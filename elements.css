@@ -1,0 +1,12 @@
+/* Modeled after https://tailwindcss.com/pages/using-with-preprocessors#build-time-imports */
+
+@import "tailwindcss/base";
+@import "@fabric-ds/css/src/base.css";
+
+@import "tailwindcss/components";
+@import "@fabric-ds/css/src/components.css";
+
+@import "tailwindcss/utilities";
+@import "@fabric-ds/css/src/utilities.css";
+
+@import "@fabric-ds/css/src/theme.css";

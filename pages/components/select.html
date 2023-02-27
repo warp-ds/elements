@@ -1,0 +1,170 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <f-docs-template>
+      <%- include('nav.html'); -%>
+      <main slot="content">
+        <h1 class="mb-16">Select</h1>
+        <p>A dropdown component for selecting a single value.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>auto-focus</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether the element should receive focus on render</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>invalid</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in an invalid state. Often paired with `hint` to provide
+                  feedback about the error
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>always</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to always show a hint</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>hint</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content displayed as the help text</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to disply as the label</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  The name of the select element, used when submitting an HTML form
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>optional</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to show optional text</div>
+              </td>
+              <td>false</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <syntax-highlight>
+          <f-select label="Berries" hint="We assume this is your jam preference" always>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </syntax-highlight>
+        <div class="example">
+          <f-select label="Berries" hint="We assume this is your jam preference" always>
+            <option value="s">Strawberries</option>
+            <option value="r">Raspberries</option>
+            <option value="c">Cloudberries</option>
+          </f-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Default option</h3>
+        <syntax-highlight>
+          <f-select label="Berries" hint="We assume this is your jam preference" always>
+            <option>Strawberries</option>
+            <option selected>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </syntax-highlight>
+        <div class="example">
+          <f-select label="Berries" hint="We assume this is your jam preference" always>
+            <option value="s">Strawberries</option>
+            <option value="r" selected>Raspberries</option>
+            <option value="c">Cloudberries</option>
+          </f-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Invalid</h3>
+        <syntax-highlight>
+          <f-select label="Berries" hint="Wrong choice" invalid>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </syntax-highlight>
+        <div class="example">
+          <f-select label="Berries" hint="Wrong choice" invalid>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Auto focus</h3>
+        <syntax-highlight>
+          <f-select label="Berries" auto-focus>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </syntax-highlight>
+        <div class="example">
+          <f-select label="Berries" auto-focus>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Optional</h3>
+        <syntax-highlight>
+          <f-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <optionx>Raspberries</optionx>
+            <option>Cloudberries</option>
+          </f-select>
+        </syntax-highlight>
+        <div class="example">
+          <f-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </f-select>
+        </div>
+      </main>
+      <%- include('footer.html'); -%>
+    </f-docs-template>
+
+    <%- include('scripts.html'); -%>
+  </body>
+</html>

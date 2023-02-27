@@ -1,0 +1,316 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <f-docs-template>
+      <%- include('nav.html'); -%>
+      <main slot="content">
+        <h1 class="mb-16">Textfield</h1>
+        <p>A single line text input element.</p>
+
+        <h2 class="mt-24 mb-16">Textfield Attributes</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>disabled</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether the input is disabled.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>invalid</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in an invalid state. Often paired together with help-text to
+                  provide feedback about the error.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>help-text</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to display as the help text.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to display as the label.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>min</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  Standard input min attribute, to be used with type="number". See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>max</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  Standard input max attribute, to be used with type="number". See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>min-length</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  The minimum number of characters supported by the input. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>max-length</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  The maximum number of characters supported by the input. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  The name of the input element, used when submitting an HTML form. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>pattern</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Regex pattern that the value of the input must match to be valid. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Text hint that occupies the text input when it is empty.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>read-only</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Whether the input can be selected but not changed by the user.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Whether user input is required on the input before form submission.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The type of input to render. See MDN.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">The current value.</div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Affix Attributes</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>aria-label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Defines a string value that labels the affix element.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Displays a clear icon.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>search</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Displays a search icon.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Displays a string</div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Validation</h2>
+
+        Text fields can communicate to the user whether the current value is invalid. Implement your
+        own validation logic in your app and set the error prop to display it as invalid. <i>error</i> is
+        often paired with <i>help-text</i> to provide feedback to the user about the error.
+
+        <syntax-highlight>
+          <f-textfield label="Email" invalid help-text="Ugyldig e-post"></f-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <f-textfield label="Email" invalid help-text="Ugyldig e-post"></f-textfield>
+        </div>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3 class="mt-24 mb-16">Placeholder</h3>
+        <syntax-highlight>
+          <f-textfield label="E-post" placeholder="puse@finn.no"></f-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <f-textfield label="E-post" placeholder="puse@finn.no"></f-textfield>
+        </div>
+        Placeholder text can be used to describe the expected value or formatting for the f-textfield.
+        Placeholder text will only appear when the f-textfield is empty, and should not be used as a
+        substitute for labeling the element with a visible label.
+
+        <h3 class="mt-24 mb-16">Disabled</h3>
+        Keep in mind that using disabled in its current form is an anti-pattern. There will ALWAYS
+        be users who don't understand why an element is disabled, or users who can't even see that
+        it is disabled because of poor lighting conditions or other reasons. Please consider more
+        informative alternatives before choosing to use disabled on an element.
+        <syntax-highlight>
+          <div class="flex flex-col space-y-32">
+            <f-textfield label="E-post" disabled value="puse@finn.no"></f-textfield>
+            <f-textfield label="E-post" disabled></f-textfield>
+          </div>
+        </syntax-highlight>
+        <div class="example">
+          <div class="flex flex-col space-y-32">
+            <f-textfield label="E-post" disabled value="puse@finn.no"></f-textfield>
+            <f-textfield label="E-post" disabled></f-textfield>
+          </div>
+        </div>
+
+        <h3 class="mt-24 mb-16">Affix</h3>
+        If you wish to use an affix you must first use the f-affix element in conjunction with
+        f-textfield. Include the affix as a child of f-textfield and set the appropiate attributes.
+        You must specify which slot to set the affix into (either prefix or suffix).
+        <syntax-highlight>
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="suffix" label="kr"></f-affix>
+          </f-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="suffix" label="kr"></f-affix>
+          </f-textfield>
+        </div>
+        <syntax-highlight>
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="prefix" label="kr"></f-affix>
+          </f-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="prefix" label="kr"></f-affix>
+          </f-textfield>
+        </div>
+
+        You can also use both a prefix and suffix
+        <syntax-highlight>
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="prefix" label="kr"></f-affix>
+            <f-affix slot="suffix" search></f-affix>
+          </f-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <f-textfield label="Price" placeholder="1 000 000">
+            <f-affix slot="prefix" label="kr"></f-affix>
+            <f-affix slot="suffix" search></f-affix>
+          </f-textfield>
+        </div>
+
+        <h3 class="mt-24 mb-16">Read only</h3>
+
+        The read-only boolean attribute makes the f-textfield's text content immutable. Unlike
+        disabled the f-textfield remains focusable and the contents can still be copied. See the MDN
+        docs for more information.
+
+        <syntax-highlight>
+          <div class="flex flex-col space-y-32">
+            <f-textfield label="E-post" read-only value="puse@finn.no"></f-textfield>
+            <f-textfield label="E-post" read-only></f-textfield>
+          </div>
+        </syntax-highlight>
+        <div class="example">
+          <div class="flex flex-col space-y-32">
+            <f-textfield label="E-post" read-only value="puse@finn.no"></f-textfield>
+            <f-textfield label="E-post" read-only></f-textfield>
+          </div>
+        </div>
+      </main>
+      <%- include('footer.html'); -%>
+    </f-docs-template>
+
+    <%- include('scripts.html'); -%>
+  </body>
+</html>

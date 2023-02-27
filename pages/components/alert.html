@@ -1,0 +1,168 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <f-docs-template>
+      <%- include('nav.html'); -%>
+      <main slot="content">
+        <h1 class="mb-16">Alert</h1>
+        <p>
+          Alert is an inline component used for displaying different types of messages. For
+          accessibility reasons, alert should appear close to the element that triggered it.
+        </p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>variant</td>
+              <td>"negative" | "positive" | "warning" | "info"</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>role</td>
+              <td>string</td>
+              <td>"alert"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <syntax-highlight>
+          <div class="flex gap-8 flex-wrap mt-16">
+            <button class="button button--small">Hide and show "info" variant</button>
+            <button class="button button--small">Hide and show "negative" variant</button>
+            <button class="button button--small">Hide and show "positive" variant</button>
+            <button class="button button--small">Hide and show "warning" variant</button>
+          </div>
+          <f-alert variant="info" show>
+            <p>This is "info" variant of the alert element</p>
+          </f-alert>
+        </syntax-highlight>
+        <div class="example">
+          <div id="defaultAlertControllers" class="flex gap-8 flex-wrap mb-16">
+            <%- include('alertControllers.html'); -%>
+          </div>
+          <f-alert id="defaultAlert" variant="info" show>
+            <p>This is "info" variant of the alert element</p>
+          </f-alert>
+        </div>
+
+        <syntax-highlight>
+          <f-alert variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+          </f-alert>
+        </syntax-highlight>
+        <div class="example">
+          <div id="alertWithDescriptionControllers" class="flex gap-8 flex-wrap mb-16">
+            <%- include('alertControllers.html'); -%>
+          </div>
+          <f-alert id="alertWithDescription" variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+          </f-alert>
+        </div>
+
+        <syntax-highlight>
+          <f-alert variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+            <a title="Link to more information">And a link to more information</a>
+          </f-alert>
+        </syntax-highlight>
+        <div class="example">
+          <div id="alertWithLinkControllers" class="flex gap-8 flex-wrap mb-16">
+            <%- include('alertControllers.html'); -%>
+          </div>
+          <f-alert id="alertWithLink" variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+            <a title="Link to more information">And a link to more information</a>
+          </f-alert>
+        </div>
+
+        <syntax-highlight>
+          <f-alert variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+            <a title="Link to more information">And a link to more information</a>
+            <div class="mt-8 space-x-8">
+              <button class="button button--small" onclick="alert('clicked!');">
+                Primary button
+              </button>
+              <button class="button button--small button--flat" onclick="alert('clicked!');">
+                Secondary button
+              </button>
+            </div>
+          </f-alert>
+        </syntax-highlight>
+        <div class="example">
+          <div id="alertWithButtonsControllers" class="flex gap-8 flex-wrap mb-16">
+            <%- include('alertControllers.html'); -%>
+          </div>
+          <f-alert id="alertWithButtons" variant="info" show>
+            <p class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+            <a title="Link to more information">And a link to more information</a>
+            <div class="mt-8 space-x-8">
+              <button class="button button--small" onclick="alert('clicked!');">
+                Primary button
+              </button>
+              <button class="button button--small button--flat" onclick="alert('clicked!');">
+                Secondary button
+              </button>
+            </div>
+          </f-alert>
+        </div>
+        <h2 class="mt-24 mb-16">Accessibility</h2>
+        <p>
+          Use the ARIA live region <code>role</code> attribute to provide meaning to the alert
+          element (defaults to "alert"). If you want to remove the role from the alert and assign it
+          to its particular child (e.g. title), you can do so by setting <code>role</code> attribute
+          to an empty string on <code>f-alert</code> element and assigning a respective
+          <code>role</code> on the child element. Read more about live region
+          <code>role</code> attribute
+          <a
+            target="_blank"
+            title="Read more about ARIA live region role attribute"
+            class="text-current hover:no-underline focus:no-underline"
+            href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions#roles_with_implicit_live_region_attributes"
+            ><u> on MDN</u></a
+          >.
+        </p>
+
+        <syntax-highlight>
+          <f-alert variant="info" show role="">
+            <p role="alert" class="font-bold">This is a "info" variant of the alert element</p>
+            <p>You see this warning because you did something wrong</p>
+            <button class="button button--primary button--small">Hide and show alert</button>
+          </f-alert>
+        </syntax-highlight>
+        <div class="example">
+          <f-alert id="selfHidingAlert" variant="info" show role="">
+            <p role="alert" class="font-bold">This is "info" variant of the alert element</p>
+            <p>With an additional description</p>
+            <div id="selfHidingAlertControllers">
+              <button class="button button--primary button--small">Hide and show alert</button>
+            </div>
+          </f-alert>
+        </div>
+      </main>
+      <%- include('footer.html'); -%>
+    </f-docs-template>
+    <%- include('alertControllersScripts.html'); -%> <%- include('scripts.html'); -%>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <f-docs-template>
+      <%- include('nav.html'); -%>
+      <main slot="content">
+        <h1 class="mb-16">Broadcast</h1>
+        <p>Broadcast automatically fetches broadcast messages for the current (or a given) url.</p>
+        <p>Uses toast apis under the hood.</p>
+
+        <p>
+          <strong>N.B.</strong> Broadcast should only be included once per page to avoid duplicate
+          broadcast messages being displayed. The preferred method for including broadcast will soon
+          be a podlet provided by the communication team. In the meantime this component can be used
+          directly.
+        </p>
+
+        <h2 class="mt-24 mb-16">Attributes</h2>
+        <p><strong>interval</strong> — Refetch interval - <i>default: 300 000 (5 minutes)</i></p>
+        <p>
+          <strong>api</strong> - API endpoint to fetch broadcasts from. Use
+          <code>https://dev.finn.no/broadcasts</code> on dev and
+          <code>https://finn.no/broadcasts</code> on prod. -
+          <i>Required</i>
+        </p>
+        <p>
+          <strong>url</strong> — Page (identified by its url) to check for registered broadcasts
+          against - <i>default window.location.href</i>
+        </p>
+
+        <h2 class="mt-24 mb-16">Example usage</h2>
+
+        <syntax-highlight>
+          <f-broadcast
+            api="https://dev.finn.no/broadcasts"
+            url="https:/dev.finn.no/meldinger"
+            interval="30000"
+          ></f-broadcast>
+        </syntax-highlight>
+
+        <f-broadcast
+          api="https://dev.finn.no/broadcasts"
+          url="https:/dev.finn.no/meldinger"
+          interval="30000"
+        ></f-broadcast>
+      </main>
+      <%- include('footer.html'); -%>
+    </f-docs-template>
+
+    <%- include('scripts.html'); -%>
+  </body>
+</html>

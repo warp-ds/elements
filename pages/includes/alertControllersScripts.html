@@ -1,0 +1,27 @@
+<script>
+  function addEventListenersToAlertControllers(alertId) {
+    const alertElement = document.getElementById(alertId);
+    const controllersWrapperId = `#${alertId}Controllers`;
+
+    document.querySelectorAll(`${controllersWrapperId} button`).forEach((el) => {
+      el.addEventListener('click', (event) => {
+        alertElement.show = false;
+        const name = event.target.name || 'info';
+
+        // update alert after hide transition ends
+        setTimeout(() => {
+          alertElement.variant = name;
+          alertElement.querySelector(
+            'p',
+          ).innerText = `This is "${name}" variant of the alert element`;
+          alertElement.show = true;
+        }, 500);
+      });
+    });
+  }
+
+  document.querySelectorAll('.example f-alert').forEach((el) => {
+    const alertId = el.getAttribute('id');
+    addEventListenersToAlertControllers(alertId);
+  });
+</script>
