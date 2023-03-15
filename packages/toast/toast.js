@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
-import { toast as c } from '@fabric-ds/css/component-classes';
+import { toast as c } from '@warp-ds/component-classes';
 import { expand, collapse } from 'element-collapse';
 import { closeSVG, successSVG, failureSVG } from './svgs';
 import { styles } from '../../dist/elements.min.js';
@@ -16,7 +16,7 @@ const classes = (definition) => {
   return classMap(defn);
 };
 
-export class FabricToast extends LitElement {
+export class WarpToast extends LitElement {
   static styles = [
     styles,
     css`
@@ -144,5 +144,5 @@ export class FabricToast extends LitElement {
 }
 
 if (!customElements.get('f-toast')) {
-  customElements.define('f-toast', FabricToast);
+  customElements.define('f-toast', WarpToast);
 }

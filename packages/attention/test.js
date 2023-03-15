@@ -2,7 +2,7 @@
 import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
 import { addContentToPage } from '../../tests/utils/index.js';
-import { opposites } from '@fabric-ds/core/attention';
+import { opposites } from '@warp-ds/core/attention';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });

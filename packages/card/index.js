@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { card as c } from '@fabric-ds/css/component-classes';
+import { card as c } from '@warp-ds/component-classes';
 import { fclasses } from '../utils';
 import { styles } from '../../dist/elements.min.js';
 
@@ -9,7 +9,7 @@ const keys = {
   SPACE: ' ',
 };
 
-class FabricCard extends LitElement {
+class WarpCard extends LitElement {
   static styles = [
     styles,
     css`
@@ -92,7 +92,7 @@ class FabricCard extends LitElement {
 }
 
 if (!customElements.get('f-card')) {
-  customElements.define('f-card', FabricCard);
+  customElements.define('f-card', WarpCard);
 }
 
-export { FabricCard };
+export { WarpCard };

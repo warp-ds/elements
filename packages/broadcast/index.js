@@ -1,7 +1,7 @@
-import { FabricBroadcast } from './component';
+import { WarpBroadcast } from './component';
 
 if (!customElements.get('f-broadcast')) {
-  customElements.define('f-broadcast', FabricBroadcast);
+  customElements.define('f-broadcast', WarpBroadcast);
 }
 
-export { FabricBroadcast };
+export { WarpBroadcast };

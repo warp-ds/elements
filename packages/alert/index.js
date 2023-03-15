@@ -33,7 +33,7 @@ const variants = {
   },
 };
 
-class FabricAlert extends LitElement {
+class WarpAlert extends LitElement {
   static properties = {
     variant: { type: String, reflect: true },
     show: { type: Boolean, reflect: true },
@@ -96,7 +96,7 @@ class FabricAlert extends LitElement {
 }
 
 if (!customElements.get('f-alert')) {
-  customElements.define('f-alert', FabricAlert);
+  customElements.define('f-alert', WarpAlert);
 }
 
-export { FabricAlert };
+export { WarpAlert };

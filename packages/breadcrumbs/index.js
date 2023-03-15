@@ -1,10 +1,10 @@
 import { html, LitElement } from 'lit';
-import { interleave } from '@fabric-ds/core/breadcrumbs';
+import { interleave } from '@warp-ds/core/breadcrumbs';
 import { styles } from '../../dist/elements.min.js';
 
 const separator = html`<span class="select-none" aria-hidden="true">/</span>`;
 
-class FabricBreadcrumbs extends LitElement {
+class WarpBreadcrumbs extends LitElement {
   static styles = [styles];
 
   connectedCallback() {
@@ -25,7 +25,7 @@ class FabricBreadcrumbs extends LitElement {
 }
 
 if (!customElements.get('f-breadcrumbs')) {
-  customElements.define('f-breadcrumbs', FabricBreadcrumbs);
+  customElements.define('f-breadcrumbs', WarpBreadcrumbs);
 }
 
-export { FabricBreadcrumbs };
+export { WarpBreadcrumbs };

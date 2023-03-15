@@ -1,16 +1,16 @@
 import { css, html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
-import { attention as c } from '@fabric-ds/css/component-classes';
+import { attention as c } from '@warp-ds/component-classes';
 import {
   opposites,
   rotation,
   arrowLabels,
   useRecompute as recompute,
-} from '@fabric-ds/core/attention';
+} from '@warp-ds/core/attention';
 import { styles } from '../../dist/elements.min.js';
 
-class FabricAttention extends kebabCaseAttributes(LitElement) {
+class WarpAttention extends kebabCaseAttributes(LitElement) {
   static properties = {
     // Whether Attention element should be visible.
     show: { type: Boolean, reflect: true },
@@ -200,7 +200,7 @@ class FabricAttention extends kebabCaseAttributes(LitElement) {
 }
 
 if (!customElements.get('f-attention')) {
-  customElements.define('f-attention', FabricAttention);
+  customElements.define('f-attention', WarpAttention);
 }
 
-export { FabricAttention };
+export { WarpAttention };

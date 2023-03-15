@@ -82,7 +82,7 @@
     "vite-plugin-html": "3.2.0"
   },
   "dependencies": {
-    "@fabric-ds/core": "0.0.15",
+    "@warp-ds/core": "0.0.15",
     "@fabric-ds/icons": "0.6.7",
     "@open-wc/testing": "3.1.7",
     "glob": "8.1.0",

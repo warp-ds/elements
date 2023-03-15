@@ -1,11 +1,11 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses, kebabCaseAttributes } from '../utils';
-import { box as boxClasses, buttonReset } from '@fabric-ds/css/component-classes';
+import { box as boxClasses, buttonReset } from '@warp-ds/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@fabric-ds/icons/elements/chevron-down-16';
 import { styles } from '../../dist/elements.min.js';
 
-class FabricExpandable extends kebabCaseAttributes(LitElement) {
+class WarpExpandable extends kebabCaseAttributes(LitElement) {
   static properties = {
     expanded: { type: Boolean, reflect: true },
     title: { type: String },
@@ -124,7 +124,7 @@ class FabricExpandable extends kebabCaseAttributes(LitElement) {
 }
 
 if (!customElements.get('f-expandable')) {
-  customElements.define('f-expandable', FabricExpandable);
+  customElements.define('f-expandable', WarpExpandable);
 }
 
-export { FabricExpandable };
+export { WarpExpandable };

@@ -1,9 +1,9 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses } from '../utils';
-import { box as boxClasses } from '@fabric-ds/css/component-classes';
+import { box as boxClasses } from '@warp-ds/component-classes';
 import { styles } from '../../dist/elements.min.js';
 
-class FabricBox extends LitElement {
+class WarpBox extends LitElement {
   static properties = {
     bleed: { type: Boolean },
     bordered: { type: Boolean },
@@ -47,7 +47,7 @@ class FabricBox extends LitElement {
 }
 
 if (!customElements.get('f-box')) {
-  customElements.define('f-box', FabricBox);
+  customElements.define('f-box', WarpBox);
 }
 
-export { FabricBox };
+export { WarpBox };
