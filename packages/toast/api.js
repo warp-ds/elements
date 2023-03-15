@@ -47,7 +47,7 @@ export function removeToast(id) {
  * Update an existing toast
  * @param {String|Number}           id      Toast identifier
  * @param {ToastOptions?}           options Toast options
- * @returns {FabricToastContainer}          Toast details
+ * @returns {WarpToastContainer}          Toast details
  */
 export function updateToast(id, options) {
   if (!windowExists) return;

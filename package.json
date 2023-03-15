@@ -1,8 +1,8 @@
 {
-  "name": "@fabric-ds/elements",
+  "name": "@warp-ds/elements",
   "type": "module",
   "version": "1.2.0-next.2",
-  "description": "Custom elements for Fabric",
+  "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
     "./toast": "./dist/api.js"
@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fabric-ds/elements.git"
+    "url": "https://github.com/warp-ds/elements.git"
   },
   "license": "ISC",
   "devDependencies": {
@@ -82,7 +82,7 @@
     "vite-plugin-html": "3.2.0"
   },
   "dependencies": {
-    "@fabric-ds/core": "0.0.15",
+    "@warp-ds/core": "0.0.15",
     "@fabric-ds/icons": "0.6.7",
     "@open-wc/testing": "3.1.7",
     "glob": "8.1.0",

@@ -12,7 +12,7 @@ const variantClassMap = {
   pill: 'button button--pill',
 };
 
-class FabricButton extends kebabCaseAttributes(LitElement) {
+class WarpButton extends kebabCaseAttributes(LitElement) {
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
   static properties = {
@@ -96,7 +96,7 @@ class FabricButton extends kebabCaseAttributes(LitElement) {
 }
 
 if (!customElements.get('f-button')) {
-  customElements.define('f-button', FabricButton);
+  customElements.define('f-button', WarpButton);
 }
 
-export { FabricButton };
+export { WarpButton };

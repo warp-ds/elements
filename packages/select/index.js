@@ -6,7 +6,7 @@ import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { styles } from '../../dist/elements.min.js';
 
-export class FabricSelect extends kebabCaseAttributes(LitElement) {
+export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
     // Whether the element should receive focus on render
     autoFocus: { type: Boolean, reflect: true },
@@ -84,5 +84,5 @@ export class FabricSelect extends kebabCaseAttributes(LitElement) {
 }
 
 if (!customElements.get('f-select')) {
-  customElements.define('f-select', FabricSelect);
+  customElements.define('f-select', WarpSelect);
 }

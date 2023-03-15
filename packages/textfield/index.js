@@ -3,7 +3,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { fclasses } from '../utils';
 import { styles } from '../../dist/elements.min.js';
 
-class FabricTextField extends LitElement {
+class WarpTextField extends LitElement {
   static properties = {
     disabled: { type: Boolean },
     invalid: { type: Boolean },
@@ -146,7 +146,7 @@ class FabricTextField extends LitElement {
 }
 
 if (!customElements.get('f-textfield')) {
-  customElements.define('f-textfield', FabricTextField);
+  customElements.define('f-textfield', WarpTextField);
 }
 
-export { FabricTextField };
+export { WarpTextField };

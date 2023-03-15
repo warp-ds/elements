@@ -3,7 +3,7 @@ import { repeat } from 'lit/directives/repeat.js';
 import { windowExists } from '../utils';
 import { styles } from '../../dist/elements.min.js';
 
-export class FabricBroadcast extends LitElement {
+export class WarpBroadcast extends LitElement {
   static properties = {
     _messages: {
       state: true,

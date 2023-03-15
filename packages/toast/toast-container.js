@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit';
-import { toaster as c } from '@fabric-ds/css/component-classes';
+import { toaster as c } from '@warp-ds/component-classes';
 import { repeat } from 'lit/directives/repeat.js';
 import { styles } from '../../dist/elements.min.js';
 
@@ -13,7 +13,7 @@ import { styles } from '../../dist/elements.min.js';
  * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
  */
 
-export class FabricToastContainer extends LitElement {
+export class WarpToastContainer extends LitElement {
   static styles = [
     styles,
     css`
@@ -90,7 +90,7 @@ export class FabricToastContainer extends LitElement {
   /**
    *
    * @param {Object} toast
-   * @returns {FabricToastContainer}
+   * @returns {WarpToastContainer}
    */
   set(toast) {
     if (!toast.id) throw new Error('invalid or undefined "id" on toast object');
@@ -143,5 +143,5 @@ export class FabricToastContainer extends LitElement {
 }
 
 if (!customElements.get('f-toast-container')) {
-  customElements.define('f-toast-container', FabricToastContainer);
+  customElements.define('f-toast-container', WarpToastContainer);
 }

@@ -1,11 +1,11 @@
 import { html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { suffix, prefix } from '@fabric-ds/css/component-classes';
+import { suffix, prefix } from '@warp-ds/component-classes';
 import { search, clear } from './icons';
 import { fclasses } from '../utils';
 import { styles } from '../../dist/elements.min.js';
 
-class FabricAffix extends LitElement {
+class WarpAffix extends LitElement {
   static styles = [styles];
 
   static properties = {
@@ -67,7 +67,7 @@ class FabricAffix extends LitElement {
 }
 
 if (!customElements.get('f-affix')) {
-  customElements.define('f-affix', FabricAffix);
+  customElements.define('f-affix', WarpAffix);
 }
 
-export { FabricAffix };
+export { WarpAffix };
