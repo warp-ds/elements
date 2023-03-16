@@ -1,4 +1,6 @@
 /* eslint-env node */
+import { presetWarp } from '@warp-ds/uno'
+import uno from 'unocss/vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
@@ -107,6 +109,9 @@ export default ({ mode }) => {
         ],
       }),
       isProduction && basePathFix(),
+      uno({
+        presets: [presetWarp()]
+      }),
     ],
     build: {
       outDir: 'site',

@@ -1,7 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { toaster as c } from '@warp-ds/component-classes';
 import { repeat } from 'lit/directives/repeat.js';
-import { styles } from '../../dist/elements.min.js';
 
 /**
  * Toast helper function options
@@ -15,7 +14,6 @@ import { styles } from '../../dist/elements.min.js';
 
 export class WarpToastContainer extends LitElement {
   static styles = [
-    styles,
     css`
       :host {
         display: block;
