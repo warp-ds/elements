@@ -3,7 +3,7 @@
     const expandableElement = document.getElementById(expandableId);
     const controllersWrapperId = `#${expandableId}Controllers`;
 
-    document.querySelectorAll(`${controllersWrapperId} f-button`).forEach((el) => {
+    document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
       el.addEventListener('click', (event) => {
         const name = event.target.getAttribute('name') || 'info';
         expandableElement[name] = !expandableElement[name];
@@ -21,13 +21,13 @@
     });
   }
 
-  document.querySelectorAll('.example f-expandable').forEach((el) => {
+  document.querySelectorAll('.example w-expandable').forEach((el) => {
     const expandableId = el.getAttribute('id');
     addEventListenersToExpandableControllers(expandableId);
   });
 
-  document.querySelector('.noTitle f-button').addEventListener('click', (event) => {
-    const expandable = document.querySelector('.noTitle f-expandable');
+  document.querySelector('.noTitle w-button').addEventListener('click', (event) => {
+    const expandable = document.querySelector('.noTitle w-expandable');
     expandable.expanded = !expandable.expanded;
   });
 </script>

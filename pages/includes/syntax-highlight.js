@@ -15,7 +15,7 @@ export class SyntaxHighlight extends LitElement {
     }
 
     pre {
-      background-color: var(--f-bluegray-50);
+      background-color: var(--w-bluegray-50);
       font-family: Monaco, Ubuntu Mono, Consolas, monospace;
       font-size: 14px;
       margin: 0;

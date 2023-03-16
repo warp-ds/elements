@@ -8,16 +8,16 @@
 exports[`packages/broadcast/test.js TAP Multiple broadcasts > must match snapshot 1`] = `
 
       <aside class="mb-16">
-        <f-toast class="w-full" type="warning" canclose="" id="broadcast-100383" text="Testing 1">
-            </f-toast><f-toast class="w-full" type="warning" canclose="" id="broadcast-100384" text="Testing 2">
-            </f-toast>
+        <w-toast class="w-full" type="warning" canclose="" id="broadcast-100383" text="Testing 1">
+            </w-toast><w-toast class="w-full" type="warning" canclose="" id="broadcast-100384" text="Testing 2">
+            </w-toast>
       </aside>
 `
 
 exports[`packages/broadcast/test.js TAP Single broadcast > must match snapshot 1`] = `
 
       <aside class="mb-16">
-        <f-toast class="w-full" type="warning" canclose="" id="broadcast-100383" text="Testing">
-            </f-toast>
+        <w-toast class="w-full" type="warning" canclose="" id="broadcast-100383" text="Testing">
+            </w-toast>
       </aside>
 `

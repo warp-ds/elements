@@ -22,9 +22,9 @@ teardown(async () => {
 test('Expandable component with no attributes is rendered on the page', async (t) => {
   // GIVEN: An expandable component
   const component = `
-    <f-expandable>
+    <w-expandable>
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   // WHEN: the component is added to the page
@@ -34,7 +34,7 @@ test('Expandable component with no attributes is rendered on the page', async (t
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
   t.equal(
     (await locator.innerHTML()).trim(),
     '<p>This is an expandable element</p>',
@@ -74,9 +74,9 @@ test('Expandable component with no attributes is rendered on the page', async (t
 
 test('Expandable component with info & expanded attribute is rendered on the page', async (t) => {
   const component = `
-    <f-expandable info expanded>
+    <w-expandable info expanded>
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   const page = await addContentToPage({
@@ -84,16 +84,16 @@ test('Expandable component with info & expanded attribute is rendered on the pag
     content: component,
   });
 
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
   t.equal(await locator.evaluate((el) => el.info), true, '"info" property should be true');
   t.equal(await locator.evaluate((el) => el.expanded), true, '"expanded" property should be true');
 });
 
 test('Expandable component with box & title attribute is rendered on the page', async (t) => {
   const component = `
-    <f-expandable box title="toggle">
+    <w-expandable box title="toggle">
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   const page = await addContentToPage({
@@ -101,7 +101,7 @@ test('Expandable component with box & title attribute is rendered on the page', 
     content: component,
   });
 
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
   t.equal(await locator.evaluate((el) => el.box), true, '"box" property should be true');
   t.equal(
     await locator.evaluate((el) => el.title),
@@ -112,9 +112,9 @@ test('Expandable component with box & title attribute is rendered on the page', 
 
 test('Animated expandable component is rendered on the page', async (t) => {
   const component = `
-    <f-expandable animated title="toggle">
+    <w-expandable animated title="toggle">
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   const page = await addContentToPage({
@@ -122,19 +122,19 @@ test('Animated expandable component is rendered on the page', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
   t.equal(await locator.evaluate((el) => el.animated), true, '"animated" property should be true');
 });
 
 test('Animated expandable component with custom title is rendered on the page', async (t) => {
   const component = `
-    <f-expandable animated>
+    <w-expandable animated>
       <div slot="title" class="flex flex-row items-center">
-        <f-icon-bag16></f-icon-bag16>
+        <w-icon-bag16></w-icon-bag16>
         <p class="ml-8 mb-0">This is a title with an icon</p>
       </div>
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   const page = await addContentToPage({
@@ -142,7 +142,7 @@ test('Animated expandable component with custom title is rendered on the page', 
     content: component,
   });
 
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
 
   t.equal(
     await locator.evaluate(
@@ -155,9 +155,9 @@ test('Animated expandable component with custom title is rendered on the page', 
 
 test('Expandable component with title and no-chevron attribute is rendered on the page', async (t) => {
   const component = `
-    <f-expandable no-chevron title="toggle">
+    <w-expandable no-chevron title="toggle">
       <p>This is an expandable element</p>
-    </f-expandable>
+    </w-expandable>
   `;
 
   const page = await addContentToPage({
@@ -165,14 +165,14 @@ test('Expandable component with title and no-chevron attribute is rendered on th
     content: component,
   });
 
-  const locator = await page.locator('f-expandable');
+  const locator = await page.locator('w-expandable');
   t.equal(
     await locator.evaluate((el) => el.noChevron),
     true,
     '"noChevron" property should be true',
   );
   t.equal(
-    await locator.evaluate((el) => el.renderRoot.querySelector('f-icon-chevron-down16')),
+    await locator.evaluate((el) => el.renderRoot.querySelector('w-icon-chevron-down16')),
     null,
     'Chevron icon should not be rendered',
   );

@@ -24,8 +24,8 @@ class WarpBreadcrumbs extends LitElement {
   }
 }
 
-if (!customElements.get('f-breadcrumbs')) {
-  customElements.define('f-breadcrumbs', WarpBreadcrumbs);
+if (!customElements.get('w-breadcrumbs')) {
+  customElements.define('w-breadcrumbs', WarpBreadcrumbs);
 }
 
 export { WarpBreadcrumbs };

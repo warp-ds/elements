@@ -1,7 +1,7 @@
 import { WarpBroadcast } from './component';
 
-if (!customElements.get('f-broadcast')) {
-  customElements.define('f-broadcast', WarpBroadcast);
+if (!customElements.get('w-broadcast')) {
+  customElements.define('w-broadcast', WarpBroadcast);
 }
 
 export { WarpBroadcast };

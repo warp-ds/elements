@@ -79,24 +79,24 @@ class WarpAlert extends LitElement {
     const { color, icon, bgColor, borderColor, textColor } = this._style;
 
     return html`
-      <f-expand-transition ?show=${this.show}>
+      <w-expand-transition ?show=${this.show}>
         <div
           role=${this.role}
           class="${`flex p-16 border rounded-4 border-l-4 ${bgColor} ${borderColor}`}"
-          style="border-left-color:var(--f-${color}-600)"
+          style="border-left-color:var(--w-${color}-600)"
         >
           <div class="mr-8 ${textColor}">${icon}</div>
           <div class="text-14">
             <slot></slot>
           </div>
         </div>
-      </f-expand-transition>
+      </w-expand-transition>
     `;
   }
 }
 
-if (!customElements.get('f-alert')) {
-  customElements.define('f-alert', WarpAlert);
+if (!customElements.get('w-alert')) {
+  customElements.define('w-alert', WarpAlert);
 }
 
 export { WarpAlert };

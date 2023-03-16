@@ -145,8 +145,8 @@ class WarpTextField extends LitElement {
   }
 }
 
-if (!customElements.get('f-textfield')) {
-  customElements.define('f-textfield', WarpTextField);
+if (!customElements.get('w-textfield')) {
+  customElements.define('w-textfield', WarpTextField);
 }
 
 export { WarpTextField };

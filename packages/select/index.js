@@ -83,6 +83,6 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('f-select')) {
-  customElements.define('f-select', WarpSelect);
+if (!customElements.get('w-select')) {
+  customElements.define('w-select', WarpSelect);
 }

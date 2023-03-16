@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-    <f-docs-template>
+    <w-docs-template>
       <%- include('nav.html'); -%>
       <main slot="content">
         <h1 class="mb-16">Button</h1>
@@ -89,15 +89,15 @@
             group. Quiet buttons have the same padding rules as other action buttons and reveal a
             button-like background color when hovered.
             <syntax-highlight>
-              <f-button quiet>Quiet secondary button</f-button>
-              <f-button quiet variant="negative">Quiet negative button</f-button>
-              <f-button quiet variant="utility">Quiet utility button</f-button>
+              <w-button quiet>Quiet secondary button</w-button>
+              <w-button quiet variant="negative">Quiet negative button</w-button>
+              <w-button quiet variant="utility">Quiet utility button</w-button>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-            <f-button quiet>Quiet secondary button</f-button>
-            <f-button quiet variant="negative">Quiet negative button</f-button>
-            <f-button quiet variant="utility">Quiet utility button</f-button>
+            <w-button quiet>Quiet secondary button</w-button>
+            <w-button quiet variant="negative">Quiet negative button</w-button>
+            <w-button quiet variant="utility">Quiet utility button</w-button>
           </div>
         </div>
 
@@ -107,11 +107,11 @@
           <div class="col-span-2">
             Buttons will be rendered as an anchor (a tag) if they use an href attribute.
             <syntax-highlight>
-              <f-button href="https://google.no">Button as anchor</f-button>
+              <w-button href="https://google.no">Button as anchor</w-button>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-            <f-button href="https://google.no">Button as anchor</f-button>
+            <w-button href="https://google.no">Button as anchor</w-button>
           </div>
         </div>
 
@@ -122,11 +122,11 @@
             To show the user that the action they triggered has begun, buttons have an in progress
             or loading state.
             <syntax-highlight>
-              <f-button variant="primary" loading>Primary button loading</f-button>
+              <w-button variant="primary" loading>Primary button loading</w-button>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-            <f-button variant="primary" loading>Button loading</f-button>
+            <w-button variant="primary" loading>Button loading</w-button>
           </div>
         </div>
 
@@ -145,7 +145,7 @@
         </p>
       </main>
       <%- include('footer.html'); -%>
-    </f-docs-template>
+    </w-docs-template>
     <%- include('buttonVariantsTable.html'); -%> <%- include('scripts.html'); -%>
   </body>
 </html>

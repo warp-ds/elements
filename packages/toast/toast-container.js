@@ -63,9 +63,9 @@ export class WarpToastContainer extends LitElement {
   }
 
   static init() {
-    let el = document.querySelector('f-toast-container');
+    let el = document.querySelector('w-toast-container');
     if (!el) {
-      el = document.createElement('f-toast-container');
+      el = document.createElement('w-toast-container');
       document.body.appendChild(el);
     }
     return el;
@@ -122,11 +122,11 @@ export class WarpToastContainer extends LitElement {
   render() {
     return html`
       <aside class="${c.toasterContainer}">
-        <div class="${c.toaster}" id="f-toast-container-list">
+        <div class="${c.toaster}" id="w-toast-container-list">
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
-            (toast) => html` <f-toast
+            (toast) => html` <w-toast
               class="w-full"
               id="${toast.id}"
               type="${toast.type}"
@@ -134,7 +134,7 @@ export class WarpToastContainer extends LitElement {
               ?canclose=${toast.canclose}
               @close=${() => this.del(toast.id)}
             >
-            </f-toast>`,
+            </w-toast>`,
           )}
         </div>
       </aside>
@@ -142,6 +142,6 @@ export class WarpToastContainer extends LitElement {
   }
 }
 
-if (!customElements.get('f-toast-container')) {
-  customElements.define('f-toast-container', WarpToastContainer);
+if (!customElements.get('w-toast-container')) {
+  customElements.define('w-toast-container', WarpToastContainer);
 }

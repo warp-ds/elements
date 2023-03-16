@@ -41,9 +41,9 @@
 
       const codeExample = document.createElement('syntax-highlight');
       codeExample.append(
-        `<f-button variant=${name}>${buttonText}</f-button>`,
+        `<w-button variant=${name}>${buttonText}</w-button>`,
         '\n',
-        `<f-button variant=${name} small>${smallButtonText}</f-button>`,
+        `<w-button variant=${name} small>${smallButtonText}</w-button>`,
       );
 
       descriptionWrapper.classList.add('col-span-2');
@@ -53,11 +53,11 @@
 
       const buttonWrapper = document.createElement('div');
 
-      const buttonNode = document.createElement('f-button');
+      const buttonNode = document.createElement('w-button');
       buttonNode.setAttribute('variant', name);
       buttonNode.innerText = buttonText;
 
-      const smallButtonNode = document.createElement('f-button');
+      const smallButtonNode = document.createElement('w-button');
       smallButtonNode.setAttribute('variant', name);
       smallButtonNode.setAttribute('small', '');
       smallButtonNode.innerText = smallButtonText;

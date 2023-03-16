@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-    <f-docs-template>
+    <w-docs-template>
       <%- include('nav.html'); -%>
       <main slot="content">
         <h1 class="mb-16">Attention</h1>
@@ -85,7 +85,7 @@
 
         <h3 class="mt-24 mb-16">Popover</h3>
         <syntax-highlight>
-          <f-attention placement="bottom" popover>
+          <w-attention placement="bottom" popover>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -95,10 +95,10 @@
               Click to toggle a popover on bottom
             </button>
             <span slot="message">I'm a popover on bottom</span>
-          </f-attention>
+          </w-attention>
         </syntax-highlight>
         <div class="example">
-          <f-attention placement="bottom" popover>
+          <w-attention placement="bottom" popover>
             <button
               id="popoverTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -107,12 +107,12 @@
               Click to toggle a popover on bottom
             </button>
             <span slot="message">I'm a popover on bottom</span>
-          </f-attention>
+          </w-attention>
         </div>
 
         <h3 class="mt-24 mb-16">Callout</h3>
         <syntax-highlight>
-          <f-attention placement="right" show callout class="flex items-center">
+          <w-attention placement="right" show callout class="flex items-center">
             <div
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -121,10 +121,10 @@
               <p>This is a target to callout attention element</p>
             </div>
             <span slot="message">Callout on right</span>
-          </f-attention>
+          </w-attention>
         </syntax-highlight>
         <div class="example">
-          <f-attention placement="right" show callout class="flex items-center">
+          <w-attention placement="right" show callout class="flex items-center">
             <div
               id="calloutTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -133,12 +133,12 @@
               <p>This is a target to callout attention element</p>
             </div>
             <span slot="message">Callout on right</span>
-          </f-attention>
+          </w-attention>
         </div>
 
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
-          <f-attention placement="right" tooltip>
+          <w-attention placement="right" tooltip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -147,10 +147,10 @@
               Hover or focus to show a tooltip on right
             </button>
             <span slot="message">I'm a tooltip on right</span>
-          </f-attention>
+          </w-attention>
         </syntax-highlight>
         <div class="example">
-          <f-attention placement="right" tooltip>
+          <w-attention placement="right" tooltip>
             <button
               id="tooltipTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 bg-aqua-50"
@@ -159,7 +159,7 @@
               Hover or focus to show a tooltip on right
             </button>
             <span slot="message">I'm a tooltip on right</span>
-          </f-attention>
+          </w-attention>
         </div>
 
         <h2 class="mt-24 mb-16">Accessibility</h2>
@@ -175,13 +175,13 @@
         <p>
           It is possible to tell assistive technologies to recognize only a part of Attention's text
           content. To do that set <code>role="tooltip"</code> on the relevant text element nested in
-          <code>f-attention</code> and reference it by id through the use of
+          <code>w-attention</code> and reference it by id through the use of
           <code>aria-describedby</code>. The <code>aria-describedby</code> attribute is on the
-          target element, not on <code>f-attention</code>.
+          target element, not on <code>w-attention</code>.
         </p>
 
         <syntax-highlight>
-          <f-attention placement="top" popover>
+          <w-attention placement="top" popover>
             <div slot="message">
               <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
               <p>(this text is less relevant)</p>
@@ -194,10 +194,10 @@
             >
               Click to toggle a popover on top
             </button>
-          </f-attention>
+          </w-attention>
         </syntax-highlight>
         <div id="accessibilityExample" class="example">
-          <f-attention placement="top" popover>
+          <w-attention placement="top" popover>
             <div slot="message">
               <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
               <p>(this text is less relevant)</p>
@@ -210,7 +210,7 @@
             >
               Click to toggle a popover on top
             </button>
-          </f-attention>
+          </w-attention>
         </div>
 
         <script>
@@ -242,7 +242,7 @@
         </script>
       </main>
       <%- include('footer.html'); -%>
-    </f-docs-template>
+    </w-docs-template>
 
     <%- include('scripts.html'); -%>
   </body>

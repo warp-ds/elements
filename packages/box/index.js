@@ -46,8 +46,8 @@ class WarpBox extends LitElement {
   }
 }
 
-if (!customElements.get('f-box')) {
-  customElements.define('f-box', WarpBox);
+if (!customElements.get('w-box')) {
+  customElements.define('w-box', WarpBox);
 }
 
 export { WarpBox };

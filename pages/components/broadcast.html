@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-    <f-docs-template>
+    <w-docs-template>
       <%- include('nav.html'); -%>
       <main slot="content">
         <h1 class="mb-16">Broadcast</h1>
@@ -31,21 +31,21 @@
         <h2 class="mt-24 mb-16">Example usage</h2>
 
         <syntax-highlight>
-          <f-broadcast
+          <w-broadcast
             api="https://dev.finn.no/broadcasts"
             url="https:/dev.finn.no/meldinger"
             interval="30000"
-          ></f-broadcast>
+          ></w-broadcast>
         </syntax-highlight>
 
-        <f-broadcast
+        <w-broadcast
           api="https://dev.finn.no/broadcasts"
           url="https:/dev.finn.no/meldinger"
           interval="30000"
-        ></f-broadcast>
+        ></w-broadcast>
       </main>
       <%- include('footer.html'); -%>
-    </f-docs-template>
+    </w-docs-template>
 
     <%- include('scripts.html'); -%>
   </body>

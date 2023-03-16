@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-    <f-docs-template>
+    <w-docs-template>
       <%- include('nav.html'); -%>
       <main slot="content">
         <h1 class="mb-16">Textfield</h1>
@@ -213,23 +213,23 @@
         often paired with <i>help-text</i> to provide feedback to the user about the error.
 
         <syntax-highlight>
-          <f-textfield label="Email" invalid help-text="Ugyldig e-post"></f-textfield>
+          <w-textfield label="Email" invalid help-text="Ugyldig e-post"></w-textfield>
         </syntax-highlight>
         <div class="example">
-          <f-textfield label="Email" invalid help-text="Ugyldig e-post"></f-textfield>
+          <w-textfield label="Email" invalid help-text="Ugyldig e-post"></w-textfield>
         </div>
 
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
         <h3 class="mt-24 mb-16">Placeholder</h3>
         <syntax-highlight>
-          <f-textfield label="E-post" placeholder="puse@finn.no"></f-textfield>
+          <w-textfield label="E-post" placeholder="puse@finn.no"></w-textfield>
         </syntax-highlight>
         <div class="example">
-          <f-textfield label="E-post" placeholder="puse@finn.no"></f-textfield>
+          <w-textfield label="E-post" placeholder="puse@finn.no"></w-textfield>
         </div>
-        Placeholder text can be used to describe the expected value or formatting for the f-textfield.
-        Placeholder text will only appear when the f-textfield is empty, and should not be used as a
+        Placeholder text can be used to describe the expected value or formatting for the w-textfield.
+        Placeholder text will only appear when the w-textfield is empty, and should not be used as a
         substitute for labeling the element with a visible label.
 
         <h3 class="mt-24 mb-16">Disabled</h3>
@@ -239,77 +239,77 @@
         informative alternatives before choosing to use disabled on an element.
         <syntax-highlight>
           <div class="flex flex-col space-y-32">
-            <f-textfield label="E-post" disabled value="puse@finn.no"></f-textfield>
-            <f-textfield label="E-post" disabled></f-textfield>
+            <w-textfield label="E-post" disabled value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" disabled></w-textfield>
           </div>
         </syntax-highlight>
         <div class="example">
           <div class="flex flex-col space-y-32">
-            <f-textfield label="E-post" disabled value="puse@finn.no"></f-textfield>
-            <f-textfield label="E-post" disabled></f-textfield>
+            <w-textfield label="E-post" disabled value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" disabled></w-textfield>
           </div>
         </div>
 
         <h3 class="mt-24 mb-16">Affix</h3>
-        If you wish to use an affix you must first use the f-affix element in conjunction with
-        f-textfield. Include the affix as a child of f-textfield and set the appropiate attributes.
+        If you wish to use an affix you must first use the w-affix element in conjunction with
+        w-textfield. Include the affix as a child of w-textfield and set the appropiate attributes.
         You must specify which slot to set the affix into (either prefix or suffix).
         <syntax-highlight>
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="suffix" label="kr"></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="suffix" label="kr"></w-affix>
+          </w-textfield>
         </syntax-highlight>
         <div class="example">
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="suffix" label="kr"></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="suffix" label="kr"></w-affix>
+          </w-textfield>
         </div>
         <syntax-highlight>
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="prefix" label="kr"></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+          </w-textfield>
         </syntax-highlight>
         <div class="example">
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="prefix" label="kr"></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+          </w-textfield>
         </div>
 
         You can also use both a prefix and suffix
         <syntax-highlight>
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="prefix" label="kr"></f-affix>
-            <f-affix slot="suffix" search></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+            <w-affix slot="suffix" search></w-affix>
+          </w-textfield>
         </syntax-highlight>
         <div class="example">
-          <f-textfield label="Price" placeholder="1 000 000">
-            <f-affix slot="prefix" label="kr"></f-affix>
-            <f-affix slot="suffix" search></f-affix>
-          </f-textfield>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+            <w-affix slot="suffix" search></w-affix>
+          </w-textfield>
         </div>
 
         <h3 class="mt-24 mb-16">Read only</h3>
 
-        The read-only boolean attribute makes the f-textfield's text content immutable. Unlike
-        disabled the f-textfield remains focusable and the contents can still be copied. See the MDN
+        The read-only boolean attribute makes the w-textfield's text content immutable. Unlike
+        disabled the w-textfield remains focusable and the contents can still be copied. See the MDN
         docs for more information.
 
         <syntax-highlight>
           <div class="flex flex-col space-y-32">
-            <f-textfield label="E-post" read-only value="puse@finn.no"></f-textfield>
-            <f-textfield label="E-post" read-only></f-textfield>
+            <w-textfield label="E-post" read-only value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" read-only></w-textfield>
           </div>
         </syntax-highlight>
         <div class="example">
           <div class="flex flex-col space-y-32">
-            <f-textfield label="E-post" read-only value="puse@finn.no"></f-textfield>
-            <f-textfield label="E-post" read-only></f-textfield>
+            <w-textfield label="E-post" read-only value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" read-only></w-textfield>
           </div>
         </div>
       </main>
       <%- include('footer.html'); -%>
-    </f-docs-template>
+    </w-docs-template>
 
     <%- include('scripts.html'); -%>
   </body>

@@ -66,8 +66,8 @@ class WarpAffix extends LitElement {
   }
 }
 
-if (!customElements.get('f-affix')) {
-  customElements.define('f-affix', WarpAffix);
+if (!customElements.get('w-affix')) {
+  customElements.define('w-affix', WarpAffix);
 }
 
 export { WarpAffix };

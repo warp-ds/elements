@@ -27,10 +27,10 @@ teardown(async () => {
 test('Select component with no attributes is rendered on the page', async (t) => {
   // GIVEN: A button component
   const component = `
-    <f-select>
+    <w-select>
       <option>First option</option>
       <option>Second option</option>
-    </f-select>
+    </w-select>
   `;
 
   // WHEN: the component is added to the page
@@ -40,7 +40,7 @@ test('Select component with no attributes is rendered on the page', async (t) =>
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-select select');
+  const locator = await page.locator('w-select select');
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
@@ -48,10 +48,10 @@ test('Select component with no attributes is rendered on the page', async (t) =>
 test('Select renders label', async (t) => {
   // GIVEN: A button component
   const component = `
-    <f-select id="withlabel" label="Options">
+    <w-select id="withlabel" label="Options">
       <option>First option</option>
       <option>Second option</option>
-    </f-select>
+    </w-select>
   `;
 
   // WHEN: the component is added to the page
@@ -61,7 +61,7 @@ test('Select renders label', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-select .input');
+  const locator = await page.locator('w-select .input');
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
@@ -69,10 +69,10 @@ test('Select renders label', async (t) => {
 test('Select renders with hint', async (t) => {
   // GIVEN: A button component
   const component = `
-      <f-select id="hello" hint="Hello" always>
+      <w-select id="hello" hint="Hello" always>
         <option>First option</option>
         <option>Second option</option>
-      </f-select>
+      </w-select>
     `;
 
   // WHEN: the component is added to the page
@@ -82,7 +82,7 @@ test('Select renders with hint', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-select .input');
+  const locator = await page.locator('w-select .input');
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
@@ -90,10 +90,10 @@ test('Select renders with hint', async (t) => {
 test('Select renders with error', async (t) => {
   // GIVEN: A button component
   const component = `
-        <f-select id="hello" hint="Something went wrong" invalid>
+        <w-select id="hello" hint="Something went wrong" invalid>
           <option>First option</option>
           <option>Second option</option>
-        </f-select>
+        </w-select>
       `;
 
   // WHEN: the component is added to the page
@@ -103,7 +103,7 @@ test('Select renders with error', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-select .input');
+  const locator = await page.locator('w-select .input');
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
@@ -111,10 +111,10 @@ test('Select renders with error', async (t) => {
 test('Select renders with autofocus', async (t) => {
   // GIVEN: A button component
   const component = `
-        <f-select id="hello" auto-focus>
+        <w-select id="hello" auto-focus>
           <option>First option</option>
           <option>Second option</option>
-        </f-select>
+        </w-select>
       `;
 
   // WHEN: the component is added to the page
@@ -124,7 +124,7 @@ test('Select renders with autofocus', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-select');
+  const locator = await page.locator('w-select');
 
   t.equal(
     await locator.evaluate((el) => document.activeElement === el),

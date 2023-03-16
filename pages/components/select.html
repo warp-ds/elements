@@ -1,7 +1,7 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-    <f-docs-template>
+    <w-docs-template>
       <%- include('nav.html'); -%>
       <main slot="content">
         <h1 class="mb-16">Select</h1>
@@ -84,86 +84,86 @@
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
         <syntax-highlight>
-          <f-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </syntax-highlight>
         <div class="example">
-          <f-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
             <option value="s">Strawberries</option>
             <option value="r">Raspberries</option>
             <option value="c">Cloudberries</option>
-          </f-select>
+          </w-select>
         </div>
 
         <h3 class="mt-24 mb-16">Default option</h3>
         <syntax-highlight>
-          <f-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
             <option>Strawberries</option>
             <option selected>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </syntax-highlight>
         <div class="example">
-          <f-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
             <option value="s">Strawberries</option>
             <option value="r" selected>Raspberries</option>
             <option value="c">Cloudberries</option>
-          </f-select>
+          </w-select>
         </div>
 
         <h3 class="mt-24 mb-16">Invalid</h3>
         <syntax-highlight>
-          <f-select label="Berries" hint="Wrong choice" invalid>
+          <w-select label="Berries" hint="Wrong choice" invalid>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </syntax-highlight>
         <div class="example">
-          <f-select label="Berries" hint="Wrong choice" invalid>
+          <w-select label="Berries" hint="Wrong choice" invalid>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </div>
 
         <h3 class="mt-24 mb-16">Auto focus</h3>
         <syntax-highlight>
-          <f-select label="Berries" auto-focus>
+          <w-select label="Berries" auto-focus>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </syntax-highlight>
         <div class="example">
-          <f-select label="Berries" auto-focus>
+          <w-select label="Berries" auto-focus>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </div>
 
         <h3 class="mt-24 mb-16">Optional</h3>
         <syntax-highlight>
-          <f-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
             <option>Strawberries</option>
             <optionx>Raspberries</optionx>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </syntax-highlight>
         <div class="example">
-          <f-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
-          </f-select>
+          </w-select>
         </div>
       </main>
       <%- include('footer.html'); -%>
-    </f-docs-template>
+    </w-docs-template>
 
     <%- include('scripts.html'); -%>
   </body>

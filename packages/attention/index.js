@@ -199,8 +199,8 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('f-attention')) {
-  customElements.define('f-attention', WarpAttention);
+if (!customElements.get('w-attention')) {
+  customElements.define('w-attention', WarpAttention);
 }
 
 export { WarpAttention };

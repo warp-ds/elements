@@ -74,7 +74,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
       })}
     >
       ${this._hasTitle
-        ? html`<f-unstyled-heading level=${this.headingLevel}>
+        ? html`<w-unstyled-heading level=${this.headingLevel}>
             <button
               type="button"
               aria-expanded="${this.expanded}"
@@ -100,16 +100,16 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
                         'box-chevron': this.box,
                       })}
                     >
-                      <f-icon-chevron-down16></f-icon-chevron-down16>
+                      <w-icon-chevron-down16></w-icon-chevron-down16>
                     </div>`}
               </div>
             </button>
-          </f-unstyled-heading>`
+          </w-unstyled-heading>`
         : ''}
       ${this.animated
-        ? html`<f-expand-transition ?show=${this.expanded}>
+        ? html`<w-expand-transition ?show=${this.expanded}>
             ${this._expandableSlot}
-          </f-expand-transition>`
+          </w-expand-transition>`
         : html`<div
             class=${fclasses({
               'overflow-hidden': true,
@@ -123,8 +123,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('f-expandable')) {
-  customElements.define('f-expandable', WarpExpandable);
+if (!customElements.get('w-expandable')) {
+  customElements.define('w-expandable', WarpExpandable);
 }
 
 export { WarpExpandable };

@@ -69,8 +69,8 @@ class ExpandTransition extends LitElement {
   }
 }
 
-if (!customElements.get('f-expand-transition')) {
-  customElements.define('f-expand-transition', ExpandTransition);
+if (!customElements.get('w-expand-transition')) {
+  customElements.define('w-expand-transition', ExpandTransition);
 }
 
 export { ExpandTransition };
