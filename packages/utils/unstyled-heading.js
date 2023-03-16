@@ -23,8 +23,8 @@ class UnstyledHeading extends LitElement {
   }
 }
 
-if (!customElements.get('f-unstyled-heading')) {
-  customElements.define('f-unstyled-heading', UnstyledHeading);
+if (!customElements.get('w-unstyled-heading')) {
+  customElements.define('w-unstyled-heading', UnstyledHeading);
 }
 
 export { UnstyledHeading };

@@ -143,6 +143,6 @@ export class WarpToast extends LitElement {
   }
 }
 
-if (!customElements.get('f-toast')) {
-  customElements.define('f-toast', WarpToast);
+if (!customElements.get('w-toast')) {
+  customElements.define('w-toast', WarpToast);
 }

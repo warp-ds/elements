@@ -17,30 +17,30 @@
 
         <h4>Attribute</h4>
         <syntax-highlight>
-          <f-card selected>
+          <w-card selected>
             <div class="m-20">This example shows a card that looks selected</div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example">
-          <f-card selected>
+          <w-card selected>
             <div class="m-20">This example shows a card that looks selected</div>
-          </f-card>
+          </w-card>
         </div>
 
         <h4>Property</h4>
         <syntax-highlight>
-          <f-card id="card-selected-property-example">
+          <w-card id="card-selected-property-example">
             <div class="m-20">This example shows a card that looks selected</div>
-          </f-card>
+          </w-card>
           <script>document.querySelector('#card-selected-property-example').selected = true;</script>
         </syntax-highlight>
         <div class="example" id="property-example">
-          <f-card>
+          <w-card>
             <div class="m-20">This example shows a card that looks selected</div>
-          </f-card>
+          </w-card>
           <script defer type="module">
             window.addEventListener('load', () => {
-              const el = document.querySelector('#property-example f-card').selected = true;
+              const el = document.querySelector('#property-example w-card').selected = true;
             })
           </script>
         </div>
@@ -51,14 +51,14 @@
         This ensures that things such as keyboard navigation works as expected.
 
         <syntax-highlight>
-          <f-card clickable onclick="alert('clicked!');">
+          <w-card clickable onclick="alert('clicked!');">
             <div class="m-20">This example shows content as a clickable div</div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example">
-          <f-card clickable onclick="alert('clicked!');">
+          <w-card clickable onclick="alert('clicked!');">
             <div class="m-20">This example shows content as a clickable div</div>
-          </f-card>
+          </w-card>
         </div>
 
         <h3>Flat</h3>
@@ -66,14 +66,14 @@
         If you need to give the component a flat look, set the `flat` attribute.
 
         <syntax-highlight>
-          <f-card flat>
+          <w-card flat>
             <div class="m-20">This example shows content with a flat look</div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example">
-          <f-card flat>
+          <w-card flat>
             <div class="m-20">This example shows content with a flat look</div>
-          </f-card>
+          </w-card>
         </div>
 
 
@@ -84,14 +84,14 @@
         When you need the component to behave like a section, article or what have you, you should set the `role` attribute.
 
         <syntax-highlight>
-          <f-card role="section">
+          <w-card role="section">
             <div class="m-20">This example shows the card behaving like a section</div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example">
-          <f-card role="section">
+          <w-card role="section">
             <div class="m-20">This example shows the card behaving like a section</div>
-          </f-card>
+          </w-card>
         </div>
 
         <h3>Click event handler example</h3>
@@ -100,7 +100,7 @@
         When you do so, be sure to set the `clickable` attribute on the element for styling and accessibility reasons.
 
         <syntax-highlight>
-          <f-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
+          <w-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
             <img
               class="h-128 w-full object-cover"
               src="https://source.unsplash.com/random/402x402"
@@ -125,10 +125,10 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example flex flex-col md:flex-row justify-between">
-          <f-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
+          <w-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
             <img
               class="h-128 w-full object-cover"
               src="https://source.unsplash.com/random/400x400"
@@ -153,8 +153,8 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
-          <f-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
+          </w-card>
+          <w-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
             <img
               class="h-128 w-full object-cover"
               src="https://source.unsplash.com/random/401x401"
@@ -179,8 +179,8 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
-          <f-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
+          </w-card>
+          <w-card class="mt-10 mr-10" clickable onclick="this.selected=!this.selected">
             <img
               class="h-128 w-full object-cover"
               src="https://source.unsplash.com/random/403x403"
@@ -205,7 +205,7 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
+          </w-card>
         </div>
 
         <h3>Anchor link example</h3>
@@ -222,20 +222,20 @@
         <p>You should follow these semantics, but styling is up to you.</p>
 
         <syntax-highlight>
-          <f-card>
+          <w-card>
             <div aria-owns="title"></div>
             ...
             <h3 id="title">
               <a href="..." title="content"> content </a>
             </h3>
             ...
-          </f-card>
+          </w-card>
         </syntax-highlight>
 
         <p>Full code example:</p>
 
         <syntax-highlight>
-          <f-card class="mt-10 mr-10">
+          <w-card class="mt-10 mr-10">
             <div aria-owns="title"></div>
             <img
               class="h-128 w-full object-cover"
@@ -270,10 +270,10 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
+          </w-card>
         </syntax-highlight>
         <div class="example flex flex-col md:flex-row justify-between">
-          <f-card class="mt-10 mr-10">
+          <w-card class="mt-10 mr-10">
             <div aria-owns="title"></div>
             <img
               class="h-128 w-full object-cover"
@@ -308,7 +308,7 @@
                 <span class="text-gray-200">•</span> 2 soverom
               </p>
             </div>
-          </f-card>
+          </w-card>
         </div>
       </main>
       <%- include('footer.html'); -%>

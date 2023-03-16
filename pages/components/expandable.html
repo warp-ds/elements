@@ -121,83 +121,83 @@
             <button class="button button--small">info</button>
             <button class="button button--small">animated</button>
           </div>
-          <f-expandable title="I'm expandable">
+          <w-expandable title="I'm expandable">
             <p>with expanded content</p>
-          </f-expandable>
+          </w-expandable>
         </syntax-highlight>
         <div class="example">
           <div id="expandableControllers" class="flex gap-8 flex-wrap mb-16" aria-controls="expandable">
             <%- include('expandableControllers.html'); -%>
           </div>
-          <f-expandable id="expandable" title="I'm expandable">
+          <w-expandable id="expandable" title="I'm expandable">
             <p>with expanded content</p>
-          </f-expandable>
+          </w-expandable>
         </div>
 
         <h3>With a heading wrapping the toggle button</h3>
         <p>This can be used to wrap the toggle button in a heading for navigational and structural purposes. It's a feature that is needed typically in scenarios where multiple consecutive Expandable components are used.</p>
 
         <syntax-highlight>
-          <f-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
+          <w-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
             <p>with expanded content</p> 
-          </f-expandable>
+          </w-expandable>
         </syntax-highlight>
         <div class="example">
-          <f-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
+          <w-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
             <p>with expanded content</p>
-          </f-expandable>
+          </w-expandable>
         </div>
 
         <h3>With custom title</h3>
         <p>This can be used if more control over styling is needed than the <code>title</code> prop allows</p>
 
         <syntax-highlight>
-          <f-expandable box info>
+          <w-expandable box info>
             <div slot="title" class="flex flex-row items-center">
-              <f-icon-bag16></f-icon-bag16>
+              <w-icon-bag16></w-icon-bag16>
               <p class="ml-8 mb-0">This is a title with an icon</p>
             </div>
             <p>with expanded content</p> 
-          </f-expandable>
+          </w-expandable>
         </syntax-highlight>
         <div class="example">
-          <f-expandable box info>
+          <w-expandable box info>
             <div slot="title" class="flex flex-row items-center">
-              <f-icon-bag16></f-icon-bag16>
+              <w-icon-bag16></w-icon-bag16>
               <p class="ml-8 mb-0">This is a title with an icon</p>
             </div>
             <p>with expanded content</p>
-          </f-expandable>
+          </w-expandable>
         </div>
 
 
         <h3>Without title</h3>
          
         <syntax-highlight>
-          <f-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</f-button>
-          <f-expandable box info expanded animated id="expandableWithoutTitle">
+          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+          <w-expandable box info expanded animated id="expandableWithoutTitle">
             <p>with expanded content</p> 
-          </f-expandable>
+          </w-expandable>
         </syntax-highlight>
         <div class="example noTitle">
-          <f-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</f-button>
-          <f-expandable box info expanded animated class="mt-16" id="expandableWithoutTitle">
+          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+          <w-expandable box info expanded animated class="mt-16" id="expandableWithoutTitle">
             <p>Expandable content</p>
-          </f-expandable>
+          </w-expandable>
         </div>
 
 
         <h3>With expanded prop</h3>
 
         <syntax-highlight>
-          <f-expandable box info title="I'm expanded by default" expanded>
+          <w-expandable box info title="I'm expanded by default" expanded>
             <p>content should be visible</p> 
-          </f-expandable>
+          </w-expandable>
         </syntax-highlight>
         <div class="example">
-          <f-expandable box info title="I'm expanded by default" expanded>
+          <w-expandable box info title="I'm expanded by default" expanded>
             <p>content should be visible</p>
-          </f-expandable>
+          </w-expandable>
         </div>
       </main>
       <%- include('footer.html'); -%>

@@ -28,11 +28,11 @@ teardown(async () => {
 test('Single broadcast', async (t) => {
   // GIVEN: The broadcast component
   const component = `
-    <f-broadcast 
+    <w-broadcast 
         api="http://localhost:4053/single-broadcast"
         url="http://test"
         interval="5000"
-    ></f-broadcast>
+    ></w-broadcast>
   `;
 
   // WHEN: the component is added to the page
@@ -43,7 +43,7 @@ test('Single broadcast', async (t) => {
 
   // THEN: the component is visible in the DOM
   await wait(50);
-  const locator = await page.locator('f-broadcast');
+  const locator = await page.locator('w-broadcast');
   
   t.matchSnapshot(formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)));
 });
@@ -51,7 +51,7 @@ test('Single broadcast', async (t) => {
 test('Multiple broadcasts', async (t) => {
   // GIVEN: The broadcast component
   const component = `
-    <f-broadcast api="http://localhost:4053/multiple-broadcasts"></f-broadcast>
+    <w-broadcast api="http://localhost:4053/multiple-broadcasts"></w-broadcast>
   `;
 
   // WHEN: the component is added to the page
@@ -62,7 +62,7 @@ test('Multiple broadcasts', async (t) => {
 
   // THEN: the component is visible in the DOM
   await wait(50);
-  const locator = await page.locator('f-broadcast');
+  const locator = await page.locator('w-broadcast');
 
   t.matchSnapshot(formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)));
 });

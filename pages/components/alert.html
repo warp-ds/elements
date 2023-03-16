@@ -47,55 +47,55 @@
             <button class="button button--small">Hide and show "positive" variant</button>
             <button class="button button--small">Hide and show "warning" variant</button>
           </div>
-          <f-alert variant="info" show>
+          <w-alert variant="info" show>
             <p>This is "info" variant of the alert element</p>
-          </f-alert>
+          </w-alert>
         </syntax-highlight>
         <div class="example">
           <div id="defaultAlertControllers" class="flex gap-8 flex-wrap mb-16">
             <%- include('alertControllers.html'); -%>
           </div>
-          <f-alert id="defaultAlert" variant="info" show>
+          <w-alert id="defaultAlert" variant="info" show>
             <p>This is "info" variant of the alert element</p>
-          </f-alert>
+          </w-alert>
         </div>
 
         <syntax-highlight>
-          <f-alert variant="info" show>
+          <w-alert variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
-          </f-alert>
+          </w-alert>
         </syntax-highlight>
         <div class="example">
           <div id="alertWithDescriptionControllers" class="flex gap-8 flex-wrap mb-16">
             <%- include('alertControllers.html'); -%>
           </div>
-          <f-alert id="alertWithDescription" variant="info" show>
+          <w-alert id="alertWithDescription" variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
-          </f-alert>
+          </w-alert>
         </div>
 
         <syntax-highlight>
-          <f-alert variant="info" show>
+          <w-alert variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <a title="Link to more information">And a link to more information</a>
-          </f-alert>
+          </w-alert>
         </syntax-highlight>
         <div class="example">
           <div id="alertWithLinkControllers" class="flex gap-8 flex-wrap mb-16">
             <%- include('alertControllers.html'); -%>
           </div>
-          <f-alert id="alertWithLink" variant="info" show>
+          <w-alert id="alertWithLink" variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <a title="Link to more information">And a link to more information</a>
-          </f-alert>
+          </w-alert>
         </div>
 
         <syntax-highlight>
-          <f-alert variant="info" show>
+          <w-alert variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <a title="Link to more information">And a link to more information</a>
@@ -107,13 +107,13 @@
                 Secondary button
               </button>
             </div>
-          </f-alert>
+          </w-alert>
         </syntax-highlight>
         <div class="example">
           <div id="alertWithButtonsControllers" class="flex gap-8 flex-wrap mb-16">
             <%- include('alertControllers.html'); -%>
           </div>
-          <f-alert id="alertWithButtons" variant="info" show>
+          <w-alert id="alertWithButtons" variant="info" show>
             <p class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <a title="Link to more information">And a link to more information</a>
@@ -125,14 +125,14 @@
                 Secondary button
               </button>
             </div>
-          </f-alert>
+          </w-alert>
         </div>
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
           Use the ARIA live region <code>role</code> attribute to provide meaning to the alert
           element (defaults to "alert"). If you want to remove the role from the alert and assign it
           to its particular child (e.g. title), you can do so by setting <code>role</code> attribute
-          to an empty string on <code>f-alert</code> element and assigning a respective
+          to an empty string on <code>w-alert</code> element and assigning a respective
           <code>role</code> on the child element. Read more about live region
           <code>role</code> attribute
           <a
@@ -145,20 +145,20 @@
         </p>
 
         <syntax-highlight>
-          <f-alert variant="info" show role="">
+          <w-alert variant="info" show role="">
             <p role="alert" class="font-bold">This is a "info" variant of the alert element</p>
             <p>You see this warning because you did something wrong</p>
             <button class="button button--primary button--small">Hide and show alert</button>
-          </f-alert>
+          </w-alert>
         </syntax-highlight>
         <div class="example">
-          <f-alert id="selfHidingAlert" variant="info" show role="">
+          <w-alert id="selfHidingAlert" variant="info" show role="">
             <p role="alert" class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
               <button class="button button--primary button--small">Hide and show alert</button>
             </div>
-          </f-alert>
+          </w-alert>
         </div>
       </main>
       <%- include('footer.html'); -%>

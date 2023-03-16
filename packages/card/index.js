@@ -91,8 +91,8 @@ class WarpCard extends LitElement {
   }
 }
 
-if (!customElements.get('f-card')) {
-  customElements.define('f-card', WarpCard);
+if (!customElements.get('w-card')) {
+  customElements.define('w-card', WarpCard);
 }
 
 export { WarpCard };

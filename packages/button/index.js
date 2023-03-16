@@ -95,8 +95,8 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('f-button')) {
-  customElements.define('f-button', WarpButton);
+if (!customElements.get('w-button')) {
+  customElements.define('w-button', WarpButton);
 }
 
 export { WarpButton };

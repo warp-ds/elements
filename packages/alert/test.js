@@ -21,9 +21,9 @@ teardown(async () => {
 
 test('Alert component with no attributes is rendered on the page', async (t) => {
   const component = `
-    <f-alert>
+    <w-alert>
       <p>This is an alert with no attributes</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const errorLogs = [];
@@ -39,7 +39,7 @@ test('Alert component with no attributes is rendered on the page', async (t) => 
     content: component,
   });
 
-  const locator = await page.locator('f-alert');
+  const locator = await page.locator('w-alert');
   t.equal(
     (await locator.innerHTML()).trim(),
     '<p>This is an alert with no attributes</p>',
@@ -63,7 +63,7 @@ test('Alert component with no attributes is rendered on the page', async (t) => 
 
   t.equal(
     await page.evaluate(
-      'document.querySelector("f-alert").renderRoot.querySelector("f-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
+      'document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
     ),
     'true',
     'Aria-hidden attribute is `true`',
@@ -74,9 +74,9 @@ test('Alert component with no attributes is rendered on the page', async (t) => 
 
 test('Alert component with invalid "variant" attribute is rendered on the page', async (t) => {
   const component = `
-    <f-alert variant="hello">
+    <w-alert variant="hello">
       <p>This is an alert with invalid "variant" attribute</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const errorLogs = [];
@@ -103,9 +103,9 @@ test('Alert component with invalid "variant" attribute is rendered on the page',
 
 test('Negative alert component with show attribute is rendered on the page', async (t) => {
   const component = `
-    <f-alert variant="negative" show>
+    <w-alert variant="negative" show>
       <p>This is a negative alert that should be visible</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const errorLogs = [];
@@ -120,7 +120,7 @@ test('Negative alert component with show attribute is rendered on the page', asy
     content: component,
   });
 
-  const locator = await page.locator('f-alert');
+  const locator = await page.locator('w-alert');
   t.equal(
     (await locator.innerHTML()).trim(),
     '<p>This is a negative alert that should be visible</p>',
@@ -137,7 +137,7 @@ test('Negative alert component with show attribute is rendered on the page', asy
 
   t.equal(
     await page.evaluate(
-      'document.querySelector("f-alert").renderRoot.querySelector("f-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
+      'document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
     ),
     null,
     'Aria-hidden attribute is missing',
@@ -148,9 +148,9 @@ test('Negative alert component with show attribute is rendered on the page', asy
 
 test('Info alert component with `status` role attribute is rendered on the page', async (t) => {
   const component = `
-    <f-alert variant="info" role="status">
+    <w-alert variant="info" role="status">
       <p>This is an info alert that should be invisible</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const page = await addContentToPage({
@@ -158,7 +158,7 @@ test('Info alert component with `status` role attribute is rendered on the page'
     content: component,
   });
 
-  const locator = await page.locator('f-alert');
+  const locator = await page.locator('w-alert');
   t.equal(
     (await locator.innerHTML()).trim(),
     '<p>This is an info alert that should be invisible</p>',
@@ -176,9 +176,9 @@ test('Positive alert component with `alert` role assigned to its child is render
   // Sometimes we might want that only a particular descendant of the alert component is asigned an "alert" role,
   // Which should result in accessibility tools only reading
   const component = `
-    <f-alert variant="positive" show role="">
+    <w-alert variant="positive" show role="">
       <p role="alert">This is a positive alert that should have an "alert" role</p><p>This is less important text</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const page = await addContentToPage({
@@ -186,7 +186,7 @@ test('Positive alert component with `alert` role assigned to its child is render
     content: component,
   });
 
-  const locator = await page.locator('f-alert');
+  const locator = await page.locator('w-alert');
   t.equal(
     (await locator.innerHTML()).trim(),
     '<p role="alert">This is a positive alert that should have an "alert" role</p><p>This is less important text</p>',
@@ -215,9 +215,9 @@ test('Warning alert component with show-toggle button is rendered on the page', 
     <button id="alertShowToggle" class="button button--primary button--small">
       Toggle show
     </button>
-    <f-alert id="alert" variant="warning" show>
+    <w-alert id="alert" variant="warning" show>
       <p role="alert">This is a positive alert that should have an "alert" role</p><p>This is less important text</p>
-    </f-alert>
+    </w-alert>
 
     <script>
       const alertEl = document.getElementById('alert');
@@ -232,7 +232,7 @@ test('Warning alert component with show-toggle button is rendered on the page', 
     content: component,
   });
 
-  const locator = await page.locator('f-alert');
+  const locator = await page.locator('w-alert');
 
   t.equal(
     await locator.evaluate((el) => el.variant),
@@ -254,11 +254,11 @@ test('Warning alert component with show-toggle button is rendered on the page', 
 
 test('Info Alert component with multiple paragraph child elements', async (t) => {
   const component = `
-    <f-alert variant="info" show>
+    <w-alert variant="info" show>
       <p>Paragraph 1</p>
       <p id="second">Paragraph 2</p>
       <p id="last">Paragraph 3</p>
-    </f-alert>
+    </w-alert>
   `;
 
   const page = await addContentToPage({
@@ -266,14 +266,14 @@ test('Info Alert component with multiple paragraph child elements', async (t) =>
     content: component,
   });
 
-  t.equal(await page.locator('f-alert p').count(), 3, '3 p tags should be present');
+  t.equal(await page.locator('w-alert p').count(), 3, '3 p tags should be present');
   t.match(
-    await page.innerText(':nth-match(f-alert p, 1)'),
+    await page.innerText(':nth-match(w-alert p, 1)'),
     'Paragraph 1',
     'The first text should be "Paragraph 1"',
   );
   t.match(
-    await page.innerText(':nth-match(f-alert p, 3)'),
+    await page.innerText(':nth-match(w-alert p, 3)'),
     'Paragraph 3',
     'The third text should be "Paragraph 3"',
   );

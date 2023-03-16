@@ -70,7 +70,7 @@ export class WarpBroadcast extends LitElement {
           messages,
           ({ id }) => `broadcast-${id}`,
           ({ id, message }) =>
-            html`<f-toast
+            html`<w-toast
               class="w-full"
               id="broadcast-${id}"
               type="warning"
@@ -78,7 +78,7 @@ export class WarpBroadcast extends LitElement {
               canclose
               @close=${() => this._del(id)}
             >
-            </f-toast>`,
+            </w-toast>`,
         )}
       </aside>
     `;

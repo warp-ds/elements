@@ -22,9 +22,9 @@ teardown(async () => {
 test('Button component with no attributes is rendered on the page', async (t) => {
   // GIVEN: A button component
   const component = `
-    <f-button>
+    <w-button>
       This is a button
-    </f-button>
+    </w-button>
   `;
 
   // WHEN: the component is added to the page
@@ -34,7 +34,7 @@ test('Button component with no attributes is rendered on the page', async (t) =>
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('f-button');
+  const locator = await page.locator('w-button');
   t.equal((await locator.innerHTML()).trim(), 'This is a button', 'HTML should be rendered');
   t.equal(await locator.getAttribute('quiet'), null, '"quiet" attribute should be null');
   t.equal(await locator.getAttribute('small'), null, '"small" attribute should be null');
@@ -48,9 +48,9 @@ test('Button component with no attributes is rendered on the page', async (t) =>
 
 test('Quiet small negative button', async (t) => {
   const component = `
-    <f-button variant="negative" quiet small>
+    <w-button variant="negative" quiet small>
       This is a quiet small negative button
-    </f-button>
+    </w-button>
   `;
 
   const page = await addContentToPage({
@@ -58,7 +58,7 @@ test('Quiet small negative button', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('f-button');
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
     'This is a quiet small negative button',
@@ -75,9 +75,9 @@ test('Quiet small negative button', async (t) => {
 
 test('Loading primary button', async (t) => {
   const component = `
-    <f-button variant="primary" loading>
+    <w-button variant="primary" loading>
       This is a loading primary button
-    </f-button>
+    </w-button>
   `;
 
   const page = await addContentToPage({
@@ -85,7 +85,7 @@ test('Loading primary button', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('f-button');
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
     'This is a loading primary button',
@@ -101,9 +101,9 @@ test('Loading primary button', async (t) => {
 
 test('Button as an anchor', async (t) => {
   const component = `
-    <f-button href="https://google.no">
+    <w-button href="https://google.no">
       This is an anchor element
-    </f-button>
+    </w-button>
   `;
 
   const page = await addContentToPage({
@@ -111,7 +111,7 @@ test('Button as an anchor', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('f-button');
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
     'This is an anchor element',
@@ -128,9 +128,9 @@ test('Button as an anchor', async (t) => {
 
 test('Button with autofocus', async (t) => {
   const component = `
-    <f-button autofocus>
+    <w-button autofocus>
       This button should be focused
-    </f-button>
+    </w-button>
   `;
 
   const page = await addContentToPage({
@@ -138,7 +138,7 @@ test('Button with autofocus', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('f-button');
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
     'This button should be focused',
@@ -153,9 +153,9 @@ test('Button with autofocus', async (t) => {
 
 test('Button with invalid variant name', async (t) => {
   const component = `
-    <f-button variant="foo" loading>
+    <w-button variant="foo" loading>
       This is a foo button
-    </f-button>
+    </w-button>
   `;
 
   const errorLogs = [];
