@@ -3,7 +3,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { styles } from '../../dist/elements.min.js';
 
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
