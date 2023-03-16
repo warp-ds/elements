@@ -4,7 +4,6 @@ import { when } from 'lit/directives/when.js';
 import { toast as c } from '@warp-ds/component-classes';
 import { expand, collapse } from 'element-collapse';
 import { closeSVG, successSVG, failureSVG } from './svgs';
-import { styles } from '../../dist/elements.min.js';
 
 const classes = (definition) => {
   const defn = {};
@@ -18,7 +17,6 @@ const classes = (definition) => {
 
 export class WarpToast extends LitElement {
   static styles = [
-    styles,
     css`
       :host {
         display: block;
