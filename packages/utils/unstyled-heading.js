@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { styles } from '../../dist/elements.min.js';
 
 class UnstyledHeading extends LitElement {

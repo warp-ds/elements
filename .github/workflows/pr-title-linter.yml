@@ -1,0 +1,10 @@
+name: PR Title Linter
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate title
+        uses: warp-ds/pr-linter@v1
