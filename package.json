@@ -22,7 +22,7 @@
     "lint": "npm run lint:format && pnpm run lint:eslint",
     "lint:format": "prettier --check . --ignore-path .gitignore",
     "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
-    "dev": "vite",
+    "dev": "vite ",
     "build:docs": "vite build && cp CNAME site",
     "eik:login": "eik login",
     "eik:publish": "eik publish",
