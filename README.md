@@ -1,4 +1,4 @@
-# Fabric Elements
+# Warp Elements
 
 ## Development
 
@@ -6,7 +6,7 @@ The project uses [Vite](https://vitejs.dev/) for "unbundled" local development. 
 server by running the following command:
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 Changes to either the custom elements or the HTML files should hot reload.
