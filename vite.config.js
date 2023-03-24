@@ -42,6 +42,10 @@ export default ({ mode }) => {
   return {
     // base: isProduction ? '/elements/' : '',
     plugins: [
+      uno({
+        presets: [presetWarp({usePreflight: true})],
+        mode: 'shadow-dom',
+      }),
       // litElementTailwindPlugin({ mode }),
       createHtmlPlugin({
         minify: false,
@@ -109,9 +113,6 @@ export default ({ mode }) => {
         ],
       }),
       isProduction && basePathFix(),
-      uno({
-        presets: [presetWarp()]
-      }),
     ],
     build: {
       outDir: 'site',

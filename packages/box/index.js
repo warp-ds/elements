@@ -15,17 +15,16 @@ class WarpBox extends LitElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [
-    styles,
+  static styles = 
     css`
-      :host {
+    /* @unocss-placeholder */
+    :host {
         display: block;
       }
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-    `,
-  ];
+    `;
 
   get _class() {
     return fclasses({

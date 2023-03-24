@@ -1,7 +1,6 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
-import { styles } from '../../dist/elements.min.js';
 
 const variantClassMap = {
   primary: 'button button--primary',
@@ -28,7 +27,9 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     buttonClass: { type: String, reflect: true },
   };
 
-  static styles = [styles];
+  static styles = css`
+    /* @unocss-placeholder */
+  `;
 
   constructor() {
     super();
@@ -58,6 +59,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     return classNames(
       variantClassMap[this.variant],
       {
+        'inline-flex rounded-8 max-w-max focusable justify-center cursor-pointer py-8 px-12 i-text-$button-color-text-primary i-bg-$button-color-background-primary': true,
         // quiet
         'button--flat': this.variant === 'secondary' && this.quiet,
         'button--destructive-flat': this.variant === 'negative' && this.quiet,
