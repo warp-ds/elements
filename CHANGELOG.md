@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2023-03-29)
+
+
+### Bug Fixes
+
+* guards ([dfa1ba0](https://github.com/warp-ds/elements/commit/dfa1ba0564e494711bb6baeea05583e2991c6d15))
+
 # [1.0.0-alpha.2](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-03-29)
 
 
