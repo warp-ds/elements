@@ -1,6 +1,5 @@
 import { css, html, LitElement } from 'lit';
 import { infoSvg, negativeSvg, positiveSvg, warningSvg } from './svgs';
-import { styles } from '../../dist/elements.min.js';
 
 const variants = {
   negative: {
@@ -61,7 +60,7 @@ class WarpAlert extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = 
     css`
-        /* @unocss-placeholder */
+      /* @unocss-placeholder */
       :host {
         display: block;
       }

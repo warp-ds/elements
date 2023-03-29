@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses } from '../utils';
 import { box as boxClasses } from '@warp-ds/component-classes';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpBox extends LitElement {
   static properties = {
@@ -17,14 +16,14 @@ class WarpBox extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = 
     css`
-    /* @unocss-placeholder */
-    :host {
-        display: block;
-      }
-      ::slotted(:last-child) {
-        margin-bottom: 0px !important;
-      }
-    `;
+      /* @unocss-placeholder */
+      :host {
+          display: block;
+        }
+        ::slotted(:last-child) {
+          margin-bottom: 0px !important;
+        }
+      `;
 
   get _class() {
     return fclasses({

@@ -59,7 +59,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     return classNames(
       variantClassMap[this.variant],
       {
-        'inline-flex rounded-8 max-w-max focusable justify-center cursor-pointer py-8 px-12 i-text-$button-color-text-primary i-bg-$button-color-background-primary': true,
+        'py-10 px-14 border-2 font-bold rounded-8 leading-24 max-w-max focusable justify-center transition-colors ease-in-out i-text-$color-button-secondary-text i-border-$color-button-secondary-border i-bg-$color-button-secondary-background hover:i-bg-$color-button-secondary-background-hover hover:i-border-$color-button-secondary-border-hover active:i-bg-$color-button-secondary-background-active': true,
         // quiet
         'button--flat': this.variant === 'secondary' && this.quiet,
         'button--destructive-flat': this.variant === 'negative' && this.quiet,
