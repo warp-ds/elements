@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { fclasses } from '../utils';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpTextField extends LitElement {
   static properties = {
@@ -31,8 +30,8 @@ class WarpTextField extends LitElement {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
-    styles,
     css`
+      /* @unocss-placeholder */
       :host {
         display: block;
       }

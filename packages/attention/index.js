@@ -8,7 +8,6 @@ import {
   arrowLabels,
   useRecompute as recompute,
 } from '@warp-ds/core/attention';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpAttention extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -28,8 +27,8 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
   };
 
   static styles = [
-    styles,
     css`
+      /* @unocss-placeholder */
       #attention {
         position: absolute;
         z-index: 50;

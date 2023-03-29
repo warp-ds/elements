@@ -15,6 +15,7 @@ import { repeat } from 'lit/directives/repeat.js';
 export class WarpToastContainer extends LitElement {
   static styles = [
     css`
+      /* @unocss-placeholder */
       :host {
         display: block;
       }

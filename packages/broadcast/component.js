@@ -1,7 +1,6 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, css } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
 import { windowExists } from '../utils';
-import { styles } from '../../dist/elements.min.js';
 
 export class WarpBroadcast extends LitElement {
   static properties = {
@@ -23,7 +22,9 @@ export class WarpBroadcast extends LitElement {
     api: { type: String, attribute: true, reflect: true },
   };
 
-  static styles = [styles];
+  static styles = css`
+    /* @unocss-placeholder */
+  `;
 
   constructor() {
     super();

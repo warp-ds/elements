@@ -1,10 +1,9 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { styles } from '../../dist/elements.min.js';
 
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -29,7 +28,9 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
     _options: { state: true },
   };
 
-  static styles = [styles];
+  static styles = css`
+    /* @unocss-placeholder */
+  `;
 
   get #classes() {
     return classNames('input mb-0', {

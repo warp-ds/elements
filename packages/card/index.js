@@ -2,7 +2,6 @@ import { LitElement, html, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { card as c } from '@warp-ds/component-classes';
 import { fclasses } from '../utils';
-import { styles } from '../../dist/elements.min.js';
 
 const keys = {
   ENTER: 'Enter',
@@ -11,8 +10,8 @@ const keys = {
 
 class WarpCard extends LitElement {
   static styles = [
-    styles,
     css`
+      /* @unocss-placeholder */
       a::after {
         content: '';
         position: absolute;

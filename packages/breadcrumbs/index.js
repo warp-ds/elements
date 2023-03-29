@@ -1,11 +1,12 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { interleave } from '@warp-ds/core/breadcrumbs';
-import { styles } from '../../dist/elements.min.js';
 
 const separator = html`<span class="select-none" aria-hidden="true">/</span>`;
 
 class WarpBreadcrumbs extends LitElement {
-  static styles = [styles];
+  static styles = css`
+    /* @unocss-placeholder */
+  `;
 
   connectedCallback() {
     super.connectedCallback();

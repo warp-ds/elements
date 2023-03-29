@@ -3,7 +3,6 @@ import { fclasses, kebabCaseAttributes } from '../utils';
 import { box as boxClasses, buttonReset } from '@warp-ds/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@fabric-ds/icons/elements/chevron-down-16';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpExpandable extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -37,8 +36,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
-    styles,
     css`
+      /* @unocss-placeholder */
       :host {
         display: block;
       }
