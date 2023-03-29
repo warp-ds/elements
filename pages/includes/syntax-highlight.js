@@ -46,7 +46,7 @@ export class SyntaxHighlight extends LitElement {
 
     slotHtml = htmlFormat(slotHtml);
 
-    const highlighted = window.Prism.highlight(slotHtml, window.Prism.languages.markup, 'html');
+    const highlighted = window?.Prism.highlight(slotHtml, window.Prism.languages.markup, 'html');
 
     this.source = highlighted;
   }
