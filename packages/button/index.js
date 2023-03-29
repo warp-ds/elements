@@ -1,15 +1,17 @@
 import { html, LitElement, css } from 'lit';
+import { button } from '@warp-ds/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
 
-const variantClassMap = {
-  primary: 'button button--primary',
-  secondary: 'button',
-  negative: 'button button--destructive',
-  utility: 'button button--utility',
-  link: 'button button--link',
-  pill: 'button button--pill',
-};
+
+const buttonTypes = [    
+  'primary',
+  'secondary',
+  'negative',
+  'utility',
+  'pill',
+  'link',
+];
 
 class WarpButton extends kebabCaseAttributes(LitElement) {
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
@@ -39,10 +41,9 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    const availableVariants = Object.keys(variantClassMap);
-    if (!availableVariants.includes(this.variant)) {
+    if (!buttonTypes.includes(this.variant)) {
       throw new Error(
-        `Invalid "variant" attribute. Set its value to one of the following:\n${availableVariants.join(
+        `Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(
           ', ',
         )}.`,
       );
@@ -55,20 +56,34 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     }
   }
 
+
   get _classes() {
+    const primary = this.variant === 'primary';
+    const secondary = this.variant === 'secondary';
+    const negative = this.variant === 'negative';
+    const utility = this.variant === 'utility';
+    const pill = this.variant === 'pill';
+    const link = this.variant === 'link';
+
     return classNames(
-      variantClassMap[this.variant],
       {
-        'py-10 px-14 border-2 font-bold rounded-8 leading-24 max-w-max focusable justify-center transition-colors ease-in-out i-text-$color-button-secondary-text i-border-$color-button-secondary-border i-bg-$color-button-secondary-background hover:i-bg-$color-button-secondary-background-hover hover:i-border-$color-button-secondary-border-hover active:i-bg-$color-button-secondary-background-active': true,
+        [button.buttonSecondary]: !buttonTypes.find(b => this.variant === b) || secondary,
+        // primary buttons
+        [button.buttonPrimary]: primary,
+        [button.buttonDestructive]: negative && !this.quiet,
         // quiet
-        'button--flat': this.variant === 'secondary' && this.quiet,
-        'button--destructive-flat': this.variant === 'negative' && this.quiet,
-        'button--utility-flat': this.variant === 'utility' && this.quiet,
+        [button.buttonFlat]: secondary && this.quiet,
+        [button.buttonDestructiveFlat]: negative && this.quiet,
+        [button.buttonUtilityFlat]: utility && this.quiet,
         // others
-        'button--small': this.small,
-        'button--in-progress': this.loading,
+        [button.buttonSmall]: this.small,
+        [button.buttonUtility]: utility && !this.quiet,
+        [button.buttonLink]: link,
+        [button.buttonPill]: pill,
+        [button.buttonInProgress]: this.loading,
+        [button.buttonIsDisabled]: this.disabled,
+        ['inline-block']: !!this.href
       },
-      this.buttonClass,
     );
   }
 

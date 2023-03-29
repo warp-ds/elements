@@ -4,8 +4,8 @@ import uno from 'unocss/vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
-// import postcss from 'postcss';
-// import cssInJS from '@stylelint/postcss-css-in-js';
+import { buttonSafelist } from '@warp-ds/component-classes/buttonSafelist';
+
 
 export default ({ mode }) => {
   let input = {};
@@ -43,8 +43,9 @@ export default ({ mode }) => {
     // base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
-        presets: [presetWarp({usePreflight: true})],
+        presets: [presetWarp({ usePreflight: true })],
         mode: 'shadow-dom',
+        safelist: buttonSafelist,
       }),
       // litElementTailwindPlugin({ mode }),
       createHtmlPlugin({
