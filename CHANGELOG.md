@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-03-29)
+
+
+### Bug Fixes
+
+* make styles on components work ([#9](https://github.com/warp-ds/elements/issues/9)) ([0aae500](https://github.com/warp-ds/elements/commit/0aae5004b7bb994610dc8ffb6afa8b274d6a1682))
+
 # 1.0.0-alpha.1 (2023-03-17)
 
 
