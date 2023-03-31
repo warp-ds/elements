@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-03-31)
+
+
+### Bug Fixes
+
+* add tokens to button element ([77b3469](https://github.com/warp-ds/elements/commit/77b346996545f7a10155714f089764c6fd48a6d8))
+
 # [1.0.0-alpha.3](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2023-03-29)
 
 
