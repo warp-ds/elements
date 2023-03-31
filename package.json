@@ -17,7 +17,7 @@
     "build:api": "npx esbuild ./packages/toast/api.js --outdir=dist --target=es2017 --bundle --sourcemap --format=esm --minify",
     "build:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch",
-    "build": "rimraf dist && pnpm run build:elements && tsc && vite build --mode lib ",
+    "build": "pnpm run build:elements && tsc && vite build --mode lib ",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "npm run lint:format && pnpm run lint:eslint",
     "lint:format": "prettier --check . --ignore-path .gitignore",

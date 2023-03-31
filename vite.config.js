@@ -6,6 +6,8 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
 import { buttonSafelist } from '@warp-ds/component-classes/buttonSafelist';
+import { MinifyWarpLib } from './.minifier-plugin.js'
+
 
 
 export default ({ mode }) => {
@@ -53,13 +55,16 @@ export default ({ mode }) => {
   
   function getBuildOpts(mode) {
     if (mode === 'production') return defineConfig({
-      build: { target: 'esnext',emptyOutDir: false,
-    }
+      build: { target: 'esnext', emptyOutDir: false,}
     })
     if (mode === 'lib') return defineConfig({
       build: {
         emptyOutDir: false,
-        ...getLibOpts('warp-elements'),
+        lib: {
+          formats: ['es'],
+          entry: './index.js',
+          fileName: 'index'
+        },
         rollupOptions: { external: ['elements'] }
       }
     })
@@ -74,7 +79,7 @@ export default ({ mode }) => {
         safelist: buttonSafelist,
       }),  
       // litElementTailwindPlugin({ mode }),
-      createHtmlPlugin({
+      mode !== 'lib' && createHtmlPlugin({
         minify: false,
         pages: [
           {
@@ -139,7 +144,8 @@ export default ({ mode }) => {
           },
         ],
       }),
-      // isProduction && basePathFix(),
+      isProduction && basePathFix(),
+      MinifyWarpLib(),
     ],
     ...getBuildOpts(mode),
   };
