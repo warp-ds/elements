@@ -40,12 +40,25 @@ export default ({ mode }) => {
     },
   };
 
+  function getLibOpts(fileName) {
+    return {
+      sourcemap: true,
+      lib: {
+        formats: ['es'],
+        entry: './index.js',
+        fileName
+      },
+    }
+  }
+  
   function getBuildOpts(mode) {
     if (mode === 'production') return defineConfig({
-      build: { target: 'esnext' }
+      build: { target: 'esnext',emptyOutDir: false,
+    }
     })
     if (mode === 'lib') return defineConfig({
       build: {
+        emptyOutDir: false,
         ...getLibOpts('warp-elements'),
         rollupOptions: { external: ['elements'] }
       }
