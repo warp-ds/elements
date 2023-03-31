@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-03-31)
+
+
+### Bug Fixes
+
+* build ([7792404](https://github.com/warp-ds/elements/commit/7792404948160752f3bea1a560156a582497152f))
+
 # [1.0.0-alpha.7](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-03-31)
 
 
