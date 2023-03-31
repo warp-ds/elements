@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-03-31)
+
+
+### Bug Fixes
+
+* try vite build ([ffdeb02](https://github.com/warp-ds/elements/commit/ffdeb02b51952862bd0f9ce6f982457691b11a6a))
+
 # [1.0.0-alpha.4](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-03-31)
 
 
