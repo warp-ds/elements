@@ -1,3 +1,10 @@
+# [1.0.0-alpha.9](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-03-31)
+
+
+### Bug Fixes
+
+* secondary and not quiet fix ([51b76b3](https://github.com/warp-ds/elements/commit/51b76b3ee7e55753d79963a6159c5a6026495559))
+
 # [1.0.0-alpha.8](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2023-03-31)
 
 
