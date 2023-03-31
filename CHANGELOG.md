@@ -1,3 +1,10 @@
+# [1.0.0-alpha.7](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-03-31)
+
+
+### Bug Fixes
+
+* remove bad code ([97d8068](https://github.com/warp-ds/elements/commit/97d806826b54184b513ae272a157bd2180cdf2a2))
+
 # [1.0.0-alpha.6](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-03-31)
 
 
