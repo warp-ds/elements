@@ -68,7 +68,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
     return classNames(
       {
-        [button.buttonSecondary]: !buttonTypes.find(b => this.variant === b) || secondary,
+        [button.buttonSecondary]: secondary && !this.quiet || !buttonTypes.find(b => this.variant === b),
         // primary buttons
         [button.buttonPrimary]: primary,
         [button.buttonDestructive]: negative && !this.quiet,
