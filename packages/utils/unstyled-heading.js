@@ -1,13 +1,16 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { styles } from '../../dist/elements.min.js';
+
 
 class UnstyledHeading extends LitElement {
   static properties = {
     level: { type: Number },
   };
 
-  static styles = [styles];
+  static styles = [styles, css`
+    /* @unocss-placeholder */
+  `];
 
   get _markup() {
     return `<h${this.level}

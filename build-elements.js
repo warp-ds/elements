@@ -11,6 +11,9 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url); // have to do these hacks it seems because import.meta.resolve is cranky
 const iconsLocation = path.resolve(path.dirname(require.resolve('@fabric-ds/icons/package.json')), 'dist');
 
+const from = './elements.css';
+const css = fs.readFileSync(from, 'utf8');
+
 const to = './dist/elements.min.js';
 const plugins = [
     atImport,
@@ -19,7 +22,8 @@ const plugins = [
     }),
     autoprefixer,
 ];
-const result = await postcss(plugins);
+const result = await postcss(plugins).process(css, { from, to });
+
 const constructedStylesheet = `import {css} from 'lit';
 export const styles = css\`
 ${result}

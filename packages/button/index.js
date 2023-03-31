@@ -2,6 +2,7 @@ import { html, LitElement, css } from 'lit';
 import { button } from '@warp-ds/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
+import { styles } from '../../dist/elements.min.js';
 
 
 const buttonTypes = [    
@@ -29,9 +30,9 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     buttonClass: { type: String, reflect: true },
   };
 
-  static styles = css`
+  static styles = [styles, css`
     /* @unocss-placeholder */
-  `;
+  `];
 
   constructor() {
     super();
