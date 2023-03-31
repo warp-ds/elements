@@ -2,7 +2,8 @@ import { html, LitElement, css } from 'lit';
 import { button } from '@warp-ds/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
-import { styles } from '../../dist/elements.min.js';
+// import { styles } from '../../dist/elements.min.js';
+import styles from "https://assets.finn.no/pkg/@warp-ds/tokens/v1/finn-no.css?inline";
 
 
 const buttonTypes = [    
@@ -28,12 +29,12 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     target: { type: String, reflect: true },
     rel: { type: String, reflect: true },
     buttonClass: { type: String, reflect: true },
-  };
+  };  
 
-  static styles = [styles, css`
+
+  static styles = [unsafeCSS(styles), css`
     /* @unocss-placeholder */
   `];
-
   constructor() {
     super();
     this.variant = 'secondary';
@@ -65,6 +66,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     const utility = this.variant === 'utility';
     const pill = this.variant === 'pill';
     const link = this.variant === 'link';
+    console.log({styles})
 
     return classNames(
       {

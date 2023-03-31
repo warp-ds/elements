@@ -1,6 +1,7 @@
 /* eslint-env node */
 import { presetWarp } from '@warp-ds/uno'
 import uno from 'unocss/vite'
+import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
@@ -39,6 +40,18 @@ export default ({ mode }) => {
     },
   };
 
+  function getBuildOpts(mode) {
+    if (mode === 'production') return defineConfig({
+      build: { target: 'esnext' }
+    })
+    if (mode === 'lib') return defineConfig({
+      build: {
+        ...getLibOpts('warp-elements'),
+        rollupOptions: { external: ['elements'] }
+      }
+    })
+  }
+  
   return {
     // base: isProduction ? '/elements/' : '',
     plugins: [
@@ -46,7 +59,7 @@ export default ({ mode }) => {
         presets: [presetWarp({ usePreflight: true })],
         mode: 'shadow-dom',
         safelist: buttonSafelist,
-      }),
+      }),  
       // litElementTailwindPlugin({ mode }),
       createHtmlPlugin({
         minify: false,
@@ -113,14 +126,9 @@ export default ({ mode }) => {
           },
         ],
       }),
-      isProduction && basePathFix(),
+      // isProduction && basePathFix(),
     ],
-    build: {
-      outDir: 'site',
-      rollupOptions: {
-        input,
-      },
-    },
+    ...getBuildOpts(mode),
   };
 };
 
