@@ -10,7 +10,7 @@ specifiers:
   '@open-wc/testing': 3.1.7
   '@semantic-release/changelog': 6.0.2
   '@semantic-release/git': 10.0.1
-  '@warp-ds/component-classes': 1.0.0-alpha.7
+  '@warp-ds/component-classes': 1.0.0-alpha.13
   '@warp-ds/core': 1.0.0-alpha.1
   '@warp-ds/uno': ^1.0.0-alpha.5
   autoprefixer: 10.4.13
@@ -45,7 +45,7 @@ specifiers:
 dependencies:
   '@fabric-ds/icons': 0.6.7
   '@open-wc/testing': 3.1.7
-  '@warp-ds/component-classes': 1.0.0-alpha.7
+  '@warp-ds/component-classes': 1.0.0-alpha.13
   '@warp-ds/core': 1.0.0-alpha.1
   glob: 8.1.0
   html-format: 1.0.2
@@ -2665,8 +2665,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes/1.0.0-alpha.7:
-    resolution: {integrity: sha512-JoVpKArN6UQyDlzr6HSVs+s0t/m1ExPSZo9qN8HqW8+sm6oo72+wcqMqsrt1I3jvTs4T0xHTFmwomHNcI4/gmA==}
+  /@warp-ds/component-classes/1.0.0-alpha.13:
+    resolution: {integrity: sha512-p2TVRzhObUE/iTDtMx5WPfX7BXleNRbjSKwTD/kTgn6uv+/AdQkoXUV+4PxmZZaVgQdQ8TwlEnuOrzFkKmvxLg==}
     dev: false
 
   /@warp-ds/core/1.0.0-alpha.1:

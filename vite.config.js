@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
-import { buttonSafelist } from '@warp-ds/component-classes/buttonSafelist';
+import { classes } from '@warp-ds/component-classes/classes';
 import { MinifyWarpLib } from './.minifier-plugin.js'
 
 
@@ -76,7 +76,7 @@ export default ({ mode }) => {
       uno({
         presets: [presetWarp({ usePreflight: true })],
         mode: 'shadow-dom',
-        safelist: buttonSafelist,
+        safelist: classes,
       }),  
       // litElementTailwindPlugin({ mode }),
       mode !== 'lib' && createHtmlPlugin({
