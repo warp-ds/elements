@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-04-13)
+
+
+### Features
+
+* **workflows:** add eik aliasing script to release.yml ([#10](https://github.com/warp-ds/elements/issues/10)) ([bc4a76f](https://github.com/warp-ds/elements/commit/bc4a76f29ee0409a868edaa14c8087d12c6cdb57))
+
 # [1.0.0-alpha.9](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2023-03-31)
 
 
