@@ -24,8 +24,6 @@
     "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
     "dev": "vite",
     "build:docs": "vite build && cp CNAME site",
-    "eik:login": "eik login",
-    "eik:publish": "eik publish",
     "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
     "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
     "test": "tap ./packages/**/test.js --no-check-coverage",
