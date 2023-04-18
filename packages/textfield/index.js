@@ -1,4 +1,5 @@
 import { css, html, LitElement } from 'lit';
+import { input, label as l, helpText as h } from '@warp-ds/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { fclasses } from '../utils';
 
@@ -46,25 +47,34 @@ class WarpTextField extends LitElement {
     this.type = 'text';
   }
 
-  get _outerWrapperStyles() {
+  get _inputStyles() {
     return fclasses({
-      'has-suffix': this._hasSuffix,
-      'has-prefix': this._hasPrefix,
+      [input.default]: true,
+      [input.invalid]: this.invalid,
+      [input.disabled]: this.disabled,
+      [input.readOnly]: this.readOnly,
+      [input.suffix]: this._hasSuffix,
+      [input.prefix]: this._hasPrefix,
     });
   }
 
-  get _innerWrapperStyles() {
+  get _helpTextStyles() {
     return fclasses({
-      'input mb-0': true,
-      'input--is-invalid': this.invalid,
-      'input--is-disabled': this.disabled,
-      'input--is-read-only': this.readOnly,
+      [h.helpText]: true,
+      [h.helpTextInvalid]: this.invalid,
+    });
+  }
+
+  get _labelStyles() {
+    return fclasses({
+      [l.label]: true,
+      [l.labelInvalid]: this.invalid,
     });
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}">${this.label}</label>`;
+      return html`<label for="${this._id}" class=${this._labelStyles}>${this.label}</label>`;
     }
   }
 
@@ -106,40 +116,36 @@ class WarpTextField extends LitElement {
 
   render() {
     return html`
-      ${this._fabricStylesheet}
-      <div class="${this._outerWrapperStyles}">
-        <div class="${this._innerWrapperStyles}">
-          ${this._label}
-          <div class="relative">
-            <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
-            <input
-              type="${this.type}"
-              min="${ifDefined(this.min)}"
-              max="${ifDefined(this.max)}"
-              size="${ifDefined(this.size)}"
-              minlength="${ifDefined(this.minLength)}"
-              maxlength="${ifDefined(this.maxLength)}"
-              name="${ifDefined(this.name)}"
-              pattern="${ifDefined(this.pattern)}"
-              placeholder="${ifDefined(this.placeholder)}"
-              value="${ifDefined(this.value)}"
-              aria-describedby="${ifDefined(this._helpId)}"
-              aria-errormessage="${ifDefined(this._error)}"
-              aria-invalid="${ifDefined(this.invalid)}"
-              id="${this._id}"
-              ?disabled="${this.disabled}"
-              ?readonly="${this.readOnly}"
-              ?required="${this.required}"
-              @blur="${this.handler}"
-              @change="${this.handler}"
-              @focus="${this.handler}"
-            />
-            <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
-          </div>
-          ${this.helpText &&
-          html`<div class="input__sub-text" id="${this._helpId}">${this.helpText}</div>`}
-        </div>
+      ${this._label}
+      <div class="${input.wrapper}">
+        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
+        <input
+          class="${this._inputStyles}"
+          type="${this.type}"
+          min="${ifDefined(this.min)}"
+          max="${ifDefined(this.max)}"
+          size="${ifDefined(this.size)}"
+          minlength="${ifDefined(this.minLength)}"
+          maxlength="${ifDefined(this.maxLength)}"
+          name="${ifDefined(this.name)}"
+          pattern="${ifDefined(this.pattern)}"
+          placeholder="${ifDefined(this.placeholder)}"
+          value="${ifDefined(this.value)}"
+          aria-describedby="${ifDefined(this._helpId)}"
+          aria-errormessage="${ifDefined(this._error)}"
+          aria-invalid="${ifDefined(this.invalid)}"
+          id="${this._id}"
+          ?disabled="${this.disabled}"
+          ?readonly="${this.readOnly}"
+          ?required="${this.required}"
+          @blur="${this.handler}"
+          @change="${this.handler}"
+          @focus="${this.handler}"
+        />
+        <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
+      ${this.helpText &&
+      html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}
     `;
   }
 }
