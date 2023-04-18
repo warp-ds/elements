@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses } from '../utils';
-import { box as boxClasses } from '@warp-ds/component-classes';
+import { box as ccBox } from '@warp-ds/component-classes';
 
 class WarpBox extends LitElement {
   static properties = {
@@ -21,17 +21,17 @@ class WarpBox extends LitElement {
           display: block;
         }
         ::slotted(:last-child) {
-          margin-bottom: 0px !important;
+          margin-bottom: 0 !important;
         }
       `;
 
   get _class() {
     return fclasses({
-      [boxClasses.box]: true,
-      [boxClasses.bleed]: this.bleed,
-      'bg-aqua-50': this.info,
-      'bg-bluegray-100': this.neutral,
-      'border-2 border-bluegray-300': this.bordered,
+      [ccBox.box]: true,
+      [ccBox.bleed]: this.bleed,
+      [ccBox.info]: this.info,
+      [ccBox.neutral]: this.neutral,
+      [ccBox.bordered]: this.bordered,
     });
   }
 
