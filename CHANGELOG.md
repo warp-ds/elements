@@ -1,3 +1,10 @@
+# [1.0.0-alpha.11](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2023-04-18)
+
+
+### Bug Fixes
+
+* add styles to textfield ([#11](https://github.com/warp-ds/elements/issues/11)) ([ed88c35](https://github.com/warp-ds/elements/commit/ed88c35d6e289019fd5ee8cb007b56c98bbba791))
+
 # [1.0.0-alpha.10](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2023-04-13)
 
 
