@@ -102,7 +102,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}
                     >
-                      <w-icon-chevron-down16></w-icon-chevron-down16>
+                      <f-icon-chevron-down16></f-icon-chevron-down16>
                     </div>`}
               </div>
             </button>
