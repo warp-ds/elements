@@ -1,13 +1,23 @@
 import { html, LitElement, css } from 'lit';
 import { interleave } from '@warp-ds/core/breadcrumbs';
 import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/component-classes'
+import { kebabCaseAttributes } from '../utils';
 
 const separator = html`<span class=${ccBreadcrumbs.separator} aria-hidden='true'>/</span>`;
 
-class WarpBreadcrumbs extends LitElement {
+class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
   static styles = css`
     /* @unocss-placeholder */
   `;
+
+  static properties = {
+    ariaLabel: { type: String },
+  };
+
+  constructor() {
+    super();
+    this.ariaLabel = 'Her er du';
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -28,8 +38,8 @@ class WarpBreadcrumbs extends LitElement {
 
   render() {
     return html`
-      <nav aria-label='Her er du'>
-        <h2 class='sr-only'>Her er du</h2>
+      <nav aria-label=${this.ariaLabel}>
+        <h2 class='sr-only'>${this.ariaLabel}</h2>
         <div class=${ccBreadcrumbs.wrapper}>
           ${this._children}
         </div>
