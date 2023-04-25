@@ -39,7 +39,7 @@ class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
   render() {
     return html`
       <nav aria-label=${this.ariaLabel}>
-        <h2 class='sr-only'>${this.ariaLabel}</h2>
+        <h2 class=${ccBreadcrumbs.a11y}>${this.ariaLabel}</h2>
         <div class=${ccBreadcrumbs.wrapper}>
           ${this._children}
         </div>

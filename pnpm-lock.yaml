@@ -43,8 +43,8 @@ devDependencies:
     specifier: 10.0.1
     version: 10.0.1(semantic-release@19.0.5)
   '@warp-ds/component-classes':
-    specifier: 1.0.0-alpha.42
-    version: 1.0.0-alpha.42
+    specifier: 1.0.0-alpha.44
+    version: 1.0.0-alpha.44
   '@warp-ds/uno':
     specifier: ^1.0.0-alpha.8
     version: 1.0.0-alpha.8
@@ -2684,8 +2684,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.42:
-    resolution: {integrity: sha512-5XyKVcvzj7SZXf++avD3EaUdINjrKIxk/pH46zEqACqf4tUYlxDaPP60pw5sgJUQcpYALliOM3PP9On7r/5n+A==}
+  /@warp-ds/component-classes@1.0.0-alpha.44:
+    resolution: {integrity: sha512-rGGJhi7VsezeDg25zrrkA7R6y/0/zKzr5iaYsPTPPFlzcVnbbEil8rnmBr5eOjVXUXp9Wz7f3eVyS68N5jiooA==}
     dev: true
 
   /@warp-ds/core@1.0.0-alpha.1:

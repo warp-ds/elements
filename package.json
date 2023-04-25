@@ -45,7 +45,7 @@
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
     "@warp-ds/uno": "^1.0.0-alpha.8",
-    "@warp-ds/component-classes": "1.0.0-alpha.42",
+    "@warp-ds/component-classes": "1.0.0-alpha.44",
     "autoprefixer": "10.4.13",
     "cors": "2.8.5",
     "cssnano": "5.1.14",
