@@ -1,3 +1,17 @@
+# [1.0.0-alpha.13](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2023-04-25)
+
+
+### Bug Fixes
+
+* **expandable:** add _hasTitle again to expandable classes ([199b146](https://github.com/warp-ds/elements/commit/199b14682f6ce68fdd2a63b17ba513d6a0c1a7b8))
+* **expandable:** bumb warp versions ([1f8a983](https://github.com/warp-ds/elements/commit/1f8a98352806200d175d5cea9c64d6447516938f))
+* **expandable:** fix icon issue ([6cbd8db](https://github.com/warp-ds/elements/commit/6cbd8dbc5ea8e603352f939da77375704450f809))
+
+
+### Features
+
+* **expandable:** add warp component classes for expandable ([3a28e93](https://github.com/warp-ds/elements/commit/3a28e939c40661b8e10bfe9b4a5952a6fe0555c4))
+
 # [1.0.0-alpha.12](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2023-04-18)
 
 
