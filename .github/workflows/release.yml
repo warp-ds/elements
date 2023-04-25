@@ -20,7 +20,7 @@ jobs:
       - name: Install pnpm and dependencies
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: latest
           run_install: true
       - name: Build
         run: pnpm build
