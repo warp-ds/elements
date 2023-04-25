@@ -1,25 +1,48 @@
 import { html, LitElement, css } from 'lit';
 import { interleave } from '@warp-ds/core/breadcrumbs';
+import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/component-classes'
+import { kebabCaseAttributes } from '../utils';
 
-const separator = html`<span class="select-none" aria-hidden="true">/</span>`;
+const separator = html`<span class=${ccBreadcrumbs.separator} aria-hidden='true'>/</span>`;
 
-class WarpBreadcrumbs extends LitElement {
+class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
   static styles = css`
     /* @unocss-placeholder */
   `;
 
+  static properties = {
+    ariaLabel: { type: String },
+  };
+
+  constructor() {
+    super();
+    this.ariaLabel = 'Her er du';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     // Grab existing children at the point that the component is added to the page
-    // Interleave "/" separator with breadcrumbs
-    this._children = interleave(Array.from(this.children), separator);
+    const flattenedChildren = Array.from(this.children).flat(Infinity).filter(child => child)
+    const styledChildren = flattenedChildren.map((child, index) => {
+      if (typeof child === 'string') {
+        const isLastEl = index === children.length - 1;
+        return html`<span class=${ccBreadcrumbs.text} aria-current=${isLastEl ? 'page' : undefined}>${child}</span>`;
+      }
+      child.classList.add(child.tagName === 'A' ? ccBreadcrumbs.link : ccBreadcrumbs.text)
+      return child
+    })
+
+    // Interleave '/' separator with breadcrumbs
+    this._children = interleave(styledChildren, separator);
   }
 
   render() {
     return html`
-      <nav aria-label="Her er du" class="flex space-x-8">
-        <h2 class="sr-only">Her er du</h2>
-        ${this._children}
+      <nav aria-label=${this.ariaLabel}>
+        <h2 class=${ccBreadcrumbs.a11y}>${this.ariaLabel}</h2>
+        <div class=${ccBreadcrumbs.wrapper}>
+          ${this._children}
+        </div>
       </nav>
     `;
   }

@@ -45,6 +45,7 @@
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
     "@warp-ds/uno": "^1.0.0-alpha.8",
+    "@warp-ds/component-classes": "1.0.0-alpha.44",
     "autoprefixer": "10.4.13",
     "cors": "2.8.5",
     "cssnano": "5.1.14",
@@ -74,7 +75,6 @@
   "dependencies": {
     "@fabric-ds/icons": "0.6.7",
     "@open-wc/testing": "3.1.7",
-    "@warp-ds/component-classes": "1.0.0-alpha.39",
     "@warp-ds/core": "1.0.0-alpha.1",
     "glob": "8.1.0",
     "html-format": "1.0.2",
