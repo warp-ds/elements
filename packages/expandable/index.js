@@ -61,7 +61,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
     return html`<div
       class=${fclasses({
         [this.contentClass || '']: true,
-        [ccBox.box + (this.title ? ' pt-0' : '')]: this.box,
+        [ccBox.box + (this._hasTitle ? ' pt-0' : '')]: this.box,
       })}
     >
       <slot></slot>
