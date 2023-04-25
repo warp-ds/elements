@@ -10,9 +10,9 @@ specifiers:
   '@open-wc/testing': 3.1.7
   '@semantic-release/changelog': 6.0.2
   '@semantic-release/git': 10.0.1
-  '@warp-ds/component-classes': 1.0.0-alpha.35
+  '@warp-ds/component-classes': 1.0.0-alpha.39
   '@warp-ds/core': 1.0.0-alpha.1
-  '@warp-ds/uno': ^1.0.0-alpha.5
+  '@warp-ds/uno': ^1.0.0-alpha.8
   autoprefixer: 10.4.13
   cors: 2.8.5
   cssnano: 5.1.14
@@ -45,7 +45,7 @@ specifiers:
 dependencies:
   '@fabric-ds/icons': 0.6.7
   '@open-wc/testing': 3.1.7
-  '@warp-ds/component-classes': 1.0.0-alpha.35
+  '@warp-ds/component-classes': 1.0.0-alpha.39
   '@warp-ds/core': 1.0.0-alpha.1
   glob: 8.1.0
   html-format: 1.0.2
@@ -59,7 +59,7 @@ devDependencies:
   '@finn-no/browserslist-config': 3.0.0
   '@semantic-release/changelog': 6.0.2_semantic-release@19.0.5
   '@semantic-release/git': 10.0.1_semantic-release@19.0.5
-  '@warp-ds/uno': 1.0.0-alpha.5
+  '@warp-ds/uno': 1.0.0-alpha.8
   autoprefixer: 10.4.13_postcss@8.4.21
   cors: 2.8.5
   cssnano: 5.1.14_postcss@8.4.21
@@ -2665,8 +2665,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes/1.0.0-alpha.35:
-    resolution: {integrity: sha512-4EpnQxSHU6GoeDFx7omBqVxxC/NnYq5w1Iq1Cyhgwya4Cs1m/RyTP0gby8hRNUr1GdFGsxv7NMCoLiPkLuXcLg==}
+  /@warp-ds/component-classes/1.0.0-alpha.39:
+    resolution: {integrity: sha512-OtwQ+q/fsjRJIOjUSIe36d9rEwzSJ2E7vHLQaWodT4Y2uYpKR6YZpdd1vhMKLeJKQ5mvMjnEldww9+3XOAPSyA==}
     dev: false
 
   /@warp-ds/core/1.0.0-alpha.1:
@@ -2675,8 +2675,8 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/uno/1.0.0-alpha.5:
-    resolution: {integrity: sha512-8V6VuRmYujceUfYkbRkkQsu1EuLLQyRWfbLn9ehz962DXA+oJ4kSnjK12tdc2tNI/8EKs14Tl4c3X4e/d+1S/w==}
+  /@warp-ds/uno/1.0.0-alpha.8:
+    resolution: {integrity: sha512-OcrvcdtzlDtV+v1qTb6nLdK5xFdZNJDL3txYOvnNBXrmr7Jx7cmiMIRctZxkLsjSLA4HGVo5NlNWakHeWawSmw==}
     dependencies:
       '@unocss/core': 0.50.6
       '@unocss/preset-mini': 0.50.6
