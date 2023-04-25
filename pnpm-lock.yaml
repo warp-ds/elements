@@ -33,9 +33,6 @@ devDependencies:
   '@eik/cli':
     specifier: ^2.0.22
     version: 2.0.22
-  '@finn-no/browserslist-config':
-    specifier: 3.0.0
-    version: 3.0.0
   '@semantic-release/changelog':
     specifier: 6.0.2
     version: 6.0.2(semantic-release@19.0.5)
@@ -742,10 +739,6 @@ packages:
     resolution: {integrity: sha512-ypZynRvXA3dibfPykQN3RB5wBdEUgSGgny8Qc6k163wYPLD4mEGEDkACp+00YmqkGvIm8D/xYoHajwyEdWD/eg==}
     dependencies:
       fast-json-stringify: 5.7.0
-    dev: true
-
-  /@finn-no/browserslist-config@3.0.0:
-    resolution: {integrity: sha1-OXsZmzbQ/9BBPhwGL2MeuU0Tsh4=, tarball: https://npm.finntech.no/@finn-no/browserslist-config/-/@finn-no/browserslist-config-3.0.0.tgz}
     dev: true
 
   /@floating-ui/core@0.7.3:
