@@ -1,3 +1,12 @@
+# [1.0.0-alpha.14](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2023-04-27)
+
+
+### Bug Fixes
+
+* add Warp component-classes to the breadcrumbs component ([#14](https://github.com/warp-ds/elements/issues/14)) ([eb6763a](https://github.com/warp-ds/elements/commit/eb6763acf98a37ab48d39f054b6d8086088ef9e2))
+* **package.json:** remove unused dependency that caused deployment errors ([#16](https://github.com/warp-ds/elements/issues/16)) ([a447c62](https://github.com/warp-ds/elements/commit/a447c62b846b3c6a66739035ed930f2d239d7d15))
+* **release.yml:** set pnpm version to 8 to fix recursive install errors ([#15](https://github.com/warp-ds/elements/issues/15)) ([21afc96](https://github.com/warp-ds/elements/commit/21afc965618e2a2030f1655750637c03d989ac49))
+
 # [1.0.0-alpha.13](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2023-04-25)
 
 
