@@ -40,11 +40,11 @@ devDependencies:
     specifier: 10.0.1
     version: 10.0.1(semantic-release@19.0.5)
   '@warp-ds/component-classes':
-    specifier: 1.0.0-alpha.44
-    version: 1.0.0-alpha.44
+    specifier: 1.0.0-alpha.68
+    version: 1.0.0-alpha.68
   '@warp-ds/uno':
-    specifier: ^1.0.0-alpha.8
-    version: 1.0.0-alpha.8
+    specifier: ^1.0.0-alpha.23
+    version: 1.0.0-alpha.23
   autoprefixer:
     specifier: 10.4.13
     version: 10.4.13(postcss@8.4.21)
@@ -2677,8 +2677,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.44:
-    resolution: {integrity: sha512-rGGJhi7VsezeDg25zrrkA7R6y/0/zKzr5iaYsPTPPFlzcVnbbEil8rnmBr5eOjVXUXp9Wz7f3eVyS68N5jiooA==}
+  /@warp-ds/component-classes@1.0.0-alpha.68:
+    resolution: {integrity: sha512-9SkZkXp5n2i3HButRdlg82fElx7hzVeredlHQ+cBmCMsSTqZt+ilj0NOmrlIFSmMNF6hoMfKnXkY1Gl1eGu96Q==}
     dev: true
 
   /@warp-ds/core@1.0.0-alpha.1:
@@ -2687,8 +2687,8 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/uno@1.0.0-alpha.8:
-    resolution: {integrity: sha512-OcrvcdtzlDtV+v1qTb6nLdK5xFdZNJDL3txYOvnNBXrmr7Jx7cmiMIRctZxkLsjSLA4HGVo5NlNWakHeWawSmw==}
+  /@warp-ds/uno@1.0.0-alpha.23:
+    resolution: {integrity: sha512-9x00PeEn8qi5XWZRgLqrZKssx7YGaODTKB36WuACWm7h6n0oA9P22YWzjZiHZRLADCbR0uenjHEcqhonhN65tg==}
     dependencies:
       '@unocss/core': 0.50.8
       '@unocss/preset-mini': 0.50.8
