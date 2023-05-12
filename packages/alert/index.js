@@ -1,3 +1,5 @@
+// TODO: replace text-14 with a token
+
 import { css, html, LitElement } from 'lit';
 import { alert as ccAlert } from '@warp-ds/component-classes';
 import { infoSvg, negativeSvg, positiveSvg, warningSvg } from './svgs';
