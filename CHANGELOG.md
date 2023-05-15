@@ -1,3 +1,10 @@
+# [1.0.0-alpha.15](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2023-05-12)
+
+
+### Features
+
+* **alert:** warpify alert component ([#17](https://github.com/warp-ds/elements/issues/17)) ([2a01030](https://github.com/warp-ds/elements/commit/2a01030420ad052fde9e38f04906f39663e5fa61))
+
 # [1.0.0-alpha.14](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2023-04-27)
 
 
