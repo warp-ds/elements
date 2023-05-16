@@ -55,7 +55,7 @@ class WarpAlert extends LitElement {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
     :host {
       display: block;
     }

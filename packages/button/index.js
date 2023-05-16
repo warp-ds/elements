@@ -31,7 +31,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
 
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `;
 
   constructor() {

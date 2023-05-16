@@ -56,7 +56,7 @@ class ExpandTransition extends LitElement {
   static styles = [
     styles,
     css`
-      /* @unocss-placeholder */
+      @unocss-placeholder
       :host {
         display: block;
       }

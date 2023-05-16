@@ -18,7 +18,7 @@ const classes = (definition) => {
 export class WarpToast extends LitElement {
   static styles = [
     css`
-      /* @unocss-placeholder */
+      @unocss-placeholder
       :host {
         display: block;
       }

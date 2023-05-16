@@ -11,7 +11,7 @@ const keys = {
 class WarpCard extends LitElement {
   static styles = [
     css`
-      /* @unocss-placeholder */
+      @unocss-placeholder
       a::after {
         content: '';
         position: absolute;

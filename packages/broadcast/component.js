@@ -23,7 +23,7 @@ export class WarpBroadcast extends LitElement {
   };
 
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `;
 
   constructor() {

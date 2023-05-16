@@ -32,7 +32,7 @@ class WarpTextField extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [
     css`
-      /* @unocss-placeholder */
+      @unocss-placeholder
       :host {
         display: block;
       }
