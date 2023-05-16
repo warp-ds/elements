@@ -28,7 +28,7 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
 
   static styles = [
     css`
-      /* @unocss-placeholder */
+      @unocss-placeholder
       #attention {
         position: absolute;
         z-index: 50;

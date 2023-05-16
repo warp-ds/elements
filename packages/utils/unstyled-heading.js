@@ -9,7 +9,7 @@ class UnstyledHeading extends LitElement {
   };
 
   static styles = [styles, css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `];
 
   get _markup() {

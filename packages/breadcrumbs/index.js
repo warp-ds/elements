@@ -7,7 +7,7 @@ const separator = html`<span class=${ccBreadcrumbs.separator} aria-hidden='true'
 
 class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `;
 
   static properties = {

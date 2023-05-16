@@ -29,7 +29,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   };
 
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `;
 
   get #classes() {

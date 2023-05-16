@@ -6,7 +6,7 @@ import { fclasses } from '../utils';
 
 class WarpAffix extends LitElement {
   static styles = css`
-    /* @unocss-placeholder */
+    @unocss-placeholder
   `;
 
   static properties = {
