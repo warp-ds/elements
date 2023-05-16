@@ -1,3 +1,10 @@
+# [1.0.0-alpha.16](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2023-05-16)
+
+
+### Bug Fixes
+
+* remove comments wrapping [@unocss-placeholder](https://github.com/unocss-placeholder) in components styles ([#19](https://github.com/warp-ds/elements/issues/19)) ([862c8cd](https://github.com/warp-ds/elements/commit/862c8cdf7b9a6e076c5cd465fcd8b457b56bebff))
+
 # [1.0.0-alpha.15](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2023-05-12)
 
 
