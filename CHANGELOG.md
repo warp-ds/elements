@@ -1,3 +1,10 @@
+# [1.0.0-alpha.17](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2023-05-17)
+
+
+### Bug Fixes
+
+* add component classes to card component ([#18](https://github.com/warp-ds/elements/issues/18)) ([d8af2fc](https://github.com/warp-ds/elements/commit/d8af2fc7e87738e620e9332c14f30d9776977bd8))
+
 # [1.0.0-alpha.16](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2023-05-16)
 
 
