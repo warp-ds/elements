@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { card as c } from '@warp-ds/component-classes';
+import { card as ccCard } from '@warp-ds/component-classes';
 import { fclasses } from '../utils';
 
 const keys = {
@@ -41,23 +41,23 @@ class WarpCard extends LitElement {
 
   get _outerClasses() {
     return fclasses({
-      [c.card]: true,
-      [c.cardShadow]: !this.flat,
-      [c.cardSelected]: this.selected,
-      [c.cardFlat]: this.flat,
-      [this.selected ? c.cardFlatSelected : c.cardFlatUnselected]: this.flat,
+      [ccCard.card]: true,
+      [ccCard.cardShadow]: !this.flat,
+      [ccCard.cardSelected]: this.selected,
+      [ccCard.cardFlat]: this.flat,
+      [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]: this.flat,
     });
   }
 
   get _innerClasses() {
     return fclasses({
-      [c.cardOutline]: true,
-      [this.selected ? c.cardOutlineSelected : c.cardOutlineUnselected]: true,
+      [ccCard.cardOutline]: true,
+      [this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]: true,
     });
   }
 
   get uuButton() {
-    return html`<button class="sr-only" aria-pressed="${this.selected}" tabindex="-1">
+    return html`<button class={${ccCard.a11y}} aria-pressed="${this.selected}" tabindex="-1">
       Velg
     </button>`;
   }
