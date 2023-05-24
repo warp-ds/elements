@@ -1,9 +1,9 @@
 import { LitElement, css, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
-import { toast as c } from '@warp-ds/component-classes';
+import { toast as ccToast } from '@warp-ds/component-classes';
 import { expand, collapse } from 'element-collapse';
-import { closeSVG, successSVG, failureSVG } from './svgs';
+import { closeSVG, successSVG, failureSVG, warningSVG } from './svgs';
 
 const classes = (definition) => {
   const defn = {};
@@ -14,6 +14,12 @@ const classes = (definition) => {
   }
   return classMap(defn);
 };
+
+const toastType = {
+  success: 'success',
+  error: 'error',
+  warning: 'warning',
+}
 
 export class WarpToast extends LitElement {
   static styles = [
@@ -54,21 +60,19 @@ export class WarpToast extends LitElement {
 
   get _primaryClasses() {
     return classes({
-      [c.toast]: true,
-      [c.toastPositive]: this.type === 'success',
-      [c.toastWarning]: this.type === 'warning',
-      [c.toastNegative]: this.type === 'error',
-      [c.toastNeutral]: this.type === 'info',
+      [ccToast.toast]: true,
+      [ccToast.toastPositive]: this.type === toastType.success,
+      [ccToast.toastWarning]: this.type === toastType.warning,
+      [ccToast.toastNegative]: this.type === toastType.error,
     });
   }
 
   get _iconClasses() {
     return classes({
-      [c.toastIcon]: true,
-      [c.toastIconPositive]: this.type == 'success',
-      [c.toastIconWarning]: this.type === 'warning',
-      [c.toastIconNegative]: this.type === 'error',
-      [c.toastIconNeutral]: this.type === 'info',
+      [ccToast.toastIcon]: true,
+      [ccToast.toastIconPositive]: this.type == toastType.success,
+      [ccToast.toastIconWarning]: this.type === toastType.warning,
+      [ccToast.toastIconNegative]: this.type === toastType.error,
     });
   }
 
@@ -77,19 +81,15 @@ export class WarpToast extends LitElement {
   }
 
   get _success() {
-    return this.type === 'success';
+    return this.type === toastType.success;
   }
 
   get _warning() {
-    return this.type === 'warning';
+    return this.type === toastType.warning;
   }
 
   get _error() {
-    return this.type === 'error';
-  }
-
-  get _info() {
-    return this.type === 'info';
+    return this.type === toastType.error;
   }
 
   get _role() {
@@ -104,9 +104,9 @@ export class WarpToast extends LitElement {
   }
 
   get _iconMarkup() {
-    return this._success
-      ? successSVG({ typeLabel: this._typeLabel })
-      : failureSVG({ typeLabel: this._typeLabel, isInfo: this._info });
+    if ( this.type === toastType.success) return successSVG({ typeLabel: this._typeLabel });
+    if ( this.type === toastType.warning) return warningSVG({ typeLabel: this._typeLabel });
+    return failureSVG({ typeLabel: this._typeLabel, isInfo: this._info });
   }
 
   async collapse() {
@@ -127,15 +127,15 @@ export class WarpToast extends LitElement {
 
   render() {
     if (!this.text) return html``;
-    return html` <section class="${c.toastWrapper}" aria-label="${this._typeLabel}">
+    return html` <section class="${ccToast.toastWrapper}" aria-label="${this._typeLabel}">
       <div class="${this._primaryClasses}">
         <div class="${this._iconClasses}">${this._iconMarkup}</div>
-        <div role="${this._role}" class="${c.toastContent}">
+        <div role="${this._role}" class="${ccToast.toastContent}">
           <p>${this.text}</p>
         </div>
         ${when(
           this.canclose === true,
-          () => html`<button class="${c.toastClose}" @click="${this.close}">${closeSVG()}</button>`,
+          () => html`<button class="${ccToast.toastClose}" @click="${this.close}">${closeSVG()}</button>`,
         )}
       </div>
     </section>`;
