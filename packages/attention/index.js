@@ -143,17 +143,12 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
   }
 
   get _arrowClasses() {
-    const arrowType = () => {
-      if (this.tooltip) return ccAttention.arrowTooltip;
-      else if (this.callout) return ccAttention.arrowCallout;
-      else if (this.popover) return ccAttention.arrowPopover;
-      return '';
-    }
-
     return classes({
       [ccAttention.arrowBase]: true,
       [ccAttention[`arrowDirection${this._arrowDirection.charAt(0).toUpperCase() + this._arrowDirection.slice(1)}`]]: true,
-      [arrowType()]: this.tooltip || this.callout || this.popover,
+      [ccAttention.arrowTooltip]: this.tooltip,
+      [ccAttention.arrowCallout]: this.callout,
+      [ccAttention.arrowPopover]: this.popover,
     });
   }
 
