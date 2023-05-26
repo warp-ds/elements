@@ -1,3 +1,10 @@
+# [1.0.0-alpha.18](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2023-05-26)
+
+
+### Features
+
+* **toast:** warpify toast ([#20](https://github.com/warp-ds/elements/issues/20)) ([d1dc939](https://github.com/warp-ds/elements/commit/d1dc9394d872c19095abd0b0bc8a11dbca603464))
+
 # [1.0.0-alpha.17](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2023-05-17)
 
 
