@@ -66,7 +66,7 @@
 
         <h2 class="mt-24 mb-16">Options</h2>
         <p>
-          Type of toast: <strong>type</strong> — default success (success, warning, error, info)
+          Type of toast: <strong>type</strong> — default success (success, warning, error)
         </p>
 
         <syntax-highlight> toast('message goes here', { type: 'warning' }) </syntax-highlight>
@@ -74,25 +74,19 @@
         <div class="example">
           <button
             class="button button--small"
-            onclick="window.toast('message goes here', { type: 'error' })"
+            onclick="window.toast('message goes here', { type: 'error', canclose: true })"
           >
             See Error Example
           </button>
           <button
             class="button button--small"
-            onclick="window.toast('message goes here', { type: 'warning' })"
+            onclick="window.toast('message goes here', { type: 'warning', canclose: true })"
           >
             See Warning Example
           </button>
           <button
             class="button button--small"
-            onclick="window.toast('message goes here', { type: 'info' })"
-          >
-            See Info Example
-          </button>
-          <button
-            class="button button--small"
-            onclick="window.toast('message goes here', { type: 'success' })"
+            onclick="window.toast('message goes here', { type: 'success', canclose: true })"
           >
             See Success Example
           </button>
