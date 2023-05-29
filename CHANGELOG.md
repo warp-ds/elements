@@ -1,3 +1,10 @@
+# [1.0.0-alpha.19](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2023-05-29)
+
+
+### Features
+
+* **attention:** warpify attention ([#21](https://github.com/warp-ds/elements/issues/21)) ([79b5b64](https://github.com/warp-ds/elements/commit/79b5b646be5ab2d4585bfba4de93dd30bbab121d))
+
 # [1.0.0-alpha.18](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2023-05-26)
 
 
