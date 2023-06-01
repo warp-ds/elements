@@ -1,3 +1,10 @@
+# [1.0.0-alpha.20](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2023-06-01)
+
+
+### Bug Fixes
+
+* **alert:** use imported instead of inline classes ([#22](https://github.com/warp-ds/elements/issues/22)) ([2f37560](https://github.com/warp-ds/elements/commit/2f375608c0074e6708123396220310f73d4a85eb))
+
 # [1.0.0-alpha.19](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2023-05-29)
 
 
