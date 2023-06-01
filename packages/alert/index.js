@@ -76,7 +76,7 @@ class WarpAlert extends LitElement {
       <w-expand-transition ?show=${this.show}>
         <div role=${this.role} class=${this._wrapperClasses}>
           <div class=${this._iconClasses}>${this._icon}</div>
-          <div class="last:mb-0 text-14">
+          <div class=${ccAlert.textWrapper}>
             <slot></slot>
           </div>
         </div>
