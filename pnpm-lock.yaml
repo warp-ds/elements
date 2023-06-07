@@ -44,7 +44,7 @@ devDependencies:
     version: 1.0.0-alpha.91
   '@warp-ds/uno':
     specifier: ^1.0.0-alpha.33
-    version: 1.0.0-alpha.33
+    version: 1.0.0-alpha.36
   autoprefixer:
     specifier: 10.4.13
     version: 10.4.13(postcss@8.4.21)
@@ -2687,8 +2687,8 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/uno@1.0.0-alpha.33:
-    resolution: {integrity: sha512-Rp9eCwHbbb2empS+jIvXbXpcTtp0u0Qv2GccpTQzIHB3No5IlEj2EycSy0osQ2Xyl1J+cv5a1xNtC9ZKzGc2aQ==}
+  /@warp-ds/uno@1.0.0-alpha.36:
+    resolution: {integrity: sha512-oHs+3qWxMfhwI6AUD4R0E2l0LzuNVHp9WqOewap/+Gi7mloCIpnDVIVXZWzvj81KkuDdm3rPMTWwBuqTNzSH8g==}
     dependencies:
       '@unocss/core': 0.50.8
       '@unocss/preset-mini': 0.50.8
