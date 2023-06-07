@@ -1,3 +1,12 @@
+# [1.0.0-alpha.21](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2023-06-07)
+
+
+### Bug Fixes
+
+* add missing package-lock ([#24](https://github.com/warp-ds/elements/issues/24)) ([5bc0dbd](https://github.com/warp-ds/elements/commit/5bc0dbda49cdb2a6aaaa1327b15be3701a9d1132))
+* bump packages ([#23](https://github.com/warp-ds/elements/issues/23)) ([aa73bae](https://github.com/warp-ds/elements/commit/aa73bae89fb2dd55118815de960406e6cccc1c56))
+* **docs:** set fonts' rem base on docs page to be 10px ([#25](https://github.com/warp-ds/elements/issues/25)) ([38e6781](https://github.com/warp-ds/elements/commit/38e67815e7f86c7fa23cd0b5098b810bab5c411a))
+
 # [1.0.0-alpha.20](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2023-06-01)
 
 
