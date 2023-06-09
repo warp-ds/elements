@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.21",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
@@ -43,8 +43,8 @@
     "@eik/cli": "^2.0.22",
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
-    "@warp-ds/uno": "^1.0.0-alpha.33",
-    "@warp-ds/component-classes": "1.0.0-alpha.91",
+    "@warp-ds/uno": "^1.0.0-alpha.36",
+    "@warp-ds/component-classes": "1.0.0-alpha.93",
     "autoprefixer": "10.4.13",
     "cors": "2.8.5",
     "cssnano": "5.1.14",
@@ -74,7 +74,7 @@
   "dependencies": {
     "@fabric-ds/icons": "0.6.7",
     "@open-wc/testing": "3.1.7",
-    "@warp-ds/core": "1.0.0-alpha.1",
+    "@warp-ds/core": "1.0.0",
     "glob": "8.1.0",
     "html-format": "1.0.2",
     "lit": "2.6.1"

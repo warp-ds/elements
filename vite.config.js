@@ -74,7 +74,7 @@ export default ({ mode }) => {
     // base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
-        presets: [presetWarp({ usePreflight: true })],
+        presets: [presetWarp()],
         mode: 'shadow-dom',
         safelist: classes,
       }),  

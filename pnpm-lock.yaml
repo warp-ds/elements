@@ -8,8 +8,8 @@ dependencies:
     specifier: 3.1.7
     version: 3.1.7
   '@warp-ds/core':
-    specifier: 1.0.0-alpha.1
-    version: 1.0.0-alpha.1
+    specifier: 1.0.0
+    version: 1.0.0
   glob:
     specifier: 8.1.0
     version: 8.1.0
@@ -40,10 +40,14 @@ devDependencies:
     specifier: 10.0.1
     version: 10.0.1(semantic-release@19.0.5)
   '@warp-ds/component-classes':
-    specifier: 1.0.0-alpha.91
-    version: 1.0.0-alpha.91
+    specifier: 1.0.0-alpha.93
+    version: 1.0.0-alpha.93
   '@warp-ds/uno':
+<<<<<<< HEAD
     specifier: ^1.0.0-alpha.33
+=======
+    specifier: ^1.0.0-alpha.36
+>>>>>>> c1eaadefb39107684e1785ee02d9aefa6b18ae6d
     version: 1.0.0-alpha.36
   autoprefixer:
     specifier: 10.4.13
@@ -2677,12 +2681,12 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.91:
-    resolution: {integrity: sha512-ySCRmSgC+RdwrfkKiaDxX85rtOMO738PLgmbX4pkHZpPhT2bV1v8ZELnqCOoKeCO9eZY5Iy55Cqb8njunw7gGA==}
+  /@warp-ds/component-classes@1.0.0-alpha.93:
+    resolution: {integrity: sha512-W1/KmDTpE8Zy2wBlpWLIQNj8HQtegNL25NSXI2X03y/XGqGUKHldtEoLbuAaRvrM1Mn9wOfz+AoQJtfIoIYt4g==}
     dev: true
 
-  /@warp-ds/core@1.0.0-alpha.1:
-    resolution: {integrity: sha512-ky93cdJZFAl81ZY6sW1QIYbfc+3JT/i/n7IU/xuBxVV5V2sjcDo7cdGamlDMJyhV9XBaZd+HQMDc9zwIhJUusA==}
+  /@warp-ds/core@1.0.0:
+    resolution: {integrity: sha512-HCzgWm6wHR2Wh/rvNu9I4Qe1HdUj/i3v5amjioW38ZPh/Ve/y/0imX//ZXMLjshDVK+ZKU34Xd0TC56z/Yg36g==}
     dependencies:
       '@floating-ui/dom': 0.5.4
     dev: false
