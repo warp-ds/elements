@@ -1,3 +1,10 @@
+# [1.0.0-alpha.22](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2023-06-09)
+
+
+### Bug Fixes
+
+* remove inline class from button link ([#26](https://github.com/warp-ds/elements/issues/26)) ([0a87895](https://github.com/warp-ds/elements/commit/0a8789564875ecfb2f54bff23abe48e56598f172))
+
 # [1.0.0-alpha.21](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2023-06-07)
 
 
