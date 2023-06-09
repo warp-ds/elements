@@ -1,5 +1,5 @@
 import { html, LitElement, css } from 'lit';
-import { button } from '@warp-ds/component-classes';
+import { button as ccButton } from '@warp-ds/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
 
@@ -68,22 +68,22 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
     return classNames(
       {
-        [button.buttonSecondary]: secondary && !this.quiet || !buttonTypes.find(b => this.variant === b),
+        [ccButton.buttonSecondary]: secondary && !this.quiet || !buttonTypes.find(b => this.variant === b),
         // primary buttons
-        [button.buttonPrimary]: primary,
-        [button.buttonDestructive]: negative && !this.quiet,
+        [ccButton.buttonPrimary]: primary,
+        [ccButton.buttonDestructive]: negative && !this.quiet,
         // quiet
-        [button.buttonFlat]: secondary && this.quiet,
-        [button.buttonDestructiveFlat]: negative && this.quiet,
-        [button.buttonUtilityFlat]: utility && this.quiet,
+        [ccButton.buttonFlat]: secondary && this.quiet,
+        [ccButton.buttonDestructiveFlat]: negative && this.quiet,
+        [ccButton.buttonUtilityFlat]: utility && this.quiet,
         // others
-        [button.buttonSmall]: this.small,
-        [button.buttonUtility]: utility && !this.quiet,
-        [button.buttonLink]: link,
-        [button.buttonPill]: pill,
-        [button.buttonInProgress]: this.loading,
-        [button.buttonIsDisabled]: this.disabled,
-        ['inline-block']: !!this.href
+        [ccButton.buttonSmall]: this.small,
+        [ccButton.buttonUtility]: utility && !this.quiet,
+        [ccButton.buttonLink]: link,
+        [ccButton.buttonPill]: pill,
+        [ccButton.buttonInProgress]: this.loading,
+        [ccButton.buttonIsDisabled]: this.disabled,
+        [ccButton.linkAsButton]: !!this.href
       },
     );
   }
