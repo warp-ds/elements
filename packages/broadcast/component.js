@@ -72,7 +72,6 @@ export class WarpBroadcast extends LitElement {
           ({ id }) => `broadcast-${id}`,
           ({ id, message }) =>
             html`<w-toast
-              class="w-full"
               id="broadcast-${id}"
               type="warning"
               text="${message}"

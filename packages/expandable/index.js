@@ -61,7 +61,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
     return html`<div
       class=${fclasses({
         [this.contentClass || '']: true,
-        [ccBox.box + (this._hasTitle ? ' pt-0' : '')]: this.box,
+        [ccBox.box]: this.box,
+        [ccExpandable.paddingTop]: this._hasTitle && this.box,
       })}
     >
       <slot></slot>
@@ -114,8 +115,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
           </w-expand-transition>`
         : html`<div
             class=${fclasses({
-              'overflow-hidden': true,
-              'h-0 invisible': !this.expanded,
+              [ccExpandable.expansion]: true,
+              [ccExpandable.expansionNotExpanded]: !this.expanded,
             })}
             aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
           >

@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@fabric-ds/icons':
@@ -40,11 +44,11 @@ devDependencies:
     specifier: 10.0.1
     version: 10.0.1(semantic-release@19.0.5)
   '@warp-ds/component-classes':
-    specifier: 1.0.0-alpha.93
-    version: 1.0.0-alpha.93
+    specifier: 1.0.0-alpha.105
+    version: 1.0.0-alpha.105
   '@warp-ds/uno':
-    specifier: ^1.0.0-alpha.36
-    version: 1.0.0-alpha.36
+    specifier: ^1.0.0-alpha.45
+    version: 1.0.0-alpha.45
   autoprefixer:
     specifier: 10.4.13
     version: 10.4.13(postcss@8.4.21)
@@ -2677,8 +2681,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.93:
-    resolution: {integrity: sha512-W1/KmDTpE8Zy2wBlpWLIQNj8HQtegNL25NSXI2X03y/XGqGUKHldtEoLbuAaRvrM1Mn9wOfz+AoQJtfIoIYt4g==}
+  /@warp-ds/component-classes@1.0.0-alpha.105:
+    resolution: {integrity: sha512-VGFZoyiNkbjG5DVwPfKdD96vZO69pJwkMd5GbOcjhoxOLoTiU6IED6PAHxP4yB1t2guYWxhSpGI7Pnmmj1nElQ==}
     dev: true
 
   /@warp-ds/core@1.0.0:
@@ -2687,8 +2691,8 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/uno@1.0.0-alpha.36:
-    resolution: {integrity: sha512-oHs+3qWxMfhwI6AUD4R0E2l0LzuNVHp9WqOewap/+Gi7mloCIpnDVIVXZWzvj81KkuDdm3rPMTWwBuqTNzSH8g==}
+  /@warp-ds/uno@1.0.0-alpha.45:
+    resolution: {integrity: sha512-Uemwf0EgmZV4En+aT74ZX6pw/+w+CLVhgTMV/4e6FouDq+e79MknNtHVpm/ktLHlUgb4fedFCChSxRExgU1/RQ==}
     dependencies:
       '@unocss/core': 0.50.8
       '@unocss/preset-mini': 0.50.8

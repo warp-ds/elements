@@ -120,13 +120,13 @@ export class WarpToastContainer extends LitElement {
 
   render() {
     return html`
-      <aside class="${ccToaster.toasterContainer}">
+      <aside class="${ccToaster.container}">
         <div class="${ccToaster.toaster}" id="w-toast-container-list">
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
             (toast) => html` <w-toast
-              class="w-full"
+              class="${ccToaster.content}"
               id="${toast.id}"
               type="${toast.type}"
               text="${toast.text}"

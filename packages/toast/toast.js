@@ -61,18 +61,18 @@ export class WarpToast extends LitElement {
   get _primaryClasses() {
     return classes({
       [ccToast.toast]: true,
-      [ccToast.toastPositive]: this.type === toastType.success,
-      [ccToast.toastWarning]: this.type === toastType.warning,
-      [ccToast.toastNegative]: this.type === toastType.error,
+      [ccToast.positive]: this.type === toastType.success,
+      [ccToast.warning]: this.type === toastType.warning,
+      [ccToast.negative]: this.type === toastType.error,
     });
   }
 
   get _iconClasses() {
     return classes({
-      [ccToast.toastIcon]: true,
-      [ccToast.toastIconPositive]: this.type == toastType.success,
-      [ccToast.toastIconWarning]: this.type === toastType.warning,
-      [ccToast.toastIconNegative]: this.type === toastType.error,
+      [ccToast.icon]: true,
+      [ccToast.iconPositive]: this.type == toastType.success,
+      [ccToast.iconWarning]: this.type === toastType.warning,
+      [ccToast.iconNegative]: this.type === toastType.error,
     });
   }
 
@@ -127,15 +127,15 @@ export class WarpToast extends LitElement {
 
   render() {
     if (!this.text) return html``;
-    return html` <section class="${ccToast.toastWrapper}" aria-label="${this._typeLabel}">
+    return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
       <div class="${this._primaryClasses}">
         <div class="${this._iconClasses}">${this._iconMarkup}</div>
-        <div role="${this._role}" class="${ccToast.toastContent}">
+        <div role="${this._role}" class="${ccToast.content}">
           <p>${this.text}</p>
         </div>
         ${when(
           this.canclose === true,
-          () => html`<button class="${ccToast.toastClose}" @click="${this.close}">${closeSVG()}</button>`,
+          () => html`<button class="${ccToast.close}" @click="${this.close}">${closeSVG()}</button>`,
         )}
       </div>
     </section>`;
