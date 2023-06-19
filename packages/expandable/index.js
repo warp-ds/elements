@@ -89,9 +89,9 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
               })}
               @click=${() => (this.expanded = !this.expanded)}
             >
-              <div class="flex justify-between align-center">
+              <div class=${ccExpandable.title}>
                 ${this.title
-                  ? html`<span class="h4">${this.title}</span>`
+                  ? html`<span class=${ccExpandable.titleType}>${this.title}</span>`
                   : html`<slot name="title"></slot>`}
                 ${this.noChevron
                   ? ''
