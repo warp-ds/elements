@@ -1,3 +1,10 @@
+# [1.0.0-alpha.23](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2023-06-19)
+
+
+### Bug Fixes
+
+* **toast:** update classes + fix color issue on icons ([#27](https://github.com/warp-ds/elements/issues/27)) ([0f09a39](https://github.com/warp-ds/elements/commit/0f09a3978eb36b86ef93115d918bf1eccf770776))
+
 # [1.0.0-alpha.22](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2023-06-09)
 
 
