@@ -1,3 +1,10 @@
+# [1.0.0-alpha.24](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2023-06-22)
+
+
+### Bug Fixes
+
+* **expandable:** fix chevron issue ([#28](https://github.com/warp-ds/elements/issues/28)) ([fc9481f](https://github.com/warp-ds/elements/commit/fc9481f67daf15278daf44b7e80bf46f4bee69e9))
+
 # [1.0.0-alpha.23](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2023-06-19)
 
 
