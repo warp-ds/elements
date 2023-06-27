@@ -1,3 +1,10 @@
+# [1.0.0-alpha.25](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2023-06-27)
+
+
+### Bug Fixes
+
+* **package.json:** update versions ([#29](https://github.com/warp-ds/elements/issues/29)) ([feb0ccf](https://github.com/warp-ds/elements/commit/feb0ccfaa8b57892d9a0c046287ddb84b4c166ae))
+
 # [1.0.0-alpha.24](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2023-06-22)
 
 
