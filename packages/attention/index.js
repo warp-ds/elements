@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
-import { attention as ccAttention } from '@warp-ds/component-classes';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,

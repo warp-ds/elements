@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses } from '../utils';
-import { box as ccBox } from '@warp-ds/component-classes';
+import { box as ccBox } from '@warp-ds/css/component-classes';
 
 class WarpBox extends LitElement {
   static properties = {

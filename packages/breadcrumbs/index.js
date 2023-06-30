@@ -1,6 +1,6 @@
 import { html, LitElement, css } from 'lit';
 import { interleave } from '@warp-ds/core/breadcrumbs';
-import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/component-classes'
+import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes'
 import { kebabCaseAttributes } from '../utils';
 
 const separator = html`<span class=${ccBreadcrumbs.separator} aria-hidden='true'>/</span>`;

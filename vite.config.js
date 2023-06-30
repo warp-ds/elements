@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
-import { classes } from '@warp-ds/component-classes/classes';
+import { classes } from '@warp-ds/css/component-classes/classes';
 import { MinifyWarpLib } from './.minifier-plugin.js'
 
 
