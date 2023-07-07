@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -11,9 +11,15 @@ dependencies:
   '@open-wc/testing':
     specifier: 3.2.0
     version: 3.2.0
+  '@warp-ds/component-classes':
+    specifier: ^1.0.0-alpha.115
+    version: 1.0.0-alpha.115
   '@warp-ds/core':
     specifier: 1.0.0
     version: 1.0.0
+  '@warp-ds/uno':
+    specifier: ^1.0.0-alpha.49
+    version: 1.0.0-alpha.49
   glob:
     specifier: 8.1.0
     version: 8.1.0
@@ -43,12 +49,6 @@ devDependencies:
   '@semantic-release/git':
     specifier: 10.0.1
     version: 10.0.1(semantic-release@21.0.5)
-  '@warp-ds/component-classes':
-    specifier: 1.0.0-alpha.110
-    version: 1.0.0-alpha.110
-  '@warp-ds/uno':
-    specifier: ^1.0.0-alpha.45
-    version: 1.0.0-alpha.45
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -2089,7 +2089,7 @@ packages:
 
   /@unocss/core@0.50.8:
     resolution: {integrity: sha512-rWmyeNE0Na8dJPDynLVar0X22qMHFNhO+/F2FZDpG4tubTavXJJo9uvhZr/D381kiWxt+XZ38y6EAD4UMdBqMA==}
-    dev: true
+    dev: false
 
   /@unocss/core@0.53.1:
     resolution: {integrity: sha512-6CUaOMeQyoPIgMuSboX9yGywiCumhoYTPk6uMFhgD3vZmIRCZMwN9RFDLB+s2+NOlnBU6aQsJLONcUapZb/49g==}
@@ -2142,7 +2142,7 @@ packages:
     resolution: {integrity: sha512-/4sbOdyaqJMvFkw1xzo2+h6bZJHw6WCYw1mF+f0ydHzj8ruvwaj9ClDDOweW5cdrk3wzDzRZ6NPRahKqLwv6/Q==}
     dependencies:
       '@unocss/core': 0.50.8
-    dev: true
+    dev: false
 
   /@unocss/preset-mini@0.53.1:
     resolution: {integrity: sha512-tHfsAXmu82/0BMktgqaq6WLOU5FdLdK/iJvS38eQLZqZlQ2VtCtNybf+bqlNNr0cr8J4ju2iwp7n61pqIvcmOw==}
@@ -2245,9 +2245,9 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.110:
-    resolution: {integrity: sha512-kqOYLHBxNjyuIs7X7hlZyywxua//Gxd6+h3H13d1RT/Zfkjnr/ByUJdFvbcYqPNrNsLLwqdPsRZTbL02f0EuDg==}
-    dev: true
+  /@warp-ds/component-classes@1.0.0-alpha.115:
+    resolution: {integrity: sha512-+Gvds1oLj2Jj5WW5hwFCPts2K0L3/yQCCMg6io49QnZ0qDwd6whof3TkDg7emhqF+xEVh87r67bqLewZbOsnyg==}
+    dev: false
 
   /@warp-ds/core@1.0.0:
     resolution: {integrity: sha512-HCzgWm6wHR2Wh/rvNu9I4Qe1HdUj/i3v5amjioW38ZPh/Ve/y/0imX//ZXMLjshDVK+ZKU34Xd0TC56z/Yg36g==}
@@ -2255,12 +2255,12 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/uno@1.0.0-alpha.45:
-    resolution: {integrity: sha512-Uemwf0EgmZV4En+aT74ZX6pw/+w+CLVhgTMV/4e6FouDq+e79MknNtHVpm/ktLHlUgb4fedFCChSxRExgU1/RQ==}
+  /@warp-ds/uno@1.0.0-alpha.49:
+    resolution: {integrity: sha512-72c5dT6QAy7GFmL+SN2gRlOsJWBWYM4uJpyw8WA9gCQHNENHXtoWu+D24+c47T9K908M3ZG+2+U1M/FXEZ7ojA==}
     dependencies:
       '@unocss/core': 0.50.8
       '@unocss/preset-mini': 0.50.8
-    dev: true
+    dev: false
 
   /@web/browser-logs@0.3.2:
     resolution: {integrity: sha512-4kYoH4XBpOnrYAzlG3M9fy3kj7jhUgOLXsBcdC5n4oALYzgX57mt2MeJT4LkdgLWbCGRl1K8KaZhOKgH4RktxQ==}
