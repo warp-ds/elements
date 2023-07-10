@@ -43,8 +43,6 @@
     "@eik/cli": "^2.0.22",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@warp-ds/uno": "^1.0.0-alpha.45",
-    "@warp-ds/component-classes": "1.0.0-alpha.110",
     "autoprefixer": "10.4.14",
     "cors": "2.8.5",
     "cz-conventional-changelog": "3.3.0",
@@ -74,6 +72,8 @@
     "@fabric-ds/icons": "0.6.7",
     "@open-wc/testing": "3.2.0",
     "@warp-ds/core": "1.0.0",
+    "@warp-ds/uno": "^1.0.0-alpha.49",
+    "@warp-ds/component-classes": "^1.0.0-alpha.116",
     "glob": "8.1.0",
     "html-format": "1.1.2",
     "lit": "2.7.5"
