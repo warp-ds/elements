@@ -12,8 +12,8 @@ dependencies:
     specifier: 3.2.0
     version: 3.2.0
   '@warp-ds/component-classes':
-    specifier: ^1.0.0-alpha.115
-    version: 1.0.0-alpha.115
+    specifier: ^1.0.0-alpha.116
+    version: 1.0.0-alpha.116
   '@warp-ds/core':
     specifier: 1.0.0
     version: 1.0.0
@@ -2245,8 +2245,8 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/component-classes@1.0.0-alpha.115:
-    resolution: {integrity: sha512-+Gvds1oLj2Jj5WW5hwFCPts2K0L3/yQCCMg6io49QnZ0qDwd6whof3TkDg7emhqF+xEVh87r67bqLewZbOsnyg==}
+  /@warp-ds/component-classes@1.0.0-alpha.116:
+    resolution: {integrity: sha512-7bAQOPtynoGtgcZ+TSX6OE+chK2s0tW/fnE1dOScjDMvd7O+6EFbBi3eTKSnmozEKL/d9c7gGL/9/OnGxlF9lg==}
     dev: false
 
   /@warp-ds/core@1.0.0:
