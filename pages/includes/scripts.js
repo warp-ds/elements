@@ -1,4 +1,5 @@
 import '../../index.js';
+import 'uno.css';
 import { toast, updateToast, removeToast } from '../../index.js';
 import { WarpToastContainer } from '../../packages/toast/toast-container.js';
 import '@fabric-ds/icons/elements/bag-16';
