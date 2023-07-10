@@ -57,7 +57,7 @@ class WarpCard extends LitElement {
   }
 
   get uuButton() {
-    return html`<button class={${ccCard.a11y}} aria-pressed="${this.selected}" tabindex="-1">
+    return html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">
       Velg
     </button>`;
   }
