@@ -1,3 +1,10 @@
+# [1.0.0-alpha.26](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2023-07-10)
+
+
+### Bug Fixes
+
+* **select:** add component classes to select ([#33](https://github.com/warp-ds/elements/issues/33)) ([8bdb2f5](https://github.com/warp-ds/elements/commit/8bdb2f507cb7e7cbb6f475a2800e895f09bb11b2))
+
 # [1.0.0-alpha.25](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2023-06-27)
 
 
