@@ -1,3 +1,10 @@
+# [1.0.0-alpha.27](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2023-07-10)
+
+
+### Bug Fixes
+
+* stable FINN prod alpha-release ([#32](https://github.com/warp-ds/elements/issues/32)) ([8351ef2](https://github.com/warp-ds/elements/commit/8351ef221671c9025bb61482ac7de1f4ea7888f0))
+
 # [1.0.0-alpha.26](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2023-07-10)
 
 
