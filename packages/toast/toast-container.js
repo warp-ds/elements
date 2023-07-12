@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit';
-import { toaster as ccToaster } from '@warp-ds/component-classes';
+import { toaster as ccToaster } from '@warp-ds/css/component-classes';
 import { repeat } from 'lit/directives/repeat.js';
 
 /**

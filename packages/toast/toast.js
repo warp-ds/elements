@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
-import { toast as ccToast } from '@warp-ds/component-classes';
+import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
 import { closeSVG, successSVG, failureSVG, warningSVG } from './svgs';
 

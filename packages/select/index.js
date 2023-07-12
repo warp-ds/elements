@@ -2,7 +2,7 @@ import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
-import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from "@warp-ds/component-classes"
+import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from "@warp-ds/css/component-classes"
 import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 

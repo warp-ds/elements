@@ -3,7 +3,7 @@ import { fclasses, kebabCaseAttributes } from '../utils';
 import {
   box as ccBox,
   expandable as ccExpandable,
-} from '@warp-ds/component-classes';
+} from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@fabric-ds/icons/elements/chevron-down-16';
 
