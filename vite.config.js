@@ -8,7 +8,14 @@ import glob from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
 import { MinifyWarpLib } from './.minifier-plugin.js'
 
-
+let reset;
+async function getReset() {
+  if (reset) return reset;
+  else {
+    reset = (await fetch('https://assets.finn.no/pkg/@warp-ds/css/1.0.0-alpha.33/resets.min.css')).text();
+    return reset;
+  }
+}
 
 export default ({ mode }) => {
   let input = {};
@@ -74,12 +81,20 @@ export default ({ mode }) => {
     // base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
-        presets: [presetWarp()],
+        presets: [presetWarp({ skipResets: true })],
+        preflights: [{
+          layer: 'preflights',
+          getCSS: getReset,
+        }],
         mode: 'shadow-dom',
         safelist: classes,
       }),
       uno({
-        presets: [presetWarp()],
+        presets: [presetWarp({ skipResets: true })],
+        preflights: [{
+          layer: 'preflights',
+          getCSS: getReset,
+        }],
       }),
       // litElementTailwindPlugin({ mode }),
       mode !== 'lib' && createHtmlPlugin({
