@@ -77,7 +77,10 @@ export default ({ mode }) => {
         presets: [presetWarp()],
         mode: 'shadow-dom',
         safelist: classes,
-      }),  
+      }),
+      uno({
+        presets: [presetWarp()],
+      }),
       // litElementTailwindPlugin({ mode }),
       mode !== 'lib' && createHtmlPlugin({
         minify: false,
