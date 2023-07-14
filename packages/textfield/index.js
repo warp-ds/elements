@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { input, label as l, helpText as h } from '@warp-ds/component-classes';
+import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { fclasses } from '../utils';
 

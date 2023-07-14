@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { card as ccCard } from '@warp-ds/component-classes';
+import { card as ccCard } from '@warp-ds/css/component-classes';
 import { fclasses } from '../utils';
 
 const keys = {

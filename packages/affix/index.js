@@ -1,6 +1,6 @@
 import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { suffix, prefix } from '@warp-ds/component-classes';
+import { suffix, prefix } from '@warp-ds/css/component-classes';
 import { search, clear } from './icons';
 import { fclasses } from '../utils';
 

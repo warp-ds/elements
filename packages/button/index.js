@@ -1,5 +1,5 @@
 import { html, LitElement, css } from 'lit';
-import { button as ccButton } from '@warp-ds/component-classes';
+import { button as ccButton } from '@warp-ds/css/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
 
