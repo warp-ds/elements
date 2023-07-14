@@ -1,3 +1,16 @@
+# [1.0.0-alpha.28](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2023-07-14)
+
+
+### Bug Fixes
+
+* **package.json:** bump semantic-release to 21.0.7 ([#36](https://github.com/warp-ds/elements/issues/36)) ([61f034a](https://github.com/warp-ds/elements/commit/61f034a7c9272a87bfe3ce4af596b20757f4f73a))
+* use css packages instead of component-classes ([#31](https://github.com/warp-ds/elements/issues/31)) ([1bf8a0a](https://github.com/warp-ds/elements/commit/1bf8a0aee7d5cc46be495648beaf433996f0db4d))
+
+
+### Reverts
+
+* Revert "chore(release): 1.0.0-alpha.28 [skip ci]" (#35) ([4770de9](https://github.com/warp-ds/elements/commit/4770de948a1a8aa1cd8d2f1a77b644f63781f145)), closes [#35](https://github.com/warp-ds/elements/issues/35)
+
 # [1.0.0-alpha.27](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2023-07-10)
 
 
