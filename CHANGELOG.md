@@ -1,3 +1,10 @@
+# [1.0.0-alpha.28](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2023-07-14)
+
+
+### Bug Fixes
+
+* use css packages instead of component-classes ([#31](https://github.com/warp-ds/elements/issues/31)) ([1bf8a0a](https://github.com/warp-ds/elements/commit/1bf8a0aee7d5cc46be495648beaf433996f0db4d))
+
 # [1.0.0-alpha.27](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2023-07-10)
 
 
