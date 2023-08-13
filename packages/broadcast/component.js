@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { repeat } from 'lit/directives/repeat.js';
-import { windowExists } from '../utils';
+import { windowExists } from '../utils/window-exists';
 
 export class WarpBroadcast extends LitElement {
   static properties = {
