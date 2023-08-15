@@ -28,8 +28,6 @@ export function classes(defn) {
   return classes.join(' ');
 }
 
-export const windowExists = typeof window !== 'undefined';
-
 export function fclasses(definition) {
   const defn = {};
   for (const [key, value] of Object.entries(definition)) {
