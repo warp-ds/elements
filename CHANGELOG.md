@@ -1,3 +1,10 @@
+# [1.0.0-alpha.29](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2023-08-15)
+
+
+### Bug Fixes
+
+* **@warp-ds/toast:** remove window reference from toast api bundle, fixing server-side rendering ([677c7ed](https://github.com/warp-ds/elements/commit/677c7edb4be269186f887a9522cc554edaea0d05))
+
 # [1.0.0-alpha.28](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2023-07-14)
 
 
