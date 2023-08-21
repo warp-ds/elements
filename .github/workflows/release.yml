@@ -29,6 +29,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
       - name: Eik login and publish
-        run: pnpm eik login -k $EIK_TOKEN && pnpm eik publish && pnpm eik pkg-alias || true
+        run: pnpm eik login -k $EIK_TOKEN && pnpm eik publish || true
         env:
           EIK_TOKEN: ${{ secrets.EIK_TOKEN }}
