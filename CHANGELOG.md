@@ -1,3 +1,10 @@
+# [1.0.0-alpha.30](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2023-08-21)
+
+
+### Bug Fixes
+
+* **package.json:** build toast api to publish missing scripts ([#39](https://github.com/warp-ds/elements/issues/39)) ([f73dd2f](https://github.com/warp-ds/elements/commit/f73dd2fba48eb7594efbd0fd2fd21810ad9743c6))
+
 # [1.0.0-alpha.29](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2023-08-15)
 
 
