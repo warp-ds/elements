@@ -20,7 +20,7 @@ Install by using npm/pnpm or by adding a script link:
 
 #### Install using npm
 ```sh
-npm i -S @warp-ds/elements
+npm install @warp-ds/elements
 ```
 
 #### Install using pnpm
