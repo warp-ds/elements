@@ -41,9 +41,8 @@ see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/)
 
 ## Releases
 
-This project is currently in alpha.
-Continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using an `alpha` tag (e.g. `1.0.0-alpha.1`).
-Anyone needing to start using the package before the first major release can install the `alpha` version while waiting for the first stable version.
+This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
+Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
 
 
 ## Changelog
