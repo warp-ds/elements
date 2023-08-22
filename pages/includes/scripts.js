@@ -3,7 +3,7 @@ import 'uno.css';
 import { toast, updateToast, removeToast } from '../../index.js';
 import { WarpToastContainer } from '../../packages/toast/toast-container.js';
 import '@fabric-ds/icons/elements/bag-16';
-import { windowExists } from '../../packages/utils/index.js';
+import { windowExists } from '../../packages/utils/window-exists';
 
 if (windowExists) {
     window.WarpToastContainer = WarpToastContainer;
