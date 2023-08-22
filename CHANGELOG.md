@@ -1,3 +1,10 @@
+# [1.0.0-alpha.31](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2023-08-22)
+
+
+### Bug Fixes
+
+* provide correct import of windowExists after refactoring ([#41](https://github.com/warp-ds/elements/issues/41)) ([7ada8bd](https://github.com/warp-ds/elements/commit/7ada8bdef6ef2e8b7caf413e107c8737e983a419))
+
 # [1.0.0-alpha.30](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2023-08-21)
 
 
