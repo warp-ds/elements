@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Attention</h1>
         <h2 class="mt-24 mb-16">Props</h2>
@@ -240,6 +242,7 @@
           });
         </script>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
   </body>

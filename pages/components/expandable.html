@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Expandable</h1>
         <p>Expandable is a layout component used for creating expandable content areas on a page.</p>
@@ -199,6 +201,7 @@
           </w-expandable>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
     <%- include('expandableControllersScripts.html'); -%>
