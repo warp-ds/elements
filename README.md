@@ -1,7 +1,7 @@
 # Warp-ds Elements
 
 Welcome to [@warp-ds/elements](https://github.com/warp-ds/elements),
-a collection of Vue3 components for building user interfaces based on the [Warp Design System](https://github.com/warp-ds/).
+a collection of Web Components built with Lit to be used to build interfaces based on the [Warp Design System](https://github.com/warp-ds/).
 This repository is maintained by the [Warp Core Team](https://github.com/orgs/warp-ds/teams/warp-core-team)
 and is home to the [@warp-ds/vue](https://www.npmjs.com/package/@warp-ds/elements) library.
 
