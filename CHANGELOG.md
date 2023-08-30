@@ -1,3 +1,10 @@
+# [1.0.0-alpha.32](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2023-08-30)
+
+
+### Bug Fixes
+
+* update @warp-ds/uno and /css to 1.0.0 ([#44](https://github.com/warp-ds/elements/issues/44)) ([44aca9a](https://github.com/warp-ds/elements/commit/44aca9af105c5eab006248b02f7c200a7aae5ba1))
+
 # [1.0.0-alpha.31](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2023-08-22)
 
 
