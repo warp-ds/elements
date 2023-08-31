@@ -1,9 +1,11 @@
 import { css, html, LitElement } from 'lit';
 import { fclasses, kebabCaseAttributes } from '../utils';
-import { box as boxClasses, buttonReset } from '@warp-ds/component-classes';
+import {
+  box as ccBox,
+  expandable as ccExpandable,
+} from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@fabric-ds/icons/elements/chevron-down-16';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpExpandable extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -37,8 +39,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
-    styles,
     css`
+      @unocss-placeholder
       :host {
         display: block;
       }
@@ -51,14 +53,16 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   firstUpdated() {
     this._hasTitle =
       !!this.title ||
-      this.renderRoot.querySelector("slot[name='title']").assignedNodes().length > 0;
+      this.renderRoot.querySelector("slot[name='title']").assignedNodes()
+        .length > 0;
   }
 
   get _expandableSlot() {
     return html`<div
       class=${fclasses({
         [this.contentClass || '']: true,
-        [boxClasses.box + (this._hasTitle ? ' pt-0' : '')]: this.box,
+        [ccBox.box]: this.box,
+        [ccExpandable.paddingTop]: this._hasTitle && this.box,
       })}
     >
       <slot></slot>
@@ -68,9 +72,9 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   render() {
     return html` <div
       class=${fclasses({
-        'bg-aqua-50': this.info,
-        ['py-0 px-0 ' + boxClasses.box]: this.box,
-        [boxClasses.bleed]: this.bleed,
+        [ccExpandable.expandable]: true,
+        [ccExpandable.expandableBox]: this.box,
+        [ccExpandable.expandableBleed]: this.bleed,
       })}
     >
       ${this._hasTitle
@@ -80,27 +84,26 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
               aria-expanded="${this.expanded}"
               class=${fclasses({
                 [this.buttonClass || '']: true,
-                [buttonReset + ' hover:underline focus:underline']: true,
-                ['w-full text-left relative ' + boxClasses.box]: this.box,
-                'hover:text-aqua-700 active:text-aqua-800': this.info,
+                [ccExpandable.button]: true,
+                [ccExpandable.buttonBox]: this.box,
               })}
               @click=${() => (this.expanded = !this.expanded)}
             >
-              <div class="flex justify-between align-center">
+              <div class="${ccExpandable.title}">
                 ${this.title
-                  ? html`<span class="h4">${this.title}</span>`
+                  ? html`<span class="${ccExpandable.titleType}">${this.title}</span>`
                   : html`<slot name="title"></slot>`}
                 ${this.noChevron
                   ? ''
                   : html`<div
                       class=${fclasses({
-                        'self-center transform transition-transform': true,
-                        '-rotate-180': this.expanded,
-                        'relative left-8': !this.box,
-                        'box-chevron': this.box,
+                        [ccExpandable.chevron]: true,
+                        [ccExpandable.chevronExpanded]: this.expanded,
+                        [ccExpandable.chevronBox]: this.box,
+                        [ccExpandable.chevronNonBox]: !this.box,
                       })}
                     >
-                      <w-icon-chevron-down16></w-icon-chevron-down16>
+                      <f-icon-chevron-down16></f-icon-chevron-down16>
                     </div>`}
               </div>
             </button>
@@ -112,8 +115,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
           </w-expand-transition>`
         : html`<div
             class=${fclasses({
-              'overflow-hidden': true,
-              'h-0 invisible': !this.expanded,
+              [ccExpandable.expansion]: true,
+              [ccExpandable.expansionNotExpanded]: !this.expanded,
             })}
             aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
           >

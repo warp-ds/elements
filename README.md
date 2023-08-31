@@ -1,35 +1,56 @@
-# Fabric Elements
+# Warp-ds Elements
 
-## Development
+Welcome to [@warp-ds/elements](https://github.com/warp-ds/elements),
+a collection of Web Components built with Lit to be used to build interfaces based on the [Warp Design System](https://github.com/warp-ds/).
+This repository is maintained by the [Warp Core Team](https://github.com/orgs/warp-ds/teams/warp-core-team)
+and is home to the [@warp-ds/vue](https://www.npmjs.com/package/@warp-ds/elements) library.
 
-The project uses [Vite](https://vitejs.dev/) for "unbundled" local development. Start a local dev
-server by running the following command:
 
+## How to contribute
+
+If you'd like to contribute to `@warp-ds/elements`,
+start by reviewing the [contributing guidelines](CONTRIBUTING.md).
+
+
+## How to use
+
+### Installation
+
+Install by using npm/pnpm or by adding a script link:
+
+#### Install using npm
 ```sh
-npm run dev
+npm i -S @warp-ds/elements
 ```
 
-Changes to either the custom elements or the HTML files should hot reload.
+#### Install using pnpm
+```sh
+pnpm add @warp-ds/elements
+```
+
+#### Using a direct link to Eik
+```html
+<script src="https://assets.finn.no/pkg/@warp-ds/elements/v1"></script>
+```
+
+### Documentation
+
+For information on the components available in the package and how to use them,
+see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/).
+
 
 ## Releases
 
-This project uses [Semantic Release](https://github.com/semantic-release/semantic-release) to
-automate package publishing when making changes to the `main` or `next` branch.
+This project is currently in alpha.
+Continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using an `alpha` tag (e.g. `1.0.0-alpha.1`).
+Anyone needing to start using the package before the first major release can install the `alpha` version while waiting for the first stable version.
 
-It is recommended to branch off the `next` branch and follow
-[conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) when making changes.
-When your changes are ready for pull request, this should be opened against the `next` branch.
 
-[Read more in-depth about Fabric Releases here](https://github.com/fabric-ds/issues/blob/779d59723993c13d62374516259602d967da56ca/rfcs/0004-releases.md).
+## Changelog
 
-Please note that the version published will depend on your commit message structure. We use
-[commitizen](https://github.com/commitizen/cz-cli) to help follow this structure:
+Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) file.
 
-```
-npm install -g commitizen
-```
 
-When installed, you should be able to type `cz` or `git cz` in your terminal to commit your changes
-(replacing `git commit`).
+## License
 
-[![Add and commit with Commitizen](https://github.com/commitizen/cz-cli/raw/master/meta/screenshots/add-commit.png)](https://github.com/commitizen/cz-cli/raw/master/meta/screenshots/add-commit.png)
+@warp-ds/elements is available under the [Apache-2.0 software license](https://github.com/warp-ds/elements/blob/main/LICENSE).

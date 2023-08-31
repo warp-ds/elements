@@ -1,16 +1,17 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
+import { button as ccButton } from '@warp-ds/css/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
-import { styles } from '../../dist/elements.min.js';
 
-const variantClassMap = {
-  primary: 'button button--primary',
-  secondary: 'button',
-  negative: 'button button--destructive',
-  utility: 'button button--utility',
-  link: 'button button--link',
-  pill: 'button button--pill',
-};
+
+const buttonTypes = [    
+  'primary',
+  'secondary',
+  'negative',
+  'utility',
+  'pill',
+  'link',
+];
 
 class WarpButton extends kebabCaseAttributes(LitElement) {
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
@@ -26,9 +27,12 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     target: { type: String, reflect: true },
     rel: { type: String, reflect: true },
     buttonClass: { type: String, reflect: true },
-  };
+  };  
 
-  static styles = [styles];
+
+  static styles = css`
+    @unocss-placeholder
+  `;
 
   constructor() {
     super();
@@ -38,10 +42,9 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    const availableVariants = Object.keys(variantClassMap);
-    if (!availableVariants.includes(this.variant)) {
+    if (!buttonTypes.includes(this.variant)) {
       throw new Error(
-        `Invalid "variant" attribute. Set its value to one of the following:\n${availableVariants.join(
+        `Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(
           ', ',
         )}.`,
       );
@@ -54,19 +57,34 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     }
   }
 
+
   get _classes() {
+    const primary = this.variant === 'primary';
+    const secondary = this.variant === 'secondary';
+    const negative = this.variant === 'negative';
+    const utility = this.variant === 'utility';
+    const pill = this.variant === 'pill';
+    const link = this.variant === 'link';
+
     return classNames(
-      variantClassMap[this.variant],
       {
+        [ccButton.buttonSecondary]: secondary && !this.quiet || !buttonTypes.find(b => this.variant === b),
+        // primary buttons
+        [ccButton.buttonPrimary]: primary,
+        [ccButton.buttonDestructive]: negative && !this.quiet,
         // quiet
-        'button--flat': this.variant === 'secondary' && this.quiet,
-        'button--destructive-flat': this.variant === 'negative' && this.quiet,
-        'button--utility-flat': this.variant === 'utility' && this.quiet,
+        [ccButton.buttonFlat]: secondary && this.quiet,
+        [ccButton.buttonDestructiveFlat]: negative && this.quiet,
+        [ccButton.buttonUtilityFlat]: utility && this.quiet,
         // others
-        'button--small': this.small,
-        'button--in-progress': this.loading,
+        [ccButton.buttonSmall]: this.small,
+        [ccButton.buttonUtility]: utility && !this.quiet,
+        [ccButton.buttonLink]: link,
+        [ccButton.buttonPill]: pill,
+        [ccButton.buttonInProgress]: this.loading,
+        [ccButton.buttonIsDisabled]: this.disabled,
+        [ccButton.linkAsButton]: !!this.href
       },
-      this.buttonClass,
     );
   }
 

@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
+import { LitElement, html, css } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import htmlFormat from 'html-format';
 
 /**
@@ -46,7 +46,7 @@ export class SyntaxHighlight extends LitElement {
 
     slotHtml = htmlFormat(slotHtml);
 
-    const highlighted = window.Prism.highlight(slotHtml, window.Prism.languages.markup, 'html');
+    const highlighted = window?.Prism.highlight(slotHtml, window.Prism.languages.markup, 'html');
 
     this.source = highlighted;
   }

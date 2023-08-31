@@ -1,4 +1,4 @@
-import { windowExists } from '../utils';
+import { windowExists } from '../utils/window-exists';
 
 /**
  * Toast helper function options

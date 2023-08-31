@@ -1,10 +1,10 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
+import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from "@warp-ds/css/component-classes"
 import { kebabCaseAttributes } from '../utils';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
-import { styles } from '../../dist/elements.min.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -29,12 +29,36 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
     _options: { state: true },
   };
 
-  static styles = [styles];
+  static styles = css`
+    @unocss-placeholder
+  `;
 
   get #classes() {
-    return classNames('input mb-0', {
-      'input--is-invalid': this.invalid,
+    return classNames({
+      [ccSelect.default]: true,
+      [ccSelect.invalid]: this.invalid
     });
+  }
+
+  get #labelClasses() {
+    return classNames({
+      [ccLabel.label]: true,
+      [ccLabel.labelInvalid]: this.invalid
+    })
+  }
+
+  get #helpTextClasses() {
+    return classNames({
+      [ccHelpText.helpText]: true,
+      [ccHelpText.helpTextInvalid]: this.invalid
+    })
+  }
+
+  get #chevronClasses() {
+    return classNames({
+      [ccSelect.chevron]: true,
+      [ccSelect.chevronDisabled]: this.disabled,
+    })
   }
 
   get #id() {
@@ -51,21 +75,22 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   }
 
   render() {
-    return html`<div class="${this.#classes}">
+    return html`<div class="${ccSelect.wrapper}">
       ${when(
         this.label,
         () =>
-          html`<label for="${this.#id}">
+          html`<label class="${this.#labelClasses}" for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,
               () =>
-                html`<span className="pl-8 font-normal text-14 text-gray-500">(valgfritt)</span>`,
+                html`<span class="${ccLabel.optional}">(valgfritt)</span>`,
             )}</label
           >`,
       )}
-      <div class="input--select__wrap">
+      <div class="${ccSelect.selectWrapper}">
         <select
+          class="${this.#classes}"
           id="${this.#id}"
           ?autofocus=${this.autoFocus}
           aria-describedby="${ifDefined(this.#helpId)}"
@@ -74,10 +99,27 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
         >
           ${unsafeHTML(this._options)}
         </select>
+        <div class="${this.#chevronClasses}">
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 16 16"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="M2.5 5.5L8 11L13.5 5.5"
+            />
+          </svg>
+        </div>
       </div>
       ${when(
         this.always || this.invalid,
-        () => html`<div id="${this.#helpId}" class="input__sub-text">${this.hint}</div>`,
+        () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.hint}</div>`,
       )}
     </div>`;
   }

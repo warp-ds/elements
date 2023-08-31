@@ -1,14 +1,13 @@
 import { css, html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
-import { attention as c } from '@warp-ds/component-classes';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
   arrowLabels,
   useRecompute as recompute,
 } from '@warp-ds/core/attention';
-import { styles } from '../../dist/elements.min.js';
 
 class WarpAttention extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -28,8 +27,8 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
   };
 
   static styles = [
-    styles,
     css`
+      @unocss-placeholder
       #attention {
         position: absolute;
         z-index: 50;
@@ -136,23 +135,20 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
 
   get _wrapperClasses() {
     return classes({
-      [c.base]: true,
-      [c.tooltip]: this.tooltip,
-      [c.callout]: this.callout,
-      [c.popover]: this.popover,
+      [ccAttention.base]: true,
+      [ccAttention.tooltip]: this.tooltip,
+      [ccAttention.callout]: this.callout,
+      [ccAttention.popover]: this.popover,
     });
   }
 
   get _arrowClasses() {
     return classes({
-      [c.arrowBase]: true,
-      [`-top-8`]: this._arrowDirection === 'top',
-      [`-right-8`]: this._arrowDirection === 'right',
-      [`-bottom-8`]: this._arrowDirection === 'bottom',
-      [`-left-8`]: this._arrowDirection === 'left',
-      [c.arrowTooltip]: this.tooltip,
-      [c.arrowCallout]: this.callout,
-      [c.arrowPopover]: this.popover,
+      [ccAttention.arrowBase]: true,
+      [ccAttention[`arrowDirection${this._arrowDirection.charAt(0).toUpperCase() + this._arrowDirection.slice(1)}`]]: true,
+      [ccAttention.arrowTooltip]: this.tooltip,
+      [ccAttention.arrowCallout]: this.callout,
+      [ccAttention.arrowPopover]: this.popover,
     });
   }
 

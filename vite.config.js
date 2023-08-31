@@ -1,11 +1,21 @@
 /* eslint-env node */
 import { presetWarp } from '@warp-ds/uno'
 import uno from 'unocss/vite'
+import { defineConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
-// import postcss from 'postcss';
-// import cssInJS from '@stylelint/postcss-css-in-js';
+import { classes } from '@warp-ds/css/component-classes/classes';
+import { MinifyWarpLib } from './.minifier-plugin.js'
+
+let reset;
+async function getReset() {
+  if (reset) return reset;
+  else {
+    reset = (await fetch('https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css')).text();
+    return reset;
+  }
+}
 
 export default ({ mode }) => {
   let input = {};
@@ -39,11 +49,55 @@ export default ({ mode }) => {
     },
   };
 
+  function getLibOpts(fileName) {
+    return {
+      sourcemap: true,
+      lib: {
+        formats: ['es'],
+        entry: './index.js',
+        fileName
+      },
+    }
+  }
+  
+  function getBuildOpts(mode) {
+    if (mode === 'production') return defineConfig({
+      build: { target: 'esnext', emptyOutDir: false,}
+    })
+    if (mode === 'lib') return defineConfig({
+      build: {
+        emptyOutDir: false,
+        lib: {
+          formats: ['es'],
+          entry: './index.js',
+          fileName: 'index'
+        },
+        rollupOptions: { external: ['elements'] }
+      }
+    })
+  }
+  
   return {
     // base: isProduction ? '/elements/' : '',
     plugins: [
+      uno({
+        presets: [presetWarp({ skipResets: true })],
+        preflights: [{
+          layer: 'preflights',
+          getCSS: getReset,
+        }],
+        mode: 'shadow-dom',
+        safelist: classes,
+      }),
+      uno({
+        presets: [presetWarp({ skipResets: true })],
+        preflights: [{
+          layer: 'preflights',
+          getCSS: getReset,
+        }],
+      }),
       // litElementTailwindPlugin({ mode }),
-      createHtmlPlugin({
+      mode !== 'lib' && createHtmlPlugin({
         minify: false,
         pages: [
           {
@@ -109,16 +163,9 @@ export default ({ mode }) => {
         ],
       }),
       isProduction && basePathFix(),
-      uno({
-        presets: [presetWarp()]
-      }),
+      MinifyWarpLib(),
     ],
-    build: {
-      outDir: 'site',
-      rollupOptions: {
-        input,
-      },
-    },
+    ...getBuildOpts(mode),
   };
 };
 

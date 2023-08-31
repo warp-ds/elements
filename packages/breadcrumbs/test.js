@@ -112,3 +112,20 @@ test('Breadcrumb component with last element as a span', async (t) => {
     '3 child span tags should be present',
   );
 });
+
+test('Breadcrumb component with custom-styled element', async (t) => {
+  // GIVEN: A component with 1 breadcrumb with a class name
+  const component = `
+    <w-breadcrumbs>
+      <a class="font-bold" href="#/url/1">Eiendom</a>
+    </w-breadcrumbs>
+  `;
+
+  // WHEN: the component is added to the page AND a elements are selected
+  const { page } = t.context;
+  await page.setContent(component);
+  await page.addScriptTag({ path: './dist/index.js', type: 'module' });
+
+  // THEN: the breadcrumb link should keep its class name together with the default one
+  t.equal(await page.locator('w-breadcrumbs a').getAttribute('class'), 'font-bold i-text-$color-breadcrumbs-link-text', 'has both custom and default class name');
+});

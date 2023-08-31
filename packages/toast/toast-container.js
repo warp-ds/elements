@@ -1,12 +1,12 @@
 import { LitElement, css, html } from 'lit';
-import { toaster as c } from '@warp-ds/component-classes';
+import { toaster as ccToaster } from '@warp-ds/css/component-classes';
 import { repeat } from 'lit/directives/repeat.js';
 
 /**
  * Toast helper function options
  * @typedef    {Object}                               ToastOptions
  * @property   {(number|string)}                      [id]        Custom identifier
- * @property   {('success'|'error'|'warning'|'info')} [type]      Type of alert
+ * @property   {('success'|'error'|'warning')}        [type]      Type of alert
  * @property   {String}                               [text]      The toast message. Only needed when updating text on existing toast
  * @property   {(number|string)}                      [duration]  Duration of toast in milliseconds. Defaults to 5000. For accessibility reasons, toasts should never be interactive and therefore need to auto remove. If you must disable auto remove, set duration to Number.POSITIVE_INFINITY.
  * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
@@ -15,6 +15,7 @@ import { repeat } from 'lit/directives/repeat.js';
 export class WarpToastContainer extends LitElement {
   static styles = [
     css`
+      @unocss-placeholder
       :host {
         display: block;
       }
@@ -119,13 +120,13 @@ export class WarpToastContainer extends LitElement {
 
   render() {
     return html`
-      <aside class="${c.toasterContainer}">
-        <div class="${c.toaster}" id="w-toast-container-list">
+      <aside class="${ccToaster.container}">
+        <div class="${ccToaster.toaster}" id="w-toast-container-list">
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
             (toast) => html` <w-toast
-              class="w-full"
+              class="${ccToaster.content}"
               id="${toast.id}"
               type="${toast.type}"
               text="${toast.text}"
