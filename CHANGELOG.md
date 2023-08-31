@@ -1,3 +1,10 @@
+## [1.0.1-next.2](https://github.com/warp-ds/elements/compare/v1.0.1-next.1...v1.0.1-next.2) (2023-08-31)
+
+
+### Bug Fixes
+
+* use new button classes and improve conditions ([#48](https://github.com/warp-ds/elements/issues/48)) ([145caad](https://github.com/warp-ds/elements/commit/145caada393aad82dcc75e2a3986c1a20c45296b))
+
 ## [1.0.1-next.1](https://github.com/warp-ds/elements/compare/v1.0.0...v1.0.1-next.1) (2023-08-31)
 
 
