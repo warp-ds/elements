@@ -1,3 +1,10 @@
+## [1.0.1-next.1](https://github.com/warp-ds/elements/compare/v1.0.0...v1.0.1-next.1) (2023-08-31)
+
+
+### Bug Fixes
+
+* use Warp Button component instead of button shortcuts ([8b498f6](https://github.com/warp-ds/elements/commit/8b498f653ddfa82967592a9846c022f7afcf4667))
+
 # 1.0.0 (2023-08-31)
 
 
