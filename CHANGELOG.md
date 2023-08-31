@@ -1,3 +1,58 @@
+# 1.0.0 (2023-08-31)
+
+
+### Bug Fixes
+
+* **@warp-ds/toast:** remove window reference from toast api bundle, fixing server-side rendering ([677c7ed](https://github.com/warp-ds/elements/commit/677c7edb4be269186f887a9522cc554edaea0d05))
+* add component classes to card component ([#18](https://github.com/warp-ds/elements/issues/18)) ([d8af2fc](https://github.com/warp-ds/elements/commit/d8af2fc7e87738e620e9332c14f30d9776977bd8))
+* add missing package-lock ([#24](https://github.com/warp-ds/elements/issues/24)) ([5bc0dbd](https://github.com/warp-ds/elements/commit/5bc0dbda49cdb2a6aaaa1327b15be3701a9d1132))
+* add release step with semantic releases and eik ([#5](https://github.com/warp-ds/elements/issues/5)) ([6363e52](https://github.com/warp-ds/elements/commit/6363e52b6627f516c7d7223b0bfd137f6467abf9))
+* add styles to textfield ([#11](https://github.com/warp-ds/elements/issues/11)) ([ed88c35](https://github.com/warp-ds/elements/commit/ed88c35d6e289019fd5ee8cb007b56c98bbba791))
+* add tokens to button element ([77b3469](https://github.com/warp-ds/elements/commit/77b346996545f7a10155714f089764c6fd48a6d8))
+* Add Warp component-classes to the box component ([#12](https://github.com/warp-ds/elements/issues/12)) ([fd55937](https://github.com/warp-ds/elements/commit/fd5593714ce9aad07449433fe2079f18ebdf992e))
+* add Warp component-classes to the breadcrumbs component ([#14](https://github.com/warp-ds/elements/issues/14)) ([eb6763a](https://github.com/warp-ds/elements/commit/eb6763acf98a37ab48d39f054b6d8086088ef9e2))
+* **alert:** use imported instead of inline classes ([#22](https://github.com/warp-ds/elements/issues/22)) ([2f37560](https://github.com/warp-ds/elements/commit/2f375608c0074e6708123396220310f73d4a85eb))
+* build ([7792404](https://github.com/warp-ds/elements/commit/7792404948160752f3bea1a560156a582497152f))
+* bump packages ([#23](https://github.com/warp-ds/elements/issues/23)) ([aa73bae](https://github.com/warp-ds/elements/commit/aa73bae89fb2dd55118815de960406e6cccc1c56))
+* **docs:** set fonts' rem base on docs page to be 10px ([#25](https://github.com/warp-ds/elements/issues/25)) ([38e6781](https://github.com/warp-ds/elements/commit/38e67815e7f86c7fa23cd0b5098b810bab5c411a))
+* **expandable:** add _hasTitle again to expandable classes ([199b146](https://github.com/warp-ds/elements/commit/199b14682f6ce68fdd2a63b17ba513d6a0c1a7b8))
+* **expandable:** bumb warp versions ([1f8a983](https://github.com/warp-ds/elements/commit/1f8a98352806200d175d5cea9c64d6447516938f))
+* **expandable:** fix chevron issue ([#28](https://github.com/warp-ds/elements/issues/28)) ([fc9481f](https://github.com/warp-ds/elements/commit/fc9481f67daf15278daf44b7e80bf46f4bee69e9))
+* **expandable:** fix icon issue ([6cbd8db](https://github.com/warp-ds/elements/commit/6cbd8dbc5ea8e603352f939da77375704450f809))
+* fix build ([9a8b2d4](https://github.com/warp-ds/elements/commit/9a8b2d4df06c0f414f452cba8e7336b1f1396871))
+* guards ([dfa1ba0](https://github.com/warp-ds/elements/commit/dfa1ba0564e494711bb6baeea05583e2991c6d15))
+* make styles on components work ([#9](https://github.com/warp-ds/elements/issues/9)) ([0aae500](https://github.com/warp-ds/elements/commit/0aae5004b7bb994610dc8ffb6afa8b274d6a1682))
+* **package.json:** build toast api to publish missing scripts ([#39](https://github.com/warp-ds/elements/issues/39)) ([f73dd2f](https://github.com/warp-ds/elements/commit/f73dd2fba48eb7594efbd0fd2fd21810ad9743c6))
+* **package.json:** bump semantic-release to 21.0.7 ([#36](https://github.com/warp-ds/elements/issues/36)) ([61f034a](https://github.com/warp-ds/elements/commit/61f034a7c9272a87bfe3ce4af596b20757f4f73a))
+* **package.json:** remove unused dependency that caused deployment errors ([#16](https://github.com/warp-ds/elements/issues/16)) ([a447c62](https://github.com/warp-ds/elements/commit/a447c62b846b3c6a66739035ed930f2d239d7d15))
+* **package.json:** update versions ([#29](https://github.com/warp-ds/elements/issues/29)) ([feb0ccf](https://github.com/warp-ds/elements/commit/feb0ccfaa8b57892d9a0c046287ddb84b4c166ae))
+* provide correct import of windowExists after refactoring ([#41](https://github.com/warp-ds/elements/issues/41)) ([7ada8bd](https://github.com/warp-ds/elements/commit/7ada8bdef6ef2e8b7caf413e107c8737e983a419))
+* **release.yml:** set pnpm version to 8 to fix recursive install errors ([#15](https://github.com/warp-ds/elements/issues/15)) ([21afc96](https://github.com/warp-ds/elements/commit/21afc965618e2a2030f1655750637c03d989ac49))
+* remove bad code ([97d8068](https://github.com/warp-ds/elements/commit/97d806826b54184b513ae272a157bd2180cdf2a2))
+* remove comments wrapping [@unocss-placeholder](https://github.com/unocss-placeholder) in components styles ([#19](https://github.com/warp-ds/elements/issues/19)) ([862c8cd](https://github.com/warp-ds/elements/commit/862c8cdf7b9a6e076c5cd465fcd8b457b56bebff))
+* remove inline class from button link ([#26](https://github.com/warp-ds/elements/issues/26)) ([0a87895](https://github.com/warp-ds/elements/commit/0a8789564875ecfb2f54bff23abe48e56598f172))
+* secondary and not quiet fix ([51b76b3](https://github.com/warp-ds/elements/commit/51b76b3ee7e55753d79963a6159c5a6026495559))
+* **select:** add component classes to select ([#33](https://github.com/warp-ds/elements/issues/33)) ([8bdb2f5](https://github.com/warp-ds/elements/commit/8bdb2f507cb7e7cbb6f475a2800e895f09bb11b2))
+* stable FINN prod alpha-release ([#32](https://github.com/warp-ds/elements/issues/32)) ([8351ef2](https://github.com/warp-ds/elements/commit/8351ef221671c9025bb61482ac7de1f4ea7888f0))
+* **toast:** update classes + fix color issue on icons ([#27](https://github.com/warp-ds/elements/issues/27)) ([0f09a39](https://github.com/warp-ds/elements/commit/0f09a3978eb36b86ef93115d918bf1eccf770776))
+* try vite build ([ffdeb02](https://github.com/warp-ds/elements/commit/ffdeb02b51952862bd0f9ce6f982457691b11a6a))
+* update @warp-ds/uno and /css to 1.0.0 ([#44](https://github.com/warp-ds/elements/issues/44)) ([44aca9a](https://github.com/warp-ds/elements/commit/44aca9af105c5eab006248b02f7c200a7aae5ba1))
+* use css packages instead of component-classes ([#31](https://github.com/warp-ds/elements/issues/31)) ([1bf8a0a](https://github.com/warp-ds/elements/commit/1bf8a0aee7d5cc46be495648beaf433996f0db4d))
+
+
+### Features
+
+* **alert:** warpify alert component ([#17](https://github.com/warp-ds/elements/issues/17)) ([2a01030](https://github.com/warp-ds/elements/commit/2a01030420ad052fde9e38f04906f39663e5fa61))
+* **attention:** warpify attention ([#21](https://github.com/warp-ds/elements/issues/21)) ([79b5b64](https://github.com/warp-ds/elements/commit/79b5b646be5ab2d4585bfba4de93dd30bbab121d))
+* **expandable:** add warp component classes for expandable ([3a28e93](https://github.com/warp-ds/elements/commit/3a28e939c40661b8e10bfe9b4a5952a6fe0555c4))
+* **toast:** warpify toast ([#20](https://github.com/warp-ds/elements/issues/20)) ([d1dc939](https://github.com/warp-ds/elements/commit/d1dc9394d872c19095abd0b0bc8a11dbca603464))
+* **workflows:** add eik aliasing script to release.yml ([#10](https://github.com/warp-ds/elements/issues/10)) ([bc4a76f](https://github.com/warp-ds/elements/commit/bc4a76f29ee0409a868edaa14c8087d12c6cdb57))
+
+
+### Reverts
+
+* Revert "chore(release): 1.0.0-alpha.28 [skip ci]" (#35) ([4770de9](https://github.com/warp-ds/elements/commit/4770de948a1a8aa1cd8d2f1a77b644f63781f145)), closes [#35](https://github.com/warp-ds/elements/issues/35)
+
 # [1.0.0-alpha.32](https://github.com/warp-ds/elements/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2023-08-30)
 
 
