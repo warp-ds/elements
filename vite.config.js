@@ -6,16 +6,10 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
+import { buttons } from '@warp-ds/css/component-classes/shortcuts';
+
 import { MinifyWarpLib } from './.minifier-plugin.js'
 
-let reset;
-async function getReset() {
-  if (reset) return reset;
-  else {
-    reset = (await fetch('https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css')).text();
-    return reset;
-  }
-}
 
 export default ({ mode }) => {
   let input = {};
@@ -49,17 +43,6 @@ export default ({ mode }) => {
     },
   };
 
-  function getLibOpts(fileName) {
-    return {
-      sourcemap: true,
-      lib: {
-        formats: ['es'],
-        entry: './index.js',
-        fileName
-      },
-    }
-  }
-  
   function getBuildOpts(mode) {
     if (mode === 'production') return defineConfig({
       build: { target: 'esnext', emptyOutDir: false,}
@@ -81,20 +64,14 @@ export default ({ mode }) => {
     // base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
-        presets: [presetWarp({ skipResets: true })],
-        preflights: [{
-          layer: 'preflights',
-          getCSS: getReset,
-        }],
+        presets: [presetWarp()],
         mode: 'shadow-dom',
         safelist: classes,
       }),
       uno({
-        presets: [presetWarp({ skipResets: true })],
-        preflights: [{
-          layer: 'preflights',
-          getCSS: getReset,
-        }],
+        presets: [presetWarp()],
+        safelist: classes,
+        shortcuts: buttons,
       }),
       // litElementTailwindPlugin({ mode }),
       mode !== 'lib' && createHtmlPlugin({
