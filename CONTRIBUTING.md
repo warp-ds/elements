@@ -64,12 +64,11 @@ Changes to either the custom elements or the HTML files should hot reload.
 ### Branching
 
 There are two branches to keep in mind:
-
-- `alpha` : used for pre-releases.
+- `next` : default, used for pre-releases.
 - `main` : the main branch, used for stable releases.
 
 When adding a new feature, fixing a bug, or adding to the repository in any other way,
-you should always do this in a feature branch that is branched off the `alpha` branch.
+you should always do this in a feature branch that is branched off the `next` branch.
 
 ### Committing
 
@@ -78,10 +77,10 @@ as this is used in the [automated release process](#releases).
 
 ### Pull Request
 
-When your changes are ready for pull request, this should be opened against the `alpha` branch.
+When your changes are ready for pull request, this should be opened against the `next` branch.
 Add the [Warp Core Team](https://github.com/orgs/warp-ds/teams/warp-core-team) as reviewer.
 
-Pull request to the `alpha` branch should always be set to _squash_.
+Pull request to the `next` branch should always be set to _squash_.
 Make sure that the squash commit message follows the instructions in the [Committing](#committing) section before squash merging the pull request.
 
 ### Commitizen
@@ -101,22 +100,20 @@ When installed, you should be able to type `cz` or `git cz` in your terminal to 
 ## Releases
 
 This project uses [Semantic Release](https://github.com/semantic-release/semantic-release) to automate package
-publishing when making changes to the `main` or `alpha` branch.
+publishing when making changes to the `main` or `next` branch.
 
 Please note that the version published will depend on your commit message structure.
 Make sure to review and follow the instructions in the [Committing](#committing) section before committing.
 
-Before the first major release we develop against an `alpha` branch which is constantly published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using an `alpha` tag (e.g. `1.0.0-alpha.1`).
-Anyone needing to start using the package before the first major release can install the `alpha` version while waiting for the first stable version.
+This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
+Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
 
-TODO: When the first stable release is done, the `alpha` branch should possibly be renamed `next` to implement releasing a `next` tag from that branch instead of `alpha`.
+A stable release from the `main` branch is basically done by just opening a pull request from `next` to `main` and then make sure to _merge_ commit the pull request.
+Never squash to `main` to prevent losing history and commit messages from all commits to `next`.
 
-A stable release from the `main` branch is basically done by just opening a pull request from `alpha` to `main` and then make sure to _merge_ commit the pull request.
-Never squash to `main` to prevent losing history and commit messages from all commits to `alpha`.
-
-To avoid git history divergence between `alpha` and `main`,
+To avoid git history divergence between `next` and `main`,
 when a stable release from `main` results in a semantic-release-bot commit being pushed to `main`,
-a GitHub action automatically rebase `alpha` to `origin/main` after every release from `main`.
+a GitHub action automatically rebase `next` to `origin/main` after every release from `main`.
 
 ( For reference, see this rfc in Fabric-ds: [RFC: Fabric Releases and Release Schedule](https://github.com/fabric-ds/issues/blob/779d59723993c13d62374516259602d967da56ca/rfcs/0004-releases.md) )
 
