@@ -1,3 +1,10 @@
+## [1.0.1-next.3](https://github.com/warp-ds/elements/compare/v1.0.1-next.2...v1.0.1-next.3) (2023-09-01)
+
+
+### Bug Fixes
+
+* no need for type check as secondary button is default ([#50](https://github.com/warp-ds/elements/issues/50)) ([089b1f0](https://github.com/warp-ds/elements/commit/089b1f06e9af4303753b4aa24dbdce5dc69498fe))
+
 ## [1.0.1-next.2](https://github.com/warp-ds/elements/compare/v1.0.1-next.1...v1.0.1-next.2) (2023-08-31)
 
 
