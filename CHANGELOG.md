@@ -1,3 +1,10 @@
+## [1.0.1-next.4](https://github.com/warp-ds/elements/compare/v1.0.1-next.3...v1.0.1-next.4) (2023-09-01)
+
+
+### Bug Fixes
+
+* remove classes for disabled buttons as there is no such thing in elements ([#51](https://github.com/warp-ds/elements/issues/51)) ([13ca7e7](https://github.com/warp-ds/elements/commit/13ca7e79e093108ea9b067c8a075143e5c43f1e5))
+
 ## [1.0.1-next.3](https://github.com/warp-ds/elements/compare/v1.0.1-next.2...v1.0.1-next.3) (2023-09-01)
 
 
