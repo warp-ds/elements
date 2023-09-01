@@ -60,8 +60,6 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
   
   get _classes() {
 
-    const buttonType = buttonTypes.find(b => !!this.variant);
-
     const primary = this.variant === 'primary';
     const secondary = this.variant === 'secondary';
     const negative = this.variant === 'negative';
@@ -70,8 +68,8 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     const link = this.variant === 'link';
     return classNames(
       {
-        [ccButton.secondary]: (secondary || !buttonType) && !this.small && !this.quiet && !this.loading && !this.disabled,
-        [ccButton.secondaryDisabled]: (secondary || !buttonType) && !this.small && !this.quiet && !this.loading && this.disabled,
+        [ccButton.secondary]: secondary && !this.small && !this.quiet && !this.loading && !this.disabled,
+        [ccButton.secondaryDisabled]: secondary && !this.small && !this.quiet && !this.loading && this.disabled,
         [ccButton.secondarySmall]: secondary && this.small && !this.quiet && !this.loading && !this.disabled,
         [ccButton.secondarySmallDisabled]: secondary && this.small && !this.quiet && !this.loading && this.disabled,
         [ccButton.secondarySmallLoading]: secondary && this.small && !this.quiet && this.loading,
