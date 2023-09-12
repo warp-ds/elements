@@ -1,0 +1,98 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+      <%- include('nav.html'); -%>
+      <main slot="content">
+        <h1 class="mb-16">Badge</h1>
+        <p>Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>type</td>
+              <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price'</td>
+              <td>'neutral'</td>
+            </tr>
+            <tr>
+              <td>position</td>
+              <td>'tl' | 'tr' | 'bl' | 'br'</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3>Default</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge>
+            I am a default badge
+          </w-badge>
+        </syntax-highlight>
+        <div class="example">
+          <w-badge>
+            I am a default badge
+          </w-badge>
+        </div>
+
+        <h3 class="mb-8">Types</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge type="neutral">neutral badge</w-badge>
+          <w-badge type="info">info badge</w-badge>
+          <w-badge type="positive">positive badge</w-badge>
+          <w-badge type="warning">warning badge</w-badge>
+          <w-badge type="negative">negative badge</w-badge>
+          <w-badge type="disabled">disabled badge</w-badge>
+          <w-badge type="notification">notification badge</w-badge>
+          <w-badge type="price">price badge</w-badge>
+        </syntax-highlight>
+        <div class="example space-x-16">
+          <w-badge type="neutral">neutral badge</w-badge>
+          <w-badge type="info">info badge</w-badge>
+          <w-badge type="positive">positive badge</w-badge>
+          <w-badge type="warning">warning badge</w-badge>
+          <w-badge type="negative">negative badge</w-badge>
+          <w-badge type="disabled">disabled badge</w-badge>
+          <w-badge type="notification">notification badge</w-badge>
+          <w-badge type="price">price badge</w-badge>
+        </div>
+
+        <h3 class="mb-8">Positions</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge position="tl">tl : Top Left</w-badge>
+          <w-badge position="tr">tr : Top Right</w-badge>
+          <w-badge position="br">br : Bottom Right</w-badge>
+          <w-badge position="bl">bl : Bottom Left</w-badge>
+        </syntax-highlight>
+        <div class="example space-y-16">
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="tl" type="price">tl : Top Left</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="tr" type="price">tr : Top Right</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="br" type="price">br : Bottom Right</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="bl" type="price">bl : Bottom Left</w-badge>
+          </div>
+        </div>
+
+      </main>
+      <%- include('footer.html'); -%>
+
+  </body>
+</html>

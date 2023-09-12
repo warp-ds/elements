@@ -121,6 +121,11 @@ export default ({ mode }) => {
             injectOptions,
           },
           {
+            filename: 'badge.html',
+            template: 'pages/components/badge.html',
+            injectOptions,
+          },
+          {
             filename: 'box.html',
             template: 'pages/components/box.html',
             injectOptions,
