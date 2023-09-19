@@ -72,7 +72,7 @@ export default ({ mode }) => {
           entry: './index.js',
           fileName: 'index'
         },
-        rollupOptions: { external: ['elements', 'lit'] }
+        rollupOptions: { external: ['elements'] }
       }
     })
   }
