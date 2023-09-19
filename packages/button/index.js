@@ -26,7 +26,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     href: { type: String, reflect: true },
     target: { type: String, reflect: true },
     rel: { type: String, reflect: true },
-    fullwidth : { type: String, reflect: true },
+    fullwidth : { type: Boolean, reflect: true },
   };
 
 
@@ -66,6 +66,9 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     const utility = this.variant === 'utility';
     const pill = this.variant === 'pill';
     const link = this.variant === 'link';
+    console.log("fullwidth: ", this.fullwidth);
+
+    console.log("ccButton.fullWidth: ", ccButton.fullWidth);
     return classNames(
       {
         [ccButton.secondary]: secondary && !this.small && !this.quiet && !this.loading,
@@ -111,7 +114,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
         [ccButton.link]: link && !this.small,
         [ccButton.linkSmall]: link && this.small,
         [ccButton.linkAsButton]: !!this.href,
-        [ccButton.fullWidth]: !!this.fullwidth,
+        [ccButton.fullWidth]: this.fullwidth,
       },
     );
   }
