@@ -66,9 +66,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     const utility = this.variant === 'utility';
     const pill = this.variant === 'pill';
     const link = this.variant === 'link';
-    console.log("fullwidth: ", this.fullwidth);
 
-    console.log("ccButton.fullWidth: ", ccButton.fullWidth);
     return classNames(
       {
         [ccButton.secondary]: secondary && !this.small && !this.quiet && !this.loading,
