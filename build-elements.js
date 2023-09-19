@@ -9,7 +9,7 @@ import importSvg from 'postcss-import-svg';
 import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url); // have to do these hacks it seems because import.meta.resolve is cranky
-const iconsLocation = path.resolve(path.dirname(require.resolve('@warp-ds/icons/package.json')), 'dist');
+const iconsLocation = path.resolve(path.dirname(require.resolve('@fabric-ds/icons/package.json')), 'dist');
 
 const from = './elements.css';
 const css = fs.readFileSync(from, 'utf8');
