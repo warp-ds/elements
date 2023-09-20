@@ -129,6 +129,38 @@
           </div>
         </div>
 
+        <h3 class="mt-32">Full width state</h3>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Button will take the parent's width instead of content width. Useful on mobile when button should take full width. 
+            <syntax-highlight>
+              <w-button full-width variant="primary" loading>Primary button loading</w-button>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <div class="w-full">
+              <w-button full-width variant="primary">Button full width</w-button>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="mt-32">No full width</h3>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Button will have the content width and should not take full width.
+            <syntax-highlight>
+              <w-button variant="primary">Button without full width</w-button>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <div class="w-full">
+              <w-button variant="primary">Button without full width</w-button>
+            </div>
+          </div>
+        </div>
+
         <h3 class="mt-32">Disabled state</h3>
 
         <p>
