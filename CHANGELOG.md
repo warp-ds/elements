@@ -1,3 +1,10 @@
+## [1.0.1-next.5](https://github.com/warp-ds/elements/compare/v1.0.1-next.4...v1.0.1-next.5) (2023-09-19)
+
+
+### Bug Fixes
+
+* add lit to rollup options to be able to build icons ([#53](https://github.com/warp-ds/elements/issues/53)) ([5c90c00](https://github.com/warp-ds/elements/commit/5c90c0073b2de62a6c6455a51c3b6a706da768fb))
+
 ## [1.0.1-next.4](https://github.com/warp-ds/elements/compare/v1.0.1-next.3...v1.0.1-next.4) (2023-09-01)
 
 
