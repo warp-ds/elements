@@ -15,8 +15,8 @@ dependencies:
     specifier: 1.0.0
     version: 1.0.0
   '@warp-ds/css':
-    specifier: ^1.0.1
-    version: 1.0.1
+    specifier: ^1.1.0
+    version: 1.1.0
   '@warp-ds/uno':
     specifier: ^1.0.0
     version: 1.0.0
@@ -2254,12 +2254,12 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/css@1.0.1:
-    resolution: {integrity: sha512-FeLaYSe6G5wcI1SENkbGrArEMPGmewwwCMgWQh1944iC3NgLXGWEx3ZRHcBNfiMJImpuZeaHSUOM3yozYbZvbw==}
+  /@warp-ds/css@1.1.0:
+    resolution: {integrity: sha512-ehDN05LnQ2RnhKfpatxQ2e0u++YH2yoXoVqN6NHaexF6j6kS6yosumqOZo0NHpbYGRhXwy0Hor0yntdrT8XNGg==}
     dependencies:
       '@warp-ds/fonts': 1.1.0
       '@warp-ds/tokenizer': 0.0.2
-      '@warp-ds/uno': 1.0.0
+      '@warp-ds/uno': 1.1.0
     dev: false
 
   /@warp-ds/fonts@1.1.0:
@@ -2275,6 +2275,13 @@ packages:
 
   /@warp-ds/uno@1.0.0:
     resolution: {integrity: sha512-RBt/uiUMmu333La2b0eFieJTe6p0xueCMlMkEiHhtkFYRkvQMzKnUj19AMyAkIeSx6IkbmuCvfuWQoCHnkILHA==}
+    dependencies:
+      '@unocss/core': 0.55.3
+      '@unocss/preset-mini': 0.52.7
+    dev: false
+
+  /@warp-ds/uno@1.1.0:
+    resolution: {integrity: sha512-XzhziKuHAWRofxVXb9meEgFbRUS+3+Lfuvz9qwWiJNermlkc5tC9x2DdTmFa0ia73nkgeD3K3hx0yVY0etoZ2w==}
     dependencies:
       '@unocss/core': 0.55.3
       '@unocss/preset-mini': 0.52.7
