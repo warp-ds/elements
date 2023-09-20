@@ -1,3 +1,10 @@
+## [1.0.1-next.6](https://github.com/warp-ds/elements/compare/v1.0.1-next.5...v1.0.1-next.6) (2023-09-20)
+
+
+### Bug Fixes
+
+* Add fullWidth button prop ([#56](https://github.com/warp-ds/elements/issues/56)) ([ba25a99](https://github.com/warp-ds/elements/commit/ba25a99c370bd01a31f961d96210a9ba3cb2a179))
+
 ## [1.0.1-next.5](https://github.com/warp-ds/elements/compare/v1.0.1-next.4...v1.0.1-next.5) (2023-09-19)
 
 
