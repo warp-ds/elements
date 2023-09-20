@@ -17,13 +17,13 @@
           </thead>
           <tbody class="align-top">
             <tr>
-              <td>type</td>
+              <td>variant</td>
               <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price'</td>
               <td>'neutral'</td>
             </tr>
             <tr>
               <td>position</td>
-              <td>'tl' | 'tr' | 'bl' | 'br'</td>
+              <td>'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'</td>
               <td></td>
             </tr>
           </tbody>
@@ -43,51 +43,51 @@
           </w-badge>
         </div>
 
-        <h3 class="mb-8">Types</h3>
+        <h3 class="mb-8">Variants</h3>
         <syntax-highlight class="mt-0">
-          <w-badge type="neutral">neutral badge</w-badge>
-          <w-badge type="info">info badge</w-badge>
-          <w-badge type="positive">positive badge</w-badge>
-          <w-badge type="warning">warning badge</w-badge>
-          <w-badge type="negative">negative badge</w-badge>
-          <w-badge type="disabled">disabled badge</w-badge>
-          <w-badge type="notification">notification badge</w-badge>
-          <w-badge type="price">price badge</w-badge>
+          <w-badge variant="neutral">neutral badge</w-badge>
+          <w-badge variant="info">info badge</w-badge>
+          <w-badge variant="positive">positive badge</w-badge>
+          <w-badge variant="warning">warning badge</w-badge>
+          <w-badge variant="negative">negative badge</w-badge>
+          <w-badge variant="disabled">disabled badge</w-badge>
+          <w-badge variant="notification">notification badge</w-badge>
+          <w-badge variant="price">price badge</w-badge>
         </syntax-highlight>
         <div class="example space-x-16">
-          <w-badge type="neutral">neutral badge</w-badge>
-          <w-badge type="info">info badge</w-badge>
-          <w-badge type="positive">positive badge</w-badge>
-          <w-badge type="warning">warning badge</w-badge>
-          <w-badge type="negative">negative badge</w-badge>
-          <w-badge type="disabled">disabled badge</w-badge>
-          <w-badge type="notification">notification badge</w-badge>
-          <w-badge type="price">price badge</w-badge>
+          <w-badge variant="neutral">neutral badge</w-badge>
+          <w-badge variant="info">info badge</w-badge>
+          <w-badge variant="positive">positive badge</w-badge>
+          <w-badge variant="warning">warning badge</w-badge>
+          <w-badge variant="negative">negative badge</w-badge>
+          <w-badge variant="disabled">disabled badge</w-badge>
+          <w-badge variant="notification">notification badge</w-badge>
+          <w-badge variant="price">price badge</w-badge>
         </div>
 
         <h3 class="mb-8">Positions</h3>
         <syntax-highlight class="mt-0">
-          <w-badge position="tl">tl : Top Left</w-badge>
-          <w-badge position="tr">tr : Top Right</w-badge>
-          <w-badge position="br">br : Bottom Right</w-badge>
-          <w-badge position="bl">bl : Bottom Left</w-badge>
+          <w-badge position="top-left">top-left</w-badge>
+          <w-badge position="top-right">top-right</w-badge>
+          <w-badge position="bottom-right">bottom-right</w-badge>
+          <w-badge position="bottom-left">bottom-left</w-badge>
         </syntax-highlight>
         <div class="example space-y-16">
           <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
             <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="tl" type="price">tl : Top Left</w-badge>
+            <w-badge position="top-left" variant="price">tl : Top Left</w-badge>
           </div>
           <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
             <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="tr" type="price">tr : Top Right</w-badge>
+            <w-badge position="top-right" variant="price">tr : Top Right</w-badge>
           </div>
           <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
             <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="br" type="price">br : Bottom Right</w-badge>
+            <w-badge position="bottom-right" variant="price">br : Bottom Right</w-badge>
           </div>
           <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
             <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="bl" type="price">bl : Bottom Left</w-badge>
+            <w-badge position="bottom-left" variant="price">bl : Bottom Left</w-badge>
           </div>
         </div>
 

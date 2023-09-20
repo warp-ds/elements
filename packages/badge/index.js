@@ -4,8 +4,8 @@ import { badge as ccBadge } from '@warp-ds/css/component-classes';
 
 class WarpBadge extends LitElement {
   static properties = {
-    type: { type: 'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price' },
-    position: { type: 'tl' | 'tr' | 'br' | 'bl' },
+    variant: { type: 'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price' },
+    position: { type: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left' },
   };
 
   static styles =
@@ -16,19 +16,18 @@ class WarpBadge extends LitElement {
   constructor() {
     super();
 
-    this.type = 'neutral';
+    this.variant = 'neutral';
   }
 
   get _class() {
     return classes({
-      [this.position]: true,
       [ccBadge.base]: true,
-      [ccBadge[this.type]]: true,
+      [ccBadge[this.variant]]: true,
       [ccBadge.positionBase]: !!this.position,
-      [ccBadge.positionTL]: this.position === 'tl',
-      [ccBadge.positionTR]: this.position === 'tr',
-      [ccBadge.positionBR]: this.position === 'br',
-      [ccBadge.positionBL]: this.position === 'bl',
+      [ccBadge.positionTL]: this.position === 'top-left',
+      [ccBadge.positionTR]: this.position === 'top-right',
+      [ccBadge.positionBR]: this.position === 'bottom-right',
+      [ccBadge.positionBL]: this.position === 'bottom-left',
     });
   }
 
