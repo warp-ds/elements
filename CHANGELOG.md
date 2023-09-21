@@ -1,3 +1,10 @@
+## [1.0.1-next.7](https://github.com/warp-ds/elements/compare/v1.0.1-next.6...v1.0.1-next.7) (2023-09-21)
+
+
+### Bug Fixes
+
+* alert examples ([#59](https://github.com/warp-ds/elements/issues/59)) ([c63d9df](https://github.com/warp-ds/elements/commit/c63d9df59d8ebb5a8b7386edc60d2322a4f9ed1c))
+
 ## [1.0.1-next.6](https://github.com/warp-ds/elements/compare/v1.0.1-next.5...v1.0.1-next.6) (2023-09-20)
 
 
