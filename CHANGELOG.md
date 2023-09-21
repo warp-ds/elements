@@ -1,3 +1,10 @@
+## [1.0.1-next.8](https://github.com/warp-ds/elements/compare/v1.0.1-next.7...v1.0.1-next.8) (2023-09-21)
+
+
+### Bug Fixes
+
+* **attention:** popover target is visible on Chrome 109 ([#60](https://github.com/warp-ds/elements/issues/60)) ([dd3619a](https://github.com/warp-ds/elements/commit/dd3619ad2eceb5eacdedbec219389b31d753c1c1))
+
 ## [1.0.1-next.7](https://github.com/warp-ds/elements/compare/v1.0.1-next.6...v1.0.1-next.7) (2023-09-21)
 
 
