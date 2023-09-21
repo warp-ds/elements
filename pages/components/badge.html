@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Badge</h1>
         <p>Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.</p>
@@ -93,6 +95,7 @@
 
       </main>
       <%- include('footer.html'); -%>
+    </div>
 
   </body>
 </html>
