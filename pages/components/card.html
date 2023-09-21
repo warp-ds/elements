@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Card</h1>
 
@@ -310,6 +312,7 @@
           </w-card>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
   </body>

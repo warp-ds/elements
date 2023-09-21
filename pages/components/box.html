@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Box</h1>
         <p>Box is a layout component used for separating content areas on a page.</p>
@@ -155,6 +157,7 @@
           </w-box>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
   </body>

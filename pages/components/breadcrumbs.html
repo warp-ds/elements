@@ -1,50 +1,54 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
-      <main slot="content">
-        <h1 class="mb-16">Breadcrumbs</h1>
-        <p>Breadcrumbs show the navigation structure for the current location.</p>
-
-        <h2 class="mt-24 mb-16">Import</h2>
-        <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
-
-        <h2 class="mt-24 mb-16">Examples</h2>
-
-        <h3>All segments linkable</h3>
-
-        <syntax-highlight>
-          <w-breadcrumbs>
-            <a href="#/url/1">Eiendom</a>
-            <a href="#/url/2">Bolig til salgs</a>
-            <a href="#/url/3" aria-current="page"> Oslo </a>
-          </w-breadcrumbs></syntax-highlight
-        >
-        <div class="example">
-          <w-breadcrumbs class="mt-10">
-            <a href="#/url/1">Eiendom</a>
-            <a href="#/url/2">Bolig til salgs</a>
-            <a href="#/url/3" aria-current="page">Oslo</a>
-          </w-breadcrumbs>
-        </div>
-
-        <h3>Disabled last link</h3>
-
-        <syntax-highlight>
-          <w-breadcrumbs>
-            <a href="#/url/1">Eiendom</a>
-            <a href="#/url/2">Bolig til salgs</a>
-            <span aria-current="page">Oslo</span>
-          </w-breadcrumbs></syntax-highlight
-        >
-        <div class="example">
-          <w-breadcrumbs class="mt-10">
-            <a href="#/url/1">Eiendom</a>
-            <a href="#/url/2">Bolig til salgs</a>
-            <span aria-current="page">Oslo</span>
-          </w-breadcrumbs>
-        </div>
-      </main>
+      <script type="module" src="../sidebar-element.js"></script>
+      <div class="flex">
+        <sidebar-element class="sidebar"></sidebar-element>
+        <main slot="content">
+          <h1 class="mb-16">Breadcrumbs</h1>
+          <p>Breadcrumbs show the navigation structure for the current location.</p>
+  
+          <h2 class="mt-24 mb-16">Import</h2>
+          <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
+  
+          <h2 class="mt-24 mb-16">Examples</h2>
+  
+          <h3>All segments linkable</h3>
+  
+          <syntax-highlight>
+            <w-breadcrumbs>
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <a href="#/url/3" aria-current="page"> Oslo </a>
+            </w-breadcrumbs></syntax-highlight
+          >
+          <div class="example">
+            <w-breadcrumbs class="mt-10">
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <a href="#/url/3" aria-current="page">Oslo</a>
+            </w-breadcrumbs>
+          </div>
+  
+          <h3>Disabled last link</h3>
+  
+          <syntax-highlight>
+            <w-breadcrumbs>
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <span aria-current="page">Oslo</span>
+            </w-breadcrumbs></syntax-highlight
+          >
+          <div class="example">
+            <w-breadcrumbs class="mt-10">
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <span aria-current="page">Oslo</span>
+            </w-breadcrumbs>
+          </div>
+        </main>
+      </div>
+      
       <%- include('footer.html'); -%>
 
   </body>

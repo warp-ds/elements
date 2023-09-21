@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Select</h1>
         <p>A dropdown component for selecting a single value.</p>
@@ -161,6 +163,7 @@
           </w-select>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
   </body>
