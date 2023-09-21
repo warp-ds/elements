@@ -5,7 +5,10 @@ import { classNames } from '@chbphone55/classnames';
 import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from "@warp-ds/css/component-classes"
 import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-
+import { messages as nbMessages} from './locales/nb/messages.mjs';
+import { messages as enMessages} from './locales/en/messages.mjs';
+import { messages as fiMessages} from './locales/fi/messages.mjs';
+import { activateI18n } from '../i18n';
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
     // Whether the element should receive focus on render
@@ -74,6 +77,11 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
     this._options = this.innerHTML;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    activateI18n(enMessages, nbMessages, fiMessages);
+  }
+
   render() {
     return html`<div class="${ccSelect.wrapper}">
       ${when(
@@ -84,7 +92,13 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
             ${when(
               this.optional,
               () =>
-                html`<span class="${ccLabel.optional}">(valgfritt)</span>`,
+                html`<span class="${ccLabel.optional}">${i18n._(
+                  {
+                    id: 'select.label.optional',
+                    message: '(optional)',
+                    comment: 'Shown behind label when marked as optional',
+                  },
+                )}</span>`,
             )}</label
           >`,
       )}

@@ -38,8 +38,15 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
   constructor() {
     super();
     this.variant = 'secondary';
+    this.ariaValueTextLoading = i18n._(
+    {
+      id: 'button.aria.loading',
+      message: 'Loading...',
+      comment: 'Screenreader message for buttons that are loading',
+    });
   }
 
+  
   connectedCallback() {
     super.connectedCallback();
 
@@ -138,7 +145,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
           class="sr-only"
           role="progressbar"
           aria-valuenow="{0}"
-          aria-valuetext="Laster..."
+          aria-valuetext=${this.ariaValueTextLoading}
         />`
       : null}`;
   }
