@@ -6,7 +6,7 @@
     document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
       el.addEventListener('click', (event) => {
         alertElement.show = false;
-        const name = event.target.name || 'info';
+        const name = el.getAttribute('name') || 'info';
 
         // update alert after hide transition ends
         setTimeout(() => {
