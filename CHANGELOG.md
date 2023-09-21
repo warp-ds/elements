@@ -1,3 +1,10 @@
+## [1.0.1-next.9](https://github.com/warp-ds/elements/compare/v1.0.1-next.8...v1.0.1-next.9) (2023-09-21)
+
+
+### Bug Fixes
+
+* add sidebar to "local development pages" ([#43](https://github.com/warp-ds/elements/issues/43)) ([e3dc411](https://github.com/warp-ds/elements/commit/e3dc411a014b4510250723c19d0dab50f5859854))
+
 ## [1.0.1-next.8](https://github.com/warp-ds/elements/compare/v1.0.1-next.7...v1.0.1-next.8) (2023-09-21)
 
 
