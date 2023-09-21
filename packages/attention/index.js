@@ -36,6 +36,10 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
         display: var(--attention-display);
       }
 
+      :host([popover]:not(:popover-open):not(dialog[open])) {
+        display: contents;
+      }
+
       #arrow {
         border-top-left-radius: 4px;
         z-index: 1;

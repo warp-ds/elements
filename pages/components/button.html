@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Button</h1>
         <p>Buttons are used to perform actions, with different visuals for different needs.</p>
@@ -175,6 +177,7 @@
           <code>aria-label</code> prop must be provided for accessibility.
         </p>
       </main>
+    </div>
       <%- include('footer.html'); -%>
     <%- include('buttonVariantsTable.html'); -%>
   </body>

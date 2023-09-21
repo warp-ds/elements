@@ -1,3 +1,31 @@
+## [1.0.1-next.9](https://github.com/warp-ds/elements/compare/v1.0.1-next.8...v1.0.1-next.9) (2023-09-21)
+
+
+### Bug Fixes
+
+* add sidebar to "local development pages" ([#43](https://github.com/warp-ds/elements/issues/43)) ([e3dc411](https://github.com/warp-ds/elements/commit/e3dc411a014b4510250723c19d0dab50f5859854))
+
+## [1.0.1-next.8](https://github.com/warp-ds/elements/compare/v1.0.1-next.7...v1.0.1-next.8) (2023-09-21)
+
+
+### Bug Fixes
+
+* **attention:** popover target is visible on Chrome 109 ([#60](https://github.com/warp-ds/elements/issues/60)) ([dd3619a](https://github.com/warp-ds/elements/commit/dd3619ad2eceb5eacdedbec219389b31d753c1c1))
+
+## [1.0.1-next.7](https://github.com/warp-ds/elements/compare/v1.0.1-next.6...v1.0.1-next.7) (2023-09-21)
+
+
+### Bug Fixes
+
+* alert examples ([#59](https://github.com/warp-ds/elements/issues/59)) ([c63d9df](https://github.com/warp-ds/elements/commit/c63d9df59d8ebb5a8b7386edc60d2322a4f9ed1c))
+
+## [1.0.1-next.6](https://github.com/warp-ds/elements/compare/v1.0.1-next.5...v1.0.1-next.6) (2023-09-20)
+
+
+### Bug Fixes
+
+* Add fullWidth button prop ([#56](https://github.com/warp-ds/elements/issues/56)) ([ba25a99](https://github.com/warp-ds/elements/commit/ba25a99c370bd01a31f961d96210a9ba3cb2a179))
+
 ## [1.0.1-next.5](https://github.com/warp-ds/elements/compare/v1.0.1-next.4...v1.0.1-next.5) (2023-09-19)
 
 

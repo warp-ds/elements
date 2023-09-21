@@ -8,15 +8,6 @@ import glob from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
 import { MinifyWarpLib } from './.minifier-plugin.js'
 
-let reset;
-async function getReset() {
-  if (reset) return reset;
-  else {
-    reset = (await fetch('https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css')).text();
-    return reset;
-  }
-}
-
 export default ({ mode }) => {
   let input = {};
 
@@ -48,17 +39,6 @@ export default ({ mode }) => {
       views: ['pages/includes'],
     },
   };
-
-  function getLibOpts(fileName) {
-    return {
-      sourcemap: true,
-      lib: {
-        formats: ['es'],
-        entry: './index.js',
-        fileName
-      },
-    }
-  }
   
   function getBuildOpts(mode) {
     if (mode === 'production') return defineConfig({
@@ -81,20 +61,12 @@ export default ({ mode }) => {
     // base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
-        presets: [presetWarp({ skipResets: true })],
-        preflights: [{
-          layer: 'preflights',
-          getCSS: getReset,
-        }],
+        presets: [presetWarp()],
         mode: 'shadow-dom',
         safelist: classes,
       }),
       uno({
-        presets: [presetWarp({ skipResets: true })],
-        preflights: [{
-          layer: 'preflights',
-          getCSS: getReset,
-        }],
+        presets: [presetWarp()],
       }),
       // litElementTailwindPlugin({ mode }),
       mode !== 'lib' && createHtmlPlugin({
@@ -174,44 +146,6 @@ export default ({ mode }) => {
   };
 };
 
-// Tiny plugin to to use Tailwind classes with lit-element
-// See postcss.config.js
-// function litElementTailwindPlugin({ mode }) {
-//     // FIXME: This is to simple a check... if we start adding utility files etc that we import in our web components we'll process them as well
-//     function shouldProcess(id) {
-//         // try to match all JS files that follows this pattern ./packages/*/src/*.js
-//         return id.match(/(.*)\/packages\/(.*)\/src\/(.*).js$/);
-//         // return !id.includes('node_modules') && id.endsWith('.js');
-//     }
-
-//     return {
-//         name: 'lit-element-tailwind-plugin',
-//         async transform(code, id) {
-//             if (shouldProcess(id)) {
-//                 // postcss context
-//                 const context = {
-//                     env: mode,
-//                     file: {
-//                         extname: path.extname(id),
-//                         dirname: path.dirname(id),
-//                         basename: path.basename(id),
-//                     },
-//                 };
-
-//                 const result = await postcss(
-//                     require('./postcss.config')(context).plugins,
-//                 ).process(code, {
-//                     from: undefined,
-//                     syntax: cssInJS,
-//                 });
-
-//                 return {
-//                     code: result.css,
-//                 };
-//             }
-//         },
-//     };
-// }
 function basePathFix() {
   return {
     name: 'base-path-fix',

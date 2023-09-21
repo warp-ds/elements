@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Alert</h1>
         <p>
@@ -147,7 +149,7 @@
           <w-alert variant="info" show role="">
             <p role="alert" class="font-bold">This is a "info" variant of the alert element</p>
             <p>You see this warning because you did something wrong</p>
-            <w-button small primary>Hide and show alert</w-button>
+            <w-button variant="primary" small>Hide and show alert</w-button>
           </w-alert>
         </syntax-highlight>
         <div class="example">
@@ -155,13 +157,13 @@
             <p role="alert" class="font-bold">This is "info" variant of the alert element</p>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
-              <w-button small primary>Hide and show alert</w-button>
+              <w-button variant="primary" small>Hide and show alert</w-button>
             </div>
           </w-alert>
         </div>
       </main>
-      <%- include('footer.html'); -%>
-    </f-docs-template>
+    </div>
+    <%- include('footer.html'); -%>
     <%- include('alertControllersScripts.html'); -%>
   </body>
 </html>
