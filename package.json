@@ -69,7 +69,7 @@
     "vite-plugin-html": "3.2.0"
   },
   "dependencies": {
-    "@fabric-ds/icons": "0.6.7",
+    "@warp-ds/icons": "1.0.0",
     "@open-wc/testing": "3.2.0",
     "@warp-ds/core": "1.0.0",
     "@warp-ds/uno": "^1.1.0",

@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@fabric-ds/icons':
-    specifier: 0.6.7
-    version: 0.6.7
   '@open-wc/testing':
     specifier: 3.2.0
     version: 3.2.0
@@ -17,6 +14,9 @@ dependencies:
   '@warp-ds/css':
     specifier: ^1.1.0
     version: 1.1.0
+  '@warp-ds/icons':
+    specifier: 1.0.0
+    version: 1.0.0
   '@warp-ds/uno':
     specifier: ^1.1.0
     version: 1.1.0
@@ -918,10 +918,6 @@ packages:
     resolution: {integrity: sha512-26SKdM4uvDWlY8/OOOxSB1AqQWeBosCX3wRYUZO7enTAj03CtVxIiCimYVG2WpULcyV51qapK4qTovwkUr5Mlw==}
     dependencies:
       '@types/chai': 4.3.5
-    dev: false
-
-  /@fabric-ds/icons@0.6.7:
-    resolution: {integrity: sha512-1UYhIuvJz9d1c5d3WfuQJLtMc8GNgsFhhFd61PNvSgFbl2IxwuBStK1LqLO0ntrqF2CxxVenhl8ccx4rOql9+w==}
     dev: false
 
   /@fastify/ajv-compiler@3.5.0:
@@ -2281,6 +2277,10 @@ packages:
 
   /@warp-ds/fonts@1.1.0:
     resolution: {integrity: sha512-kLNZzK3o0rMJApm7/YT3K7rYoFKgH5PyJMTVwv34O4Dx6ikfN7appc4f2DFYkE2XY6gifpD5F2r1ftcJtdW4+w==}
+    dev: false
+
+  /@warp-ds/icons@1.0.0:
+    resolution: {integrity: sha512-wAKyzaanqsB9p6tb1WgwjVuASryEeuH4ypUs+YFH8lw1b12KY3crtlPDB5eWHca/kA8AcKu0Cwz5oJJ+LJ+hGg==}
     dev: false
 
   /@warp-ds/tokenizer@0.0.2:
