@@ -1,3 +1,10 @@
+# [1.1.0-next.1](https://github.com/warp-ds/elements/compare/v1.0.1...v1.1.0-next.1) (2023-09-25)
+
+
+### Features
+
+* Add Badge component ([#55](https://github.com/warp-ds/elements/issues/55)) ([b73bfa6](https://github.com/warp-ds/elements/commit/b73bfa6bf3bfe8a93e8f42376c8cc42bce577bcb))
+
 ## [1.0.1](https://github.com/warp-ds/elements/compare/v1.0.0...v1.0.1) (2023-09-25)
 
 
