@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1-next.10",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
@@ -64,16 +64,16 @@
     "semantic-release-slack-bot": "^4.0.2",
     "tap": "16.3.6",
     "typescript": "5.1.3",
-    "unocss": "^0.53.1",
+    "unocss": "^0.56.0",
     "vite": "4.3.9",
     "vite-plugin-html": "3.2.0"
   },
   "dependencies": {
-    "@fabric-ds/icons": "0.6.7",
+    "@warp-ds/icons": "1.0.0",
     "@open-wc/testing": "3.2.0",
     "@warp-ds/core": "1.0.0",
-    "@warp-ds/uno": "^1.0.0",
-    "@warp-ds/css": "^1.0.0",
+    "@warp-ds/uno": "^1.1.0",
+    "@warp-ds/css": "^1.1.0",
     "glob": "8.1.0",
     "html-format": "1.1.2",
     "lit": "2.7.5"

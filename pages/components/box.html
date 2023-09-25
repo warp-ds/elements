@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Box</h1>
         <p>Box is a layout component used for separating content areas on a page.</p>
@@ -115,7 +117,7 @@
             <div class="my-16">
               <a title="This is a link">This is a link</a>
             </div>
-            <button class="button button--small" onclick="alert('clicked!');">Button</button>
+            <w-button small onclick="alert('clicked!');">Button</button>
           </w-box>
         </syntax-highlight>
         <div class="example">
@@ -128,7 +130,7 @@
             <div class="my-16">
               <a title="This is a link">This is a link</a>
             </div>
-            <button class="button button--small" onclick="alert('clicked!');">Button</button>
+            <w-button small onclick="alert('clicked!');">Button</w-button>
           </w-box>
         </div>
         <h2 class="mt-24 mb-16">Accessibility</h2>
@@ -155,6 +157,7 @@
           </w-box>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
 
   </body>

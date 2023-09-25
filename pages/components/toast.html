@@ -1,7 +1,9 @@
 <html lang="en">
   <%- include('head.html'); -%>
   <body>
-      <%- include('nav.html'); -%>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Toast</h1>
 
@@ -50,9 +52,9 @@
         <syntax-highlight> toast('This is a toast'); </syntax-highlight>
 
         <div class="example">
-          <button class="button button--small" onclick="window.toast('This is a toast');">
+          <w-button small onclick="window.toast('This is a toast');">
             See Example
-          </button>
+          </w-button>
         </div>
 
         Create a new toast giving it a message and some options and then get back an id that can be
@@ -72,24 +74,24 @@
         <syntax-highlight> toast('message goes here', { type: 'warning' }) </syntax-highlight>
 
         <div class="example">
-          <button
-            class="button button--small"
+          <w-button
+            small
             onclick="window.toast('message goes here', { type: 'error', canclose: true })"
           >
             See Error Example
-          </button>
-          <button
-            class="button button--small"
+          </w-button>
+          <w-button
+            small
             onclick="window.toast('message goes here', { type: 'warning', canclose: true })"
           >
             See Warning Example
-          </button>
-          <button
-            class="button button--small"
+          </w-button>
+          <w-button
+            small
             onclick="window.toast('message goes here', { type: 'success', canclose: true })"
           >
             See Success Example
-          </button>
+          </w-button>
         </div>
 
         <p>Text content: <strong>text</strong> — default undefined</p>
@@ -103,14 +105,15 @@
         <syntax-highlight> toast('message goes here', { duration: 2500 }) </syntax-highlight>
 
         <div class="example">
-          <button
-            class="button button--small"
+          <w-button
+            small
             onclick="window.toast('message goes here', { duration: 2500 })"
           >
             See Example
-          </button>
+          </w-button>
         </div>
       </main>
+    </div>
       <%- include('footer.html'); -%>
   </body>
 </html>
