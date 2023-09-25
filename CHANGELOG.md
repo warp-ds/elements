@@ -1,3 +1,19 @@
+## [1.0.1](https://github.com/warp-ds/elements/compare/v1.0.0...v1.0.1) (2023-09-25)
+
+
+### Bug Fixes
+
+* Add fullWidth button prop ([#56](https://github.com/warp-ds/elements/issues/56)) ([ba25a99](https://github.com/warp-ds/elements/commit/ba25a99c370bd01a31f961d96210a9ba3cb2a179))
+* add lit to rollup options to be able to build icons ([#53](https://github.com/warp-ds/elements/issues/53)) ([5c90c00](https://github.com/warp-ds/elements/commit/5c90c0073b2de62a6c6455a51c3b6a706da768fb))
+* add lit to rollup options to be able to build icons ([#62](https://github.com/warp-ds/elements/issues/62)) ([ad1d5e8](https://github.com/warp-ds/elements/commit/ad1d5e84c738f158950ed8e15db1ed48d4a5acdb))
+* add sidebar to "local development pages" ([#43](https://github.com/warp-ds/elements/issues/43)) ([e3dc411](https://github.com/warp-ds/elements/commit/e3dc411a014b4510250723c19d0dab50f5859854))
+* alert examples ([#59](https://github.com/warp-ds/elements/issues/59)) ([c63d9df](https://github.com/warp-ds/elements/commit/c63d9df59d8ebb5a8b7386edc60d2322a4f9ed1c))
+* **attention:** popover target is visible on Chrome 109 ([#60](https://github.com/warp-ds/elements/issues/60)) ([dd3619a](https://github.com/warp-ds/elements/commit/dd3619ad2eceb5eacdedbec219389b31d753c1c1))
+* no need for type check as secondary button is default ([#50](https://github.com/warp-ds/elements/issues/50)) ([089b1f0](https://github.com/warp-ds/elements/commit/089b1f06e9af4303753b4aa24dbdce5dc69498fe))
+* remove classes for disabled buttons as there is no such thing in elements ([#51](https://github.com/warp-ds/elements/issues/51)) ([13ca7e7](https://github.com/warp-ds/elements/commit/13ca7e79e093108ea9b067c8a075143e5c43f1e5))
+* use new button classes and improve conditions ([#48](https://github.com/warp-ds/elements/issues/48)) ([145caad](https://github.com/warp-ds/elements/commit/145caada393aad82dcc75e2a3986c1a20c45296b))
+* use Warp Button component instead of button shortcuts ([8b498f6](https://github.com/warp-ds/elements/commit/8b498f653ddfa82967592a9846c022f7afcf4667))
+
 ## [1.0.1-next.10](https://github.com/warp-ds/elements/compare/v1.0.1-next.9...v1.0.1-next.10) (2023-09-22)
 
 
