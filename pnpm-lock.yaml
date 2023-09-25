@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@open-wc/testing':
     specifier: 3.2.0
@@ -108,7 +104,7 @@ devDependencies:
     version: 4.0.2(semantic-release@21.0.7)
   tap:
     specifier: 16.3.6
-    version: 16.3.6(ts-node@10.9.1)(typescript@5.1.3)
+    version: 16.3.6(typescript@5.1.3)
   typescript:
     specifier: 5.1.3
     version: 5.1.3
@@ -117,7 +113,7 @@ devDependencies:
     version: 0.56.0(postcss@8.4.24)(vite@4.3.9)
   vite:
     specifier: 4.3.9
-    version: 4.3.9(@types/node@20.4.2)
+    version: 4.3.9
   vite-plugin-html:
     specifier: 3.2.0
     version: 3.2.0(vite@4.3.9)
@@ -435,6 +431,7 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
+    optional: true
 
   /@eik/cli@2.0.22:
     resolution: {integrity: sha512-76Xfkd/+anI3C+LdnDeQtnG37YnZrz+zyTFw3t2RnD6PcynAv6+ZeTKgv6GlljCNGOQLb/na0HGuR6mwZmTgzQ==}
@@ -470,7 +467,7 @@ packages:
     resolution: {integrity: sha512-h9z1jyz0ueOwNfAPnwjJk3JGCMdm/3TFqGiGi3KqLgx3fhHgKOLmZa9fqGgX0E8arCgN2YavJwHiBCsIKTqEdQ==}
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       glob: 8.1.0
       is-glob: 4.0.3
       mime-types: 2.1.35
@@ -924,7 +921,7 @@ packages:
     resolution: {integrity: sha512-ebbEtlI7dxXF5ziNdr05mOY8NnDiPB1XvAlLHctRt/Rc+C3LCOVW5imUVX+mhvUhnNzmPBHewUkOFgGlCxgdAA==}
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       fast-uri: 2.2.0
     dev: true
 
@@ -1048,6 +1045,7 @@ packages:
     engines: {node: '>=6.0.0'}
     requiresBuild: true
     dev: true
+    optional: true
 
   /@jridgewell/set-array@1.1.2:
     resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}
@@ -1083,6 +1081,7 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+    optional: true
 
   /@lerna/child-process@7.0.2:
     resolution: {integrity: sha512-15lMrNBL/pvREMJPSfIPieaBtyyapDco/TNjALLEL53JGzO9g8rj5PipfE9h5ILx8aq/GaP17XCh209aVCun/w==}
@@ -1788,21 +1787,25 @@ packages:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /@tsconfig/node12@1.0.11:
     resolution: {integrity: sha512-cqefuRsh12pWyGsIoBKJA9luFu3mRxCA+ORZvA4ktLSzIuCUtWVxGIuXigEwO5/ywWFMZ2QEGKWvkZG1zDMTag==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /@tsconfig/node14@1.0.3:
     resolution: {integrity: sha512-ysT8mhdixWK6Hw3i1V2AeRqZ5WfXg1G43mqoYlM2nc6388Fq5jcXyr5mRsqViLx/GJYdoL0bfXD8nmF+Zn/Iow==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /@tufjs/canonical-json@1.0.0:
     resolution: {integrity: sha512-QTnf++uxunWvG2z3UFNzAoQPHxnSXOwtaI3iJ+AohhV+5vONuArPjJE7aPXPVXfXJsqrVbZBu9b81AJoSd09IQ==}
@@ -2045,7 +2048,7 @@ packages:
       '@unocss/core': 0.56.0
       '@unocss/reset': 0.56.0
       '@unocss/vite': 0.56.0(vite@4.3.9)
-      vite: 4.3.9(@types/node@20.4.2)
+      vite: 4.3.9
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -2256,7 +2259,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.1
       magic-string: 0.30.3
-      vite: 4.3.9(@types/node@20.4.2)
+      vite: 4.3.9
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -2456,6 +2459,7 @@ packages:
     engines: {node: '>=0.4.0'}
     requiresBuild: true
     dev: true
+    optional: true
 
   /acorn@8.10.0:
     resolution: {integrity: sha512-F0SAmZ8iUtS//m8DmCTA0jlh6TDKkHQyK6xc6V4KDTyZKA9dnvX9/3sRTVQrWm79glUAZbnmmNcdYwUIHWVybw==}
@@ -2512,10 +2516,8 @@ packages:
       indent-string: 5.0.0
     dev: true
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -2646,6 +2648,7 @@ packages:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
@@ -3525,6 +3528,7 @@ packages:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /cross-spawn@6.0.5:
     resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
@@ -4428,7 +4432,7 @@ packages:
     dependencies:
       '@fastify/deepmerge': 1.3.0
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       fast-deep-equal: 3.1.3
       fast-uri: 2.2.0
       rfdc: 1.3.0
@@ -6630,6 +6634,7 @@ packages:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /make-fetch-happen@11.1.1:
     resolution: {integrity: sha512-rLWS7GCSTcEujjVBs2YqG7Y4643u8ucvCJeSRqiLYhesrDuzeuFIk37xREzAsfQaqzl8b9rNCE4m6J8tvX4Q8w==}
@@ -9441,7 +9446,7 @@ packages:
       yaml: 1.10.2
     dev: true
 
-  /tap@16.3.6(ts-node@10.9.1)(typescript@5.1.3):
+  /tap@16.3.6(typescript@5.1.3):
     resolution: {integrity: sha512-+DF58Y0DuR18NITVuPsfQ5CRZ1KmYobxLeqKq6LOhr1YJu+QMbAkyhgWhaKsV8GMd329h3fa2SZoqTWmGZ+o9w==}
     engines: {node: '>=12'}
     hasBin: true
@@ -9480,7 +9485,6 @@ packages:
       tap-parser: 11.0.2
       tap-yaml: 1.0.2
       tcompare: 5.0.7
-      ts-node: 10.9.1(@types/node@20.4.2)(typescript@5.1.3)
       typescript: 5.1.3
       which: 2.0.2
     transitivePeerDependencies:
@@ -9707,6 +9711,7 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+    optional: true
 
   /tsconfig-paths@4.2.0:
     resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
@@ -9976,7 +9981,7 @@ packages:
       '@unocss/transformer-directives': 0.56.0
       '@unocss/transformer-variant-group': 0.56.0
       '@unocss/vite': 0.56.0(vite@4.3.9)
-      vite: 4.3.9(@types/node@20.4.2)
+      vite: 4.3.9
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -10037,6 +10042,7 @@ packages:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     requiresBuild: true
     dev: true
+    optional: true
 
   /v8-compile-cache@2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
@@ -10115,10 +10121,10 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: 4.3.9(@types/node@20.4.2)
+      vite: 4.3.9
     dev: true
 
-  /vite@4.3.9(@types/node@20.4.2):
+  /vite@4.3.9:
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -10143,7 +10149,6 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.4.2
       esbuild: 0.17.19
       postcss: 8.4.24
       rollup: 3.26.2
@@ -10448,6 +10453,7 @@ packages:
     engines: {node: '>=6'}
     requiresBuild: true
     dev: true
+    optional: true
 
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -10462,3 +10468,7 @@ packages:
   /zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
