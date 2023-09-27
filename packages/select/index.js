@@ -2,12 +2,17 @@ import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
-import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from "@warp-ds/css/component-classes"
+import {
+  select as ccSelect,
+  helpText as ccHelpText,
+  label as ccLabel,
+} from '@warp-ds/css/component-classes';
 import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { messages as nbMessages} from './locales/nb/messages.mjs';
-import { messages as enMessages} from './locales/en/messages.mjs';
-import { messages as fiMessages} from './locales/fi/messages.mjs';
+import { i18n } from '@lingui/core';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { activateI18n } from '../i18n';
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -33,35 +38,35 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   };
 
   static styles = css`
-    @unocss-placeholder
+    @unocss-placeholder;
   `;
 
   get #classes() {
     return classNames({
       [ccSelect.default]: true,
-      [ccSelect.invalid]: this.invalid
+      [ccSelect.invalid]: this.invalid,
     });
   }
 
   get #labelClasses() {
     return classNames({
       [ccLabel.label]: true,
-      [ccLabel.labelInvalid]: this.invalid
-    })
+      [ccLabel.labelInvalid]: this.invalid,
+    });
   }
 
   get #helpTextClasses() {
     return classNames({
       [ccHelpText.helpText]: true,
-      [ccHelpText.helpTextInvalid]: this.invalid
-    })
+      [ccHelpText.helpTextInvalid]: this.invalid,
+    });
   }
 
   get #chevronClasses() {
     return classNames({
       [ccSelect.chevron]: true,
       [ccSelect.chevronDisabled]: this.disabled,
-    })
+    });
   }
 
   get #id() {
@@ -92,15 +97,16 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
             ${when(
               this.optional,
               () =>
-                html`<span class="${ccLabel.optional}">${i18n._(
-                  {
+                html`<span class="${ccLabel.optional}"
+                  >${i18n._({
                     id: 'select.label.optional',
                     message: '(optional)',
-                    comment: 'Shown behind label when marked as optional',
-                  },
-                )}</span>`,
+                    comment:
+                      'Shown behind label when marked as optional',
+                  })}</span
+                >`
             )}</label
-          >`,
+          >`
       )}
       <div class="${ccSelect.selectWrapper}">
         <select
@@ -109,17 +115,19 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
           ?autofocus=${this.autoFocus}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
-          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
+          aria-errormessage="${ifDefined(
+            this.invalid && this.#helpId
+          )}"
         >
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
           <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="none"
-              viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="none"
+            viewBox="0 0 16 16"
           >
             <path
               stroke="currentColor"
@@ -133,7 +141,13 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
       </div>
       ${when(
         this.always || this.invalid,
-        () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.hint}</div>`,
+        () =>
+          html`<div
+            id="${this.#helpId}"
+            class="${this.#helpTextClasses}"
+          >
+            ${this.hint}
+          </div>`
       )}
     </div>`;
   }
