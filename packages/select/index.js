@@ -14,6 +14,8 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { activateI18n } from '../i18n';
+import '@warp-ds/icons/elements/chevron-down-16';
+
 export class WarpSelect extends kebabCaseAttributes(LitElement) {
   static properties = {
     // Whether the element should receive focus on render
@@ -119,21 +121,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="none"
-            viewBox="0 0 16 16"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M2.5 5.5L8 11L13.5 5.5"
-            />
-          </svg>
+          <w-icon-chevron-down16></w-icon-chevron-down16>
         </div>
       </div>
       ${when(
