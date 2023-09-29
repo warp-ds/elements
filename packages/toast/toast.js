@@ -83,10 +83,6 @@ export class WarpToast extends LitElement {
     return this.renderRoot?.querySelector(`section`) ?? null;
   }
 
-  get _success() {
-    return this.type === toastType.success;
-  }
-
   get _warning() {
     return this.type === toastType.warning;
   }
@@ -100,10 +96,9 @@ export class WarpToast extends LitElement {
   }
 
   get _typeLabel() {
-    if (this._success) return 'Vellykket';
-    if (this._error) return 'Feil';
     if (this._warning) return 'Varsel';
-    return 'Info';
+    if (this._error) return 'Feil';
+    return 'Vellykket'
   }
 
   get _iconMarkup() {
