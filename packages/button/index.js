@@ -53,6 +53,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
+    activateI18n(enMessages, nbMessages, fiMessages);
 
     if (!buttonTypes.includes(this.variant)) {
       throw new Error(
