@@ -5,7 +5,7 @@ import {
   expandable as ccExpandable,
 } from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '@fabric-ds/icons/elements/chevron-down-16';
+import '@warp-ds/icons/elements/chevron-down-16';
 
 class WarpExpandable extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -103,7 +103,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}
                     >
-                      <f-icon-chevron-down16></f-icon-chevron-down16>
+                      <w-icon-chevron-down16></w-icon-chevron-down16>
                     </div>`}
               </div>
             </button>

@@ -52,7 +52,7 @@ export default ({ mode }) => {
           entry: './index.js',
           fileName: 'index'
         },
-        rollupOptions: { external: ['elements'] }
+        rollupOptions: { external: ['elements', 'lit'] }
       }
     })
   }
@@ -90,6 +90,11 @@ export default ({ mode }) => {
           {
             filename: 'attention.html',
             template: 'pages/components/attention.html',
+            injectOptions,
+          },
+          {
+            filename: 'badge.html',
+            template: 'pages/components/badge.html',
             injectOptions,
           },
           {

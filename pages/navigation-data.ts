@@ -34,12 +34,16 @@ export default [
     title: 'Layout',
     items: [
       {
-        title: 'Broadcast',
-        href: '/pages/components/broadcast.html',
+        title: 'Badge',
+        href: '/pages/components/badge.html',
       },
       {
         title: 'Box',
         href: '/pages/components/box.html',
+      },
+      {
+        title: 'Broadcast',
+        href: '/pages/components/broadcast.html',
       },
       {
         title: 'Card',
