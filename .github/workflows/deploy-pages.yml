@@ -2,6 +2,7 @@ name: Deploy docs to GitHub pages
 on:
   push:
     branches:
+      - test-deploy
       - next
 
 jobs:
