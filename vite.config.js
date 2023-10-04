@@ -52,7 +52,6 @@ export default ({ mode }) => {
           },
           rollupOptions: {
             input,
-            external: ['elements', 'lit'],
           },
         },
       });
