@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
@@ -265,106 +264,99 @@
   <link rel="stylesheet" href="/assets/index-92d560e9.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-      <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
-          <div class="">
-            <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
-                Warp Elements
-              </h1>
-              <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
-              </p>
-            </div>
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Badge</h1>
+        <p>Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>variant</td>
+              <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price'</td>
+              <td>'neutral'</td>
+            </tr>
+            <tr>
+              <td>position</td>
+              <td>'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3>Default</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge>
+            I am a default badge
+          </w-badge>
+        </syntax-highlight>
+        <div class="example">
+          <w-badge>
+            I am a default badge
+          </w-badge>
+        </div>
+
+        <h3 class="mb-8">Variants</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge variant="neutral">neutral badge</w-badge>
+          <w-badge variant="info">info badge</w-badge>
+          <w-badge variant="positive">positive badge</w-badge>
+          <w-badge variant="warning">warning badge</w-badge>
+          <w-badge variant="negative">negative badge</w-badge>
+          <w-badge variant="disabled">disabled badge</w-badge>
+          <w-badge variant="notification">notification badge</w-badge>
+          <w-badge variant="price">price badge</w-badge>
+        </syntax-highlight>
+        <div class="example space-x-16">
+          <w-badge variant="neutral">neutral badge</w-badge>
+          <w-badge variant="info">info badge</w-badge>
+          <w-badge variant="positive">positive badge</w-badge>
+          <w-badge variant="warning">warning badge</w-badge>
+          <w-badge variant="negative">negative badge</w-badge>
+          <w-badge variant="disabled">disabled badge</w-badge>
+          <w-badge variant="notification">notification badge</w-badge>
+          <w-badge variant="price">price badge</w-badge>
+        </div>
+
+        <h3 class="mb-8">Positions</h3>
+        <syntax-highlight class="mt-0">
+          <w-badge position="top-left">top-left</w-badge>
+          <w-badge position="top-right">top-right</w-badge>
+          <w-badge position="bottom-right">bottom-right</w-badge>
+          <w-badge position="bottom-left">bottom-left</w-badge>
+        </syntax-highlight>
+        <div class="example space-y-16">
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="top-left" variant="price">tl : Top Left</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="top-right" variant="price">tr : Top Right</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="bottom-right" variant="price">br : Bottom Right</w-badge>
+          </div>
+          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
+            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+            <w-badge position="bottom-left" variant="price">bl : Bottom Left</w-badge>
           </div>
         </div>
-  
-        <main slot="content">
-          <div class="p-32">
-            <div class="">
-              <h2 class="mb-16">Installation</h2>
-              <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
-              </p>
-  
-              <h3 class="mt-24 mb-16">Install from NPM</h3>
-  
-              <p>The Warp Elements package can be installed from NPM.</p>
-  
-              <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
-  
-              <h3 class="mt-24 mb-16">Install from Eik</h3>
-  
-              <p>The same package is also available via our Eik CDN server</p>
-  
-              <syntax-highlight
-                >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
-              >
-  
-              <h2 class="mt-32 mb-16">Using Components</h2>
-  
-              <p>Once installed, components can be used in your HTML markup.</p>
-              <syntax-highlight>
-                <w-breadcrumbs class="mt-10">
-                  <a href="#/url/1">Eiendom</a>
-                  <a href="#/url/2">Bolig til salgs</a>
-                  <a href="#/url/3" aria-current="page"> Oslo </a>
-                </w-breadcrumbs>
-              </syntax-highlight>
-  
-              <w-breadcrumbs class="mt-10">
-                <a href="#/url/1">Eiendom</a>
-                <a href="#/url/2">Bolig til salgs</a>
-                <a href="#/url/3" aria-current="page"> Oslo </a>
-              </w-breadcrumbs>
-  
-              <br />
-  
-              <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
-              👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
-              <i>Example</i>
-              <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
-              <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
-              👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
-              <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
-              </p>
-  
-              <i>Example</i>
-              <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
-              </syntax-highlight>
-            </div>
-            <div>
-              <w-docs-highlight-box></w-docs-highlight-box>
-            </div>
-          </div>
-        </main>
-      </div>
 
-      </div>
-      
-
-      
+      </main>
       <script data-for="footer" type="application/json">
   {
     "github": {
@@ -377,6 +369,7 @@
     }
   }
 </script>
+    </div>
 
   </body>
 </html>

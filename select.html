@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
@@ -265,106 +264,169 @@
   <link rel="stylesheet" href="/assets/index-92d560e9.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-      <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
-          <div class="">
-            <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
-                Warp Elements
-              </h1>
-              <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
-              </p>
-            </div>
-          </div>
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Select</h1>
+        <p>A dropdown component for selecting a single value.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>auto-focus</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether the element should receive focus on render</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>invalid</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in an invalid state. Often paired with `hint` to provide
+                  feedback about the error
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>always</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to always show a hint</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>hint</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content displayed as the help text</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to disply as the label</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  The name of the select element, used when submitting an HTML form
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>optional</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to show optional text</div>
+              </td>
+              <td>false</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <syntax-highlight>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
+            <option value="s">Strawberries</option>
+            <option value="r">Raspberries</option>
+            <option value="c">Cloudberries</option>
+          </w-select>
         </div>
-  
-        <main slot="content">
-          <div class="p-32">
-            <div class="">
-              <h2 class="mb-16">Installation</h2>
-              <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
-              </p>
-  
-              <h3 class="mt-24 mb-16">Install from NPM</h3>
-  
-              <p>The Warp Elements package can be installed from NPM.</p>
-  
-              <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
-  
-              <h3 class="mt-24 mb-16">Install from Eik</h3>
-  
-              <p>The same package is also available via our Eik CDN server</p>
-  
-              <syntax-highlight
-                >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
-              >
-  
-              <h2 class="mt-32 mb-16">Using Components</h2>
-  
-              <p>Once installed, components can be used in your HTML markup.</p>
-              <syntax-highlight>
-                <w-breadcrumbs class="mt-10">
-                  <a href="#/url/1">Eiendom</a>
-                  <a href="#/url/2">Bolig til salgs</a>
-                  <a href="#/url/3" aria-current="page"> Oslo </a>
-                </w-breadcrumbs>
-              </syntax-highlight>
-  
-              <w-breadcrumbs class="mt-10">
-                <a href="#/url/1">Eiendom</a>
-                <a href="#/url/2">Bolig til salgs</a>
-                <a href="#/url/3" aria-current="page"> Oslo </a>
-              </w-breadcrumbs>
-  
-              <br />
-  
-              <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
-              👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
-              <i>Example</i>
-              <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
-              <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
-              👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
-              <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
-              </p>
-  
-              <i>Example</i>
-              <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
-              </syntax-highlight>
-            </div>
-            <div>
-              <w-docs-highlight-box></w-docs-highlight-box>
-            </div>
-          </div>
-        </main>
-      </div>
 
-      </div>
-      
+        <h3 class="mt-24 mb-16">Default option</h3>
+        <syntax-highlight>
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
+            <option>Strawberries</option>
+            <option selected>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="We assume this is your jam preference" always>
+            <option value="s">Strawberries</option>
+            <option value="r" selected>Raspberries</option>
+            <option value="c">Cloudberries</option>
+          </w-select>
+        </div>
 
-      
+        <h3 class="mt-24 mb-16">Invalid</h3>
+        <syntax-highlight>
+          <w-select label="Berries" hint="Wrong choice" invalid>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="Wrong choice" invalid>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Auto focus</h3>
+        <syntax-highlight>
+          <w-select label="Berries" auto-focus>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" auto-focus>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Optional</h3>
+        <syntax-highlight>
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <optionx>Raspberries</optionx>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </div>
+      </main>
+    </div>
       <script data-for="footer" type="application/json">
   {
     "github": {

@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
@@ -268,102 +267,50 @@
       
       <div class="flex">
         <sidebar-element class="sidebar"></sidebar-element>
-      <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
-          <div class="">
-            <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
-                Warp Elements
-              </h1>
-              <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
-              </p>
-            </div>
-          </div>
-        </div>
-  
         <main slot="content">
-          <div class="p-32">
-            <div class="">
-              <h2 class="mb-16">Installation</h2>
-              <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
-              </p>
+          <h1 class="mb-16">Breadcrumbs</h1>
+          <p>Breadcrumbs show the navigation structure for the current location.</p>
   
-              <h3 class="mt-24 mb-16">Install from NPM</h3>
+          <h2 class="mt-24 mb-16">Import</h2>
+          <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
   
-              <p>The Warp Elements package can be installed from NPM.</p>
+          <h2 class="mt-24 mb-16">Examples</h2>
   
-              <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
+          <h3>All segments linkable</h3>
   
-              <h3 class="mt-24 mb-16">Install from Eik</h3>
+          <syntax-highlight>
+            <w-breadcrumbs>
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <a href="#/url/3" aria-current="page"> Oslo </a>
+            </w-breadcrumbs></syntax-highlight
+          >
+          <div class="example">
+            <w-breadcrumbs class="mt-10">
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <a href="#/url/3" aria-current="page">Oslo</a>
+            </w-breadcrumbs>
+          </div>
   
-              <p>The same package is also available via our Eik CDN server</p>
+          <h3>Disabled last link</h3>
   
-              <syntax-highlight
-                >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
-              >
-  
-              <h2 class="mt-32 mb-16">Using Components</h2>
-  
-              <p>Once installed, components can be used in your HTML markup.</p>
-              <syntax-highlight>
-                <w-breadcrumbs class="mt-10">
-                  <a href="#/url/1">Eiendom</a>
-                  <a href="#/url/2">Bolig til salgs</a>
-                  <a href="#/url/3" aria-current="page"> Oslo </a>
-                </w-breadcrumbs>
-              </syntax-highlight>
-  
-              <w-breadcrumbs class="mt-10">
-                <a href="#/url/1">Eiendom</a>
-                <a href="#/url/2">Bolig til salgs</a>
-                <a href="#/url/3" aria-current="page"> Oslo </a>
-              </w-breadcrumbs>
-  
-              <br />
-  
-              <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
-              👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
-              <i>Example</i>
-              <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
-              <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
-              👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
-              <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
-              </p>
-  
-              <i>Example</i>
-              <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
-              </syntax-highlight>
-            </div>
-            <div>
-              <w-docs-highlight-box></w-docs-highlight-box>
-            </div>
+          <syntax-highlight>
+            <w-breadcrumbs>
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <span aria-current="page">Oslo</span>
+            </w-breadcrumbs></syntax-highlight
+          >
+          <div class="example">
+            <w-breadcrumbs class="mt-10">
+              <a href="#/url/1">Eiendom</a>
+              <a href="#/url/2">Bolig til salgs</a>
+              <span aria-current="page">Oslo</span>
+            </w-breadcrumbs>
           </div>
         </main>
       </div>
-
-      </div>
-      
-
       
       <script data-for="footer" type="application/json">
   {

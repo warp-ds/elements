@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
@@ -265,106 +264,50 @@
   <link rel="stylesheet" href="/assets/index-92d560e9.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-      <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
-          <div class="">
-            <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
-                Warp Elements
-              </h1>
-              <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
-              </p>
-            </div>
-          </div>
-        </div>
-  
-        <main slot="content">
-          <div class="p-32">
-            <div class="">
-              <h2 class="mb-16">Installation</h2>
-              <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
-              </p>
-  
-              <h3 class="mt-24 mb-16">Install from NPM</h3>
-  
-              <p>The Warp Elements package can be installed from NPM.</p>
-  
-              <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
-  
-              <h3 class="mt-24 mb-16">Install from Eik</h3>
-  
-              <p>The same package is also available via our Eik CDN server</p>
-  
-              <syntax-highlight
-                >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
-              >
-  
-              <h2 class="mt-32 mb-16">Using Components</h2>
-  
-              <p>Once installed, components can be used in your HTML markup.</p>
-              <syntax-highlight>
-                <w-breadcrumbs class="mt-10">
-                  <a href="#/url/1">Eiendom</a>
-                  <a href="#/url/2">Bolig til salgs</a>
-                  <a href="#/url/3" aria-current="page"> Oslo </a>
-                </w-breadcrumbs>
-              </syntax-highlight>
-  
-              <w-breadcrumbs class="mt-10">
-                <a href="#/url/1">Eiendom</a>
-                <a href="#/url/2">Bolig til salgs</a>
-                <a href="#/url/3" aria-current="page"> Oslo </a>
-              </w-breadcrumbs>
-  
-              <br />
-  
-              <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
-              👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
-              <i>Example</i>
-              <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
-              <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
-              👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
-              <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
-              </p>
-  
-              <i>Example</i>
-              <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
-              </syntax-highlight>
-            </div>
-            <div>
-              <w-docs-highlight-box></w-docs-highlight-box>
-            </div>
-          </div>
-        </main>
-      </div>
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Broadcast</h1>
+        <p>Broadcast automatically fetches broadcast messages for the current (or a given) url.</p>
+        <p>Uses toast apis under the hood.</p>
 
-      </div>
-      
+        <p>
+          <strong>N.B.</strong> Broadcast should only be included once per page to avoid duplicate
+          broadcast messages being displayed. The preferred method for including broadcast will soon
+          be a podlet provided by the communication team. In the meantime this component can be used
+          directly.
+        </p>
 
-      
+        <h2 class="mt-24 mb-16">Attributes</h2>
+        <p><strong>interval</strong> — Refetch interval - <i>default: 300 000 (5 minutes)</i></p>
+        <p>
+          <strong>api</strong> - API endpoint to fetch broadcasts from. Use
+          <code>https://dev.finn.no/broadcasts</code> on dev and
+          <code>https://finn.no/broadcasts</code> on prod. -
+          <i>Required</i>
+        </p>
+        <p>
+          <strong>url</strong> — Page (identified by its url) to check for registered broadcasts
+          against - <i>default window.location.href</i>
+        </p>
+
+        <h2 class="mt-24 mb-16">Example usage</h2>
+
+        <syntax-highlight>
+          <w-broadcast
+            api="https://dev.finn.no/broadcasts"
+            url="https:/dev.finn.no/meldinger"
+            interval="30000"
+          ></w-broadcast>
+        </syntax-highlight>
+
+        <w-broadcast
+          api="https://dev.finn.no/broadcasts"
+          url="https:/dev.finn.no/meldinger"
+          interval="30000"
+        ></w-broadcast>
+      </main>
       <script data-for="footer" type="application/json">
   {
     "github": {
@@ -377,6 +320,6 @@
     }
   }
 </script>
-
+    </div>
   </body>
 </html>

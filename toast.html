@@ -1,5 +1,4 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
@@ -265,106 +264,119 @@
   <link rel="stylesheet" href="/assets/index-92d560e9.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-      <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
-          <div class="">
-            <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
-                Warp Elements
-              </h1>
-              <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
-              </p>
-            </div>
-          </div>
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Toast</h1>
+
+        <p>
+          Toasts display small snippets of information to the user and then disappear after a set
+          time. The Warp toast appears at the bottom of the screen but will normally be triggered
+          by a user interaction somewhere else on the page.
+        </p>
+
+        <h2>Accessibility</h2>
+        <p>
+          For accessibility reasons, toasts should never contain interactive elements as interactive
+          elements should always occur in the same location as the action that triggered it. Because
+          of this limitation, we consider the use of toasts to be somewhat of an antipattern and
+          recommend that another approach be found wherever possible. The Warp team will be
+          investigating potentially better approaches for specific use cases in near future. That
+          being said, you are free to use toast so long as you avoid using interactive elements such
+          as links or a close button.
+        </p>
+
+        <h2>Usage</h2>
+        <p>
+          The toast is intended to be used programmatically. JavaScript APIs are provided to create,
+          update and remove toasts from a page while managing things like placement on the page for
+          you.
+        </p>
+
+        <p>
+          Toast is a bit different from other packages in Warp Elements. You need to import
+          functions from the package and call them as needed.
+        </p>
+
+        <p>Import functions for working with toasts:</p>
+
+        Be sure to import the elements package first as the toast APIs depend on this package.
+
+        <syntax-highlight> import from '@warp-ds/elements' </syntax-highlight>
+
+        Once you have imported the elements package, import the toast api package.
+
+        <syntax-highlight>
+          import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
+        </syntax-highlight>
+
+        Then you can create a new toast giving it a message:
+        <syntax-highlight> toast('This is a toast'); </syntax-highlight>
+
+        <div class="example">
+          <w-button small onclick="window.toast('This is a toast');">
+            See Example
+          </w-button>
         </div>
-  
-        <main slot="content">
-          <div class="p-32">
-            <div class="">
-              <h2 class="mb-16">Installation</h2>
-              <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
-              </p>
-  
-              <h3 class="mt-24 mb-16">Install from NPM</h3>
-  
-              <p>The Warp Elements package can be installed from NPM.</p>
-  
-              <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
-  
-              <h3 class="mt-24 mb-16">Install from Eik</h3>
-  
-              <p>The same package is also available via our Eik CDN server</p>
-  
-              <syntax-highlight
-                >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
-              >
-  
-              <h2 class="mt-32 mb-16">Using Components</h2>
-  
-              <p>Once installed, components can be used in your HTML markup.</p>
-              <syntax-highlight>
-                <w-breadcrumbs class="mt-10">
-                  <a href="#/url/1">Eiendom</a>
-                  <a href="#/url/2">Bolig til salgs</a>
-                  <a href="#/url/3" aria-current="page"> Oslo </a>
-                </w-breadcrumbs>
-              </syntax-highlight>
-  
-              <w-breadcrumbs class="mt-10">
-                <a href="#/url/1">Eiendom</a>
-                <a href="#/url/2">Bolig til salgs</a>
-                <a href="#/url/3" aria-current="page"> Oslo </a>
-              </w-breadcrumbs>
-  
-              <br />
-  
-              <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
-              👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
-              <i>Example</i>
-              <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
-              <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
-              👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
-              <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
-              </p>
-  
-              <i>Example</i>
-              <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
-              </syntax-highlight>
-            </div>
-            <div>
-              <w-docs-highlight-box></w-docs-highlight-box>
-            </div>
-          </div>
-        </main>
-      </div>
 
-      </div>
-      
+        Create a new toast giving it a message and some options and then get back an id that can be
+        used later to remove or edit the toast:
+        <syntax-highlight>
+          const id = toast('This is a toast', { type: 'warning' });
+        </syntax-highlight>
 
-      
+        Update an existing toast by id:
+        <syntax-highlight> updateToast(id, { text: 'This is a toast' }); </syntax-highlight>
+
+        <h2 class="mt-24 mb-16">Options</h2>
+        <p>
+          Type of toast: <strong>type</strong> — default success (success, warning, error)
+        </p>
+
+        <syntax-highlight> toast('message goes here', { type: 'warning' }) </syntax-highlight>
+
+        <div class="example">
+          <w-button
+            small
+            onclick="window.toast('message goes here', { type: 'error', canclose: true })"
+          >
+            See Error Example
+          </w-button>
+          <w-button
+            small
+            onclick="window.toast('message goes here', { type: 'warning', canclose: true })"
+          >
+            See Warning Example
+          </w-button>
+          <w-button
+            small
+            onclick="window.toast('message goes here', { type: 'success', canclose: true })"
+          >
+            See Success Example
+          </w-button>
+        </div>
+
+        <p>Text content: <strong>text</strong> — default undefined</p>
+
+        <syntax-highlight>
+          const id = toast('message goes here'); updateToast({ id, text: 'change the message' });
+        </syntax-highlight>
+
+        <p>Auto removal: <strong>duration</strong> — default 5000ms</p>
+
+        <syntax-highlight> toast('message goes here', { duration: 2500 }) </syntax-highlight>
+
+        <div class="example">
+          <w-button
+            small
+            onclick="window.toast('message goes here', { duration: 2500 })"
+          >
+            See Example
+          </w-button>
+        </div>
+      </main>
+    </div>
       <script data-for="footer" type="application/json">
   {
     "github": {
@@ -377,6 +389,5 @@
     }
   }
 </script>
-
   </body>
 </html>
