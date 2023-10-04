@@ -42,7 +42,12 @@ export default ({ mode }) => {
   
   function getBuildOpts(mode) {
     if (mode === 'production') return defineConfig({
-      build: { target: 'esnext', emptyOutDir: false,}
+      build: {
+        outDir: 'site',
+        rollupOptions: {
+          input,
+        },
+      },
     })
     if (mode === 'lib') return defineConfig({
       build: {
