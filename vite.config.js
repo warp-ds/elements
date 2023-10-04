@@ -45,11 +45,6 @@ export default ({ mode }) => {
       return defineConfig({
         build: {
           outDir: 'site',
-          lib: {
-            formats: ['es'],
-            entry: './index.js',
-            fileName: 'index',
-          },
           rollupOptions: {
             input,
           },
