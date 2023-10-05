@@ -10941,21 +10941,28 @@ ${we.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
 .sm\\:pb-32{padding-bottom:3.2rem;}
 .sm\\:pt-32{padding-top:3.2rem;}
 }
-    `]);customElements.get("w-unstyled-heading")||customElements.define("w-unstyled-heading",Lr);class fe extends _{render(){return v`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><title>Håndveske</title><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 14.5V3a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11.5"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.222 6H3.777a2 2 0 0 0-1.986 1.766l-.53 4.5A2 2 0 0 0 3.25 14.5h9.502a2 2 0 0 0 1.986-2.234l-.53-4.5A2 2 0 0 0 12.222 6Z"></path></svg>`}}customElements.get("w-icon-bag16",fe)||customElements.define("w-icon-bag16",fe);wo&&(window.WarpToastContainer=Ko,window.toast=ya,window.updateToast=_a,window.removeToast=za);const Ma=[{title:"Action",items:[{title:"Button",href:"/pages/components/button.html"}]},{title:"Feedback Indicators",items:[{title:"Alert",href:"/pages/components/alert.html"}]},{title:"Forms",items:[{title:"Select",href:"/pages/components/select.html"},{title:"Textfield",href:"/pages/components/textfield.html"}]},{title:"Layout",items:[{title:"Badge",href:"/pages/components/badge.html"},{title:"Box",href:"/pages/components/box.html"},{title:"Broadcast",href:"/pages/components/broadcast.html"},{title:"Card",href:"/pages/components/card.html"},{title:"Expandable",href:"/pages/components/expandable.html"},{title:"Toast",href:"/pages/components/toast.html"}]},{title:"Navigation",items:[{title:"Breadcrumbs",href:"/pages/components/breadcrumbs.html"}]},{title:"Overlays",items:[{title:"Attention",href:"/pages/components/attention.html"}]}];class it extends _{render(){return v`
+    `]);customElements.get("w-unstyled-heading")||customElements.define("w-unstyled-heading",Lr);class fe extends _{render(){return v`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><title>Håndveske</title><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 14.5V3a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v11.5"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.222 6H3.777a2 2 0 0 0-1.986 1.766l-.53 4.5A2 2 0 0 0 3.25 14.5h9.502a2 2 0 0 0 1.986-2.234l-.53-4.5A2 2 0 0 0 12.222 6Z"></path></svg>`}}customElements.get("w-icon-bag16",fe)||customElements.define("w-icon-bag16",fe);wo&&(window.WarpToastContainer=Ko,window.toast=ya,window.updateToast=_a,window.removeToast=za);const Ma={heading:{title:"Warp Elements",href:"/elements/"},pages:[{title:"Action",items:[{title:"Button",href:"/elements/button.html"}]},{title:"Feedback Indicators",items:[{title:"Alert",href:"/elements/alert.html"}]},{title:"Forms",items:[{title:"Select",href:"/elements/select.html"},{title:"Textfield",href:"/elements/textfield.html"}]},{title:"Layout",items:[{title:"Badge",href:"/elements/badge.html"},{title:"Box",href:"/elements/box.html"},{title:"Broadcast",href:"/elements/broadcast.html"},{title:"Card",href:"/elements/card.html"},{title:"Expandable",href:"/elements/expandable.html"},{title:"Toast",href:"/elements/toast.html"}]},{title:"Navigation",items:[{title:"Breadcrumbs",href:"/elements/breadcrumbs.html"}]},{title:"Overlays",items:[{title:"Attention",href:"/elements/attention.html"}]}]};class it extends _{render(){const{heading:o,pages:e}=Ma;return v`
       <nav class="sidebar p-24 s-bg-subtle mr-12">
-        <h2>Warp Elements</h2>
-        <a href="/" class="text-m no-underline py-2">About Warp Elements</a>
+        <h2>
+          <a href="${o.href}" class="no-underline py-2"
+            >${o.title}</a
+          >
+        </h2>
 
         <ul class="py-8">
-          ${this.renderItems(Ma)}
+          ${this.renderItems(e)}
         </ul>
       </nav>
     `}renderItems(o){return o.map(e=>v`
-      <li>
-        ${e.href?v`<a class="no-underline py-2 px-16 text-m" href="${e.href}">${e.title}</a>`:v`<span class="pt-2 text-m font-bold">${e.title}</span>`}
-        ${e.items?v`<ul class="py-4">${this.renderItems(e.items)}</ul>`:""}
-      </li>
-    `)}}y(it,"styles",Z`
+        <li>
+          ${e.href?v`<a class="no-underline py-2 px-16 text-m" href="${e.href}"
+                >${e.title}</a
+              >`:v`<span class="pt-2 text-m font-bold">${e.title}</span>`}
+          ${e.items?v`<ul class="py-4">
+                ${this.renderItems(e.items)}
+              </ul>`:""}
+        </li>
+      `)}}y(it,"styles",Z`
     .sidebar {
       width: 300px;
     }
