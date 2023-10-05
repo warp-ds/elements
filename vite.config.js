@@ -65,7 +65,7 @@ export default ({ mode }) => {
   }
 
   return {
-    // base: isProduction ? '/elements/' : '',
+    base: isProduction ? '/elements/' : '',
     plugins: [
       uno({
         presets: [presetWarp()],
@@ -157,9 +157,12 @@ export default ({ mode }) => {
 function basePathFix() {
   return {
     name: 'base-path-fix',
-    transformIndexHtml(html) {
-      // Replace pages/components with '' for production build.
-      return html.replace(/pages\/components\//g, '');
+    transform(src, fileName) {
+      return fileName.includes('navigation-data.js')
+        ? src
+            .replace(/pages\/components\//g, 'elements/')
+            .replace(/'\/'/, '"/elements/"')
+        : src;
     },
   };
 }

@@ -24,7 +24,7 @@
     "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
     "dev": "vite",
     "build:docs": "vite build",
-    "preview": "vite preview",
+    "preview:docs": "vite preview",
     "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
     "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
     "test": "tap ./packages/**/test.js --no-check-coverage",
