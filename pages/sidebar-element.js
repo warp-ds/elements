@@ -15,16 +15,17 @@ class SidebarElement extends LitElement {
   `;
 
   render() {
+    const { heading, pages } = navigationData;
     return html`
       <nav class="sidebar p-24 s-bg-subtle mr-12">
         <h2>
-          <a href="${navigationData.heading.href}" class="no-underline py-2"
-            >${navigationData.heading.title}</a
+          <a href="${heading.href}" class="no-underline py-2"
+            >${heading.title}</a
           >
         </h2>
 
         <ul class="py-8">
-          ${this.renderItems(navigationData.pages)}
+          ${this.renderItems(pages)}
         </ul>
       </nav>
     `;

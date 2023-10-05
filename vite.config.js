@@ -157,8 +157,8 @@ export default ({ mode }) => {
 function basePathFix() {
   return {
     name: 'base-path-fix',
-    transform(src, id) {
-      return id.includes('navigation-data.js')
+    transform(src, fileName) {
+      return fileName.includes('navigation-data.js')
         ? src
             .replace(/pages\/components\//g, 'elements/')
             .replace(/'\/'/, '"/elements/"')
