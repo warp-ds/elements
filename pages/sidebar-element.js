@@ -11,7 +11,7 @@ class SidebarElement extends LitElement {
       text-decoration: none;
       color: #131313;
     }
-    @unocss-placeholder;
+    @unocss-placeholder
   `;
 
   render() {
