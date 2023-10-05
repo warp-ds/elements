@@ -1,12 +1,12 @@
 /* eslint-env node */
-import { presetWarp } from '@warp-ds/uno'
-import uno from 'unocss/vite'
-import { defineConfig } from 'vite'
+import { presetWarp } from '@warp-ds/uno';
+import uno from 'unocss/vite';
+import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import path from 'path';
 import glob from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
-import { MinifyWarpLib } from './.minifier-plugin.js'
+import { MinifyWarpLib } from './.minifier-plugin.js';
 
 export default ({ mode }) => {
   let input = {};
@@ -39,29 +39,31 @@ export default ({ mode }) => {
       views: ['pages/includes'],
     },
   };
-  
+
   function getBuildOpts(mode) {
-    if (mode === 'production') return defineConfig({
-      build: {
-        outDir: 'site',
-        rollupOptions: {
-          input,
+    if (mode === 'production')
+      return defineConfig({
+        build: {
+          outDir: 'site',
+          rollupOptions: {
+            input,
+          },
         },
-      },
-    })
-    if (mode === 'lib') return defineConfig({
-      build: {
-        emptyOutDir: false,
-        lib: {
-          formats: ['es'],
-          entry: './index.js',
-          fileName: 'index'
+      });
+    if (mode === 'lib')
+      return defineConfig({
+        build: {
+          emptyOutDir: false,
+          lib: {
+            formats: ['es'],
+            entry: './index.js',
+            fileName: 'index',
+          },
+          rollupOptions: { external: ['elements', 'lit'] },
         },
-        rollupOptions: { external: ['elements', 'lit'] }
-      }
-    })
+      });
   }
-  
+
   return {
     // base: isProduction ? '/elements/' : '',
     plugins: [
@@ -74,76 +76,77 @@ export default ({ mode }) => {
         presets: [presetWarp()],
       }),
       // litElementTailwindPlugin({ mode }),
-      mode !== 'lib' && createHtmlPlugin({
-        minify: false,
-        pages: [
-          {
-            filename: 'button.html',
-            template: 'pages/components/button.html',
-            injectOptions,
-          },
-          {
-            filename: 'alert.html',
-            template: 'pages/components/alert.html',
-            injectOptions,
-          },
-          {
-            filename: 'select.html',
-            template: 'pages/components/select.html',
-            injectOptions,
-          },
-          {
-            filename: 'attention.html',
-            template: 'pages/components/attention.html',
-            injectOptions,
-          },
-          {
-            filename: 'badge.html',
-            template: 'pages/components/badge.html',
-            injectOptions,
-          },
-          {
-            filename: 'box.html',
-            template: 'pages/components/box.html',
-            injectOptions,
-          },
-          {
-            filename: 'breadcrumbs.html',
-            template: 'pages/components/breadcrumbs.html',
-            injectOptions,
-          },
-          {
-            filename: 'broadcast.html',
-            template: 'pages/components/broadcast.html',
-            injectOptions,
-          },
-          {
-            filename: 'card.html',
-            template: 'pages/components/card.html',
-            injectOptions,
-          },
-          {
-            filename: 'toast.html',
-            template: 'pages/components/toast.html',
-            injectOptions,
-          },
-          {
-            filename: 'textfield.html',
-            template: 'pages/components/textfield.html',
-            injectOptions,
-          },
-          {
-            filename: 'expandable.html',
-            template: 'pages/components/expandable.html',
-            injectOptions,
-          },
-          {
-            filename: 'index.html',
-            template: 'index.html',
-            injectOptions,
-          },
-        ],
-      }),
+      mode !== 'lib' &&
+        createHtmlPlugin({
+          minify: false,
+          pages: [
+            {
+              filename: 'button.html',
+              template: 'pages/components/button.html',
+              injectOptions,
+            },
+            {
+              filename: 'alert.html',
+              template: 'pages/components/alert.html',
+              injectOptions,
+            },
+            {
+              filename: 'select.html',
+              template: 'pages/components/select.html',
+              injectOptions,
+            },
+            {
+              filename: 'attention.html',
+              template: 'pages/components/attention.html',
+              injectOptions,
+            },
+            {
+              filename: 'badge.html',
+              template: 'pages/components/badge.html',
+              injectOptions,
+            },
+            {
+              filename: 'box.html',
+              template: 'pages/components/box.html',
+              injectOptions,
+            },
+            {
+              filename: 'breadcrumbs.html',
+              template: 'pages/components/breadcrumbs.html',
+              injectOptions,
+            },
+            {
+              filename: 'broadcast.html',
+              template: 'pages/components/broadcast.html',
+              injectOptions,
+            },
+            {
+              filename: 'card.html',
+              template: 'pages/components/card.html',
+              injectOptions,
+            },
+            {
+              filename: 'toast.html',
+              template: 'pages/components/toast.html',
+              injectOptions,
+            },
+            {
+              filename: 'textfield.html',
+              template: 'pages/components/textfield.html',
+              injectOptions,
+            },
+            {
+              filename: 'expandable.html',
+              template: 'pages/components/expandable.html',
+              injectOptions,
+            },
+            {
+              filename: 'index.html',
+              template: 'index.html',
+              injectOptions,
+            },
+          ],
+        }),
       isProduction && basePathFix(),
       MinifyWarpLib(),
     ],
