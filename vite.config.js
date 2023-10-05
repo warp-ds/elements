@@ -41,7 +41,8 @@ export default ({ mode }) => {
   };
 
   function getBuildOpts(mode) {
-    if (mode === 'production') return defineConfig({
+    if (mode === 'production')
+      return defineConfig({
         build: {
           outDir: 'site',
           rollupOptions: {
@@ -49,7 +50,8 @@ export default ({ mode }) => {
           },
         },
       });
-    if (mode === 'lib') return defineConfig({
+    if (mode === 'lib')
+      return defineConfig({
         build: {
           emptyOutDir: false,
           lib: {
@@ -74,7 +76,8 @@ export default ({ mode }) => {
         presets: [presetWarp()],
       }),
       // litElementTailwindPlugin({ mode }),
-      mode !== 'lib' && createHtmlPlugin({
+      mode !== 'lib' &&
+        createHtmlPlugin({
           minify: false,
           pages: [
             {
@@ -155,8 +158,10 @@ function basePathFix() {
   return {
     name: 'base-path-fix',
     transform(src, id) {
-      return id.includes('navigation-data.ts')
-        ? src.replace(/pages\/components\//g, 'elements/')
+      return id.includes('navigation-data.js')
+        ? src
+            .replace(/pages\/components\//g, 'elements/')
+            .replace(/'\/'/, '"/elements/"')
         : src;
     },
   };
