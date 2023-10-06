@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { collapse, expand } from 'element-collapse';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { styles } from '../../dist/elements.min.js';
 
 class ExpandTransition extends LitElement {
   static properties = {
@@ -54,7 +53,6 @@ class ExpandTransition extends LitElement {
   }
 
   static styles = [
-    styles,
     css`
       @unocss-placeholder
       :host {
