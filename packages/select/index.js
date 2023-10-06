@@ -79,12 +79,9 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
 
   constructor() {
     super();
-    this._options = this.innerHTML;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
     activateI18n(enMessages, nbMessages, fiMessages);
+
+    this._options = this.innerHTML;
   }
 
   render() {

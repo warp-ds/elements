@@ -15,6 +15,6 @@ msgstr ""
 
 #. Screenreader message for buttons that are loading
 #. js-lingui-explicit-id
-#: packages/button/index.js:47
+#: packages/button/index.js:49
 msgid "button.aria.loading"
 msgstr "Ladataan..."

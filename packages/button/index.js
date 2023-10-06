@@ -43,6 +43,8 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
   constructor() {
     super();
+    activateI18n(enMessages, nbMessages, fiMessages);
+
     this.variant = 'secondary';
     this.ariaValueTextLoading = i18n._({
       id: 'button.aria.loading',
@@ -53,7 +55,6 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    activateI18n(enMessages, nbMessages, fiMessages);
 
     if (!buttonTypes.includes(this.variant)) {
       throw new Error(

@@ -15,6 +15,6 @@ msgstr ""
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/select/index.js:101
+#: packages/select/index.js:98
 msgid "select.label.optional"
 msgstr "(valgfritt)"
