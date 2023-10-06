@@ -30,7 +30,9 @@
     "test": "tap ./packages/**/test.js --no-check-coverage",
     "test:snapshot": "TAP_SNAPSHOT=1 tap ./packages/**/test.js --no-check-coverage",
     "semantic-release": "semantic-release",
-    "build:elements": "node build-elements.js"
+    "build:elements": "node build-elements.js",
+    "messages:extract": "lingui extract",
+    "messages:compile": "lingui compile --strict"
   },
   "repository": {
     "type": "git",
@@ -42,8 +44,11 @@
     "@babel/eslint-parser": "7.22.5",
     "@chbphone55/classnames": "2.0.0",
     "@eik/cli": "^2.0.22",
+    "@lingui/cli": "^4.5.0",
+    "@lingui/conf": "^4.5.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@types/node": "^20.7.1",
     "autoprefixer": "10.4.14",
     "cors": "2.8.5",
     "cz-conventional-changelog": "3.3.0",
@@ -70,11 +75,12 @@
     "vite-plugin-html": "3.2.0"
   },
   "dependencies": {
+    "@lingui/core": "^4.5.0",
     "@warp-ds/icons": "1.0.0",
     "@open-wc/testing": "3.2.0",
     "@warp-ds/core": "1.0.0",
-    "@warp-ds/uno": "^1.1.0",
     "@warp-ds/css": "^1.1.0",
+    "@warp-ds/uno": "^1.1.0",
     "glob": "8.1.0",
     "html-format": "1.1.2",
     "lit": "2.7.5"
