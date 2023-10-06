@@ -30,10 +30,8 @@ class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
     });
   }
 
-
   connectedCallback() {
     super.connectedCallback();
-
     // Grab existing children at the point that the component is added to the page
     const flattenedChildren = Array.from(this.children).flat(Infinity).filter(child => child)
     const styledChildren = flattenedChildren.map((child, index) => {
