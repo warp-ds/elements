@@ -1,3 +1,10 @@
+# [1.1.0-next.2](https://github.com/warp-ds/elements/compare/v1.1.0-next.1...v1.1.0-next.2) (2023-10-06)
+
+
+### Features
+
+* **i18n:** add i18n support ([#61](https://github.com/warp-ds/elements/issues/61)) ([1735094](https://github.com/warp-ds/elements/commit/1735094e665f34f157e1339d3fe61a07d1ba3ba7))
+
 # [1.1.0-next.1](https://github.com/warp-ds/elements/compare/v1.0.1...v1.1.0-next.1) (2023-09-25)
 
 
