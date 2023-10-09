@@ -2,7 +2,11 @@ import { html, LitElement, css } from 'lit';
 import { interleave } from '@warp-ds/core/breadcrumbs';
 import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes'
 import { kebabCaseAttributes } from '../utils';
-
+import { i18n } from '@lingui/core';
+import { messages as enMessages} from './locales/en/messages.mjs';
+import { messages as nbMessages} from './locales/nb/messages.mjs';
+import { messages as fiMessages} from './locales/fi/messages.mjs';
+import { activateI18n } from '../i18n';
 const separator = html`<span class=${ccBreadcrumbs.separator} aria-hidden='true'>/</span>`;
 
 class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
@@ -16,7 +20,14 @@ class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
 
   constructor() {
     super();
-    this.ariaLabel = 'Her er du';
+    activateI18n(enMessages, nbMessages, fiMessages);
+
+    this.ariaLabel = i18n._(
+    {
+      id: 'breadcrumbs.ariaLabel',
+      message: 'You are here',
+      comment: 'Default screenreader message for the breadcrumb component',
+    });
   }
 
   connectedCallback() {
