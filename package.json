@@ -64,7 +64,7 @@
     "postcss-import": "15.1.0",
     "postcss-import-svg": "1.0.5",
     "postcss-syntax": "0.36.2",
-    "prettier": "2.8.8",
+    "prettier": "3.0.3",
     "rimraf": "5.0.1",
     "semantic-release": "^21.0.7",
     "semantic-release-slack-bot": "^4.0.2",
