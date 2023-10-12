@@ -2,10 +2,6 @@
 
 import { css, html, LitElement } from 'lit';
 import { alert as ccAlert } from '@warp-ds/css/component-classes';
-import '@warp-ds/icons/elements/alert-warning-16';
-import '@warp-ds/icons/elements/alert-success-16';
-import '@warp-ds/icons/elements/alert-error-16';
-import '@warp-ds/icons/elements/alert-info-16';
 import { classNames } from '@chbphone55/classnames';
 
 const variants = {
@@ -71,10 +67,10 @@ class WarpAlert extends LitElement {
   `;
 
   get _icon() {
-    if (this.variant === variants.info) return html`<w-icon-alert-info16></w-icon-alert-info16>`;
-    if (this.variant === variants.warning) return html`<w-icon-alert-warning16></w-icon-alert-warning16>`;
-    if (this.variant === variants.negative) return html`<w-icon-alert-error16></w-icon-alert-error16>`;
-    if (this.variant === variants.positive) return html`<w-icon-alert-success16></w-icon-alert-success16>`;
+    if (this.variant === variants.info) return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
+    if (this.variant === variants.warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    if (this.variant === variants.negative) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    if (this.variant === variants.positive) return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
     else return '';
   }
 

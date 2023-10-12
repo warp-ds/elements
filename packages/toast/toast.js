@@ -3,10 +3,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
-import '@warp-ds/icons/elements/alert-warning-16';
-import '@warp-ds/icons/elements/alert-success-16';
-import '@warp-ds/icons/elements/alert-error-16';
-import '@warp-ds/icons/elements/close-16';
 
 const classes = (definition) => {
   const defn = {};
@@ -102,9 +98,9 @@ export class WarpToast extends LitElement {
   }
 
   get _iconMarkup() {
-    if (this._warning) return html`<w-icon-alert-warning16></w-icon-alert-warning16>`;
-    if (this._error) return html`<w-icon-alert-error16></w-icon-alert-error16>`;
-    else return html`<w-icon-alert-success16></w-icon-alert-success16>`;
+    if (this._warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    if (this._error) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
   }
 
   async collapse() {
@@ -135,7 +131,7 @@ export class WarpToast extends LitElement {
           this.canclose === true,
           () => html`
             <button class="${ccToast.close}" @click="${this.close}">
-              <w-icon-close16></w-icon-close16>
+              <w-icon-close-16></w-icon-close-16>
             </button>
           `,
         )}
