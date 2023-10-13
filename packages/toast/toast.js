@@ -3,7 +3,6 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
-import { closeSVG, successSVG, failureSVG, warningSVG } from './svgs';
 
 const classes = (definition) => {
   const defn = {};
@@ -80,10 +79,6 @@ export class WarpToast extends LitElement {
     return this.renderRoot?.querySelector(`section`) ?? null;
   }
 
-  get _success() {
-    return this.type === toastType.success;
-  }
-
   get _warning() {
     return this.type === toastType.warning;
   }
@@ -97,16 +92,15 @@ export class WarpToast extends LitElement {
   }
 
   get _typeLabel() {
-    if (this._success) return 'Vellykket';
-    if (this._error) return 'Feil';
     if (this._warning) return 'Varsel';
-    return 'Info';
+    if (this._error) return 'Feil';
+    return 'Vellykket'
   }
 
   get _iconMarkup() {
-    if ( this.type === toastType.success) return successSVG({ typeLabel: this._typeLabel });
-    if ( this.type === toastType.warning) return warningSVG({ typeLabel: this._typeLabel });
-    return failureSVG({ typeLabel: this._typeLabel, isInfo: this._info });
+    if (this._warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    if (this._error) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
   }
 
   async collapse() {
@@ -135,7 +129,11 @@ export class WarpToast extends LitElement {
         </div>
         ${when(
           this.canclose === true,
-          () => html`<button class="${ccToast.close}" @click="${this.close}">${closeSVG()}</button>`,
+          () => html`
+            <button class="${ccToast.close}" @click="${this.close}">
+              <w-icon-close-16></w-icon-close-16>
+            </button>
+          `,
         )}
       </div>
     </section>`;
