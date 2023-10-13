@@ -1,3 +1,10 @@
+## [1.1.1-next.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1-next.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* replace inline svgs with warp icons ([#63](https://github.com/warp-ds/elements/issues/63)) ([f69fb59](https://github.com/warp-ds/elements/commit/f69fb59badda2306b9dbc32c95a96329e24de42c))
+
 # [1.1.0](https://github.com/warp-ds/elements/compare/v1.0.1...v1.1.0) (2023-10-09)
 
 
