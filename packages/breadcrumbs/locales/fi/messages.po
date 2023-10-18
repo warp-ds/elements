@@ -23,4 +23,3 @@ msgstr ""
 #: packages/breadcrumbs/index.js:26
 msgid "breadcrumbs.ariaLabel"
 msgstr "Olet tässä"
-

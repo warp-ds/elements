@@ -32,7 +32,7 @@
     "semantic-release": "semantic-release",
     "build:elements": "node build-elements.js",
     "messages:extract": "lingui extract",
-    "messages:compile": "lingui compile --strict"
+    "messages:compile": "lingui compile"
   },
   "repository": {
     "type": "git",

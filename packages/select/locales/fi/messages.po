@@ -20,7 +20,6 @@ msgstr ""
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/select/index.js:98
+#: packages/select/index.js:99
 msgid "select.label.optional"
 msgstr "(valinnainen)"
-

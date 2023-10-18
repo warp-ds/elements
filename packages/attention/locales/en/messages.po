@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-10-18 15:22+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#. Default screenreader message for callout speech bubble in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:161
+msgid "attention.callout"
+msgstr "callout speech bubble"
+
+#. Default screenreader message for bottom direction in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:133
+msgid "attention.direction.bottom"
+msgstr "pointing down"
+
+#. Default screenreader message for left direction in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:140
+msgid "attention.direction.left"
+msgstr "pointing left"
+
+#. Default screenreader message for right direction in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:126
+msgid "attention.direction.right"
+msgstr "pointing right"
+
+#. Default screenreader message for top direction in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:119
+msgid "attention.direction.top"
+msgstr "pointing up"
+
+#. Default screenreader message for popover speech bubble in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:168
+msgid "attention.popover"
+msgstr "popover speech bubble"
+
+#. Default screenreader message for tooltip speech bubble in the attention component
+#. js-lingui-explicit-id
+#: packages/attention/index.js:154
+msgid "attention.tooltip"
+msgstr "tooltip speech bubble"

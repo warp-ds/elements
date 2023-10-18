@@ -8,6 +8,11 @@ import {
   arrowLabels,
   useRecompute as recompute,
 } from '@warp-ds/core/attention';
+import { i18n } from '@lingui/core';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { activateI18n } from '../i18n';
 
 class WarpAttention extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -49,6 +54,7 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
 
   constructor() {
     super();
+    activateI18n(enMessages, nbMessages, fiMessages);
 
     this.show = false;
     this.tooltip = false;
@@ -108,11 +114,80 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
     recompute(this.attentionState);
   }
 
+  pointingAtDirection() {
+    switch (opposites[this._actualDirection]) {
+      case 'top':
+        return i18n._({
+          id: 'attention.direction.top',
+          message: 'pointing up',
+          comment:
+            'Default screenreader message for top direction in the attention component',
+        })
+      case 'right':
+        return i18n._({
+          id: 'attention.direction.right',
+          message: 'pointing right',
+          comment:
+            'Default screenreader message for right direction in the attention component',
+        })
+      case 'bottom':
+        return i18n._({
+          id: 'attention.direction.bottom',
+          message: 'pointing down',
+          comment:
+            'Default screenreader message for bottom direction in the attention component',
+        })
+      case 'left':
+        return i18n._({
+          id: 'attention.direction.left',
+          message: 'pointing left',
+          comment:
+            'Default screenreader message for left direction in the attention component',
+        })
+      default:
+        return ''
+    }
+  }
+  
+  activeAttentionType() {
+    switch (true) {
+      case this.tooltip:
+        return i18n._({
+          id: 'attention.tooltip',
+          message: 'tooltip speech bubble',
+          comment:
+            'Default screenreader message for tooltip speech bubble in the attention component',
+        })
+      case this.callout:
+        return i18n._({
+          id: 'attention.callout',
+          message: 'callout speech bubble',
+          comment:
+            'Default screenreader message for callout speech bubble in the attention component',
+        })
+      case this.popover:
+        return i18n._({
+          id: 'attention.popover',
+          message: 'popover speech bubble',
+          comment:
+            'Default screenreader message for popover speech bubble in the attention component',
+        })
+      default:
+        return ''
+    }
+  }
+  
+  defaultAriaLabel(){
+    return `${this.activeAttentionType()} ${!this.noArrow ? this.pointingAtDirection() : ''}`
+  }
+
   setAriaLabels() {
     if (this._targetEl && !this._targetEl.getAttribute('aria-describedby')) {
       const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
-      this._messageEl.setAttribute('role', 'tooltip');
+      const role = 
+      this._messageEl.setAttribute('role', this.tooltip ? 'tooltip' : 'img');
       this._targetEl.setAttribute('aria-describedby', attentionMessageId);
+      this._messageEl.setAttribute('aria-label', this.defaultAriaLabel())
     }
   }
 

@@ -23,4 +23,3 @@ msgstr ""
 #: packages/button/index.js:49
 msgid "button.aria.loading"
 msgstr "Laster..."
-
