@@ -237,7 +237,6 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
       : html`<div
           id="arrow"
           role="img"
-          aria-label=${arrowLabels[this._arrowDirection]}
           class="${this._arrowClasses}"
           style="transform:rotate(${rotation[this._arrowDirection]}deg);
           margin-${
