@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2023-10-18 15:22+0200\n"
+"POT-Creation-Date: 2023-10-19 13:39+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9,42 +9,42 @@ msgstr ""
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:161
+#: packages/attention/index.js:162
 msgid "attention.callout"
 msgstr "callout speech bubble"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:133
-msgid "attention.direction.bottom"
+#: packages/attention/index.js:134
+msgid "attention.pointingDown"
 msgstr "pointing down"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:140
-msgid "attention.direction.left"
+#: packages/attention/index.js:141
+msgid "attention.pointingLeft"
 msgstr "pointing left"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:126
-msgid "attention.direction.right"
+#: packages/attention/index.js:127
+msgid "attention.pointingRight"
 msgstr "pointing right"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:119
-msgid "attention.direction.top"
+#: packages/attention/index.js:120
+msgid "attention.pointingUp"
 msgstr "pointing up"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:168
+#: packages/attention/index.js:169
 msgid "attention.popover"
 msgstr "popover speech bubble"
 
 #. Default screenreader message for tooltip speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:154
+#: packages/attention/index.js:155
 msgid "attention.tooltip"
 msgstr "tooltip speech bubble"
