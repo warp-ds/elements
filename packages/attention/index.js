@@ -5,7 +5,6 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
-  arrowLabels,
   useRecompute as recompute,
 } from '@warp-ds/core/attention';
 import { i18n } from '@lingui/core';
@@ -184,7 +183,6 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
   setAriaLabels() {
     if (this._targetEl && !this._targetEl.getAttribute('aria-describedby')) {
       const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
-      const role = 
       this._messageEl.setAttribute('role', this.tooltip ? 'tooltip' : 'img');
       this._targetEl.setAttribute('aria-describedby', attentionMessageId);
       this._messageEl.setAttribute('aria-label', this.defaultAriaLabel())
