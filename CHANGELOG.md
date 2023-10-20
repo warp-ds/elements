@@ -1,3 +1,10 @@
+## [1.1.1-next.2](https://github.com/warp-ds/elements/compare/v1.1.1-next.1...v1.1.1-next.2) (2023-10-20)
+
+
+### Bug Fixes
+
+* anchor text alignment & icon translations ([#84](https://github.com/warp-ds/elements/issues/84)) ([83b6c7a](https://github.com/warp-ds/elements/commit/83b6c7a6236ab07a5a9cc86b066e5e2938be6a77))
+
 ## [1.1.1-next.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1-next.1) (2023-10-13)
 
 
