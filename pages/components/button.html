@@ -102,17 +102,17 @@
           </div>
         </div>
 
-        <h3 class="mt-32">Link</h3>
+        <h3 class="mt-32">Link (anchor) styled as button</h3>
 
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
             Buttons will be rendered as an anchor (a tag) if they use an href attribute.
             <syntax-highlight>
-              <w-button href="https://google.no">Button as anchor</w-button>
+              <w-button href="https://google.no">Go to google.com</w-button>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-            <w-button href="https://google.no">Button as anchor</w-button>
+            <w-button href="https://google.com">Go to google.com</w-button>
           </div>
         </div>
 
@@ -137,12 +137,14 @@
           <div class="col-span-2">
             Button will take the parent's width instead of content width. Useful on mobile when button should take full width. 
             <syntax-highlight>
-              <w-button full-width variant="primary" loading>Primary button loading</w-button>
+              <w-button full-width variant="primary">Button full width</w-button>
+              <w-button full-width variant="primary" href="https://google.com">Go to google.com</w-button>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-            <div class="w-full">
+            <div class="w-full flex flex-col gap-8">
               <w-button full-width variant="primary">Button full width</w-button>
+              <w-button full-width variant="primary" href="https://google.com">Go to google.com</w-button>
             </div>
           </div>
         </div>
