@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* anchor text alignment & icon translations ([#84](https://github.com/warp-ds/elements/issues/84)) ([83b6c7a](https://github.com/warp-ds/elements/commit/83b6c7a6236ab07a5a9cc86b066e5e2938be6a77))
+* **breadcrumbs:** Remove double aria-label ([5e165ae](https://github.com/warp-ds/elements/commit/5e165aecd9214bf0c553351189c928159f1bab10))
+* **breadcrumbs:** remove dounble aria label and remove aria hidden from seperators ([4595529](https://github.com/warp-ds/elements/commit/4595529aa8bc375f71f240180235e95c8e75cdf9))
+* replace inline svgs with warp icons ([#63](https://github.com/warp-ds/elements/issues/63)) ([f69fb59](https://github.com/warp-ds/elements/commit/f69fb59badda2306b9dbc32c95a96329e24de42c))
+
 ## [1.1.1-next.3](https://github.com/warp-ds/elements/compare/v1.1.1-next.2...v1.1.1-next.3) (2023-10-23)
 
 
