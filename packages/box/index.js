@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { fclasses } from '../utils';
 import { box as ccBox } from '@warp-ds/css/component-classes';
 
@@ -8,6 +8,7 @@ class WarpBox extends LitElement {
     bordered: { type: Boolean },
     info: { type: Boolean },
     neutral: { type: Boolean },
+    role: { type: String },
   };
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -18,12 +19,12 @@ class WarpBox extends LitElement {
     css`
       @unocss-placeholder
       :host {
-          display: block;
-        }
-        ::slotted(:last-child) {
-          margin-bottom: 0 !important;
-        }
-      `;
+        display: block;
+      }
+      ::slotted(:last-child) {
+        margin-bottom: 0 !important;
+      }
+    `;
 
   get _class() {
     return fclasses({
@@ -35,9 +36,13 @@ class WarpBox extends LitElement {
     });
   }
 
+  get _optOutRoleWithDefault() {
+    return this.role === '' ? nothing : this.role ?? 'region'
+  }
+
   render() {
     return html`
-      <div class="${this._class}">
+      <div role="${this._optOutRoleWithDefault}" class="${this._class}">
         <slot></slot>
       </div>
     `;
