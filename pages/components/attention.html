@@ -171,13 +171,13 @@
         <p>
           Attention element handles accessibility automatically by wrapping its slotted content with
           a <code>div</code> with either <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and setting an
-          <code>aria-describedby</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
+          <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
         </p>
         <p>
           It is possible to tell assistive technologies to recognize only a part of Attention's text
           content. To do that set the <code>role</code> and <code>aria-label</code> attributes on the relevant text element nested in
           <code>w-attention</code> and reference it by id through the use of
-          <code>aria-describedby</code>. The <code>aria-describedby</code> attribute is on the
+          <code>aria-details</code>. The <code>aria-details</code> attribute is on the
           target element, not on <code>w-attention</code>.
         </p>
 
@@ -188,7 +188,7 @@
               <p>(this text is less relevant)</p>
             </div>
             <button
-              aria-describedby="aria-content"
+              aria-details="aria-content"
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
@@ -204,7 +204,7 @@
               <p>(this text is less relevant)</p>
             </div>
             <button
-              aria-describedby="aria-content"
+              aria-details="aria-content"
               id="popoverTarget2"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"

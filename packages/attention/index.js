@@ -1,17 +1,17 @@
-import { css, html, LitElement } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
-import { attention as ccAttention } from '@warp-ds/css/component-classes';
+import { css, html, LitElement } from 'lit'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { classes, kebabCaseAttributes, generateRandomId } from '../utils'
+import { attention as ccAttention } from '@warp-ds/css/component-classes'
 import {
   opposites,
   rotation,
   useRecompute as recompute,
-} from '@warp-ds/core/attention';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { activateI18n } from '../i18n';
+} from '@warp-ds/core/attention'
+import { i18n } from '@lingui/core'
+import { messages as enMessages } from './locales/en/messages.mjs'
+import { messages as nbMessages } from './locales/nb/messages.mjs'
+import { messages as fiMessages } from './locales/fi/messages.mjs'
+import { activateI18n } from '../i18n'
 
 class WarpAttention extends kebabCaseAttributes(LitElement) {
   static properties = {
@@ -28,12 +28,11 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
     popover: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
-  };
+  }
 
   static styles = [
     css`
-      @unocss-placeholder
-      #attention {
+      @unocss-placeholder #attention {
         position: absolute;
         z-index: 50;
         visibility: var(--attention-visibility);
@@ -49,53 +48,59 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
         z-index: 1;
       }
     `,
-  ];
+  ]
 
   constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages);
+    super()
+    activateI18n(enMessages, nbMessages, fiMessages)
 
-    this.show = false;
-    this.tooltip = false;
-    this.callout = false;
-    this.popover = false;
-    this.noArrow = false;
+    this.show = false
+    this.tooltip = false
+    this.callout = false
+    this.popover = false
+    this.noArrow = false
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    super.connectedCallback()
 
     if (!this.placement || !Object.keys(opposites).includes(this.placement)) {
       throw new Error(
         `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
-          Object.keys(opposites),
-        )}`,
-      );
+          Object.keys(opposites)
+        )}`
+      )
     }
 
     // Fix FOUC effect issues
-    setTimeout(() => this.requestUpdate(), 0);
+    setTimeout(() => this.requestUpdate(), 0)
   }
 
   get _actualDirection() {
-    return this.placement;
+    return this.placement
   }
 
   set _actualDirection(v) {
-    this.placement = v;
+    this.placement = v
   }
 
   get _arrowDirection() {
-    return opposites[this.placement];
+    return opposites[this.placement]
   }
 
   updated() {
     if (!this.callout) {
-      this._attentionEl.style.setProperty('--attention-visibility', this.show ? '' : 'hidden');
+      this._attentionEl.style.setProperty(
+        '--attention-visibility',
+        this.show ? '' : 'hidden'
+      )
     }
 
     if (!this.tooltip) {
-      this._attentionEl.style.setProperty('--attention-display', this.show ? 'block' : 'none');
+      this._attentionEl.style.setProperty(
+        '--attention-display',
+        this.show ? 'block' : 'none'
+      )
     }
 
     this.attentionState = {
@@ -107,10 +112,10 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
       attentionEl: this._attentionEl,
       targetEl: this._targetEl,
       noArrow: this.noArrow,
-    };
+    }
 
     // Recompute attention element position on property changes
-    recompute(this.attentionState);
+    recompute(this.attentionState)
   }
 
   pointingAtDirection() {
@@ -147,7 +152,7 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
         return ''
     }
   }
-  
+
   activeAttentionType() {
     switch (true) {
       case this.tooltip:
@@ -175,39 +180,43 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
         return ''
     }
   }
-  
-  defaultAriaLabel(){
-    return `${this.activeAttentionType()} ${!this.noArrow ? this.pointingAtDirection() : ''}`
-  }
 
+  defaultAriaLabel() {
+    return `${this.activeAttentionType()} ${
+      !this.noArrow ? this.pointingAtDirection() : ''
+    }`
+  }
   setAriaLabels() {
-    if (this._targetEl && !this._targetEl.getAttribute('aria-describedby')) {
-      const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
-      this._messageEl.setAttribute('role', this.tooltip ? 'tooltip' : 'img');
-      this._targetEl.setAttribute('aria-describedby', attentionMessageId);
-      this._messageEl.setAttribute('aria-label', this.defaultAriaLabel())
+    if (this._targetEl && !this._targetEl.getAttribute('aria-details')) {
+      const attentionMessageId =
+        this._messageEl.id || (this._messageEl.id = generateRandomId())
+      this._targetEl.setAttribute('aria-details', attentionMessageId)
     }
   }
 
   firstUpdated() {
-    this.setAriaLabels();
+    this.setAriaLabels()
 
     // Attention of "callout" type should always be used inline
     if (this.callout) {
-      this._attentionEl.style.position = 'relative';
+      this._attentionEl.style.position = 'relative'
     }
   }
 
   get _attentionEl() {
-    return this.renderRoot.querySelector('#attention');
+    return this.renderRoot.querySelector('#attention')
   }
 
   get _targetEl() {
-    return this.renderRoot.querySelector("slot[name='target']").assignedNodes()[0];
+    return this.renderRoot
+      .querySelector("slot[name='target']")
+      .assignedNodes()[0]
   }
 
   get _messageEl() {
-    return this.renderRoot.querySelector("slot[name='message']").assignedNodes()[0];
+    return this.renderRoot
+      .querySelector("slot[name='message']")
+      .assignedNodes()[0]
   }
 
   get _wrapperClasses() {
@@ -216,17 +225,22 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
       [ccAttention.tooltip]: this.tooltip,
       [ccAttention.callout]: this.callout,
       [ccAttention.popover]: this.popover,
-    });
+    })
   }
 
   get _arrowClasses() {
     return classes({
       [ccAttention.arrowBase]: true,
-      [ccAttention[`arrowDirection${this._arrowDirection.charAt(0).toUpperCase() + this._arrowDirection.slice(1)}`]]: true,
+      [ccAttention[
+        `arrowDirection${
+          this._arrowDirection.charAt(0).toUpperCase() +
+          this._arrowDirection.slice(1)
+        }`
+      ]]: true,
       [ccAttention.arrowTooltip]: this.tooltip,
       [ccAttention.arrowCallout]: this.callout,
       [ccAttention.arrowPopover]: this.popover,
-    });
+    })
   }
 
   get _arrowHtml() {
@@ -239,9 +253,10 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
           style="transform:rotate(${rotation[this._arrowDirection]}deg);
           margin-${
             // border alignment is off by a fraction of a pixel, this fixes it
-            this._arrowDirection.charAt(0).toLowerCase() + this._arrowDirection.slice(1)
+            this._arrowDirection.charAt(0).toLowerCase() +
+            this._arrowDirection.slice(1)
           }:-0.5px;"
-        />`;
+        />`
   }
 
   render() {
@@ -250,7 +265,13 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
         ${this.placement === 'right' || this.placement === 'bottom' // Attention's and its arrow's visual position should be reflected in the DOM
           ? html`
               <slot name="target"></slot>
-              <div id="attention" class="${this._wrapperClasses}">
+
+              <div
+                id="attention"
+                role="${this.tooltip ? 'tooltip' : 'img'}"
+                aria-label="${this.defaultAriaLabel()}"
+                class="${this._wrapperClasses}"
+              >
                 <div>
                   ${this._arrowHtml}
                   <slot name="message"></slot>
@@ -267,12 +288,12 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
               <slot name="target"></slot>
             `}
       </div>
-    `;
+    `
   }
 }
 
 if (!customElements.get('w-attention')) {
-  customElements.define('w-attention', WarpAttention);
+  customElements.define('w-attention', WarpAttention)
 }
 
-export { WarpAttention };
+export { WarpAttention }
