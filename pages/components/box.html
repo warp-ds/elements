@@ -47,6 +47,17 @@
               </td>
               <td>false</td>
             </tr>
+            <tr>
+              <td>role</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Sets the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
+                  To remove the default role attribute, supply an empty role (<code>role=""</code>).
+                </div>
+              </td>
+              <td>region</td>
+            </tr>
           </tbody>
         </table>
 
@@ -58,13 +69,13 @@
           </w-box>
         </syntax-highlight>
         <div class="example">
-          <w-box>
+          <w-box role="region">
             <h3>I have default styles</h3>
           </w-box>
         </div>
 
         <syntax-highlight>
-          <w-box info="true">
+          <w-box info>
             <h3>I am an info box</h3>
           </w-box>
         </syntax-highlight>
@@ -75,18 +86,18 @@
         </div>
 
         <syntax-highlight>
-          <w-box bordered="true">
+          <w-box bordered>
             <h3>I am a bordered box</h3>
           </w-box>
         </syntax-highlight>
         <div class="example">
-          <w-box bordered="true">
+          <w-box bordered>
             <h3>I am a bordered box</h3>
           </w-box>
         </div>
 
         <syntax-highlight>
-          <w-box neutral="true">
+          <w-box neutral>
             <h3>I am a neutral colour</h3>
           </w-box>
         </syntax-highlight>
@@ -97,7 +108,7 @@
         </div>
 
         <syntax-highlight>
-          <w-box neutral="true" bleed="true">
+          <w-box neutral bleed>
             <h3>I am full width on mobile</h3>
           </w-box>
         </syntax-highlight>
@@ -111,21 +122,19 @@
           <w-box info class="w-full lg:w-2/4 md:w-2/4">
             <h3 class="mb-16">Info box</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in
-              commodo dapibus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
             </p>
             <div class="my-16">
               <a title="This is a link">This is a link</a>
             </div>
-            <w-button small onclick="alert('clicked!');">Button</button>
+            <w-button small onclick="alert('clicked!');">Button</w-button>
           </w-box>
         </syntax-highlight>
         <div class="example">
           <w-box info class="w-full lg:w-2/4 md:w-2/4">
             <h3 class="mb-16">Info box</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in
-              commodo dapibus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
             </p>
             <div class="my-16">
               <a title="This is a link">This is a link</a>
@@ -136,23 +145,25 @@
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
           Use the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
-          Read more about <code>role</code> types
+          If no role property is supplied, it will default to <code>role="region"</code>.
+          To remove the default role attribute, supply an empty role (<code>role=""</code>).
+          Consider using more suitable roles for your specific Box, as described on
           <a
             target="_blank"
             title="Read more about ARIA role types on MDN"
             class="text-current hover:no-underline focus:no-underline"
             href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#aria_role_types"
-            ><u> on MDN</u></a
+            ><u>MDN WAI-ARIA Roles</u></a
           >.
         </p>
 
         <syntax-highlight>
-          <w-box bordered="true" role="section">
+          <w-box bordered role="region">
             <h3>I am treated as a section element by screen readers and other tools</h3>
           </w-box>
         </syntax-highlight>
         <div class="example">
-          <w-box bordered role="section">
+          <w-box bordered role="region">
             <h3>I am treated as a section element by screen readers and other tools</h3>
           </w-box>
         </div>
