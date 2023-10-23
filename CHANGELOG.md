@@ -1,3 +1,11 @@
+## [1.1.1-next.3](https://github.com/warp-ds/elements/compare/v1.1.1-next.2...v1.1.1-next.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** Remove double aria-label ([5e165ae](https://github.com/warp-ds/elements/commit/5e165aecd9214bf0c553351189c928159f1bab10))
+* **breadcrumbs:** remove dounble aria label and remove aria hidden from seperators ([4595529](https://github.com/warp-ds/elements/commit/4595529aa8bc375f71f240180235e95c8e75cdf9))
+
 ## [1.1.1-next.2](https://github.com/warp-ds/elements/compare/v1.1.1-next.1...v1.1.1-next.2) (2023-10-20)
 
 
