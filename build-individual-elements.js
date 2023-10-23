@@ -47,7 +47,7 @@ imports.forEach(async (item) => {
         fileName: `packages/${match[1]}/index`,
       },
       rollupOptions: {
-        external: ["lit", "lit/directives/class-map.js", "lit/directives/if-defined.js"],
+        external: ["lit", /^lit\/.*/],
         output: {
           globals: { lit: "lit" },
         },
