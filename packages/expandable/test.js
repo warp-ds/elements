@@ -130,7 +130,7 @@ test('Animated expandable component with custom title is rendered on the page', 
   const component = `
     <w-expandable animated>
       <div slot="title" class="flex flex-row items-center">
-        <w-icon-bag16></w-icon-bag16>
+        <w-icon-bag-16></w-icon-bag-16>
         <p class="ml-8 mb-0">This is a title with an icon</p>
       </div>
       <p>This is an expandable element</p>

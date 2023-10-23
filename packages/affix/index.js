@@ -1,7 +1,7 @@
 import { html, LitElement, css } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { suffix, prefix } from '@warp-ds/css/component-classes';
-import { search, clear } from './icons';
+
 import { fclasses } from '../utils';
 
 class WarpAffix extends LitElement {
@@ -31,7 +31,7 @@ class WarpAffix extends LitElement {
   get _searchButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="submit">
-        ${search}
+        <w-icon-search-16></w-icon-search-16>
       </button>
     `;
   }
@@ -39,7 +39,7 @@ class WarpAffix extends LitElement {
   get _clearButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="reset">
-        ${clear}
+        <w-icon-close-16></w-icon-close-16>
       </button>
     `;
   }

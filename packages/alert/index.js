@@ -2,14 +2,13 @@
 
 import { css, html, LitElement } from 'lit';
 import { alert as ccAlert } from '@warp-ds/css/component-classes';
-import { infoSvg, negativeSvg, positiveSvg, warningSvg } from './svgs';
 import { classNames } from '@chbphone55/classnames';
 
-const icons = {
-  negative: negativeSvg(),
-  positive: positiveSvg(),
-  warning: warningSvg(),
-  info: infoSvg(),
+const variants = {
+  negative: 'negative',
+  positive: 'positive',
+  warning: 'warning',
+  info: 'info'
 };
 
 class WarpAlert extends LitElement {
@@ -27,7 +26,7 @@ class WarpAlert extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.variant || !Object.keys(icons).includes(this.variant)) {
+    if (!this.variant || !variants[this.variant]) {
       throw new Error(
         'Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.'
       );
@@ -68,7 +67,11 @@ class WarpAlert extends LitElement {
   `;
 
   get _icon() {
-    return this.variant ? icons[this.variant] : {};
+    if (this.variant === variants.info) return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
+    if (this.variant === variants.warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    if (this.variant === variants.negative) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    if (this.variant === variants.positive) return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    else return '';
   }
 
   render() {
