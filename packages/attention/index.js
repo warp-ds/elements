@@ -158,9 +158,9 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
       case this.tooltip:
         return i18n._({
           id: 'attention.tooltip',
-          message: 'tooltip speech bubble',
+          message: 'tooltip',
           comment:
-            'Default screenreader message for tooltip speech bubble in the attention component',
+            'Default screenreader message for tooltip in the attention component',
         })
       case this.callout:
         return i18n._({
