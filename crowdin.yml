@@ -22,4 +22,9 @@ files:
       "dest": "elements/packages/select/messages.po",
       "translation": "/packages/select/locales/%two_letters_code%/messages.po",
     },
+    {
+      "source": "/packages/attention/locales/en/messages.po",
+      "dest": "elements/packages/attention/messages.po",
+      "translation": "/packages/attention/locales/%two_letters_code%/messages.po",
+    },
   ]
