@@ -175,7 +175,7 @@
         </p>
         <p>
           It is possible to tell assistive technologies to recognize only a part of Attention's text
-          content. To do that set the <code>role</code> and <code>aria-label</code> attributes on the relevant text element nested in
+          content. To do that set the <code>role</code> attribute on the relevant text element nested in
           <code>w-attention</code> and reference it by id through the use of
           <code>aria-details</code>. The <code>aria-details</code> attribute is on the
           target element, not on <code>w-attention</code>.
@@ -184,7 +184,7 @@
         <syntax-highlight>
           <w-attention placement="top" popover>
             <div slot="message">
-              <p id="aria-content" role="tooltip" aria-label="popover with ARIA 'tooltip' role">I'm a popover with ARIA "tooltip" role and a aria-label</p>
+              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
               <p>(this text is less relevant)</p>
             </div>
             <button
@@ -200,7 +200,7 @@
         <div id="accessibilityExample" class="example">
           <w-attention placement="top" popover>
             <div slot="message">
-              <p id="aria-content" role="tooltip" aria-label="popover with ARIA 'tooltip' role">I'm a popover with ARIA "tooltip" role and a aria-label</p>
+              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
               <p>(this text is less relevant)</p>
             </div>
             <button
