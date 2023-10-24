@@ -1,3 +1,10 @@
+## [1.1.2-next.1](https://github.com/warp-ds/elements/compare/v1.1.1...v1.1.2-next.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* a11y issues for attention component ([#82](https://github.com/warp-ds/elements/issues/82)) ([8b96498](https://github.com/warp-ds/elements/commit/8b9649846739cc3ab5af879c01515142fb9ef884))
+
 ## [1.1.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1) (2023-10-23)
 
 

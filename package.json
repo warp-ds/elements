@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "1.1.1",
+  "version": "1.1.2-next.1",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
