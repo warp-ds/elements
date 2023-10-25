@@ -260,8 +260,8 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/main-6c4b1006.js"></script>
-  <link rel="stylesheet" href="/elements/assets/index-3fbd3cc4.css">
+  <script type="module" crossorigin src="/elements/assets/main-580df11b.js"></script>
+  <link rel="stylesheet" href="/elements/assets/index-6e47d14b.css">
 </head>
   <body>
     
@@ -306,12 +306,12 @@
 
         <syntax-highlight>
           <div class="flex gap-8 flex-wrap mt-16">
-            <w-button small>Hide and show "info" variant</w-button>
-            <w-button small>Hide and show "negative" variant</w-button>
-            <w-button small>Hide and show "positive" variant</w-button>
-            <w-button small>Hide and show "warning" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "info" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "negative" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "positive" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "warning" variant</w-button>
           </div>
-          <w-alert variant="info" show>
+          <w-alert id="defaultAlertId" variant="info" show>
             <p>This is "info" variant of the alert element</p>
           </w-alert>
         </syntax-highlight>
@@ -329,7 +329,7 @@
 
         <syntax-highlight>
           <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
           </w-alert>
         </syntax-highlight>
@@ -341,37 +341,15 @@
 <w-button small name="warning">Hide and show "warning" variant</w-button>
           </div>
           <w-alert id="alertWithDescription" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
           </w-alert>
         </div>
 
         <syntax-highlight>
           <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
-          </w-alert>
-        </syntax-highlight>
-        <div class="example">
-          <div id="alertWithLinkControllers" class="flex gap-8 flex-wrap mb-16">
-            <w-button small name="info">Hide and show "info" variant</w-button>
-<w-button small name="negative">Hide and show "negative" variant</w-button>
-<w-button small name="positive">Hide and show "positive" variant</w-button>
-<w-button small name="warning">Hide and show "warning" variant</w-button>
-          </div>
-          <w-alert id="alertWithLink" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
-            <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
-          </w-alert>
-        </div>
-
-        <syntax-highlight>
-          <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
-            <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
             <div class="mt-8 space-x-8">
               <w-button small onclick="alert('clicked!');">
                 Primary button
@@ -390,9 +368,8 @@
 <w-button small name="warning">Hide and show "warning" variant</w-button>
           </div>
           <w-alert id="alertWithButtons" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
             <div class="mt-8 space-x-8">
               <w-button small onclick="alert('clicked!');">
                 Primary button
@@ -421,18 +398,18 @@
         </p>
 
         <syntax-highlight>
-          <w-alert variant="info" show role="">
-            <p role="alert" class="font-bold">This is a "info" variant of the alert element</p>
+          <w-alert id="selfHidingAlertId" variant="info" show role="">
+            <h3 role="alert" class="t5">This is a "info" variant of the alert element</h3>
             <p>You see this warning because you did something wrong</p>
-            <w-button variant="primary" small>Hide and show alert</w-button>
+            <w-button variant="primary" small aria-controls="selfHidingAlertId">Hide and show alert</w-button>
           </w-alert>
         </syntax-highlight>
         <div class="example">
           <w-alert id="selfHidingAlert" variant="info" show role="">
-            <p role="alert" class="font-bold">This is "info" variant of the alert element</p>
+            <h3 role="alert" class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
-              <w-button variant="primary" small>Hide and show alert</w-button>
+              <w-button variant="primary" small aria-controls="selfHidingAlert">Hide and show alert</w-button>
             </div>
           </w-alert>
         </div>
@@ -456,17 +433,26 @@
     const controllersWrapperId = `#${alertId}Controllers`;
 
     document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
+      el.setAttribute('aria-controls', alertId);
+
       el.addEventListener('click', (event) => {
         alertElement.show = false;
+        el.setAttribute('aria-expanded', false);
+
         const name = el.getAttribute('name') || 'info';
+        const role = (name === 'info' || name === 'positive') ? 'status' : 'alert';
 
         // update alert after hide transition ends
         setTimeout(() => {
           alertElement.variant = name;
+          alertElement.role = role;
+
           alertElement.querySelector(
-            'p',
+            alertId === 'defaultAlert' ? 'p' : 'h3',
           ).innerText = `This is "${name}" variant of the alert element`;
+
           alertElement.show = true;
+          el.setAttribute('aria-expanded', true);
         }, 500);
       });
     });
