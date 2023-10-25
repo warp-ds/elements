@@ -20,7 +20,6 @@ msgstr ""
 
 #. Default screenreader message for the breadcrumb component
 #. js-lingui-explicit-id
-#: packages/breadcrumbs/index.js:26
+#: packages/breadcrumbs/index.js:27
 msgid "breadcrumbs.ariaLabel"
 msgstr "Her er du"
-

@@ -16,6 +16,10 @@ const config: LinguiConfig = {
       include: ['packages/select/index.js'],
       path: 'packages/select/locales/{locale}/messages',
     },
+    {
+      include: ['packages/attention/index.js'],
+      path: 'packages/attention/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',
