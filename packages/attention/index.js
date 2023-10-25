@@ -1,4 +1,5 @@
-import { css, html, LitElement } from 'lit';
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
@@ -9,7 +10,7 @@ import {
   useRecompute as recompute,
 } from '@warp-ds/core/attention';
 
-class WarpAttention extends kebabCaseAttributes(LitElement) {
+class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether Attention element should be visible.
     show: { type: Boolean, reflect: true },
@@ -26,9 +27,8 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
     noArrow: { type: Boolean, reflect: true },
   };
 
-  static styles = [
+  static styles = [WarpElement.styles,
     css`
-      @unocss-placeholder
       #attention {
         position: absolute;
         z-index: 50;

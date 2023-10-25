@@ -1,5 +1,5 @@
 import { build } from "vite";
-//import esbuild from "esbuild";
+import esbuild from "esbuild";
 import { classes } from '@warp-ds/css/component-classes/classes';
 import { presetWarp } from '@warp-ds/uno';
 import uno from 'unocss/vite';
@@ -15,43 +15,43 @@ imports.forEach(async (item) => {
   if (item.includes("utils")) return;
 
   // could use esbuild instead of vite but since we are using unocss plugin, vite is a better choice
-  /*try {
+  try {
     await esbuild.build({
       entryPoints: [item],
       bundle: true,
-      outfile: `dist/${match[1]}.js`,
+      outfile: `dist/packages/${match[1]}/index.js`,
       format: "esm",
       sourcemap: true,
       target: "es2017",
       minify: true,
-      external: ["lit"],
+      external: ["lit", "@warp-ds/elements-core"],
     });
   } catch (err) {
     console.error(err);
-  }*/
+  }
 
-  await build({
-    configFile: false,
-    plugins: [
-      uno({
-        presets: [presetWarp()],
-        mode: 'shadow-dom',
-        safelist: classes,
-      })
-    ],
-    build: {
-      emptyOutDir: false,
-      lib: {
-        formats: ["es"],
-        entry: item,
-        fileName: `packages/${match[1]}/index`,
-      },
-      rollupOptions: {
-        external: ["lit", /^lit\/.*/],
-        output: {
-          globals: { lit: "lit" },
-        },
-      },
-    },
-  }); 
+  // await build({
+  //   configFile: false,
+  //   plugins: [
+  //     uno({
+  //       presets: [presetWarp()],
+  //       mode: 'shadow-dom',
+  //       safelist: classes,
+  //     })
+  //   ],
+  //   build: {
+  //     emptyOutDir: false,
+  //     lib: {
+  //       formats: ["es"],
+  //       entry: item,
+  //       fileName: `packages/${match[1]}/index`,
+  //     },
+  //     rollupOptions: {
+  //       external: ["lit", /^lit\/.*/],
+  //       output: {
+  //         globals: { lit: "lit" },
+  //       },
+  //     },
+  //   },
+  // });
 });
