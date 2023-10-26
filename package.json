@@ -78,7 +78,7 @@
     "@lingui/core": "^4.5.0",
     "@open-wc/testing": "3.2.0",
     "@warp-ds/core": "1.0.0",
-    "@warp-ds/css": "^1.1.2",
+    "@warp-ds/css": "^1.2.0",
     "@warp-ds/icons": "1.1.0",
     "@warp-ds/uno": "^1.1.0",
     "glob": "8.1.0",
