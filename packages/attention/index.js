@@ -27,6 +27,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     callout: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as a popover
     popover: { type: Boolean, reflect: true },
+    // Whether Attention element is rendered as a highlight
+    highlight: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
   }
@@ -59,6 +61,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.tooltip = false
     this.callout = false
     this.popover = false
+    this.highlight = false;
     this.noArrow = false
   }
 
@@ -177,6 +180,13 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           comment:
             'Default screenreader message for popover speech bubble in the attention component',
         })
+      case this.highlight:
+        return i18n._({
+          id: 'attention.aria.highlight',
+          message: 'highlighted speech bubble',
+          comment:
+            'Default screenreader message for highlighted speech bubble in the attention component',
+        })
       default:
         return ''
     }
@@ -194,6 +204,23 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this._targetEl.setAttribute('aria-details', attentionMessageId)
     }
   }
+
+
+  get _activeVariantClasses() {
+    const variantProps = {
+      callout: this.callout,
+      popover: this.popover,
+      tooltip: this.tooltip,
+      highlight: this.highlight
+    }
+
+    const activeVariant = Object.keys(variantProps).find(b => !!variantProps[b]) || '';
+
+    return {
+      wrapper: ccAttention[activeVariant],
+      arrow: ccAttention[`arrow${activeVariant.charAt(0).toUpperCase() + activeVariant.slice(1)}`]
+    }
+  };
 
   firstUpdated() {
     this.setAriaLabels()
@@ -223,10 +250,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   get _wrapperClasses() {
     return classes({
       [ccAttention.base]: true,
-      [ccAttention.tooltip]: this.tooltip,
-      [ccAttention.callout]: this.callout,
-      [ccAttention.popover]: this.popover,
-    })
+      [this._activeVariantClasses.wrapper]: true
+    });
   }
 
   get _arrowClasses() {
@@ -238,10 +263,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           this._arrowDirection.slice(1)
         }`
       ]]: true,
-      [ccAttention.arrowTooltip]: this.tooltip,
-      [ccAttention.arrowCallout]: this.callout,
-      [ccAttention.arrowPopover]: this.popover,
-    })
+      [this._activeVariantClasses.arrow]: true
+    });
   }
 
   get _arrowHtml() {
