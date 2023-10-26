@@ -137,6 +137,32 @@
           </w-attention>
         </div>
 
+        <syntax-highlight>
+          <w-attention placement="right" highlight>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" highlight>
+            <button
+              id="highlightTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </div>
+
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
           <w-attention placement="right" tooltip>
@@ -217,9 +243,11 @@
         <script>
           const tooltipTarget = document.querySelector('.example #tooltipTarget');
           const popoverTarget = document.querySelector('.example #popoverTarget');
+          const highlightTarget = document.querySelector('.example #highlightTarget');
           const popoverTarget2 = document.querySelector('.example #popoverTarget2');
           const tooltipEl = document.querySelector('.example [tooltip]');
           const popoverEl = document.querySelector('.example [popover]');
+          const highlightEl = document.querySelector('.example [highlight]');
           const popoverEl2 = document.querySelector('#accessibilityExample [popover]');
 
           tooltipTarget.addEventListener('mouseenter', () => {
@@ -236,6 +264,9 @@
           });
           popoverTarget.addEventListener('click', () => {
             popoverEl.show = !popoverEl.show;
+          });
+          highlightTarget.addEventListener('click', () => {
+            highlightEl.show = !highlightEl.show;
           });
           popoverTarget2.addEventListener('click', () => {
             popoverEl2.show = !popoverEl2.show;
