@@ -1,12 +1,13 @@
-import { css, html, LitElement } from 'lit';
-import { fclasses, kebabCaseAttributes } from '../utils';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { fclasses, kebabCaseAttributes } from "../utils";
 import {
   box as ccBox,
   expandable as ccExpandable,
-} from '@warp-ds/css/component-classes';
-import { ifDefined } from 'lit/directives/if-defined.js';
+} from "@warp-ds/css/component-classes";
+import { ifDefined } from "lit/directives/if-defined.js";
 
-class WarpExpandable extends kebabCaseAttributes(LitElement) {
+class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
     expanded: { type: Boolean, reflect: true },
     title: { type: String },
@@ -38,8 +39,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
+    WarpElement.styles,
     css`
-      @unocss-placeholder
       :host {
         display: block;
       }
@@ -59,7 +60,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   get _expandableSlot() {
     return html`<div
       class=${fclasses({
-        [this.contentClass || '']: true,
+        [this.contentClass || ""]: true,
         [ccBox.box]: this.box,
         [ccExpandable.paddingTop]: this._hasTitle && this.box,
       })}
@@ -82,7 +83,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
               type="button"
               aria-expanded="${this.expanded}"
               class=${fclasses({
-                [this.buttonClass || '']: true,
+                [this.buttonClass || ""]: true,
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
               })}
@@ -90,10 +91,12 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
             >
               <div class="${ccExpandable.title}">
                 ${this.title
-                  ? html`<span class="${ccExpandable.titleType}">${this.title}</span>`
+                  ? html`<span class="${ccExpandable.titleType}"
+                      >${this.title}</span
+                    >`
                   : html`<slot name="title"></slot>`}
                 ${this.noChevron
-                  ? ''
+                  ? ""
                   : html`<div
                       class=${fclasses({
                         [ccExpandable.chevron]: true,
@@ -108,7 +111,7 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
               </div>
             </button>
           </w-unstyled-heading>`
-        : ''}
+        : ""}
       ${this.animated
         ? html`<w-expand-transition ?show=${this.expanded}>
             ${this._expandableSlot}
@@ -126,8 +129,8 @@ class WarpExpandable extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('w-expandable')) {
-  customElements.define('w-expandable', WarpExpandable);
+if (!customElements.get("w-expandable")) {
+  customElements.define("w-expandable", WarpExpandable);
 }
 
 export { WarpExpandable };

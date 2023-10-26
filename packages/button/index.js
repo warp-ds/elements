@@ -1,4 +1,5 @@
-import { html, LitElement, css } from 'lit';
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { button as ccButton } from '@warp-ds/css/component-classes';
 import { classNames } from '@chbphone55/classnames';
 import { kebabCaseAttributes } from '../utils';
@@ -17,9 +18,9 @@ const buttonTypes = [
   'link',
 ];
 
-class WarpButton extends kebabCaseAttributes(LitElement) {
+class WarpButton extends kebabCaseAttributes(WarpElement) {
   static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
+    ...WarpElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
@@ -37,9 +38,7 @@ class WarpButton extends kebabCaseAttributes(LitElement) {
     buttonClass: { type: String, reflect: true },
   };
 
-  static styles = css`
-    @unocss-placeholder;
-  `;
+  static styles = [WarpElement.styles];
 
   constructor() {
     super();

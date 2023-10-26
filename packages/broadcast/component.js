@@ -1,8 +1,9 @@
-import { LitElement, html, css } from 'lit';
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { repeat } from 'lit/directives/repeat.js';
 import { windowExists } from '../utils/window-exists';
 
-export class WarpBroadcast extends LitElement {
+export class WarpBroadcast extends WarpElement {
   static properties = {
     _messages: {
       state: true,
@@ -22,9 +23,7 @@ export class WarpBroadcast extends LitElement {
     api: { type: String, attribute: true, reflect: true },
   };
 
-  static styles = css`
-    @unocss-placeholder
-  `;
+  static styles = [WarpElement.styles];
 
   constructor() {
     super();

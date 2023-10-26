@@ -1,7 +1,8 @@
-import { css, html, LitElement } from 'lit'
-import { ifDefined } from 'lit/directives/if-defined.js'
-import { classes, kebabCaseAttributes, generateRandomId } from '../utils'
-import { attention as ccAttention } from '@warp-ds/css/component-classes'
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
@@ -13,7 +14,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs'
 import { messages as fiMessages } from './locales/fi/messages.mjs'
 import { activateI18n } from '../i18n'
 
-class WarpAttention extends kebabCaseAttributes(LitElement) {
+class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether Attention element should be visible.
     show: { type: Boolean, reflect: true },
@@ -32,9 +33,9 @@ class WarpAttention extends kebabCaseAttributes(LitElement) {
     noArrow: { type: Boolean, reflect: true },
   }
 
-  static styles = [
+  static styles = [WarpElement.styles,
     css`
-      @unocss-placeholder #attention {
+      #attention {
         position: absolute;
         z-index: 50;
         visibility: var(--attention-visibility);

@@ -1,4 +1,5 @@
-import { html, LitElement, css } from 'lit';
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { interleave } from '@warp-ds/core/breadcrumbs';
 import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes';
 import { kebabCaseAttributes } from '../utils';
@@ -11,10 +12,8 @@ const separator = html`<span class=${ccBreadcrumbs.separator}
   >/</span
 >`;
 
-class WarpBreadcrumbs extends kebabCaseAttributes(LitElement) {
-  static styles = css`
-    @unocss-placeholder;
-  `;
+class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
+  static styles = [WarpElement.styles];
 
   static properties = {
     ariaLabel: { type: String },
