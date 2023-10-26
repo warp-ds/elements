@@ -1,3 +1,10 @@
+## [1.1.2-next.2](https://github.com/warp-ds/elements/compare/v1.1.2-next.1...v1.1.2-next.2) (2023-10-26)
+
+
+### Bug Fixes
+
+* changed css for expandable ([#91](https://github.com/warp-ds/elements/issues/91)) ([25b910c](https://github.com/warp-ds/elements/commit/25b910c55fa2cc7376196e12d4d1299eaa30ea53))
+
 ## [1.1.2-next.1](https://github.com/warp-ds/elements/compare/v1.1.1...v1.1.2-next.1) (2023-10-24)
 
 
