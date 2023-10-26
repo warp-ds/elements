@@ -1,0 +1,36 @@
+name: Elements docs preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install pnpm and dependencies
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+      - name: Build storybook
+        run: pnpm run build-storybook
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./site/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
