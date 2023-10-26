@@ -1,3 +1,10 @@
+# [1.2.0-next.3](https://github.com/warp-ds/elements/compare/v1.2.0-next.2...v1.2.0-next.3) (2023-10-26)
+
+
+### Bug Fixes
+
+* bring back unocss for our own docs ([#93](https://github.com/warp-ds/elements/issues/93)) ([5cee1a1](https://github.com/warp-ds/elements/commit/5cee1a1e8515f32872021332d9eb36d1a1fe1be3))
+
 # [1.2.0-next.2](https://github.com/warp-ds/elements/compare/v1.2.0-next.1...v1.2.0-next.2) (2023-10-26)
 
 
