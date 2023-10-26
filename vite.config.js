@@ -1,5 +1,7 @@
 /* eslint-env node */
 import { defineConfig } from 'vite';
+import { presetWarp } from '@warp-ds/uno';
+import uno from 'unocss/vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from "vite-plugin-top-level-await";
 import path from 'path';
@@ -66,6 +68,9 @@ export default ({ mode }) => {
   return {
     base: isProduction ? '/elements/' : '',
     plugins: [
+      mode !== 'lib' && uno({
+        presets: [presetWarp()],
+      }),
       mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
