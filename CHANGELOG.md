@@ -1,3 +1,10 @@
+# [1.2.0-next.1](https://github.com/warp-ds/elements/compare/v1.1.2-next.2...v1.2.0-next.1) (2023-10-26)
+
+
+### Features
+
+* **attention:** add highlight variant ([#90](https://github.com/warp-ds/elements/issues/90)) ([595d91b](https://github.com/warp-ds/elements/commit/595d91b41c5941369e1f5495ddabd200affdb40f))
+
 ## [1.1.2-next.2](https://github.com/warp-ds/elements/compare/v1.1.2-next.1...v1.1.2-next.2) (2023-10-26)
 
 
