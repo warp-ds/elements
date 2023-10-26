@@ -1,3 +1,10 @@
+# [1.2.0-next.2](https://github.com/warp-ds/elements/compare/v1.2.0-next.1...v1.2.0-next.2) (2023-10-26)
+
+
+### Features
+
+* SSR safe individual elements ([#87](https://github.com/warp-ds/elements/issues/87)) ([6596387](https://github.com/warp-ds/elements/commit/6596387ea2cfcfab4f2f091a50870c0926507d94))
+
 # [1.2.0-next.1](https://github.com/warp-ds/elements/compare/v1.1.2-next.2...v1.2.0-next.1) (2023-10-26)
 
 
