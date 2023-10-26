@@ -260,7 +260,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/main-15b79eb7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/main-aeab7344.js"></script>
   <link rel="stylesheet" href="/elements/assets/index-6e47d14b.css">
 </head>
   <body>
@@ -400,6 +400,32 @@
           </w-attention>
         </div>
 
+        <syntax-highlight>
+          <w-attention placement="right" highlight>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" highlight>
+            <button
+              id="highlightTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </div>
+
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
           <w-attention placement="right" tooltip>
@@ -480,9 +506,11 @@
         <script>
           const tooltipTarget = document.querySelector('.example #tooltipTarget');
           const popoverTarget = document.querySelector('.example #popoverTarget');
+          const highlightTarget = document.querySelector('.example #highlightTarget');
           const popoverTarget2 = document.querySelector('.example #popoverTarget2');
           const tooltipEl = document.querySelector('.example [tooltip]');
           const popoverEl = document.querySelector('.example [popover]');
+          const highlightEl = document.querySelector('.example [highlight]');
           const popoverEl2 = document.querySelector('#accessibilityExample [popover]');
 
           tooltipTarget.addEventListener('mouseenter', () => {
@@ -499,6 +527,9 @@
           });
           popoverTarget.addEventListener('click', () => {
             popoverEl.show = !popoverEl.show;
+          });
+          highlightTarget.addEventListener('click', () => {
+            highlightEl.show = !highlightEl.show;
           });
           popoverTarget2.addEventListener('click', () => {
             popoverEl2.show = !popoverEl2.show;
