@@ -1,4 +1,4 @@
-import { css, html, } from 'lit'
+import { css, html } from 'lit'
 import WarpElement from '@warp-ds/elements-core'
 import { fclasses, kebabCaseAttributes } from '../utils'
 import {
@@ -6,7 +6,6 @@ import {
   expandable as ccExpandable,
 } from '@warp-ds/css/component-classes'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { useRecompute as recompute } from '@warp-ds/core/attention'
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -21,6 +20,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     animated: { type: Boolean },
     headingLevel: { type: Number },
     _hasTitle: { type: Boolean, state: true },
+    showChevronUp: { type: Boolean, state: this.expanded }
   }
 
   constructor() {
@@ -36,14 +36,13 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     this.showChevronUp = this.expanded
   }
 
-  updated() {
-    this.expandableState = {
-      expanded: this.expandable,
-      showChevronUp: this.showChevronUp,
+  updated(changedProperties) {
+    // We need a slight delay for the animation since it has a transition-duration of 150ms:
+    if (changedProperties.has('expanded')) {
+      setTimeout(() => {
+        this.showChevronUp = this.expanded;
+      }, 200);
     }
-
-    // Recompute attention element position on property changes
-    recompute(this.expandableState)
   }
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -61,8 +60,6 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       }
     `,
   ]
-
-
 
   firstUpdated() {
     this._hasTitle =
@@ -83,14 +80,19 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     </div>`
   }
 
-  toggleExpandable(state) {
-  this.expanded = !state;
+  get _chevronUpClasses() {
+    return fclasses({
+      [ccExpandable.chevronTransform]: true,
+      [ccExpandable.chevronCollapse]: !this.expanded && this.showChevronUp,
+    })
+  }
 
-// We need a slight delay for the animation since it has a transition-duration of 150ms:
-  // setTimeout(() => {
-    this.showChevronUp = !state;
-  // }, 200);
-}
+  get _chevronDownClasses() {
+    return fclasses({
+      [ccExpandable.chevronTransform]: true,
+      [ccExpandable.chevronExpand]: this.expanded && !this.showChevronUp,
+    })
+  }
 
   render() {
     return html` <div
@@ -110,7 +112,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
               })}
-              @click=${() => this.toggleExpandable(this.expanded)}
+              @click=${() => (this.expanded = !this.expanded)}
             >
               <div class="${ccExpandable.title}">
                 ${this.title
@@ -126,16 +128,14 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                         [ccExpandable.chevronBox]: this.box,
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}
-                      >
+                    >
                       ${this.showChevronUp
-                        ? html`<w-icon-chevron-up-16 class=${fclasses({
-                          [ccExpandable.chevronTransform]: true,
-                          [ccExpandable.chevronCollapse]: !this.expanded && this.showChevronUp,
-                        })}></w-icon-chevron-up-16>`
-                        : html`<w-icon-chevron-down-16 class=${fclasses({
-                          [ccExpandable.chevronTransform]: true,
-                          [ccExpandable.chevronExpand]: this.expanded && !this.showChevronUp,
-                        })}></w-icon-chevron-down-16>`}
+                        ? html`<w-icon-chevron-up-16
+                            class=${this._chevronUpClasses}
+                          ></w-icon-chevron-up-16>`
+                        : html`<w-icon-chevron-down-16
+                            class=${this._chevronDownClasses}
+                          ></w-icon-chevron-down-16>`}
                     </div>`}
               </div>
             </button>
