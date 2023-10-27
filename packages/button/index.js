@@ -35,7 +35,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     target: { type: String, reflect: true },
     rel: { type: String, reflect: true },
     fullWidth: { type: Boolean, reflect: true },
-    buttonClass: { type: String, reflect: true },
+    class: { type: String, reflect: true },
   };
 
   static styles = [WarpElement.styles];
@@ -159,7 +159,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
         [ccButton.fullWidth]: this.fullWidth,
         [ccButton.contentWidth]: !this.fullWidth,
       },
-      this.buttonClass
+      this.class
     );
   }
 
