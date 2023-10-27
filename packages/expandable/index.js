@@ -1,11 +1,12 @@
-import { css, html } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { fclasses, kebabCaseAttributes } from "../utils";
+import { css, html, } from 'lit'
+import WarpElement from '@warp-ds/elements-core'
+import { fclasses, kebabCaseAttributes } from '../utils'
 import {
   box as ccBox,
   expandable as ccExpandable,
-} from "@warp-ds/css/component-classes";
-import { ifDefined } from "lit/directives/if-defined.js";
+} from '@warp-ds/css/component-classes'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { useRecompute as recompute } from '@warp-ds/core/attention'
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -20,18 +21,29 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     animated: { type: Boolean },
     headingLevel: { type: Number },
     _hasTitle: { type: Boolean, state: true },
-  };
+  }
 
   constructor() {
-    super();
+    super()
 
-    this.expanded = false;
-    this.animated = false;
-    this.info = false;
-    this.box = false;
-    this.bleed = false;
-    this.noChevron = false;
-    this._hasTitle = true;
+    this.expanded = false
+    this.animated = false
+    this.info = false
+    this.box = false
+    this.bleed = false
+    this.noChevron = false
+    this._hasTitle = true
+    this.showChevronUp = this.expanded
+  }
+
+  updated() {
+    this.expandableState = {
+      expanded: this.expandable,
+      showChevronUp: this.showChevronUp,
+    }
+
+    // Recompute attention element position on property changes
+    recompute(this.expandableState)
   }
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -48,26 +60,37 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
         margin-bottom: 0px !important;
       }
     `,
-  ];
+  ]
+
+
 
   firstUpdated() {
     this._hasTitle =
       !!this.title ||
       this.renderRoot.querySelector("slot[name='title']").assignedNodes()
-        .length > 0;
+        .length > 0
   }
 
   get _expandableSlot() {
     return html`<div
       class=${fclasses({
-        [this.contentClass || ""]: true,
+        [this.contentClass || '']: true,
         [ccBox.box]: this.box,
         [ccExpandable.paddingTop]: this._hasTitle && this.box,
       })}
     >
       <slot></slot>
-    </div>`;
+    </div>`
   }
+
+  toggleExpandable(state) {
+  this.expanded = !state;
+
+// We need a slight delay for the animation since it has a transition-duration of 150ms:
+  // setTimeout(() => {
+    this.showChevronUp = !state;
+  // }, 200);
+}
 
   render() {
     return html` <div
@@ -83,11 +106,11 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
               type="button"
               aria-expanded="${this.expanded}"
               class=${fclasses({
-                [this.buttonClass || ""]: true,
+                [this.buttonClass || '']: true,
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
               })}
-              @click=${() => (this.expanded = !this.expanded)}
+              @click=${() => this.toggleExpandable(this.expanded)}
             >
               <div class="${ccExpandable.title}">
                 ${this.title
@@ -96,22 +119,28 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                     >`
                   : html`<slot name="title"></slot>`}
                 ${this.noChevron
-                  ? ""
+                  ? ''
                   : html`<div
                       class=${fclasses({
                         [ccExpandable.chevron]: true,
-                        [ccExpandable.chevronTransform]: true,
-                        [ccExpandable.chevronExpand]: this.expanded,
                         [ccExpandable.chevronBox]: this.box,
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}
-                    >
-                      <w-icon-chevron-down-16></w-icon-chevron-down-16>
+                      >
+                      ${this.showChevronUp
+                        ? html`<w-icon-chevron-up-16 class=${fclasses({
+                          [ccExpandable.chevronTransform]: true,
+                          [ccExpandable.chevronCollapse]: !this.expanded && this.showChevronUp,
+                        })}></w-icon-chevron-up-16>`
+                        : html`<w-icon-chevron-down-16 class=${fclasses({
+                          [ccExpandable.chevronTransform]: true,
+                          [ccExpandable.chevronExpand]: this.expanded && !this.showChevronUp,
+                        })}></w-icon-chevron-down-16>`}
                     </div>`}
               </div>
             </button>
           </w-unstyled-heading>`
-        : ""}
+        : ''}
       ${this.animated
         ? html`<w-expand-transition ?show=${this.expanded}>
             ${this._expandableSlot}
@@ -125,12 +154,12 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
           >
             ${this._expandableSlot}
           </div>`}
-    </div>`;
+    </div>`
   }
 }
 
-if (!customElements.get("w-expandable")) {
-  customElements.define("w-expandable", WarpExpandable);
+if (!customElements.get('w-expandable')) {
+  customElements.define('w-expandable', WarpExpandable)
 }
 
-export { WarpExpandable };
+export { WarpExpandable }
