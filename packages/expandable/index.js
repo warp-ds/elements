@@ -20,7 +20,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     animated: { type: Boolean },
     headingLevel: { type: Number },
     _hasTitle: { type: Boolean, state: true },
-    showChevronUp: { type: Boolean, state: this.expanded }
+    _showChevronUp: { type: Boolean, state: this.expanded }
   }
 
   constructor() {
@@ -33,14 +33,14 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     this.bleed = false
     this.noChevron = false
     this._hasTitle = true
-    this.showChevronUp = this.expanded
+    this._showChevronUp = this.expanded
   }
 
   updated(changedProperties) {
     // We need a slight delay for the animation since it has a transition-duration of 150ms:
     if (changedProperties.has('expanded')) {
       setTimeout(() => {
-        this.showChevronUp = this.expanded;
+        this._showChevronUp = this.expanded;
       }, 200);
     }
   }
@@ -83,14 +83,14 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   get _chevronUpClasses() {
     return fclasses({
       [ccExpandable.chevronTransform]: true,
-      [ccExpandable.chevronCollapse]: !this.expanded && this.showChevronUp,
+      [ccExpandable.chevronCollapse]: !this.expanded && this._showChevronUp,
     })
   }
 
   get _chevronDownClasses() {
     return fclasses({
       [ccExpandable.chevronTransform]: true,
-      [ccExpandable.chevronExpand]: this.expanded && !this.showChevronUp,
+      [ccExpandable.chevronExpand]: this.expanded && !this._showChevronUp,
     })
   }
 
@@ -129,7 +129,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}
                     >
-                      ${this.showChevronUp
+                      ${this._showChevronUp
                         ? html`<w-icon-chevron-up-16
                             class=${this._chevronUpClasses}
                           ></w-icon-chevron-up-16>`
