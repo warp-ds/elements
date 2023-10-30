@@ -126,28 +126,28 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     switch (opposites[this._actualDirection]) {
       case 'top':
         return i18n._({
-          id: 'attention.pointingUp',
+          id: 'attention.aria.pointingUp',
           message: 'pointing up',
           comment:
             'Default screenreader message for top direction in the attention component',
         })
       case 'right':
         return i18n._({
-          id: 'attention.pointingRight',
+          id: 'attention.aria.pointingRight',
           message: 'pointing right',
           comment:
             'Default screenreader message for right direction in the attention component',
         })
       case 'bottom':
         return i18n._({
-          id: 'attention.pointingDown',
+          id: 'attention.aria.pointingDown',
           message: 'pointing down',
           comment:
             'Default screenreader message for bottom direction in the attention component',
         })
       case 'left':
         return i18n._({
-          id: 'attention.pointingLeft',
+          id: 'attention.aria.pointingLeft',
           message: 'pointing left',
           comment:
             'Default screenreader message for left direction in the attention component',
@@ -161,21 +161,21 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     switch (true) {
       case this.tooltip:
         return i18n._({
-          id: 'attention.tooltip',
+          id: 'attention.aria.tooltip',
           message: 'tooltip',
           comment:
             'Default screenreader message for tooltip in the attention component',
         })
       case this.callout:
         return i18n._({
-          id: 'attention.callout',
+          id: 'attention.aria.callout',
           message: 'callout speech bubble',
           comment:
             'Default screenreader message for callout speech bubble in the attention component',
         })
       case this.popover:
         return i18n._({
-          id: 'attention.popover',
+          id: 'attention.aria.popover',
           message: 'popover speech bubble',
           comment:
             'Default screenreader message for popover speech bubble in the attention component',
