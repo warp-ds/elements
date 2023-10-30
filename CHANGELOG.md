@@ -1,3 +1,10 @@
+# [1.2.0-next.4](https://github.com/warp-ds/elements/compare/v1.2.0-next.3...v1.2.0-next.4) (2023-10-30)
+
+
+### Bug Fixes
+
+* adjust further a11y attention ([#97](https://github.com/warp-ds/elements/issues/97)) ([de51c17](https://github.com/warp-ds/elements/commit/de51c175d920a73743b20df1c4230b358d8ac4cd))
+
 # [1.2.0-next.3](https://github.com/warp-ds/elements/compare/v1.2.0-next.2...v1.2.0-next.3) (2023-10-26)
 
 
