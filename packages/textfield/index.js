@@ -1,9 +1,10 @@
-import { css, html, LitElement } from 'lit';
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { fclasses } from '../utils';
 
-class WarpTextField extends LitElement {
+class WarpTextField extends WarpElement {
   static properties = {
     disabled: { type: Boolean },
     invalid: { type: Boolean },
@@ -30,9 +31,8 @@ class WarpTextField extends LitElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [
+  static styles = [WarpElement.styles,
     css`
-      @unocss-placeholder
       :host {
         display: block;
       }

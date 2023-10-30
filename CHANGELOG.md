@@ -1,3 +1,31 @@
+# [1.2.0-next.3](https://github.com/warp-ds/elements/compare/v1.2.0-next.2...v1.2.0-next.3) (2023-10-26)
+
+
+### Bug Fixes
+
+* bring back unocss for our own docs ([#93](https://github.com/warp-ds/elements/issues/93)) ([5cee1a1](https://github.com/warp-ds/elements/commit/5cee1a1e8515f32872021332d9eb36d1a1fe1be3))
+
+# [1.2.0-next.2](https://github.com/warp-ds/elements/compare/v1.2.0-next.1...v1.2.0-next.2) (2023-10-26)
+
+
+### Features
+
+* SSR safe individual elements ([#87](https://github.com/warp-ds/elements/issues/87)) ([6596387](https://github.com/warp-ds/elements/commit/6596387ea2cfcfab4f2f091a50870c0926507d94))
+
+# [1.2.0-next.1](https://github.com/warp-ds/elements/compare/v1.1.2-next.2...v1.2.0-next.1) (2023-10-26)
+
+
+### Features
+
+* **attention:** add highlight variant ([#90](https://github.com/warp-ds/elements/issues/90)) ([595d91b](https://github.com/warp-ds/elements/commit/595d91b41c5941369e1f5495ddabd200affdb40f))
+
+## [1.1.2-next.2](https://github.com/warp-ds/elements/compare/v1.1.2-next.1...v1.1.2-next.2) (2023-10-26)
+
+
+### Bug Fixes
+
+* changed css for expandable ([#91](https://github.com/warp-ds/elements/issues/91)) ([25b910c](https://github.com/warp-ds/elements/commit/25b910c55fa2cc7376196e12d4d1299eaa30ea53))
+
 ## [1.1.2-next.1](https://github.com/warp-ds/elements/compare/v1.1.1...v1.1.2-next.1) (2023-10-24)
 
 
