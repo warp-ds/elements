@@ -6,51 +6,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: fi\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:170
+#: packages/attention/index.js:173
 msgid "attention.aria.callout"
 msgstr ""
 
+#. Aria label for the close button in attention
+#. js-lingui-explicit-id
+#: packages/attention/index.js:229
+msgid "attention.aria.close"
+msgstr "Sulje"
+
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:184
+#: packages/attention/index.js:187
 msgid "attention.aria.highlight"
 msgstr ""
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:142
+#: packages/attention/index.js:145
 msgid "attention.aria.pointingDown"
 msgstr ""
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:149
+#: packages/attention/index.js:152
 msgid "attention.aria.pointingLeft"
 msgstr ""
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:135
+#: packages/attention/index.js:138
 msgid "attention.aria.pointingRight"
 msgstr ""
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:128
+#: packages/attention/index.js:131
 msgid "attention.aria.pointingUp"
 msgstr ""
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:177
+#: packages/attention/index.js:180
 msgid "attention.aria.popover"
 msgstr ""
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:163
+#: packages/attention/index.js:166
 msgid "attention.aria.tooltip"
 msgstr ""
