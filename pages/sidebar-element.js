@@ -1,6 +1,6 @@
-import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import navigationData from './navigation-data';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import navigationData from "./navigation-data";
 
 class SidebarElement extends WarpElement {
   static styles = [
@@ -47,11 +47,11 @@ class SidebarElement extends WarpElement {
             ? html`<ul class="py-4">
                 ${this.renderItems(item.items)}
               </ul>`
-            : ''}
+            : ""}
         </li>
       `,
     );
   }
 }
 
-customElements.define('sidebar-element', SidebarElement);
+customElements.define("sidebar-element", SidebarElement);

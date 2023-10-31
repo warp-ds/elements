@@ -1,6 +1,6 @@
-import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 class UnstyledHeading extends WarpElement {
   static properties = {
@@ -23,8 +23,8 @@ class UnstyledHeading extends WarpElement {
   }
 }
 
-if (!customElements.get('w-unstyled-heading')) {
-  customElements.define('w-unstyled-heading', UnstyledHeading);
+if (!customElements.get("w-unstyled-heading")) {
+  customElements.define("w-unstyled-heading", UnstyledHeading);
 }
 
 export { UnstyledHeading };

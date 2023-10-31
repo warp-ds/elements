@@ -1,21 +1,21 @@
-import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { button as ccButton } from '@warp-ds/css/component-classes';
-import { classNames } from '@chbphone55/classnames';
-import { kebabCaseAttributes } from '../utils';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { activateI18n } from '../i18n';
+import { html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { button as ccButton } from "@warp-ds/css/component-classes";
+import { classNames } from "@chbphone55/classnames";
+import { kebabCaseAttributes } from "../utils";
+import { i18n } from "@lingui/core";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { activateI18n } from "../i18n";
 
 const buttonTypes = [
-  'primary',
-  'secondary',
-  'negative',
-  'utility',
-  'pill',
-  'link',
+  "primary",
+  "secondary",
+  "negative",
+  "utility",
+  "pill",
+  "link",
 ];
 
 class WarpButton extends kebabCaseAttributes(WarpElement) {
@@ -25,7 +25,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   };
 
   static properties = {
-    type: { type: 'button' | 'submit' | 'reset', reflect: true },
+    type: { type: "button" | "submit" | "reset", reflect: true },
     autofocus: { type: Boolean, reflect: true },
     variant: { type: String, reflect: true },
     quiet: { type: Boolean, reflect: true },
@@ -44,11 +44,11 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     super();
     activateI18n(enMessages, nbMessages, fiMessages);
 
-    this.variant = 'secondary';
+    this.variant = "secondary";
     this.ariaValueTextLoading = i18n._({
-      id: 'button.aria.loading',
-      message: 'Loading...',
-      comment: 'Screenreader message for buttons that are loading',
+      id: "button.aria.loading",
+      message: "Loading...",
+      comment: "Screenreader message for buttons that are loading",
     });
   }
 
@@ -58,7 +58,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     if (!buttonTypes.includes(this.variant)) {
       throw new Error(
         `Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(
-          ', ',
+          ", ",
         )}.`,
       );
     }
@@ -71,12 +71,12 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   }
 
   get _classes() {
-    const primary = this.variant === 'primary';
-    const secondary = this.variant === 'secondary';
-    const negative = this.variant === 'negative';
-    const utility = this.variant === 'utility';
-    const pill = this.variant === 'pill';
-    const link = this.variant === 'link';
+    const primary = this.variant === "primary";
+    const secondary = this.variant === "secondary";
+    const negative = this.variant === "negative";
+    const utility = this.variant === "utility";
+    const pill = this.variant === "pill";
+    const link = this.variant === "link";
 
     return classNames(
       {
@@ -167,12 +167,12 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
       ? html`<a
           href=${this.href}
           target=${this.target}
-          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
+          rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
           class=${this._classes}
         >
           <slot></slot>
         </a>`
-      : html`<button type=${this.type || 'button'} class=${this._classes}>
+      : html`<button type=${this.type || "button"} class=${this._classes}>
           <slot></slot>
         </button>`}
     ${this.loading
@@ -186,8 +186,8 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   }
 }
 
-if (!customElements.get('w-button')) {
-  customElements.define('w-button', WarpButton);
+if (!customElements.get("w-button")) {
+  customElements.define("w-button", WarpButton);
 }
 
 export { WarpButton };

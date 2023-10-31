@@ -1,7 +1,7 @@
-import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { repeat } from 'lit/directives/repeat.js';
-import { windowExists } from '../utils/window-exists';
+import { html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { repeat } from "lit/directives/repeat.js";
+import { windowExists } from "../utils/window-exists";
 
 export class WarpBroadcast extends WarpElement {
   static properties = {
@@ -30,7 +30,7 @@ export class WarpBroadcast extends WarpElement {
     this._messages = [];
     this.interval = 30000;
     this._hiddenMessageIds = [];
-    this.url = windowExists ? window.location.href : '';
+    this.url = windowExists ? window.location.href : "";
   }
 
   async connectedCallback() {
@@ -67,7 +67,7 @@ export class WarpBroadcast extends WarpElement {
     );
 
     return html`
-      <aside class=${`${messages.length === 0 ? 'hidden' : 'mb-16'}`}>
+      <aside class=${`${messages.length === 0 ? "hidden" : "mb-16"}`}>
         ${repeat(
           messages,
           ({ id }) => `broadcast-${id}`,

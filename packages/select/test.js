@@ -1,12 +1,12 @@
-import tap, { test, beforeEach, teardown } from 'tap';
-import { chromium } from 'playwright';
-import { addContentToPage } from '../../tests/utils/index.js';
+import tap, { test, beforeEach, teardown } from "tap";
+import { chromium } from "playwright";
+import { addContentToPage } from "../../tests/utils/index.js";
 
 const formatHTML = (string) =>
   string
     .trim()
     // remove html comments
-    .replace(/<!--.*?-->/g, '');
+    .replace(/<!--.*?-->/g, "");
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -24,7 +24,7 @@ teardown(async () => {
   browser.close();
 });
 
-test('Select component with no attributes is rendered on the page', async (t) => {
+test("Select component with no attributes is rendered on the page", async (t) => {
   // GIVEN: A button component
   const component = `
     <w-select>
@@ -40,12 +40,12 @@ test('Select component with no attributes is rendered on the page', async (t) =>
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-select select');
+  const locator = await page.locator("w-select select");
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
 
-test('Select renders label', async (t) => {
+test("Select renders label", async (t) => {
   // GIVEN: A button component
   const component = `
     <w-select id="withlabel" label="Options">
@@ -61,12 +61,12 @@ test('Select renders label', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-select .input');
+  const locator = await page.locator("w-select .input");
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
 
-test('Select renders with hint', async (t) => {
+test("Select renders with hint", async (t) => {
   // GIVEN: A button component
   const component = `
       <w-select id="hello" hint="Hello" always>
@@ -82,12 +82,12 @@ test('Select renders with hint', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-select .input');
+  const locator = await page.locator("w-select .input");
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
 
-test('Select renders with error', async (t) => {
+test("Select renders with error", async (t) => {
   // GIVEN: A button component
   const component = `
         <w-select id="hello" hint="Something went wrong" invalid>
@@ -103,12 +103,12 @@ test('Select renders with error', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-select .input');
+  const locator = await page.locator("w-select .input");
 
   t.matchSnapshot(formatHTML(await locator.innerHTML()));
 });
 
-test('Select renders with autofocus', async (t) => {
+test("Select renders with autofocus", async (t) => {
   // GIVEN: A button component
   const component = `
         <w-select id="hello" auto-focus>
@@ -124,11 +124,11 @@ test('Select renders with autofocus', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-select');
+  const locator = await page.locator("w-select");
 
   t.equal(
     await locator.evaluate((el) => document.activeElement === el),
     true,
-    'Select should be focused on render',
+    "Select should be focused on render",
   );
 });

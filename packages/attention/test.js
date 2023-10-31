@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
-import { chromium } from 'playwright';
-import { addContentToPage } from '../../tests/utils/index.js';
-import { opposites } from '@warp-ds/core/attention';
+import tap, { test, beforeEach, teardown } from "tap";
+import { chromium } from "playwright";
+import { addContentToPage } from "../../tests/utils/index.js";
+import { opposites } from "@warp-ds/core/attention";
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -20,7 +20,7 @@ teardown(async () => {
   browser.close();
 });
 
-test('Attention component with no attributes is rendered on the page', async (t) => {
+test("Attention component with no attributes is rendered on the page", async (t) => {
   // GIVEN: An attention component
   const component = `
     <w-attention>
@@ -34,7 +34,7 @@ test('Attention component with no attributes is rendered on the page', async (t)
   };
 
   // Before adding content to the page, subscribe to all uncaught errors emitted there
-  t.context.page.on('pageerror', registerErrorLogs);
+  t.context.page.on("pageerror", registerErrorLogs);
 
   // WHEN: the component is added to the page
   const page = await addContentToPage({
@@ -43,14 +43,14 @@ test('Attention component with no attributes is rendered on the page', async (t)
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     (await locator.innerHTML()).trim(),
     '<div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to attention</div><p slot="message">This is an attention</p>',
-    'HTML should be rendered',
+    "HTML should be rendered",
   );
   t.equal(
-    await locator.getAttribute('callout'),
+    await locator.getAttribute("callout"),
     null,
     '"callout" attribute should be null',
   );
@@ -60,7 +60,7 @@ test('Attention component with no attributes is rendered on the page', async (t)
     '"callout" property should default to false',
   );
   t.equal(
-    await locator.getAttribute('popover'),
+    await locator.getAttribute("popover"),
     null,
     '"popover" attribute should be null',
   );
@@ -75,7 +75,7 @@ test('Attention component with no attributes is rendered on the page', async (t)
     '"tooltip" property should default to false',
   );
   t.equal(
-    await locator.getAttribute('no-arrow'),
+    await locator.getAttribute("no-arrow"),
     null,
     '"no-arrow" attribute should be null',
   );
@@ -95,9 +95,9 @@ test('Attention component with no attributes is rendered on the page', async (t)
     `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
       Object.keys(opposites),
     )}`,
-    'Invalid attribute error was thrown',
+    "Invalid attribute error was thrown",
   );
-  page.removeListener('pageerror', registerErrorLogs);
+  page.removeListener("pageerror", registerErrorLogs);
 });
 
 test('Attention component with invalid "placement" attribute is rendered on the page', async (t) => {
@@ -114,7 +114,7 @@ test('Attention component with invalid "placement" attribute is rendered on the 
   };
 
   // Before adding content to the page, subscribe to all uncaught errors emitted there
-  t.context.page.on('pageerror', registerErrorLogs);
+  t.context.page.on("pageerror", registerErrorLogs);
 
   const page = await addContentToPage({
     page: t.context.page,
@@ -126,13 +126,13 @@ test('Attention component with invalid "placement" attribute is rendered on the 
     `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
       Object.keys(opposites),
     )}`,
-    'Invalid attribute error was thrown',
+    "Invalid attribute error was thrown",
   );
 
-  page.removeListener('pageerror', registerErrorLogs);
+  page.removeListener("pageerror", registerErrorLogs);
 });
 
-test('Bottom placed tooltip attention component with show attribute is rendered on the page', async (t) => {
+test("Bottom placed tooltip attention component with show attribute is rendered on the page", async (t) => {
   const component = `
     <w-attention placement="bottom" show tooltip>
       <div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to tooltip attention</div>
@@ -145,17 +145,17 @@ test('Bottom placed tooltip attention component with show attribute is rendered 
     errorLogs.push(exception);
   };
 
-  t.context.page.on('pageerror', registerErrorLogs);
+  t.context.page.on("pageerror", registerErrorLogs);
 
   const page = await addContentToPage({
     page: t.context.page,
     content: component,
   });
 
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     await locator.evaluate((el) => el.placement),
-    'bottom',
+    "bottom",
     '"placement" property should be "bottom"',
   );
   t.equal(
@@ -168,12 +168,12 @@ test('Bottom placed tooltip attention component with show attribute is rendered 
     true,
     '"show" property should be true',
   );
-  t.equal(errorLogs.length, 0, 'No errors should be thrown in the console');
+  t.equal(errorLogs.length, 0, "No errors should be thrown in the console");
 
-  page.removeListener('pageerror', registerErrorLogs);
+  page.removeListener("pageerror", registerErrorLogs);
 });
 
-test('Right placed callout attention component with show attribute is rendered on the page', async (t) => {
+test("Right placed callout attention component with show attribute is rendered on the page", async (t) => {
   const component = `
       <w-attention placement="right" show callout class="flex items-center">
         <div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to callout attention</div>
@@ -186,10 +186,10 @@ test('Right placed callout attention component with show attribute is rendered o
     content: component,
   });
 
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     await locator.evaluate((el) => el.placement),
-    'right',
+    "right",
     '"placement" property should be "right"',
   );
   t.equal(
@@ -200,15 +200,15 @@ test('Right placed callout attention component with show attribute is rendered o
   t.equal(
     await locator.evaluate((el) =>
       window
-        .getComputedStyle(el.renderRoot.querySelector('#attention'))
-        .getPropertyValue('display'),
+        .getComputedStyle(el.renderRoot.querySelector("#attention"))
+        .getPropertyValue("display"),
     ),
-    'block',
+    "block",
     '"display" should be "block"',
   );
 });
 
-test('Order of target node for left placed attention component', async (t) => {
+test("Order of target node for left placed attention component", async (t) => {
   const component = `
     <w-attention placement="left" show tooltip>
       <div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to tooltip attention</div><p slot="message">This is a tooltip that should be visible on left</p>
@@ -220,17 +220,17 @@ test('Order of target node for left placed attention component', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     await locator.evaluate(
-      (el) => el.renderRoot.querySelector('div').lastElementChild.name,
+      (el) => el.renderRoot.querySelector("div").lastElementChild.name,
     ),
-    'target',
-    'Target should be rendered as last element',
+    "target",
+    "Target should be rendered as last element",
   );
 });
 
-test('Order of attention message for bottom placed attention component', async (t) => {
+test("Order of attention message for bottom placed attention component", async (t) => {
   const component = `
     <w-attention placement="bottom" show tooltip>
       <div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to tooltip attention</div><p slot="message">This is a tooltip that should be visible on bottom</p>
@@ -242,17 +242,17 @@ test('Order of attention message for bottom placed attention component', async (
     content: component,
   });
 
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     await locator.evaluate(
-      (el) => el.renderRoot.querySelector('div').lastElementChild.id,
+      (el) => el.renderRoot.querySelector("div").lastElementChild.id,
     ),
-    'attention',
-    'Attention message should be rendered as last element',
+    "attention",
+    "Attention message should be rendered as last element",
   );
 });
 
-test('Default ARIA attributes', async (t) => {
+test("Default ARIA attributes", async (t) => {
   const component = `
     <w-attention placement="bottom" show tooltip>
       <div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to tooltip attention</div><p slot="message">This is a tooltip that should be visible on bottom</p>
@@ -264,16 +264,16 @@ test('Default ARIA attributes', async (t) => {
     content: component,
   });
 
-  const locator = await page.locator('w-attention');
+  const locator = await page.locator("w-attention");
   t.equal(
     await locator.evaluate((el) =>
       el.renderRoot
         .querySelector('slot[name="target"]')
         .assignedNodes()[0]
-        .hasAttribute('aria-describedby'),
+        .hasAttribute("aria-describedby"),
     ),
     true,
-    'Target elemement has aria-describedby attribute',
+    "Target elemement has aria-describedby attribute",
   );
 
   t.equal(
@@ -281,9 +281,9 @@ test('Default ARIA attributes', async (t) => {
       el.renderRoot
         .querySelector('slot[name="message"]')
         .assignedNodes()[0]
-        .getAttribute('role'),
+        .getAttribute("role"),
     ),
-    'tooltip',
+    "tooltip",
     'Message elemement has role="tooltip" attribute',
   );
 });

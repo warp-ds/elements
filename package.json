@@ -31,7 +31,7 @@
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch",
     "build": "pnpm run build:elements && tsc && vite build --mode lib && pnpm run build:api && node build-individual-elements.js",
     "lint:fix": "eslint . --fix --ignore-path .gitignore && prettier --write . --ignore-path .gitignore",
-    "lint:check": "eslint . --ignore-path .gitignore",
+    "lint:check": "eslint . --ignore-path .gitignore && prettier --check . --ignore-path .gitignore",
     "dev": "vite",
     "build:docs": "vite build",
     "preview:docs": "vite preview",

@@ -1,12 +1,12 @@
-import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
 import {
   input,
   label as l,
   helpText as h,
-} from '@warp-ds/css/component-classes';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { fclasses } from '../utils';
+} from "@warp-ds/css/component-classes";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { fclasses } from "../utils";
 
 class WarpTextField extends WarpElement {
   static properties = {
@@ -14,16 +14,16 @@ class WarpTextField extends WarpElement {
     invalid: { type: Boolean },
     id: { type: String },
     label: { type: String },
-    helpText: { type: String, attribute: 'help-text' },
+    helpText: { type: String, attribute: "help-text" },
     size: { type: String },
     max: { type: Number },
     min: { type: Number },
-    minLength: { type: Number, attribute: 'min-length' },
-    maxLength: { type: Number, attribute: 'max-length' },
+    minLength: { type: Number, attribute: "min-length" },
+    maxLength: { type: Number, attribute: "max-length" },
     name: { type: String },
     pattern: { type: String },
     placeholder: { type: String },
-    readOnly: { type: Boolean, attribute: 'read-only' },
+    readOnly: { type: Boolean, attribute: "read-only" },
     required: { type: Boolean },
     type: { type: String },
     value: { type: String },
@@ -49,7 +49,7 @@ class WarpTextField extends WarpElement {
 
   constructor() {
     super();
-    this.type = 'text';
+    this.type = "text";
   }
 
   get _inputStyles() {
@@ -90,7 +90,7 @@ class WarpTextField extends WarpElement {
   }
 
   get _id() {
-    return 'textfield';
+    return "textfield";
   }
 
   get _error() {
@@ -110,13 +110,13 @@ class WarpTextField extends WarpElement {
   }
 
   prefixSlotChange(e) {
-    const el = this.renderRoot.querySelector('slot[name=prefix]');
+    const el = this.renderRoot.querySelector("slot[name=prefix]");
     const affixes = el.assignedElements();
     if (affixes.length) this._hasPrefix = true;
   }
 
   suffixSlotChange(e) {
-    const el = this.renderRoot.querySelector('slot[name=suffix]');
+    const el = this.renderRoot.querySelector("slot[name=suffix]");
     const affixes = el.assignedElements();
     if (affixes.length) this._hasSuffix = true;
   }
@@ -159,8 +159,8 @@ class WarpTextField extends WarpElement {
   }
 }
 
-if (!customElements.get('w-textfield')) {
-  customElements.define('w-textfield', WarpTextField);
+if (!customElements.get("w-textfield")) {
+  customElements.define("w-textfield", WarpTextField);
 }
 
 export { WarpTextField };

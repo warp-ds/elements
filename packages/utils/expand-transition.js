@@ -1,7 +1,7 @@
-import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { collapse, expand } from 'element-collapse';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { collapse, expand } from "element-collapse";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 class ExpandTransition extends WarpElement {
   static properties = {
@@ -63,14 +63,14 @@ class ExpandTransition extends WarpElement {
   ];
 
   render() {
-    return html`<div aria-hidden=${ifDefined(!this.show ? 'true' : undefined)}>
+    return html`<div aria-hidden=${ifDefined(!this.show ? "true" : undefined)}>
       ${this._removeElement ? html`` : html`<slot></slot>`}
     </div>`;
   }
 }
 
-if (!customElements.get('w-expand-transition')) {
-  customElements.define('w-expand-transition', ExpandTransition);
+if (!customElements.get("w-expand-transition")) {
+  customElements.define("w-expand-transition", ExpandTransition);
 }
 
 export { ExpandTransition };
