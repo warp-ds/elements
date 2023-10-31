@@ -12,9 +12,11 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+"X-Crowdin-SourceKey: msgstr\n"
 
 #. Default screenreader message for the breadcrumb component
 #. js-lingui-explicit-id
 #: packages/breadcrumbs/index.js:26
 msgid "breadcrumbs.ariaLabel"
 msgstr "You are here"
+

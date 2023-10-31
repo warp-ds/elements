@@ -5,7 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: e\n"
+"X-Crowdin-SourceKey: msgstr\n"
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
@@ -54,3 +55,4 @@ msgstr "popover speech bubble"
 #: packages/attention/index.js:163
 msgid "attention.aria.tooltip"
 msgstr "tooltip"
+
