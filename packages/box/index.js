@@ -1,7 +1,7 @@
-import { css, html } from "lit";
+import { css, html, nothing } from 'lit';
 import WarpElement from "@warp-ds/elements-core";
-import { fclasses } from "../utils";
-import { box as ccBox } from "@warp-ds/css/component-classes";
+import { fclasses } from '../utils';
+import { box as ccBox } from '@warp-ds/css/component-classes';
 
 class WarpBox extends WarpElement {
   static properties = {
@@ -9,6 +9,7 @@ class WarpBox extends WarpElement {
     bordered: { type: Boolean },
     info: { type: Boolean },
     neutral: { type: Boolean },
+    role: { type: String },
   };
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -37,17 +38,21 @@ class WarpBox extends WarpElement {
     });
   }
 
+  get _optOutRoleWithDefault() {
+    return this.role === '' ? nothing : this.role ?? 'region'
+  }
+
   render() {
     return html`
-      <div class="${this._class}">
+      <div role="${this._optOutRoleWithDefault}" class="${this._class}">
         <slot></slot>
       </div>
     `;
   }
 }
 
-if (!customElements.get("w-box")) {
-  customElements.define("w-box", WarpBox);
+if (!customElements.get('w-box')) {
+  customElements.define('w-box', WarpBox);
 }
 
 export { WarpBox };
