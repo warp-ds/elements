@@ -9,14 +9,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { activateI18n } from '../i18n';
 
-const buttonTypes = [
-  'primary',
-  'secondary',
-  'negative',
-  'utility',
-  'pill',
-  'link',
-];
+const buttonTypes = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
 
 class WarpButton extends kebabCaseAttributes(WarpElement) {
   static shadowRootOptions = {
@@ -56,11 +49,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     super.connectedCallback();
 
     if (!buttonTypes.includes(this.variant)) {
-      throw new Error(
-        `Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(
-          ', '
-        )}.`
-      );
+      throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(', ')}.`);
     }
   }
 
@@ -80,115 +69,65 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
 
     return classNames(
       {
-        [ccButton.secondary]:
-          secondary && !this.small && !this.quiet && !this.loading,
-        [ccButton.secondarySmall]:
-          secondary && this.small && !this.quiet && !this.loading,
-        [ccButton.secondarySmallLoading]:
-          secondary && this.small && !this.quiet && this.loading,
-        [ccButton.secondarySmallQuiet]:
-          secondary && this.small && this.quiet && !this.loading,
-        [ccButton.secondarySmallQuietLoading]:
-          secondary && this.small && this.quiet && this.loading,
-        [ccButton.secondaryQuiet]:
-          secondary && !this.small && this.quiet && !this.loading,
-        [ccButton.secondaryQuietLoading]:
-          secondary && !this.small && this.quiet && this.loading,
-        [ccButton.secondaryLoading]:
-          secondary && !this.small && !this.quiet && this.loading,
+        [ccButton.secondary]: secondary && !this.small && !this.quiet && !this.loading,
+        [ccButton.secondarySmall]: secondary && this.small && !this.quiet && !this.loading,
+        [ccButton.secondarySmallLoading]: secondary && this.small && !this.quiet && this.loading,
+        [ccButton.secondarySmallQuiet]: secondary && this.small && this.quiet && !this.loading,
+        [ccButton.secondarySmallQuietLoading]: secondary && this.small && this.quiet && this.loading,
+        [ccButton.secondaryQuiet]: secondary && !this.small && this.quiet && !this.loading,
+        [ccButton.secondaryQuietLoading]: secondary && !this.small && this.quiet && this.loading,
+        [ccButton.secondaryLoading]: secondary && !this.small && !this.quiet && this.loading,
 
-        [ccButton.primary]:
-          primary && !this.small && !this.quiet && !this.loading,
-        [ccButton.primarySmall]:
-          primary && this.small && !this.quiet && !this.loading,
-        [ccButton.primarySmallQuiet]:
-          primary && this.small && this.quiet && !this.loading,
-        [ccButton.primarySmallLoading]:
-          primary && this.small && !this.quiet && this.loading,
-        [ccButton.primarySmallQuietLoading]:
-          primary && this.small && this.quiet && this.loading,
-        [ccButton.primaryQuiet]:
-          primary && !this.small && this.quiet && !this.loading,
-        [ccButton.primaryQuietLoading]:
-          primary && !this.small && this.quiet && this.loading,
-        [ccButton.primaryLoading]:
-          primary && !this.small && !this.quiet && this.loading,
+        [ccButton.primary]: primary && !this.small && !this.quiet && !this.loading,
+        [ccButton.primarySmall]: primary && this.small && !this.quiet && !this.loading,
+        [ccButton.primarySmallQuiet]: primary && this.small && this.quiet && !this.loading,
+        [ccButton.primarySmallLoading]: primary && this.small && !this.quiet && this.loading,
+        [ccButton.primarySmallQuietLoading]: primary && this.small && this.quiet && this.loading,
+        [ccButton.primaryQuiet]: primary && !this.small && this.quiet && !this.loading,
+        [ccButton.primaryQuietLoading]: primary && !this.small && this.quiet && this.loading,
+        [ccButton.primaryLoading]: primary && !this.small && !this.quiet && this.loading,
 
-        [ccButton.utility]:
-          utility && !this.small && !this.quiet && !this.loading,
-        [ccButton.utilitySmall]:
-          utility && this.small && !this.quiet && !this.loading,
-        [ccButton.utilitySmallQuiet]:
-          utility && this.small && this.quiet && !this.loading,
-        [ccButton.utilitySmallLoading]:
-          utility && this.small && !this.quiet && this.loading,
-        [ccButton.utilitySmallQuietLoading]:
-          utility && this.small && this.quiet && this.loading,
-        [ccButton.utilityQuiet]:
-          utility && !this.small && this.quiet && !this.loading,
-        [ccButton.utilityQuietLoading]:
-          utility && !this.small && this.quiet && this.loading,
-        [ccButton.utilityLoading]:
-          utility && !this.small && !this.quiet && this.loading,
+        [ccButton.utility]: utility && !this.small && !this.quiet && !this.loading,
+        [ccButton.utilitySmall]: utility && this.small && !this.quiet && !this.loading,
+        [ccButton.utilitySmallQuiet]: utility && this.small && this.quiet && !this.loading,
+        [ccButton.utilitySmallLoading]: utility && this.small && !this.quiet && this.loading,
+        [ccButton.utilitySmallQuietLoading]: utility && this.small && this.quiet && this.loading,
+        [ccButton.utilityQuiet]: utility && !this.small && this.quiet && !this.loading,
+        [ccButton.utilityQuietLoading]: utility && !this.small && this.quiet && this.loading,
+        [ccButton.utilityLoading]: utility && !this.small && !this.quiet && this.loading,
 
-        [ccButton.negative]:
-          negative && !this.small && !this.quiet && !this.loading,
-        [ccButton.negativeSmall]:
-          negative && this.small && !this.quiet && !this.loading,
-        [ccButton.negativeSmallQuiet]:
-          negative && this.small && this.quiet && !this.loading,
-        [ccButton.negativeSmallLoading]:
-          negative && this.small && !this.quiet && this.loading,
-        [ccButton.negativeSmallQuietLoading]:
-          negative && this.small && this.quiet && this.loading,
-        [ccButton.negativeQuiet]:
-          negative && !this.small && this.quiet && !this.loading,
-        [ccButton.negativeQuietLoading]:
-          negative && !this.small && this.quiet && this.loading,
-        [ccButton.negativeLoading]:
-          negative && !this.small && !this.quiet && this.loading,
+        [ccButton.negative]: negative && !this.small && !this.quiet && !this.loading,
+        [ccButton.negativeSmall]: negative && this.small && !this.quiet && !this.loading,
+        [ccButton.negativeSmallQuiet]: negative && this.small && this.quiet && !this.loading,
+        [ccButton.negativeSmallLoading]: negative && this.small && !this.quiet && this.loading,
+        [ccButton.negativeSmallQuietLoading]: negative && this.small && this.quiet && this.loading,
+        [ccButton.negativeQuiet]: negative && !this.small && this.quiet && !this.loading,
+        [ccButton.negativeQuietLoading]: negative && !this.small && this.quiet && this.loading,
+        [ccButton.negativeLoading]: negative && !this.small && !this.quiet && this.loading,
 
         [ccButton.pill]: pill && !this.small && !this.loading,
         [ccButton.pillSmall]: pill && this.small && !this.loading,
         [ccButton.pillLoading]: pill && !this.small && this.loading,
-        [ccButton.pillSmallLoading]:
-          pill && this.small && this.loading,
+        [ccButton.pillSmallLoading]: pill && this.small && this.loading,
         [ccButton.link]: link && !this.small,
         [ccButton.linkSmall]: link && this.small,
         [ccButton.linkAsButton]: !!this.href,
         [ccButton.fullWidth]: this.fullWidth,
         [ccButton.contentWidth]: !this.fullWidth,
       },
-      this.buttonClass
+      this.buttonClass,
     );
   }
 
   render() {
     return html` ${this.href
-      ? html`<a
-          href=${this.href}
-          target=${this.target}
-          rel=${this.target === '_blank'
-            ? this.rel || 'noopener'
-            : undefined}
-          class=${this._classes}
-        >
+      ? html`<a href=${this.href} target=${this.target} rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined} class=${this._classes}>
           <slot></slot>
         </a>`
-      : html`<button
-          type=${this.type || 'button'}
-          class=${this._classes}
-        >
+      : html`<button type=${this.type || 'button'} class=${this._classes}>
           <slot></slot>
         </button>`}
-    ${this.loading
-      ? html`<span
-          class="sr-only"
-          role="progressbar"
-          aria-valuenow="{0}"
-          aria-valuetext=${this.ariaValueTextLoading}
-        />`
-      : null}`;
+    ${this.loading ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading} />` : null}`;
   }
 }
 

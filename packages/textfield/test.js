@@ -99,11 +99,7 @@ test('Text field component with a label and help text is rendered on the page', 
 
   // THEN: the component is visible in the DOM
   t.equal(await page.locator('text=Telefonnummer').isVisible(), true, 'Label should be visible');
-  t.equal(
-    await page.locator('text=Vil kun brukes til brukerverifisering').isVisible(),
-    true,
-    'Help text should be visible',
-  );
+  t.equal(await page.locator('text=Vil kun brukes til brukerverifisering').isVisible(), true, 'Help text should be visible');
 });
 
 test('Invalid component with label and help text is rendered on the page', async (t) => {
@@ -123,16 +119,8 @@ test('Invalid component with label and help text is rendered on the page', async
   });
 
   // THEN: the component is visible in the DOM
-  t.equal(
-    await page.locator('text=Ugyldig e-post').isVisible(),
-    true,
-    'Help text should be visible',
-  );
-  t.equal(
-    await page.locator('input').getAttribute('aria-invalid'),
-    'true',
-    'Aria invalid should be set',
-  );
+  t.equal(await page.locator('text=Ugyldig e-post').isVisible(), true, 'Help text should be visible');
+  t.equal(await page.locator('input').getAttribute('aria-invalid'), 'true', 'Aria invalid should be set');
 });
 
 test('Invalid component with label and help text is rendered on the page', async (t) => {
@@ -149,11 +137,7 @@ test('Invalid component with label and help text is rendered on the page', async
 
   // THEN: the component is visible in the DOM
   t.equal(await page.locator('text=E-post').isVisible(), true, 'Help text should be visible');
-  t.equal(
-    await page.locator('input').getAttribute('placeholder'),
-    'puse@finn.no',
-    'Placeholder text should be visible',
-  );
+  t.equal(await page.locator('input').getAttribute('placeholder'), 'puse@finn.no', 'Placeholder text should be visible');
 });
 
 test('Disabled component with label and value is rendered on the page', async (t) => {
@@ -170,11 +154,7 @@ test('Disabled component with label and value is rendered on the page', async (t
 
   // THEN: the component is visible in the DOM
   t.equal(await page.locator('text=E-post').isVisible(), true, 'Help text should be visible');
-  t.equal(
-    await page.locator('input').getAttribute('disabled'),
-    '',
-    'Disabled should be set on input',
-  );
+  t.equal(await page.locator('input').getAttribute('disabled'), '', 'Disabled should be set on input');
 });
 
 test('Component with prefix is rendered on the page', async (t) => {
@@ -210,11 +190,7 @@ test('Component with search suffix is rendered on the page', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  t.equal(
-    await page.locator('button[type=submit]').isVisible(),
-    true,
-    'Suffix search button should be visible',
-  );
+  t.equal(await page.locator('button[type=submit]').isVisible(), true, 'Suffix search button should be visible');
 });
 
 test('Component with clear suffix is rendered on the page', async (t) => {
@@ -232,11 +208,7 @@ test('Component with clear suffix is rendered on the page', async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  t.equal(
-    await page.locator('button[type=reset]').isVisible(),
-    true,
-    'Suffix clear button should be visible',
-  );
+  t.equal(await page.locator('button[type=reset]').isVisible(), true, 'Suffix clear button should be visible');
 });
 
 test('Component with prefix label and clear suffix is rendered on the page', async (t) => {
@@ -256,11 +228,7 @@ test('Component with prefix label and clear suffix is rendered on the page', asy
 
   // THEN: the component is visible in the DOM
   t.equal(await page.locator('text=kr').isVisible(), true, 'Prefix text should be visible');
-  t.equal(
-    await page.locator('button[type=reset]').isVisible(),
-    true,
-    'Suffix clear button should be visible',
-  );
+  t.equal(await page.locator('button[type=reset]').isVisible(), true, 'Suffix clear button should be visible');
 });
 
 test('Affix component button events bubble', async (t) => {
@@ -286,9 +254,5 @@ test('Affix component button events bubble', async (t) => {
   // THEN: the component is visible in the DOM
   const loc = await page.locator('button[type=reset]');
   await loc.click();
-  t.equal(
-    await page.locator('w-affix').getAttribute('hasBeenClicked'),
-    'true',
-    'Clicked element should have bubbled to the parent',
-  );
+  t.equal(await page.locator('w-affix').getAttribute('hasBeenClicked'), 'true', 'Clicked element should have bubbled to the parent');
 });

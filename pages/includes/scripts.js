@@ -6,8 +6,8 @@ import '@warp-ds/icons/elements';
 import { windowExists } from '../../packages/utils/window-exists';
 
 if (windowExists) {
-    window.WarpToastContainer = WarpToastContainer;
-    window.toast = toast;
-    window.updateToast = updateToast;
-    window.removeToast = removeToast;
+  window.WarpToastContainer = WarpToastContainer;
+  window.toast = toast;
+  window.updateToast = updateToast;
+  window.removeToast = removeToast;
 }

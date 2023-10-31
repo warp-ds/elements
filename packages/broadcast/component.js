@@ -69,15 +69,7 @@ export class WarpBroadcast extends WarpElement {
         ${repeat(
           messages,
           ({ id }) => `broadcast-${id}`,
-          ({ id, message }) =>
-            html`<w-toast
-              id="broadcast-${id}"
-              type="warning"
-              text="${message}"
-              canclose
-              @close=${() => this._del(id)}
-            >
-            </w-toast>`,
+          ({ id, message }) => html`<w-toast id="broadcast-${id}" type="warning" text="${message}" canclose @close=${() => this._del(id)}> </w-toast>`,
         )}
       </aside>
     `;

@@ -44,7 +44,7 @@ test('Single broadcast', async (t) => {
   // THEN: the component is visible in the DOM
   await wait(50);
   const locator = await page.locator('w-broadcast');
-  
+
   t.matchSnapshot(formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)));
 });
 
@@ -66,4 +66,3 @@ test('Multiple broadcasts', async (t) => {
 
   t.matchSnapshot(formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)));
 });
-

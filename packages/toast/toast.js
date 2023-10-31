@@ -19,10 +19,11 @@ const toastType = {
   success: 'success',
   error: 'error',
   warning: 'warning',
-}
+};
 
 export class WarpToast extends WarpElement {
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
@@ -54,7 +55,9 @@ export class WarpToast extends WarpElement {
   }
 
   updated() {
-    if (!this._expanded && this._wrapper) expand(this._wrapper, () => (this._expanded = true));
+    if (!this._expanded && this._wrapper) {
+      expand(this._wrapper, () => (this._expanded = true));
+    }
   }
 
   get _primaryClasses() {
@@ -69,7 +72,7 @@ export class WarpToast extends WarpElement {
   get _iconClasses() {
     return classes({
       [ccToast.icon]: true,
-      [ccToast.iconPositive]: this.type == toastType.success,
+      [ccToast.iconPositive]: this.type === toastType.success,
       [ccToast.iconWarning]: this.type === toastType.warning,
       [ccToast.iconNegative]: this.type === toastType.error,
     });
@@ -94,13 +97,16 @@ export class WarpToast extends WarpElement {
   get _typeLabel() {
     if (this._warning) return 'Varsel';
     if (this._error) return 'Feil';
-    return 'Vellykket'
+    return 'Vellykket';
   }
 
   get _iconMarkup() {
-    if (this._warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this._error) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    if (this._warning) {
+      return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    }
+    if (this._error) {
+      return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    } else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
   }
 
   async collapse() {

@@ -1,12 +1,12 @@
-import { html, css } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { card as ccCard } from "@warp-ds/css/component-classes";
-import { fclasses } from "../utils";
+import { html, css } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { card as ccCard } from '@warp-ds/css/component-classes';
+import { fclasses } from '../utils';
 
 const keys = {
-  ENTER: "Enter",
-  SPACE: " ",
+  ENTER: 'Enter',
+  SPACE: ' ',
 };
 
 class WarpCard extends WarpElement {
@@ -14,7 +14,7 @@ class WarpCard extends WarpElement {
     WarpElement.styles,
     css`
       a::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         right: 0;
@@ -46,36 +46,23 @@ class WarpCard extends WarpElement {
       [ccCard.cardShadow]: !this.flat,
       [ccCard.cardSelected]: this.selected,
       [ccCard.cardFlat]: this.flat,
-      [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]:
-        this.flat,
+      [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]: this.flat,
     });
   }
 
   get _innerClasses() {
     return fclasses({
       [ccCard.cardOutline]: true,
-      [this.selected
-        ? ccCard.cardOutlineSelected
-        : ccCard.cardOutlineUnselected]: true,
+      [this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]: true,
     });
   }
 
   get uuButton() {
-    return html`<button
-      class="${ccCard.a11y}"
-      aria-pressed="${this.selected}"
-      tabindex="-1"
-    >
-      Velg
-    </button>`;
+    return html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">Velg</button>`;
   }
 
   get uuSpan() {
-    return html`<span
-      role="checkbox"
-      aria-checked="true"
-      aria-disabled="true"
-    ></span>`;
+    return html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
   }
 
   keypressed(e) {
@@ -88,13 +75,8 @@ class WarpCard extends WarpElement {
 
   render() {
     return html`
-      <div
-        tabindex=${ifDefined(this.clickable ? "0" : undefined)}
-        class="${this._outerClasses}"
-        @keydown=${this.keypressed}
-      >
-        ${this.clickable ? this.uuButton : ""}
-        ${!this.clickable && this.selected ? this.uuSpan : ""}
+      <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._outerClasses}" @keydown=${this.keypressed}>
+        ${this.clickable ? this.uuButton : ''} ${!this.clickable && this.selected ? this.uuSpan : ''}
         <div class="${this._innerClasses}"></div>
         <slot></slot>
       </div>
@@ -102,8 +84,8 @@ class WarpCard extends WarpElement {
   }
 }
 
-if (!customElements.get("w-card")) {
-  customElements.define("w-card", WarpCard);
+if (!customElements.get('w-card')) {
+  customElements.define('w-card', WarpCard);
 }
 
 export { WarpCard };
