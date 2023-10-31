@@ -58,8 +58,8 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     if (!buttonTypes.includes(this.variant)) {
       throw new Error(
         `Invalid "variant" attribute. Set its value to one of the following:\n${buttonTypes.join(
-          ', '
-        )}.`
+          ', ',
+        )}.`,
       );
     }
   }
@@ -159,7 +159,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
         [ccButton.fullWidth]: this.fullWidth,
         [ccButton.contentWidth]: !this.fullWidth,
       },
-      this.buttonClass
+      this.buttonClass,
     );
   }
 
@@ -169,8 +169,8 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
           href=${this.href}
           target=${this.target}
           rel=${this.target === '_blank'
-            ? this.rel || 'noopener'
-            : undefined}
+    ? this.rel || 'noopener'
+    : undefined}
           class=${this._classes}
         >
           <slot></slot>
@@ -182,13 +182,13 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
           <slot></slot>
         </button>`}
     ${this.loading
-      ? html`<span
+    ? html`<span
           class="sr-only"
           role="progressbar"
           aria-valuenow="{0}"
           aria-valuetext=${this.ariaValueTextLoading}
         />`
-      : null}`;
+    : null}`;
   }
 }
 

@@ -19,10 +19,11 @@ const toastType = {
   success: 'success',
   error: 'error',
   warning: 'warning',
-}
+};
 
 export class WarpToast extends WarpElement {
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
@@ -69,7 +70,7 @@ export class WarpToast extends WarpElement {
   get _iconClasses() {
     return classes({
       [ccToast.icon]: true,
-      [ccToast.iconPositive]: this.type == toastType.success,
+      [ccToast.iconPositive]: this.type === toastType.success,
       [ccToast.iconWarning]: this.type === toastType.warning,
       [ccToast.iconNegative]: this.type === toastType.error,
     });
@@ -94,7 +95,7 @@ export class WarpToast extends WarpElement {
   get _typeLabel() {
     if (this._warning) return 'Varsel';
     if (this._error) return 'Feil';
-    return 'Vellykket'
+    return 'Vellykket';
   }
 
   get _iconMarkup() {
@@ -121,20 +122,23 @@ export class WarpToast extends WarpElement {
 
   render() {
     if (!this.text) return html``;
-    return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
+    return html` <section
+      class="${ccToast.wrapper}"
+      aria-label="${this._typeLabel}"
+    >
       <div class="${this._primaryClasses}">
         <div class="${this._iconClasses}">${this._iconMarkup}</div>
         <div role="${this._role}" class="${ccToast.content}">
           <p>${this.text}</p>
         </div>
         ${when(
-          this.canclose === true,
-          () => html`
+    this.canclose === true,
+    () => html`
             <button class="${ccToast.close}" @click="${this.close}">
               <w-icon-close-16></w-icon-close-16>
             </button>
           `,
-        )}
+  )}
       </div>
     </section>`;
   }

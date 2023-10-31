@@ -16,11 +16,11 @@ const css = fs.readFileSync(from, 'utf8');
 
 const to = './dist/elements.min.js';
 const plugins = [
-    atImport,
-    importSvg({
-        paths: [iconsLocation],
-    }),
-    autoprefixer,
+  atImport,
+  importSvg({
+    paths: [iconsLocation],
+  }),
+  autoprefixer,
 ];
 const result = await postcss(plugins).process(css, { from, to });
 

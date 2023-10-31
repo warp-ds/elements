@@ -30,10 +30,8 @@
     "build:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch",
     "build": "pnpm run build:elements && tsc && vite build --mode lib && pnpm run build:api && node build-individual-elements.js",
-    "format": "prettier --write . --ignore-path .gitignore",
-    "lint": "npm run lint:format && pnpm run lint:eslint",
-    "lint:format": "prettier --check . --ignore-path .gitignore",
-    "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
+    "lint:fix": "eslint . --fix --ignore-path .gitignore",
+    "lint:check": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
     "dev": "vite",
     "build:docs": "vite build",
     "preview:docs": "vite preview",
@@ -68,6 +66,7 @@
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.18.6",
+    "@warp-ds/eslint-config": "^0.0.1",
     "eslint": "8.43.0",
     "express": "4.18.2",
     "fastify": "4.18.0",
@@ -81,7 +80,6 @@
     "postcss-import": "15.1.0",
     "postcss-import-svg": "1.0.5",
     "postcss-syntax": "0.36.2",
-    "prettier": "3.0.3",
     "rimraf": "5.0.1",
     "semantic-release": "^21.0.7",
     "semantic-release-slack-bot": "^4.0.2",
@@ -110,5 +108,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "eslintConfig": {
+    "extends": "@warp-ds"
   }
 }

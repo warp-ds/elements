@@ -49,7 +49,7 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
       child.classList.add(
         child.tagName === 'A'
           ? ccBreadcrumbs.link
-          : ccBreadcrumbs.text
+          : ccBreadcrumbs.text,
       );
       return child;
     });

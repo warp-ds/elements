@@ -438,12 +438,12 @@ test('Emits close event when close button clicked', async (t) => {
   const locator = await page.locator('w-toast');
   await locator.evaluate(
     (el) => el.addEventListener('close', () => {
-        // @ts-ignore
-        window.toastWasClosed = true;
-        el.click();
+      // @ts-ignore
+      window.toastWasClosed = true;
+      el.click();
     }),
   );
-  const closeButton = await page.locator('w-toast button')
+  const closeButton = await page.locator('w-toast button');
   await closeButton.click();
 
   // THEN:

@@ -52,6 +52,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.7.1
     version: 20.7.1
+  '@warp-ds/eslint-config':
+    specifier: ^0.0.1
+    version: 0.0.1(eslint@8.43.0)
   '@warp-ds/uno':
     specifier: ^1.1.0
     version: 1.1.0
@@ -109,9 +112,6 @@ devDependencies:
   postcss-syntax:
     specifier: 0.36.2
     version: 0.36.2(postcss@8.4.24)
-  prettier:
-    specifier: 3.0.3
-    version: 3.0.3
   rimraf:
     specifier: 5.0.1
     version: 5.0.1
@@ -2770,6 +2770,14 @@ packages:
       construct-style-sheets-polyfill: 3.1.0
       lit: 2.7.6
     dev: false
+
+  /@warp-ds/eslint-config@0.0.1(eslint@8.43.0):
+    resolution: {integrity: sha512-lzmn67NF8ZyilXDiRVPJqx95FvMGVZw//na33DDEPEnk5apeV1WD53uruFJM0DjvO9QEc51xo1zI1oS4ocWRrA==}
+    peerDependencies:
+      eslint: ^8.34.0
+    dependencies:
+      eslint: 8.43.0
+    dev: true
 
   /@warp-ds/icons@1.1.1:
     resolution: {integrity: sha512-XUDIxqHVbqLgoQHgpCSCgchCKwNUdsBz3siEcyE9/gRitEN30vbEReKgU2sIBoco8YCgKo0MuebA1+CCvfqFNg==}
@@ -9033,12 +9041,6 @@ packages:
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
-    dev: true
-
-  /prettier@3.0.3:
-    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
-    engines: {node: '>=14'}
-    hasBin: true
     dev: true
 
   /pretty-format@29.6.1:
