@@ -41,7 +41,7 @@ export default ({ mode }) => {
   };
 
   function getBuildOpts(mode) {
-    if (mode === 'production')
+    if (mode === 'production') {
       return defineConfig({
         build: {
           target: 'esnext',
@@ -51,7 +51,8 @@ export default ({ mode }) => {
           },
         },
       });
-    if (mode === 'lib')
+    }
+    if (mode === 'lib') {
       return defineConfig({
         build: {
           emptyOutDir: false,
@@ -63,6 +64,7 @@ export default ({ mode }) => {
           rollupOptions: { external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/] },
         },
       });
+    }
   }
 
   return {
@@ -148,7 +150,7 @@ export default ({ mode }) => {
         // The export name of top-level await promise for each chunk module
         promiseExportName: "__tla",
         // The function to generate import names of top-level await promise in each chunk module
-        promiseImportName: i => `__tla_${i}`
+        promiseImportName: i => `__tla_${i}`,
       }),
     ],
     ...getBuildOpts(mode),
@@ -161,8 +163,8 @@ function basePathFix() {
     transform(src, fileName) {
       return fileName.includes('navigation-data.js')
         ? src
-            .replace(/pages\/components\//g, 'elements/')
-            .replace(/'\/'/, '"/elements/"')
+          .replace(/pages\/components\//g, 'elements/')
+          .replace(/'\/'/, '"/elements/"')
         : src;
     },
   };

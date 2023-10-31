@@ -1,20 +1,20 @@
-import { html, css } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { when } from "lit/directives/when.js";
-import { classNames } from "@chbphone55/classnames";
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { when } from 'lit/directives/when.js';
+import { classNames } from '@chbphone55/classnames';
 import {
   select as ccSelect,
   helpText as ccHelpText,
   label as ccLabel,
-} from "@warp-ds/css/component-classes";
-import { kebabCaseAttributes } from "../utils";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import { i18n } from "@lingui/core";
-import { messages as enMessages } from "./locales/en/messages.mjs";
-import { messages as nbMessages } from "./locales/nb/messages.mjs";
-import { messages as fiMessages } from "./locales/fi/messages.mjs";
-import { activateI18n } from "../i18n";
+} from '@warp-ds/css/component-classes';
+import { kebabCaseAttributes } from '../utils';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { i18n } from '@lingui/core';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { activateI18n } from '../i18n';
 
 export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -70,7 +70,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 
   get #id() {
-    return "select_id";
+    return 'select_id';
   }
 
   get #helpId() {
@@ -96,9 +96,9 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
               () =>
                 html`<span class="${ccLabel.optional}"
                   >${i18n._({
-                    id: "select.label.optional",
-                    message: "(optional)",
-                    comment: "Shown behind label when marked as optional",
+                    id: 'select.label.optional',
+                    message: '(optional)',
+                    comment: 'Shown behind label when marked as optional',
                   })}</span
                 >`
             )}</label
@@ -130,6 +130,6 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 }
 
-if (!customElements.get("w-select")) {
-  customElements.define("w-select", WarpSelect);
+if (!customElements.get('w-select')) {
+  customElements.define('w-select', WarpSelect);
 }
