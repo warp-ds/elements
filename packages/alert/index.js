@@ -1,14 +1,14 @@
 // TODO: replace text-14 with a token
-import WarpElement from "@warp-ds/elements-core";
-import { css, html } from "lit";
-import { alert as ccAlert } from "@warp-ds/css/component-classes";
-import { classNames } from "@chbphone55/classnames";
+import WarpElement from '@warp-ds/elements-core';
+import { css, html } from 'lit';
+import { alert as ccAlert } from '@warp-ds/css/component-classes';
+import { classNames } from '@chbphone55/classnames';
 
 const variants = {
-  negative: "negative",
-  positive: "positive",
-  warning: "warning",
-  info: "info",
+  negative: 'negative',
+  positive: 'positive',
+  warning: 'warning',
+  info: 'info',
 };
 
 class WarpAlert extends WarpElement {
@@ -21,7 +21,7 @@ class WarpAlert extends WarpElement {
   constructor() {
     super();
     this.show = false;
-    this.role = "alert";
+    this.role = 'alert';
   }
 
   connectedCallback() {
@@ -80,7 +80,7 @@ class WarpAlert extends WarpElement {
     }
     if (this.variant === variants.positive) {
       return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
-    } else return "";
+    } else return '';
   }
 
   render() {
@@ -97,8 +97,8 @@ class WarpAlert extends WarpElement {
   }
 }
 
-if (!customElements.get("w-alert")) {
-  customElements.define("w-alert", WarpAlert);
+if (!customElements.get('w-alert')) {
+  customElements.define('w-alert', WarpAlert);
 }
 
 export { WarpAlert };

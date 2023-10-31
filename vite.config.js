@@ -1,29 +1,29 @@
 /* eslint-env node */
-import { defineConfig } from "vite";
-import { presetWarp } from "@warp-ds/uno";
-import uno from "unocss/vite";
-import { createHtmlPlugin } from "vite-plugin-html";
-import topLevelAwait from "vite-plugin-top-level-await";
-import path from "path";
-import glob from "glob";
-import { MinifyWarpLib } from "./.minifier-plugin.js";
+import { defineConfig } from 'vite';
+import { presetWarp } from '@warp-ds/uno';
+import uno from 'unocss/vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import topLevelAwait from 'vite-plugin-top-level-await';
+import path from 'path';
+import glob from 'glob';
+import { MinifyWarpLib } from './.minifier-plugin.js';
 
 export default ({ mode }) => {
   let input = {};
 
   const dirname = path.dirname(new URL(import.meta.url).pathname);
 
-  const isProduction = mode === "production";
+  const isProduction = mode === 'production';
 
   // For production we need to specify all our entry points
   // See https://vitejs.dev/guide/build.html#multi-page-app
   if (isProduction) {
-    input.main = path.resolve(dirname, "index.html");
+    input.main = path.resolve(dirname, 'index.html');
 
-    const componentPages = glob.sync("pages/components/**/*.html", {
+    const componentPages = glob.sync('pages/components/**/*.html', {
       absolute: true,
     });
-    const pages = glob.sync("pages/*.html", {
+    const pages = glob.sync('pages/*.html', {
       absolute: true,
     });
 
@@ -36,33 +36,33 @@ export default ({ mode }) => {
 
   const injectOptions = {
     ejsOptions: {
-      views: ["pages/includes"],
+      views: ['pages/includes'],
     },
   };
 
   function getBuildOpts(mode) {
-    if (mode === "production") {
+    if (mode === 'production') {
       return defineConfig({
         build: {
-          target: "esnext",
-          outDir: "site",
+          target: 'esnext',
+          outDir: 'site',
           rollupOptions: {
             input,
           },
         },
       });
     }
-    if (mode === "lib") {
+    if (mode === 'lib') {
       return defineConfig({
         build: {
           emptyOutDir: false,
           lib: {
-            formats: ["es"],
-            entry: "./index.js",
-            fileName: "index",
+            formats: ['es'],
+            entry: './index.js',
+            fileName: 'index',
           },
           rollupOptions: {
-            external: ["elements", "lit", "@warp-ds/elements-core", /^lit\/.*/],
+            external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/],
           },
         },
       });
@@ -70,89 +70,89 @@ export default ({ mode }) => {
   }
 
   return {
-    base: isProduction ? "/elements/" : "",
+    base: isProduction ? '/elements/' : '',
     plugins: [
-      mode !== "lib" &&
+      mode !== 'lib' &&
         uno({
           presets: [presetWarp()],
         }),
-      mode !== "lib" &&
+      mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
           pages: [
             {
-              filename: "button.html",
-              template: "pages/components/button.html",
+              filename: 'button.html',
+              template: 'pages/components/button.html',
               injectOptions,
             },
             {
-              filename: "alert.html",
-              template: "pages/components/alert.html",
+              filename: 'alert.html',
+              template: 'pages/components/alert.html',
               injectOptions,
             },
             {
-              filename: "select.html",
-              template: "pages/components/select.html",
+              filename: 'select.html',
+              template: 'pages/components/select.html',
               injectOptions,
             },
             {
-              filename: "attention.html",
-              template: "pages/components/attention.html",
+              filename: 'attention.html',
+              template: 'pages/components/attention.html',
               injectOptions,
             },
             {
-              filename: "badge.html",
-              template: "pages/components/badge.html",
+              filename: 'badge.html',
+              template: 'pages/components/badge.html',
               injectOptions,
             },
             {
-              filename: "box.html",
-              template: "pages/components/box.html",
+              filename: 'box.html',
+              template: 'pages/components/box.html',
               injectOptions,
             },
             {
-              filename: "breadcrumbs.html",
-              template: "pages/components/breadcrumbs.html",
+              filename: 'breadcrumbs.html',
+              template: 'pages/components/breadcrumbs.html',
               injectOptions,
             },
             {
-              filename: "broadcast.html",
-              template: "pages/components/broadcast.html",
+              filename: 'broadcast.html',
+              template: 'pages/components/broadcast.html',
               injectOptions,
             },
             {
-              filename: "card.html",
-              template: "pages/components/card.html",
+              filename: 'card.html',
+              template: 'pages/components/card.html',
               injectOptions,
             },
             {
-              filename: "toast.html",
-              template: "pages/components/toast.html",
+              filename: 'toast.html',
+              template: 'pages/components/toast.html',
               injectOptions,
             },
             {
-              filename: "textfield.html",
-              template: "pages/components/textfield.html",
+              filename: 'textfield.html',
+              template: 'pages/components/textfield.html',
               injectOptions,
             },
             {
-              filename: "expandable.html",
-              template: "pages/components/expandable.html",
+              filename: 'expandable.html',
+              template: 'pages/components/expandable.html',
               injectOptions,
             },
             {
-              filename: "index.html",
-              template: "index.html",
+              filename: 'index.html',
+              template: 'index.html',
               injectOptions,
             },
           ],
         }),
       isProduction && basePathFix(),
       MinifyWarpLib(),
-      mode === "development" &&
+      mode === 'development' &&
         topLevelAwait({
           // The export name of top-level await promise for each chunk module
-          promiseExportName: "__tla",
+          promiseExportName: '__tla',
           // The function to generate import names of top-level await promise in each chunk module
           promiseImportName: (i) => `__tla_${i}`,
         }),
@@ -163,11 +163,11 @@ export default ({ mode }) => {
 
 function basePathFix() {
   return {
-    name: "base-path-fix",
+    name: 'base-path-fix',
     transform(src, fileName) {
-      return fileName.includes("navigation-data.js")
+      return fileName.includes('navigation-data.js')
         ? src
-            .replace(/pages\/components\//g, "elements/")
+            .replace(/pages\/components\//g, 'elements/')
             .replace(/'\/'/, '"/elements/"')
         : src;
     },
