@@ -23,4 +23,3 @@ msgstr ""
 #: packages/select/index.js:98
 msgid "select.label.optional"
 msgstr "(valinnainen)"
-

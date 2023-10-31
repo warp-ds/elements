@@ -1,11 +1,11 @@
 /* eslint-env node */
+import { defineConfig } from 'vite';
 import { presetWarp } from '@warp-ds/uno';
 import uno from 'unocss/vite';
-import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import topLevelAwait from "vite-plugin-top-level-await";
 import path from 'path';
 import glob from 'glob';
-import { classes } from '@warp-ds/css/component-classes/classes';
 import { MinifyWarpLib } from './.minifier-plugin.js';
 
 export default ({ mode }) => {
@@ -44,6 +44,7 @@ export default ({ mode }) => {
     if (mode === 'production')
       return defineConfig({
         build: {
+          target: 'esnext',
           outDir: 'site',
           rollupOptions: {
             input,
@@ -59,7 +60,7 @@ export default ({ mode }) => {
             entry: './index.js',
             fileName: 'index',
           },
-          rollupOptions: { external: ['elements', 'lit'] },
+          rollupOptions: { external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/] },
         },
       });
   }
@@ -67,15 +68,9 @@ export default ({ mode }) => {
   return {
     base: isProduction ? '/elements/' : '',
     plugins: [
-      uno({
-        presets: [presetWarp()],
-        mode: 'shadow-dom',
-        safelist: classes,
-      }),
-      uno({
+      mode !== 'lib' && uno({
         presets: [presetWarp()],
       }),
-      // litElementTailwindPlugin({ mode }),
       mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
@@ -149,6 +144,12 @@ export default ({ mode }) => {
         }),
       isProduction && basePathFix(),
       MinifyWarpLib(),
+      mode === 'development' && topLevelAwait({
+        // The export name of top-level await promise for each chunk module
+        promiseExportName: "__tla",
+        // The function to generate import names of top-level await promise in each chunk module
+        promiseImportName: i => `__tla_${i}`
+      }),
     ],
     ...getBuildOpts(mode),
   };

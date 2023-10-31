@@ -43,12 +43,12 @@
 
         <syntax-highlight>
           <div class="flex gap-8 flex-wrap mt-16">
-            <w-button small>Hide and show "info" variant</w-button>
-            <w-button small>Hide and show "negative" variant</w-button>
-            <w-button small>Hide and show "positive" variant</w-button>
-            <w-button small>Hide and show "warning" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "info" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "negative" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "positive" variant</w-button>
+            <w-button small aria-controls="defaultAlertId">Hide and show "warning" variant</w-button>
           </div>
-          <w-alert variant="info" show>
+          <w-alert id="defaultAlertId" variant="info" show>
             <p>This is "info" variant of the alert element</p>
           </w-alert>
         </syntax-highlight>
@@ -63,7 +63,7 @@
 
         <syntax-highlight>
           <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
           </w-alert>
         </syntax-highlight>
@@ -72,34 +72,15 @@
             <%- include('alertControllers.html'); -%>
           </div>
           <w-alert id="alertWithDescription" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
           </w-alert>
         </div>
 
         <syntax-highlight>
           <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
-          </w-alert>
-        </syntax-highlight>
-        <div class="example">
-          <div id="alertWithLinkControllers" class="flex gap-8 flex-wrap mb-16">
-            <%- include('alertControllers.html'); -%>
-          </div>
-          <w-alert id="alertWithLink" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
-            <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
-          </w-alert>
-        </div>
-
-        <syntax-highlight>
-          <w-alert variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
-            <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
             <div class="mt-8 space-x-8">
               <w-button small onclick="alert('clicked!');">
                 Primary button
@@ -115,9 +96,8 @@
             <%- include('alertControllers.html'); -%>
           </div>
           <w-alert id="alertWithButtons" variant="info" show>
-            <p class="font-bold">This is "info" variant of the alert element</p>
+            <h3 class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
-            <a title="Link to more information">And a link to more information</a>
             <div class="mt-8 space-x-8">
               <w-button small onclick="alert('clicked!');">
                 Primary button
@@ -146,18 +126,18 @@
         </p>
 
         <syntax-highlight>
-          <w-alert variant="info" show role="">
-            <p role="alert" class="font-bold">This is a "info" variant of the alert element</p>
+          <w-alert id="selfHidingAlertId" variant="info" show role="">
+            <h3 role="alert" class="t5">This is a "info" variant of the alert element</h3>
             <p>You see this warning because you did something wrong</p>
-            <w-button variant="primary" small>Hide and show alert</w-button>
+            <w-button variant="primary" small aria-controls="selfHidingAlertId">Hide and show alert</w-button>
           </w-alert>
         </syntax-highlight>
         <div class="example">
           <w-alert id="selfHidingAlert" variant="info" show role="">
-            <p role="alert" class="font-bold">This is "info" variant of the alert element</p>
+            <h3 role="alert" class="t5">This is "info" variant of the alert element</h3>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
-              <w-button variant="primary" small>Hide and show alert</w-button>
+              <w-button variant="primary" small aria-controls="selfHidingAlert">Hide and show alert</w-button>
             </div>
           </w-alert>
         </div>

@@ -1,8 +1,9 @@
-import { css, html, LitElement } from 'lit';
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { collapse, expand } from 'element-collapse';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-class ExpandTransition extends LitElement {
+class ExpandTransition extends WarpElement {
   static properties = {
     show: {
       type: Boolean,
@@ -52,9 +53,8 @@ class ExpandTransition extends LitElement {
     return this ?? null;
   }
 
-  static styles = [
+  static styles = [WarpElement.styles,
     css`
-      @unocss-placeholder
       :host {
         display: block;
       }

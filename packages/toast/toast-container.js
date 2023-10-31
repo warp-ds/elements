@@ -1,6 +1,7 @@
-import { LitElement, css, html } from 'lit';
-import { toaster as ccToaster } from '@warp-ds/css/component-classes';
-import { repeat } from 'lit/directives/repeat.js';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { toaster as ccToaster } from "@warp-ds/css/component-classes";
+import { repeat } from "lit/directives/repeat.js";
 
 /**
  * Toast helper function options
@@ -12,10 +13,10 @@ import { repeat } from 'lit/directives/repeat.js';
  * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
  */
 
-export class WarpToastContainer extends LitElement {
+export class WarpToastContainer extends WarpElement {
   static styles = [
+    WarpElement.styles,
     css`
-      @unocss-placeholder
       :host {
         display: block;
       }
@@ -62,9 +63,9 @@ export class WarpToastContainer extends LitElement {
   }
 
   static init() {
-    let el = document.querySelector('w-toast-container');
+    let el = document.querySelector("w-toast-container");
     if (!el) {
-      el = document.createElement('w-toast-container');
+      el = document.createElement("w-toast-container");
       document.body.appendChild(el);
     }
     return el;
@@ -80,9 +81,12 @@ export class WarpToastContainer extends LitElement {
    * @returns {ToastOptions}
    */
   get(id) {
-    if (!id) throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== 'string' && !Number.isInteger(id))
-      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    if (!id)
+      throw new Error('undefined "id" given when attempting to retrieve toast');
+    if (typeof id !== "string" && !Number.isInteger(id))
+      throw new Error(
+        '"id" must be number or string when attempting to retrieve toast'
+      );
     return this._toasts.get(id);
   }
 
@@ -107,9 +111,12 @@ export class WarpToastContainer extends LitElement {
    * @returns {ToastOptions | false}
    */
   async del(id) {
-    if (!id) throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== 'string' && !Number.isInteger(id))
-      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    if (!id)
+      throw new Error('undefined "id" given when attempting to retrieve toast');
+    if (typeof id !== "string" && !Number.isInteger(id))
+      throw new Error(
+        '"id" must be number or string when attempting to retrieve toast'
+      );
     const el = this.renderRoot.querySelector(`#${id}`);
     if (!this._toasts.has(id)) return false;
     await el.collapse();
@@ -125,15 +132,16 @@ export class WarpToastContainer extends LitElement {
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
-            (toast) => html` <w-toast
-              class="${ccToaster.content}"
-              id="${toast.id}"
-              type="${toast.type}"
-              text="${toast.text}"
-              ?canclose=${toast.canclose}
-              @close=${() => this.del(toast.id)}
-            >
-            </w-toast>`,
+            (toast) =>
+              html` <w-toast
+                class="${ccToaster.content}"
+                id="${toast.id}"
+                type="${toast.type}"
+                text="${toast.text}"
+                ?canclose=${toast.canclose}
+                @close=${() => this.del(toast.id)}
+              >
+              </w-toast>`
           )}
         </div>
       </aside>
@@ -141,6 +149,6 @@ export class WarpToastContainer extends LitElement {
   }
 }
 
-if (!customElements.get('w-toast-container')) {
-  customElements.define('w-toast-container', WarpToastContainer);
+if (!customElements.get("w-toast-container")) {
+  customElements.define("w-toast-container", WarpToastContainer);
 }

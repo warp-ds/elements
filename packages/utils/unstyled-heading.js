@@ -1,16 +1,13 @@
-import { html, LitElement, css } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-class UnstyledHeading extends LitElement {
+class UnstyledHeading extends WarpElement {
   static properties = {
     level: { type: Number },
   };
 
-  static styles = [
-    css`
-      @unocss-placeholder
-    `,
-  ];
+  static styles = [WarpElement.styles];
 
   get _markup() {
     return `<h${this.level}
@@ -26,8 +23,8 @@ class UnstyledHeading extends LitElement {
   }
 }
 
-if (!customElements.get('w-unstyled-heading')) {
-  customElements.define('w-unstyled-heading', UnstyledHeading);
+if (!customElements.get("w-unstyled-heading")) {
+  customElements.define("w-unstyled-heading", UnstyledHeading);
 }
 
 export { UnstyledHeading };

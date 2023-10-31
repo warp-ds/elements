@@ -1,3 +1,70 @@
+# [1.2.0-next.4](https://github.com/warp-ds/elements/compare/v1.2.0-next.3...v1.2.0-next.4) (2023-10-30)
+
+
+### Bug Fixes
+
+* adjust further a11y attention ([#97](https://github.com/warp-ds/elements/issues/97)) ([de51c17](https://github.com/warp-ds/elements/commit/de51c175d920a73743b20df1c4230b358d8ac4cd))
+
+# [1.2.0-next.3](https://github.com/warp-ds/elements/compare/v1.2.0-next.2...v1.2.0-next.3) (2023-10-26)
+
+
+### Bug Fixes
+
+* bring back unocss for our own docs ([#93](https://github.com/warp-ds/elements/issues/93)) ([5cee1a1](https://github.com/warp-ds/elements/commit/5cee1a1e8515f32872021332d9eb36d1a1fe1be3))
+
+# [1.2.0-next.2](https://github.com/warp-ds/elements/compare/v1.2.0-next.1...v1.2.0-next.2) (2023-10-26)
+
+
+### Features
+
+* SSR safe individual elements ([#87](https://github.com/warp-ds/elements/issues/87)) ([6596387](https://github.com/warp-ds/elements/commit/6596387ea2cfcfab4f2f091a50870c0926507d94))
+
+# [1.2.0-next.1](https://github.com/warp-ds/elements/compare/v1.1.2-next.2...v1.2.0-next.1) (2023-10-26)
+
+
+### Features
+
+* **attention:** add highlight variant ([#90](https://github.com/warp-ds/elements/issues/90)) ([595d91b](https://github.com/warp-ds/elements/commit/595d91b41c5941369e1f5495ddabd200affdb40f))
+
+## [1.1.2-next.2](https://github.com/warp-ds/elements/compare/v1.1.2-next.1...v1.1.2-next.2) (2023-10-26)
+
+
+### Bug Fixes
+
+* changed css for expandable ([#91](https://github.com/warp-ds/elements/issues/91)) ([25b910c](https://github.com/warp-ds/elements/commit/25b910c55fa2cc7376196e12d4d1299eaa30ea53))
+
+## [1.1.2-next.1](https://github.com/warp-ds/elements/compare/v1.1.1...v1.1.2-next.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* a11y issues for attention component ([#82](https://github.com/warp-ds/elements/issues/82)) ([8b96498](https://github.com/warp-ds/elements/commit/8b9649846739cc3ab5af879c01515142fb9ef884))
+
+## [1.1.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1) (2023-10-23)
+
+
+### Bug Fixes
+
+* anchor text alignment & icon translations ([#84](https://github.com/warp-ds/elements/issues/84)) ([83b6c7a](https://github.com/warp-ds/elements/commit/83b6c7a6236ab07a5a9cc86b066e5e2938be6a77))
+* **breadcrumbs:** Remove double aria-label ([5e165ae](https://github.com/warp-ds/elements/commit/5e165aecd9214bf0c553351189c928159f1bab10))
+* **breadcrumbs:** remove dounble aria label and remove aria hidden from seperators ([4595529](https://github.com/warp-ds/elements/commit/4595529aa8bc375f71f240180235e95c8e75cdf9))
+* replace inline svgs with warp icons ([#63](https://github.com/warp-ds/elements/issues/63)) ([f69fb59](https://github.com/warp-ds/elements/commit/f69fb59badda2306b9dbc32c95a96329e24de42c))
+
+## [1.1.1-next.3](https://github.com/warp-ds/elements/compare/v1.1.1-next.2...v1.1.1-next.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** Remove double aria-label ([5e165ae](https://github.com/warp-ds/elements/commit/5e165aecd9214bf0c553351189c928159f1bab10))
+* **breadcrumbs:** remove dounble aria label and remove aria hidden from seperators ([4595529](https://github.com/warp-ds/elements/commit/4595529aa8bc375f71f240180235e95c8e75cdf9))
+
+## [1.1.1-next.2](https://github.com/warp-ds/elements/compare/v1.1.1-next.1...v1.1.1-next.2) (2023-10-20)
+
+
+### Bug Fixes
+
+* anchor text alignment & icon translations ([#84](https://github.com/warp-ds/elements/issues/84)) ([83b6c7a](https://github.com/warp-ds/elements/commit/83b6c7a6236ab07a5a9cc86b066e5e2938be6a77))
+
 ## [1.1.1-next.1](https://github.com/warp-ds/elements/compare/v1.1.0...v1.1.1-next.1) (2023-10-13)
 
 
