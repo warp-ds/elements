@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -286,7 +300,9 @@
               <td>auto-focus</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether the element should receive focus on render</div>
+                <div class="annotation">
+                  Whether the element should receive focus on render
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -295,8 +311,8 @@
               <td>
                 <div>boolean</div>
                 <div class="annotation">
-                  Renders the field in an invalid state. Often paired with `hint` to provide
-                  feedback about the error
+                  Renders the field in an invalid state. Often paired with
+                  `hint` to provide feedback about the error
                 </div>
               </td>
               <td>false</td>
@@ -313,7 +329,9 @@
               <td>hint</td>
               <td>
                 <div>string</div>
-                <div class="annotation">The content displayed as the help text</div>
+                <div class="annotation">
+                  The content displayed as the help text
+                </div>
               </td>
               <td></td>
             </tr>
@@ -330,7 +348,8 @@
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  The name of the select element, used when submitting an HTML form
+                  The name of the select element, used when submitting an HTML
+                  form
                 </div>
               </td>
               <td></td>
@@ -349,14 +368,22 @@
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option value="s">Strawberries</option>
             <option value="r">Raspberries</option>
             <option value="c">Cloudberries</option>
@@ -365,14 +392,22 @@
 
         <h3 class="mt-24 mb-16">Default option</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option>Strawberries</option>
             <option selected>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option value="s">Strawberries</option>
             <option value="r" selected>Raspberries</option>
             <option value="c">Cloudberries</option>
@@ -413,14 +448,24 @@
 
         <h3 class="mt-24 mb-16">Optional</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+            optional
+          >
             <option>Strawberries</option>
             <optionx>Raspberries</optionx>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+            optional
+          >
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
@@ -428,7 +473,7 @@
         </div>
       </main>
     </div>
-      <script data-for="footer" type="application/json">
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -440,6 +485,5 @@
     }
   }
 </script>
-
   </body>
 </html>

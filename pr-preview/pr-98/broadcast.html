@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -270,18 +284,25 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Broadcast</h1>
-        <p>Broadcast automatically fetches broadcast messages for the current (or a given) url.</p>
+        <p>
+          Broadcast automatically fetches broadcast messages for the current (or
+          a given) url.
+        </p>
         <p>Uses toast apis under the hood.</p>
 
         <p>
-          <strong>N.B.</strong> Broadcast should only be included once per page to avoid duplicate
-          broadcast messages being displayed. The preferred method for including broadcast will soon
-          be a podlet provided by the communication team. In the meantime this component can be used
+          <strong>N.B.</strong> Broadcast should only be included once per page
+          to avoid duplicate broadcast messages being displayed. The preferred
+          method for including broadcast will soon be a podlet provided by the
+          communication team. In the meantime this component can be used
           directly.
         </p>
 
         <h2 class="mt-24 mb-16">Attributes</h2>
-        <p><strong>interval</strong> — Refetch interval - <i>default: 300 000 (5 minutes)</i></p>
+        <p>
+          <strong>interval</strong> — Refetch interval -
+          <i>default: 300 000 (5 minutes)</i>
+        </p>
         <p>
           <strong>api</strong> - API endpoint to fetch broadcasts from. Use
           <code>https://dev.finn.no/broadcasts</code> on dev and
@@ -289,8 +310,8 @@
           <i>Required</i>
         </p>
         <p>
-          <strong>url</strong> — Page (identified by its url) to check for registered broadcasts
-          against - <i>default window.location.href</i>
+          <strong>url</strong> — Page (identified by its url) to check for
+          registered broadcasts against - <i>default window.location.href</i>
         </p>
 
         <h2 class="mt-24 mb-16">Example usage</h2>

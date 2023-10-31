@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -271,8 +285,9 @@
       <main slot="content">
         <h1 class="mb-16">Alert</h1>
         <p>
-          Alert is an inline component used for displaying different types of messages. For
-          accessibility reasons, alert should appear close to the element that triggered it.
+          Alert is an inline component used for displaying different types of
+          messages. For accessibility reasons, alert should appear close to the
+          element that triggered it.
         </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
@@ -307,10 +322,18 @@
 
         <syntax-highlight>
           <div class="flex gap-8 flex-wrap mt-16">
-            <w-button small aria-controls="defaultAlertId">Hide and show "info" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "negative" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "positive" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "warning" variant</w-button>
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "info" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "negative" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "positive" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "warning" variant</w-button
+            >
           </div>
           <w-alert id="defaultAlertId" variant="info" show>
             <p>This is "info" variant of the alert element</p>
@@ -335,7 +358,10 @@
           </w-alert>
         </syntax-highlight>
         <div class="example">
-          <div id="alertWithDescriptionControllers" class="flex gap-8 flex-wrap mb-16">
+          <div
+            id="alertWithDescriptionControllers"
+            class="flex gap-8 flex-wrap mb-16"
+          >
             <w-button small name="info">Hide and show "info" variant</w-button>
 <w-button small name="negative">Hide and show "negative" variant</w-button>
 <w-button small name="positive">Hide and show "positive" variant</w-button>
@@ -362,7 +388,10 @@
           </w-alert>
         </syntax-highlight>
         <div class="example">
-          <div id="alertWithButtonsControllers" class="flex gap-8 flex-wrap mb-16">
+          <div
+            id="alertWithButtonsControllers"
+            class="flex gap-8 flex-wrap mb-16"
+          >
             <w-button small name="info">Hide and show "info" variant</w-button>
 <w-button small name="negative">Hide and show "negative" variant</w-button>
 <w-button small name="positive">Hide and show "positive" variant</w-button>
@@ -383,12 +412,13 @@
         </div>
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
-          Use the ARIA live region <code>role</code> attribute to provide meaning to the alert
-          element (defaults to "alert"). If you want to remove the role from the alert and assign it
-          to its particular child (e.g. title), you can do so by setting <code>role</code> attribute
-          to an empty string on <code>w-alert</code> element and assigning a respective
-          <code>role</code> on the child element. Read more about live region
-          <code>role</code> attribute
+          Use the ARIA live region <code>role</code> attribute to provide
+          meaning to the alert element (defaults to "alert"). If you want to
+          remove the role from the alert and assign it to its particular child
+          (e.g. title), you can do so by setting <code>role</code> attribute to
+          an empty string on <code>w-alert</code> element and assigning a
+          respective <code>role</code> on the child element. Read more about
+          live region <code>role</code> attribute
           <a
             target="_blank"
             title="Read more about ARIA live region role attribute"
@@ -400,17 +430,25 @@
 
         <syntax-highlight>
           <w-alert id="selfHidingAlertId" variant="info" show role="">
-            <h3 role="alert" class="t5">This is a "info" variant of the alert element</h3>
+            <h3 role="alert" class="t5">
+              This is a "info" variant of the alert element
+            </h3>
             <p>You see this warning because you did something wrong</p>
-            <w-button variant="primary" small aria-controls="selfHidingAlertId">Hide and show alert</w-button>
+            <w-button variant="primary" small aria-controls="selfHidingAlertId"
+              >Hide and show alert</w-button
+            >
           </w-alert>
         </syntax-highlight>
         <div class="example">
           <w-alert id="selfHidingAlert" variant="info" show role="">
-            <h3 role="alert" class="t5">This is "info" variant of the alert element</h3>
+            <h3 role="alert" class="t5">
+              This is "info" variant of the alert element
+            </h3>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
-              <w-button variant="primary" small aria-controls="selfHidingAlert">Hide and show alert</w-button>
+              <w-button variant="primary" small aria-controls="selfHidingAlert"
+                >Hide and show alert</w-button
+              >
             </div>
           </w-alert>
         </div>
@@ -428,39 +466,42 @@
     }
   }
 </script>
-    <script>
+ <script>
   function addEventListenersToAlertControllers(alertId) {
     const alertElement = document.getElementById(alertId);
     const controllersWrapperId = `#${alertId}Controllers`;
 
-    document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
-      el.setAttribute('aria-controls', alertId);
+    document
+      .querySelectorAll(`${controllersWrapperId} w-button`)
+      .forEach((el) => {
+        el.setAttribute("aria-controls", alertId);
 
-      el.addEventListener('click', (event) => {
-        alertElement.show = false;
-        el.setAttribute('aria-expanded', false);
+        el.addEventListener("click", (event) => {
+          alertElement.show = false;
+          el.setAttribute("aria-expanded", false);
 
-        const name = el.getAttribute('name') || 'info';
-        const role = (name === 'info' || name === 'positive') ? 'status' : 'alert';
+          const name = el.getAttribute("name") || "info";
+          const role =
+            name === "info" || name === "positive" ? "status" : "alert";
 
-        // update alert after hide transition ends
-        setTimeout(() => {
-          alertElement.variant = name;
-          alertElement.role = role;
+          // update alert after hide transition ends
+          setTimeout(() => {
+            alertElement.variant = name;
+            alertElement.role = role;
 
-          alertElement.querySelector(
-            alertId === 'defaultAlert' ? 'p' : 'h3',
-          ).innerText = `This is "${name}" variant of the alert element`;
+            alertElement.querySelector(
+              alertId === "defaultAlert" ? "p" : "h3",
+            ).innerText = `This is "${name}" variant of the alert element`;
 
-          alertElement.show = true;
-          el.setAttribute('aria-expanded', true);
-        }, 500);
+            alertElement.show = true;
+            el.setAttribute("aria-expanded", true);
+          }, 500);
+        });
       });
-    });
   }
 
-  document.querySelectorAll('.example w-alert').forEach((el) => {
-    const alertId = el.getAttribute('id');
+  document.querySelectorAll(".example w-alert").forEach((el) => {
+    const alertId = el.getAttribute("id");
     addEventListenersToAlertControllers(alertId);
   });
 </script>

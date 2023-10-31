@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -270,7 +284,10 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Badge</h1>
-        <p>Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.</p>
+        <p>
+          Badge is used for showing a small amount of non-interactive
+          color-categorized metadata, like a status or count.
+        </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
@@ -284,7 +301,10 @@
           <tbody class="align-top">
             <tr>
               <td>variant</td>
-              <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'notification' | 'price'</td>
+              <td>
+                'neutral' | 'info' | 'positive' | 'warning' |'negative' |
+                'disabled' | 'notification' | 'price'
+              </td>
               <td>'neutral'</td>
             </tr>
             <tr>
@@ -299,14 +319,10 @@
 
         <h3>Default</h3>
         <syntax-highlight class="mt-0">
-          <w-badge>
-            I am a default badge
-          </w-badge>
+          <w-badge> I am a default badge </w-badge>
         </syntax-highlight>
         <div class="example">
-          <w-badge>
-            I am a default badge
-          </w-badge>
+          <w-badge> I am a default badge </w-badge>
         </div>
 
         <h3 class="mb-8">Variants</h3>
@@ -328,7 +344,9 @@
             <li><w-badge variant="warning">warning badge</w-badge></li>
             <li><w-badge variant="negative">negative badge</w-badge></li>
             <li><w-badge variant="disabled">disabled badge</w-badge></li>
-            <li><w-badge variant="notification">notification badge</w-badge></li>
+            <li>
+              <w-badge variant="notification">notification badge</w-badge>
+            </li>
             <li><w-badge variant="price">price badge</w-badge></li>
           </ul>
         </div>
@@ -341,24 +359,47 @@
           <w-badge position="bottom-left">bottom-left</w-badge>
         </syntax-highlight>
         <div class="example space-y-16">
-          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
-            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+          <div
+            class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]"
+          >
+            <img
+              class="w-full h-96 object-cover"
+              src="https://source.unsplash.com/random/400x96"
+            />
             <w-badge position="top-left" variant="price">top-left</w-badge>
           </div>
-          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
-            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
+          <div
+            class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]"
+          >
+            <img
+              class="w-full h-96 object-cover"
+              src="https://source.unsplash.com/random/400x96"
+            />
             <w-badge position="top-right" variant="price">top-right</w-badge>
           </div>
-          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
-            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="bottom-right" variant="price">bottom-right</w-badge>
+          <div
+            class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]"
+          >
+            <img
+              class="w-full h-96 object-cover"
+              src="https://source.unsplash.com/random/400x96"
+            />
+            <w-badge position="bottom-right" variant="price"
+              >bottom-right</w-badge
+            >
           </div>
-          <div class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]">
-            <img class="w-full h-96 object-cover" src="https://source.unsplash.com/random/400x96" />
-            <w-badge position="bottom-left" variant="price">bottom-left</w-badge>
+          <div
+            class="relative border border-0 rounded-8 overflow-hidden h-96 max-w-[400px]"
+          >
+            <img
+              class="w-full h-96 object-cover"
+              src="https://source.unsplash.com/random/400x96"
+            />
+            <w-badge position="bottom-left" variant="price"
+              >bottom-left</w-badge
+            >
           </div>
         </div>
-
       </main>
       <script data-for="footer" type="application/json">
   {
@@ -373,6 +414,5 @@
   }
 </script>
     </div>
-
   </body>
 </html>

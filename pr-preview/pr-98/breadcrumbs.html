@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,59 +275,61 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-        <main slot="content">
-          <h1 class="mb-16">Breadcrumbs</h1>
-          <p>Breadcrumbs show the navigation structure for the current location.</p>
-  
-          <h2 class="mt-24 mb-16">Import</h2>
-          <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
-  
-          <h2 class="mt-24 mb-16">Examples</h2>
-  
-          <h3>All segments linkable</h3>
-  
-          <syntax-highlight>
-            <w-breadcrumbs>
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <a href="#/url/3" aria-current="page"> Oslo </a>
-            </w-breadcrumbs></syntax-highlight
-          >
-          <div class="example">
-            <w-breadcrumbs class="mt-10">
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <a href="#/url/3" aria-current="page">Oslo</a>
-            </w-breadcrumbs>
-          </div>
-  
-          <h3>Disabled last link</h3>
-  
-          <syntax-highlight>
-            <w-breadcrumbs>
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <span aria-current="page">Oslo</span>
-            </w-breadcrumbs></syntax-highlight
-          >
-          <div class="example">
-            <w-breadcrumbs class="mt-10">
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <span aria-current="page">Oslo</span>
-            </w-breadcrumbs>
-          </div>
-        </main>
-      </div>
-      
-      <script data-for="footer" type="application/json">
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Breadcrumbs</h1>
+        <p>
+          Breadcrumbs show the navigation structure for the current location.
+        </p>
+
+        <h2 class="mt-24 mb-16">Import</h2>
+        <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
+
+        <h2 class="mt-24 mb-16">Examples</h2>
+
+        <h3>All segments linkable</h3>
+
+        <syntax-highlight>
+          <w-breadcrumbs>
+            <a href="#/url/1">Eiendom</a>
+            <a href="#/url/2">Bolig til salgs</a>
+            <a href="#/url/3" aria-current="page"> Oslo </a>
+          </w-breadcrumbs></syntax-highlight
+        >
+        <div class="example">
+          <w-breadcrumbs class="mt-10">
+            <a href="#/url/1">Eiendom</a>
+            <a href="#/url/2">Bolig til salgs</a>
+            <a href="#/url/3" aria-current="page">Oslo</a>
+          </w-breadcrumbs>
+        </div>
+
+        <h3>Disabled last link</h3>
+
+        <syntax-highlight>
+          <w-breadcrumbs>
+            <a href="#/url/1">Eiendom</a>
+            <a href="#/url/2">Bolig til salgs</a>
+            <span aria-current="page">Oslo</span>
+          </w-breadcrumbs></syntax-highlight
+        >
+        <div class="example">
+          <w-breadcrumbs class="mt-10">
+            <a href="#/url/1">Eiendom</a>
+            <a href="#/url/2">Bolig til salgs</a>
+            <span aria-current="page">Oslo</span>
+          </w-breadcrumbs>
+        </div>
+      </main>
+    </div>
+
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -325,6 +341,5 @@
     }
   }
 </script>
-
   </body>
 </html>

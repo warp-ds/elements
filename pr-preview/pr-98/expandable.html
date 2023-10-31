@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,8 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
+  <script type="module" crossorigin src="/elements/assets/expandable-7f9effe1.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -270,7 +285,10 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Expandable</h1>
-        <p>Expandable is a layout component used for creating expandable content areas on a page.</p>
+        <p>
+          Expandable is a layout component used for creating expandable content
+          areas on a page.
+        </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
@@ -286,7 +304,9 @@
               <td>expanded</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Controls component's expanded state</div>
+                <div class="annotation">
+                  Controls component's expanded state
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -302,7 +322,9 @@
               <td>info</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Styles the box with light blue color</div>
+                <div class="annotation">
+                  Styles the box with light blue color
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -310,54 +332,62 @@
               <td>box</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether to display the component as a padded box or not</div>
-                <td>false</td>
+                <div class="annotation">
+                  Whether to display the component as a padded box or not
+                </div>
               </td>
+              <td>false</td>
             </tr>
             <tr>
               <td>animated</td>
               <td>
                 <div>boolean</div>
                 <div class="annotation">Animate open and close</div>
-                <td>false</td>
               </td>
+              <td>false</td>
             </tr>
             <tr>
               <td>no-chevron</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether to hide the chevron on the button part of the component</div>
-                <td>false</td>
+                <div class="annotation">
+                  Whether to hide the chevron on the button part of the
+                  component
+                </div>
               </td>
+              <td>false</td>
             </tr>
             <tr>
               <td>title</td>
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  Component title. Used to display the title value which is always present
-                  regardless of whether the component is open or closed.
+                  Component title. Used to display the title value which is
+                  always present regardless of whether the component is open or
+                  closed.
                 </div>
-                <td></td>
               </td>
+              <td></td>
             </tr>
             <tr>
               <td>heading-level</td>
               <td>
                 <div>number</div>
                 <div class="annotation">
-                  Wrap the toggle button in a heading element with the specified level. If
-                  headingLevel is not specified, the button will not be wrapped by a heading element
+                  Wrap the toggle button in a heading element with the specified
+                  level. If headingLevel is not specified, the button will not
+                  be wrapped by a heading element
                 </div>
-                <td></td>
               </td>
+              <td></td>
             </tr>
             <tr>
               <td>button-class</td>
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  Additional CSS classes to include on the button part of the component
+                  Additional CSS classes to include on the button part of the
+                  component
                 </div>
               </td>
               <td></td>
@@ -367,7 +397,8 @@
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  Additional CSS classes to include on the content part of the component
+                  Additional CSS classes to include on the content part of the
+                  component
                 </div>
               </td>
               <td></td>
@@ -391,7 +422,11 @@
           </w-expandable>
         </syntax-highlight>
         <div class="example">
-          <div id="expandableControllers" class="flex gap-8 flex-wrap mb-16" aria-controls="expandable">
+          <div
+            id="expandableControllers"
+            class="flex gap-8 flex-wrap mb-16"
+            aria-controls="expandable"
+          >
             <w-button name="box" small aria-pressed="false">box</w-button>
 <w-button name="bleed" small aria-pressed="false">bleed</w-button>
 <w-button name="info" small aria-pressed="false">info</w-button>
@@ -403,21 +438,39 @@
         </div>
 
         <h3>With a heading wrapping the toggle button</h3>
-        <p>This can be used to wrap the toggle button in a heading for navigational and structural purposes. It's a feature that is needed typically in scenarios where multiple consecutive Expandable components are used.</p>
+        <p>
+          This can be used to wrap the toggle button in a heading for
+          navigational and structural purposes. It's a feature that is needed
+          typically in scenarios where multiple consecutive Expandable
+          components are used.
+        </p>
 
         <syntax-highlight>
-          <w-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
-            <p>with expanded content</p> 
+          <w-expandable
+            box
+            info
+            title="I'm expanded with h2 wrapper"
+            heading-level="2"
+          >
+            <p>with expanded content</p>
           </w-expandable>
         </syntax-highlight>
         <div class="example">
-          <w-expandable box info title="I'm expanded with h2 wrapper" heading-level="2">
+          <w-expandable
+            box
+            info
+            title="I'm expanded with h2 wrapper"
+            heading-level="2"
+          >
             <p>with expanded content</p>
           </w-expandable>
         </div>
 
         <h3>With custom title</h3>
-        <p>This can be used if more control over styling is needed than the <code>title</code> prop allows</p>
+        <p>
+          This can be used if more control over styling is needed than the
+          <code>title</code> prop allows
+        </p>
 
         <syntax-highlight>
           <w-expandable box info>
@@ -425,7 +478,7 @@
               <w-icon-bag-16></w-icon-bag-16>
               <p class="ml-8 mb-0">This is a title with an icon</p>
             </div>
-            <p>with expanded content</p> 
+            <p>with expanded content</p>
           </w-expandable>
         </syntax-highlight>
         <div class="example">
@@ -438,28 +491,43 @@
           </w-expandable>
         </div>
 
-
         <h3>Without title</h3>
-         
+
         <syntax-highlight>
-          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+          <w-button
+            variant="primary"
+            aria-label="Toggle expandable content without title"
+            aria-controls="expandableWithoutTitle"
+            >Toggle</w-button
+          >
           <w-expandable box info expanded animated id="expandableWithoutTitle">
-            <p>with expanded content</p> 
+            <p>with expanded content</p>
           </w-expandable>
         </syntax-highlight>
         <div class="example noTitle">
-          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
-          <w-expandable box info expanded animated class="mt-16" id="expandableWithoutTitle">
+          <w-button
+            variant="primary"
+            aria-label="Toggle expandable content without title"
+            aria-controls="expandableWithoutTitle"
+            >Toggle</w-button
+          >
+          <w-expandable
+            box
+            info
+            expanded
+            animated
+            class="mt-16"
+            id="expandableWithoutTitle"
+          >
             <p>Expandable content</p>
           </w-expandable>
         </div>
-
 
         <h3>With expanded prop</h3>
 
         <syntax-highlight>
           <w-expandable box info title="I'm expanded by default" expanded>
-            <p>content should be visible</p> 
+            <p>content should be visible</p>
           </w-expandable>
         </syntax-highlight>
         <div class="example">
@@ -469,7 +537,7 @@
         </div>
       </main>
     </div>
-      <script data-for="footer" type="application/json">
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -481,39 +549,45 @@
     }
   }
 </script>
-
-    <script>
+ <script>
   function addEventListenersToExpandableControllers(expandableId) {
     const expandableElement = document.getElementById(expandableId);
     const controllersWrapperId = `#${expandableId}Controllers`;
 
-    document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
-      el.addEventListener('click', (event) => {
-        const name = event.target.getAttribute('name') || 'info';
-        expandableElement[name] = !expandableElement[name];
+    document
+      .querySelectorAll(`${controllersWrapperId} w-button`)
+      .forEach((el) => {
+        el.addEventListener("click", (event) => {
+          const name = event.target.getAttribute("name") || "info";
+          expandableElement[name] = !expandableElement[name];
 
-        if (expandableElement[name]) {
-          el.buttonClass = 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400';
-          el.ariaPressed = true;
-          expandableElement.title = expandableElement.title + ` ${name}`;
-        } else {
-          el.buttonClass = undefined;
-          el.ariaPressed = false;
-          expandableElement.title = expandableElement.title.replace(` ${name}`, '');
-        }
+          if (expandableElement[name]) {
+            el.buttonClass = "bg-gray-200 hover:bg-gray-300 active:bg-gray-400";
+            el.ariaPressed = true;
+            expandableElement.title = expandableElement.title + ` ${name}`;
+          } else {
+            el.buttonClass = undefined;
+            el.ariaPressed = false;
+            expandableElement.title = expandableElement.title.replace(
+              ` ${name}`,
+              "",
+            );
+          }
+        });
       });
-    });
   }
 
-  document.querySelectorAll('.example w-expandable').forEach((el) => {
-    const expandableId = el.getAttribute('id');
+  document.querySelectorAll(".example w-expandable").forEach((el) => {
+    const expandableId = el.getAttribute("id");
     addEventListenersToExpandableControllers(expandableId);
   });
 
-  document.querySelector('.noTitle w-button').addEventListener('click', (event) => {
-    const expandable = document.querySelector('.noTitle w-expandable');
-    expandable.expanded = !expandable.expanded;
-  });
+  document
+    .querySelector(".noTitle w-button")
+    .addEventListener("click", (event) => {
+      const expandable = document.querySelector(".noTitle w-expandable");
+      expandable.expanded = !expandable.expanded;
+    });
 </script>
   </body>
 </html>

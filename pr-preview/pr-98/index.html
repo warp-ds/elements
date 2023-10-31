@@ -1,16 +1,29 @@
 <html lang="en">
-
   <head>
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -32,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -262,52 +275,56 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
-      
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
+    
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
       <div>
-        <div slot="banner" class="p-32 " style="max-width: 1024">
+        <div slot="banner" class="p-32" style="max-width: 1024">
           <div class="">
             <div class="">
-              <h1 style="font-size: 48px; line-height: 56px" class="text-white mb-16">
+              <h1
+                style="font-size: 48px; line-height: 56px"
+                class="text-white mb-16"
+              >
                 Warp Elements
               </h1>
               <p style="font-size: 22px; line-height: 28px" class="text-white">
-                The home of the web component, or custom elements, implementation of Warp.
+                The home of the web component, or custom elements,
+                implementation of Warp.
               </p>
             </div>
           </div>
         </div>
-  
+
         <main slot="content">
           <div class="p-32">
             <div class="">
               <h2 class="mb-16">Installation</h2>
               <p>
-                All the Warp Elements code is provided as a single package and each component can be
-                imported from this package.
+                All the Warp Elements code is provided as a single package and
+                each component can be imported from this package.
               </p>
-  
+
               <h3 class="mt-24 mb-16">Install from NPM</h3>
-  
+
               <p>The Warp Elements package can be installed from NPM.</p>
-  
+
               <syntax-highlight>npm install @warp-ds/elements</syntax-highlight>
-  
+
               <h3 class="mt-24 mb-16">Install from Eik</h3>
-  
+
               <p>The same package is also available via our Eik CDN server</p>
-  
+
               <syntax-highlight
                 >https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js</syntax-highlight
               >
-  
+
               <h2 class="mt-32 mb-16">Using Components</h2>
-  
+
               <p>Once installed, components can be used in your HTML markup.</p>
               <syntax-highlight>
                 <w-breadcrumbs class="mt-10">
@@ -316,43 +333,56 @@
                   <a href="#/url/3" aria-current="page"> Oslo </a>
                 </w-breadcrumbs>
               </syntax-highlight>
-  
+
               <w-breadcrumbs class="mt-10">
                 <a href="#/url/1">Eiendom</a>
                 <a href="#/url/2">Bolig til salgs</a>
                 <a href="#/url/3" aria-current="page"> Oslo </a>
               </w-breadcrumbs>
-  
+
               <br />
-  
+
               <h4 class="mt-24 mb-16">Importing from the NPM package</h4>
-  
+
               👉
-              <strong><i>This is the most common method and should be used in most cases</i></strong>
-  
-              When importing from NPM you will need to ensure you have build tooling in place. If you
-              are working with Podium podlets or layouts which is the most common use case at Finn,
-              you likely already have Eik in place with Rollup or Esbuild in which case no further
-              action should be needed.
-  
+              <strong
+                ><i
+                  >This is the most common method and should be used in most
+                  cases</i
+                ></strong
+              >
+
+              When importing from NPM you will need to ensure you have build
+              tooling in place. If you are working with Podium podlets or
+              layouts which is the most common use case at Finn, you likely
+              already have Eik in place with Rollup or Esbuild in which case no
+              further action should be needed.
+
               <i>Example</i>
               <syntax-highlight>import '@warp-ds/elements';</syntax-highlight>
-  
+
               <h4 class="mt-24 mb-16">Importing directly from Eik</h4>
-  
+
               👉
-              <strong><i>This is great for prototyping (can also be used in production)</i></strong>
-  
+              <strong
+                ><i
+                  >This is great for prototyping (can also be used in
+                  production)</i
+                ></strong
+              >
+
               <p>
-                It is also possible to import components directly from the URL on our Eik server.
-                While not common, it should be possible to write Elements code without the need for a
-                build setup. You might find this useful for rapid prototyping something on a hack day
-                for example!
+                It is also possible to import components directly from the URL
+                on our Eik server. While not common, it should be possible to
+                write Elements code without the need for a build setup. You
+                might find this useful for rapid prototyping something on a hack
+                day for example!
               </p>
-  
+
               <i>Example</i>
               <syntax-highlight>
-                import 'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
+                import
+                'https://assets.finn.no/pkg/@warp-ds/elements/v1/index.js';
               </syntax-highlight>
             </div>
             <div>
@@ -361,12 +391,9 @@
           </div>
         </main>
       </div>
+    </div>
 
-      </div>
-      
-
-      
-      <script data-for="footer" type="application/json">
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -378,6 +405,5 @@
     }
   }
 </script>
-
   </body>
 </html>

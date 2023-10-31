@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -284,7 +298,9 @@
               <td>show</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether Attention element should be visible.</div>
+                <div class="annotation">
+                  Whether Attention element should be visible.
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -293,8 +309,8 @@
               <td>
                 <div>"top" | "right" | "bottom" | "left"</div>
                 <div class="annotation">
-                  Placement according to the target element. Arrow would be on the opposite side of
-                  this position.
+                  Placement according to the target element. Arrow would be on
+                  the opposite side of this position.
                 </div>
               </td>
               <td>-</td>
@@ -304,7 +320,8 @@
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  Selector of element that the Attention component is rendered relatively to.
+                  Selector of element that the Attention component is rendered
+                  relatively to.
                 </div>
               </td>
               <td>-</td>
@@ -313,7 +330,9 @@
               <td>tooltip</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether Attention element is rendered as a tooltip.</div>
+                <div class="annotation">
+                  Whether Attention element is rendered as a tooltip.
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -331,7 +350,9 @@
               <td>popover</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether Attention element is rendered as a popover.</div>
+                <div class="annotation">
+                  Whether Attention element is rendered as a popover.
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -339,7 +360,9 @@
               <td>no-arrow</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Render Attention element without an arrow.</div>
+                <div class="annotation">
+                  Render Attention element without an arrow.
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -455,26 +478,32 @@
 
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
-          If the Attention element has "left" or "top" position, it should be placed before the
-          target element in the DOM.
+          If the Attention element has "left" or "top" position, it should be
+          placed before the target element in the DOM.
         </p>
         <p>
-          Attention element handles accessibility automatically by wrapping its slotted content with
-          a <code>div</code> with either <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and setting an
-          <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
+          Attention element handles accessibility automatically by wrapping its
+          slotted content with a <code>div</code> with either
+          <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for
+          callout and popover, a default <code>aria-label</code>and setting an
+          <code>aria-details</code> attribute on the target element. The default
+          <code>aria-label</code> also supports i18n.
         </p>
         <p>
-          It is possible to tell assistive technologies to recognize only a part of Attention's text
-          content. To do that set the <code>role</code> attribute on the relevant text element nested in
+          It is possible to tell assistive technologies to recognize only a part
+          of Attention's text content. To do that set the
+          <code>role</code> attribute on the relevant text element nested in
           <code>w-attention</code> and reference it by id through the use of
-          <code>aria-details</code>. The <code>aria-details</code> attribute is on the
-          target element, not on <code>w-attention</code>.
+          <code>aria-details</code>. The <code>aria-details</code> attribute is
+          on the target element, not on <code>w-attention</code>.
         </p>
 
         <syntax-highlight>
           <w-attention placement="top" popover>
             <div slot="message">
-              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
+              <p id="aria-content" role="tooltip">
+                I'm a popover with ARIA "tooltip" role
+              </p>
               <p>(this text is less relevant)</p>
             </div>
             <button
@@ -490,7 +519,9 @@
         <div id="accessibilityExample" class="example">
           <w-attention placement="top" popover>
             <div slot="message">
-              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
+              <p id="aria-content" role="tooltip">
+                I'm a popover with ARIA "tooltip" role
+              </p>
               <p>(this text is less relevant)</p>
             </div>
             <button
@@ -505,40 +536,50 @@
         </div>
 
         <script>
-          const tooltipTarget = document.querySelector('.example #tooltipTarget');
-          const popoverTarget = document.querySelector('.example #popoverTarget');
-          const highlightTarget = document.querySelector('.example #highlightTarget');
-          const popoverTarget2 = document.querySelector('.example #popoverTarget2');
-          const tooltipEl = document.querySelector('.example [tooltip]');
-          const popoverEl = document.querySelector('.example [popover]');
-          const highlightEl = document.querySelector('.example [highlight]');
-          const popoverEl2 = document.querySelector('#accessibilityExample [popover]');
+          const tooltipTarget = document.querySelector(
+            ".example #tooltipTarget",
+          );
+          const popoverTarget = document.querySelector(
+            ".example #popoverTarget",
+          );
+          const highlightTarget = document.querySelector(
+            ".example #highlightTarget",
+          );
+          const popoverTarget2 = document.querySelector(
+            ".example #popoverTarget2",
+          );
+          const tooltipEl = document.querySelector(".example [tooltip]");
+          const popoverEl = document.querySelector(".example [popover]");
+          const highlightEl = document.querySelector(".example [highlight]");
+          const popoverEl2 = document.querySelector(
+            "#accessibilityExample [popover]",
+          );
 
-          tooltipTarget.addEventListener('mouseenter', () => {
+          tooltipTarget.addEventListener("mouseenter", () => {
             tooltipEl.show = true;
           });
-          tooltipTarget.addEventListener('mouseleave', () => {
+          tooltipTarget.addEventListener("mouseleave", () => {
             tooltipEl.show = false;
           });
-          tooltipTarget.addEventListener('focus', () => {
+          tooltipTarget.addEventListener("focus", () => {
             tooltipEl.show = true;
           });
-          tooltipTarget.addEventListener('blur', () => {
+          tooltipTarget.addEventListener("blur", () => {
             tooltipEl.show = false;
           });
-          popoverTarget.addEventListener('click', () => {
+          popoverTarget.addEventListener("click", () => {
             popoverEl.show = !popoverEl.show;
           });
-          highlightTarget.addEventListener('click', () => {
+          highlightTarget.addEventListener("click", () => {
             highlightEl.show = !highlightEl.show;
           });
-          popoverTarget2.addEventListener('click', () => {
+          popoverTarget2.addEventListener("click", () => {
             popoverEl2.show = !popoverEl2.show;
           });
         </script>
       </main>
     </div>
-      <script data-for="footer" type="application/json">
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -550,6 +591,5 @@
     }
   }
 </script>
-
   </body>
 </html>

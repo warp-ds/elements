@@ -3,13 +3,27 @@
   <title>Warp Elements</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css"
+    rel="stylesheet"
+  />
 
   <style>
-    html { font-size: 62.5%; }
+    html {
+      font-size: 62.5%;
+    }
 
     main {
       -ms-text-size-adjust: 100%;
@@ -31,9 +45,9 @@
       margin-top: 20px;
     }
 
-    main [type='button'],
-    main [type='reset'],
-    main [type='submit'] {
+    main [type="button"],
+    main [type="reset"],
+    main [type="submit"] {
       -webkit-appearance: button;
     }
 
@@ -261,7 +275,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-a79c39a7.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-0ed85d85.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
 </head>
   <body>
@@ -270,7 +284,9 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Box</h1>
-        <p>Box is a layout component used for separating content areas on a page.</p>
+        <p>
+          Box is a layout component used for separating content areas on a page.
+        </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
@@ -286,7 +302,9 @@
               <td>bleed</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Will make a box full-width on mobile</div>
+                <div class="annotation">
+                  Will make a box full-width on mobile
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -299,7 +317,9 @@
               <td>info</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Will style the box with light blue colors</div>
+                <div class="annotation">
+                  Will style the box with light blue colors
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -307,7 +327,9 @@
               <td>neutral</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Will style the box with light gray colors</div>
+                <div class="annotation">
+                  Will style the box with light gray colors
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -316,8 +338,9 @@
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  Sets the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
-                  To remove the default role attribute, supply an empty role (<code>role=""</code>).
+                  Sets the ARIA <code>role</code> attribute to provide semantic
+                  meaning to a box element. To remove the default role
+                  attribute, supply an empty role (<code>role=""</code>).
                 </div>
               </td>
               <td>region</td>
@@ -386,7 +409,8 @@
           <w-box info class="w-full lg:w-2/4 md:w-2/4">
             <h3 class="mb-16">Info box</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+              malesuada dui in commodo dapibus.
             </p>
             <div class="my-16">
               <a title="This is a link">This is a link</a>
@@ -398,7 +422,8 @@
           <w-box info class="w-full lg:w-2/4 md:w-2/4">
             <h3 class="mb-16">Info box</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+              malesuada dui in commodo dapibus.
             </p>
             <div class="my-16">
               <a title="This is a link">This is a link</a>
@@ -408,10 +433,11 @@
         </div>
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
-          Use the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
-          If no role property is supplied, it will default to <code>role="region"</code>.
-          To remove the default role attribute, supply an empty role (<code>role=""</code>).
-          Consider using more suitable roles for your specific Box, as described on
+          Use the ARIA <code>role</code> attribute to provide semantic meaning
+          to a box element. If no role property is supplied, it will default to
+          <code>role="region"</code>. To remove the default role attribute,
+          supply an empty role (<code>role=""</code>). Consider using more
+          suitable roles for your specific Box, as described on
           <a
             target="_blank"
             title="Read more about ARIA role types on MDN"
@@ -423,17 +449,23 @@
 
         <syntax-highlight>
           <w-box bordered role="region">
-            <h3>I am treated as a section element by screen readers and other tools</h3>
+            <h3>
+              I am treated as a section element by screen readers and other
+              tools
+            </h3>
           </w-box>
         </syntax-highlight>
         <div class="example">
           <w-box bordered role="region">
-            <h3>I am treated as a section element by screen readers and other tools</h3>
+            <h3>
+              I am treated as a section element by screen readers and other
+              tools
+            </h3>
           </w-box>
         </div>
       </main>
     </div>
-      <script data-for="footer" type="application/json">
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -445,6 +477,5 @@
     }
   }
 </script>
-
   </body>
 </html>
