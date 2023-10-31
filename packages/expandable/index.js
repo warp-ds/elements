@@ -60,10 +60,10 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   get _expandableSlot() {
     return html`<div
       class=${fclasses({
-    [this.contentClass || ""]: true,
-    [ccBox.box]: this.box,
-    [ccExpandable.paddingTop]: this._hasTitle && this.box,
-  })}
+        [this.contentClass || ""]: true,
+        [ccBox.box]: this.box,
+        [ccExpandable.paddingTop]: this._hasTitle && this.box,
+      })}
     >
       <slot></slot>
     </div>`;
@@ -72,55 +72,55 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   render() {
     return html` <div
       class=${fclasses({
-    [ccExpandable.expandable]: true,
-    [ccExpandable.expandableBox]: this.box,
-    [ccExpandable.expandableBleed]: this.bleed,
-  })}
+        [ccExpandable.expandable]: true,
+        [ccExpandable.expandableBox]: this.box,
+        [ccExpandable.expandableBleed]: this.bleed,
+      })}
     >
       ${this._hasTitle
-    ? html`<w-unstyled-heading level=${this.headingLevel}>
+        ? html`<w-unstyled-heading level=${this.headingLevel}>
             <button
               type="button"
               aria-expanded="${this.expanded}"
               class=${fclasses({
-    [this.buttonClass || ""]: true,
-    [ccExpandable.button]: true,
-    [ccExpandable.buttonBox]: this.box,
-  })}
+                [this.buttonClass || ""]: true,
+                [ccExpandable.button]: true,
+                [ccExpandable.buttonBox]: this.box,
+              })}
               @click=${() => (this.expanded = !this.expanded)}
             >
               <div class="${ccExpandable.title}">
                 ${this.title
-    ? html`<span class="${ccExpandable.titleType}"
+                  ? html`<span class="${ccExpandable.titleType}"
                       >${this.title}</span
                     >`
-    : html`<slot name="title"></slot>`}
+                  : html`<slot name="title"></slot>`}
                 ${this.noChevron
-    ? ""
-    : html`<div
+                  ? ""
+                  : html`<div
                       class=${fclasses({
-    [ccExpandable.chevron]: true,
-    [ccExpandable.chevronTransform]: true,
-    [ccExpandable.chevronExpand]: this.expanded,
-    [ccExpandable.chevronBox]: this.box,
-    [ccExpandable.chevronNonBox]: !this.box,
-  })}
+                        [ccExpandable.chevron]: true,
+                        [ccExpandable.chevronTransform]: true,
+                        [ccExpandable.chevronExpand]: this.expanded,
+                        [ccExpandable.chevronBox]: this.box,
+                        [ccExpandable.chevronNonBox]: !this.box,
+                      })}
                     >
                       <w-icon-chevron-down-16></w-icon-chevron-down-16>
                     </div>`}
               </div>
             </button>
           </w-unstyled-heading>`
-    : ""}
+        : ""}
       ${this.animated
-    ? html`<w-expand-transition ?show=${this.expanded}>
+        ? html`<w-expand-transition ?show=${this.expanded}>
             ${this._expandableSlot}
           </w-expand-transition>`
-    : html`<div
+        : html`<div
             class=${fclasses({
-    [ccExpandable.expansion]: true,
-    [ccExpandable.expansionNotExpanded]: !this.expanded,
-  })}
+              [ccExpandable.expansion]: true,
+              [ccExpandable.expansionNotExpanded]: !this.expanded,
+            })}
             aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
           >
             ${this._expandableSlot}

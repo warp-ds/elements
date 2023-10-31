@@ -1,6 +1,7 @@
-import { classMap } from 'lit/directives/class-map.js';
+import { classMap } from "lit/directives/class-map.js";
 
-const camelCaseToKebabCase = (str) => str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+const camelCaseToKebabCase = (str) =>
+  str.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 
 // Source: https://medium.com/@dayton-bobbitt/generating-attributes-for-litelement-properties-f972ef658137
 export function kebabCaseAttributes(constructor) {
@@ -9,7 +10,10 @@ export function kebabCaseAttributes(constructor) {
       let customOptions = options;
 
       // derive the attribute name if not already defined or disabled
-      if (typeof options?.attribute === 'undefined' || options?.attribute === true) {
+      if (
+        typeof options?.attribute === "undefined" ||
+        options?.attribute === true
+      ) {
         customOptions = Object.assign({}, options, {
           attribute: camelCaseToKebabCase(name.toString()),
         });
@@ -25,13 +29,13 @@ export function classes(defn) {
   for (const [key, value] of Object.entries(defn)) {
     if (value) classes.push(key);
   }
-  return classes.join(' ');
+  return classes.join(" ");
 }
 
 export function fclasses(definition) {
   const defn = {};
   for (const [key, value] of Object.entries(definition)) {
-    for (const className of key.split(' ')) {
+    for (const className of key.split(" ")) {
       defn[className] = value;
     }
   }

@@ -1,16 +1,14 @@
-import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { interleave } from '@warp-ds/core/breadcrumbs';
-import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes';
-import { kebabCaseAttributes } from '../utils';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { activateI18n } from '../i18n';
-const separator = html`<span class=${ccBreadcrumbs.separator}
-  >/</span
->`;
+import { html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { interleave } from "@warp-ds/core/breadcrumbs";
+import { breadcrumbs as ccBreadcrumbs } from "@warp-ds/css/component-classes";
+import { kebabCaseAttributes } from "../utils";
+import { i18n } from "@lingui/core";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { activateI18n } from "../i18n";
+const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];
@@ -24,10 +22,9 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
     activateI18n(enMessages, nbMessages, fiMessages);
 
     this.ariaLabel = i18n._({
-      id: 'breadcrumbs.ariaLabel',
-      message: 'You are here',
-      comment:
-        'Default screenreader message for the breadcrumb component',
+      id: "breadcrumbs.ariaLabel",
+      message: "You are here",
+      comment: "Default screenreader message for the breadcrumb component",
     });
   }
 
@@ -38,18 +35,16 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
       .flat(Infinity)
       .filter((child) => child);
     const styledChildren = flattenedChildren.map((child, index) => {
-      if (typeof child === 'string') {
+      if (typeof child === "string") {
         const isLastEl = index === children.length - 1;
         return html`<span
           class=${ccBreadcrumbs.text}
-          aria-current=${isLastEl ? 'page' : undefined}
+          aria-current=${isLastEl ? "page" : undefined}
           >${child}</span
         >`;
       }
       child.classList.add(
-        child.tagName === 'A'
-          ? ccBreadcrumbs.link
-          : ccBreadcrumbs.text,
+        child.tagName === "A" ? ccBreadcrumbs.link : ccBreadcrumbs.text,
       );
       return child;
     });
@@ -70,8 +65,8 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
   }
 }
 
-if (!customElements.get('w-breadcrumbs')) {
-  customElements.define('w-breadcrumbs', WarpBreadcrumbs);
+if (!customElements.get("w-breadcrumbs")) {
+  customElements.define("w-breadcrumbs", WarpBreadcrumbs);
 }
 
 export { WarpBreadcrumbs };

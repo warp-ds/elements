@@ -22,7 +22,9 @@
               <td>auto-focus</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">Whether the element should receive focus on render</div>
+                <div class="annotation">
+                  Whether the element should receive focus on render
+                </div>
               </td>
               <td>false</td>
             </tr>
@@ -31,8 +33,8 @@
               <td>
                 <div>boolean</div>
                 <div class="annotation">
-                  Renders the field in an invalid state. Often paired with `hint` to provide
-                  feedback about the error
+                  Renders the field in an invalid state. Often paired with
+                  `hint` to provide feedback about the error
                 </div>
               </td>
               <td>false</td>
@@ -49,7 +51,9 @@
               <td>hint</td>
               <td>
                 <div>string</div>
-                <div class="annotation">The content displayed as the help text</div>
+                <div class="annotation">
+                  The content displayed as the help text
+                </div>
               </td>
               <td></td>
             </tr>
@@ -66,7 +70,8 @@
               <td>
                 <div>string</div>
                 <div class="annotation">
-                  The name of the select element, used when submitting an HTML form
+                  The name of the select element, used when submitting an HTML
+                  form
                 </div>
               </td>
               <td></td>
@@ -85,14 +90,22 @@
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option value="s">Strawberries</option>
             <option value="r">Raspberries</option>
             <option value="c">Cloudberries</option>
@@ -101,14 +114,22 @@
 
         <h3 class="mt-24 mb-16">Default option</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option>Strawberries</option>
             <option selected>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+          >
             <option value="s">Strawberries</option>
             <option value="r" selected>Raspberries</option>
             <option value="c">Cloudberries</option>
@@ -149,14 +170,24 @@
 
         <h3 class="mt-24 mb-16">Optional</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+            optional
+          >
             <option>Strawberries</option>
             <optionx>Raspberries</optionx>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+          <w-select
+            label="Berries"
+            hint="We assume this is your jam preference"
+            always
+            optional
+          >
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
@@ -164,7 +195,6 @@
         </div>
       </main>
     </div>
-      <%- include('footer.html'); -%>
-
+    <%- include('footer.html'); -%>
   </body>
 </html>

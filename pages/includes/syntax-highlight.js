@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import htmlFormat from 'html-format';
+import { LitElement, html, css } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import htmlFormat from "html-format";
 
 /**
  * This component reads the content from the slot and renders it with syntax highlighting.
@@ -16,7 +16,11 @@ export class SyntaxHighlight extends LitElement {
 
     pre {
       background-color: var(--w-bluegray-50);
-      font-family: Monaco, Ubuntu Mono, Consolas, monospace;
+      font-family:
+        Monaco,
+        Ubuntu Mono,
+        Consolas,
+        monospace;
       font-size: 14px;
       margin: 0;
       padding: 16px;
@@ -36,17 +40,23 @@ export class SyntaxHighlight extends LitElement {
 
   // After the initial render we get the source HTML from the slot and highlight it using prismjs
   firstUpdated() {
-    const slot = this.shadowRoot.querySelector('slot');
+    const slot = this.shadowRoot.querySelector("slot");
 
     let slotHtml = slot
       .assignedNodes()
-      .map((el) => (el.nodeType === Node.TEXT_NODE ? el.textContent : el.outerHTML))
-      .join('')
+      .map((el) =>
+        el.nodeType === Node.TEXT_NODE ? el.textContent : el.outerHTML,
+      )
+      .join("")
       .trim();
 
     slotHtml = htmlFormat(slotHtml);
 
-    const highlighted = window?.Prism.highlight(slotHtml, window.Prism.languages.markup, 'html');
+    const highlighted = window?.Prism.highlight(
+      slotHtml,
+      window.Prism.languages.markup,
+      "html",
+    );
 
     this.source = highlighted;
   }
@@ -63,4 +73,4 @@ export class SyntaxHighlight extends LitElement {
   }
 }
 
-customElements.define('syntax-highlight', SyntaxHighlight);
+customElements.define("syntax-highlight", SyntaxHighlight);

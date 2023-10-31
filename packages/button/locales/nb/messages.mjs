@@ -1,1 +1,3 @@
-/*eslint-disable*/export const messages=JSON.parse("{\"button.aria.loading\":\"Laster...\"}");
+/*eslint-disable*/ export const messages = JSON.parse(
+  '{"button.aria.loading":"Laster..."}',
+);

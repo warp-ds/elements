@@ -1,7 +1,7 @@
-import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { toaster as ccToaster } from '@warp-ds/css/component-classes';
-import { repeat } from 'lit/directives/repeat.js';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { toaster as ccToaster } from "@warp-ds/css/component-classes";
+import { repeat } from "lit/directives/repeat.js";
 
 /**
  * Toast helper function options
@@ -63,9 +63,9 @@ export class WarpToastContainer extends WarpElement {
   }
 
   static init() {
-    let el = document.querySelector('w-toast-container');
+    let el = document.querySelector("w-toast-container");
     if (!el) {
-      el = document.createElement('w-toast-container');
+      el = document.createElement("w-toast-container");
       document.body.appendChild(el);
     }
     return el;
@@ -81,8 +81,10 @@ export class WarpToastContainer extends WarpElement {
    * @returns {ToastOptions}
    */
   get(id) {
-    if (!id) throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== 'string' && !Number.isInteger(id)) {
+    if (!id) {
+      throw new Error('undefined "id" given when attempting to retrieve toast');
+    }
+    if (typeof id !== "string" && !Number.isInteger(id)) {
       throw new Error(
         '"id" must be number or string when attempting to retrieve toast',
       );
@@ -111,8 +113,10 @@ export class WarpToastContainer extends WarpElement {
    * @returns {ToastOptions | false}
    */
   async del(id) {
-    if (!id) throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== 'string' && !Number.isInteger(id)) {
+    if (!id) {
+      throw new Error('undefined "id" given when attempting to retrieve toast');
+    }
+    if (typeof id !== "string" && !Number.isInteger(id)) {
       throw new Error(
         '"id" must be number or string when attempting to retrieve toast',
       );
@@ -130,10 +134,10 @@ export class WarpToastContainer extends WarpElement {
       <aside class="${ccToaster.container}">
         <div class="${ccToaster.toaster}" id="w-toast-container-list">
           ${repeat(
-    this._toastsArray,
-    (toast) => toast.id,
-    (toast) =>
-      html` <w-toast
+            this._toastsArray,
+            (toast) => toast.id,
+            (toast) =>
+              html` <w-toast
                 class="${ccToaster.content}"
                 id="${toast.id}"
                 type="${toast.type}"
@@ -142,13 +146,13 @@ export class WarpToastContainer extends WarpElement {
                 @close=${() => this.del(toast.id)}
               >
               </w-toast>`,
-  )}
+          )}
         </div>
       </aside>
     `;
   }
 }
 
-if (!customElements.get('w-toast-container')) {
-  customElements.define('w-toast-container', WarpToastContainer);
+if (!customElements.get("w-toast-container")) {
+  customElements.define("w-toast-container", WarpToastContainer);
 }

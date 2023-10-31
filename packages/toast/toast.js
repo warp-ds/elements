@@ -1,14 +1,14 @@
-import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { classMap } from 'lit/directives/class-map.js';
-import { when } from 'lit/directives/when.js';
-import { toast as ccToast } from '@warp-ds/css/component-classes';
-import { expand, collapse } from 'element-collapse';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { classMap } from "lit/directives/class-map.js";
+import { when } from "lit/directives/when.js";
+import { toast as ccToast } from "@warp-ds/css/component-classes";
+import { expand, collapse } from "element-collapse";
 
 const classes = (definition) => {
   const defn = {};
   for (const [key, value] of Object.entries(definition)) {
-    for (const className of key.split(' ')) {
+    for (const className of key.split(" ")) {
       defn[className] = value;
     }
   }
@@ -16,9 +16,9 @@ const classes = (definition) => {
 };
 
 const toastType = {
-  success: 'success',
-  error: 'error',
-  warning: 'warning',
+  success: "success",
+  error: "error",
+  warning: "warning",
 };
 
 export class WarpToast extends WarpElement {
@@ -41,8 +41,8 @@ export class WarpToast extends WarpElement {
   constructor() {
     super();
     this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    this.type = 'success';
-    this.text = '';
+    this.type = "success";
+    this.text = "";
     this.canclose = false;
   }
 
@@ -55,7 +55,9 @@ export class WarpToast extends WarpElement {
   }
 
   updated() {
-    if (!this._expanded && this._wrapper) expand(this._wrapper, () => (this._expanded = true));
+    if (!this._expanded && this._wrapper) {
+      expand(this._wrapper, () => (this._expanded = true));
+    }
   }
 
   get _primaryClasses() {
@@ -89,19 +91,22 @@ export class WarpToast extends WarpElement {
   }
 
   get _role() {
-    return this._error || this._warning ? 'alert' : 'status';
+    return this._error || this._warning ? "alert" : "status";
   }
 
   get _typeLabel() {
-    if (this._warning) return 'Varsel';
-    if (this._error) return 'Feil';
-    return 'Vellykket';
+    if (this._warning) return "Varsel";
+    if (this._error) return "Feil";
+    return "Vellykket";
   }
 
   get _iconMarkup() {
-    if (this._warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this._error) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    if (this._warning) {
+      return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    }
+    if (this._error) {
+      return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    } else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
   }
 
   async collapse() {
@@ -112,7 +117,7 @@ export class WarpToast extends WarpElement {
   }
 
   close() {
-    const event = new CustomEvent('close', {
+    const event = new CustomEvent("close", {
       detail: { id: this.id },
       bubbles: true,
       composed: true,
@@ -132,18 +137,18 @@ export class WarpToast extends WarpElement {
           <p>${this.text}</p>
         </div>
         ${when(
-    this.canclose === true,
-    () => html`
+          this.canclose === true,
+          () => html`
             <button class="${ccToast.close}" @click="${this.close}">
               <w-icon-close-16></w-icon-close-16>
             </button>
           `,
-  )}
+        )}
       </div>
     </section>`;
   }
 }
 
-if (!customElements.get('w-toast')) {
-  customElements.define('w-toast', WarpToast);
+if (!customElements.get("w-toast")) {
+  customElements.define("w-toast", WarpToast);
 }

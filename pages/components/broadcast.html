@@ -6,18 +6,25 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Broadcast</h1>
-        <p>Broadcast automatically fetches broadcast messages for the current (or a given) url.</p>
+        <p>
+          Broadcast automatically fetches broadcast messages for the current (or
+          a given) url.
+        </p>
         <p>Uses toast apis under the hood.</p>
 
         <p>
-          <strong>N.B.</strong> Broadcast should only be included once per page to avoid duplicate
-          broadcast messages being displayed. The preferred method for including broadcast will soon
-          be a podlet provided by the communication team. In the meantime this component can be used
+          <strong>N.B.</strong> Broadcast should only be included once per page
+          to avoid duplicate broadcast messages being displayed. The preferred
+          method for including broadcast will soon be a podlet provided by the
+          communication team. In the meantime this component can be used
           directly.
         </p>
 
         <h2 class="mt-24 mb-16">Attributes</h2>
-        <p><strong>interval</strong> — Refetch interval - <i>default: 300 000 (5 minutes)</i></p>
+        <p>
+          <strong>interval</strong> — Refetch interval -
+          <i>default: 300 000 (5 minutes)</i>
+        </p>
         <p>
           <strong>api</strong> - API endpoint to fetch broadcasts from. Use
           <code>https://dev.finn.no/broadcasts</code> on dev and
@@ -25,8 +32,8 @@
           <i>Required</i>
         </p>
         <p>
-          <strong>url</strong> — Page (identified by its url) to check for registered broadcasts
-          against - <i>default window.location.href</i>
+          <strong>url</strong> — Page (identified by its url) to check for
+          registered broadcasts against - <i>default window.location.href</i>
         </p>
 
         <h2 class="mt-24 mb-16">Example usage</h2>

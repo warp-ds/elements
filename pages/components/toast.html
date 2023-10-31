@@ -8,44 +8,50 @@
         <h1 class="mb-16">Toast</h1>
 
         <p>
-          Toasts display small snippets of information to the user and then disappear after a set
-          time. The Warp toast appears at the bottom of the screen but will normally be triggered
-          by a user interaction somewhere else on the page.
+          Toasts display small snippets of information to the user and then
+          disappear after a set time. The Warp toast appears at the bottom of
+          the screen but will normally be triggered by a user interaction
+          somewhere else on the page.
         </p>
 
         <h2>Accessibility</h2>
         <p>
-          For accessibility reasons, toasts should never contain interactive elements as interactive
-          elements should always occur in the same location as the action that triggered it. Because
-          of this limitation, we consider the use of toasts to be somewhat of an antipattern and
-          recommend that another approach be found wherever possible. The Warp team will be
-          investigating potentially better approaches for specific use cases in near future. That
-          being said, you are free to use toast so long as you avoid using interactive elements such
-          as links or a close button.
+          For accessibility reasons, toasts should never contain interactive
+          elements as interactive elements should always occur in the same
+          location as the action that triggered it. Because of this limitation,
+          we consider the use of toasts to be somewhat of an antipattern and
+          recommend that another approach be found wherever possible. The Warp
+          team will be investigating potentially better approaches for specific
+          use cases in near future. That being said, you are free to use toast
+          so long as you avoid using interactive elements such as links or a
+          close button.
         </p>
 
         <h2>Usage</h2>
         <p>
-          The toast is intended to be used programmatically. JavaScript APIs are provided to create,
-          update and remove toasts from a page while managing things like placement on the page for
-          you.
+          The toast is intended to be used programmatically. JavaScript APIs are
+          provided to create, update and remove toasts from a page while
+          managing things like placement on the page for you.
         </p>
 
         <p>
-          Toast is a bit different from other packages in Warp Elements. You need to import
-          functions from the package and call them as needed.
+          Toast is a bit different from other packages in Warp Elements. You
+          need to import functions from the package and call them as needed.
         </p>
 
         <p>Import functions for working with toasts:</p>
 
-        Be sure to import the elements package first as the toast APIs depend on this package.
+        Be sure to import the elements package first as the toast APIs depend on
+        this package.
 
         <syntax-highlight> import from '@warp-ds/elements' </syntax-highlight>
 
-        Once you have imported the elements package, import the toast api package.
+        Once you have imported the elements package, import the toast api
+        package.
 
         <syntax-highlight>
-          import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
+          import { toast, removeToast, updateToast } from
+          '@warp-ds/elements/toast';
         </syntax-highlight>
 
         Then you can create a new toast giving it a message:
@@ -57,21 +63,26 @@
           </w-button>
         </div>
 
-        Create a new toast giving it a message and some options and then get back an id that can be
-        used later to remove or edit the toast:
+        Create a new toast giving it a message and some options and then get
+        back an id that can be used later to remove or edit the toast:
         <syntax-highlight>
           const id = toast('This is a toast', { type: 'warning' });
         </syntax-highlight>
 
         Update an existing toast by id:
-        <syntax-highlight> updateToast(id, { text: 'This is a toast' }); </syntax-highlight>
+        <syntax-highlight>
+          updateToast(id, { text: 'This is a toast' });
+        </syntax-highlight>
 
         <h2 class="mt-24 mb-16">Options</h2>
         <p>
-          Type of toast: <strong>type</strong> — default success (success, warning, error)
+          Type of toast: <strong>type</strong> — default success (success,
+          warning, error)
         </p>
 
-        <syntax-highlight> toast('message goes here', { type: 'warning' }) </syntax-highlight>
+        <syntax-highlight>
+          toast('message goes here', { type: 'warning' })
+        </syntax-highlight>
 
         <div class="example">
           <w-button
@@ -97,12 +108,15 @@
         <p>Text content: <strong>text</strong> — default undefined</p>
 
         <syntax-highlight>
-          const id = toast('message goes here'); updateToast({ id, text: 'change the message' });
+          const id = toast('message goes here'); updateToast({ id, text: 'change
+          the message' });
         </syntax-highlight>
 
         <p>Auto removal: <strong>duration</strong> — default 5000ms</p>
 
-        <syntax-highlight> toast('message goes here', { duration: 2500 }) </syntax-highlight>
+        <syntax-highlight>
+          toast('message goes here', { duration: 2500 })
+        </syntax-highlight>
 
         <div class="example">
           <w-button
@@ -114,6 +128,6 @@
         </div>
       </main>
     </div>
-      <%- include('footer.html'); -%>
+    <%- include('footer.html'); -%>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { windowExists } from '../utils/window-exists';
+import { windowExists } from "../utils/window-exists";
 
 /**
  * Toast helper function options
@@ -18,13 +18,13 @@ import { windowExists } from '../utils/window-exists';
  */
 export function toast(message, options) {
   if (!windowExists) return;
-  const toast = customElements.get('w-toast-container').init();
+  const toast = customElements.get("w-toast-container").init();
 
   const data = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
     text: message,
     duration: 5000,
-    type: 'success',
+    type: "success",
     ...options,
   };
 
@@ -39,7 +39,7 @@ export function toast(message, options) {
  */
 export function removeToast(id) {
   if (!windowExists) return;
-  const toast = customElements.get('w-toast-container').init();
+  const toast = customElements.get("w-toast-container").init();
   return toast.del(id);
 }
 
@@ -51,7 +51,7 @@ export function removeToast(id) {
  */
 export function updateToast(id, options) {
   if (!windowExists) return;
-  const toast = customElements.get('w-toast-container').init();
+  const toast = customElements.get("w-toast-container").init();
   toast.set({ ...toast.get(id), ...options });
   return toast.get(id);
 }

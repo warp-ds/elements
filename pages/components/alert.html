@@ -7,8 +7,9 @@
       <main slot="content">
         <h1 class="mb-16">Alert</h1>
         <p>
-          Alert is an inline component used for displaying different types of messages. For
-          accessibility reasons, alert should appear close to the element that triggered it.
+          Alert is an inline component used for displaying different types of
+          messages. For accessibility reasons, alert should appear close to the
+          element that triggered it.
         </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
@@ -43,10 +44,18 @@
 
         <syntax-highlight>
           <div class="flex gap-8 flex-wrap mt-16">
-            <w-button small aria-controls="defaultAlertId">Hide and show "info" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "negative" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "positive" variant</w-button>
-            <w-button small aria-controls="defaultAlertId">Hide and show "warning" variant</w-button>
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "info" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "negative" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "positive" variant</w-button
+            >
+            <w-button small aria-controls="defaultAlertId"
+              >Hide and show "warning" variant</w-button
+            >
           </div>
           <w-alert id="defaultAlertId" variant="info" show>
             <p>This is "info" variant of the alert element</p>
@@ -68,7 +77,10 @@
           </w-alert>
         </syntax-highlight>
         <div class="example">
-          <div id="alertWithDescriptionControllers" class="flex gap-8 flex-wrap mb-16">
+          <div
+            id="alertWithDescriptionControllers"
+            class="flex gap-8 flex-wrap mb-16"
+          >
             <%- include('alertControllers.html'); -%>
           </div>
           <w-alert id="alertWithDescription" variant="info" show>
@@ -92,7 +104,10 @@
           </w-alert>
         </syntax-highlight>
         <div class="example">
-          <div id="alertWithButtonsControllers" class="flex gap-8 flex-wrap mb-16">
+          <div
+            id="alertWithButtonsControllers"
+            class="flex gap-8 flex-wrap mb-16"
+          >
             <%- include('alertControllers.html'); -%>
           </div>
           <w-alert id="alertWithButtons" variant="info" show>
@@ -110,12 +125,13 @@
         </div>
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
-          Use the ARIA live region <code>role</code> attribute to provide meaning to the alert
-          element (defaults to "alert"). If you want to remove the role from the alert and assign it
-          to its particular child (e.g. title), you can do so by setting <code>role</code> attribute
-          to an empty string on <code>w-alert</code> element and assigning a respective
-          <code>role</code> on the child element. Read more about live region
-          <code>role</code> attribute
+          Use the ARIA live region <code>role</code> attribute to provide
+          meaning to the alert element (defaults to "alert"). If you want to
+          remove the role from the alert and assign it to its particular child
+          (e.g. title), you can do so by setting <code>role</code> attribute to
+          an empty string on <code>w-alert</code> element and assigning a
+          respective <code>role</code> on the child element. Read more about
+          live region <code>role</code> attribute
           <a
             target="_blank"
             title="Read more about ARIA live region role attribute"
@@ -127,23 +143,31 @@
 
         <syntax-highlight>
           <w-alert id="selfHidingAlertId" variant="info" show role="">
-            <h3 role="alert" class="t5">This is a "info" variant of the alert element</h3>
+            <h3 role="alert" class="t5">
+              This is a "info" variant of the alert element
+            </h3>
             <p>You see this warning because you did something wrong</p>
-            <w-button variant="primary" small aria-controls="selfHidingAlertId">Hide and show alert</w-button>
+            <w-button variant="primary" small aria-controls="selfHidingAlertId"
+              >Hide and show alert</w-button
+            >
           </w-alert>
         </syntax-highlight>
         <div class="example">
           <w-alert id="selfHidingAlert" variant="info" show role="">
-            <h3 role="alert" class="t5">This is "info" variant of the alert element</h3>
+            <h3 role="alert" class="t5">
+              This is "info" variant of the alert element
+            </h3>
             <p>With an additional description</p>
             <div id="selfHidingAlertControllers">
-              <w-button variant="primary" small aria-controls="selfHidingAlert">Hide and show alert</w-button>
+              <w-button variant="primary" small aria-controls="selfHidingAlert"
+                >Hide and show alert</w-button
+              >
             </div>
           </w-alert>
         </div>
       </main>
     </div>
-    <%- include('footer.html'); -%>
-    <%- include('alertControllersScripts.html'); -%>
+    <%- include('footer.html'); -%> <%- include('alertControllersScripts.html');
+    -%>
   </body>
 </html>

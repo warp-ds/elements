@@ -64,6 +64,7 @@ Changes to either the custom elements or the HTML files should hot reload.
 ### Branching
 
 There are two branches to keep in mind:
+
 - `next` : default, used for pre-releases.
 - `main` : the main branch, used for stable releases.
 

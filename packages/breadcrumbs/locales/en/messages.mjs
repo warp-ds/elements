@@ -1,1 +1,3 @@
-/*eslint-disable*/export const messages=JSON.parse("{\"breadcrumbs.ariaLabel\":\"You are here\"}");
+/*eslint-disable*/ export const messages = JSON.parse(
+  '{"breadcrumbs.ariaLabel":"You are here"}',
+);

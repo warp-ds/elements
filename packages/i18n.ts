@@ -1,21 +1,21 @@
-import { Messages, i18n } from '@lingui/core';
+import { Messages, i18n } from "@lingui/core";
 
-export const supportedLocales = ['en', 'nb', 'fi'] as const;
+export const supportedLocales = ["en", "nb", "fi"] as const;
 type SupportedLocale = (typeof supportedLocales)[number];
 
-export const defaultLocale = 'en';
+export const defaultLocale = "en";
 
 export const getSupportedLocale = (usedLocale: string) => {
   return (
     supportedLocales.find(
       (locale) =>
-        usedLocale === locale || usedLocale.toLowerCase().includes(locale)
+        usedLocale === locale || usedLocale.toLowerCase().includes(locale),
     ) || defaultLocale
   );
 };
 
 export function detectLocale(): SupportedLocale {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     /**
      * Server locale detection. This requires e.g LANG environment variable to be set on the server.
      */
@@ -32,7 +32,7 @@ export function detectLocale(): SupportedLocale {
     const htmlLocale = document.documentElement.lang;
     return getSupportedLocale(htmlLocale);
   } catch (e) {
-    console.warn('could not detect locale, falling back to source locale', e);
+    console.warn("could not detect locale, falling back to source locale", e);
     return defaultLocale;
   }
 }
@@ -41,10 +41,10 @@ export const getMessages = (
   locale: SupportedLocale,
   enMsg: Messages,
   nbMsg: Messages,
-  fiMsg: Messages
+  fiMsg: Messages,
 ) => {
-  if (locale === 'nb') return nbMsg;
-  if (locale === 'fi') return fiMsg;
+  if (locale === "nb") return nbMsg;
+  if (locale === "fi") return fiMsg;
   // Default to English
   return enMsg;
 };
@@ -52,7 +52,7 @@ export const getMessages = (
 export const activateI18n = (
   enMessages: Messages,
   nbMessages: Messages,
-  fiMessages: Messages
+  fiMessages: Messages,
 ) => {
   const locale = detectLocale();
   const messages = getMessages(locale, enMessages, nbMessages, fiMessages);

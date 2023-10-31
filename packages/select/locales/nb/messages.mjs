@@ -1,1 +1,3 @@
-/*eslint-disable*/export const messages=JSON.parse("{\"select.label.optional\":\"(valgfritt)\"}");
+/*eslint-disable*/ export const messages = JSON.parse(
+  '{"select.label.optional":"(valgfritt)"}',
+);

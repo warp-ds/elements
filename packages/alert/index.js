@@ -69,11 +69,18 @@ class WarpAlert extends WarpElement {
   ];
 
   get _icon() {
-    if (this.variant === variants.info) return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
-    if (this.variant === variants.warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this.variant === variants.negative) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    if (this.variant === variants.positive) return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
-    else return "";
+    if (this.variant === variants.info) {
+      return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
+    }
+    if (this.variant === variants.warning) {
+      return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    }
+    if (this.variant === variants.negative) {
+      return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    }
+    if (this.variant === variants.positive) {
+      return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    } else return "";
   }
 
   render() {
