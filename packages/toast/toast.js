@@ -55,8 +55,9 @@ export class WarpToast extends WarpElement {
   }
 
   updated() {
-    if (!this._expanded && this._wrapper)
+    if (!this._expanded && this._wrapper) {
       expand(this._wrapper, () => (this._expanded = true));
+    }
   }
 
   get _primaryClasses() {
@@ -100,11 +101,12 @@ export class WarpToast extends WarpElement {
   }
 
   get _iconMarkup() {
-    if (this._warning)
+    if (this._warning) {
       return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this._error)
+    }
+    if (this._error) {
       return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    } else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
   }
 
   async collapse() {
@@ -125,10 +127,7 @@ export class WarpToast extends WarpElement {
 
   render() {
     if (!this.text) return html``;
-    return html` <section
-      class="${ccToast.wrapper}"
-      aria-label="${this._typeLabel}"
-    >
+    return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
       <div class="${this._primaryClasses}">
         <div class="${this._iconClasses}">${this._iconMarkup}</div>
         <div role="${this._role}" class="${ccToast.content}">
@@ -140,7 +139,7 @@ export class WarpToast extends WarpElement {
             <button class="${ccToast.close}" @click="${this.close}">
               <w-icon-close-16></w-icon-close-16>
             </button>
-          `
+          `,
         )}
       </div>
     </section>`;

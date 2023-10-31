@@ -3,11 +3,7 @@ import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 import { classNames } from '@chbphone55/classnames';
-import {
-  select as ccSelect,
-  helpText as ccHelpText,
-  label as ccLabel,
-} from '@warp-ds/css/component-classes';
+import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
 import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { i18n } from '@lingui/core';
@@ -100,32 +96,19 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
                     message: '(optional)',
                     comment: 'Shown behind label when marked as optional',
                   })}</span
-                >`
+                >`,
             )}</label
-          >`
+          >`,
       )}
       <div class="${ccSelect.selectWrapper}">
-        <select
-          class="${this.#classes}"
-          id="${this.#id}"
-          ?autofocus=${this.autoFocus}
-          aria-describedby="${ifDefined(this.#helpId)}"
-          aria-invalid="${ifDefined(this.invalid)}"
-          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
-        >
+        <select class="${this.#classes}" id="${this.#id}" ?autofocus=${this.autoFocus} aria-describedby="${ifDefined(this.#helpId)}" aria-invalid="${ifDefined(this.invalid)}" aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
           <w-icon-chevron-down-16></w-icon-chevron-down-16>
         </div>
       </div>
-      ${when(
-        this.always || this.invalid,
-        () =>
-          html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
-            ${this.hint}
-          </div>`
-      )}
+      ${when(this.always || this.invalid, () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.hint}</div>`)}
     </div>`;
   }
 }

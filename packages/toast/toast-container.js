@@ -84,10 +84,9 @@ export class WarpToastContainer extends WarpElement {
     if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
     }
-    if (typeof id !== 'string' && !Number.isInteger(id))
-      throw new Error(
-        '"id" must be number or string when attempting to retrieve toast'
-      );
+    if (typeof id !== 'string' && !Number.isInteger(id)) {
+      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    }
     return this._toasts.get(id);
   }
 
@@ -115,10 +114,9 @@ export class WarpToastContainer extends WarpElement {
     if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
     }
-    if (typeof id !== 'string' && !Number.isInteger(id))
-      throw new Error(
-        '"id" must be number or string when attempting to retrieve toast'
-      );
+    if (typeof id !== 'string' && !Number.isInteger(id)) {
+      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    }
     const el = this.renderRoot.querySelector(`#${id}`);
     if (!this._toasts.has(id)) return false;
     await el.collapse();
@@ -134,16 +132,7 @@ export class WarpToastContainer extends WarpElement {
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
-            (toast) =>
-              html` <w-toast
-                class="${ccToaster.content}"
-                id="${toast.id}"
-                type="${toast.type}"
-                text="${toast.text}"
-                ?canclose=${toast.canclose}
-                @close=${() => this.del(toast.id)}
-              >
-              </w-toast>`
+            (toast) => html` <w-toast class="${ccToaster.content}" id="${toast.id}" type="${toast.type}" text="${toast.text}" ?canclose=${toast.canclose} @close=${() => this.del(toast.id)}> </w-toast>`,
           )}
         </div>
       </aside>

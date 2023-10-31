@@ -42,7 +42,8 @@
     "semantic-release": "semantic-release",
     "build:elements": "node build-elements.js",
     "messages:extract": "lingui extract",
-    "messages:compile": "lingui compile"
+    "messages:compile": "lingui compile",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -60,7 +61,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.7.1",
-    "@warp-ds/eslint-config": "^1.0.1",
+    "@warp-ds/eslint-config": "^1.0.3",
     "@warp-ds/uno": "^1.1.0",
     "autoprefixer": "10.4.14",
     "cors": "2.8.5",
