@@ -1,7 +1,7 @@
 // /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from "tap";
-import { chromium } from "playwright";
-import { addContentToPage } from "../../tests/utils/index.js";
+import tap, { test, beforeEach, teardown } from 'tap';
+import { chromium } from 'playwright';
+import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -19,7 +19,7 @@ teardown(async () => {
   browser.close();
 });
 
-test("Text field component with a value attribute is rendered on the page", async (t) => {
+test('Text field component with a value attribute is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield value="this is a textfield"></w-textfield>
@@ -32,15 +32,15 @@ test("Text field component with a value attribute is rendered on the page", asyn
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator("w-textfield");
+  const locator = await page.locator('w-textfield');
   t.equal(
-    await locator.getAttribute("value"),
-    "this is a textfield",
-    "value should be defined",
+    await locator.getAttribute('value'),
+    'this is a textfield',
+    'value should be defined',
   );
 });
 
-test("Text field number component with a min and max is rendered on the page", async (t) => {
+test('Text field number component with a min and max is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield min="10" max="20" value="15" type="number"></w-textfield>
@@ -59,17 +59,17 @@ test("Text field number component with a min and max is rendered on the page", a
   });
 
   // THEN: the component is visible in the DOM
-  let locator = await page.locator("input");
+  let locator = await page.locator('input');
   await locator.click();
-  await locator.fill("10");
-  await page.keyboard.press("Tab");
-  t.equal(await locator.inputValue(), "10", "value should be 10");
+  await locator.fill('10');
+  await page.keyboard.press('Tab');
+  t.equal(await locator.inputValue(), '10', 'value should be 10');
 
-  await page.locator("w-textfield");
-  t.equal(await locator.getAttribute("value"), "10", "value should be 10");
+  await page.locator('w-textfield');
+  t.equal(await locator.getAttribute('value'), '10', 'value should be 10');
 });
 
-test("Text field component with a label is rendered on the page", async (t) => {
+test('Text field component with a label is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Name of a person"></w-textfield>
@@ -82,11 +82,11 @@ test("Text field component with a label is rendered on the page", async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  let locator = await page.locator("text=Name of a person");
-  t.equal(await locator.isVisible(), true, "Label should be visible");
+  let locator = await page.locator('text=Name of a person');
+  t.equal(await locator.isVisible(), true, 'Label should be visible');
 });
 
-test("Text field component with a label and help text is rendered on the page", async (t) => {
+test('Text field component with a label and help text is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield 
@@ -103,20 +103,20 @@ test("Text field component with a label and help text is rendered on the page", 
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=Telefonnummer").isVisible(),
+    await page.locator('text=Telefonnummer').isVisible(),
     true,
-    "Label should be visible",
+    'Label should be visible',
   );
   t.equal(
     await page
-      .locator("text=Vil kun brukes til brukerverifisering")
+      .locator('text=Vil kun brukes til brukerverifisering')
       .isVisible(),
     true,
-    "Help text should be visible",
+    'Help text should be visible',
   );
 });
 
-test("Invalid component with label and help text is rendered on the page", async (t) => {
+test('Invalid component with label and help text is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield 
@@ -134,18 +134,18 @@ test("Invalid component with label and help text is rendered on the page", async
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=Ugyldig e-post").isVisible(),
+    await page.locator('text=Ugyldig e-post').isVisible(),
     true,
-    "Help text should be visible",
+    'Help text should be visible',
   );
   t.equal(
-    await page.locator("input").getAttribute("aria-invalid"),
-    "true",
-    "Aria invalid should be set",
+    await page.locator('input').getAttribute('aria-invalid'),
+    'true',
+    'Aria invalid should be set',
   );
 });
 
-test("Invalid component with label and help text is rendered on the page", async (t) => {
+test('Invalid component with label and help text is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="E-post" placeholder="puse@finn.no"></w-textfield>
@@ -159,18 +159,18 @@ test("Invalid component with label and help text is rendered on the page", async
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=E-post").isVisible(),
+    await page.locator('text=E-post').isVisible(),
     true,
-    "Help text should be visible",
+    'Help text should be visible',
   );
   t.equal(
-    await page.locator("input").getAttribute("placeholder"),
-    "puse@finn.no",
-    "Placeholder text should be visible",
+    await page.locator('input').getAttribute('placeholder'),
+    'puse@finn.no',
+    'Placeholder text should be visible',
   );
 });
 
-test("Disabled component with label and value is rendered on the page", async (t) => {
+test('Disabled component with label and value is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="E-post" disabled value="puse@finn.no"></w-textfield>
@@ -184,18 +184,18 @@ test("Disabled component with label and value is rendered on the page", async (t
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=E-post").isVisible(),
+    await page.locator('text=E-post').isVisible(),
     true,
-    "Help text should be visible",
+    'Help text should be visible',
   );
   t.equal(
-    await page.locator("input").getAttribute("disabled"),
-    "",
-    "Disabled should be set on input",
+    await page.locator('input').getAttribute('disabled'),
+    '',
+    'Disabled should be set on input',
   );
 });
 
-test("Component with prefix is rendered on the page", async (t) => {
+test('Component with prefix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
@@ -211,13 +211,13 @@ test("Component with prefix is rendered on the page", async (t) => {
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=kr").isVisible(),
+    await page.locator('text=kr').isVisible(),
     true,
-    "Prefix text should be visible",
+    'Prefix text should be visible',
   );
 });
 
-test("Component with search suffix is rendered on the page", async (t) => {
+test('Component with search suffix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
@@ -233,13 +233,13 @@ test("Component with search suffix is rendered on the page", async (t) => {
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("button[type=submit]").isVisible(),
+    await page.locator('button[type=submit]').isVisible(),
     true,
-    "Suffix search button should be visible",
+    'Suffix search button should be visible',
   );
 });
 
-test("Component with clear suffix is rendered on the page", async (t) => {
+test('Component with clear suffix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
@@ -255,13 +255,13 @@ test("Component with clear suffix is rendered on the page", async (t) => {
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("button[type=reset]").isVisible(),
+    await page.locator('button[type=reset]').isVisible(),
     true,
-    "Suffix clear button should be visible",
+    'Suffix clear button should be visible',
   );
 });
 
-test("Component with prefix label and clear suffix is rendered on the page", async (t) => {
+test('Component with prefix label and clear suffix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
@@ -278,18 +278,18 @@ test("Component with prefix label and clear suffix is rendered on the page", asy
 
   // THEN: the component is visible in the DOM
   t.equal(
-    await page.locator("text=kr").isVisible(),
+    await page.locator('text=kr').isVisible(),
     true,
-    "Prefix text should be visible",
+    'Prefix text should be visible',
   );
   t.equal(
-    await page.locator("button[type=reset]").isVisible(),
+    await page.locator('button[type=reset]').isVisible(),
     true,
-    "Suffix clear button should be visible",
+    'Suffix clear button should be visible',
   );
 });
 
-test("Affix component button events bubble", async (t) => {
+test('Affix component button events bubble', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
@@ -310,11 +310,11 @@ test("Affix component button events bubble", async (t) => {
   });
 
   // THEN: the component is visible in the DOM
-  const loc = await page.locator("button[type=reset]");
+  const loc = await page.locator('button[type=reset]');
   await loc.click();
   t.equal(
-    await page.locator("w-affix").getAttribute("hasBeenClicked"),
-    "true",
-    "Clicked element should have bubbled to the parent",
+    await page.locator('w-affix').getAttribute('hasBeenClicked'),
+    'true',
+    'Clicked element should have bubbled to the parent',
   );
 });

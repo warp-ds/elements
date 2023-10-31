@@ -1,22 +1,22 @@
-import { html } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { suffix, prefix } from "@warp-ds/css/component-classes";
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { suffix, prefix } from '@warp-ds/css/component-classes';
 
-import { fclasses } from "../utils";
+import { fclasses } from '../utils';
 
 class WarpAffix extends WarpElement {
   static styles = [WarpElement.styles];
 
   static properties = {
-    ariaLabel: { type: String, attribute: "aria-label" },
+    ariaLabel: { type: String, attribute: 'aria-label' },
     clear: { type: Boolean },
     search: { type: Boolean },
     label: { type: String },
   };
 
   get _classBase() {
-    return this.slot === "suffix" ? suffix : prefix;
+    return this.slot === 'suffix' ? suffix : prefix;
   }
 
   get _classes() {
@@ -74,8 +74,8 @@ class WarpAffix extends WarpElement {
   }
 }
 
-if (!customElements.get("w-affix")) {
-  customElements.define("w-affix", WarpAffix);
+if (!customElements.get('w-affix')) {
+  customElements.define('w-affix', WarpAffix);
 }
 
 export { WarpAffix };

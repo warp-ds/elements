@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from "tap";
-import { chromium } from "playwright";
-import { addContentToPage } from "../../tests/utils/index.js";
+import tap, { test, beforeEach, teardown } from 'tap';
+import { chromium } from 'playwright';
+import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -19,7 +19,7 @@ teardown(async () => {
   browser.close();
 });
 
-test("Button component with no attributes is rendered on the page", async (t) => {
+test('Button component with no attributes is rendered on the page', async (t) => {
   // GIVEN: A button component
   const component = `
     <w-button>
@@ -34,35 +34,35 @@ test("Button component with no attributes is rendered on the page", async (t) =>
   });
 
   // THEN: the component is visible in the DOM
-  const locator = await page.locator("w-button");
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
-    "This is a button",
-    "HTML should be rendered",
+    'This is a button',
+    'HTML should be rendered',
   );
   t.equal(
-    await locator.getAttribute("quiet"),
+    await locator.getAttribute('quiet'),
     null,
     '"quiet" attribute should be null',
   );
   t.equal(
-    await locator.getAttribute("small"),
+    await locator.getAttribute('small'),
     null,
     '"small" attribute should be null',
   );
   t.equal(
-    await locator.getAttribute("loading"),
+    await locator.getAttribute('loading'),
     null,
     '"loading" attribute should be null',
   );
   t.equal(
     await locator.evaluate((el) => el.variant),
-    "secondary",
+    'secondary',
     '"variant" property should default to "secondary"',
   );
 });
 
-test("Quiet small negative button", async (t) => {
+test('Quiet small negative button', async (t) => {
   const component = `
     <w-button variant="negative" quiet small>
       This is a quiet small negative button
@@ -74,11 +74,11 @@ test("Quiet small negative button", async (t) => {
     content: component,
   });
 
-  const locator = await page.locator("w-button");
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
-    "This is a quiet small negative button",
-    "HTML should be rendered",
+    'This is a quiet small negative button',
+    'HTML should be rendered',
   );
   t.equal(
     await locator.evaluate((el) => el.quiet),
@@ -92,12 +92,12 @@ test("Quiet small negative button", async (t) => {
   );
   t.equal(
     await locator.evaluate((el) => el.variant),
-    "negative",
+    'negative',
     '"variant" property should be "negative"',
   );
 });
 
-test("Loading primary button", async (t) => {
+test('Loading primary button', async (t) => {
   const component = `
     <w-button variant="primary" loading>
       This is a loading primary button
@@ -109,11 +109,11 @@ test("Loading primary button", async (t) => {
     content: component,
   });
 
-  const locator = await page.locator("w-button");
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
-    "This is a loading primary button",
-    "HTML should be rendered",
+    'This is a loading primary button',
+    'HTML should be rendered',
   );
   t.equal(
     await locator.evaluate((el) => el.loading),
@@ -122,12 +122,12 @@ test("Loading primary button", async (t) => {
   );
   t.equal(
     await locator.evaluate((el) => el.variant),
-    "primary",
+    'primary',
     '"variant" property should be "primary"',
   );
 });
 
-test("Button as an anchor", async (t) => {
+test('Button as an anchor', async (t) => {
   const component = `
     <w-button href="https://google.no">
       This is an anchor element
@@ -139,22 +139,22 @@ test("Button as an anchor", async (t) => {
     content: component,
   });
 
-  const locator = await page.locator("w-button");
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
-    "This is an anchor element",
-    "HTML should be rendered",
+    'This is an anchor element',
+    'HTML should be rendered',
   );
   t.equal(
     await locator.evaluate(
       (el) => el.renderRoot.querySelector('[href="https://google.no"]').tagName,
     ),
-    "A",
-    "Button is rendered as an anchor tag",
+    'A',
+    'Button is rendered as an anchor tag',
   );
 });
 
-test("Button with autofocus", async (t) => {
+test('Button with autofocus', async (t) => {
   const component = `
     <w-button autofocus>
       This button should be focused
@@ -166,20 +166,20 @@ test("Button with autofocus", async (t) => {
     content: component,
   });
 
-  const locator = await page.locator("w-button");
+  const locator = await page.locator('w-button');
   t.equal(
     (await locator.innerHTML()).trim(),
-    "This button should be focused",
-    "HTML should be rendered",
+    'This button should be focused',
+    'HTML should be rendered',
   );
   t.equal(
     await locator.evaluate((el) => document.activeElement === el),
     true,
-    "Button should be focused",
+    'Button should be focused',
   );
 });
 
-test("Button with invalid variant name", async (t) => {
+test('Button with invalid variant name', async (t) => {
   const component = `
     <w-button variant="foo" loading>
       This is a foo button
@@ -192,7 +192,7 @@ test("Button with invalid variant name", async (t) => {
   };
 
   // Before adding content to the page, subscribe to all uncaught errors emitted there
-  t.context.page.on("pageerror", registerErrorLogs);
+  t.context.page.on('pageerror', registerErrorLogs);
 
   const page = await addContentToPage({
     page: t.context.page,
@@ -202,8 +202,8 @@ test("Button with invalid variant name", async (t) => {
   t.equal(
     errorLogs[0].message,
     `Invalid "variant" attribute. Set its value to one of the following:\nprimary, secondary, negative, utility, link, pill.`,
-    "Invalid attribute error was thrown",
+    'Invalid attribute error was thrown',
   );
 
-  page.removeListener("pageerror", registerErrorLogs);
+  page.removeListener('pageerror', registerErrorLogs);
 });

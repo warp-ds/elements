@@ -1,23 +1,23 @@
-import { html } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { classes } from "../utils";
-import { badge as ccBadge } from "@warp-ds/css/component-classes";
+import { html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { classes } from '../utils';
+import { badge as ccBadge } from '@warp-ds/css/component-classes';
 
 class WarpBadge extends WarpElement {
   static properties = {
     variant: {
       type:
-        "neutral" |
-        "info" |
-        "positive" |
-        "warning" |
-        "negative" |
-        "disabled" |
-        "notification" |
-        "price",
+        'neutral' |
+        'info' |
+        'positive' |
+        'warning' |
+        'negative' |
+        'disabled' |
+        'notification' |
+        'price',
     },
     position: {
-      type: "top-left" | "top-right" | "bottom-right" | "bottom-left",
+      type: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left',
     },
   };
 
@@ -26,7 +26,7 @@ class WarpBadge extends WarpElement {
   constructor() {
     super();
 
-    this.variant = "neutral";
+    this.variant = 'neutral';
   }
 
   get _class() {
@@ -34,10 +34,10 @@ class WarpBadge extends WarpElement {
       [ccBadge.base]: true,
       [ccBadge[this.variant]]: true,
       [ccBadge.positionBase]: !!this.position,
-      [ccBadge.positionTL]: this.position === "top-left",
-      [ccBadge.positionTR]: this.position === "top-right",
-      [ccBadge.positionBR]: this.position === "bottom-right",
-      [ccBadge.positionBL]: this.position === "bottom-left",
+      [ccBadge.positionTL]: this.position === 'top-left',
+      [ccBadge.positionTR]: this.position === 'top-right',
+      [ccBadge.positionBR]: this.position === 'bottom-right',
+      [ccBadge.positionBL]: this.position === 'bottom-left',
     });
   }
 
@@ -50,8 +50,8 @@ class WarpBadge extends WarpElement {
   }
 }
 
-if (!customElements.get("w-badge")) {
-  customElements.define("w-badge", WarpBadge);
+if (!customElements.get('w-badge')) {
+  customElements.define('w-badge', WarpBadge);
 }
 
 export { WarpBadge };

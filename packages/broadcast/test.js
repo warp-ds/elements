@@ -1,6 +1,6 @@
-import tap, { test, beforeEach, teardown } from "tap";
-import { chromium } from "playwright";
-import { addContentToPage } from "../../tests/utils/index.js";
+import tap, { test, beforeEach, teardown } from 'tap';
+import { chromium } from 'playwright';
+import { addContentToPage } from '../../tests/utils/index.js';
 
 const wait = (duration = 0) =>
   new Promise((resolve) => setTimeout(resolve, duration));
@@ -8,7 +8,7 @@ const formatHTML = (string) =>
   string
     .trim()
     // remove html comments
-    .replace(/<!--.*?-->/g, "");
+    .replace(/<!--.*?-->/g, '');
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -26,7 +26,7 @@ teardown(async () => {
   browser.close();
 });
 
-test("Single broadcast", async (t) => {
+test('Single broadcast', async (t) => {
   // GIVEN: The broadcast component
   const component = `
     <w-broadcast 
@@ -44,14 +44,14 @@ test("Single broadcast", async (t) => {
 
   // THEN: the component is visible in the DOM
   await wait(50);
-  const locator = await page.locator("w-broadcast");
+  const locator = await page.locator('w-broadcast');
 
   t.matchSnapshot(
     formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)),
   );
 });
 
-test("Multiple broadcasts", async (t) => {
+test('Multiple broadcasts', async (t) => {
   // GIVEN: The broadcast component
   const component = `
     <w-broadcast api="http://localhost:4053/multiple-broadcasts"></w-broadcast>
@@ -65,7 +65,7 @@ test("Multiple broadcasts", async (t) => {
 
   // THEN: the component is visible in the DOM
   await wait(50);
-  const locator = await page.locator("w-broadcast");
+  const locator = await page.locator('w-broadcast');
 
   t.matchSnapshot(
     formatHTML(await locator.evaluate((el) => el.renderRoot.innerHTML)),

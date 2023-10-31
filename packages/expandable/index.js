@@ -1,11 +1,11 @@
-import { css, html } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { fclasses, kebabCaseAttributes } from "../utils";
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { fclasses, kebabCaseAttributes } from '../utils';
 import {
   box as ccBox,
   expandable as ccExpandable,
-} from "@warp-ds/css/component-classes";
-import { ifDefined } from "lit/directives/if-defined.js";
+} from '@warp-ds/css/component-classes';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -60,7 +60,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   get _expandableSlot() {
     return html`<div
       class=${fclasses({
-        [this.contentClass || ""]: true,
+        [this.contentClass || '']: true,
         [ccBox.box]: this.box,
         [ccExpandable.paddingTop]: this._hasTitle && this.box,
       })}
@@ -83,7 +83,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
               type="button"
               aria-expanded="${this.expanded}"
               class=${fclasses({
-                [this.buttonClass || ""]: true,
+                [this.buttonClass || '']: true,
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
               })}
@@ -96,7 +96,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                     >`
                   : html`<slot name="title"></slot>`}
                 ${this.noChevron
-                  ? ""
+                  ? ''
                   : html`<div
                       class=${fclasses({
                         [ccExpandable.chevron]: true,
@@ -111,7 +111,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
               </div>
             </button>
           </w-unstyled-heading>`
-        : ""}
+        : ''}
       ${this.animated
         ? html`<w-expand-transition ?show=${this.expanded}>
             ${this._expandableSlot}
@@ -129,8 +129,8 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 }
 
-if (!customElements.get("w-expandable")) {
-  customElements.define("w-expandable", WarpExpandable);
+if (!customElements.get('w-expandable')) {
+  customElements.define('w-expandable', WarpExpandable);
 }
 
 export { WarpExpandable };
