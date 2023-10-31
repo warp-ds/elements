@@ -20,7 +20,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     animated: { type: Boolean },
     headingLevel: { type: Number },
     _hasTitle: { type: Boolean, state: true },
-    _showChevronUp: { type: Boolean, state: this.expanded }
+    _showChevronUp: { type: Boolean, state: true },
   }
 
   constructor() {
@@ -39,9 +39,21 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   updated(changedProperties) {
     // We need a slight delay for the animation since it has a transition-duration of 150ms:
     if (changedProperties.has('expanded')) {
+      // if(!this._showChevronUp) {
+      //   const chevronUpIcon = this.renderRoot
+      //   .querySelector('w-icon-chevron-up-16')
+      //   .renderRoot.querySelector('svg')
+      //   chevronUpIcon.classList.add(this._chevronUpClasses)
+      // } else {
+      //   const chevronDownIcon = this.renderRoot
+      //   .querySelector('w-icon-chevron-down-16')
+      //   .renderRoot.querySelector('svg')
+      //   chevronDownIcon.classList.add(this._chevronDownClasses)
+      // }
+
       setTimeout(() => {
-        this._showChevronUp = this.expanded;
-      }, 200);
+        this._showChevronUp = this.expanded
+      }, 1000)
     }
   }
 
