@@ -39,7 +39,7 @@ class WarpBox extends WarpElement {
   }
 
   get _optOutRoleWithDefault() {
-    return this.role === '' ? nothing : this.role ?? 'region';
+    return this.role === '' ? nothing : this.role ?? 'region'
   }
 
   render() {

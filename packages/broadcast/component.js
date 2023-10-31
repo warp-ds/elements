@@ -67,10 +67,10 @@ export class WarpBroadcast extends WarpElement {
     return html`
       <aside class=${`${messages.length === 0 ? 'hidden' : 'mb-16'}`}>
         ${repeat(
-    messages,
-    ({ id }) => `broadcast-${id}`,
-    ({ id, message }) =>
-      html`<w-toast
+          messages,
+          ({ id }) => `broadcast-${id}`,
+          ({ id, message }) =>
+            html`<w-toast
               id="broadcast-${id}"
               type="warning"
               text="${message}"
@@ -78,7 +78,7 @@ export class WarpBroadcast extends WarpElement {
               @close=${() => this._del(id)}
             >
             </w-toast>`,
-  )}
+        )}
       </aside>
     `;
   }

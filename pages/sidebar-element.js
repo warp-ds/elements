@@ -35,20 +35,22 @@ class SidebarElement extends WarpElement {
   }
 
   renderItems(items) {
-    return items.map((item) => html`
+    return items.map((item) => {
+      return html`
         <li>
           ${item.href
-    ? html`<a class="no-underline py-2 px-16 text-m" href="${item.href}"
+            ? html`<a class="no-underline py-2 px-16 text-m" href="${item.href}"
                 >${item.title}</a
               >`
-    : html`<span class="pt-2 text-m font-bold">${item.title}</span>`}
+            : html`<span class="pt-2 text-m font-bold">${item.title}</span>`}
           ${item.items
-    ? html`<ul class="py-4">
+            ? html`<ul class="py-4">
                 ${this.renderItems(item.items)}
               </ul>`
-    : ""}
+            : ""}
         </li>
-      `);
+      `;
+    });
   }
 }
 

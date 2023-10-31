@@ -158,13 +158,17 @@ test('Box component with paragraph child elements', async (t) => {
   const lastElement = await page.locator('#last');
 
   t.match(
-    await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    await lastElement.evaluate((el) => {
+      return window.getComputedStyle(el).getPropertyValue('margin-bottom');
+    }),
     '0px',
     'Bottom margin of last paragraph should be 0px',
   );
 
   t.match(
-    await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    await secondElement.evaluate((el) => {
+      return window.getComputedStyle(el).getPropertyValue('margin-bottom');
+    }),
     '8px',
     'Bottom margin of second paragraph should be 8px',
   );
