@@ -1,7 +1,7 @@
-import { css, html } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { toaster as ccToaster } from "@warp-ds/css/component-classes";
-import { repeat } from "lit/directives/repeat.js";
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
+import { toaster as ccToaster } from '@warp-ds/css/component-classes';
+import { repeat } from 'lit/directives/repeat.js';
 
 /**
  * Toast helper function options
@@ -52,7 +52,7 @@ export class WarpToastContainer extends WarpElement {
       }
       // once all toasts that should be removed have been collapsed, remove them from the map
       Promise.all(collapseTasks).then(() => {
-        if (keep.length != this._toasts.size) this._toasts = new Map(keep);
+        if (keep.length !== this._toasts.size) this._toasts = new Map(keep);
       });
     }, 500);
   }
@@ -63,9 +63,9 @@ export class WarpToastContainer extends WarpElement {
   }
 
   static init() {
-    let el = document.querySelector("w-toast-container");
+    let el = document.querySelector('w-toast-container');
     if (!el) {
-      el = document.createElement("w-toast-container");
+      el = document.createElement('w-toast-container');
       document.body.appendChild(el);
     }
     return el;
@@ -81,9 +81,10 @@ export class WarpToastContainer extends WarpElement {
    * @returns {ToastOptions}
    */
   get(id) {
-    if (!id)
+    if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== "string" && !Number.isInteger(id))
+    }
+    if (typeof id !== 'string' && !Number.isInteger(id))
       throw new Error(
         '"id" must be number or string when attempting to retrieve toast'
       );
@@ -111,9 +112,10 @@ export class WarpToastContainer extends WarpElement {
    * @returns {ToastOptions | false}
    */
   async del(id) {
-    if (!id)
+    if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
-    if (typeof id !== "string" && !Number.isInteger(id))
+    }
+    if (typeof id !== 'string' && !Number.isInteger(id))
       throw new Error(
         '"id" must be number or string when attempting to retrieve toast'
       );
@@ -149,6 +151,6 @@ export class WarpToastContainer extends WarpElement {
   }
 }
 
-if (!customElements.get("w-toast-container")) {
-  customElements.define("w-toast-container", WarpToastContainer);
+if (!customElements.get('w-toast-container')) {
+  customElements.define('w-toast-container', WarpToastContainer);
 }
