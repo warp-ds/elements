@@ -5,7 +5,15 @@ import {
   box as ccBox,
   expandable as ccExpandable,
 } from '@warp-ds/css/component-classes'
+
+import '@warp-ds/icons/elements/chevron-down-16'
+import '@warp-ds/icons/elements/chevron-up-16'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { i18n } from '@lingui/core'
+import { messages as enMessages } from './locales/en/messages.mjs'
+import { messages as nbMessages } from './locales/nb/messages.mjs'
+import { messages as fiMessages } from './locales/fi/messages.mjs'
+import { activateI18n } from '../i18n'
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -25,6 +33,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super()
+    activateI18n(enMessages, nbMessages, fiMessages)
 
     this.expanded = false
     this.animated = false
@@ -94,6 +103,22 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     })
   }
 
+ chevronDownTitle() {
+    return i18n._({
+      id: 'icon.title.chevron-down',
+      message: 'Downward arrow',
+      comment: 'Default screenreader message for chevron down icon in the expandable component'
+    })
+  }
+
+  chevronUpTitle() {
+    return i18n._({
+      id: 'icon.title.chevron-up',
+      message: 'Upward arrow',
+      comment: 'Default screenreader message for chevron up icon in the expandable component'
+    })
+  }
+
   render() {
     return html` <div
       class=${fclasses({
@@ -130,12 +155,40 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                       })}
                     >
                       ${this._showChevronUp
-                        ? html`<w-icon-chevron-up-16
+                        ? html`<svg
                             class=${this._chevronUpClasses}
-                          ></w-icon-chevron-up-16>`
-                        : html`<w-icon-chevron-down-16
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="none"
+                            viewBox="0 0 16 16"
+                          >
+                            <title>${this.chevronUpTitle()}</title>
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.5"
+                              d="M2.5 11 8 5.5l5.5 5.5"
+                            ></path>
+                          </svg>`
+                        : html`<svg
                             class=${this._chevronDownClasses}
-                          ></w-icon-chevron-down-16>`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="none"
+                            viewBox="0 0 16 16"
+                          >
+                            <title>${this.chevronDownTitle()}</title>
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.5"
+                              d="M2.5 5.5 8 11l5.5-5.5"
+                            ></path>
+                          </svg>`}
                     </div>`}
               </div>
             </button>
