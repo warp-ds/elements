@@ -111,6 +111,32 @@
           </w-attention>
         </div>
 
+        <h3 class="mt-24 mb-16">Tooltip</h3>
+        <syntax-highlight>
+          <w-attention placement="right" tooltip>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Hover or focus to show a tooltip on right
+            </button>
+            <span slot="message">I'm a tooltip on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" tooltip>
+            <button
+              id="tooltipTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Hover or focus to show a tooltip on right
+            </button>
+            <span slot="message">I'm a tooltip on right</span>
+          </w-attention>
+        </div>
+
         <h3 class="mt-24 mb-16">Callout</h3>
         <syntax-highlight>
           <w-attention placement="right" show callout class="flex items-center">
@@ -137,6 +163,7 @@
           </w-attention>
         </div>
 
+        <h3 class="mt-24 mb-16">Highlight</h3>
         <syntax-highlight>
           <w-attention placement="right" highlight>
             <button
@@ -163,29 +190,31 @@
           </w-attention>
         </div>
 
-        <h3 class="mt-24 mb-16">Tooltip</h3>
+
+        <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="right" tooltip>
+          <w-attention placement="right" highlight can-close>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
               slot="target"
             >
-              Hover or focus to show a tooltip on right
+              Click to toggle a dismissible highlight on right
             </button>
-            <span slot="message">I'm a tooltip on right</span>
+            <span slot="message">I'm a highlight on right</span>
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" tooltip>
+          <w-attention placement="right" highlight id="dismissibleHighlight" can-close="">
             <button
-              id="tooltipTarget"
+              id="dismissibleHighlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
             >
-              Hover or focus to show a tooltip on right
+              Click to toggle a dismissible highlight on right
             </button>
-            <span slot="message">I'm a tooltip on right</span>
+            <span slot="message">I'm a dismissible highlight on right</span>
           </w-attention>
         </div>
 
@@ -271,6 +300,20 @@
           popoverTarget2.addEventListener('click', () => {
             popoverEl2.show = !popoverEl2.show;
           });
+
+          // Dismissible Attention
+
+          const dismissibleHighlightTarget = document.querySelector('.example #dismissibleHighlightTarget');
+          const dismissibleHighlightEl = document.getElementById('dismissibleHighlight')
+          
+          dismissibleHighlightTarget.addEventListener('click', () => {
+            dismissibleHighlightEl.show = !dismissibleHighlightEl.show;
+          });
+          dismissibleHighlightEl.addEventListener('close', () => {
+            dismissibleHighlightEl.show = false;
+          })
+          
+          
         </script>
       </main>
     </div>

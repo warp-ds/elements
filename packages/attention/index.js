@@ -1,4 +1,4 @@
-import { css, html } from 'lit';
+import { css, html, nothing } from 'lit';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
@@ -29,6 +29,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     popover: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as a highlight
     highlight: { type: Boolean, reflect: true },
+    // Render Attention element with a close button
+    canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
   }
@@ -62,6 +64,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.callout = false
     this.popover = false
     this.highlight = false;
+    this.canClose = false;
     this.noArrow = false
   }
 
@@ -103,7 +106,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     if (!this.tooltip) {
       this._attentionEl.style.setProperty(
         '--attention-display',
-        this.show ? 'block' : 'none'
+        this.show ? 'flex' : 'none'
       )
     }
 
@@ -222,6 +225,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
   };
 
+  get _ariaClose() {
+    return i18n._({
+      id: 'attention.aria.close',
+      message: 'Close',
+      comment:
+        'Aria label for the close button in attention',
+    })
+  }
+
   firstUpdated() {
     this.setAriaLabels()
 
@@ -283,6 +295,35 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         />`
   }
 
+  close() {
+    const event = new CustomEvent('close', {
+      bubbles: true,
+      composed: true,
+    });
+    this.updateComplete.then(() => this.dispatchEvent(event));
+  }
+
+  keypressed(e) {
+    if (!this.canClose) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      this.close();
+    }
+  }
+
+  get _closeBtnHtml() {
+    return html`
+      <button 
+        aria-label="${this._ariaClose}"
+        @click="${this.close}"
+        @keydown=${this.keypressed}
+        class="${ccAttention.closeBtn}"
+      >
+        <w-icon-close-16 />
+      </button>
+    `
+  }
+
   render() {
     return html`
       <div class=${ifDefined(this.className ? this.className : undefined)}>
@@ -296,18 +337,16 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
                 aria-label="${this.defaultAriaLabel()}"
                 class="${this._wrapperClasses}"
               >
-                <div>
-                  ${this._arrowHtml}
-                  <slot name="message"></slot>
-                </div>
+                ${this._arrowHtml}
+                <slot name="message"></slot>
+                ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
           : html`
               <div id="attention" class="${this._wrapperClasses}">
-                <div>
-                  <slot name="message"></slot>
-                  ${this._arrowHtml}
-                </div>
+                <slot name="message"></slot>
+                ${this._arrowHtml}
+                ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
               <slot name="target"></slot>
             `}
