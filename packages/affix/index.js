@@ -2,6 +2,8 @@ import { html } from 'lit';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { suffix, prefix } from '@warp-ds/css/component-classes';
+import '@warp-ds/icons/elements/search-16'
+import '@warp-ds/icons/elements/close-16'
 
 import { fclasses } from '../utils';
 

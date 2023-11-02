@@ -13,6 +13,8 @@ import { messages as enMessages } from './locales/en/messages.mjs'
 import { messages as nbMessages } from './locales/nb/messages.mjs'
 import { messages as fiMessages } from './locales/fi/messages.mjs'
 import { activateI18n } from '../i18n'
+import '@warp-ds/icons/elements/close-16'
+
 
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {

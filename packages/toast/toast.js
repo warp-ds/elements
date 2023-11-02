@@ -4,6 +4,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
+import '@warp-ds/icons/elements/alert-warning-16'
+import '@warp-ds/icons/elements/alert-error-16'
+import '@warp-ds/icons/elements/alert-success-16'
+import '@warp-ds/icons/elements/close-16'
 
 const classes = (definition) => {
   const defn = {};

@@ -27,4 +27,9 @@ files:
       "dest": "elements/packages/attention/messages.po",
       "translation": "/packages/attention/locales/%two_letters_code%/messages.po",
     },
+     {
+      "source": "/packages/expandable/locales/en/messages.po",
+      "dest": "elements/packages/expandable/messages.po",
+      "translation": "/packages/expandable/locales/%two_letters_code%/messages.po",
+    },
   ]

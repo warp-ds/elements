@@ -15,6 +15,7 @@ import { messages as enMessages } from "./locales/en/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { activateI18n } from "../i18n";
+import '@warp-ds/icons/elements/chevron-down-16'
 
 export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   static properties = {
