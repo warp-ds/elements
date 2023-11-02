@@ -1,3 +1,10 @@
+# [1.2.0-next.7](https://github.com/warp-ds/elements/compare/v1.2.0-next.6...v1.2.0-next.7) (2023-11-02)
+
+
+### Bug Fixes
+
+* a11y expandable ([#103](https://github.com/warp-ds/elements/issues/103)) ([729bf5f](https://github.com/warp-ds/elements/commit/729bf5f20bf6ace3e05d7b1c943bc468c873f699))
+
 # [1.2.0-next.6](https://github.com/warp-ds/elements/compare/v1.2.0-next.5...v1.2.0-next.6) (2023-11-02)
 
 
