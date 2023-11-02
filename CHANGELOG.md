@@ -1,3 +1,10 @@
+# [1.2.0-next.6](https://github.com/warp-ds/elements/compare/v1.2.0-next.5...v1.2.0-next.6) (2023-11-02)
+
+
+### Features
+
+* **attention:** add optional close button and dismiss on esc keypress ([#101](https://github.com/warp-ds/elements/issues/101)) ([9da7a58](https://github.com/warp-ds/elements/commit/9da7a58af199b507655a44a4aa04437e2b797229))
+
 # [1.2.0-next.5](https://github.com/warp-ds/elements/compare/v1.2.0-next.4...v1.2.0-next.5) (2023-10-31)
 
 
