@@ -120,7 +120,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   render() {
-    // Will keep the inline-svg:s for expandable due to issues with setting css-classes on an element inside the shadowRoot:
+    // Will keep the inline-svg:s for expandable due to issues with setting css-classes on an element inside the shadow DOM:
     return html` <div
       class=${fclasses({
         [ccExpandable.expandable]: true,
