@@ -3,6 +3,10 @@ import WarpElement from "@warp-ds/elements-core";
 import { css, html } from "lit";
 import { alert as ccAlert } from "@warp-ds/css/component-classes";
 import { classNames } from "@chbphone55/classnames";
+import '@warp-ds/icons/elements/alert-info-16'
+import '@warp-ds/icons/elements/alert-warning-16'
+import '@warp-ds/icons/elements/alert-error-16'
+import '@warp-ds/icons/elements/alert-success-16'
 
 const variants = {
   negative: "negative",

@@ -6,8 +6,6 @@ import {
   expandable as ccExpandable,
 } from '@warp-ds/css/component-classes'
 
-import '@warp-ds/icons/elements/chevron-down-16'
-import '@warp-ds/icons/elements/chevron-up-16'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { i18n } from '@lingui/core'
 import { messages as enMessages } from './locales/en/messages.mjs'
@@ -103,11 +101,12 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     })
   }
 
- chevronDownTitle() {
+  chevronDownTitle() {
     return i18n._({
       id: 'icon.title.chevron-down',
       message: 'Downward arrow',
-      comment: 'Default screenreader message for chevron down icon in the expandable component'
+      comment:
+        'Default screenreader message for chevron down icon in the expandable component',
     })
   }
 
@@ -115,7 +114,8 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     return i18n._({
       id: 'icon.title.chevron-up',
       message: 'Upward arrow',
-      comment: 'Default screenreader message for chevron up icon in the expandable component'
+      comment:
+        'Default screenreader message for chevron up icon in the expandable component',
     })
   }
 
@@ -157,6 +157,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                     >
                       ${this._showChevronUp
                         ? html`<svg
+                            id="chevron-up"
                             class=${this._chevronUpClasses}
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -174,6 +175,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                             ></path>
                           </svg>`
                         : html`<svg
+                            id="chevron-down"
                             class=${this._chevronDownClasses}
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
