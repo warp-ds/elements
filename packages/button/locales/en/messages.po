@@ -12,9 +12,11 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+"X-Crowdin-SourceKey: msgstr\n"
 
 #. Screenreader message for buttons that are loading
 #. js-lingui-explicit-id
 #: packages/button/index.js:48
 msgid "button.aria.loading"
 msgstr "Loading..."
+
