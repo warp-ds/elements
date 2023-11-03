@@ -101,7 +101,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     })
   }
 
-  chevronDownTitle() {
+  get _chevronDownTitle() {
     return i18n._({
       id: 'icon.title.chevron-down',
       message: 'Downward arrow',
@@ -110,7 +110,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     })
   }
 
-  chevronUpTitle() {
+  get _chevronUpTitle() {
     return i18n._({
       id: 'icon.title.chevron-up',
       message: 'Upward arrow',
@@ -165,7 +165,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                             fill="none"
                             viewBox="0 0 16 16"
                           >
-                            <title>${this.chevronUpTitle()}</title>
+                            <title>${this._chevronUpTitle}</title>
                             <path
                               stroke="currentColor"
                               stroke-linecap="round"
@@ -183,7 +183,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                             fill="none"
                             viewBox="0 0 16 16"
                           >
-                            <title>${this.chevronDownTitle()}</title>
+                            <title>${this._chevronDownTitle}</title>
                             <path
                               stroke="currentColor"
                               stroke-linecap="round"
