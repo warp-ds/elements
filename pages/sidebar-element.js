@@ -1,18 +1,21 @@
-import { LitElement, css, html } from 'lit';
-import navigationData from './navigation-data';
+import { css, html } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import navigationData from "./navigation-data";
 
-class SidebarElement extends LitElement {
-  static styles = css`
-    .sidebar {
-      width: 300px;
-    }
+class SidebarElement extends WarpElement {
+  static styles = [
+    WarpElement.styles,
+    css`
+      .sidebar {
+        width: 300px;
+      }
 
-    .sidebar a {
-      text-decoration: none;
-      color: #131313;
-    }
-    @unocss-placeholder
-  `;
+      .sidebar a {
+        text-decoration: none;
+        color: #131313;
+      }
+    `,
+  ];
 
   render() {
     const { heading, pages } = navigationData;
@@ -44,11 +47,11 @@ class SidebarElement extends LitElement {
             ? html`<ul class="py-4">
                 ${this.renderItems(item.items)}
               </ul>`
-            : ''}
+            : ""}
         </li>
       `;
     });
   }
 }
 
-customElements.define('sidebar-element', SidebarElement);
+customElements.define("sidebar-element", SidebarElement);

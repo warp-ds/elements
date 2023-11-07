@@ -1,21 +1,23 @@
-import { html, LitElement, css } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { when } from 'lit/directives/when.js';
-import { classNames } from '@chbphone55/classnames';
+import { html, css } from "lit";
+import WarpElement from "@warp-ds/elements-core";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { when } from "lit/directives/when.js";
+import { classNames } from "@chbphone55/classnames";
 import {
   select as ccSelect,
   helpText as ccHelpText,
   label as ccLabel,
-} from '@warp-ds/css/component-classes';
-import { kebabCaseAttributes } from '../utils';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { activateI18n } from '../i18n';
+} from "@warp-ds/css/component-classes";
+import { kebabCaseAttributes } from "../utils";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { i18n } from "@lingui/core";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { activateI18n } from "../i18n";
+import '@warp-ds/icons/elements/chevron-down-16'
 
-export class WarpSelect extends kebabCaseAttributes(LitElement) {
+export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether the element should receive focus on render
     autoFocus: { type: Boolean, reflect: true },
@@ -38,9 +40,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
     _options: { state: true },
   };
 
-  static styles = css`
-    @unocss-placeholder;
-  `;
+  static styles = [WarpElement.styles];
 
   get #classes() {
     return classNames({
@@ -71,7 +71,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   }
 
   get #id() {
-    return 'select_id';
+    return "select_id";
   }
 
   get #helpId() {
@@ -97,10 +97,9 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
               () =>
                 html`<span class="${ccLabel.optional}"
                   >${i18n._({
-                    id: 'select.label.optional',
-                    message: '(optional)',
-                    comment:
-                      'Shown behind label when marked as optional',
+                    id: "select.label.optional",
+                    message: "(optional)",
+                    comment: "Shown behind label when marked as optional",
                   })}</span
                 >`
             )}</label
@@ -113,9 +112,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
           ?autofocus=${this.autoFocus}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
-          aria-errormessage="${ifDefined(
-            this.invalid && this.#helpId
-          )}"
+          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
         >
           ${unsafeHTML(this._options)}
         </select>
@@ -126,10 +123,7 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
       ${when(
         this.always || this.invalid,
         () =>
-          html`<div
-            id="${this.#helpId}"
-            class="${this.#helpTextClasses}"
-          >
+          html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
             ${this.hint}
           </div>`
       )}
@@ -137,6 +131,6 @@ export class WarpSelect extends kebabCaseAttributes(LitElement) {
   }
 }
 
-if (!customElements.get('w-select')) {
-  customElements.define('w-select', WarpSelect);
+if (!customElements.get("w-select")) {
+  customElements.define("w-select", WarpSelect);
 }

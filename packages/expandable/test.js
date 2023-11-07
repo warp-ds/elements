@@ -2,6 +2,7 @@
 import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
 import { addContentToPage } from '../../tests/utils/index.js';
+import '@warp-ds/icons/elements/icon-bag-16'
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -172,7 +173,7 @@ test('Expandable component with title and no-chevron attribute is rendered on th
     '"noChevron" property should be true',
   );
   t.equal(
-    await locator.evaluate((el) => el.renderRoot.querySelector('w-icon-chevron-down16')),
+    await locator.evaluate((el) => el.renderRoot.querySelector('#chevron-down')),
     null,
     'Chevron icon should not be rendered',
   );

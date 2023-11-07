@@ -1,17 +1,21 @@
 // TODO: replace text-14 with a token
-
-import { css, html, LitElement } from 'lit';
-import { alert as ccAlert } from '@warp-ds/css/component-classes';
-import { classNames } from '@chbphone55/classnames';
+import WarpElement from "@warp-ds/elements-core";
+import { css, html } from "lit";
+import { alert as ccAlert } from "@warp-ds/css/component-classes";
+import { classNames } from "@chbphone55/classnames";
+import '@warp-ds/icons/elements/alert-info-16'
+import '@warp-ds/icons/elements/alert-warning-16'
+import '@warp-ds/icons/elements/alert-error-16'
+import '@warp-ds/icons/elements/alert-success-16'
 
 const variants = {
-  negative: 'negative',
-  positive: 'positive',
-  warning: 'warning',
-  info: 'info'
+  negative: "negative",
+  positive: "positive",
+  warning: "warning",
+  info: "info",
 };
 
-class WarpAlert extends LitElement {
+class WarpAlert extends WarpElement {
   static properties = {
     variant: { type: String, reflect: true },
     show: { type: Boolean, reflect: true },
@@ -21,7 +25,7 @@ class WarpAlert extends LitElement {
   constructor() {
     super();
     this.show = false;
-    this.role = 'alert';
+    this.role = "alert";
   }
 
   connectedCallback() {
@@ -53,25 +57,31 @@ class WarpAlert extends LitElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = css`
-    @unocss-placeholder
-    :host {
-      display: block;
-    }
-    ::slotted(:first-child) {
-      margin-top: 0px;
-    }
-    ::slotted(:last-child) {
-      margin-bottom: 0px !important;
-    }
-  `;
+  static styles = [
+    WarpElement.styles,
+    css`
+      :host {
+        display: block;
+      }
+      ::slotted(:first-child) {
+        margin-top: 0px;
+      }
+      ::slotted(:last-child) {
+        margin-bottom: 0px !important;
+      }
+    `,
+  ];
 
   get _icon() {
-    if (this.variant === variants.info) return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
-    if (this.variant === variants.warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this.variant === variants.negative) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    if (this.variant === variants.positive) return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
-    else return '';
+    if (this.variant === variants.info)
+      return html`<w-icon-alert-info-16></w-icon-alert-info-16>`;
+    if (this.variant === variants.warning)
+      return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
+    if (this.variant === variants.negative)
+      return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
+    if (this.variant === variants.positive)
+      return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    else return "";
   }
 
   render() {
@@ -88,8 +98,8 @@ class WarpAlert extends LitElement {
   }
 }
 
-if (!customElements.get('w-alert')) {
-  customElements.define('w-alert', WarpAlert);
+if (!customElements.get("w-alert")) {
+  customElements.define("w-alert", WarpAlert);
 }
 
 export { WarpAlert };

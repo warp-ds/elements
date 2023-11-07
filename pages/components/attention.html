@@ -111,32 +111,6 @@
           </w-attention>
         </div>
 
-        <h3 class="mt-24 mb-16">Callout</h3>
-        <syntax-highlight>
-          <w-attention placement="right" show callout class="flex items-center">
-            <div
-              id="target"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
-              <p>This is a target to callout attention element</p>
-            </div>
-            <span slot="message">Callout on right</span>
-          </w-attention>
-        </syntax-highlight>
-        <div class="example">
-          <w-attention placement="right" show callout class="flex items-center">
-            <div
-              id="calloutTarget"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
-              <p>This is a target to callout attention element</p>
-            </div>
-            <span slot="message">Callout on right</span>
-          </w-attention>
-        </div>
-
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
           <w-attention placement="right" tooltip>
@@ -163,6 +137,87 @@
           </w-attention>
         </div>
 
+        <h3 class="mt-24 mb-16">Callout</h3>
+        <syntax-highlight>
+          <w-attention placement="right" show callout class="flex items-center">
+            <div
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              <p>This is a target to callout attention element</p>
+            </div>
+            <span slot="message">Callout on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" show callout class="flex items-center">
+            <div
+              id="calloutTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              <p>This is a target to callout attention element</p>
+            </div>
+            <span slot="message">Callout on right</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Highlight</h3>
+        <syntax-highlight>
+          <w-attention placement="right" highlight>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" highlight>
+            <button
+              id="highlightTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Click to toggle a highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </div>
+
+
+        <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
+        <syntax-highlight>
+          <w-attention placement="right" highlight can-close>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target"
+            >
+              Click to toggle a dismissible highlight on right
+            </button>
+            <span slot="message">I'm a highlight on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" highlight id="dismissibleHighlight" can-close="">
+            <button
+              id="dismissibleHighlightTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+            >
+              Click to toggle a dismissible highlight on right
+            </button>
+            <span slot="message">I'm a dismissible highlight on right</span>
+          </w-attention>
+        </div>
+
         <h2 class="mt-24 mb-16">Accessibility</h2>
         <p>
           If the Attention element has "left" or "top" position, it should be placed before the
@@ -170,14 +225,14 @@
         </p>
         <p>
           Attention element handles accessibility automatically by wrapping its slotted content with
-          a <code>div</code> with <code>role="tooltip"</code>, and setting an
-          <code>aria-describedby</code> attribute on the target element.
+          a <code>div</code> with either <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and setting an
+          <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
         </p>
         <p>
           It is possible to tell assistive technologies to recognize only a part of Attention's text
-          content. To do that set <code>role="tooltip"</code> on the relevant text element nested in
+          content. To do that set the <code>role</code> attribute on the relevant text element nested in
           <code>w-attention</code> and reference it by id through the use of
-          <code>aria-describedby</code>. The <code>aria-describedby</code> attribute is on the
+          <code>aria-details</code>. The <code>aria-details</code> attribute is on the
           target element, not on <code>w-attention</code>.
         </p>
 
@@ -188,7 +243,7 @@
               <p>(this text is less relevant)</p>
             </div>
             <button
-              aria-describedby="aria-content"
+              aria-details="aria-content"
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
@@ -204,7 +259,7 @@
               <p>(this text is less relevant)</p>
             </div>
             <button
-              aria-describedby="aria-content"
+              aria-details="aria-content"
               id="popoverTarget2"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
@@ -217,9 +272,11 @@
         <script>
           const tooltipTarget = document.querySelector('.example #tooltipTarget');
           const popoverTarget = document.querySelector('.example #popoverTarget');
+          const highlightTarget = document.querySelector('.example #highlightTarget');
           const popoverTarget2 = document.querySelector('.example #popoverTarget2');
           const tooltipEl = document.querySelector('.example [tooltip]');
           const popoverEl = document.querySelector('.example [popover]');
+          const highlightEl = document.querySelector('.example [highlight]');
           const popoverEl2 = document.querySelector('#accessibilityExample [popover]');
 
           tooltipTarget.addEventListener('mouseenter', () => {
@@ -237,9 +294,26 @@
           popoverTarget.addEventListener('click', () => {
             popoverEl.show = !popoverEl.show;
           });
+          highlightTarget.addEventListener('click', () => {
+            highlightEl.show = !highlightEl.show;
+          });
           popoverTarget2.addEventListener('click', () => {
             popoverEl2.show = !popoverEl2.show;
           });
+
+          // Dismissible Attention
+
+          const dismissibleHighlightTarget = document.querySelector('.example #dismissibleHighlightTarget');
+          const dismissibleHighlightEl = document.getElementById('dismissibleHighlight')
+          
+          dismissibleHighlightTarget.addEventListener('click', () => {
+            dismissibleHighlightEl.show = !dismissibleHighlightEl.show;
+          });
+          dismissibleHighlightEl.addEventListener('close', () => {
+            dismissibleHighlightEl.show = false;
+          })
+          
+          
         </script>
       </main>
     </div>

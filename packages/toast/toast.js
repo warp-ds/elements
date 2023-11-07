@@ -1,8 +1,13 @@
-import { LitElement, css, html } from 'lit';
+import { css, html } from 'lit';
+import WarpElement from '@warp-ds/elements-core';
 import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
+import '@warp-ds/icons/elements/alert-warning-16'
+import '@warp-ds/icons/elements/alert-error-16'
+import '@warp-ds/icons/elements/alert-success-16'
+import '@warp-ds/icons/elements/close-16'
 
 const classes = (definition) => {
   const defn = {};
@@ -20,10 +25,9 @@ const toastType = {
   warning: 'warning',
 }
 
-export class WarpToast extends LitElement {
-  static styles = [
+export class WarpToast extends WarpElement {
+  static styles = [WarpElement.styles,
     css`
-      @unocss-placeholder
       :host {
         display: block;
       }
