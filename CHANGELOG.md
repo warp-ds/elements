@@ -1,3 +1,22 @@
+# [1.2.0](https://github.com/warp-ds/elements/compare/v1.1.1...v1.2.0) (2023-11-07)
+
+
+### Bug Fixes
+
+* a11y expandable ([#103](https://github.com/warp-ds/elements/issues/103)) ([729bf5f](https://github.com/warp-ds/elements/commit/729bf5f20bf6ace3e05d7b1c943bc468c873f699))
+* a11y issues for attention component ([#82](https://github.com/warp-ds/elements/issues/82)) ([8b96498](https://github.com/warp-ds/elements/commit/8b9649846739cc3ab5af879c01515142fb9ef884))
+* Add role property to Box component ([#86](https://github.com/warp-ds/elements/issues/86)) ([d31cb8c](https://github.com/warp-ds/elements/commit/d31cb8c7b66af5243c8536ed0eb3db33280ebafc))
+* adjust further a11y attention ([#97](https://github.com/warp-ds/elements/issues/97)) ([de51c17](https://github.com/warp-ds/elements/commit/de51c175d920a73743b20df1c4230b358d8ac4cd))
+* bring back unocss for our own docs ([#93](https://github.com/warp-ds/elements/issues/93)) ([5cee1a1](https://github.com/warp-ds/elements/commit/5cee1a1e8515f32872021332d9eb36d1a1fe1be3))
+* changed css for expandable ([#91](https://github.com/warp-ds/elements/issues/91)) ([25b910c](https://github.com/warp-ds/elements/commit/25b910c55fa2cc7376196e12d4d1299eaa30ea53))
+
+
+### Features
+
+* **attention:** add highlight variant ([#90](https://github.com/warp-ds/elements/issues/90)) ([595d91b](https://github.com/warp-ds/elements/commit/595d91b41c5941369e1f5495ddabd200affdb40f))
+* **attention:** add optional close button and dismiss on esc keypress ([#101](https://github.com/warp-ds/elements/issues/101)) ([9da7a58](https://github.com/warp-ds/elements/commit/9da7a58af199b507655a44a4aa04437e2b797229))
+* SSR safe individual elements ([#87](https://github.com/warp-ds/elements/issues/87)) ([6596387](https://github.com/warp-ds/elements/commit/6596387ea2cfcfab4f2f091a50870c0926507d94))
+
 # [1.2.0-next.7](https://github.com/warp-ds/elements/compare/v1.2.0-next.6...v1.2.0-next.7) (2023-11-02)
 
 
