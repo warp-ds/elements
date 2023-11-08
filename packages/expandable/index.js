@@ -87,16 +87,16 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   get _chevronUpClasses() {
     return fclasses({
-      [`part-[w-icon-chevron-up-16-part]:transform part-[w-icon-chevron-up-16-part]:transition-transform part-[w-icon-chevron-up-16-part]:transform-gpu part-[w-icon-chevron-up-16-part]:ease-in-out`]: true,
-      [`part-[w-icon-chevron-up-16-part]:-rotate-180`]:
+      ['part-[w-icon-chevron-up-16-part]:transform part-[w-icon-chevron-up-16-part]:transition-transform part-[w-icon-chevron-up-16-part]:transform-gpu part-[w-icon-chevron-up-16-part]:ease-in-out']: true,
+      ['part-[w-icon-chevron-up-16-part]:-rotate-180']:
         !this.expanded && this._showChevronUp,
     })
   }
 
   get _chevronDownClasses() {
     return fclasses({
-      [`part-[w-icon-chevron-down-16-part]:transform part-[w-icon-chevron-down-16-part]:transition-transform part-[w-icon-chevron-down-16-part]:transform-gpu part-[w-icon-chevron-down-16-part]:ease-in-out`]: true,
-      [`part-[w-icon-chevron-down-16-part]:rotate-180`]:
+      ['part-[w-icon-chevron-down-16-part]:transform part-[w-icon-chevron-down-16-part]:transition-transform part-[w-icon-chevron-down-16-part]:transform-gpu part-[w-icon-chevron-down-16-part]:ease-in-out']: true,
+      ['part-[w-icon-chevron-down-16-part]:rotate-180']:
         this.expanded && !this._showChevronUp,
     })
   }
