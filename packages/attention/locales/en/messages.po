@@ -16,55 +16,54 @@ msgstr ""
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:173
+#: packages/attention/index.js:175
 msgid "attention.aria.callout"
 msgstr "callout speech bubble"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
-#: packages/attention/index.js:229
+#: packages/attention/index.js:231
 msgid "attention.aria.close"
 msgstr "Close"
 
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:187
+#: packages/attention/index.js:189
 msgid "attention.aria.highlight"
 msgstr "highlighted speech bubble"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:145
+#: packages/attention/index.js:147
 msgid "attention.aria.pointingDown"
 msgstr "pointing down"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:152
+#: packages/attention/index.js:154
 msgid "attention.aria.pointingLeft"
 msgstr "pointing left"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:138
+#: packages/attention/index.js:140
 msgid "attention.aria.pointingRight"
 msgstr "pointing right"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:131
+#: packages/attention/index.js:133
 msgid "attention.aria.pointingUp"
 msgstr "pointing up"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:180
+#: packages/attention/index.js:182
 msgid "attention.aria.popover"
 msgstr "popover speech bubble"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/index.js:166
+#: packages/attention/index.js:168
 msgid "attention.aria.tooltip"
 msgstr "tooltip"
-

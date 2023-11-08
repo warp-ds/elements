@@ -19,4 +19,3 @@ msgstr ""
 #: packages/button/index.js:48
 msgid "button.aria.loading"
 msgstr "Loading..."
-

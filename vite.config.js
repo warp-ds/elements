@@ -70,7 +70,7 @@ export default ({ mode }) => {
     plugins: [
       mode !== 'lib' && uno({
         presets: [presetWarp()],
-      }),
+      }), uno({ presets: [presetWarp()],  mode: 'shadow-dom'}),
       mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
