@@ -61,8 +61,6 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-
-      @unocss-placeholder;
     `,
   ]
 
@@ -87,16 +85,16 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   get _chevronUpClasses() {
     return fclasses({
-      ['part-[w-icon-chevron-up-16-part]:transform part-[w-icon-chevron-up-16-part]:transition-transform part-[w-icon-chevron-up-16-part]:transform-gpu part-[w-icon-chevron-up-16-part]:ease-in-out']: true,
-      ['part-[w-icon-chevron-up-16-part]:-rotate-180']:
+      [ccExpandable.elementsTransformChevronUpPart]: true,
+      [ccExpandable.elementsChevronUpCollapsePart]:
         !this.expanded && this._showChevronUp,
     })
   }
 
   get _chevronDownClasses() {
     return fclasses({
-      ['part-[w-icon-chevron-down-16-part]:transform part-[w-icon-chevron-down-16-part]:transition-transform part-[w-icon-chevron-down-16-part]:transform-gpu part-[w-icon-chevron-down-16-part]:ease-in-out']: true,
-      ['part-[w-icon-chevron-down-16-part]:rotate-180']:
+      [ccExpandable.elementsTransformChevronDownPart]: true,
+      [ccExpandable.elementsChevronDownExpandPart]:
         this.expanded && !this._showChevronUp,
     })
   }
