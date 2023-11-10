@@ -2,7 +2,11 @@ name: Crowdin Synchronisation
 
 on:
   push:
-    branches: [next, main]
+    branches:
+      - next
+    paths:
+      - "**.po"
+      - "crowdin.yml"
 
 jobs:
   synchronize-with-crowdin:
