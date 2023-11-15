@@ -4,6 +4,7 @@ export * from './packages/attention';
 export * from './packages/badge';
 export * from './packages/box';
 export * from './packages/breadcrumbs';
+export * from './packages/breadcrumbs/item';
 export * from './packages/broadcast';
 export * from './packages/button';
 export * from './packages/card';
