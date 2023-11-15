@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^20.7.1
     version: 20.7.1
   '@warp-ds/uno':
-    specifier: ^1.1.0
-    version: 1.1.0
+    specifier: ^1.2.0
+    version: 1.2.0
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -1311,7 +1311,6 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
-    dev: true
 
   /@jridgewell/trace-mapping@0.3.18:
     resolution: {integrity: sha512-w+niJYzMHdd7USdiH2U6869nqhD2nbfZXND5Yp93qIbEmnDNk7PD48o+YchRVpzMU7M6jVCbenTR7PA1FLQ9pA==}
@@ -2571,26 +2570,13 @@ packages:
       unconfig: 0.3.11
     dev: true
 
-  /@unocss/core@0.52.7:
-    resolution: {integrity: sha512-dZonrlfu33SkUMsZXlsyYSM79tr2nLer/hBEU2ZaemRik2KchxIUNlZV6kX1f1k3m+gEtVQOyx1MImpgLS8PWg==}
-
-  /@unocss/core@0.55.3:
-    resolution: {integrity: sha512-2hV9QlE/iOM4DHQ7i6L8sMC1t5/OVAz6AfGHjetTXcgbNfDCsHWqE8jhLZ1y2DeUvKwJvj2A09sYbYQ8E27+Gg==}
-
   /@unocss/core@0.57.1:
     resolution: {integrity: sha512-cqQW/4gCuk+bFMPg9lBanuRNQ9Lx1l4PpMN/6uKxI5WROpq7ce/Xb4uGvAxKLh3ITtFSpXs2cLfsy7QD6cVD/Q==}
-    dev: true
-
-  /@unocss/extractor-arbitrary-variants@0.52.7:
-    resolution: {integrity: sha512-nJ4iE7nIRpoOIQfD8S58yG4qJd6AhVPEfEOf7ksX1u8xLf71rrBIojwraRXvv7aPqNdZiWvXdh/znpA/QC5b9w==}
-    dependencies:
-      '@unocss/core': 0.52.7
 
   /@unocss/extractor-arbitrary-variants@0.57.1:
     resolution: {integrity: sha512-9s+azHhBnwjxm46TsD1RY0krDAwOR8tcw58Vtl3emd6C0VQsAOdoprt7UHE7GEXMvDVq7nMf8lAT0BM0LteW3w==}
     dependencies:
       '@unocss/core': 0.57.1
-    dev: true
 
   /@unocss/inspector@0.57.1:
     resolution: {integrity: sha512-qV7ta7iHGX2EpZJ4IWY/05kgyhKFeWlvVJbrOnGsaH8gVt33T/43YAhB/8K5GIXBXIwkhwk13iB13nlg2gSheg==}
@@ -2631,19 +2617,12 @@ packages:
       - supports-color
     dev: true
 
-  /@unocss/preset-mini@0.52.7:
-    resolution: {integrity: sha512-c5VRzPwyAmIBWwz2ufEboYwHGiheG+V9SCmJJLHlu/gcW5KndFsxoeJPE6nOfXVmbx4AGq/rkzV35ZXtH8Iecw==}
-    dependencies:
-      '@unocss/core': 0.52.7
-      '@unocss/extractor-arbitrary-variants': 0.52.7
-
   /@unocss/preset-mini@0.57.1:
     resolution: {integrity: sha512-v9ZsIUGDfZNXbIrOc7zrBp+RFbFFGSQN/vKIf761js4fJ31j6lan4pPQPGcY17xHConkI1HJT/+yb/UVJaAcHw==}
     dependencies:
       '@unocss/core': 0.57.1
       '@unocss/extractor-arbitrary-variants': 0.57.1
       '@unocss/rule-utils': 0.57.1
-    dev: true
 
   /@unocss/preset-tagify@0.57.1:
     resolution: {integrity: sha512-GV8knxnsOVH/XiG2KB+mVZeEJqr0PZvvkSTPftGPbjttoKVZ+28Y5q9/qezH7p4W6RYVAAK+3qHHy5wWZosiMw==}
@@ -2692,7 +2671,6 @@ packages:
     dependencies:
       '@unocss/core': 0.57.1
       magic-string: 0.30.5
-    dev: true
 
   /@unocss/scope@0.57.1:
     resolution: {integrity: sha512-ZAzg6lLGwKNQGCvJXEie3TvGztkAyajEFqygu0mjtHb+CmDql4iAjoygs+3dnRI5hSDwfMYFrJ2azX26+2CsoA==}
@@ -2760,7 +2738,7 @@ packages:
     resolution: {integrity: sha512-RFq9rqsRz581RB3/VfeDIebGDGbjKDbARqTSPP1tOBjUo/+mBJ80Z1RP7DV0Q3bUi+5tAz8TuPBCZcoQqToSxw==}
     dependencies:
       '@warp-ds/tokenizer': 0.0.2
-      '@warp-ds/uno': 1.1.0
+      '@warp-ds/uno': 1.2.0
     dev: false
 
   /@warp-ds/elements-core@0.0.1-alpha.9:
@@ -2784,11 +2762,12 @@ packages:
       yaml: 2.3.2
     dev: false
 
-  /@warp-ds/uno@1.1.0:
-    resolution: {integrity: sha512-XzhziKuHAWRofxVXb9meEgFbRUS+3+Lfuvz9qwWiJNermlkc5tC9x2DdTmFa0ia73nkgeD3K3hx0yVY0etoZ2w==}
+  /@warp-ds/uno@1.2.0:
+    resolution: {integrity: sha512-P5zq8/Bzg33HXR0UxupqJROZK3/QFJOc+bzABN3qTihPCkiqLJCWHxqf2a61Bleg1yK4mTQv+J3FRfYyeZCUow==}
     dependencies:
-      '@unocss/core': 0.55.3
-      '@unocss/preset-mini': 0.52.7
+      '@unocss/core': 0.57.1
+      '@unocss/preset-mini': 0.57.1
+      '@unocss/rule-utils': 0.57.1
 
   /@web/browser-logs@0.3.3:
     resolution: {integrity: sha512-wt8arj0x7ghXbnipgCvLR+xQ90cFg16ae23cFbInCrJvAxvyI22bAtT24W4XOXMPXwWLBVUJwBgBcXo3oKIvDw==}
@@ -7344,7 +7323,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
 
   /make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
