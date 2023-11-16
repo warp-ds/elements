@@ -50,9 +50,11 @@ Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) 
 
 ## Styling components inside the Shadow DOM
 
-It is possible to style components that are inside the Shadow DOM by including `@unocss-placeholder` inside each component's static styles:
+It is possible to style components that are inside the Shadow DOM by including `@unocss-placeholder` inside the static styles of the component that contains the component you want to style:
 
 ```js
+// web-component-container/index.js
+
 static styles = [
     css`
       @unocss-placeholder
@@ -62,19 +64,21 @@ static styles = [
 
 Once you have this in place, you can style the component using the [part CSS pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) that is also supported by [UnoCSS](https://unocss.dev/integrations/vite#part-built-in-support).
 
-You simply add `part=<part-name>` to the component that you want to style, for example:
+You simply add `part=<part-name>` to the component that you want to style:
 
 ```js
 // web-component-with-parts/index.js
+
 <h2 part='heading'>
   <slot></slot>
 </h2>
 ```
 
-Then you apply style to that part-name in the component that is using the component that you want to style:
+Then you apply style to that part-name in the component that contains the component that you want to style:
 
 ```js
 // web-component-container/index.js
+
 <div>
   <web-component-with-parts class='part-[heading]:s-text-positive part-[heading]:pl-4'>
     I'm an h2 heading
