@@ -51,7 +51,7 @@ Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) 
 
 ## Styling components inside the Shadow DOM
 
-It is possible to style components that are inside the Shadow DOM by enabling `shadow-dom` mode in the plugin (this is already prepared for development mode in vite.config.js) and including `@unocss-placeholder` inside each component's static styles:
+It is possible to style components that are inside the Shadow DOM by enabling `shadow-dom` mode in the plugin (this is already prepared for development mode in vite.config.js), and including `@unocss-placeholder` inside each component's static styles:
 
 ```js
 static styles = [
@@ -61,19 +61,24 @@ static styles = [
   ]
 ```
 
-Once you have this in place you can style the component using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::part" target="_blank">::part CSS pseudo-element</a> that is also supported by <a href="https://unocss.dev/integrations/vite#part-built-in-support" target="_blank">UnoCSS</a>.
+Once you have this in place, you can style the component using the [part CSS pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) that is also supported by [UnoCSS](https://unocss.dev/integrations/vite#part-built-in-support).
 
 You simply add `part=<part-name>` as an attribute inside the component that you want to style, for example:
 
 ```html
-<svg part="style-svg"></svg>
+//web-component-with-parts/index.js
+<h4 part="heading-part"
+  >
+    <slot></slot>
+</h4>
 ```
 
 Then you apply style to that part-name in the component that is using the component that you want to style:
 ```html
-<web-component-with-parts>
-  <svg class="part-[style-svg]:w-20 part-[style-svg]:h-20"></svg>
-</web-component-with-parts>
+//web-component-container/index.js
+<div>
+  <web-component-with-parts class="part-[heading-part]:s-text-positive part-[heading-part]:pl-4"></web-component-with-parts>
+</div>
 ```
 
 
