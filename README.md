@@ -50,7 +50,7 @@ Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) 
 
 ## Styling components inside the Shadow DOM
 
-It is possible to style components that are inside the Shadow DOM by enabling `shadow-dom` mode in the plugin (this is already prepared for development mode in vite.config.js), and including `@unocss-placeholder` inside each component's static styles:
+It is possible to style components that are inside the Shadow DOM by including `@unocss-placeholder` inside each component's static styles:
 
 ```js
 static styles = [
