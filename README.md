@@ -64,9 +64,10 @@ static styles = [
 Once you have this in place, you can style the component using the [part CSS pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) that is also supported by [UnoCSS](https://unocss.dev/integrations/vite#part-built-in-support).
 
 You simply add `part=<part-name>` as an attribute inside the component that you want to style, for example:
-
+```js
+// web-component-with-parts/index.js
+```
 ```html
-//web-component-with-parts/index.js
 <h4 part="heading-part"
   >
     <slot></slot>
@@ -74,8 +75,10 @@ You simply add `part=<part-name>` as an attribute inside the component that you 
 ```
 
 Then you apply style to that part-name in the component that is using the component that you want to style:
+```js
+// web-component-container/index.js
+```
 ```html
-//web-component-container/index.js
 <div>
   <web-component-with-parts class="part-[heading-part]:s-text-positive part-[heading-part]:pl-4"></web-component-with-parts>
 </div>
