@@ -3,10 +3,11 @@ import { defineConfig } from 'vite';
 import { presetWarp } from '@warp-ds/uno';
 import uno from 'unocss/vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import topLevelAwait from "vite-plugin-top-level-await";
+import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 import glob from 'glob';
 import { MinifyWarpLib } from './.minifier-plugin.js';
+import { classes } from '@warp-ds/css/component-classes/classes';      
 
 export default ({ mode }) => {
   let input = {};
@@ -70,6 +71,11 @@ export default ({ mode }) => {
     plugins: [
       mode !== 'lib' && uno({
         presets: [presetWarp()],
+      }),
+      mode === 'development' && uno({
+        mode: 'shadow-dom',
+        presets: [presetWarp()],
+        safelist: classes,
       }),
       mode !== 'lib' &&
         createHtmlPlugin({
@@ -146,7 +152,7 @@ export default ({ mode }) => {
       MinifyWarpLib(),
       mode === 'development' && topLevelAwait({
         // The export name of top-level await promise for each chunk module
-        promiseExportName: "__tla",
+        promiseExportName: '__tla',
         // The function to generate import names of top-level await promise in each chunk module
         promiseImportName: i => `__tla_${i}`
       }),
