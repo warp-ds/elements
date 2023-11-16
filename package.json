@@ -109,8 +109,6 @@
     "type": "package",
     "files": "eik",
     "import-map": [
-      "https://assets.finn.no/map/react/v2",
-      "https://assets.finn.no/map/vue/v1",
       "https://assets.finn.no/map/custom-elements/v2"
     ]
   },
