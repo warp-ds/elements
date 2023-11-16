@@ -49,6 +49,34 @@ Anyone needing to use the latest changes of this package can point to the `next`
 
 Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) file.
 
+## Styling components inside the Shadow DOM
+
+It is possible to style components that are inside the Shadow DOM by enabling `shadow-dom` mode in the plugin (this is already prepared for development mode in vite.config.js) and including `@unocss-placeholder` inside each component's static styles:
+
+```js
+static styles = [
+    css`
+      @unocss-placeholder
+      `,
+  ]
+```
+
+Once you have this in place you can style the component using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::part" target="_blank">::part CSS pseudo-element</a> that is also supported by <a href="https://unocss.dev/integrations/vite#part-built-in-support" target="_blank">UnoCSS</a>.
+
+You simply add `part=<part-name>` as an attribute inside the component that you want to style, for example:
+
+```html
+<svg part="style-svg"></svg>
+```
+
+Then you apply style to that part-name in the component that is using the component that you want to style:
+```html
+<web-component-with-parts>
+  <svg class="part-[style-svg]:w-20 part-[style-svg]:h-20"></svg>
+</web-component-with-parts>
+```
+
+
 
 ## License
 
