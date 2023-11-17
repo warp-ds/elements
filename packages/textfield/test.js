@@ -199,7 +199,7 @@ test('Component with search suffix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
-      <w-affix slot="suffix" search></w-affix>
+      <w-affix slot="suffix" search aria-label="Search"></w-affix>
     </w-textfield>
   `;
 
@@ -221,7 +221,7 @@ test('Component with clear suffix is rendered on the page', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
-      <w-affix slot="suffix" clear></w-affix>
+      <w-affix slot="suffix" clear aria-label="Clear text"></w-affix>
     </w-textfield>
   `;
 
@@ -244,7 +244,7 @@ test('Component with prefix label and clear suffix is rendered on the page', asy
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
       <w-affix slot="prefix" label="kr"></w-affix>
-      <w-affix slot="suffix" clear></w-affix>
+      <w-affix slot="suffix" clear aria-label="Clear text"></w-affix>
     </w-textfield>
   `;
 
@@ -267,7 +267,7 @@ test('Affix component button events bubble', async (t) => {
   // GIVEN: A box component
   const component = `
     <w-textfield label="Price" placeholder="1 000 000">
-      <w-affix slot="suffix" clear></w-affix>
+      <w-affix slot="suffix" clear aria-label="Clear text"></w-affix>
     </w-textfield>
     <script>
       const el = document.querySelector('w-affix');
