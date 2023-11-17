@@ -12,8 +12,8 @@ dependencies:
     specifier: 1.0.0
     version: 1.0.0
   '@warp-ds/css':
-    specifier: ^1.4.0
-    version: 1.4.0
+    specifier: ^1.4.1
+    version: 1.4.1
   '@warp-ds/elements-core':
     specifier: 0.0.1-alpha.9
     version: 0.0.1-alpha.9
@@ -2734,8 +2734,8 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/css@1.4.0:
-    resolution: {integrity: sha512-tjbemTmqc1WmLwNpZB7w5kiKvCyRaz2LojOiLByhNG/pURm5yaUB1/rN8GLYtzijtnzpimrPrekXxnQK8HFLkw==}
+  /@warp-ds/css@1.4.1:
+    resolution: {integrity: sha512-AgVOEU4f023CKTMxTnH8+BTNhGjAVux88EeIR/ikch5FM2nArCTpp7af8/qGZOhc7QDegJvHlt6DcCR7rqyIQg==}
     dependencies:
       '@warp-ds/tokenizer': 0.0.2
       '@warp-ds/uno': 1.2.0
