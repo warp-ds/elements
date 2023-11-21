@@ -32,6 +32,15 @@ pnpm add @warp-ds/elements
 ```html
 <script src="https://assets.finn.no/pkg/@warp-ds/elements/v1"></script>
 ```
+#### Import components
+This project builds both the whole Elements package and separate component packages that are published to EIK, making it possible for the user to choose to either import all of the components:
+```js
+import from '@warp-ds/elements'
+```
+or a specific component: 
+```js
+import '@warp-ds/elements/packages/toast'
+```
 
 ### Documentation
 
@@ -43,12 +52,6 @@ see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/)
 
 This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
 Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
-
-The project is also using a separate esbuild config for building assets for Eik and includes [Eik's Esbuild plugin](https://github.com/eik-lib/esbuild-plugin), which imports maps for `lit` from an Eik server, as well as, applying
-mapping to ECMAScript modules.
-
-Furthermore, it builds both the whole Elements package and separate component packages that are published to EIK, making it possible for the user to choose to either import all of the components or just a specific one.
-The component packages will also be included in the import map-list for [custom elements](https://github.schibsted.io/nmp-web/eik-import-maps/blob/main/maps/custom-elements/map.json).
 
 
 ## Changelog
