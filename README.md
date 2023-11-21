@@ -48,6 +48,7 @@ The project is also using a separate esbuild config for building assets for Eik 
 mapping to ECMAScript modules.
 
 Furthermore, it builds both the whole Elements package and separate component packages that are published to EIK, making it possible for the user to choose to either import all of the components or just a specific one.
+The component packages will also be included in the import map-list for [custom elements](https://github.schibsted.io/nmp-web/eik-import-maps/blob/main/maps/custom-elements/map.json).
 
 
 ## Changelog
