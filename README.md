@@ -39,7 +39,7 @@ import from '@warp-ds/elements'
 ```
 or a specific component: 
 ```js
-import '@warp-ds/elements/packages/toast'
+import '@warp-ds/elements/components/toast'
 ```
 
 ### Documentation
