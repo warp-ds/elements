@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.2.1-next.1",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
@@ -29,7 +29,7 @@
     "build:api": "npx esbuild ./packages/toast/api.js --outdir=dist --target=es2017 --bundle --sourcemap --format=esm --minify",
     "build:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch",
-    "build": "pnpm run build:elements && tsc && vite build --mode lib && pnpm run build:api && node build-individual-elements.js",
+    "build": "pnpm run build:elements && tsc && vite build --mode lib && pnpm run build:api && node build-individual-elements.js && pnpm build:eik",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "npm run lint:format && pnpm run lint:eslint",
     "lint:format": "prettier --check . --ignore-path .gitignore",
@@ -44,7 +44,8 @@
     "semantic-release": "semantic-release",
     "build:elements": "node build-elements.js",
     "messages:extract": "lingui extract",
-    "messages:compile": "lingui compile"
+    "messages:compile": "lingui compile",
+    "build:eik": "node build-elements-eik.js"
   },
   "repository": {
     "type": "git",
@@ -56,6 +57,7 @@
     "@babel/eslint-parser": "7.22.5",
     "@chbphone55/classnames": "2.0.0",
     "@eik/cli": "^2.0.22",
+    "@eik/esbuild-plugin": "^1.1.43",
     "@lingui/cli": "^4.5.0",
     "@lingui/conf": "^4.5.0",
     "@open-wc/testing": "3.2.0",
@@ -104,7 +106,11 @@
   },
   "eik": {
     "server": "https://assets.finn.no",
-    "files": "dist"
+    "type": "package",
+    "files": "eik",
+    "import-map": [
+      "https://assets.finn.no/map/custom-elements/v2"
+    ]
   },
   "config": {
     "commitizen": {

@@ -1,3 +1,10 @@
+## [1.2.1-next.1](https://github.com/warp-ds/elements/compare/v1.2.0...v1.2.1-next.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* eik publishing for elements ([#111](https://github.com/warp-ds/elements/issues/111)) ([0915221](https://github.com/warp-ds/elements/commit/09152215ec3ccf40643403c2d64edb6b9f76ea89))
+
 # [1.2.0](https://github.com/warp-ds/elements/compare/v1.1.1...v1.2.0) (2023-11-07)
 
 

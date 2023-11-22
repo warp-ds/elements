@@ -33,6 +33,15 @@ pnpm add @warp-ds/elements
 ```html
 <script src="https://assets.finn.no/pkg/@warp-ds/elements/v1"></script>
 ```
+### Import components
+This project builds both the whole Elements package and separate component packages that are published to EIK, making it possible for the user to choose to either import all of the components:
+```js
+import '@warp-ds/elements';
+```
+or a specific component: 
+```js
+import '@warp-ds/elements/components/toast';
+```
 
 ### Documentation
 
