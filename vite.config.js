@@ -6,8 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 import glob from 'glob';
-import { MinifyWarpLib } from './.minifier-plugin.js';
-import { classes } from '@warp-ds/css/component-classes/classes';      
+import { classes } from '@warp-ds/css/component-classes/classes';
 
 export default ({ mode }) => {
   let input = {};
@@ -149,7 +148,6 @@ export default ({ mode }) => {
           ],
         }),
       isProduction && basePathFix(),
-      MinifyWarpLib(),
       mode === 'development' && topLevelAwait({
         // The export name of top-level await promise for each chunk module
         promiseExportName: '__tla',
