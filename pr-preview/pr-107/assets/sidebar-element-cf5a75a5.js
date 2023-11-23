@@ -264,7 +264,6 @@ ${Dr.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @unocss-placeholder
       `];firstUpdated(){this._hasTitle=!!this.title||this.renderRoot.querySelector("slot[name='title']").assignedNodes().length>0}get _expandableSlot(){return v`<div
       class=${j({[this.contentClass||""]:!0,[X.box]:this.box,[R.paddingTop]:this._hasTitle&&this.box})}
     >
