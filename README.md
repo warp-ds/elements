@@ -59,11 +59,9 @@ Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) 
 
 ## How to test component-classes locally
 
-It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) but that has not yet been published to Eik, by linking the `@warp-ds/css` package and adding `@unocss-placeholder` inside the static styles of the component that contains the component you want to style:
+It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) but that has not yet been published to Eik. You simply need to link the `@warp-ds/css` package and add `@unocss-placeholder` inside the static styles of the component that you want to test:
 
 ```js
-// web-component-container/index.js
-
 static styles = [
     css`
       @unocss-placeholder
