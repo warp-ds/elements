@@ -57,9 +57,9 @@ Anyone needing to use the latest changes of this package can point to the `next`
 
 Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) file.
 
-## Styling components inside the Shadow DOM
+## How to test component-classes locally
 
-It is possible to style components that are inside the Shadow DOM by including `@unocss-placeholder` inside the static styles of the component that contains the component you want to style:
+It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) but that has not yet been published to Eik, by linking the `@warp-ds/css` package and adding `@unocss-placeholder` inside the static styles of the component that contains the component you want to style:
 
 ```js
 // web-component-container/index.js
@@ -71,29 +71,7 @@ static styles = [
   ]
 ```
 
-Once you have this in place, you can style the component using the [part CSS pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part) that is also supported by [UnoCSS](https://unocss.dev/integrations/vite#part-built-in-support).
-
-You simply add `part=<part-name>` to the component that you want to style:
-
-```js
-// web-component-with-parts/index.js
-
-<h2 part='heading'>
-  <slot></slot>
-</h2>
-```
-
-Then you apply style to that part-name in the component that contains the component that you want to style:
-
-```js
-// web-component-container/index.js
-
-<div>
-  <web-component-with-parts class='part-[heading]:s-text-positive part-[heading]:pl-4'>
-    I'm an h2 heading
-  </web-component-with-parts>
-</div>
-```
+Once you have tested it locally, make sure to remove the `@unocss-placeholder` from the static styles before pushing any changes to the repo.
 
 ## License
 
