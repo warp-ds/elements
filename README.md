@@ -59,7 +59,7 @@ Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) 
 
 ## How to test component-classes locally
 
-It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) package but that has not yet been published to Eik. You simply need to link the `@warp-ds/css` package and add `@unocss-placeholder` inside the static styles of the component that you want to test:
+It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) package but that has not yet been published to Eik. You simply need to link the `@warp-ds/css` package in this repository and add `@unocss-placeholder` inside the static styles of the component that you want to test:
 
 ```js
 static styles = [
@@ -69,7 +69,7 @@ static styles = [
   ]
 ```
 
-Once you have tested it locally, make sure to remove the `@unocss-placeholder` from the static styles before pushing any changes to the repo.
+Once you have tested it locally, make sure to remove the `@unocss-placeholder` from the static styles before pushing any changes to the repository.
 
 ## License
 
