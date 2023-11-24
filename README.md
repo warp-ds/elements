@@ -69,6 +69,8 @@ static styles = [
   ]
 ```
 
+Run `pnpm dev` to see the linked styles in action.
+
 Once you have tested it locally, make sure to remove the `@unocss-placeholder` from the static styles before pushing any changes to the repository.
 
 ## License
