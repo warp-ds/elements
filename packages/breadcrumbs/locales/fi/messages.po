@@ -15,10 +15,10 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: fi\n"
 "X-Crowdin-File-ID: 1446\n"
+"PO-Revision-Date: \n"
 
 #. Default screenreader message for the breadcrumb component
 #. js-lingui-explicit-id
 #: packages/breadcrumbs/index.js:26
 msgid "breadcrumbs.ariaLabel"
 msgstr "Olet tässä"
-

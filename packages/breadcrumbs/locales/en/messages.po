@@ -19,4 +19,3 @@ msgstr ""
 #: packages/breadcrumbs/index.js:26
 msgid "breadcrumbs.ariaLabel"
 msgstr "You are here"
-

@@ -20,10 +20,6 @@ const config: LinguiConfig = {
       include: ['packages/attention/index.js'],
       path: 'packages/attention/locales/{locale}/messages',
     },
-    {
-      include: ['packages/expandable/index.js'],
-      path: 'packages/expandable/locales/{locale}/messages',
-    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

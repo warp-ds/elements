@@ -1,1 +1,0 @@
-/*eslint-disable*/export const messages=JSON.parse("{\"icon.title.chevron-down\":\"Downward arrow\",\"icon.title.chevron-up\":\"Upward arrow\"}");
