@@ -1,3 +1,10 @@
+## [1.2.1-next.2](https://github.com/warp-ds/elements/compare/v1.2.1-next.1...v1.2.1-next.2) (2023-11-27)
+
+
+### Bug Fixes
+
+* Add part to the expandable to be able to style an svg inside the shadow-DOM ([#107](https://github.com/warp-ds/elements/issues/107)) ([87faf60](https://github.com/warp-ds/elements/commit/87faf60be3ac5d5460b04add6f5b408844b31bd7))
+
 ## [1.2.1-next.1](https://github.com/warp-ds/elements/compare/v1.2.0...v1.2.1-next.1) (2023-11-22)
 
 
