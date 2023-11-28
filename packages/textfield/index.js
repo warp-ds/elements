@@ -39,6 +39,9 @@ class WarpTextField extends WarpElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
+      .warp-input-with-prefix {
+        padding-left:var(--w-prefix-width, 40px);
+      }
     `,
   ];
 
@@ -54,7 +57,9 @@ class WarpTextField extends WarpElement {
       [input.disabled]: this.disabled,
       [input.readOnly]: this.readOnly,
       [input.suffix]: this._hasSuffix,
-      [input.prefix]: this._hasPrefix,
+      // we style input with prefix here because we cannot use
+      // arbitrary values with commas in UnoCSS like pl-[var(--w-prefix-width, 40px)]
+      'warp-input-with-prefix': this._hasPrefix,
     });
   }
 
