@@ -1,3 +1,10 @@
+## [1.2.1-next.3](https://github.com/warp-ds/elements/compare/v1.2.1-next.2...v1.2.1-next.3) (2023-11-28)
+
+
+### Bug Fixes
+
+* **textfield:** allow styling input's left padding when prefix is wider than 40px ([#116](https://github.com/warp-ds/elements/issues/116)) ([ac890c7](https://github.com/warp-ds/elements/commit/ac890c79d877a851fe536436aa598ef5e18308ec))
+
 ## [1.2.1-next.2](https://github.com/warp-ds/elements/compare/v1.2.1-next.1...v1.2.1-next.2) (2023-11-27)
 
 
