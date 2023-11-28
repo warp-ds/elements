@@ -261,8 +261,8 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-cf5a75a5.js"></script>
-  <link rel="stylesheet" href="/elements/assets/sidebar-element-6e47d14b.css">
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-d0f81704.js"></script>
+  <link rel="stylesheet" href="/elements/assets/sidebar-element-73c799f1.css">
 </head>
   <body>
     
@@ -537,6 +537,16 @@
         <div class="example">
           <w-textfield label="Price" placeholder="1 000 000">
             <w-affix slot="prefix" label="kr"></w-affix>
+          </w-textfield>
+        </div>
+        <syntax-highlight>
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
           </w-textfield>
         </div>
 
