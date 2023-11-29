@@ -275,18 +275,28 @@
             <w-affix slot="prefix" label="kr"></w-affix>
           </w-textfield>
         </div>
+        <syntax-highlight>
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
+          </w-textfield>
+        </div>
 
         You can also use both a prefix and suffix
         <syntax-highlight>
           <w-textfield label="Price" placeholder="1 000 000">
             <w-affix slot="prefix" label="kr"></w-affix>
-            <w-affix slot="suffix" search></w-affix>
+            <w-affix slot="suffix" search aria-label="Search"></w-affix>
           </w-textfield>
         </syntax-highlight>
         <div class="example">
           <w-textfield label="Price" placeholder="1 000 000">
             <w-affix slot="prefix" label="kr"></w-affix>
-            <w-affix slot="suffix" search></w-affix>
+            <w-affix slot="suffix" search aria-label="Search"></w-affix>
           </w-textfield>
         </div>
 

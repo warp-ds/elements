@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.2.1-next.3",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
@@ -25,26 +25,25 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "commit": "cz",
-    "build:api": "npx esbuild ./packages/toast/api.js --outdir=dist --target=es2017 --bundle --sourcemap --format=esm --minify",
-    "build:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify",
-    "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch",
-    "build": "pnpm run build:elements && tsc && vite build --mode lib && pnpm run build:api && node build-individual-elements.js",
-    "format": "prettier --write . --ignore-path .gitignore",
-    "lint": "npm run lint:format && pnpm run lint:eslint",
-    "lint:format": "prettier --check . --ignore-path .gitignore",
-    "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
-    "dev": "vite",
     "build:docs": "vite build",
-    "preview:docs": "vite preview",
-    "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
-    "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
-    "test": "tap ./packages/**/test.js --no-check-coverage",
-    "test:snapshot": "TAP_SNAPSHOT=1 tap ./packages/**/test.js --no-check-coverage",
-    "semantic-release": "semantic-release",
-    "build:elements": "node build-elements.js",
+    "build:eik": "node build.js eik",
+    "build:npm": "node build.js npm",
+    "build": "rimraf dist && rimraf eik && tsc && vite build --mode lib && pnpm run build:npm && pnpm build:eik",
+    "commit": "cz",
+    "dev": "vite",
+    "format": "prettier --write . --ignore-path .gitignore",
+    "lint:eslint": "eslint . --ext js,cjs,mjs --ignore-path .gitignore",
+    "lint:format": "prettier --check . --ignore-path .gitignore",
+    "lint": "npm run lint:format && pnpm run lint:eslint",
+    "messages:compile": "lingui compile",
     "messages:extract": "lingui extract",
-    "messages:compile": "lingui compile"
+    "preview:docs": "vite preview",
+    "semantic-release": "semantic-release",
+    "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
+    "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
+    "test:snapshot": "TAP_SNAPSHOT=1 tap ./packages/**/test.js --no-check-coverage",
+    "test": "tap ./packages/**/test.js --no-check-coverage",
+    "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {
     "type": "git",
@@ -56,13 +55,14 @@
     "@babel/eslint-parser": "7.22.5",
     "@chbphone55/classnames": "2.0.0",
     "@eik/cli": "^2.0.22",
+    "@eik/esbuild-plugin": "^1.1.43",
     "@lingui/cli": "^4.5.0",
     "@lingui/conf": "^4.5.0",
     "@open-wc/testing": "3.2.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.7.1",
-    "@warp-ds/uno": "^1.1.0",
+    "@warp-ds/uno": "^1.2.0",
     "autoprefixer": "10.4.14",
     "cors": "2.8.5",
     "cz-conventional-changelog": "3.3.0",
@@ -95,16 +95,20 @@
   "dependencies": {
     "@lingui/core": "^4.5.0",
     "@warp-ds/core": "1.0.0",
-    "@warp-ds/css": "^1.3.0",
+    "@warp-ds/css": "^1.4.2",
     "@warp-ds/elements-core": "0.0.1-alpha.9",
-    "@warp-ds/icons": "1.1.1"
+    "@warp-ds/icons": "1.3.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "eik": {
     "server": "https://assets.finn.no",
-    "files": "dist"
+    "type": "package",
+    "files": "eik",
+    "import-map": [
+      "https://assets.finn.no/map/custom-elements/v2"
+    ]
   },
   "config": {
     "commitizen": {

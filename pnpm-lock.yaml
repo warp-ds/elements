@@ -12,14 +12,14 @@ dependencies:
     specifier: 1.0.0
     version: 1.0.0
   '@warp-ds/css':
-    specifier: ^1.3.0
-    version: 1.3.0
+    specifier: ^1.4.2
+    version: 1.4.2
   '@warp-ds/elements-core':
     specifier: 0.0.1-alpha.9
     version: 0.0.1-alpha.9
   '@warp-ds/icons':
-    specifier: 1.1.1
-    version: 1.1.1
+    specifier: 1.3.0
+    version: 1.3.0
 
 devDependencies:
   '@babel/core':
@@ -34,6 +34,9 @@ devDependencies:
   '@eik/cli':
     specifier: ^2.0.22
     version: 2.0.22
+  '@eik/esbuild-plugin':
+    specifier: ^1.1.43
+    version: 1.1.43
   '@lingui/cli':
     specifier: ^4.5.0
     version: 4.5.0
@@ -53,8 +56,8 @@ devDependencies:
     specifier: ^20.7.1
     version: 20.7.1
   '@warp-ds/uno':
-    specifier: ^1.1.0
-    version: 1.1.0
+    specifier: ^1.2.0
+    version: 1.2.0
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -502,8 +505,18 @@ packages:
       is-glob: 4.0.3
       mime-types: 2.1.35
       node-fetch: 2.6.12
-      semver: 7.3.5
+      semver: 7.5.4
       validate-npm-package-name: 4.0.0
+    transitivePeerDependencies:
+      - encoding
+    dev: true
+
+  /@eik/esbuild-plugin@1.1.43:
+    resolution: {integrity: sha512-k1qOE6jsmy/2evnh6Sbe3QK0z/a1CYzoloseicLawqrlIdlnjir5XCHcVLhXaUpmiZeoZZ6NLH1RqePkqUH1uA==}
+    dependencies:
+      '@eik/common': 3.0.1
+      esbuild-plugin-import-map: 2.1.0
+      undici: 5.27.2
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -1153,6 +1166,11 @@ packages:
       fast-uri: 2.2.0
     dev: true
 
+  /@fastify/busboy@2.1.0:
+    resolution: {integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==}
+    engines: {node: '>=14'}
+    dev: true
+
   /@fastify/deepmerge@1.3.0:
     resolution: {integrity: sha512-J8TOSBq3SoZbDhM9+R/u77hP93gz/rajSA+K2kGyijPpORPWUXHUpTaleoj+92As0S9uPRP7Oi8IqMf0u+ro6A==}
     dev: true
@@ -1311,7 +1329,6 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
-    dev: true
 
   /@jridgewell/trace-mapping@0.3.18:
     resolution: {integrity: sha512-w+niJYzMHdd7USdiH2U6869nqhD2nbfZXND5Yp93qIbEmnDNk7PD48o+YchRVpzMU7M6jVCbenTR7PA1FLQ9pA==}
@@ -2571,26 +2588,13 @@ packages:
       unconfig: 0.3.11
     dev: true
 
-  /@unocss/core@0.52.7:
-    resolution: {integrity: sha512-dZonrlfu33SkUMsZXlsyYSM79tr2nLer/hBEU2ZaemRik2KchxIUNlZV6kX1f1k3m+gEtVQOyx1MImpgLS8PWg==}
-
-  /@unocss/core@0.55.3:
-    resolution: {integrity: sha512-2hV9QlE/iOM4DHQ7i6L8sMC1t5/OVAz6AfGHjetTXcgbNfDCsHWqE8jhLZ1y2DeUvKwJvj2A09sYbYQ8E27+Gg==}
-
   /@unocss/core@0.57.1:
     resolution: {integrity: sha512-cqQW/4gCuk+bFMPg9lBanuRNQ9Lx1l4PpMN/6uKxI5WROpq7ce/Xb4uGvAxKLh3ITtFSpXs2cLfsy7QD6cVD/Q==}
-    dev: true
-
-  /@unocss/extractor-arbitrary-variants@0.52.7:
-    resolution: {integrity: sha512-nJ4iE7nIRpoOIQfD8S58yG4qJd6AhVPEfEOf7ksX1u8xLf71rrBIojwraRXvv7aPqNdZiWvXdh/znpA/QC5b9w==}
-    dependencies:
-      '@unocss/core': 0.52.7
 
   /@unocss/extractor-arbitrary-variants@0.57.1:
     resolution: {integrity: sha512-9s+azHhBnwjxm46TsD1RY0krDAwOR8tcw58Vtl3emd6C0VQsAOdoprt7UHE7GEXMvDVq7nMf8lAT0BM0LteW3w==}
     dependencies:
       '@unocss/core': 0.57.1
-    dev: true
 
   /@unocss/inspector@0.57.1:
     resolution: {integrity: sha512-qV7ta7iHGX2EpZJ4IWY/05kgyhKFeWlvVJbrOnGsaH8gVt33T/43YAhB/8K5GIXBXIwkhwk13iB13nlg2gSheg==}
@@ -2631,19 +2635,12 @@ packages:
       - supports-color
     dev: true
 
-  /@unocss/preset-mini@0.52.7:
-    resolution: {integrity: sha512-c5VRzPwyAmIBWwz2ufEboYwHGiheG+V9SCmJJLHlu/gcW5KndFsxoeJPE6nOfXVmbx4AGq/rkzV35ZXtH8Iecw==}
-    dependencies:
-      '@unocss/core': 0.52.7
-      '@unocss/extractor-arbitrary-variants': 0.52.7
-
   /@unocss/preset-mini@0.57.1:
     resolution: {integrity: sha512-v9ZsIUGDfZNXbIrOc7zrBp+RFbFFGSQN/vKIf761js4fJ31j6lan4pPQPGcY17xHConkI1HJT/+yb/UVJaAcHw==}
     dependencies:
       '@unocss/core': 0.57.1
       '@unocss/extractor-arbitrary-variants': 0.57.1
       '@unocss/rule-utils': 0.57.1
-    dev: true
 
   /@unocss/preset-tagify@0.57.1:
     resolution: {integrity: sha512-GV8knxnsOVH/XiG2KB+mVZeEJqr0PZvvkSTPftGPbjttoKVZ+28Y5q9/qezH7p4W6RYVAAK+3qHHy5wWZosiMw==}
@@ -2692,7 +2689,6 @@ packages:
     dependencies:
       '@unocss/core': 0.57.1
       magic-string: 0.30.5
-    dev: true
 
   /@unocss/scope@0.57.1:
     resolution: {integrity: sha512-ZAzg6lLGwKNQGCvJXEie3TvGztkAyajEFqygu0mjtHb+CmDql4iAjoygs+3dnRI5hSDwfMYFrJ2azX26+2CsoA==}
@@ -2756,11 +2752,11 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/css@1.3.0:
-    resolution: {integrity: sha512-RFq9rqsRz581RB3/VfeDIebGDGbjKDbARqTSPP1tOBjUo/+mBJ80Z1RP7DV0Q3bUi+5tAz8TuPBCZcoQqToSxw==}
+  /@warp-ds/css@1.4.2:
+    resolution: {integrity: sha512-PuwfbtzPQs6BtBOIFJR4AmBZmoqArPvAsv5POiwPUO6cyk60K1uo0P1pZqE3CKwXR0WBoK8WnQqRh+G2IIyU5g==}
     dependencies:
       '@warp-ds/tokenizer': 0.0.2
-      '@warp-ds/uno': 1.1.0
+      '@warp-ds/uno': 1.2.0
     dev: false
 
   /@warp-ds/elements-core@0.0.1-alpha.9:
@@ -2771,8 +2767,8 @@ packages:
       lit: 2.7.6
     dev: false
 
-  /@warp-ds/icons@1.1.1:
-    resolution: {integrity: sha512-XUDIxqHVbqLgoQHgpCSCgchCKwNUdsBz3siEcyE9/gRitEN30vbEReKgU2sIBoco8YCgKo0MuebA1+CCvfqFNg==}
+  /@warp-ds/icons@1.3.0:
+    resolution: {integrity: sha512-YlP8p3ONQmpx8114xhySN+Rx+6hkWETXztvl3sw6MdGsXgXhNhO9pKs8x2MIx3K+R15vBfV8dt8fdqGPmFgL6w==}
     dependencies:
       '@lingui/core': 4.5.0
     dev: false
@@ -2784,11 +2780,12 @@ packages:
       yaml: 2.3.2
     dev: false
 
-  /@warp-ds/uno@1.1.0:
-    resolution: {integrity: sha512-XzhziKuHAWRofxVXb9meEgFbRUS+3+Lfuvz9qwWiJNermlkc5tC9x2DdTmFa0ia73nkgeD3K3hx0yVY0etoZ2w==}
+  /@warp-ds/uno@1.2.0:
+    resolution: {integrity: sha512-P5zq8/Bzg33HXR0UxupqJROZK3/QFJOc+bzABN3qTihPCkiqLJCWHxqf2a61Bleg1yK4mTQv+J3FRfYyeZCUow==}
     dependencies:
-      '@unocss/core': 0.55.3
-      '@unocss/preset-mini': 0.52.7
+      '@unocss/core': 0.57.1
+      '@unocss/preset-mini': 0.57.1
+      '@unocss/rule-utils': 0.57.1
 
   /@web/browser-logs@0.3.3:
     resolution: {integrity: sha512-wt8arj0x7ghXbnipgCvLR+xQ90cFg16ae23cFbInCrJvAxvyI22bAtT24W4XOXMPXwWLBVUJwBgBcXo3oKIvDw==}
@@ -4605,6 +4602,10 @@ packages:
 
   /es6-error@4.1.1:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
+    dev: true
+
+  /esbuild-plugin-import-map@2.1.0:
+    resolution: {integrity: sha512-rlI9H8f1saIqYEUNHxDmIMGZZFroANyD6q3Aht6aXyOq/aOdO6jp5VFF1+n3o9AUe+wAtQcn93Wv1Vuj9na0hg==}
     dev: true
 
   /esbuild@0.17.19:
@@ -7344,7 +7345,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
 
   /make-dir@2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
@@ -10734,6 +10734,13 @@ packages:
       defu: 6.1.3
       jiti: 1.20.0
       mlly: 1.4.2
+    dev: true
+
+  /undici@5.27.2:
+    resolution: {integrity: sha512-iS857PdOEy/y3wlM3yRp+6SNQQ6xU0mmZcwRSriqk+et/cwWAtwmIGf6WkoDN2EK/AMdCO/dfXzIwi+rFMrjjQ==}
+    engines: {node: '>=14.0'}
+    dependencies:
+      '@fastify/busboy': 2.1.0
     dev: true
 
   /unicode-length@2.1.0:

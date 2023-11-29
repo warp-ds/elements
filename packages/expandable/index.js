@@ -5,13 +5,10 @@ import {
   box as ccBox,
   expandable as ccExpandable,
 } from '@warp-ds/css/component-classes'
+import '@warp-ds/icons/elements/chevron-down-16'
+import '@warp-ds/icons/elements/chevron-up-16'
 
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { i18n } from '@lingui/core'
-import { messages as enMessages } from './locales/en/messages.mjs'
-import { messages as nbMessages } from './locales/nb/messages.mjs'
-import { messages as fiMessages } from './locales/fi/messages.mjs'
-import { activateI18n } from '../i18n'
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -31,7 +28,6 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super()
-    activateI18n(enMessages, nbMessages, fiMessages)
 
     this.expanded = false
     this.animated = false
@@ -65,7 +61,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-    `,
+      `,
   ]
 
   firstUpdated() {
@@ -89,33 +85,17 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   get _chevronUpClasses() {
     return fclasses({
-      [ccExpandable.chevronTransform]: true,
-      [ccExpandable.chevronCollapse]: !this.expanded && this._showChevronUp,
+      [ccExpandable.elementsTransformChevronUpPart]: true,
+      [ccExpandable.elementsChevronUpCollapsePart]:
+        !this.expanded && this._showChevronUp,
     })
   }
 
   get _chevronDownClasses() {
     return fclasses({
-      [ccExpandable.chevronTransform]: true,
-      [ccExpandable.chevronExpand]: this.expanded && !this._showChevronUp,
-    })
-  }
-
-  chevronDownTitle() {
-    return i18n._({
-      id: 'icon.title.chevron-down',
-      message: 'Downward arrow',
-      comment:
-        'Default screenreader message for chevron down icon in the expandable component',
-    })
-  }
-
-  chevronUpTitle() {
-    return i18n._({
-      id: 'icon.title.chevron-up',
-      message: 'Upward arrow',
-      comment:
-        'Default screenreader message for chevron up icon in the expandable component',
+      [ccExpandable.elementsTransformChevronDownPart]: true,
+      [ccExpandable.elementsChevronDownExpandPart]:
+        this.expanded && !this._showChevronUp,
     })
   }
 
@@ -156,42 +136,12 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                       })}
                     >
                       ${this._showChevronUp
-                        ? html`<svg
-                            id="chevron-up"
-                            class=${this._chevronUpClasses}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="none"
-                            viewBox="0 0 16 16"
-                          >
-                            <title>${this.chevronUpTitle()}</title>
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="1.5"
-                              d="M2.5 11 8 5.5l5.5 5.5"
-                            ></path>
-                          </svg>`
-                        : html`<svg
-                            id="chevron-down"
-                            class=${this._chevronDownClasses}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="none"
-                            viewBox="0 0 16 16"
-                          >
-                            <title>${this.chevronDownTitle()}</title>
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="1.5"
-                              d="M2.5 5.5 8 11l5.5-5.5"
-                            ></path>
-                          </svg>`}
+                        ? html`<w-icon-chevron-up-16
+                            class="${this._chevronUpClasses}"
+                          ></w-icon-chevron-up-16>`
+                        : html`<w-icon-chevron-down-16
+                            class="${this._chevronDownClasses}"
+                          ></w-icon-chevron-down-16>`}
                     </div>`}
               </div>
             </button>
