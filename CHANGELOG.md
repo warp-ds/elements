@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/warp-ds/elements/compare/v1.2.0...v1.2.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* Add part to the expandable to be able to style an svg inside the shadow-DOM ([#107](https://github.com/warp-ds/elements/issues/107)) ([87faf60](https://github.com/warp-ds/elements/commit/87faf60be3ac5d5460b04add6f5b408844b31bd7))
+* eik publishing for elements ([#111](https://github.com/warp-ds/elements/issues/111)) ([0915221](https://github.com/warp-ds/elements/commit/09152215ec3ccf40643403c2d64edb6b9f76ea89))
+* **textfield:** allow styling input's left padding when prefix is wider than 40px ([#116](https://github.com/warp-ds/elements/issues/116)) ([ac890c7](https://github.com/warp-ds/elements/commit/ac890c79d877a851fe536436aa598ef5e18308ec))
+
 ## [1.2.1-next.3](https://github.com/warp-ds/elements/compare/v1.2.1-next.2...v1.2.1-next.3) (2023-11-28)
 
 
