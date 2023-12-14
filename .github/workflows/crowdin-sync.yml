@@ -7,8 +7,12 @@ on:
     paths:
       - "**.po"
       - "crowdin.yml"
+  workflow_dispatch:
+  pull_request_review_comment:
 
 jobs:
   synchronize-with-crowdin:
     uses: warp-ds/reusable-workflows/.github/workflows/crowdin-sync.yml@main
     secrets: inherit
+    with:
+      pull_request_reviewers: "felicia-haggqvist"
