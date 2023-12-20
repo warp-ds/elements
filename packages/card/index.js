@@ -44,7 +44,7 @@ class WarpCard extends WarpElement {
     return fclasses({
       [ccCard.card]: true,
       [ccCard.cardShadow]: !this.flat,
-      [ccCard.cardSelected]: this.selected,
+      [this.selected ? ccCard.cardSelected : ccCard.cardUnselected]: !this.flat,
       [ccCard.cardFlat]: this.flat,
       [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]:
         this.flat,
