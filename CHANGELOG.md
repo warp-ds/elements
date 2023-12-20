@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/warp-ds/elements/compare/v1.2.1...v1.2.2) (2023-12-20)
+
+
+### Bug Fixes
+
+* **card:** set default background on unselected non-flat card ([#120](https://github.com/warp-ds/elements/issues/120)) ([05b1193](https://github.com/warp-ds/elements/commit/05b11936da806068d11cce74a7e7666a6bdafcdb))
+
 ## [1.2.2-next.1](https://github.com/warp-ds/elements/compare/v1.2.1...v1.2.2-next.1) (2023-12-20)
 
 
