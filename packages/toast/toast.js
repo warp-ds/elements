@@ -105,19 +105,19 @@ export class WarpToast extends WarpElement {
   get _typeLabel() {
     if (this._warning) return i18n._({
       id: 'toast.aria.warning',
-      message: 'warning',
+      message: 'Warning',
       comment:
         'Default screenreader message for warning in toast component',
     });
     if (this._error) return i18n._({
       id: 'toast.aria.error',
-      message: 'error',
+      message: 'Error',
       comment:
         'Default screenreader message for error in toast component',
     });
     return i18n._({
       id: 'toast.aria.successful',
-      message: 'successful',
+      message: 'Successful',
       comment:
         'Default screenreader message for successful in toast component',
     });
