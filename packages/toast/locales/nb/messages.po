@@ -1,0 +1,26 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2024-01-08 14:36+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: nb\n"
+
+#. Default screenreader message for error in toast component
+#. js-lingui-explicit-id
+#: packages/toast/toast.js:112
+msgid "toast.aria.error"
+msgstr ""
+
+#. Default screenreader message for successful in toast component
+#. js-lingui-explicit-id
+#: packages/toast/toast.js:118
+msgid "toast.aria.successful"
+msgstr ""
+
+#. Default screenreader message for warning in toast component
+#. js-lingui-explicit-id
+#: packages/toast/toast.js:106
+msgid "toast.aria.warning"
+msgstr ""

@@ -8,6 +8,11 @@ import '@warp-ds/icons/elements/alert-warning-16'
 import '@warp-ds/icons/elements/alert-error-16'
 import '@warp-ds/icons/elements/alert-success-16'
 import '@warp-ds/icons/elements/close-16'
+import { i18n } from '@lingui/core'
+import { messages as enMessages } from './locales/en/messages.mjs'
+import { messages as nbMessages } from './locales/nb/messages.mjs'
+import { messages as fiMessages } from './locales/fi/messages.mjs'
+import { activateI18n } from '../i18n'
 
 const classes = (definition) => {
   const defn = {};
@@ -43,6 +48,8 @@ export class WarpToast extends WarpElement {
 
   constructor() {
     super();
+    activateI18n(enMessages, nbMessages, fiMessages);
+
     this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
     this.type = 'success';
     this.text = '';
@@ -96,9 +103,24 @@ export class WarpToast extends WarpElement {
   }
 
   get _typeLabel() {
-    if (this._warning) return 'Varsel';
-    if (this._error) return 'Feil';
-    return 'Vellykket'
+    if (this._warning) return i18n._({
+      id: 'toast.aria.warning',
+      message: 'warning',
+      comment:
+        'Default screenreader message for warning in toast component',
+    });
+    if (this._error) return i18n._({
+      id: 'toast.aria.error',
+      message: 'error',
+      comment:
+        'Default screenreader message for error in toast component',
+    });
+    return i18n._({
+      id: 'toast.aria.successful',
+      message: 'successful',
+      comment:
+        'Default screenreader message for successful in toast component',
+    });
   }
 
   get _iconMarkup() {
