@@ -11,16 +11,16 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/toast/toast.js:112
 msgid "toast.aria.error"
-msgstr ""
+msgstr "Varsel"
 
 #. Default screenreader message for successful in toast component
 #. js-lingui-explicit-id
 #: packages/toast/toast.js:118
 msgid "toast.aria.successful"
-msgstr ""
+msgstr "Vellykket"
 
 #. Default screenreader message for warning in toast component
 #. js-lingui-explicit-id
 #: packages/toast/toast.js:106
 msgid "toast.aria.warning"
-msgstr ""
+msgstr "Feil"
