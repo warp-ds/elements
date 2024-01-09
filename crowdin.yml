@@ -27,4 +27,9 @@ files:
       "dest": "elements/packages/attention/messages.po",
       "translation": "/packages/attention/locales/%two_letters_code%/messages.po",
     },
+     {
+      "source": "/packages/toast/locales/en/messages.po",
+      "dest": "elements/packages/toast/messages.po",
+      "translation": "/packages/toast/locales/%two_letters_code%/messages.po",
+    },
   ]
