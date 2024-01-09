@@ -1,3 +1,10 @@
+## [1.2.3-next.1](https://github.com/warp-ds/elements/compare/v1.2.2...v1.2.3-next.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* add translation for toast aria-label ([#123](https://github.com/warp-ds/elements/issues/123)) ([9458ed4](https://github.com/warp-ds/elements/commit/9458ed4ba67c362a5f9a8e4c5030ffc61079977f))
+
 ## [1.2.2](https://github.com/warp-ds/elements/compare/v1.2.1...v1.2.2) (2023-12-20)
 
 
