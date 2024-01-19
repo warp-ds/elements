@@ -105,7 +105,7 @@ publishing when making changes to the `main` or `next` branch.
 Please note that the version published will depend on your commit message structure.
 Make sure to review and follow the instructions in the [Committing](#committing) section before committing.
 
-This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
+This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements).
 Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
 
 A stable release from the `main` branch is basically done by just opening a pull request from `next` to `main` and then make sure to _merge_ commit the pull request.
