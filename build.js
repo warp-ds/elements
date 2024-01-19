@@ -1,12 +1,10 @@
 import esbuild from "esbuild";
 import pkg from "glob";
-import * as eik from "@eik/esbuild-plugin";
 const { glob } = pkg;
 
 const components = glob.sync("packages/**/index.js");
 const toastApiPath = "packages/toast/api.js";
 const indexPath = "index.js";
-const version = process.argv[2];
 
 const esbuildDefaults = {
   bundle: true,
@@ -66,15 +64,9 @@ async function buildIndex(outDir, extraBuildOptions = {}) {
   }
 }
 
-console.log("Building elements for: ", version);
+console.log("Building elements");
 
-if (version === "eik") {
-  await eik.load();
-  buildComponents("eik", { plugins: [eik.plugin()] });
-  buildToastApi("eik", { plugins: [eik.plugin()] });
-  buildIndex("eik", { plugins: [eik.plugin()] });
-} else {
-  buildComponents("dist");
-  buildToastApi("dist");
-  buildIndex("dist");
-}
+buildComponents("dist");
+buildToastApi("dist");
+buildIndex("dist");
+
