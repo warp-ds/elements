@@ -1,3 +1,10 @@
+## [1.2.3-next.2](https://github.com/warp-ds/elements/compare/v1.2.3-next.1...v1.2.3-next.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* Remove eik from Elements ([#124](https://github.com/warp-ds/elements/issues/124)) ([9253ed0](https://github.com/warp-ds/elements/commit/9253ed081d1fbe967db5830dc45b6d0df38f737f))
+
 ## [1.2.3-next.1](https://github.com/warp-ds/elements/compare/v1.2.2...v1.2.3-next.1) (2024-01-09)
 
 
