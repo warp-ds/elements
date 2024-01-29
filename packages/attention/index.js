@@ -8,6 +8,14 @@ import {
   rotation,
   useRecompute as recompute,
 } from '@warp-ds/core/attention'
+import {
+  computePosition,
+  flip,
+  offset,
+  shift,
+  arrow,
+  autoUpdate,
+} from '@floating-ui/dom'
 import { i18n } from '@lingui/core'
 import { messages as enMessages } from './locales/en/messages.mjs'
 import { messages as nbMessages } from './locales/nb/messages.mjs'
@@ -22,7 +30,16 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     show: { type: Boolean, reflect: true },
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
-    placement: { type: String },
+    placement: {
+      type: String,
+      reflect: true,
+      converter: (value, type) => {
+        if (value !== 'top-start' && value !== 'top' && value !== 'top-end' && value !== 'right-start' && value !== 'right' && value !== 'right-end' && value !== 'bottom-start' && value !== 'bottom' && value !== 'bottom-end' && value !== 'left-start' && value !== 'left' && value !== 'left-end') {
+          throw new Error('Invalid value for placement property');
+        }
+        return value;
+      }
+    },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
@@ -97,35 +114,88 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     return opposites[this.placement]
   }
 
-  updated() {
-    if (!this.callout) {
-      this._attentionEl.style.setProperty(
-        '--attention-visibility',
-        this.show ? '' : 'hidden'
-      )
+  get _activeVariantClasses() {
+    const variantProps = {
+      callout: this.callout,
+      popover: this.popover,
+      tooltip: this.tooltip,
+      highlight: this.highlight
     }
 
-    if (!this.tooltip) {
-      this._attentionEl.style.setProperty(
-        '--attention-display',
-        this.show ? 'flex' : 'none'
-      )
+    const activeVariant = Object.keys(variantProps).find(b => !!variantProps[b]) || '';
+
+    return {
+      wrapper: ccAttention[activeVariant],
+      arrow: ccAttention[`arrow${activeVariant.charAt(0).toUpperCase() + activeVariant.slice(1)}`]
+    }
+  };
+
+  updatePosition(referenceEl, floatingEl) {
+    if (!floatingEl) return
+    console.log("this._attentionEl: ", floatingEl);
+      computePosition(referenceEl, floatingEl, {
+            placement: this.placement,
+            middleware: [
+              offset(8),
+              flip(),
+              shift({ padding: 16 }),
+              !this.noArrow && this._arrowHtml && arrow({ element: this._arrowHtml })]
+          }).then(({ x, y, middlewareData, placement}) => {
+            this.placement = placement
+            console.log("this.placement: ", this.placemnet);
+            Object.assign(floatingEl?.style, {
+              left: `${x}px`,
+              top: `${y}px`,
+            })
+        
+            if (middlewareData.arrow) {
+              const { x, y } = middlewareData.arrow
+              Object.assign(this._arrowHtml.style || {}, {
+                // TODO: temporary fix, for some reason left-start and right-start positions the arrowEL slightly too far from the attentionEl
+                left: x ? placement.includes("-start") ? `${x - 12}px` : `${x}px` : '',
+                top: y ? placement.includes("-start") ? `${y - 12}px` : `${y}px` : '',
+              });
+            }
+          });    
+    }
+    
+    updated(changedProperties) {
+      if (!this.callout) {
+        this._attentionEl.style.setProperty(
+          '--attention-visibility',
+          this.show ? '' : 'hidden'
+        )
+      }
+  
+      if (!this.tooltip) {
+        this._attentionEl.style.setProperty(
+          '--attention-display',
+          this.show ? 'flex' : 'none'
+        )
+      }
+  
+      if (changedProperties.has('show')) {
+        if (this.show === true && this._targetEl && this._attentionEl) {
+          // console.log("this._targetEl: ", this._targetEl, "this._attentionEl: ", this._attentionEl);
+          const cleanup = autoUpdate(this._targetEl, this._attentionEl, this.updatePosition(this._targetEl, this._attentionEl));
+          return cleanup; 
+        }
+        return () => {};
+      }
+  
+      this.attentionState = {
+        isShowing: this.show,
+        isCallout: this.callout,
+        actualDirection: this._actualDirection,
+        directionName: this.placement,
+        arrowEl: this.renderRoot.querySelector('#arrow'),
+      }
+  
+  
+      // Recompute attention element position on property changes
+      recompute(this.attentionState, this.updatePosition(this._targetEl, this._attentionEl))
     }
 
-    this.attentionState = {
-      isShowing: this.show,
-      isCallout: this.callout,
-      actualDirection: this._actualDirection,
-      directionName: this.placement,
-      arrowEl: this.renderRoot.querySelector('#arrow'),
-      attentionEl: this._attentionEl,
-      targetEl: this._targetEl,
-      noArrow: this.noArrow,
-    }
-
-    // Recompute attention element position on property changes
-    recompute(this.attentionState)
-  }
 
   pointingAtDirection() {
     switch (opposites[this._actualDirection]) {
@@ -209,24 +279,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this._targetEl.setAttribute('aria-details', attentionMessageId)
     }
   }
-
-
-  get _activeVariantClasses() {
-    const variantProps = {
-      callout: this.callout,
-      popover: this.popover,
-      tooltip: this.tooltip,
-      highlight: this.highlight
-    }
-
-    const activeVariant = Object.keys(variantProps).find(b => !!variantProps[b]) || '';
-
-    return {
-      wrapper: ccAttention[activeVariant],
-      arrow: ccAttention[`arrow${activeVariant.charAt(0).toUpperCase() + activeVariant.slice(1)}`]
-    }
-  };
-
   get _ariaClose() {
     return i18n._({
       id: 'attention.aria.close',
