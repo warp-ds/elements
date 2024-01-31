@@ -31,14 +31,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
     placement: {
-      type: String,
+      type: "top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" | "left-start" | "left" | "left-end",
       reflect: true,
-      converter: (value, type) => {
-        if (value !== 'top-start' && value !== 'top' && value !== 'top-end' && value !== 'right-start' && value !== 'right' && value !== 'right-end' && value !== 'bottom-start' && value !== 'bottom' && value !== 'bottom-end' && value !== 'left-start' && value !== 'left' && value !== 'left-end') {
-          throw new Error('Invalid value for placement property');
-        }
-        return value;
-      }
     },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
@@ -52,6 +46,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
+    _targetElState: { type: HTMLElement, state: true},
+    _attentionElState: { type: HTMLElement, state: true},
   }
 
   static styles = [WarpElement.styles,
@@ -79,12 +75,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     activateI18n(enMessages, nbMessages, fiMessages)
 
     this.show = false
+    this.placement = "bottom"
     this.tooltip = false
     this.callout = false
     this.popover = false
-    this.highlight = false;
-    this.canClose = false;
+    this.highlight = false
+    this.canClose = false
     this.noArrow = false
+    this._targetElState = this.renderRoot
+    this._attentionElState = this.renderRoot
   }
 
   connectedCallback() {
@@ -130,27 +129,35 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
   };
 
-  updatePosition(referenceEl, floatingEl) {
-    if (!floatingEl) return
-    console.log("this._attentionEl: ", floatingEl);
-      computePosition(referenceEl, floatingEl, {
-            placement: this.placement,
-            middleware: [
-              offset(8),
-              flip(),
-              shift({ padding: 16 }),
-              !this.noArrow && this._arrowHtml && arrow({ element: this._arrowHtml })]
-          }).then(({ x, y, middlewareData, placement}) => {
-            this.placement = placement
-            console.log("this.placement: ", this.placemnet);
-            Object.assign(floatingEl?.style, {
-              left: `${x}px`,
-              top: `${y}px`,
-            })
-        
+  get _arrowEl() {
+    return this.renderRoot.querySelector('#arrow')
+  }
+
+  set _arrowEl(v) {
+    this._arrowEl = v
+  }
+    
+  updatePosition() {
+    if (!this._attentionElState) return
+    console.log("this._attentionEl: ", this._attentionElState);
+      computePosition(this._targetElState, this._attentionElState, {
+        placement: this.placement,
+        middleware: [
+          offset(8),
+          flip(),
+          shift({ padding: 16 }),
+          !this.noArrow && this._arrowEl && arrow({ element: this._arrowEl})]
+        }).then(({ x, y, middlewareData, placement}) => {
+          this._actualDirection = placement
+          console.log("this._actualDirection: ", this.placement);
+          Object.assign(this._attentionElState?.style, {
+            left: `${x}px`,
+            top: `${y}px`,
+          })
+
             if (middlewareData.arrow) {
               const { x, y } = middlewareData.arrow
-              Object.assign(this._arrowHtml.style || {}, {
+              Object.assign(this._arrowEl.style || {}, {
                 // TODO: temporary fix, for some reason left-start and right-start positions the arrowEL slightly too far from the attentionEl
                 left: x ? placement.includes("-start") ? `${x - 12}px` : `${x}px` : '',
                 top: y ? placement.includes("-start") ? `${y - 12}px` : `${y}px` : '',
@@ -159,7 +166,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           });    
     }
     
-    updated(changedProperties) {
+  updated(changedProperties) {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -174,28 +181,44 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         )
       }
   
-      if (changedProperties.has('show')) {
-        if (this.show === true && this._targetEl && this._attentionEl) {
-          // console.log("this._targetEl: ", this._targetEl, "this._attentionEl: ", this._attentionEl);
-          const cleanup = autoUpdate(this._targetEl, this._attentionEl, this.updatePosition(this._targetEl, this._attentionEl));
-          return cleanup; 
-        }
-        return () => {};
-      }
-  
+      
       this.attentionState = {
         isShowing: this.show,
         isCallout: this.callout,
         actualDirection: this._actualDirection,
         directionName: this.placement,
-        arrowEl: this.renderRoot.querySelector('#arrow'),
+        arrowEl: this._arrowEl,
       }
-  
-  
       // Recompute attention element position on property changes
-      recompute(this.attentionState, this.updatePosition(this._targetEl, this._attentionEl))
-    }
+      if(changedProperties.has('placement')) {
+        console.log("när kommer vi hit?");
+        recompute(this.attentionState, this.updatePosition())
+      }
+      
+      // if (changedProperties.has('show')) {
+      //   console.log("kommer vi till changedProperties?");
+      //   if (this.show === true && this._targetElState && this._attentionElState) {
+      //     const cleanup =  autoUpdate(this._targetElState, this._attentionElState, this.updatePosition());
+      //     console.log("cleanup: ", cleanup);
+      //     return cleanup; 
+      //   }
+      //   return () => {};
+      // }
 
+      let cleanup;
+  
+      if (changedProperties.has('show')) {
+        console.log("kommer vi hit dååå???????", !cleanup && this._targetElState && this.show);
+        if (!cleanup && this._targetElState && this.show) {
+          console.log("this._targetEl: ", this._targetElState, "this._attentionElState: ", this._attentionElState);
+          cleanup = autoUpdate(this._targetElState, this._attentionElState, this.updatePosition());
+        } else if (cleanup) {
+          console.log("cleanup: ", cleanup);
+          cleanup();
+          cleanup = null; 
+        }
+      }
+    }
 
   pointingAtDirection() {
     switch (opposites[this._actualDirection]) {
@@ -296,15 +319,19 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this._attentionEl.style.position = 'relative'
     }
   }
-
+  
   get _attentionEl() {
-    return this.renderRoot.querySelector('#attention')
+    this._attentionElState = this.renderRoot
+    .querySelector('#attention')
+    return this._attentionElState
   }
 
+
   get _targetEl() {
-    return this.renderRoot
-      .querySelector("slot[name='target']")
-      .assignedNodes()[0]
+    this._targetElState = this.renderRoot
+   .querySelector("slot[name='target']")
+   .assignedNodes()[0]
+   return this._targetElState
   }
 
   get _messageEl() {
