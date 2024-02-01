@@ -46,8 +46,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
-    _targetElState: { type: HTMLElement, state: true},
-    _attentionElState: { type: HTMLElement, state: true},
+    _cleanup: { state: true },
   }
 
   static styles = [WarpElement.styles,
@@ -82,8 +81,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.highlight = false
     this.canClose = false
     this.noArrow = false
-    this._targetElState = this.renderRoot
-    this._attentionElState = this.renderRoot
+    this._cleanup = null
   }
 
   connectedCallback() {
@@ -107,10 +105,49 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
   set _actualDirection(v) {
     this.placement = v
+  } 
+
+  get _arrowEl() {
+    return this.renderRoot.querySelector('#arrow')
   }
 
   get _arrowDirection() {
     return opposites[this.placement]
+  }
+
+  get _arrowDirectionClass() {
+    let direction;
+    if (/-/.test(this._arrowDirection)) {
+      direction = this._arrowDirection
+      .split('-')
+        .map((d) => d.charAt(0).toUpperCase() + d.slice(1))
+        .join('')
+    } else {
+      direction = this._arrowDirection.charAt(0).toUpperCase() + this._arrowDirection.slice(1)
+    }
+    return `arrowDirection${direction}`
+  }
+
+  get _arrowClasses() {
+    return classes({
+      [ccAttention.arrowBase]: true,
+      [ccAttention[this._arrowDirectionClass]]: true,
+      [this._activeVariantClasses.arrow]: true
+    });
+  }
+
+  get _arrowHtml() {
+    return this.noArrow
+      ? ''
+      : html`<div
+          id="arrow"
+          role="img"
+          class="${this._arrowClasses}"
+          style="transform:rotate(${rotation[this._arrowDirection]}deg);
+          margin-${
+            // border alignment is off by a fraction of a pixel, this fixes it
+            this._arrowDirectionClass}:-0.5px;"
+        />`
   }
 
   get _activeVariantClasses() {
@@ -129,28 +166,65 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
   };
 
-  get _arrowEl() {
-    return this.renderRoot.querySelector('#arrow')
+  get _attentionEl() {
+    return this.renderRoot
+    .querySelector('#attention')
   }
 
-  set _arrowEl(v) {
-    this._arrowEl = v
+  get _targetEl() {
+    return this.renderRoot
+   .querySelector("slot[name='target']")
+   .assignedNodes()[0]
   }
-    
-  updatePosition() {
-    if (!this._attentionElState) return
-    console.log("this._attentionEl: ", this._attentionElState);
-      computePosition(this._targetElState, this._attentionElState, {
+
+  get _messageEl() {
+    return this.renderRoot
+      .querySelector("slot[name='message']")
+      .assignedNodes()[0]
+  }
+
+  get _wrapperClasses() {
+    return classes({
+      [ccAttention.base]: true,
+      [this._activeVariantClasses.wrapper]: true
+    });
+  }
+
+  get _ariaClose() {
+    return i18n._({
+      id: 'attention.aria.close',
+      message: 'Close',
+      comment:
+        'Aria label for the close button in attention',
+    })
+  }
+  
+  get _closeBtnHtml() {
+    return html`
+      <button 
+        aria-label="${this._ariaClose}"
+        @click="${this.close}"
+        @keydown=${this.keypressed}
+        class="${ccAttention.closeBtn}"
+      >
+        <w-icon-close-16 />
+      </button>
+    `
+  }
+
+  updatePosition = () => {
+    if (!this._attentionEl) return
+      computePosition(this._targetEl, this._attentionEl, {
         placement: this.placement,
         middleware: [
           offset(8),
           flip(),
           shift({ padding: 16 }),
-          !this.noArrow && this._arrowEl && arrow({ element: this._arrowEl})]
+          !this.noArrow && this._arrowEl && arrow({ element: this._arrowEl })]
         }).then(({ x, y, middlewareData, placement}) => {
           this._actualDirection = placement
-          console.log("this._actualDirection: ", this.placement);
-          Object.assign(this._attentionElState?.style, {
+          console.log("this._actualDirection: ", this._actualDirection);
+          Object.assign(this._attentionEl?.style, {
             left: `${x}px`,
             top: `${y}px`,
           })
@@ -165,7 +239,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
             }
           });    
     }
-    
+
   updated(changedProperties) {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
@@ -190,35 +264,23 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         arrowEl: this._arrowEl,
       }
       // Recompute attention element position on property changes
-      if(changedProperties.has('placement')) {
-        console.log("när kommer vi hit?");
-        recompute(this.attentionState, this.updatePosition())
-      }
-      
-      // if (changedProperties.has('show')) {
-      //   console.log("kommer vi till changedProperties?");
-      //   if (this.show === true && this._targetElState && this._attentionElState) {
-      //     const cleanup =  autoUpdate(this._targetElState, this._attentionElState, this.updatePosition());
-      //     console.log("cleanup: ", cleanup);
-      //     return cleanup; 
-      //   }
-      //   return () => {};
-      // }
-
-      let cleanup;
+        recompute(this.attentionState, this.updatePosition)
   
       if (changedProperties.has('show')) {
-        console.log("kommer vi hit dååå???????", !cleanup && this._targetElState && this.show);
-        if (!cleanup && this._targetElState && this.show) {
-          console.log("this._targetEl: ", this._targetElState, "this._attentionElState: ", this._attentionElState);
-          cleanup = autoUpdate(this._targetElState, this._attentionElState, this.updatePosition());
-        } else if (cleanup) {
-          console.log("cleanup: ", cleanup);
-          cleanup();
-          cleanup = null; 
+        console.log("in the if-statement when show-prop has changed", !this._cleanup && this._targetEl && this.show);
+        if (!this._cleanup && this._targetEl && this.show && this._attentionEl) {
+          console.log("start autoUpdate");
+          this._cleanup = autoUpdate(this._targetEl, this._attentionEl, this.updatePosition);
+        } else if (this._cleanup) {
+          console.log("cleanup: ", this._cleanup);
+          this._cleanup();
+          this._cleanup = null;
+          console.log("this.show: ", this.show);
         }
       }
     }
+
+
 
   pointingAtDirection() {
     switch (opposites[this._actualDirection]) {
@@ -302,14 +364,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this._targetEl.setAttribute('aria-details', attentionMessageId)
     }
   }
-  get _ariaClose() {
-    return i18n._({
-      id: 'attention.aria.close',
-      message: 'Close',
-      comment:
-        'Aria label for the close button in attention',
-    })
-  }
+  
 
   firstUpdated() {
     this.setAriaLabels()
@@ -320,62 +375,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
   }
   
-  get _attentionEl() {
-    this._attentionElState = this.renderRoot
-    .querySelector('#attention')
-    return this._attentionElState
-  }
-
-
-  get _targetEl() {
-    this._targetElState = this.renderRoot
-   .querySelector("slot[name='target']")
-   .assignedNodes()[0]
-   return this._targetElState
-  }
-
-  get _messageEl() {
-    return this.renderRoot
-      .querySelector("slot[name='message']")
-      .assignedNodes()[0]
-  }
-
-  get _wrapperClasses() {
-    return classes({
-      [ccAttention.base]: true,
-      [this._activeVariantClasses.wrapper]: true
-    });
-  }
-
-  get _arrowClasses() {
-    return classes({
-      [ccAttention.arrowBase]: true,
-      [ccAttention[
-        `arrowDirection${
-          this._arrowDirection.charAt(0).toUpperCase() +
-          this._arrowDirection.slice(1)
-        }`
-      ]]: true,
-      [this._activeVariantClasses.arrow]: true
-    });
-  }
-
-  get _arrowHtml() {
-    return this.noArrow
-      ? ''
-      : html`<div
-          id="arrow"
-          role="img"
-          class="${this._arrowClasses}"
-          style="transform:rotate(${rotation[this._arrowDirection]}deg);
-          margin-${
-            // border alignment is off by a fraction of a pixel, this fixes it
-            this._arrowDirection.charAt(0).toLowerCase() +
-            this._arrowDirection.slice(1)
-          }:-0.5px;"
-        />`
-  }
-
   close() {
     const event = new CustomEvent('close', {
       bubbles: true,
@@ -392,18 +391,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
   }
 
-  get _closeBtnHtml() {
-    return html`
-      <button 
-        aria-label="${this._ariaClose}"
-        @click="${this.close}"
-        @keydown=${this.keypressed}
-        class="${ccAttention.closeBtn}"
-      >
-        <w-icon-close-16 />
-      </button>
-    `
-  }
+  
 
   render() {
     return html`

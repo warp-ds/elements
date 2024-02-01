@@ -27,7 +27,7 @@
             <tr>
               <td>placement *</td>
               <td>
-                <div>"top" | "right" | "bottom" | "left"</div>
+                <div>"top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" | "left-start" | "left" | "left-end"</div>
                 <div class="annotation">
                   Placement according to the target element. Arrow would be on the opposite side of
                   this position.
@@ -86,28 +86,28 @@
 
         <h3 class="mt-24 mb-16">Popover</h3>
         <syntax-highlight>
-          <w-attention placement="bottom" popover>
+          <w-attention placement="right-start" popover>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               onclick="toggleShow()"
               slot="target"
             >
-              Click to toggle a popover on bottom
+              Click to toggle a popover on right-start
             </button>
-            <span slot="message">I'm a popover on bottom</span>
+            <span slot="message">I'm a popover on right-start</span>
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom" popover>
+          <w-attention placement="right-start" popover>
             <button
               id="popoverTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
             >
-              Click to toggle a popover on bottom
+              Click to toggle a popover on right-start
             </button>
-            <span slot="message">I'm a popover on bottom</span>
+            <span slot="message">I'm a popover on right-start</span>
           </w-attention>
         </div>
 
