@@ -1,0 +1,102 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Pill</h1>
+        <p>Buttons are used to perform actions, with different visuals for different needs.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>type</td>
+              <td>
+                <div>"button" | "submit" | "reset"</div>
+                <div>Button type, only applied when href is not set.</div>
+              </td>
+              <td>"button"</td>
+            </tr>
+            <tr>
+              <td>variant</td>
+              <td>"primary" | "secondary" | "negative" | "utility" | "link" | "pill"</td>
+              <td>"secondary"</td>
+            </tr>
+            <tr>
+              <td>quiet</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>small</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>loading</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>href</td>
+              <td>
+                <div>string</div>
+                <div>Set the href for the location where clicking the button will take you to.</div>
+              </td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>target</td>
+              <td>
+                <div>string</div>
+                <div>
+                  Anchor target, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a.
+                </div>
+              </td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>rel</td>
+              <td>
+                <div>string</div>
+                <div>The relationship of the linked URL.</div>
+              </td>
+              <td>"noopener"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Pill
+            <syntax-highlight>
+                <w-pill>Standard pill</w-pill>
+                <w-pill suggestion>Suggestion pill</w-pill>
+                <w-pill canClose>Closable pill</w-pill>
+                <w-pill suggestion canClose>SC pill</w-pill>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <w-pill>Standard pill</w-pill>
+            <w-pill suggestion>Suggestion pill</w-pill>
+            <w-pill canClose>Closable pill</w-pill>
+            <w-pill suggestion canClose>SC pill</w-pill>
+          </div>
+        </div>
+
+        
+      </main>
+    </div>
+      <%- include('footer.html'); -%>
+    <%- include('buttonVariantsTable.html'); -%>
+  </body>
+</html>

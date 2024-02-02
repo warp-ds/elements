@@ -86,6 +86,11 @@ export default ({ mode }) => {
               injectOptions,
             },
             {
+              filename: 'pill.html',
+              template: 'pages/components/pill.html',
+              injectOptions,
+            },
+            {
               filename: 'alert.html',
               template: 'pages/components/alert.html',
               injectOptions,
