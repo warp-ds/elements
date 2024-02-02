@@ -44,7 +44,12 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       "left-start" |
       "left" |
       "left-end",
-      reflect: true,
+    },
+    fallbackDirection: {
+      type: 
+      "none" |
+      "start" |
+      "end",
     },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
@@ -87,6 +92,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
     this.show = false
     this.placement = "bottom"
+    this.fallbackDirection = "none"
     this.tooltip = false
     this.callout = false
     this.popover = false
@@ -230,7 +236,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         placement: this.placement,
         middleware: [
           offset(8),
-          flip(),
+          flip({ fallbackAxisSideDirection: this.fallbackDirection, fallbackStrategy: 'initialPlacement' }),
           shift({ padding: 16 }),
           !this.noArrow && this._arrowEl && arrow({ element: this._arrowEl })]
         }).then(({ x, y, middlewareData, placement}) => {
@@ -266,7 +272,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           this.show ? 'flex' : 'none'
         )
       }
-  
       
       this.attentionState = {
         isShowing: this.show,
@@ -276,7 +281,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         arrowEl: this._arrowEl,
       }
       // Recompute attention element position on property changes
+      if (changedProperties.has('placement')) {
+        console.log("do we reach recompute?");
         recompute(this.attentionState, this.updatePosition)
+      }
   
       if (changedProperties.has('show')) {
         console.log("in the if-statement when show-prop has changed", !this._cleanup && this._targetEl && this.show);
@@ -291,8 +299,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         }
       }
     }
-
-
 
   pointingAtDirection() {
     switch (opposites[this._actualDirection]) {
