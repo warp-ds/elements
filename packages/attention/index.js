@@ -23,6 +23,11 @@ import { messages as fiMessages } from './locales/fi/messages.mjs'
 import { activateI18n } from '../i18n'
 import '@warp-ds/icons/elements/close-16'
 
+const fallbackDirectionTypes = [
+  "none",
+  "start",
+  "end"
+]
 
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -109,6 +114,13 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       throw new Error(
         `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
           Object.keys(opposites)
+        )}`
+      )
+    }
+    if (!fallbackDirectionTypes.includes(this.fallbackDirection)) {
+      throw new Error(
+        `Invalid "fallbackDirection" attribute. Set its value to one of the following:\n${JSON.stringify(
+          fallbackDirectionTypes
         )}`
       )
     }
