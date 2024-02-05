@@ -36,7 +36,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
     placement: { type: String, reflect: true },
-    fallbackDirection: { type: String, reflect: true },
+    fallbackDirection: { type: String },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
@@ -50,6 +50,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
     _cleanup: { state: true },
+    _actualDirection: { state: true, type: String }
   }
 
   static styles = [WarpElement.styles,
@@ -86,6 +87,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.canClose = false
     this.noArrow = false
     this._cleanup = null
+    this._actualDirection = this.placement
   }
 
   connectedCallback() {
@@ -109,21 +111,16 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
   }
-
-  get _actualDirection() {
+  get _directionName() {
     return this.placement
   }
-
-  set _actualDirection(v) {
-    this.placement = v
-  } 
 
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow')
   }
 
   get _arrowDirection() {
-    return opposites[this.placement]
+    return opposites[this._actualDirection]
   }
 
   get _arrowDirectionClass() {
@@ -224,6 +221,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   updatePosition = () => {
+    console.log("this.placement: ", this.placement);
+
     if (!this._attentionEl) return
       computePosition(this._targetEl, this._attentionEl, {
         placement: this.placement,
@@ -242,6 +241,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
             if (middlewareData.arrow) {
               const { x, y } = middlewareData.arrow
+              console.log("placement: ", placement);
               Object.assign(this._arrowEl.style || {}, {
                 // TODO: temporary fix, for some reason left-start and right-start positions the arrowEL slightly too far from the attentionEl
                 left: x ? placement.includes("-start") ? `${x - 12}px` : `${x}px` : '',
@@ -270,7 +270,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         isShowing: this.show,
         isCallout: this.callout,
         actualDirection: this._actualDirection,
-        directionName: this.placement,
+        directionName: this._directionName,
         arrowEl: this._arrowEl,
       }
       // Recompute attention element position on property changes
