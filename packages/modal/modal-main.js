@@ -67,7 +67,6 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   handleListeners(verb = 'addEventListener') {
     // HACK: escape normally fires 'cancel' but 'cancel' can only be intercepted once (browser bug/quirk)
     document[verb]('keydown', this.interceptEscape)
-    // TODO: check mobile
     // Using 'mousedown' instead of 'click' because mouse-up events on the backdrop also trigger 'click'
     if (!this[NO_BACKDROP_CLICKS]) this.dialogEl.value[verb]('mousedown', this.closeOnBackdropClick)
     // HACK: 'close' fires once the dialog is closed, thus it's cannot animate
