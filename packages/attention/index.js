@@ -35,27 +35,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     show: { type: Boolean, reflect: true },
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
-    placement: {
-      type: 
-      "top-start" |
-      "top" |
-      "top-end" |
-      "right-start" |
-      "right" |
-      "right-end" |
-      "bottom-start" |
-      "bottom" |
-      "bottom-end" |
-      "left-start" |
-      "left" |
-      "left-end",
-    },
-    fallbackDirection: {
-      type: 
-      "none" |
-      "start" |
-      "end",
-    },
+    placement: { type: String, reflect: true },
+    fallbackDirection: { type: String, reflect: true },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
