@@ -13,7 +13,6 @@ class WarpPill extends WarpElement {
   static styles = [WarpElement.styles];
 
   static properties = {
-    label: { type: String },
     canClose: { type: Boolean },
     suggestion: { type: Boolean },
     openSRLabel: { type: String },
@@ -30,15 +29,13 @@ class WarpPill extends WarpElement {
         id: "pill.aria.openFilter",
         message: "Open filter",
         comment: "Fallback screenreader message for open filter",
-        values: { label: this.label },
       }
     );
 
     this.removeFilterSrText = i18n._({
         id: "pill.aria.removeFilter",
-        message: "Remove filter {label}",
+        message: "Remove filter",
         comment: "Fallback screenreader message for removal of the filter",
-        values: { label: this.label },
       }
     );
   }

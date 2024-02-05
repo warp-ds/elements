@@ -6,7 +6,7 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Pill</h1>
-        <p>Buttons are used to perform actions, with different visuals for different needs.</p>
+        <p>Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.</p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
@@ -19,58 +19,26 @@
           </thead>
           <tbody class="align-top">
             <tr>
-              <td>type</td>
-              <td>
-                <div>"button" | "submit" | "reset"</div>
-                <div>Button type, only applied when href is not set.</div>
-              </td>
-              <td>"button"</td>
+              <td>canClose</td>
+              <td>boolean</td>
+              <td>"false"</td>
             </tr>
             <tr>
-              <td>variant</td>
-              <td>"primary" | "secondary" | "negative" | "utility" | "link" | "pill"</td>
-              <td>"secondary"</td>
-            </tr>
-            <tr>
-              <td>quiet</td>
+              <td>suggestion</td>
               <td>boolean</td>
               <td>false</td>
             </tr>
             <tr>
-              <td>small</td>
-              <td>boolean</td>
-              <td>false</td>
+              <td>openSRLabel</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the pill.</div></td>
+              <td>"Open filter"</td>
             </tr>
             <tr>
-              <td>loading</td>
-              <td>boolean</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>href</td>
-              <td>
-                <div>string</div>
-                <div>Set the href for the location where clicking the button will take you to.</div>
-              </td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>target</td>
-              <td>
-                <div>string</div>
-                <div>
-                  Anchor target, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a.
-                </div>
-              </td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>rel</td>
-              <td>
-                <div>string</div>
-                <div>The relationship of the linked URL.</div>
-              </td>
-              <td>"noopener"</td>
+              <td>closeSRLabel</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the close button.</div></td>
+              <td>"Remove filter {label}"</td>
             </tr>
           </tbody>
         </table>
