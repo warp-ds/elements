@@ -7,6 +7,8 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 import glob from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
+// TODO - kill once component classes are ported
+import { modalClasses } from './packages/modal/component-classes.js'
 
 export default ({ mode }) => {
   let input = {};
@@ -74,7 +76,7 @@ export default ({ mode }) => {
       mode === 'development' && uno({
         mode: 'shadow-dom',
         presets: [presetWarp()],
-        safelist: classes,
+        safelist: [...classes, ...modalClasses],
       }),
       mode !== 'lib' &&
         createHtmlPlugin({
@@ -123,6 +125,11 @@ export default ({ mode }) => {
             {
               filename: 'card.html',
               template: 'pages/components/card.html',
+              injectOptions,
+            },
+            {
+              filename: 'modal.html',
+              template: 'pages/components/modal.html',
               injectOptions,
             },
             {
