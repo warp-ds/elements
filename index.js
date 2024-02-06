@@ -8,6 +8,7 @@ export * from './packages/broadcast';
 export * from './packages/button';
 export * from './packages/card';
 export * from './packages/expandable';
+export * from './packages/modal';
 export * from './packages/select';
 export * from './packages/textfield';
 export * from './packages/toast/api';

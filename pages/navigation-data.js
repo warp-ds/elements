@@ -80,6 +80,10 @@ export default {
           title: 'Attention',
           href: '/pages/components/attention.html',
         },
+        {
+          title: 'Modal',
+          href: '/pages/components/modal.html',
+        },
       ],
     },
   ],
