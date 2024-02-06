@@ -261,7 +261,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-b9a562e1.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-930f164b.js"></script>
   <link rel="stylesheet" href="/elements/assets/sidebar-element-b956b825.css">
 </head>
   <body>
@@ -290,6 +290,11 @@
             </tr>
           </thead>
           <tbody class="align-top">
+            <tr>
+              <td>label</td>
+              <td>string</td>
+              <td>required</td>
+            </tr>
             <tr>
               <td>can-close</td>
               <td>boolean</td>
@@ -339,17 +344,17 @@
           <div class="col-span-2">
             Pill
             <syntax-highlight>
-                <w-pill>Standard pill</w-pill>
-                <w-pill suggestion>Suggestion pill</w-pill>
-                <w-pill can-close>Closable pill</w-pill>
-                <w-pill suggestion can-close>SC pill</w-pill>
+              <w-pill label="Standard pill"></w-pill>
+              <w-pill suggestion label="Suggestion pill"></w-pill>
+              <w-pill can-close label="Closable pill"></w-pill>
+              <w-pill suggestion can-close label="SC pill"></w-pill>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
-                <w-pill>Standard pill</w-pill>
-                <w-pill suggestion>Suggestion pill</w-pill>
-                <w-pill can-close>Closable pill</w-pill>
-                <w-pill suggestion can-close>SC pill</w-pill>
+                <w-pill label="Standard pill"></w-pill>
+                <w-pill suggestion label="Suggestion pill"></w-pill>
+                <w-pill can-close label="Closable pill"></w-pill>
+                <w-pill suggestion can-close label="SC pill"></w-pill>
           </div>
         </div>
       </main>
