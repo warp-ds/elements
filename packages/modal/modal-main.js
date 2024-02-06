@@ -138,7 +138,6 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
         to { background: transparent; }
       }
     `,
-    WarpElement.styles,
-    css`@unocss-placeholder`
+    WarpElement.styles
   ]
 }

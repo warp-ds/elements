@@ -1,6 +1,6 @@
 import { CanCloseMixin } from './util.js'
 import WarpElement from '@warp-ds/elements-core'
-import { css, html } from 'lit'
+import { html } from 'lit'
 import { modalV2 as cc } from './component-classes.js'
 
 export class ModalTitleBar extends CanCloseMixin(WarpElement) {
@@ -21,6 +21,5 @@ export class ModalTitleBar extends CanCloseMixin(WarpElement) {
   }
   static styles = [
     WarpElement.styles,
-    css`@unocss-placeholder`
   ]
 }

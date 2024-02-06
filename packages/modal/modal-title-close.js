@@ -19,7 +19,6 @@ export class ModalTitleClose extends CanCloseMixin(WarpElement) {
   }
   static styles = [
     WarpElement.styles,
-    css`@unocss-placeholder`,
     // TODO: kill
     css`
       .new-pill {
