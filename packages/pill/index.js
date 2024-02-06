@@ -26,18 +26,16 @@ class WarpPill extends WarpElement {
     this.suggestion = false;
 
     this.openFilterSrText = i18n._({
-        id: "pill.aria.openFilter",
-        message: "Open filter",
-        comment: "Fallback screenreader message for open filter",
-      }
-    );
+      id: "pill.aria.openFilter",
+      message: "Open filter",
+      comment: "Fallback screenreader message for open filter",
+    });
 
     this.removeFilterSrText = i18n._({
-        id: "pill.aria.removeFilter",
-        message: "Remove filter",
-        comment: "Fallback screenreader message for removal of the filter",
-      }
-    );
+      id: "pill.aria.removeFilter",
+      message: "Remove filter",
+      comment: "Fallback screenreader message for removal of the filter",
+    });
   }
 
   get _labelClasses() {
@@ -57,10 +55,22 @@ class WarpPill extends WarpElement {
     });
   }
 
+  _onClick() {
+    this.dispatchEvent(new CustomEvent("w-pill-click", { bubbles: true, composed: true }));
+  }
+
+  _onClose() {
+    this.dispatchEvent(new CustomEvent("w-pill-close", { bubbles: true, composed: true }));
+  }
+
   render() {
     return html`
       <div class="${ccPill.pill}">
-        <button type="button" class="${this._labelClasses}">
+        <button
+          type="button"
+          class="${this._labelClasses}"
+          @click="${this._onClick}"
+        >
           <span class="${ccPill.a11y}"
             >${this.openSRLabel
               ? this.openSRLabel
@@ -69,7 +79,11 @@ class WarpPill extends WarpElement {
           <span><slot></slot></span>
         </button>
         ${this.canClose
-          ? html`<button type="button" class="${this._closeClasses}">
+          ? html`<button
+              type="button"
+              class="${this._closeClasses}"
+              @click="${this._onClose}"
+            >
               <span class="${ccPill.a11y}"
                 >${this.closeSRLabel
                   ? this.closeSRLabel

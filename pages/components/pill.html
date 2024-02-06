@@ -2,6 +2,14 @@
   <%- include('head.html'); -%>
   <body>
     <script type="module" src="../sidebar-element.js"></script>
+    <script>
+        document.querySelector('html').addEventListener('w-pill-click', e => {
+            console.log('Click clicked');
+        });
+        document.querySelector('html').addEventListener('w-pill-close', e => {
+            console.log('Close clicked');
+        });
+    </script>
     <div class="flex">
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
@@ -43,6 +51,26 @@
           </tbody>
         </table>
 
+        <h2 class="mt-24 mb-16">Events</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>Name</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>w-pill-click</td>
+              <td>Event to be called when the pill is clicked.</td>
+            </tr>
+            <tr>
+              <td>w-pill-close</td>
+              <td>Event to be called when the close button is clicked.</td>
+            </tr>
+          </tbody>
+        </table>
+
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
             Pill
@@ -60,8 +88,6 @@
             <w-pill suggestion canClose>SC pill</w-pill>
           </div>
         </div>
-
-        
       </main>
     </div>
       <%- include('footer.html'); -%>
