@@ -14,6 +14,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];
 
   static properties = {
+    label: { type: String },
     canClose: { type: Boolean },
     suggestion: { type: Boolean },
     openSRLabel: { type: String },
@@ -34,8 +35,9 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
 
     this.removeFilterSrText = i18n._({
       id: "pill.aria.removeFilter",
-      message: "Remove filter",
+      message: "Remove filter {label}",
       comment: "Fallback screenreader message for removal of the filter",
+      values: { label: this.label }
     });
   }
 
@@ -77,7 +79,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
               ? this.openSRLabel
               : this.openFilterSrText}</span
           >
-          <span><slot></slot></span>
+          <span>${this.label}</span>
         </button>
         ${this.canClose
           ? html`<button
