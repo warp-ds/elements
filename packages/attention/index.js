@@ -6,16 +6,9 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
-  useRecompute as recompute,
+  autoUpdatePosition,
+  computeCalloutArrow,
 } from '@warp-ds/core/attention'
-import {
-  computePosition,
-  flip,
-  offset,
-  shift,
-  arrow,
-  autoUpdate,
-} from '@floating-ui/dom'
 import { i18n } from '@lingui/core'
 import { messages as enMessages } from './locales/en/messages.mjs'
 import { messages as nbMessages } from './locales/nb/messages.mjs'
@@ -35,8 +28,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     show: { type: Boolean, reflect: true },
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
-    placement: { type: String, reflect: true },
-    fallbackDirection: { type: String },
+    placement: { type: String, value: 'bottom' },
+    fallbackDirection: { type: String, value: 'none' },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
@@ -50,7 +43,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
     _cleanup: { state: true },
-    _actualDirection: { state: true, type: String }
   }
 
   static styles = [WarpElement.styles,
@@ -78,8 +70,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     activateI18n(enMessages, nbMessages, fiMessages)
 
     this.show = false
-    this.placement = "bottom"
-    this.fallbackDirection = "none"
     this.tooltip = false
     this.callout = false
     this.popover = false
@@ -87,12 +77,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.canClose = false
     this.noArrow = false
     this._cleanup = null
-    this._actualDirection = this.placement
   }
 
   connectedCallback() {
     super.connectedCallback()
-
     if (!this.placement || !Object.keys(opposites).includes(this.placement)) {
       throw new Error(
         `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
@@ -111,8 +99,17 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
   }
-  get _directionName() {
-    return this.placement
+
+  set actualDirection(v) {
+    this._actualDirection = v;
+  }
+
+  get _actualDirection() {
+    return this.placement;
+  }
+  
+  set _actualDirection(v) {
+    this.placement = v;
   }
 
   get _arrowEl() {
@@ -122,7 +119,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   get _arrowDirection() {
     return opposites[this._actualDirection]
   }
-
   get _arrowDirectionClass() {
     let direction;
     if (/-/.test(this._arrowDirection)) {
@@ -220,38 +216,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     `
   }
 
-  updatePosition = () => {
-    console.log("this.placement: ", this.placement);
-
-    if (!this._attentionEl) return
-      computePosition(this._targetEl, this._attentionEl, {
-        placement: this.placement,
-        middleware: [
-          offset(8),
-          flip({ fallbackAxisSideDirection: this.fallbackDirection, fallbackStrategy: 'initialPlacement' }),
-          shift({ padding: 16 }),
-          !this.noArrow && this._arrowEl && arrow({ element: this._arrowEl })]
-        }).then(({ x, y, middlewareData, placement}) => {
-          this._actualDirection = placement
-          console.log("this._actualDirection: ", this._actualDirection);
-          Object.assign(this._attentionEl?.style, {
-            left: `${x}px`,
-            top: `${y}px`,
-          })
-
-            if (middlewareData.arrow) {
-              const { x, y } = middlewareData.arrow
-              console.log("placement: ", placement);
-              Object.assign(this._arrowEl.style || {}, {
-                // TODO: temporary fix, for some reason left-start and right-start positions the arrowEL slightly too far from the attentionEl
-                left: x ? placement.includes("-start") ? `${x - 12}px` : `${x}px` : '',
-                top: y ? placement.includes("-start") ? `${y - 12}px` : `${y}px` : '',
-              });
-            }
-          });    
-    }
-
-  updated(changedProperties) {
+  updated (changedProperties) {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -270,20 +235,26 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         isShowing: this.show,
         isCallout: this.callout,
         actualDirection: this._actualDirection,
-        directionName: this._directionName,
+        directionName: this.placement,
         arrowEl: this._arrowEl,
+        attentionEl: this._attentionEl,
+        fallbackDirection: this.fallbackDirection,
+        targetEl: this._targetEl,
+        noArrow: this.noArrow
       }
-      // Recompute attention element position on property changes
-      if (changedProperties.has('placement')) {
-        console.log("do we reach recompute?");
-        recompute(this.attentionState, this.updatePosition)
+
+      if (changedProperties.has('callout')) {
+        console.log("do we reach callout?");
+        if(this.callout) {
+          computeCalloutArrow(this._actualDirection, this.placement, this._arrowEl)
+        }
       }
   
       if (changedProperties.has('show')) {
         console.log("in the if-statement when show-prop has changed", !this._cleanup && this._targetEl && this.show);
         if (!this._cleanup && this._targetEl && this.show && this._attentionEl) {
           console.log("start autoUpdate");
-          this._cleanup = autoUpdate(this._targetEl, this._attentionEl, this.updatePosition);
+          this._cleanup = autoUpdatePosition(this.attentionState);
         } else if (this._cleanup) {
           console.log("cleanup: ", this._cleanup);
           this._cleanup();
