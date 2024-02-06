@@ -314,15 +314,23 @@ ${Kr.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
           >
             ${this._expandableSlot}
           </div>`}
-    </div>`}}customElements.get("w-expandable")||customElements.define("w-expandable",aa);const la=JSON.parse('{"pill.aria.openFilter":"Open filter","pill.aria.removeFilter":["Remove filter ",["label"]]}'),ca=JSON.parse('{"pill.aria.openFilter":"Avaa suodatin","pill.aria.removeFilter":["Tyhjennä suodatin ",["label"]]}'),da=JSON.parse('{"pill.aria.openFilter":"Åpne filter","pill.aria.removeFilter":["Fjern filter ",["label"]]}');class ua extends C{static styles=[C.styles];static properties={canClose:{type:Boolean},suggestion:{type:Boolean},openSRLabel:{type:String},closeSRLabel:{type:String}};constructor(){super(),Pt(la,da,ca),this.canClose=!1,this.suggestion=!1,this.openFilterSrText=_._({id:"pill.aria.openFilter",message:"Open filter",comment:"Fallback screenreader message for open filter"}),this.removeFilterSrText=_._({id:"pill.aria.removeFilter",message:"Remove filter",comment:"Fallback screenreader message for removal of the filter"})}get _labelClasses(){return Y({[F.button]:!0,[this.suggestion?F.suggestion:F.filter]:!0,[F.label]:!0,[this.canClose?F.labelWithClose:F.labelWithoutClose]:!0})}get _closeClasses(){return Y({[F.button]:!0,[this.suggestion?F.suggestion:F.filter]:!0,[F.close]:!0})}render(){return v`
+    </div>`}}customElements.get("w-expandable")||customElements.define("w-expandable",aa);const la=JSON.parse('{"pill.aria.openFilter":"Open filter","pill.aria.removeFilter":["Remove filter ",["label"]]}'),ca=JSON.parse('{"pill.aria.openFilter":"Avaa suodatin","pill.aria.removeFilter":["Tyhjennä suodatin ",["label"]]}'),da=JSON.parse('{"pill.aria.openFilter":"Åpne filter","pill.aria.removeFilter":["Fjern filter ",["label"]]}');class ua extends C{static styles=[C.styles];static properties={canClose:{type:Boolean},suggestion:{type:Boolean},openSRLabel:{type:String},closeSRLabel:{type:String}};constructor(){super(),Pt(la,da,ca),this.canClose=!1,this.suggestion=!1,this.openFilterSrText=_._({id:"pill.aria.openFilter",message:"Open filter",comment:"Fallback screenreader message for open filter"}),this.removeFilterSrText=_._({id:"pill.aria.removeFilter",message:"Remove filter",comment:"Fallback screenreader message for removal of the filter"})}get _labelClasses(){return Y({[F.button]:!0,[this.suggestion?F.suggestion:F.filter]:!0,[F.label]:!0,[this.canClose?F.labelWithClose:F.labelWithoutClose]:!0})}get _closeClasses(){return Y({[F.button]:!0,[this.suggestion?F.suggestion:F.filter]:!0,[F.close]:!0})}_onClick(){this.dispatchEvent(new CustomEvent("w-pill-click",{bubbles:!0,composed:!0}))}_onClose(){this.dispatchEvent(new CustomEvent("w-pill-close",{bubbles:!0,composed:!0}))}render(){return v`
       <div class="${F.pill}">
-        <button type="button" class="${this._labelClasses}">
+        <button
+          type="button"
+          class="${this._labelClasses}"
+          @click="${this._onClick}"
+        >
           <span class="${F.a11y}"
             >${this.openSRLabel?this.openSRLabel:this.openFilterSrText}</span
           >
           <span><slot></slot></span>
         </button>
-        ${this.canClose?v`<button type="button" class="${this._closeClasses}">
+        ${this.canClose?v`<button
+              type="button"
+              class="${this._closeClasses}"
+              @click="${this._onClose}"
+            >
               <span class="${F.a11y}"
                 >${this.closeSRLabel?this.closeSRLabel:this.removeFilterSrText}</span
               >
