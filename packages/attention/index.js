@@ -77,9 +77,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.canClose = false
     this.noArrow = false
     this._cleanup = null
+    this._actualDirection = this.placement
   }
 
   connectedCallback() {
+    // this.actualDirection is undefined if I remove this line:
+    this.actualDirection = this.placement
+    // I'm guessing that this makes sure that this.actualDirection is initialized to this.placement,
+    // but I thought that was already being taken care of in the constructor
+
     super.connectedCallback()
     if (!this.placement || !Object.keys(opposites).includes(this.placement)) {
       throw new Error(
@@ -100,24 +106,22 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     setTimeout(() => this.requestUpdate(), 0)
   }
 
-  set actualDirection(v) {
-    this._actualDirection = v;
+
+  get actualDirection() {
+    return this._actualDirection
   }
 
-  get _actualDirection() {
-    return this.placement;
+  set actualDirection(v) {
+      this._actualDirection = v
   }
-  
-  set _actualDirection(v) {
-    this.placement = v;
-  }
+
 
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow')
   }
 
   get _arrowDirection() {
-    return opposites[this._actualDirection]
+    return opposites[this.actualDirection]
   }
   get _arrowDirectionClass() {
     let direction;
@@ -176,15 +180,13 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _targetEl() {
-    return this.renderRoot
-   .querySelector("slot[name='target']")
-   .assignedNodes()[0]
+    const targetSlot = this.renderRoot.querySelector("slot[name='target']");
+    return targetSlot ? targetSlot.assignedNodes()[0] : null;
   }
 
   get _messageEl() {
-    return this.renderRoot
-      .querySelector("slot[name='message']")
-      .assignedNodes()[0]
+    const messageSlot = this.renderRoot.querySelector("slot[name='message']")
+    return messageSlot ? messageSlot.assignedNodes()[0] : null;
   }
 
   get _wrapperClasses() {
@@ -216,7 +218,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     `
   }
 
-  updated (changedProperties) {
+  updated () {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -230,11 +232,13 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           this.show ? 'flex' : 'none'
         )
       }
-      
+    }
+    
+    async willUpdate(changedProperties) {
       this.attentionState = {
         isShowing: this.show,
         isCallout: this.callout,
-        actualDirection: this._actualDirection,
+        actualDirection: this.actualDirection,
         directionName: this.placement,
         arrowEl: this._arrowEl,
         attentionEl: this._attentionEl,
@@ -244,28 +248,26 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       }
 
       if (changedProperties.has('callout')) {
-        console.log("do we reach callout?");
         if(this.callout) {
-          computeCalloutArrow(this._actualDirection, this.placement, this._arrowEl)
+          computeCalloutArrow(this.actualDirection, this.placement, this._arrowEl)
         }
       }
-  
-      if (changedProperties.has('show')) {
-        console.log("in the if-statement when show-prop has changed", !this._cleanup && this._targetEl && this.show);
+      
+      if (changedProperties.has('show')) {      
         if (!this._cleanup && this._targetEl && this.show && this._attentionEl) {
-          console.log("start autoUpdate");
-          this._cleanup = autoUpdatePosition(this.attentionState);
-        } else if (this._cleanup) {
-          console.log("cleanup: ", this._cleanup);
-          this._cleanup();
-          this._cleanup = null;
+          await this.updateComplete;
+          this._cleanup = autoUpdatePosition(this.attentionState)
+        } else if (!this.show && this._cleanup) {
+          await this.updateComplete;
+          this._cleanup()
+          this._cleanup = null
           console.log("this.show: ", this.show);
         }
       }
     }
 
   pointingAtDirection() {
-    switch (opposites[this._actualDirection]) {
+    switch (opposites[this.actualDirection]) {
       case 'top':
         return i18n._({
           id: 'attention.aria.pointingUp',
