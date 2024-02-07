@@ -14,11 +14,10 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];
 
   static properties = {
-    label: { type: String },
     canClose: { type: Boolean },
     suggestion: { type: Boolean },
-    openSRLabel: { type: String },
-    closeSRLabel: { type: String },
+    openSrLabel: { type: String },
+    closeSrLabel: { type: String },
   };
 
   constructor() {
@@ -37,7 +36,6 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
       id: "pill.aria.removeFilter",
       message: "Remove filter {label}",
       comment: "Fallback screenreader message for removal of the filter",
-      values: { label: this.label }
     });
   }
 
@@ -75,11 +73,11 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
           @click="${this._onClick}"
         >
           <span class="${ccPill.a11y}"
-            >${this.openSRLabel
-              ? this.openSRLabel
+            >${this.openSrLabel
+              ? this.openSrLabel
               : this.openFilterSrText}</span
           >
-          <span>${this.label}</span>
+          <slot></slot>
         </button>
         ${this.canClose
           ? html`<button
@@ -88,8 +86,8 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
               @click="${this._onClose}"
             >
               <span class="${ccPill.a11y}"
-                >${this.closeSRLabel
-                  ? this.closeSRLabel
+                >${this.closeSrLabel
+                  ? this.closeSrLabel
                   : this.removeFilterSrText}</span
               >
               <w-icon-close-16></w-icon-close-16>
