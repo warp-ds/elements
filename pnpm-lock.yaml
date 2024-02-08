@@ -18,8 +18,8 @@ dependencies:
     specifier: 0.0.1-alpha.11
     version: 0.0.1-alpha.11
   '@warp-ds/icons':
-    specifier: 1.4.0
-    version: 1.4.0
+    specifier: 2.0.0
+    version: 2.0.0
 
 devDependencies:
   '@babel/core':
@@ -2689,8 +2689,8 @@ packages:
       lit: 2.7.6
     dev: false
 
-  /@warp-ds/icons@1.4.0:
-    resolution: {integrity: sha512-CC4LlDUlSa65/ts4REDk8hVC3vY+IA6D6mhTFYg31WpOf8KwfzNY4QnEnXdzbL/1WUFU+fmUSejgqbwI8nnpVw==}
+  /@warp-ds/icons@2.0.0:
+    resolution: {integrity: sha512-a6Zi9CEunu5V0ScfaG42j5LoPK/U9uL5Gcv+/4D9FNQjaPuissqflUL3YpYI2PxTMIrHuyYXfUMWu8gBVGoUdg==}
     dependencies:
       '@lingui/core': 4.7.0
     dev: false
