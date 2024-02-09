@@ -8,6 +8,7 @@ import {
   rotation,
   autoUpdatePosition,
   computeCalloutArrow,
+  useRecompute as recompute
 } from '@warp-ds/core/attention'
 import { i18n } from '@lingui/core'
 import { messages as enMessages } from './locales/en/messages.mjs'
@@ -21,7 +22,32 @@ const fallbackDirectionTypes = [
   "start",
   "end"
 ]
+// export const debounce = (
+//   callback,
+//   timeoutMs,
+// ) => {
+//   let timeoutRef = null;
 
+//   const cancel = () => {
+//       if (timeoutRef) {
+//           clearTimeout(timeoutRef);
+//           timeoutRef = null;
+//       }
+//   };
+
+//   return [
+//       (...values) => {
+//           if (timeoutRef) {
+//               clearTimeout(timeoutRef);
+//           }
+//           timeoutRef = window.setTimeout(() => {
+// callback(...values);
+//               timeoutRef = null;
+//           }, timeoutMs);
+//       },
+//       cancel,
+//   ];
+// };
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether Attention element should be visible.
@@ -70,6 +96,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     activateI18n(enMessages, nbMessages, fiMessages)
 
     this.show = false
+    this.placement = 'bottom'
     this.tooltip = false
     this.callout = false
     this.popover = false
@@ -79,13 +106,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this._cleanup = null
     this._actualDirection = this.placement
   }
-
+  
   connectedCallback() {
-    // this.actualDirection is undefined if I remove this line:
-    this.actualDirection = this.placement
-    // I'm guessing that this makes sure that this.actualDirection is initialized to this.placement,
-    // but I thought that was already being taken care of in the constructor
-
     super.connectedCallback()
     if (!this.placement || !Object.keys(opposites).includes(this.placement)) {
       throw new Error(
@@ -218,7 +240,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     `
   }
 
-  updated () {
+  updated (changedProperties) {
+    console.log("I am called");
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -232,14 +255,12 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           this.show ? 'flex' : 'none'
         )
       }
-    }
-    
-    async willUpdate(changedProperties) {
+      
       this.attentionState = {
         isShowing: this.show,
         isCallout: this.callout,
         actualDirection: this.actualDirection,
-        directionName: this.placement,
+        directionName: this.placement, 
         arrowEl: this._arrowEl,
         attentionEl: this._attentionEl,
         fallbackDirection: this.fallbackDirection,
@@ -247,49 +268,60 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         noArrow: this.noArrow
       }
 
+      // recompute(this.attentionState)
+
       if (changedProperties.has('callout')) {
         if(this.callout) {
           computeCalloutArrow(this.actualDirection, this.placement, this._arrowEl)
         }
       }
-      
-      if (changedProperties.has('show')) {      
-        if (!this._cleanup && this._targetEl && this.show && this._attentionEl) {
-          await this.updateComplete;
-          this._cleanup = autoUpdatePosition(this.attentionState)
-        } else if (!this.show && this._cleanup) {
-          await this.updateComplete;
-          this._cleanup()
-          this._cleanup = null
-          console.log("this.show: ", this.show);
+
+      if (this.show) {   
+        if (!this._cleanup && this._targetEl && this._attentionEl) {
+          // start autoupdate
+            this._cleanup = autoUpdatePosition(this.attentionState)
         }
+      } else if (this._cleanup) {
+        this._cleanup()
+        this._cleanup = null
       }
     }
 
+
+
+
   pointingAtDirection() {
     switch (opposites[this.actualDirection]) {
+      case 'top-start':
       case 'top':
+      case 'top-end':
         return i18n._({
           id: 'attention.aria.pointingUp',
           message: 'pointing up',
           comment:
             'Default screenreader message for top direction in the attention component',
         })
+      case 'right-start':
       case 'right':
+      case 'right-end':
         return i18n._({
           id: 'attention.aria.pointingRight',
           message: 'pointing right',
           comment:
             'Default screenreader message for right direction in the attention component',
         })
+      case 'bottom-start':
       case 'bottom':
+      case 'bottom-end':
         return i18n._({
           id: 'attention.aria.pointingDown',
           message: 'pointing down',
           comment:
             'Default screenreader message for bottom direction in the attention component',
         })
+      case 'left-start':
       case 'left':
+      case 'left-end':
         return i18n._({
           id: 'attention.aria.pointingLeft',
           message: 'pointing left',
@@ -376,11 +408,12 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   
-
+// Why do we only want to should role and aria-label for when this.placement is other on the right or bottom side? 
+// We don't have this for react and vue, we always show role and aria-label regardless of this.placement
   render() {
     return html`
       <div class=${ifDefined(this.className ? this.className : undefined)}>
-        ${this.placement === 'right' || this.placement === 'bottom' // Attention's and its arrow's visual position should be reflected in the DOM
+        ${this.placement === 'right-start' || this.placement === 'right' || this.placement === 'right-end' || this.placement === 'bottom-start' || this.placement === 'bottom' || this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
           ? html`
               <slot name="target"></slot>
 
@@ -406,6 +439,28 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       </div>
     `
   }
+
+  // render() {
+  //   return html`
+  //     <div class=${ifDefined(this.className ? this.className : undefined)}>
+  //           ${
+  //         html`
+  //             <slot name="target"></slot>
+
+  //             <div
+  //               id="attention"
+  //               role="${this.tooltip ? 'tooltip' : 'img'}"
+  //               aria-label="${this.defaultAriaLabel()}"
+  //               class="${this._wrapperClasses}"
+  //             >
+  //               ${this._arrowHtml}
+  //               <slot name="message"></slot>
+  //               ${this.canClose ? this._closeBtnHtml : nothing}
+  //             </div>
+  //           `}
+  //     </div>
+  //   `
+  // }
 }
 
 if (!customElements.get('w-attention')) {
