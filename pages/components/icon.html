@@ -1,0 +1,67 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Icon</h1>
+        <p>Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>can-close</td>
+              <td>boolean</td>
+              <td>"false"</td>
+            </tr>
+            <tr>
+              <td>suggestion</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>open-sr-label</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the pill.</div></td>
+              <td>"Open filter"</td>
+            </tr>
+            <tr>
+              <td>close-sr-label</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the close button.</div></td>
+              <td>"Remove filter {label}"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Icon
+            <syntax-highlight>
+                <w-icon name="ads-16"></w-icon>
+                <w-icon name="alert-24"></w-icon>
+                <w-icon name="attachment-32"></w-icon>
+                <w-icon name="car-42"></w-icon>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <w-icon name="ads-16"></w-icon>
+            <w-icon name="alert-24"></w-icon>
+            <w-icon name="attachment-32"></w-icon>
+            <w-icon name="car-42"></w-icon>
+          </div>
+        </div>
+      </main>
+    </div>
+      <%- include('footer.html'); -%>
+  </body>
+</html>

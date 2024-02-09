@@ -146,6 +146,11 @@ export default ({ mode }) => {
               injectOptions,
             },
             {
+              filename: 'icon.html',
+              template: 'pages/components/icon.html',
+              injectOptions,
+            },
+            {
               filename: 'index.html',
               template: 'index.html',
               injectOptions,
