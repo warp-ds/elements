@@ -47,7 +47,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
-      <dialog ${ref(this.dialogEl)} class="${cc.dialogEl}">
+      <dialog ${ref(this.dialogEl)} class="w-modal ${cc.dialogEl}">
         <div ${ref(this.dialogInnerEl)} class="${cc.dialogInner}">
           <slot name="top" @slotchange="${this.handleSlotChange}"></slot>
           <slot name="title" @slotchange="${this.handleSlotChange}"></slot>
@@ -102,32 +102,32 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   static styles = [
     css`
-      dialog {
-        --w-dialog-translate-distance: 100%;
+      .w-modal {
+        --w-modal-translate-distance: 100%;
       }
       @media (min-width: 480px) {
-        dialog { --w-dialog-translate-distance: 50%; }
+        .w-modal { --w-modal-translate-distance: 50%; }
       }
-      dialog[open] {
-        animation: dialog-in 0.3s ease-in-out forwards;
+      .w-modal[open] {
+        animation: w-modal-in 0.3s ease-in-out forwards;
       }
-      dialog.close {
-        animation: dialog-out 0.3s ease-in-out forwards;
+      .w-modal.close {
+        animation: w-modal-out 0.3s ease-in-out forwards;
       }
-      dialog[open]::backdrop {
+      .w-modal[open]::backdrop {
         animation: backdrop-in 0.3s ease-in-out forwards;
       }
-      dialog.close::backdrop {
+      .w-modal.close::backdrop {
         animation: backdrop-out 0.3s ease-in-out forwards;
       }
       /* shouldn't need two (in/out) animations declared here, but reversing is being weird */
-      @keyframes dialog-in {
-        from { transform: translateY(var(--w-dialog-translate-distance)); opacity: 0; }
+      @keyframes w-modal-in {
+        from { transform: translateY(var(--w-modal-translate-distance)); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
       }
-      @keyframes dialog-out {
+      @keyframes w-modal-out {
         from { transform: translateY(0); opacity: 1; }
-        to { transform: translateY(var(--w-dialog-translate-distance)); opacity: 0; }
+        to { transform: translateY(var(--w-modal-translate-distance)); opacity: 0; }
       }
       @keyframes backdrop-in {
         from { background: transparent; }
