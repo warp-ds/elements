@@ -6,7 +6,6 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
-  autoUpdatePosition,
   computeCalloutArrow,
   useRecompute as recompute
 } from '@warp-ds/core/attention'
@@ -22,39 +21,13 @@ const fallbackDirectionTypes = [
   "start",
   "end"
 ]
-// export const debounce = (
-//   callback,
-//   timeoutMs,
-// ) => {
-//   let timeoutRef = null;
-
-//   const cancel = () => {
-//       if (timeoutRef) {
-//           clearTimeout(timeoutRef);
-//           timeoutRef = null;
-//       }
-//   };
-
-//   return [
-//       (...values) => {
-//           if (timeoutRef) {
-//               clearTimeout(timeoutRef);
-//           }
-//           timeoutRef = window.setTimeout(() => {
-// callback(...values);
-//               timeoutRef = null;
-//           }, timeoutMs);
-//       },
-//       cancel,
-//   ];
-// };
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether Attention element should be visible.
     show: { type: Boolean, reflect: true },
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
-    placement: { type: String, value: 'bottom' },
+    placement: { type: String },
     fallbackDirection: { type: String, value: 'none' },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
@@ -68,7 +41,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
-    _cleanup: { state: true },
   }
 
   static styles = [WarpElement.styles,
@@ -95,15 +67,16 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     super()
     activateI18n(enMessages, nbMessages, fiMessages)
 
+    this.handleDone = this.handleDone.bind(this)
+
     this.show = false
-    this.placement = 'bottom'
     this.tooltip = false
     this.callout = false
     this.popover = false
     this.highlight = false
     this.canClose = false
     this.noArrow = false
-    this._cleanup = null
+    this._initialPlacement = this.placement
     this._actualDirection = this.placement
   }
   
@@ -126,24 +99,49 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
+
+    window.addEventListener('click', this.handleDone);
+    window.addEventListener('scroll', this.handleDone);
+    window.addEventListener('resize', this.handleDone);
+    window.addEventListener('touch', this.handleDone);
   }
 
+  disconnectedCallback() {
+    window.removeEventListener('click', this.handleDone);
+    window.removeEventListener('scroll', this.handleDone);
+    window.removeEventListener('resize', this.handleDone);
+    window.removeEventListener('touch', this.handleDone);
 
-  get actualDirection() {
-    return this._actualDirection
+    super.disconnectedCallback()
+
   }
 
-  set actualDirection(v) {
-      this._actualDirection = v
+   handleDone() {
+     window.requestAnimationFrame(() => {
+    if(this.show) {
+        recompute(this.attentionState).then((state) => {
+          this._actualDirection = state?.actualDirection
+        })
+      } else {
+        this._actualDirection = this._initialPlacement
+      }
+    })
   }
 
+  get _actualDirection() {
+    return this.placement
+  }
+
+  set _actualDirection(v) {
+      this.placement = v
+  }
 
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow')
   }
 
   get _arrowDirection() {
-    return opposites[this.actualDirection]
+    return opposites[this._actualDirection]
   }
   get _arrowDirectionClass() {
     let direction;
@@ -153,7 +151,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         .map((d) => d.charAt(0).toUpperCase() + d.slice(1))
         .join('')
     } else {
-      direction = this._arrowDirection.charAt(0).toUpperCase() + this._arrowDirection.slice(1)
+      direction = this._arrowDirection?.charAt(0).toUpperCase() + this._arrowDirection?.slice(1)
     }
     return `arrowDirection${direction}`
   }
@@ -241,7 +239,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   updated (changedProperties) {
-    console.log("I am called");
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -259,7 +256,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this.attentionState = {
         isShowing: this.show,
         isCallout: this.callout,
-        actualDirection: this.actualDirection,
+        actualDirection: this._actualDirection,
         directionName: this.placement, 
         arrowEl: this._arrowEl,
         attentionEl: this._attentionEl,
@@ -268,30 +265,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         noArrow: this.noArrow
       }
 
-      // recompute(this.attentionState)
-
       if (changedProperties.has('callout')) {
         if(this.callout) {
-          computeCalloutArrow(this.actualDirection, this.placement, this._arrowEl)
+          computeCalloutArrow(this._actualDirection, this.placement, this._arrowEl)
         }
-      }
-
-      if (this.show) {   
-        if (!this._cleanup && this._targetEl && this._attentionEl) {
-          // start autoupdate
-            this._cleanup = autoUpdatePosition(this.attentionState)
-        }
-      } else if (this._cleanup) {
-        this._cleanup()
-        this._cleanup = null
       }
     }
 
-
-
-
   pointingAtDirection() {
-    switch (opposites[this.actualDirection]) {
+    switch (opposites[this._actualDirection]) {
       case 'top-start':
       case 'top':
       case 'top-end':
@@ -383,6 +365,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   
 
   firstUpdated() {
+    this._initialPlacement = this.placement
+
     this.setAriaLabels()
 
     // Attention of "callout" type should always be used inline
@@ -408,7 +392,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   
-// Why do we only want to should role and aria-label for when this.placement is other on the right or bottom side? 
+// Why do we only want to should role and aria-label for when this.placement is either on the right or bottom side? 
 // We don't have this for react and vue, we always show role and aria-label regardless of this.placement
   render() {
     return html`
@@ -439,28 +423,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       </div>
     `
   }
-
-  // render() {
-  //   return html`
-  //     <div class=${ifDefined(this.className ? this.className : undefined)}>
-  //           ${
-  //         html`
-  //             <slot name="target"></slot>
-
-  //             <div
-  //               id="attention"
-  //               role="${this.tooltip ? 'tooltip' : 'img'}"
-  //               aria-label="${this.defaultAriaLabel()}"
-  //               class="${this._wrapperClasses}"
-  //             >
-  //               ${this._arrowHtml}
-  //               <slot name="message"></slot>
-  //               ${this.canClose ? this._closeBtnHtml : nothing}
-  //             </div>
-  //           `}
-  //     </div>
-  //   `
-  // }
 }
 
 if (!customElements.get('w-attention')) {
