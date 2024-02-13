@@ -382,8 +382,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   
-// Why do we only want to should role and aria-label for when this.placement is either on the right or bottom side? 
-// We don't have this for react and vue, we always show role and aria-label regardless of this.placement
   render() {
     return html`
       <div class=${ifDefined(this.className ? this.className : undefined)}>
