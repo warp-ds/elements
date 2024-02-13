@@ -118,7 +118,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
    handleDone() {
      window.requestAnimationFrame(() => {
-    if(this.show) {
+    if(this.show && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
           this._actualDirection = state?.actualDirection
         })
@@ -143,6 +143,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   get _arrowDirection() {
     return opposites[this._actualDirection]
   }
+
   get _arrowDirectionClass() {
     let direction;
     if (/-/.test(this._arrowDirection)) {
@@ -264,6 +265,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         targetEl: this._targetEl,
         noArrow: this.noArrow
       }
+
+      // We need to recompute here as well if this._actualDirection gets updated immediately when this.show is true (in this.handleDone()).
+      // Otherwise this._arrowDirection will get this._initialPlacement's value and will only be updated on next click/scroll/resize
+       recompute(this.attentionState)
 
       if (changedProperties.has('callout')) {
         if(this.callout) {
