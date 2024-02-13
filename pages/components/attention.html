@@ -40,10 +40,10 @@
               <td>
                 <div>"none" | "start" | "end"</div>
                 <div class="annotation">
-                  Default is 'none'.<br>
+                  Default is 'start'.<br>
                   Option to pass in to choose which preferred side attention element should fallback to when the placement prop value no longer fits on the screen. 
-                  <br>'start' means that it will try the following placements (in order): ['right', 'left', 'top', 'bottom']
-                  <br>'end' means that it will try the following placements (in order): ['right', 'left', 'bottom', 'top']
+                  <br>'start' means that it will try the following placements (in order): ["right", "left", "top", "bottom"]
+                  <br>'end' means that it will try the following placements (in order): ["right", "left", "bottom", "top"]
                 </div>
               </td>
               <td>-</td>
@@ -99,28 +99,28 @@
 
         <h3 class="mt-24 mb-16">Popover</h3>
         <syntax-highlight>
-          <w-attention placement="right-start" fallback-direction="start" popover>
+          <w-attention placement="bottom" popover>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              onclick="toggleShow()"
               slot="target"
+              onclick="toggleShow()"
             >
-              Click to toggle a popover on right-start
+              Click to toggle a popover on bottom
             </button>
-            <span slot="message">I'm a popover on right-start</span>
+            <span slot="message">I'm a popover on bottom</span>
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right-start" fallback-direction="start" popover>
+          <w-attention placement="bottom" popover>
             <button
               id="popoverTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
             >
-              Click to toggle a popover on right-start
+              Click to toggle a popover on bottom
             </button>
-            <span slot="message">I'm a popover on right-start</span>
+            <span slot="message">I'm a popover on bottom</span>
           </w-attention>
         </div>
 
@@ -149,6 +149,7 @@
             <span slot="message">I'm a tooltip on right</span>
           </w-attention>
         </div>
+        
 
         <h3 class="mt-24 mb-16">Callout</h3>
         <syntax-highlight>
