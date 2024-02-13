@@ -4,9 +4,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
-import '@warp-ds/icons/elements/alert-warning-16'
-import '@warp-ds/icons/elements/alert-error-16'
-import '@warp-ds/icons/elements/alert-success-16'
+import '@warp-ds/icons/elements/warning-16'
+import '@warp-ds/icons/elements/error-16'
+import '@warp-ds/icons/elements/success-16'
 import '@warp-ds/icons/elements/close-16'
 import { i18n } from '@lingui/core'
 import { messages as enMessages } from './locales/en/messages.mjs'
@@ -124,9 +124,9 @@ export class WarpToast extends WarpElement {
   }
 
   get _iconMarkup() {
-    if (this._warning) return html`<w-icon-alert-warning-16></w-icon-alert-warning-16>`;
-    if (this._error) return html`<w-icon-alert-error-16></w-icon-alert-error-16>`;
-    else return html`<w-icon-alert-success-16></w-icon-alert-success-16>`;
+    if (this._warning) return html`<w-icon-warning-16></w-icon-warning-16>`;
+    if (this._error) return html`<w-icon-error-16></w-icon-error-16>`;
+    else return html`<w-icon-success-16></w-icon-success-16>`;
   }
 
   async collapse() {
