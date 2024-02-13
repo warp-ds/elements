@@ -168,10 +168,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           id="arrow"
           role="img"
           class="${this._arrowClasses}"
-          style="transform:rotate(${rotation[this._arrowDirection]}deg);
-          margin-${
-            // border alignment is off by a fraction of a pixel, this fixes it
-            this._arrowDirectionClass}:-0.5px;"
         />`
   }
 
