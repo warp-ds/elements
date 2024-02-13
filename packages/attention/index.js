@@ -6,7 +6,6 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   rotation,
-  computeCalloutArrow,
   useRecompute as recompute
 } from '@warp-ds/core/attention'
 import { i18n } from '@lingui/core'
@@ -28,7 +27,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
     placement: { type: String },
-    fallbackDirection: { type: String, value: 'none' },
+    fallbackDirection: { type: String },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
@@ -76,6 +75,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.highlight = false
     this.canClose = false
     this.noArrow = false
+    this.fallbackDirection = "start"
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
   }
@@ -100,10 +100,17 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
 
-    window.addEventListener('click', this.handleDone);
-    window.addEventListener('scroll', this.handleDone);
-    window.addEventListener('resize', this.handleDone);
-    window.addEventListener('touch', this.handleDone);
+    if (!this.callout) {
+      window.addEventListener('click', this.handleDone);
+      window.addEventListener('scroll', this.handleDone);
+      window.addEventListener('resize', this.handleDone);
+      window.addEventListener('touch', this.handleDone);
+    }
+    
+    if (this.tooltip) {
+      window.addEventListener('mouseover', this.handleDone)
+      window.addEventListener('mouseout', this.handleDone)
+    }
   }
 
   disconnectedCallback() {
@@ -111,6 +118,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     window.removeEventListener('scroll', this.handleDone);
     window.removeEventListener('resize', this.handleDone);
     window.removeEventListener('touch', this.handleDone);
+    window.removeEventListener('mouseover', this.handleDone);
+    window.removeEventListener('mouseout', this.handleDone);
 
     super.disconnectedCallback()
 
@@ -122,7 +131,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         recompute(this.attentionState).then((state) => {
           this._actualDirection = state?.actualDirection
         })
-      } else {
+      } 
+      else {
         this._actualDirection = this._initialPlacement
       }
     })
@@ -239,7 +249,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     `
   }
 
-  updated (changedProperties) {
+  updated () {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
@@ -268,13 +278,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
       // We need to recompute here as well if this._actualDirection gets updated immediately when this.show is true (in this.handleDone()).
       // Otherwise this._arrowDirection will get this._initialPlacement's value and will only be updated on next click/scroll/resize
-       recompute(this.attentionState)
-
-      if (changedProperties.has('callout')) {
-        if(this.callout) {
-          computeCalloutArrow(this._actualDirection, this.placement, this._arrowEl)
-        }
-      }
+      recompute(this.attentionState)
     }
 
   pointingAtDirection() {
