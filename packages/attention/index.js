@@ -15,11 +15,6 @@ import { messages as fiMessages } from './locales/fi/messages.mjs'
 import { activateI18n } from '../i18n'
 import '@warp-ds/icons/elements/close-16'
 
-const fallbackDirectionTypes = [
-  "none",
-  "start",
-  "end"
-]
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
   static properties = {
     // Whether Attention element should be visible.
@@ -27,7 +22,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Placement according to the target element
     // Arrow would be on the opposite side of this position
     placement: { type: String },
-    fallbackDirection: { type: String },
     // Whether Attention element is rendered as a tooltip
     tooltip: { type: Boolean, reflect: true },
     // Whether Attention element is rendered as an inline callout
@@ -75,7 +69,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.highlight = false
     this.canClose = false
     this.noArrow = false
-    this.fallbackDirection = "start"
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
   }
@@ -86,13 +79,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       throw new Error(
         `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
           Object.keys(opposites)
-        )}`
-      )
-    }
-    if (!fallbackDirectionTypes.includes(this.fallbackDirection)) {
-      throw new Error(
-        `Invalid "fallbackDirection" attribute. Set its value to one of the following:\n${JSON.stringify(
-          fallbackDirectionTypes
         )}`
       )
     }
@@ -271,7 +257,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         directionName: this.placement, 
         arrowEl: this._arrowEl,
         attentionEl: this._attentionEl,
-        fallbackDirection: this.fallbackDirection,
         targetEl: this._targetEl,
         noArrow: this.noArrow
       }
