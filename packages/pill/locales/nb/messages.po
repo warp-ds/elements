@@ -14,7 +14,7 @@ msgstr ""
 "X-Crowdin-Project: 2853b3c41d7b7a59e7cd64c0153b540a\n"
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: nb\n"
-"X-Crowdin-File-ID: 2556\n"
+"X-Crowdin-File-ID: 16174\n"
 
 #. Fallback screenreader message for open filter
 #. js-lingui-explicit-id
