@@ -5,7 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: e\n"
+"X-Crowdin-SourceKey: msgstr\n"
 
 #. Default screenreader message for error in toast component
 #. js-lingui-explicit-id
@@ -24,3 +25,4 @@ msgstr "Successful"
 #: packages/toast/toast.js:106
 msgid "toast.aria.warning"
 msgstr "Warning"
+

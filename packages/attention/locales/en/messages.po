@@ -18,7 +18,7 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/attention/index.js:175
 msgid "attention.aria.callout"
-msgstr "callout speech bubble"
+msgstr "A green speech bubble introducing something new"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
@@ -30,7 +30,7 @@ msgstr "Close"
 #. js-lingui-explicit-id
 #: packages/attention/index.js:189
 msgid "attention.aria.highlight"
-msgstr "highlighted speech bubble"
+msgstr "An attention speech bubble with important information"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
@@ -60,11 +60,11 @@ msgstr "pointing up"
 #. js-lingui-explicit-id
 #: packages/attention/index.js:182
 msgid "attention.aria.popover"
-msgstr "popover speech bubble"
+msgstr "A white speech bubble providing additional information"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:168
 msgid "attention.aria.tooltip"
-msgstr "tooltip"
+msgstr "A black speech bubble providing complementary information"
 
