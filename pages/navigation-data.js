@@ -11,6 +11,10 @@ export default {
           title: 'Button',
           href: '/pages/components/button.html',
         },
+        {
+          title: 'Pill',
+          href: '/pages/components/pill.html',
+        },
       ],
     },
     {
