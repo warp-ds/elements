@@ -5,7 +5,6 @@ import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
-  rotation,
   useRecompute as recompute
 } from '@warp-ds/core/attention'
 import { i18n } from '@lingui/core'
@@ -34,6 +33,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
+    // Distance from which to offset the attentionEl from the targetEl 
+    distance: { type: Number, reflect: true },
+    // Distance from which to offset the attentionEl along its targetEl
+    skidding: { type: Number, reflect: true }
   }
 
   static styles = [WarpElement.styles,
@@ -69,6 +72,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.highlight = false
     this.canClose = false
     this.noArrow = false
+    this.distance = 8
+    this.skidding = 0
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
   }
@@ -254,7 +259,9 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         arrowEl: this._arrowEl,
         attentionEl: this._attentionEl,
         targetEl: this._targetEl,
-        noArrow: this.noArrow
+        noArrow: this.noArrow,
+        distance: this.distance,
+        skidding: this.skidding,
       }
 
       // We need to recompute here as well if this._actualDirection gets updated immediately when this.show is true (in this.handleDone()).
