@@ -1,3 +1,17 @@
+# [1.3.0-next.2](https://github.com/warp-ds/elements/compare/v1.3.0-next.1...v1.3.0-next.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* rename deleted icons after @warp-ds/icons update to 2.0.0 ([#128](https://github.com/warp-ds/elements/issues/128)) ([236356e](https://github.com/warp-ds/elements/commit/236356e855b148d0f3d0cd16ad24d2f39c0da066))
+
+# [1.3.0-next.1](https://github.com/warp-ds/elements/compare/v1.2.3-next.2...v1.3.0-next.1) (2024-02-07)
+
+
+### Features
+
+* Add pill to elements ([#126](https://github.com/warp-ds/elements/issues/126)) ([df25503](https://github.com/warp-ds/elements/commit/df25503844a61efacb2f13ce8dbdbdc87f0f333f))
+
 ## [1.2.3-next.2](https://github.com/warp-ds/elements/compare/v1.2.3-next.1...v1.2.3-next.2) (2024-01-19)
 
 
