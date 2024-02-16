@@ -76,6 +76,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.skidding = 0
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
+    this._isShowing = this.show
   }
   
   connectedCallback() {
@@ -118,13 +119,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
    handleDone() {
      window.requestAnimationFrame(() => {
-    if(this.show && this._targetEl && this._attentionEl) {
+    if(this._isShowing && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
           this._actualDirection = state?.actualDirection
+          this._isShowing = state?.isShowing
         })
       } 
       else {
         this._actualDirection = this._initialPlacement
+        this._isShowing = false
       }
     })
   }
@@ -135,6 +138,14 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
   set _actualDirection(v) {
       this.placement = v
+  }
+
+  get _isShowing() {
+    return this.show
+  }
+
+  set _isShowing(v) {
+    return this.show = v
   }
 
   get _arrowEl() {
@@ -240,19 +251,19 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
-          this.show ? '' : 'hidden'
+          this._isShowing ? '' : 'hidden'
         )
       }
   
       if (!this.tooltip) {
         this._attentionEl.style.setProperty(
           '--attention-display',
-          this.show ? 'flex' : 'none'
+          this._isShowing ? 'flex' : 'none'
         )
       }
       
       this.attentionState = {
-        isShowing: this.show,
+        isShowing: this._isShowing,
         isCallout: this.callout,
         actualDirection: this._actualDirection,
         directionName: this.placement, 
@@ -264,7 +275,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         skidding: this.skidding,
       }
 
-      // We need to recompute here as well if this._actualDirection gets updated immediately when this.show is true (in this.handleDone()).
+      // We need to recompute here as well if this._actualDirection gets updated immediately when this._isShowing is true (in this.handleDone()).
       // Otherwise this._arrowDirection will get this._initialPlacement's value and will only be updated on next click/scroll/resize
       recompute(this.attentionState)
     }
