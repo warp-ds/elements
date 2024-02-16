@@ -33,9 +33,9 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     canClose: { type: Boolean, reflect: true },
     // Render Attention element without an arrow
     noArrow: { type: Boolean, reflect: true },
-    // Distance from which to offset the attentionEl from the targetEl 
+    // Distance from which to offset the attentionEl from the targetEl vertically
     distance: { type: Number, reflect: true },
-    // Distance from which to offset the attentionEl along its targetEl
+    // Distance from which to offset the attentionEl along its targetEl horizontally
     skidding: { type: Number, reflect: true }
   }
 
