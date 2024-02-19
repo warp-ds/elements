@@ -5,7 +5,7 @@ import uno from 'unocss/vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
-import glob from 'glob';
+import { glob } from 'glob';
 import { classes } from '@warp-ds/css/component-classes/classes';
 
 export default ({ mode }) => {
