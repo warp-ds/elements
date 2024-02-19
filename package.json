@@ -50,8 +50,6 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "7.22.5",
-    "@babel/eslint-parser": "7.22.5",
     "@chbphone55/classnames": "2.0.0",
     "@lingui/cli": "^4.5.0",
     "@lingui/conf": "^4.5.0",
