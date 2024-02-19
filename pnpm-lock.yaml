@@ -88,18 +88,6 @@ devDependencies:
   playwright:
     specifier: 1.35.1
     version: 1.35.1
-  postcss:
-    specifier: 8.4.24
-    version: 8.4.24
-  postcss-import:
-    specifier: 15.1.0
-    version: 15.1.0(postcss@8.4.24)
-  postcss-import-svg:
-    specifier: 1.0.5
-    version: 1.0.5(postcss@8.4.24)
-  postcss-syntax:
-    specifier: 0.36.2
-    version: 0.36.2(postcss@8.4.24)
   prettier:
     specifier: 3.0.3
     version: 3.0.3
@@ -3030,16 +3018,6 @@ packages:
       type-fest: 1.4.0
     dev: true
 
-  /css-select@3.1.2:
-    resolution: {integrity: sha512-qmss1EihSuBNWNNhHjxzxSfJoFBM/lERB/Q4EnsJQQC62R2evJDW481091oAdOr9uh46/0n4nrg0It5cAnj1RA==}
-    dependencies:
-      boolbase: 1.0.0
-      css-what: 4.0.0
-      domhandler: 4.3.1
-      domutils: 2.8.0
-      nth-check: 2.1.1
-    dev: true
-
   /css-select@4.3.0:
     resolution: {integrity: sha512-wPpOYtnsVontu2mODhA19JrqWxNsfdatRKd64kmpRbQgh1KtItko5sTnEpPdpSaJszTOhEMlF/RPz28qj4HqhQ==}
     dependencies:
@@ -3056,11 +3034,6 @@ packages:
     dependencies:
       mdn-data: 2.0.30
       source-map-js: 1.0.2
-    dev: true
-
-  /css-what@4.0.0:
-    resolution: {integrity: sha512-teijzG7kwYfNVsUh2H/YN62xW3KK9YhXEgSlbxMlcyjPNvdKJqFx5lrwlJgoFP1ZHlB89iGDlo/JyshKeRhv5A==}
-    engines: {node: '>= 6'}
     dev: true
 
   /css-what@6.1.0:
@@ -4425,15 +4398,6 @@ packages:
       param-case: 3.0.4
       relateurl: 0.2.7
       terser: 5.19.0
-    dev: true
-
-  /htmlparser2@6.1.0:
-    resolution: {integrity: sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==}
-    dependencies:
-      domelementtype: 2.3.0
-      domhandler: 4.3.1
-      domutils: 2.8.0
-      entities: 2.2.0
     dev: true
 
   /http-errors@2.0.0:
@@ -6361,11 +6325,6 @@ packages:
     hasBin: true
     dev: true
 
-  /pify@2.3.0:
-    resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /pify@3.0.0:
     resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
@@ -6446,54 +6405,6 @@ packages:
 
   /pofile@1.1.4:
     resolution: {integrity: sha512-r6Q21sKsY1AjTVVjOuU02VYKVNQGJNQHjTIvs4dEbeuuYfxgYk/DGD2mqqq4RDaVkwdSq0VEtmQUOPe/wH8X3g==}
-    dev: true
-
-  /postcss-import-svg@1.0.5(postcss@8.4.24):
-    resolution: {integrity: sha512-Ba38EIr+Z0uCQrvgJsJVn68gp5QB3oMA2jLrTIbVO5yuizw3tABzMPay6tYb3fB8JGHnBczV5WpOO0H9veULtA==}
-    peerDependencies:
-      postcss: ^8.1.4
-    dependencies:
-      css-select: 3.1.2
-      dom-serializer: 1.4.1
-      htmlparser2: 6.1.0
-      postcss: 8.4.24
-      postcss-value-parser: 4.2.0
-    dev: true
-
-  /postcss-import@15.1.0(postcss@8.4.24):
-    resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      postcss: ^8.0.0
-    dependencies:
-      postcss: 8.4.24
-      postcss-value-parser: 4.2.0
-      read-cache: 1.0.0
-      resolve: 1.22.2
-    dev: true
-
-  /postcss-syntax@0.36.2(postcss@8.4.24):
-    resolution: {integrity: sha512-nBRg/i7E3SOHWxF3PpF5WnJM/jQ1YpY9000OaVXlAQj6Zp/kIqJxEDWIZ67tAd7NLuk7zqN4yqe9nc0oNAOs1w==}
-    peerDependencies:
-      postcss: '>=5.0.0'
-      postcss-html: '*'
-      postcss-jsx: '*'
-      postcss-less: '*'
-      postcss-markdown: '*'
-      postcss-scss: '*'
-    peerDependenciesMeta:
-      postcss-html:
-        optional: true
-      postcss-jsx:
-        optional: true
-      postcss-less:
-        optional: true
-      postcss-markdown:
-        optional: true
-      postcss-scss:
-        optional: true
-    dependencies:
-      postcss: 8.4.24
     dev: true
 
   /postcss-value-parser@4.2.0:
@@ -6634,12 +6545,6 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: true
-
-  /read-cache@1.0.0:
-    resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
-    dependencies:
-      pify: 2.3.0
     dev: true
 
   /read-pkg-up@10.0.0:
