@@ -66,6 +66,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.handleDone = this.handleDone.bind(this)
 
     this.show = false
+    this.placement = "bottom"
     this.tooltip = false
     this.callout = false
     this.popover = false

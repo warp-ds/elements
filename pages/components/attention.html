@@ -17,25 +17,6 @@
           </thead>
           <tbody class="align-top">
             <tr>
-              <td>show</td>
-              <td>
-                <div>boolean</div>
-                <div class="annotation">Whether Attention element should be visible.</div>
-              </td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>placement *</td>
-              <td>
-                <div>"top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" | "left-start" | "left" | "left-end"</div>
-                <div class="annotation">
-                  Placement according to the target element. Arrow would be on the opposite side of
-                  this position.
-                </div>
-              </td>
-              <td>-</td>
-            </tr>
-            <tr>
               <td>target-selector *</td>
               <td>
                 <div>string</div>
@@ -44,6 +25,25 @@
                 </div>
               </td>
               <td>-</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element should be visible.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td>
+                <div>"top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" | "left-start" | "left" | "left-end"</div>
+                <div class="annotation">
+                  Placement according to the target element. Arrow would be on the opposite side of
+                  this position.
+                </div>
+              </td>
+              <td>"bottom"</td>
             </tr>
             <tr>
               <td>tooltip</td>
@@ -76,6 +76,14 @@
               <td>
                 <div>boolean</div>
                 <div class="annotation">Render Attention element without an arrow.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>can-close</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Render Attention element with a close button.</div>
               </td>
               <td>false</td>
             </tr>
@@ -129,7 +137,7 @@
 
         <h3 class="mt-24 mb-16">Popover with icon as target element</h3>
         <syntax-highlight>
-          <w-attention placement="bottom-start" popover skidding='-205'>
+          <w-attention placement="bottom" popover skidding='-205'>
             <w-button
               id="target"
               quiet
