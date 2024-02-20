@@ -107,16 +107,18 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
 
-    if (!this.callout) {
-      window.addEventListener('click', this.handleDone);
-      window.addEventListener('scroll', this.handleDone);
-      window.addEventListener('resize', this.handleDone);
-      window.addEventListener('touch', this.handleDone);
-    }
-    
-    if (this.tooltip) {
-      window.addEventListener('mouseover', this.handleDone)
-      window.addEventListener('mouseout', this.handleDone)
+    if (this.flip) {
+      if (!this.callout) {
+        window.addEventListener('click', this.handleDone);
+        window.addEventListener('scroll', this.handleDone);
+        window.addEventListener('resize', this.handleDone);
+        window.addEventListener('touch', this.handleDone);
+      }
+      
+      if (this.tooltip) {
+        window.addEventListener('mouseover', this.handleDone)
+        window.addEventListener('mouseout', this.handleDone)
+      }
     }
   }
 
