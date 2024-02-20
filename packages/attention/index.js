@@ -36,7 +36,11 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Distance from which to offset the attentionEl from the targetEl vertically
     distance: { type: Number, reflect: true },
     // Distance from which to offset the attentionEl along its targetEl horizontally
-    skidding: { type: Number, reflect: true }
+    skidding: { type: Number, reflect: true },
+    // Whether Attention element should flip its position in order to keep it in view
+    flip: { type: Boolean, reflect: true },
+    // Choose which preferred placements the Attention element should flip to
+    fallbackPlacements: { type: Array }
   }
 
   static styles = [WarpElement.styles,
@@ -75,20 +79,30 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.noArrow = false
     this.distance = 8
     this.skidding = 0
+    this.flip = false
+    this.fallbackPlacements = undefined
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
-    this._isShowing = this.show
+    // this._isShowing = this.show
   }
   
   connectedCallback() {
     super.connectedCallback()
-    if (!this.placement || !Object.keys(opposites).includes(this.placement)) {
+    if (this.placement && !Object.keys(opposites).includes(this.placement)) {
       throw new Error(
         `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
           Object.keys(opposites)
         )}`
       )
     }
+
+    // if (this.fallbackPlacements && !Object.keys(opposites).includes(this.fallbackPlacements)) {
+    //   throw new Error(
+    //     `Invalid "fallbackPlacements" attribute. Set its value to one of the following:\n${JSON.stringify(
+    //       Object.keys(opposites)
+    //     )}`
+    //   )
+    // }
 
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
@@ -120,15 +134,15 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
    handleDone() {
      window.requestAnimationFrame(() => {
-    if(this._isShowing && this._targetEl && this._attentionEl) {
+    if(this.show && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
           this._actualDirection = state?.actualDirection
-          this._isShowing = state?.isShowing
+          // this._isShowing = state?.isShowing
         })
       } 
       else {
         this._actualDirection = this._initialPlacement
-        this._isShowing = false
+        // this._isShowing = false
       }
     })
   }
@@ -141,13 +155,13 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this.placement = v
   }
 
-  get _isShowing() {
-    return this.show
-  }
+  // get _isShowing() {
+  //   return this.show
+  // }
 
-  set _isShowing(v) {
-    return this.show = v
-  }
+  // set _isShowing(v) {
+  //   return this.show = v
+  // }
 
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow')
@@ -252,19 +266,19 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       if (!this.callout) {
         this._attentionEl.style.setProperty(
           '--attention-visibility',
-          this._isShowing ? '' : 'hidden'
+          this.show ? '' : 'hidden'
         )
       }
   
       if (!this.tooltip) {
         this._attentionEl.style.setProperty(
           '--attention-display',
-          this._isShowing ? 'flex' : 'none'
+          this.show ? 'flex' : 'none'
         )
       }
       
       this.attentionState = {
-        isShowing: this._isShowing,
+        isShowing: this.show,
         isCallout: this.callout,
         actualDirection: this._actualDirection,
         directionName: this.placement, 
@@ -274,9 +288,11 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         noArrow: this.noArrow,
         distance: this.distance,
         skidding: this.skidding,
+        flip: this.flip,
+        fallbackPlacements: this.fallbackPlacements
       }
 
-      // We need to recompute here as well if this._actualDirection gets updated immediately when this._isShowing is true (in this.handleDone()).
+      // We need to recompute here as well if this._actualDirection gets updated immediately when this.show is true (in this.handleDone()).
       // Otherwise this._arrowDirection will get this._initialPlacement's value and will only be updated on next click/scroll/resize
       recompute(this.attentionState)
     }
@@ -375,6 +391,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
   firstUpdated() {
     this._initialPlacement = this.placement
+    console.log("this.fallbackPlacements: ", this.fallbackPlacements);
 
     this.setAriaLabels()
 

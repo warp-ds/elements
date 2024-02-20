@@ -103,6 +103,22 @@
               </td>
               <td>0</td>
             </tr>
+            <tr>
+              <td>flip</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element should flip its position in order to keep it in view.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>fallbackPlacements</td>
+              <td>
+                <div>array</div>
+                <div class="annotation">Choose which preferred placements the Attention element should flip to.</div>
+              </td>
+              <td>opposite placement, ex: placement: "bottom", fallbackPlacements: ["top"] </td>
+            </tr>
           </tbody>
         </table>
 
@@ -110,7 +126,7 @@
 
         <h3 class="mt-24 mb-16">Popover</h3>
         <syntax-highlight>
-          <w-attention placement="bottom" popover>
+          <w-attention placement="bottom" popover flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -123,7 +139,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom" popover>
+          <w-attention placement="bottom" popover flip>
             <button
               id="popoverTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -137,7 +153,7 @@
 
         <h3 class="mt-24 mb-16">Popover with icon as target element</h3>
         <syntax-highlight>
-          <w-attention placement="bottom" popover skidding='-205'>
+          <w-attention placement="bottom-start" popover skidding='-205'>
             <w-button
               id="target"
               quiet
@@ -168,7 +184,7 @@
 
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
-          <w-attention placement="right" tooltip>
+          <w-attention placement="right" tooltip flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -180,7 +196,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" tooltip>
+          <w-attention placement="right" tooltip flip>
             <button
               id="tooltipTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -221,7 +237,7 @@
 
         <h3 class="mt-24 mb-16">Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="right" highlight>
+          <w-attention placement="right" highlight flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -234,7 +250,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" highlight>
+          <w-attention placement="right" highlight flip>
             <button
               id="highlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -249,7 +265,7 @@
 
         <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="right" highlight can-close>
+          <w-attention placement="right" highlight can-close flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -262,7 +278,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" highlight id="dismissibleHighlight" can-close="">
+          <w-attention placement="right" highlight id="dismissibleHighlight" can-close flip>
             <button
               id="dismissibleHighlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
