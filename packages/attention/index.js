@@ -37,7 +37,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     distance: { type: Number, reflect: true },
     // Distance from which to offset the attentionEl along its targetEl horizontally
     skidding: { type: Number, reflect: true },
-    // Whether Attention element should flip its position in order to keep it in view
+    // Whether Attention element should flip its placement in order to keep it in view
     flip: { type: Boolean, reflect: true },
     // Choose which preferred placements the Attention element should flip to
     fallbackPlacements: { type: Array }
