@@ -26,8 +26,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:docs": "vite build",
+    "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
-    "build": "rimraf dist && tsc && vite build --mode lib && pnpm run build:npm",
+    "build": "rimraf dist && rimraf eik && tsc && vite build --mode lib && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",
     "format": "prettier --write . --ignore-path .gitignore",
@@ -53,6 +54,8 @@
     "@babel/core": "7.22.5",
     "@babel/eslint-parser": "7.22.5",
     "@chbphone55/classnames": "2.0.0",
+    "@eik/cli": "^2.0.22",
+    "@eik/esbuild-plugin": "^1.1.43",
     "@lingui/cli": "^4.5.0",
     "@lingui/conf": "^4.5.0",
     "@open-wc/testing": "3.2.0",
@@ -98,6 +101,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "eik": {
+    "server": "https://assets.finn.no",
+    "type": "package",
+    "files": "eik",
+    "import-map": [
+      "https://assets.finn.no/map/custom-elements/v2"
+    ]
   },
   "config": {
     "commitizen": {
