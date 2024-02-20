@@ -1,3 +1,10 @@
+## [1.3.1-next.1](https://github.com/warp-ds/elements/compare/v1.3.0...v1.3.1-next.1) (2024-02-20)
+
+
+### Reverts
+
+* Revert "fix: Remove eik from Elements (#124)" (#133) ([be2644a](https://github.com/warp-ds/elements/commit/be2644a7e5abe71d1bdb09a68ce913fe14fdbbb3)), closes [#124](https://github.com/warp-ds/elements/issues/124) [#133](https://github.com/warp-ds/elements/issues/133)
+
 # [1.3.0](https://github.com/warp-ds/elements/compare/v1.2.2...v1.3.0) (2024-02-15)
 
 
