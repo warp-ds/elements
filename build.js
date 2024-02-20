@@ -1,7 +1,6 @@
 import esbuild from "esbuild";
-import pkg from "glob";
+import { glob } from "glob";
 import * as eik from "@eik/esbuild-plugin";
-const { glob } = pkg;
 
 const components = glob.sync("packages/**/index.js");
 const toastApiPath = "packages/toast/api.js";
