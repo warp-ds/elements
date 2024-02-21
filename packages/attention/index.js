@@ -40,7 +40,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Whether Attention element should flip its placement in order to keep it in view
     flip: { type: Boolean, reflect: true },
     // Choose which preferred placements the Attention element should flip to
-    fallbackPlacements: { type: Array }
+    fallbackPlacements: { type: Array, reflect: true },
   }
 
   static styles = [WarpElement.styles,
@@ -95,13 +95,27 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       )
     }
 
-    // if (this.fallbackPlacements && !Object.keys(opposites).includes(this.fallbackPlacements)) {
-    //   throw new Error(
-    //     `Invalid "fallbackPlacements" attribute. Set its value to one of the following:\n${JSON.stringify(
-    //       Object.keys(opposites)
-    //     )}`
-    //   )
-    // }
+      const acceptedValues = [
+        'top-start',
+        'top',
+        'top-end',
+        'right-start',
+        'right',
+        'right-end',
+        'bottom-start',
+        'bottom',
+        'bottom-end',
+        'left-start',
+        'left',
+        'left-end'];
+
+    if (this.fallbackPlacements && acceptedValues.includes(this.fallbackPlacements)) {
+      throw new Error(
+        `Invalid "fallbackPlacements" attribute. Set its value to an array with one or more of the following:\n${JSON.stringify(
+          acceptedValues
+        )}`
+      )
+    }
 
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
@@ -382,8 +396,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
   firstUpdated() {
     this._initialPlacement = this.placement
-    console.log("this.fallbackPlacements: ", this.fallbackPlacements);
-
     this.setAriaLabels()
 
     // Attention of "callout" type should always be used inline
