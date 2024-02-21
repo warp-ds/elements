@@ -83,7 +83,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.fallbackPlacements = undefined
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
-    // this._isShowing = this.show
   }
   
   connectedCallback() {
@@ -139,12 +138,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     if(this.show && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
           this._actualDirection = state?.actualDirection
-          // this._isShowing = state?.isShowing
         })
       } 
       else {
         this._actualDirection = this._initialPlacement
-        // this._isShowing = false
       }
     })
   }
@@ -156,14 +153,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   set _actualDirection(v) {
       this.placement = v
   }
-
-  // get _isShowing() {
-  //   return this.show
-  // }
-
-  // set _isShowing(v) {
-  //   return this.show = v
-  // }
 
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow')
