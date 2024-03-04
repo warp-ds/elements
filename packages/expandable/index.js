@@ -48,9 +48,9 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     }
   }
 
-  // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
+  // Slotted elements remain in lightDOM which allows for control of their style outside shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
-  // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
+  // so never gets higher Specificity. Thus, in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
     WarpElement.styles,
@@ -59,7 +59,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
         display: block;
       }
       ::slotted(:last-child) {
-        margin-bottom: 0px !important;
+        margin-bottom: 0 !important;
       }
       `,
   ]
@@ -105,6 +105,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       class=${fclasses({
         [ccExpandable.expandable]: true,
         [ccExpandable.expandableBox]: this.box,
+        [ccExpandable.expandableInfo]: this.info,
         [ccExpandable.expandableBleed]: this.bleed,
       })}
     >
