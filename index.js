@@ -9,6 +9,7 @@ export * from './packages/button';
 export * from './packages/card';
 export * from './packages/expandable';
 export * from './packages/pill';
+export * from './packages/icon/warp-icon';
 export * from './packages/select';
 export * from './packages/textfield';
 export * from './packages/toast/api';
