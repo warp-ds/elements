@@ -5,6 +5,7 @@ import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
+  directions,
   useRecompute as recompute
 } from '@warp-ds/core/attention'
 import { i18n } from '@lingui/core'
@@ -70,7 +71,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.handleDone = this.handleDone.bind(this)
 
     this.show = false
-    this.placement = "bottom"
+    this.placement = 'bottom'
     this.tooltip = false
     this.callout = false
     this.popover = false
@@ -94,25 +95,11 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         )}`
       )
     }
-
-      const acceptedValues = [
-        'top-start',
-        'top',
-        'top-end',
-        'right-start',
-        'right',
-        'right-end',
-        'bottom-start',
-        'bottom',
-        'bottom-end',
-        'left-start',
-        'left',
-        'left-end'];
-
-    if (this.fallbackPlacements && acceptedValues.includes(this.fallbackPlacements)) {
+    
+    if (this.fallbackPlacements && !this.fallbackPlacements.every(fallbackPlacement => directions.includes(fallbackPlacement))) {
       throw new Error(
         `Invalid "fallbackPlacements" attribute. Set its value to an array with one or more of the following:\n${JSON.stringify(
-          acceptedValues
+          directions
         )}`
       )
     }
