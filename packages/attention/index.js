@@ -6,6 +6,7 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import {
   opposites,
   directions,
+  arrowDirectionClassname,
   useRecompute as recompute
 } from '@warp-ds/core/attention'
 import { i18n } from '@lingui/core'
@@ -163,23 +164,10 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     return opposites[this._actualDirection]
   }
 
-  get _arrowDirectionClass() {
-    let direction;
-    if (/-/.test(this._arrowDirection)) {
-      direction = this._arrowDirection
-      .split('-')
-        .map((d) => d.charAt(0).toUpperCase() + d.slice(1))
-        .join('')
-    } else {
-      direction = this._arrowDirection?.charAt(0).toUpperCase() + this._arrowDirection?.slice(1)
-    }
-    return `arrowDirection${direction}`
-  }
-
   get _arrowClasses() {
     return classes({
       [ccAttention.arrowBase]: true,
-      [ccAttention[this._arrowDirectionClass]]: true,
+      [ccAttention[`arrowDirection${arrowDirectionClassname(this._arrowDirection)}`]]: true,
       [this._activeVariantClasses.arrow]: true
     });
   }
