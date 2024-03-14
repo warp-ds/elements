@@ -108,7 +108,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     // Fix FOUC effect issues
     setTimeout(() => this.requestUpdate(), 0)
 
-    if (this.flip) {
       if (!this.callout) {
         window.addEventListener('click', this.handleDone);
         window.addEventListener('scroll', this.handleDone);
@@ -120,7 +119,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         window.addEventListener('mouseover', this.handleDone)
         window.addEventListener('mouseout', this.handleDone)
       }
-    }
   }
 
   disconnectedCallback() {
