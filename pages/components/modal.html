@@ -43,7 +43,7 @@
 
         <syntax-highlight>
           <w-modal>
-            <w-modal-title-bar slot="header" title="An example modal"></w-modal-title-bar>
+            <w-modal-header slot="header" title="An example modal"></w-modal-header>
             <div slot="content">
               <p>Wu-Tang is forever</p>
             </div>
@@ -56,8 +56,11 @@
         <div class="example">
           <w-button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</w-button>
           <w-modal id="example-modal-one">
-            <w-modal-title-bar slot="header" title="An example modal"></w-modal-title-bar>
+            <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
             <div slot="content">
+              <div class="mb-12">
+                <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
+              </div>
               <p>I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous Ultra-violet shine blind forensics I inspect view through the future see millennium Killa Beez sold fifty gold, sixty platinum Shackling the masses with drastic rap tactics Graphic displays melt the steel like blacksmiths Black Wu jackets, Queen Beez ease the guns in Rumble with patrolmen, tear gas laced the function Heads by the score take flight, incite a war Chicks hit the floor, diehard fans demand more Behold the bold soldier, control the globe slowly Proceeds to blow, swingin' swords like Shinobi Stomp grounds and pound footprints in solid rock Wu got it locked, performin' live on your hottest block</p>
               <p>First I'm gonna getcha, once I gotcha, I gat-cha, You could never capture the Method Man's stature. So uhh, tic toc and keep ticking, while I get you flipping off what I'm kicking. Yes, the rhythm, the rebel, alone in my level heat it up past the boiling point of metal. Shackling the masses with drastic rap tactics, graphic displays melt the steel like blacksmiths. My beats travel like a vortex through your spine, to the top of your cerebral cortex. Yes, the rhythm, the rebel, alone in my level heat it up past the boiling point of metal. Small change, they putting shame in the game. Murderous material, made by a madman, it's the mic wrecker, Inspector, bad man.</p>
               <p>My beats travel like a vortex through your spine, to the top of your cerebral cortex. The rebel, I make more noise than heavy metal. Now, lo and behold, another deadly episode, bound to catch another charge when I explode Perpendicular to the square we stay in gold like Flair, escape from your dragon's lair in particular. Handcuffed in the back of a bus, forty of us. Slammin a hype verse til ya head burst. Handcuffed in the back of a bus, forty of us. I bomb atomically Socrates' philosophies and hypothesis can't define how I be dropping these mockeries. I be that insane one from the psycho ward, I'm on the trigger, plus I got the Wu-Tang sword. Step through your section with the Force like Luke Skywalker, rhyme author, orchestrate mind torture.</p>
@@ -73,11 +76,9 @@
 
         <syntax-highlight>
           <w-modal>
-            <w-modal-title-close slot="header"></w-modal-title-close>
-            <img slot="top" class="h-[256] object-cover" src="https://source.unsplash.com/random?dog" alt="a picture of a dog">
-            <div slot="content">
-              <h1>Look a doggo!</h1>
-            </div>
+            <w-modal-header slot="header" title="Look a doggo!">
+              <img slot="top" class="h-[256] w-full object-cover" src="https://source.unsplash.com/random?dog" alt="a picture of a dog">
+            </w-modal-header>
             <w-modal-footer slot="footer">
               <w-button variant="primary">OK</w-button>
             </w-modal-footer>
@@ -87,11 +88,9 @@
         <div class="example">
           <w-button id="modal-open-button-two" aria-haspopup="dialog">Open a modal</w-button>
           <w-modal id="example-modal-two">
-            <w-modal-title-close slot="header"></w-modal-title-close>
-            <img slot="top" class="h-[256] object-cover" src="https://source.unsplash.com/random?dog" alt="a picture of a dog">
-            <div slot="content">
-              <h1>Look a doggo!</h1>
-            </div>
+            <w-modal-header slot="header" title="Look a doggo!">
+              <img slot="top" class="h-[256] w-full object-cover" src="https://source.unsplash.com/random?dog" alt="a picture of a dog">
+            </w-modal-header>
             <w-modal-footer slot="footer">
               <w-button variant="primary" id="modal-close-button-two">OK</w-button>
             </w-modal-footer>
@@ -101,9 +100,15 @@
         <script>
           const openButtonOne = document.querySelector('#modal-open-button-one')
           const closeButtonOne = document.querySelector('#modal-close-button-one')
+          const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one')
           const modalOne = document.querySelector('#example-modal-one')
+          const modalHeaderOne = document.querySelector('#modal-header-one')
+          console.log({ modalHeaderOne })
           openButtonOne.addEventListener('click', () => modalOne.open())
           closeButtonOne.addEventListener('click', () => modalOne.close())
+          toggleBackButtonOne.addEventListener('click', () => {
+            modalHeaderOne.back = !modalHeaderOne.back
+          })
 
           const openButtonTwo = document.querySelector('#modal-open-button-two')
           const closeButtonTwo = document.querySelector('#modal-close-button-two')
