@@ -32,10 +32,14 @@ export const modalV2 = {
   titleBarSlot: `pt-${mobileBorderPadding} sm:pt-${borderPadding} px-${mobileBorderPadding} sm:px-${borderPadding} grid gap-12 grid-cols-[auto_1fr_auto] items-start shrink-0`,
   // the X icon should align with the top of the title-text and the right-margin of the modal - hence the negative margin to compensate for the pill's size
   titleButton: `sm:min-h-[32px] sm:min-w-[32px] min-h-[40px] min-w-[40px]`,
+  titleButtonLeft: `sm:-mt-8 sm:-ml-8 -mt-12 -ml-12`,
   titleButtonRight: `sm:-mt-8 sm:-mr-8 -mt-12 -mr-12`,
   titleBarButton: `${buttonTextSizes.medium} ${buttonTypes.pill} ${buttonColors.pill}`,
-  // TODO - col-span-2 - missing feedback from Design on how 'back' button should be approached in this v2
-  titleBarText: 'mb-0 h3 col-span-2',
+  titleBarText: 'mb-0 h3',
+  titleTextWithBackButton: 'justify-self-center',
+  titleTextWithoutBackButton: 'col-span-2',
+  // pt-12 here needed because 'gap-12' that normally handles spacing won't affect this element
+  titleTextWithTopArea: `pt-12 px-${mobileBorderPadding} sm:px-${borderPadding}`,
   titleCloseSlot: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10`,
   // TODO - missing colors from Design
   titleCloseButton: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10 ${buttonTextSizes.medium} ${buttonTypes.pill} something-something-colors`,
