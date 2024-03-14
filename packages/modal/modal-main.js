@@ -49,8 +49,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     return html`
       <dialog ${ref(this.dialogEl)} class="w-modal ${cc.dialogEl}">
         <div ${ref(this.dialogInnerEl)} class="${cc.dialogInner}">
-          <slot name="top" @slotchange="${this.handleSlotChange}"></slot>
-          <slot name="title" @slotchange="${this.handleSlotChange}"></slot>
+          <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
           <div ${ref(this.contentEl)} class="${cc.contentSlot}">
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
@@ -138,6 +137,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
         to { background: transparent; }
       }
     `,
-    WarpElement.styles
+    WarpElement.styles,
+    css`@unocss-placeholder`
   ]
 }
