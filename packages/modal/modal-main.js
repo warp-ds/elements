@@ -6,6 +6,7 @@ import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll
 import WarpElement from '@warp-ds/elements-core'
 
 const NO_BACKDROP_CLICKS = 'ignore-backdrop-clicks'
+const CONTENT_ID = 'content-id'
 
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   dialogEl = createRef()
@@ -14,6 +15,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   static properties = {
     show: { type: Boolean },
+    [CONTENT_ID]: { type: String },
     [NO_BACKDROP_CLICKS]: { type: Boolean }
   }
 
@@ -50,7 +52,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
       <dialog ${ref(this.dialogEl)} class="w-modal ${cc.dialogEl}">
         <div ${ref(this.dialogInnerEl)} class="${cc.dialogInner}">
           <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
-          <div ${ref(this.contentEl)} class="${cc.contentSlot}">
+          <div ${ref(this.contentEl)} class="${cc.contentSlot}" id=${this[CONTENT_ID]}>
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
           <slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
