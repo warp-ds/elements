@@ -1,9 +1,13 @@
 import { CanCloseMixin } from './util.js'
 import WarpElement from '@warp-ds/elements-core'
 import { html, css, nothing } from 'lit'
+import { createRef, ref } from 'lit/directives/ref.js'
 import { modalV2 as cc } from './component-classes.js'
+import { Move } from '@itsy/animate/move'
 
 export class ModalHeader extends CanCloseMixin(WarpElement) {
+  titleEl = createRef()
+
   static properties = {
     title: { type: String },
     back: { type: Boolean },
@@ -19,7 +23,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
         <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
         <div class="${!this._hasTopContent && cc.titleBarSlot}">
           ${this.backButton}
-          <h1 class="${this.titleClasses}">${this.title}</h1>
+          <h1 ${ref(this.titleEl)} class="${this.titleClasses}">${this.title}</h1>
           ${this._hasTopContent ? this.topCloseButton : this.normalCloseButton}
         </div>
       </div>
@@ -27,8 +31,10 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   }
   async willUpdate(changedProperties) {
     if (changedProperties.has('back')) {
-      await this.updateComplete
-      console.log("BACKED")
+      const move = new Move(this.titleEl.value)
+      move.when(async () => {
+        await this.updateComplete
+      })
     }
   }
   get titleClasses() {
