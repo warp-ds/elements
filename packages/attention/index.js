@@ -57,11 +57,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       :host([popover]:not(:popover-open):not(dialog[open])) {
         display: contents;
       }
-
-      #arrow {
-        border-top-left-radius: 4px;
-        z-index: 1;
-      }
     `,
   ]
 
