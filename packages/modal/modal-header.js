@@ -49,7 +49,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   }
   get backButton() {
     return this.back ? html`
-      <button class="${cc.titleButton} ${cc.titleBarButton} ${cc.titleButtonLeft}" @click="${this.emitBack}">
+      <button type="button" class="${cc.titleButton} ${cc.titleBarButton} ${cc.titleButtonLeft}" @click="${this.emitBack}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" class="s-icon"><title>Leftward-pointing arrow</title><path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M5.222 8h6.667"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.444 11.75 4.111 8l3.333-3.75"></path></svg>
       </button>`
     : nothing
@@ -62,7 +62,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
       this._hasTopContent ? cc.titleCloseButton : cc.titleBarButton
     ].join(' ')
     return html`
-      <button class="${classes}" @click="${this.close}">
+      <button type="button" class="${classes}" @click="${this.close}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.5 3.5-9 9M3.5 3.5l9 9"></path></svg>
       </button>`
   }
