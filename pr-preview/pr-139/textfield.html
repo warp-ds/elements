@@ -1,0 +1,598 @@
+<html lang="en">
+  <head>
+  <title>Warp Elements</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+
+  <style>
+    html { font-size: 62.5%; }
+
+    main {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      margin: 24px;
+    }
+
+    main code:not(:where(.example *)),
+    main kbd:not(:where(.example *)),
+    main pre:not(:where(.example *)),
+    main samp:not(:where(.example *)) {
+      font-family: monospace, monospace;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+
+    main [type='button'],
+    main [type='reset'],
+    main [type='submit'] {
+      -webkit-appearance: button;
+    }
+
+    main > div:not(:where(.example *)) {
+      margin-bottom: 16px;
+    }
+
+    main > div + .example {
+      margin-top: -16px;
+    }
+
+    main code:not(:where(.example *)) {
+      padding: 3px 5px;
+      margin: 0;
+      font-size: 90% !important;
+      background-color: rgba(175, 184, 193, 0.2);
+      border-radius: 6px;
+    }
+
+    main .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+    }
+
+    main .example-controls {
+      background: #f1f5f9;
+      margin: 32px -32px -32px;
+      padding: 8px 8px 8px 12px;
+    }
+
+    main h4:not(:where(.example *)),
+    main h5:not(:where(.example *)),
+    main h6:not(:where(.example *)) {
+      margin-bottom: 12px;
+    }
+
+    main h1:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:first-child):not(:where(.example *)) {
+      margin-top: 48px;
+    }
+
+    main h3:not(:where(.example *)) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    main ul:not(:where(.example *)),
+    main dl:not(:where(.example *)) {
+      padding-bottom: 16px;
+    }
+
+    main ul:not(:where(.example *)) {
+      list-style-type: disc;
+      list-style-position: inside;
+      padding-left: 24px;
+      padding-top: 8px;
+    }
+
+    main ol:not(:where(.example *)) {
+      list-style-type: decimal;
+      list-style-position: inside;
+    }
+
+    main ul li:not(:where(.example *)) {
+      padding-bottom: 4px;
+      padding-left: 16px;
+      list-style-type: square;
+    }
+
+    main table:not(:where(.example *)) {
+      margin-top: 16px;
+      padding: 0;
+      width: 100%;
+    }
+
+    main table tr:not(:where(.example *)) {
+      border-top: 1px;
+      border-color: #d4d4d4;
+      background: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    main table th:not(:where(.example *)),
+    main table td:not(:where(.example *)) {
+      border: 1px solid #d4d4d4;
+      color: #767676;
+      background: white;
+      margin: 0;
+      font-size: 13px;
+      text-align: left;
+
+      border-left: none;
+      border-right: none;
+      padding: 10px 16px;
+    }
+
+    /** monospace fonts for all columns except the description column */
+    main table td:not(:last-child):not(:where(.example *)) {
+      font-size: 12px;
+    }
+
+    /** no bottom margin for the last paragraph in the cell */
+    main table td p:last-child:not(:where(.example *)) {
+      margin-bottom: 0;
+    }
+
+    main table th:not(:where(.example *)) {
+      font-size: 11px;
+      text-transform: uppercase;
+      vertical-align: top;
+    }
+
+    /** links to types should keep their colors */
+    main table td:not(:last-child) a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main table a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main pre:not(:where(div *)) {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    main strong:not(:where(.example *)) {
+      font-weight: bold;
+    }
+
+    main hr:not(:where(.example *)) {
+      border-style: none;
+      color: #d4d4d4;
+      height: 4px;
+      padding: 0;
+    }
+
+    .docs-table {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .docs-table tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .docs-table th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .docs-table th,
+    .docs-table td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+
+    .doc-advanced {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .doc-advanced tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .doc-advanced thead th {
+      font-size: 20px;
+      text-align: left;
+      padding: 24px 16px;
+      font-weight: normal;
+    }
+
+    .doc-advanced tbody th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .doc-advanced tbody th,
+    .doc-advanced tbody td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+    .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      margin-top: -20px;
+    }
+    .grid-example {
+      padding: 16px;
+      border: 1px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      background-color: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"
+    integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
+    crossorigin="anonymous"
+  ></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-BaIIRbUx.js"></script>
+  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-0RZy_NnV.css">
+</head>
+  <body>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Textfield</h1>
+        <p>A single line text input element.</p>
+
+        <h2 class="mt-24 mb-16">Textfield Attributes</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>disabled</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether the input is disabled.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>invalid</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in an invalid state. Often paired together with help-text to
+                  provide feedback about the error.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>help-text</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to display as the help text.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The content to display as the label.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>min</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  Standard input min attribute, to be used with type="number". See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>max</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  Standard input max attribute, to be used with type="number". See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>min-length</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  The minimum number of characters supported by the input. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>max-length</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">
+                  The maximum number of characters supported by the input. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>name</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  The name of the input element, used when submitting an HTML form. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>pattern</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Regex pattern that the value of the input must match to be valid. See MDN.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Text hint that occupies the text input when it is empty.
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>read-only</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Whether the input can be selected but not changed by the user.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Whether user input is required on the input before form submission.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">The type of input to render. See MDN.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">The current value.</div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Affix Attributes</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>aria-label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Defines a string value that labels the affix element.</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>clear</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Displays a clear icon.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>search</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Displays a search icon.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Displays a string</div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Validation</h2>
+
+        Text fields can communicate to the user whether the current value is invalid. Implement your
+        own validation logic in your app and set the error prop to display it as invalid. <i>error</i> is
+        often paired with <i>help-text</i> to provide feedback to the user about the error.
+
+        <syntax-highlight>
+          <w-textfield label="Email" invalid help-text="Ugyldig e-post"></w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield label="Email" invalid help-text="Ugyldig e-post"></w-textfield>
+        </div>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3 class="mt-24 mb-16">Placeholder</h3>
+        <syntax-highlight>
+          <w-textfield label="E-post" placeholder="puse@finn.no"></w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield label="E-post" placeholder="puse@finn.no"></w-textfield>
+        </div>
+        Placeholder text can be used to describe the expected value or formatting for the w-textfield.
+        Placeholder text will only appear when the w-textfield is empty, and should not be used as a
+        substitute for labeling the element with a visible label.
+
+        <h3 class="mt-24 mb-16">Disabled</h3>
+        Keep in mind that using disabled in its current form is an anti-pattern. There will ALWAYS
+        be users who don't understand why an element is disabled, or users who can't even see that
+        it is disabled because of poor lighting conditions or other reasons. Please consider more
+        informative alternatives before choosing to use disabled on an element.
+        <syntax-highlight>
+          <div class="flex flex-col space-y-32">
+            <w-textfield label="E-post" disabled value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" disabled></w-textfield>
+          </div>
+        </syntax-highlight>
+        <div class="example">
+          <div class="flex flex-col space-y-32">
+            <w-textfield label="E-post" disabled value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" disabled></w-textfield>
+          </div>
+        </div>
+
+        <h3 class="mt-24 mb-16">Affix</h3>
+        If you wish to use an affix you must first use the w-affix element in conjunction with
+        w-textfield. Include the affix as a child of w-textfield and set the appropiate attributes.
+        You must specify which slot to set the affix into (either prefix or suffix).
+        <syntax-highlight>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="suffix" label="kr"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="suffix" label="kr"></w-affix>
+          </w-textfield>
+        </div>
+        <syntax-highlight>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+          </w-textfield>
+        </div>
+        <syntax-highlight>
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield class="[--w-prefix-width:90px]" label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="Long prefix"></w-affix>
+          </w-textfield>
+        </div>
+
+        You can also use both a prefix and suffix
+        <syntax-highlight>
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+            <w-affix slot="suffix" search aria-label="Search"></w-affix>
+          </w-textfield>
+        </syntax-highlight>
+        <div class="example">
+          <w-textfield label="Price" placeholder="1 000 000">
+            <w-affix slot="prefix" label="kr"></w-affix>
+            <w-affix slot="suffix" search aria-label="Search"></w-affix>
+          </w-textfield>
+        </div>
+
+        <h3 class="mt-24 mb-16">Read only</h3>
+
+        The read-only boolean attribute makes the w-textfield's text content immutable. Unlike
+        disabled the w-textfield remains focusable and the contents can still be copied. See the MDN
+        docs for more information.
+
+        <syntax-highlight>
+          <div class="flex flex-col space-y-32">
+            <w-textfield label="E-post" read-only value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" read-only></w-textfield>
+          </div>
+        </syntax-highlight>
+        <div class="example">
+          <div class="flex flex-col space-y-32">
+            <w-textfield label="E-post" read-only value="puse@finn.no"></w-textfield>
+            <w-textfield label="E-post" read-only></w-textfield>
+          </div>
+        </div>
+      </main>
+    </div>
+      <script data-for="footer" type="application/json">
+  {
+    "github": {
+      "name": "Github",
+      "href": "https://github.com/warp-ds/elements"
+    },
+    "slack": {
+      "name": "#npm-warp",
+      "href": "https://sch-chat.slack.com/archives/C04P0GYTHPV"
+    }
+  }
+</script>
+
+  </body>
+</html>
