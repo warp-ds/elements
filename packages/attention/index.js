@@ -77,7 +77,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.distance = 8
     this.skidding = 0
     this.flip = false
-    this.fallbackPlacements = undefined
     this._initialPlacement = this.placement
     this._actualDirection = this.placement
   }
