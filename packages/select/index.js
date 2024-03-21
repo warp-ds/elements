@@ -49,17 +49,11 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     });
   }
 
-  get #labelClasses() {
-    return classNames({
-      [ccLabel.label]: true,
-      [ccLabel.labelInvalid]: this.invalid,
-    });
-  }
-
   get #helpTextClasses() {
     return classNames({
       [ccHelpText.helpText]: true,
-      [ccHelpText.helpTextInvalid]: this.invalid,
+      [ccHelpText.helpTextColor]: !this.invalid,
+      [ccHelpText.helpTextColorInvalid]: this.invalid,
     });
   }
 
@@ -90,7 +84,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="${this.#labelClasses}" for="${this.#id}">
+          html`<label class="${ccLabel.label}" for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,
