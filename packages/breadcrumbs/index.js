@@ -8,9 +8,7 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { activateI18n } from '../i18n';
-const separator = html`<span class=${ccBreadcrumbs.separator}
-  >/</span
->`;
+const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];
@@ -26,8 +24,7 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
     this.ariaLabel = i18n._({
       id: 'breadcrumbs.ariaLabel',
       message: 'You are here',
-      comment:
-        'Default screenreader message for the breadcrumb component',
+      comment: 'Default screenreader message for the breadcrumb component',
     });
   }
 
@@ -40,17 +37,9 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
     const styledChildren = flattenedChildren.map((child, index) => {
       if (typeof child === 'string') {
         const isLastEl = index === children.length - 1;
-        return html`<span
-          class=${ccBreadcrumbs.text}
-          aria-current=${isLastEl ? 'page' : undefined}
-          >${child}</span
-        >`;
+        return html`<span class=${ccBreadcrumbs.text} aria-current=${isLastEl ? 'page' : undefined}>${child}</span>`;
       }
-      child.classList.add(
-        child.tagName === 'A'
-          ? ccBreadcrumbs.link
-          : ccBreadcrumbs.text
-      );
+      child.classList.add(child.tagName === 'A' ? ccBreadcrumbs.link : ccBreadcrumbs.text);
       return child;
     });
 
@@ -61,9 +50,7 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
   render() {
     return html`
       <nav aria-labelledby="breadCrumbLabel">
-        <h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>
-          ${this.ariaLabel}
-        </h2>
+        <h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>${this.ariaLabel}</h2>
         <div class=${ccBreadcrumbs.wrapper}>${this._children}</div>
       </nav>
     `;

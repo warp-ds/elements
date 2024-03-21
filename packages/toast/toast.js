@@ -4,15 +4,15 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import { expand, collapse } from 'element-collapse';
-import '@warp-ds/icons/elements/warning-16'
-import '@warp-ds/icons/elements/error-16'
-import '@warp-ds/icons/elements/success-16'
-import '@warp-ds/icons/elements/close-16'
-import { i18n } from '@lingui/core'
-import { messages as enMessages } from './locales/en/messages.mjs'
-import { messages as nbMessages } from './locales/nb/messages.mjs'
-import { messages as fiMessages } from './locales/fi/messages.mjs'
-import { activateI18n } from '../i18n'
+import '@warp-ds/icons/elements/warning-16';
+import '@warp-ds/icons/elements/error-16';
+import '@warp-ds/icons/elements/success-16';
+import '@warp-ds/icons/elements/close-16';
+import { i18n } from '@lingui/core';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { activateI18n } from '../i18n';
 
 const classes = (definition) => {
   const defn = {};
@@ -28,10 +28,11 @@ const toastType = {
   success: 'success',
   error: 'error',
   warning: 'warning',
-}
+};
 
 export class WarpToast extends WarpElement {
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
@@ -80,7 +81,7 @@ export class WarpToast extends WarpElement {
   get _iconClasses() {
     return classes({
       [ccToast.icon]: true,
-      [ccToast.iconPositive]: this.type == toastType.success,
+      [ccToast.iconPositive]: this.type === toastType.success,
       [ccToast.iconWarning]: this.type === toastType.warning,
       [ccToast.iconNegative]: this.type === toastType.error,
     });
@@ -103,24 +104,26 @@ export class WarpToast extends WarpElement {
   }
 
   get _typeLabel() {
-    if (this._warning) return i18n._({
-      id: 'toast.aria.warning',
-      message: 'Warning',
-      comment:
-        'Default screenreader message for warning in toast component',
-    });
-    if (this._error) return i18n._({
-      id: 'toast.aria.error',
-      message: 'Error',
-      comment:
-        'Default screenreader message for error in toast component',
-    });
-    return i18n._({
-      id: 'toast.aria.successful',
-      message: 'Successful',
-      comment:
-        'Default screenreader message for successful in toast component',
-    });
+    if (this._warning) {
+      return i18n._({
+        id: 'toast.aria.warning',
+        message: 'Warning',
+        comment: 'Default screenreader message for warning in toast component',
+      });
+    }
+    if (this._error) {
+      return i18n._({
+        id: 'toast.aria.error',
+        message: 'Error',
+        comment: 'Default screenreader message for error in toast component',
+      });
+    } else {
+      return i18n._({
+        id: 'toast.aria.successful',
+        message: 'Successful',
+        comment: 'Default screenreader message for successful in toast component',
+      });
+    }
   }
 
   get _iconMarkup() {
