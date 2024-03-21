@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2) (2024-03-21)
+
+
+### Bug Fixes
+
+* use correct colors in label and error text ([#139](https://github.com/warp-ds/elements/issues/139)) ([c9045fd](https://github.com/warp-ds/elements/commit/c9045fd733aa64395fdb50b52a6329e9ae774c03))
+
 ## [1.3.2-next.1](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2-next.1) (2024-03-21)
 
 
