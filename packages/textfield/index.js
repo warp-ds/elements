@@ -66,20 +66,14 @@ class WarpTextField extends WarpElement {
   get _helpTextStyles() {
     return fclasses({
       [h.helpText]: true,
-      [h.helpTextInvalid]: this.invalid,
-    });
-  }
-
-  get _labelStyles() {
-    return fclasses({
-      [l.label]: true,
-      [l.labelInvalid]: this.invalid,
+      [h.helpTextColor]: !this.invalid,
+      [h.helpTextColorInvalid]: this.invalid,
     });
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${this._labelStyles}>${this.label}</label>`;
+      return html`<label for="${this._id}" class=${l.label}>${this.label}</label>`;
     }
   }
 
