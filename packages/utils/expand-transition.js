@@ -53,7 +53,8 @@ class ExpandTransition extends WarpElement {
     return this ?? null;
   }
 
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
@@ -62,9 +63,7 @@ class ExpandTransition extends WarpElement {
   ];
 
   render() {
-    return html`<div aria-hidden=${ifDefined(!this.show ? 'true' : undefined)}>
-      ${this._removeElement ? html`` : html`<slot></slot>`}
-    </div>`;
+    return html`<div aria-hidden=${ifDefined(!this.show ? 'true' : undefined)}>${this._removeElement ? html`` : html`<slot></slot>`}</div>`;
   }
 }
 
