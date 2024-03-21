@@ -143,33 +143,13 @@ test('Box component with paragraph child elements', async (t) => {
 
   // THEN: there should be three paragraphs in the DOM
   t.equal(await page.locator('w-box p').count(), 3, '3 p tags should be present');
-  t.match(
-    await page.innerText(':nth-match(w-box p, 1)'),
-    'Paragraph 1',
-    'The first text should be "Paragraph 1"',
-  );
-  t.match(
-    await page.innerText(':nth-match(w-box p, 3)'),
-    'Paragraph 3',
-    'The third text should be "Paragraph 3"',
-  );
+  t.match(await page.innerText(':nth-match(w-box p, 1)'), 'Paragraph 1', 'The first text should be "Paragraph 1"');
+  t.match(await page.innerText(':nth-match(w-box p, 3)'), 'Paragraph 3', 'The third text should be "Paragraph 3"');
 
   const secondElement = await page.locator('#second');
   const lastElement = await page.locator('#last');
 
-  t.match(
-    await lastElement.evaluate((el) => {
-      return window.getComputedStyle(el).getPropertyValue('margin-bottom');
-    }),
-    '0px',
-    'Bottom margin of last paragraph should be 0px',
-  );
+  t.match(await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '0px', 'Bottom margin of last paragraph should be 0px');
 
-  t.match(
-    await secondElement.evaluate((el) => {
-      return window.getComputedStyle(el).getPropertyValue('margin-bottom');
-    }),
-    '8px',
-    'Bottom margin of second paragraph should be 8px',
-  );
+  t.match(await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '8px', 'Bottom margin of second paragraph should be 8px');
 });

@@ -126,9 +126,5 @@ test('Select renders with autofocus', async (t) => {
   // THEN: the component is visible in the DOM
   const locator = await page.locator('w-select');
 
-  t.equal(
-    await locator.evaluate((el) => document.activeElement === el),
-    true,
-    'Select should be focused on render',
-  );
+  t.equal(await locator.evaluate((el) => document.activeElement === el), true, 'Select should be focused on render');
 });

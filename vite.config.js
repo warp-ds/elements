@@ -41,7 +41,7 @@ export default ({ mode }) => {
   };
 
   function getBuildOpts(mode) {
-    if (mode === 'production')
+    if (mode === 'production') {
       return defineConfig({
         build: {
           target: 'esnext',
@@ -51,7 +51,8 @@ export default ({ mode }) => {
           },
         },
       });
-    if (mode === 'lib')
+    }
+    if (mode === 'lib') {
       return defineConfig({
         build: {
           emptyOutDir: false,
@@ -63,19 +64,22 @@ export default ({ mode }) => {
           rollupOptions: { external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/] },
         },
       });
+    }
   }
 
   return {
     base: isProduction ? '/elements/' : '',
     plugins: [
-      mode !== 'lib' && uno({
-        presets: [presetWarp()],
-      }),
-      mode === 'development' && uno({
-        mode: 'shadow-dom',
-        presets: [presetWarp()],
-        safelist: classes,
-      }),
+      mode !== 'lib' &&
+        uno({
+          presets: [presetWarp()],
+        }),
+      mode === 'development' &&
+        uno({
+          mode: 'shadow-dom',
+          presets: [presetWarp()],
+          safelist: classes,
+        }),
       mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
@@ -153,12 +157,13 @@ export default ({ mode }) => {
           ],
         }),
       isProduction && basePathFix(),
-      mode === 'development' && topLevelAwait({
-        // The export name of top-level await promise for each chunk module
-        promiseExportName: '__tla',
-        // The function to generate import names of top-level await promise in each chunk module
-        promiseImportName: i => `__tla_${i}`
-      }),
+      mode === 'development' &&
+        topLevelAwait({
+          // The export name of top-level await promise for each chunk module
+          promiseExportName: '__tla',
+          // The function to generate import names of top-level await promise in each chunk module
+          promiseImportName: (i) => `__tla_${i}`,
+        }),
     ],
     ...getBuildOpts(mode),
   };
@@ -168,11 +173,7 @@ function basePathFix() {
   return {
     name: 'base-path-fix',
     transform(src, fileName) {
-      return fileName.includes('navigation-data.js')
-        ? src
-            .replace(/pages\/components\//g, 'elements/')
-            .replace(/'\/'/, '"/elements/"')
-        : src;
+      return fileName.includes('navigation-data.js') ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"') : src;
     },
   };
 }
