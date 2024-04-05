@@ -1,74 +1,54 @@
-import { css, html } from 'lit';
+import { html, nothing } from 'lit';
+import { createRef, ref } from 'lit/directives/ref.js';
+import { Accordion } from '@itsy/animate/accordion';
 import WarpElement from '@warp-ds/elements-core';
-import { collapse, expand } from 'element-collapse';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
-class ExpandTransition extends WarpElement {
-  static properties = {
-    show: {
-      type: Boolean,
-      reflect: true,
-    },
-    _removeElement: { type: Boolean, state: true },
-  };
+export class ExpandTransition extends WarpElement {
+  contentEl = createRef();
 
-  constructor() {
-    super();
-
-    this.show = false;
-    this._mounted = false;
-    this._removeElement = false;
+  static get properties() {
+    return {
+      show: { type: Boolean, reflect: true },
+      _showContent: { state: true },
+    };
   }
-
-  willUpdate() {
-    // Initialise state property with public property value
-    if (!this._mounted) {
-      this._removeElement = !this.show;
-    }
-
-    if (this.show && this._removeElement) {
-      this._removeElement = false;
-    }
-  }
-
-  updated() {
-    if (!this._wrapper) return;
-
-    if (!this._mounted) {
-      this._mounted = true;
-      return;
-    }
-
-    // If show is set to `true` by user, animate only after component is mount
-    if (this.show) {
-      expand(this._wrapper);
-    }
-
-    if (!this.show && !this._removeElement) {
-      collapse(this._wrapper, () => (this._removeElement = true));
-    }
-  }
-
-  get _wrapper() {
-    return this ?? null;
-  }
-
-  static styles = [
-    WarpElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-    `,
-  ];
 
   render() {
-    return html`<div aria-hidden=${ifDefined(!this.show ? 'true' : undefined)}>${this._removeElement ? html`` : html`<slot></slot>`}</div>`;
+    return html`<div ${ref(this.contentEl)}>${this.defaultSlot}</div>`;
+  }
+
+  get defaultSlot() {
+    return this._showContent ? html`<slot></slot>` : nothing;
+  }
+
+  async willUpdate(changedProperties) {
+    if (changedProperties.has('show')) {
+      // element isn't mounted yet, so content can be shown without transition
+      // e.g. if show is true at mount-time
+      if (!this.contentEl.value) {
+        this._showContent = this.show;
+        return;
+      }
+      const accordion = new Accordion(this.contentEl.value);
+      // different handlers are used below for show -> true/false because when collapsing
+      // we want to have content showing _as_ we collapse - where the 'default' would be for content to disappear
+      // and then the collapse animation to happen
+      if (this.show) {
+        // read the height of 0px
+        accordion.expand(async () => {
+          // then populate the content slot before reading the destination height
+          this._showContent = this.show;
+          await this.updateComplete;
+        });
+      }
+      if (!this.show) {
+        // completely collapse the expandable
+        await accordion.collapse();
+        // then remove the content
+        this._showContent = this.show;
+      }
+    }
   }
 }
 
-if (!customElements.get('w-expand-transition')) {
-  customElements.define('w-expand-transition', ExpandTransition);
-}
-
-export { ExpandTransition };
+if (!customElements.get('w-expand-transition')) customElements.define('w-expand-transition', ExpandTransition);
