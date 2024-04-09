@@ -72,21 +72,9 @@ test('Breadcrumb component with anchor child elements', async (t) => {
   // THEN: there should be three breadcrumbs in the DOM
   t.equal(await page.locator('w-breadcrumbs a').count(), 3, '3 a tags should be present');
   t.equal(await page.locator('w-breadcrumbs span').count(), 2, '2 span tags should be present');
-  t.match(
-    await page.innerText(':nth-match(w-breadcrumbs a, 1)'),
-    'Eiendom',
-    'The first segment should be Eiendom',
-  );
-  t.match(
-    await page.innerText(':nth-match(w-breadcrumbs a, 2)'),
-    'Torget',
-    'The second segment should be Torget',
-  );
-  t.match(
-    await page.innerText(':nth-match(w-breadcrumbs a, 3)'),
-    'Oslo',
-    'The third segment should be Oslo',
-  );
+  t.match(await page.innerText(':nth-match(w-breadcrumbs a, 1)'), 'Eiendom', 'The first segment should be Eiendom');
+  t.match(await page.innerText(':nth-match(w-breadcrumbs a, 2)'), 'Torget', 'The second segment should be Torget');
+  t.match(await page.innerText(':nth-match(w-breadcrumbs a, 3)'), 'Oslo', 'The third segment should be Oslo');
 });
 
 test('Breadcrumb component with last element as a span', async (t) => {
@@ -106,11 +94,7 @@ test('Breadcrumb component with last element as a span', async (t) => {
 
   // THEN: there should be three breadcrumbs in the DOM
   t.equal(await page.locator('w-breadcrumbs a').count(), 2, '2 child a tags should be present');
-  t.equal(
-    await page.locator('w-breadcrumbs span').count(),
-    3,
-    '3 child span tags should be present',
-  );
+  t.equal(await page.locator('w-breadcrumbs span').count(), 3, '3 child span tags should be present');
 });
 
 test('Breadcrumb component with custom-styled element', async (t) => {

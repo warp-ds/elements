@@ -1,3 +1,24 @@
+## [1.3.3-next.1](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3-next.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* add warp-ds eslint-config ([#141](https://github.com/warp-ds/elements/issues/141)) ([dd3fec1](https://github.com/warp-ds/elements/commit/dd3fec1b180aa8980274311ac25801a7666dfa43))
+
+## [1.3.2](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2) (2024-03-21)
+
+
+### Bug Fixes
+
+* use correct colors in label and error text ([#139](https://github.com/warp-ds/elements/issues/139)) ([c9045fd](https://github.com/warp-ds/elements/commit/c9045fd733aa64395fdb50b52a6329e9ae774c03))
+
+## [1.3.2-next.1](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2-next.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* use correct colors in label and error text ([#139](https://github.com/warp-ds/elements/issues/139)) ([c9045fd](https://github.com/warp-ds/elements/commit/c9045fd733aa64395fdb50b52a6329e9ae774c03))
+
 ## [1.3.1](https://github.com/warp-ds/elements/compare/v1.3.0...v1.3.1) (2024-02-20)
 
 

@@ -16,7 +16,11 @@ export class SyntaxHighlight extends LitElement {
 
     pre {
       background-color: var(--w-bluegray-50);
-      font-family: Monaco, Ubuntu Mono, Consolas, monospace;
+      font-family:
+        Monaco,
+        Ubuntu Mono,
+        Consolas,
+        monospace;
       font-size: 14px;
       margin: 0;
       padding: 16px;
@@ -52,12 +56,7 @@ export class SyntaxHighlight extends LitElement {
   }
 
   render() {
-    return html` <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
-        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
-        crossorigin="anonymous"
-      />
+    return html` <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
       <slot></slot>
       <pre><code>${unsafeHTML(this.source)}</code></pre>`;
   }

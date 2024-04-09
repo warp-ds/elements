@@ -31,7 +31,8 @@ class WarpTextField extends WarpElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
@@ -40,7 +41,7 @@ class WarpTextField extends WarpElement {
         margin-bottom: 0px !important;
       }
       .warp-input-with-prefix {
-        padding-left:var(--w-prefix-width, 40px);
+        padding-left: var(--w-prefix-width, 40px);
       }
     `,
   ];
@@ -66,20 +67,14 @@ class WarpTextField extends WarpElement {
   get _helpTextStyles() {
     return fclasses({
       [h.helpText]: true,
-      [h.helpTextInvalid]: this.invalid,
-    });
-  }
-
-  get _labelStyles() {
-    return fclasses({
-      [l.label]: true,
-      [l.labelInvalid]: this.invalid,
+      [h.helpTextColor]: !this.invalid,
+      [h.helpTextColorInvalid]: this.invalid,
     });
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${this._labelStyles}>${this.label}</label>`;
+      return html`<label for="${this._id}" class=${l.label}>${this.label}</label>`;
     }
   }
 
@@ -124,33 +119,10 @@ class WarpTextField extends WarpElement {
       ${this._label}
       <div class="${input.wrapper}">
         <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
-        <input
-          class="${this._inputStyles}"
-          type="${this.type}"
-          min="${ifDefined(this.min)}"
-          max="${ifDefined(this.max)}"
-          size="${ifDefined(this.size)}"
-          minlength="${ifDefined(this.minLength)}"
-          maxlength="${ifDefined(this.maxLength)}"
-          name="${ifDefined(this.name)}"
-          pattern="${ifDefined(this.pattern)}"
-          placeholder="${ifDefined(this.placeholder)}"
-          value="${ifDefined(this.value)}"
-          aria-describedby="${ifDefined(this._helpId)}"
-          aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid="${ifDefined(this.invalid)}"
-          id="${this._id}"
-          ?disabled="${this.disabled}"
-          ?readonly="${this.readOnly}"
-          ?required="${this.required}"
-          @blur="${this.handler}"
-          @change="${this.handler}"
-          @focus="${this.handler}"
-        />
+        <input class="${this._inputStyles}" type="${this.type}" min="${ifDefined(this.min)}" max="${ifDefined(this.max)}" size="${ifDefined(this.size)}" minlength="${ifDefined(this.minLength)}" maxlength="${ifDefined(this.maxLength)}" name="${ifDefined(this.name)}" pattern="${ifDefined(this.pattern)}" placeholder="${ifDefined(this.placeholder)}" value="${ifDefined(this.value)}" aria-describedby="${ifDefined(this._helpId)}" aria-errormessage="${ifDefined(this._error)}" aria-invalid="${ifDefined(this.invalid)}" id="${this._id}" ?disabled="${this.disabled}" ?readonly="${this.readOnly}" ?required="${this.required}" @blur="${this.handler}" @change="${this.handler}" @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
-      ${this.helpText &&
-      html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}
+      ${this.helpText && html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}
     `;
   }
 }

@@ -1,14 +1,14 @@
-import "@warp-ds/icons/elements/close-16";
-import { activateI18n } from "../i18n";
-import { classNames } from "@chbphone55/classnames";
-import { html } from "lit";
-import { i18n } from "@lingui/core";
+import '@warp-ds/icons/elements/close-16';
+import { activateI18n } from '../i18n';
+import { classNames } from '@chbphone55/classnames';
+import { html } from 'lit';
+import { i18n } from '@lingui/core';
 import { kebabCaseAttributes } from '../utils';
-import { messages as enMessages } from "./locales/en/messages.mjs";
-import { messages as fiMessages } from "./locales/fi/messages.mjs";
-import { messages as nbMessages } from "./locales/nb/messages.mjs";
-import { pill as ccPill } from "@warp-ds/css/component-classes";
-import WarpElement from "@warp-ds/elements-core";
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { pill as ccPill } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
 
 class WarpPill extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];
@@ -27,15 +27,15 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
     this.suggestion = false;
 
     this.openFilterSrText = i18n._({
-      id: "pill.aria.openFilter",
-      message: "Open filter",
-      comment: "Fallback screenreader message for open filter",
+      id: 'pill.aria.openFilter',
+      message: 'Open filter',
+      comment: 'Fallback screenreader message for open filter',
     });
 
     this.removeFilterSrText = i18n._({
-      id: "pill.aria.removeFilter",
-      message: "Remove filter {label}",
-      comment: "Fallback screenreader message for removal of the filter",
+      id: 'pill.aria.removeFilter',
+      message: 'Remove filter {label}',
+      comment: 'Fallback screenreader message for removal of the filter',
     });
   }
 
@@ -57,39 +57,23 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   }
 
   _onClick() {
-    this.dispatchEvent(new CustomEvent("w-pill-click", { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('w-pill-click', { bubbles: true, composed: true }));
   }
 
   _onClose() {
-    this.dispatchEvent(new CustomEvent("w-pill-close", { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent('w-pill-close', { bubbles: true, composed: true }));
   }
 
   render() {
     return html`
       <div class="${ccPill.pill}">
-        <button
-          type="button"
-          class="${this._labelClasses}"
-          @click="${this._onClick}"
-        >
-          <span class="${ccPill.a11y}"
-            >${this.openSrLabel
-              ? this.openSrLabel
-              : this.openFilterSrText}</span
-          >
+        <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
+          <span class="${ccPill.a11y}">${this.openSrLabel ? this.openSrLabel : this.openFilterSrText}</span>
           <slot></slot>
         </button>
         ${this.canClose
-          ? html`<button
-              type="button"
-              class="${this._closeClasses}"
-              @click="${this._onClose}"
-            >
-              <span class="${ccPill.a11y}"
-                >${this.closeSrLabel
-                  ? this.closeSrLabel
-                  : this.removeFilterSrText}</span
-              >
+          ? html`<button type="button" class="${this._closeClasses}" @click="${this._onClose}">
+              <span class="${ccPill.a11y}">${this.closeSrLabel ? this.closeSrLabel : this.removeFilterSrText}</span>
               <w-icon-close-16></w-icon-close-16>
             </button>`
           : null}
@@ -98,8 +82,8 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   }
 }
 
-if (!customElements.get("w-pill")) {
-  customElements.define("w-pill", WarpPill);
+if (!customElements.get('w-pill')) {
+  customElements.define('w-pill', WarpPill);
 }
 
 export { WarpPill };
