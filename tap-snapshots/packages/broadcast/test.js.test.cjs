@@ -4,7 +4,7 @@
  * Re-generate by setting TAP_SNAPSHOT=1 and running tests.
  * Make sure to inspect the output below.  Do not ignore changes!
  */
-'use strict'
+'use strict';
 exports[`packages/broadcast/test.js TAP Multiple broadcasts > must match snapshot 1`] = `
 
       <aside class="mb-16">
@@ -12,7 +12,7 @@ exports[`packages/broadcast/test.js TAP Multiple broadcasts > must match snapsho
             </w-toast><w-toast class="w-full" type="warning" canclose="" id="broadcast-100384" text="Testing 2">
             </w-toast>
       </aside>
-`
+`;
 
 exports[`packages/broadcast/test.js TAP Single broadcast > must match snapshot 1`] = `
 
@@ -20,4 +20,4 @@ exports[`packages/broadcast/test.js TAP Single broadcast > must match snapshot 1
         <w-toast class="w-full" type="warning" canclose="" id="broadcast-100383" text="Testing">
             </w-toast>
       </aside>
-`
+`;

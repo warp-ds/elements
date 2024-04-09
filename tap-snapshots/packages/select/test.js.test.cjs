@@ -4,12 +4,12 @@
  * Re-generate by setting TAP_SNAPSHOT=1 and running tests.
  * Make sure to inspect the output below.  Do not ignore changes!
  */
-'use strict'
+'use strict';
 exports[`packages/select/test.js TAP Select component with no attributes is rendered on the page > must match snapshot 1`] = `
 
       <option>First option</option>
       <option>Second option</option>
-`
+`;
 
 exports[`packages/select/test.js TAP Select renders label > must match snapshot 1`] = `
 <label for="select_id">
@@ -24,7 +24,7 @@ exports[`packages/select/test.js TAP Select renders label > must match snapshot 
         </select>
       </div>
       
-`
+`;
 
 exports[`packages/select/test.js TAP Select renders with error > must match snapshot 1`] = `
 
@@ -37,7 +37,7 @@ exports[`packages/select/test.js TAP Select renders with error > must match snap
         </select>
       </div>
       <div class="input__sub-text" id="select_id__hint">Something went wrong</div>
-`
+`;
 
 exports[`packages/select/test.js TAP Select renders with hint > must match snapshot 1`] = `
 
@@ -50,4 +50,4 @@ exports[`packages/select/test.js TAP Select renders with hint > must match snaps
         </select>
       </div>
       <div class="input__sub-text" id="select_id__hint">Hello</div>
-`
+`;
