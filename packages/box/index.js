@@ -1,5 +1,5 @@
 import { css, html, nothing } from 'lit';
-import WarpElement from "@warp-ds/elements-core";
+import WarpElement from '@warp-ds/elements-core';
 import { fclasses } from '../utils';
 import { box as ccBox } from '@warp-ds/css/component-classes';
 
@@ -39,7 +39,7 @@ class WarpBox extends WarpElement {
   }
 
   get _optOutRoleWithDefault() {
-    return this.role === '' ? nothing : this.role ?? 'region'
+    return this.role === '' ? nothing : this.role ?? 'region';
   }
 
   render() {
