@@ -40,21 +40,18 @@ class WarpCard extends WarpElement {
     this.clickable = false;
   }
 
-  get _outerClasses() {
+  get _containerClasses() {
     return fclasses({
       [ccCard.card]: true,
       [ccCard.cardShadow]: !this.flat,
-      [this.selected ? ccCard.cardSelected : ccCard.cardUnselected]: !this.flat,
+      [ccCard.cardSelected]: !this.flat && this.selected,
       [ccCard.cardFlat]: this.flat,
       [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]: this.flat,
     });
   }
 
-  get _innerClasses() {
-    return fclasses({
-      [ccCard.cardOutline]: true,
-      [this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]: true,
-    });
+  get _outlineClasses() {
+    return [ccCard.cardOutline, this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected].join(' ');
   }
 
   get uuButton() {
@@ -75,9 +72,9 @@ class WarpCard extends WarpElement {
 
   render() {
     return html`
-      <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._outerClasses}" @keydown=${this.keypressed}>
+      <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
         ${this.clickable ? this.uuButton : ''} ${!this.clickable && this.selected ? this.uuSpan : ''}
-        <div class="${this._innerClasses}"></div>
+        <div class="${this._outlineClasses}"></div>
         <slot></slot>
       </div>
     `;
