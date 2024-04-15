@@ -51,7 +51,10 @@ class WarpCard extends WarpElement {
   }
 
   get _outlineClasses() {
-    return [ccCard.cardOutline, this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected].join(' ');
+    return fclasses({
+      [ccCard.cardOutline]: true,
+      [this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]: true,
+    });
   }
 
   get uuButton() {
