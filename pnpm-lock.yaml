@@ -1,12 +1,16 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@lingui/core':
     specifier: 4.7.1
     version: 4.7.1
   '@warp-ds/core':
-    specifier: 1.0.2
-    version: 1.0.2
+    specifier: 1.1.0
+    version: 1.1.0(@floating-ui/dom@1.6.3)
   '@warp-ds/css':
     specifier: 1.9.3
     version: 1.9.3
@@ -101,7 +105,7 @@ devDependencies:
     version: 5.3.3
   unocss:
     specifier: 0.58.5
-    version: 0.58.5(vite@5.1.4)
+    version: 0.58.5(postcss@8.4.35)(vite@5.1.4)
   vite:
     specifier: 5.1.4
     version: 5.1.4(@types/node@20.11.19)
@@ -564,7 +568,7 @@ packages:
     resolution: {integrity: sha512-h9z1jyz0ueOwNfAPnwjJk3JGCMdm/3TFqGiGi3KqLgx3fhHgKOLmZa9fqGgX0E8arCgN2YavJwHiBCsIKTqEdQ==}
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1(ajv@8.12.0)
       glob: 8.1.0
       is-glob: 4.0.3
       mime-types: 2.1.35
@@ -1239,14 +1243,21 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
-  /@floating-ui/core@0.7.3:
-    resolution: {integrity: sha512-buc8BXHmG9l82+OQXOFU3Kr2XQx9ys01U/Q9HMIrZ300iLc8HLMgh7dcCqgYzAzf4BkoQvDcXf5Y+CuEZ5JBYg==}
+  /@floating-ui/core@1.6.0:
+    resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
+    dependencies:
+      '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/dom@0.5.4:
-    resolution: {integrity: sha512-419BMceRLq0RrmTSDxn8hf9R3VCJv2K9PUfugh5JyEFmdjzDo+e8U5EdR8nzKq8Yj1htzLm3b6eQEEam3/rrtg==}
+  /@floating-ui/dom@1.6.3:
+    resolution: {integrity: sha512-RnDthu3mzPlQ31Ss/BTwQ1zjzIhr3lk1gZB1OC56h/1vEtaXkESrOqL5fQVMfXpwGtRwX+YsZBdyHtJMQnkArw==}
     dependencies:
-      '@floating-ui/core': 0.7.3
+      '@floating-ui/core': 1.6.0
+      '@floating-ui/utils': 0.2.1
+    dev: false
+
+  /@floating-ui/utils@0.2.1:
+    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
@@ -2147,9 +2158,11 @@ packages:
       sirv: 2.0.4
     dev: true
 
-  /@unocss/postcss@0.58.5:
+  /@unocss/postcss@0.58.5(postcss@8.4.35):
     resolution: {integrity: sha512-m4L2YRdYfT6CV306Kl2VwEwbqa/92EpW4GE2Kqak1RuJyFJXBnWEEMJV4Uy6B1jWKLlCEWkuVUW33JUg7X6BxQ==}
     engines: {node: '>=14'}
+    peerDependencies:
+      postcss: ^8.4.21
     dependencies:
       '@unocss/config': 0.58.5
       '@unocss/core': 0.58.5
@@ -2292,10 +2305,12 @@ packages:
       - rollup
     dev: true
 
-  /@warp-ds/core@1.0.2:
-    resolution: {integrity: sha512-1ww8X7xM7PBs3nyfNcUa0W+Ay1ymbOHORSyheeHVelD+6UjLS+iezLA7JH51z74top1imy4AM29kxIrCvNgKbw==}
+  /@warp-ds/core@1.1.0(@floating-ui/dom@1.6.3):
+    resolution: {integrity: sha512-ZMpeE/ZWLBJkHL6CtR02JIRGm7RM1iwhVal1Vo9wC2HU2JqGOMBG9T0vCK7FNqjZXTgw7TPgVqJpbkLnTD3KTg==}
+    peerDependencies:
+      '@floating-ui/dom': 1.6.3
     dependencies:
-      '@floating-ui/dom': 0.5.4
+      '@floating-ui/dom': 1.6.3
     dev: false
 
   /@warp-ds/css@1.9.3:
@@ -2406,8 +2421,10 @@ packages:
       indent-string: 5.0.0
     dev: true
 
-  /ajv-formats@2.1.1:
+  /ajv-formats@2.1.1(ajv@8.12.0):
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -7432,7 +7449,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.58.5(vite@5.1.4):
+  /unocss@0.58.5(postcss@8.4.35)(vite@5.1.4):
     resolution: {integrity: sha512-0g4P6jLgRRNnhscxw7nQ9RHGrKJ1UPPiHPet+YT3TXUcmy4mTiYgo9+kGQf5bjyrzsELJ10cT6Qz2y6g9Tls4g==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7448,7 +7465,7 @@ packages:
       '@unocss/cli': 0.58.5
       '@unocss/core': 0.58.5
       '@unocss/extractor-arbitrary-variants': 0.58.5
-      '@unocss/postcss': 0.58.5
+      '@unocss/postcss': 0.58.5(postcss@8.4.35)
       '@unocss/preset-attributify': 0.58.5
       '@unocss/preset-icons': 0.58.5
       '@unocss/preset-mini': 0.58.5
@@ -7466,6 +7483,7 @@ packages:
       '@unocss/vite': 0.58.5(vite@5.1.4)
       vite: 5.1.4(@types/node@20.11.19)
     transitivePeerDependencies:
+      - postcss
       - rollup
       - supports-color
     dev: true
@@ -7820,7 +7838,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
