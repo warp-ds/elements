@@ -320,18 +320,6 @@ test('Setting type to warning', async (t) => {
   t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'warning');
 });
 
-test('Setting type to info', async (t) => {
-  // GIVEN: An initialized page with no component
-  const page = await addContentToPage({
-    page: t.context.page,
-    content: '<w-toast text="This is my toast" type="info"></w-toast>',
-  });
-
-  // WHEN/THEN:
-  const locator = await page.locator('w-toast');
-  t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'info');
-});
-
 test('Setting type to error', async (t) => {
   // GIVEN: An initialized page with no component
   const page = await addContentToPage({

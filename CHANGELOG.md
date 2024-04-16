@@ -1,3 +1,17 @@
+## [1.3.4-next.1](https://github.com/warp-ds/elements/compare/v1.3.3...v1.3.4-next.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+
+## [1.3.3](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3) (2024-04-09)
+
+
+### Bug Fixes
+
+* add warp-ds eslint-config ([#141](https://github.com/warp-ds/elements/issues/141)) ([dd3fec1](https://github.com/warp-ds/elements/commit/dd3fec1b180aa8980274311ac25801a7666dfa43))
+
 ## [1.3.3-next.1](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3-next.1) (2024-03-21)
 
 

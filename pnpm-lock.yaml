@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@lingui/core':
     specifier: 4.7.1
@@ -12,8 +8,8 @@ dependencies:
     specifier: 1.0.2
     version: 1.0.2
   '@warp-ds/css':
-    specifier: 1.9.1
-    version: 1.9.1
+    specifier: 1.9.3
+    version: 1.9.3
   '@warp-ds/elements-core':
     specifier: 0.0.1-alpha.12
     version: 0.0.1-alpha.12
@@ -50,8 +46,8 @@ devDependencies:
     specifier: 1.0.4
     version: 1.0.4(eslint-config-prettier@9.1.0)(eslint-plugin-prettier@5.1.3)(eslint@8.57.0)
   '@warp-ds/uno':
-    specifier: 1.9.0
-    version: 1.9.0
+    specifier: 1.10.2
+    version: 1.10.2
   cors:
     specifier: 2.8.5
     version: 2.8.5
@@ -105,7 +101,7 @@ devDependencies:
     version: 5.3.3
   unocss:
     specifier: 0.58.5
-    version: 0.58.5(postcss@8.4.35)(vite@5.1.4)
+    version: 0.58.5(vite@5.1.4)
   vite:
     specifier: 5.1.4
     version: 5.1.4(@types/node@20.11.19)
@@ -568,7 +564,7 @@ packages:
     resolution: {integrity: sha512-h9z1jyz0ueOwNfAPnwjJk3JGCMdm/3TFqGiGi3KqLgx3fhHgKOLmZa9fqGgX0E8arCgN2YavJwHiBCsIKTqEdQ==}
     dependencies:
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       glob: 8.1.0
       is-glob: 4.0.3
       mime-types: 2.1.35
@@ -2151,11 +2147,9 @@ packages:
       sirv: 2.0.4
     dev: true
 
-  /@unocss/postcss@0.58.5(postcss@8.4.35):
+  /@unocss/postcss@0.58.5:
     resolution: {integrity: sha512-m4L2YRdYfT6CV306Kl2VwEwbqa/92EpW4GE2Kqak1RuJyFJXBnWEEMJV4Uy6B1jWKLlCEWkuVUW33JUg7X6BxQ==}
     engines: {node: '>=14'}
-    peerDependencies:
-      postcss: ^8.4.21
     dependencies:
       '@unocss/config': 0.58.5
       '@unocss/core': 0.58.5
@@ -2304,11 +2298,11 @@ packages:
       '@floating-ui/dom': 0.5.4
     dev: false
 
-  /@warp-ds/css@1.9.1:
-    resolution: {integrity: sha512-AlfEwB0ernCxA/TccSElR2sJcTP6crEJthBHBvJyqi+TpUFE8R/8oCdw2Lh4rDCG3b86dtfthi1hzp9JN0LK9w==}
+  /@warp-ds/css@1.9.3:
+    resolution: {integrity: sha512-NHOGNIPwcCMqVAkydzcemELvn+6Jt7Ji8hfiXfnKXLGc2H8xHV+2kj9FmYM9bDmPmTGzDvFabHwW8txBtxjoUw==}
     dependencies:
       '@warp-ds/tokenizer': 0.0.4
-      '@warp-ds/uno': 1.9.0
+      '@warp-ds/uno': 1.10.2
     dev: false
 
   /@warp-ds/elements-core@0.0.1-alpha.12:
@@ -2344,8 +2338,8 @@ packages:
       yaml: 2.3.4
     dev: false
 
-  /@warp-ds/uno@1.9.0:
-    resolution: {integrity: sha512-DVL43/FHdSmOWgKtORsWDKM8WDOZLQHE6cCLYMxkLgJaYMcJGzZ3NrPPV8nwr3g3CL9RF5ySjp5aEKC+ax40Rg==}
+  /@warp-ds/uno@1.10.2:
+    resolution: {integrity: sha512-w3oJ57EPY2Yl2SAJFflw+E+pDIotp68b1ECddoxHgMvxkqeNEYjoObAF/X+x9McLdzV4LTziBirW/XeDGyJoTw==}
     dependencies:
       '@unocss/core': 0.58.5
       '@unocss/preset-mini': 0.58.5
@@ -2412,10 +2406,8 @@ packages:
       indent-string: 5.0.0
     dev: true
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -7440,7 +7432,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.58.5(postcss@8.4.35)(vite@5.1.4):
+  /unocss@0.58.5(vite@5.1.4):
     resolution: {integrity: sha512-0g4P6jLgRRNnhscxw7nQ9RHGrKJ1UPPiHPet+YT3TXUcmy4mTiYgo9+kGQf5bjyrzsELJ10cT6Qz2y6g9Tls4g==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7456,7 +7448,7 @@ packages:
       '@unocss/cli': 0.58.5
       '@unocss/core': 0.58.5
       '@unocss/extractor-arbitrary-variants': 0.58.5
-      '@unocss/postcss': 0.58.5(postcss@8.4.35)
+      '@unocss/postcss': 0.58.5
       '@unocss/preset-attributify': 0.58.5
       '@unocss/preset-icons': 0.58.5
       '@unocss/preset-mini': 0.58.5
@@ -7474,7 +7466,6 @@ packages:
       '@unocss/vite': 0.58.5(vite@5.1.4)
       vite: 5.1.4(@types/node@20.11.19)
     transitivePeerDependencies:
-      - postcss
       - rollup
       - supports-color
     dev: true
@@ -7829,3 +7820,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
