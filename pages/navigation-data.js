@@ -86,5 +86,14 @@ export default {
         },
       ],
     },
+    {
+      title: 'Icons',
+      items: [
+        {
+          title: 'Icon',
+          href: '/pages/components/icon.html',
+        },
+      ],
+    },
   ],
 };
