@@ -36,6 +36,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     skidding: { type: Number, reflect: true },
     // Whether Attention element should flip its placement in order to keep it in view
     flip: { type: Boolean, reflect: true },
+    // Whether Attention element should ignore cross axis overflow
+    crossAxis: { type: Boolean, reflect: true },
     // Choose which preferred placements the Attention element should flip to
     fallbackPlacements: { type: Array, reflect: true },
   };
@@ -73,6 +75,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.distance = 8;
     this.skidding = 0;
     this.flip = false;
+    this.crossAxis = false;
     this._initialPlacement = this.placement;
     this._actualDirection = this.placement;
   }
@@ -228,6 +231,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       distance: this.distance,
       skidding: this.skidding,
       flip: this.flip,
+      crossAxis: this.crossAxis,
       fallbackPlacements: this.fallbackPlacements,
     };
 

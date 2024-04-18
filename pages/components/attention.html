@@ -237,7 +237,7 @@
 
         <h3 class="mt-24 mb-16">Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="right" highlight>
+          <w-attention placement="right" highlight flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -250,7 +250,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" highlight>
+          <w-attention placement="right" highlight flip>
             <button
               id="highlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -265,7 +265,7 @@
 
         <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="bottom" highlight can-close flip fallback-placements='["bottom", "right", "top"]'>
+          <w-attention placement="bottom" highlight can-close flip cross-axis fallback-placements='["bottom", "right", "top"]'>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -278,7 +278,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom" highlight id="dismissibleHighlight" can-close flip fallback-placements='["bottom", "right", "top"]'>
+          <w-attention placement="bottom" highlight id="dismissibleHighlight" can-close flip cross-axis fallback-placements='["bottom", "right", "top"]'>
             <button
               id="dismissibleHighlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
