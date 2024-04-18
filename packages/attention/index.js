@@ -218,6 +218,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.attentionState = {
       isShowing: this.show,
       isCallout: this.callout,
+      isTooltip: this.tooltip,
       actualDirection: this._actualDirection,
       directionName: this.placement,
       arrowEl: this._arrowEl,
