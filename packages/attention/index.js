@@ -177,7 +177,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _targetEl() {
-    const targetSlot = this.renderRoot.querySelector("slot[name='target']");
+    const targetSlot = this.renderRoot?.querySelector("slot[name='target']");
     return targetSlot ? targetSlot.assignedNodes()[0] : null;
   }
 
