@@ -344,29 +344,30 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this.close();
     }
   }
-
+  
   render() {
-    return html` ${this.callout || (this._targetEl !== undefined && !this.callout)
-      ? html`<div class=${ifDefined(this.className ? this.className : undefined)}>
-          ${this.placement === 'right-start' || this.placement === 'right' || this.placement === 'right-end' || this.placement === 'bottom-start' || this.placement === 'bottom' || this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
-            ? html`
-                <slot name="target"></slot>
+    if (!this.callout && this._targetEl === undefined) return html``;
+    return html`
+      <div class=${ifDefined(this.className ? this.className : undefined)}>
+        ${this.placement === 'right-start' || this.placement === 'right' || this.placement === 'right-end' || this.placement === 'bottom-start' || this.placement === 'bottom' || this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
+          ? html`
+              <slot name="target"></slot>
 
-                <div id="attention" role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}" class="${this._wrapperClasses}">
-                  ${this._arrowHtml}
-                  <slot name="message"></slot>
-                  ${this.canClose ? this._closeBtnHtml : nothing}
-                </div>
-              `
-            : html`
-                <div id="attention" class="${this._wrapperClasses}">
-                  <slot name="message"></slot>
-                  ${this._arrowHtml} ${this.canClose ? this._closeBtnHtml : nothing}
-                </div>
-                <slot name="target"></slot>
-              `}
-        </div>`
-      : ''}`;
+              <div id="attention" role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}" class="${this._wrapperClasses}">
+                ${this._arrowHtml}
+                <slot name="message"></slot>
+                ${this.canClose ? this._closeBtnHtml : nothing}
+              </div>
+            `
+          : html`
+              <div id="attention" class="${this._wrapperClasses}">
+                <slot name="message"></slot>
+                ${this._arrowHtml} ${this.canClose ? this._closeBtnHtml : nothing}
+              </div>
+              <slot name="target"></slot>
+            `}
+      </div>
+    `;
   }
 }
 
