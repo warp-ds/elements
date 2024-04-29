@@ -344,7 +344,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
       this.close();
     }
   }
-  
+
   render() {
     if (!this.callout && this._targetEl === undefined) return html``;
     return html`
