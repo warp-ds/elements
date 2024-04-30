@@ -259,7 +259,7 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-CsAcA3QQ.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-BXCMBI77.js"></script>
   <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-CghmQaJQ.css">
 </head>
   <body>
@@ -498,7 +498,7 @@
 
         <h3 class="mt-24 mb-16">Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="right" highlight>
+          <w-attention placement="bottom" highlight flip>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -511,7 +511,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="right" highlight>
+          <w-attention placement="bottom" highlight flip>
             <button
               id="highlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -526,7 +526,7 @@
 
         <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
         <syntax-highlight>
-          <w-attention placement="bottom" highlight can-close flip fallback-placements='["bottom", "right", "top"]'>
+          <w-attention placement="bottom" highlight can-close flip cross-axis fallback-placements='["right", "top", "left", "bottom"]'>
             <button
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
@@ -539,7 +539,7 @@
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom" highlight id="dismissibleHighlight" can-close flip fallback-placements='["bottom", "right", "top"]'>
+          <w-attention placement="bottom" highlight id="dismissibleHighlight" can-close flip cross-axis fallback-placements='["right", "top", "left", "bottom"]'>
             <button
               id="dismissibleHighlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
