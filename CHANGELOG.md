@@ -1,3 +1,10 @@
+# [1.4.0-next.2](https://github.com/warp-ds/elements/compare/v1.4.0-next.1...v1.4.0-next.2) (2024-04-30)
+
+
+### Features
+
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
 # [1.4.0-next.1](https://github.com/warp-ds/elements/compare/v1.3.4-next.1...v1.4.0-next.1) (2024-04-16)
 
 
