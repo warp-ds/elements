@@ -15,8 +15,8 @@ importers:
         specifier: 1.1.1
         version: 1.1.1(@floating-ui/dom@1.6.3)
       '@warp-ds/css':
-        specifier: 1.9.6-next.1
-        version: 1.9.6-next.1
+        specifier: 1.9.6
+        version: 1.9.6
       '@warp-ds/elements-core':
         specifier: 0.0.1-alpha.12
         version: 0.0.1-alpha.12
@@ -1284,8 +1284,8 @@ packages:
     peerDependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.6-next.1':
-    resolution: {integrity: sha512-niitqXlTgqzU9iD/Gfv6PI/MTCPcDcXRseoIu3IUiMkTixicKj692NqT2OXC8DnYAJL1V1X34V/ChianilOdVQ==}
+  '@warp-ds/css@1.9.6':
+    resolution: {integrity: sha512-h1weeukiNcbapcCz4JBt71qes8gaPXG/xdWvL3BVcje3MJ3bqIwyYaer4PKfYJRIzeKCg/EWVrzylsKplI5U6Q==}
 
   '@warp-ds/elements-core@0.0.1-alpha.12':
     resolution: {integrity: sha512-Rgi6srMVzBNUjRISlz652O/vlrYa/ZVkh9VMTNOzCGXsaC5hSKj9A1PT9AvVY2orHZ3jr0sqgLTW2/ODDV4wew==}
@@ -5568,7 +5568,7 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.6-next.1':
+  '@warp-ds/css@1.9.6':
     dependencies:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
