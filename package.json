@@ -106,6 +106,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "packageManager": "pnpm@9.1.1"
+  }
 }
