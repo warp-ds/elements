@@ -1,5 +1,6 @@
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 const formatHTML = (string) =>

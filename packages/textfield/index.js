@@ -1,7 +1,9 @@
 import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
+
 import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
+
 import { fclasses } from '../utils';
 
 class WarpTextField extends WarpElement {
@@ -119,7 +121,28 @@ class WarpTextField extends WarpElement {
       ${this._label}
       <div class="${input.wrapper}">
         <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
-        <input class="${this._inputStyles}" type="${this.type}" min="${ifDefined(this.min)}" max="${ifDefined(this.max)}" size="${ifDefined(this.size)}" minlength="${ifDefined(this.minLength)}" maxlength="${ifDefined(this.maxLength)}" name="${ifDefined(this.name)}" pattern="${ifDefined(this.pattern)}" placeholder="${ifDefined(this.placeholder)}" value="${ifDefined(this.value)}" aria-describedby="${ifDefined(this._helpId)}" aria-errormessage="${ifDefined(this._error)}" aria-invalid="${ifDefined(this.invalid)}" id="${this._id}" ?disabled="${this.disabled}" ?readonly="${this.readOnly}" ?required="${this.required}" @blur="${this.handler}" @change="${this.handler}" @focus="${this.handler}" />
+        <input
+          class="${this._inputStyles}"
+          type="${this.type}"
+          min="${ifDefined(this.min)}"
+          max="${ifDefined(this.max)}"
+          size="${ifDefined(this.size)}"
+          minlength="${ifDefined(this.minLength)}"
+          maxlength="${ifDefined(this.maxLength)}"
+          name="${ifDefined(this.name)}"
+          pattern="${ifDefined(this.pattern)}"
+          placeholder="${ifDefined(this.placeholder)}"
+          value="${ifDefined(this.value)}"
+          aria-describedby="${ifDefined(this._helpId)}"
+          aria-errormessage="${ifDefined(this._error)}"
+          aria-invalid="${ifDefined(this.invalid)}"
+          id="${this._id}"
+          ?disabled="${this.disabled}"
+          ?readonly="${this.readOnly}"
+          ?required="${this.required}"
+          @blur="${this.handler}"
+          @change="${this.handler}"
+          @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       ${this.helpText && html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}

@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
@@ -39,8 +40,16 @@ test('Card component with no attributes is rendered on the page', async (t) => {
   t.equal(await locator.getAttribute('selected'), null, 'Selected attribute should be null');
   t.equal(await locator.getAttribute('flat'), null, 'Flat attribute should be null');
   t.equal(await locator.getAttribute('clickable'), null, 'Clickable attribute should be null');
-  t.equal(await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").tabIndex'), -1, 'Tab index property should default to -1');
-  t.equal(await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").getAttribute("tabindex")'), null, 'Tab index attribute should be null');
+  t.equal(
+    await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").tabIndex'),
+    -1,
+    'Tab index property should default to -1',
+  );
+  t.equal(
+    await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").getAttribute("tabindex")'),
+    null,
+    'Tab index attribute should be null',
+  );
 });
 
 test('Card component with selected attribute', async (t) => {
@@ -108,8 +117,16 @@ test('Card component with clickable attribute', async (t) => {
   t.equal((await locator.innerHTML()).trim(), '<div>This is a clickable w-card</div>', 'HTML should be rendered');
   t.equal(await page.evaluate('document.querySelector("w-card").clickable'), true, 'Clickable property should be true');
   t.equal(await locator.getAttribute('clickable'), '', 'Clickable attribute should be set');
-  t.equal(await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").tabIndex'), 0, 'Tab index should be set to 0');
-  t.equal(await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").getAttribute("tabindex")'), '0', 'Tab index should be set to 0');
+  t.equal(
+    await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").tabIndex'),
+    0,
+    'Tab index should be set to 0',
+  );
+  t.equal(
+    await page.evaluate('document.querySelector("w-card").renderRoot.querySelector("div").getAttribute("tabindex")'),
+    '0',
+    'Tab index should be set to 0',
+  );
   t.equal(await locator.getAttribute('flat'), null, 'Flat attribute should be null');
   t.equal(await locator.getAttribute('selected'), null, 'Selected attribute should be null');
 });

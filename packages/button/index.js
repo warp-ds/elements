@@ -1,13 +1,16 @@
 import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { button as ccButton } from '@warp-ds/css/component-classes';
+
 import { classNames } from '@chbphone55/classnames';
-import { kebabCaseAttributes } from '../utils';
 import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { button as ccButton } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+
 import { activateI18n } from '../i18n';
+import { kebabCaseAttributes } from '../utils';
+
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 
 const buttonTypes = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
 
@@ -121,13 +124,19 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
 
   render() {
     return html` ${this.href
-      ? html`<a href=${this.href} target=${this.target} rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined} class=${this._classes}>
+      ? html`<a
+          href=${this.href}
+          target=${this.target}
+          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
+          class=${this._classes}>
           <slot></slot>
         </a>`
       : html`<button type=${this.type || 'button'} class=${this._classes}>
           <slot></slot>
         </button>`}
-    ${this.loading ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading} />` : null}`;
+    ${this.loading
+      ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
+      : null}`;
   }
 }
 

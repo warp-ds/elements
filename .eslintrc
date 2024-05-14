@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "lit"
+  ],
+  "extends": [
+    "@warp-ds",
+    "plugin:lit/recommended",
+    "plugin:prettier/recommended"
+  ]
+}

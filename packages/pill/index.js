@@ -1,14 +1,18 @@
 import '@warp-ds/icons/elements/close-16';
-import { activateI18n } from '../i18n';
-import { classNames } from '@chbphone55/classnames';
+
 import { html } from 'lit';
+
+import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { pill as ccPill } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+
+import { activateI18n } from '../i18n';
 import { kebabCaseAttributes } from '../utils';
+
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { pill as ccPill } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 
 class WarpPill extends kebabCaseAttributes(WarpElement) {
   static styles = [WarpElement.styles];

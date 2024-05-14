@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -111,5 +111,9 @@ test('Breadcrumb component with custom-styled element', async (t) => {
   await page.addScriptTag({ path: './dist/index.js', type: 'module' });
 
   // THEN: the breadcrumb link should keep its class name together with the default one
-  t.equal(await page.locator('w-breadcrumbs a').getAttribute('class'), 'font-bold i-text-$color-breadcrumbs-link-text', 'has both custom and default class name');
+  t.equal(
+    await page.locator('w-breadcrumbs a').getAttribute('class'),
+    'font-bold i-text-$color-breadcrumbs-link-text',
+    'has both custom and default class name',
+  );
 });
