@@ -1,3 +1,10 @@
+# [1.4.0-next.3](https://github.com/warp-ds/elements/compare/v1.4.0-next.2...v1.4.0-next.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
 # [1.4.0-next.2](https://github.com/warp-ds/elements/compare/v1.4.0-next.1...v1.4.0-next.2) (2024-04-30)
 
 
