@@ -1,3 +1,31 @@
+# [1.4.0-next.3](https://github.com/warp-ds/elements/compare/v1.4.0-next.2...v1.4.0-next.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
+# [1.4.0-next.2](https://github.com/warp-ds/elements/compare/v1.4.0-next.1...v1.4.0-next.2) (2024-04-30)
+
+
+### Features
+
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
+# [1.4.0-next.1](https://github.com/warp-ds/elements/compare/v1.3.4-next.1...v1.4.0-next.1) (2024-04-16)
+
+
+### Features
+
+* Add more features on how attention component is positioned ([#135](https://github.com/warp-ds/elements/issues/135)) ([e15dc54](https://github.com/warp-ds/elements/commit/e15dc545187717476d7418af0ca47f6eb734a488))
+
+## [1.3.4-next.1](https://github.com/warp-ds/elements/compare/v1.3.3...v1.3.4-next.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+
 ## [1.3.3](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3) (2024-04-09)
 
 

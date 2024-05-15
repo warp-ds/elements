@@ -2,7 +2,7 @@ import { css, html } from 'lit';
 import WarpElement from '@warp-ds/elements-core';
 import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { fclasses } from '../utils';
+import { classes } from '../utils';
 
 class WarpTextField extends WarpElement {
   static properties = {
@@ -40,9 +40,6 @@ class WarpTextField extends WarpElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      .warp-input-with-prefix {
-        padding-left: var(--w-prefix-width, 40px);
-      }
     `,
   ];
 
@@ -52,20 +49,19 @@ class WarpTextField extends WarpElement {
   }
 
   get _inputStyles() {
-    return fclasses({
-      [input.default]: true,
-      [input.invalid]: this.invalid,
-      [input.disabled]: this.disabled,
-      [input.readOnly]: this.readOnly,
+    return classes({
+      [input.base]: true,
+      [input.default]: !this.invalid && !this.disabled && !this.readOnly,
+      [input.invalid]: this.invalid && !this.disabled && !this.readOnly,
+      [input.disabled]: !this.invalid && this.disabled && !this.readOnly,
+      [input.readOnly]: !this.invalid && !this.disabled && this.readOnly,
       [input.suffix]: this._hasSuffix,
-      // we style input with prefix here because we cannot use
-      // arbitrary values with commas in UnoCSS like pl-[var(--w-prefix-width, 40px)]
-      'warp-input-with-prefix': this._hasPrefix,
+      [input.prefix]: this._hasPrefix,
     });
   }
 
   get _helpTextStyles() {
-    return fclasses({
+    return classes({
       [h.helpText]: true,
       [h.helpTextColor]: !this.invalid,
       [h.helpTextColorInvalid]: this.invalid,
