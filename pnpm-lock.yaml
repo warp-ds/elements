@@ -70,7 +70,7 @@ importers:
         specifier: 8.57.0
         version: 8.57.0
       eslint-plugin-lit:
-        specifier: ^1.12.0
+        specifier: 1.12.0
         version: 1.12.0(eslint@8.57.0)
       express:
         specifier: 4.18.2
@@ -6739,7 +6739,7 @@ snapshots:
 
   es-shim-unscopables@1.0.2:
     dependencies:
-      hasown: 2.0.1
+      hasown: 2.0.2
 
   es-to-primitive@1.2.1:
     dependencies:
@@ -6872,7 +6872,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.1(eslint-import-resolver-node@0.3.9)(eslint@8.57.0)
-      hasown: 2.0.1
+      hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
       minimatch: 3.1.2
