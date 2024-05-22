@@ -1,12 +1,13 @@
 /* eslint-env node */
-import { defineConfig } from 'vite';
+import path from 'path';
+
+import { classes } from '@warp-ds/css/component-classes/classes';
 import { presetWarp } from '@warp-ds/uno';
+import { glob } from 'glob';
 import uno from 'unocss/vite';
+import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
-import path from 'path';
-import { glob } from 'glob';
-import { classes } from '@warp-ds/css/component-classes/classes';
 
 export default ({ mode }) => {
   let input = {};
@@ -173,7 +174,9 @@ function basePathFix() {
   return {
     name: 'base-path-fix',
     transform(src, fileName) {
-      return fileName.includes('navigation-data.js') ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"') : src;
+      return fileName.includes('navigation-data.js')
+        ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"')
+        : src;
     },
   };
 }

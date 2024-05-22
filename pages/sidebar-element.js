@@ -1,5 +1,7 @@
 import { css, html } from 'lit';
+
 import WarpElement from '@warp-ds/elements-core';
+
 import navigationData from './navigation-data';
 
 class SidebarElement extends WarpElement {
@@ -36,7 +38,9 @@ class SidebarElement extends WarpElement {
     return items.map(
       (item) => html`
         <li>
-          ${item.href ? html`<a class="no-underline py-2 px-16 text-m" href="${item.href}">${item.title}</a>` : html`<span class="pt-2 text-m font-bold">${item.title}</span>`}
+          ${item.href
+            ? html`<a class="no-underline py-2 px-16 text-m" href="${item.href}">${item.title}</a>`
+            : html`<span class="pt-2 text-m font-bold">${item.title}</span>`}
           ${item.items
             ? html`<ul class="py-4">
                 ${this.renderItems(item.items)}

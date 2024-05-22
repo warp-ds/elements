@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
-import { chromium } from 'playwright';
-import { addContentToPage } from '../../tests/utils/index.js';
 import { opposites } from '@warp-ds/core/attention';
+import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
+import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -44,7 +45,11 @@ test('Attention component with no attributes is rendered on the page', async (t)
 
   // THEN: the component is visible in the DOM
   const locator = await page.locator('w-attention');
-  t.equal((await locator.innerHTML()).trim(), '<div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to attention</div><p slot="message">This is an attention</p>', 'HTML should be rendered');
+  t.equal(
+    (await locator.innerHTML()).trim(),
+    '<div slot="target" class="p-16 rounded-8 bg-aqua-50">Target element to attention</div><p slot="message">This is an attention</p>',
+    'HTML should be rendered',
+  );
   t.equal(await locator.getAttribute('callout'), null, '"callout" attribute should be null');
   t.equal(await locator.evaluate((el) => el.callout), false, '"callout" property should default to false');
   t.equal(await locator.getAttribute('popover'), null, '"popover" attribute should be null');
@@ -54,7 +59,11 @@ test('Attention component with no attributes is rendered on the page', async (t)
   t.equal(await locator.evaluate((el) => el.noArrow), false, '"noArrow" property should default to false');
   t.equal(await locator.evaluate((el) => el.show), false, '"show" property should default to false');
 
-  t.equal(errorLogs[0].message, `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`, 'Invalid attribute error was thrown');
+  t.equal(
+    errorLogs[0].message,
+    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`,
+    'Invalid attribute error was thrown',
+  );
   page.removeListener('pageerror', registerErrorLogs);
 });
 
@@ -79,7 +88,11 @@ test('Attention component with invalid "placement" attribute is rendered on the 
     content: component,
   });
 
-  t.equal(errorLogs[0].message, `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`, 'Invalid attribute error was thrown');
+  t.equal(
+    errorLogs[0].message,
+    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`,
+    'Invalid attribute error was thrown',
+  );
 
   page.removeListener('pageerror', registerErrorLogs);
 });
@@ -129,7 +142,11 @@ test('Right placed callout attention component with show attribute is rendered o
   const locator = await page.locator('w-attention');
   t.equal(await locator.evaluate((el) => el.placement), 'right', '"placement" property should be "right"');
   t.equal(await locator.evaluate((el) => el.callout), true, '"callout" property should be true');
-  t.equal(await locator.evaluate((el) => window.getComputedStyle(el.renderRoot.querySelector('#attention')).getPropertyValue('display')), 'block', '"display" should be "block"');
+  t.equal(
+    await locator.evaluate((el) => window.getComputedStyle(el.renderRoot.querySelector('#attention')).getPropertyValue('display')),
+    'block',
+    '"display" should be "block"',
+  );
 });
 
 test('Order of target node for left placed attention component', async (t) => {
@@ -145,7 +162,11 @@ test('Order of target node for left placed attention component', async (t) => {
   });
 
   const locator = await page.locator('w-attention');
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('div').lastElementChild.name), 'target', 'Target should be rendered as last element');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('div').lastElementChild.name),
+    'target',
+    'Target should be rendered as last element',
+  );
 });
 
 test('Order of attention message for bottom placed attention component', async (t) => {
@@ -161,7 +182,11 @@ test('Order of attention message for bottom placed attention component', async (
   });
 
   const locator = await page.locator('w-attention');
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('div').lastElementChild.id), 'attention', 'Attention message should be rendered as last element');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('div').lastElementChild.id),
+    'attention',
+    'Attention message should be rendered as last element',
+  );
 });
 
 test('Default ARIA attributes', async (t) => {
@@ -177,7 +202,15 @@ test('Default ARIA attributes', async (t) => {
   });
 
   const locator = await page.locator('w-attention');
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="target"]').assignedNodes()[0].hasAttribute('aria-describedby')), true, 'Target elemement has aria-describedby attribute');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="target"]').assignedNodes()[0].hasAttribute('aria-describedby')),
+    true,
+    'Target elemement has aria-describedby attribute',
+  );
 
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="message"]').assignedNodes()[0].getAttribute('role')), 'tooltip', 'Message elemement has role="tooltip" attribute');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="message"]').assignedNodes()[0].getAttribute('role')),
+    'tooltip',
+    'Message elemement has role="tooltip" attribute',
+  );
 });

@@ -1,6 +1,7 @@
 import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
+
 import { toaster as ccToaster } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
 import { repeat } from 'lit/directives/repeat.js';
 
 /**
@@ -128,7 +129,15 @@ export class WarpToastContainer extends WarpElement {
           ${repeat(
             this._toastsArray,
             (toast) => toast.id,
-            (toast) => html` <w-toast class="${ccToaster.content}" id="${toast.id}" type="${toast.type}" text="${toast.text}" ?canclose=${toast.canclose} @close=${() => this.del(toast.id)}> </w-toast>`,
+            (toast) =>
+              html` <w-toast
+                class="${ccToaster.content}"
+                id="${toast.id}"
+                type="${toast.type}"
+                text="${toast.text}"
+                ?canclose=${toast.canclose}
+                @close=${() => this.del(toast.id)}>
+              </w-toast>`,
           )}
         </div>
       </aside>

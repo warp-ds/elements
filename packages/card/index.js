@@ -1,7 +1,9 @@
 import { html, css } from 'lit';
+
+import { card as ccCard } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { card as ccCard } from '@warp-ds/css/component-classes';
+
 import { fclasses } from '../utils';
 
 const keys = {

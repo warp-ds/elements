@@ -1,14 +1,17 @@
 import { css, html, nothing } from 'lit';
+
+import { i18n } from '@lingui/core';
+import { opposites, directions, arrowDirectionClassname, useRecompute as recompute } from '@warp-ds/core/attention';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
-import { attention as ccAttention } from '@warp-ds/css/component-classes';
-import { opposites, directions, arrowDirectionClassname, useRecompute as recompute } from '@warp-ds/core/attention';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
+
 import { activateI18n } from '../i18n';
+import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
+
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 import '@warp-ds/icons/elements/close-16';
 
 class WarpAttention extends kebabCaseAttributes(WarpElement) {
@@ -87,7 +90,9 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     }
 
     if (this.fallbackPlacements && !this.fallbackPlacements.every((fallbackPlacement) => directions.includes(fallbackPlacement))) {
-      throw new Error(`Invalid "fallbackPlacements" attribute. Set its value to an array with one or more of the following:\n${JSON.stringify(directions)}`);
+      throw new Error(
+        `Invalid "fallbackPlacements" attribute. Set its value to an array with one or more of the following:\n${JSON.stringify(directions)}`,
+      );
     }
 
     // Fix FOUC effect issues
@@ -153,7 +158,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _arrowHtml() {
-    return this.noArrow ? '' : html`<div id="arrow" role="img" class="${this._arrowClasses}" />`;
+    return this.noArrow ? '' : html`<div id="arrow" role="img" class="${this._arrowClasses}"></div>`;
   }
 
   get _activeVariantClasses() {
@@ -204,7 +209,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   get _closeBtnHtml() {
     return html`
       <button aria-label="${this._ariaClose}" @click="${this.close}" @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
-        <w-icon-close-16 />
+        <w-icon-close-16></w-icon-close-16>
       </button>
     `;
   }
@@ -349,11 +354,20 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     if (!this.callout && this._targetEl === undefined) return html``;
     return html`
       <div class=${ifDefined(this.className ? this.className : undefined)}>
-        ${this.placement === 'right-start' || this.placement === 'right' || this.placement === 'right-end' || this.placement === 'bottom-start' || this.placement === 'bottom' || this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
+        ${this.placement === 'right-start' ||
+        this.placement === 'right' ||
+        this.placement === 'right-end' ||
+        this.placement === 'bottom-start' ||
+        this.placement === 'bottom' ||
+        this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
           ? html`
               <slot name="target"></slot>
 
-              <div id="attention" role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}" class="${this._wrapperClasses}">
+              <div
+                id="attention"
+                role="${this.tooltip ? 'tooltip' : 'img'}"
+                aria-label="${this.defaultAriaLabel()}"
+                class="${this._wrapperClasses}">
                 ${this._arrowHtml}
                 <slot name="message"></slot>
                 ${this.canClose ? this._closeBtnHtml : nothing}

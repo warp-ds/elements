@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
@@ -149,7 +150,15 @@ test('Box component with paragraph child elements', async (t) => {
   const secondElement = await page.locator('#second');
   const lastElement = await page.locator('#last');
 
-  t.match(await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '0px', 'Bottom margin of last paragraph should be 0px');
+  t.match(
+    await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    '0px',
+    'Bottom margin of last paragraph should be 0px',
+  );
 
-  t.match(await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '8px', 'Bottom margin of second paragraph should be 8px');
+  t.match(
+    await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    '8px',
+    'Bottom margin of second paragraph should be 8px',
+  );
 });

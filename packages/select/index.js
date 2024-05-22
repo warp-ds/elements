@@ -1,16 +1,19 @@
 import { html } from 'lit';
+
+import { classNames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
+import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { when } from 'lit/directives/when.js';
-import { classNames } from '@chbphone55/classnames';
-import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
-import { kebabCaseAttributes } from '../utils';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { when } from 'lit/directives/when.js';
+
 import { activateI18n } from '../i18n';
+import { kebabCaseAttributes } from '../utils';
+
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 import '@warp-ds/icons/elements/chevron-down-16';
 
 export class WarpSelect extends kebabCaseAttributes(WarpElement) {
@@ -96,7 +99,13 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           >`,
       )}
       <div class="${ccSelect.selectWrapper}">
-        <select class="${this.#classes}" id="${this.#id}" ?autofocus=${this.autoFocus} aria-describedby="${ifDefined(this.#helpId)}" aria-invalid="${ifDefined(this.invalid)}" aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
+        <select
+          class="${this.#classes}"
+          id="${this.#id}"
+          ?autofocus=${this.autoFocus}
+          aria-describedby="${ifDefined(this.#helpId)}"
+          aria-invalid="${ifDefined(this.invalid)}"
+          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
