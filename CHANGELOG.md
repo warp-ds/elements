@@ -1,3 +1,10 @@
+## [1.4.1-next.1](https://github.com/warp-ds/elements/compare/v1.4.0...v1.4.1-next.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* update warp-ds eslint-config devDep and add .eslintrc-file ([#153](https://github.com/warp-ds/elements/issues/153)) ([679fab7](https://github.com/warp-ds/elements/commit/679fab7a1a89a59fa9434932e06d9e2026f46982))
+
 # [1.4.0](https://github.com/warp-ds/elements/compare/v1.3.3...v1.4.0) (2024-05-15)
 
 
