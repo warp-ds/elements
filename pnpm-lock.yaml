@@ -15,14 +15,14 @@ importers:
         specifier: 1.1.1
         version: 1.1.1(@floating-ui/dom@1.6.3)
       '@warp-ds/css':
-        specifier: 1.9.6
-        version: 1.9.6
+        specifier: 1.9.7
+        version: 1.9.7
       '@warp-ds/elements-core':
-        specifier: 0.0.1-alpha.12
-        version: 0.0.1-alpha.12
+        specifier: 0.0.1
+        version: 0.0.1
       '@warp-ds/icons':
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.0.1
+        version: 2.0.1
     devDependencies:
       '@chbphone55/classnames':
         specifier: 2.0.0
@@ -1284,11 +1284,11 @@ packages:
     peerDependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.6':
-    resolution: {integrity: sha512-h1weeukiNcbapcCz4JBt71qes8gaPXG/xdWvL3BVcje3MJ3bqIwyYaer4PKfYJRIzeKCg/EWVrzylsKplI5U6Q==}
+  '@warp-ds/css@1.9.7':
+    resolution: {integrity: sha512-JCRVmwndAnQB9FSF09mCMJe1EJyQo6oaJ6txwRFaiJ1zeGtcL1jHHO1gtNvPRznE14LdqoTis78Nd1TeEI/UaA==}
 
-  '@warp-ds/elements-core@0.0.1-alpha.12':
-    resolution: {integrity: sha512-Rgi6srMVzBNUjRISlz652O/vlrYa/ZVkh9VMTNOzCGXsaC5hSKj9A1PT9AvVY2orHZ3jr0sqgLTW2/ODDV4wew==}
+  '@warp-ds/elements-core@0.0.1':
+    resolution: {integrity: sha512-G84Zv4nk+QjYAYRIWHoF5+KpgL3Emk18kv4I2FleNpIG0UfTEv0DY3BcBtrFVjfumVnIFz3sS2zZR13BncdqnA==}
 
   '@warp-ds/eslint-config@1.0.5':
     resolution: {integrity: sha512-cHakkN7BVpqwQxpEeDrl3V8/QDco/7UwHTWIFzN3C9t8RlfcT9Y1QTNfMzJQBiIux8oQNE6rom0AydmWLo8mRw==}
@@ -1298,8 +1298,8 @@ packages:
       eslint-plugin-import: ^2.29.1
       eslint-plugin-prettier: ^5.1.3
 
-  '@warp-ds/icons@2.0.0':
-    resolution: {integrity: sha512-a6Zi9CEunu5V0ScfaG42j5LoPK/U9uL5Gcv+/4D9FNQjaPuissqflUL3YpYI2PxTMIrHuyYXfUMWu8gBVGoUdg==}
+  '@warp-ds/icons@2.0.1':
+    resolution: {integrity: sha512-GYKgLePU6dVfWcBnfJEschXY0hQxy1ajsEuiJwcKRgN70pk9ZWICBfJbVI4NSlgdWbglgaptyjDj9B6ug4Jy6A==}
 
   '@warp-ds/tokenizer@0.0.4':
     resolution: {integrity: sha512-D4qIUQdY0Tp23OpeR6P9T5QXpsr9crN/FusHWN+975Yk5WoWZOMAf7SVyvgFKV0uq5s70I3qlZqjT51khMwPNQ==}
@@ -5864,12 +5864,12 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.6':
+  '@warp-ds/css@1.9.7':
     dependencies:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
 
-  '@warp-ds/elements-core@0.0.1-alpha.12':
+  '@warp-ds/elements-core@0.0.1':
     dependencies:
       '@podium/element': 1.0.8(lit@2.7.6)
       construct-style-sheets-polyfill: 3.1.0
@@ -5882,7 +5882,7 @@ snapshots:
       eslint-plugin-import: 2.29.1(eslint@8.57.0)
       eslint-plugin-prettier: 5.1.3(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.2.5)
 
-  '@warp-ds/icons@2.0.0':
+  '@warp-ds/icons@2.0.1':
     dependencies:
       '@lingui/core': 4.7.1
 
