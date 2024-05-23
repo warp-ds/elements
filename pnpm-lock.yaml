@@ -18,8 +18,8 @@ importers:
         specifier: 1.9.6
         version: 1.9.6
       '@warp-ds/elements-core':
-        specifier: 0.0.1-alpha.12
-        version: 0.0.1-alpha.12
+        specifier: 0.0.1
+        version: 0.0.1
       '@warp-ds/icons':
         specifier: 2.0.0
         version: 2.0.0
@@ -1287,8 +1287,8 @@ packages:
   '@warp-ds/css@1.9.6':
     resolution: {integrity: sha512-h1weeukiNcbapcCz4JBt71qes8gaPXG/xdWvL3BVcje3MJ3bqIwyYaer4PKfYJRIzeKCg/EWVrzylsKplI5U6Q==}
 
-  '@warp-ds/elements-core@0.0.1-alpha.12':
-    resolution: {integrity: sha512-Rgi6srMVzBNUjRISlz652O/vlrYa/ZVkh9VMTNOzCGXsaC5hSKj9A1PT9AvVY2orHZ3jr0sqgLTW2/ODDV4wew==}
+  '@warp-ds/elements-core@0.0.1':
+    resolution: {integrity: sha512-G84Zv4nk+QjYAYRIWHoF5+KpgL3Emk18kv4I2FleNpIG0UfTEv0DY3BcBtrFVjfumVnIFz3sS2zZR13BncdqnA==}
 
   '@warp-ds/eslint-config@1.0.5':
     resolution: {integrity: sha512-cHakkN7BVpqwQxpEeDrl3V8/QDco/7UwHTWIFzN3C9t8RlfcT9Y1QTNfMzJQBiIux8oQNE6rom0AydmWLo8mRw==}
@@ -5869,7 +5869,7 @@ snapshots:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
 
-  '@warp-ds/elements-core@0.0.1-alpha.12':
+  '@warp-ds/elements-core@0.0.1':
     dependencies:
       '@podium/element': 1.0.8(lit@2.7.6)
       construct-style-sheets-polyfill: 3.1.0
