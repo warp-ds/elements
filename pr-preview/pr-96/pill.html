@@ -1,0 +1,368 @@
+<html lang="en">
+  <head>
+  <title>Warp Elements</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/tokens/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/components.css" rel="stylesheet" />
+
+  <style>
+    html { font-size: 62.5%; }
+
+    main {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      margin: 24px;
+    }
+
+    main code:not(:where(.example *)),
+    main kbd:not(:where(.example *)),
+    main pre:not(:where(.example *)),
+    main samp:not(:where(.example *)) {
+      font-family: monospace, monospace;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+
+    main [type='button'],
+    main [type='reset'],
+    main [type='submit'] {
+      -webkit-appearance: button;
+    }
+
+    main > div:not(:where(.example *)) {
+      margin-bottom: 16px;
+    }
+
+    main > div + .example {
+      margin-top: -16px;
+    }
+
+    main code:not(:where(.example *)) {
+      padding: 3px 5px;
+      margin: 0;
+      font-size: 90% !important;
+      background-color: rgba(175, 184, 193, 0.2);
+      border-radius: 6px;
+    }
+
+    main .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+    }
+
+    main .example-controls {
+      background: #f1f5f9;
+      margin: 32px -32px -32px;
+      padding: 8px 8px 8px 12px;
+    }
+
+    main h4:not(:where(.example *)),
+    main h5:not(:where(.example *)),
+    main h6:not(:where(.example *)) {
+      margin-bottom: 12px;
+    }
+
+    main h1:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:first-child):not(:where(.example *)) {
+      margin-top: 48px;
+    }
+
+    main h3:not(:where(.example *)) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    main ul:not(:where(.example *)),
+    main dl:not(:where(.example *)) {
+      padding-bottom: 16px;
+    }
+
+    main ul:not(:where(.example *)) {
+      list-style-type: disc;
+      list-style-position: inside;
+      padding-left: 24px;
+      padding-top: 8px;
+    }
+
+    main ol:not(:where(.example *)) {
+      list-style-type: decimal;
+      list-style-position: inside;
+    }
+
+    main ul li:not(:where(.example *)) {
+      padding-bottom: 4px;
+      padding-left: 16px;
+      list-style-type: square;
+    }
+
+    main table:not(:where(.example *)) {
+      margin-top: 16px;
+      padding: 0;
+      width: 100%;
+    }
+
+    main table tr:not(:where(.example *)) {
+      border-top: 1px;
+      border-color: #d4d4d4;
+      background: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    main table th:not(:where(.example *)),
+    main table td:not(:where(.example *)) {
+      border: 1px solid #d4d4d4;
+      color: #767676;
+      background: white;
+      margin: 0;
+      font-size: 13px;
+      text-align: left;
+
+      border-left: none;
+      border-right: none;
+      padding: 10px 16px;
+    }
+
+    /** monospace fonts for all columns except the description column */
+    main table td:not(:last-child):not(:where(.example *)) {
+      font-size: 12px;
+    }
+
+    /** no bottom margin for the last paragraph in the cell */
+    main table td p:last-child:not(:where(.example *)) {
+      margin-bottom: 0;
+    }
+
+    main table th:not(:where(.example *)) {
+      font-size: 11px;
+      text-transform: uppercase;
+      vertical-align: top;
+    }
+
+    /** links to types should keep their colors */
+    main table td:not(:last-child) a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main table a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main pre:not(:where(div *)) {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    main strong:not(:where(.example *)) {
+      font-weight: bold;
+    }
+
+    main hr:not(:where(.example *)) {
+      border-style: none;
+      color: #d4d4d4;
+      height: 4px;
+      padding: 0;
+    }
+
+    .docs-table {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .docs-table tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .docs-table th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .docs-table th,
+    .docs-table td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+
+    .doc-advanced {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .doc-advanced tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .doc-advanced thead th {
+      font-size: 20px;
+      text-align: left;
+      padding: 24px 16px;
+      font-weight: normal;
+    }
+
+    .doc-advanced tbody th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .doc-advanced tbody th,
+    .doc-advanced tbody td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+    .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      margin-top: -20px;
+    }
+    .grid-example {
+      padding: 16px;
+      border: 1px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      background-color: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"
+    integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
+    crossorigin="anonymous"
+  ></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-BHgUEUCA.js"></script>
+  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-CghmQaJQ.css">
+</head>
+  <body>
+    <script>
+        document.querySelector('html').addEventListener('w-pill-click', e => {
+            console.log('Click clicked');
+        });
+        document.querySelector('html').addEventListener('w-pill-close', e => {
+            console.log('Close clicked');
+        });
+    </script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Pill</h1>
+        <p>Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>can-close</td>
+              <td>boolean</td>
+              <td>"false"</td>
+            </tr>
+            <tr>
+              <td>suggestion</td>
+              <td>boolean</td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>open-sr-label</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the pill.</div></td>
+              <td>"Open filter"</td>
+            </tr>
+            <tr>
+              <td>close-sr-label</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the close button.</div></td>
+              <td>"Remove filter {label}"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Events</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>Name</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>w-pill-click</td>
+              <td>Event to be called when the pill is clicked.</td>
+            </tr>
+            <tr>
+              <td>w-pill-close</td>
+              <td>Event to be called when the close button is clicked.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Pill
+            <syntax-highlight>
+              <w-pill>Standard pill</w-pill>
+              <w-pill open-sr-label="test">Standard pill</w-pill>
+              <w-pill can-close>Closable pill</w-pill>
+              <w-pill suggestion can-close>SC pill</w-pill>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <w-pill>Standard pill</w-pill>
+            <w-pill open-sr-label="test">Standard pill</w-pill>
+            <w-pill suggestion>Suggestion pill</w-pill>
+            <w-pill can-close>Closable pill</w-pill>
+            <w-pill suggestion can-close>SC pill</w-pill>
+          </div>
+        </div>
+      </main>
+    </div>
+      <script data-for="footer" type="application/json">
+  {
+    "github": {
+      "name": "Github",
+      "href": "https://github.com/warp-ds/elements"
+    },
+    "slack": {
+      "name": "#npm-warp",
+      "href": "https://sch-chat.slack.com/archives/C04P0GYTHPV"
+    }
+  }
+</script>
+  </body>
+</html>
