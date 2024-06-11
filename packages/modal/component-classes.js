@@ -1,4 +1,3 @@
-
 // export const modal = {
 //   backdrop: 'fixed inset-0 flex sm:place-content-center sm:place-items-center items-end z-30 [--w-modal-max-height:80%] [--w-modal-width:640px] bg-[--w-black-alpha25]',
 //   modal: 'pb-safe-[32] shadow-m max-h-[--w-modal-max-height] min-h-[--w-modal-min-height] w-[--w-modal-width] h-[--w-modal-height] relative transition-300 ease-in-out backface-hidden will-change-height rounded-8 mx-0 sm:mx-16 s-bg flex flex-col overflow-hidden outline-none space-y-16 pt-8 sm:pt-32 sm:pb-32 rounded-b-0 sm:rounded-b-8',
@@ -16,16 +15,37 @@
 //   titleButtonIconRotated: 'transform rotate-90',
 // };
 const buttonDefaultStyling = 'font-bold focusable justify-center transition-colors ease-in-out';
-const buttonColors = { primary: 's-text-inverted bg-[--w-color-button-primary-background] hover:bg-[--w-color-button-primary-background-hover] active:bg-[--w-color-button-primary-background-active]', secondary: 's-text-link s-border s-bg hover:s-bg-hover hover:s-border-hover active:s-bg-active', utility: 's-text s-bg hover:s-bg-hover s-border hover:s-border-hover active:s-border-active', destructive: 's-bg-negative s-text-inverted hover:s-bg-negative-hover active:s-bg-negative-active', pill: 's-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]', disabled: 's-text-inverted s-bg-disabled', quiet: 'bg-transparent s-text-link hover:s-bg-hover active:s-bg-active', utilityQuiet: 's-text bg-transparent hover:s-bg-subtle-hover', negativeQuiet: 'bg-transparent s-text-negative hover:s-bg-negative-subtle-hover active:s-bg-negative-subtle-active', loading: 's-text s-bg-subtle', link: 's-text-link', };
-const buttonTypes = { primary: `border-0 rounded-8 ${buttonDefaultStyling}`, secondary: `border-2 rounded-8 ${buttonDefaultStyling}`, utility: `border rounded-4 ${buttonDefaultStyling}`, negative: `border-0 rounded-8 ${buttonDefaultStyling}`, pill: `p-4 rounded-full border-0 inline-flex items-center justify-center hover:bg-clip-padding ${buttonDefaultStyling}`, link: `bg-transparent focusable ease-in-out inline active:underline hover:underline ${buttonColors.link}`, };
-const buttonTextSizes = { medium: 'text-m leading-[24]', xsmall: 'text-xs', };
+const buttonColors = {
+  primary:
+    's-text-inverted bg-[--w-color-button-primary-background] hover:bg-[--w-color-button-primary-background-hover] active:bg-[--w-color-button-primary-background-active]',
+  secondary: 's-text-link s-border s-bg hover:s-bg-hover hover:s-border-hover active:s-bg-active',
+  utility: 's-text s-bg hover:s-bg-hover s-border hover:s-border-hover active:s-border-active',
+  destructive: 's-bg-negative s-text-inverted hover:s-bg-negative-hover active:s-bg-negative-active',
+  pill: 's-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]',
+  disabled: 's-text-inverted s-bg-disabled',
+  quiet: 'bg-transparent s-text-link hover:s-bg-hover active:s-bg-active',
+  utilityQuiet: 's-text bg-transparent hover:s-bg-subtle-hover',
+  negativeQuiet: 'bg-transparent s-text-negative hover:s-bg-negative-subtle-hover active:s-bg-negative-subtle-active',
+  loading: 's-text s-bg-subtle',
+  link: 's-text-link',
+};
+const buttonTypes = {
+  primary: `border-0 rounded-8 ${buttonDefaultStyling}`,
+  secondary: `border-2 rounded-8 ${buttonDefaultStyling}`,
+  utility: `border rounded-4 ${buttonDefaultStyling}`,
+  negative: `border-0 rounded-8 ${buttonDefaultStyling}`,
+  pill: `p-4 rounded-full border-0 inline-flex items-center justify-center hover:bg-clip-padding ${buttonDefaultStyling}`,
+  link: `bg-transparent focusable ease-in-out inline active:underline hover:underline ${buttonColors.link}`,
+};
+const buttonTextSizes = { medium: 'text-m leading-[24]', xsmall: 'text-xs' };
 
 // TODO: can hardcode these into the classes below if this spacing is actually ratified
-const mobileBorderPadding = 24
-const borderPadding = 24
+const mobileBorderPadding = 24;
+const borderPadding = 24;
 export const modalV2 = {
   // several items in here are 'resets' for the <dialog> element
-  dialogEl: 'bg-transparent backface-hidden w-unset h-unset max-w-unset max-h-unset p-0 m-auto border-0 inset-0 open:flex open:fixed sm:place-content-center sm:place-items-center items-end [--w-modal-max-height:80%] [--w-modal-width:640px]',
+  dialogEl:
+    'bg-transparent backface-hidden w-unset h-unset max-w-unset max-h-unset p-0 m-auto border-0 inset-0 open:flex open:fixed sm:place-content-center sm:place-items-center items-end [--w-modal-max-height:80%] [--w-modal-width:640px]',
   dialogInner: `transition-all relative pb-safe-[${borderPadding}] sm:pb-${borderPadding} shadow-m max-h-[--w-modal-max-height] min-h-[--w-modal-min-height] w-[--w-modal-width] h-[--w-modal-height] ease-in-out backface-hidden will-change-height rounded-8 sm:mx-16 s-bg flex flex-col overflow-hidden gap-12 lt-sm:rounded-b-0`,
   contentSlot: `block overflow-y-auto overflow-x-hidden last-child:mb-0 grow shrink px-${mobileBorderPadding} sm:px-${borderPadding} relative`,
   titleSlot: `relative`,
@@ -41,10 +61,10 @@ export const modalV2 = {
   // pt-12 here needed because 'gap-12' that normally handles spacing won't affect this element
   titleTextWithTopArea: `pt-12 px-${mobileBorderPadding} sm:px-${borderPadding}`,
   titleCloseSlot: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10`,
-  // TODO - missing colors from Design
-  titleCloseButton: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10 ${buttonTextSizes.medium} ${buttonTypes.pill} something-something-colors`,
-  footerSlot: `flex justify-end shrink-0 px-${mobileBorderPadding} sm:px-${borderPadding}`
-}
+  titleCloseButton: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10 ${buttonTextSizes.medium} ${buttonTypes.pill}`,
+  titleCloseButtonOnImage: `absolute right-8 sm:right-16 top-8 sm:top-16 z-10 ${buttonTextSizes.medium} ${buttonTypes.pill} s-color-inverted bg-[var(--w-black)/70] hover:bg-[var(--w-black)/85] active:bg-[var(--w-black)] s-text-inverted`,
+  footerSlot: `flex justify-end shrink-0 px-${mobileBorderPadding} sm:px-${borderPadding}`,
+};
 
 export const modalClasses = [
   ...new Set(

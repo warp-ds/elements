@@ -10,7 +10,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
 // TODO - kill once component classes are ported
-import { modalClasses } from './packages/modal/component-classes.js'
+import { modalClasses } from './packages/modal/component-classes.js';
 
 export default ({ mode }) => {
   let input = {};
@@ -74,14 +74,16 @@ export default ({ mode }) => {
   return {
     base: isProduction ? '/elements/' : '',
     plugins: [
-      mode !== 'lib' && uno({
-        presets: [presetWarp()],
-      }),
-      mode === 'development' && uno({
-        mode: 'shadow-dom',
-        presets: [presetWarp()],
-        safelist: [...classes, ...modalClasses],
-      }),
+      mode !== 'lib' &&
+        uno({
+          presets: [presetWarp()],
+        }),
+      mode === 'development' &&
+        uno({
+          mode: 'shadow-dom',
+          presets: [presetWarp()],
+          safelist: [...classes, ...modalClasses],
+        }),
       mode !== 'lib' &&
         createHtmlPlugin({
           minify: false,
