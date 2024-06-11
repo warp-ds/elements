@@ -34,6 +34,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
       </div>
     `;
   }
+
   async willUpdate(changedProperties) {
     if (changedProperties.has('back')) {
       const move = new Move(this.titleEl.value);
@@ -52,7 +53,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   get backButton() {
     return this.back
       ? html` <button type="button" class="${cc.titleButton} ${cc.titleBarButton} ${cc.titleButtonLeft}" @click="${this.emitBack}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" class="s-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
             <title>Leftward-pointing arrow</title>
             <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M5.222 8h6.667"></path>
             <path
@@ -67,8 +68,8 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   }
   get closeButton() {
     if (this[NO_CLOSE_BUTTON]) return nothing;
-    const classes = [cc.titleButton, cc.titleButtonRight, this._hasTopContent ? cc.titleCloseButton : cc.titleBarButton].join(' ');
-    return html` <button type="button" class="${classes}" @click="${this.close}">
+    const classes = [cc.titleButton, cc.titleButtonRight, this._hasTopContent ? cc.titleCloseButtonOnImage : cc.titleBarButton].join(' ');
+    return html` <button type="button" class="${classes} " @click="${this.close}">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m12.5 3.5-9 9M3.5 3.5l9 9"></path>
       </svg>
