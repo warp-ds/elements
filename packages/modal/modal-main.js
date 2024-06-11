@@ -55,7 +55,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
-      <dialog ${ref(this.dialogEl)} class="w-modal ${cc.dialogEl} s-bg-positive">
+      <dialog ${ref(this.dialogEl)} class="w-modal ${cc.dialogEl}">
         <div ${ref(this.dialogInnerEl)} class="${cc.dialogInner}">
           <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
           <div ${ref(this.contentEl)} class="${cc.contentSlot}" id=${this[CONTENT_ID]}>
