@@ -1,16 +1,12 @@
 /* eslint-env node */
 import path from 'path';
 
-import { classes } from '@warp-ds/css/component-classes/classes';
 import { presetWarp } from '@warp-ds/uno';
 import { glob } from 'glob';
 import uno from 'unocss/vite';
 import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
-
-// TODO - kill once component classes are ported
-import { modalClasses } from './packages/modal/component-classes.js';
 
 export default ({ mode }) => {
   let input = {};
@@ -82,7 +78,6 @@ export default ({ mode }) => {
         uno({
           mode: 'shadow-dom',
           presets: [presetWarp()],
-          safelist: [...classes, ...modalClasses],
         }),
       mode !== 'lib' &&
         createHtmlPlugin({
