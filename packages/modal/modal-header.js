@@ -83,21 +83,11 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
     this._hasTopContent = !!topContent.length;
   }
   static styles = [
-    WarpElement.styles,
+    //WarpElement.styles,
     css`
       @unocss-placeholder;
     `,
-    css`
-      .new-pill {
-        transition: 0.3s ease;
-        background-color: rgba(255, 255, 255, 0.5);
-      }
-      .new-pill:hover {
-        background-color: rgba(255, 255, 255, 0.75);
-      }
-      .new-pill:active {
-        background-color: rgba(255, 255, 255, 0.25);
-      }
-    `,
   ];
 }
+
+/* Reset without the other stuff */

@@ -82,7 +82,7 @@ export default ({ mode }) => {
         uno({
           mode: 'shadow-dom',
           presets: [presetWarp()],
-          safelist: [...classes, ...modalClasses],
+          //safelist: [...classes, ...modalClasses],
         }),
       mode !== 'lib' &&
         createHtmlPlugin({
