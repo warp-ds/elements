@@ -25,7 +25,8 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
     return html`
       <div class="relative">
         <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
-        <div class="${!this._hasTopContent && 'pt-16 sm:pt-24 px-16 sm:px-32 grid gap-12 grid-cols-[auto_1fr_auto] items-start shrink-0!'}">
+        <div
+          class="${this._hasTopContent ? '' : 'pt-16 sm:pt-24 px-16 sm:px-32 grid gap-12 grid-cols-[auto_1fr_auto] items-start shrink-0!'}">
           ${this.backButton}
           <h1 ${ref(this.titleEl)} class="${this.titleClasses}">${this.title}</h1>
           ${this.closeButton}
