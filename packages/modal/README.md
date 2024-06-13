@@ -32,17 +32,17 @@ One tidy solution would be to have an alternative w-modal-header, w-modal-header
 
 | Property                 | Type    | Description                                      | Example                                |
 |--------------------------|---------|--------------------------------------------------|----------------------------------------|
-| `show`                   | Boolean | Controls the visibility of the modal             | `<w-modal show="true">`                |
+| `show`                   | Boolean | Controls the visibility of the modal             | `<w-modal show>`                |
 | `content-id`             | String  | Sets the ID for the content element inside modal  | `<w-modal content-id="main-content">`  |
-| `ignore-backdrop-clicks` | Boolean | Disables closing the modal on backdrop clicks     | `<w-modal ignore-backdrop-clicks="true">` |
+| `ignore-backdrop-clicks` | Boolean | Disables closing the modal on backdrop clicks     | `<w-modal ignore-backdrop-clicks>` |
 
 ### `WarpModalHeader`
 
 | Property      | Type    | Description                                 | Example                                |
 |---------------|---------|---------------------------------------------|----------------------------------------|
 | `title`       | String  | Sets the title of the modal header          | `<w-modal-header title="Modal Title">` |
-| `back`        | Boolean | Displays a back button if true              | `<w-modal-header back="true">`         |
-| `no-close`    | Boolean | Hides the close button if true              | `<w-modal-header no-close="true">`     |
+| `back`        | Boolean | Displays a back button if true              | `<w-modal-header back>`         |
+| `no-close`    | Boolean | Hides the close button if true              | `<w-modal-header no-close>`     |
 
 ### `WarpModalFooter`
 
@@ -67,13 +67,13 @@ One tidy solution would be to have an alternative w-modal-header, w-modal-header
 
 ## Mixins
 
-### `CanCloseMixin`
+### `ModalCanCloseMixin`
 
-`CanCloseMixin` provides a `close` method to the component. This method can be overridden to implement custom close behavior.
+`ModalCanCloseMixin` provides a `close` method to the component. This method can be overridden to implement custom close behavior.
 
-### `ProvidesCanCloseToSlotsMixin`
+### `ModalProvidesCanCloseToSlotsMixin`
 
-`ProvidesCanCloseToSlotsMixin` provides `close` functionality to elements in the component's slots. It listens for slot changes and assigns the parent's `close` method to any slotted elements that have a `patchClose` property set to true.
+`ModalProvidesCanCloseToSlotsMixin` provides `close` functionality to elements in the component's slots. It listens for slot changes and assigns the parent's `close` method to any slotted elements that have a `patchClose` property set to true.
 
 
 ## Detailed Example
@@ -83,7 +83,7 @@ Here's a comprehensive example demonstrating the `WarpModal` component with all 
 ```html
 <w-button id="modal-open-button" aria-haspopup="dialog">Open a modal</w-button>
 
-<w-modal id="example-modal" show content-id="main-content" ignore-backdrop-clicks="true">
+<w-modal id="example-modal" show content-id="main-content" ignore-backdrop-clicks>
   <w-modal-header slot="header" title="Look a doggo!">
     <img slot="top" class="h-[256] w-full object-cover" src="https://source.unsplash.com/random?dog" alt="a picture of a dog">
   </w-modal-header>
