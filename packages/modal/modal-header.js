@@ -71,7 +71,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   }
 
   get backButton() {
-    return this.back
+    return this.back && !this._hasTopContent // Not showing back button when there is a top image
       ? html` <button type="button" class="${this.backButtonClasses}" @click="${this.emitBack}">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
             <title>Leftward-pointing arrow</title>
