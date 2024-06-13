@@ -77,7 +77,7 @@ export default ({ mode }) => {
       mode === 'development' &&
         uno({
           mode: 'shadow-dom',
-          presets: [presetWarp()],
+          presets: [presetWarp({ skipResets: true })],
         }),
       mode !== 'lib' &&
         createHtmlPlugin({

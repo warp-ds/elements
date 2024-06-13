@@ -54,6 +54,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
+      <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
       <dialog
         ${ref(this.dialogEl)}
         class="w-modal bg-transparent backface-hidden w-unset h-unset max-w-unset max-h-unset p-0 m-auto border-0 inset-0 open:flex open:fixed sm:place-content-center sm:place-items-center items-end [--w-modal-max-height:80%] [--w-modal-width:640px]">

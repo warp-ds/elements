@@ -23,6 +23,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   }
   render() {
     return html`
+      <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
       <div class="relative">
         <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
         <div
