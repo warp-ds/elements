@@ -1,8 +1,10 @@
 import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
+
 import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { fclasses } from '../utils';
+
+import { classes } from '../utils';
 
 class WarpTextField extends WarpElement {
   static properties = {
@@ -31,16 +33,14 @@ class WarpTextField extends WarpElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [WarpElement.styles,
+  static styles = [
+    WarpElement.styles,
     css`
       :host {
         display: block;
       }
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
-      }
-      .warp-input-with-prefix {
-        padding-left:var(--w-prefix-width, 40px);
       }
     `,
   ];
@@ -51,35 +51,28 @@ class WarpTextField extends WarpElement {
   }
 
   get _inputStyles() {
-    return fclasses({
-      [input.default]: true,
-      [input.invalid]: this.invalid,
-      [input.disabled]: this.disabled,
-      [input.readOnly]: this.readOnly,
+    return classes({
+      [input.base]: true,
+      [input.default]: !this.invalid && !this.disabled && !this.readOnly,
+      [input.invalid]: this.invalid && !this.disabled && !this.readOnly,
+      [input.disabled]: !this.invalid && this.disabled && !this.readOnly,
+      [input.readOnly]: !this.invalid && !this.disabled && this.readOnly,
       [input.suffix]: this._hasSuffix,
-      // we style input with prefix here because we cannot use
-      // arbitrary values with commas in UnoCSS like pl-[var(--w-prefix-width, 40px)]
-      'warp-input-with-prefix': this._hasPrefix,
+      [input.prefix]: this._hasPrefix,
     });
   }
 
   get _helpTextStyles() {
-    return fclasses({
+    return classes({
       [h.helpText]: true,
-      [h.helpTextInvalid]: this.invalid,
-    });
-  }
-
-  get _labelStyles() {
-    return fclasses({
-      [l.label]: true,
-      [l.labelInvalid]: this.invalid,
+      [h.helpTextColor]: !this.invalid,
+      [h.helpTextColorInvalid]: this.invalid,
     });
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${this._labelStyles}>${this.label}</label>`;
+      return html`<label for="${this._id}" class=${l.label}>${this.label}</label>`;
     }
   }
 
@@ -145,12 +138,10 @@ class WarpTextField extends WarpElement {
           ?required="${this.required}"
           @blur="${this.handler}"
           @change="${this.handler}"
-          @focus="${this.handler}"
-        />
+          @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
-      ${this.helpText &&
-      html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}
+      ${this.helpText && html`<div class="${this._helpTextStyles}" id="${this._helpId}">${this.helpText}</div>`}
     `;
   }
 }

@@ -24,6 +24,10 @@ const config: LinguiConfig = {
       include: ['packages/toast/toast.js'],
       path: 'packages/toast/locales/{locale}/messages',
     },
+    {
+      include: ['packages/pill/index.js'],
+      path: 'packages/pill/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

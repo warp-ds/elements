@@ -19,7 +19,7 @@ jobs:
       - name: Install pnpm and dependencies
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
           run_install: true
       - name: Build
         run: pnpm build
@@ -28,3 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+      - name: Eik login and publish
+        run: pnpm eik login -k $EIK_TOKEN && pnpm eik publish || true
+        env:
+          EIK_TOKEN: ${{ secrets.EIK_TOKEN }}

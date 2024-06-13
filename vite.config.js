@@ -1,12 +1,14 @@
 /* eslint-env node */
-import { defineConfig } from 'vite';
+import path from 'path';
+
+import { classes } from '@warp-ds/css/component-classes/classes';
 import { presetWarp } from '@warp-ds/uno';
+import { glob } from 'glob';
 import uno from 'unocss/vite';
+import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import topLevelAwait from 'vite-plugin-top-level-await';
-import path from 'path';
-import glob from 'glob';
-import { classes } from '@warp-ds/css/component-classes/classes';
+
 // TODO - kill once component classes are ported
 import { modalClasses } from './packages/modal/component-classes.js'
 
@@ -43,7 +45,7 @@ export default ({ mode }) => {
   };
 
   function getBuildOpts(mode) {
-    if (mode === 'production')
+    if (mode === 'production') {
       return defineConfig({
         build: {
           target: 'esnext',
@@ -53,7 +55,8 @@ export default ({ mode }) => {
           },
         },
       });
-    if (mode === 'lib')
+    }
+    if (mode === 'lib') {
       return defineConfig({
         build: {
           emptyOutDir: false,
@@ -65,6 +68,7 @@ export default ({ mode }) => {
           rollupOptions: { external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/] },
         },
       });
+    }
   }
 
   return {
@@ -85,6 +89,11 @@ export default ({ mode }) => {
             {
               filename: 'button.html',
               template: 'pages/components/button.html',
+              injectOptions,
+            },
+            {
+              filename: 'pill.html',
+              template: 'pages/components/pill.html',
               injectOptions,
             },
             {
@@ -155,12 +164,13 @@ export default ({ mode }) => {
           ],
         }),
       isProduction && basePathFix(),
-      mode === 'development' && topLevelAwait({
-        // The export name of top-level await promise for each chunk module
-        promiseExportName: '__tla',
-        // The function to generate import names of top-level await promise in each chunk module
-        promiseImportName: i => `__tla_${i}`
-      }),
+      mode === 'development' &&
+        topLevelAwait({
+          // The export name of top-level await promise for each chunk module
+          promiseExportName: '__tla',
+          // The function to generate import names of top-level await promise in each chunk module
+          promiseImportName: (i) => `__tla_${i}`,
+        }),
     ],
     ...getBuildOpts(mode),
   };
@@ -171,9 +181,7 @@ function basePathFix() {
     name: 'base-path-fix',
     transform(src, fileName) {
       return fileName.includes('navigation-data.js')
-        ? src
-            .replace(/pages\/components\//g, 'elements/')
-            .replace(/'\/'/, '"/elements/"')
+        ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"')
         : src;
     },
   };

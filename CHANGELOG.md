@@ -1,3 +1,122 @@
+## [1.4.1-next.1](https://github.com/warp-ds/elements/compare/v1.4.0...v1.4.1-next.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* update warp-ds eslint-config devDep and add .eslintrc-file ([#153](https://github.com/warp-ds/elements/issues/153)) ([679fab7](https://github.com/warp-ds/elements/commit/679fab7a1a89a59fa9434932e06d9e2026f46982))
+
+# [1.4.0](https://github.com/warp-ds/elements/compare/v1.3.3...v1.4.0) (2024-05-15)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
+
+### Features
+
+* Add more features on how attention component is positioned ([#135](https://github.com/warp-ds/elements/issues/135)) ([e15dc54](https://github.com/warp-ds/elements/commit/e15dc545187717476d7418af0ca47f6eb734a488))
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
+# [1.4.0-next.3](https://github.com/warp-ds/elements/compare/v1.4.0-next.2...v1.4.0-next.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
+# [1.4.0-next.2](https://github.com/warp-ds/elements/compare/v1.4.0-next.1...v1.4.0-next.2) (2024-04-30)
+
+
+### Features
+
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
+# [1.4.0-next.1](https://github.com/warp-ds/elements/compare/v1.3.4-next.1...v1.4.0-next.1) (2024-04-16)
+
+
+### Features
+
+* Add more features on how attention component is positioned ([#135](https://github.com/warp-ds/elements/issues/135)) ([e15dc54](https://github.com/warp-ds/elements/commit/e15dc545187717476d7418af0ca47f6eb734a488))
+
+## [1.3.4-next.1](https://github.com/warp-ds/elements/compare/v1.3.3...v1.3.4-next.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+
+## [1.3.3](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3) (2024-04-09)
+
+
+### Bug Fixes
+
+* add warp-ds eslint-config ([#141](https://github.com/warp-ds/elements/issues/141)) ([dd3fec1](https://github.com/warp-ds/elements/commit/dd3fec1b180aa8980274311ac25801a7666dfa43))
+
+## [1.3.3-next.1](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3-next.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* add warp-ds eslint-config ([#141](https://github.com/warp-ds/elements/issues/141)) ([dd3fec1](https://github.com/warp-ds/elements/commit/dd3fec1b180aa8980274311ac25801a7666dfa43))
+
+## [1.3.2](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2) (2024-03-21)
+
+
+### Bug Fixes
+
+* use correct colors in label and error text ([#139](https://github.com/warp-ds/elements/issues/139)) ([c9045fd](https://github.com/warp-ds/elements/commit/c9045fd733aa64395fdb50b52a6329e9ae774c03))
+
+## [1.3.2-next.1](https://github.com/warp-ds/elements/compare/v1.3.1...v1.3.2-next.1) (2024-03-21)
+
+
+### Bug Fixes
+
+* use correct colors in label and error text ([#139](https://github.com/warp-ds/elements/issues/139)) ([c9045fd](https://github.com/warp-ds/elements/commit/c9045fd733aa64395fdb50b52a6329e9ae774c03))
+
+## [1.3.1](https://github.com/warp-ds/elements/compare/v1.3.0...v1.3.1) (2024-02-20)
+
+
+### Reverts
+
+* Revert "fix: Remove eik from Elements (#124)" (#133) ([be2644a](https://github.com/warp-ds/elements/commit/be2644a7e5abe71d1bdb09a68ce913fe14fdbbb3)), closes [#124](https://github.com/warp-ds/elements/issues/124) [#133](https://github.com/warp-ds/elements/issues/133)
+
+## [1.3.1-next.1](https://github.com/warp-ds/elements/compare/v1.3.0...v1.3.1-next.1) (2024-02-20)
+
+
+### Reverts
+
+* Revert "fix: Remove eik from Elements (#124)" (#133) ([be2644a](https://github.com/warp-ds/elements/commit/be2644a7e5abe71d1bdb09a68ce913fe14fdbbb3)), closes [#124](https://github.com/warp-ds/elements/issues/124) [#133](https://github.com/warp-ds/elements/issues/133)
+
+# [1.3.0](https://github.com/warp-ds/elements/compare/v1.2.2...v1.3.0) (2024-02-15)
+
+
+### Bug Fixes
+
+* add translation for toast aria-label ([#123](https://github.com/warp-ds/elements/issues/123)) ([9458ed4](https://github.com/warp-ds/elements/commit/9458ed4ba67c362a5f9a8e4c5030ffc61079977f))
+* Remove eik from Elements ([#124](https://github.com/warp-ds/elements/issues/124)) ([9253ed0](https://github.com/warp-ds/elements/commit/9253ed081d1fbe967db5830dc45b6d0df38f737f))
+* rename deleted icons after @warp-ds/icons update to 2.0.0 ([#128](https://github.com/warp-ds/elements/issues/128)) ([236356e](https://github.com/warp-ds/elements/commit/236356e855b148d0f3d0cd16ad24d2f39c0da066))
+
+
+### Features
+
+* Add pill to elements ([#126](https://github.com/warp-ds/elements/issues/126)) ([df25503](https://github.com/warp-ds/elements/commit/df25503844a61efacb2f13ce8dbdbdc87f0f333f))
+
+# [1.3.0-next.2](https://github.com/warp-ds/elements/compare/v1.3.0-next.1...v1.3.0-next.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* rename deleted icons after @warp-ds/icons update to 2.0.0 ([#128](https://github.com/warp-ds/elements/issues/128)) ([236356e](https://github.com/warp-ds/elements/commit/236356e855b148d0f3d0cd16ad24d2f39c0da066))
+
+# [1.3.0-next.1](https://github.com/warp-ds/elements/compare/v1.2.3-next.2...v1.3.0-next.1) (2024-02-07)
+
+
+### Features
+
+* Add pill to elements ([#126](https://github.com/warp-ds/elements/issues/126)) ([df25503](https://github.com/warp-ds/elements/commit/df25503844a61efacb2f13ce8dbdbdc87f0f333f))
+
 ## [1.2.3-next.2](https://github.com/warp-ds/elements/compare/v1.2.3-next.1...v1.2.3-next.2) (2024-01-19)
 
 

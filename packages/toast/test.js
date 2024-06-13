@@ -1,5 +1,6 @@
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 const wait = (duration = 0) => new Promise((resolve) => setTimeout(resolve, duration));
@@ -122,9 +123,7 @@ test('set method: toast element created from given data', async (t) => {
   const page = await addContentToPage({ page: t.context.page, content: '' });
 
   // WHEN: the .set() is called with an id.
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });",
-  );
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });");
 
   // THEN: the toast is added to the page
   const locator = await page.locator('w-toast-container');
@@ -168,12 +167,8 @@ test('set/get methods: set a value then get it', async (t) => {
   const page = await addContentToPage({ page: t.context.page, content: '' });
 
   // WHEN: the .set() is called with an id.
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });",
-  );
-  const message = await page.evaluate(
-    "customElements.get('w-toast-container').init().get('abc').text;",
-  );
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });");
+  const message = await page.evaluate("customElements.get('w-toast-container').init().get('abc').text;");
 
   // THEN:
   t.equal(message, 'This is a toast');
@@ -231,9 +226,7 @@ test('set/del methods: set a toast then delete it', async (t) => {
   });
 
   // WHEN: the .set() is called with an id.
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });",
-  );
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });");
   // AND: .del() is called after to remove it
   await page.evaluate("customElements.get('w-toast-container').init().del('abc');");
 
@@ -247,26 +240,14 @@ test('scheduling: toasts automatically deleted after duration', async (t) => {
   const page = await addContentToPage({ page: t.context.page, content: '' });
 
   // WHEN: toasts with durations are added
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast', duration: 50 });",
-  );
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'bbb', text: 'This is a toast', duration: 50 });",
-  );
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'ccc', text: 'This is a toast', duration: 50 });",
-  );
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'ddd', text: 'This is a toast' });",
-  );
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast', duration: 50 });");
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'bbb', text: 'This is a toast', duration: 50 });");
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'ccc', text: 'This is a toast', duration: 50 });");
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'ddd', text: 'This is a toast' });");
   const locator = await page.locator('w-toast-container');
-  const numberofToastsBeforeWaiting = await locator.evaluate(
-    (el) => el.renderRoot.querySelectorAll('w-toast').length,
-  );
+  const numberofToastsBeforeWaiting = await locator.evaluate((el) => el.renderRoot.querySelectorAll('w-toast').length);
   await wait(1000);
-  const numberofToastsAfterWaiting = await locator.evaluate(
-    (el) => el.renderRoot.querySelectorAll('w-toast').length,
-  );
+  const numberofToastsAfterWaiting = await locator.evaluate((el) => el.renderRoot.querySelectorAll('w-toast').length);
 
   // THEN: there should be 4 toasts intially and 1 after the duration
   t.equal(numberofToastsBeforeWaiting, 4);
@@ -278,12 +259,8 @@ test('updating toast type', async (t) => {
   const page = await addContentToPage({ page: t.context.page, content: '' });
 
   // WHEN:
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });",
-  );
-  await page.evaluate(
-    "customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast', type: 'error' });",
-  );
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast' });");
+  await page.evaluate("customElements.get('w-toast-container').init().set({ id: 'abc', text: 'This is a toast', type: 'error' });");
 
   const locator = await page.locator('w-toast-container');
   const type = await locator.evaluate((el) => el.renderRoot.querySelector('w-toast').type);
@@ -344,18 +321,6 @@ test('Setting type to warning', async (t) => {
   t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'warning');
 });
 
-test('Setting type to info', async (t) => {
-  // GIVEN: An initialized page with no component
-  const page = await addContentToPage({
-    page: t.context.page,
-    content: '<w-toast text="This is my toast" type="info"></w-toast>',
-  });
-
-  // WHEN/THEN:
-  const locator = await page.locator('w-toast');
-  t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'info');
-});
-
 test('Setting type to error', async (t) => {
   // GIVEN: An initialized page with no component
   const page = await addContentToPage({
@@ -414,13 +379,9 @@ test('Collapse method collapses markup', async (t) => {
 
   // WHEN:
   const locator = await page.locator('w-toast');
-  const beforeHeight = await locator.evaluate(
-    (el) => el.renderRoot.querySelector('section').style.height,
-  );
+  const beforeHeight = await locator.evaluate((el) => el.renderRoot.querySelector('section').style.height);
   await locator.evaluate((el) => el.collapse());
-  const afterHeight = await locator.evaluate(
-    (el) => el.renderRoot.querySelector('section').style.height,
-  );
+  const afterHeight = await locator.evaluate((el) => el.renderRoot.querySelector('section').style.height);
 
   // THEN:
   t.equal(beforeHeight, 'auto');
@@ -436,14 +397,14 @@ test('Emits close event when close button clicked', async (t) => {
 
   // WHEN:
   const locator = await page.locator('w-toast');
-  await locator.evaluate(
-    (el) => el.addEventListener('close', () => {
-        // @ts-ignore
-        window.toastWasClosed = true;
-        el.click();
+  await locator.evaluate((el) =>
+    el.addEventListener('close', () => {
+      // @ts-ignore
+      window.toastWasClosed = true;
+      el.click();
     }),
   );
-  const closeButton = await page.locator('w-toast button')
+  const closeButton = await page.locator('w-toast button');
   await closeButton.click();
 
   // THEN:
@@ -554,9 +515,7 @@ test('API: update toast modifies existing toast', async (t) => {
 
   // WHEN:
   await t.context.page.evaluate("window.identifier = window.toast('This is a toast')");
-  await t.context.page.evaluate(
-    "window.updateToast(window.identifier.id, { text: 'This is an updated toast' })",
-  );
+  await t.context.page.evaluate("window.updateToast(window.identifier.id, { text: 'This is an updated toast' })");
   const text = await locator.evaluate((el) => el.text);
 
   // THEN:

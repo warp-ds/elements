@@ -3,7 +3,7 @@
 Welcome to [@warp-ds/elements](https://github.com/warp-ds/elements),
 a collection of Web Components built with Lit to be used to build interfaces based on the [Warp Design System](https://github.com/warp-ds/).
 This repository is maintained by the [Warp Core Team](https://github.com/orgs/warp-ds/teams/warp-core-team)
-and is home to the [@warp-ds/vue](https://www.npmjs.com/package/@warp-ds/elements) library.
+and is home to the [@warp-ds/elements](https://www.npmjs.com/package/@warp-ds/elements) library.
 
 ## How to contribute
 

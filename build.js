@@ -1,18 +1,19 @@
-import esbuild from "esbuild";
-import pkg from "glob";
-const { glob } = pkg;
+import * as eik from '@eik/esbuild-plugin';
+import esbuild from 'esbuild';
+import { glob } from 'glob';
 
-const components = glob.sync("packages/**/index.js");
-const toastApiPath = "packages/toast/api.js";
-const indexPath = "index.js";
+const components = glob.sync('packages/**/index.js');
+const toastApiPath = 'packages/toast/api.js';
+const indexPath = 'index.js';
+const version = process.argv[2];
 
 const esbuildDefaults = {
   bundle: true,
-  format: "esm",
+  format: 'esm',
   sourcemap: true,
-  target: "es2017",
+  target: 'es2017',
   minify: false,
-  external: ["lit", "@warp-ds/elements-core"],
+  external: ['lit', '@warp-ds/elements-core'],
 };
 
 function buildComponents(outDir, extraBuildOptions = {}) {
@@ -20,7 +21,7 @@ function buildComponents(outDir, extraBuildOptions = {}) {
     const regex = /\/(\w+)\//;
     const match = item.match(regex);
 
-    if (item.includes("utils")) return;
+    if (item.includes('utils')) return;
     console.log(`elements: building ${match[1]}.js`);
 
     try {
@@ -37,7 +38,7 @@ function buildComponents(outDir, extraBuildOptions = {}) {
 }
 
 async function buildToastApi(outDir, extraBuildOptions = {}) {
-  console.log("elements: building api.js");
+  console.log('elements: building api.js');
   try {
     await esbuild.build({
       entryPoints: [toastApiPath],
@@ -51,7 +52,7 @@ async function buildToastApi(outDir, extraBuildOptions = {}) {
 }
 
 async function buildIndex(outDir, extraBuildOptions = {}) {
-  console.log("elements: building index.js");
+  console.log('elements: building index.js');
   try {
     await esbuild.build({
       entryPoints: [indexPath],
@@ -64,9 +65,15 @@ async function buildIndex(outDir, extraBuildOptions = {}) {
   }
 }
 
-console.log("Building elements");
+console.log('Building elements for: ', version);
 
-buildComponents("dist");
-buildToastApi("dist");
-buildIndex("dist");
-
+if (version === 'eik') {
+  await eik.load();
+  buildComponents('eik', { plugins: [eik.plugin()] });
+  buildToastApi('eik', { plugins: [eik.plugin()] });
+  buildIndex('eik', { plugins: [eik.plugin()] });
+} else {
+  buildComponents('dist');
+  buildToastApi('dist');
+  buildIndex('dist');
+}

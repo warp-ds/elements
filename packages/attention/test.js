@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
-import { chromium } from 'playwright';
-import { addContentToPage } from '../../tests/utils/index.js';
 import { opposites } from '@warp-ds/core/attention';
+import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
+import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -50,39 +51,17 @@ test('Attention component with no attributes is rendered on the page', async (t)
     'HTML should be rendered',
   );
   t.equal(await locator.getAttribute('callout'), null, '"callout" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.callout),
-    false,
-    '"callout" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.callout), false, '"callout" property should default to false');
   t.equal(await locator.getAttribute('popover'), null, '"popover" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.popover),
-    false,
-    '"popover" property should default to false',
-  );
-  t.equal(
-    await locator.evaluate((el) => el.tooltip),
-    false,
-    '"tooltip" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.popover), false, '"popover" property should default to false');
+  t.equal(await locator.evaluate((el) => el.tooltip), false, '"tooltip" property should default to false');
   t.equal(await locator.getAttribute('no-arrow'), null, '"no-arrow" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.noArrow),
-    false,
-    '"noArrow" property should default to false',
-  );
-  t.equal(
-    await locator.evaluate((el) => el.show),
-    false,
-    '"show" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.noArrow), false, '"noArrow" property should default to false');
+  t.equal(await locator.evaluate((el) => el.show), false, '"show" property should default to false');
 
   t.equal(
     errorLogs[0].message,
-    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
-      Object.keys(opposites),
-    )}`,
+    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`,
     'Invalid attribute error was thrown',
   );
   page.removeListener('pageerror', registerErrorLogs);
@@ -111,9 +90,7 @@ test('Attention component with invalid "placement" attribute is rendered on the 
 
   t.equal(
     errorLogs[0].message,
-    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(
-      Object.keys(opposites),
-    )}`,
+    `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`,
     'Invalid attribute error was thrown',
   );
 
@@ -141,11 +118,7 @@ test('Bottom placed tooltip attention component with show attribute is rendered 
   });
 
   const locator = await page.locator('w-attention');
-  t.equal(
-    await locator.evaluate((el) => el.placement),
-    'bottom',
-    '"placement" property should be "bottom"',
-  );
+  t.equal(await locator.evaluate((el) => el.placement), 'bottom', '"placement" property should be "bottom"');
   t.equal(await locator.evaluate((el) => el.tooltip), true, '"tooltip" property should be true');
   t.equal(await locator.evaluate((el) => el.show), true, '"show" property should be true');
   t.equal(errorLogs.length, 0, 'No errors should be thrown in the console');
@@ -167,18 +140,10 @@ test('Right placed callout attention component with show attribute is rendered o
   });
 
   const locator = await page.locator('w-attention');
-  t.equal(
-    await locator.evaluate((el) => el.placement),
-    'right',
-    '"placement" property should be "right"',
-  );
+  t.equal(await locator.evaluate((el) => el.placement), 'right', '"placement" property should be "right"');
   t.equal(await locator.evaluate((el) => el.callout), true, '"callout" property should be true');
   t.equal(
-    await locator.evaluate((el) =>
-      window
-        .getComputedStyle(el.renderRoot.querySelector('#attention'))
-        .getPropertyValue('display'),
-    ),
+    await locator.evaluate((el) => window.getComputedStyle(el.renderRoot.querySelector('#attention')).getPropertyValue('display')),
     'block',
     '"display" should be "block"',
   );
@@ -238,20 +203,13 @@ test('Default ARIA attributes', async (t) => {
 
   const locator = await page.locator('w-attention');
   t.equal(
-    await locator.evaluate((el) =>
-      el.renderRoot
-        .querySelector('slot[name="target"]')
-        .assignedNodes()[0]
-        .hasAttribute('aria-describedby'),
-    ),
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="target"]').assignedNodes()[0].hasAttribute('aria-describedby')),
     true,
     'Target elemement has aria-describedby attribute',
   );
 
   t.equal(
-    await locator.evaluate((el) =>
-      el.renderRoot.querySelector('slot[name="message"]').assignedNodes()[0].getAttribute('role'),
-    ),
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="message"]').assignedNodes()[0].getAttribute('role')),
     'tooltip',
     'Message elemement has role="tooltip" attribute',
   );

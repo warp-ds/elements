@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
-import '@warp-ds/icons/elements/icon-bag-16'
+import '@warp-ds/icons/elements/icon-bag-16';
 
 tap.before(async () => {
   const browser = await chromium.launch({ headless: true });
@@ -36,41 +37,17 @@ test('Expandable component with no attributes is rendered on the page', async (t
 
   // THEN: the component is visible in the DOM
   const locator = await page.locator('w-expandable');
-  t.equal(
-    (await locator.innerHTML()).trim(),
-    '<p>This is an expandable element</p>',
-    'HTML should be rendered',
-  );
+  t.equal((await locator.innerHTML()).trim(), '<p>This is an expandable element</p>', 'HTML should be rendered');
   t.equal(await locator.getAttribute('info'), null, '"info" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.info),
-    false,
-    '"info" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.info), false, '"info" property should default to false');
   t.equal(await locator.getAttribute('box'), null, '"box" attribute should be null');
   t.equal(await locator.evaluate((el) => el.box), false, '"box" property should default to false');
-  t.equal(
-    await locator.evaluate((el) => el.bleed),
-    false,
-    '"bleed" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.bleed), false, '"bleed" property should default to false');
   t.equal(await locator.getAttribute('animated'), null, '"animated" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.animated),
-    false,
-    '"animated" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.animated), false, '"animated" property should default to false');
   t.equal(await locator.getAttribute('no-chevron'), null, '"no-chevron" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.noChevron),
-    false,
-    '"noChevron" property should default to false',
-  );
-  t.equal(
-    await locator.evaluate((el) => el.expanded),
-    false,
-    '"expanded" property should default to false',
-  );
+  t.equal(await locator.evaluate((el) => el.noChevron), false, '"noChevron" property should default to false');
+  t.equal(await locator.evaluate((el) => el.expanded), false, '"expanded" property should default to false');
 });
 
 test('Expandable component with info & expanded attribute is rendered on the page', async (t) => {
@@ -104,11 +81,7 @@ test('Expandable component with box & title attribute is rendered on the page', 
 
   const locator = await page.locator('w-expandable');
   t.equal(await locator.evaluate((el) => el.box), true, '"box" property should be true');
-  t.equal(
-    await locator.evaluate((el) => el.title),
-    'toggle',
-    '"title" property should be "toggle"',
-  );
+  t.equal(await locator.evaluate((el) => el.title), 'toggle', '"title" property should be "toggle"');
 });
 
 test('Animated expandable component is rendered on the page', async (t) => {
@@ -146,9 +119,7 @@ test('Animated expandable component with custom title is rendered on the page', 
   const locator = await page.locator('w-expandable');
 
   t.equal(
-    await locator.evaluate(
-      (el) => el.renderRoot.querySelector('slot[name="title"]').assignedNodes().length > 0,
-    ),
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="title"]').assignedNodes().length > 0),
     true,
     'Custom title should be slotted',
   );
@@ -167,14 +138,6 @@ test('Expandable component with title and no-chevron attribute is rendered on th
   });
 
   const locator = await page.locator('w-expandable');
-  t.equal(
-    await locator.evaluate((el) => el.noChevron),
-    true,
-    '"noChevron" property should be true',
-  );
-  t.equal(
-    await locator.evaluate((el) => el.renderRoot.querySelector('#chevron-down')),
-    null,
-    'Chevron icon should not be rendered',
-  );
+  t.equal(await locator.evaluate((el) => el.noChevron), true, '"noChevron" property should be true');
+  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('#chevron-down')), null, 'Chevron icon should not be rendered');
 });

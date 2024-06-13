@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
@@ -39,11 +40,7 @@ test('Button component with no attributes is rendered on the page', async (t) =>
   t.equal(await locator.getAttribute('quiet'), null, '"quiet" attribute should be null');
   t.equal(await locator.getAttribute('small'), null, '"small" attribute should be null');
   t.equal(await locator.getAttribute('loading'), null, '"loading" attribute should be null');
-  t.equal(
-    await locator.evaluate((el) => el.variant),
-    'secondary',
-    '"variant" property should default to "secondary"',
-  );
+  t.equal(await locator.evaluate((el) => el.variant), 'secondary', '"variant" property should default to "secondary"');
 });
 
 test('Quiet small negative button', async (t) => {
@@ -59,18 +56,10 @@ test('Quiet small negative button', async (t) => {
   });
 
   const locator = await page.locator('w-button');
-  t.equal(
-    (await locator.innerHTML()).trim(),
-    'This is a quiet small negative button',
-    'HTML should be rendered',
-  );
+  t.equal((await locator.innerHTML()).trim(), 'This is a quiet small negative button', 'HTML should be rendered');
   t.equal(await locator.evaluate((el) => el.quiet), true, '"quiet" property should be true');
   t.equal(await locator.evaluate((el) => el.small), true, '"small" property should be true');
-  t.equal(
-    await locator.evaluate((el) => el.variant),
-    'negative',
-    '"variant" property should be "negative"',
-  );
+  t.equal(await locator.evaluate((el) => el.variant), 'negative', '"variant" property should be "negative"');
 });
 
 test('Loading primary button', async (t) => {
@@ -86,17 +75,9 @@ test('Loading primary button', async (t) => {
   });
 
   const locator = await page.locator('w-button');
-  t.equal(
-    (await locator.innerHTML()).trim(),
-    'This is a loading primary button',
-    'HTML should be rendered',
-  );
+  t.equal((await locator.innerHTML()).trim(), 'This is a loading primary button', 'HTML should be rendered');
   t.equal(await locator.evaluate((el) => el.loading), true, '"loading" property should be true');
-  t.equal(
-    await locator.evaluate((el) => el.variant),
-    'primary',
-    '"variant" property should be "primary"',
-  );
+  t.equal(await locator.evaluate((el) => el.variant), 'primary', '"variant" property should be "primary"');
 });
 
 test('Button as an anchor', async (t) => {
@@ -112,15 +93,9 @@ test('Button as an anchor', async (t) => {
   });
 
   const locator = await page.locator('w-button');
+  t.equal((await locator.innerHTML()).trim(), 'This is an anchor element', 'HTML should be rendered');
   t.equal(
-    (await locator.innerHTML()).trim(),
-    'This is an anchor element',
-    'HTML should be rendered',
-  );
-  t.equal(
-    await locator.evaluate(
-      (el) => el.renderRoot.querySelector('[href="https://google.no"]').tagName,
-    ),
+    await locator.evaluate((el) => el.renderRoot.querySelector('[href="https://google.no"]').tagName),
     'A',
     'Button is rendered as an anchor tag',
   );
@@ -139,16 +114,8 @@ test('Button with autofocus', async (t) => {
   });
 
   const locator = await page.locator('w-button');
-  t.equal(
-    (await locator.innerHTML()).trim(),
-    'This button should be focused',
-    'HTML should be rendered',
-  );
-  t.equal(
-    await locator.evaluate((el) => document.activeElement === el),
-    true,
-    'Button should be focused',
-  );
+  t.equal((await locator.innerHTML()).trim(), 'This button should be focused', 'HTML should be rendered');
+  t.equal(await locator.evaluate((el) => document.activeElement === el), true, 'Button should be focused');
 });
 
 test('Button with invalid variant name', async (t) => {

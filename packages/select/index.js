@@ -1,21 +1,20 @@
-import { html, css } from "lit";
-import WarpElement from "@warp-ds/elements-core";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { when } from "lit/directives/when.js";
-import { classNames } from "@chbphone55/classnames";
-import {
-  select as ccSelect,
-  helpText as ccHelpText,
-  label as ccLabel,
-} from "@warp-ds/css/component-classes";
-import { kebabCaseAttributes } from "../utils";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import { i18n } from "@lingui/core";
-import { messages as enMessages } from "./locales/en/messages.mjs";
-import { messages as nbMessages } from "./locales/nb/messages.mjs";
-import { messages as fiMessages } from "./locales/fi/messages.mjs";
-import { activateI18n } from "../i18n";
-import '@warp-ds/icons/elements/chevron-down-16'
+import { html } from 'lit';
+
+import { classNames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
+import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { when } from 'lit/directives/when.js';
+
+import { activateI18n } from '../i18n';
+import { kebabCaseAttributes } from '../utils';
+
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import '@warp-ds/icons/elements/chevron-down-16';
 
 export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -49,17 +48,11 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     });
   }
 
-  get #labelClasses() {
-    return classNames({
-      [ccLabel.label]: true,
-      [ccLabel.labelInvalid]: this.invalid,
-    });
-  }
-
   get #helpTextClasses() {
     return classNames({
       [ccHelpText.helpText]: true,
-      [ccHelpText.helpTextInvalid]: this.invalid,
+      [ccHelpText.helpTextColor]: !this.invalid,
+      [ccHelpText.helpTextColorInvalid]: this.invalid,
     });
   }
 
@@ -71,7 +64,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 
   get #id() {
-    return "select_id";
+    return 'select_id';
   }
 
   get #helpId() {
@@ -90,20 +83,20 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="${this.#labelClasses}" for="${this.#id}">
+          html`<label class="${ccLabel.label}" for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,
               () =>
                 html`<span class="${ccLabel.optional}"
                   >${i18n._({
-                    id: "select.label.optional",
-                    message: "(optional)",
-                    comment: "Shown behind label when marked as optional",
+                    id: 'select.label.optional',
+                    message: '(optional)',
+                    comment: 'Shown behind label when marked as optional',
                   })}</span
-                >`
+                >`,
             )}</label
-          >`
+          >`,
       )}
       <div class="${ccSelect.selectWrapper}">
         <select
@@ -112,25 +105,18 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           ?autofocus=${this.autoFocus}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
-          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
-        >
+          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
           <w-icon-chevron-down-16></w-icon-chevron-down-16>
         </div>
       </div>
-      ${when(
-        this.always || this.invalid,
-        () =>
-          html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
-            ${this.hint}
-          </div>`
-      )}
+      ${when(this.always || this.invalid, () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.hint}</div>`)}
     </div>`;
   }
 }
 
-if (!customElements.get("w-select")) {
-  customElements.define("w-select", WarpSelect);
+if (!customElements.get('w-select')) {
+  customElements.define('w-select', WarpSelect);
 }
