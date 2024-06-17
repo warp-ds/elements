@@ -1,6 +1,7 @@
 /* eslint-env node */
 import path from 'path';
 
+import { classes } from '@warp-ds/css/component-classes/classes';
 import { presetWarp } from '@warp-ds/uno';
 import { glob } from 'glob';
 import uno from 'unocss/vite';
@@ -78,6 +79,7 @@ export default ({ mode }) => {
         uno({
           mode: 'shadow-dom',
           presets: [presetWarp({ skipResets: true })],
+          safelist: classes,
         }),
       mode !== 'lib' &&
         createHtmlPlugin({

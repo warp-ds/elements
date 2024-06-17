@@ -1,5 +1,6 @@
 import { css, html } from 'lit';
 
+import { modalElement as ccModal } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
@@ -54,18 +55,10 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
-      <link href="https://assets.finn.no/pkg/@warp-ds/css/v1/resets.css" rel="stylesheet" />
-      <dialog
-        ${ref(this.dialogEl)}
-        class="w-modal bg-transparent backface-hidden w-unset h-unset max-w-unset max-h-unset p-0 m-auto border-0 inset-0 open:flex open:fixed sm:place-content-center sm:place-items-center items-end [--w-modal-max-height:80%] [--w-modal-width:640px]">
-        <div
-          ${ref(this.dialogInnerEl)}
-          class="transition-all relative pb-safe-[24] sm:pb-24 shadow-m max-h-[--w-modal-max-height] min-h-[--w-modal-min-height] w-[--w-modal-width] h-[--w-modal-height] ease-in-out backface-hidden will-change-height rounded-8 sm:mx-16 s-bg flex flex-col overflow-hidden gap-12 lt-sm:rounded-b-0">
+      <dialog ${ref(this.dialogEl)} class="w-modal ${ccModal.dialogEl}">
+        <div ${ref(this.dialogInnerEl)} class="${ccModal.dialogInner}">
           <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
-          <div
-            ${ref(this.contentEl)}
-            class="block overflow-y-auto overflow-x-hidden last-child:mb-0 grow shrink px-16 sm:px-32 relative"
-            id=${this[CONTENT_ID]}>
+          <div ${ref(this.contentEl)} class="${ccModal.contentSlot}" id=${this[CONTENT_ID]}>
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
           <slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
@@ -115,6 +108,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   }
 
   static styles = [
+    WarpElement.styles,
     css`
       .w-modal {
         --w-modal-translate-distance: 100%;
