@@ -12,8 +12,8 @@ importers:
         specifier: 4.7.1
         version: 4.7.1
       '@warp-ds/core':
-        specifier: 1.1.1
-        version: 1.1.1(@floating-ui/dom@1.6.3)
+        specifier: 1.1.2
+        version: 1.1.2(@floating-ui/dom@1.6.3)
       '@warp-ds/css':
         specifier: 1.9.7
         version: 1.9.7
@@ -1279,8 +1279,8 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
 
-  '@warp-ds/core@1.1.1':
-    resolution: {integrity: sha512-JL7Zzi8djG9NOpZMebn4zuP7zAu8C5nAnplvJuMnWrExg3Kw+ZP9wnJWJJ+wNPASPbqHxshVHbNTBStGGTCeqw==}
+  '@warp-ds/core@1.1.2':
+    resolution: {integrity: sha512-Y5m3cqbtB1qlp9/OYBmO7N6CE9x8l57HUHyynBWXFQDqcfxKZxjCcU4TCleQFpAlKXgqqdQ7CL8MZqIuG5F38g==}
     peerDependencies:
       '@floating-ui/dom': 1.6.3
 
@@ -5860,7 +5860,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@warp-ds/core@1.1.1(@floating-ui/dom@1.6.3)':
+  '@warp-ds/core@1.1.2(@floating-ui/dom@1.6.3)':
     dependencies:
       '@floating-ui/dom': 1.6.3
 

@@ -82,7 +82,7 @@
   },
   "dependencies": {
     "@lingui/core": "4.7.1",
-    "@warp-ds/core": "1.1.1",
+    "@warp-ds/core": "1.1.2",
     "@warp-ds/css": "1.9.7",
     "@warp-ds/elements-core": "0.0.1",
     "@warp-ds/icons": "2.0.1"
