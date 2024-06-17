@@ -1,3 +1,10 @@
+## [1.4.1-next.2](https://github.com/warp-ds/elements/compare/v1.4.1-next.1...v1.4.1-next.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* add a mr-8 to calloutTarget div ([#157](https://github.com/warp-ds/elements/issues/157)) ([66ef95e](https://github.com/warp-ds/elements/commit/66ef95e163d988b31f475773673df556f684a998))
+
 ## [1.4.1-next.1](https://github.com/warp-ds/elements/compare/v1.4.0...v1.4.1-next.1) (2024-05-22)
 
 
