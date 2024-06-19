@@ -59,7 +59,6 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     super.connectedCallback();
 
     if (this.readOnly) {
-      console.log("hola");
       window.addEventListener('keydown', this.handleKeyDown)
     }
   }
