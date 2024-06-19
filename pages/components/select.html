@@ -27,6 +27,16 @@
               <td>false</td>
             </tr>
             <tr>
+              <td>disabled</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in a disabled state.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
               <td>invalid</td>
               <td>
                 <div>boolean</div>
@@ -79,27 +89,38 @@
               </td>
               <td>false</td>
             </tr>
+            <tr>
+              <td>read-only</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in a readonly state.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
           </tbody>
         </table>
 
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
+        <h3 class="mt-24 mb-16">Default</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries">
             <option>Strawberries</option>
-            <option>Raspberries</option>
+            <option selected>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
+          <w-select label="Berries">
             <option value="s">Strawberries</option>
-            <option value="r">Raspberries</option>
+            <option value="r" selected>Raspberries</option>
             <option value="c">Cloudberries</option>
           </w-select>
         </div>
 
-        <h3 class="mt-24 mb-16">Default option</h3>
+        <h3 class="mt-24 mb-16">Hint</h3>
         <syntax-highlight>
           <w-select label="Berries" hint="We assume this is your jam preference" always>
             <option>Strawberries</option>
@@ -112,6 +133,38 @@
             <option value="s">Strawberries</option>
             <option value="r" selected>Raspberries</option>
             <option value="c">Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Optional</h3>
+        <syntax-highlight>
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
+            <option>Strawberries</option>
+            <option>Raspberries</option>
+            <option>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Disabled</h3>
+        <syntax-highlight>
+          <w-select label="Berries" disabled>
+            <option disabled selected>Strawberries</option>
+            <optionx>Raspberries</optionx>
+            <option>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" disabled>
+            <option disabled selected>Strawberries</option>
+            <optionx>Raspberries</optionx>
+            <option>Cloudberries</option>
           </w-select>
         </div>
 
@@ -147,21 +200,22 @@
           </w-select>
         </div>
 
-        <h3 class="mt-24 mb-16">Optional</h3>
+        <h3 class="mt-24 mb-16">Readonly</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
-            <option>Strawberries</option>
-            <optionx>Raspberries</optionx>
+          <w-select label="Berries" read-only>
+            <option disabled selected>Strawberries</option>
+            <option>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always optional>
-            <option>Strawberries</option>
+          <w-select label="Berries" read-only>
+            <option disabled selected>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </div>
+
       </main>
     </div>
       <%- include('footer.html'); -%>
