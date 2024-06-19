@@ -135,6 +135,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           class="${this.#classes}"
           id="${this.#id}"
           ?autofocus=${this.autoFocus}
+          ?disabled=${this.disabled}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
