@@ -170,14 +170,14 @@
 
         <h3 class="mt-24 mb-16">Invalid</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="Wrong choice" invalid>
+          <w-select label="Berries" hint="Wrong choice" invalid always>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="Wrong choice" invalid>
+          <w-select label="Berries" hint="Wrong choice" invalid id='invalid-example' always>
             <option>Strawberries</option>
             <option>Raspberries</option>
             <option>Cloudberries</option>
@@ -217,6 +217,36 @@
         </div>
       </main>
     </div>
+    <script>
+     document.addEventListener('DOMContentLoaded', () => {
+        const selectElement = document.getElementById('invalid-example');
+
+        function attachChangeListener() {
+          if (selectElement.shadowRoot) {
+            const shadowSelect = selectElement.shadowRoot.querySelector('select');
+            if (shadowSelect) {
+              shadowSelect.addEventListener('change', (e) => {
+                const selectedValue = e.target.value;
+                if (selectedValue === 'Cloudberries') {
+                  selectElement.removeAttribute('invalid');
+                  selectElement.setAttribute('hint', 'Right choice');
+                } else {
+                  selectElement.setAttribute('invalid', '');
+                  selectElement.setAttribute('hint', 'Wrong choice');
+                }
+              });
+            } 
+            else {
+              setTimeout(attachChangeListener, 100);
+            }
+          } else {
+            setTimeout(attachChangeListener, 100);
+          }
+        }
+
+        attachChangeListener();
+      });
+    </script>
       <%- include('footer.html'); -%>
 
   </body>
