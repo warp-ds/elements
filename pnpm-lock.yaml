@@ -15,8 +15,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2(@floating-ui/dom@1.6.3)
       '@warp-ds/css':
-        specifier: 1.9.7
-        version: 1.9.7
+        specifier: github:warp-ds/css#component-classes-cleanup
+        version: https://codeload.github.com/warp-ds/css/tar.gz/aee56a067b3fbdc1ec068ef11da4e6340f0325d6
       '@warp-ds/elements-core':
         specifier: 0.0.1
         version: 0.0.1
@@ -1284,8 +1284,9 @@ packages:
     peerDependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.7':
-    resolution: {integrity: sha512-JCRVmwndAnQB9FSF09mCMJe1EJyQo6oaJ6txwRFaiJ1zeGtcL1jHHO1gtNvPRznE14LdqoTis78Nd1TeEI/UaA==}
+  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/aee56a067b3fbdc1ec068ef11da4e6340f0325d6':
+    resolution: {tarball: https://codeload.github.com/warp-ds/css/tar.gz/aee56a067b3fbdc1ec068ef11da4e6340f0325d6}
+    version: 1.9.7
 
   '@warp-ds/elements-core@0.0.1':
     resolution: {integrity: sha512-G84Zv4nk+QjYAYRIWHoF5+KpgL3Emk18kv4I2FleNpIG0UfTEv0DY3BcBtrFVjfumVnIFz3sS2zZR13BncdqnA==}
@@ -5864,7 +5865,7 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.9.7':
+  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/aee56a067b3fbdc1ec068ef11da4e6340f0325d6':
     dependencies:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
