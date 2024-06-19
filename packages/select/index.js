@@ -43,6 +43,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     readOnly: { type: Boolean, relfect: true },
 
     _options: { state: true },
+    _readOnlyId: { type: String },
   };
 
   static styles = [WarpElement.styles];
@@ -59,18 +60,22 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     super.connectedCallback();
 
     if (this.readOnly) {
+      this._readOnlyId = `w-select-readonly-${Math.random().toString(36).slice(2, 11)}`;
+      this.setAttribute('data-readonly-id', this._readOnlyId);
       window.addEventListener('keydown', this.handleKeyDown);
     }
   }
 
   disconnectedCallback() {
+    if (this.readOnly)
     window.removeEventListener('keydown', this.handleKeyDown);
 
     super.disconnectedCallback();
   }
 
   handleKeyDown(event) {
-    if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+    const target = event.target.closest('w-select[data-readonly-id="' + this._readOnlyId + '"]');
+    if (target && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
     }
   }
