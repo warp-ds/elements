@@ -78,7 +78,7 @@ export default ({ mode }) => {
       mode === 'development' &&
         uno({
           mode: 'shadow-dom',
-          presets: [presetWarp({ skipResets: true })],
+          presets: [presetWarp()],
           safelist: classes,
         }),
       mode !== 'lib' &&
