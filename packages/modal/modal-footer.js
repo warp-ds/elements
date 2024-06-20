@@ -1,18 +1,22 @@
-import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from "./util"
-import WarpElement from '@warp-ds/elements-core'
-import { html, css } from 'lit'
-import { modalV2 as cc } from './component-classes.js'
+import { html, css } from 'lit';
+
+import { modalElement as ccModal } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+
+import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from './util';
 
 export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(WarpElement)) {
   render() {
     return html`
-      <div class="${cc.footerSlot}">
+      <div class="${ccModal.footer}">
         <slot @slotchange="${this.handleSlotChange}"></slot>
       </div>
-    `
+    `;
   }
   static styles = [
     WarpElement.styles,
-    css`@unocss-placeholder`
-  ]
+    css`
+      @unocss-placeholder;
+    `,
+  ];
 }
