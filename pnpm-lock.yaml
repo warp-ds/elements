@@ -12,11 +12,11 @@ importers:
         specifier: 4.7.1
         version: 4.7.1
       '@warp-ds/core':
-        specifier: 1.1.1
-        version: 1.1.1(@floating-ui/dom@1.6.3)
+        specifier: 1.1.2
+        version: 1.1.2(@floating-ui/dom@1.6.3)
       '@warp-ds/css':
-        specifier: 1.10.0-next.1
-        version: 1.10.0-next.1
+        specifier: 1.10.0
+        version: 1.10.0
       '@warp-ds/elements-core':
         specifier: 0.0.1
         version: 0.0.1
@@ -1434,13 +1434,13 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
 
-  '@warp-ds/core@1.1.1':
-    resolution: {integrity: sha512-JL7Zzi8djG9NOpZMebn4zuP7zAu8C5nAnplvJuMnWrExg3Kw+ZP9wnJWJJ+wNPASPbqHxshVHbNTBStGGTCeqw==}
+  '@warp-ds/core@1.1.2':
+    resolution: {integrity: sha512-Y5m3cqbtB1qlp9/OYBmO7N6CE9x8l57HUHyynBWXFQDqcfxKZxjCcU4TCleQFpAlKXgqqdQ7CL8MZqIuG5F38g==}
     peerDependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.10.0-next.1':
-    resolution: {integrity: sha512-q1UtBS99cpl6JJEnV1daY7UU/h76fk4v5vp0yGEmOpay645OwL6+QpMZJXTFqwnsd9egtNmyqIhZXMSl2bqc4A==}
+  '@warp-ds/css@1.10.0':
+    resolution: {integrity: sha512-FbMKdF74wsJL91CcvWBbmHo4Gyu/Wu7anjMPNKV+PgarGV/Scei4EJvbDtT4/irNPZOmGRERJrEeebi7bSBf5w==}
 
   '@warp-ds/elements-core@0.0.1':
     resolution: {integrity: sha512-G84Zv4nk+QjYAYRIWHoF5+KpgL3Emk18kv4I2FleNpIG0UfTEv0DY3BcBtrFVjfumVnIFz3sS2zZR13BncdqnA==}
@@ -6354,11 +6354,11 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@warp-ds/core@1.1.1(@floating-ui/dom@1.6.3)':
+  '@warp-ds/core@1.1.2(@floating-ui/dom@1.6.3)':
     dependencies:
       '@floating-ui/dom': 1.6.3
 
-  '@warp-ds/css@1.10.0-next.1':
+  '@warp-ds/css@1.10.0':
     dependencies:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
