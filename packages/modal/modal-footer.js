@@ -13,10 +13,5 @@ export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(Warp
       </div>
     `;
   }
-  static styles = [
-    WarpElement.styles,
-    css`
-      @unocss-placeholder;
-    `,
-  ];
+  static styles = [WarpElement.styles];
 }

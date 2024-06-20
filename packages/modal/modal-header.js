@@ -76,10 +76,5 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
     const topContent = slotEvent.target.assignedElements({ flatten: true });
     this._hasTopContent = !!topContent.length;
   }
-  static styles = [
-    WarpElement.styles,
-    css`
-      @unocss-placeholder;
-    `,
-  ];
+  static styles = [WarpElement.styles];
 }

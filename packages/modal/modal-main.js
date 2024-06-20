@@ -168,8 +168,5 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
         }
       }
     `,
-    css`
-      @unocss-placeholder;
-    `,
   ];
 }
