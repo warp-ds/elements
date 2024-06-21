@@ -1,4 +1,4 @@
-import { html, css } from 'lit';
+import { html } from 'lit';
 
 import { modalElement as ccModal } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';

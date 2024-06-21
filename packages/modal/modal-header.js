@@ -1,4 +1,4 @@
-import { html, css, nothing } from 'lit';
+import { html, nothing } from 'lit';
 
 import { Move } from '@itsy/animate/move';
 import { modalElement as ccModal } from '@warp-ds/css/component-classes';
