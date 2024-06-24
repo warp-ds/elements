@@ -85,7 +85,7 @@
   "dependencies": {
     "@lingui/core": "4.7.1",
     "@warp-ds/core": "1.1.2",
-    "@warp-ds/css": "1.10.0",
+    "@warp-ds/css": "1.10.1",
     "@warp-ds/elements-core": "0.0.1",
     "@warp-ds/icons": "2.0.1",
     "scroll-doctor": "2.0.2"
