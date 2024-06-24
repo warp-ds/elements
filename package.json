@@ -15,6 +15,7 @@
     "./components/button": "./dist/packages/button/index.js",
     "./components/card": "./dist/packages/card/index.js",
     "./components/expandable": "./dist/packages/expandable/index.js",
+    "./components/modal": "./dist/packages/modal/index.js",
     "./components/select": "./dist/packages/select/index.js",
     "./components/textfield": "./dist/packages/textfield/index.js",
     "./components/toast": "./dist/packages/toast/index.js"
@@ -50,6 +51,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
+    "@itsy/animate": "0.0.9",
     "@eik/cli": "2.0.33",
     "@eik/esbuild-plugin": "1.1.46",
     "@lingui/cli": "4.7.1",
@@ -83,9 +85,10 @@
   "dependencies": {
     "@lingui/core": "4.7.1",
     "@warp-ds/core": "1.1.2",
-    "@warp-ds/css": "1.9.7",
+    "@warp-ds/css": "1.10.1",
     "@warp-ds/elements-core": "0.0.1",
-    "@warp-ds/icons": "2.0.1"
+    "@warp-ds/icons": "2.0.1",
+    "scroll-doctor": "2.0.2"
   },
   "publishConfig": {
     "access": "public"

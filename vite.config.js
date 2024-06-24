@@ -136,6 +136,11 @@ export default ({ mode }) => {
               injectOptions,
             },
             {
+              filename: 'modal.html',
+              template: 'pages/components/modal.html',
+              injectOptions,
+            },
+            {
               filename: 'toast.html',
               template: 'pages/components/toast.html',
               injectOptions,
