@@ -1,3 +1,10 @@
+# [1.5.0-next.1](https://github.com/warp-ds/elements/compare/v1.4.1-next.2...v1.5.0-next.1) (2024-06-24)
+
+
+### Features
+
+* add Modal component ([#127](https://github.com/warp-ds/elements/issues/127)) ([30aecaf](https://github.com/warp-ds/elements/commit/30aecaf8301f8dcb7d2130c12e0dff308aeac84a))
+
 ## [1.4.1-next.2](https://github.com/warp-ds/elements/compare/v1.4.1-next.1...v1.4.1-next.2) (2024-06-17)
 
 
