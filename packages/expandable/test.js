@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 import '@warp-ds/icons/elements/icon-bag-16';
 
@@ -117,7 +118,11 @@ test('Animated expandable component with custom title is rendered on the page', 
 
   const locator = await page.locator('w-expandable');
 
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="title"]').assignedNodes().length > 0), true, 'Custom title should be slotted');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('slot[name="title"]').assignedNodes().length > 0),
+    true,
+    'Custom title should be slotted',
+  );
 });
 
 test('Expandable component with title and no-chevron attribute is rendered on the page', async (t) => {

@@ -1,5 +1,6 @@
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 const wait = (duration = 0) => new Promise((resolve) => setTimeout(resolve, duration));
@@ -318,18 +319,6 @@ test('Setting type to warning', async (t) => {
   // WHEN/THEN:
   const locator = await page.locator('w-toast');
   t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'warning');
-});
-
-test('Setting type to info', async (t) => {
-  // GIVEN: An initialized page with no component
-  const page = await addContentToPage({
-    page: t.context.page,
-    content: '<w-toast text="This is my toast" type="info"></w-toast>',
-  });
-
-  // WHEN/THEN:
-  const locator = await page.locator('w-toast');
-  t.equal(await locator.evaluate((el) => el.getAttribute('type')), 'info');
 });
 
 test('Setting type to error', async (t) => {

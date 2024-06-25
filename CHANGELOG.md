@@ -1,3 +1,73 @@
+# [1.5.0-next.1](https://github.com/warp-ds/elements/compare/v1.4.1-next.2...v1.5.0-next.1) (2024-06-24)
+
+
+### Features
+
+* add Modal component ([#127](https://github.com/warp-ds/elements/issues/127)) ([30aecaf](https://github.com/warp-ds/elements/commit/30aecaf8301f8dcb7d2130c12e0dff308aeac84a))
+
+## [1.4.1-next.2](https://github.com/warp-ds/elements/compare/v1.4.1-next.1...v1.4.1-next.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* add a mr-8 to calloutTarget div ([#157](https://github.com/warp-ds/elements/issues/157)) ([66ef95e](https://github.com/warp-ds/elements/commit/66ef95e163d988b31f475773673df556f684a998))
+
+## [1.4.1-next.1](https://github.com/warp-ds/elements/compare/v1.4.0...v1.4.1-next.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* update warp-ds eslint-config devDep and add .eslintrc-file ([#153](https://github.com/warp-ds/elements/issues/153)) ([679fab7](https://github.com/warp-ds/elements/commit/679fab7a1a89a59fa9434932e06d9e2026f46982))
+
+# [1.4.0](https://github.com/warp-ds/elements/compare/v1.3.3...v1.4.0) (2024-05-15)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
+
+### Features
+
+* Add more features on how attention component is positioned ([#135](https://github.com/warp-ds/elements/issues/135)) ([e15dc54](https://github.com/warp-ds/elements/commit/e15dc545187717476d7418af0ca47f6eb734a488))
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
+# [1.4.0-next.3](https://github.com/warp-ds/elements/compare/v1.4.0-next.2...v1.4.0-next.3) (2024-05-14)
+
+
+### Bug Fixes
+
+* **textfield:** clean up classes ([#150](https://github.com/warp-ds/elements/issues/150)) ([da25199](https://github.com/warp-ds/elements/commit/da251996fe38f77fddf6290c675f399b04236f10))
+
+# [1.4.0-next.2](https://github.com/warp-ds/elements/compare/v1.4.0-next.1...v1.4.0-next.2) (2024-04-30)
+
+
+### Features
+
+* add more functionality to attention component ([#149](https://github.com/warp-ds/elements/issues/149)) ([daaf385](https://github.com/warp-ds/elements/commit/daaf3853a2c71c6dd70148cc4a7d53498dd5b497))
+
+# [1.4.0-next.1](https://github.com/warp-ds/elements/compare/v1.3.4-next.1...v1.4.0-next.1) (2024-04-16)
+
+
+### Features
+
+* Add more features on how attention component is positioned ([#135](https://github.com/warp-ds/elements/issues/135)) ([e15dc54](https://github.com/warp-ds/elements/commit/e15dc545187717476d7418af0ca47f6eb734a488))
+
+## [1.3.4-next.1](https://github.com/warp-ds/elements/compare/v1.3.3...v1.3.4-next.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* Styling fixes for Card component ([#147](https://github.com/warp-ds/elements/issues/147)) ([53c1249](https://github.com/warp-ds/elements/commit/53c12490ada84eb4e4d30e7707c37ee6f446c1c8))
+
+## [1.3.3](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3) (2024-04-09)
+
+
+### Bug Fixes
+
+* add warp-ds eslint-config ([#141](https://github.com/warp-ds/elements/issues/141)) ([dd3fec1](https://github.com/warp-ds/elements/commit/dd3fec1b180aa8980274311ac25801a7666dfa43))
+
 ## [1.3.3-next.1](https://github.com/warp-ds/elements/compare/v1.3.2...v1.3.3-next.1) (2024-03-21)
 
 

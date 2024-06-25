@@ -1,7 +1,8 @@
 import { html, nothing } from 'lit';
-import { createRef, ref } from 'lit/directives/ref.js';
+
 import { Accordion } from '@itsy/animate/accordion';
 import WarpElement from '@warp-ds/elements-core';
+import { createRef, ref } from 'lit/directives/ref.js';
 
 export class ExpandTransition extends WarpElement {
   contentEl = createRef();

@@ -1,6 +1,8 @@
 import { html } from 'lit';
+
 import WarpElement from '@warp-ds/elements-core';
 import { repeat } from 'lit/directives/repeat.js';
+
 import { windowExists } from '../utils/window-exists';
 
 export class WarpBroadcast extends WarpElement {
@@ -69,7 +71,8 @@ export class WarpBroadcast extends WarpElement {
         ${repeat(
           messages,
           ({ id }) => `broadcast-${id}`,
-          ({ id, message }) => html`<w-toast id="broadcast-${id}" type="warning" text="${message}" canclose @close=${() => this._del(id)}> </w-toast>`,
+          ({ id, message }) =>
+            html`<w-toast id="broadcast-${id}" type="warning" text="${message}" canclose @close=${() => this._del(id)}> </w-toast>`,
         )}
       </aside>
     `;

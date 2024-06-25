@@ -1,7 +1,9 @@
 import { html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { classes } from '../utils';
+
 import { badge as ccBadge } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+
+import { classes } from '../utils';
 
 class WarpBadge extends WarpElement {
   static properties = {
