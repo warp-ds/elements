@@ -36,29 +36,48 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     // Whether to show optional text
     optional: { type: Boolean, reflect: true },
 
+    // Renders the field in a disabled state.
+    disabled: { type: Boolean, reflect: true },
+
+    // Renders the field in a readonly state.
+    readOnly: { type: Boolean, relfect: true },
+
     _options: { state: true },
   };
 
   static styles = [WarpElement.styles];
 
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages);
+
+    this._options = this.innerHTML;
+  }
+
+  handleKeyDown(event) {
+    if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      event.preventDefault();
+    }
+  }
+
   get #classes() {
-    return classNames({
-      [ccSelect.default]: true,
+    return classNames(ccSelect.base, {
+      [ccSelect.default]: !this.invalid && !this.disabled && !this.readOnly,
       [ccSelect.invalid]: this.invalid,
+      [ccSelect.disabled]: this.disabled,
+      [ccSelect.readOnly]: this.readOnly,
     });
   }
 
   get #helpTextClasses() {
-    return classNames({
-      [ccHelpText.helpText]: true,
+    return classNames(ccHelpText.helpText, {
       [ccHelpText.helpTextColor]: !this.invalid,
       [ccHelpText.helpTextColorInvalid]: this.invalid,
     });
   }
 
   get #chevronClasses() {
-    return classNames({
-      [ccSelect.chevron]: true,
+    return classNames(ccSelect.chevron, {
       [ccSelect.chevronDisabled]: this.disabled,
     });
   }
@@ -69,13 +88,6 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
 
   get #helpId() {
     return this.hint ? `${this.#id}__hint` : undefined;
-  }
-
-  constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages);
-
-    this._options = this.innerHTML;
   }
 
   render() {
@@ -103,9 +115,11 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           class="${this.#classes}"
           id="${this.#id}"
           ?autofocus=${this.autoFocus}
+          ?disabled=${this.disabled}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
-          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}">
+          aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
+          @keydown=${this.handleKeyDown}>
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
