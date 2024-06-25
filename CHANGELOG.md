@@ -1,3 +1,10 @@
+# [1.5.0-next.2](https://github.com/warp-ds/elements/compare/v1.5.0-next.1...v1.5.0-next.2) (2024-06-25)
+
+
+### Bug Fixes
+
+* update release.yml to include a retry for semantic-release and only if succesful will it publish to eik ([#160](https://github.com/warp-ds/elements/issues/160)) ([31a8b4e](https://github.com/warp-ds/elements/commit/31a8b4ea057c2e43afc1e2e7a69fb19bb33d015c))
+
 # [1.5.0-next.1](https://github.com/warp-ds/elements/compare/v1.4.1-next.2...v1.5.0-next.1) (2024-06-24)
 
 
