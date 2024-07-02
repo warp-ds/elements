@@ -18,8 +18,8 @@ importers:
         specifier: 1.10.1
         version: 1.10.1
       '@warp-ds/elements-core':
-        specifier: 0.0.1
-        version: 0.0.1
+        specifier: 2.0.0
+        version: 2.0.0
       '@warp-ds/icons':
         specifier: 2.0.1
         version: 2.0.1
@@ -861,6 +861,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -868,6 +869,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1442,8 +1444,8 @@ packages:
   '@warp-ds/css@1.10.1':
     resolution: {integrity: sha512-TOaxFBnvnnRJzDoyBPK4rS6bNs32Aulv2H5jzVCPGqNgncaFf4ef1k2Z1bkL4/vrR7HNXBJjfIJ50z0HAyOBAw==}
 
-  '@warp-ds/elements-core@0.0.1':
-    resolution: {integrity: sha512-G84Zv4nk+QjYAYRIWHoF5+KpgL3Emk18kv4I2FleNpIG0UfTEv0DY3BcBtrFVjfumVnIFz3sS2zZR13BncdqnA==}
+  '@warp-ds/elements-core@2.0.0':
+    resolution: {integrity: sha512-FMf+sOPjhDepwcVHUPYffzPXi6iBZY5fa3fmlznyn4QHo5zusd5HueyOi0vrvbNTX3kba2bv/3+6C1Cbim/QOw==}
 
   '@warp-ds/eslint-config@1.0.5':
     resolution: {integrity: sha512-cHakkN7BVpqwQxpEeDrl3V8/QDco/7UwHTWIFzN3C9t8RlfcT9Y1QTNfMzJQBiIux8oQNE6rom0AydmWLo8mRw==}
@@ -6363,7 +6365,7 @@ snapshots:
       '@warp-ds/tokenizer': 0.0.4
       '@warp-ds/uno': 1.12.0
 
-  '@warp-ds/elements-core@0.0.1':
+  '@warp-ds/elements-core@2.0.0':
     dependencies:
       '@podium/element': 1.0.8(lit@2.7.6)
       construct-style-sheets-polyfill: 3.1.0
