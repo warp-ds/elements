@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/warp-ds/elements/compare/v1.4.0...v1.5.0) (2024-07-02)
+
+
+### Bug Fixes
+
+* add a mr-8 to calloutTarget div ([#157](https://github.com/warp-ds/elements/issues/157)) ([66ef95e](https://github.com/warp-ds/elements/commit/66ef95e163d988b31f475773673df556f684a998))
+* update release.yml to include a retry for semantic-release and only if succesful will it publish to eik ([#160](https://github.com/warp-ds/elements/issues/160)) ([31a8b4e](https://github.com/warp-ds/elements/commit/31a8b4ea057c2e43afc1e2e7a69fb19bb33d015c))
+* update warp-ds eslint-config devDep and add .eslintrc-file ([#153](https://github.com/warp-ds/elements/issues/153)) ([679fab7](https://github.com/warp-ds/elements/commit/679fab7a1a89a59fa9434932e06d9e2026f46982))
+
+
+### Features
+
+* add Modal component ([#127](https://github.com/warp-ds/elements/issues/127)) ([30aecaf](https://github.com/warp-ds/elements/commit/30aecaf8301f8dcb7d2130c12e0dff308aeac84a))
+
 # [1.5.0-next.2](https://github.com/warp-ds/elements/compare/v1.5.0-next.1...v1.5.0-next.2) (2024-06-25)
 
 
