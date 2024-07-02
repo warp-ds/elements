@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
@@ -93,7 +94,11 @@ test('Button as an anchor', async (t) => {
 
   const locator = await page.locator('w-button');
   t.equal((await locator.innerHTML()).trim(), 'This is an anchor element', 'HTML should be rendered');
-  t.equal(await locator.evaluate((el) => el.renderRoot.querySelector('[href="https://google.no"]').tagName), 'A', 'Button is rendered as an anchor tag');
+  t.equal(
+    await locator.evaluate((el) => el.renderRoot.querySelector('[href="https://google.no"]').tagName),
+    'A',
+    'Button is rendered as an anchor tag',
+  );
 });
 
 test('Button with autofocus', async (t) => {
@@ -133,7 +138,11 @@ test('Button with invalid variant name', async (t) => {
     content: component,
   });
 
-  t.equal(errorLogs[0].message, `Invalid "variant" attribute. Set its value to one of the following:\nprimary, secondary, negative, utility, link, pill.`, 'Invalid attribute error was thrown');
+  t.equal(
+    errorLogs[0].message,
+    `Invalid "variant" attribute. Set its value to one of the following:\nprimary, secondary, negative, utility, link, pill.`,
+    'Invalid attribute error was thrown',
+  );
 
   page.removeListener('pageerror', registerErrorLogs);
 });

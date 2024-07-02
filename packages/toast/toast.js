@@ -1,18 +1,21 @@
 import { css, html } from 'lit';
+
+import { i18n } from '@lingui/core';
+import { toast as ccToast } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
+import { expand, collapse } from 'element-collapse';
 import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
-import { toast as ccToast } from '@warp-ds/css/component-classes';
-import { expand, collapse } from 'element-collapse';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/close-16';
-import { i18n } from '@lingui/core';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
+
 import { activateI18n } from '../i18n';
+
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 
 const classes = (definition) => {
   const defn = {};

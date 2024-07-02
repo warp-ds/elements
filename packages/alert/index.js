@@ -1,8 +1,10 @@
 // TODO: replace text-14 with a token
-import WarpElement from '@warp-ds/elements-core';
+
 import { css, html } from 'lit';
-import { alert as ccAlert } from '@warp-ds/css/component-classes';
+
 import { classNames } from '@chbphone55/classnames';
+import { alert as ccAlert } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
 import '@warp-ds/icons/elements/info-16';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';

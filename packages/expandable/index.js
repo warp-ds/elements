@@ -1,11 +1,13 @@
 import { css, html } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { fclasses, kebabCaseAttributes } from '../utils';
+
 import { box as ccBox, expandable as ccExpandable } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+import { ifDefined } from 'lit/directives/if-defined.js';
+
+import { fclasses, kebabCaseAttributes } from '../utils';
+
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
-
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
@@ -71,8 +73,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
         [this.contentClass || '']: true,
         [ccBox.box]: this.box,
         [ccExpandable.paddingTop]: this._hasTitle && this.box,
-      })}
-    >
+      })}>
       <slot></slot>
     </div>`;
   }
@@ -98,8 +99,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
         [ccExpandable.expandable]: true,
         [ccExpandable.expandableBox]: this.box,
         [ccExpandable.expandableBleed]: this.bleed,
-      })}
-    >
+      })}>
       ${this._hasTitle
         ? html`<w-unstyled-heading level=${this.headingLevel}>
             <button
@@ -110,8 +110,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
               })}
-              @click=${() => (this.expanded = !this.expanded)}
-            >
+              @click=${() => (this.expanded = !this.expanded)}>
               <div class="${ccExpandable.title}">
                 ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
                 ${this.noChevron
@@ -121,9 +120,10 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                         [ccExpandable.chevron]: true,
                         [ccExpandable.chevronBox]: this.box,
                         [ccExpandable.chevronNonBox]: !this.box,
-                      })}
-                    >
-                      ${this._showChevronUp ? html`<w-icon-chevron-up-16 class="${this._chevronUpClasses}"></w-icon-chevron-up-16>` : html`<w-icon-chevron-down-16 class="${this._chevronDownClasses}"></w-icon-chevron-down-16>`}
+                      })}>
+                      ${this._showChevronUp
+                        ? html`<w-icon-chevron-up-16 class="${this._chevronUpClasses}"></w-icon-chevron-up-16>`
+                        : html`<w-icon-chevron-down-16 class="${this._chevronDownClasses}"></w-icon-chevron-down-16>`}
                     </div>`}
               </div>
             </button>
@@ -136,8 +136,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
               [ccExpandable.expansion]: true,
               [ccExpandable.expansionNotExpanded]: !this.expanded,
             })}
-            aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
-          >
+            aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
             ${this._expandableSlot}
           </div>`}
     </div>`;

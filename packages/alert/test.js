@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import tap, { test, beforeEach, teardown } from 'tap';
 import { chromium } from 'playwright';
+import tap, { test, beforeEach, teardown } from 'tap';
+
 import { addContentToPage } from '../../tests/utils/index.js';
 
 tap.before(async () => {
@@ -47,9 +48,19 @@ test('Alert component with no attributes is rendered on the page', async (t) => 
   t.equal(await locator.getAttribute('role'), 'alert', 'Role attribute should default to "alert"');
   t.equal(await locator.evaluate((el) => el.role), 'alert', 'Role property should default to alert');
 
-  t.equal(errorLogs[0].message, 'Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.', 'Invalid attribute error was thrown');
+  t.equal(
+    errorLogs[0].message,
+    'Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.',
+    'Invalid attribute error was thrown',
+  );
 
-  t.equal(await page.evaluate('document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")'), 'true', 'Aria-hidden attribute is `true`');
+  t.equal(
+    await page.evaluate(
+      'document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
+    ),
+    'true',
+    'Aria-hidden attribute is `true`',
+  );
 
   page.removeListener('pageerror', registerErrorLogs);
 });
@@ -74,7 +85,11 @@ test('Alert component with invalid "variant" attribute is rendered on the page',
     content: component,
   });
 
-  t.equal(errorLogs[0].message, 'Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.', 'Invalid attribute error was thrown');
+  t.equal(
+    errorLogs[0].message,
+    'Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.',
+    'Invalid attribute error was thrown',
+  );
 
   page.removeListener('pageerror', registerErrorLogs);
 });
@@ -105,7 +120,13 @@ test('Negative alert component with show attribute is rendered on the page', asy
 
   t.equal(errorLogs.length, 0, 'No errors should be thrown in the console');
 
-  t.equal(await page.evaluate('document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")'), null, 'Aria-hidden attribute is missing');
+  t.equal(
+    await page.evaluate(
+      'document.querySelector("w-alert").renderRoot.querySelector("w-expand-transition").renderRoot.querySelector("div").getAttribute("aria-hidden")',
+    ),
+    null,
+    'Aria-hidden attribute is missing',
+  );
 
   page.removeListener('pageerror', registerErrorLogs);
 });
@@ -143,11 +164,19 @@ test('Positive alert component with `alert` role assigned to its child is render
   });
 
   const locator = await page.locator('w-alert');
-  t.equal((await locator.innerHTML()).trim(), '<p role="alert">This is a positive alert that should have an "alert" role</p><p>This is less important text</p>', 'HTML should be rendered');
+  t.equal(
+    (await locator.innerHTML()).trim(),
+    '<p role="alert">This is a positive alert that should have an "alert" role</p><p>This is less important text</p>',
+    'HTML should be rendered',
+  );
   t.equal(await locator.evaluate((el) => el.variant), 'positive', '"variant" attribute should be "positive"');
   t.equal(await locator.evaluate((el) => el.role), '', 'Role attribute of alert should be an empty string');
 
-  t.equal(await locator.evaluate((el) => el.querySelector("[role='alert']").innerHTML), 'This is a positive alert that should have an "alert" role', 'Role attribute should be set on child');
+  t.equal(
+    await locator.evaluate((el) => el.querySelector("[role='alert']").innerHTML),
+    'This is a positive alert that should have an "alert" role',
+    'Role attribute should be set on child',
+  );
 });
 
 test('Warning alert component with show-toggle button is rendered on the page', async (t) => {
@@ -209,7 +238,15 @@ test('Info Alert component with multiple paragraph child elements', async (t) =>
   const lastElement = await page.locator('#last');
   const secondElement = await page.locator('#second');
 
-  t.match(await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '0px', 'Bottom margin of last paragraph should be 0px');
+  t.match(
+    await lastElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    '0px',
+    'Bottom margin of last paragraph should be 0px',
+  );
 
-  t.match(await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')), '8px', 'Bottom margin of second paragraph should be 8px');
+  t.match(
+    await secondElement.evaluate((el) => window.getComputedStyle(el).getPropertyValue('margin-bottom')),
+    '8px',
+    'Bottom margin of second paragraph should be 8px',
+  );
 });

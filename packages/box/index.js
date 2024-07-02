@@ -1,7 +1,9 @@
 import { css, html, nothing } from 'lit';
-import WarpElement from '@warp-ds/elements-core';
-import { fclasses } from '../utils';
+
 import { box as ccBox } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+
+import { fclasses } from '../utils';
 
 class WarpBox extends WarpElement {
   static properties = {
