@@ -75,7 +75,7 @@
     "express": "4.18.2",
     "glob": "10.3.10",
     "html-format": "1.1.6",
-    "lit": "3.1.4",
+    "lit": "3.x",
     "playwright": "1.41.2",
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
@@ -91,7 +91,7 @@
     "@lingui/core": "4.7.1",
     "@warp-ds/core": "1.1.2",
     "@warp-ds/css": "2.0.0-next.4",
-    "@warp-ds/elements-core": "2.0.0",
+    "@warp-ds/elements-core": "2.x",
     "@warp-ds/icons": "2.0.1",
     "scroll-doctor": "2.0.2"
   },

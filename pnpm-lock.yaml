@@ -18,7 +18,7 @@ importers:
         specifier: 2.0.0-next.4
         version: 2.0.0-next.4(@warp-ds/uno@2.0.0(unocss@0.58.5(postcss@8.4.38)(rollup@4.18.0)(vite@5.1.4(@types/node@20.11.19)(terser@5.19.0))))
       '@warp-ds/elements-core':
-        specifier: 2.0.0
+        specifier: 2.x
         version: 2.0.0
       '@warp-ds/icons':
         specifier: 2.0.1
@@ -88,7 +88,7 @@ importers:
         specifier: 1.1.6
         version: 1.1.6
       lit:
-        specifier: 3.1.4
+        specifier: 3.x
         version: 3.1.4
       playwright:
         specifier: 1.41.2
@@ -954,9 +954,6 @@ packages:
   '@lingui/message-utils@4.7.1':
     resolution: {integrity: sha512-c4D9Qg575LHvJHNyDDJfw+lAfyVv+3L+j4ZkaG8elNjc06ITx6sBWETFlj9FwoE8krF/r4yyXuCdnhBgUMrvJg==}
     engines: {node: '>=16.0.0'}
-
-  '@lit-labs/ssr-dom-shim@1.1.2':
-    resolution: {integrity: sha512-jnOD+/+dSrfTWYfSXBXlo5l5f0q1UuJo3tkbMDCYA2lKUYq79jaxqtGEvnRoh049nt1vdo1+45RinipU6FGY2g==}
 
   '@lit-labs/ssr-dom-shim@1.2.0':
     resolution: {integrity: sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==}
@@ -5785,13 +5782,11 @@ snapshots:
       '@messageformat/parser': 5.1.0
       js-sha256: 0.10.1
 
-  '@lit-labs/ssr-dom-shim@1.1.2': {}
-
   '@lit-labs/ssr-dom-shim@1.2.0': {}
 
   '@lit/reactive-element@1.6.2':
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.1.2
+      '@lit-labs/ssr-dom-shim': 1.2.0
 
   '@lit/reactive-element@2.0.4':
     dependencies:
@@ -8464,7 +8459,7 @@ snapshots:
 
   lit-element@3.3.2:
     dependencies:
-      '@lit-labs/ssr-dom-shim': 1.1.2
+      '@lit-labs/ssr-dom-shim': 1.2.0
       '@lit/reactive-element': 1.6.2
       lit-html: 2.8.0
 
