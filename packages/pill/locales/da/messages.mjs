@@ -1,0 +1,1 @@
+/*eslint-disable*/export const messages=JSON.parse("{\"pill.aria.openFilter\":\"Åbn filter\",\"pill.aria.removeFilter\":[\"Fjern filter \",[\"label\"]]}");
