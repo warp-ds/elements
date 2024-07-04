@@ -49,6 +49,11 @@
     "url": "https://github.com/warp-ds/elements.git"
   },
   "license": "Apache-2.0",
+  "peerDependencies": {
+    "@warp-ds/css": "2.0.0-next.4",
+    "@warp-ds/elements-core": "2.x",
+    "lit": "3.x"
+  },
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
     "@itsy/animate": "0.0.9",
@@ -59,7 +64,7 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/node": "20.11.19",
-    "@warp-ds/uno": "1.12.0",
+    "@warp-ds/uno": "2.x",
     "cors": "2.8.5",
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
@@ -70,14 +75,14 @@
     "express": "4.18.2",
     "glob": "10.3.10",
     "html-format": "1.1.6",
-    "lit": "2.8.0",
+    "lit": "3.x",
     "playwright": "1.41.2",
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
     "semantic-release": "23.0.2",
     "tap": "16.3.10",
     "typescript": "5.3.3",
-    "unocss": "0.58.5",
+    "unocss": "0.x",
     "vite": "5.1.4",
     "vite-plugin-html": "3.2.2",
     "vite-plugin-top-level-await": "1.4.1"
@@ -85,8 +90,8 @@
   "dependencies": {
     "@lingui/core": "4.7.1",
     "@warp-ds/core": "1.1.2",
-    "@warp-ds/css": "1.10.1",
-    "@warp-ds/elements-core": "0.0.1",
+    "@warp-ds/css": "2.0.0-next.4",
+    "@warp-ds/elements-core": "2.x",
     "@warp-ds/icons": "2.0.1",
     "scroll-doctor": "2.0.2"
   },
@@ -98,7 +103,7 @@
     "type": "package",
     "files": "eik",
     "import-map": [
-      "https://assets.finn.no/map/custom-elements/v2"
+      "https://assets.finn.no/map/custom-elements/v3"
     ]
   },
   "config": {
