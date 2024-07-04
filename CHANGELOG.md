@@ -1,3 +1,21 @@
+# [2.0.0-next.1](https://github.com/warp-ds/elements/compare/v1.5.0...v2.0.0-next.1) (2024-07-04)
+
+
+### Features
+
+* release for DBA ([#164](https://github.com/warp-ds/elements/issues/164)) ([36c9f47](https://github.com/warp-ds/elements/commit/36c9f47058f9c4f3d0f5e68ef63c8ff21c39da54))
+
+
+### BREAKING CHANGES
+
+* This removes depreacted stuff
+
+* update some more stuff
+
+* update to v2
+
+* more v2
+
 # [1.5.0](https://github.com/warp-ds/elements/compare/v1.4.0...v1.5.0) (2024-07-02)
 
 
