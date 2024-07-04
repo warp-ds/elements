@@ -13,6 +13,7 @@ import '@warp-ds/icons/elements/close-16';
 
 import { activateI18n } from '../i18n';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
@@ -52,7 +53,7 @@ export class WarpToast extends WarpElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
 
     this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
     this.type = 'success';
