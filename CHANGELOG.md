@@ -1,3 +1,10 @@
+# [2.0.0-next.2](https://github.com/warp-ds/elements/compare/v2.0.0-next.1...v2.0.0-next.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* support danish locale ([#167](https://github.com/warp-ds/elements/issues/167)) ([418c68f](https://github.com/warp-ds/elements/commit/418c68fc20f1ec2720cc70168afb5311ad65a0e5))
+
 # [2.0.0-next.1](https://github.com/warp-ds/elements/compare/v1.5.0...v2.0.0-next.1) (2024-07-04)
 
 
