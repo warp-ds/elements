@@ -118,7 +118,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
                   : html`<div
                       class=${fclasses({
                         [ccExpandable.chevron]: true,
-                        [ccExpandable.chevronBox]: this.box,
+                        [ccExpandable.chevronBox]: this.box && ccExpandable.chevronBox,
                         [ccExpandable.chevronNonBox]: !this.box,
                       })}>
                       ${this._showChevronUp
