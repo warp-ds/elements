@@ -5,7 +5,6 @@
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
-    "./toast": "./dist/api.js",
     "./components/affix": "./dist/packages/affix/index.js",
     "./components/alert": "./dist/packages/alert/index.js",
     "./components/attention": "./dist/packages/attention/index.js",
@@ -18,7 +17,8 @@
     "./components/modal": "./dist/packages/modal/index.js",
     "./components/select": "./dist/packages/select/index.js",
     "./components/textfield": "./dist/packages/textfield/index.js",
-    "./components/toast": "./dist/packages/toast/index.js"
+    "./components/toast": "./dist/packages/toast/index.js",
+    "./toast": "./dist/api.js"
   },
   "module": "dist/index.js",
   "files": [
@@ -56,20 +56,20 @@
   },
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
-    "@itsy/animate": "0.0.9",
     "@eik/cli": "2.0.38",
     "@eik/esbuild-plugin": "1.1.47",
+    "@itsy/animate": "0.0.9",
     "@lingui/cli": "4.11.2",
     "@lingui/conf": "4.11.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/node": "20.14.10",
+    "@warp-ds/eslint-config": "1.0.5",
     "@warp-ds/uno": "2.x",
     "cors": "2.8.5",
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.23.0",
-    "@warp-ds/eslint-config": "1.0.5",
     "eslint-plugin-lit": "1.14.0",
     "express": "4.19.2",
     "glob": "11.0.0",
@@ -98,12 +98,12 @@
     "access": "public"
   },
   "eik": {
-    "server": "https://assets.finn.no",
-    "type": "package",
     "files": "eik",
     "import-map": [
       "https://assets.finn.no/map/custom-elements/v3"
-    ]
+    ],
+    "server": "https://assets.finn.no",
+    "type": "package"
   },
   "config": {
     "commitizen": {
