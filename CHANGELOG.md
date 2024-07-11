@@ -1,3 +1,10 @@
+# [2.0.0-next.3](https://github.com/warp-ds/elements/compare/v2.0.0-next.2...v2.0.0-next.3) (2024-07-11)
+
+
+### Bug Fixes
+
+* update dependencies ([#168](https://github.com/warp-ds/elements/issues/168)) ([a71ff2f](https://github.com/warp-ds/elements/commit/a71ff2f1f9feb28923e1d98529a6654dcfe9929c))
+
 # [2.0.0-next.2](https://github.com/warp-ds/elements/compare/v2.0.0-next.1...v2.0.0-next.2) (2024-07-04)
 
 
