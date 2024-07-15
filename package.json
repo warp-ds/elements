@@ -50,7 +50,7 @@
   },
   "license": "Apache-2.0",
   "peerDependencies": {
-    "@warp-ds/css": "github:warp-ds/css#fix/clean-up-toast-classes",
+    "@warp-ds/css": "github:warp-ds/css#component-classes-cleanup",
     "@warp-ds/elements-core": "2.x",
     "lit": "3.x"
   },
@@ -89,7 +89,7 @@
   "dependencies": {
     "@lingui/core": "4.11.2",
     "@warp-ds/core": "1.1.5",
-    "@warp-ds/css": "github:warp-ds/css#fix/clean-up-toast-classes",
+    "@warp-ds/css": "github:warp-ds/css#component-classes-cleanup",
     "@warp-ds/elements-core": "2.x",
     "@warp-ds/icons": "2.0.2",
     "scroll-doctor": "2.0.2"

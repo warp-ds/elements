@@ -15,8 +15,8 @@ importers:
         specifier: 1.1.5
         version: 1.1.5(@floating-ui/dom@1.6.7)
       '@warp-ds/css':
-        specifier: github:warp-ds/css#fix/clean-up-toast-classes
-        version: https://codeload.github.com/warp-ds/css/tar.gz/644d9932615397ac561506d8a91042511ad71420(@warp-ds/uno@2.0.0(unocss@0.61.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))))
+        specifier: github:warp-ds/css#component-classes-cleanup
+        version: https://codeload.github.com/warp-ds/css/tar.gz/3a91a4cf393d57049e4ef0e3bf7aafa38e613de5(@warp-ds/uno@2.0.0(unocss@0.61.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))))
       '@warp-ds/elements-core':
         specifier: 2.x
         version: 2.0.1
@@ -1569,8 +1569,8 @@ packages:
     peerDependencies:
       '@floating-ui/dom': 1.6.x
 
-  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/644d9932615397ac561506d8a91042511ad71420':
-    resolution: {tarball: https://codeload.github.com/warp-ds/css/tar.gz/644d9932615397ac561506d8a91042511ad71420}
+  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/3a91a4cf393d57049e4ef0e3bf7aafa38e613de5':
+    resolution: {tarball: https://codeload.github.com/warp-ds/css/tar.gz/3a91a4cf393d57049e4ef0e3bf7aafa38e613de5}
     version: 2.0.0-next.4
     peerDependencies:
       '@warp-ds/uno': 2.x
@@ -6604,7 +6604,7 @@ snapshots:
     dependencies:
       '@floating-ui/dom': 1.6.7
 
-  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/644d9932615397ac561506d8a91042511ad71420(@warp-ds/uno@2.0.0(unocss@0.61.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))))':
+  '@warp-ds/css@https://codeload.github.com/warp-ds/css/tar.gz/3a91a4cf393d57049e4ef0e3bf7aafa38e613de5(@warp-ds/uno@2.0.0(unocss@0.61.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))))':
     dependencies:
       '@warp-ds/uno': 2.0.0(unocss@0.61.3(postcss@8.4.39)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2)))
 
