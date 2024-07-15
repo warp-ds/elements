@@ -11,6 +11,7 @@ import { when } from 'lit/directives/when.js';
 import { activateI18n } from '../i18n';
 import { kebabCaseAttributes } from '../utils';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';

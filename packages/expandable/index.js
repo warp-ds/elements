@@ -4,7 +4,7 @@ import { box as ccBox, expandable as ccExpandable } from '@warp-ds/css/component
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { fclasses, kebabCaseAttributes } from '../utils';
+import { classes, kebabCaseAttributes } from '../utils';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
@@ -69,24 +69,24 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
 
   get _expandableSlot() {
     return html`<div
-      class=${fclasses({
+      class="${classes({
         [this.contentClass || '']: true,
         [ccBox.box]: this.box,
         [ccExpandable.paddingTop]: this._hasTitle && this.box,
-      })}>
+      })}">
       <slot></slot>
     </div>`;
   }
 
   get _chevronUpClasses() {
-    return fclasses({
+    return classes({
       [ccExpandable.elementsTransformChevronUpPart]: true,
       [ccExpandable.elementsChevronUpCollapsePart]: !this.expanded && this._showChevronUp,
     });
   }
 
   get _chevronDownClasses() {
-    return fclasses({
+    return classes({
       [ccExpandable.elementsTransformChevronDownPart]: true,
       [ccExpandable.elementsChevronDownExpandPart]: this.expanded && !this._showChevronUp,
     });
@@ -95,32 +95,32 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   render() {
     // Will keep the inline-svg:s for expandable due to issues with setting css-classes on an element inside the shadow DOM:
     return html` <div
-      class=${fclasses({
+      class="${classes({
         [ccExpandable.expandable]: true,
         [ccExpandable.expandableBox]: this.box,
         [ccExpandable.expandableBleed]: this.bleed,
-      })}>
+      })}">
       ${this._hasTitle
         ? html`<w-unstyled-heading level=${this.headingLevel}>
             <button
               type="button"
               aria-expanded="${this.expanded}"
-              class=${fclasses({
+              class="${classes({
                 [this.buttonClass || '']: true,
                 [ccExpandable.button]: true,
                 [ccExpandable.buttonBox]: this.box,
-              })}
+              })}"
               @click=${() => (this.expanded = !this.expanded)}>
               <div class="${ccExpandable.title}">
                 ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
                 ${this.noChevron
                   ? ''
                   : html`<div
-                      class=${fclasses({
+                      class="${classes({
                         [ccExpandable.chevron]: true,
                         [ccExpandable.chevronBox]: this.box,
                         [ccExpandable.chevronNonBox]: !this.box,
-                      })}>
+                      })}">
                       ${this._showChevronUp
                         ? html`<w-icon-chevron-up-16 class="${this._chevronUpClasses}"></w-icon-chevron-up-16>`
                         : html`<w-icon-chevron-down-16 class="${this._chevronDownClasses}"></w-icon-chevron-down-16>`}
@@ -132,10 +132,10 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       ${this.animated
         ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
         : html`<div
-            class=${fclasses({
+            class="${classes({
               [ccExpandable.expansion]: true,
               [ccExpandable.expansionNotExpanded]: !this.expanded,
-            })}
+            })}"
             aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
             ${this._expandableSlot}
           </div>`}

@@ -1,0 +1,1 @@
+/*eslint-disable*/export const messages=JSON.parse("{\"toast.aria.error\":\"Fejl\",\"toast.aria.successful\":\"Fuldført\",\"toast.aria.warning\":\"Advarsel\"}");
