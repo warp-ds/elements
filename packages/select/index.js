@@ -50,7 +50,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
 
     this._options = this.innerHTML;
   }
