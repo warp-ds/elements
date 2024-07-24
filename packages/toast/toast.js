@@ -1,10 +1,10 @@
 import { css, html } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { expand, collapse } from 'element-collapse';
-import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
@@ -12,21 +12,12 @@ import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/close-16';
 
 import { activateI18n } from '../i18n';
+import { kebabCaseAttributes } from '../utils';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
-
-const classes = (definition) => {
-  const defn = {};
-  for (const [key, value] of Object.entries(definition)) {
-    for (const className of key.split(' ')) {
-      defn[className] = value;
-    }
-  }
-  return classMap(defn);
-};
 
 const toastType = {
   success: 'success',
@@ -34,7 +25,7 @@ const toastType = {
   warning: 'warning',
 };
 
-export class WarpToast extends WarpElement {
+export class WarpToast extends kebabCaseAttributes(WarpElement) {
   static styles = [
     WarpElement.styles,
     css`
@@ -73,18 +64,16 @@ export class WarpToast extends WarpElement {
     if (!this._expanded && this._wrapper) expand(this._wrapper, () => (this._expanded = true));
   }
 
-  get _primaryClasses() {
-    return classes({
-      [ccToast.toast]: true,
+  get #primaryClasses() {
+    return classNames(ccToast.base, {
       [ccToast.positive]: this.type === toastType.success,
       [ccToast.warning]: this.type === toastType.warning,
       [ccToast.negative]: this.type === toastType.error,
     });
   }
 
-  get _iconClasses() {
-    return classes({
-      [ccToast.icon]: true,
+  get #iconClasses() {
+    return classNames(ccToast.iconBase, {
       [ccToast.iconPositive]: this.type === toastType.success,
       [ccToast.iconWarning]: this.type === toastType.warning,
       [ccToast.iconNegative]: this.type === toastType.error,
@@ -155,8 +144,8 @@ export class WarpToast extends WarpElement {
   render() {
     if (!this.text) return html``;
     return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
-      <div class="${this._primaryClasses}">
-        <div class="${this._iconClasses}">${this._iconMarkup}</div>
+      <div class="${this.#primaryClasses}">
+        <div class="${this.#iconClasses}">${this._iconMarkup}</div>
         <div role="${this._role}" class="${ccToast.content}">
           <p>${this.text}</p>
         </div>
