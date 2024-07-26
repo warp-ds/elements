@@ -68,14 +68,24 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     this.expanded = !this._stateExpanded;
   }
 
-  get _expandableSlot() {
-    return html`<div
-      class="${classNames([this.contentClass, this.box && ccBox.box, this._hasTitle && this.box && ccExpandable.paddingTop])}">
-      <slot></slot>
-    </div>`;
+  get #wrapperClasses() {
+    return classNames([
+      ccExpandable.expandable,
+      this.box && ccExpandable.expandableBox,
+      this.info && this.box && ccExpandable.expandableInfo,
+      this.bleed && ccExpandable.expandableBleed,
+    ]);
   }
 
-  get chevronIcon() {
+  get #buttonClasses() {
+    return classNames(this.buttonClass, [ccExpandable.button, this.box && ccExpandable.buttonBox]);
+  }
+
+  get #chevronClasses() {
+    return classNames([ccExpandable.chevron, !this.box && ccExpandable.chevronNonBox]);
+  }
+
+  get #chevronIcon() {
     const upClasses = classNames([ccExpandable.elementsChevronUpTransform, !this._stateExpanded && ccExpandable.elementsChevronCollapse]);
     const downClasses = classNames([ccExpandable.elementsChevronDownTransform, this._stateExpanded && ccExpandable.elementsChevronExpand]);
 
@@ -84,37 +94,35 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
       : html`<w-icon-chevron-down-16 class="${downClasses}"></w-icon-chevron-down-16>`;
   }
 
+  get #contentClasses() {
+    return classNames(this.contentClass, [this.box && ccBox.box, this._hasTitle && this.box && ccExpandable.paddingTop]);
+  }
+
+  get #expansionClasses() {
+    return classNames([ccExpandable.expansion, !this._stateExpanded && ccExpandable.expansionNotExpanded]);
+  }
+
+  get _expandableSlot() {
+    return html`<div class="${this.#contentClasses}">
+      <slot></slot>
+    </div>`;
+  }
+
   render() {
-    return html` <div
-      class="${classNames([
-        ccExpandable.expandable,
-        this.box && ccExpandable.expandableBox,
-        this.info && this.box && ccExpandable.expandableInfo,
-        this.bleed && ccExpandable.expandableBleed,
-      ])}">
+    return html` <div class="${this.#wrapperClasses}">
       ${this._hasTitle
         ? html`<w-unstyled-heading level=${this.headingLevel}>
-            <button
-              type="button"
-              aria-expanded="${this._stateExpanded}"
-              class="${classNames(this.buttonClass, [ccExpandable.button, this.box && ccExpandable.buttonBox])}"
-              @click=${this._toggleExpandable}>
+            <button type="button" aria-expanded="${this._stateExpanded}" class="${this.#buttonClasses}" @click=${this._toggleExpandable}>
               <div class="${ccExpandable.title}">
                 ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
-                ${this.noChevron
-                  ? ''
-                  : html`<div class="${classNames([ccExpandable.chevron, !this.box && ccExpandable.chevronNonBox])}">
-                      ${this.chevronIcon}
-                    </div>`}
+                ${this.noChevron ? '' : html`<div class="${this.#chevronClasses}">${this.#chevronIcon}</div>`}
               </div>
             </button>
           </w-unstyled-heading>`
         : ''}
       ${this.animated
         ? html`<w-expand-transition ?show=${this._stateExpanded}> ${this._expandableSlot} </w-expand-transition>`
-        : html`<div
-            class="${classNames([ccExpandable.expansion, !this._stateExpanded && ccExpandable.expansionNotExpanded])}"
-            aria-hidden=${ifDefined(!this._stateExpanded ? true : undefined)}>
+        : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this._stateExpanded ? true : undefined)}>
             ${this._expandableSlot}
           </div>`}
     </div>`;
