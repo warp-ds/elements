@@ -76,17 +76,12 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get chevronIcon() {
+    const upClasses = classNames([ccExpandable.elementsChevronUpTransform, !this._stateExpanded && ccExpandable.elementsChevronCollapse]);
+    const downClasses = classNames([ccExpandable.elementsChevronDownTransform, this._stateExpanded && ccExpandable.elementsChevronExpand]);
+
     return this._stateExpanded
-      ? html`<w-icon-chevron-up-16
-          class="${classNames([
-            ccExpandable.elementsTransformChevronUpPart,
-            !this._stateExpanded && ccExpandable.elementsChevronUpCollapsePart,
-          ])}"></w-icon-chevron-up-16>`
-      : html`<w-icon-chevron-down-16
-          class="${classNames([
-            ccExpandable.elementsTransformChevronDownPart,
-            this._stateExpanded && ccExpandable.elementsChevronDownExpandPart,
-          ])}"></w-icon-chevron-down-16>`;
+      ? html`<w-icon-chevron-up-16 class="${upClasses}"></w-icon-chevron-up-16>`
+      : html`<w-icon-chevron-down-16 class="${downClasses}"></w-icon-chevron-down-16>`;
   }
 
   render() {
