@@ -88,7 +88,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #contentClasses() {
-    return classNames(this.contentClass, [this.box && ccBox.box, this._hasTitle && this.box && ccExpandable.paddingTop]);
+    return classNames(this.contentClass, [this.box && ccBox.box, this._hasTitle && this.box && ccExpandable.contentWithTitle]);
   }
 
   get #expansionClasses() {
