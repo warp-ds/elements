@@ -14,7 +14,6 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   static properties = {
     expanded: { type: Boolean, reflect: true },
     title: { type: String },
-    info: { type: Boolean },
     box: { type: Boolean },
     bleed: { type: Boolean },
     buttonClass: { type: String },
@@ -30,7 +29,6 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     super();
     this.expanded = false;
     this.animated = false;
-    this.info = false;
     this.box = false;
     this.bleed = false;
     this.noChevron = false;
@@ -69,12 +67,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #wrapperClasses() {
-    return classNames([
-      ccExpandable.expandable,
-      this.box && ccExpandable.expandableBox,
-      this.info && this.box && ccExpandable.expandableInfo,
-      this.bleed && ccExpandable.expandableBleed,
-    ]);
+    return classNames([ccExpandable.expandable, this.box && ccExpandable.expandableBox, this.bleed && ccExpandable.expandableBleed]);
   }
 
   get #buttonClasses() {
