@@ -1,17 +1,45 @@
 import { html, css } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
 import { card as ccCard } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { fclasses } from '../utils';
+import { activateI18n } from '../i18n';
+import { kebabCaseAttributes } from '../utils';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 
 const keys = {
   ENTER: 'Enter',
   SPACE: ' ',
 };
 
-class WarpCard extends WarpElement {
+class WarpCard extends kebabCaseAttributes(WarpElement) {
+  static properties = {
+    selected: { type: Boolean, reflect: true },
+    flat: { type: Boolean },
+    clickable: { type: Boolean },
+  };
+
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
+
+    this.selected = false;
+    this.flat = false;
+    this.clickable = false;
+    this.buttonText = i18n._({
+      id: 'card.button.text',
+      message: 'Select',
+      comment: 'Screenreader message to indicate that the card is clickable',
+    });
+  }
+
   static styles = [
     WarpElement.styles,
     css`
@@ -29,42 +57,27 @@ class WarpCard extends WarpElement {
     `,
   ];
 
-  static properties = {
-    selected: { type: Boolean, reflect: true },
-    flat: { type: Boolean },
-    clickable: { type: Boolean },
-  };
-
-  constructor() {
-    super();
-    this.selected = false;
-    this.flat = false;
-    this.clickable = false;
-  }
-
   get _containerClasses() {
-    return fclasses({
-      [ccCard.card]: true,
-      [ccCard.cardShadow]: !this.flat,
-      [ccCard.cardSelected]: !this.flat && this.selected,
-      [ccCard.cardFlat]: this.flat,
-      [this.selected ? ccCard.cardFlatSelected : ccCard.cardFlatUnselected]: this.flat,
-    });
+    let backgroundClass;
+    if (this.selected) {
+      backgroundClass = this.flat ? ccCard.cardFlatSelected : ccCard.cardSelected;
+    } else {
+      backgroundClass = this.flat ? ccCard.cardFlatUnselected : ccCard.cardShadowBackground;
+    }
+
+    return classNames([ccCard.card, this.flat ? ccCard.cardFlat : ccCard.cardShadow, backgroundClass]);
   }
 
   get _outlineClasses() {
-    return fclasses({
-      [ccCard.cardOutline]: true,
-      [this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]: true,
-    });
+    return classNames([ccCard.cardOutline, this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]);
   }
 
-  get uuButton() {
-    return html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">Velg</button>`;
-  }
+  get _interactiveElement() {
+    const renderButton = () =>
+      html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;
+    const renderSpan = () => html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
 
-  get uuSpan() {
-    return html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
+    return this.clickable ? renderButton() : !this.clickable && this.selected && renderSpan();
   }
 
   keypressed(e) {
@@ -78,7 +91,7 @@ class WarpCard extends WarpElement {
   render() {
     return html`
       <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
-        ${this.clickable ? this.uuButton : ''} ${!this.clickable && this.selected ? this.uuSpan : ''}
+        ${this._interactiveElement}
         <div class="${this._outlineClasses}"></div>
         <slot></slot>
       </div>
