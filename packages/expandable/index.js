@@ -22,18 +22,19 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     animated: { type: Boolean },
     headingLevel: { type: Number },
     _hasTitle: { type: Boolean, state: true },
-    _stateExpanded: { type: Boolean, state: true },
+    _showChevronUp: { type: Boolean, state: true },
   };
 
   constructor() {
     super();
+
     this.expanded = false;
     this.animated = false;
     this.box = false;
     this.bleed = false;
     this.noChevron = false;
     this._hasTitle = true;
-    this._stateExpanded = this.expanded;
+    this._showChevronUp = this.expanded;
   }
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -53,17 +54,16 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   ];
 
   updated(changedProperties) {
+    // We need a slight delay for the animation since it has a transition-duration of 150ms:
     if (changedProperties.has('expanded')) {
-      this._stateExpanded = this.expanded;
+      setTimeout(() => {
+        this._showChevronUp = this.expanded;
+      }, 200);
     }
   }
 
   firstUpdated() {
     this._hasTitle = !!this.title || this.renderRoot.querySelector("slot[name='title']").assignedNodes().length > 0;
-  }
-
-  _toggleExpandable() {
-    this.expanded = !this._stateExpanded;
   }
 
   get #wrapperClasses() {
@@ -79,10 +79,16 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #chevronIcon() {
-    const upClasses = classNames([ccExpandable.elementsChevronUpTransform, !this._stateExpanded && ccExpandable.elementsChevronCollapse]);
-    const downClasses = classNames([ccExpandable.elementsChevronDownTransform, this._stateExpanded && ccExpandable.elementsChevronExpand]);
+    const upClasses = classNames([
+      ccExpandable.elementsChevronUpTransform,
+      !this.expanded && this._showChevronUp && ccExpandable.elementsChevronCollapse,
+    ]);
+    const downClasses = classNames([
+      ccExpandable.elementsChevronDownTransform,
+      this.expanded && !this._showChevronUp && ccExpandable.elementsChevronExpand,
+    ]);
 
-    return this._stateExpanded
+    return this._showChevronUp
       ? html`<w-icon-chevron-up-16 class="${upClasses}"></w-icon-chevron-up-16>`
       : html`<w-icon-chevron-down-16 class="${downClasses}"></w-icon-chevron-down-16>`;
   }
@@ -92,7 +98,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #expansionClasses() {
-    return classNames([ccExpandable.expansion, !this._stateExpanded && ccExpandable.expansionNotExpanded]);
+    return classNames([ccExpandable.expansion, !this.expanded && ccExpandable.expansionNotExpanded]);
   }
 
   get _expandableSlot() {
@@ -105,7 +111,11 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     return html` <div class="${this.#wrapperClasses}">
       ${this._hasTitle
         ? html`<w-unstyled-heading level=${this.headingLevel}>
-            <button type="button" aria-expanded="${this._stateExpanded}" class="${this.#buttonClasses}" @click=${this._toggleExpandable}>
+            <button
+              type="button"
+              aria-expanded="${this.expanded}"
+              class="${this.#buttonClasses}"
+              @click=${() => (this.expanded = !this.expanded)}>
               <div class="${ccExpandable.title}">
                 ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
                 ${this.noChevron ? '' : html`<div class="${this.#chevronClasses}">${this.#chevronIcon}</div>`}
@@ -114,8 +124,8 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
           </w-unstyled-heading>`
         : ''}
       ${this.animated
-        ? html`<w-expand-transition ?show=${this._stateExpanded}> ${this._expandableSlot} </w-expand-transition>`
-        : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this._stateExpanded ? true : undefined)}>
+        ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
+        : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
             ${this._expandableSlot}
           </div>`}
     </div>`;
