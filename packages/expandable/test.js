@@ -38,8 +38,6 @@ test('Expandable component with no attributes is rendered on the page', async (t
   // THEN: the component is visible in the DOM
   const locator = await page.locator('w-expandable');
   t.equal((await locator.innerHTML()).trim(), '<p>This is an expandable element</p>', 'HTML should be rendered');
-  t.equal(await locator.getAttribute('info'), null, '"info" attribute should be null');
-  t.equal(await locator.evaluate((el) => el.info), false, '"info" property should default to false');
   t.equal(await locator.getAttribute('box'), null, '"box" attribute should be null');
   t.equal(await locator.evaluate((el) => el.box), false, '"box" property should default to false');
   t.equal(await locator.evaluate((el) => el.bleed), false, '"bleed" property should default to false');
@@ -50,9 +48,9 @@ test('Expandable component with no attributes is rendered on the page', async (t
   t.equal(await locator.evaluate((el) => el.expanded), false, '"expanded" property should default to false');
 });
 
-test('Expandable component with info & expanded attribute is rendered on the page', async (t) => {
+test('Expandable component with box & expanded attribute is rendered on the page', async (t) => {
   const component = `
-    <w-expandable info expanded>
+    <w-expandable box expanded>
       <p>This is an expandable element</p>
     </w-expandable>
   `;
@@ -63,7 +61,6 @@ test('Expandable component with info & expanded attribute is rendered on the pag
   });
 
   const locator = await page.locator('w-expandable');
-  t.equal(await locator.evaluate((el) => el.info), true, '"info" property should be true');
   t.equal(await locator.evaluate((el) => el.expanded), true, '"expanded" property should be true');
 });
 
