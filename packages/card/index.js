@@ -74,7 +74,7 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
       html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;
     const renderSpan = () => html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
 
-    return this.clickable ? renderButton() : (!this.clickable && this.selected) ? renderSpan() : '';
+    return this.clickable ? renderButton() : !this.clickable && this.selected ? renderSpan() : '';
   }
 
   keypressed(e) {
