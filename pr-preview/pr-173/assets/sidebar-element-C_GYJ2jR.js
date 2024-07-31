@@ -199,7 +199,7 @@ ${tn.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       :host {
         display: block;
       }
-    `];get _containerClasses(){return M([oe.base,this.flat?oe.flat:oe.shadow,this.selected&&!this.flat&&oe.selected,this.selected&&this.flat?oe.flatSelected:oe.flatUnselected])}get _outlineClasses(){return M([oe.outline,this.selected?oe.outlineSelected:oe.outlineUnselected])}get _interactiveElement(){const e=()=>f`<button class="${oe.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`,s=()=>f`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;return this.clickable?e():!this.clickable&&this.selected?s():""}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===sn.ENTER||e.key===sn.SPACE)&&(e.preventDefault(),this.click())}render(){return f`
+    `];get _containerClasses(){return M([oe.base,this.flat?oe.flat:oe.shadow,this.selected&&!this.flat&&oe.selected,this.selected&&this.flat?oe.flatSelected:oe.flatUnselected])}get _outlineClasses(){return M([oe.outline,this.selected?oe.outlineSelected:oe.outlineUnselected])}get _interactiveElement(){const e=()=>f`<button class="${oe.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`,s=()=>f`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;return this.clickable?e():this.selected?s():""}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===sn.ENTER||e.key===sn.SPACE)&&(e.preventDefault(),this.click())}render(){return f`
       <div tabindex=${P(this.clickable?"0":void 0)} class="${this._containerClasses}" @keydown=${this.keypressed}>
         ${this._interactiveElement} ${this.flat?"":f`<div class="${this._outlineClasses}"></div>`}
         <slot></slot>
