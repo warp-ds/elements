@@ -58,18 +58,15 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
   ];
 
   get _containerClasses() {
-    let backgroundClass;
-    if (this.selected) {
-      backgroundClass = this.flat ? ccCard.cardFlatSelected : ccCard.cardSelected;
-    } else {
-      backgroundClass = this.flat ? ccCard.cardFlatUnselected : ccCard.cardShadowBackground;
-    }
-
-    return classNames([ccCard.card, this.flat ? ccCard.cardFlat : ccCard.cardShadow, backgroundClass]);
+    return classNames([
+      ccCard.base,
+      this.flat ? ccCard.flat : ccCard.shadow,
+      this.selected ? (this.flat ? ccCard.flatSelected : ccCard.selected) : this.flat && ccCard.flatUnselected,
+    ]);
   }
 
   get _outlineClasses() {
-    return classNames([ccCard.cardOutline, this.selected ? ccCard.cardOutlineSelected : ccCard.cardOutlineUnselected]);
+    return classNames([ccCard.outline, this.selected ? ccCard.outlineSelected : ccCard.outlineUnselected]);
   }
 
   get _interactiveElement() {
@@ -77,7 +74,7 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
       html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;
     const renderSpan = () => html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
 
-    return this.clickable ? renderButton() : !this.clickable && this.selected && renderSpan();
+    return this.clickable ? renderButton() : (!this.clickable && this.selected) ? renderSpan() : '';
   }
 
   keypressed(e) {
