@@ -88,8 +88,7 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
   render() {
     return html`
       <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
-        ${this._interactiveElement}
-        <div class="${this._outlineClasses}"></div>
+        ${this._interactiveElement} ${!this.flat ? html`<div class="${this._outlineClasses}"></div>` : ''}
         <slot></slot>
       </div>
     `;
