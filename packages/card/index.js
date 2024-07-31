@@ -75,7 +75,7 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
       html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;
     const renderSpan = () => html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
 
-    return this.clickable ? renderButton() : !this.clickable && this.selected ? renderSpan() : '';
+    return this.clickable ? renderButton() : this.selected ? renderSpan() : '';
   }
 
   keypressed(e) {
@@ -89,7 +89,7 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
   render() {
     return html`
       <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
-        ${this._interactiveElement} ${!this.flat ? html`<div class="${this._outlineClasses}"></div>` : ''}
+        ${this._interactiveElement} ${this.flat ? '' : html`<div class="${this._outlineClasses}"></div>`}
         <slot></slot>
       </div>
     `;
