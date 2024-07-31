@@ -61,7 +61,8 @@ class WarpCard extends kebabCaseAttributes(WarpElement) {
     return classNames([
       ccCard.base,
       this.flat ? ccCard.flat : ccCard.shadow,
-      this.selected ? (this.flat ? ccCard.flatSelected : ccCard.selected) : this.flat && ccCard.flatUnselected,
+      this.selected && !this.flat && ccCard.selected,
+      this.selected && this.flat ? ccCard.flatSelected : ccCard.flatUnselected,
     ]);
   }
 
