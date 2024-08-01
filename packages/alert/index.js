@@ -39,7 +39,7 @@ class WarpAlert extends WarpElement {
 
   get _wrapperClasses() {
     return classNames({
-      [ccAlert.alert]: true,
+      [ccAlert.wrapper]: true,
       [ccAlert[this.variant]]: true,
     });
   }

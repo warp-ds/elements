@@ -71,7 +71,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
 
   render() {
     return html`
-      <div class="${ccPill.pill}">
+      <div class="${ccPill.wrapper}">
         <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
           <span class="${ccPill.a11y}">${this.openSrLabel ? this.openSrLabel : this.openFilterSrText}</span>
           <slot></slot>

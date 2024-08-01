@@ -67,7 +67,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #wrapperClasses() {
-    return classNames([ccExpandable.expandable, this.box && ccExpandable.expandableBox, this.bleed && ccExpandable.expandableBleed]);
+    return classNames([ccExpandable.wrapper, this.box && ccExpandable.box, this.bleed && ccExpandable.bleed]);
   }
 
   get #buttonClasses() {
@@ -94,7 +94,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   get #contentClasses() {
-    return classNames(this.contentClass, [this.box && ccBox.box, this._hasTitle && this.box && ccExpandable.contentWithTitle]);
+    return classNames(this.contentClass, [this.box && ccBox.base, this._hasTitle && this.box && ccExpandable.contentWithTitle]);
   }
 
   get #expansionClasses() {

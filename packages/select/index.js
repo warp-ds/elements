@@ -71,9 +71,9 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 
   get #helpTextClasses() {
-    return classNames(ccHelpText.helpText, {
-      [ccHelpText.helpTextColor]: !this.invalid,
-      [ccHelpText.helpTextColorInvalid]: this.invalid,
+    return classNames(ccHelpText.base, {
+      [ccHelpText.color]: !this.invalid,
+      [ccHelpText.colorInvalid]: this.invalid,
     });
   }
 
@@ -96,7 +96,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="${ccLabel.label}" for="${this.#id}">
+          html`<label class="${ccLabel.base}" for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,

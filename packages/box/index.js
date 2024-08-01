@@ -32,7 +32,7 @@ class WarpBox extends WarpElement {
 
   get _class() {
     return fclasses({
-      [ccBox.box]: true,
+      [ccBox.base]: true,
       [ccBox.bleed]: this.bleed,
       [ccBox.info]: this.info,
       [ccBox.neutral]: this.neutral,
