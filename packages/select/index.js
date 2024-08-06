@@ -62,25 +62,21 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 
   get #classes() {
-    return classNames(ccSelect.base, {
-      [ccSelect.default]: !this.invalid && !this.disabled && !this.readOnly,
-      [ccSelect.invalid]: this.invalid,
-      [ccSelect.disabled]: this.disabled,
-      [ccSelect.readOnly]: this.readOnly,
-    });
+    return classNames([
+      ccSelect.base,
+      !this.invalid && !this.disabled && !this.readOnly && ccSelect.default,
+      this.invalid && ccSelect.invalid,
+      this.disabled && ccSelect.disabled,
+      this.readOnly && ccSelect.readOnly,
+    ]);
   }
 
   get #helpTextClasses() {
-    return classNames(ccHelpText.base, {
-      [ccHelpText.color]: !this.invalid,
-      [ccHelpText.colorInvalid]: this.invalid,
-    });
+    return classNames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
   }
 
   get #chevronClasses() {
-    return classNames(ccSelect.chevron, {
-      [ccSelect.chevronDisabled]: this.disabled,
-    });
+    return classNames([ccSelect.chevron, this.disabled && ccSelect.chevronDisabled]);
   }
 
   get #id() {

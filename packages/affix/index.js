@@ -1,16 +1,15 @@
 import { html } from 'lit';
 
-import { suffix, prefix } from '@warp-ds/css/component-classes';
+import { classNames } from '@chbphone55/classnames';
+import { suffix as ccSuffix, prefix as ccPrefix } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/search-16';
 import '@warp-ds/icons/elements/close-16';
 
-import { fclasses } from '../utils';
+import { kebabCaseAttributes } from '../utils';
 
-class WarpAffix extends WarpElement {
-  static styles = [WarpElement.styles];
-
+class WarpAffix extends kebabCaseAttributes(WarpElement) {
   static properties = {
     ariaLabel: { type: String, attribute: 'aria-label' },
     clear: { type: Boolean },
@@ -18,16 +17,14 @@ class WarpAffix extends WarpElement {
     label: { type: String },
   };
 
+  static styles = [WarpElement.styles];
+
   get _classBase() {
-    return this.slot === 'suffix' ? suffix : prefix;
+    return this.slot === 'suffix' ? ccSuffix : ccPrefix;
   }
 
   get _classes() {
-    return fclasses({
-      [this._classBase.wrapper]: true,
-      [this._classBase.wrapperWithLabel]: this.label,
-      [this._classBase.wrapperWithIcon]: !this.label,
-    });
+    return classNames([this._classBase.wrapper, this.label ? this._classBase.wrapperWithLabel : this._classBase.wrapperWithIcon]);
   }
 
   get _searchButton() {

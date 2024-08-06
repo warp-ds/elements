@@ -4,6 +4,8 @@ import { toaster as ccToaster } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { repeat } from 'lit/directives/repeat.js';
 
+import { kebabCaseAttributes } from '../utils';
+
 /**
  * Toast helper function options
  * @typedef    {Object}                               ToastOptions
@@ -14,7 +16,7 @@ import { repeat } from 'lit/directives/repeat.js';
  * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
  */
 
-export class WarpToastContainer extends WarpElement {
+export class WarpToastContainer extends kebabCaseAttributes(WarpElement) {
   static styles = [
     WarpElement.styles,
     css`

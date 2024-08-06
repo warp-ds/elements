@@ -65,19 +65,21 @@ export class WarpToast extends kebabCaseAttributes(WarpElement) {
   }
 
   get #primaryClasses() {
-    return classNames(ccToast.base, {
-      [ccToast.positive]: this.type === toastType.success,
-      [ccToast.warning]: this.type === toastType.warning,
-      [ccToast.negative]: this.type === toastType.error,
-    });
+    return classNames([
+      ccToast.base,
+      this.type === toastType.success && ccToast.positive,
+      this.type === toastType.warning && ccToast.warning,
+      this.type === toastType.error && ccToast.negative,
+    ]);
   }
 
   get #iconClasses() {
-    return classNames(ccToast.iconBase, {
-      [ccToast.iconPositive]: this.type === toastType.success,
-      [ccToast.iconWarning]: this.type === toastType.warning,
-      [ccToast.iconNegative]: this.type === toastType.error,
-    });
+    return classNames([
+      ccToast.iconBase,
+      this.type === toastType.success && ccToast.iconPositive,
+      this.type === toastType.warning && ccToast.iconWarning,
+      this.type === toastType.error && ccToast.iconNegative,
+    ]);
   }
 
   get _wrapper() {

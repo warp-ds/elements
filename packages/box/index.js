@@ -1,11 +1,12 @@
 import { css, html, nothing } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
 import { box as ccBox } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 
-import { fclasses } from '../utils';
+import { kebabCaseAttributes } from '../utils';
 
-class WarpBox extends WarpElement {
+class WarpBox extends kebabCaseAttributes(WarpElement) {
   static properties = {
     bleed: { type: Boolean },
     bordered: { type: Boolean },
@@ -31,13 +32,13 @@ class WarpBox extends WarpElement {
   ];
 
   get _class() {
-    return fclasses({
-      [ccBox.base]: true,
-      [ccBox.bleed]: this.bleed,
-      [ccBox.info]: this.info,
-      [ccBox.neutral]: this.neutral,
-      [ccBox.bordered]: this.bordered,
-    });
+    return classNames([
+      ccBox.base,
+      this.bleed && ccBox.bleed,
+      this.info && ccBox.info,
+      this.neutral && ccBox.neutral,
+      this.bordered && ccBox.bordered,
+    ]);
   }
 
   get _optOutRoleWithDefault() {

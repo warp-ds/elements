@@ -2,9 +2,11 @@ import { css, html } from 'lit';
 
 import WarpElement from '@warp-ds/elements-core';
 
+import { kebabCaseAttributes } from '../packages/utils';
+
 import navigationData from './navigation-data';
 
-class SidebarElement extends WarpElement {
+class SidebarElement extends kebabCaseAttributes(WarpElement) {
   static styles = [
     WarpElement.styles,
     css`

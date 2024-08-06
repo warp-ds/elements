@@ -4,7 +4,9 @@ import WarpElement from '@warp-ds/elements-core';
 import { collapse, expand } from 'element-collapse';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-class ExpandTransition extends WarpElement {
+import { kebabCaseAttributes } from './index';
+
+class ExpandTransition extends kebabCaseAttributes(WarpElement) {
   static properties = {
     show: {
       type: Boolean,
