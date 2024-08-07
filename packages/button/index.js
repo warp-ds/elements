@@ -64,74 +64,67 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   }
 
   get _primaryClasses() {
-    const primary = this.variant === 'primary';
     return [
-      primary && !this.small && !this.quiet && !this.loading && ccButton.primary,
-      primary && this.small && !this.quiet && !this.loading && ccButton.primarySmall,
-      primary && this.small && this.quiet && !this.loading && ccButton.primarySmallQuiet,
-      primary && this.small && this.loading && (this.quiet ? ccButton.primarySmallQuietLoading : ccButton.primarySmallLoading),
-      primary && !this.small && this.quiet && !this.loading && ccButton.primaryQuiet,
-      primary && !this.small && this.loading && (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
+      !this.small && !this.quiet && !this.loading && ccButton.primary,
+      this.small && !this.quiet && !this.loading && ccButton.primarySmall,
+      this.small && this.quiet && !this.loading && ccButton.primarySmallQuiet,
+      this.small && this.loading && (this.quiet ? ccButton.primarySmallQuietLoading : ccButton.primarySmallLoading),
+      !this.small && this.quiet && !this.loading && ccButton.primaryQuiet,
+      !this.small && this.loading && (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
     ];
   }
 
   get _secondaryClasses() {
-    const secondary = this.variant === 'secondary';
     return [
-      secondary && !this.small && !this.quiet && !this.loading && ccButton.secondary,
-      secondary && this.small && !this.quiet && !this.loading && ccButton.secondarySmall,
-      secondary && this.small && this.loading && (this.quiet ? ccButton.secondarySmallQuietLoading : ccButton.secondarySmallLoading),
-      secondary && this.small && this.quiet && !this.loading && ccButton.secondarySmallQuiet,
-      secondary && !this.small && this.quiet && !this.loading && ccButton.secondaryQuiet,
-      secondary && !this.small && this.loading && (this.quiet ? ccButton.secondaryQuietLoading : ccButton.secondaryLoading),
+      !this.small && !this.quiet && !this.loading && ccButton.secondary,
+      this.small && !this.quiet && !this.loading && ccButton.secondarySmall,
+      this.small && this.loading && (this.quiet ? ccButton.secondarySmallQuietLoading : ccButton.secondarySmallLoading),
+      this.small && this.quiet && !this.loading && ccButton.secondarySmallQuiet,
+      !this.small && this.quiet && !this.loading && ccButton.secondaryQuiet,
+      !this.small && this.loading && (this.quiet ? ccButton.secondaryQuietLoading : ccButton.secondaryLoading),
     ];
   }
 
   get _utilityClasses() {
-    const utility = this.variant === 'utility';
     return [
-      utility && !this.small && !this.quiet && !this.loading && ccButton.utility,
-      utility && this.small && !this.quiet && !this.loading && ccButton.utilitySmall,
-      utility && this.small && this.quiet && !this.loading && ccButton.utilitySmallQuiet,
-      utility && this.small && this.loading && (this.quiet ? ccButton.utilitySmallQuietLoading : ccButton.utilitySmallLoading),
-      utility && !this.small && this.quiet && !this.loading && ccButton.utilityQuiet,
-      utility && !this.small && this.loading && (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
+      !this.small && !this.quiet && !this.loading && ccButton.utility,
+      this.small && !this.quiet && !this.loading && ccButton.utilitySmall,
+      this.small && this.quiet && !this.loading && ccButton.utilitySmallQuiet,
+      this.small && this.loading && (this.quiet ? ccButton.utilitySmallQuietLoading : ccButton.utilitySmallLoading),
+      !this.small && this.quiet && !this.loading && ccButton.utilityQuiet,
+      !this.small && this.loading && (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
     ];
   }
 
   get _negativeClasses() {
-    const negative = this.variant === 'negative';
     return [
-      negative && !this.small && !this.quiet && !this.loading && ccButton.negative,
-      negative && this.small && !this.quiet && !this.loading && ccButton.negativeSmall,
-      negative && this.small && this.quiet && !this.loading && ccButton.negativeSmallQuiet,
-      negative && this.small && this.loading && (this.quiet ? ccButton.negativeSmallQuietLoading : ccButton.negativeSmallLoading),
-      negative && !this.small && this.quiet && !this.loading && ccButton.negativeQuiet,
-      negative && !this.small && this.loading && (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
+      !this.small && !this.quiet && !this.loading && ccButton.negative,
+      this.small && !this.quiet && !this.loading && ccButton.negativeSmall,
+      this.small && this.quiet && !this.loading && ccButton.negativeSmallQuiet,
+      this.small && this.loading && (this.quiet ? ccButton.negativeSmallQuietLoading : ccButton.negativeSmallLoading),
+      !this.small && this.quiet && !this.loading && ccButton.negativeQuiet,
+      !this.small && this.loading && (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
     ];
   }
 
   get _pillClasses() {
-    const pill = this.variant === 'pill';
     return [
-      pill && !this.loading && (this.small ? ccButton.pillSmall : ccButton.pill),
-      pill && this.loading && (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
+      !this.loading && (this.small ? ccButton.pillSmall : ccButton.pill),
+      this.loading && (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
     ];
   }
 
   get _linkClasses() {
-    const link = this.variant === 'link';
-    return [link && (this.small ? ccButton.linkSmall : ccButton.link), !!this.href && ccButton.linkAsButton];
+    return [this.small ? ccButton.linkSmall : ccButton.link, !!this.href && ccButton.linkAsButton];
   }
-
   get _classes() {
     return classNames(this.buttonClass, [
-      ...this._primaryClasses,
-      ...this._secondaryClasses,
-      ...this._utilityClasses,
-      ...this._negativeClasses,
-      ...this._pillClasses,
-      ...this._linkClasses,
+      ...(this.variant === 'primary' ? this._primaryClasses : []),
+      ...(this.variant === 'secondary' ? this._secondaryClasses : []),
+      ...(this.variant === 'utility' ? this._utilityClasses : []),
+      ...(this.variant === 'negative' ? this._negativeClasses : []),
+      ...(this.variant === 'pill' ? this._pillClasses : []),
+      ...(this.variant === 'link' ? this._linkClasses : []),
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
   }
