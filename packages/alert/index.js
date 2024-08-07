@@ -28,6 +28,23 @@ class WarpAlert extends WarpElement {
     this.role = 'alert';
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.variant || !variants[this.variant]) {
+      throw new Error('Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.');
+    }
+  }
+
+  get _wrapperClasses() {
+    return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
+  }
+
+  get _iconClasses() {
+    const activeIconClassNames = ccAlert[`${this.variant}Icon`];
+
+    return classNames([ccAlert.icon, activeIconClassNames]);
+  }
+
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
@@ -46,23 +63,6 @@ class WarpAlert extends WarpElement {
       }
     `,
   ];
-
-  connectedCallback() {
-    super.connectedCallback();
-    if (!this.variant || !variants[this.variant]) {
-      throw new Error('Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.');
-    }
-  }
-
-  get _wrapperClasses() {
-    return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
-  }
-
-  get _iconClasses() {
-    const activeIconClassNames = ccAlert[`${this.variant}Icon`];
-
-    return classNames([ccAlert.icon, activeIconClassNames]);
-  }
 
   get _icon() {
     if (this.variant === variants.info) {
