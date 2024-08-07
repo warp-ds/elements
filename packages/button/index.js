@@ -115,7 +115,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   }
 
   get _linkClasses() {
-    return [this.small ? ccButton.linkSmall : ccButton.link, !!this.href && ccButton.linkAsButton];
+    return [this.small ? ccButton.linkSmall : ccButton.link];
   }
   get _classes() {
     return classNames(this.buttonClass, [
@@ -125,6 +125,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
       this.variant === 'negative' && this._negativeClasses,
       this.variant === 'pill' && this._pillClasses,
       this.variant === 'link' && this._linkClasses,
+      this.href && ccButton.linkAsButton,
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
   }
