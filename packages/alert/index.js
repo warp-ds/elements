@@ -8,8 +8,6 @@ import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
 
-import { kebabCaseAttributes } from '../utils';
-
 const variants = {
   negative: 'negative',
   positive: 'positive',
@@ -17,7 +15,7 @@ const variants = {
   info: 'info',
 };
 
-class WarpAlert extends kebabCaseAttributes(WarpElement) {
+class WarpAlert extends WarpElement {
   static properties = {
     variant: { type: String, reflect: true },
     show: { type: Boolean, reflect: true },

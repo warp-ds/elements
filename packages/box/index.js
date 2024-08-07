@@ -4,9 +4,7 @@ import { classNames } from '@chbphone55/classnames';
 import { box as ccBox } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 
-import { kebabCaseAttributes } from '../utils';
-
-class WarpBox extends kebabCaseAttributes(WarpElement) {
+class WarpBox extends WarpElement {
   static properties = {
     bleed: { type: Boolean },
     bordered: { type: Boolean },

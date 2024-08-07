@@ -4,9 +4,7 @@ import { classNames } from '@chbphone55/classnames';
 import { badge as ccBadge } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 
-import { kebabCaseAttributes } from '../utils';
-
-class WarpBadge extends kebabCaseAttributes(WarpElement) {
+class WarpBadge extends WarpElement {
   static properties = {
     variant: {
       type: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'notification' | 'price',
