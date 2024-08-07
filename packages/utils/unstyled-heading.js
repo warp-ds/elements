@@ -3,9 +3,7 @@ import { html } from 'lit';
 import WarpElement from '@warp-ds/elements-core';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-import { kebabCaseAttributes } from './index';
-
-class UnstyledHeading extends kebabCaseAttributes(WarpElement) {
+class UnstyledHeading extends WarpElement {
   static properties = {
     level: { type: Number },
   };
