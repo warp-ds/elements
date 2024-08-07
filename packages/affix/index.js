@@ -11,7 +11,7 @@ import { kebabCaseAttributes } from '../utils';
 
 class WarpAffix extends kebabCaseAttributes(WarpElement) {
   static properties = {
-    ariaLabel: { type: String, attribute: 'aria-label' },
+    ariaLabel: { type: String },
     clear: { type: Boolean },
     search: { type: Boolean },
     label: { type: String },
