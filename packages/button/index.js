@@ -119,12 +119,12 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
   }
   get _classes() {
     return classNames(this.buttonClass, [
-      ...(this.variant === 'primary' ? this._primaryClasses : []),
-      ...(this.variant === 'secondary' ? this._secondaryClasses : []),
-      ...(this.variant === 'utility' ? this._utilityClasses : []),
-      ...(this.variant === 'negative' ? this._negativeClasses : []),
-      ...(this.variant === 'pill' ? this._pillClasses : []),
-      ...(this.variant === 'link' ? this._linkClasses : []),
+      this.variant === 'primary' && this._primaryClasses,
+      this.variant === 'secondary' && this._secondaryClasses,
+      this.variant === 'utility' && this._utilityClasses,
+      this.variant === 'negative' && this._negativeClasses,
+      this.variant === 'pill' && this._pillClasses,
+      this.variant === 'link' && this._linkClasses,
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
   }
