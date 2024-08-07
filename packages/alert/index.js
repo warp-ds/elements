@@ -1,5 +1,3 @@
-// TODO: replace text-14 with a token
-
 import { css, html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
@@ -38,19 +36,13 @@ class WarpAlert extends WarpElement {
   }
 
   get _wrapperClasses() {
-    return classNames({
-      [ccAlert.alert]: true,
-      [ccAlert[this.variant]]: true,
-    });
+    return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
   }
 
   get _iconClasses() {
     const activeIconClassNames = ccAlert[`${this.variant}Icon`];
 
-    return classNames({
-      [ccAlert.icon]: true,
-      [activeIconClassNames]: true,
-    });
+    return classNames([ccAlert.icon, activeIconClassNames]);
   }
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.

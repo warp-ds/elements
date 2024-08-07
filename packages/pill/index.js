@@ -45,20 +45,16 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   }
 
   get _labelClasses() {
-    return classNames({
-      [ccPill.button]: true,
-      [this.suggestion ? ccPill.suggestion : ccPill.filter]: true,
-      [ccPill.label]: true,
-      [this.canClose ? ccPill.labelWithClose : ccPill.labelWithoutClose]: true,
-    });
+    return classNames([
+      ccPill.button,
+      ccPill.label,
+      this.suggestion ? ccPill.suggestion : ccPill.filter,
+      this.canClose ? ccPill.labelWithClose : ccPill.labelWithoutClose,
+    ]);
   }
 
   get _closeClasses() {
-    return classNames({
-      [ccPill.button]: true,
-      [this.suggestion ? ccPill.suggestion : ccPill.filter]: true,
-      [ccPill.close]: true,
-    });
+    return classNames([ccPill.button, ccPill.close, this.suggestion ? ccPill.suggestion : ccPill.filter]);
   }
 
   _onClick() {
@@ -71,7 +67,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
 
   render() {
     return html`
-      <div class="${ccPill.pill}">
+      <div class="${ccPill.wrapper}">
         <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
           <span class="${ccPill.a11y}">${this.openSrLabel ? this.openSrLabel : this.openFilterSrText}</span>
           <slot></slot>

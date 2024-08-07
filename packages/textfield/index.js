@@ -1,27 +1,28 @@
 import { css, html } from 'lit';
 
-import { input, label as l, helpText as h } from '@warp-ds/css/component-classes';
+import { classNames } from '@chbphone55/classnames';
+import { input as ccInput, label as ccLabel, helpText as ccHelpText } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { classes } from '../utils';
+import { kebabCaseAttributes } from '../utils';
 
-class WarpTextField extends WarpElement {
+class WarpTextField extends kebabCaseAttributes(WarpElement) {
   static properties = {
     disabled: { type: Boolean },
     invalid: { type: Boolean },
     id: { type: String },
     label: { type: String },
-    helpText: { type: String, attribute: 'help-text' },
+    helpText: { type: String },
     size: { type: String },
     max: { type: Number },
     min: { type: Number },
-    minLength: { type: Number, attribute: 'min-length' },
-    maxLength: { type: Number, attribute: 'max-length' },
+    minLength: { type: Number },
+    maxLength: { type: Number },
     name: { type: String },
     pattern: { type: String },
     placeholder: { type: String },
-    readOnly: { type: Boolean, attribute: 'read-only' },
+    readOnly: { type: Boolean },
     required: { type: Boolean },
     type: { type: String },
     value: { type: String },
@@ -51,28 +52,24 @@ class WarpTextField extends WarpElement {
   }
 
   get _inputStyles() {
-    return classes({
-      [input.base]: true,
-      [input.default]: !this.invalid && !this.disabled && !this.readOnly,
-      [input.invalid]: this.invalid && !this.disabled && !this.readOnly,
-      [input.disabled]: !this.invalid && this.disabled && !this.readOnly,
-      [input.readOnly]: !this.invalid && !this.disabled && this.readOnly,
-      [input.suffix]: this._hasSuffix,
-      [input.prefix]: this._hasPrefix,
-    });
+    return classNames([
+      ccInput.base,
+      this._hasSuffix && ccInput.suffix,
+      this._hasPrefix && ccInput.prefix,
+      !this.invalid && !this.disabled && !this.readOnly && ccInput.default,
+      this.invalid && !this.disabled && !this.readOnly && ccInput.invalid,
+      !this.invalid && this.disabled && !this.readOnly && ccInput.disabled,
+      !this.invalid && !this.disabled && this.readOnly && ccInput.readOnly,
+    ]);
   }
 
   get _helpTextStyles() {
-    return classes({
-      [h.helpText]: true,
-      [h.helpTextColor]: !this.invalid,
-      [h.helpTextColorInvalid]: this.invalid,
-    });
+    return classNames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${l.label}>${this.label}</label>`;
+      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
     }
   }
 
@@ -115,7 +112,7 @@ class WarpTextField extends WarpElement {
   render() {
     return html`
       ${this._label}
-      <div class="${input.wrapper}">
+      <div class="${ccInput.wrapper}">
         <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <input
           class="${this._inputStyles}"
