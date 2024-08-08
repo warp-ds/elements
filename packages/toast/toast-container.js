@@ -124,7 +124,7 @@ export class WarpToastContainer extends WarpElement {
 
   render() {
     return html`
-      <aside class="${ccToastContainer.container}">
+      <aside class="${ccToastContainer.wrapper}">
         <div class="${ccToastContainer.base}" id="w-toast-container-list">
           ${repeat(
             this._toastsArray,
