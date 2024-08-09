@@ -54,7 +54,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
 
     this._options = this.innerHTML;
   }
-  
+
   firstUpdated() {
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
     this.autoFocus && !this.disabled && !this.readOnly && this.shadowRoot.querySelector('select').focus();
