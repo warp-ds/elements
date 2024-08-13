@@ -12,7 +12,6 @@ import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/close-16';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -25,7 +24,7 @@ const toastType = {
   warning: 'warning',
 };
 
-export class WarpToast extends kebabCaseAttributes(WarpElement) {
+export class WarpToast extends WarpElement {
   static styles = [
     WarpElement.styles,
     css`
