@@ -7,7 +7,6 @@ import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -19,7 +18,7 @@ const keys = {
   SPACE: ' ',
 };
 
-class WarpCard extends kebabCaseAttributes(WarpElement) {
+class WarpCard extends WarpElement {
   static properties = {
     selected: { type: Boolean, reflect: true },
     flat: { type: Boolean },

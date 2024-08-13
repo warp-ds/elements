@@ -1,1 +1,1 @@
-/*eslint-disable*/export const messages=JSON.parse("{\"card.button.text\":\"Select\"}");
+/*eslint-disable*/export const messages=JSON.parse("{\"card.button.text\":\"Vælg\"}");
