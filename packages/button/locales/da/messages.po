@@ -15,10 +15,10 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: da\n"
 "X-Crowdin-File-ID: 1450\n"
+"PO-Revision-Date: \n"
 
 #. Screenreader message for buttons that are loading
 #. js-lingui-explicit-id
-#: packages/button/index.js:48
+#: packages/button/index.js:45
 msgid "button.aria.loading"
 msgstr "Indlæser..."
-

@@ -15,10 +15,10 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: da\n"
 "X-Crowdin-File-ID: 1454\n"
+"PO-Revision-Date: \n"
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/select/index.js:99
+#: packages/select/index.js:101
 msgid "select.label.optional"
 msgstr "(valgfrit)"
-
