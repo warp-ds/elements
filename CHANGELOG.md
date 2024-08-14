@@ -1,3 +1,10 @@
+# [2.0.0-next.5](https://github.com/warp-ds/elements/compare/v2.0.0-next.4...v2.0.0-next.5) (2024-08-14)
+
+
+### Bug Fixes
+
+* **select:** autofocus to work in safari and firefox ([#176](https://github.com/warp-ds/elements/issues/176)) ([7a314e9](https://github.com/warp-ds/elements/commit/7a314e91a71980243036a953cb0dce109d83f15a))
+
 # [2.0.0-next.4](https://github.com/warp-ds/elements/compare/v2.0.0-next.3...v2.0.0-next.4) (2024-08-13)
 
 
