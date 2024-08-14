@@ -15,6 +15,6 @@ msgstr ""
 
 #. Screenreader message to indicate that the card is clickable
 #. js-lingui-explicit-id
-#: packages/card/index.js:34
+#: packages/card/index.js:35
 msgid "card.button.text"
-msgstr ""
+msgstr "Valitse"
