@@ -13,22 +13,24 @@ msgstr ""
 "X-Crowdin-File-ID: 15496\n"
 "Project-Id-Version: 2853b3c41d7b7a59e7cd64c0153b540a\n"
 "Language-Team: Finnish\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 
 #. Default screenreader message for error in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:112
+#: packages/toast/toast.js:110
 msgid "toast.aria.error"
 msgstr "Virhe"
 
 #. Default screenreader message for successful in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:118
+#: packages/toast/toast.js:116
 msgid "toast.aria.successful"
 msgstr "Onnistui"
 
 #. Default screenreader message for warning in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:106
+#: packages/toast/toast.js:103
 msgid "toast.aria.warning"
 msgstr "Varoitus"
-

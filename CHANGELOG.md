@@ -1,3 +1,54 @@
+# [2.0.0-next.5](https://github.com/warp-ds/elements/compare/v2.0.0-next.4...v2.0.0-next.5) (2024-08-14)
+
+
+### Bug Fixes
+
+* **select:** autofocus to work in safari and firefox ([#176](https://github.com/warp-ds/elements/issues/176)) ([7a314e9](https://github.com/warp-ds/elements/commit/7a314e91a71980243036a953cb0dce109d83f15a))
+
+# [2.0.0-next.4](https://github.com/warp-ds/elements/compare/v2.0.0-next.3...v2.0.0-next.4) (2024-08-13)
+
+
+### Bug Fixes
+
+* **cc:** no classes styling the same CSS properties are set on one element ([#177](https://github.com/warp-ds/elements/issues/177)) ([789b821](https://github.com/warp-ds/elements/commit/789b821a775c227b6f7d83726d8aad362c24dc8b))
+
+
+### BREAKING CHANGES
+
+* **cc:** Expandable info prop has been removed
+
+# [2.0.0-next.3](https://github.com/warp-ds/elements/compare/v2.0.0-next.2...v2.0.0-next.3) (2024-07-11)
+
+
+### Bug Fixes
+
+* update dependencies ([#168](https://github.com/warp-ds/elements/issues/168)) ([a71ff2f](https://github.com/warp-ds/elements/commit/a71ff2f1f9feb28923e1d98529a6654dcfe9929c))
+
+# [2.0.0-next.2](https://github.com/warp-ds/elements/compare/v2.0.0-next.1...v2.0.0-next.2) (2024-07-04)
+
+
+### Bug Fixes
+
+* support danish locale ([#167](https://github.com/warp-ds/elements/issues/167)) ([418c68f](https://github.com/warp-ds/elements/commit/418c68fc20f1ec2720cc70168afb5311ad65a0e5))
+
+# [2.0.0-next.1](https://github.com/warp-ds/elements/compare/v1.5.0...v2.0.0-next.1) (2024-07-04)
+
+
+### Features
+
+* release for DBA ([#164](https://github.com/warp-ds/elements/issues/164)) ([36c9f47](https://github.com/warp-ds/elements/commit/36c9f47058f9c4f3d0f5e68ef63c8ff21c39da54))
+
+
+### BREAKING CHANGES
+
+* This removes depreacted stuff
+
+* update some more stuff
+
+* update to v2
+
+* more v2
+
 # [1.5.0](https://github.com/warp-ds/elements/compare/v1.4.0...v1.5.0) (2024-07-02)
 
 

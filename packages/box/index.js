@@ -1,9 +1,8 @@
 import { css, html, nothing } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
 import { box as ccBox } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
-
-import { fclasses } from '../utils';
 
 class WarpBox extends WarpElement {
   static properties = {
@@ -31,13 +30,13 @@ class WarpBox extends WarpElement {
   ];
 
   get _class() {
-    return fclasses({
-      [ccBox.box]: true,
-      [ccBox.bleed]: this.bleed,
-      [ccBox.info]: this.info,
-      [ccBox.neutral]: this.neutral,
-      [ccBox.bordered]: this.bordered,
-    });
+    return classNames([
+      ccBox.base,
+      this.bleed && ccBox.bleed,
+      this.info && ccBox.info,
+      this.neutral && ccBox.neutral,
+      this.bordered && ccBox.bordered,
+    ]);
   }
 
   get _optOutRoleWithDefault() {

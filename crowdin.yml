@@ -18,6 +18,11 @@ files:
       "translation": "/packages/button/locales/%two_letters_code%/messages.po",
     },
     {
+      "source": "/packages/card/locales/en/messages.po",
+      "dest": "elements/packages/card/messages.po",
+      "translation": "/packages/card/locales/%two_letters_code%/messages.po",
+    },
+    {
       "source": "/packages/select/locales/en/messages.po",
       "dest": "elements/packages/select/messages.po",
       "translation": "/packages/select/locales/%two_letters_code%/messages.po",

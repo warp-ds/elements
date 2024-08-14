@@ -1,9 +1,8 @@
 import { html } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
 import { badge as ccBadge } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
-
-import { classes } from '../utils';
 
 class WarpBadge extends WarpElement {
   static properties = {
@@ -24,15 +23,15 @@ class WarpBadge extends WarpElement {
   }
 
   get _class() {
-    return classes({
-      [ccBadge.base]: true,
-      [ccBadge[this.variant]]: true,
-      [ccBadge.positionBase]: !!this.position,
-      [ccBadge.positionTL]: this.position === 'top-left',
-      [ccBadge.positionTR]: this.position === 'top-right',
-      [ccBadge.positionBR]: this.position === 'bottom-right',
-      [ccBadge.positionBL]: this.position === 'bottom-left',
-    });
+    return classNames([
+      ccBadge.base,
+      ccBadge[this.variant],
+      !!this.position && ccBadge.positionBase,
+      this.position === 'top-left' && ccBadge.positionTL,
+      this.position === 'top-right' && ccBadge.positionTR,
+      this.position === 'bottom-right' && ccBadge.positionBR,
+      this.position === 'bottom-left' && ccBadge.positionBL,
+    ]);
   }
 
   render() {

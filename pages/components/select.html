@@ -27,6 +27,16 @@
               <td>false</td>
             </tr>
             <tr>
+              <td>disabled</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in a disabled state.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
               <td>invalid</td>
               <td>
                 <div>boolean</div>
@@ -79,91 +89,164 @@
               </td>
               <td>false</td>
             </tr>
+            <tr>
+              <td>read-only</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">
+                  Renders the field in a readonly state.
+                </div>
+              </td>
+              <td>false</td>
+            </tr>
           </tbody>
         </table>
 
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
+        <h3 class="mt-24 mb-16">Default</h3>
         <syntax-highlight>
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
+          <w-select label="Berries">
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries' selected>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
-          <w-select label="Berries" hint="We assume this is your jam preference" always>
-            <option value="s">Strawberries</option>
-            <option value="r">Raspberries</option>
-            <option value="c">Cloudberries</option>
+          <w-select label="Berries">
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries' selected>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </div>
 
-        <h3 class="mt-24 mb-16">Default option</h3>
+        <h3 class="mt-24 mb-16">Hint</h3>
         <syntax-highlight>
           <w-select label="Berries" hint="We assume this is your jam preference" always>
-            <option>Strawberries</option>
-            <option selected>Raspberries</option>
-            <option>Cloudberries</option>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries' selected>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
           <w-select label="Berries" hint="We assume this is your jam preference" always>
-            <option value="s">Strawberries</option>
-            <option value="r" selected>Raspberries</option>
-            <option value="c">Cloudberries</option>
-          </w-select>
-        </div>
-
-        <h3 class="mt-24 mb-16">Invalid</h3>
-        <syntax-highlight>
-          <w-select label="Berries" hint="Wrong choice" invalid>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
-          </w-select>
-        </syntax-highlight>
-        <div class="example">
-          <w-select label="Berries" hint="Wrong choice" invalid>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
-          </w-select>
-        </div>
-
-        <h3 class="mt-24 mb-16">Auto focus</h3>
-        <syntax-highlight>
-          <w-select label="Berries" auto-focus>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
-          </w-select>
-        </syntax-highlight>
-        <div class="example">
-          <w-select label="Berries" auto-focus>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries' selected>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </div>
 
         <h3 class="mt-24 mb-16">Optional</h3>
         <syntax-highlight>
           <w-select label="Berries" hint="We assume this is your jam preference" always optional>
-            <option>Strawberries</option>
-            <optionx>Raspberries</optionx>
-            <option>Cloudberries</option>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </syntax-highlight>
         <div class="example">
           <w-select label="Berries" hint="We assume this is your jam preference" always optional>
-            <option>Strawberries</option>
-            <option>Raspberries</option>
-            <option>Cloudberries</option>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Disabled</h3>
+        <syntax-highlight>
+          <w-select label="Berries" disabled>
+            <option value='Strawberries' disabled selected>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" disabled>
+            <option value='Strawberries' disabled selected>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Invalid</h3>
+        <syntax-highlight>
+          <w-select label="Berries" hint="Wrong choice" invalid always>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" hint="Wrong choice" invalid id='invalid-example' always>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Auto focus</h3>
+        <syntax-highlight>
+          <w-select label="Berries" auto-focus>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" auto-focus>
+            <option value='Strawberries'>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </div>
+
+        <h3 class="mt-24 mb-16">Readonly</h3>
+        <syntax-highlight>
+          <w-select label="Berries" read-only>
+            <option value='Strawberries' disabled selected>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
+          </w-select>
+        </syntax-highlight>
+        <div class="example">
+          <w-select label="Berries" read-only>
+            <option value='Strawberries' disabled selected>Strawberries</option>
+            <option value='Raspberries'>Raspberries</option>
+            <option value='Cloudberries'>Cloudberries</option>
           </w-select>
         </div>
       </main>
     </div>
+    <script>
+     document.addEventListener('DOMContentLoaded', () => {
+        const selectElement = document.getElementById('invalid-example');
+
+        function attachChangeListener() {
+          if (selectElement.shadowRoot) {
+            const shadowSelect = selectElement.shadowRoot.querySelector('select');
+            if (shadowSelect) {
+              shadowSelect.addEventListener('change', (e) => {
+                const selectedValue = e.target.value;
+                if (selectedValue === 'Cloudberries') {
+                  selectElement.removeAttribute('invalid');
+                  selectElement.setAttribute('hint', 'Right choice');
+                } else {
+                  selectElement.setAttribute('invalid', '');
+                  selectElement.setAttribute('hint', 'Wrong choice');
+                }
+              });
+            } 
+            else {
+              setTimeout(attachChangeListener, 100);
+            }
+          } else {
+            setTimeout(attachChangeListener, 100);
+          }
+        }
+
+        attachChangeListener();
+      });
+    </script>
       <%- include('footer.html'); -%>
 
   </body>

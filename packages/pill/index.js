@@ -10,6 +10,7 @@ import WarpElement from '@warp-ds/elements-core';
 import { activateI18n } from '../i18n';
 import { kebabCaseAttributes } from '../utils';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
@@ -26,7 +27,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
     this.canClose = false;
     this.suggestion = false;
 
@@ -44,20 +45,16 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
   }
 
   get _labelClasses() {
-    return classNames({
-      [ccPill.button]: true,
-      [this.suggestion ? ccPill.suggestion : ccPill.filter]: true,
-      [ccPill.label]: true,
-      [this.canClose ? ccPill.labelWithClose : ccPill.labelWithoutClose]: true,
-    });
+    return classNames([
+      ccPill.button,
+      ccPill.label,
+      this.suggestion ? ccPill.suggestion : ccPill.filter,
+      this.canClose ? ccPill.labelWithClose : ccPill.labelWithoutClose,
+    ]);
   }
 
   get _closeClasses() {
-    return classNames({
-      [ccPill.button]: true,
-      [this.suggestion ? ccPill.suggestion : ccPill.filter]: true,
-      [ccPill.close]: true,
-    });
+    return classNames([ccPill.button, ccPill.close, this.suggestion ? ccPill.suggestion : ccPill.filter]);
   }
 
   _onClick() {
@@ -70,7 +67,7 @@ class WarpPill extends kebabCaseAttributes(WarpElement) {
 
   render() {
     return html`
-      <div class="${ccPill.pill}">
+      <div class="${ccPill.wrapper}">
         <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
           <span class="${ccPill.a11y}">${this.openSrLabel ? this.openSrLabel : this.openFilterSrText}</span>
           <slot></slot>

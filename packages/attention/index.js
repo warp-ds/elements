@@ -1,5 +1,6 @@
 import { css, html, nothing } from 'lit';
 
+import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { opposites, directions, arrowDirectionClassname, useRecompute as recompute } from '@warp-ds/core/attention';
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
@@ -7,8 +8,9 @@ import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { classes, kebabCaseAttributes, generateRandomId } from '../utils';
+import { kebabCaseAttributes, generateRandomId } from '../utils';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
@@ -63,7 +65,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
 
     this.handleDone = this.handleDone.bind(this);
 
@@ -150,11 +152,11 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _arrowClasses() {
-    return classes({
-      [ccAttention.arrowBase]: true,
-      [ccAttention[`arrowDirection${arrowDirectionClassname(this._arrowDirection)}`]]: true,
-      [this._activeVariantClasses.arrow]: true,
-    });
+    return classNames([
+      ccAttention.arrowBase,
+      this._activeVariantClasses.arrow,
+      ccAttention[`arrowDirection${arrowDirectionClassname(this._arrowDirection)}`],
+    ]);
   }
 
   get _arrowHtml() {
@@ -192,10 +194,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _wrapperClasses() {
-    return classes({
-      [ccAttention.base]: true,
-      [this._activeVariantClasses.wrapper]: true,
-    });
+    return classNames([ccAttention.base, this._activeVariantClasses.wrapper]);
   }
 
   get _ariaClose() {
