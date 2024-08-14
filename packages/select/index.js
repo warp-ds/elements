@@ -55,6 +55,11 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     this._options = this.innerHTML;
   }
 
+  firstUpdated() {
+    // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
+    this.autoFocus && this.shadowRoot.querySelector('select').focus();
+  }
+
   handleKeyDown(event) {
     if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
@@ -111,7 +116,6 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
         <select
           class="${this.#classes}"
           id="${this.#id}"
-          ?autofocus=${this.autoFocus}
           ?disabled=${this.disabled}
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
