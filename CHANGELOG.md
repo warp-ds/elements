@@ -1,3 +1,10 @@
+## [2.0.1-next.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1-next.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* **modal:** add aria labels to back an close buttons ([#180](https://github.com/warp-ds/elements/issues/180)) ([e1b0f41](https://github.com/warp-ds/elements/commit/e1b0f410e877506c9e0fd10049ea93111d23e903))
+
 # [2.0.0](https://github.com/warp-ds/elements/compare/v1.5.0...v2.0.0) (2024-08-14)
 
 
