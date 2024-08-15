@@ -1,12 +1,19 @@
 import { html, nothing } from 'lit';
 
 import { Move } from '@itsy/animate/move';
+import { i18n } from '@lingui/core';
 import { modalElement as ccModal } from '@warp-ds/css/component-classes';
 import '@warp-ds/icons/elements/arrow-left-16';
 import '@warp-ds/icons/elements/close-16';
 import WarpElement from '@warp-ds/elements-core';
 import { createRef, ref } from 'lit/directives/ref.js';
 
+import { activateI18n } from '../i18n';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { CanCloseMixin } from './util.js';
 
 const NO_CLOSE_BUTTON = 'no-close';
@@ -22,6 +29,8 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   };
   constructor() {
     super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
+
     this._hasTopContent = false;
   }
   render() {
@@ -55,15 +64,28 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
 
   get backButton() {
     return this.back && !this._hasTopContent // Not showing back button when there is a top image
-      ? html` <button type="button" class="${ccModal.headerButton} ${ccModal.headerButtonLeft}" @click="${this.emitBack}">
+      ? html`<button
+          type="button"
+          aria-label="${i18n._({
+            id: 'modal.aria.back',
+            message: 'Back',
+            comment: 'Aria label for the back button in modal',
+          })}"
+          class="${ccModal.headerButton} ${ccModal.headerButtonLeft}"
+          @click="${this.emitBack}">
           <w-icon-arrow-left-16></w-icon-arrow-left-16>
         </button>`
       : nothing;
   }
   get closeButton() {
     if (this[NO_CLOSE_BUTTON]) return nothing;
-    return html` <button
+    return html`<button
       type="button"
+      aria-label="${i18n._({
+        id: 'modal.aria.close',
+        message: 'Close',
+        comment: 'Aria label for the close button in modal',
+      })}"
       class="${ccModal.headerButton} ${this._hasTopContent ? ccModal.headerCloseButtonOnImage : ccModal.headerCloseButton}"
       @click="${this.close}">
       <w-icon-close-16></w-icon-close-16>

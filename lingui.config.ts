@@ -25,6 +25,10 @@ const config: LinguiConfig = {
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
+      include: ['packages/modal/modal-header.js'],
+      path: 'packages/modal/locales/{locale}/messages',
+    },
+    {
       include: ['packages/toast/toast.js'],
       path: 'packages/toast/locales/{locale}/messages',
     },
