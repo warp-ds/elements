@@ -15,7 +15,6 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: nb\n"
 "X-Crowdin-File-ID: 16174\n"
-"PO-Revision-Date: \n"
 
 #. Fallback screenreader message for open filter
 #. js-lingui-explicit-id
@@ -28,3 +27,4 @@ msgstr "Åpne filter"
 #: packages/pill/index.js:40
 msgid "pill.aria.removeFilter"
 msgstr "Fjern filter {label}"
+
