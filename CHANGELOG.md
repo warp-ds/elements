@@ -1,3 +1,10 @@
+## [2.0.1-next.2](https://github.com/warp-ds/elements/compare/v2.0.1-next.1...v2.0.1-next.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* **badge:** remove deprecated 'notification' example ([#183](https://github.com/warp-ds/elements/issues/183)) ([880c712](https://github.com/warp-ds/elements/commit/880c712c69179d18f0ee1ad007774e16fca8cebd))
+
 ## [2.0.1-next.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1-next.1) (2024-08-15)
 
 
