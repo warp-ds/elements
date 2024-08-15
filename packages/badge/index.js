@@ -7,7 +7,7 @@ import WarpElement from '@warp-ds/elements-core';
 class WarpBadge extends WarpElement {
   static properties = {
     variant: {
-      type: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'notification' | 'price',
+      type: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price',
     },
     position: {
       type: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left',
