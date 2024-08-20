@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1-next.2",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
@@ -91,7 +91,7 @@
     "@warp-ds/core": "1.1.5",
     "@warp-ds/css": "2.0.0",
     "@warp-ds/elements-core": "2.x",
-    "@warp-ds/icons": "2.0.2",
+    "@warp-ds/icons": "2.1.0",
     "scroll-doctor": "2.0.2"
   },
   "publishConfig": {
