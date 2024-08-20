@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* **badge:** remove deprecated 'notification' example ([#183](https://github.com/warp-ds/elements/issues/183)) ([880c712](https://github.com/warp-ds/elements/commit/880c712c69179d18f0ee1ad007774e16fca8cebd))
+* **modal:** add aria labels to back an close buttons ([#180](https://github.com/warp-ds/elements/issues/180)) ([e1b0f41](https://github.com/warp-ds/elements/commit/e1b0f410e877506c9e0fd10049ea93111d23e903))
+
 ## [2.0.1-next.2](https://github.com/warp-ds/elements/compare/v2.0.1-next.1...v2.0.1-next.2) (2024-08-15)
 
 
