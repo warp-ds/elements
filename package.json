@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
-    "@eik/cli": "2.0.38",
+    "@eik/cli": "3.1.9",
     "@eik/esbuild-plugin": "1.1.47",
     "@itsy/animate": "0.0.9",
     "@lingui/cli": "4.11.2",
