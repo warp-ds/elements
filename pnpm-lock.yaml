@@ -12,8 +12,8 @@ importers:
         specifier: 4.11.2
         version: 4.11.2
       '@warp-ds/core':
-        specifier: 1.1.5
-        version: 1.1.5(@floating-ui/dom@1.6.10)
+        specifier: 1.1.7
+        version: 1.1.7(@floating-ui/dom@1.6.10)
       '@warp-ds/css':
         specifier: 2.0.0
         version: 2.0.0(@warp-ds/uno@2.0.0(unocss@0.62.0(postcss@8.4.41)(rollup@4.20.0)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.5))))
@@ -1548,8 +1548,8 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
 
-  '@warp-ds/core@1.1.5':
-    resolution: {integrity: sha512-rIM48g46USPV73S2nO8eY8u+w6eAWjMwjhpQ/R9cnMNuNTUQm9mn4JFs52BIge/a35UYdfxFPGIQH0qP0KrFFQ==}
+  '@warp-ds/core@1.1.7':
+    resolution: {integrity: sha512-yLHLDBVa/yXaxJq1wRkKuISA7W9aYl0h5sXvJXFxltNu0/rAZXJ2IVF757gjcwqOPTcixchvYm0AJT3qx1pSgw==}
     peerDependencies:
       '@floating-ui/dom': 1.6.x
 
@@ -6612,7 +6612,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@warp-ds/core@1.1.5(@floating-ui/dom@1.6.10)':
+  '@warp-ds/core@1.1.7(@floating-ui/dom@1.6.10)':
     dependencies:
       '@floating-ui/dom': 1.6.10
 
