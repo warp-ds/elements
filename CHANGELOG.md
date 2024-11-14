@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+## [2.0.2-next.2](https://github.com/warp-ds/elements/compare/v2.0.2-next.1...v2.0.2-next.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* export badge and pill in package.json ([c94216e](https://github.com/warp-ds/elements/commit/c94216e4964f706c65a731fb99e2d1ca8b9584fc))
+
 ## [2.0.2-next.1](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2-next.1) (2024-10-21)
 
 
