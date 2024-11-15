@@ -92,6 +92,13 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     return this.hint ? `${this.#id}__hint` : undefined;
   }
 
+  // Fire a custom 'change' event, used when the dropdown changes state.
+  onChange() {
+    let event = new CustomEvent('change', { detail: 'change' });
+
+    this.dispatchEvent(event);
+  }
+
   render() {
     return html`<div class="${ccSelect.wrapper}">
       ${when(
@@ -120,7 +127,8 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
-          @keydown=${this.handleKeyDown}>
+          @keydown=${this.handleKeyDown}
+          @change=${this.onChange}>
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
