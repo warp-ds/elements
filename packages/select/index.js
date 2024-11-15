@@ -94,7 +94,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
 
   // Fire a custom 'change' event, used when the dropdown changes state.
   onChange(value) {
-    let event = new CustomEvent('change', { detail: value });
+    const event = new CustomEvent('change', { detail: value });
 
     this.dispatchEvent(event);
   }
