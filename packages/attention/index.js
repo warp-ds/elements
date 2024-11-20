@@ -160,7 +160,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   get _arrowHtml() {
-    return this.noArrow ? '' : html`<div id="arrow" role="img" class="${this._arrowClasses}"></div>`;
+    return this.noArrow ? '' : html`<div id="arrow" class="${this._arrowClasses}"></div>`;
   }
 
   get _activeVariantClasses() {
@@ -362,12 +362,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           ? html`
               <slot name="target"></slot>
 
-              <div
-                id="attention"
-                role="${this.tooltip ? 'tooltip' : 'img'}"
-                aria-label="${this.defaultAriaLabel()}"
-                class="${this._wrapperClasses}">
-                ${this._arrowHtml}
+              <div id="attention" class="${this._wrapperClasses}">
+                <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
                 <slot name="message"></slot>
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
@@ -375,7 +371,8 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
           : html`
               <div id="attention" class="${this._wrapperClasses}">
                 <slot name="message"></slot>
-                ${this._arrowHtml} ${this.canClose ? this._closeBtnHtml : nothing}
+                <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
+                ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
               <slot name="target"></slot>
             `}
