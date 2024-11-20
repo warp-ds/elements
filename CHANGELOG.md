@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+## [2.0.2-next.3](https://github.com/warp-ds/elements/compare/v2.0.2-next.2...v2.0.2-next.3) (2024-11-20)
+
+
+### Bug Fixes
+
+* **attention:** move role and aria-label to attention-arrow wrapper ([#191](https://github.com/warp-ds/elements/issues/191)) ([f2512a5](https://github.com/warp-ds/elements/commit/f2512a550bd88e88687bdafcdd2eda05b749895f))
+
 ## [2.0.2-next.2](https://github.com/warp-ds/elements/compare/v2.0.2-next.1...v2.0.2-next.2) (2024-11-14)
 
 
