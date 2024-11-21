@@ -37,19 +37,18 @@ class WarpCard extends WarpElement {
       message: 'Select',
       comment: 'Screenreader message to indicate that the card is clickable',
     });
+
+    const href = this.getAttribute('href');
+
+    // Add href property, to use for anchor tag.
+    if (href) {
+      this.href = href;
+    }
   }
 
   static styles = [
     WarpElement.styles,
     css`
-      a::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
       :host {
         display: block;
       }
@@ -86,12 +85,18 @@ class WarpCard extends WarpElement {
   }
 
   render() {
-    return html`
+    const content = html`
       <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
         ${this._interactiveElement} ${this.flat ? '' : html`<div class="${this._outlineClasses}"></div>`}
         <slot></slot>
       </div>
     `;
+
+    if (this.href) {
+      return html`<a style="text-decoration: none" href="${this.href}">${content}</a> `;
+    } else {
+      return content;
+    }
   }
 }
 
