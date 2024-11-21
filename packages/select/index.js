@@ -93,8 +93,8 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   }
 
   // Fire a custom 'change' event, used when the dropdown changes state.
-  onChange(value) {
-    const event = new CustomEvent('change', { detail: value });
+  onChange({ target }) {
+    const event = new CustomEvent('change', { detail: target.value });
 
     this.dispatchEvent(event);
   }
@@ -128,7 +128,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
           @keydown=${this.handleKeyDown}
-          @change=${(e) => this.onChange(e.target.value)}>
+          @change=${this.onChange}>
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
