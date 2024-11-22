@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+## [2.0.2-next.4](https://github.com/warp-ds/elements/compare/v2.0.2-next.3...v2.0.2-next.4) (2024-11-22)
+
+
+### Bug Fixes
+
+* Add select element change event ([#190](https://github.com/warp-ds/elements/issues/190)) ([4ebb243](https://github.com/warp-ds/elements/commit/4ebb243bfd3453999dafb20328f7887bedf0e464))
+
 ## [2.0.2-next.3](https://github.com/warp-ds/elements/compare/v2.0.2-next.2...v2.0.2-next.3) (2024-11-20)
 
 
