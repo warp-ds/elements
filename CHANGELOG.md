@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+## [2.0.2-next.5](https://github.com/warp-ds/elements/compare/v2.0.2-next.4...v2.0.2-next.5) (2024-11-26)
+
+
+### Bug Fixes
+
+* **attention:** update to latest version of @warp-ds/core dependency ([#194](https://github.com/warp-ds/elements/issues/194)) ([7127ce8](https://github.com/warp-ds/elements/commit/7127ce8b52eaa5a46dfdf54a180ecf58dd11e7c1))
+
 ## [2.0.2-next.4](https://github.com/warp-ds/elements/compare/v2.0.2-next.3...v2.0.2-next.4) (2024-11-22)
 
 
