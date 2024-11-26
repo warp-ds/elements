@@ -1,0 +1,503 @@
+<html lang="en">
+  <head>
+  <title>Warp Elements</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/finn-no.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" rel="stylesheet" />
+  <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/components.css" rel="stylesheet" />
+
+  <style>
+    html { font-size: 62.5%; }
+
+    main {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      margin: 24px;
+    }
+
+    main code:not(:where(.example *)),
+    main kbd:not(:where(.example *)),
+    main pre:not(:where(.example *)),
+    main samp:not(:where(.example *)) {
+      font-family: monospace, monospace;
+      font-size: 1em;
+      margin-top: 20px;
+    }
+
+    main [type='button'],
+    main [type='reset'],
+    main [type='submit'] {
+      -webkit-appearance: button;
+    }
+
+    main > div:not(:where(.example *)) {
+      margin-bottom: 16px;
+    }
+
+    main > div + .example {
+      margin-top: -16px;
+    }
+
+    main code:not(:where(.example *)) {
+      padding: 3px 5px;
+      margin: 0;
+      font-size: 90% !important;
+      background-color: rgba(175, 184, 193, 0.2);
+      border-radius: 6px;
+    }
+
+    main .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+    }
+
+    main .example-controls {
+      background: #f1f5f9;
+      margin: 32px -32px -32px;
+      padding: 8px 8px 8px 12px;
+    }
+
+    main h4:not(:where(.example *)),
+    main h5:not(:where(.example *)),
+    main h6:not(:where(.example *)) {
+      margin-bottom: 12px;
+    }
+
+    main h1:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:where(.example *)) {
+      margin-bottom: 20px;
+    }
+
+    main h2:not(:first-child):not(:where(.example *)) {
+      margin-top: 48px;
+    }
+
+    main h3:not(:where(.example *)) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    main ul:not(:where(.example *)),
+    main dl:not(:where(.example *)) {
+      padding-bottom: 16px;
+    }
+
+    main ul:not(:where(.example *)) {
+      list-style-type: disc;
+      list-style-position: inside;
+      padding-left: 24px;
+      padding-top: 8px;
+    }
+
+    main ol:not(:where(.example *)) {
+      list-style-type: decimal;
+      list-style-position: inside;
+    }
+
+    main ul li:not(:where(.example *)) {
+      padding-bottom: 4px;
+      padding-left: 16px;
+      list-style-type: square;
+    }
+
+    main table:not(:where(.example *)) {
+      margin-top: 16px;
+      padding: 0;
+      width: 100%;
+    }
+
+    main table tr:not(:where(.example *)) {
+      border-top: 1px;
+      border-color: #d4d4d4;
+      background: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    main table th:not(:where(.example *)),
+    main table td:not(:where(.example *)) {
+      border: 1px solid #d4d4d4;
+      color: #767676;
+      background: white;
+      margin: 0;
+      font-size: 13px;
+      text-align: left;
+
+      border-left: none;
+      border-right: none;
+      padding: 10px 16px;
+    }
+
+    /** monospace fonts for all columns except the description column */
+    main table td:not(:last-child):not(:where(.example *)) {
+      font-size: 12px;
+    }
+
+    /** no bottom margin for the last paragraph in the cell */
+    main table td p:last-child:not(:where(.example *)) {
+      margin-bottom: 0;
+    }
+
+    main table th:not(:where(.example *)) {
+      font-size: 11px;
+      text-transform: uppercase;
+      vertical-align: top;
+    }
+
+    /** links to types should keep their colors */
+    main table td:not(:last-child) a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main table a:not(:where(.example *)) {
+      color: inherit;
+    }
+
+    main pre:not(:where(div *)) {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    main strong:not(:where(.example *)) {
+      font-weight: bold;
+    }
+
+    main hr:not(:where(.example *)) {
+      border-style: none;
+      color: #d4d4d4;
+      height: 4px;
+      padding: 0;
+    }
+
+    .docs-table {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .docs-table tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .docs-table th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .docs-table th,
+    .docs-table td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+
+    .doc-advanced {
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 2rem;
+      margin-bottom: 56px;
+      width: 100%;
+    }
+
+    .doc-advanced tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .doc-advanced thead th {
+      font-size: 20px;
+      text-align: left;
+      padding: 24px 16px;
+      font-weight: normal;
+    }
+
+    .doc-advanced tbody th {
+      text-transform: uppercase;
+      font-size: 11px;
+      text-align: left;
+      color: #767676;
+    }
+
+    .doc-advanced tbody th,
+    .doc-advanced tbody td {
+      padding: 10px 16px;
+      vertical-align: top;
+    }
+    .example {
+      padding: 30px;
+      border: 3px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      margin-top: -20px;
+    }
+    .grid-example {
+      padding: 16px;
+      border: 1px solid rgb(246, 248, 250);
+      margin-bottom: 16px;
+      background-color: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"
+    integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
+    crossorigin="anonymous"
+  ></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-D-lMwn3y.js"></script>
+  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-zqHNPh9D.css">
+</head>
+  <body>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Expandable</h1>
+        <p>Expandable is a layout component used for creating expandable content areas on a page.</p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>expanded</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Controls component's expanded state</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>bleed</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Makes the box full-width on mobile</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>box</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to display the component as a padded box or not</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>animated</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Animate open and close</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>no-chevron</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether to hide the chevron on the button part of the component</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Component title. Used to display the title value which is always present
+                  regardless of whether the component is open or closed.</div>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>heading-level</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">Wrap the toggle button in a heading element with the specified level. If
+                  headingLevel is not specified, the button will not be wrapped by a heading element</div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>button-class</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Additional CSS classes to include on the button part of the component
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>content-class</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">
+                  Additional CSS classes to include on the content part of the component
+                </div>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3>With style modifiers</h3>
+
+        <syntax-highlight>
+          <div class="flex gap-8 flex-wrap mt-16">
+            <w-button small>box</w-button>
+            <w-button small>bleed</w-button>
+            <w-button small>animated</w-button>
+          </div>
+          <w-expandable title="I'm expandable">
+            <p>with expanded content</p>
+          </w-expandable>
+        </syntax-highlight>
+        <div class="example">
+          <div id="expandableControllers" class="flex gap-8 flex-wrap mb-16" aria-controls="expandable">
+            <w-button name="box" small aria-pressed="false">box</w-button>
+<w-button name="bleed" small aria-pressed="false">bleed</w-button>
+<w-button name="animated" small aria-pressed="false">animated</w-button>
+          </div>
+          <w-expandable id="expandable" title="I'm expandable">
+            <p>with expanded content</p>
+          </w-expandable>
+        </div>
+
+        <h3>With a heading wrapping the toggle button</h3>
+        <p>This can be used to wrap the toggle button in a heading for navigational and structural purposes. It's a feature that is needed typically in scenarios where multiple consecutive Expandable components are used.</p>
+
+        <syntax-highlight>
+          <w-expandable box title="I'm expanded with h2 wrapper" heading-level="2">
+            <p>with expanded content</p> 
+          </w-expandable>
+        </syntax-highlight>
+        <div class="example">
+          <w-expandable box title="I'm expanded with h2 wrapper" heading-level="2">
+            <p>with expanded content</p>
+          </w-expandable>
+        </div>
+
+        <h3>With custom title</h3>
+        <p>This can be used if more control over styling is needed than the <code>title</code> prop allows</p>
+
+        <syntax-highlight>
+          <w-expandable box>
+            <div slot="title" class="flex flex-row items-center">
+              <w-icon-bag-16></w-icon-bag-16>
+              <p class="ml-8 mb-0">This is a title with an icon</p>
+            </div>
+            <p>with expanded content</p> 
+          </w-expandable>
+        </syntax-highlight>
+        <div class="example">
+          <w-expandable box>
+            <div slot="title" class="flex flex-row items-center">
+              <w-icon-bag-16></w-icon-bag-16>
+              <p class="ml-8 mb-0">This is a title with an icon</p>
+            </div>
+            <p>with expanded content</p>
+          </w-expandable>
+        </div>
+
+
+        <h3>Without title</h3>
+         
+        <syntax-highlight>
+          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+          <w-expandable box expanded animated id="expandableWithoutTitle">
+            <p>with expanded content</p> 
+          </w-expandable>
+        </syntax-highlight>
+        <div class="example noTitle">
+          <w-button variant="primary" aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+          <w-expandable box expanded animated class="mt-16" id="expandableWithoutTitle">
+            <p>Expandable content</p>
+          </w-expandable>
+        </div>
+
+
+        <h3>With expanded prop</h3>
+
+        <syntax-highlight>
+          <w-expandable box title="I'm expanded by default" expanded>
+            <p>content should be visible</p> 
+          </w-expandable>
+        </syntax-highlight>
+        <div class="example">
+          <w-expandable box title="I'm expanded by default" expanded>
+            <p>content should be visible</p>
+          </w-expandable>
+        </div>
+      </main>
+    </div>
+      <script data-for="footer" type="application/json">
+  {
+    "github": {
+      "name": "Github",
+      "href": "https://github.com/warp-ds/elements"
+    },
+    "slack": {
+      "name": "#npm-warp",
+      "href": "https://sch-chat.slack.com/archives/C04P0GYTHPV"
+    }
+  }
+</script>
+
+    <script>
+  function addEventListenersToExpandableControllers(expandableId) {
+    const expandableElement = document.getElementById(expandableId);
+    const controllersWrapperId = `#${expandableId}Controllers`;
+
+    document.querySelectorAll(`${controllersWrapperId} w-button`).forEach((el) => {
+      el.addEventListener('click', (event) => {
+        const name = event.target.getAttribute('name') || 'info';
+        expandableElement[name] = !expandableElement[name];
+
+        if (expandableElement[name]) {
+          el.buttonClass = 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400';
+          el.ariaPressed = true;
+          expandableElement.title = expandableElement.title + ` ${name}`;
+        } else {
+          el.buttonClass = undefined;
+          el.ariaPressed = false;
+          expandableElement.title = expandableElement.title.replace(` ${name}`, '');
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll('.example w-expandable').forEach((el) => {
+    const expandableId = el.getAttribute('id');
+    addEventListenersToExpandableControllers(expandableId);
+  });
+
+  document.querySelector('.noTitle w-button').addEventListener('click', (event) => {
+    const expandable = document.querySelector('.noTitle w-expandable');
+    expandable.expanded = !expandable.expanded;
+  });
+</script>
+  </body>
+</html>
