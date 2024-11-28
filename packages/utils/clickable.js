@@ -23,7 +23,7 @@ class WarpClickable extends WarpElement {
         color: inherit;
       }
       a::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         right: 0;
