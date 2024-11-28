@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+## [2.0.2-next.6](https://github.com/warp-ds/elements/compare/v2.0.2-next.5...v2.0.2-next.6) (2024-11-28)
+
+
+### Bug Fixes
+
+* Improve attention component styling ([#193](https://github.com/warp-ds/elements/issues/193)) ([bee1548](https://github.com/warp-ds/elements/commit/bee1548bd8d12918b877450ed1838cef0efd7988))
+
 ## [2.0.2-next.5](https://github.com/warp-ds/elements/compare/v2.0.2-next.4...v2.0.2-next.5) (2024-11-26)
 
 
