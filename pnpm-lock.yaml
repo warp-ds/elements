@@ -21,8 +21,8 @@ importers:
         specifier: 2.x
         version: 2.0.1
       '@warp-ds/icons':
-        specifier: 2.1.0
-        version: 2.1.0
+        specifier: 2.3.0
+        version: 2.3.0
       scroll-doctor:
         specifier: 2.0.2
         version: 2.0.2
@@ -1569,8 +1569,8 @@ packages:
       eslint-plugin-import: ^2.29.1
       eslint-plugin-prettier: ^5.1.3
 
-  '@warp-ds/icons@2.1.0':
-    resolution: {integrity: sha512-PpecGJRqOVimnsfh5dfl7+4Ai8D8SqiMVwgSfy4b5KVLtRspN9jR/BaMEcDjDa7011Hucn61wB9LwKVbNfEfdg==}
+  '@warp-ds/icons@2.3.0':
+    resolution: {integrity: sha512-8IYsk0mvD0DSYm3cmOOXf/iG5vH7iN5fM1h8GPWtNcPFesRfr/OwZfeba0ESL/53MKDPO10BzwHmZ31kY/Wrow==}
 
   '@warp-ds/uno@2.0.0':
     resolution: {integrity: sha512-1X67+dsZS6m1FMlMkRgEIOww0tRzTrG4wgMGJa6rAZ9Zdb+5BZAkxRqeq+3Bix7iDn3548+NEidLF3uZWNW3aA==}
@@ -6634,7 +6634,7 @@ snapshots:
       eslint-plugin-import: 2.29.1(eslint@8.57.0)
       eslint-plugin-prettier: 5.2.1(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2)
 
-  '@warp-ds/icons@2.1.0': {}
+  '@warp-ds/icons@2.3.0': {}
 
   '@warp-ds/uno@2.0.0(unocss@0.62.0(postcss@8.4.41)(rollup@4.20.0)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.5)))':
     dependencies:
