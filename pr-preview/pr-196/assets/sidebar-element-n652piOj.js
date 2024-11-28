@@ -186,7 +186,7 @@ ${on.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
         color: inherit;
       }
       a::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         right: 0;
