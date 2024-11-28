@@ -12,7 +12,7 @@ This matches the React implementation.
 class WarpClickable extends WarpElement {
   static properties = {
     href: { type: String, reflect: true },
-    //title: { type: String, reflect: true },
+    title: { type: String, reflect: true },
   };
 
   static styles = [
@@ -38,7 +38,7 @@ class WarpClickable extends WarpElement {
 
   render() {
     if (this.href) {
-      return html`<a href="${this.href}"><slot></slot></a> `;
+      return html`<a href="${this.href}" title="${this.title}"><slot></slot></a> `;
     } else {
       return html`<slot></slot>`;
     }
