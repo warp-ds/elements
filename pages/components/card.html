@@ -324,8 +324,32 @@
             </div>
           </w-card>
         </div>
-      </main>
-    </div>
+
+        <h3>Using the warp-clickable component</h3>
+
+        The clickable component, like its React counterpart, can be used to wrap clickable content to make the card clickable.
+        This is used to add href behavior to a certain element, which makes the card act as a link.
+        <br /><br />
+      
+        <h4>Clickable</h4>
+        <syntax-highlight>
+          <w-card selected>
+            <div class="m-20">This example shows a card that looks selected</div>
+
+            <w-clickable href="/link">
+              <div class="m-20">This example shows a card that looks selected</div>
+            </w-clickable>
+          </w-card>
+        </syntax-highlight>
+        <div class="example">
+          <w-card selected>
+            <div class="m-20">This example shows a card that works like a clickable link</div>
+
+            <w-clickable href="/link">
+              <div class="m-20">Link text.</div>
+            </w-clickable>
+          </w-card>
+        </div>
       <%- include('footer.html'); -%>
 
   </body>
