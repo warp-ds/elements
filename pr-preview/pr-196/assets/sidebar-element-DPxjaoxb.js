@@ -180,7 +180,7 @@ ${on.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
         </a>`:b`<button type=${this.type||"button"} class=${this._classes}>
           <slot></slot>
         </button>`}
-    ${this.loading?b`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`:null}`}}customElements.get("w-button")||customElements.define("w-button",hl);const pl=JSON.parse('{"card.button.text":"Vælg"}'),fl=JSON.parse('{"card.button.text":"Select"}'),ml=JSON.parse('{"card.button.text":"Valitse"}'),gl=JSON.parse('{"card.button.text":"Velg"}');class vl extends k{static properties={href:{type:String,reflect:!0}};static styles=[k.styles,te`
+    ${this.loading?b`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`:null}`}}customElements.get("w-button")||customElements.define("w-button",hl);const pl=JSON.parse('{"card.button.text":"Vælg"}'),fl=JSON.parse('{"card.button.text":"Select"}'),ml=JSON.parse('{"card.button.text":"Valitse"}'),gl=JSON.parse('{"card.button.text":"Velg"}');class vl extends k{static properties={href:{type:String,reflect:!0},title:{type:String,reflect:!0}};static styles=[k.styles,te`
       a {
         text-decoration: none !important;
         color: inherit;
@@ -196,7 +196,7 @@ ${on.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       :host {
         display: block;
       }
-    `];render(){return this.href?b`<a href="${this.href}"><slot></slot></a> `:b`<slot></slot>`}}customElements.get("w-clickable")||customElements.define("w-clickable",vl);const an={ENTER:"Enter",SPACE:" "};class bl extends k{static properties={selected:{type:Boolean,reflect:!0},flat:{type:Boolean},clickable:{type:Boolean}};constructor(){super(),Ee(fl,gl,ml,pl),this.selected=!1,this.flat=!1,this.clickable=!1,this.buttonText=_._({id:"card.button.text",message:"Select",comment:"Screenreader message to indicate that the card is clickable"})}static styles=[k.styles,te`
+    `];render(){return this.href?b`<a href="${this.href}" title="${this.title}"><slot></slot></a> `:b`<slot></slot>`}}customElements.get("w-clickable")||customElements.define("w-clickable",vl);const an={ENTER:"Enter",SPACE:" "};class bl extends k{static properties={selected:{type:Boolean,reflect:!0},flat:{type:Boolean},clickable:{type:Boolean}};constructor(){super(),Ee(fl,gl,ml,pl),this.selected=!1,this.flat=!1,this.clickable=!1,this.buttonText=_._({id:"card.button.text",message:"Select",comment:"Screenreader message to indicate that the card is clickable"})}static styles=[k.styles,te`
       a::after {
         content: '';
         position: absolute;
