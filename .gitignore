@@ -4,3 +4,6 @@ dist
 .idea
 site/
 eik
+
+# # i18n related files
+packages/*/locales/*/*.mjs
