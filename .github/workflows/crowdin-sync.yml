@@ -17,4 +17,4 @@ jobs:
     uses: warp-ds/reusable-workflows/.github/workflows/crowdin-sync.yml@main
     secrets: inherit
     with:
-      pull_request_reviewers: "felicia-haggqvist"
+      pull_request_reviewers: "imprashast"
