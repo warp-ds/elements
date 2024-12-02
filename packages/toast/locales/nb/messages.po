@@ -15,6 +15,7 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: nb\n"
 "X-Crowdin-File-ID: 15496\n"
+"PO-Revision-Date: \n"
 
 #. Default screenreader message for error in toast component
 #. js-lingui-explicit-id
@@ -33,4 +34,3 @@ msgstr "Vellykket"
 #: packages/toast/toast.js:103
 msgid "toast.aria.warning"
 msgstr "Advarsel"
-

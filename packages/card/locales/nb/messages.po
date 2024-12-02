@@ -15,10 +15,10 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: nb\n"
 "X-Crowdin-File-ID: 17701\n"
+"PO-Revision-Date: \n"
 
 #. Screenreader message to indicate that the card is clickable
 #. js-lingui-explicit-id
-#: packages/card/index.js:35
+#: packages/card/index.js:36
 msgid "card.button.text"
 msgstr "Velg"
-
