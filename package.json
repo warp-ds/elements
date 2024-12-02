@@ -94,7 +94,7 @@
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.0.0",
     "@warp-ds/elements-core": "2.x",
-    "@warp-ds/icons": "2.3.0",
+    "@warp-ds/icons": "2.4.0",
     "scroll-doctor": "2.0.2"
   },
   "publishConfig": {
