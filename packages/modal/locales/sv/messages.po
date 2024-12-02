@@ -15,16 +15,16 @@ msgstr ""
 "X-Crowdin-Project-ID: 141\n"
 "X-Crowdin-Language: sv\n"
 "X-Crowdin-File-ID: 17783\n"
+"PO-Revision-Date: \n"
 
 #. Aria label for the back button in modal
 #. js-lingui-explicit-id
-#: packages/modal/modal-header.js:69
+#: packages/modal/modal-header.js:71
 msgid "modal.aria.back"
 msgstr "Tillbaka"
 
 #. Aria label for the close button in modal
 #. js-lingui-explicit-id
-#: packages/modal/modal-header.js:84
+#: packages/modal/modal-header.js:86
 msgid "modal.aria.close"
 msgstr "Stäng"
-
