@@ -1,4 +1,11 @@
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+# [2.1.0-next.1](https://github.com/warp-ds/elements/compare/v2.0.2-next.6...v2.1.0-next.1) (2024-12-02)
+
+
+### Features
+
+* **lingui:** add support for Swedish ('sv') translations ([#197](https://github.com/warp-ds/elements/issues/197)) ([8c68f1c](https://github.com/warp-ds/elements/commit/8c68f1caae272bc3e03b41f2e0700d42706d3c29))
+
 ## [2.0.2-next.6](https://github.com/warp-ds/elements/compare/v2.0.2-next.5...v2.0.2-next.6) (2024-11-28)
 
 
