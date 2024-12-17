@@ -53,7 +53,7 @@
   },
   "license": "Apache-2.0",
   "peerDependencies": {
-    "@warp-ds/css": "2.0.0",
+    "@warp-ds/css": ">=2.0.0 <3.0.0",
     "@warp-ds/elements-core": "2.x",
     "lit": "3.x"
   },
