@@ -62,8 +62,8 @@
     "@eik/cli": "2.0.38",
     "@eik/esbuild-plugin": "1.1.47",
     "@itsy/animate": "0.0.9",
-    "@lingui/cli": "4.11.2",
-    "@lingui/conf": "4.11.2",
+    "@lingui/cli": "5.1.2",
+    "@lingui/conf": "5.1.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/node": "20.14.10",
@@ -90,7 +90,7 @@
     "vite-plugin-top-level-await": "1.4.1"
   },
   "dependencies": {
-    "@lingui/core": "4.11.2",
+    "@lingui/core": "5.1.2",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.0.0",
     "@warp-ds/elements-core": "2.x",
