@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+
+
+### Bug Fixes
+
+* ease strictness of warp-ds/css peer dependency ([#201](https://github.com/warp-ds/elements/issues/201)) ([f973f16](https://github.com/warp-ds/elements/commit/f973f1675326883999581c07965ead38fb9d0081))
+
 ## [2.0.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1) (2024-08-20)
 
 
