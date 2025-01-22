@@ -14,6 +14,7 @@ import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 import { CanCloseMixin } from './util.js';
 
 const NO_CLOSE_BUTTON = 'no-close';
@@ -29,7 +30,7 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
   };
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
     this._hasTopContent = false;
   }

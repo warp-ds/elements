@@ -1,9 +1,72 @@
+# [2.1.0-next.2](https://github.com/warp-ds/elements/compare/v2.1.0-next.1...v2.1.0-next.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* Add select element change event ([#190](https://github.com/warp-ds/elements/issues/190)) ([149c057](https://github.com/warp-ds/elements/commit/149c0572f85d55912bcac9e3d4ec3bf79ed62db1))
+* **attention:** bump to latest version of @warp-ds/core dependency ([#187](https://github.com/warp-ds/elements/issues/187)) ([2458f49](https://github.com/warp-ds/elements/commit/2458f4948fe325d57c3cd90b619c80a61b46f28f))
+* **attention:** move role and aria-label to attention-arrow wrapper ([#191](https://github.com/warp-ds/elements/issues/191)) ([2b609be](https://github.com/warp-ds/elements/commit/2b609be45d275b6f92d1c90548c00cb972b1be8c))
+* **attention:** update to latest version of @warp-ds/core dependency ([#194](https://github.com/warp-ds/elements/issues/194)) ([b65c724](https://github.com/warp-ds/elements/commit/b65c72466583f861e8445a4df400ca9dce0b32ed))
+* ease strictness of warp-ds/css peer dependency ([#201](https://github.com/warp-ds/elements/issues/201)) ([f973f16](https://github.com/warp-ds/elements/commit/f973f1675326883999581c07965ead38fb9d0081))
+* export badge and pill in package.json ([53c2971](https://github.com/warp-ds/elements/commit/53c29713f74c12ef0a5dc07adecfb1e2cb025cb4))
+* Improve attention component styling ([#193](https://github.com/warp-ds/elements/issues/193)) ([0109e73](https://github.com/warp-ds/elements/commit/0109e7335ff5cff06c504b59532e0279202a257a))
+* merge in change that was made to main branch in error ([#203](https://github.com/warp-ds/elements/issues/203)) ([7b2acc6](https://github.com/warp-ds/elements/commit/7b2acc60bed47262146a9d7c283211c05e4ecb2f)), closes [#201](https://github.com/warp-ds/elements/issues/201) [#201](https://github.com/warp-ds/elements/issues/201) [#187](https://github.com/warp-ds/elements/issues/187) [#187](https://github.com/warp-ds/elements/issues/187) [#191](https://github.com/warp-ds/elements/issues/191) [#191](https://github.com/warp-ds/elements/issues/191) [#190](https://github.com/warp-ds/elements/issues/190) [#190](https://github.com/warp-ds/elements/issues/190) [#194](https://github.com/warp-ds/elements/issues/194) [#194](https://github.com/warp-ds/elements/issues/194) [#195](https://github.com/warp-ds/elements/issues/195) [#193](https://github.com/warp-ds/elements/issues/193) [#193](https://github.com/warp-ds/elements/issues/193) [#197](https://github.com/warp-ds/elements/issues/197) [#197](https://github.com/warp-ds/elements/issues/197) [#200](https://github.com/warp-ds/elements/issues/200)
+
+
+### Features
+
+* **lingui:** add support for Swedish ('sv') translations ([#197](https://github.com/warp-ds/elements/issues/197)) ([6d1a3d5](https://github.com/warp-ds/elements/commit/6d1a3d5aa52d8c69e7b5e6e7aa5fe6ba4824b2cf))
+
+## [2.1.0-next.1](https://github.com/warp-ds/elements/compare/v2.0.2-next.6...v2.1.0-next.1) (2024-12-02)
+
 ## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
+
+### Features
+
+* **lingui:** add support for Swedish ('sv') translations ([#197](https://github.com/warp-ds/elements/issues/197)) ([8c68f1c](https://github.com/warp-ds/elements/commit/8c68f1caae272bc3e03b41f2e0700d42706d3c29))
+
+## [2.0.2-next.6](https://github.com/warp-ds/elements/compare/v2.0.2-next.5...v2.0.2-next.6) (2024-11-28)
+
+
+### Bug Fixes
+
+* Improve attention component styling ([#193](https://github.com/warp-ds/elements/issues/193)) ([bee1548](https://github.com/warp-ds/elements/commit/bee1548bd8d12918b877450ed1838cef0efd7988))
+
+## [2.0.2-next.5](https://github.com/warp-ds/elements/compare/v2.0.2-next.4...v2.0.2-next.5) (2024-11-26)
+
+
+### Bug Fixes
+
+* **attention:** update to latest version of @warp-ds/core dependency ([#194](https://github.com/warp-ds/elements/issues/194)) ([7127ce8](https://github.com/warp-ds/elements/commit/7127ce8b52eaa5a46dfdf54a180ecf58dd11e7c1))
+
+## [2.0.2-next.4](https://github.com/warp-ds/elements/compare/v2.0.2-next.3...v2.0.2-next.4) (2024-11-22)
+
+
+### Bug Fixes
+
+* Add select element change event ([#190](https://github.com/warp-ds/elements/issues/190)) ([4ebb243](https://github.com/warp-ds/elements/commit/4ebb243bfd3453999dafb20328f7887bedf0e464))
+
+## [2.0.2-next.3](https://github.com/warp-ds/elements/compare/v2.0.2-next.2...v2.0.2-next.3) (2024-11-20)
+
+
+### Bug Fixes
+
+* **attention:** move role and aria-label to attention-arrow wrapper ([#191](https://github.com/warp-ds/elements/issues/191)) ([f2512a5](https://github.com/warp-ds/elements/commit/f2512a550bd88e88687bdafcdd2eda05b749895f))
+
+## [2.0.2-next.2](https://github.com/warp-ds/elements/compare/v2.0.2-next.1...v2.0.2-next.2) (2024-11-14)
+
+
+### Bug Fixes
+
+* export badge and pill in package.json ([c94216e](https://github.com/warp-ds/elements/commit/c94216e4964f706c65a731fb99e2d1ca8b9584fc))
+
+## [2.0.2-next.1](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2-next.1) (2024-10-21)
 
 
 ### Bug Fixes
 
 * ease strictness of warp-ds/css peer dependency ([#201](https://github.com/warp-ds/elements/issues/201)) ([f973f16](https://github.com/warp-ds/elements/commit/f973f1675326883999581c07965ead38fb9d0081))
+* **attention:** bump to latest version of @warp-ds/core dependency ([#187](https://github.com/warp-ds/elements/issues/187)) ([886f9ef](https://github.com/warp-ds/elements/commit/886f9ef3ce4f49b542f3c38fd3794971787ea6ee))
 
 ## [2.0.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1) (2024-08-20)
 

@@ -15,6 +15,8 @@ import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
+
 import '@warp-ds/icons/elements/chevron-down-16';
 
 export class WarpSelect extends kebabCaseAttributes(WarpElement) {
@@ -50,7 +52,7 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages);
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
     this._options = this.innerHTML;
   }
@@ -92,6 +94,13 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     return this.hint ? `${this.#id}__hint` : undefined;
   }
 
+  // Fire a custom 'change' event, used when the dropdown changes state.
+  onChange({ target }) {
+    const event = new CustomEvent('change', { detail: target.value });
+
+    this.dispatchEvent(event);
+  }
+
   render() {
     return html`<div class="${ccSelect.wrapper}">
       ${when(
@@ -120,7 +129,8 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
-          @keydown=${this.handleKeyDown}>
+          @keydown=${this.handleKeyDown}
+          @change=${this.onChange}>
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">

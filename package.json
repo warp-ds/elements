@@ -1,13 +1,14 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.1.0-next.2",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
     "./components/affix": "./dist/packages/affix/index.js",
     "./components/alert": "./dist/packages/alert/index.js",
     "./components/attention": "./dist/packages/attention/index.js",
+    "./components/badge": "./dist/packages/badge/index.js",
     "./components/box": "./dist/packages/box/index.js",
     "./components/breadcrumbs": "./dist/packages/breadcrumbs/index.js",
     "./components/broadcast": "./dist/packages/broadcast/index.js",
@@ -15,6 +16,7 @@
     "./components/card": "./dist/packages/card/index.js",
     "./components/expandable": "./dist/packages/expandable/index.js",
     "./components/modal": "./dist/packages/modal/index.js",
+    "./components/pill": "./dist/packages/pill/index.js",
     "./components/select": "./dist/packages/select/index.js",
     "./components/textfield": "./dist/packages/textfield/index.js",
     "./components/toast": "./dist/packages/toast/index.js",
@@ -37,6 +39,7 @@
     "messages:compile": "lingui compile",
     "messages:extract": "lingui extract",
     "preview:docs": "vite preview",
+    "postinstall": "lingui compile",
     "semantic-release": "semantic-release",
     "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
     "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
@@ -88,10 +91,10 @@
   },
   "dependencies": {
     "@lingui/core": "4.11.2",
-    "@warp-ds/core": "1.1.5",
+    "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.0.0",
     "@warp-ds/elements-core": "2.x",
-    "@warp-ds/icons": "2.1.0",
+    "@warp-ds/icons": "2.4.0",
     "scroll-doctor": "2.0.2"
   },
   "publishConfig": {
