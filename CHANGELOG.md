@@ -1,5 +1,6 @@
-# [2.1.0-next.1](https://github.com/warp-ds/elements/compare/v2.0.2-next.6...v2.1.0-next.1) (2024-12-02)
+## [2.1.0-next.1](https://github.com/warp-ds/elements/compare/v2.0.2-next.6...v2.1.0-next.1) (2024-12-02)
 
+## [2.0.2](https://github.com/warp-ds/elements/compare/v2.0.1...v2.0.2) (2024-12-17)
 
 ### Features
 
@@ -45,6 +46,7 @@
 
 ### Bug Fixes
 
+* ease strictness of warp-ds/css peer dependency ([#201](https://github.com/warp-ds/elements/issues/201)) ([f973f16](https://github.com/warp-ds/elements/commit/f973f1675326883999581c07965ead38fb9d0081))
 * **attention:** bump to latest version of @warp-ds/core dependency ([#187](https://github.com/warp-ds/elements/issues/187)) ([886f9ef](https://github.com/warp-ds/elements/commit/886f9ef3ce4f49b542f3c38fd3794971787ea6ee))
 
 ## [2.0.1](https://github.com/warp-ds/elements/compare/v2.0.0...v2.0.1) (2024-08-20)
