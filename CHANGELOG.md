@@ -1,3 +1,10 @@
+## [2.1.1-next.1](https://github.com/warp-ds/elements/compare/v2.1.0...v2.1.1-next.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* update dependencies and build process for improved compatibility ([#206](https://github.com/warp-ds/elements/issues/206)) ([e855400](https://github.com/warp-ds/elements/commit/e8554006e9e8998820990b3862e23414027dbe88))
+
 # [2.1.0](https://github.com/warp-ds/elements/compare/v2.0.2...v2.1.0) (2025-01-22)
 
 
