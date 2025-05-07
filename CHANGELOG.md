@@ -1,3 +1,10 @@
+# [2.2.0-next.1](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0-next.1) (2025-05-07)
+
+
+### Features
+
+* remove broadcast component and related files ([#213](https://github.com/warp-ds/elements/issues/213)) ([f555f50](https://github.com/warp-ds/elements/commit/f555f50df67aeff94381b1b28430d4b0d8117a4a))
+
 ## [2.1.1](https://github.com/warp-ds/elements/compare/v2.1.0...v2.1.1) (2025-02-13)
 
 
