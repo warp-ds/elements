@@ -51,10 +51,6 @@ export default {
           href: '/pages/components/box.html',
         },
         {
-          title: 'Broadcast',
-          href: '/pages/components/broadcast.html',
-        },
-        {
           title: 'Card',
           href: '/pages/components/card.html',
         },

@@ -126,11 +126,6 @@ export default ({ mode }) => {
               injectOptions,
             },
             {
-              filename: 'broadcast.html',
-              template: 'pages/components/broadcast.html',
-              injectOptions,
-            },
-            {
               filename: 'card.html',
               template: 'pages/components/card.html',
               injectOptions,

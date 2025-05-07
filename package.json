@@ -11,7 +11,6 @@
     "./components/badge": "./dist/packages/badge/index.js",
     "./components/box": "./dist/packages/box/index.js",
     "./components/breadcrumbs": "./dist/packages/breadcrumbs/index.js",
-    "./components/broadcast": "./dist/packages/broadcast/index.js",
     "./components/button": "./dist/packages/button/index.js",
     "./components/card": "./dist/packages/card/index.js",
     "./components/expandable": "./dist/packages/expandable/index.js",
@@ -40,8 +39,6 @@
     "messages:extract": "lingui extract",
     "preview:docs": "vite preview",
     "semantic-release": "semantic-release",
-    "test:mock-backend:ci": "node ./tests/utils/broadcast-backend.js &",
-    "test:mock-backend": "node ./tests/utils/broadcast-backend.js",
     "test:snapshot": "TAP_SNAPSHOT=1 tap ./packages/**/test.js --no-check-coverage",
     "test": "tap ./packages/**/test.js --no-check-coverage",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
