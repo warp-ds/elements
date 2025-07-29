@@ -71,7 +71,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   }
 
   get contentEl() {
-    return this.shadowRoot.querySelector('content-el');
+    return this.shadowRoot.querySelector('.content-el');
   }
 
   willUpdate(changedProperties) {
