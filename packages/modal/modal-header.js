@@ -6,7 +6,6 @@ import { modalElement as ccModal } from '@warp-ds/css/component-classes';
 import '@warp-ds/icons/elements/arrow-left-16';
 import '@warp-ds/icons/elements/close-16';
 import WarpElement from '@warp-ds/elements-core';
-import { createRef, ref } from 'lit/directives/ref.js';
 
 import { activateI18n } from '../i18n';
 
@@ -20,8 +19,6 @@ import { CanCloseMixin } from './util.js';
 const NO_CLOSE_BUTTON = 'no-close';
 
 export class ModalHeader extends CanCloseMixin(WarpElement) {
-  titleEl = createRef();
-
   static properties = {
     title: { type: String },
     back: { type: Boolean },
@@ -40,16 +37,20 @@ export class ModalHeader extends CanCloseMixin(WarpElement) {
         <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
         <div class="${this._hasTopContent ? '' : ccModal.headerTitleBar}">
           ${this.backButton}
-          <h1 ${ref(this.titleEl)} class="${this.titleClasses}">${this.title}</h1>
+          <h1 class="title-el ${this.titleClasses}">${this.title}</h1>
           ${this.closeButton}
         </div>
       </div>
     `;
   }
 
+  get titleEl() {
+    return this.shadowRoot.querySelector('.title-el');
+  }
+
   async willUpdate(changedProperties) {
     if (changedProperties.has('back')) {
-      const move = new Move(this.titleEl.value);
+      const move = new Move(this.titleEl);
       move.when(async () => {
         await this.updateComplete;
       });
