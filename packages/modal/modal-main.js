@@ -2,7 +2,6 @@ import { css, html } from 'lit';
 
 import { modalElement as ccModal } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
-import { createRef, ref } from 'lit/directives/ref.js';
 import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
 
 import { ProvidesCanCloseToSlotsMixin } from './util.js';
@@ -11,10 +10,6 @@ const NO_BACKDROP_CLICKS = 'ignore-backdrop-clicks';
 const CONTENT_ID = 'content-id';
 
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
-  dialogEl = createRef();
-  dialogInnerEl = createRef();
-  contentEl = createRef();
-
   static properties = {
     show: { type: Boolean },
     [CONTENT_ID]: { type: String },
@@ -30,21 +25,21 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   }
 
   async open() {
-    this.dialogEl.value.showModal();
+    this.dialogEl.showModal();
     this.handleListeners();
-    setupScrollLock(this.contentEl.value);
+    setupScrollLock(this.contentEl);
     await this.updateComplete;
     this.dispatchEvent(new CustomEvent('shown', { bubbles: true, composed: true }));
   }
 
   close() {
     this.handleListeners('removeEventListener');
-    this.dialogEl.value.classList.add('close');
-    this.dialogEl.value.addEventListener(
+    this.dialogEl.classList.add('close');
+    this.dialogEl.addEventListener(
       'animationend',
       async () => {
-        this.dialogEl.value.classList.remove('close');
-        this.dialogEl.value.close();
+        this.dialogEl.classList.remove('close');
+        this.dialogEl.close();
         teardownScrollLock();
         await this.updateComplete;
         this.dispatchEvent(new CustomEvent('hidden', { bubbles: true, composed: true }));
@@ -55,10 +50,10 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
-      <dialog ${ref(this.dialogEl)} class="w-modal ${ccModal.dialogEl}">
-        <div ${ref(this.dialogInnerEl)} class="${ccModal.dialogInner}">
+      <dialog class="dialog-el w-modal ${ccModal.dialogEl}">
+        <div class="dialog-inner-el ${ccModal.dialogInner}">
           <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
-          <div ${ref(this.contentEl)} class="${ccModal.contentSlot}" id=${this[CONTENT_ID]}>
+          <div class="content-el ${ccModal.contentSlot}" id=${this[CONTENT_ID]}>
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
           <slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
@@ -67,7 +62,19 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     `;
   }
 
-  willUpdate(changedProperties) {
+  get dialogEl() {
+    return this.shadowRoot.querySelector('.dialog-el');
+  }
+
+  get dialogInnerEl() {
+    return this.shadowRoot.querySelector('.dialog-inner-el');
+  }
+
+  get contentEl() {
+    return this.shadowRoot.querySelector('.content-el');
+  }
+
+  updated(changedProperties) {
     if (changedProperties.has('show')) this[this.show ? 'open' : 'close']();
   }
 
@@ -75,13 +82,13 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     // HACK: escape normally fires 'cancel' but 'cancel' can only be intercepted once (browser bug/quirk)
     document[verb]('keydown', this.interceptEscape);
     // Using 'mousedown' instead of 'click' because mouse-up events on the backdrop also trigger 'click'
-    if (!this[NO_BACKDROP_CLICKS]) this.dialogEl.value[verb]('mousedown', this.closeOnBackdropClick);
+    if (!this[NO_BACKDROP_CLICKS]) this.dialogEl[verb]('mousedown', this.closeOnBackdropClick);
     // HACK: 'close' fires once the dialog is closed, thus it's cannot animate
-    this.dialogEl.value[verb]('close', this.eventPreventer);
+    this.dialogEl[verb]('close', this.eventPreventer);
     // HACK: this might not be needed since escape is intercepted, but better to be safe
-    this.dialogEl.value[verb]('cancel', this.eventPreventer);
+    this.dialogEl[verb]('cancel', this.eventPreventer);
 
-    this.dialogInnerEl.value[verb]('transitionend', this.modifyBorderRadius);
+    this.dialogInnerEl[verb]('transitionend', this.modifyBorderRadius);
   }
 
   /** @param {Event} evt */
@@ -91,7 +98,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   /** @param {MouseEvent} evt */
   closeOnBackdropClick(evt) {
-    if (this.dialogEl.value === evt.target) this.close();
+    if (this.dialogEl === evt.target) this.close();
   }
 
   /** @param {KeyboardEvent} evt */
@@ -103,8 +110,8 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   }
 
   modifyBorderRadius() {
-    if (this.dialogInnerEl.value.scrollHeight * 1.02 > innerHeight) this.dialogInnerEl.value.style.borderRadius = '0px';
-    else this.dialogInnerEl.value.style.borderRadius = null;
+    if (this.dialogInnerEl.scrollHeight * 1.02 > innerHeight) this.dialogInnerEl.style.borderRadius = '0px';
+    else this.dialogInnerEl.style.borderRadius = null;
   }
 
   static styles = [
