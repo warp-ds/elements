@@ -1,3 +1,10 @@
+# [2.2.0-next.2](https://github.com/warp-ds/elements/compare/v2.2.0-next.1...v2.2.0-next.2) (2025-07-29)
+
+
+### Bug Fixes
+
+* replace ref to avoid hydration errors and change willupdate lifecycle hook for SSR ([#215](https://github.com/warp-ds/elements/issues/215)) ([81197d0](https://github.com/warp-ds/elements/commit/81197d0a3b1594163df0c241791bd7c39bd54fa5))
+
 # [2.2.0-next.1](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0-next.1) (2025-05-07)
 
 
