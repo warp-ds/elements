@@ -4,6 +4,7 @@ import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { button as ccButton } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
+import { FormControlMixin } from '@open-wc/form-control';
 
 import { activateI18n } from '../i18n';
 import { kebabCaseAttributes } from '../utils/index.js';
@@ -16,7 +17,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 const buttonTypes = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
 
-class WarpButton extends kebabCaseAttributes(WarpElement) {
+class WarpButton extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
   static shadowRootOptions = {
     ...WarpElement.shadowRootOptions,
     delegatesFocus: true,
@@ -34,9 +35,17 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     rel: { type: String, reflect: true },
     fullWidth: { type: Boolean, reflect: true },
     buttonClass: { type: String, reflect: true },
+    name: { type: String, reflect: true },
+    value: { type: String, reflect: true },
   };
 
   static styles = [WarpElement.styles];
+
+  updated(changedProperties) {
+    if (changedProperties.has('value')) {
+      this.setValue(this.value);
+    }
+  }
 
   constructor() {
     super();
@@ -129,6 +138,11 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
       this.href && ccButton.linkAsButton,
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
+  }
+
+  _handleButtonClick() {
+    if (this.type === 'submit') this.internals.form.requestSubmit();
+    else if (this.type === 'reset') this.internals.form.reset();
   }
 
   render() {
