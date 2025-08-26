@@ -62,7 +62,9 @@ export default ({ mode }) => {
             entry: './index.js',
             fileName: 'index',
           },
-          rollupOptions: { external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/] },
+          rollupOptions: {
+            external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/],
+          },
         },
       });
     }
