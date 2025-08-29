@@ -1,13 +1,14 @@
 import { css, html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
+import { FormControlMixin } from '@open-wc/form-control';
 import { input as ccInput, label as ccLabel, helpText as ccHelpText } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { kebabCaseAttributes } from '../utils';
 
-class WarpTextField extends kebabCaseAttributes(WarpElement) {
+class WarpTextField extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
   static properties = {
     disabled: { type: Boolean },
     invalid: { type: Boolean },
@@ -19,13 +20,13 @@ class WarpTextField extends kebabCaseAttributes(WarpElement) {
     min: { type: Number },
     minLength: { type: Number },
     maxLength: { type: Number },
-    name: { type: String },
     pattern: { type: String },
     placeholder: { type: String },
     readOnly: { type: Boolean },
     required: { type: Boolean },
     type: { type: String },
     value: { type: String },
+    name: { type: String },
     _hasPrefix: { state: true },
     _hasSuffix: { state: true },
   };
@@ -87,6 +88,7 @@ class WarpTextField extends kebabCaseAttributes(WarpElement) {
 
   handler(e) {
     const { name, value } = e.target;
+    this.setValue(value);
     const event = new CustomEvent(e.type, {
       detail: {
         name,

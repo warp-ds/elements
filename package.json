@@ -89,6 +89,7 @@
   },
   "dependencies": {
     "@lingui/core": "5.2.0",
+    "@open-wc/form-control": "^1.0.0",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.1.1",
     "@warp-ds/elements-core": "2.0.1",
