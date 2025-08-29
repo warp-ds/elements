@@ -1,4 +1,4 @@
-import { css, html } from 'lit';
+import { html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
@@ -51,7 +51,7 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
     value: { type: String, reflect: true },
   };
 
-  static styles = [WarpElement.styles, css``];
+  static styles = [WarpElement.styles];
 
   constructor() {
     super();
@@ -145,13 +145,6 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
           @keydown=${this.handleKeyDown}
           @change=${this.onChange}>
-          <slot
-            @slotchange=${(content) => {
-              console.log(
-                'slot changed',
-                content.target.assignedNodes({ flatten: true }).filter((node) => node.nodeName === 'OPTION'),
-              );
-            }}></slot>
           ${unsafeHTML(this._options)}
         </select>
         <div class="${this.#chevronClasses}">
