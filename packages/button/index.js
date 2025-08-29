@@ -2,9 +2,9 @@ import { html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { FormControlMixin } from '@open-wc/form-control';
 import { button as ccButton } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
-import { FormControlMixin } from '@open-wc/form-control';
 
 import { activateI18n } from '../i18n';
 import { kebabCaseAttributes } from '../utils/index.js';
