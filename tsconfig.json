@@ -1,11 +1,16 @@
 {
-  "include": ["index.js"],
+  "include": ["packages", "index.js"],
   "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist",
-    "moduleResolution": "node",
-    "skipLibCheck": true
-  },
+    "moduleResolution": "bundler"
+  }
 }
