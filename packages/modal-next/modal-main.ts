@@ -145,7 +145,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
         padding-right:1.6rem;
       }
       @media (min-width: 480px) {
-        .w-modal {
+        .dialog-el {
           --w-modal-translate-distance: 50%;
           place-content:center;
           place-items:center;
@@ -166,20 +166,18 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
           border-bottom-right-radius:0;
         }
       }
-
-      .w-modal[open] {
+      .dialog-el[open] {
         animation: w-modal-in 0.3s ease-in-out forwards;
-        /* new */
         display:flex;
         position:fixed;
       }
-      .w-modal.close {
+      .dialog-el.close {
         animation: w-modal-out 0.3s ease-in-out forwards;
       }
-      .w-modal[open]::backdrop {
+      .dialog-el[open]::backdrop {
         animation: backdrop-in 0.3s ease-in-out forwards;
       }
-      .w-modal.close::backdrop {
+      .dialog-el.close::backdrop {
         animation: backdrop-out 0.3s ease-in-out forwards;
       }
       /* shouldn't need two (in/out) animations declared here, but reversing is being weird */

@@ -14,7 +14,6 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { CanCloseMixin } from './util.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 export class ModalHeader extends CanCloseMixin(LitElement) {
   @property({ type: String }) title: string;
@@ -33,7 +32,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
         <div class="${this._hasTopContent ? '' : 'header-title-bar'}">
           ${this.backButton}
-          <h1 class="${this.titleClasses}">${this.title}</h1>
+          <h1 class="title-el ${this.titleClasses}">${this.title}</h1>
           ${this.closeButton}
         </div>
       </div>
@@ -49,13 +48,11 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
     }
   }
   get titleClasses() {
-    return classMap({
-      'title-el': true,
-      'header-title': true,
-      'header-title-with-back-button': this.back,
-      'header-title-without-back-button': !this.back,
-      'header-title-with-top-area': this._hasTopContent
-    })
+    return [
+      'header-title',
+      this.back ? 'header-title-with-back-button' : 'header-title-without-back-button',
+      this._hasTopContent ? 'header-title-with-top-area' : ''
+    ].join(' ')
   }
 
   get backButton() {
