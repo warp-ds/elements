@@ -72,7 +72,7 @@
     "esbuild": "0.23.0",
     "eslint": "8.57.0",
     "eslint-plugin-lit": "1.14.0",
-    "express": "4.19.2",
+    "express": "5.1.0",
     "glob": "11.0.0",
     "html-format": "1.1.7",
     "lit": "3.x",
