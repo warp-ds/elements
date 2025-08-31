@@ -8,7 +8,6 @@ export * from './packages/button';
 export * from './packages/card';
 export * from './packages/expandable';
 export * from './packages/modal';
-export * from './packages/modal-next';
 export * from './packages/pill';
 export * from './packages/select';
 export * from './packages/textfield';

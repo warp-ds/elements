@@ -111,7 +111,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
       font-size:var(--w-font-size-l);
       line-height:var(--w-line-height-l);
       align-self:center;
-      margin-bottom:0rem;
+      margin: 0;
     }
     .header-title-with-back-button {
       justify-self:center;
