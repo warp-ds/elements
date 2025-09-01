@@ -1,6 +1,6 @@
-import { ModalFooter } from './modal-footer.js';
-import { ModalHeader } from './modal-header.js';
-import { ModalMain } from './modal-main.js';
+import { ModalFooter } from './modal-footer.ts';
+import { ModalHeader } from './modal-header.ts';
+import { ModalMain } from './modal-main.ts';
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from './util.js';
 
 if (!customElements.get('w-modal')) {

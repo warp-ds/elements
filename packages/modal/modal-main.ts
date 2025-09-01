@@ -1,20 +1,16 @@
-import { css, html } from 'lit';
-
-import { modalElement as ccModal } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { css, html, LitElement } from 'lit';
 import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
-
+import { property, query } from 'lit/decorators.js';
 import { ProvidesCanCloseToSlotsMixin } from './util.js';
 
-const NO_BACKDROP_CLICKS = 'ignore-backdrop-clicks';
-const CONTENT_ID = 'content-id';
+export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
+  @property({ type: Boolean }) show: boolean
+  @property({ type: String, attribute: 'content-id' }) contentId: string
+  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean
 
-export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
-  static properties = {
-    show: { type: Boolean },
-    [CONTENT_ID]: { type: String },
-    [NO_BACKDROP_CLICKS]: { type: Boolean },
-  };
+  @query('.dialog-el') dialogEl: HTMLDialogElement
+  @query('.dialog-inner-el') dialogInnerEl: HTMLElement
+  @query('.content-el') contentEl: HTMLElement
 
   constructor() {
     super();
@@ -50,10 +46,10 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
 
   render() {
     return html`
-      <dialog class="dialog-el w-modal ${ccModal.dialogEl}">
-        <div class="dialog-inner-el ${ccModal.dialogInner}">
+      <dialog class="dialog-el">
+        <div class="dialog-inner-el">
           <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
-          <div class="content-el ${ccModal.contentSlot}" id=${this[CONTENT_ID]}>
+          <div class="content-el" id=${this.contentId}>
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
           <slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
@@ -62,19 +58,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     `;
   }
 
-  get dialogEl() {
-    return this.shadowRoot.querySelector('.dialog-el');
-  }
-
-  get dialogInnerEl() {
-    return this.shadowRoot.querySelector('.dialog-inner-el');
-  }
-
-  get contentEl() {
-    return this.shadowRoot.querySelector('.content-el');
-  }
-
-  updated(changedProperties) {
+  updated(changedProperties: Map<string, any>) {
     if (changedProperties.has('show')) this[this.show ? 'open' : 'close']();
   }
 
@@ -82,7 +66,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     // HACK: escape normally fires 'cancel' but 'cancel' can only be intercepted once (browser bug/quirk)
     document[verb]('keydown', this.interceptEscape);
     // Using 'mousedown' instead of 'click' because mouse-up events on the backdrop also trigger 'click'
-    if (!this[NO_BACKDROP_CLICKS]) this.dialogEl[verb]('mousedown', this.closeOnBackdropClick);
+    if (!this.ignoreBackdropClicks) this.dialogEl[verb]('mousedown', this.closeOnBackdropClick);
     // HACK: 'close' fires once the dialog is closed, thus it's cannot animate
     this.dialogEl[verb]('close', this.eventPreventer);
     // HACK: this might not be needed since escape is intercepted, but better to be safe
@@ -91,18 +75,15 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
     this.dialogInnerEl[verb]('transitionend', this.modifyBorderRadius);
   }
 
-  /** @param {Event} evt */
-  eventPreventer(evt) {
+  eventPreventer(evt: Event) {
     evt.preventDefault();
   }
 
-  /** @param {MouseEvent} evt */
-  closeOnBackdropClick(evt) {
+  closeOnBackdropClick(evt: MouseEvent) {
     if (this.dialogEl === evt.target) this.close();
   }
 
-  /** @param {KeyboardEvent} evt */
-  interceptEscape(evt) {
+  interceptEscape(evt: KeyboardEvent) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       this.close();
@@ -115,26 +96,88 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(WarpElement) {
   }
 
   static styles = [
-    WarpElement.styles,
     css`
-      .w-modal {
+      .dialog-el {
         --w-modal-translate-distance: 100%;
+        --w-modal-max-height:80%;
+        --w-modal-width:640px;
+        background-color:transparent;
+        border-width:0;
+        align-items:flex-end;
+        inset:0rem;
+        height:unset;
+        max-height:unset;
+        max-width:unset;
+        width:unset;
+        margin:auto;
+        padding:0rem;
+        backface-visibility:hidden;
+      }
+      .dialog-inner-el {
+        will-change:height;
+        border-radius:8px;
+        display:flex;
+        flex-direction:column;
+        overflow:hidden;
+        position:relative;
+        background-color:var(--w-s-color-background);
+        box-shadow:var(--w-shadow-m);
+        height:var(--w-modal-height);
+        max-height:var(--w-modal-max-height);
+        min-height:var(--w-modal-min-height);
+        width:var(--w-modal-width);
+        backface-visibility:hidden;
+        padding-bottom:calc(32px + env(safe-area-inset-bottom, 0px));
+        transition-property:all;
+        transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration:150ms;
+        transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .content-el {
+        display:block;
+        flex-shrink:1;
+        flex-grow:1;
+        overflow-x:hidden;
+        overflow-y:auto;
+        position:relative;
+        margin-bottom:0rem;
+        padding-left:1.6rem;
+        padding-right:1.6rem;
       }
       @media (min-width: 480px) {
-        .w-modal {
+        .dialog-el {
           --w-modal-translate-distance: 50%;
+          place-content:center;
+          place-items:center;
+        }
+        .dialog-inner-el {
+          margin-left:1.6rem;
+          margin-right:1.6rem;
+          padding-bottom:3.2rem;
+        }
+        .content-el {
+          padding-left:3.2rem;
+          padding-right:3.2rem;
         }
       }
-      .w-modal[open] {
-        animation: w-modal-in 0.3s ease-in-out forwards;
+      @media (max-width: 479.9px){
+        .dialog-inner-el {
+          border-bottom-left-radius:0;
+          border-bottom-right-radius:0;
+        }
       }
-      .w-modal.close {
+      .dialog-el[open] {
+        animation: w-modal-in 0.3s ease-in-out forwards;
+        display:flex;
+        position:fixed;
+      }
+      .dialog-el.close {
         animation: w-modal-out 0.3s ease-in-out forwards;
       }
-      .w-modal[open]::backdrop {
+      .dialog-el[open]::backdrop {
         animation: backdrop-in 0.3s ease-in-out forwards;
       }
-      .w-modal.close::backdrop {
+      .dialog-el.close::backdrop {
         animation: backdrop-out 0.3s ease-in-out forwards;
       }
       /* shouldn't need two (in/out) animations declared here, but reversing is being weird */
