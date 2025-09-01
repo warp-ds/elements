@@ -24,7 +24,7 @@ class SidebarElement extends WarpElement {
     return html`
       <nav class="sidebar p-24 s-bg-subtle mr-12">
         <h2>
-          <a href="${heading.href}" class="no-underline py-2">${heading.title}</a>
+          <a href="./${heading.href}" class="no-underline py-2">${heading.title}</a>
         </h2>
 
         <ul class="py-8">
