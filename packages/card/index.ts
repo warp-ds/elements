@@ -1,4 +1,5 @@
 import { html, css } from 'lit';
+import { property } from 'lit/decorators.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
@@ -20,26 +21,6 @@ const keys = {
 };
 
 class WarpCard extends WarpElement {
-  static properties = {
-    selected: { type: Boolean, reflect: true },
-    flat: { type: Boolean },
-    clickable: { type: Boolean },
-  };
-
-  constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-    this.selected = false;
-    this.flat = false;
-    this.clickable = false;
-    this.buttonText = i18n._({
-      id: 'card.button.text',
-      message: 'Select',
-      comment: 'Screenreader message to indicate that the card is clickable',
-    });
-  }
-
   static styles = [
     WarpElement.styles,
     css`
@@ -56,6 +37,29 @@ class WarpCard extends WarpElement {
       }
     `,
   ];
+
+  @property({ type: Boolean, reflect: true })
+  selected: boolean = false;
+
+  @property({ type: Boolean })
+  flat: boolean = false;
+
+  @property({ type: Boolean })
+  clickable: boolean = false;
+
+  buttonText: string;
+
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+
+    this.buttonText = i18n._({
+      id: 'card.button.text',
+      message: 'Select',
+      comment: 'Screenreader message to indicate that the card is clickable',
+    });
+  }
+
 
   get _containerClasses() {
     return classNames([
@@ -78,7 +82,7 @@ class WarpCard extends WarpElement {
     return this.clickable ? renderButton() : this.selected ? renderSpan() : '';
   }
 
-  keypressed(e) {
+  keypressed(e: KeyboardEvent) {
     if (!this.clickable || e.altKey || e.ctrlKey) return;
     if (e.key === keys.ENTER || e.key === keys.SPACE) {
       e.preventDefault();
