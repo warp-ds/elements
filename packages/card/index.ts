@@ -1,9 +1,8 @@
-import { html, css } from 'lit';
+import { html, css, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { card as ccCard } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -21,7 +20,7 @@ const keys = {
   SPACE: ' ',
 };
 
-class WarpCard extends WarpElement {
+class WarpCard extends LitElement {
   static styles = [
     reset,
     components,

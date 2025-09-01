@@ -1,11 +1,10 @@
-import { css, html, PropertyValues } from "lit";
+import { css, html, LitElement, PropertyValues } from "lit";
 
 import { classNames } from "@chbphone55/classnames";
 import {
   box as ccBox,
   expandable as ccExpandable,
 } from "@warp-ds/css/component-classes";
-import WarpElement from "@warp-ds/elements-core";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 import "@warp-ds/icons/elements/chevron-down-16";
@@ -14,7 +13,7 @@ import { property } from "lit/decorators.js";
 
 import { components, reset } from "../styles.js";
 
-class WarpExpandable extends WarpElement {
+class WarpExpandable extends LitElement {
   @property({ type: Boolean, reflect: true })
   expanded: boolean = false;
 
