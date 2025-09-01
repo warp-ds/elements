@@ -7,7 +7,8 @@ import { card as ccCard } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { activateI18n } from '../i18n';
+import { components, reset } from '../styles.js';
+import { activateI18n } from '../i18n.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -22,7 +23,8 @@ const keys = {
 
 class WarpCard extends WarpElement {
   static styles = [
-    WarpElement.styles,
+    reset,
+    components,
     css`
       a::after {
         content: '';
