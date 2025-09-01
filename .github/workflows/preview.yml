@@ -23,7 +23,7 @@ jobs:
       - name: Install pnpm and dependencies
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
           run_install: true
       - name: Build docs
         run: pnpm run build:docs
