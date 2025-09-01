@@ -66,7 +66,7 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
 
   firstUpdated() {
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
-    this.autoFocus && this.shadowRoot.querySelector('select').focus();
+    if (this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
     // Set initial value based on any slotted options that are selected
     Array.from(this.children).map((child) => {

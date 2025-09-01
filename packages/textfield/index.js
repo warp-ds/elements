@@ -72,10 +72,12 @@ class WarpTextField extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
     if (this.label) {
       return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
     }
+    return undefined;
   }
 
   get _helpId() {
     if (this.helpText) return `${this._id}__hint`;
+    return undefined;
   }
 
   get _id() {
@@ -84,6 +86,7 @@ class WarpTextField extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
 
   get _error() {
     if (this.invalid && this._helpId) return this._helpId;
+    return undefined;
   }
 
   handler(e) {
@@ -99,13 +102,13 @@ class WarpTextField extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
     this.dispatchEvent(event);
   }
 
-  prefixSlotChange(e) {
+  prefixSlotChange() {
     const el = this.renderRoot.querySelector('slot[name=prefix]');
     const affixes = el.assignedElements();
     if (affixes.length) this._hasPrefix = true;
   }
 
-  suffixSlotChange(e) {
+  suffixSlotChange() {
     const el = this.renderRoot.querySelector('slot[name=suffix]');
     const affixes = el.assignedElements();
     if (affixes.length) this._hasSuffix = true;

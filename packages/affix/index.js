@@ -59,6 +59,7 @@ class WarpAffix extends kebabCaseAttributes(WarpElement) {
     } else if (this.clear) {
       return this._clearButton;
     }
+    return undefined;
   }
 
   render() {
