@@ -31,7 +31,7 @@
     "build:docs": "lingui compile && vite build",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
-    "build": "rimraf dist && rimraf eik && lingui compile && tsc && vite build --mode lib && pnpm run build:npm && pnpm build:eik",
+    "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",
     "lint:check": "eslint .",

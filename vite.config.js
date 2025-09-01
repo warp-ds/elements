@@ -53,112 +53,95 @@ export default ({ mode }) => {
         },
       });
     }
-    if (mode === 'lib') {
-      return defineConfig({
-        build: {
-          emptyOutDir: false,
-          lib: {
-            formats: ['es'],
-            entry: './index.js',
-            fileName: 'index',
-          },
-          rollupOptions: {
-            external: ['elements', 'lit', '@warp-ds/elements-core', /^lit\/.*/],
-          },
-        },
-      });
-    }
   }
 
   return {
     base: isProduction ? '/elements/' : '',
     plugins: [
-      mode !== 'lib' &&
-        uno({
-          presets: [presetWarp()],
-        }),
+      uno({
+        presets: [presetWarp()],
+      }),
       mode === 'development' &&
         uno({
           mode: 'shadow-dom',
           presets: [presetWarp()],
           safelist: classes,
         }),
-      mode !== 'lib' &&
-        createHtmlPlugin({
-          minify: false,
-          pages: [
-            {
-              filename: 'button.html',
-              template: 'pages/components/button.html',
-              injectOptions,
-            },
-            {
-              filename: 'pill.html',
-              template: 'pages/components/pill.html',
-              injectOptions,
-            },
-            {
-              filename: 'alert.html',
-              template: 'pages/components/alert.html',
-              injectOptions,
-            },
-            {
-              filename: 'select.html',
-              template: 'pages/components/select.html',
-              injectOptions,
-            },
-            {
-              filename: 'attention.html',
-              template: 'pages/components/attention.html',
-              injectOptions,
-            },
-            {
-              filename: 'badge.html',
-              template: 'pages/components/badge.html',
-              injectOptions,
-            },
-            {
-              filename: 'box.html',
-              template: 'pages/components/box.html',
-              injectOptions,
-            },
-            {
-              filename: 'breadcrumbs.html',
-              template: 'pages/components/breadcrumbs.html',
-              injectOptions,
-            },
-            {
-              filename: 'card.html',
-              template: 'pages/components/card.html',
-              injectOptions,
-            },
-            {
-              filename: 'modal.html',
-              template: 'pages/components/modal.html',
-              injectOptions,
-            },
-            {
-              filename: 'toast.html',
-              template: 'pages/components/toast.html',
-              injectOptions,
-            },
-            {
-              filename: 'textfield.html',
-              template: 'pages/components/textfield.html',
-              injectOptions,
-            },
-            {
-              filename: 'expandable.html',
-              template: 'pages/components/expandable.html',
-              injectOptions,
-            },
-            {
-              filename: 'index.html',
-              template: 'index.html',
-              injectOptions,
-            },
-          ],
-        }),
+      createHtmlPlugin({
+        minify: false,
+        pages: [
+          {
+            filename: 'button.html',
+            template: 'pages/components/button.html',
+            injectOptions,
+          },
+          {
+            filename: 'pill.html',
+            template: 'pages/components/pill.html',
+            injectOptions,
+          },
+          {
+            filename: 'alert.html',
+            template: 'pages/components/alert.html',
+            injectOptions,
+          },
+          {
+            filename: 'select.html',
+            template: 'pages/components/select.html',
+            injectOptions,
+          },
+          {
+            filename: 'attention.html',
+            template: 'pages/components/attention.html',
+            injectOptions,
+          },
+          {
+            filename: 'badge.html',
+            template: 'pages/components/badge.html',
+            injectOptions,
+          },
+          {
+            filename: 'box.html',
+            template: 'pages/components/box.html',
+            injectOptions,
+          },
+          {
+            filename: 'breadcrumbs.html',
+            template: 'pages/components/breadcrumbs.html',
+            injectOptions,
+          },
+          {
+            filename: 'card.html',
+            template: 'pages/components/card.html',
+            injectOptions,
+          },
+          {
+            filename: 'modal.html',
+            template: 'pages/components/modal.html',
+            injectOptions,
+          },
+          {
+            filename: 'toast.html',
+            template: 'pages/components/toast.html',
+            injectOptions,
+          },
+          {
+            filename: 'textfield.html',
+            template: 'pages/components/textfield.html',
+            injectOptions,
+          },
+          {
+            filename: 'expandable.html',
+            template: 'pages/components/expandable.html',
+            injectOptions,
+          },
+          {
+            filename: 'index.html',
+            template: 'index.html',
+            injectOptions,
+          },
+        ],
+      }),
       isProduction && basePathFix(),
       mode === 'development' &&
         topLevelAwait({
