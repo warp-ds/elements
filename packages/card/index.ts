@@ -1,14 +1,14 @@
 import { html, css } from 'lit';
-import { property } from 'lit/decorators.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { card as ccCard } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { components, reset } from '../styles.js';
 import { activateI18n } from '../i18n.js';
+import { components, reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -61,7 +61,6 @@ class WarpCard extends WarpElement {
       comment: 'Screenreader message to indicate that the card is clickable',
     });
   }
-
 
   get _containerClasses() {
     return classNames([

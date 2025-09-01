@@ -1,39 +1,27 @@
-import { html, LitElement, PropertyValues } from "lit";
-import { property } from "lit/decorators.js";
-import { classNames } from "@chbphone55/classnames";
-import { i18n } from "@lingui/core";
-import { FormControlMixin } from "@open-wc/form-control";
-import { button as ccButton } from "@warp-ds/css/component-classes";
-import WarpElement from "@warp-ds/elements-core";
+import { html, LitElement, PropertyValues } from 'lit';
 
-import { components, reset } from "../styles.js";
-import { activateI18n } from "../i18n";
-import { kebabCaseAttributes } from "../utils";
+import { classNames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
+import { FormControlMixin } from '@open-wc/form-control';
+import { button as ccButton } from '@warp-ds/css/component-classes';
+import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
-import { messages as daMessages } from "./locales/da/messages.mjs";
-import { messages as enMessages } from "./locales/en/messages.mjs";
-import { messages as fiMessages } from "./locales/fi/messages.mjs";
-import { messages as nbMessages } from "./locales/nb/messages.mjs";
-import { messages as svMessages } from "./locales/sv/messages.mjs";
+import { activateI18n } from '../i18n';
+import { components, reset } from '../styles.js';
+import { kebabCaseAttributes } from '../utils';
 
-type ButtonVariant =
-  | "primary"
-  | "secondary"
-  | "negative"
-  | "utility"
-  | "pill"
-  | "link";
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 
-const buttonVariants = [
-  "primary",
-  "secondary",
-  "negative",
-  "utility",
-  "pill",
-  "link",
-];
+type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'utility' | 'pill' | 'link';
 
-type ButtonType = "button" | "submit" | "reset";
+const buttonVariants = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
+
+type ButtonType = 'button' | 'submit' | 'reset';
 
 class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   static shadowRootOptions = {
@@ -42,7 +30,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   };
 
   @property({ reflect: true })
-  type: ButtonType = "button";
+  type: ButtonType = 'button';
 
   @property({ type: Boolean, reflect: true })
   autofocus: boolean;
@@ -83,7 +71,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   static styles = [reset, components];
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has("value")) {
+    if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
   }
@@ -92,11 +80,11 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-    this.variant = "secondary";
+    this.variant = 'secondary';
     this.ariaValueTextLoading = i18n._({
-      id: "button.aria.loading",
-      message: "Loading...",
-      comment: "Screen reader message for buttons that are loading",
+      id: 'button.aria.loading',
+      message: 'Loading...',
+      comment: 'Screen reader message for buttons that are loading',
     });
   }
 
@@ -104,9 +92,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
     super.connectedCallback();
 
     if (!buttonVariants.includes(this.variant)) {
-      throw new Error(
-        `Invalid "variant" attribute. Set its value to one of the following:\n${buttonVariants.join(", ")}.`,
-      );
+      throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${buttonVariants.join(', ')}.`);
     }
   }
 
@@ -121,15 +107,9 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.primary,
       this.small && !this.quiet && !this.loading && ccButton.primarySmall,
       this.small && this.quiet && !this.loading && ccButton.primarySmallQuiet,
-      this.small &&
-        this.loading &&
-        (this.quiet
-          ? ccButton.primarySmallQuietLoading
-          : ccButton.primarySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.primarySmallQuietLoading : ccButton.primarySmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.primaryQuiet,
-      !this.small &&
-        this.loading &&
-        (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
     ];
   }
 
@@ -137,18 +117,10 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.secondary,
       this.small && !this.quiet && !this.loading && ccButton.secondarySmall,
-      this.small &&
-        this.loading &&
-        (this.quiet
-          ? ccButton.secondarySmallQuietLoading
-          : ccButton.secondarySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.secondarySmallQuietLoading : ccButton.secondarySmallLoading),
       this.small && this.quiet && !this.loading && ccButton.secondarySmallQuiet,
       !this.small && this.quiet && !this.loading && ccButton.secondaryQuiet,
-      !this.small &&
-        this.loading &&
-        (this.quiet
-          ? ccButton.secondaryQuietLoading
-          : ccButton.secondaryLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.secondaryQuietLoading : ccButton.secondaryLoading),
     ];
   }
 
@@ -157,15 +129,9 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.utility,
       this.small && !this.quiet && !this.loading && ccButton.utilitySmall,
       this.small && this.quiet && !this.loading && ccButton.utilitySmallQuiet,
-      this.small &&
-        this.loading &&
-        (this.quiet
-          ? ccButton.utilitySmallQuietLoading
-          : ccButton.utilitySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.utilitySmallQuietLoading : ccButton.utilitySmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.utilityQuiet,
-      !this.small &&
-        this.loading &&
-        (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
     ];
   }
 
@@ -174,23 +140,16 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.negative,
       this.small && !this.quiet && !this.loading && ccButton.negativeSmall,
       this.small && this.quiet && !this.loading && ccButton.negativeSmallQuiet,
-      this.small &&
-        this.loading &&
-        (this.quiet
-          ? ccButton.negativeSmallQuietLoading
-          : ccButton.negativeSmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.negativeSmallQuietLoading : ccButton.negativeSmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.negativeQuiet,
-      !this.small &&
-        this.loading &&
-        (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
     ];
   }
 
   get _pillClasses() {
     return [
       !this.loading && (this.small ? ccButton.pillSmall : ccButton.pill),
-      this.loading &&
-        (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
+      this.loading && (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
     ];
   }
 
@@ -199,20 +158,20 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   }
   get _classes() {
     return classNames(this.buttonClass, [
-      this.variant === "primary" && this._primaryClasses,
-      this.variant === "secondary" && this._secondaryClasses,
-      this.variant === "utility" && this._utilityClasses,
-      this.variant === "negative" && this._negativeClasses,
-      this.variant === "pill" && this._pillClasses,
-      this.variant === "link" && this._linkClasses,
+      this.variant === 'primary' && this._primaryClasses,
+      this.variant === 'secondary' && this._secondaryClasses,
+      this.variant === 'utility' && this._utilityClasses,
+      this.variant === 'negative' && this._negativeClasses,
+      this.variant === 'pill' && this._pillClasses,
+      this.variant === 'link' && this._linkClasses,
       this.href && ccButton.linkAsButton,
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
   }
 
   _handleButtonClick() {
-    if (this.type === "submit") this.internals.form.requestSubmit();
-    else if (this.type === "reset") this.internals.form.reset();
+    if (this.type === 'submit') this.internals.form.requestSubmit();
+    else if (this.type === 'reset') this.internals.form.reset();
   }
 
   render() {
@@ -220,32 +179,22 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       ? html`<a
           href=${this.href}
           target=${this.target}
-          rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
-          class=${this._classes}
-        >
+          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
+          class=${this._classes}>
           <slot></slot>
         </a>`
-      : html`<button
-          type=${this.type || "button"}
-          class=${this._classes}
-          @click="${this._handleButtonClick}"
-        >
+      : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
         </button>`}
     ${this.loading
-      ? html`<span
-          class="sr-only"
-          role="progressbar"
-          aria-valuenow="{0}"
-          aria-valuetext=${this.ariaValueTextLoading}
-        ></span>`
+      ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
       : null}`;
   }
 }
 
-if (!customElements.get("w-button")) {
+if (!customElements.get('w-button')) {
   // @ts-expect-error Debug type issue
-  customElements.define("w-button", WarpButton);
+  customElements.define('w-button', WarpButton);
 }
 
 export { WarpButton };

@@ -1,4 +1,5 @@
 import type { LinguiConfig } from '@lingui/conf';
+
 import { supportedLocales } from './packages/i18n';
 
 const config: LinguiConfig = {

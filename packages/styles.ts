@@ -1,4 +1,4 @@
-import { css } from "lit";
+import { css } from 'lit';
 
 export const reset = css`
   *,
@@ -115,9 +115,9 @@ export const reset = css`
     text-transform: none;
   }
   button,
-  [type="button"],
-  [type="reset"],
-  [type="submit"] {
+  [type='button'],
+  [type='reset'],
+  [type='submit'] {
     -webkit-appearance: button;
   }
   :-moz-focusring {
@@ -135,7 +135,7 @@ export const reset = css`
   ::-webkit-outer-spin-button {
     height: auto;
   }
-  [type="search"] {
+  [type='search'] {
     -webkit-appearance: textfield;
     outline-offset: -2px;
   }
@@ -187,7 +187,7 @@ export const reset = css`
     color: var(--w-s-color-text-placeholder);
   }
   button,
-  [role="button"] {
+  [role='button'] {
     cursor: pointer;
   }
   :disabled {
@@ -248,7 +248,7 @@ export const reset = css`
   [hidden] {
     display: none !important;
   }
-  [tabindex="-1"]:focus:not(:focus-visible) {
+  [tabindex='-1']:focus:not(:focus-visible) {
     outline: none;
   }
   legend {

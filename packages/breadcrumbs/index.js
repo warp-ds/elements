@@ -42,7 +42,7 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
       .filter((child) => child);
     const styledChildren = flattenedChildren.map((child, index) => {
       if (typeof child === 'string') {
-        const isLastEl = index === children.length - 1;
+        const isLastEl = index === this.children.length - 1;
         return html`<span class=${ccBreadcrumbs.text} aria-current=${isLastEl ? 'page' : undefined}>${child}</span>`;
       }
       child.classList.add(child.tagName === 'A' ? ccBreadcrumbs.link : ccBreadcrumbs.text);
