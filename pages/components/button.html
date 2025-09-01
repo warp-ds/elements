@@ -6,7 +6,10 @@
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
         <h1 class="mb-16">Button</h1>
-        <p>Buttons are used to perform actions, with different visuals for different needs.</p>
+        <p>
+          Buttons are used to perform actions, with different visuals for
+          different needs.
+        </p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
@@ -28,7 +31,10 @@
             </tr>
             <tr>
               <td>variant</td>
-              <td>"primary" | "secondary" | "negative" | "utility" | "link" | "pill"</td>
+              <td>
+                "primary" | "secondary" | "negative" | "utility" | "link" |
+                "pill"
+              </td>
               <td>"secondary"</td>
             </tr>
             <tr>
@@ -50,7 +56,10 @@
               <td>href</td>
               <td>
                 <div>string</div>
-                <div>Set the href for the location where clicking the button will take you to.</div>
+                <div>
+                  Set the href for the location where clicking the button will
+                  take you to.
+                </div>
               </td>
               <td>-</td>
             </tr>
@@ -59,7 +68,8 @@
               <td>
                 <div>string</div>
                 <div>
-                  Anchor target, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a.
+                  Anchor target, see
+                  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a.
                 </div>
               </td>
               <td>-</td>
@@ -85,13 +95,16 @@
 
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
-            By default, buttons have a visible stroke and fill. Quiet buttons do not have this
-            visible stroke or fill and should only be used for secondary actions within a button
-            group. Quiet buttons have the same padding rules as other action buttons and reveal a
-            button-like background color when hovered.
+            By default, buttons have a visible stroke and fill. Quiet buttons do
+            not have this visible stroke or fill and should only be used for
+            secondary actions within a button group. Quiet buttons have the same
+            padding rules as other action buttons and reveal a button-like
+            background color when hovered.
             <syntax-highlight>
               <w-button quiet>Quiet secondary button</w-button>
-              <w-button quiet variant="negative">Quiet negative button</w-button>
+              <w-button quiet variant="negative"
+                >Quiet negative button</w-button
+              >
               <w-button quiet variant="utility">Quiet utility button</w-button>
             </syntax-highlight>
           </div>
@@ -102,11 +115,41 @@
           </div>
         </div>
 
+        <h3 class="mt-32">Form control</h3>
+
+        <div class="md:grid md:grid-cols-3">
+          <div class="col-span-2">
+            Buttons used in the context of a form.
+            <syntax-highlight>
+              <form name="form-control">
+                <input type="text" value="I am value" name="demoValue">
+                <w-button type="reset" name="resetButton" value="fooyoo">Reset</w-button>
+                <w-button type="submit" name="submuitButtton" value="fooyoo">Send thing</w-button>
+              </form>
+            </syntax-highlight>
+          </div>
+          <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
+            <form name="form-control">
+              <input type="text" value="I am value" name="demoValue"><br>
+              <w-button type="reset" name="resetButton" value="fooyoo">Reset</w-button>
+              <w-button type="submit" name="submuitButtton" value="fooyoo">Send thing</w-button>
+            </form>
+            <script>
+              const form = document.forms["form-control"];
+              form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                alert(`Form submitted!\n${JSON.stringify(Object.fromEntries(formData.entries()), null, 2)}`);
+              });
+            </script>
+          </div>
+        </div>
         <h3 class="mt-32">Link (anchor) styled as button</h3>
 
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
-            Buttons will be rendered as an anchor (a tag) if they use an href attribute.
+            Buttons will be rendered as an anchor (a tag) if they use an href
+            attribute.
             <syntax-highlight>
               <w-button href="https://google.no">Go to google.com</w-button>
             </syntax-highlight>
@@ -120,10 +163,12 @@
 
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
-            To show the user that the action they triggered has begun, buttons have an in progress
-            or loading state.
+            To show the user that the action they triggered has begun, buttons
+            have an in progress or loading state.
             <syntax-highlight>
-              <w-button variant="primary" loading>Primary button loading</w-button>
+              <w-button variant="primary" loading
+                >Primary button loading</w-button
+              >
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
@@ -135,16 +180,25 @@
 
         <div class="md:grid md:grid-cols-3">
           <div class="col-span-2">
-            Button will take the parent's width instead of content width. Useful on mobile when button should take full width. 
+            Button will take the parent's width instead of content width. Useful
+            on mobile when button should take full width.
             <syntax-highlight>
-              <w-button full-width variant="primary">Button full width</w-button>
-              <w-button full-width variant="primary" href="https://google.com">Go to google.com</w-button>
+              <w-button full-width variant="primary"
+                >Button full width</w-button
+              >
+              <w-button full-width variant="primary" href="https://google.com"
+                >Go to google.com</w-button
+              >
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
             <div class="w-full flex flex-col gap-8">
-              <w-button full-width variant="primary">Button full width</w-button>
-              <w-button full-width variant="primary" href="https://google.com">Go to google.com</w-button>
+              <w-button full-width variant="primary"
+                >Button full width</w-button
+              >
+              <w-button full-width variant="primary" href="https://google.com"
+                >Go to google.com</w-button
+              >
             </div>
           </div>
         </div>
@@ -168,19 +222,20 @@
         <h3 class="mt-32">Disabled state</h3>
 
         <p>
-          Disabled is an anti-pattern and is not supported. There will ALWAYS be users who don't
-          understand why an element is disabled, or users who can't even see that it is disabled
-          because of poor lighting conditions or other reasons.
+          Disabled is an anti-pattern and is not supported. There will ALWAYS be
+          users who don't understand why an element is disabled, or users who
+          can't even see that it is disabled because of poor lighting conditions
+          or other reasons.
         </p>
 
         <h2>Accessibility</h2>
         <p>
-          If the button doesn't have visible text content, such as when used with only an icon, an
+          If the button doesn't have visible text content, such as when used
+          with only an icon, an
           <code>aria-label</code> prop must be provided for accessibility.
         </p>
       </main>
     </div>
-      <%- include('footer.html'); -%>
-    <%- include('buttonVariantsTable.html'); -%>
+    <%- include('footer.html'); -%> <%- include('buttonVariantsTable.html'); -%>
   </body>
 </html>

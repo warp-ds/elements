@@ -2,6 +2,7 @@ import { html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { FormControlMixin } from '@open-wc/form-control';
 import { button as ccButton } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 
@@ -16,7 +17,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 const buttonTypes = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
 
-class WarpButton extends kebabCaseAttributes(WarpElement) {
+class WarpButton extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
   static shadowRootOptions = {
     ...WarpElement.shadowRootOptions,
     delegatesFocus: true,
@@ -34,9 +35,17 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     rel: { type: String, reflect: true },
     fullWidth: { type: Boolean, reflect: true },
     buttonClass: { type: String, reflect: true },
+    name: { type: String, reflect: true },
+    value: { type: String, reflect: true },
   };
 
   static styles = [WarpElement.styles];
+
+  updated(changedProperties) {
+    if (changedProperties.has('value')) {
+      this.setValue(this.value);
+    }
+  }
 
   constructor() {
     super();
@@ -131,6 +140,11 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
     ]);
   }
 
+  _handleButtonClick() {
+    if (this.type === 'submit') this.internals.form.requestSubmit();
+    else if (this.type === 'reset') this.internals.form.reset();
+  }
+
   render() {
     return html` ${this.href
       ? html`<a
@@ -140,7 +154,7 @@ class WarpButton extends kebabCaseAttributes(WarpElement) {
           class=${this._classes}>
           <slot></slot>
         </a>`
-      : html`<button type=${this.type || 'button'} class=${this._classes}>
+      : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
         </button>`}
     ${this.loading
