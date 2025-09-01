@@ -2667,9 +2667,7 @@ ${Zo.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-    `]}updated(e){e.has("expanded")&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){const e=!!this.title,r=this.renderRoot.querySelector("slot[name='title']")?.assignedNodes().length>0;this._hasTitle=e||r}get#e(){return I([ee.wrapper,this.box&&ee.box,this.bleed&&ee.bleed])}get#t(){return I(this.buttonClass,[ee.button,this.box&&ee.buttonBox])}get#i(){return I([ee.chevron,!this.box&&ee.chevronNonBox])}get#r(){const e=I([ee.elementsChevronUpTransform,!this.expanded&&this._showChevronUp&&ee.elementsChevronCollapse]),r=I([ee.elementsChevronDownTransform,this.expanded&&!this._showChevronUp&&ee.elementsChevronExpand]);return this._showChevronUp?w`<w-icon-chevron-up-16 class="${e}"></w-icon-chevron-up-16>`:w`<w-icon-chevron-down-16
-          class="${r}"
-        ></w-icon-chevron-down-16>`}get#o(){return I(this.contentClass,[this.box&&tt.base,this._hasTitle&&this.box&&ee.contentWithTitle])}get#n(){return I([ee.expansion,!this.expanded&&ee.expansionNotExpanded])}get _expandableSlot(){return w`<div class="${this.#o}">
+    `]}updated(e){e.has("expanded")&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){const e=!!this.title,r=this.renderRoot.querySelector("slot[name='title']")?.assignedNodes().length>0;this._hasTitle=e||r}get#e(){return I([ee.wrapper,this.box&&ee.box,this.bleed&&ee.bleed])}get#t(){return I(this.buttonClass,[ee.button,this.box&&ee.buttonBox])}get#i(){return I([ee.chevron,!this.box&&ee.chevronNonBox])}get#r(){const e=I([ee.elementsChevronUpTransform,!this.expanded&&this._showChevronUp&&ee.elementsChevronCollapse]),r=I([ee.elementsChevronDownTransform,this.expanded&&!this._showChevronUp&&ee.elementsChevronExpand]);return this._showChevronUp?w`<w-icon-chevron-up-16 class="${e}"></w-icon-chevron-up-16>`:w`<w-icon-chevron-down-16 class="${r}"></w-icon-chevron-down-16>`}get#o(){return I(this.contentClass,[this.box&&tt.base,this._hasTitle&&this.box&&ee.contentWithTitle])}get#n(){return I([ee.expansion,!this.expanded&&ee.expansionNotExpanded])}get _expandableSlot(){return w`<div class="${this.#o}">
       <slot></slot>
     </div>`}render(){return w` <div class="${this.#e}">
       ${this._hasTitle?w`<w-unstyled-heading level=${this.headingLevel}>
@@ -2677,24 +2675,14 @@ ${Zo.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
               type="button"
               aria-expanded="${this.expanded}"
               class="${this.#t}"
-              @click=${()=>this.expanded=!this.expanded}
-            >
+              @click=${()=>this.expanded=!this.expanded}>
               <div class="${ee.title}">
-                ${this.title?w`<span class="${ee.titleType}"
-                      >${this.title}</span
-                    >`:w`<slot name="title"></slot>`}
-                ${this.noChevron?"":w`<div class="${this.#i}">
-                      ${this.#r}
-                    </div>`}
+                ${this.title?w`<span class="${ee.titleType}">${this.title}</span>`:w`<slot name="title"></slot>`}
+                ${this.noChevron?"":w`<div class="${this.#i}">${this.#r}</div>`}
               </div>
             </button>
           </w-unstyled-heading>`:""}
-      ${this.animated?w`<w-expand-transition ?show=${this.expanded}>
-            ${this._expandableSlot}
-          </w-expand-transition>`:w`<div
-            class="${this.#n}"
-            aria-hidden=${J(this.expanded?void 0:!0)}
-          >
+      ${this.animated?w`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`:w`<div class="${this.#n}" aria-hidden=${J(this.expanded?void 0:!0)}>
             ${this._expandableSlot}
           </div>`}
     </div>`}}me([N({type:Boolean,reflect:!0})],he.prototype,"expanded");me([N({type:String})],he.prototype,"title");me([N({type:Boolean})],he.prototype,"box");me([N({type:Boolean})],he.prototype,"bleed");me([N({attribute:"button-class",type:String})],he.prototype,"buttonClass");me([N({attribute:"content-class",type:String})],he.prototype,"contentClass");me([N({attribute:"no-chevron",type:Boolean})],he.prototype,"noChevron");me([N({type:Boolean})],he.prototype,"animated");me([N({attribute:"heading-level",type:Number})],he.prototype,"headingLevel");me([N({type:Boolean,state:!0})],he.prototype,"_hasTitle");me([N({type:Boolean,state:!0})],he.prototype,"_showChevronUp");customElements.get("w-expandable")||customElements.define("w-expandable",he);const wn=t=>class extends t{patchClose=!0;_close=null;close(){this._close()}},yn=t=>class extends t{handleSlotChange(e){const r=e.target.assignedNodes({flatten:!0});for(const o of r.filter(i=>i.patchClose))o._close=()=>this.close()}};class bd extends wn(yn(V)){render(){return w`
