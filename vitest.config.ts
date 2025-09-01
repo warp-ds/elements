@@ -14,6 +14,11 @@ export default defineConfig({
     }),
   ],
   test: {
+    expect: {
+      poll: {
+        timeout: 200,
+      },
+    },
     onConsoleLog(log) {
       if (log.includes('Lit is in dev mode.')) return false;
       if (log.includes('Multiple versions of Lit loaded.')) return false;
