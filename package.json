@@ -86,7 +86,7 @@
     "semantic-release": "24.0.0",
     "typescript": "5.5.3",
     "typescript-eslint": "^8.41.0",
-    "unocss": "0.x",
+    "unocss": "66.x",
     "vite": "5.3.3",
     "vite-plugin-html": "3.2.2",
     "vite-plugin-top-level-await": "1.4.1",
