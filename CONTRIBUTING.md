@@ -32,6 +32,12 @@ Install it by running:
 npm install -g pnpm
 ```
 
+Or if you use [corepack](https://www.npmjs.com/package/corepack):
+
+```sh
+corepack prepare --activate
+```
+
 ### Dependencies
 
 Install dependencies by running:
@@ -58,6 +64,20 @@ pnpm run dev
 ```
 
 Changes to either the custom elements or the HTML files should hot reload.
+
+### Automated tests
+
+To run tests, first install Playwright:
+
+```sh
+pnpm exec playwright install
+```
+
+Then run the `test` command:
+
+```sh
+pnpm test
+```
 
 ## Contributing
 
