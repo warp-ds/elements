@@ -1,48 +1,55 @@
-import { css, html } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { box as ccBox, expandable as ccExpandable } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
-import { kebabCaseAttributes } from '../utils/index.js';
-
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
 
-class WarpExpandable extends kebabCaseAttributes(WarpElement) {
-  static properties = {
-    expanded: { type: Boolean, reflect: true },
-    title: { type: String },
-    box: { type: Boolean },
-    bleed: { type: Boolean },
-    buttonClass: { type: String },
-    contentClass: { type: String },
-    noChevron: { type: Boolean },
-    animated: { type: Boolean },
-    headingLevel: { type: Number },
-    _hasTitle: { type: Boolean, state: true },
-    _showChevronUp: { type: Boolean, state: true },
-  };
+import { components, reset } from '../styles.js';
 
-  constructor() {
-    super();
+class WarpExpandable extends LitElement {
+  @property({ type: Boolean, reflect: true })
+  expanded: boolean = false;
 
-    this.expanded = false;
-    this.animated = false;
-    this.box = false;
-    this.bleed = false;
-    this.noChevron = false;
-    this._hasTitle = true;
-    this._showChevronUp = this.expanded;
-  }
+  @property({ type: String })
+  title: string;
+
+  @property({ type: Boolean })
+  box: boolean = false;
+
+  @property({ type: Boolean })
+  bleed: boolean = false;
+
+  @property({ attribute: 'button-class', type: String })
+  buttonClass: string;
+
+  @property({ attribute: 'content-class', type: String })
+  contentClass: string;
+
+  @property({ attribute: 'no-chevron', type: Boolean })
+  noChevron: boolean = false;
+
+  @property({ type: Boolean })
+  animated: boolean = false;
+
+  @property({ attribute: 'heading-level', type: Number })
+  headingLevel: number;
+
+  @property({ type: Boolean, state: true })
+  _hasTitle: boolean = true;
+
+  @property({ type: Boolean, state: true })
+  _showChevronUp: boolean = false;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
-    WarpElement.styles,
+    reset,
+    components,
     css`
       :host {
         display: block;
@@ -53,7 +60,7 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
     `,
   ];
 
-  updated(changedProperties) {
+  updated(changedProperties: PropertyValues<this>) {
     // We need a slight delay for the animation since it has a transition-duration of 150ms:
     if (changedProperties.has('expanded')) {
       setTimeout(() => {
@@ -63,7 +70,10 @@ class WarpExpandable extends kebabCaseAttributes(WarpElement) {
   }
 
   firstUpdated() {
-    this._hasTitle = !!this.title || this.renderRoot.querySelector("slot[name='title']").assignedNodes().length > 0;
+    const hasTitleProp = Boolean(this.title);
+    const hasTitleSlot = (this.renderRoot.querySelector("slot[name='title']") as HTMLSlotElement)?.assignedNodes().length > 0;
+
+    this._hasTitle = hasTitleProp || hasTitleSlot;
   }
 
   get #wrapperClasses() {
