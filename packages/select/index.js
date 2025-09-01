@@ -2,6 +2,7 @@ import { html } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { FormControlMixin } from '@open-wc/form-control';
 import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -19,7 +20,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 
-export class WarpSelect extends kebabCaseAttributes(WarpElement) {
+export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
   static properties = {
     // Whether the element should receive focus on render
     autoFocus: { type: Boolean, reflect: true },
@@ -46,6 +47,8 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     readOnly: { type: Boolean, relfect: true },
 
     _options: { state: true },
+    name: { type: String, reflect: true },
+    value: { type: String, reflect: true },
   };
 
   static styles = [WarpElement.styles];
@@ -53,13 +56,24 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
     this._options = this.innerHTML;
   }
+
+  _setValue = (value) => {
+    this.value = value;
+    this.setValue(value);
+  };
 
   firstUpdated() {
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
     this.autoFocus && this.shadowRoot.querySelector('select').focus();
+
+    // Set initial value based on any slotted options that are selected
+    Array.from(this.children).map((child) => {
+      if (child.selected) {
+        this._setValue(child.value);
+      }
+    });
   }
 
   handleKeyDown(event) {
@@ -94,10 +108,10 @@ export class WarpSelect extends kebabCaseAttributes(WarpElement) {
     return this.hint ? `${this.#id}__hint` : undefined;
   }
 
-  // Fire a custom 'change' event, used when the dropdown changes state.
+  // // Fire a custom 'change' event, used when the dropdown changes state.
   onChange({ target }) {
+    this._setValue(target.value);
     const event = new CustomEvent('change', { detail: target.value });
-
     this.dispatchEvent(event);
   }
 
