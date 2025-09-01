@@ -71,7 +71,7 @@ export default ({ mode }) => {
   }
 
   return {
-    base: isProduction ? '/elements/' : '',
+    base: isProduction ? '/elements/' : process.env.BASE || '',
     plugins: [
       mode !== 'lib' &&
         uno({

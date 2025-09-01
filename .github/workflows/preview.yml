@@ -26,6 +26,8 @@ jobs:
           run_install: true
       - name: Build docs
         run: pnpm run build:docs
+        env:
+          BASE: "/elements/pr-preview/pr-${{ github.event.pull_request.number }}/"
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
