@@ -1,19 +1,21 @@
 import { css, html, LitElement } from 'lit';
-import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
+
 import { property, query } from 'lit/decorators.js';
+import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
+
 import { ProvidesCanCloseToSlotsMixin } from './util.js';
 
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
-  @property({ type: Boolean }) show: boolean
-  @property({ type: String, attribute: 'content-id' }) contentId: string
-  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean
+  @property({ type: Boolean }) show: boolean;
+  @property({ type: String, attribute: 'content-id' }) contentId: string;
+  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean;
 
   // @ts-expect-error The mixin needs type definitions
-  @query('.dialog-el') dialogEl: HTMLDialogElement
+  @query('.dialog-el') dialogEl: HTMLDialogElement;
   // @ts-expect-error The mixin needs type definitions
-  @query('.dialog-inner-el') dialogInnerEl: HTMLElement
+  @query('.dialog-inner-el') dialogInnerEl: HTMLElement;
   // @ts-expect-error The mixin needs type definitions
-  @query('.content-el') contentEl: HTMLElement
+  @query('.content-el') contentEl: HTMLElement;
 
   constructor() {
     super();
@@ -102,77 +104,77 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
     css`
       .dialog-el {
         --w-modal-translate-distance: 100%;
-        --w-modal-max-height:80%;
-        --w-modal-width:640px;
-        background-color:transparent;
-        border-width:0;
-        align-items:flex-end;
-        inset:0rem;
-        height:unset;
-        max-height:unset;
-        max-width:unset;
-        width:unset;
-        margin:auto;
-        padding:0rem;
-        backface-visibility:hidden;
+        --w-modal-max-height: 80%;
+        --w-modal-width: 640px;
+        background-color: transparent;
+        border-width: 0;
+        align-items: flex-end;
+        inset: 0rem;
+        height: unset;
+        max-height: unset;
+        max-width: unset;
+        width: unset;
+        margin: auto;
+        padding: 0rem;
+        backface-visibility: hidden;
       }
       .dialog-inner-el {
-        will-change:height;
-        border-radius:8px;
-        display:flex;
-        flex-direction:column;
-        overflow:hidden;
-        position:relative;
-        background-color:var(--w-s-color-background);
-        box-shadow:var(--w-shadow-m);
-        height:var(--w-modal-height);
-        max-height:var(--w-modal-max-height);
-        min-height:var(--w-modal-min-height);
-        width:var(--w-modal-width);
-        backface-visibility:hidden;
-        padding-bottom:calc(32px + env(safe-area-inset-bottom, 0px));
-        transition-property:all;
-        transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration:150ms;
-        transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: height;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        background-color: var(--w-s-color-background);
+        box-shadow: var(--w-shadow-m);
+        height: var(--w-modal-height);
+        max-height: var(--w-modal-max-height);
+        min-height: var(--w-modal-min-height);
+        width: var(--w-modal-width);
+        backface-visibility: hidden;
+        padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       }
       .content-el {
-        display:block;
-        flex-shrink:1;
-        flex-grow:1;
-        overflow-x:hidden;
-        overflow-y:auto;
-        position:relative;
-        margin-bottom:0rem;
-        padding-left:1.6rem;
-        padding-right:1.6rem;
+        display: block;
+        flex-shrink: 1;
+        flex-grow: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        margin-bottom: 0rem;
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;
       }
       @media (min-width: 480px) {
         .dialog-el {
           --w-modal-translate-distance: 50%;
-          place-content:center;
-          place-items:center;
+          place-content: center;
+          place-items: center;
         }
         .dialog-inner-el {
-          margin-left:1.6rem;
-          margin-right:1.6rem;
-          padding-bottom:3.2rem;
+          margin-left: 1.6rem;
+          margin-right: 1.6rem;
+          padding-bottom: 3.2rem;
         }
         .content-el {
-          padding-left:3.2rem;
-          padding-right:3.2rem;
+          padding-left: 3.2rem;
+          padding-right: 3.2rem;
         }
       }
-      @media (max-width: 479.9px){
+      @media (max-width: 479.9px) {
         .dialog-inner-el {
-          border-bottom-left-radius:0;
-          border-bottom-right-radius:0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
         }
       }
       .dialog-el[open] {
         animation: w-modal-in 0.3s ease-in-out forwards;
-        display:flex;
-        position:fixed;
+        display: flex;
+        position: fixed;
       }
       .dialog-el.close {
         animation: w-modal-out 0.3s ease-in-out forwards;
