@@ -154,7 +154,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
           class=${this._classes}>
           <slot></slot>
         </a>`
-      : html`<button type=${this.type || 'button'} class=${this._classes}>
+      : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
         </button>`}
     ${this.loading
