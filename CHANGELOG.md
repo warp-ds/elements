@@ -1,3 +1,12 @@
+# [2.2.0-next.3](https://github.com/warp-ds/elements/compare/v2.2.0-next.2...v2.2.0-next.3) (2025-09-01)
+
+
+### Bug Fixes
+
+* add form association to select ([eaebfd0](https://github.com/warp-ds/elements/commit/eaebfd0936ddb34eed6f9ebff4b11987d370a9e9))
+* add form participation to w-button ([5870570](https://github.com/warp-ds/elements/commit/58705705ee215b527e1830da61c9eee74c09e9eb))
+* add form participation to w-textfield ([ac13366](https://github.com/warp-ds/elements/commit/ac13366ebfb72713e7acd131be2ecc6d17003f4d))
+
 # [2.2.0-next.2](https://github.com/warp-ds/elements/compare/v2.2.0-next.1...v2.2.0-next.2) (2025-07-29)
 
 
