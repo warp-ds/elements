@@ -2,6 +2,7 @@
   "name": "@warp-ds/elements",
   "type": "module",
   "version": "2.2.0-next.2",
+  "packageManager": "pnpm@10.15.0",
   "description": "Custom elements for Warp",
   "exports": {
     ".": "./dist/index.js",
