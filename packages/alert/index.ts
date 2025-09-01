@@ -1,26 +1,33 @@
-import { css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { alert as ccAlert } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
+
 import '@warp-ds/icons/elements/info-16';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
+import { components, reset } from '../styles.js';
 
-const variants = {
+type AlertVariants = 'negative' | 'positive' | 'warning' | 'info';
+
+const alertVariants = {
   negative: 'negative',
   positive: 'positive',
   warning: 'warning',
   info: 'info',
 };
 
-class WarpAlert extends WarpElement {
-  static properties = {
-    variant: { type: String, reflect: true },
-    show: { type: Boolean, reflect: true },
-    role: { type: String, reflect: true },
-  };
+class WarpAlert extends LitElement {
+  @property({ reflect: true })
+  variant: AlertVariants = 'info';
+
+  @property({ reflect: true })
+  show: boolean = true;
+
+  @property({ reflect: true })
+  role: string = 'alert';
 
   constructor() {
     super();
@@ -30,8 +37,8 @@ class WarpAlert extends WarpElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.variant || !variants[this.variant]) {
-      throw new Error('Invalid "variant" attribute. Set its value to one of the following:\nnegative, positive, warning, info.');
+    if (!this.variant || !alertVariants[this.variant]) {
+      throw new Error(`Invalid 'variant' attribute. Set its value to one of the following:\nnegative, positive, warning, info.`);
     }
   }
 
@@ -50,14 +57,17 @@ class WarpAlert extends WarpElement {
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
   static styles = [
-    WarpElement.styles,
+    reset,
+    components,
     css`
       :host {
         display: block;
       }
+
       ::slotted(:first-child) {
         margin-top: 0px;
       }
+
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
@@ -65,17 +75,17 @@ class WarpAlert extends WarpElement {
   ];
 
   get _icon() {
-    if (this.variant === variants.info) {
-      return html`<w-icon-info-16></w-icon-info-16>`;
+    if (this.variant === alertVariants.info) {
+      return html` <w-icon-info-16></w-icon-info-16>`;
     }
-    if (this.variant === variants.warning) {
-      return html`<w-icon-warning-16></w-icon-warning-16>`;
+    if (this.variant === alertVariants.warning) {
+      return html` <w-icon-warning-16></w-icon-warning-16>`;
     }
-    if (this.variant === variants.negative) {
-      return html`<w-icon-error-16></w-icon-error-16>`;
+    if (this.variant === alertVariants.negative) {
+      return html` <w-icon-error-16></w-icon-error-16>`;
     }
-    if (this.variant === variants.positive) {
-      return html`<w-icon-success-16></w-icon-success-16>`;
+    if (this.variant === alertVariants.positive) {
+      return html` <w-icon-success-16></w-icon-success-16>`;
     } else return '';
   }
 
