@@ -3112,7 +3112,7 @@ ${Jo.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
     `];render(){const{heading:e,pages:r}=Ru;return w`
       <nav class="sidebar p-24 s-bg-subtle mr-12">
         <h2>
-          <a href="${e.href}" class="no-underline py-2">${e.title}</a>
+          <a href="./${e.href}" class="no-underline py-2">${e.title}</a>
         </h2>
 
         <ul class="py-8">
