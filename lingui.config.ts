@@ -1,5 +1,4 @@
 import type { LinguiConfig } from '@lingui/conf';
-
 import { supportedLocales } from './packages/i18n';
 
 const config: LinguiConfig = {
@@ -36,6 +35,10 @@ const config: LinguiConfig = {
     {
       include: ['packages/pill/index.js'],
       path: 'packages/pill/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/pagination/index.ts'],
+      path: 'packages/pagination/locales/{locale}/messages',
     },
   ],
   compileNamespace: 'es',

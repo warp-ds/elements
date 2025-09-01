@@ -145,6 +145,11 @@ export default ({ mode }) => {
             template: 'index.html',
             injectOptions,
           },
+          {
+            filename: 'pagination.html',
+            template: 'pages/components/pagination.html',
+            injectOptions,
+          },
         ],
       }),
       isProduction && basePathFix(),
@@ -165,7 +170,9 @@ function basePathFix() {
     name: 'base-path-fix',
     transform(src, fileName) {
       return fileName.includes('navigation-data.js')
-        ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"')
+        ? src
+            .replace(/pages\/components\//g, 'elements/')
+            .replace(/'\/'/, '"/elements/"')
         : src;
     },
   };
