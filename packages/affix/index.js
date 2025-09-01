@@ -7,7 +7,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/search-16';
 import '@warp-ds/icons/elements/close-16';
 
-import { kebabCaseAttributes } from '../utils';
+import { kebabCaseAttributes } from '../utils/index.js';
 
 class WarpAffix extends kebabCaseAttributes(WarpElement) {
   static properties = {

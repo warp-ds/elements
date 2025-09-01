@@ -8,7 +8,7 @@ import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes, generateRandomId } from '../utils';
+import { kebabCaseAttributes, generateRandomId } from '../utils/index.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';

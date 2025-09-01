@@ -8,7 +8,7 @@ import { pill as ccPill } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils';
+import { kebabCaseAttributes } from '../utils/index.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';

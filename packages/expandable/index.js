@@ -5,7 +5,7 @@ import { box as ccBox, expandable as ccExpandable } from '@warp-ds/css/component
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { kebabCaseAttributes } from '../utils';
+import { kebabCaseAttributes } from '../utils/index.js';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';

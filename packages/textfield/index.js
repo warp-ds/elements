@@ -6,7 +6,7 @@ import { input as ccInput, label as ccLabel, helpText as ccHelpText } from '@war
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { kebabCaseAttributes } from '../utils';
+import { kebabCaseAttributes } from '../utils/index.js';
 
 class WarpTextField extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
   static properties = {
