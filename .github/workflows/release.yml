@@ -20,12 +20,16 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: true
+
+      - name: Build
+        run: pnpm build
+
+      # test after build so we have compiled Lingui files to import
       - name: Install Playwright
         run: pnpm exec playwright install --with-deps
       - name: Test
         run: pnpm test
-      - name: Build
-        run: pnpm build
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
