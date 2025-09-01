@@ -244,6 +244,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
 }
 
 if (!customElements.get("w-button")) {
+  // @ts-expect-error Debug type issue
   customElements.define("w-button", WarpButton);
 }
 
