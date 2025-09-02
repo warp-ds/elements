@@ -8,7 +8,6 @@ test('renders the slotted label', async () => {
   const component = html`<w-button>This is a button</w-button>`;
 
   const screen = await page.render(component);
-  screen.debug();
   await expect.element(screen.getByText('This is a button')).toBeVisible();
   await expect.element(screen.getByRole('button')).toBeVisible();
 });
@@ -17,6 +16,5 @@ test('by default button type is button', async () => {
   const component = html`<w-button>This is a button</w-button>`;
 
   const screen = await page.render(component);
-  screen.debug();
   await expect.element(screen.getByRole('button')).toHaveAttribute('type', 'button');
 });

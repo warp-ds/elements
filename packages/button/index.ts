@@ -10,7 +10,6 @@ import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-import { styles } from './styles.js';
 import { kebabCaseAttributes } from '../utils';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -18,6 +17,7 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles.js';
 
 type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'utility' | 'pill' | 'link';
 
@@ -143,7 +143,6 @@ export const ccButton = {
   fullWidth: 'w-full max-w-full',
   contentWidth: 'max-w-max',
 };
-
 
 class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   static shadowRootOptions = {
