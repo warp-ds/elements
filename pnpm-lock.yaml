@@ -71,6 +71,9 @@ importers:
       '@types/node':
         specifier: 20.14.10
         version: 20.14.10
+      '@unocss/core':
+        specifier: ^66.5.0
+        version: 66.5.0
       '@vitest/utils':
         specifier: ^3.2.4
         version: 3.2.4
@@ -1455,6 +1458,9 @@ packages:
 
   '@unocss/core@0.65.4':
     resolution: {integrity: sha512-a2JOoFutrhqd5RgPhIR5FIXrDoHDU3gwCbPrpT6KYTjsqlSc/fv02yZ+JGOZFN3MCFhCmaPTs+idDFtwb3xU8g==}
+
+  '@unocss/core@66.5.0':
+    resolution: {integrity: sha512-4JStg50nrwd4aJulbPYglqHyuVUHMEX2EltpdxrrxknvSjy4LriKCVUCEmIljsbTFDXm8xcPnPGs6VN/ZmlKlA==}
 
   '@unocss/extractor-arbitrary-variants@0.62.0':
     resolution: {integrity: sha512-IAqDEuXfIiL2rtzdlZd07SgGENG+/R81ePQ5CvezEM1XV81L2EzvzQgYIq0xa5lnB0B254VrYgFP1B7AXdXjLA==}
@@ -6348,6 +6354,8 @@ snapshots:
   '@unocss/core@0.62.0': {}
 
   '@unocss/core@0.65.4': {}
+
+  '@unocss/core@66.5.0': {}
 
   '@unocss/extractor-arbitrary-variants@0.62.0':
     dependencies:
