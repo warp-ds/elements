@@ -1,3 +1,10 @@
+# [2.2.0-next.4](https://github.com/warp-ds/elements/compare/v2.2.0-next.3...v2.2.0-next.4) (2025-09-02)
+
+
+### Bug Fixes
+
+* adding setup test script for tests ([b02f5b4](https://github.com/warp-ds/elements/commit/b02f5b4143590c888619dcd4ed9b15f01d68bbfa))
+
 # [2.2.0-next.3](https://github.com/warp-ds/elements/compare/v2.2.0-next.2...v2.2.0-next.3) (2025-09-01)
 
 
