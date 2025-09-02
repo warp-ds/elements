@@ -1,16 +1,16 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
-import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils/index.js';
+import { activateI18n } from '../i18n.js';
+import { components, reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -20,38 +20,49 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 
-export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
-  static properties = {
-    // Whether the element should receive focus on render
-    autoFocus: { type: Boolean, reflect: true },
+export class WarpSelect extends FormControlMixin(LitElement) {
+  // Whether the element should receive focus on render
+  @property({ type: Boolean, reflect: true })
+  autoFocus: boolean;
 
-    // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
-    invalid: { type: Boolean, reflect: true },
+  // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
+  @property({ type: Boolean, reflect: true })
+  invalid: boolean;
 
-    // Whether to always show a hint
-    always: { type: Boolean, reflect: true },
+  // Whether to always show a hint
+  @property({ type: Boolean, reflect: true })
+  always: boolean;
 
-    // The content displayed as the help text
-    hint: { type: String, reflect: true },
+  // The content displayed as the help text
+  @property({ reflect: true })
+  hint: string;
 
-    // The content to disply as the label
-    label: { type: String, reflect: true },
+  // The content to disply as the label
+  @property({ reflect: true })
+  label: string;
 
-    // Whether to show optional text
-    optional: { type: Boolean, reflect: true },
+  // Whether to show optional text
+  @property({ type: Boolean, reflect: true })
+  optional: boolean;
 
-    // Renders the field in a disabled state.
-    disabled: { type: Boolean, reflect: true },
+  // Renders the field in a disabled state.
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean;
 
-    // Renders the field in a readonly state.
-    readOnly: { type: Boolean, relfect: true },
+  // Renders the field in a readonly state.
+  @property({ attribute: 'read-only', type: Boolean, reflect: true })
+  readOnly: boolean;
 
-    _options: { state: true },
-    name: { type: String, reflect: true },
-    value: { type: String, reflect: true },
-  };
+  @property({ state: true })
+  _options: string;
 
-  static styles = [WarpElement.styles];
+  @property({ reflect: true })
+  name: string;
+
+  @property({ reflect: true })
+  value: string;
+
+  static styles = [reset, components];
 
   constructor() {
     super();
@@ -59,7 +70,7 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
     this._options = this.innerHTML;
   }
 
-  _setValue = (value) => {
+  _setValue = (value: string) => {
     this.value = value;
     this.setValue(value);
   };
@@ -69,14 +80,14 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
     if (this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
     // Set initial value based on any slotted options that are selected
-    Array.from(this.children).map((child) => {
+    Array.from(this.children).map((child: HTMLOptionElement) => {
       if (child.selected) {
         this._setValue(child.value);
       }
     });
   }
 
-  handleKeyDown(event) {
+  handleKeyDown(event: KeyboardEvent) {
     if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
     }

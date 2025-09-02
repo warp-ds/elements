@@ -144,7 +144,7 @@ export const ccButton = {
   contentWidth: 'max-w-max',
 };
 
-class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
+class WarpButton extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
     ...WarpElement.shadowRootOptions,
     delegatesFocus: true,
@@ -177,10 +177,10 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
   @property({ reflect: true })
   rel: string;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth: boolean;
 
-  @property({ reflect: true })
+  @property({ attribute: 'button-class', reflect: true })
   buttonClass: string;
 
   @property({ reflect: true })
@@ -188,6 +188,8 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
 
   @property({ reflect: true })
   value: string;
+
+  ariaValueTextLoading: string;
 
   static styles = [reset, styles];
 
@@ -314,7 +316,6 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
 }
 
 if (!customElements.get('w-button')) {
-  // @ts-expect-error Debug type issue
   customElements.define('w-button', WarpButton);
 }
 
