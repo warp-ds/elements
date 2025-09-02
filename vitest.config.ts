@@ -25,6 +25,7 @@ export default defineConfig({
       if (log.includes('Multiple versions of Lit loaded.')) return false;
       if (log.includes('Overriding ReactiveElement.createProperty() is deprecated.')) return false;
     },
+    setupFiles: ['./setup-tests.ts'],
     browser: {
       provider: 'playwright',
       enabled: true,
