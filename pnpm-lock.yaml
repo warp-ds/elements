@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  vitest-browser-lit:
+    hash: 8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1
+    path: patches/vitest-browser-lit.patch
+
 importers:
 
   .:
@@ -66,6 +71,9 @@ importers:
       '@types/node':
         specifier: 20.14.10
         version: 20.14.10
+      '@vitest/utils':
+        specifier: ^3.2.4
+        version: 3.2.4
       '@warp-ds/eslint-config':
         specifier: 1.1.0
         version: 1.1.0(@eslint/js@9.16.0)(eslint-config-prettier@9.1.0(eslint@9.16.0(jiti@1.21.7)))(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.41.0(eslint@9.16.0(jiti@1.21.7))(typescript@5.5.3))(eslint@9.16.0(jiti@1.21.7)))(eslint-plugin-prettier@5.5.4(eslint-config-prettier@9.1.0(eslint@9.16.0(jiti@1.21.7)))(eslint@9.16.0(jiti@1.21.7))(prettier@3.3.2))(eslint@9.16.0(jiti@1.21.7))(globals@15.13.0)
@@ -146,7 +154,7 @@ importers:
         version: 3.2.4(@types/node@20.14.10)(@vitest/browser@3.2.4)(terser@5.37.0)
       vitest-browser-lit:
         specifier: ^0.1.0
-        version: 0.1.0(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4)
+        version: 0.1.0(patch_hash=8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1)(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4)
 
 packages:
 
@@ -5164,7 +5172,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   '@babel/parser@7.25.3':
     dependencies:
@@ -5225,7 +5233,7 @@ snapshots:
 
   '@babel/template@7.25.0':
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.2
       '@babel/parser': 7.25.3
       '@babel/types': 7.25.2
 
@@ -5237,7 +5245,7 @@ snapshots:
 
   '@babel/traverse@7.25.3':
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.2
       '@babel/generator': 7.25.0
       '@babel/parser': 7.25.3
       '@babel/template': 7.25.0
@@ -6424,7 +6432,7 @@ snapshots:
   '@unocss/rule-utils@0.62.0':
     dependencies:
       '@unocss/core': 0.62.0
-      magic-string: 0.30.11
+      magic-string: 0.30.17
 
   '@unocss/rule-utils@0.65.4':
     dependencies:
@@ -8976,7 +8984,7 @@ snapshots:
 
   parse-json@8.1.0:
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.2
       index-to-position: 0.1.2
       type-fest: 4.24.0
 
@@ -9912,7 +9920,7 @@ snapshots:
     dependencies:
       browserslist: 4.23.3
       escalade: 3.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   update-browserslist-db@1.1.2(browserslist@4.24.4):
     dependencies:
@@ -9996,7 +10004,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.37.0
 
-  vitest-browser-lit@0.1.0(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4):
+  vitest-browser-lit@0.1.0(patch_hash=8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1)(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4):
     dependencies:
       '@vitest/browser': 3.2.4(playwright@1.55.0)(vite@5.3.3(@types/node@20.14.10)(terser@5.37.0))(vitest@3.2.4)
       lit: 3.2.0

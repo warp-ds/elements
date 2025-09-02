@@ -68,6 +68,8 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/node": "20.14.10",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/utils": "^3.2.4",
     "@warp-ds/eslint-config": "1.1.0",
     "@warp-ds/uno": "2.1.0",
     "cz-conventional-changelog": "3.3.0",
