@@ -1,5 +1,7 @@
 import { html, css, LitElement } from 'lit';
 
+import { reset } from '../styles.js';
+
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from './util';
 
 export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitElement)) {
@@ -10,20 +12,23 @@ export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitE
       </div>
     `;
   }
-  static styles = css`
-    .footer {
-      display: flex;
-      flex-shrink: 0;
-      justify-content: flex-end;
-      padding-left: 1.6rem;
-      padding-right: 1.6rem;
-      padding-top: 2.4rem;
-    }
-    @media (min-width: 480px) {
+  static styles = [
+    reset,
+    css`
       .footer {
-        padding-left: 3.2rem;
-        padding-right: 3.2rem;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: flex-end;
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;
+        padding-top: 2.4rem;
       }
-    }
-  `;
+      @media (min-width: 480px) {
+        .footer {
+          padding-left: 3.2rem;
+          padding-right: 3.2rem;
+        }
+      }
+    `,
+  ];
 }
