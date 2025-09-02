@@ -1,7 +1,8 @@
 import * as eik from '@eik/esbuild-plugin';
 import esbuild from 'esbuild';
-import { plugin as stylePlugin } from './build/index.js';
 import { glob } from 'glob';
+
+import { plugin as stylePlugin } from './build/index.js';
 
 const components = glob.sync('packages/**/index.js');
 const toastApiPath = 'packages/toast/api.js';
@@ -70,11 +71,11 @@ console.log('Building elements for: ', version);
 
 if (version === 'eik') {
   await eik.load();
-  buildComponents('eik', { plugins: [eik.plugin(), stylePlugin({ filter: /\.ts$/ })] });
-  buildToastApi('eik', { plugins: [eik.plugin(),stylePlugin({ filter: /\.ts$/ })] });
-  buildIndex('eik', { plugins: [eik.plugin(),stylePlugin({ filter: /\.ts$/ })] });
+  buildComponents('eik', { plugins: [eik.plugin(), stylePlugin()] });
+  buildToastApi('eik', { plugins: [eik.plugin(), stylePlugin()] });
+  buildIndex('eik', { plugins: [eik.plugin(), stylePlugin()] });
 } else {
-  buildComponents('dist', { plugins: [stylePlugin({ filter: /\.ts$/ })] });
-  buildToastApi('dist', { plugins: [stylePlugin({ filter: /\.ts$/ })] });
-  buildIndex('dist', { plugins: [stylePlugin({ filter: /\.ts$/ })] });
+  buildComponents('dist', { plugins: [stylePlugin()] });
+  buildToastApi('dist', { plugins: [stylePlugin()] });
+  buildIndex('dist', { plugins: [stylePlugin()] });
 }

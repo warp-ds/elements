@@ -35,7 +35,7 @@ class WarpCard extends LitElement {
       :host {
         display: block;
       }
-      @warp-css
+      @warp-css;
     `,
   ];
 

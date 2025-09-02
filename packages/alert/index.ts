@@ -70,7 +70,7 @@ class WarpAlert extends LitElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @warp-css
+      @warp-css;
     `,
   ];
 
