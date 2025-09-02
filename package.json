@@ -20,7 +20,8 @@
     "./components/select": "./dist/packages/select/index.js",
     "./components/textfield": "./dist/packages/textfield/index.js",
     "./components/toast": "./dist/packages/toast/index.js",
-    "./toast": "./dist/api.js"
+    "./toast": "./dist/api.js",
+    "./custom-elements.json": "./dist/custom-elements.json"
   },
   "module": "dist/index.js",
   "files": [
@@ -31,7 +32,8 @@
     "build:docs": "lingui compile && vite build",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
-    "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:npm && pnpm build:eik",
+    "build:manifest": "cem analyze --config cem/config.js",
+    "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",
     "lint:check": "eslint .",
@@ -56,6 +58,7 @@
   },
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
+    "@custom-elements-manifest/analyzer": "^0.10.5",
     "@eik/cli": "2.0.38",
     "@eik/esbuild-plugin": "1.1.47",
     "@eslint/js": "9.16.0",
@@ -117,5 +120,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "customElements": "dist/custom-elements.json"
 }
