@@ -1,33 +1,32 @@
-import { css, html, nothing } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { box as ccBox } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
-class WarpBox extends WarpElement {
-  static properties = {
-    bleed: { type: Boolean },
-    bordered: { type: Boolean },
-    info: { type: Boolean },
-    neutral: { type: Boolean },
-    role: { type: String },
-  };
+import { components, reset } from '../styles';
+
+class WarpBox extends LitElement {
+  @property({ type: Boolean, reflect: true })
+  bleed: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  bordered: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  info: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  neutral: boolean;
+
+  @property({ type: String, reflect: true })
+  role: string;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [
-    WarpElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      ::slotted(:last-child) {
-        margin-bottom: 0 !important;
-      }
-    `,
-  ];
+  static styles = [reset, components];
 
   get _class() {
     return classNames([
