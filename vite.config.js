@@ -116,6 +116,11 @@ export default ({ mode }) => {
             injectOptions,
           },
           {
+            filename: 'deadtoggle.html',
+            template: 'pages/components/deadtoggle.html',
+            injectOptions,
+          },
+          {
             filename: 'modal.html',
             template: 'pages/components/modal.html',
             injectOptions,

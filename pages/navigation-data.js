@@ -30,6 +30,10 @@ export default {
       title: 'Forms',
       items: [
         {
+          title: 'Dead toggle',
+          href: '/pages/components/deadtoggle.html',
+        },
+        {
           title: 'Select',
           href: '/pages/components/select.html',
         },
