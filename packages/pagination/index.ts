@@ -1,36 +1,41 @@
-import { html, LitElement, nothing } from "lit";
-import { property } from "lit/decorators.js";
-import { components, reset } from "../styles.js";
-import "@warp-ds/icons/elements/chevron-double-left-16";
-import "@warp-ds/icons/elements/chevron-left-16";
-import "@warp-ds/icons/elements/chevron-right-16";
-import { activateI18n } from "../i18n.js";
+import { html, LitElement, nothing } from 'lit';
 
-import { messages as daMessages } from "./locales/da/messages.mjs";
-import { messages as enMessages } from "./locales/en/messages.mjs";
-import { messages as fiMessages } from "./locales/fi/messages.mjs";
-import { messages as nbMessages } from "./locales/nb/messages.mjs";
-import { messages as svMessages } from "./locales/sv/messages.mjs";
-import { i18n } from "@lingui/core";
+import { i18n } from '@lingui/core';
+import { property } from 'lit/decorators.js';
+
+import '@warp-ds/icons/elements/chevron-double-left-16';
+import '@warp-ds/icons/elements/chevron-left-16';
+import '@warp-ds/icons/elements/chevron-right-16';
+import { activateI18n } from '../i18n.js';
+import { components, reset } from '../styles.js';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 
 const iconSuffix = i18n._({
-  id: "pagination.aria.icon-suffix",
-  message: "icon",
+  id: 'pagination.aria.icon-suffix',
+  message: 'icon',
   comment:
-    "Suffix added at the end of icon titles when img semantics are lost on an html element",
+    'Suffix added at the end of icon titles when img semantics are lost on an html element',
 });
 
 const baseItemStyles =
-  "hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding";
+  'hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding';
 
 class WarpPagination extends LitElement {
-  @property({ type: Array, reflect: true })
-  pages: Array<string>;
+  @property({ type: String, reflect: true, attribute: 'base-url' })
+  baseUrl: string;
 
-  @property({ type: Number, reflect: true, attribute: "current-page" })
+  @property({ type: Number, reflect: true })
+  pages: number;
+
+  @property({ type: Number, reflect: true, attribute: 'current-page' })
   currentPageNumber = 1;
 
-  @property({ type: Number, reflect: true, attribute: "visible-pages" })
+  @property({ type: Number, reflect: true, attribute: 'visible-pages' })
   visiblePages = 7;
 
   static styles = [reset, components];
@@ -49,7 +54,7 @@ class WarpPagination extends LitElement {
   }
 
   get shouldShowNextPageButton() {
-    return this.currentPageNumber < this.pages.length;
+    return this.currentPageNumber < this.pages;
   }
 
   get currentPageIndex() {
@@ -57,13 +62,17 @@ class WarpPagination extends LitElement {
   }
 
   render() {
+    const pageUrls = new Array(this.pages).fill('').map((_v, i) => {
+      return `${this.baseUrl}${i}`;
+    });
+
     return html`<nav class="flex items-center justify-center p-8">
       <h1 class="sr-only">
         ${i18n._({
-          id: "pagination.aria.pagination",
-          message: "Pages",
+          id: 'pagination.aria.pagination',
+          message: 'Pages',
           comment:
-            "Default screenreader message for pagination container in the pagination component",
+            'Default screenreader message for pagination container in the pagination component',
         })}
       </h1>
       <div class="hidden md:block s-text-link">
@@ -71,14 +80,14 @@ class WarpPagination extends LitElement {
           ? html`<a
               href="${this.pages[0]}"
               class="${baseItemStyles +
-              " s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"}"
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
             >
               <span class="sr-only"
                 >${i18n._({
-                  id: "pagination.aria.first-page",
-                  message: "First page",
+                  id: 'pagination.aria.first-page',
+                  message: 'First page',
                   comment:
-                    "Default screenreader message for first page link in the pagination component",
+                    'Default screenreader message for first page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-double-left-16></w-icon-chevron-double-left-16>
@@ -89,36 +98,36 @@ class WarpPagination extends LitElement {
           ? html`<a
               href="${this.pages[this.currentPageIndex - 1]}"
               class="${baseItemStyles +
-              " s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"}"
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
             >
               <span class="sr-only"
                 >${i18n._({
-                  id: "pagination.aria.prev-page",
-                  message: "Previous page",
+                  id: 'pagination.aria.prev-page',
+                  message: 'Previous page',
                   comment:
-                    "Default screenreader message for previous page link in the pagination component",
+                    'Default screenreader message for previous page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-left-16></w-icon-chevron-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
           : nothing}
-        ${this.pages.map((page, pageIndex) => {
+        ${pageUrls.map((url, pageIndex) => {
           const isCurrentPage = pageIndex === this.currentPageIndex;
 
           let styles = baseItemStyles;
 
           if (isCurrentPage) {
-            styles += " s-bg-primary s-text-inverted";
+            styles += ' s-bg-primary s-text-inverted';
           } else {
             styles +=
-              " hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]";
+              ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
           }
 
           return html`<a
-            href="${page}"
+            href="${url}"
             class="${styles}"
-            aria-current="${isCurrentPage ? "page" : ""}"
+            aria-current="${isCurrentPage ? 'page' : ''}"
             >${pageIndex + 1}</a
           >`;
         })}
@@ -126,14 +135,14 @@ class WarpPagination extends LitElement {
           ? html`<a
               href="${this.pages[this.currentPageIndex + 1]}"
               class="${baseItemStyles +
-              " s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"}"
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
             >
               <span class="sr-only">
                 ${i18n._({
-                  id: "pagination.aria.next-page",
-                  message: "Next page",
+                  id: 'pagination.aria.next-page',
+                  message: 'Next page',
                   comment:
-                    "Default screenreader message for next page link in the pagination component",
+                    'Default screenreader message for next page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-right-16></w-icon-chevron-right-16>
@@ -145,8 +154,8 @@ class WarpPagination extends LitElement {
   }
 }
 
-if (!customElements.get("w-pagination")) {
-  customElements.define("w-pagination", WarpPagination);
+if (!customElements.get('w-pagination')) {
+  customElements.define('w-pagination', WarpPagination);
 }
 
 export { WarpPagination };
