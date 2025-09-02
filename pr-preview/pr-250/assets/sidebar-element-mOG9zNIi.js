@@ -2568,7 +2568,7 @@ negative, positive, warning, info.`)}get _wrapperClasses(){return I([gt.wrapper,
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @warp-css
+      @warp-css;
     `]}get _icon(){return this.variant===mt.info?w` <w-icon-info-16></w-icon-info-16>`:this.variant===mt.warning?w` <w-icon-warning-16></w-icon-warning-16>`:this.variant===mt.negative?w` <w-icon-error-16></w-icon-error-16>`:this.variant===mt.positive?w` <w-icon-success-16></w-icon-success-16>`:""}render(){return w`
       <w-expand-transition ?show=${this.show}>
         <div role=${this.role} class=${this._wrapperClasses}>
@@ -2656,7 +2656,7 @@ ${Go.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       :host {
         display: block;
       }
-      @warp-css
+      @warp-css;
     `]}get _containerClasses(){return I([be.base,this.flat?be.flat:be.shadow,this.selected&&!this.flat&&be.selected,this.selected&&this.flat?be.flatSelected:be.flatUnselected])}get _outlineClasses(){return I([be.outline,this.selected?be.outlineSelected:be.outlineUnselected])}get _interactiveElement(){const e=()=>w`<button class="${be.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`,r=()=>w`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;return this.clickable?e():this.selected?r():""}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===Zo.ENTER||e.key===Zo.SPACE)&&(e.preventDefault(),this.click())}render(){return w`
       <div tabindex=${J(this.clickable?"0":void 0)} class="${this._containerClasses}" @keydown=${this.keypressed}>
         ${this._interactiveElement} ${this.flat?"":w`<div class="${this._outlineClasses}"></div>`}
@@ -2669,7 +2669,7 @@ ${Go.join(", ")}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @warp-css
+      @warp-css;
     `]}updated(e){e.has("expanded")&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){const e=!!this.title,r=this.renderRoot.querySelector("slot[name='title']")?.assignedNodes().length>0;this._hasTitle=e||r}get#e(){return I([ee.wrapper,this.box&&ee.box,this.bleed&&ee.bleed])}get#t(){return I(this.buttonClass,[ee.button,this.box&&ee.buttonBox])}get#i(){return I([ee.chevron,!this.box&&ee.chevronNonBox])}get#r(){const e=I([ee.elementsChevronUpTransform,!this.expanded&&this._showChevronUp&&ee.elementsChevronCollapse]),r=I([ee.elementsChevronDownTransform,this.expanded&&!this._showChevronUp&&ee.elementsChevronExpand]);return this._showChevronUp?w`<w-icon-chevron-up-16 class="${e}"></w-icon-chevron-up-16>`:w`<w-icon-chevron-down-16 class="${r}"></w-icon-chevron-down-16>`}get#o(){return I(this.contentClass,[this.box&&tt.base,this._hasTitle&&this.box&&ee.contentWithTitle])}get#n(){return I([ee.expansion,!this.expanded&&ee.expansionNotExpanded])}get _expandableSlot(){return w`<div class="${this.#o}">
       <slot></slot>
     </div>`}render(){return w` <div class="${this.#e}">
