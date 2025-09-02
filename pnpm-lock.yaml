@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  vitest-browser-lit:
+    hash: 8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1
+    path: patches/vitest-browser-lit.patch
+
 importers:
 
   .:
@@ -14,6 +19,9 @@ importers:
       '@open-wc/form-control':
         specifier: ^1.0.0
         version: 1.0.0
+      '@vitest/browser':
+        specifier: ^3.2.4
+        version: 3.2.4(playwright@1.55.0)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.43.1))(vitest@3.2.4)
       '@warp-ds/core':
         specifier: 1.1.8
         version: 1.1.8(@floating-ui/dom@1.6.13)
@@ -140,7 +148,7 @@ importers:
         version: 3.2.4(@types/node@20.14.10)(@vitest/browser@3.2.4)(lightningcss@1.30.1)(terser@5.43.1)
       vitest-browser-lit:
         specifier: ^0.1.0
-        version: 0.1.0(@vitest/browser@3.2.4)(lit@3.3.1)(vitest@3.2.4)
+        version: 0.1.0(patch_hash=8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1)(@vitest/browser@3.2.4)(lit@3.3.1)(vitest@3.2.4)
 
 packages:
 
@@ -9759,7 +9767,7 @@ snapshots:
       lightningcss: 1.30.1
       terser: 5.43.1
 
-  vitest-browser-lit@0.1.0(@vitest/browser@3.2.4)(lit@3.3.1)(vitest@3.2.4):
+  vitest-browser-lit@0.1.0(patch_hash=8b3b5312440278f7beddb8f84e004f782cd98c94fc82bf4b0ef6e626d5124fd1)(@vitest/browser@3.2.4)(lit@3.3.1)(vitest@3.2.4):
     dependencies:
       '@vitest/browser': 3.2.4(playwright@1.55.0)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.43.1))(vitest@3.2.4)
       lit: 3.3.1
