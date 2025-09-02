@@ -7,7 +7,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
 
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 
 class WarpExpandable extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -49,7 +49,6 @@ class WarpExpandable extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [
     reset,
-    components,
     css`
       :host {
         display: block;
@@ -57,6 +56,7 @@ class WarpExpandable extends LitElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
+      @warp-css
     `,
   ];
 

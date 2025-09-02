@@ -7,7 +7,7 @@ import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n.js';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -23,7 +23,6 @@ const keys = {
 class WarpCard extends LitElement {
   static styles = [
     reset,
-    components,
     css`
       a::after {
         content: '';
@@ -36,6 +35,7 @@ class WarpCard extends LitElement {
       :host {
         display: block;
       }
+      @warp-css
     `,
   ];
 

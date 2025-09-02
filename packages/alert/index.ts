@@ -8,7 +8,7 @@ import '@warp-ds/icons/elements/info-16';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 
 type AlertVariants = 'negative' | 'positive' | 'warning' | 'info';
 
@@ -23,7 +23,7 @@ class WarpAlert extends LitElement {
   @property({ reflect: true })
   variant: AlertVariants = 'info';
 
-  @property({ reflect: true })
+  @property({ type: Boolean, reflect: true })
   show: boolean = true;
 
   @property({ reflect: true })
@@ -58,7 +58,6 @@ class WarpAlert extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [
     reset,
-    components,
     css`
       :host {
         display: block;
@@ -71,6 +70,7 @@ class WarpAlert extends LitElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
+      @warp-css
     `,
   ];
 
