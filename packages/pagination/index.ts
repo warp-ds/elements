@@ -134,7 +134,16 @@ class WarpPagination extends LitElement {
             styles += ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
           }
 
-          return html`<a href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}">${pageNumber}</a>`;
+          const ariaLabel = i18n._({
+            id: 'pagination.aria.page',
+            message: 'Page {currentPage}',
+            values: { currentPage: pageNumber },
+            comment: 'Default screenreader message for page link in the pagination component',
+          });
+
+          return html`<a aria-label="${ariaLabel}" href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}"
+            >${pageNumber}</a
+          >`;
         })}
         ${this.shouldShowNextPageButton
           ? html`<a
