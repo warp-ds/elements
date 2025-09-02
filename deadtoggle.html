@@ -259,177 +259,101 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-CcsVT6LD.js"></script>
-  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-BwRplTYa.css">
+  <script type="module" crossorigin src="/elements/assets/deadtoggle-BCPdglCh.js"></script>
+  <link rel="modulepreload" crossorigin href="/elements/assets/sidebar-element-BDaYY5_2.js">
+  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-BVmthQBT.css">
 </head>
   <body>
     <div class="flex">
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
-        <h1 class="mb-16">Box</h1>
-        <p>Box is a layout component used for separating content areas on a page.</p>
+        <h1 class="mb-16">Dead toggle</h1>
+        <p>Dead toggle can be used where the appearance of a checkbox or radio is needed - but for accessibility purposes an actual <code>input</code> element should not be present.</p>
+        <p>Typically this happens in a component like a Card, where the whole card should behave as a checkbox and be clickable - but the representation of a checkbox-UI is part of the card</p>
+        <p>For more examples see the <a href="https://warp-ds.github.io/docs/components/card/">Warp Card documentation</a></p>
 
         <h2 class="mt-24 mb-16">Props</h2>
         <table class="w-full docs-table">
-          <thead>
-            <tr class="text-left text-gray-400 uppercase">
-              <th>prop</th>
-              <th>type</th>
-              <th>default</th>
-            </tr>
-          </thead>
-          <tbody class="align-top">
-            <tr>
-              <td>bleed</td>
-              <td>
-                <div>boolean</div>
-                <div class="annotation">Will make a box full-width on mobile</div>
-              </td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>bordered</td>
-              <td>boolean</td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>info</td>
-              <td>
-                <div>boolean</div>
-                <div class="annotation">Will style the box with light blue colors</div>
-              </td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>neutral</td>
-              <td>
-                <div>boolean</div>
-                <div class="annotation">Will style the box with light gray colors</div>
-              </td>
-              <td>false</td>
-            </tr>
-            <tr>
-              <td>role</td>
-              <td>
-                <div>string</div>
-                <div class="annotation">
-                  Sets the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
-                  To remove the default role attribute, supply an empty role (<code>role=""</code>).
-                </div>
-              </td>
-              <td>region</td>
-            </tr>
-          </tbody>
-        </table>
+        <thead>
+          <tr class="text-left text-gray-400 uppercase">
+            <th>prop</th>
+            <th>type</th>
+            <th>default</th>
+          </tr>
+        </thead>
+        <tbody class="align-top">
+          <tr>
+            <td>type</td>
+            <td>
+              <div>string</div>
+              <div class="annotation">Can be 'radio' or 'checkbox'</div>
+            </td>
+            <td>'radio'</td>
+          </tr>
+          <tr>
+            <td>checked</td>
+            <td>
+              <div>boolean</div>
+              <div class="annotation">
+                Changes the appearance of the radio/checkbox to 'checked'.
+              </div>
+            </td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>invalid</td>
+            <td>
+              <div>boolean</div>
+              <div class="annotation">
+                Changes the appearance of the radio/checkbox to 'invalid'.
+              </div>
+            </td>
+            <td>false</td>
+          </tr>
+        </tbody>
+         </table>
 
         <h2 class="mt-24 mb-16">Visual Options</h2>
 
+        <h3 class="mt-24 mb-16">Radio</h3>
         <syntax-highlight>
-          <w-box>
-            <h3>I have default styles</h3>
-          </w-box>
+          <w-dead-toggle type="radio"></w-dead-toggle>
+          <w-dead-toggle type="radio" checked></w-dead-toggle>
+          <w-dead-toggle type="radio" invalid></w-dead-toggle>
+          <w-dead-toggle type="radio" invalid checked></w-dead-toggle>
         </syntax-highlight>
-        <div class="example">
-          <w-box role="region">
-            <h3>I have default styles</h3>
-          </w-box>
+        <div class="example flex gap-8 items-center">
+          <w-dead-toggle type="radio"></w-dead-toggle>
+          <w-dead-toggle type="radio" checked></w-dead-toggle>
+          <w-dead-toggle type="radio" invalid></w-dead-toggle>
+          <w-dead-toggle type="radio" invalid checked></w-dead-toggle>
+          <w-dead-toggle type="radio" id="toggleableRadio"></w-dead-toggle>
+          <w-button id="toggleRadio" variant="utility" small class="ml-auto">Click me to toggle the last radio</w-button>
         </div>
 
+        <h3 class="mt-24 mb-16">Checkbox</h3>
         <syntax-highlight>
-          <w-box info>
-            <h3>I am an info box</h3>
-          </w-box>
+          <w-dead-toggle type="checkbox"></w-dead-toggle>
+          <w-dead-toggle type="checkbox" indeterminate></w-dead-toggle>
+          <w-dead-toggle type="checkbox" checked></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid indeterminate></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid checked></w-dead-toggle>
         </syntax-highlight>
-        <div class="example">
-          <w-box info>
-            <h3>I am an info box</h3>
-          </w-box>
-        </div>
-
-        <syntax-highlight>
-          <w-box bordered>
-            <h3>I am a bordered box</h3>
-          </w-box>
-        </syntax-highlight>
-        <div class="example">
-          <w-box bordered>
-            <h3>I am a bordered box</h3>
-          </w-box>
-        </div>
-
-        <syntax-highlight>
-          <w-box neutral>
-            <h3>I am a neutral colour</h3>
-          </w-box>
-        </syntax-highlight>
-        <div class="example">
-          <w-box neutral>
-            <h3>I am a neutral colour</h3>
-          </w-box>
-        </div>
-
-        <syntax-highlight>
-          <w-box neutral bleed>
-            <h3>I am full width on mobile</h3>
-          </w-box>
-        </syntax-highlight>
-        <div class="example">
-          <w-box neutral bleed>
-            <h3>I am full width on mobile</h3>
-          </w-box>
-        </div>
-
-        <syntax-highlight>
-          <w-box info class="w-full lg:w-2/4 md:w-2/4">
-            <h3 class="mb-16">Info box</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
-            </p>
-            <div class="my-16">
-              <a title="This is a link">This is a link</a>
-            </div>
-            <w-button small onclick="alert('clicked!');">Button</w-button>
-          </w-box>
-        </syntax-highlight>
-        <div class="example">
-          <w-box info class="w-full lg:w-2/4 md:w-2/4">
-            <h3 class="mb-16">Info box</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada dui in commodo dapibus.
-            </p>
-            <div class="my-16">
-              <a title="This is a link">This is a link</a>
-            </div>
-            <w-button small onclick="alert('clicked!');">Button</w-button>
-          </w-box>
-        </div>
-        <h2 class="mt-24 mb-16">Accessibility</h2>
-        <p>
-          Use the ARIA <code>role</code> attribute to provide semantic meaning to a box element.
-          If no role property is supplied, it will default to <code>role="region"</code>.
-          To remove the default role attribute, supply an empty role (<code>role=""</code>).
-          Consider using more suitable roles for your specific Box, as described on
-          <a
-            target="_blank"
-            title="Read more about ARIA role types on MDN"
-            class="text-current hover:no-underline focus:no-underline"
-            href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles#aria_role_types"
-            ><u>MDN WAI-ARIA Roles</u></a
-          >.
-        </p>
-
-        <syntax-highlight>
-          <w-box bordered role="region">
-            <h3>I am treated as a section element by screen readers and other tools</h3>
-          </w-box>
-        </syntax-highlight>
-        <div class="example">
-          <w-box bordered role="region">
-            <h3>I am treated as a section element by screen readers and other tools</h3>
-          </w-box>
+        <div class="example flex gap-8 items-center">
+          <w-dead-toggle type="checkbox"></w-dead-toggle>
+          <w-dead-toggle type="checkbox" indeterminate></w-dead-toggle>
+          <w-dead-toggle type="checkbox" checked></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid indeterminate></w-dead-toggle>
+          <w-dead-toggle type="checkbox" invalid checked></w-dead-toggle>
+          <w-dead-toggle type="checkbox" id="toggleableCheckbox"></w-dead-toggle>
+          <w-button id="toggleCheckbox" variant="utility" small class="ml-auto">Click me to toggle the last checkbox</w-button>
         </div>
       </main>
     </div>
+    <script>
+    </script>
       <script data-for="footer" type="application/json">
   {
     "github": {
@@ -442,6 +366,6 @@
     }
   }
 </script>
-
   </body>
 </html>
+
