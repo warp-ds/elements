@@ -3,6 +3,8 @@ import { css, html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { setup as setupScrollLock, teardown as teardownScrollLock } from 'scroll-doctor';
 
+import { reset } from '../styles.js';
+
 import { ProvidesCanCloseToSlotsMixin } from './util.js';
 
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
@@ -101,6 +103,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   }
 
   static styles = [
+    reset,
     css`
       .dialog-el {
         --w-modal-translate-distance: 100%;
