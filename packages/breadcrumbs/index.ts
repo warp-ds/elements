@@ -17,7 +17,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 class WarpBreadcrumbs extends LitElement {
-  @property({ type: String })
+  @property({ attribute: 'aria-label', type: String })
   ariaLabel;
 
   static styles = [reset, components];
