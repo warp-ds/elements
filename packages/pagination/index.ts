@@ -89,7 +89,7 @@ class WarpPagination extends LitElement {
           comment: 'Default screenreader message for pagination container in the pagination component',
         })}
       </h1>
-      <div class="hidden md:block s-text-link">
+      <div class="md:block s-text-link">
         ${this.shouldShowShowFirstPageButton
           ? html`<a
               href="${this.baseUrl}1"
