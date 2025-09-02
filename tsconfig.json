@@ -1,5 +1,5 @@
 {
-  "include": ["packages", "index.js"],
+  "include": ["packages", "index.js", "setup-tests.ts"],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
