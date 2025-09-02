@@ -18,8 +18,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 const iconSuffix = i18n._({
   id: 'pagination.aria.icon-suffix',
   message: 'icon',
-  comment:
-    'Suffix added at the end of icon titles when img semantics are lost on an html element',
+  comment: 'Suffix added at the end of icon titles when img semantics are lost on an html element',
 });
 
 const baseItemStyles =
@@ -71,8 +70,7 @@ class WarpPagination extends LitElement {
         ${i18n._({
           id: 'pagination.aria.pagination',
           message: 'Pages',
-          comment:
-            'Default screenreader message for pagination container in the pagination component',
+          comment: 'Default screenreader message for pagination container in the pagination component',
         })}
       </h1>
       <div class="hidden md:block s-text-link">
@@ -80,14 +78,12 @@ class WarpPagination extends LitElement {
           ? html`<a
               href="${this.pages[0]}"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
-            >
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
                 >${i18n._({
                   id: 'pagination.aria.first-page',
                   message: 'First page',
-                  comment:
-                    'Default screenreader message for first page link in the pagination component',
+                  comment: 'Default screenreader message for first page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-double-left-16></w-icon-chevron-double-left-16>
@@ -98,14 +94,12 @@ class WarpPagination extends LitElement {
           ? html`<a
               href="${this.pages[this.currentPageIndex - 1]}"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
-            >
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
                 >${i18n._({
                   id: 'pagination.aria.prev-page',
                   message: 'Previous page',
-                  comment:
-                    'Default screenreader message for previous page link in the pagination component',
+                  comment: 'Default screenreader message for previous page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-left-16></w-icon-chevron-left-16>
@@ -120,29 +114,21 @@ class WarpPagination extends LitElement {
           if (isCurrentPage) {
             styles += ' s-bg-primary s-text-inverted';
           } else {
-            styles +=
-              ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
+            styles += ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
           }
 
-          return html`<a
-            href="${url}"
-            class="${styles}"
-            aria-current="${isCurrentPage ? 'page' : ''}"
-            >${pageIndex + 1}</a
-          >`;
+          return html`<a href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}">${pageIndex + 1}</a>`;
         })}
         ${this.shouldShowNextPageButton
           ? html`<a
               href="${this.pages[this.currentPageIndex + 1]}"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}"
-            >
+              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only">
                 ${i18n._({
                   id: 'pagination.aria.next-page',
                   message: 'Next page',
-                  comment:
-                    'Default screenreader message for next page link in the pagination component',
+                  comment: 'Default screenreader message for next page link in the pagination component',
                 })},</span
               >
               <w-icon-chevron-right-16></w-icon-chevron-right-16>
