@@ -60,10 +60,26 @@ class WarpPagination extends LitElement {
     return this.currentPageNumber - 1;
   }
 
+  get visiblePageNumbers() {
+    if (this.pages <= this.visiblePages) {
+      // Show all pages if total pages is less than or equal to visible pages
+      return Array.from({ length: this.pages }, (_, i) => i + 1);
+    }
+
+    const half = Math.floor(this.visiblePages / 2);
+    let start = Math.max(1, this.currentPageNumber - half);
+    const end = Math.min(this.pages, start + this.visiblePages - 1);
+
+    // Adjust start if we're near the end
+    if (end - start + 1 < this.visiblePages) {
+      start = Math.max(1, end - this.visiblePages + 1);
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  }
+
   render() {
-    const pageUrls = new Array(this.pages).fill('').map((_v, i) => {
-      return `${this.baseUrl}${i}`;
-    });
+    const visiblePages = this.visiblePageNumbers;
 
     return html`<nav class="flex items-center justify-center p-8">
       <h1 class="sr-only">
@@ -76,7 +92,7 @@ class WarpPagination extends LitElement {
       <div class="hidden md:block s-text-link">
         ${this.shouldShowShowFirstPageButton
           ? html`<a
-              href="${this.pages[0]}"
+              href="${this.baseUrl}1"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
@@ -92,7 +108,7 @@ class WarpPagination extends LitElement {
           : nothing}
         ${this.shouldShowPreviousPageButton
           ? html`<a
-              href="${this.pages[this.currentPageIndex - 1]}"
+              href="${this.baseUrl}${this.currentPageNumber - 1}"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
@@ -106,8 +122,9 @@ class WarpPagination extends LitElement {
               <span class="sr-only">${iconSuffix}</span>
             </a>`
           : nothing}
-        ${pageUrls.map((url, pageIndex) => {
-          const isCurrentPage = pageIndex === this.currentPageIndex;
+        ${visiblePages.map((pageNumber) => {
+          const isCurrentPage = pageNumber === this.currentPageNumber;
+          const url = `${this.baseUrl}${pageNumber}`;
 
           let styles = baseItemStyles;
 
@@ -117,11 +134,11 @@ class WarpPagination extends LitElement {
             styles += ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
           }
 
-          return html`<a href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}">${pageIndex + 1}</a>`;
+          return html`<a href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}">${pageNumber}</a>`;
         })}
         ${this.shouldShowNextPageButton
           ? html`<a
-              href="${this.pages[this.currentPageIndex + 1]}"
+              href="${this.baseUrl}${this.currentPageNumber + 1}"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only">
