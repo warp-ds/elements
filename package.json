@@ -33,6 +33,7 @@
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
     "build:manifest": "cem analyze --config cem/config.js",
+    "build:styles": "node build.js styles",
     "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",

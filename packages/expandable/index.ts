@@ -1,13 +1,51 @@
+// @warp-css;
+
 import { css, html, LitElement, PropertyValues } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
-import { box as ccBox, expandable as ccExpandable } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
 
 import { reset } from '../styles.js';
+
+import { styles } from './styles.js';
+
+export const ccBox = {
+  base: 'group block relative break-words last-child:mb-0 p-16 rounded-8', // Relative here enables w-clickable
+  bleed: '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8', // We target L and R to override the default rounded-8
+  info: 's-bg-info-subtle',
+  neutral: 's-surface-sunken',
+  bordered: 'border-2 s-border s-bg',
+};
+
+export const ccExpandable = {
+  wrapper: 'will-change-height s-text',
+  box: 's-surface-sunken hover:s-bg-hover active:s-bg-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
+  bleed: '-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8',
+  chevron: 'inline-block align-middle s-icon',
+  chevronNonBox: 'ml-8',
+  chevronTransform: 'transform transition-transform transform-gpu ease-in-out',
+  chevronExpand: '-rotate-180',
+  chevronCollapse: 'rotate-180',
+
+  // These are web component specific classes, using the ::part-selector:
+  elementsChevronDownTransform:
+    'part-[w-icon-chevron-down-16-part]:transform part-[w-icon-chevron-down-16-part]:transition-transform part-[w-icon-chevron-down-16-part]:transform-gpu part-[w-icon-chevron-down-16-part]:ease-in-out',
+  elementsChevronUpTransform:
+    'part-[w-icon-chevron-up-16-part]:transform part-[w-icon-chevron-up-16-part]:transition-transform part-[w-icon-chevron-up-16-part]:transform-gpu part-[w-icon-chevron-up-16-part]:ease-in-out',
+  elementsChevronExpand: 'part-[w-icon-chevron-down-16-part]:-rotate-180',
+  elementsChevronCollapse: 'part-[w-icon-chevron-up-16-part]:rotate-180',
+
+  expansion: 'overflow-hidden',
+  expansionNotExpanded: 'h-0 invisible',
+  button: 'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline',
+  buttonBox: 'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 p-16 rounded-8',
+  contentWithTitle: 'pt-0',
+  title: 'flex w-full justify-between items-center',
+  titleType: 't4',
+};
 
 class WarpExpandable extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -49,6 +87,7 @@ class WarpExpandable extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [
     reset,
+    styles,
     css`
       :host {
         display: block;
@@ -56,7 +95,6 @@ class WarpExpandable extends LitElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @warp-css;
     `,
   ];
 

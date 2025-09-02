@@ -1,12 +1,11 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-
 import { createGenerator } from '@unocss/core';
 import { presetWarp } from '@warp-ds/uno';
 import * as lightning from 'lightningcss';
 
 const uno = await createGenerator({
-  presets: [presetWarp({ skipResets: true })],
+  presets: [presetWarp({ skipResets: true, externalizeClasses: false })],
   safelist: [],
 });
 
@@ -55,8 +54,12 @@ export const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = 
         const { ext } = path.parse(args.path);
         let contents = await readFile(args.path, 'utf8');
         if (contents.includes(placeholder)) {
-          const css = await buildCSS(placeholder, { minify });
-          contents = contents.replace(placeholder, css);
+          const css = await buildCSS(contents, { minify });
+          await writeFile(
+            path.dirname(args.path) + '/styles.ts',
+            `import { css } from 'lit'; export const styles = css\`${css}\`;
+          `,
+          );
         }
         return {
           contents,

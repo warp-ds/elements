@@ -1,7 +1,8 @@
+// @warp-css;
+
 import { css, html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
-import { alert as ccAlert } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/info-16';
@@ -9,6 +10,24 @@ import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
 import { reset } from '../styles.js';
+
+import { styles } from './styles.js';
+
+const ccAlert = {
+  wrapper: 'flex p-16 border border-l-4 rounded-4 s-text',
+  willChangeHeight: 'will-change-height',
+  textWrapper: 'last-child:mb-0 text-s',
+  title: 'text-s',
+  icon: 'w-16 mr-8 min-w-16',
+  negative: 's-border-negative-subtle s-border-l-negative s-bg-negative-subtle',
+  negativeIcon: 's-icon-negative',
+  positive: 's-border-positive-subtle s-border-l-positive s-bg-positive-subtle',
+  positiveIcon: 's-icon-positive',
+  warning: 's-border-warning-subtle s-border-l-warning s-bg-warning-subtle',
+  warningIcon: 's-icon-warning',
+  info: 's-border-info-subtle s-border-l-info s-bg-info-subtle',
+  infoIcon: 's-icon-info',
+};
 
 type AlertVariants = 'negative' | 'positive' | 'warning' | 'info';
 
@@ -58,6 +77,7 @@ class WarpAlert extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [
     reset,
+    styles,
     css`
       :host {
         display: block;
@@ -70,7 +90,6 @@ class WarpAlert extends LitElement {
       ::slotted(:last-child) {
         margin-bottom: 0px !important;
       }
-      @warp-css;
     `,
   ];
 

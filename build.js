@@ -71,11 +71,14 @@ console.log('Building elements for: ', version);
 
 if (version === 'eik') {
   await eik.load();
-  buildComponents('eik', { plugins: [eik.plugin(), stylePlugin()] });
-  buildToastApi('eik', { plugins: [eik.plugin(), stylePlugin()] });
-  buildIndex('eik', { plugins: [eik.plugin(), stylePlugin()] });
-} else {
-  buildComponents('dist', { plugins: [stylePlugin()] });
-  buildToastApi('dist', { plugins: [stylePlugin()] });
+  buildComponents('eik', { plugins: [eik.plugin()] });
+  buildToastApi('eik', { plugins: [eik.plugin()] });
+  buildIndex('eik', { plugins: [eik.plugin()] });
+} else if (version === 'styles') {
+  console.log('Building styles: remember to commit changes');
   buildIndex('dist', { plugins: [stylePlugin()] });
+} else {
+  buildComponents('dist');
+  buildToastApi('dist');
+  buildIndex('dist');
 }
