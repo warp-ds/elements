@@ -6,5 +6,7 @@ site/
 eik
 .tap
 __screenshots__
+test-results
+
 # # i18n related files
 packages/*/locales/*/*.mjs

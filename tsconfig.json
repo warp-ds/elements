@@ -2,7 +2,7 @@
   "include": ["packages", "index.js", "setup-tests.ts"],
   "compilerOptions": {
     "target": "ES2022",
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "useDefineForClassFields": false,
     "module": "ESNext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
