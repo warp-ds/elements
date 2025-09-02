@@ -2,14 +2,11 @@ import { LitElement, html, PropertyValues } from 'lit';
 
 import { classNames as classnames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import {
-  input as ccinput,
-  label as ccLabel,
-  helpText as ccHelpText,
-} from '@warp-ds/css/component-classes';
+import { input as ccinput, label as ccLabel, helpText as ccHelpText } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+
 import { components, reset } from '../styles.js';
 
 class WarpTextField extends FormControlMixin(LitElement) {
@@ -103,17 +100,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
   }
 
   get _helptextstyles() {
-    return classnames([
-      ccHelpText.base,
-      this.invalid ? ccHelpText.colorInvalid : ccHelpText.color,
-    ]);
+    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
   }
 
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${ccLabel.base}
-        >${this.label}</label
-      >`;
+      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
     }
     return undefined;
   }
@@ -146,15 +138,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
   }
 
   prefixSlotChange() {
-    const el: HTMLSlotElement =
-      this.renderRoot.querySelector('slot[name=prefix]');
+    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=prefix]');
     const affixes = el.assignedElements();
     if (affixes.length) this._hasPrefix = true;
   }
 
   suffixSlotChange() {
-    const el: HTMLSlotElement =
-      this.renderRoot.querySelector('slot[name=suffix]');
+    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=suffix]');
     const affixes = el.assignedElements();
     if (affixes.length) this._hasSuffix = true;
   }
@@ -185,14 +175,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
           ?required="${this.required}"
           @blur="${this.handler}"
           @change="${this.handler}"
-          @focus="${this.handler}"
-        />
+          @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
-      ${this.helpText &&
-      html`<div class="${this._helptextstyles}" id="${this._helpId}">
-        ${this.helpText}
-      </div>`}
+      ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
     `;
   }
 }

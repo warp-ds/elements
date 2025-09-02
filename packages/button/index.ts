@@ -17,22 +17,9 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
-type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'negative'
-  | 'utility'
-  | 'pill'
-  | 'link';
+type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'utility' | 'pill' | 'link';
 
-const buttonVariants = [
-  'primary',
-  'secondary',
-  'negative',
-  'utility',
-  'pill',
-  'link',
-];
+const buttonVariants = ['primary', 'secondary', 'negative', 'utility', 'pill', 'link'];
 
 type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -105,9 +92,7 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
     super.connectedCallback();
 
     if (!buttonVariants.includes(this.variant)) {
-      throw new Error(
-        `Invalid "variant" attribute. Set its value to one of the following:\n${buttonVariants.join(', ')}.`,
-      );
+      throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${buttonVariants.join(', ')}.`);
     }
   }
 
@@ -122,15 +107,9 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.primary,
       this.small && !this.quiet && !this.loading && ccButton.primarySmall,
       this.small && this.quiet && !this.loading && ccButton.primarySmallQuiet,
-      this.small &&
-      this.loading &&
-      (this.quiet
-        ? ccButton.primarySmallQuietLoading
-        : ccButton.primarySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.primarySmallQuietLoading : ccButton.primarySmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.primaryQuiet,
-      !this.small &&
-      this.loading &&
-      (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.primaryQuietLoading : ccButton.primaryLoading),
     ];
   }
 
@@ -138,18 +117,10 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.secondary,
       this.small && !this.quiet && !this.loading && ccButton.secondarySmall,
-      this.small &&
-      this.loading &&
-      (this.quiet
-        ? ccButton.secondarySmallQuietLoading
-        : ccButton.secondarySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.secondarySmallQuietLoading : ccButton.secondarySmallLoading),
       this.small && this.quiet && !this.loading && ccButton.secondarySmallQuiet,
       !this.small && this.quiet && !this.loading && ccButton.secondaryQuiet,
-      !this.small &&
-      this.loading &&
-      (this.quiet
-        ? ccButton.secondaryQuietLoading
-        : ccButton.secondaryLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.secondaryQuietLoading : ccButton.secondaryLoading),
     ];
   }
 
@@ -158,15 +129,9 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.utility,
       this.small && !this.quiet && !this.loading && ccButton.utilitySmall,
       this.small && this.quiet && !this.loading && ccButton.utilitySmallQuiet,
-      this.small &&
-      this.loading &&
-      (this.quiet
-        ? ccButton.utilitySmallQuietLoading
-        : ccButton.utilitySmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.utilitySmallQuietLoading : ccButton.utilitySmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.utilityQuiet,
-      !this.small &&
-      this.loading &&
-      (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.utilityQuietLoading : ccButton.utilityLoading),
     ];
   }
 
@@ -175,23 +140,16 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
       !this.small && !this.quiet && !this.loading && ccButton.negative,
       this.small && !this.quiet && !this.loading && ccButton.negativeSmall,
       this.small && this.quiet && !this.loading && ccButton.negativeSmallQuiet,
-      this.small &&
-      this.loading &&
-      (this.quiet
-        ? ccButton.negativeSmallQuietLoading
-        : ccButton.negativeSmallLoading),
+      this.small && this.loading && (this.quiet ? ccButton.negativeSmallQuietLoading : ccButton.negativeSmallLoading),
       !this.small && this.quiet && !this.loading && ccButton.negativeQuiet,
-      !this.small &&
-      this.loading &&
-      (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
+      !this.small && this.loading && (this.quiet ? ccButton.negativeQuietLoading : ccButton.negativeLoading),
     ];
   }
 
   get _pillClasses() {
     return [
       !this.loading && (this.small ? ccButton.pillSmall : ccButton.pill),
-      this.loading &&
-      (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
+      this.loading && (this.small ? ccButton.pillSmallLoading : ccButton.pillLoading),
     ];
   }
 
@@ -222,25 +180,15 @@ class WarpButton extends FormControlMixin(kebabCaseAttributes(LitElement)) {
           href=${this.href}
           target=${this.target}
           rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
-          class=${this._classes}
-        >
+          class=${this._classes}>
           <slot></slot>
         </a>`
-      : html`<button
-          type=${this.type || 'button'}
-          class=${this._classes}
-          @click="${this._handleButtonClick}"
-        >
+      : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
         </button>`}
     ${this.loading
-        ? html`<span
-          class="sr-only"
-          role="progressbar"
-          aria-valuenow="{0}"
-          aria-valuetext=${this.ariaValueTextLoading}
-        ></span>`
-        : null}`;
+      ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
+      : null}`;
   }
 }
 
