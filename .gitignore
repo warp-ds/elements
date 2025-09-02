@@ -5,6 +5,6 @@ dist
 site/
 eik
 .tap
-
+__screenshots__
 # # i18n related files
 packages/*/locales/*/*.mjs

@@ -23,7 +23,7 @@ class WarpAlert extends LitElement {
   @property({ reflect: true })
   variant: AlertVariants = 'info';
 
-  @property({ reflect: true })
+  @property({ type: Boolean, reflect: true })
   show: boolean = true;
 
   @property({ reflect: true })
