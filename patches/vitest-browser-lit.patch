@@ -1,0 +1,62 @@
+diff --git a/dist/chunk-C44SADVH.js b/dist/chunk-C44SADVH.js
+index a5dc5f5a2542f9531e876b35a81b1ddc2712d2a0..a895ebeb6c544885b1248d6d40a51ffe526d9aed 100644
+--- a/dist/chunk-C44SADVH.js
++++ b/dist/chunk-C44SADVH.js
+@@ -1,24 +1,36 @@
+ // src/pure.ts
+-import { debug, getElementLocatorSelectors } from "@vitest/browser/utils";
++import { debug as viteDebug, getElementLocatorSelectors } from "@vitest/browser/utils";
+ import { render as litRender } from "lit";
+ var containers = /* @__PURE__ */ new Set();
+-function render(template, {
++async function render(template, {
+   baseElement = document.body,
+   container = baseElement.appendChild(document.createElement("div")),
+   ...options
+ } = {}) {
+   containers.add(container);
+   litRender(template, container, options);
++  // Let Lit components finish rendering
++  await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+   return {
+     container,
+     baseElement,
+-    debug,
++    debug(...args) {
++      viteDebug(...args);
++      for (const el of baseElement.querySelectorAll("*")) {
++        if (el.shadowRoot) {
++          for (const shel of el.shadowRoot.children) {
++            viteDebug(shel, undefined);
++          }
++        }
++      }
++    },
+     unmount() {
+       containers.delete(container);
+       container.remove();
+     },
+-    rerender(newTemplate) {
++    async rerender(newTemplate) {
+       litRender(newTemplate, container, options);
++      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+     },
+     asFragment() {
+       return document.createRange().createContextualFragment(container.innerHTML);
+diff --git a/dist/pure.d.ts b/dist/pure.d.ts
+index ebd3ac24afe257f3c51153ff23d88decb5a5182d..8819736283c0045b4be28e4811ac518037b6bf8d 100644
+--- a/dist/pure.d.ts
++++ b/dist/pure.d.ts
+@@ -11,10 +11,10 @@ interface RenderResult extends LocatorSelectors {
+     baseElement: HTMLElement;
+     debug: typeof debug;
+     unmount: () => void;
+-    rerender: (template: unknown) => void;
++    rerender: (template: unknown) => Promise<void>;
+     asFragment: () => DocumentFragment;
+ }
+-declare function render(template: unknown, { baseElement, container, ...options }?: ComponentRenderOptions): RenderResult;
++declare function render(template: unknown, { baseElement, container, ...options }?: ComponentRenderOptions): Promise<RenderResult>;
+ declare function cleanup(): void;
+
+ export { type ComponentRenderOptions, type RenderResult, cleanup, render };

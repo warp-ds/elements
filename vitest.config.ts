@@ -1,3 +1,4 @@
+/// <reference types="@vitest/browser/matchers" />
 import topLevelAwait from 'vite-plugin-top-level-await';
 import { defineConfig } from 'vitest/config';
 
