@@ -2,6 +2,8 @@ import * as eik from '@eik/esbuild-plugin';
 import esbuild from 'esbuild';
 import { glob } from 'glob';
 
+import { plugin as stylePlugin } from './build/index.js';
+
 const components = glob.sync('packages/**/index.js');
 const toastApiPath = 'packages/toast/api.js';
 const indexPath = 'index.js';
@@ -72,6 +74,9 @@ if (version === 'eik') {
   buildComponents('eik', { plugins: [eik.plugin()] });
   buildToastApi('eik', { plugins: [eik.plugin()] });
   buildIndex('eik', { plugins: [eik.plugin()] });
+} else if (version === 'styles') {
+  console.log('Building styles: remember to commit changes');
+  buildIndex('dist', { plugins: [stylePlugin()] });
 } else {
   buildComponents('dist');
   buildToastApi('dist');

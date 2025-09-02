@@ -12,6 +12,6 @@ export default [
     },
   },
   {
-    ignores: ['site', 'dist', 'eik', 'pages'],
+    ignores: ['site', 'dist', 'eik', 'pages', '*/**/styles.ts'],
   },
 ];

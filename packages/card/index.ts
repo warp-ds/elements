@@ -1,19 +1,35 @@
+// @warp-css;
+
 import { html, css, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { card as ccCard } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n.js';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles.js';
+
+export const ccCard = {
+  base: 'cursor-pointer overflow-hidden relative transition-all',
+  shadow: 'group rounded-8 s-surface-elevated-200 hover:s-surface-elevated-200-hover active:s-surface-elevated-200-active',
+  selected: '!s-bg-selected !hover:s-bg-selected-hover !active:s-bg-selected-active',
+  outline: 'absolute border-2 rounded-8 inset-0 transition-all',
+  outlineUnselected: 'border-transparent group-active:s-border-active',
+  outlineSelected: 's-border-selected group-hover:s-border-selected-hover group-active:s-border-selected-active',
+  flat: 'border-2 rounded-4',
+  flatUnselected: 's-bg hover:s-bg-hover active:s-bg-active s-border hover:s-border-hover active:s-border-active',
+  flatSelected:
+    's-bg-selected hover:s-bg-selected-hover active:s-bg-selected-active s-border-selected hover:s-border-selected-hover active:s-border-selected-active',
+  a11y: 'sr-only',
+};
 
 const keys = {
   ENTER: 'Enter',
@@ -23,7 +39,7 @@ const keys = {
 class WarpCard extends LitElement {
   static styles = [
     reset,
-    components,
+    styles,
     css`
       a::after {
         content: '';
