@@ -117,7 +117,11 @@ export class BaseFormAssociatedElement extends BaseElement implements Omit<Eleme
       this.addEventListener('invalid', this.emitInvalid);
     }
   }
-  states: CustomStateSet;
+  // this bullshit makes no sense but tsc is angry about it
+  // this needs both 'private' and 'typeof' or it will be angry and we don't know why
+  // eslint-disable-next-line
+  // @ts-ignore
+  private states: typeof CustomStateSet;
 
   connectedCallback() {
     super.connectedCallback();

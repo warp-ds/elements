@@ -8,6 +8,8 @@ import { BaseFormAssociatedElement } from './form-associated-element';
 import { uniqueId } from './math';
 import './radio';
 import type { WRadio } from './radio';
+// eslint-disable-next-line
+// @ts-ignore
 import styles from './radio-group.css?inline';
 import { RequiredValidator } from './required-validator';
 import { HasSlotController } from './slot';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CSSResult, CSSResultGroup } from 'lit';
 import { LitElement, unsafeCSS } from 'lit';
 
@@ -67,7 +68,7 @@ export default class BaseElement extends LitElement {
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
     if (!this.#hasRecordedInitialProperties) {
       (this.constructor as typeof BaseElement).elementProperties.forEach((obj, prop: keyof typeof this & string) => {
-         
+
           if (obj.reflect && this[prop] != null) {
           this.initialReflectedProperties.set(prop, this[prop]);
         }

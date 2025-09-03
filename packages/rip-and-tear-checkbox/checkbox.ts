@@ -12,6 +12,8 @@ import { HasSlotController } from '../rip-and-tear-radio/slot';
 import { watch } from '../rip-and-tear-radio/watch';
 import '@warp-ds/icons/elements/check-16';
 
+// eslint-disable-next-line
+// @ts-ignore
 import styles from './checkbox.css?inline';
 
 export class WCheckbox extends BaseFormAssociatedElement {
