@@ -1,41 +1,42 @@
-import { css, html, nothing } from 'lit';
+// @warp-css;
+import { html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
-import { box as ccBox } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
-class WarpBox extends WarpElement {
-  static properties = {
-    bleed: { type: Boolean },
-    bordered: { type: Boolean },
-    info: { type: Boolean },
-    neutral: { type: Boolean },
-    role: { type: String },
-  };
+import { reset } from '../styles';
+
+import { styles } from './styles';
+
+class WarpBox extends LitElement {
+  @property({ type: Boolean, reflect: true })
+  bleed: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  bordered: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  info: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  neutral: boolean;
+
+  @property({ type: String, reflect: true })
+  role: string;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [
-    WarpElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      ::slotted(:last-child) {
-        margin-bottom: 0 !important;
-      }
-    `,
-  ];
+  static styles = [reset, styles];
 
   get _class() {
     return classNames([
-      ccBox.base,
-      this.bleed && ccBox.bleed,
-      this.info && ccBox.info,
-      this.neutral && ccBox.neutral,
-      this.bordered && ccBox.bordered,
+      'group block relative break-words last-child:mb-0 p-16 rounded-8',
+      this.bleed && '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8',
+      this.info && 's-bg-info-subtle',
+      this.neutral && 's-surface-sunken',
+      this.bordered && 'border-2 s-border s-bg',
     ]);
   }
 
