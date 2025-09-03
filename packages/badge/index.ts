@@ -1,26 +1,19 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { badge as ccBadge } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
-class WarpBadge extends WarpElement {
-  static properties = {
-    variant: {
-      type: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price',
-    },
-    position: {
-      type: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left',
-    },
-  };
+import { reset } from '../styles';
 
-  static styles = [WarpElement.styles];
+class WarpBadge extends LitElement {
+  @property({ type: String, reflect: true })
+  variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' = 'neutral';
 
-  constructor() {
-    super();
+  @property({ type: String, reflect: true })
+  position: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
 
-    this.variant = 'neutral';
-  }
+  static styles = [reset];
 
   get _class() {
     return classNames([
