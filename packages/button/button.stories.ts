@@ -58,7 +58,7 @@ const meta: Meta<Args> = {
     type: {
       control: { type: 'select' },
       options: ['button', 'submit', 'reset'],
-      description: 'Button type attribute',
+      description: 'Button type, only applied when href is not set.',
     },
   },
 };
