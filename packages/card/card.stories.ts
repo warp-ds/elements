@@ -1,17 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
 import './index.js';
 
-type Args = {
-  selected: boolean;
-  flat: boolean;
-  clickable: boolean;
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-card');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Navigation/Card',
-  component: 'w-card',
   render(args) {
     return `
       <w-card ${toAttributeString(args)}>
@@ -22,24 +19,17 @@ const meta: Meta<Args> = {
       </w-card>
     `;
   },
-  argTypes: {
-    selected: {
-      type: 'boolean',
-      description: 'Whether the card appears selected',
-    },
-    flat: {
-      type: 'boolean',
-      description: 'Flat styling without shadow',
-    },
-    clickable: {
-      type: 'boolean',
-      description: 'Makes the card interactive and focusable',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Default: Story = {
   args: {

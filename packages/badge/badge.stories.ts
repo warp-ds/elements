@@ -1,35 +1,27 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
-type Args = {
-  variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored';
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-badge');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Layout/Badge',
-  component: 'w-badge',
   render(args) {
     return `<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['neutral', 'info', 'positive', 'warning', 'negative', 'disabled', 'price', 'sponsored'],
-      description: 'The visual style variant of the badge',
-    },
-    position: {
-      control: { type: 'select' },
-      options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-      description: 'Position for absolutely positioned badges',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Neutral: Story = {
   args: {

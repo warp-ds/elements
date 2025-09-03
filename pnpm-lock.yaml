@@ -188,6 +188,9 @@ importers:
       vitest-browser-lit:
         specifier: ^0.1.0
         version: 0.1.0(patch_hash=b7d71e5a2e320a367d2061c2084ce79a132787dcef2f9ae8a43d82be7ef03edf)(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4)
+      wc-storybook-helpers:
+        specifier: ^2.0.4
+        version: 2.0.4(lit@3.2.0)(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)))
 
 packages:
 
@@ -1307,6 +1310,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+
+  '@storybook/preview-api@8.6.14':
+    resolution: {integrity: sha512-2GhcCd4dNMrnD7eooEfvbfL4I83qAqEyO0CO7JQAmIO6Rxb9BsOLLI/GD5HkvQB73ArTJ+PT50rfaO820IExOQ==}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
   '@storybook/react-dom-shim@9.1.4':
     resolution: {integrity: sha512-vGBmPMgae8zkS0r2u/1WgpYMKjQm7EdTL7hJ7WA9K4j3j9dj9Y+ok6xIotYqggcI04zTyKeZiv9vf/235Cuqpw==}
@@ -5105,6 +5113,11 @@ packages:
       jsdom:
         optional: true
 
+  wc-storybook-helpers@2.0.4:
+    resolution: {integrity: sha512-nkW2l8p7NnvC3aum2l44MKWebwBINQLdstlQmEffZ7oof1bdEl7P5PT6O3cqCrUqNvS7J+S8O3m31az4Eom0aA==}
+    peerDependencies:
+      lit: ^2.0.0 || ^3.0.0
+
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
 
@@ -6412,6 +6425,10 @@ snapshots:
     dependencies:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
+
+  '@storybook/preview-api@8.6.14(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)))':
+    dependencies:
+      storybook: 9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0))
 
   '@storybook/react-dom-shim@9.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)))':
     dependencies:
@@ -10554,6 +10571,13 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  wc-storybook-helpers@2.0.4(lit@3.2.0)(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0))):
+    dependencies:
+      '@storybook/preview-api': 8.6.14(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)))
+      lit: 3.2.0
+    transitivePeerDependencies:
+      - storybook
 
   wcwidth@1.0.1:
     dependencies:

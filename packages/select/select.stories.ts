@@ -1,11 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
-const meta: Meta = {
+const { events, args, argTypes } = getWcStorybookHelpers('w-select');
+
+const meta = {
   title: 'Forms/Select',
-  component: 'w-select',
   render(args) {
     return `
       <w-select ${toAttributeString(args)}>
@@ -15,16 +17,12 @@ const meta: Meta = {
       </w-select>
     `;
   },
-  argTypes: {
-    'auto-focus': { type: 'boolean' },
-    disabled: { type: 'boolean' },
-    invalid: { type: 'boolean' },
-    always: { type: 'boolean', description: 'Whether to always show a hint' },
-    hint: { type: 'string' },
-    label: { type: 'string' },
-    name: { type: 'string' },
-    optional: { type: 'boolean' },
-    'read-only': { type: 'boolean' },
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
+    },
   },
 };
 

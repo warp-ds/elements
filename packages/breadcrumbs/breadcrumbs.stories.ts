@@ -1,15 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
-type Args = {
-  'aria-label': string;
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-breadcrumbs');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Navigation/Breadcrumbs',
-  component: 'w-breadcrumbs',
   render(args) {
     return `
       <w-breadcrumbs ${toAttributeString(args)}>
@@ -20,16 +18,17 @@ const meta: Meta<Args> = {
       </w-breadcrumbs>
     `;
   },
-  argTypes: {
-    'aria-label': {
-      type: 'string',
-      description: 'Accessible label for the breadcrumb navigation',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Default: Story = {
   args: {

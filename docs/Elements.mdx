@@ -1,0 +1,56 @@
+# Warp Elements
+
+The home of the web component, or custom elements, implementation of Warp.
+
+## Usage
+
+### Install
+
+Install by using npm/pnpm or by adding a script link:
+
+_npm_:
+
+```sh
+npm install @warp-ds/elements
+```
+
+_pnpm_:
+```sh
+pnpm add @warp-ds/elements
+```
+
+#### Using a direct link to Eik
+
+You can also add this `script` tag to your document if you want to get all available elements (replace finn.no with your brand's domain):
+
+```html
+<script type="module" src="https://assets.finn.no/pkg/@warp-ds/elements/v2/index.js" crossorigin></script>
+```
+
+For performance you may want to import just the elements you use. Check the list of available files on [https://assets.finn.no/pkg/@warp-ds/elements/v2/](https://assets.finn.no/pkg/@warp-ds/elements/v2/).
+
+### Import components
+
+Importing individual components is recommended for performance reasons:
+
+```js
+import '@warp-ds/elements/components/toast';
+```
+
+In a prototyping phase you may want to import all available components:
+
+```js
+import '@warp-ds/elements';
+```
+
+### Use the components in your markup
+
+Once the components have been imported you can use them in your HTML.
+
+```
+<w-breadcrumbs class="mt-10">
+  <a href="#/url/1">Eiendom</a>
+  <a href="#/url/2">Bolig til salgs</a>
+  <a href="#/url/3" aria-current="page"> Oslo </a>
+</w-breadcrumbs>
+```

@@ -1,25 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
 import './index.js';
 
-type Args = {
-  expanded: boolean;
-  title: string;
-  box: boolean;
-  bleed: boolean;
-  animated: boolean;
-  'no-chevron': boolean;
-  'heading-level': number;
-  'button-class': string;
-  'content-class': string;
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-expandable');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Layout/Expandable',
-  component: 'w-expandable',
   render(args) {
     return `
       <w-expandable ${toAttributeString(args)}>
@@ -28,48 +18,17 @@ const meta: Meta<Args> = {
       </w-expandable>
     `;
   },
-  argTypes: {
-    expanded: {
-      type: 'boolean',
-      description: 'Controls the expanded state',
-    },
-    title: {
-      type: 'string',
-      description: 'Title text for the expandable',
-    },
-    box: {
-      type: 'boolean',
-      description: 'Display as a padded box',
-    },
-    bleed: {
-      type: 'boolean',
-      description: 'Make full-width on mobile',
-    },
-    animated: {
-      type: 'boolean',
-      description: 'Animate open and close',
-    },
-    'no-chevron': {
-      type: 'boolean',
-      description: 'Hide the chevron icon',
-    },
-    'heading-level': {
-      type: 'number',
-      description: 'Wrap toggle button in heading element',
-    },
-    'button-class': {
-      type: 'string',
-      description: 'Additional CSS classes for button',
-    },
-    'content-class': {
-      type: 'string',
-      description: 'Additional CSS classes for content',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Default: Story = {
   args: {

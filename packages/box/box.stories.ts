@@ -1,17 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
-type Args = {
-  bleed: boolean;
-  bordered: boolean;
-  info: boolean;
-  neutral: boolean;
-  role: string;
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-box');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Layout/Box',
   component: 'w-box',
   render(args) {
@@ -22,32 +17,17 @@ const meta: Meta<Args> = {
       </w-box>
     `;
   },
-  argTypes: {
-    bleed: {
-      type: 'boolean',
-      description: 'Makes the box full-width on mobile',
-    },
-    bordered: {
-      type: 'boolean',
-      description: 'Adds a border to the box',
-    },
-    info: {
-      type: 'boolean',
-      description: 'Styles the box with light blue colors',
-    },
-    neutral: {
-      type: 'boolean',
-      description: 'Styles the box with light gray colors',
-    },
-    role: {
-      type: 'string',
-      description: 'ARIA role attribute',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Default: Story = {
   args: {

@@ -1,16 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import type { StoryObj } from '@storybook/web-components-vite';
+import { getWcStorybookHelpers } from 'wc-storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import './index.js';
 
-type Args = {
-  variant: 'negative' | 'positive' | 'warning' | 'info';
-  show: boolean;
-  role: string;
-};
+const { events, args, argTypes } = getWcStorybookHelpers('w-alert');
 
-const meta: Meta<Args> = {
+const meta = {
   title: 'Feedback/Alert',
   component: 'w-alert',
   render(args) {
@@ -20,25 +17,17 @@ const meta: Meta<Args> = {
       </w-alert>
     `;
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['negative', 'positive', 'warning', 'info'],
-      description: 'The visual style variant of the alert',
-    },
-    show: {
-      type: 'boolean',
-      description: 'Whether the alert is visible',
-    },
-    role: {
-      type: 'string',
-      description: 'ARIA role for the alert',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj;
 
 export const Info: Story = {
   args: {
