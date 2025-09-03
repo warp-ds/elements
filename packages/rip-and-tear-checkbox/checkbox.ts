@@ -185,8 +185,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-describedby="hint"
             @click=${this.handleClick} />
-
-          ${this.checked ? html`<w-icon-check-16></w-icon-check-16>` : nothing}
+          ${this.indeterminate ? '–' : ''}
         </span>
 
         <slot part="label"></slot>
