@@ -8,13 +8,13 @@ import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles.js';
 
 export const ccBreadcrumbs = {
   wrapper: 'flex space-x-8',

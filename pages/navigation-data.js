@@ -75,6 +75,10 @@ export default {
           title: 'Breadcrumbs',
           href: '/pages/components/breadcrumbs.html',
         },
+        {
+          title: 'Pagination',
+          href: '/pages/components/pagination.html',
+        },
       ],
     },
     {

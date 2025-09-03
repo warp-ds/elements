@@ -37,6 +37,10 @@ const config: LinguiConfig = {
       include: ['packages/pill/index.js'],
       path: 'packages/pill/locales/{locale}/messages',
     },
+    {
+      include: ['packages/pagination/index.ts'],
+      path: 'packages/pagination/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

@@ -145,6 +145,11 @@ export default ({ mode }) => {
             template: 'index.html',
             injectOptions,
           },
+          {
+            filename: 'pagination.html',
+            template: 'pages/components/pagination.html',
+            injectOptions,
+          },
         ],
       }),
       isProduction && basePathFix(),
