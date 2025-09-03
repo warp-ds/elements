@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+import '../utils/expand-transition.js';
 import './index.js';
 
 type Args = {

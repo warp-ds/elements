@@ -5,6 +5,9 @@ function ifDefined(attribute: string, args: Record<string, unknown>): string {
   if (args[attribute] === false) {
     return '';
   }
+  if (args[attribute] === true) {
+    return attribute;
+  }
   return `${attribute}="${args[attribute]}"`;
 }
 
