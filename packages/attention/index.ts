@@ -1,4 +1,5 @@
-import { css, html, nothing } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
+import { components, reset } from '../styles.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
@@ -6,9 +7,10 @@ import { opposites, directions, arrowDirectionClassname, useRecompute as recompu
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes, generateRandomId } from '../utils/index.js';
+import { generateRandomId } from '../utils/index.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -18,39 +20,54 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/close-16';
 
-class WarpAttention extends kebabCaseAttributes(WarpElement) {
-  static properties = {
-    // Whether Attention element should be visible.
-    show: { type: Boolean, reflect: true },
-    // Placement according to the target element
-    // Arrow would be on the opposite side of this position
-    placement: { type: String, reflect: true },
-    // Whether Attention element is rendered as a tooltip
-    tooltip: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as an inline callout
-    callout: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as a popover
-    popover: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as a highlight
-    highlight: { type: Boolean, reflect: true },
-    // Render Attention element with a close button
-    canClose: { type: Boolean, reflect: true },
-    // Render Attention element without an arrow
-    noArrow: { type: Boolean, reflect: true },
-    // Distance from which to offset the attentionEl from the targetEl vertically
-    distance: { type: Number, reflect: true },
-    // Distance from which to offset the attentionEl along its targetEl horizontally
-    skidding: { type: Number, reflect: true },
-    // Whether Attention element should flip its placement in order to keep it in view
-    flip: { type: Boolean, reflect: true },
-    // Whether Attention element should ignore cross axis overflow when flip is enabled
-    crossAxis: { type: Boolean, reflect: true },
-    // Choose which preferred placements the Attention element should flip to
-    fallbackPlacements: { type: Array, reflect: true },
-  };
+class WarpAttention extends LitElement {
+  @property({ type: Boolean, reflect: true })
+  show: boolean;
+
+  @property({ type: String, reflect: true })
+  placement: string;
+
+  @property({ type: Boolean, reflect: true })
+  tooltip: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  callout: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  popover: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  highlight: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  canClose: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  noArrow: boolean;
+
+  @property({ type: Number, reflect: true })
+  distance: number;
+
+  @property({ type: Number, reflect: true })
+  skidding: number;
+
+  @property({ type: Boolean, reflect: true })
+  flip: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  crossAxis: boolean;
+
+  @property({ type: Array, reflect: true })
+  fallbackPlacements: string[];
+
+  attentionState;
+
+  // To store the initial placement value for reference when computing the actual direction
+  _initialPlacement;
 
   static styles = [
-    WarpElement.styles,
+    reset,
+    components,
     css`
       #attention {
         position: absolute;
