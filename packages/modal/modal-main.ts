@@ -12,11 +12,8 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   @property({ type: String, attribute: 'content-id' }) contentId: string;
   @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean;
 
-  // @ts-expect-error The mixin needs type definitions
   @query('.dialog-el') dialogEl: HTMLDialogElement;
-  // @ts-expect-error The mixin needs type definitions
   @query('.dialog-inner-el') dialogInnerEl: HTMLElement;
-  // @ts-expect-error The mixin needs type definitions
   @query('.content-el') contentEl: HTMLElement;
 
   constructor() {
