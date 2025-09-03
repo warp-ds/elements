@@ -129,7 +129,7 @@ export class WRadioGroup extends BaseFormAssociatedElement {
 
   private handleRadioClick = (e: Event) => {
     const clickedRadio = (e.target as HTMLElement).closest<WRadio>('w-radio');
-
+    /* eslint-disable */
     if (!clickedRadio || clickedRadio.disabled || (clickedRadio as any).forceDisabled || this.disabled) {
       return;
     }

@@ -166,9 +166,6 @@ export class WCheckbox extends BaseFormAssociatedElement {
     const hasHint = this.hint ? true : !!hasHintSlot;
     const isIndeterminate = !this.checked && this.indeterminate;
 
-    const iconName = isIndeterminate ? 'indeterminate' : 'check';
-    const iconState = isIndeterminate ? 'indeterminate' : 'check';
-
     return html`
       <label part="base">
         <span part="control">
@@ -185,7 +182,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
             aria-checked=${this.checked ? 'true' : 'false'}
             aria-describedby="hint"
             @click=${this.handleClick} />
-          ${this.indeterminate ? '–' : ''}
+          ${isIndeterminate ? '–' : ''}
         </span>
 
         <slot part="label"></slot>
