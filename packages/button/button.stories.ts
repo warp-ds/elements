@@ -16,6 +16,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Buttons/Button',
   component: 'w-button',
   render(args) {
     return `<w-button ${toAttributeString(args)}>Button Text</w-button>`;

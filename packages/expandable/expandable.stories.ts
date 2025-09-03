@@ -5,7 +5,6 @@ import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
 import './index.js';
 
-
 type Args = {
   expanded: boolean;
   title: string;
@@ -19,6 +18,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Layout/Expandable',
   component: 'w-expandable',
   render(args) {
     return `

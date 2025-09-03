@@ -11,6 +11,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Feedback/Alert',
   component: 'w-alert',
   render(args) {
     return `

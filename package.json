@@ -29,7 +29,7 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:docs": "lingui compile && vite build",
+    "build:storybook": "lingui compile && storybook build && touch ./storybook-static/.nojekyll",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
     "build:manifest": "cem analyze --config cem/config.js",

@@ -17,6 +17,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Forms/Textfield',
   component: 'w-textfield',
   render(args) {
     return `<w-textfield ${toAttributeString(args)}></w-textfield>`;

@@ -8,6 +8,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Navigation/Breadcrumbs',
   component: 'w-breadcrumbs',
   render(args) {
     return `

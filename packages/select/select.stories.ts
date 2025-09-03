@@ -4,6 +4,7 @@ import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
 const meta: Meta = {
+  title: 'Forms/Select',
   component: 'w-select',
   render(args) {
     return `
