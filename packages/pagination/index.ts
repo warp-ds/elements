@@ -1,3 +1,4 @@
+// @warp-css;
 import { html, LitElement, nothing } from 'lit';
 
 import { i18n } from '@lingui/core';
@@ -7,13 +8,14 @@ import '@warp-ds/icons/elements/chevron-double-left-16';
 import '@warp-ds/icons/elements/chevron-left-16';
 import '@warp-ds/icons/elements/chevron-right-16';
 import { activateI18n } from '../i18n.js';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles';
 
 const iconSuffix = i18n._({
   id: 'pagination.aria.icon-suffix',
@@ -37,7 +39,7 @@ class WarpPagination extends LitElement {
   @property({ type: Number, reflect: true, attribute: 'visible-pages' })
   visiblePages = 7;
 
-  static styles = [reset, components];
+  static styles = [reset, styles];
 
   constructor() {
     super();
