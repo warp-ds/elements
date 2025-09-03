@@ -48,7 +48,7 @@ export const ccHelpText = {
 
 export class WarpSelect extends FormControlMixin(LitElement) {
   // Whether the element should receive focus on render
-  @property({ type: Boolean, reflect: true })
+  @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus: boolean;
 
   // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
