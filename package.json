@@ -36,7 +36,7 @@
     "build:styles": "node build.js styles",
     "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
-    "dev": "vite",
+    "dev": "storybook dev",
     "storybook": "storybook dev",
     "lint:check": "eslint .",
     "lint": "eslint . --fix",
