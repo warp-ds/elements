@@ -1,12 +1,14 @@
+// @warp-css;
+
 import { html, LitElement, TemplateResult } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { interleave } from '@warp-ds/core/breadcrumbs';
-import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
+import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -16,11 +18,19 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
+export const ccBreadcrumbs = {
+  wrapper: 'flex space-x-8',
+  text: 's-text',
+  link: 's-text-link',
+  separator: 'select-none s-icon',
+  a11y: 'sr-only',
+};
+
 class WarpBreadcrumbs extends LitElement {
   @property({ attribute: 'aria-label', type: String })
   ariaLabel;
 
-  static styles = [reset, components];
+  static styles = [reset, styles];
 
   constructor() {
     super();

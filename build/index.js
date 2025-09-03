@@ -59,7 +59,7 @@ export const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = 
           await writeFile(
             path.dirname(args.path) + '/styles.ts',
             `import { css } from 'lit'; export const styles = css\`${css}\`;
-          `,
+`,
           );
         }
         return {
