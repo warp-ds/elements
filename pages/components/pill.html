@@ -37,13 +37,25 @@
               <td>false</td>
             </tr>
             <tr>
-              <td>open-sr-label</td>
+              <td>open-aria-label</td>
               <td><div>string</div>
                 <div>Label read by screen readers when targeting the pill.</div></td>
               <td>"Open filter"</td>
             </tr>
             <tr>
-              <td>close-sr-label</td>
+              <td>open-sr-label (deprecated, use "open-arial-label")</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the pill.</div></td>
+              <td>"Open filter"</td>
+            </tr>
+            <tr>
+              <td>close-aria-label</td>
+              <td><div>string</div>
+                <div>Label read by screen readers when targeting the close button.</div></td>
+              <td>"Remove filter {label}"</td>
+            </tr>
+            <tr>
+              <td>close-sr-label (deprecated, use "close-arial-label")</td>
               <td><div>string</div>
                 <div>Label read by screen readers when targeting the close button.</div></td>
               <td>"Remove filter {label}"</td>
@@ -76,14 +88,14 @@
             Pill
             <syntax-highlight>
               <w-pill>Standard pill</w-pill>
-              <w-pill open-sr-label="test">Standard pill</w-pill>
+              <w-pill open-aria-label="test">Standard pill</w-pill>
               <w-pill can-close>Closable pill</w-pill>
               <w-pill suggestion can-close>SC pill</w-pill>
             </syntax-highlight>
           </div>
           <div class="grid-example md:ml-48 col-span-2 md:col-span-1">
             <w-pill>Standard pill</w-pill>
-            <w-pill open-sr-label="test">Standard pill</w-pill>
+            <w-pill open-aria-label="test">Standard pill</w-pill>
             <w-pill suggestion>Suggestion pill</w-pill>
             <w-pill can-close>Closable pill</w-pill>
             <w-pill suggestion can-close>SC pill</w-pill>
