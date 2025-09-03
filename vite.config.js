@@ -170,9 +170,7 @@ function basePathFix() {
     name: 'base-path-fix',
     transform(src, fileName) {
       return fileName.includes('navigation-data.js')
-        ? src
-            .replace(/pages\/components\//g, 'elements/')
-            .replace(/'\/'/, '"/elements/"')
+        ? src.replace(/pages\/components\//g, 'elements/').replace(/'\/'/, '"/elements/"')
         : src;
     },
   };
