@@ -275,7 +275,7 @@
       });
     });
   </script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-B6nDPOKs.js"></script>
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-EjkRELrQ.js"></script>
   <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-DHIBknkn.css">
 </head>
   <body data-await-elements="w-badge,sidebar-element">
@@ -297,7 +297,7 @@
           <tbody class="align-top">
             <tr>
               <td>variant</td>
-              <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'price'</td>
+              <td>'neutral' | 'info' | 'positive' | 'warning' |'negative' | 'disabled' | 'price' | 'sponsored'</td>
               <td>'neutral'</td>
             </tr>
             <tr>
@@ -312,14 +312,10 @@
 
         <h3>Default</h3>
         <syntax-highlight class="mt-0">
-          <w-badge>
-            I am a default badge
-          </w-badge>
+          <w-badge> I am a default badge </w-badge>
         </syntax-highlight>
         <div class="example">
-          <w-badge>
-            I am a default badge
-          </w-badge>
+          <w-badge> I am a default badge </w-badge>
         </div>
 
         <h3 class="mb-8">Variants</h3>
@@ -331,6 +327,7 @@
           <w-badge variant="negative">negative badge</w-badge>
           <w-badge variant="disabled">disabled badge</w-badge>
           <w-badge variant="price">price badge</w-badge>
+          <w-badge variant="sponsored">sponsored badge</w-badge>
         </syntax-highlight>
         <div class="example">
           <ul class="flex flex-row flex-wrap gap-8">
@@ -341,6 +338,7 @@
             <li><w-badge variant="negative">negative badge</w-badge></li>
             <li><w-badge variant="disabled">disabled badge</w-badge></li>
             <li><w-badge variant="price">price badge</w-badge></li>
+            <li><w-badge variant="sponsored">sponsored badge</w-badge></li>
           </ul>
         </div>
 
@@ -369,7 +367,6 @@
             <w-badge position="bottom-left" variant="price">bottom-left</w-badge>
           </div>
         </div>
-
       </main>
       <script data-for="footer" type="application/json">
   {
@@ -384,6 +381,5 @@
   }
 </script>
     </div>
-
   </body>
 </html>
