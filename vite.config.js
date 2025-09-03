@@ -121,6 +121,11 @@ export default ({ mode }) => {
             injectOptions,
           },
           {
+            filename: 'checkbox.html',
+            template: 'pages/components/checkbox.html',
+            injectOptions,
+          },
+          {
             filename: 'radio.html',
             template: 'pages/components/radio.html',
             injectOptions,

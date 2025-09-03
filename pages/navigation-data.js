@@ -34,6 +34,10 @@ export default {
           href: '/pages/components/deadtoggle.html',
         },
         {
+          title: 'Checkbox',
+          href: '/pages/components/checkbox.html',
+        },
+        {
           title: 'Radio',
           href: '/pages/components/radio.html',
         },
