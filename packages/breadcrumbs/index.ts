@@ -1,12 +1,14 @@
-import { html } from 'lit';
+// @warp-css;
+
+import { html, LitElement, TemplateResult } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { interleave } from '@warp-ds/core/breadcrumbs';
-import { breadcrumbs as ccBreadcrumbs } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils/index.js';
+import { reset } from '../styles.js';
+import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -14,14 +16,21 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
+export const ccBreadcrumbs = {
+  wrapper: 'flex space-x-8',
+  text: 's-text',
+  link: 's-text-link',
+  separator: 'select-none s-icon',
+  a11y: 'sr-only',
+};
+
 const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
-class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
-  static styles = [WarpElement.styles];
+class WarpBreadcrumbs extends LitElement {
+  @property({ attribute: 'aria-label', type: String })
+  ariaLabel;
 
-  static properties = {
-    ariaLabel: { type: String },
-  };
+  static styles = [reset, styles];
 
   constructor() {
     super();
@@ -30,9 +39,11 @@ class WarpBreadcrumbs extends kebabCaseAttributes(WarpElement) {
     this.ariaLabel = i18n._({
       id: 'breadcrumbs.ariaLabel',
       message: 'You are here',
-      comment: 'Default screenreader message for the breadcrumb component',
+      comment: 'Default screen reader message for the breadcrumb component',
     });
   }
+
+  _children: Array<Element | TemplateResult>;
 
   connectedCallback() {
     super.connectedCallback();
