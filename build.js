@@ -4,7 +4,7 @@ import { glob } from 'glob';
 
 import { plugin as stylePlugin } from './build/index.js';
 
-const components = glob.sync('packages/**/index.js');
+const components = glob.sync('packages/**/index.{js,ts}');
 const toastApiPath = 'packages/toast/api.js';
 const indexPath = 'index.js';
 const version = process.argv[2];
@@ -20,16 +20,17 @@ const esbuildDefaults = {
 
 function buildComponents(outDir, extraBuildOptions = {}) {
   components.forEach(async (item) => {
-    const regex = /\/(\w+)\//;
+    const regex = /\/(.+)\/index.(ts|js)/;
     const match = item.match(regex);
 
     if (item.includes('utils')) return;
-    console.log(`elements: building ${match[1]}.js`);
+    if (!match) console.log(item);
+    console.log(`elements: building ${match[1]}.${match[2]}`);
 
     try {
       await esbuild.build({
         entryPoints: [item],
-        outfile: `${outDir}/packages/${match[1]}/index.js`,
+        outfile: `${outDir}/packages/${match[1]}/index.${match[2]}`,
         ...esbuildDefaults,
         ...extraBuildOptions,
       });

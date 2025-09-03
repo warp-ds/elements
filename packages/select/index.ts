@@ -1,57 +1,94 @@
-import { html } from 'lit';
+// @warp-css;
+import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
-import { activateI18n } from '../i18n';
-import { kebabCaseAttributes } from '../utils/index.js';
+import { activateI18n } from '../i18n.js';
+import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles.js';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 
-export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement)) {
-  static properties = {
-    // Whether the element should receive focus on render
-    autoFocus: { type: Boolean, reflect: true },
+export const ccSelect = {
+  base: 'block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current',
+  default: 's-text s-bg pl-8 border-1 s-border hover:s-border-hover active:s-border-active',
+  disabled:
+    's-text-disabled s-bg-disabled-subtle pl-8 border-1 s-border-disabled hover:s-border-disabled active:s-border-disabled pointer-events-none',
+  invalid:
+    's-text s-bg pl-8 border-1 s-border-negative hover:s-border-negative-hover active:s-border-active outline-[--w-s-color-border-negative]!',
+  readOnly: 's-text bg-transparent pl-0 border-0 pointer-events-none before:hidden',
+  wrapper: 'relative',
+  selectWrapper: `relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none `,
+  chevron: 'block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer',
+  chevronDisabled: 'opacity-25',
+};
 
-    // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
-    invalid: { type: Boolean, reflect: true },
+export const ccLabel = {
+  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
+  optional: 'pl-8 font-normal text-s s-text-subtle',
+};
 
-    // Whether to always show a hint
-    always: { type: Boolean, reflect: true },
+export const ccHelpText = {
+  base: 'text-xs mt-4 block',
+  color: 's-text-subtle',
+  colorInvalid: 's-text-negative',
+};
 
-    // The content displayed as the help text
-    hint: { type: String, reflect: true },
+export class WarpSelect extends FormControlMixin(LitElement) {
+  // Whether the element should receive focus on render
+  @property({ type: Boolean, reflect: true })
+  autoFocus: boolean;
 
-    // The content to disply as the label
-    label: { type: String, reflect: true },
+  // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
+  @property({ type: Boolean, reflect: true })
+  invalid: boolean;
 
-    // Whether to show optional text
-    optional: { type: Boolean, reflect: true },
+  // Whether to always show a hint
+  @property({ type: Boolean, reflect: true })
+  always: boolean;
 
-    // Renders the field in a disabled state.
-    disabled: { type: Boolean, reflect: true },
+  // The content displayed as the help text
+  @property({ reflect: true })
+  hint: string;
 
-    // Renders the field in a readonly state.
-    readOnly: { type: Boolean, relfect: true },
+  // The content to disply as the label
+  @property({ reflect: true })
+  label: string;
 
-    _options: { state: true },
-    name: { type: String, reflect: true },
-    value: { type: String, reflect: true },
-  };
+  // Whether to show optional text
+  @property({ type: Boolean, reflect: true })
+  optional: boolean;
 
-  static styles = [WarpElement.styles];
+  // Renders the field in a disabled state.
+  @property({ type: Boolean, reflect: true })
+  disabled: boolean;
+
+  // Renders the field in a readonly state.
+  @property({ attribute: 'read-only', type: Boolean, reflect: true })
+  readOnly: boolean;
+
+  @property({ state: true })
+  _options: string;
+
+  @property({ reflect: true })
+  name: string;
+
+  @property({ reflect: true })
+  value: string;
+
+  static styles = [reset, styles];
 
   constructor() {
     super();
@@ -59,7 +96,7 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
     this._options = this.innerHTML;
   }
 
-  _setValue = (value) => {
+  _setValue = (value: string) => {
     this.value = value;
     this.setValue(value);
   };
@@ -69,14 +106,14 @@ export class WarpSelect extends FormControlMixin(kebabCaseAttributes(WarpElement
     if (this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
     // Set initial value based on any slotted options that are selected
-    Array.from(this.children).map((child) => {
+    Array.from(this.children).map((child: HTMLOptionElement) => {
       if (child.selected) {
         this._setValue(child.value);
       }
     });
   }
 
-  handleKeyDown(event) {
+  handleKeyDown(event: KeyboardEvent) {
     if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
     }
