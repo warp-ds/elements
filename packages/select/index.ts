@@ -1,16 +1,17 @@
+// @warp-css;
 import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { select as ccSelect, helpText as ccHelpText, label as ccLabel } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
 import { activateI18n } from '../i18n.js';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
+import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -19,6 +20,31 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/chevron-down-16';
+
+export const ccSelect = {
+  base: 'block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current',
+  default: 's-text s-bg pl-8 border-1 s-border hover:s-border-hover active:s-border-active',
+  disabled:
+    's-text-disabled s-bg-disabled-subtle pl-8 border-1 s-border-disabled hover:s-border-disabled active:s-border-disabled pointer-events-none',
+  invalid:
+    's-text s-bg pl-8 border-1 s-border-negative hover:s-border-negative-hover active:s-border-active outline-[--w-s-color-border-negative]!',
+  readOnly: 's-text bg-transparent pl-0 border-0 pointer-events-none before:hidden',
+  wrapper: 'relative',
+  selectWrapper: `relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none `,
+  chevron: 'block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer',
+  chevronDisabled: 'opacity-25',
+};
+
+export const ccLabel = {
+  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
+  optional: 'pl-8 font-normal text-s s-text-subtle',
+};
+
+export const ccHelpText = {
+  base: 'text-xs mt-4 block',
+  color: 's-text-subtle',
+  colorInvalid: 's-text-negative',
+};
 
 export class WarpSelect extends FormControlMixin(LitElement) {
   // Whether the element should receive focus on render
@@ -62,7 +88,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
-  static styles = [reset, components];
+  static styles = [reset, styles];
 
   constructor() {
     super();
