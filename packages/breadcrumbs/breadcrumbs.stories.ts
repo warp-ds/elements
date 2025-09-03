@@ -20,9 +20,9 @@ const meta: Meta<Args> = {
     `;
   },
   argTypes: {
-    'aria-label': { 
+    'aria-label': {
       type: 'string',
-      description: 'Accessible label for the breadcrumb navigation'
+      description: 'Accessible label for the breadcrumb navigation',
     },
   },
 };

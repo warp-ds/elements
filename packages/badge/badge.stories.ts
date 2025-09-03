@@ -17,12 +17,12 @@ const meta: Meta<Args> = {
     variant: {
       control: { type: 'select' },
       options: ['neutral', 'info', 'positive', 'warning', 'negative', 'disabled', 'price', 'sponsored'],
-      description: 'The visual style variant of the badge'
+      description: 'The visual style variant of the badge',
     },
     position: {
       control: { type: 'select' },
       options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-      description: 'Position for absolutely positioned badges'
+      description: 'Position for absolutely positioned badges',
     },
   },
 };

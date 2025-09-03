@@ -26,41 +26,41 @@ const meta: Meta<Args> = {
     `;
   },
   argTypes: {
-    expanded: { 
+    expanded: {
       type: 'boolean',
-      description: 'Controls the expanded state'
+      description: 'Controls the expanded state',
     },
-    title: { 
+    title: {
       type: 'string',
-      description: 'Title text for the expandable'
+      description: 'Title text for the expandable',
     },
-    box: { 
+    box: {
       type: 'boolean',
-      description: 'Display as a padded box'
+      description: 'Display as a padded box',
     },
-    bleed: { 
+    bleed: {
       type: 'boolean',
-      description: 'Make full-width on mobile'
+      description: 'Make full-width on mobile',
     },
-    animated: { 
+    animated: {
       type: 'boolean',
-      description: 'Animate open and close'
+      description: 'Animate open and close',
     },
-    'no-chevron': { 
+    'no-chevron': {
       type: 'boolean',
-      description: 'Hide the chevron icon'
+      description: 'Hide the chevron icon',
     },
-    'heading-level': { 
+    'heading-level': {
       type: 'number',
-      description: 'Wrap toggle button in heading element'
+      description: 'Wrap toggle button in heading element',
     },
-    'button-class': { 
+    'button-class': {
       type: 'string',
-      description: 'Additional CSS classes for button'
+      description: 'Additional CSS classes for button',
     },
-    'content-class': { 
+    'content-class': {
       type: 'string',
-      description: 'Additional CSS classes for content'
+      description: 'Additional CSS classes for content',
     },
   },
 };
@@ -126,7 +126,7 @@ export const WithHeading: Story = {
 
 export const NoChevron: Story = {
   args: {
-    title: "I have no chevron",
+    title: 'I have no chevron',
     expanded: false,
     box: false,
     bleed: false,

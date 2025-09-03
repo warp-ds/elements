@@ -24,40 +24,40 @@ const meta: Meta<Args> = {
     variant: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'negative', 'utility', 'link', 'pill'],
-      description: 'Visual style variant of the button'
+      description: 'Visual style variant of the button',
     },
-    quiet: { 
+    quiet: {
       type: 'boolean',
-      description: 'Removes background and border styling'
+      description: 'Removes background and border styling',
     },
-    small: { 
+    small: {
       type: 'boolean',
-      description: 'Smaller button size'
+      description: 'Smaller button size',
     },
-    loading: { 
+    loading: {
       type: 'boolean',
-      description: 'Shows loading state with animation'
+      description: 'Shows loading state with animation',
     },
-    href: { 
+    href: {
       type: 'string',
-      description: 'Makes button render as anchor link'
+      description: 'Makes button render as anchor link',
     },
-    target: { 
+    target: {
       type: 'string',
-      description: 'Link target (when href is set)'
+      description: 'Link target (when href is set)',
     },
-    rel: { 
+    rel: {
       type: 'string',
-      description: 'Link relationship (when href is set)'
+      description: 'Link relationship (when href is set)',
     },
-    'full-width': { 
+    'full-width': {
       type: 'boolean',
-      description: 'Makes button take full width of container'
+      description: 'Makes button take full width of container',
     },
     type: {
       control: { type: 'select' },
       options: ['button', 'submit', 'reset'],
-      description: 'Button type attribute'
+      description: 'Button type attribute',
     },
   },
 };

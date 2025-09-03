@@ -22,17 +22,17 @@ const meta: Meta<Args> = {
     `;
   },
   argTypes: {
-    selected: { 
+    selected: {
       type: 'boolean',
-      description: 'Whether the card appears selected'
+      description: 'Whether the card appears selected',
     },
-    flat: { 
+    flat: {
       type: 'boolean',
-      description: 'Flat styling without shadow'
+      description: 'Flat styling without shadow',
     },
-    clickable: { 
+    clickable: {
       type: 'boolean',
-      description: 'Makes the card interactive and focusable'
+      description: 'Makes the card interactive and focusable',
     },
   },
 };

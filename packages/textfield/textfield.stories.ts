@@ -22,45 +22,45 @@ const meta: Meta<Args> = {
     return `<w-textfield ${toAttributeString(args)}></w-textfield>`;
   },
   argTypes: {
-    disabled: { 
+    disabled: {
       type: 'boolean',
-      description: 'Whether the input is disabled'
+      description: 'Whether the input is disabled',
     },
-    invalid: { 
+    invalid: {
       type: 'boolean',
-      description: 'Renders the field in an invalid state'
+      description: 'Renders the field in an invalid state',
     },
-    label: { 
+    label: {
       type: 'string',
-      description: 'The content to display as the label'
+      description: 'The content to display as the label',
     },
-    'help-text': { 
+    'help-text': {
       type: 'string',
-      description: 'The content to display as the help text'
+      description: 'The content to display as the help text',
     },
-    placeholder: { 
+    placeholder: {
       type: 'string',
-      description: 'Placeholder text for the input'
+      description: 'Placeholder text for the input',
     },
-    'read-only': { 
+    'read-only': {
       type: 'boolean',
-      description: 'Whether the input can be selected but not changed'
+      description: 'Whether the input can be selected but not changed',
     },
-    required: { 
+    required: {
       type: 'boolean',
-      description: 'Whether user input is required'
+      description: 'Whether user input is required',
     },
-    type: { 
+    type: {
       type: 'string',
-      description: 'The type of input to render'
+      description: 'The type of input to render',
     },
-    value: { 
+    value: {
       type: 'string',
-      description: 'The current value'
+      description: 'The current value',
     },
-    name: { 
+    name: {
       type: 'string',
-      description: 'The name of the input element'
+      description: 'The name of the input element',
     },
   },
 };

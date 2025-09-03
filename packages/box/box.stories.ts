@@ -22,25 +22,25 @@ const meta: Meta<Args> = {
     `;
   },
   argTypes: {
-    bleed: { 
+    bleed: {
       type: 'boolean',
-      description: 'Makes the box full-width on mobile'
+      description: 'Makes the box full-width on mobile',
     },
-    bordered: { 
+    bordered: {
       type: 'boolean',
-      description: 'Adds a border to the box'
+      description: 'Adds a border to the box',
     },
-    info: { 
+    info: {
       type: 'boolean',
-      description: 'Styles the box with light blue colors'
+      description: 'Styles the box with light blue colors',
     },
-    neutral: { 
+    neutral: {
       type: 'boolean',
-      description: 'Styles the box with light gray colors'
+      description: 'Styles the box with light gray colors',
     },
-    role: { 
+    role: {
       type: 'string',
-      description: 'ARIA role attribute'
+      description: 'ARIA role attribute',
     },
   },
 };

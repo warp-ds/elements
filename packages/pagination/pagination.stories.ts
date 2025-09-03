@@ -16,21 +16,21 @@ const meta: Meta<Args> = {
     return `<w-pagination ${toAttributeString(args)}></w-pagination>`;
   },
   argTypes: {
-    'base-url': { 
+    'base-url': {
       type: 'string',
-      description: 'Base URL pattern for generating page links'
+      description: 'Base URL pattern for generating page links',
     },
-    pages: { 
+    pages: {
       type: 'number',
-      description: 'Total number of pages available'
+      description: 'Total number of pages available',
     },
-    'current-page': { 
+    'current-page': {
       type: 'number',
-      description: 'The currently active page number (1-indexed)'
+      description: 'The currently active page number (1-indexed)',
     },
-    'visible-pages': { 
+    'visible-pages': {
       type: 'number',
-      description: 'Maximum number of page links to display at once'
+      description: 'Maximum number of page links to display at once',
     },
   },
 };

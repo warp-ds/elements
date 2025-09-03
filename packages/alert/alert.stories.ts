@@ -22,15 +22,15 @@ const meta: Meta<Args> = {
     variant: {
       control: { type: 'select' },
       options: ['negative', 'positive', 'warning', 'info'],
-      description: 'The visual style variant of the alert'
+      description: 'The visual style variant of the alert',
     },
-    show: { 
+    show: {
       type: 'boolean',
-      description: 'Whether the alert is visible'
+      description: 'Whether the alert is visible',
     },
-    role: { 
+    role: {
       type: 'string',
-      description: 'ARIA role for the alert'
+      description: 'ARIA role for the alert',
     },
   },
 };
