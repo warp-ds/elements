@@ -56,14 +56,15 @@ pnpm build
 
 ### Start dev server
 
-The project uses [Vite](https://vitejs.dev/) for "unbundled" local development.
+The project uses [Storybook](https://storybook.js.org/docs/8/get-started/frameworks/web-components-vite) for local development.
+
 Start a local dev server by running the following command:
 
 ```sh
-pnpm run dev
+pnpm run storybook
 ```
 
-Changes to either the custom elements or the HTML files should hot reload.
+Changes to either the custom elements or the HTML files should trigger a reload in the Storybook preview.
 
 ### Automated tests
 
