@@ -22,7 +22,6 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   @property({ type: Boolean, attribute: 'no-close' }) noClose: boolean;
   @state() private _hasTopContent = false;
 
-  // @ts-expect-error The mixin needs type definitions
   @query('.title-el') titleEl: HTMLElement;
 
   constructor() {
