@@ -10,11 +10,6 @@ import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-<<<<<<< HEAD
-=======
-import { styles } from './styles.js';
-import { kebabCaseAttributes } from '../utils';
->>>>>>> 735bb9c (chore: inline button styles)
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
