@@ -26,10 +26,7 @@ test('works in a form', async () => {
   });
 
   // Select Raspberries
-  await userEvent.selectOptions(
-    page.getByLabelText('Berries').element(),
-    'Raspberries'
-  );
+  await userEvent.selectOptions(page.getByLabelText('Berries').element(), 'Raspberries');
 
   // Confirm the form has a field berry with value raspberries
   expect(form).toHaveFormValues({

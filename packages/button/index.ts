@@ -10,7 +10,6 @@ import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-import { kebabCaseAttributes } from '../utils';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
