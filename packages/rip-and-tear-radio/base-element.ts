@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 // @ts-nocheck
 import type { CSSResult, CSSResultGroup } from 'lit';
 import { LitElement, unsafeCSS } from 'lit';
