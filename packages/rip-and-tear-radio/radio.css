@@ -50,6 +50,7 @@
     transition:
       background var(--wa-transition-normal, 0.3s),
       border-color var(--wa-transition-fast, 0.1s),
+      border-width var(--wa-transition-normal, 0.3s),
       box-shadow var(--wa-transition-fast, 0.1s),
       color var(--wa-transition-fast, 0.1s);
     transition-timing-function: var(--wa-transition-easing, ease);
@@ -68,9 +69,10 @@
 
 /* Checked */
 :host(:state(checked)) .control {
-  color: var(--checked-icon-color);
+  /* color: var(--checked-icon-color, white); */
   border-color: var(--wa-form-control-activated-color, blue);
-  background-color: var(--wa-form-control-background-color, blue);
+  background-color: var(--wa-form-control-background-color, white);
+  border-width: 0.6rem;
 }
 
 /* Focus */
