@@ -11,6 +11,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Navigation/Pagination',
   component: 'w-pagination',
   render(args) {
     return `<w-pagination ${toAttributeString(args)}></w-pagination>`;

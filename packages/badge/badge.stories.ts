@@ -9,6 +9,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Layout/Badge',
   component: 'w-badge',
   render(args) {
     return `<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;

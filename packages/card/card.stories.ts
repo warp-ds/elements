@@ -10,6 +10,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Navigation/Card',
   component: 'w-card',
   render(args) {
     return `

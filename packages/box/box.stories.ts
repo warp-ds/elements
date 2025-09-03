@@ -12,6 +12,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
+  title: 'Layout/Box',
   component: 'w-box',
   render(args) {
     return `
