@@ -13,8 +13,8 @@ const esbuildDefaults = {
   bundle: true,
   format: 'esm',
   sourcemap: true,
-  target: 'es2017',
-  minify: false,
+  target: 'es2018',
+  minify: true,
   external: ['lit', '@warp-ds/elements-core'],
 };
 
