@@ -1,11 +1,14 @@
 // @warp-css;
 
 import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
-import { reset } from '../styles.js';
-import { styles } from './styles.js';
+
 import { classNames } from '@chbphone55/classnames';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+
+import { reset } from '../styles.js';
+
+import { styles } from './styles.js';
 import '@warp-ds/icons/elements/search-16';
 import '@warp-ds/icons/elements/close-16';
 
