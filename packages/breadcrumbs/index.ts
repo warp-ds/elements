@@ -16,8 +16,6 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
-const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
-
 export const ccBreadcrumbs = {
   wrapper: 'flex space-x-8',
   text: 's-text',
@@ -25,6 +23,8 @@ export const ccBreadcrumbs = {
   separator: 'select-none s-icon',
   a11y: 'sr-only',
 };
+
+const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 class WarpBreadcrumbs extends LitElement {
   @property({ attribute: 'aria-label', type: String })
