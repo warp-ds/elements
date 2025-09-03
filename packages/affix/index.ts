@@ -1,23 +1,38 @@
-import { html } from 'lit';
+// @warp-css;
 
+import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { reset } from '../styles.js';
+import { styles } from './styles.js';
 import { classNames } from '@chbphone55/classnames';
-import { suffix as ccSuffix, prefix as ccPrefix } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/search-16';
 import '@warp-ds/icons/elements/close-16';
 
-import { kebabCaseAttributes } from '../utils/index.js';
+const prefixSuffixWrapper =
+  'absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ';
 
-class WarpAffix extends kebabCaseAttributes(WarpElement) {
-  static properties = {
-    ariaLabel: { type: String },
-    clear: { type: Boolean },
-    search: { type: Boolean },
-    label: { type: String },
-  };
+export const ccSuffix = {
+  wrapper: prefixSuffixWrapper + 'right-0',
+  wrapperWithLabel: 'w-max pr-12',
+  wrapperWithIcon: 'w-40',
+  label: 'antialiased block relative cursor-default pb-0 font-bold text-xs s-text',
+};
 
-  static styles = [WarpElement.styles];
+export const ccPrefix = {
+  wrapper: prefixSuffixWrapper + 'left-0',
+  wrapperWithLabel: 'w-max pl-12',
+  wrapperWithIcon: 'w-40',
+  label: 'antialiased block relative cursor-default pb-0 font-bold text-xs s-text',
+};
+
+class WarpAffix extends LitElement {
+  @property({ attribute: 'aria-label' }) ariaLabel: string;
+  @property({ type: Boolean }) clear = false;
+  @property({ type: Boolean }) search = false;
+  @property() label: string;
+
+  static styles = [reset, styles];
 
   get _classBase() {
     return this.slot === 'suffix' ? ccSuffix : ccPrefix;
