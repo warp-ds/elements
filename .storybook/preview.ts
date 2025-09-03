@@ -1,7 +1,8 @@
 import 'virtual:uno.css';
+import { setCustomElementsManifest } from '@storybook/web-components';
 import type { Preview, Parameters } from '@storybook/web-components-vite';
-import { setCustomElementsManifest } from "@storybook/web-components";
-import customElements from "../dist/custom-elements.json";
+
+import customElements from '../dist/custom-elements.json';
 
 setCustomElementsManifest(customElements);
 
