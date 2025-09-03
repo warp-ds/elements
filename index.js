@@ -10,6 +10,7 @@ export * from './packages/dead-toggle/';
 export * from './packages/expandable';
 export * from './packages/modal';
 export * from './packages/pill';
+export * from './packages/rip-and-tear-radio/';
 export * from './packages/select';
 export * from './packages/textfield';
 export * from './packages/toast/api';

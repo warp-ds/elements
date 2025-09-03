@@ -4,9 +4,10 @@ import { html, isServer } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
 import { BaseFormAssociatedElement } from './form-associated-element';
+import styles from './radio.css?inline';
 
-export default class WRadio extends BaseFormAssociatedElement {
-  static css = [];
+export class WRadio extends BaseFormAssociatedElement {
+  static css = [styles];
 
   @state() checked = false;
 

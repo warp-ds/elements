@@ -121,6 +121,11 @@ export default ({ mode }) => {
             injectOptions,
           },
           {
+            filename: 'radio.html',
+            template: 'pages/components/radio.html',
+            injectOptions,
+          },
+          {
             filename: 'modal.html',
             template: 'pages/components/modal.html',
             injectOptions,

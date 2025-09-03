@@ -34,6 +34,10 @@ export default {
           href: '/pages/components/deadtoggle.html',
         },
         {
+          title: 'Radio',
+          href: '/pages/components/radio.html',
+        },
+        {
           title: 'Select',
           href: '/pages/components/select.html',
         },

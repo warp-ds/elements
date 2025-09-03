@@ -7,12 +7,13 @@ import { classMap } from 'lit/directives/class-map.js';
 import { BaseFormAssociatedElement } from './form-associated-element';
 import { uniqueId } from './math';
 import './radio';
-import type WRadio from './radio';
+import type { WRadio } from './radio';
+import styles from './radio-group.css?inline';
 import { RequiredValidator } from './required-validator';
 import { HasSlotController } from './slot';
 
-export default class WRadioGroup extends BaseFormAssociatedElement {
-  static css = [];
+export class WRadioGroup extends BaseFormAssociatedElement {
+  static css = [styles];
 
   static get validators() {
     const validators = [
@@ -97,11 +98,8 @@ export default class WRadioGroup extends BaseFormAssociatedElement {
 
   constructor() {
     super();
-
-    if (!isServer) {
-      this.addEventListener('keydown', this.handleKeyDown);
-      this.addEventListener('click', this.handleRadioClick);
-    }
+    this.addEventListener('keydown', this.handleKeyDown);
+    this.addEventListener('click', this.handleRadioClick);
   }
 
   /**

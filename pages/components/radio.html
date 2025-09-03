@@ -1,0 +1,22 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Radio</h1>
+
+        <w-radio-group label="Select an option" name="a" value="1">
+          <w-radio value="1">Option 1</w-radio>
+          <w-radio value="2">Option 2</w-radio>
+          <w-radio value="3">Option 3</w-radio>
+        </w-radio-group>
+      </main>
+    </div>
+    <script>
+    </script>
+      <%- include('footer.html'); -%>
+  </body>
+</html>
+
