@@ -1,10 +1,12 @@
+// @warp-css;
 import { html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
-import { box as ccBox } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 
-import { components, reset } from '../styles';
+import { reset } from '../styles';
+
+import { styles } from './styles';
 
 class WarpBox extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -26,15 +28,15 @@ class WarpBox extends LitElement {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [reset, components];
+  static styles = [reset, styles];
 
   get _class() {
     return classNames([
-      ccBox.base,
-      this.bleed && ccBox.bleed,
-      this.info && ccBox.info,
-      this.neutral && ccBox.neutral,
-      this.bordered && ccBox.bordered,
+      'group block relative break-words last-child:mb-0 p-16 rounded-8',
+      this.bleed && '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8',
+      this.info && 's-bg-info-subtle',
+      this.neutral && 's-surface-sunken',
+      this.bordered && 'border-2 s-border s-bg',
     ]);
   }
 
