@@ -11,6 +11,10 @@
   <style>
     html { font-size: 62.5%; }
 
+    [data-await-elements] {
+      display: none;
+    }
+
     main {
       -ms-text-size-adjust: 100%;
       -webkit-text-size-adjust: 100%;
@@ -259,10 +263,22 @@
     integrity="sha512-UOoJElONeUNzQbbKQbjldDf9MwOHqxNz49NNJJ1d90yp+X9edsHyJoAs6O4K19CZGaIdjI5ohK+O2y5lBTW6uQ=="
     crossorigin="anonymous"
   ></script>
+  <script defer>
+    window.addEventListener('DOMContentLoaded', async () => {
+      const el = document.querySelector('[data-await-elements]');
+      const elements = el.dataset.awaitElements.split(',');
+      await Promise.race([
+        Promise.all(elements.map((elName) => customElements.whenDefined(elName.trim()))),
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+      ]).then(() => {
+        el.removeAttribute('data-await-elements');
+      });
+    });
+  </script>
   <script type="module" crossorigin src="/elements/assets/sidebar-element-BDaYY5_2.js"></script>
   <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-BVmthQBT.css">
 </head>
-  <body>
+  <body data-await-elements="w-attention,sidebar-element">
     <div class="flex">
       <sidebar-element class="sidebar"></sidebar-element>
       <main slot="content">
