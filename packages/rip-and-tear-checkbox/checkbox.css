@@ -40,7 +40,16 @@
   padding: 0.2rem 0;
 }
 
-/* Checked */
+label:hover [part~='control']:not(:has(:checked, :indeterminate)) {
+  background-color: var(--w-s-color-background-hover);
+  border-color: var(--w-s-color-border-primary);
+}
+
+label:hover [part~='control']:has(:checked, :indeterminate) {
+  border-color: var(--w-s-color-border-primary-hover);
+  background-color: var(--w-s-color-background-primary-hover);
+}
+
 [part~='control']:has(:checked, :indeterminate) {
   color: var(--checked-icon-color, white);
   border-color: var(--w-s-color-border-primary);
@@ -49,6 +58,18 @@
 
 [part~='control']:has(:indeterminate) {
   font-weight: 700;
+}
+
+[part~='control']:has(:invalid) {
+  border-color: var(--w-s-color-border-negative);
+}
+
+[part~='control']:has(:invalid):hover {
+  background-color: var(--w-s-color-background-negative-subtle-hover);
+}
+
+[part~='control']:has(:checked):has(:invalid) {
+  background-color: var(--w-s-color-background-negative);
 }
 
 [part~='control']:has(:checked) {
