@@ -1,5 +1,19 @@
 <html lang="en">
   <%- include('head.html'); -%>
+  <style>
+  .card {
+    position: relative;
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .card-example {
+    margin-top: 32px;
+    display: grid;
+    gap: 16px;
+  }
+  </style>
   <body>
     <script type="module" src="../sidebar-element.js"></script>
     <div class="flex">
@@ -12,6 +26,20 @@
           <w-radio value="2">Option 2</w-radio>
           <w-radio value="3">Option 3</w-radio>
         </w-radio-group>
+
+        <section class="card-example">
+          <w-radio-group label="Hey some cards" name="b" value="lovely">
+          <div class="card">
+            <h4>I am a lovely card title</h4>
+            <p>And I'm going to contain the radio for <w-radio value="lovely" appearance="clickable">this amazing option</w-radio></p>
+          </div>
+          <div class="card">
+            <h4>I am a second super neat card</h4>
+            <p>I do not have the radio, the next paragraph does because it has more important information for the screenreader</p>
+            <p>Hello you can probably <w-radio value="neat" appearance="clickable">click this card to get neat stuff</w-radio></p>
+          </div>
+          </w-radio-group>
+        </section>
       </main>
     </div>
     <script>

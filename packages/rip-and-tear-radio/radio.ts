@@ -1,5 +1,5 @@
 import type { PropertyValues } from 'lit';
-import { html, isServer } from 'lit';
+import { html } from 'lit';
 
 import { property, state } from 'lit/decorators.js';
 
@@ -23,7 +23,7 @@ export class WRadio extends BaseFormAssociatedElement {
   @property({ reflect: true }) value: string;
 
   /** The radio's value. When selected, the radio group will receive this value. */
-  @property({ reflect: true }) appearance: 'default' | 'button' = 'default';
+  @property({ reflect: true }) appearance: 'default' | 'button' | 'clickable' = 'default';
 
   /**
    * The radio's size. When used inside a radio group, the size will be determined by the radio group's size so this
@@ -36,9 +36,7 @@ export class WRadio extends BaseFormAssociatedElement {
 
   constructor() {
     super();
-    if (!isServer) {
-      this.addEventListener('click', this.handleClick);
-    }
+    this.addEventListener('click', this.handleClick);
   }
 
   connectedCallback() {
@@ -95,16 +93,7 @@ export class WRadio extends BaseFormAssociatedElement {
 
   render() {
     return html`
-      <span part="control" class="control">
-        ${this.checked
-          ? html`
-              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" part="checked-icon" class="checked-icon">
-                <circle cx="8" cy="8" r="8" />
-              </svg>
-            `
-          : ''}
-      </span>
-
+      <span part="control" class="control"></span>
       <slot part="label" class="label"></slot>
     `;
   }
