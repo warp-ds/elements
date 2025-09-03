@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
+
 import { toAttributeString } from '../../.storybook/utilities.js';
 import './index.js';
 
 const meta: Meta = {
   component: 'w-select',
-  render(args, context) {
+  render(args) {
     return `
       <w-select ${toAttributeString(args)}>
         <option value="strawberries">Strawberries</option>
