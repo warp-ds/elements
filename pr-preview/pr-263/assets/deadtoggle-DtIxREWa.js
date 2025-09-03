@@ -1,1 +1,0 @@
-import"./sidebar-element-ByX7thb7.js";toggleRadio.addEventListener("click",()=>{toggleableRadio.checked=!toggleableRadio.checked});toggleCheckbox.addEventListener("click",()=>{toggleableCheckbox.checked=!toggleableCheckbox.checked});

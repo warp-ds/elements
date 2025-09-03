@@ -275,58 +275,129 @@
       });
     });
   </script>
-  <script type="module" crossorigin src="/elements/assets/sidebar-element-ByX7thb7.js"></script>
-  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-BBfaijLt.css">
+  <script type="module" crossorigin src="/elements/assets/sidebar-element-DDu8zzo-.js"></script>
+  <link rel="stylesheet" crossorigin href="/elements/assets/sidebar-element-DHIBknkn.css">
 </head>
-  <body data-await-elements="w-breadcrumbs,sidebar-element">
-      <div class="flex">
-        <sidebar-element class="sidebar"></sidebar-element>
-        <main slot="content">
-          <h1 class="mb-16">Breadcrumbs</h1>
-          <p>Breadcrumbs show the navigation structure for the current location.</p>
-  
-          <h2 class="mt-24 mb-16">Import</h2>
-          <syntax-highlight>import "@warp-ds/elements";</syntax-highlight>
-  
-          <h2 class="mt-24 mb-16">Examples</h2>
-  
-          <h3>All segments linkable</h3>
-  
-          <syntax-highlight>
-            <w-breadcrumbs>
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <a href="#/url/3" aria-current="page"> Oslo </a>
-            </w-breadcrumbs></syntax-highlight
-          >
-          <div class="example">
-            <w-breadcrumbs class="mt-10">
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <a href="#/url/3" aria-current="page">Oslo</a>
-            </w-breadcrumbs>
-          </div>
-  
-          <h3>Disabled last link</h3>
-  
-          <syntax-highlight>
-            <w-breadcrumbs>
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <span aria-current="page">Oslo</span>
-            </w-breadcrumbs></syntax-highlight
-          >
-          <div class="example">
-            <w-breadcrumbs class="mt-10">
-              <a href="#/url/1">Eiendom</a>
-              <a href="#/url/2">Bolig til salgs</a>
-              <span aria-current="page">Oslo</span>
-            </w-breadcrumbs>
-          </div>
-        </main>
-      </div>
-      
-      <script data-for="footer" type="application/json">
+  <body>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Pagination</h1>
+        <p>
+          Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and
+          directional arrows.
+        </p>
+
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>base-url</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Base URL pattern for generating page links</div>
+              </td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>pages</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">Total number of pages available</div>
+              </td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>current-page</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">The currently active page number (1-indexed)</div>
+              </td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>visible-pages</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">Maximum number of page links to display at once</div>
+              </td>
+              <td>7</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3 class="mt-24 mb-16">Basic Pagination</h3>
+        <syntax-highlight>
+          <w-pagination current-page="1" pages="5" base-url="/search?page="> </w-pagination>
+        </syntax-highlight>
+        <div class="example">
+          <w-pagination current-page="1" pages="5" base-url="/search?page="> </w-pagination>
+        </div>
+
+        <h3 class="mt-24 mb-16">Middle Page Selected</h3>
+        <syntax-highlight>
+          <w-pagination current-page="3" pages="7" base-url="/search?page="> </w-pagination>
+        </syntax-highlight>
+        <div class="example">
+          <w-pagination current-page="3" pages="7" base-url="/search?page="> </w-pagination>
+        </div>
+
+        <h3 class="mt-24 mb-16">Last Page Selected</h3>
+        <syntax-highlight>
+          <w-pagination current-page="10" pages="10" base-url="/search?page="> </w-pagination>
+        </syntax-highlight>
+        <div class="example">
+          <w-pagination current-page="10" pages="10" base-url="/search?page="> </w-pagination>
+        </div>
+
+        <h3 class="mt-24 mb-16">Many Pages with Limited Visible Pages</h3>
+        <syntax-highlight>
+          <w-pagination current-page="15" pages="50" visible-pages="5" base-url="/search?page="> </w-pagination>
+        </syntax-highlight>
+        <div class="example">
+          <w-pagination current-page="15" pages="50" visible-pages="5" base-url="/search?page="> </w-pagination>
+        </div>
+
+        <h3 class="mt-24 mb-16">Single Page (No Pagination)</h3>
+        <syntax-highlight>
+          <w-pagination current-page="1" pages="1" base-url="/search?page="> </w-pagination>
+        </syntax-highlight>
+        <div class="example">
+          <w-pagination current-page="1" pages="1" base-url="/search?page="> </w-pagination>
+        </div>
+
+        <h2 class="mt-24 mb-16">Accessibility</h2>
+        <p>The pagination component includes proper ARIA labels and semantic navigation structure:</p>
+        <ul class="list-disc ml-24 space-y-8">
+          <li>Uses <code>nav</code> element with "Pages" heading for screen readers</li>
+          <li>Current page is marked with <code>aria-current="page"</code></li>
+          <li>Navigation buttons include descriptive screen reader text</li>
+          <li>All interactive elements meet minimum touch target size requirements (44px)</li>
+          <li>Keyboard navigation is fully supported</li>
+        </ul>
+
+        <h2 class="mt-24 mb-16">Usage Guidelines</h2>
+        <p>
+          <strong>When to use:</strong> Use pagination when you have a large dataset that needs to be split across multiple pages to improve
+          performance and user experience.
+        </p>
+        <p><strong>Page numbering:</strong> The component uses 1-indexed page numbers (first page is 1, not 0).</p>
+        <p>
+          <strong>URL structure:</strong> The <code>base-url</code> prop should include the URL pattern up to where the page number will be
+          appended. For example, if your URLs are <code>/search?page=1</code>, set <code>base-url="/search?page="</code>.
+        </p>
+      </main>
+    </div>
+    <script data-for="footer" type="application/json">
   {
     "github": {
       "name": "Github",
@@ -338,6 +409,5 @@
     }
   }
 </script>
-
   </body>
 </html>
