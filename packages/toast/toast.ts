@@ -5,6 +5,7 @@ import { i18n } from '@lingui/core';
 import { toast as ccToast } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { expand, collapse } from 'element-collapse';
+import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
@@ -18,6 +19,7 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import type { ToastType } from './types';
 
 const toastType = {
   success: 'success',
@@ -49,21 +51,24 @@ export class WarpToast extends WarpElement {
     `,
   ];
 
-  static properties = {
-    id: { type: String, attribute: true, reflect: true },
-    type: { type: String, attribute: true, reflect: true },
-    text: { type: String, attribute: true, reflect: true },
-    canclose: { type: Boolean, attribute: true, reflect: true },
-  };
+  @property({ type: String, attribute: true, reflect: true })
+  id: string = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+
+  @property({ type: String, attribute: true, reflect: true })
+  type: ToastType = 'success';
+
+  @property({ type: String, attribute: true, reflect: true })
+  text: string = '';
+
+  @property({ type: Boolean, attribute: true, reflect: true })
+  canclose: boolean = false;
+
+  @state()
+  private _expanded: boolean = false;
 
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-    this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    this.type = 'success';
-    this.text = '';
-    this.canclose = false;
   }
 
   connectedCallback() {
@@ -148,9 +153,12 @@ export class WarpToast extends WarpElement {
   }
 
   async collapse() {
-    return new Promise((resolve) => {
-      if (this._expanded && this._wrapper) collapse(this._wrapper, resolve);
-      else resolve();
+    return new Promise<void>((resolve) => {
+      if (this._expanded && this._wrapper) {
+        collapse(this._wrapper, resolve);
+      } else {
+        resolve();
+      }
     });
   }
 
@@ -165,6 +173,7 @@ export class WarpToast extends WarpElement {
 
   render() {
     if (!this.text) return html``;
+
     return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
       <div class="${this.#primaryClasses}">
         <div class="${this.#iconClasses}">${this._iconMarkup}</div>
