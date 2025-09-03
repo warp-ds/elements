@@ -5,7 +5,6 @@ import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
 import './index.js';
 
-
 type Args = {
   expanded: boolean;
   title: string;
