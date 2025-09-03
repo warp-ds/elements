@@ -1,13 +1,43 @@
+// @warp-css;
+
 import { LitElement, html, PropertyValues } from 'lit';
 
 import { classNames as classnames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import { input as ccinput, label as ccLabel, helpText as ccHelpText } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
+
+import { styles } from './styles.js';
+
+export const ccinput = {
+  // wrapper classes
+  wrapper: 'relative',
+  // input classes
+  base: 'block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current', // true
+  default: 'border-1 s-text s-bg s-border hover:s-border-hover active:s-border-selected', // !isInvalid && !isDisabled && !isReadOnly
+  disabled: 'border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none', // !isInvalid && isDisabled && !isReadOnly
+  invalid: 'border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!', // isInvalid && !isDisabled && !isReadOnly
+  readOnly: 'pl-0 bg-transparent pointer-events-none', // !isInvalid && !isDisabled && isReadOnly
+  placeholder: 'placeholder:s-text-placeholder',
+  suffix: 'pr-40',
+  prefix: 'pl-[var(--w-prefix-width,_40px)]',
+  // textarea classes
+  textArea: 'min-h-[42] sm:min-h-[45]',
+};
+
+export const ccLabel = {
+  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
+  optional: 'pl-8 font-normal text-s s-text-subtle',
+};
+
+export const ccHelpText = {
+  base: 'text-xs mt-4 block',
+  color: 's-text-subtle',
+  colorInvalid: 's-text-negative',
+};
 
 class WarpTextField extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
@@ -85,7 +115,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [reset, components];
+  static styles = [reset, styles];
 
   get _inputstyles() {
     return classnames([
