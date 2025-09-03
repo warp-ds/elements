@@ -1,11 +1,9 @@
 diff --git a/dist/chunk-C44SADVH.js b/dist/chunk-C44SADVH.js
-index a5dc5f5a2542f9531e876b35a81b1ddc2712d2a0..a895ebeb6c544885b1248d6d40a51ffe526d9aed 100644
+index a5dc5f5a2542f9531e876b35a81b1ddc2712d2a0..c463aee341d12844452e3b29994438ddf7c64621 100644
 --- a/dist/chunk-C44SADVH.js
 +++ b/dist/chunk-C44SADVH.js
-@@ -1,24 +1,36 @@
- // src/pure.ts
--import { debug, getElementLocatorSelectors } from "@vitest/browser/utils";
-+import { debug as viteDebug, getElementLocatorSelectors } from "@vitest/browser/utils";
+@@ -2,13 +2,15 @@
+ import { debug, getElementLocatorSelectors } from "@vitest/browser/utils";
  import { render as litRender } from "lit";
  var containers = /* @__PURE__ */ new Set();
 -function render(template, {
@@ -21,18 +19,7 @@ index a5dc5f5a2542f9531e876b35a81b1ddc2712d2a0..a895ebeb6c544885b1248d6d40a51ffe
    return {
      container,
      baseElement,
--    debug,
-+    debug(...args) {
-+      viteDebug(...args);
-+      for (const el of baseElement.querySelectorAll("*")) {
-+        if (el.shadowRoot) {
-+          for (const shel of el.shadowRoot.children) {
-+            viteDebug(shel, undefined);
-+          }
-+        }
-+      }
-+    },
-     unmount() {
+@@ -17,8 +19,9 @@ function render(template, {
        containers.delete(container);
        container.remove();
      },
@@ -44,7 +31,7 @@ index a5dc5f5a2542f9531e876b35a81b1ddc2712d2a0..a895ebeb6c544885b1248d6d40a51ffe
      asFragment() {
        return document.createRange().createContextualFragment(container.innerHTML);
 diff --git a/dist/pure.d.ts b/dist/pure.d.ts
-index ebd3ac24afe257f3c51153ff23d88decb5a5182d..8819736283c0045b4be28e4811ac518037b6bf8d 100644
+index ebd3ac24afe257f3c51153ff23d88decb5a5182d..79df7dcb0e4c70ed7702e39ed50513e39d6eca01 100644
 --- a/dist/pure.d.ts
 +++ b/dist/pure.d.ts
 @@ -11,10 +11,10 @@ interface RenderResult extends LocatorSelectors {
@@ -58,5 +45,5 @@ index ebd3ac24afe257f3c51153ff23d88decb5a5182d..8819736283c0045b4be28e4811ac5180
 -declare function render(template: unknown, { baseElement, container, ...options }?: ComponentRenderOptions): RenderResult;
 +declare function render(template: unknown, { baseElement, container, ...options }?: ComponentRenderOptions): Promise<RenderResult>;
  declare function cleanup(): void;
-
+ 
  export { type ComponentRenderOptions, type RenderResult, cleanup, render };
