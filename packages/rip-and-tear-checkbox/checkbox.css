@@ -1,0 +1,115 @@
+:host {
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+[part~='control'] {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--w-s-color-border);
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: var(--w-s-color-background);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  margin-right: 0.8rem;
+  text-align: center;
+  line-height: var(--w-line-height-xs);
+  font-size: var(--w-font-size-m);
+}
+
+[part~='base'] {
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: currentColor;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+[part~='label'] {
+  display: block;
+  font-size: var(--w-font-size-m);
+  line-height: var(--w-line-height-m);
+  user-select: none;
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+
+label:hover [part~='control']:not(:has(:checked, :indeterminate)) {
+  background-color: var(--w-s-color-background-hover);
+  border-color: var(--w-s-color-border-primary);
+}
+
+label:hover [part~='control']:has(:checked, :indeterminate) {
+  border-color: var(--w-s-color-border-primary-hover);
+  background-color: var(--w-s-color-background-primary-hover);
+}
+
+[part~='control']:has(:checked, :indeterminate) {
+  color: var(--checked-icon-color, white);
+  border-color: var(--w-s-color-border-primary);
+  background-color: var(--w-s-color-background-primary);
+}
+
+[part~='control']:has(:indeterminate) {
+  font-weight: 700;
+}
+
+[part~='control']:has(:invalid) {
+  border-color: var(--w-s-color-border-negative);
+}
+
+[part~='control']:has(:invalid):hover {
+  background-color: var(--w-s-color-background-negative-subtle-hover);
+}
+
+[part~='control']:has(:checked):has(:invalid) {
+  background-color: var(--w-s-color-background-negative);
+}
+
+[part~='control']:has(:checked) {
+  background-image: var(--w-icon-toggle-checked);
+  background-position: center;
+}
+
+/* Focus */
+[part~='control']:has(> input:focus-visible:not(:disabled)) {
+  outline: var(--wa-focus-ring);
+  outline-offset: var(--wa-focus-ring-offset);
+}
+
+/* Disabled */
+:host [part~='base']:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+input {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[part~='icon'] {
+  display: flex;
+
+  input:not(:checked, :indeterminate) + & {
+    visibility: hidden;
+  }
+}
+
+:host([required]) [part~='label']::after {
+  content: var(--wa-form-control-required-content);
+  color: var(--wa-form-control-required-content-color);
+  margin-inline-start: var(--wa-form-control-required-content-offset);
+}
+

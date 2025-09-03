@@ -1,0 +1,89 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <style>
+  .card {
+    position: relative;
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3 ease;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 32px;
+  }
+  .mb-0 { margin-bottom: 0; }
+  .card.active {
+    background-color: rgba(66, 135, 245, 0.2);
+    border-color: rgba(66, 135, 245, 1);
+  }
+  .card-example {
+    margin-top: 32px;
+    display: grid;
+    gap: 16px;
+  }
+  </style>
+  <body>
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Radio</h1>
+
+        <w-radio-group label="Select an option" name="a" value="1">
+          <w-radio value="1">Option 1</w-radio>
+          <w-radio value="2">Option 2</w-radio>
+          <w-radio value="3">Option 3</w-radio>
+        </w-radio-group>
+
+        <form>
+          <w-radio-group required label="Select an option" name="a" value="">
+            <w-radio value="1">Option 1</w-radio>
+            <w-radio value="2">Option 2</w-radio>
+            <w-radio value="3">Option 3</w-radio>
+          </w-radio-group>
+          <button>Click me</button>
+        </form>
+
+
+        <section class="card-example">
+          <w-radio-group label="Cards with dead-toggle example" name="b" value="" id="groupExample">
+            <div class="card" id="lovelyCard">
+              <w-dead-toggle type="radio"></w-dead-toggle>
+              <div>
+                <h4>I am a lovely card title</h4>
+                <p class="mb-0">And I'm going to contain the radio for <w-radio value="lovely" appearance="clickable">this amazing option</w-radio></p>
+              </div>
+            </div>
+            <div class="card" id="neatCard">
+              <w-dead-toggle type="radio"></w-dead-toggle>
+              <div>
+                <h4>I am a second super neat card</h4>
+                <p>I do not have the radio, the next paragraph does because it has more important information for the screenreader</p>
+                <p class="mb-0">Hello you can probably <w-radio value="neat" appearance="clickable">click this card to get neat stuff</w-radio></p>
+              </div>
+            </div>
+          </w-radio-group>
+        </section>
+      </main>
+    </div>
+    <script type="module">
+    groupExample.addEventListener('change', (e) => {
+      const v = e.target.value
+      if (v === 'lovely') {
+        lovelyCard.classList.add('active')
+        neatCard.classList.remove('active')
+        lovelyCard.querySelector('w-dead-toggle').checked = true
+        neatCard.querySelector('w-dead-toggle').checked = false
+      } else {
+        lovelyCard.classList.remove('active')
+        neatCard.classList.add('active')
+        lovelyCard.querySelector('w-dead-toggle').checked = false
+        neatCard.querySelector('w-dead-toggle').checked = true
+      }
+    })
+    </script>
+      <%- include('footer.html'); -%>
+  </body>
+</html>
+
