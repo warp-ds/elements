@@ -1,5 +1,5 @@
 import type { PropertyValues } from 'lit';
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -10,6 +10,7 @@ import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated
 import { RequiredValidator } from '../rip-and-tear-radio/required-validator';
 import { HasSlotController } from '../rip-and-tear-radio/slot';
 import { watch } from '../rip-and-tear-radio/watch';
+import '@warp-ds/icons/elements/check-16';
 
 import styles from './checkbox.css?inline';
 
@@ -185,7 +186,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
             aria-describedby="hint"
             @click=${this.handleClick} />
 
-          <wa-icon part="${iconState}-icon icon" library="system" name=${iconName}></wa-icon>
+          ${this.checked ? html`<w-icon-check-16></w-icon-check-16>` : nothing}
         </span>
 
         <slot part="label"></slot>
