@@ -10,7 +10,16 @@
 }
 
 .label {
-  padding: 0;
+  font-size: var(--w-font-size-s);
+  line-height: var(--w-line-height-s);
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: grayscale;
+  cursor: pointer;
+  padding-bottom: 0.4rem;
+  color: var(--w-s-color-text);
+  display: block;
 }
 
 .radio-group-required .label::after {
