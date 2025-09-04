@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import * as ToastStories from './toast.stories';
+
+<Meta of={ToastStories} name="Usage" />
+
+# Toast
+
+Toast is a bit different from other packages in Warp Elements. You need to import functions from the package and call them as needed.
+
+The toast is intended to be used programmatically. JavaScript APIs are provided to create, update and remove toasts from a page while managing things like placement on the page for you.
+
+## Import functions for working with toasts
+
+Be sure to import the elements package first as the toast APIs depend on this package.
+
+```js
+import from '@warp-ds/elements/components/toast';
+```
+
+Once you have imported the elements package, import the toast api package.
+
+```js
+import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
+```

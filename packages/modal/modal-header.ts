@@ -212,3 +212,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
     `,
   ];
 }
+
+if (!customElements.get('w-modal-header')) {
+  customElements.define('w-modal-header', ModalHeader);
+}
