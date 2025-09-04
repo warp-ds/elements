@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpModal, WarpModalHeader, WarpModalFooter } from './index.ts';
 import './index.ts';
@@ -82,7 +83,7 @@ export const Modal: StoryObj<typeof modalArgs> = {
   render(args) {
     return html`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal ${toAttributeString(args)}></w-modal>
+      <w-modal ${spread(prespread(args))}></w-modal>
     `;
   },
   args: modalArgs,
@@ -98,7 +99,7 @@ export const ModalHeader: StoryObj<typeof modalHeaderArgs> = {
   render(args) {
     return html`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-header ${toAttributeString(args)}></w-modal-header>
+      <w-modal-header ${spread(prespread(args))}></w-modal-header>
     `;
   },
   args: modalHeaderArgs,
@@ -114,7 +115,7 @@ export const ModalFooter: StoryObj<typeof modalFooterArgs> = {
   render(args) {
     return html`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-footer ${toAttributeString(args)}></w-modal-footer>
+      <w-modal-footer ${spread(prespread(args))}></w-modal-footer>
     `;
   },
   args: modalFooterArgs,

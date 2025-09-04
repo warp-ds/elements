@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpToast, WarpToastContainer } from './index.js';
 import '../button/index.js';
@@ -37,7 +38,7 @@ export const ToastContainer: StoryObj<typeof containerArgs> = {
   args: containerArgs,
   render(args) {
     return html` <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast-container ${toAttributeString(args)}></w-toast-container>`;
+      <w-toast-container ${spread(prespread(args))}></w-toast-container>`;
   },
   argTypes: containerArgTypes,
   parameters: {
@@ -52,7 +53,7 @@ export const Toast: StoryObj = {
   render(args) {
     return html`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast ${toAttributeString(args)}></w-toast>
+      <w-toast ${spread(prespread(args))}></w-toast>
     `;
   },
   argTypes,

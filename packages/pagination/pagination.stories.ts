@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpPagination } from './index.js';
 import './index.js';
@@ -13,7 +14,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpPagination>('w-pagina
 const meta: Meta<typeof args> = {
   title: 'Navigation/Pagination',
   render(args) {
-    return html`<w-pagination ${toAttributeString(args)}></w-pagination>`;
+    return html`<w-pagination ${spread(prespread(args))}></w-pagination>`;
   },
   args,
   argTypes,

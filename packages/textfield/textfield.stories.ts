@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpTextField } from './index.js';
 import './index.js';
@@ -13,7 +14,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfie
 const meta: Meta<typeof args> = {
   title: 'Forms/Textfield',
   render(args) {
-    return html`<w-textfield ${toAttributeString(args)}></w-textfield>`;
+    return html`<w-textfield ${spread(prespread(args))}></w-textfield>`;
   },
   args,
   argTypes,
@@ -94,7 +95,7 @@ export const WithAffix: Story = {
   },
   render(args) {
     return html`
-      <w-textfield ${toAttributeString(args)}>
+      <w-textfield ${spread(prespread(args))}>
         <w-affix slot="suffix" label="kr"></w-affix>
       </w-textfield>
     `;

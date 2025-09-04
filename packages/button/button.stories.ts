@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpButton } from './index.js';
 import './index.js';
@@ -13,7 +14,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
 const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
   render(args) {
-    return html`<w-button ${toAttributeString(args)}>Button Text</w-button>`;
+    return html`<w-button ${spread(prespread(args))}>Button Text</w-button>`;
   },
   args,
   argTypes,
@@ -68,7 +69,7 @@ export const Pill: Story = {
     type: 'button',
   },
   render(args) {
-    return html`<w-button ${toAttributeString(args)}>💙</w-button>`;
+    return html`<w-button ${spread(prespread(args))}>💙</w-button>`;
   },
 };
 
@@ -114,7 +115,7 @@ export const AsLink: Story = {
   render(args) {
     return html`
       <div style="width: 50vw">
-        <w-button ${toAttributeString(args)}>Visit Example</w-button>
+        <w-button ${spread(prespread(args))}>Visit Example</w-button>
       </div>
     `;
   },

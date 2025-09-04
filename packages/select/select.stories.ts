@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpSelect } from './index.js';
 import './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Forms/Select',
   render(args) {
     return html`
-      <w-select ${toAttributeString(args)}>
+      <w-select ${spread(prespread(args))}>
         <option value="strawberries">Strawberries</option>
         <option value="raspberries" selected>Raspberries</option>
         <option value="cloudberries">Cloudberries</option>

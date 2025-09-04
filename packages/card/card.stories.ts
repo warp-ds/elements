@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpCard } from './index.js';
 import './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Navigation/Card',
   render(args) {
     return html`
-      <w-card ${toAttributeString(args)}>
+      <w-card ${spread(prespread(args))}>
         <div style="padding: 16px;">
           <h3>Card Title</h3>
           <p>This is card content with some example text.</p>
@@ -82,7 +83,7 @@ export const PropertyExample: Story = {
   },
   render(args) {
     return html`
-      <w-card ${toAttributeString(args)} style="max-width: 300px;">
+      <w-card ${spread(prespread(args))} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">
           <p style="font-size: 12px; color: #666; margin: 0 0 8px 0;">DNB Eiendom</p>

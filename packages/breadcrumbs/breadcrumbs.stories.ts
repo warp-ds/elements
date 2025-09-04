@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpBreadcrumbs } from './index.js';
 import './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Navigation/Breadcrumbs',
   render(args) {
     return html`
-      <w-breadcrumbs ${toAttributeString(args)}>
+      <w-breadcrumbs ${spread(prespread(args))}>
         <a href="#/home">Home</a>
         <a href="#/category">Category</a>
         <a href="#/subcategory">Subcategory</a>
@@ -46,7 +47,7 @@ export const WithLinks: Story = {
   },
   render(args) {
     return html`
-      <w-breadcrumbs ${toAttributeString(args)}>
+      <w-breadcrumbs ${spread(prespread(args))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <a href="#/oslo" aria-current="page">Oslo</a>
@@ -61,7 +62,7 @@ export const WithSpanForCurrentPage: Story = {
   },
   render(args) {
     return html`
-      <w-breadcrumbs ${toAttributeString(args)}>
+      <w-breadcrumbs ${spread(prespread(args))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <span aria-current="page">Oslo</span>

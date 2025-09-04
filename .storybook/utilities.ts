@@ -1,24 +1,14 @@
-function ifDefined(attribute: string, args: Record<string, unknown>): string {
-  if (!args[attribute]) {
-    return '';
-  }
-  if (args[attribute] === false) {
-    return '';
-  }
-  if (args[attribute] === true) {
-    return attribute;
-  }
-  return `${attribute}="${args[attribute]}"`;
-}
-
 /**
- * Maps storybook args to HTML attributes.
+ * Massages storybook args before being spread to HTML attributes.
  *
- * Boolean false is rendered as the empty string.
+ * - Empty strings are treated as not set.
+ * - Boolean false don't get set.
  *
  * @example
  * ```ts
- * import { toAttributeString } from '../../.storybook/utilities.js';
+ * import { html } from 'lit';
+ * import { spread } from '@open-wc/lit-helpers';
+ * import { prespread } from '../../.storybook/utilities.js';
  *
  * type Args = {
  *   required: boolean;
@@ -27,7 +17,7 @@ function ifDefined(attribute: string, args: Record<string, unknown>): string {
  * const meta: Meta<Args> = {
  *   component: 'w-component',
  *   render(args) {
- *     return `<w-component ${toAttributeString(args)}></w-component>`;
+ *     return html`<w-component ${spread(prespread(args))}></w-component>`;
  *   },
  *   argTypes: {
  *     required: { type: 'boolean' },
@@ -35,8 +25,15 @@ function ifDefined(attribute: string, args: Record<string, unknown>): string {
  * };
  * ```
  */
-export function toAttributeString(args: Record<string, unknown>): string {
-  return Object.keys(args)
-    .map((attribute) => ifDefined(attribute, args))
-    .join(' ');
+export function prespread(args: Record<string, unknown>): Record<string, unknown> {
+  const newArgs = {
+    ...args,
+  };
+  for (const field of Object.keys(newArgs)) {
+    // allow the number value 0 which is falsy in JS
+    if (typeof newArgs[field] !== 'number' && !newArgs[field]) {
+      delete newArgs[field];
+    }
+  }
+  return newArgs;
 }

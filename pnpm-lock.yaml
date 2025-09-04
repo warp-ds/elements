@@ -71,6 +71,9 @@ importers:
       '@lingui/conf':
         specifier: 5.2.0
         version: 5.2.0(typescript@5.5.3)
+      '@open-wc/lit-helpers':
+        specifier: ^0.7.0
+        version: 0.7.0(lit@3.2.0)
       '@semantic-release/changelog':
         specifier: 6.0.3
         version: 6.0.3(semantic-release@24.0.0(typescript@5.5.3))
@@ -997,6 +1000,11 @@ packages:
 
   '@open-wc/form-control@1.0.0':
     resolution: {integrity: sha512-4QW7FZcq1r7vKzs+ULAqc8vcjs+15kiGksoLiNMi1lbHX52MC+jonveEhvzX1rs0QUXv57V7F6rGt/q+UZh61Q==}
+
+  '@open-wc/lit-helpers@0.7.0':
+    resolution: {integrity: sha512-4NBlx5ve0EvZplCRJbESm0MdMbRCw16alP2y76KAAAwzmFFXXrUj5hFwhw55+sSg5qaRRx6sY+s7usKgnNo3TQ==}
+    peerDependencies:
+      lit: ^2.0.0 || ^3.0.0
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -6142,6 +6150,10 @@ snapshots:
       '@octokit/openapi-types': 22.2.0
 
   '@open-wc/form-control@1.0.0': {}
+
+  '@open-wc/lit-helpers@0.7.0(lit@3.2.0)':
+    dependencies:
+      lit: 3.2.0
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpBox } from './index.js';
 import './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Layout/Box',
   render: (args) => {
     return html`
-      <w-box ${toAttributeString(args)}>
+      <w-box ${spread(prespread(args))}>
         <h3>Box Content</h3>
         <p>This is content inside a box component.</p>
       </w-box>

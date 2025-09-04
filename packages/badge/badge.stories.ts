@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpBadge } from './index.js';
 import './index.js';
@@ -13,7 +14,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpBadge>('w-badge');
 const meta: Meta<typeof args> = {
   title: 'Layout/Badge',
   render(args) {
-    return html`<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
+    return html`<w-badge ${spread(prespread(args))}>Badge text</w-badge>`;
   },
   args,
   argTypes,
@@ -77,7 +78,7 @@ export const Positioned: Story = {
   render(args) {
     return html`
       <div style="position: relative; width: 200px; height: 100px; background: #f0f0f0; border-radius: 8px;">
-        <w-badge ${toAttributeString(args)}>Badge</w-badge>
+        <w-badge ${spread(prespread(args))}>Badge</w-badge>
       </div>
     `;
   },

@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpAttention } from './index.js';
 import './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Overlays/Attention',
   render(args) {
     return html`
-      <w-attention ${toAttributeString(args)}>
+      <w-attention ${spread(prespread(args))}>
         <button id="popoverTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
           Click to toggle a popover
         </button>

@@ -1,4 +1,0 @@
-{
-  // This editor warning is not happy with how we set attributes in .stories.ts files
-  "lit-plugin.rules.no-incompatible-type-binding": "off"
-}

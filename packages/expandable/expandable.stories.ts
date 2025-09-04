@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { prespread } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
 
@@ -16,7 +17,7 @@ const meta: Meta<typeof args> = {
   title: 'Layout/Expandable',
   render(args) {
     return html`
-      <w-expandable ${toAttributeString(args)}>
+      <w-expandable ${spread(prespread(args))}>
         <p>This is the expandable content that can be shown or hidden.</p>
         <p>It can contain multiple paragraphs and other elements.</p>
       </w-expandable>
@@ -111,7 +112,7 @@ export const CustomTitle: Story = {
   },
   render(args) {
     return html`
-      <w-expandable ${toAttributeString(args)}>
+      <w-expandable ${spread(prespread(args))}>
         <div slot="title" style="display: flex; align-items: center;">
           <span style="margin-right: 8px;">🎯</span>
           <span>Custom title with icon</span>
