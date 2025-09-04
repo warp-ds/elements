@@ -76,9 +76,11 @@ class WarpExpandable extends LitElement {
   headingLevel: number;
 
   @property({ type: Boolean, state: true })
+  /** @internal */
   _hasTitle: boolean = true;
 
   @property({ type: Boolean, state: true })
+  /** @internal */
   _showChevronUp: boolean = false;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
@@ -149,6 +151,7 @@ class WarpExpandable extends LitElement {
     return classNames([ccExpandable.expansion, !this.expanded && ccExpandable.expansionNotExpanded]);
   }
 
+  /** @internal */
   get _expandableSlot() {
     return html`<div class="${this.#contentClasses}">
       <slot></slot>

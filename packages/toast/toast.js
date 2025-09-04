@@ -82,22 +82,27 @@ export class WarpToast extends WarpElement {
     ]);
   }
 
+  /** @internal */
   get _wrapper() {
     return this.renderRoot?.querySelector(`section`) ?? null;
   }
 
+  /** @internal */
   get _warning() {
     return this.type === toastType.warning;
   }
 
+  /** @internal */
   get _error() {
     return this.type === toastType.error;
   }
 
+  /** @internal */
   get _role() {
     return this._error || this._warning ? 'alert' : 'status';
   }
 
+  /** @internal */
   get _typeLabel() {
     if (this._warning) {
       return i18n._({
@@ -121,6 +126,7 @@ export class WarpToast extends WarpElement {
     }
   }
 
+  /** @internal */
   get _iconMarkup() {
     if (this._warning) return html`<w-icon-warning-16></w-icon-warning-16>`;
     if (this._error) return html`<w-icon-error-16></w-icon-error-16>`;

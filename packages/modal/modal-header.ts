@@ -20,6 +20,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   @property({ type: String }) title: string;
   @property({ type: Boolean }) back: boolean;
   @property({ type: Boolean, attribute: 'no-close' }) noClose: boolean;
+  /** @internal */
   @state() private _hasTopContent = false;
 
   @query('.title-el') titleEl: HTMLElement;

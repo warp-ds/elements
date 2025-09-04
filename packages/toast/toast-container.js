@@ -25,6 +25,7 @@ export class WarpToastContainer extends WarpElement {
   ];
 
   static properties = {
+    /** @internal */
     _toasts: { state: true },
   };
 
@@ -72,6 +73,7 @@ export class WarpToastContainer extends WarpElement {
     return el;
   }
 
+  /** @internal */
   get _toastsArray() {
     return Array.from(this._toasts).map(([, toast]) => toast);
   }

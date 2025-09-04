@@ -28,7 +28,7 @@ const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 class WarpBreadcrumbs extends LitElement {
   @property({ attribute: 'aria-label', type: String })
-  ariaLabel;
+  ariaLabel: string;
 
   static styles = [reset, styles];
 
@@ -43,6 +43,7 @@ class WarpBreadcrumbs extends LitElement {
     });
   }
 
+  /** @internal */
   _children: Array<Element | TemplateResult>;
 
   connectedCallback() {

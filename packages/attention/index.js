@@ -141,22 +141,27 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     });
   }
 
+  /** @internal */
   get _actualDirection() {
     return this.placement;
   }
 
+  /** @internal */
   set _actualDirection(v) {
     this.placement = v;
   }
 
+  /** @internal */
   get _arrowEl() {
     return this.renderRoot.querySelector('#arrow');
   }
 
+  /** @internal */
   get _arrowDirection() {
     return opposites[this._actualDirection];
   }
 
+  /** @internal */
   get _arrowClasses() {
     return classNames([
       ccAttention.arrowBase,
@@ -165,10 +170,12 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     ]);
   }
 
+  /** @internal */
   get _arrowHtml() {
     return this.noArrow ? '' : html`<div id="arrow" class="${this._arrowClasses}"></div>`;
   }
 
+  /** @internal */
   get _activeVariantClasses() {
     const variantProps = {
       callout: this.callout,
@@ -185,24 +192,29 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     };
   }
 
+  /** @internal */
   get _attentionEl() {
     return this.renderRoot.querySelector('#attention');
   }
 
+  /** @internal */
   get _targetEl() {
     const targetSlot = this.renderRoot?.querySelector("slot[name='target']");
     return targetSlot ? targetSlot.assignedNodes()[0] : null;
   }
 
+  /** @internal */
   get _messageEl() {
     const messageSlot = this.renderRoot.querySelector("slot[name='message']");
     return messageSlot ? messageSlot.assignedNodes()[0] : null;
   }
 
+  /** @internal */
   get _wrapperClasses() {
     return classNames([ccAttention.base, this._activeVariantClasses.wrapper]);
   }
 
+  /** @internal */
   get _ariaClose() {
     return i18n._({
       id: 'attention.aria.close',
@@ -211,6 +223,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     });
   }
 
+  /** @internal */
   get _closeBtnHtml() {
     return html`
       <button aria-label="${this._ariaClose}" @click="${this.close}" @keydown=${this.keypressed} class="${ccAttention.closeBtn}">

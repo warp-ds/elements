@@ -46,22 +46,27 @@ class WarpPagination extends LitElement {
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
+  /** @internal */
   get shouldShowShowFirstPageButton() {
     return this.currentPageNumber - 2 > 0;
   }
 
+  /** @internal */
   get shouldShowPreviousPageButton() {
     return this.currentPageNumber - 1 > 0;
   }
 
+  /** @internal */
   get shouldShowNextPageButton() {
     return this.currentPageNumber < this.pages;
   }
 
+  /** @internal */
   get currentPageIndex() {
     return this.currentPageNumber - 1;
   }
 
+  /** @internal */
   get visiblePageNumbers() {
     if (this.pages <= this.visiblePages) {
       // Show all pages if total pages is less than or equal to visible pages

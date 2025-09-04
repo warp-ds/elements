@@ -17,6 +17,7 @@ class WarpBadge extends LitElement {
 
   static styles = [reset, styles];
 
+  /** @internal */
   get _class() {
     return classNames([
       'py-4 px-8 border-0 rounded-4 text-xs inline-flex',

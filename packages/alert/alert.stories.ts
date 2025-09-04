@@ -33,6 +33,7 @@ type Story = StoryObj<typeof args>;
 export const Info: Story = {
   args: {
     variant: 'info',
+    show: true,
     role: 'alert',
   },
 };

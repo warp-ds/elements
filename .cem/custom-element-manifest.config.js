@@ -2,7 +2,7 @@ import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
 
 export default {
   // Globs to analyze
-  globs: ['packages/**/index.ts'],
+  globs: ['packages/**/index.ts', 'packages/**/index.js'],
 
   // Globs to exclude
   exclude: [],
