@@ -27,6 +27,7 @@ export const pillStyles = {
   labelWithoutClose: 'pr-12 rounded-r-full',
   labelWithClose: 'pr-2',
   close: 'pr-12 pl-4 py-8 rounded-r-full',
+  closeIcon: 'h-16',
   a11y: 'sr-only',
 };
 
@@ -115,7 +116,7 @@ class WarpPill extends LitElement {
         ${this.canClose
           ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
               <span class="${pillStyles.a11y}">${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span>
-              <w-icon-close-16></w-icon-close-16>
+              <w-icon-close-16 class="${pillStyles.closeIcon}"></w-icon-close-16>
             </button>`
           : null}
       </div>

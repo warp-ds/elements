@@ -1,0 +1,21 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as Breadcrumbs from './breadcrumbs.stories';
+
+<Meta of={Breadcrumbs} name="Docs" />
+
+# Breadcrumbs
+
+Breadcrumbs show the navigation structure for the current location.
+
+<Canvas of={Breadcrumbs.Default} />
+
+## Visual options
+
+### All segments linkable
+
+<Canvas of={Breadcrumbs.WithLinks} />
+
+### Disabled last link
+
+<Canvas of={Breadcrumbs.WithSpanForCurrentPage} />

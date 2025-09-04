@@ -103,6 +103,13 @@ export const FullWidth: Story = {
     'full-width': true,
     type: 'button',
   },
+  render(args) {
+    return html`
+      <div class="w-full flex flex-col gap-8">
+        <w-button ${spread(prespread(args))}>Full width</w-button>
+      </div>
+    `;
+  },
 };
 
 export const AsLink: Story = {
@@ -113,10 +120,19 @@ export const AsLink: Story = {
     type: 'button',
   },
   render(args) {
+    return html`<w-button ${spread(prespread(args))}>Visit Example</w-button>`;
+  },
+};
+
+export const FormControl: Story = {
+  args: {},
+  render() {
     return html`
-      <div style="width: 50vw">
-        <w-button ${spread(prespread(args))}>Visit Example</w-button>
-      </div>
+      <form name="form-control">
+        <input type="text" value="I am an input field" name="demoValue" style="border: 1px solid lime" />
+        <w-button type="reset" name="resetButton" value="fooyoo">Reset</w-button>
+        <w-button type="submit" name="submuitButtton" value="fooyoo">Send thing</w-button>
+      </form>
     `;
   },
 };

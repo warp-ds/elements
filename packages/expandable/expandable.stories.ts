@@ -122,3 +122,29 @@ export const CustomTitle: Story = {
     `;
   },
 };
+
+export const NoTitle: Story = {
+  args: {
+    expanded: true,
+    box: true,
+    animated: true,
+  },
+  render(args) {
+    return html`
+      <w-button aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</w-button>
+      <w-expandable ${spread(prespread(args))} id="expandableWithoutTitle">
+        <p>with expanded content</p>
+      </w-expandable>
+      <script>
+        document.querySelector('[aria-controls="expandableWithoutTitle"]').addEventListener('click', () => {
+          const expand = document.getElementById('expandableWithoutTitle');
+          if (expand.expanded) {
+            expand.removeAttribute('expanded');
+          } else {
+            expand.setAttribute('expanded', 'true');
+          }
+        });
+      </script>
+    `;
+  },
+};

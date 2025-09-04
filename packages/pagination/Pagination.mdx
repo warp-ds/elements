@@ -1,0 +1,44 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories} name="Docs" />
+
+# Pagination
+
+Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
+
+## Usage guidelines
+
+**When to use:** Use pagination when you have a large dataset that needs to be split across multiple pages to improve performance and user experience.
+
+**Page numbering:** The component uses 1-indexed page numbers (first page is 1, not 0).
+
+**URL structure:** The `base-url` prop should include the URL pattern up to where the page number will be appended. For example, if your URLs are `/search?page=1`, set `base-url="/search?page="`.
+
+## Accessibility
+
+The pagination component includes proper ARIA labels and semantic navigation structure:
+
+- Uses nav element with "Pages" heading for screen readers
+- Current page is marked with `aria-current="page"`
+- Navigation buttons include descriptive screen reader text
+- All interactive elements meet minimum touch target size requirements (44px)
+- Keyboard navigation is fully supported
+
+## Visual options
+
+### Basic pagination
+
+<Canvas of={PaginationStories.BasicPagination} />
+<Canvas of={PaginationStories.MiddlePageSelected} />
+<Canvas of={PaginationStories.LastPageSelected} />
+
+### Many pages with limited visible pages
+
+<Canvas of={PaginationStories.ManyPagesWithLimitedVisible} />
+
+### Single page (no pagination)
+
+<Canvas of={PaginationStories.SinglePage} />
+

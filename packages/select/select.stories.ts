@@ -34,7 +34,7 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     label: 'Berries',
   },
