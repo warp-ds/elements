@@ -1,4 +1,4 @@
-import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as t}from"./index-DnE6RDA0.js";function r(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...t(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-elements",children:"Warp Elements"}),`
+import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as a}from"./index-DnE6RDA0.js";function r(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-elements",children:"Warp Elements"}),`
 `,e.jsx(n.p,{children:"The home of the web component, or custom elements, implementation of Warp."}),`
 `,e.jsx(n.h2,{id:"usage",children:"Usage"}),`
 `,e.jsx(n.h3,{id:"install",children:"Install"}),`
@@ -23,9 +23,10 @@ import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as t}from"./inde
 `})}),`
 `,e.jsx(n.h3,{id:"use-the-components-in-your-markup",children:"Use the components in your markup"}),`
 `,e.jsx(n.p,{children:"Once the components have been imported you can use them in your HTML."}),`
-`,e.jsx(n.pre,{children:e.jsx(n.code,{children:`<w-breadcrumbs class="mt-10">
+`,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-html",children:`<w-breadcrumbs class="mt-10">
   <a href="#/url/1">Eiendom</a>
   <a href="#/url/2">Bolig til salgs</a>
   <a href="#/url/3" aria-current="page"> Oslo </a>
 </w-breadcrumbs>
-`})})]})}function i(s={}){const{wrapper:n}={...t(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(r,{...s})}):r(s)}export{i as default};
+`})}),`
+`,e.jsx(n.p,{children:"Check the sidebar to see available components in interactive demos. The demos include code examples (click Show code)."})]})}function i(s={}){const{wrapper:n}={...a(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(r,{...s})}):r(s)}export{i as default};

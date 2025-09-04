@@ -1,12 +1,12 @@
-import{g as o}from"./iframe-B1lh29w8.js";import{t as n}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:p,args:i,argTypes:d}=o("w-card"),u={title:"Navigation/Card",render(c){return`
-      <w-card ${n(c)}>
+import{g as p,k as n}from"./iframe-D-rxdG1p.js";import{t as o}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:i,args:d,argTypes:m}=p("w-card"),x={title:"Navigation/Card",render(c){return n`
+      <w-card ${o(c)}>
         <div style="padding: 16px;">
           <h3>Card Title</h3>
           <p>This is card content with some example text.</p>
         </div>
       </w-card>
-    `},args:i,argTypes:d,parameters:{actions:{handles:p}}},e={args:{selected:!1,flat:!1,clickable:!1}},a={args:{selected:!0,flat:!1,clickable:!1}},r={args:{selected:!1,flat:!0,clickable:!1}},s={args:{selected:!0,flat:!0,clickable:!1}},t={args:{selected:!1,flat:!1,clickable:!0}},l={args:{selected:!1,flat:!1,clickable:!0},render(c){return`
-      <w-card ${n(c)} style="max-width: 300px;">
+    `},args:d,argTypes:m,parameters:{actions:{handles:i}}},e={args:{selected:!1,flat:!1,clickable:!1}},a={args:{selected:!0,flat:!1,clickable:!1}},r={args:{selected:!1,flat:!0,clickable:!1}},s={args:{selected:!0,flat:!0,clickable:!1}},t={args:{selected:!1,flat:!1,clickable:!0}},l={args:{selected:!1,flat:!1,clickable:!0},render(c){return n`
+      <w-card ${o(c)} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">
           <p style="font-size: 12px; color: #666; margin: 0 0 8px 0;">DNB Eiendom</p>
@@ -52,7 +52,7 @@ import{g as o}from"./iframe-B1lh29w8.js";import{t as n}from"./utilities-DLlq11Ww
     clickable: true
   },
   render(args) {
-    return \`
+    return html\`
       <w-card \${toAttributeString(args)} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">
@@ -64,4 +64,4 @@ import{g as o}from"./iframe-B1lh29w8.js";import{t as n}from"./utilities-DLlq11Ww
       </w-card>
     \`;
   }
-}`,...l.parameters?.docs?.source}}};const x=["Default","Selected","Flat","FlatSelected","Clickable","PropertyExample"];export{t as Clickable,e as Default,r as Flat,s as FlatSelected,l as PropertyExample,a as Selected,x as __namedExportsOrder,u as default};
+}`,...l.parameters?.docs?.source}}};const b=["Default","Selected","Flat","FlatSelected","Clickable","PropertyExample"];export{t as Clickable,e as Default,r as Flat,s as FlatSelected,l as PropertyExample,a as Selected,b as __namedExportsOrder,x as default};

@@ -1,4 +1,4 @@
-import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as s}from"./index-DnE6RDA0.js";import{M as a}from"./blocks-73nhSfK1.js";import{T as r}from"./toast.stories-BVcsUyCC.js";import"./preload-helper-Dch09mLN.js";import"./iframe-B1lh29w8.js";import"./utilities-DLlq11Ww.js";function n(o){const t={code:"code",h1:"h1",h2:"h2",p:"p",pre:"pre",...s(),...o.components};return e.jsxs(e.Fragment,{children:[e.jsx(a,{of:r,name:"Usage"}),`
+import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as s}from"./index-DnE6RDA0.js";import{M as a,C as r}from"./blocks-C0NJYJYI.js";import{T as i,D as p}from"./toast.stories-D8RVrUX1.js";import"./preload-helper-Dch09mLN.js";import"./iframe-D-rxdG1p.js";import"./utilities-DLlq11Ww.js";function n(o){const t={code:"code",h1:"h1",h2:"h2",p:"p",pre:"pre",...s(),...o.components};return e.jsxs(e.Fragment,{children:[e.jsx(a,{of:i,name:"Docs"}),`
 `,e.jsx(t.h1,{id:"toast",children:"Toast"}),`
 `,e.jsx(t.p,{children:"Toast is a bit different from other packages in Warp Elements. You need to import functions from the package and call them as needed."}),`
 `,e.jsx(t.p,{children:"The toast is intended to be used programmatically. JavaScript APIs are provided to create, update and remove toasts from a page while managing things like placement on the page for you."}),`
@@ -8,4 +8,5 @@ import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as s}from"./inde
 `})}),`
 `,e.jsx(t.p,{children:"Once you have imported the elements package, import the toast api package."}),`
 `,e.jsx(t.pre,{children:e.jsx(t.code,{className:"language-js",children:`import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
-`})})]})}function f(o={}){const{wrapper:t}={...s(),...o.components};return t?e.jsx(t,{...o,children:e.jsx(n,{...o})}):n(o)}export{f as default};
+`})}),`
+`,e.jsx(r,{of:p})]})}function g(o={}){const{wrapper:t}={...s(),...o.components};return t?e.jsx(t,{...o,children:e.jsx(n,{...o})}):n(o)}export{g as default};

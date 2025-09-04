@@ -1,10 +1,10 @@
-import{g as i}from"./iframe-B1lh29w8.js";import{t as d}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:p,args:c,argTypes:m}=i("w-expandable"),b={title:"Layout/Expandable",render(l){return`
-      <w-expandable ${d(l)}>
+import{g as p,k as d}from"./iframe-D-rxdG1p.js";import{t as i}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:c,args:m,argTypes:f}=p("w-expandable"),h={title:"Layout/Expandable",render(l){return d`
+      <w-expandable ${i(l)}>
         <p>This is the expandable content that can be shown or hidden.</p>
         <p>It can contain multiple paragraphs and other elements.</p>
       </w-expandable>
-    `},args:c,argTypes:m,parameters:{actions:{handles:p}}},e={args:{title:"I'm expandable",expanded:!1,box:!1,bleed:!1,animated:!1,"no-chevron":!1}},a={args:{title:"I'm expanded by default",expanded:!0,box:!1,bleed:!1,animated:!1,"no-chevron":!1}},s={args:{title:"I'm a box expandable",expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1}},n={args:{title:"I'm animated",expanded:!1,box:!0,bleed:!1,animated:!0,"no-chevron":!1}},t={args:{title:"I'm wrapped in h2",expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1,"heading-level":2}},r={args:{title:"I have no chevron",expanded:!1,box:!1,bleed:!1,animated:!1,"no-chevron":!0}},o={args:{expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1},render(l){return`
-      <w-expandable ${d(l)}>
+    `},args:m,argTypes:f,parameters:{actions:{handles:c}}},e={args:{title:"I'm expandable",expanded:!1,box:!1,bleed:!1,animated:!1,"no-chevron":!1}},a={args:{title:"I'm expanded by default",expanded:!0,box:!1,bleed:!1,animated:!1,"no-chevron":!1}},s={args:{title:"I'm a box expandable",expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1}},n={args:{title:"I'm animated",expanded:!1,box:!0,bleed:!1,animated:!0,"no-chevron":!1}},t={args:{title:"I'm wrapped in h2",expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1,"heading-level":2}},r={args:{title:"I have no chevron",expanded:!1,box:!1,bleed:!1,animated:!1,"no-chevron":!0}},o={args:{expanded:!1,box:!0,bleed:!1,animated:!1,"no-chevron":!1},render(l){return d`
+      <w-expandable ${i(l)}>
         <div slot="title" style="display: flex; align-items: center;">
           <span style="margin-right: 8px;">🎯</span>
           <span>Custom title with icon</span>
@@ -75,7 +75,7 @@ import{g as i}from"./iframe-B1lh29w8.js";import{t as d}from"./utilities-DLlq11Ww
     'no-chevron': false
   },
   render(args) {
-    return \`
+    return html\`
       <w-expandable \${toAttributeString(args)}>
         <div slot="title" style="display: flex; align-items: center;">
           <span style="margin-right: 8px;">🎯</span>
@@ -85,4 +85,4 @@ import{g as i}from"./iframe-B1lh29w8.js";import{t as d}from"./utilities-DLlq11Ww
       </w-expandable>
     \`;
   }
-}`,...o.parameters?.docs?.source}}};const h=["Default","Expanded","Box","Animated","WithHeading","NoChevron","CustomTitle"];export{n as Animated,s as Box,o as CustomTitle,e as Default,a as Expanded,r as NoChevron,t as WithHeading,h as __namedExportsOrder,b as default};
+}`,...o.parameters?.docs?.source}}};const g=["Default","Expanded","Box","Animated","WithHeading","NoChevron","CustomTitle"];export{n as Animated,s as Box,o as CustomTitle,e as Default,a as Expanded,r as NoChevron,t as WithHeading,g as __namedExportsOrder,h as default};
