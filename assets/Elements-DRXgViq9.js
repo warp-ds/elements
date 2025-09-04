@@ -1,4 +1,4 @@
-import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as a}from"./index-DnE6RDA0.js";function r(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-elements",children:"Warp Elements"}),`
+import{j as e}from"./index-BX4tXiAa.js";import{useMDXComponents as a}from"./index-DnE6RDA0.js";function r(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-dselements",children:"@warp-ds/elements"}),`
 `,e.jsx(n.p,{children:"The home of the web component, or custom elements, implementation of Warp."}),`
 `,e.jsx(n.h2,{id:"usage",children:"Usage"}),`
 `,e.jsx(n.h3,{id:"install",children:"Install"}),`
