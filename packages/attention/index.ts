@@ -24,7 +24,7 @@ class WarpAttention extends LitElement {
   show: boolean;
 
   @property({ type: String, reflect: true })
-  placement: string;
+  placement: Directions;
 
   @property({ type: Boolean, reflect: true })
   tooltip: boolean;
@@ -392,7 +392,7 @@ class WarpAttention extends LitElement {
         this.placement === 'bottom-start' ||
         this.placement === 'bottom' ||
         this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
-          ? html`
+        ? html`
               <slot name="target"></slot>
 
               <div id="attention" class="${this._wrapperClasses}">
@@ -401,7 +401,7 @@ class WarpAttention extends LitElement {
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
-          : html`
+        : html`
               <div id="attention" class="${this._wrapperClasses}">
                 <slot name="message"></slot>
                 <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
@@ -415,6 +415,7 @@ class WarpAttention extends LitElement {
 }
 
 if (!customElements.get('w-attention')) {
+  // @ts-expect-error Overriding native HTML popover global attribute
   customElements.define('w-attention', WarpAttention);
 }
 
