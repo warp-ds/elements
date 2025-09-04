@@ -10,6 +10,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { activateI18n } from '../i18n';
 import { components, reset } from '../styles.js';
 import { generateRandomId } from '../utils/index.js';
+import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -65,22 +66,7 @@ class WarpAttention extends LitElement {
   // To store the initial placement value for reference when computing the actual direction
   _initialPlacement: Directions;
 
-  static styles = [
-    reset,
-    components,
-    css`
-      #attention {
-        position: absolute;
-        z-index: 50;
-        visibility: var(--attention-visibility);
-        display: var(--attention-display);
-      }
-
-      :host([popover]:not(:popover-open):not(dialog[open])) {
-        display: contents;
-      }
-    `,
-  ];
+  static styles = [reset, components, styles];
 
   constructor() {
     super();
