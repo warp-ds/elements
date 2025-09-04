@@ -195,15 +195,18 @@ class WarpAttention extends LitElement {
     };
   }
 
+  /** @internal */
   get _attentionEl(): HTMLDivElement {
     return this.renderRoot.querySelector('#attention');
   }
 
+  /** @internal */
   get _targetEl(): Element | null {
     const targetSlot: HTMLSlotElement = this.renderRoot?.querySelector("slot[name='target']");
     return targetSlot ? targetSlot.assignedElements()[0] : null;
   }
 
+  /** @internal */
   get _messageEl(): Element | null {
     const messageSlot: HTMLSlotElement = this.renderRoot.querySelector("slot[name='message']");
     return messageSlot ? messageSlot.assignedElements()[0] : null;
