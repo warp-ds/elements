@@ -1,0 +1,11 @@
+diff --git a/dist/html-templates.js b/dist/html-templates.js
+index 2823fe0be0dce65759f4136f884e4de4811cd61f..f927d2112ee040844713bfeeaf61af37299ffe46 100644
+--- a/dist/html-templates.js
++++ b/dist/html-templates.js
+@@ -1,5 +1,5 @@
+ import { spread } from "./spread";
+-import { useArgs } from "@storybook/preview-api";
++import { useArgs } from "storybook/preview-api";
+ import { html, unsafeStatic } from "lit/static-html.js";
+ import { getAttributesAndProperties, getCssParts, getCssProperties, getSlots, } from "./cem-utilities.js";
+ let argObserver;
