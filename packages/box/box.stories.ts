@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpBox>('w-box');
 const meta: Meta<typeof args> = {
   title: 'Layout/Box',
   render: (args) => {
-    return `
+    return html`
       <w-box ${toAttributeString(args)}>
         <h3>Box Content</h3>
         <p>This is content inside a box component.</p>

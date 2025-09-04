@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpSelect>('w-select');
 const meta: Meta<typeof args> = {
   title: 'Forms/Select',
   render(args) {
-    return `
+    return html`
       <w-select ${toAttributeString(args)}>
         <option value="strawberries">Strawberries</option>
         <option value="raspberries" selected>Raspberries</option>

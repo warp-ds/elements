@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,9 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpAffix>('w-affix');
 const meta: Meta<typeof args> = {
   title: 'Forms/Affix',
   render(args) {
-    return `
-      <w-affix ${toAttributeString(args)}></w-affix>
-    `;
+    return html`<w-affix ${toAttributeString(args)}></w-affix>`;
   },
   args,
   argTypes,

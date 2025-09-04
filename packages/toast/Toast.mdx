@@ -1,8 +1,8 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
 import * as ToastStories from './toast.stories';
 
-<Meta of={ToastStories} name="Usage" />
+<Meta of={ToastStories} name="Docs" />
 
 # Toast
 
@@ -23,3 +23,5 @@ Once you have imported the elements package, import the toast api package.
 ```js
 import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
 ```
+
+<Canvas of={ToastStories.Default} />

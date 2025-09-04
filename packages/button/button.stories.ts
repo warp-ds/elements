@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
 const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
   render(args) {
-    return `<w-button ${toAttributeString(args)}>Button Text</w-button>`;
+    return html`<w-button ${toAttributeString(args)}>Button Text</w-button>`;
   },
   args,
   argTypes,
@@ -66,7 +68,7 @@ export const Pill: Story = {
     type: 'button',
   },
   render(args) {
-    return `<w-button ${toAttributeString(args)}>💙</w-button>`;
+    return html`<w-button ${toAttributeString(args)}>💙</w-button>`;
   },
 };
 
@@ -110,6 +112,10 @@ export const AsLink: Story = {
     type: 'button',
   },
   render(args) {
-    return `<w-button ${toAttributeString(args)}>Visit Example</w-button>`;
+    return html`
+      <div style="width: 50vw">
+        <w-button ${toAttributeString(args)}>Visit Example</w-button>
+      </div>
+    `;
   },
 };

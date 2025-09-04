@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpBreadcrumbs>('w-bread
 const meta: Meta<typeof args> = {
   title: 'Navigation/Breadcrumbs',
   render(args) {
-    return `
+    return html`
       <w-breadcrumbs ${toAttributeString(args)}>
         <a href="#/home">Home</a>
         <a href="#/category">Category</a>
@@ -43,7 +45,7 @@ export const WithLinks: Story = {
     'aria-label': 'Navigation breadcrumb',
   },
   render(args) {
-    return `
+    return html`
       <w-breadcrumbs ${toAttributeString(args)}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
@@ -58,7 +60,7 @@ export const WithSpanForCurrentPage: Story = {
     'aria-label': 'You are here',
   },
   render(args) {
-    return `
+    return html`
       <w-breadcrumbs ${toAttributeString(args)}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>

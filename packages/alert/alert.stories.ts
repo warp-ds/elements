@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -12,7 +14,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpAlert>('w-alert');
 const meta: Meta<typeof args> = {
   title: 'Feedback/Alert',
   render(args) {
-    return `
+    return html`
       <w-alert ${toAttributeString(args)}>
         <p>This is an alert message</p>
       </w-alert>
@@ -69,7 +71,7 @@ export const WithDescription: Story = {
     role: 'alert',
   },
   render(args) {
-    return `
+    return html`
       <w-alert ${toAttributeString(args)}>
         <h3>Alert Title</h3>
         <p>This is a more detailed alert message with additional description.</p>

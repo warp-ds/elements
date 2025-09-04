@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpCard>('w-card');
 const meta: Meta<typeof args> = {
   title: 'Navigation/Card',
   render(args) {
-    return `
+    return html`
       <w-card ${toAttributeString(args)}>
         <div style="padding: 16px;">
           <h3>Card Title</h3>
@@ -79,7 +81,7 @@ export const PropertyExample: Story = {
     clickable: true,
   },
   render(args) {
-    return `
+    return html`
       <w-card ${toAttributeString(args)} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">

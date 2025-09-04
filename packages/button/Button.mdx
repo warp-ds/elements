@@ -1,0 +1,43 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ButtonStories from './button.stories';
+
+<Meta of={ButtonStories} name="Docs" />
+
+# Button
+
+Buttons are used to perform actions, widh different visuals for different needs.
+
+## Variants
+
+<Canvas of={ButtonStories.Primary} />
+<Canvas of={ButtonStories.Secondary} />
+<Canvas of={ButtonStories.Negative} />
+<Canvas of={ButtonStories.Utility} />
+<Canvas of={ButtonStories.Link} />
+<Canvas of={ButtonStories.Pill} />
+<Canvas of={ButtonStories.Small} />
+
+## Quiet
+
+By default, buttons have a visible stroke and fill. Quiet buttons do not have this visible stroke or fill and should only be used for secondary actions within a button group. Quiet buttons have the same padding rules as other action buttons and reveal a button-like background color when hovered.
+
+<Canvas of={ButtonStories.Quiet} />
+
+## Link (anchor) styled as button
+
+Buttons will be rendered as an anchor (a tag) if they use an href attribute.
+
+<Canvas of={ButtonStories.AsLink} />
+
+## Loading state
+
+To show the user that the action they triggered has begun, buttons have an in progress or loading state.
+
+<Canvas of={ButtonStories.Loading} />
+
+## Full width
+
+Button will take the parent's width instead of content width. Useful on mobile when button should take full width.
+
+<Canvas of={ButtonStories.FullWidth} />

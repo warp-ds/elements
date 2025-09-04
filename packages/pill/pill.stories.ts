@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpPill>('w-pill');
 const meta: Meta<typeof args> = {
   title: 'Buttons/Pill',
   render(args) {
-    return `<w-pill ${toAttributeString(args)}>Lorem</w-pill>`;
+    return html`<w-pill ${toAttributeString(args)}>Lorem</w-pill>`;
   },
   args,
   argTypes,

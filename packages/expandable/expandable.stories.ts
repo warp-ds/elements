@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -13,7 +15,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpExpandable>('w-expand
 const meta: Meta<typeof args> = {
   title: 'Layout/Expandable',
   render(args) {
-    return `
+    return html`
       <w-expandable ${toAttributeString(args)}>
         <p>This is the expandable content that can be shown or hidden.</p>
         <p>It can contain multiple paragraphs and other elements.</p>
@@ -108,7 +110,7 @@ export const CustomTitle: Story = {
     'no-chevron': false,
   },
   render(args) {
-    return `
+    return html`
       <w-expandable ${toAttributeString(args)}>
         <div slot="title" style="display: flex; align-items: center;">
           <span style="margin-right: 8px;">🎯</span>

@@ -17,9 +17,17 @@ setStorybookHelpersConfig({
 const preview: Preview = {
   tags: ['autodocs'],
   parameters: {
+    options: {
+      storySort: {
+        method: 'alphabetical',
+      },
+    },
     controls: {
       expanded: true,
       sort: 'alpha',
+    },
+    docs: {
+      codePanel: true,
     },
   },
   decorators: [withActions],

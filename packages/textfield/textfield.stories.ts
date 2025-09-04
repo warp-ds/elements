@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfie
 const meta: Meta<typeof args> = {
   title: 'Forms/Textfield',
   render(args) {
-    return `<w-textfield ${toAttributeString(args)}></w-textfield>`;
+    return html`<w-textfield ${toAttributeString(args)}></w-textfield>`;
   },
   args,
   argTypes,
@@ -91,7 +93,7 @@ export const WithAffix: Story = {
     type: 'text',
   },
   render(args) {
-    return `
+    return html`
       <w-textfield ${toAttributeString(args)}>
         <w-affix slot="suffix" label="kr"></w-affix>
       </w-textfield>

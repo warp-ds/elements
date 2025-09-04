@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,9 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpDeadToggle>('w-dead-t
 const meta: Meta<typeof args> = {
   title: 'Forms/Dead toggle',
   render(args) {
-    return `
-      <w-dead-toggle ${toAttributeString(args)}></w-dead-toggle>
-    `;
+    return html`<w-dead-toggle ${toAttributeString(args)}></w-dead-toggle>`;
   },
   args,
   argTypes,

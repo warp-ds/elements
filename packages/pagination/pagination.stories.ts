@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpPagination>('w-pagina
 const meta: Meta<typeof args> = {
   title: 'Navigation/Pagination',
   render(args) {
-    return `<w-pagination ${toAttributeString(args)}></w-pagination>`;
+    return html`<w-pagination ${toAttributeString(args)}></w-pagination>`;
   },
   args,
   argTypes,

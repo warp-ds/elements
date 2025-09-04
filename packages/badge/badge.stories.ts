@@ -1,3 +1,5 @@
+import { html } from 'lit';
+
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
@@ -11,7 +13,7 @@ const { events, args, argTypes } = getStorybookHelpers<WarpBadge>('w-badge');
 const meta: Meta<typeof args> = {
   title: 'Layout/Badge',
   render(args) {
-    return `<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
+    return html`<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
   },
   args,
   argTypes,
@@ -73,7 +75,7 @@ export const Positioned: Story = {
     position: 'top-right',
   },
   render(args) {
-    return `
+    return html`
       <div style="position: relative; width: 200px; height: 100px; background: #f0f0f0; border-radius: 8px;">
         <w-badge ${toAttributeString(args)}>Badge</w-badge>
       </div>
