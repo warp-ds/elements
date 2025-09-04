@@ -1,18 +1,18 @@
-import{g as i,k as t}from"./iframe-D-rxdG1p.js";import{t as o}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:n,args:l,argTypes:g}=i("w-breadcrumbs"),b={title:"Navigation/Breadcrumbs",render(r){return t`
-      <w-breadcrumbs ${o(r)}>
+import{g as n,k as o}from"./iframe-JIkZ_xUY.js";import{s as t,p as i}from"./utilities-DIiVBuYh.js";import"./preload-helper-Dch09mLN.js";const{events:l,args:g,argTypes:c}=n("w-breadcrumbs"),p={title:"Navigation/Breadcrumbs",render(r){return o`
+      <w-breadcrumbs ${t(i(r))}>
         <a href="#/home">Home</a>
         <a href="#/category">Category</a>
         <a href="#/subcategory">Subcategory</a>
         <span aria-current="page">Current Page</span>
       </w-breadcrumbs>
-    `},args:l,argTypes:g,parameters:{actions:{handles:n}}},a={args:{"aria-label":"You are here"}},e={args:{"aria-label":"Navigation breadcrumb"},render(r){return t`
-      <w-breadcrumbs ${o(r)}>
+    `},args:g,argTypes:c,parameters:{actions:{handles:l}}},a={args:{"aria-label":"You are here"}},e={args:{"aria-label":"Navigation breadcrumb"},render(r){return o`
+      <w-breadcrumbs ${t(i(r))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <a href="#/oslo" aria-current="page">Oslo</a>
       </w-breadcrumbs>
-    `}},s={args:{"aria-label":"You are here"},render(r){return t`
-      <w-breadcrumbs ${o(r)}>
+    `}},s={args:{"aria-label":"You are here"},render(r){return o`
+      <w-breadcrumbs ${t(i(r))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <span aria-current="page">Oslo</span>
@@ -27,7 +27,7 @@ import{g as i,k as t}from"./iframe-D-rxdG1p.js";import{t as o}from"./utilities-D
   },
   render(args) {
     return html\`
-      <w-breadcrumbs \${toAttributeString(args)}>
+      <w-breadcrumbs \${spread(prespread(args))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <a href="#/oslo" aria-current="page">Oslo</a>
@@ -40,11 +40,11 @@ import{g as i,k as t}from"./iframe-D-rxdG1p.js";import{t as o}from"./utilities-D
   },
   render(args) {
     return html\`
-      <w-breadcrumbs \${toAttributeString(args)}>
+      <w-breadcrumbs \${spread(prespread(args))}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <span aria-current="page">Oslo</span>
       </w-breadcrumbs>
     \`;
   }
-}`,...s.parameters?.docs?.source}}};const d=["Default","WithLinks","WithSpanForCurrentPage"];export{a as Default,e as WithLinks,s as WithSpanForCurrentPage,d as __namedExportsOrder,b as default};
+}`,...s.parameters?.docs?.source}}};const b=["Default","WithLinks","WithSpanForCurrentPage"];export{a as Default,e as WithLinks,s as WithSpanForCurrentPage,b as __namedExportsOrder,p as default};

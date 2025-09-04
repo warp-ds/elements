@@ -1,9 +1,9 @@
-import{g as t,k as l}from"./iframe-D-rxdG1p.js";import{t as c}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:d,args:u,argTypes:i}=t("w-box"),f={title:"Layout/Box",render:n=>l`
-      <w-box ${c(n)}>
+import{g as t,k as l}from"./iframe-JIkZ_xUY.js";import{s as c,p as d}from"./utilities-DIiVBuYh.js";import"./preload-helper-Dch09mLN.js";const{events:u,args:p,argTypes:i}=t("w-box"),b={title:"Layout/Box",render:n=>l`
+      <w-box ${c(d(n))}>
         <h3>Box Content</h3>
         <p>This is content inside a box component.</p>
       </w-box>
-    `,args:u,argTypes:i,parameters:{actions:{handles:d}}},e={args:{bleed:!1,bordered:!1,info:!1,neutral:!1,role:"region"}},r={args:{info:!0,role:"region"}},o={args:{neutral:!0,role:"region"}},a={args:{bordered:!0,role:"region"}},s={args:{bleed:!0,neutral:!0,role:"region"}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+    `,args:p,argTypes:i,parameters:{actions:{handles:u}}},e={args:{bleed:!1,bordered:!1,info:!1,neutral:!1,role:"region"}},r={args:{info:!0,role:"region"}},o={args:{neutral:!0,role:"region"}},a={args:{bordered:!0,role:"region"}},s={args:{bleed:!0,neutral:!0,role:"region"}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
   args: {
     bleed: false,
     bordered: false,
@@ -32,4 +32,4 @@ import{g as t,k as l}from"./iframe-D-rxdG1p.js";import{t as c}from"./utilities-D
     neutral: true,
     role: 'region'
   }
-}`,...s.parameters?.docs?.source}}};const b=["Default","Info","Neutral","Bordered","Bleed"];export{s as Bleed,a as Bordered,e as Default,r as Info,o as Neutral,b as __namedExportsOrder,f as default};
+}`,...s.parameters?.docs?.source}}};const x=["Default","Info","Neutral","Bordered","Bleed"];export{s as Bleed,a as Bordered,e as Default,r as Info,o as Neutral,x as __namedExportsOrder,b as default};

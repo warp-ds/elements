@@ -1,12 +1,12 @@
-import{g as o,k as s}from"./iframe-D-rxdG1p.js";import{t as n}from"./utilities-DLlq11Ww.js";const{events:c,args:l,argTypes:i}=o("w-pill"),{events:p,args:u,argTypes:m}=o("w-toast-container"),g={title:"Overlays/Toast"},e={args:{},render(){return s`
+import{g as o,k as a}from"./iframe-JIkZ_xUY.js";import{s as n,p as c}from"./utilities-DIiVBuYh.js";const{events:p,args:l,argTypes:m}=o("w-pill"),{events:u,args:i,argTypes:g}=o("w-toast-container"),d={title:"Overlays/Toast"},e={args:{},render(){return a`
       <w-button small onclick="window.toast('message goes here', { type: 'error', canclose: true })"> See Error Example </w-button>
       <w-button small onclick="window.toast('message goes here', { type: 'warning', canclose: true })"> See Warning Example </w-button>
       <w-button small onclick="window.toast('message goes here', { type: 'success', canclose: true })"> See Success Example </w-button>
-    `}},t={args:u,render(a){return s` <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast-container ${n(a)}></w-toast-container>`},argTypes:m,parameters:{actions:{handles:p}}},r={args:l,render(a){return s`
+    `}},t={args:i,render(s){return a` <p>This is here to document attributes. See the Default example for a complete usage example.</p>
+      <w-toast-container ${n(c(s))}></w-toast-container>`},argTypes:g,parameters:{actions:{handles:u}}},r={args:l,render(s){return a`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast ${n(a)}></w-toast>
-    `},argTypes:i,parameters:{actions:{handles:c}}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+      <w-toast ${n(c(s))}></w-toast>
+    `},argTypes:m,parameters:{actions:{handles:p}}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -19,7 +19,7 @@ import{g as o,k as s}from"./iframe-D-rxdG1p.js";import{t as n}from"./utilities-D
   args: containerArgs,
   render(args) {
     return html\` <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast-container \${toAttributeString(args)}></w-toast-container>\`;
+      <w-toast-container \${spread(prespread(args))}></w-toast-container>\`;
   },
   argTypes: containerArgTypes,
   parameters: {
@@ -32,7 +32,7 @@ import{g as o,k as s}from"./iframe-D-rxdG1p.js";import{t as n}from"./utilities-D
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-toast \${toAttributeString(args)}></w-toast>
+      <w-toast \${spread(prespread(args))}></w-toast>
     \`;
   },
   argTypes,
@@ -41,4 +41,4 @@ import{g as o,k as s}from"./iframe-D-rxdG1p.js";import{t as n}from"./utilities-D
       handles: events
     }
   }
-}`,...r.parameters?.docs?.source}}};const w=["Default","ToastContainer","Toast"],b=Object.freeze(Object.defineProperty({__proto__:null,Default:e,Toast:r,ToastContainer:t,__namedExportsOrder:w,default:g},Symbol.toStringTag,{value:"Module"}));export{e as D,b as T};
+}`,...r.parameters?.docs?.source}}};const w=["Default","ToastContainer","Toast"],S=Object.freeze(Object.defineProperty({__proto__:null,Default:e,Toast:r,ToastContainer:t,__namedExportsOrder:w,default:d},Symbol.toStringTag,{value:"Module"}));export{e as D,S as T};

@@ -1,4 +1,4 @@
-import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-DLlq11Ww.js";import"./preload-helper-Dch09mLN.js";const{events:n,args:h,argTypes:d}=i("w-modal"),{events:m,args:c,argTypes:p}=i("w-modal-header"),{events:u,args:g,argTypes:y}=i("w-modal-footer"),k={title:"Overlays/Modal"},t={args:{},render(){return s`
+import{g as l,k as s}from"./iframe-JIkZ_xUY.js";import{s as n,p as i}from"./utilities-DIiVBuYh.js";import"./preload-helper-Dch09mLN.js";const{events:h,args:d,argTypes:m}=l("w-modal"),{events:p,args:c,argTypes:u}=l("w-modal-header"),{events:g,args:y,argTypes:b}=l("w-modal-footer"),v={title:"Overlays/Modal"},t={args:{},render(){return s`
       <button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</button>
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
@@ -45,14 +45,14 @@ import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-D
       </w-modal>
     `}},o={render(e){return s`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal ${l(e)}></w-modal>
-    `},args:h,argTypes:d,parameters:{actions:{handles:n}}},a={render(e){return s`
+      <w-modal ${n(i(e))}></w-modal>
+    `},args:d,argTypes:m,parameters:{actions:{handles:h}}},a={render(e){return s`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-header ${l(e)}></w-modal-header>
-    `},args:c,argTypes:p,parameters:{actions:{handles:m}}},r={render(e){return s`
+      <w-modal-header ${n(i(e))}></w-modal-header>
+    `},args:c,argTypes:u,parameters:{actions:{handles:p}}},r={render(e){return s`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-footer ${l(e)}></w-modal-footer>
-    `},args:g,argTypes:y,parameters:{actions:{handles:u}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+      <w-modal-footer ${n(i(e))}></w-modal-footer>
+    `},args:y,argTypes:b,parameters:{actions:{handles:g}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -106,7 +106,7 @@ import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-D
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal \${toAttributeString(args)}></w-modal>
+      <w-modal \${spread(prespread(args))}></w-modal>
     \`;
   },
   args: modalArgs,
@@ -120,7 +120,7 @@ import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-D
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-header \${toAttributeString(args)}></w-modal-header>
+      <w-modal-header \${spread(prespread(args))}></w-modal-header>
     \`;
   },
   args: modalHeaderArgs,
@@ -134,7 +134,7 @@ import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-D
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-footer \${toAttributeString(args)}></w-modal-footer>
+      <w-modal-footer \${spread(prespread(args))}></w-modal-footer>
     \`;
   },
   args: modalFooterArgs,
@@ -144,4 +144,4 @@ import{g as i,k as s}from"./iframe-D-rxdG1p.js";import{t as l}from"./utilities-D
       handles: modalFooterEvents
     }
   }
-}`,...r.parameters?.docs?.source}}};const v=["Default","Modal","ModalHeader","ModalFooter"];export{t as Default,o as Modal,r as ModalFooter,a as ModalHeader,v as __namedExportsOrder,k as default};
+}`,...r.parameters?.docs?.source}}};const S=["Default","Modal","ModalHeader","ModalFooter"];export{t as Default,o as Modal,r as ModalFooter,a as ModalHeader,S as __namedExportsOrder,v as default};
