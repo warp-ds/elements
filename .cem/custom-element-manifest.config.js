@@ -1,3 +1,5 @@
+import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
+
 export default {
   // Globs to analyze
   globs: ['packages/**/index.ts'],
@@ -17,12 +19,13 @@ export default {
   // Include third party custom elements manifests
   dependencies: true,
 
-  // Output CEM path to `package.json`, defaults to true
-  packagejson: true,
-
   // Enable special handling for litelement
   litelement: true,
 
-  // Plugins to use
-  plugins: [],
+  // The `analyze` command and the validator plugin
+  // disagree on what's a valid path, so disable the
+  // automatic package.json update.
+  packagejson: false,
+
+  plugins: [cemValidatorPlugin()],
 };

@@ -1,13 +1,14 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 
+import type { WarpCard } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-card');
+const { events, args, argTypes } = getStorybookHelpers<WarpCard>('w-card');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Navigation/Card',
   render(args) {
     return `
@@ -29,7 +30,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {

@@ -1,15 +1,16 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
+import type { WarpBox } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-box');
+const { events, args, argTypes } = getStorybookHelpers<WarpBox>('w-box');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Layout/Box',
-  component: 'w-box',
-  render(args) {
+  render: (args) => {
     return `
       <w-box ${toAttributeString(args)}>
         <h3>Box Content</h3>
@@ -27,7 +28,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {

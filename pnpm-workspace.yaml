@@ -1,4 +1,3 @@
 patchedDependencies:
   '@vitest/pretty-format': patches/@vitest__pretty-format.patch
   vitest-browser-lit: patches/vitest-browser-lit.patch
-  wc-storybook-helpers: patches/wc-storybook-helpers.patch

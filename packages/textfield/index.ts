@@ -46,10 +46,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   };
 
   @property({ type: Boolean, reflect: true })
-  disabled: false;
+  disabled: boolean;
 
   @property({ type: Boolean, reflect: true })
-  invalid: false;
+  invalid: boolean;
 
   @property({ type: String, reflect: true })
   id: string;
@@ -82,10 +82,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   placeholder: string;
 
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly: false;
+  readOnly: boolean;
 
   @property({ type: Boolean, reflect: true })
-  required: false;
+  required: boolean;
 
   @property({ type: String, reflect: true })
   type = 'text';

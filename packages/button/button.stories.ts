@@ -1,12 +1,14 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
+import type { WarpButton } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-button');
+const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
   render(args) {
     return `<w-button ${toAttributeString(args)}>Button Text</w-button>`;
@@ -21,7 +23,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Primary: Story = {
   args: {

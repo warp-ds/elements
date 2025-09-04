@@ -1,15 +1,16 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
 import '../utils/expand-transition.js';
+import type { WarpAlert } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-alert');
+const { events, args, argTypes } = getStorybookHelpers<WarpAlert>('w-alert');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Feedback/Alert',
-  component: 'w-alert',
   render(args) {
     return `
       <w-alert ${toAttributeString(args)}>
@@ -27,12 +28,11 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Info: Story = {
   args: {
     variant: 'info',
-    show: true,
     role: 'alert',
   },
 };

@@ -1,12 +1,14 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
+import type { WarpTextField } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-textfield');
+const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfield');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Forms/Textfield',
   render(args) {
     return `<w-textfield ${toAttributeString(args)}></w-textfield>`;
@@ -21,7 +23,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {

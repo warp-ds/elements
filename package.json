@@ -23,16 +23,19 @@
     "./toast": "./dist/api.js",
     "./custom-elements.json": "./dist/custom-elements.json"
   },
-  "module": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "customElements": "./dist/custom-elements.json",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist/"
+    "./dist/",
+    "./dist/custom-elements.json"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
     "build:storybook": "pnpm run messages:compile && pnpm run build:manifest && storybook build && touch ./storybook-static/.nojekyll",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
-    "build:manifest": "cem analyze --config cem/config.js",
+    "build:manifest": "custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js",
     "build:styles": "node build.js styles",
     "build": "rimraf dist && rimraf eik && pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
@@ -80,6 +83,8 @@
     "@vitest/utils": "^3.2.4",
     "@warp-ds/eslint-config": "1.1.0",
     "@warp-ds/uno": "2.1.0",
+    "@wc-toolkit/cem-validator": "^1.0.3",
+    "@wc-toolkit/storybook-helpers": "^9.0.1",
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.23.0",
@@ -107,8 +112,7 @@
     "vite-plugin-html": "3.2.2",
     "vite-plugin-top-level-await": "1.4.1",
     "vitest": "^3.2.4",
-    "vitest-browser-lit": "^0.1.0",
-    "wc-storybook-helpers": "^2.0.4"
+    "vitest-browser-lit": "^0.1.0"
   },
   "dependencies": {
     "@lingui/core": "5.2.0",
@@ -136,6 +140,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "customElements": "dist/custom-elements.json"
+  }
 }

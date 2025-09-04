@@ -1,14 +1,15 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
+import type { WarpPagination } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-pagination');
+const { events, args, argTypes } = getStorybookHelpers<WarpPagination>('w-pagination');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Navigation/Pagination',
-  component: 'w-pagination',
   render(args) {
     return `<w-pagination ${toAttributeString(args)}></w-pagination>`;
   },
@@ -22,7 +23,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const BasicPagination: Story = {
   args: {

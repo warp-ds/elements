@@ -1,14 +1,16 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
+
+import type { WarpExpandable } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-expandable');
+const { events, args, argTypes } = getStorybookHelpers<WarpExpandable>('w-expandable');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Layout/Expandable',
   render(args) {
     return `
@@ -28,7 +30,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {

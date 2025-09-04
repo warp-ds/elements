@@ -1,12 +1,14 @@
-import type { StoryObj } from '@storybook/web-components-vite';
-import { getWcStorybookHelpers } from 'wc-storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { toAttributeString } from '../../.storybook/utilities.js';
+
+import type { WarpBadge } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getWcStorybookHelpers('w-badge');
+const { events, args, argTypes } = getStorybookHelpers<WarpBadge>('w-badge');
 
-const meta = {
+const meta: Meta<typeof args> = {
   title: 'Layout/Badge',
   render(args) {
     return `<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
@@ -21,7 +23,7 @@ const meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof args>;
 
 export const Neutral: Story = {
   args: {
