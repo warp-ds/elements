@@ -46,10 +46,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   };
 
   @property({ type: Boolean, reflect: true })
-  disabled: false;
+  disabled: boolean;
 
   @property({ type: Boolean, reflect: true })
-  invalid: false;
+  invalid: boolean;
 
   @property({ type: String, reflect: true })
   id: string;
@@ -82,10 +82,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   placeholder: string;
 
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly: false;
+  readOnly: boolean;
 
   @property({ type: Boolean, reflect: true })
-  required: false;
+  required: boolean;
 
   @property({ type: String, reflect: true })
   type = 'text';
@@ -97,9 +97,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
   name: string;
 
   @property({ type: Boolean })
+  /** @internal */
   _hasPrefix = false;
 
   @property({ type: Boolean })
+  /** @internal */
   _hasSuffix = false;
 
   updated(changedProperties: PropertyValues<this>) {
@@ -117,6 +119,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   // https://stackoverflow.com/a/61631668
   static styles = [reset, styles];
 
+  /** @internal */
   get _inputstyles() {
     return classnames([
       ccinput.base,
@@ -129,10 +132,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
     ]);
   }
 
+  /** @internal */
   get _helptextstyles() {
     return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
   }
 
+  /** @internal */
   get _label() {
     if (this.label) {
       return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
@@ -140,15 +145,18 @@ class WarpTextField extends FormControlMixin(LitElement) {
     return undefined;
   }
 
+  /** @internal */
   get _helpId() {
     if (this.helpText) return `${this._id}__hint`;
     return undefined;
   }
 
+  /** @internal */
   get _id() {
     return 'textfield';
   }
 
+  /** @internal */
   get _error() {
     if (this.invalid && this._helpId) return this._helpId;
     return undefined;

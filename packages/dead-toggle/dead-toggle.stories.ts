@@ -6,21 +6,15 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpSelect } from './index.js';
+import type { WarpDeadToggle } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getStorybookHelpers<WarpSelect>('w-select');
+const { events, args, argTypes } = getStorybookHelpers<WarpDeadToggle>('w-dead-toggle');
 
 const meta: Meta<typeof args> = {
-  title: 'Forms/Select',
+  title: 'Forms/Dead toggle',
   render(args) {
-    return html`
-      <w-select ${spread(prespread(args))}>
-        <option value="strawberries">Strawberries</option>
-        <option value="raspberries" selected>Raspberries</option>
-        <option value="cloudberries">Cloudberries</option>
-      </w-select>
-    `;
+    return html`<w-dead-toggle ${spread(prespread(args))}></w-dead-toggle>`;
   },
   args,
   argTypes,
@@ -34,8 +28,6 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Primary: Story = {
-  args: {
-    label: 'Berries',
-  },
+export const Default: Story = {
+  args: {},
 };

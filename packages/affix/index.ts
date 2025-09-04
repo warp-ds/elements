@@ -37,14 +37,17 @@ class WarpAffix extends LitElement {
 
   static styles = [reset, styles];
 
+  /** @internal */
   get _classBase() {
     return this.slot === 'suffix' ? ccSuffix : ccPrefix;
   }
 
+  /** @internal */
   get _classes() {
     return classNames([this._classBase.wrapper, this.label ? this._classBase.wrapperWithLabel : this._classBase.wrapperWithIcon]);
   }
 
+  /** @internal */
   get _searchButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="submit">
@@ -53,6 +56,7 @@ class WarpAffix extends LitElement {
     `;
   }
 
+  /** @internal */
   get _clearButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="reset">
@@ -61,6 +65,7 @@ class WarpAffix extends LitElement {
     `;
   }
 
+  /** @internal */
   get _text() {
     return html`
       <div class="${this._classes}">
@@ -69,6 +74,7 @@ class WarpAffix extends LitElement {
     `;
   }
 
+  /** @internal */
   get _markup() {
     if (this.label) {
       return this._text;

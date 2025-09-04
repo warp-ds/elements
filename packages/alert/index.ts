@@ -61,10 +61,12 @@ class WarpAlert extends LitElement {
     }
   }
 
+  /** @internal */
   get _wrapperClasses() {
     return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
   }
 
+  /** @internal */
   get _iconClasses() {
     const activeIconClassNames = ccAlert[`${this.variant}Icon`];
 
@@ -93,6 +95,7 @@ class WarpAlert extends LitElement {
     `,
   ];
 
+  /** @internal */
   get _icon() {
     if (this.variant === alertVariants.info) {
       return html` <w-icon-info-16></w-icon-info-16>`;

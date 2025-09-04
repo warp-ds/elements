@@ -30,6 +30,7 @@ class WarpBox extends LitElement {
   // https://stackoverflow.com/a/61631668
   static styles = [reset, styles];
 
+  /** @internal */
   get _class() {
     return classNames([
       'group block relative break-words last-child:mb-0 p-16 rounded-8',
@@ -40,6 +41,7 @@ class WarpBox extends LitElement {
     ]);
   }
 
+  /** @internal */
   get _optOutRoleWithDefault() {
     return this.role === '' ? nothing : this.role ?? 'region';
   }

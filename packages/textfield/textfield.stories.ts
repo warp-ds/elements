@@ -1,73 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
+import type { WarpTextField } from './index.js';
 import './index.js';
 
-type Args = {
-  disabled: boolean;
-  invalid: boolean;
-  label: string;
-  'help-text': string;
-  placeholder: string;
-  'read-only': boolean;
-  required: boolean;
-  type: string;
-  value: string;
-  name: string;
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfield');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Forms/Textfield',
-  component: 'w-textfield',
   render(args) {
-    return `<w-textfield ${toAttributeString(args)}></w-textfield>`;
+    return html`<w-textfield ${spread(prespread(args))}></w-textfield>`;
   },
-  argTypes: {
-    disabled: {
-      type: 'boolean',
-      description: 'Whether the input is disabled',
-    },
-    invalid: {
-      type: 'boolean',
-      description: 'Renders the field in an invalid state',
-    },
-    label: {
-      type: 'string',
-      description: 'The content to display as the label',
-    },
-    'help-text': {
-      type: 'string',
-      description: 'The content to display as the help text',
-    },
-    placeholder: {
-      type: 'string',
-      description: 'Placeholder text for the input',
-    },
-    'read-only': {
-      type: 'boolean',
-      description: 'Whether the input can be selected but not changed',
-    },
-    required: {
-      type: 'boolean',
-      description: 'Whether user input is required',
-    },
-    type: {
-      type: 'string',
-      description: 'The type of input to render',
-    },
-    value: {
-      type: 'string',
-      description: 'The current value',
-    },
-    name: {
-      type: 'string',
-      description: 'The name of the input element',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {
@@ -135,8 +94,8 @@ export const WithAffix: Story = {
     type: 'text',
   },
   render(args) {
-    return `
-      <w-textfield ${toAttributeString(args)}>
+    return html`
+      <w-textfield ${spread(prespread(args))}>
         <w-affix slot="suffix" label="kr"></w-affix>
       </w-textfield>
     `;

@@ -6,20 +6,21 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpSelect } from './index.js';
+import type { WarpAttention } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getStorybookHelpers<WarpSelect>('w-select');
+const { events, args, argTypes } = getStorybookHelpers<WarpAttention>('w-attention');
 
 const meta: Meta<typeof args> = {
-  title: 'Forms/Select',
+  title: 'Overlays/Attention',
   render(args) {
     return html`
-      <w-select ${spread(prespread(args))}>
-        <option value="strawberries">Strawberries</option>
-        <option value="raspberries" selected>Raspberries</option>
-        <option value="cloudberries">Cloudberries</option>
-      </w-select>
+      <w-attention ${spread(prespread(args))}>
+        <button id="popoverTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+          Click to toggle a popover
+        </button>
+        <span slot="message">I'm a popover</span>
+      </w-attention>
     `;
   },
   args,
@@ -34,8 +35,6 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Primary: Story = {
-  args: {
-    label: 'Berries',
-  },
+export const Default: Story = {
+  args: {},
 };

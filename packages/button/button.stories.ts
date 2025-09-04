@@ -1,70 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
+import type { WarpButton } from './index.js';
 import './index.js';
 
-type Args = {
-  variant: 'primary' | 'secondary' | 'negative' | 'utility' | 'link' | 'pill';
-  quiet: boolean;
-  small: boolean;
-  loading: boolean;
-  href?: string;
-  target?: string;
-  rel?: string;
-  'full-width': boolean;
-  type: 'button' | 'submit' | 'reset';
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
-  component: 'w-button',
   render(args) {
-    return `<w-button ${toAttributeString(args)}>Button Text</w-button>`;
+    return html`<w-button ${spread(prespread(args))}>Button Text</w-button>`;
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'negative', 'utility', 'link', 'pill'],
-      description: 'Visual style variant of the button',
-    },
-    quiet: {
-      type: 'boolean',
-      description: 'Removes background and border styling',
-    },
-    small: {
-      type: 'boolean',
-      description: 'Smaller button size',
-    },
-    loading: {
-      type: 'boolean',
-      description: 'Shows loading state with animation',
-    },
-    href: {
-      type: 'string',
-      description: 'Makes button render as anchor link',
-    },
-    target: {
-      type: 'string',
-      description: 'Link target (when href is set)',
-    },
-    rel: {
-      type: 'string',
-      description: 'Link relationship (when href is set)',
-    },
-    'full-width': {
-      type: 'boolean',
-      description: 'Makes button take full width of container',
-    },
-    type: {
-      control: { type: 'select' },
-      options: ['button', 'submit', 'reset'],
-      description: 'Button type attribute',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Primary: Story = {
   args: {
@@ -107,7 +69,7 @@ export const Pill: Story = {
     type: 'button',
   },
   render(args) {
-    return `<w-button ${toAttributeString(args)}>💙</w-button>`;
+    return html`<w-button ${spread(prespread(args))}>💙</w-button>`;
   },
 };
 
@@ -151,6 +113,10 @@ export const AsLink: Story = {
     type: 'button',
   },
   render(args) {
-    return `<w-button ${toAttributeString(args)}>Visit Example</w-button>`;
+    return html`
+      <div style="width: 50vw">
+        <w-button ${spread(prespread(args))}>Visit Example</w-button>
+      </div>
+    `;
   },
 };

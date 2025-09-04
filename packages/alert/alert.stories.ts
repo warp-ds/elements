@@ -1,44 +1,37 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
 import '../utils/expand-transition.js';
+import type { WarpAlert } from './index.js';
 import './index.js';
 
-type Args = {
-  variant: 'negative' | 'positive' | 'warning' | 'info';
-  show: boolean;
-  role: string;
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpAlert>('w-alert');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Feedback/Alert',
-  component: 'w-alert',
   render(args) {
-    return `
-      <w-alert ${toAttributeString(args)}>
+    return html`
+      <w-alert ${spread(prespread(args))}>
         <p>This is an alert message</p>
       </w-alert>
     `;
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['negative', 'positive', 'warning', 'info'],
-      description: 'The visual style variant of the alert',
-    },
-    show: {
-      type: 'boolean',
-      description: 'Whether the alert is visible',
-    },
-    role: {
-      type: 'string',
-      description: 'ARIA role for the alert',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Info: Story = {
   args: {
@@ -79,8 +72,8 @@ export const WithDescription: Story = {
     role: 'alert',
   },
   render(args) {
-    return `
-      <w-alert ${toAttributeString(args)}>
+    return html`
+      <w-alert ${spread(prespread(args))}>
         <h3>Alert Title</h3>
         <p>This is a more detailed alert message with additional description.</p>
       </w-alert>

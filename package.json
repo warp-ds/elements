@@ -23,18 +23,21 @@
     "./toast": "./dist/api.js",
     "./custom-elements.json": "./dist/custom-elements.json"
   },
-  "module": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "customElements": "./dist/custom-elements.json",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist/"
+    "./dist/",
+    "./dist/custom-elements.json"
   ],
-  "types": "dist/index.d.ts",
   "scripts": {
-    "build:storybook": "lingui compile && storybook build && touch ./storybook-static/.nojekyll",
+    "build:storybook": "pnpm run messages:compile && pnpm run build:manifest && storybook build && touch ./storybook-static/.nojekyll",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
-    "build:manifest": "cem analyze --config cem/config.js",
+    "build:manifest": "custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js",
     "build:styles": "node build.js styles",
-    "build": "rimraf dist && rimraf eik && lingui compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
+    "build": "rimraf dist && rimraf eik && pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",
     "storybook": "storybook dev",
@@ -68,8 +71,10 @@
     "@itsy/animate": "0.0.9",
     "@lingui/cli": "5.2.0",
     "@lingui/conf": "5.2.0",
+    "@open-wc/lit-helpers": "^0.7.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
+    "@storybook/addon-docs": "^9.1.4",
     "@storybook/builder-vite": "^9.1.4",
     "@storybook/web-components": "^9.1.4",
     "@storybook/web-components-vite": "^9.1.4",
@@ -79,6 +84,8 @@
     "@vitest/utils": "^3.2.4",
     "@warp-ds/eslint-config": "1.1.0",
     "@warp-ds/uno": "2.1.0",
+    "@wc-toolkit/cem-validator": "^1.0.3",
+    "@wc-toolkit/storybook-helpers": "^9.0.1",
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.23.0",
@@ -134,6 +141,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "customElements": "dist/custom-elements.json"
+  }
 }

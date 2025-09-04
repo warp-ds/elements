@@ -1,75 +1,39 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
+
+import type { WarpExpandable } from './index.js';
 import './index.js';
 
-type Args = {
-  expanded: boolean;
-  title: string;
-  box: boolean;
-  bleed: boolean;
-  animated: boolean;
-  'no-chevron': boolean;
-  'heading-level': number;
-  'button-class': string;
-  'content-class': string;
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpExpandable>('w-expandable');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Layout/Expandable',
-  component: 'w-expandable',
   render(args) {
-    return `
-      <w-expandable ${toAttributeString(args)}>
+    return html`
+      <w-expandable ${spread(prespread(args))}>
         <p>This is the expandable content that can be shown or hidden.</p>
         <p>It can contain multiple paragraphs and other elements.</p>
       </w-expandable>
     `;
   },
-  argTypes: {
-    expanded: {
-      type: 'boolean',
-      description: 'Controls the expanded state',
-    },
-    title: {
-      type: 'string',
-      description: 'Title text for the expandable',
-    },
-    box: {
-      type: 'boolean',
-      description: 'Display as a padded box',
-    },
-    bleed: {
-      type: 'boolean',
-      description: 'Make full-width on mobile',
-    },
-    animated: {
-      type: 'boolean',
-      description: 'Animate open and close',
-    },
-    'no-chevron': {
-      type: 'boolean',
-      description: 'Hide the chevron icon',
-    },
-    'heading-level': {
-      type: 'number',
-      description: 'Wrap toggle button in heading element',
-    },
-    'button-class': {
-      type: 'string',
-      description: 'Additional CSS classes for button',
-    },
-    'content-class': {
-      type: 'string',
-      description: 'Additional CSS classes for content',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {
@@ -147,8 +111,8 @@ export const CustomTitle: Story = {
     'no-chevron': false,
   },
   render(args) {
-    return `
-      <w-expandable ${toAttributeString(args)}>
+    return html`
+      <w-expandable ${spread(prespread(args))}>
         <div slot="title" style="display: flex; align-items: center;">
           <span style="margin-right: 8px;">🎯</span>
           <span>Custom title with icon</span>

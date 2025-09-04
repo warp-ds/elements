@@ -44,7 +44,9 @@ class WarpPill extends LitElement {
   @property({ attribute: 'close-sr-label', type: String }) closeSrLabel: string;
   @property({ attribute: 'close-aria-label', type: String }) closeAriaLabel: string;
 
+  /** @internal */
   openFilterSrText: string;
+  /** @internal */
   removeFilterSrText: string;
 
   static styles = [reset, styles];
@@ -68,6 +70,7 @@ class WarpPill extends LitElement {
     });
   }
 
+  /** @internal */
   get _labelClasses() {
     return classNames([
       pillStyles.button,
@@ -77,14 +80,17 @@ class WarpPill extends LitElement {
     ]);
   }
 
+  /** @internal */
   get _closeClasses() {
     return classNames([pillStyles.button, pillStyles.close, this.suggestion ? pillStyles.suggestion : pillStyles.filter]);
   }
 
+  /** @internal */
   _onClick() {
     this.dispatchEvent(new CustomEvent('w-pill-click', { bubbles: true, composed: true }));
   }
 
+  /** @internal */
   _onClose() {
     this.dispatchEvent(new CustomEvent('w-pill-close', { bubbles: true, composed: true }));
   }

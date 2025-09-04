@@ -64,6 +64,7 @@ class WarpCard extends LitElement {
   @property({ type: Boolean })
   clickable: boolean = false;
 
+  /** @internal */
   buttonText: string;
 
   constructor() {
@@ -77,6 +78,7 @@ class WarpCard extends LitElement {
     });
   }
 
+  /** @internal */
   get _containerClasses() {
     return classNames([
       ccCard.base,
@@ -86,10 +88,12 @@ class WarpCard extends LitElement {
     ]);
   }
 
+  /** @internal */
   get _outlineClasses() {
     return classNames([ccCard.outline, this.selected ? ccCard.outlineSelected : ccCard.outlineUnselected]);
   }
 
+  /** @internal */
   get _interactiveElement() {
     const renderButton = () =>
       html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;

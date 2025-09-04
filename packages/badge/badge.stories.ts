@@ -1,35 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
+import type { WarpBadge } from './index.js';
 import './index.js';
 
-type Args = {
-  variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored';
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpBadge>('w-badge');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Layout/Badge',
-  component: 'w-badge',
   render(args) {
-    return `<w-badge ${toAttributeString(args)}>Badge text</w-badge>`;
+    return html`<w-badge ${spread(prespread(args))}>Badge text</w-badge>`;
   },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['neutral', 'info', 'positive', 'warning', 'negative', 'disabled', 'price', 'sponsored'],
-      description: 'The visual style variant of the badge',
-    },
-    position: {
-      control: { type: 'select' },
-      options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
-      description: 'Position for absolutely positioned badges',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Neutral: Story = {
   args: {
@@ -79,9 +76,9 @@ export const Positioned: Story = {
     position: 'top-right',
   },
   render(args) {
-    return `
+    return html`
       <div style="position: relative; width: 200px; height: 100px; background: #f0f0f0; border-radius: 8px;">
-        <w-badge ${toAttributeString(args)}>Badge</w-badge>
+        <w-badge ${spread(prespread(args))}>Badge</w-badge>
       </div>
     `;
   },

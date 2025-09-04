@@ -80,6 +80,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   readOnly: boolean;
 
   @property({ state: true })
+  /** @internal */
   _options: string;
 
   @property({ reflect: true })
@@ -96,6 +97,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this._options = this.innerHTML;
   }
 
+  /** @internal */
   _setValue = (value: string) => {
     this.value = value;
     this.setValue(value);

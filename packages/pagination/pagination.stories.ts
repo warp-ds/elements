@@ -1,43 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
+import type { WarpPagination } from './index.js';
 import './index.js';
 
-type Args = {
-  'base-url': string;
-  pages: number;
-  'current-page': number;
-  'visible-pages': number;
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpPagination>('w-pagination');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Navigation/Pagination',
-  component: 'w-pagination',
   render(args) {
-    return `<w-pagination ${toAttributeString(args)}></w-pagination>`;
+    return html`<w-pagination ${spread(prespread(args))}></w-pagination>`;
   },
-  argTypes: {
-    'base-url': {
-      type: 'string',
-      description: 'Base URL pattern for generating page links',
-    },
-    pages: {
-      type: 'number',
-      description: 'Total number of pages available',
-    },
-    'current-page': {
-      type: 'number',
-      description: 'The currently active page number (1-indexed)',
-    },
-    'visible-pages': {
-      type: 'number',
-      description: 'Maximum number of page links to display at once',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const BasicPagination: Story = {
   args: {

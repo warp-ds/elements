@@ -1,20 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { html } from 'lit';
 
-import { toAttributeString } from '../../.storybook/utilities.js';
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
+
+import type { WarpCard } from './index.js';
 import './index.js';
 
-type Args = {
-  selected: boolean;
-  flat: boolean;
-  clickable: boolean;
-};
+const { events, args, argTypes } = getStorybookHelpers<WarpCard>('w-card');
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof args> = {
   title: 'Navigation/Card',
-  component: 'w-card',
   render(args) {
-    return `
-      <w-card ${toAttributeString(args)}>
+    return html`
+      <w-card ${spread(prespread(args))}>
         <div style="padding: 16px;">
           <h3>Card Title</h3>
           <p>This is card content with some example text.</p>
@@ -22,24 +23,17 @@ const meta: Meta<Args> = {
       </w-card>
     `;
   },
-  argTypes: {
-    selected: {
-      type: 'boolean',
-      description: 'Whether the card appears selected',
-    },
-    flat: {
-      type: 'boolean',
-      description: 'Flat styling without shadow',
-    },
-    clickable: {
-      type: 'boolean',
-      description: 'Makes the card interactive and focusable',
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<Args>;
+type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {
@@ -88,8 +82,8 @@ export const PropertyExample: Story = {
     clickable: true,
   },
   render(args) {
-    return `
-      <w-card ${toAttributeString(args)} style="max-width: 300px;">
+    return html`
+      <w-card ${spread(prespread(args))} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">
           <p style="font-size: 12px; color: #666; margin: 0 0 8px 0;">DNB Eiendom</p>

@@ -188,6 +188,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
+  /** @internal */
   ariaValueTextLoading: string;
 
   static styles = [reset, styles];
@@ -224,6 +225,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
   get _primaryClasses() {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.primary,
@@ -235,6 +237,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     ];
   }
 
+  /** @internal */
   get _secondaryClasses() {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.secondary,
@@ -246,6 +249,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     ];
   }
 
+  /** @internal */
   get _utilityClasses() {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.utility,
@@ -257,6 +261,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     ];
   }
 
+  /** @internal */
   get _negativeClasses() {
     return [
       !this.small && !this.quiet && !this.loading && ccButton.negative,
@@ -268,6 +273,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     ];
   }
 
+  /** @internal */
   get _pillClasses() {
     return [
       !this.loading && (this.small ? ccButton.pillSmall : ccButton.pill),
@@ -275,9 +281,11 @@ class WarpButton extends FormControlMixin(LitElement) {
     ];
   }
 
+  /** @internal */
   get _linkClasses() {
     return [this.small ? ccButton.linkSmall : ccButton.link];
   }
+  /** @internal */
   get _classes() {
     return classNames(this.buttonClass, [
       this.variant === 'primary' && this._primaryClasses,
@@ -291,6 +299,7 @@ class WarpButton extends FormControlMixin(LitElement) {
     ]);
   }
 
+  /** @internal */
   _handleButtonClick() {
     if (this.type === 'submit') this.internals.form.requestSubmit();
     else if (this.type === 'reset') this.internals.form.reset();
