@@ -31,3 +31,15 @@ type Story = StoryObj<typeof args>;
 export const Default: Story = {
   args: {},
 };
+
+export const Suggestion: Story = {
+  args: {
+    suggestion: true,
+  },
+};
+
+export const Closable: Story = {
+  args: {
+    'can-close': true,
+  },
+};

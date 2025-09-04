@@ -8,14 +8,30 @@ import * as ButtonStories from './button.stories';
 
 Buttons are used to perform actions, widh different visuals for different needs.
 
+## Accessibility
+
+If the button doesn't have visible text content, such as when used with only an icon, an aria-label prop must be provided for accessibility.
+
 ## Variants
 
+The primary button is a call to action.
+
 <Canvas of={ButtonStories.Primary} />
+
+The secondary button is for secondary or tertiary actions. "secondary" is the default value of the "variant" attribute.
+
 <Canvas of={ButtonStories.Secondary} />
+
+The negative button is for emphasizing actions that can be destructive or have negative consequences if taken.
+
 <Canvas of={ButtonStories.Negative} />
+
 <Canvas of={ButtonStories.Utility} />
 <Canvas of={ButtonStories.Link} />
 <Canvas of={ButtonStories.Pill} />
+
+All of the above buttons have a small variant.
+
 <Canvas of={ButtonStories.Small} />
 
 ## Quiet
@@ -23,6 +39,12 @@ Buttons are used to perform actions, widh different visuals for different needs.
 By default, buttons have a visible stroke and fill. Quiet buttons do not have this visible stroke or fill and should only be used for secondary actions within a button group. Quiet buttons have the same padding rules as other action buttons and reveal a button-like background color when hovered.
 
 <Canvas of={ButtonStories.Quiet} />
+
+## Form control
+
+Buttons used in the context of a form.
+
+<Canvas of={ButtonStories.FormControl} />
 
 ## Link (anchor) styled as button
 
@@ -41,3 +63,7 @@ To show the user that the action they triggered has begun, buttons have an in pr
 Button will take the parent's width instead of content width. Useful on mobile when button should take full width.
 
 <Canvas of={ButtonStories.FullWidth} />
+
+## Disabled state
+
+Disabled is an anti-pattern and is not supported. There will ALWAYS be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.

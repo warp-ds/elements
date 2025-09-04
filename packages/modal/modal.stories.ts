@@ -31,7 +31,7 @@ export const Default: StoryObj = {
   args: {},
   render() {
     return html`
-      <button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</button>
+      <w-button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</w-button>
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
         <div slot="content">
@@ -75,6 +75,59 @@ export const Default: StoryObj = {
           <w-button variant="primary" id="modal-close-button-one">OK</w-button>
         </w-modal-footer>
       </w-modal>
+
+      <script>
+        const openButtonOne = document.querySelector('#modal-open-button-one');
+        const closeButtonOne = document.querySelector('#modal-close-button-one');
+        const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
+        const modalOne = document.querySelector('#example-modal-one');
+        const modalHeaderOne = document.querySelector('#modal-header-one');
+        openButtonOne.addEventListener('click', () => modalOne.open());
+        closeButtonOne.addEventListener('click', () => modalOne.close());
+        toggleBackButtonOne.addEventListener('click', () => {
+          modalHeaderOne.back = !modalHeaderOne.back;
+        });
+      </script>
+    `;
+  },
+};
+
+export const WithImage: StoryObj = {
+  args: {},
+  render() {
+    return html`
+      <w-button id="modal-open-button-two" aria-haspopup="dialog">Open a modal</w-button>
+      <w-modal id="example-modal-two">
+        <w-modal-header slot="header" title="Look a doggo!">
+          <img
+            slot="top"
+            class="h-[256] w-full object-cover"
+            src="/pages/public/unocssmusical.jpeg"
+            alt="AI-generated picture of a band in colourful setup" />
+        </w-modal-header>
+        <div slot="content">
+          <p>
+            I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed
+            robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous
+            Ultra-violet shine blind forensics I inspect view through the future see millennium Killa Beez sold fifty gold, sixty platinum
+            Shackling the masses with drastic rap tactics Graphic displays melt the steel like blacksmiths Black Wu jackets, Queen Beez ease
+            the guns in Rumble with patrolmen, tear gas laced the function Heads by the score take flight, incite a war Chicks hit the
+            floor, diehard fans demand more Behold the bold soldier, control the globe slowly Proceeds to blow, swingin' swords like Shinobi
+            Stomp grounds and pound footprints in solid rock Wu got it locked, performin' live on your hottest block
+          </p>
+        </div>
+        <w-modal-footer slot="footer">
+          <w-button variant="primary" id="modal-close-button-two">OK</w-button>
+        </w-modal-footer>
+      </w-modal>
+
+      <script>
+        const openButtonTwo = document.querySelector('#modal-open-button-two');
+        const closeButtonTwo = document.querySelector('#modal-close-button-two');
+        const modalTwo = document.querySelector('#example-modal-two');
+        openButtonTwo.addEventListener('click', () => modalTwo.open());
+        closeButtonTwo.addEventListener('click', () => modalTwo.close());
+      </script>
     `;
   },
 };
