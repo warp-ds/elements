@@ -1,15 +1,14 @@
 import { css, html, LitElement, nothing } from 'lit';
-import { components, reset } from '../styles.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { opposites, directions, arrowDirectionClassname, useRecompute as recompute } from '@warp-ds/core/attention';
+import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
 import { attention as ccAttention } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
+import { components, reset } from '../styles.js';
 import { generateRandomId } from '../utils/index.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -34,6 +33,7 @@ class WarpAttention extends LitElement {
   callout: boolean;
 
   @property({ type: Boolean, reflect: true })
+  // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
   @property({ type: Boolean, reflect: true })
@@ -58,12 +58,12 @@ class WarpAttention extends LitElement {
   crossAxis: boolean;
 
   @property({ type: Array, reflect: true })
-  fallbackPlacements: string[];
+  fallbackPlacements: Directions[];
 
   attentionState;
 
   // To store the initial placement value for reference when computing the actual direction
-  _initialPlacement;
+  _initialPlacement: Directions;
 
   static styles = [
     reset,
@@ -209,21 +209,18 @@ class WarpAttention extends LitElement {
     };
   }
 
-  /** @internal */
-  get _attentionEl() {
+  get _attentionEl(): HTMLDivElement {
     return this.renderRoot.querySelector('#attention');
   }
 
-  /** @internal */
-  get _targetEl() {
-    const targetSlot = this.renderRoot?.querySelector("slot[name='target']");
-    return targetSlot ? targetSlot.assignedNodes()[0] : null;
+  get _targetEl(): Element | null {
+    const targetSlot: HTMLSlotElement = this.renderRoot?.querySelector("slot[name='target']");
+    return targetSlot ? targetSlot.assignedElements()[0] : null;
   }
 
-  /** @internal */
-  get _messageEl() {
-    const messageSlot = this.renderRoot.querySelector("slot[name='message']");
-    return messageSlot ? messageSlot.assignedNodes()[0] : null;
+  get _messageEl(): Element | null {
+    const messageSlot: HTMLSlotElement = this.renderRoot.querySelector("slot[name='message']");
+    return messageSlot ? messageSlot.assignedElements()[0] : null;
   }
 
   /** @internal */
@@ -377,7 +374,7 @@ class WarpAttention extends LitElement {
     this.updateComplete.then(() => this.dispatchEvent(event));
   }
 
-  keypressed(e) {
+  keypressed(e: KeyboardEvent) {
     if (!this.canClose) return;
     if (e.key === 'Escape') {
       e.preventDefault();
