@@ -40,6 +40,9 @@ importers:
       '@warp-ds/icons':
         specifier: 2.5.0
         version: 2.5.0(@lingui/core@5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0))
+      '@wc-toolkit/type-parser':
+        specifier: ^1.2.0
+        version: 1.2.0
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -113,9 +116,6 @@ importers:
       '@wc-toolkit/storybook-helpers':
         specifier: ^9.0.1
         version: 9.0.1(lit@3.2.0)(storybook@9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)))
-      cem-plugin-expanded-types:
-        specifier: ^1.4.0
-        version: 1.4.0
       custom-element-jet-brains-integration:
         specifier: ^1.7.0
         version: 1.7.0(prettier@3.3.2)
@@ -1758,6 +1758,9 @@ packages:
       lit: ^2.0.0 || ^3.0.0
       storybook: '>=9.0.0-0 <10.0.0-0'
 
+  '@wc-toolkit/type-parser@1.2.0':
+    resolution: {integrity: sha512-d1Vsf4bk3+fIzca14Mtg5h9rZxOATLv5V9r0KArgJYIc59HiegkyII9v4SnVw55hBVSD0j3O7RMuCAprU5572A==}
+
   '@web/config-loader@0.1.3':
     resolution: {integrity: sha512-XVKH79pk4d3EHRhofete8eAnqto1e8mCRAqPV00KLNFzCWSe8sWmLnqKCqkPNARC6nksMaGrATnA5sPDRllMpQ==}
     engines: {node: '>=10.0.0'}
@@ -2041,10 +2044,6 @@ packages:
 
   caniuse-lite@1.0.30001695:
     resolution: {integrity: sha512-vHyLade6wTgI2u1ec3WQBxv+2BrTERV28UXQu9LO6lZ9pYeMk34vjXFLOxo1A4UBA8XTL4njRQZdno/yYaSmWw==}
-
-  cem-plugin-expanded-types@1.4.0:
-    resolution: {integrity: sha512-uJJ8irJp6HAPbqr+mvHswkMiYqL+FOrH8fZ0Kc4OpACMVbf+h7uDe/xRKutKf5p5S6vDewBpJJ5+4V2LRIfcPg==}
-    deprecated: This package has moved to @wc-toolkit/type-parser
 
   chai@5.3.3:
     resolution: {integrity: sha512-4zNhdJD/iOjSH0A05ea+Ke6MU5mmpQcbQsSOkgdaUMJ9zTlDTD/GYlwohmIE2u0gaxHYiVHEn1Fw9mZ/ktJWgw==}
@@ -7008,6 +7007,8 @@ snapshots:
       lit: 3.2.0
       storybook: 9.1.4(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0))
 
+  '@wc-toolkit/type-parser@1.2.0': {}
+
   '@web/config-loader@0.1.3':
     dependencies:
       semver: 7.6.3
@@ -7321,8 +7322,6 @@ snapshots:
   caniuse-lite@1.0.30001651: {}
 
   caniuse-lite@1.0.30001695: {}
-
-  cem-plugin-expanded-types@1.4.0: {}
 
   chai@5.3.3:
     dependencies:

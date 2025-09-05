@@ -1,5 +1,5 @@
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
-import { getTsProgram, expandTypesPlugin } from 'cem-plugin-expanded-types';
+import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
 export default {
   overrideModuleCreation: ({ ts, globs }) => {
@@ -33,5 +33,5 @@ export default {
   // automatic package.json update.
   packagejson: false,
 
-  plugins: [cemValidatorPlugin(), expandTypesPlugin()],
+  plugins: [cemValidatorPlugin(), typeParserPlugin()],
 };

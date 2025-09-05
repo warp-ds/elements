@@ -87,7 +87,6 @@
     "@warp-ds/uno": "2.1.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
     "@wc-toolkit/storybook-helpers": "^9.0.1",
-    "cem-plugin-expanded-types": "^1.4.0",
     "custom-element-jet-brains-integration": "^1.7.0",
     "custom-element-vs-code-integration": "^1.5.0",
     "cz-conventional-changelog": "3.3.0",
@@ -128,6 +127,7 @@
     "@warp-ds/css": "2.1.1",
     "@warp-ds/elements-core": "2.0.1",
     "@warp-ds/icons": "2.5.0",
+    "@wc-toolkit/type-parser": "^1.2.0",
     "scroll-doctor": "2.0.2"
   },
   "publishConfig": {

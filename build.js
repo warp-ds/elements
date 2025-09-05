@@ -11,12 +11,14 @@ import manifest from './dist/custom-elements.json' with { type: 'json' };
 // for how to configure VS Code as a consumer of these files.
 generateVsCodeCustomElementData(manifest, {
   outdir: './dist',
+  typesSrc: 'parsedType', // since we use @wc-toolkit/type-parser the values for enum types are found here, not on `type`
 });
 
 // See https://github.com/break-stuff/cem-tools/tree/main/packages/jet-brains-integration#implementation
 // for an explanation. We set `web-types` in `package.json` so users shouldn't need to do anything.
 generateJetBrainsWebTypes(manifest, {
   outdir: './dist',
+  typesSrc: 'parsedType', // since we use @wc-toolkit/type-parser the values for enum types are found here, not on `type`
 });
 
 const components = glob.sync('packages/**/index.{js,ts}');
