@@ -1,8 +1,23 @@
 import * as eik from '@eik/esbuild-plugin';
+import { generateJetBrainsWebTypes } from 'custom-element-jet-brains-integration';
+import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integration';
 import esbuild from 'esbuild';
 import { glob } from 'glob';
 
 import { plugin as stylePlugin } from './build/index.js';
+import manifest from './dist/custom-elements.json' with { type: 'json' };
+
+// See https://github.com/break-stuff/cem-tools/tree/main/packages/vs-code-integration#implementation
+// for how to configure VS Code as a consumer of these files.
+generateVsCodeCustomElementData(manifest, {
+  outdir: './dist',
+});
+
+// See https://github.com/break-stuff/cem-tools/tree/main/packages/jet-brains-integration#implementation
+// for an explanation. We set `web-types` in `package.json` so users shouldn't need to do anything.
+generateJetBrainsWebTypes(manifest, {
+  outdir: './dist',
+});
 
 const components = glob.sync('packages/**/index.{js,ts}');
 const toastApiPath = 'packages/toast/api.js';

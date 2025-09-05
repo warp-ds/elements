@@ -48,6 +48,32 @@ import '@warp-ds/elements/components/toast';
 For information on the components available in the package and how to use them,
 see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/).
 
+### Editor integration
+
+#### Visual Studio Code
+
+This module includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
+
+Add this to your `settings.json` and restart VS Code to get IntelliSense and inline documentation for Warp elements.
+
+```json
+{
+  "html.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
+  ]
+}
+```
+
+#### JetBrains products
+
+We ship `web-types.json` which should get picked up automatically by JetBrains IDEA and similar products.
+
+You should see code completions and inline docs for Warp elements when writing HTML.
+
+
 ## Releases
 
 This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).

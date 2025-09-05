@@ -14,6 +14,9 @@ import styles from './radio-group.css?inline';
 import { RequiredValidator } from './required-validator';
 import { HasSlotController } from './slot';
 
+/**
+ * @slot label - Alternative to the `label` attribute should you need custom HTML.
+ */
 export class WRadioGroup extends BaseFormAssociatedElement {
   static css = [styles];
 

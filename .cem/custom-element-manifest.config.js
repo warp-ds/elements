@@ -1,6 +1,12 @@
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
+import { getTsProgram, expandTypesPlugin } from 'cem-plugin-expanded-types';
 
 export default {
+  overrideModuleCreation: ({ ts, globs }) => {
+    const program = getTsProgram(ts, globs, 'tsconfig.json');
+    return program.getSourceFiles().filter((sf) => globs.find((glob) => sf.fileName.includes(glob)));
+  },
+
   // Globs to analyze
   globs: ['packages/**/index.ts', 'packages/**/index.js', 'packages/modal/modal-*.ts', 'packages/toast/toast*.js'],
 
@@ -27,5 +33,5 @@ export default {
   // automatic package.json update.
   packagejson: false,
 
-  plugins: [cemValidatorPlugin()],
+  plugins: [cemValidatorPlugin(), expandTypesPlugin()],
 };

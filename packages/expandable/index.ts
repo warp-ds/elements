@@ -47,6 +47,9 @@ export const ccExpandable = {
   titleType: 't4',
 };
 
+/**
+ * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
+ */
 class WarpExpandable extends LitElement {
   @property({ type: Boolean, reflect: true })
   expanded: boolean = false;
