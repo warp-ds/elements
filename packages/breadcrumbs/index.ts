@@ -26,6 +26,11 @@ export const ccBreadcrumbs = {
 
 const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
+/**
+ * Breadcrumbs show the navigation structure for the current location.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-breadcrumbs--docs)
+ */
 class WarpBreadcrumbs extends LitElement {
   @property({ attribute: 'aria-label', type: String })
   ariaLabel: string;

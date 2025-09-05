@@ -14,6 +14,20 @@ import { repeat } from 'lit/directives/repeat.js';
  * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
  */
 
+/**
+ * You should probably not include this component in HTML markup.
+ *
+ * As long as the element definition is imported in your application you can use the toast JS API to create toasts.
+ *
+ * ```js
+ * import from '@warp-ds/elements/components/toast';
+ * import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
+ * ```
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-toast--docs)
+ *
+ * @internal
+ */
 export class WarpToastContainer extends WarpElement {
   static styles = [
     WarpElement.styles,

@@ -8,6 +8,11 @@ import { reset } from '../styles';
 
 import { styles } from './styles';
 
+/**
+ * `w-badge` is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-badge--docs)
+ */
 class WarpBadge extends LitElement {
   @property({ type: String, reflect: true })
   variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored' = 'neutral';

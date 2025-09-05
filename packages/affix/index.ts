@@ -29,6 +29,11 @@ export const ccPrefix = {
   label: 'antialiased block relative cursor-default pb-0 font-bold text-xs s-text',
 };
 
+/**
+ * This component is usually used in other components like form elements to show a prefix or suffix. See for example `w-textfield`.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-affix--docs)
+ */
 class WarpAffix extends LitElement {
   @property({ attribute: 'aria-label' }) ariaLabel: string;
   @property({ type: Boolean }) clear = false;

@@ -26,6 +26,11 @@ const iconSuffix = i18n._({
 const baseItemStyles =
   'hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding';
 
+/**
+ * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-pagination--docs)
+ */
 class WarpPagination extends LitElement {
   @property({ type: String, reflect: true, attribute: 'base-url' })
   baseUrl: string;

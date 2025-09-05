@@ -48,6 +48,10 @@ export const ccExpandable = {
 };
 
 /**
+ * Expandable is a layout component used for creating expandable content areas on a page.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-expandable--docs)
+ *
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
  */
 class WarpExpandable extends LitElement {

@@ -8,6 +8,9 @@ patchedDependencies:
   '@vitest/pretty-format':
     hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
     path: patches/@vitest__pretty-format.patch
+  custom-element-vs-code-integration:
+    hash: 58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2
+    path: patches/custom-element-vs-code-integration.patch
   vitest-browser-lit:
     hash: b7d71e5a2e320a367d2061c2084ce79a132787dcef2f9ae8a43d82be7ef03edf
     path: patches/vitest-browser-lit.patch
@@ -121,7 +124,7 @@ importers:
         version: 1.7.0(prettier@3.3.2)
       custom-element-vs-code-integration:
         specifier: ^1.5.0
-        version: 1.5.0(prettier@3.3.2)
+        version: 1.5.0(patch_hash=58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2)(prettier@3.3.2)
       cz-conventional-changelog:
         specifier: 3.3.0
         version: 3.3.0(@types/node@20.14.10)(typescript@5.5.3)
@@ -7629,7 +7632,7 @@ snapshots:
     transitivePeerDependencies:
       - prettier
 
-  custom-element-vs-code-integration@1.5.0(prettier@3.3.2):
+  custom-element-vs-code-integration@1.5.0(patch_hash=58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2)(prettier@3.3.2):
     dependencies:
       '@prettier/sync': 0.5.5(prettier@3.3.2)
     transitivePeerDependencies:

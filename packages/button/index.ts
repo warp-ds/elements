@@ -143,6 +143,11 @@ export const ccButton = {
   contentWidth: 'max-w-max',
 };
 
+/**
+ * Buttons are used to perform actions, widh different visuals for different needs.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-button--docs)
+ */
 class WarpButton extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
     ...WarpElement.shadowRootOptions,
