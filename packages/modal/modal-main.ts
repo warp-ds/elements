@@ -7,6 +7,11 @@ import { reset } from '../styles.js';
 
 import { ProvidesCanCloseToSlotsMixin } from './util.js';
 
+/**
+ * @slot header - Typically where you would use the `w-modal-header` component.
+ * @slot content - The main content of the modal.
+ * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.
+ */
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   @property({ type: Boolean }) show: boolean;
   @property({ type: String, attribute: 'content-id' }) contentId: string;

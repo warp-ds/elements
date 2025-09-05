@@ -16,6 +16,9 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { CanCloseMixin } from './util.js';
 
+/**
+ * @slot top - Customize the title bar, for example to have a header image that reaches the modal's edges. See the With Image story for an example.
+ */
 export class ModalHeader extends CanCloseMixin(LitElement) {
   @property({ type: String }) title: string;
   @property({ type: Boolean }) back: boolean;
