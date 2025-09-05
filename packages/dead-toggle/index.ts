@@ -13,7 +13,7 @@ export class WarpDeadToggle extends LitElement {
 
   /** @internal */
   get indeterminateMarker() {
-    return this.indeterminate ? '–' : '';
+    return !this.checked && this.indeterminate ? '–' : '';
   }
 
   render() {

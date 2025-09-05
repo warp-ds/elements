@@ -14,7 +14,11 @@ const { events, args, argTypes } = getStorybookHelpers<WarpDeadToggle>('w-dead-t
 const meta: Meta<typeof args> = {
   title: 'Forms/Dead toggle',
   render(args) {
-    return html`<w-dead-toggle ${spread(prespread(args))}></w-dead-toggle>`;
+    return html`<w-dead-toggle
+      ?checked=${args.checked}
+      ?indeterminate=${args.indeterminate}
+      ?invalid=${args.invalid}
+      type=${args.type}></w-dead-toggle>`;
   },
   args,
   argTypes,
