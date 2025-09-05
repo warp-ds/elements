@@ -101,12 +101,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   name: string;
 
-  @property({ type: Boolean })
   /** @internal */
+  @property({ type: Boolean })
   _hasPrefix = false;
 
-  @property({ type: Boolean })
   /** @internal */
+  @property({ type: Boolean })
   _hasSuffix = false;
 
   updated(changedProperties: PropertyValues<this>) {
