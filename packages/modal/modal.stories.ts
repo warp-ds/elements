@@ -35,7 +35,7 @@ export const Default: StoryObj = {
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
         <div slot="content">
-          <div class="mb-12">
+          <div style="margin-bottom: 12px">
             <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
           </div>
           <p>
@@ -101,9 +101,9 @@ export const WithImage: StoryObj = {
         <w-modal-header slot="header" title="Look a doggo!">
           <img
             slot="top"
-            class="h-[256] w-full object-cover"
-            src="/pages/public/unocssmusical.jpeg"
-            alt="AI-generated picture of a band in colourful setup" />
+            style="height: 256px; width: 100%; object-fit: cover;"
+            src="https://images.unsplash.com/photo-1534361960057-19889db9621e"
+            alt="A really nice dog" />
         </w-modal-header>
         <div slot="content">
           <p>
