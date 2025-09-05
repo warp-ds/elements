@@ -36,6 +36,11 @@ const keys = {
   SPACE: ' ',
 };
 
+/**
+ * Card is a layout component used for separating content areas on a page.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-card--docs)
+ */
 class WarpCard extends LitElement {
   static styles = [
     reset,

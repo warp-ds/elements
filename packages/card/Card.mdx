@@ -1,12 +1,12 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import * as BoxStories from './box.stories';
+import * as CardStories from './card.stories';
 
-<Meta of={BoxStories} name="Docs" />
+<Meta of={CardStories} name="Docs" />
 
-# Box
+# Card
 
-Box is a layout component used for separating content areas on a page.
+Card is a layout component used for separating content areas on a page.
 
 ## Accessibility
 
@@ -14,8 +14,9 @@ Use the ARIA role attribute to provide semantic meaning to a box element. If no 
 
 ## Visual options
 
-<Canvas of={BoxStories.Default} />
-<Canvas of={BoxStories.Info} />
-<Canvas of={BoxStories.Neutral} />
-<Canvas of={BoxStories.Bordered} />
-<Canvas of={BoxStories.Bleed} />
+<Canvas of={CardStories.Default} />
+<Canvas of={CardStories.Selected} />
+<Canvas of={CardStories.Flat} />
+<Canvas of={CardStories.FlatSelected} />
+<Canvas of={CardStories.Clickable} />
+<Canvas of={CardStories.PropertyExample} />

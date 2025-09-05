@@ -31,6 +31,11 @@ export const pillStyles = {
   a11y: 'sr-only',
 };
 
+/**
+ * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-pill--docs)
+ */
 class WarpPill extends LitElement {
   @property({ attribute: 'can-close', type: Boolean }) canClose: boolean;
   @property({ attribute: 'suggestion', type: Boolean }) suggestion: boolean;

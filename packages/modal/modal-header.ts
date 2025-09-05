@@ -17,6 +17,10 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 import { CanCloseMixin } from './util.js';
 
 /**
+ * The header section of a modal, typically where you place the title and a close button.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-modal--docs)
+ *
  * @slot top - Customize the title bar, for example to have a header image that reaches the modal's edges. See the With Image story for an example.
  */
 export class ModalHeader extends CanCloseMixin(LitElement) {

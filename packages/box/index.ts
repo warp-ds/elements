@@ -8,6 +8,11 @@ import { reset } from '../styles';
 
 import { styles } from './styles';
 
+/**
+ * Box is a layout component used for separating content areas on a page.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
+ */
 class WarpBox extends LitElement {
   @property({ type: Boolean, reflect: true })
   bleed: boolean;

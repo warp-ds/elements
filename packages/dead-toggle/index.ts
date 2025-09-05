@@ -5,6 +5,11 @@ import { classMap } from 'lit/directives/class-map.js';
 
 import { reset } from '../styles';
 
+/**
+ * Dead toggle can be used where the appearance of a checkbox or radio is needed - but for accessibility purposes an actual input element should not be present.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-dead-toggle--docs)
+ */
 export class WarpDeadToggle extends LitElement {
   @property({ type: String }) type: 'radio' | 'checkbox' = 'radio';
   @property({ type: Boolean, reflect: true }) checked: boolean = false;

@@ -4,6 +4,11 @@ import { reset } from '../styles.js';
 
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from './util';
 
+/**
+ * The footer section of a modal, typically where you place actions.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-modal--docs)
+ */
 export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitElement)) {
   render() {
     return html`

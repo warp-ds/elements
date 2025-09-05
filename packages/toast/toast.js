@@ -25,6 +25,20 @@ const toastType = {
   warning: 'warning',
 };
 
+/**
+ * You should probably not include this component in HTML markup.
+ *
+ * As long as the element definition is imported in your application you can use the toast JS API to create toasts.
+ *
+ * ```js
+ * import from '@warp-ds/elements/components/toast';
+ * import { toast, removeToast, updateToast } from '@warp-ds/elements/toast';
+ * ```
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-toast--docs)
+ *
+ * @internal
+ */
 export class WarpToast extends WarpElement {
   static styles = [
     WarpElement.styles,

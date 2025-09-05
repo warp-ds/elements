@@ -46,6 +46,11 @@ export const ccHelpText = {
   colorInvalid: 's-text-negative',
 };
 
+/**
+ * A dropdown component for selecting a single value.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-select--docs)
+ */
 export class WarpSelect extends FormControlMixin(LitElement) {
   // Whether the element should receive focus on render
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })

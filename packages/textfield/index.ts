@@ -39,6 +39,11 @@ export const ccHelpText = {
   colorInvalid: 's-text-negative',
 };
 
+/**
+ * A single line text input element.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-textfield--docs)
+ */
 class WarpTextField extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
     ...WarpElement.shadowRootOptions,

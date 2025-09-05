@@ -38,6 +38,13 @@ const alertVariants = {
   info: 'info',
 };
 
+/**
+ * Alert is an inline component used for displaying different types of messages.
+ *
+ * For accessibility reasons, alert should appear close to the element that triggered it.
+ *
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/feedback-alert--docs)
+ */
 class WarpAlert extends LitElement {
   @property({ reflect: true })
   variant: AlertVariants = 'info';
