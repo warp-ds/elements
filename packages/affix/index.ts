@@ -36,8 +36,21 @@ export const ccPrefix = {
  */
 class WarpAffix extends LitElement {
   @property({ attribute: 'aria-label' }) ariaLabel: string;
+
+  /**
+   * Add this property to render a clickable Warp close icon.
+   *
+   * Set an `aria-label` that explains the action when using this.
+   */
   @property({ type: Boolean }) clear = false;
+
+  /**
+   * Add this property to render a clickable Warp search icon.
+   *
+   * Set an `aria-label` that explains the action when using this.
+   */
   @property({ type: Boolean }) search = false;
+
   @property() label: string;
 
   static styles = [reset, styles];

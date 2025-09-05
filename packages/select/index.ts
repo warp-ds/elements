@@ -52,40 +52,40 @@ export const ccHelpText = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-select--docs)
  */
 export class WarpSelect extends FormControlMixin(LitElement) {
-  // Whether the element should receive focus on render
+  /** Whether the element should receive focus on render */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus: boolean;
 
-  // Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error
+  /** Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error */
   @property({ type: Boolean, reflect: true })
   invalid: boolean;
 
-  // Whether to always show a hint
+  /** Whether to always show a hint */
   @property({ type: Boolean, reflect: true })
   always: boolean;
 
-  // The content displayed as the help text
+  /** The content displayed as the help text */
   @property({ reflect: true })
   hint: string;
 
-  // The content to disply as the label
+  /** The content to disply as the label */
   @property({ reflect: true })
   label: string;
 
-  // Whether to show optional text
+  /** Whether to show optional text */
   @property({ type: Boolean, reflect: true })
   optional: boolean;
 
-  // Renders the field in a disabled state.
+  /** Renders the field in a disabled state. */
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
-  // Renders the field in a readonly state.
+  /** Renders the field in a readonly state. */
   @property({ attribute: 'read-only', type: Boolean, reflect: true })
   readOnly: boolean;
 
-  @property({ state: true })
   /** @internal */
+  @property({ state: true })
   _options: string;
 
   @property({ reflect: true })
