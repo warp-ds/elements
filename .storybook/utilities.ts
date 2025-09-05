@@ -30,8 +30,24 @@ export function prespread(args: Record<string, unknown>): Record<string, unknown
     ...args,
   };
   for (const field of Object.keys(newArgs)) {
-    // allow the number value 0 which is falsy in JS
-    if (typeof newArgs[field] !== 'number' && !newArgs[field]) {
+    const value = args[field];
+
+    // Add Lit syntax for boolean attributes
+    if (typeof value === 'boolean') {
+      newArgs[`?${field}`] = value;
+      delete newArgs[field];
+    }
+
+    // Add Lit syntax for complex properties
+    if (typeof value === 'object') {
+      newArgs[`.${field}`] = value;
+      delete newArgs[field];
+    }
+
+    // The manifest has a bunch of default empty strings (which we should probably investigate)
+    // that turn on features that should be off in Storybook canvases.
+    // Remove the empty strings.
+    if (newArgs[field] === '') {
       delete newArgs[field];
     }
   }
