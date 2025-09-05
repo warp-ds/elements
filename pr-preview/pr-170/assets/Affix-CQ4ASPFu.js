@@ -1,0 +1,4 @@
+import{j as e}from"./index-BpnebWie.js";import{useMDXComponents as s}from"./index-Cbq7Ng9C.js";import{M as r,C as i}from"./blocks-Bi6jltFn.js";import{A as m,D as f}from"./affix.stories-DW_kC72x.js";import"./preload-helper-CmsKOCeN.js";import"./iframe-BHL3F51P.js";import"./utilities-Csu3kLeB.js";function t(o){const n={code:"code",h1:"h1",p:"p",...s(),...o.components};return e.jsxs(e.Fragment,{children:[e.jsx(r,{of:m,name:"Docs"}),`
+`,e.jsx(n.h1,{id:"affix",children:"Affix"}),`
+`,e.jsxs(n.p,{children:["This component is usually used in other components like form elements to show a prefix or suffix. See for example the ",e.jsx(n.code,{children:"Textfield"})," component."]}),`
+`,e.jsx(i,{of:f})]})}function h(o={}){const{wrapper:n}={...s(),...o.components};return n?e.jsx(n,{...o,children:e.jsx(t,{...o})}):t(o)}export{h as default};

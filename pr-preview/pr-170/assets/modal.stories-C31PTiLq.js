@@ -1,9 +1,9 @@
-import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./utilities-C-uX2Lmj.js";import"./preload-helper-CmsKOCeN.js";const{events:h,args:d,argTypes:m}=l("w-modal"),{events:p,args:c,argTypes:u}=l("w-modal-header"),{events:g,args:y,argTypes:b}=l("w-modal-footer"),v={title:"Overlays/Modal"},t={args:{},render(){return s`
-      <button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</button>
+import{g as s,x as l}from"./iframe-BHL3F51P.js";import{s as i,p as d}from"./utilities-Csu3kLeB.js";var c=Object.freeze,u=Object.defineProperty,p=(e,I)=>c(u(e,"raw",{value:c(e.slice())})),h,m;const{events:g,args:b,argTypes:y}=s("w-modal"),{events:w,args:k,argTypes:f}=s("w-modal-header"),{events:v,args:S,argTypes:x}=s("w-modal-footer"),T={title:"Overlays/Modal"},t={args:{},render(){return l(h||(h=p([`
+      <w-button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</w-button>
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
         <div slot="content">
-          <div class="mb-12">
+          <div style="margin-bottom: 12px">
             <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
           </div>
           <p>
@@ -43,24 +43,70 @@ import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./util
           <w-button variant="primary" id="modal-close-button-one">OK</w-button>
         </w-modal-footer>
       </w-modal>
-    `}},o={render(e){return s`
+
+      <script>
+        const openButtonOne = document.querySelector('#modal-open-button-one');
+        const closeButtonOne = document.querySelector('#modal-close-button-one');
+        const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
+        const modalOne = document.querySelector('#example-modal-one');
+        const modalHeaderOne = document.querySelector('#modal-header-one');
+        openButtonOne.addEventListener('click', () => modalOne.open());
+        closeButtonOne.addEventListener('click', () => modalOne.close());
+        toggleBackButtonOne.addEventListener('click', () => {
+          modalHeaderOne.back = !modalHeaderOne.back;
+        });
+      <\/script>
+    `])))}},o={args:{},render(){return l(m||(m=p([`
+      <w-button id="modal-open-button-two" aria-haspopup="dialog">Open a modal</w-button>
+      <w-modal id="example-modal-two">
+        <w-modal-header slot="header" title="Look a doggo!">
+          <img
+            slot="top"
+            style="height: 256px; width: 100%; object-fit: cover;"
+            src="https://images.unsplash.com/photo-1534361960057-19889db9621e"
+            alt="A really nice dog" />
+        </w-modal-header>
+        <div slot="content">
+          <p>
+            I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed
+            robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous
+            Ultra-violet shine blind forensics I inspect view through the future see millennium Killa Beez sold fifty gold, sixty platinum
+            Shackling the masses with drastic rap tactics Graphic displays melt the steel like blacksmiths Black Wu jackets, Queen Beez ease
+            the guns in Rumble with patrolmen, tear gas laced the function Heads by the score take flight, incite a war Chicks hit the
+            floor, diehard fans demand more Behold the bold soldier, control the globe slowly Proceeds to blow, swingin' swords like Shinobi
+            Stomp grounds and pound footprints in solid rock Wu got it locked, performin' live on your hottest block
+          </p>
+        </div>
+        <w-modal-footer slot="footer">
+          <w-button variant="primary" id="modal-close-button-two">OK</w-button>
+        </w-modal-footer>
+      </w-modal>
+
+      <script>
+        const openButtonTwo = document.querySelector('#modal-open-button-two');
+        const closeButtonTwo = document.querySelector('#modal-close-button-two');
+        const modalTwo = document.querySelector('#example-modal-two');
+        openButtonTwo.addEventListener('click', () => modalTwo.open());
+        closeButtonTwo.addEventListener('click', () => modalTwo.close());
+      <\/script>
+    `])))}},a={render(e){return l`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal ${n(i(e))}></w-modal>
-    `},args:d,argTypes:m,parameters:{actions:{handles:h}}},a={render(e){return s`
+      <w-modal ${i(d(e))}></w-modal>
+    `},args:b,argTypes:y,parameters:{actions:{handles:g}}},r={render(e){return l`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-header ${n(i(e))}></w-modal-header>
-    `},args:c,argTypes:u,parameters:{actions:{handles:p}}},r={render(e){return s`
+      <w-modal-header ${i(d(e))}></w-modal-header>
+    `},args:k,argTypes:f,parameters:{actions:{handles:w}}},n={render(e){return l`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
-      <w-modal-footer ${n(i(e))}></w-modal-footer>
-    `},args:y,argTypes:b,parameters:{actions:{handles:g}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+      <w-modal-footer ${i(d(e))}></w-modal-footer>
+    `},args:S,argTypes:x,parameters:{actions:{handles:v}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
-      <button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</button>
+      <w-button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</w-button>
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
         <div slot="content">
-          <div class="mb-12">
+          <div style="margin-bottom: 12px">
             <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
           </div>
           <p>
@@ -100,9 +146,60 @@ import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./util
           <w-button variant="primary" id="modal-close-button-one">OK</w-button>
         </w-modal-footer>
       </w-modal>
+
+      <script>
+        const openButtonOne = document.querySelector('#modal-open-button-one');
+        const closeButtonOne = document.querySelector('#modal-close-button-one');
+        const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
+        const modalOne = document.querySelector('#example-modal-one');
+        const modalHeaderOne = document.querySelector('#modal-header-one');
+        openButtonOne.addEventListener('click', () => modalOne.open());
+        closeButtonOne.addEventListener('click', () => modalOne.close());
+        toggleBackButtonOne.addEventListener('click', () => {
+          modalHeaderOne.back = !modalHeaderOne.back;
+        });
+      <\/script>
     \`;
   }
 }`,...t.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  args: {},
+  render() {
+    return html\`
+      <w-button id="modal-open-button-two" aria-haspopup="dialog">Open a modal</w-button>
+      <w-modal id="example-modal-two">
+        <w-modal-header slot="header" title="Look a doggo!">
+          <img
+            slot="top"
+            style="height: 256px; width: 100%; object-fit: cover;"
+            src="https://images.unsplash.com/photo-1534361960057-19889db9621e"
+            alt="A really nice dog" />
+        </w-modal-header>
+        <div slot="content">
+          <p>
+            I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed
+            robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous
+            Ultra-violet shine blind forensics I inspect view through the future see millennium Killa Beez sold fifty gold, sixty platinum
+            Shackling the masses with drastic rap tactics Graphic displays melt the steel like blacksmiths Black Wu jackets, Queen Beez ease
+            the guns in Rumble with patrolmen, tear gas laced the function Heads by the score take flight, incite a war Chicks hit the
+            floor, diehard fans demand more Behold the bold soldier, control the globe slowly Proceeds to blow, swingin' swords like Shinobi
+            Stomp grounds and pound footprints in solid rock Wu got it locked, performin' live on your hottest block
+          </p>
+        </div>
+        <w-modal-footer slot="footer">
+          <w-button variant="primary" id="modal-close-button-two">OK</w-button>
+        </w-modal-footer>
+      </w-modal>
+
+      <script>
+        const openButtonTwo = document.querySelector('#modal-open-button-two');
+        const closeButtonTwo = document.querySelector('#modal-close-button-two');
+        const modalTwo = document.querySelector('#example-modal-two');
+        openButtonTwo.addEventListener('click', () => modalTwo.open());
+        closeButtonTwo.addEventListener('click', () => modalTwo.close());
+      <\/script>
+    \`;
+  }
+}`,...o.parameters?.docs?.source}}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
@@ -116,7 +213,7 @@ import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./util
       handles: modalEvents
     }
   }
-}`,...o.parameters?.docs?.source}}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+}`,...a.parameters?.docs?.source}}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
@@ -130,7 +227,7 @@ import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./util
       handles: modalHeaderEvents
     }
   }
-}`,...a.parameters?.docs?.source}}};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`{
+}`,...r.parameters?.docs?.source}}};n.parameters={...n.parameters,docs:{...n.parameters?.docs,source:{originalSource:`{
   render(args) {
     return html\`
       <p>This is here to document attributes. See the Default example for a complete usage example.</p>
@@ -144,4 +241,4 @@ import{g as l,x as s}from"./iframe-Be-bD8zp.js";import{s as n,p as i}from"./util
       handles: modalFooterEvents
     }
   }
-}`,...r.parameters?.docs?.source}}};const S=["Default","Modal","ModalHeader","ModalFooter"];export{t as Default,o as Modal,r as ModalFooter,a as ModalHeader,S as __namedExportsOrder,v as default};
+}`,...n.parameters?.docs?.source}}};const B=["Default","WithImage","Modal","ModalHeader","ModalFooter"],H=Object.freeze(Object.defineProperty({__proto__:null,Default:t,Modal:a,ModalFooter:n,ModalHeader:r,WithImage:o,__namedExportsOrder:B,default:T},Symbol.toStringTag,{value:"Module"}));export{t as D,H as M,o as W};

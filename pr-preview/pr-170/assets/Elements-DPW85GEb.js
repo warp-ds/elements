@@ -1,4 +1,4 @@
-import{j as e}from"./index-BpnebWie.js";import{useMDXComponents as a}from"./index-Cbq7Ng9C.js";function r(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...a(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-elements",children:"Warp Elements"}),`
+import{j as e}from"./index-BpnebWie.js";import{useMDXComponents as t}from"./index-Cbq7Ng9C.js";function o(s){const n={a:"a",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",p:"p",pre:"pre",...t(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(n.h1,{id:"warp-dselements",children:"@warp-ds/elements"}),`
 `,e.jsx(n.p,{children:"The home of the web component, or custom elements, implementation of Warp."}),`
 `,e.jsx(n.h2,{id:"usage",children:"Usage"}),`
 `,e.jsx(n.h3,{id:"install",children:"Install"}),`
@@ -29,4 +29,20 @@ import{j as e}from"./index-BpnebWie.js";import{useMDXComponents as a}from"./inde
   <a href="#/url/3" aria-current="page"> Oslo </a>
 </w-breadcrumbs>
 `})}),`
-`,e.jsx(n.p,{children:"Check the sidebar to see available components in interactive demos. The demos include code examples (click Show code)."})]})}function i(s={}){const{wrapper:n}={...a(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(r,{...s})}):r(s)}export{i as default};
+`,e.jsx(n.p,{children:"Check the sidebar to see available components in interactive demos. The demos include code examples (click Show code)."}),`
+`,e.jsx(n.h2,{id:"editor-integration",children:"Editor integration"}),`
+`,e.jsx(n.h3,{id:"visual-studio-code",children:"Visual Studio Code"}),`
+`,e.jsxs(n.p,{children:["This module includes ",e.jsx(n.a,{href:"https://code.visualstudio.com/blogs/2020/02/24/custom-data-format",rel:"nofollow",children:"Custom HTML and CSS data for Visual Studio Code"}),"."]}),`
+`,e.jsxs(n.p,{children:["Add this to your ",e.jsx(n.code,{children:"settings.json"})," and restart VS Code to get IntelliSense and inline documentation for Warp elements."]}),`
+`,e.jsx(n.pre,{children:e.jsx(n.code,{className:"language-json",children:`{
+  "html.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
+  ]
+}
+`})}),`
+`,e.jsx(n.h3,{id:"jetbrains-products",children:"JetBrains products"}),`
+`,e.jsxs(n.p,{children:["We ship ",e.jsx(n.code,{children:"web-types.json"})," which should get picked up automatically by JetBrains IDEA and similar products."]}),`
+`,e.jsx(n.p,{children:"You should see code completions and inline docs for Warp elements when writing HTML."})]})}function a(s={}){const{wrapper:n}={...t(),...s.components};return n?e.jsx(n,{...s,children:e.jsx(o,{...s})}):o(s)}export{a as default};

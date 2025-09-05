@@ -1,4 +1,4 @@
-import{g as o,x as a}from"./iframe-Be-bD8zp.js";import{s as n,p as c}from"./utilities-C-uX2Lmj.js";const{events:p,args:l,argTypes:m}=o("w-pill"),{events:u,args:i,argTypes:g}=o("w-toast-container"),d={title:"Overlays/Toast"},e={args:{},render(){return a`
+import{g as o,x as a}from"./iframe-BHL3F51P.js";import{s as n,p as c}from"./utilities-Csu3kLeB.js";const{events:p,args:l,argTypes:m}=o("w-pill"),{events:u,args:i,argTypes:g}=o("w-toast-container"),d={title:"Overlays/Toast"},e={args:{},render(){return a`
       <w-button small onclick="window.toast('message goes here', { type: 'error', canclose: true })"> See Error Example </w-button>
       <w-button small onclick="window.toast('message goes here', { type: 'warning', canclose: true })"> See Warning Example </w-button>
       <w-button small onclick="window.toast('message goes here', { type: 'success', canclose: true })"> See Success Example </w-button>

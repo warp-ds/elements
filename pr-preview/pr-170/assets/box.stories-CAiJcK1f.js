@@ -1,4 +1,4 @@
-import{g as t,x as l}from"./iframe-Be-bD8zp.js";import{s as c,p as d}from"./utilities-C-uX2Lmj.js";import"./preload-helper-CmsKOCeN.js";const{events:u,args:p,argTypes:i}=t("w-box"),b={title:"Layout/Box",render:n=>l`
+import{g as t,x as l}from"./iframe-BHL3F51P.js";import{s as c,p as d}from"./utilities-Csu3kLeB.js";const{events:u,args:p,argTypes:i}=t("w-box"),g={title:"Layout/Box",render:n=>l`
       <w-box ${c(d(n))}>
         <h3>Box Content</h3>
         <p>This is content inside a box component.</p>
@@ -32,4 +32,4 @@ import{g as t,x as l}from"./iframe-Be-bD8zp.js";import{s as c,p as d}from"./util
     neutral: true,
     role: 'region'
   }
-}`,...s.parameters?.docs?.source}}};const x=["Default","Info","Neutral","Bordered","Bleed"];export{s as Bleed,a as Bordered,e as Default,r as Info,o as Neutral,x as __namedExportsOrder,b as default};
+}`,...s.parameters?.docs?.source}}};const m=["Default","Info","Neutral","Bordered","Bleed"],x=Object.freeze(Object.defineProperty({__proto__:null,Bleed:s,Bordered:a,Default:e,Info:r,Neutral:o,__namedExportsOrder:m,default:g},Symbol.toStringTag,{value:"Module"}));export{x as B,e as D,r as I,o as N,a,s as b};
