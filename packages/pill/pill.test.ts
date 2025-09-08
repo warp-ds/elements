@@ -13,7 +13,7 @@ test('renders a pill', async () => {
 test('renders a pill with a close icon', async () => {
   const screen = await page.render(html` <w-pill can-close>Close me</w-pill>`);
   await expect.element(screen.getByText('Close me')).toBeVisible();
-  await expect.element(screen.getByText('Close me').element().shadowRoot.querySelector('w-icon-close-16')).toBeVisible();
+  await expect.poll(() => screen.getByText('Close me').element().shadowRoot.querySelector('w-icon-close-16')).toBeVisible();
 });
 
 test('renders screen reader label on the pill', async () => {
