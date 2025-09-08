@@ -1,14 +1,14 @@
+// @warp-css;
 import { css, html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
-import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { components, reset } from '../styles.js';
+import { reset } from '../styles.js';
 import { generateRandomId } from '../utils/index.js';
 import { styles } from './styles.js';
 
@@ -18,6 +18,36 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
+export const ccAttention = {
+  base: 'border-2 relative flex items-start',
+  tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
+  callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',
+  highlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8 drop-shadow-m translate-z-0',
+  popover:
+    'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300] s-text rounded-8 p-16 drop-shadow-m translate-z-0',
+
+  arrowBase: 'absolute h-[14px] w-[14px] border-2 border-b-0 border-r-0 rounded-tl-4 transform',
+  arrowDirectionLeftStart: '-left-[8px]',
+  arrowDirectionLeft: '-left-[8px]',
+  arrowDirectionLeftEnd: '-left-[8px]',
+  arrowDirectionRightStart: '-right-[8px]',
+  arrowDirectionRight: '-right-[8px]',
+  arrowDirectionRightEnd: '-right-[8px]',
+  arrowDirectionBottomStart: '-bottom-[8px]',
+  arrowDirectionBottom: '-bottom-[8px]',
+  arrowDirectionBottomEnd: '-bottom-[8px]',
+  arrowDirectionTopStart: '-top-[8px]',
+  arrowDirectionTop: '-top-[8px]',
+  arrowDirectionTopEnd: '-top-[8px]',
+  arrowTooltip: 's-bg-inverted border-[--w-s-color-background-inverted]',
+  arrowCallout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
+  arrowPopover: 'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300]',
+  arrowHighlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
+
+  content: 'last-child:mb-0',
+  notCallout: 'absolute z-50',
+  closeBtn: `${'text-m leading-[24]'} ${`bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${'s-text-link'}`} ${'s-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'} justify-self-end -mr-8 ml-8`,
+};
 import '@warp-ds/icons/elements/close-16';
 
 class WarpAttention extends LitElement {
@@ -40,10 +70,10 @@ class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
   highlight: boolean;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ attribute: 'can-close', type: Boolean, reflect: true })
   canClose: boolean;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ attribute: 'no-arrow', type: Boolean, reflect: true })
   noArrow: boolean;
 
   @property({ type: Number, reflect: true })
@@ -55,20 +85,21 @@ class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
   flip: boolean;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ attribute: 'cross-axis', type: Boolean, reflect: true })
   crossAxis: boolean;
 
-  @property({ type: Array, reflect: true })
+  @property({ attribute: 'fallback-placements', type: Array, reflect: true })
   fallbackPlacements: Directions[];
 
+  /** @internal */
   attentionState;
 
   // To store the initial placement value for reference when computing the actual direction
+  /** @internal */
   _initialPlacement: Directions;
 
   static styles = [
     reset,
-    components,
     styles,
     css`
       #attention {
@@ -148,6 +179,8 @@ class WarpAttention extends LitElement {
   }
 
   handleDone() {
+    console.log('target element', this._targetEl);
+    console.log('attention element', this._attentionEl);
     window.requestAnimationFrame(() => {
       if (this.show && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
