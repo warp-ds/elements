@@ -1,12 +1,12 @@
-import{g as i,k as n}from"./iframe-Db-sxe0R.js";import{s as o,p}from"./utilities-PJ6nCT1H.js";import"./preload-helper-Dch09mLN.js";const{events:d,args:m,argTypes:g}=i("w-card"),b={title:"Navigation/Card",render(c){return n`
-      <w-card ${o(p(c))}>
+import{g as i,k as o}from"./iframe-BkMFtFBJ.js";import{s as n,p}from"./utilities-DadZFdyE.js";const{events:d,args:m,argTypes:g}=i("w-card"),f={title:"Navigation/Card",render(c){return o`
+      <w-card ${n(p(c))}>
         <div style="padding: 16px;">
           <h3>Card Title</h3>
           <p>This is card content with some example text.</p>
         </div>
       </w-card>
-    `},args:m,argTypes:g,parameters:{actions:{handles:d}}},e={args:{selected:!1,flat:!1,clickable:!1}},a={args:{selected:!0,flat:!1,clickable:!1}},s={args:{selected:!1,flat:!0,clickable:!1}},r={args:{selected:!0,flat:!0,clickable:!1}},t={args:{selected:!1,flat:!1,clickable:!0}},l={args:{selected:!1,flat:!1,clickable:!0},render(c){return n`
-      <w-card ${o(p(c))} style="max-width: 300px;">
+    `},args:m,argTypes:g,parameters:{actions:{handles:d}}},e={args:{selected:!1,flat:!1,clickable:!1}},a={args:{selected:!0,flat:!1,clickable:!1}},s={args:{selected:!1,flat:!0,clickable:!1}},r={args:{selected:!0,flat:!0,clickable:!1}},t={args:{selected:!1,flat:!1,clickable:!0}},l={args:{selected:!1,flat:!1,clickable:!0},render(c){return o`
+      <w-card ${n(p(c))} style="max-width: 300px;">
         <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
         <div style="padding: 16px;">
           <p style="font-size: 12px; color: #666; margin: 0 0 8px 0;">DNB Eiendom</p>
@@ -64,4 +64,4 @@ import{g as i,k as n}from"./iframe-Db-sxe0R.js";import{s as o,p}from"./utilities
       </w-card>
     \`;
   }
-}`,...l.parameters?.docs?.source}}};const k=["Default","Selected","Flat","FlatSelected","Clickable","PropertyExample"];export{t as Clickable,e as Default,s as Flat,r as FlatSelected,l as PropertyExample,a as Selected,k as __namedExportsOrder,b as default};
+}`,...l.parameters?.docs?.source}}};const u=["Default","Selected","Flat","FlatSelected","Clickable","PropertyExample"],k=Object.freeze(Object.defineProperty({__proto__:null,Clickable:t,Default:e,Flat:s,FlatSelected:r,PropertyExample:l,Selected:a,__namedExportsOrder:u,default:f},Symbol.toStringTag,{value:"Module"}));export{k as C,e as D,s as F,l as P,a as S,r as a,t as b};
