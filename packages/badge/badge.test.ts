@@ -7,6 +7,6 @@ import './index.js';
 test('renders the slotted label', async () => {
   const component = html`<w-badge>This is also not a button</w-badge>`;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await expect.element(screen.getByText('This is also not a button')).toBeVisible();
 });

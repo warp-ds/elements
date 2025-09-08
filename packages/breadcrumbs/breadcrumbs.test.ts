@@ -6,7 +6,7 @@ import { expect, test } from 'vitest';
 import './index.js';
 
 test('renders a bread crumb', async () => {
-  const screen = await page.render(
+  const screen = page.render(
     html` <w-breadcrumb>
       <a href="/foo">Foo</a>
       <a href="/bar">Bar</a>
@@ -17,6 +17,6 @@ test('renders a bread crumb', async () => {
 });
 
 test('renders an aria-label if set', async () => {
-  const screen = await page.render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
+  const screen = page.render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
   await expect.element(screen.getByLabelText('You are here', { hasText: 'w-breadcrumb' })).toBeDefined();
 });

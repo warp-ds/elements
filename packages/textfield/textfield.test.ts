@@ -7,6 +7,6 @@ import './index.js';
 test('renders the textfield', async () => {
   const component = html`<w-textfield label="Email" help-text="Ugyldig e-post"></w-textfield>`;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await expect.element(screen.getByText('Email')).toBeVisible();
 });

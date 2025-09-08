@@ -11,9 +11,6 @@ patchedDependencies:
   custom-element-vs-code-integration:
     hash: 58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2
     path: patches/custom-element-vs-code-integration.patch
-  vitest-browser-lit:
-    hash: b7d71e5a2e320a367d2061c2084ce79a132787dcef2f9ae8a43d82be7ef03edf
-    path: patches/vitest-browser-lit.patch
 
 importers:
 
@@ -208,7 +205,7 @@ importers:
         version: 3.2.4(@types/debug@4.1.12)(@types/node@20.14.10)(@vitest/browser@3.2.4)(lightningcss@1.30.1)(terser@5.37.0)
       vitest-browser-lit:
         specifier: ^0.1.0
-        version: 0.1.0(patch_hash=b7d71e5a2e320a367d2061c2084ce79a132787dcef2f9ae8a43d82be7ef03edf)(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4)
+        version: 0.1.0(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4)
 
 packages:
 
@@ -10594,7 +10591,7 @@ snapshots:
       lightningcss: 1.30.1
       terser: 5.37.0
 
-  vitest-browser-lit@0.1.0(patch_hash=b7d71e5a2e320a367d2061c2084ce79a132787dcef2f9ae8a43d82be7ef03edf)(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4):
+  vitest-browser-lit@0.1.0(@vitest/browser@3.2.4)(lit@3.2.0)(vitest@3.2.4):
     dependencies:
       '@vitest/browser': 3.2.4(playwright@1.55.0)(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0))(vitest@3.2.4)
       lit: 3.2.0

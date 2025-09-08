@@ -7,6 +7,6 @@ import './index.js';
 test('renders the slotted text', async () => {
   const component = html`<w-card>This is a card</w-card>`;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await expect.element(screen.getByText('This is a card')).toBeVisible();
 });
