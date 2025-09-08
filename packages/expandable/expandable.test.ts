@@ -11,7 +11,7 @@ test('renders the given title prop and hides the slotted content', async () => {
     </w-expandable>
   `;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await expect.element(screen.getByText("I'm expandable")).toBeVisible();
   await expect.element(screen.getByText('with expanded content')).not.toBeVisible();
 });
@@ -23,7 +23,7 @@ test('clicking the expandable shows the slotted content', async () => {
     </w-expandable>
   `;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await screen.getByRole('button').click();
   await expect.element(screen.getByText('with expanded content')).toBeVisible();
 });

@@ -17,7 +17,7 @@ test('works in a form', async () => {
     </form>
   `;
 
-  await page.render(component);
+  page.render(component);
 
   // Confirm we have a form associated field berry
   const form = page.getByTestId('flavour');
@@ -26,6 +26,7 @@ test('works in a form', async () => {
   });
 
   // Select Raspberries
+  await expect.element(page.getByLabelText('Berries')).toBeVisible();
   await userEvent.selectOptions(page.getByLabelText('Berries').element(), 'Raspberries');
 
   // Confirm the form has a field berry with value raspberries

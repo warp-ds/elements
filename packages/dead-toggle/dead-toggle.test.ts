@@ -7,6 +7,6 @@ import './index.js';
 test('renders the dead toggle', async () => {
   const component = html`<w-dead-toggle data-testid="dead-toggle"></w-dead-toggle>`;
 
-  const screen = await page.render(component);
+  const screen = page.render(component);
   await expect.element(screen.getByTestId('dead-toggle')).toBeVisible();
 });
