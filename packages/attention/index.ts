@@ -19,6 +19,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/close-16';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -405,7 +406,7 @@ class WarpAttention extends LitElement {
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
-        html`
+        : html`
               <div id="attention" class="${this._wrapperClasses}">
                 <slot name="message"></slot>
                 <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
