@@ -4,19 +4,20 @@ import { css, html, LitElement, nothing } from 'lit';
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
+import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { reset } from '../styles.js';
 import { generateRandomId } from '../utils/index.js';
-import { styles } from './styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+
+import '@warp-ds/icons/elements/close-16';
 
 export const ccAttention = {
   base: 'border-2 relative flex items-start',
@@ -48,7 +49,6 @@ export const ccAttention = {
   notCallout: 'absolute z-50',
   closeBtn: `${'text-m leading-[24]'} ${`bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${'s-text-link'}`} ${'s-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'} justify-self-end -mr-8 ml-8`,
 };
-import '@warp-ds/icons/elements/close-16';
 
 class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -99,8 +99,7 @@ class WarpAttention extends LitElement {
   _initialPlacement: Directions;
 
   static styles = [
-    reset,
-    styles,
+    WarpElement.styles,
     css`
       #attention {
         position: absolute;
@@ -179,8 +178,6 @@ class WarpAttention extends LitElement {
   }
 
   handleDone() {
-    console.log('target element', this._targetEl);
-    console.log('attention element', this._attentionEl);
     window.requestAnimationFrame(() => {
       if (this.show && this._targetEl && this._attentionEl) {
         recompute(this.attentionState).then((state) => {
