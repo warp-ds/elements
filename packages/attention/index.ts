@@ -7,6 +7,7 @@ import { opposites, directions, arrowDirectionClassname, useRecompute as recompu
 import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 
 import { activateI18n } from '../i18n';
 import { generateRandomId } from '../utils/index.js';
@@ -18,37 +19,6 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/close-16';
-
-export const ccAttention = {
-  base: 'border-2 relative flex items-start',
-  tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
-  callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',
-  highlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8 drop-shadow-m translate-z-0',
-  popover:
-    'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300] s-text rounded-8 p-16 drop-shadow-m translate-z-0',
-
-  arrowBase: 'absolute h-[14px] w-[14px] border-2 border-b-0 border-r-0 rounded-tl-4 transform',
-  arrowDirectionLeftStart: '-left-[8px]',
-  arrowDirectionLeft: '-left-[8px]',
-  arrowDirectionLeftEnd: '-left-[8px]',
-  arrowDirectionRightStart: '-right-[8px]',
-  arrowDirectionRight: '-right-[8px]',
-  arrowDirectionRightEnd: '-right-[8px]',
-  arrowDirectionBottomStart: '-bottom-[8px]',
-  arrowDirectionBottom: '-bottom-[8px]',
-  arrowDirectionBottomEnd: '-bottom-[8px]',
-  arrowDirectionTopStart: '-top-[8px]',
-  arrowDirectionTop: '-top-[8px]',
-  arrowDirectionTopEnd: '-top-[8px]',
-  arrowTooltip: 's-bg-inverted border-[--w-s-color-background-inverted]',
-  arrowCallout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
-  arrowPopover: 'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300]',
-  arrowHighlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
-
-  content: 'last-child:mb-0',
-  notCallout: 'absolute z-50',
-  closeBtn: `${'text-m leading-[24]'} ${`bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${'s-text-link'}`} ${'s-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'} justify-self-end -mr-8 ml-8`,
-};
 
 class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
@@ -435,7 +405,7 @@ class WarpAttention extends LitElement {
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
-        : html`
+        html`
               <div id="attention" class="${this._wrapperClasses}">
                 <slot name="message"></slot>
                 <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
