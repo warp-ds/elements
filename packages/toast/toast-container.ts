@@ -1,10 +1,12 @@
+// @warp-css;
 import { css, html, LitElement } from 'lit';
 
-import { toaster as ccToastContainer } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 import { state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
+import { reset } from '../styles';
+
+import { styles } from './styles';
 import type { WarpToast } from './toast';
 import type { ToastOptions, ToastInternal } from './types';
 
@@ -22,9 +24,18 @@ import type { ToastOptions, ToastInternal } from './types';
  *
  * @internal
  */
+
+// all class objects have to be in this file when generating
+const ccToastContainer = {
+  wrapper: 'fixed transform translate-z-0 bottom-16 left-0 right-0 mx-8 sm:mx-16 z-50 pointer-events-none',
+  base: 'grid auto-rows-auto justify-items-center justify-center mx-auto pointer-events-none',
+  content: 'w-full',
+};
+
 export class WarpToastContainer extends LitElement {
   static styles = [
-    WarpElement.styles,
+    reset,
+    styles,
     css`
       :host {
         display: block;
@@ -53,7 +64,7 @@ export class WarpToastContainer extends LitElement {
       // collapse toasts that will be removed
       const collapseTasks = [];
       for (const [id] of remove) {
-        const el = this.renderRoot.querySelector(`#${id}`) as WarpToast | null;
+        const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
         collapseTasks.push(el.collapse());
       }
 
@@ -128,7 +139,7 @@ export class WarpToastContainer extends LitElement {
       throw new Error('"id" must be number or string when attempting to retrieve toast');
     }
 
-    const el = this.renderRoot.querySelector(`#${id}`) as WarpToast | null;
+    const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
 
     if (!this._toasts.has(id)) {
       return false;

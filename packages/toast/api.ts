@@ -1,11 +1,11 @@
 import { windowExists } from '../utils/window-exists';
-import { WarpToastContainer } from './toast-container';
 
+import { WarpToastContainer } from './toast-container';
 import type { ToastOptions, ToastInternal } from './types';
 
 function getToastContainer() {
   const container = customElements.get('w-toast-container');
-  return container as unknown as WarpToastContainer;
+  return container as typeof WarpToastContainer;
 }
 
 /**
@@ -14,7 +14,7 @@ function getToastContainer() {
 export function toast(message: string, options?: ToastOptions) {
   if (!windowExists) return;
 
-  const toast = getToastContainer().init();
+  const toast = getToastContainer().init() as WarpToastContainer;
 
   const data: ToastOptions = {
     id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
@@ -34,7 +34,7 @@ export function toast(message: string, options?: ToastOptions) {
 export function removeToast(id: string | number): Promise<boolean> | undefined {
   if (!windowExists) return;
 
-  const toast = customElements.get('w-toast-container').init();
+  const toast = getToastContainer().init() as WarpToastContainer;
   return toast.del(id);
 }
 
@@ -44,7 +44,7 @@ export function removeToast(id: string | number): Promise<boolean> | undefined {
 export function updateToast(id: string | number, options?: ToastOptions): ToastInternal | undefined {
   if (!windowExists) return;
 
-  const toast = customElements.get('w-toast-container').init();
+  const toast = getToastContainer().init() as WarpToastContainer;
   toast.set({ ...toast.get(id), ...options });
   return toast.get(id);
 }
