@@ -1,16 +1,26 @@
+// @warp-css;
 import { css, html, LitElement } from 'lit';
 
-import { toaster as ccToastContainer } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 import { state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
+import { reset } from '../styles';
+
+import { styles } from './styles';
 import type { WarpToast } from './toast';
 import type { ToastOptions, ToastInternal } from './types';
 
+// all class objects have to be in this file when generating
+const ccToastContainer = {
+  wrapper: 'fixed transform translate-z-0 bottom-16 left-0 right-0 mx-8 sm:mx-16 z-50 pointer-events-none',
+  base: 'grid auto-rows-auto justify-items-center justify-center mx-auto pointer-events-none',
+  content: 'w-full',
+};
+
 export class WarpToastContainer extends LitElement {
   static styles = [
-    WarpElement.styles,
+    reset,
+    styles,
     css`
       :host {
         display: block;

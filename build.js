@@ -5,7 +5,7 @@ import { glob } from 'glob';
 import { plugin as stylePlugin } from './build/index.js';
 
 const components = glob.sync('packages/**/index.{js,ts}');
-const toastApiPath = 'packages/toast/api.js';
+const toastApiPath = 'packages/toast/api.ts';
 const indexPath = 'index.js';
 const version = process.argv[2];
 
