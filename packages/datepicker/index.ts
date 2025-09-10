@@ -3,6 +3,7 @@ import { LitElement, html, nothing } from 'lit';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import {
+  addDays,
   addMonths,
   differenceInCalendarDays,
   eachDayOfInterval,
@@ -20,10 +21,11 @@ import {
   startOfMonth,
   startOfToday,
   startOfWeek,
+  subDays,
   subMonths,
 } from 'date-fns';
 import { property, query, state } from 'lit/decorators.js';
-import { cache } from 'lit/directives/cache.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '@warp-ds/icons/elements/calendar-16';
@@ -37,7 +39,6 @@ import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
 import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { fromISOToDate } from './utils.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 const isIOS = /iP(hone|od|ad)/.test(ua);
@@ -47,6 +48,8 @@ const inputType = isIOS ? 'text' : 'date';
  * An input for dates.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-datepicker--docs)
+ *
+ * @fires {Event}
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
@@ -159,8 +162,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @query('#wrapper', true)
   wrapper: HTMLDivElement;
 
-  #commitValue(newValue: string) {
-  }
+  @query('[data-navigation="true"]')
+  selectedCell: HTMLTableCellElement;
 
   #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
     e.preventDefault();
@@ -173,6 +176,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   #previousMonth() {
     this.navigationDate = subMonths(this.month, 1);
+  }
+
+  async #dispatchChangeEvent() {
+    // Let Lit finish rendering the updated value for the input field so
+    // the `event.target.value` is correct.
+    await this.updateComplete;
+    this.input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   #onClickOutside(e: MouseEvent | FocusEvent) {
@@ -198,7 +208,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   #onInputBlur(e: FocusEvent) {
     this.value = (e.target as HTMLInputElement).value;
-    // TODO: emit change event
+    this.#dispatchChangeEvent();
   }
 
   #onInputKeyDown(e: KeyboardEvent) {
@@ -208,20 +218,70 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     }
   }
 
+  async #onCalendarKeyDown(e: KeyboardEvent) {
+    const navigationDate = this.navigationDate;
+    let newNavigationDate: Date;
+
+    switch (e.key) {
+      case 'ArrowUp':
+        newNavigationDate = subDays(navigationDate, 7);
+        break;
+      case 'ArrowLeft':
+        newNavigationDate = subDays(navigationDate, 1);
+        break;
+      case 'Home':
+        newNavigationDate = startOfWeek(navigationDate, { locale: this.#locale });
+        break;
+      case 'PageUp':
+        newNavigationDate = subMonths(navigationDate, 1);
+        break;
+      case 'ArrowDown':
+        newNavigationDate = addDays(navigationDate, 7);
+        break;
+      case 'ArrowRight':
+        newNavigationDate = addDays(navigationDate, 1);
+        break;
+      case 'End':
+        newNavigationDate = endOfWeek(navigationDate, { locale: this.#locale });
+        break;
+      case 'PageDown':
+        newNavigationDate = addMonths(navigationDate, 1);
+        break;
+      case 'Escape':
+        this.isCalendarOpen = false;
+        break;
+    }
+
+    if (newNavigationDate) {
+      // prevent scrolling the viewport
+      e.preventDefault();
+      this.navigationDate = newNavigationDate;
+
+      // move keyboard focus once Lit has rendered an updated `data-navigation`
+      // based on this.navigationDate
+      await this.updateComplete;
+      this.selectedCell.focus();
+    }
+  }
+
   #onCalendarSelect(event: MouseEvent | KeyboardEvent) {
-    const isoDate = (event.target as HTMLTableCellElement).dataset.date;
+    // Clicks can hit the `<div>` inside the `<td>`, in
+    // which case we need to get the parentElement to look
+    // up the data-date attribute for the selected value.
+    const isoDate = (event.target as HTMLElement).parentElement.dataset.date || (event.target as HTMLTableCellElement).dataset.date;
+
     if ('key' in event) {
       if (event.key === 'Enter' || event.key === ' ') {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
         this.internalValue = this.value = isoDate;
         this.isCalendarOpen = false;
-        // TODO: emit change event
+        this.#dispatchChangeEvent();
       }
     } else {
       this.internalValue = this.value = isoDate;
       this.isCalendarOpen = false;
-      // TODO: emit change event
+      this.#dispatchChangeEvent();
     }
   }
 
@@ -253,13 +313,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     return html`
       <div class="w-datepicker-wrapper" id="${this.#wrapperId}">
         <label class="w-datepicker-input-label" for="${this.#inputId}">${this.label}</label>
-        <div className="w-datepicker-input-wrapper">
+        <div class="w-datepicker-input-wrapper">
           <input
             id="${this.#inputId}"
             type="${inputType}"
             name="${ifDefined(this.name)}"
             value="${ifDefined(this.value)}"
-            className="w-datepicker-input"
+            class="w-datepicker-input"
             @input="${this.#onInput}"
             @blur="${this.#onInputBlur}"
             @keydown="${this.#onInputKeyDown}" />
@@ -275,32 +335,34 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
           </w-button>
         </div>
       </div>
-      ${cache(
-        this.isCalendarOpen
-          ? html`
-              <div class="w-dropdown__popover w-dropdown__popover--open">
-                <div class="w-datepicker__calendar" aria-roledescription="TODO" id="${this.#calendarId}">
-                  <div class="w-datepicker__month-nav">
-                    <w-button
-                      aria-label="TODO"
-                      class="w-datepicker__month__nav__button"
-                      variant="utility"
-                      quiet
-                      small
-                      @click="${this.#previousMonth}">
-                      <w-icon-chevron-left-16></w-icon-chevron-left-16>
-                    </w-button>
-                    <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.#locale })}</div>
-                    <w-button
-                      aria-label="TODO"
-                      class="w-datepicker__month__nav__button"
-                      variant="utility"
-                      quiet
-                      small
-                      @click="${this.#nextMonth}">
-                      <w-icon-chevron-right-16></w-icon-chevron-right-16>
-                    </w-button>
-                  </div>
+      ${this.isCalendarOpen
+        ? html`
+            <div class="w-dropdown__popover w-dropdown__popover--open">
+              <div
+                aria-roledescription="TODO"
+                class="w-datepicker__calendar"
+                id="${this.#calendarId}"
+                @keydown="${this.#onCalendarKeyDown}">
+                <div class="w-datepicker__month-nav">
+                  <w-button
+                    aria-label="TODO"
+                    class="w-datepicker__month__nav__button"
+                    variant="utility"
+                    quiet
+                    small
+                    @click="${this.#previousMonth}">
+                    <w-icon-chevron-left-16></w-icon-chevron-left-16>
+                  </w-button>
+                  <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.#locale })}</div>
+                  <w-button
+                    aria-label="TODO"
+                    class="w-datepicker__month__nav__button"
+                    variant="utility"
+                    quiet
+                    small
+                    @click="${this.#nextMonth}">
+                    <w-icon-chevron-right-16></w-icon-chevron-right-16>
+                  </w-button>
                 </div>
                 <div class="w-datepicker__month">
                   <table class="w-datepicker__table" role="grid">
@@ -308,7 +370,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       <tr>
                         ${this.weeks[0].map(
                           (day) =>
-                            html`<th className="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.#locale })}</th> `,
+                            html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.#locale })}</th> `,
                         )}
                       </tr>
                     </thead>
@@ -337,6 +399,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                                   'w-datepicker__day--disabled': isDisabled,
                                   'w-datepicker__day--navigation': isNavigationDate,
                                 })}"
+                                data-navigation="${isNavigationDate}"
                                 data-date="${formatISO(day, { representation: 'date' })}"
                                 role="gridcell"
                                 tabindex="${isNavigationDate ? 0 : -1}"
@@ -351,9 +414,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   </table>
                 </div>
               </div>
-            `
-          : nothing,
-      )}
+            </div>
+          `
+        : nothing}
     `;
   }
 }
