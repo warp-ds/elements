@@ -6,15 +6,15 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpButton } from './index.js';
+import type { WarpLink } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
+const { events, args, argTypes } = getStorybookHelpers<WarpLink>('w-link');
 
 const meta: Meta<typeof args> = {
-  title: 'Buttons/Button',
+  title: 'Buttons/Link',
   render(args) {
-    return html`<w-button ${spread(prespread(args))}>Button Text</w-button>`;
+    return html`<w-link ${spread(prespread(args))}>Link Button Text</w-link>`;
   },
   args,
   argTypes,
@@ -32,6 +32,8 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -39,6 +41,8 @@ export const Secondary: Story = {
   args: {
     variant: 'secondary',
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -46,6 +50,17 @@ export const Negative: Story = {
   args: {
     variant: 'negative',
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
+  },
+};
+
+export const NegativeQuiet: Story = {
+  args: {
+    variant: 'negativeQuiet',
+    type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -53,6 +68,17 @@ export const Utility: Story = {
   args: {
     variant: 'utility',
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
+  },
+};
+
+export const UtilityQuiet: Story = {
+  args: {
+    variant: 'utilityQuiet',
+    type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -60,7 +86,7 @@ export const Link: Story = {
   args: {
     variant: 'link',
     type: 'button',
-    href: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_components',
+    href: 'http://developer.mozilla.org',
     target: '_new',
   },
 };
@@ -69,9 +95,11 @@ export const Pill: Story = {
   args: {
     variant: 'pill',
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
   render(args) {
-    return html`<w-button ${spread(prespread(args))}>💙</w-button>`;
+    return html`<w-link ${spread(prespread(args))}>💙</w-link>`;
   },
 };
 
@@ -80,6 +108,8 @@ export const Small: Story = {
     variant: 'primary',
     small: true,
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -88,14 +118,8 @@ export const Quiet: Story = {
     variant: 'secondary',
     quiet: true,
     type: 'button',
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    variant: 'primary',
-    loading: true,
-    type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -104,37 +128,14 @@ export const FullWidth: Story = {
     variant: 'primary',
     'full-width': true,
     type: 'button',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
   render(args) {
     return html`
       <div class="w-full flex flex-col gap-8">
-        <w-button ${spread(prespread(args))}>Full width</w-button>
+        <w-link ${spread(prespread(args))}>Full width</w-link>
       </div>
-    `;
-  },
-};
-
-export const AsLink: Story = {
-  args: {
-    variant: 'primary',
-    href: 'https://example.com',
-    target: '_blank',
-    type: 'button',
-  },
-  render(args) {
-    return html`<w-button ${spread(prespread(args))}>Visit Example</w-button>`;
-  },
-};
-
-export const FormControl: Story = {
-  args: {},
-  render() {
-    return html`
-      <form name="form-control">
-        <input type="text" value="I am an input field" name="demoValue" style="border: 1px solid lime" />
-        <w-button type="reset" name="resetButton" value="fooyoo">Reset</w-button>
-        <w-button type="submit" name="submuitButtton" value="fooyoo">Send thing</w-button>
-      </form>
     `;
   },
 };

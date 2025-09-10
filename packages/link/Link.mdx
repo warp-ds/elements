@@ -1,12 +1,12 @@
 import { Canvas, Meta } from '@storybook/addon-docs/blocks';
 
-import * as ButtonStories from './button.stories';
+import * as LinkStories from './link.stories.ts';
 
-<Meta of={ButtonStories} name="Docs" />
+<Meta of={LinkStories} name="Docs" />
 
-# Button
+# Link
 
-Buttons are used to perform actions, with different visuals for different needs.
+Link buttons are used to perform actions, with different visuals for different needs.
 
 ## Accessibility
 
@@ -16,53 +16,37 @@ If the button doesn't have visible text content, such as when used with only an 
 
 The primary button is a call to action.
 
-<Canvas of={ButtonStories.Primary} />
+<Canvas of={LinkStories.Primary} />
 
 The secondary button is for secondary or tertiary actions. "secondary" is the default value of the "variant" attribute.
 
-<Canvas of={ButtonStories.Secondary} />
+<Canvas of={LinkStories.Secondary} />
 
 The negative button is for emphasizing actions that can be destructive or have negative consequences if taken.
 
-<Canvas of={ButtonStories.Negative} />
+<Canvas of={LinkStories.Negative} />
 
-<Canvas of={ButtonStories.Utility} />
-<Canvas of={ButtonStories.Link} />
-<Canvas of={ButtonStories.Pill} />
+<Canvas of={LinkStories.Utility} />
+<Canvas of={LinkStories.Link} />
+<Canvas of={LinkStories.Pill} />
 
 All of the above buttons have a small variant.
 
-<Canvas of={ButtonStories.Small} />
+<Canvas of={LinkStories.Small} />
 
 ## Quiet
 
 By default, buttons have a visible stroke and fill. Quiet buttons do not have this visible stroke or fill and should only be used for secondary actions within a button group. Quiet buttons have the same padding rules as other action buttons and reveal a button-like background color when hovered.
 
-<Canvas of={ButtonStories.Quiet} />
-
-## Form control
-
-Buttons used in the context of a form.
-
-<Canvas of={ButtonStories.FormControl} />
-
-## Link (anchor) styled as button
-
-See [Link](/docs/buttons-link--docs) component for details.
-
-<Canvas of={ButtonStories.AsLink} />
-
-## Loading state
-
-To show the user that the action they triggered has begun, buttons have an in progress or loading state.
-
-<Canvas of={ButtonStories.Loading} />
+<Canvas of={LinkStories.Quiet} />
+<Canvas of={LinkStories.UtilityQuiet} />
+<Canvas of={LinkStories.NegativeQuiet} />
 
 ## Full width
 
 Button will take the parent's width instead of content width. Useful on mobile when button should take full width.
 
-<Canvas of={ButtonStories.FullWidth} />
+<Canvas of={LinkStories.FullWidth} />
 
 ## Disabled state
 

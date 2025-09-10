@@ -9,6 +9,7 @@ import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
+import '../link';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -312,13 +313,13 @@ class WarpButton extends FormControlMixin(LitElement) {
 
   render() {
     return html` ${this.href
-      ? html`<a
+      ? html`<w-link
           href=${this.href}
           target=${this.target}
           rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
           class=${this._classes}>
           <slot></slot>
-        </a>`
+        </w-link>`
       : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
         </button>`}
