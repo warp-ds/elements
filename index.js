@@ -9,6 +9,7 @@ export * from './packages/card';
 export * from './packages/dead-toggle/';
 export * from './packages/expandable';
 export * from './packages/modal';
+export * from './packages/pageindicator';
 export * from './packages/pagination';
 export * from './packages/pill';
 export * from './packages/rip-and-tear-radio/';

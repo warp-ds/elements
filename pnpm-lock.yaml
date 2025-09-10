@@ -4,14 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  '@vitest/pretty-format':
-    hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
-    path: patches/@vitest__pretty-format.patch
-  custom-element-vs-code-integration:
-    hash: 58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2
-    path: patches/custom-element-vs-code-integration.patch
-
 importers:
 
   .:
@@ -121,7 +113,7 @@ importers:
         version: 1.7.0(prettier@3.3.2)
       custom-element-vs-code-integration:
         specifier: ^1.5.0
-        version: 1.5.0(patch_hash=58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2)(prettier@3.3.2)
+        version: 1.5.0(prettier@3.3.2)
       cz-conventional-changelog:
         specifier: 3.3.0
         version: 3.3.0(@types/node@20.14.10)(typescript@5.5.3)
@@ -6940,7 +6932,7 @@ snapshots:
     optionalDependencies:
       vite: 5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0)
 
-  '@vitest/pretty-format@3.2.4(patch_hash=f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e)':
+  '@vitest/pretty-format@3.2.4':
     dependencies:
       tinyrainbow: 2.0.0
 
@@ -6952,7 +6944,7 @@ snapshots:
 
   '@vitest/snapshot@3.2.4':
     dependencies:
-      '@vitest/pretty-format': 3.2.4(patch_hash=f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e)
+      '@vitest/pretty-format': 3.2.4
       magic-string: 0.30.17
       pathe: 2.0.3
 
@@ -6962,7 +6954,7 @@ snapshots:
 
   '@vitest/utils@3.2.4':
     dependencies:
-      '@vitest/pretty-format': 3.2.4(patch_hash=f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e)
+      '@vitest/pretty-format': 3.2.4
       loupe: 3.2.1
       tinyrainbow: 2.0.0
 
@@ -7629,7 +7621,7 @@ snapshots:
     transitivePeerDependencies:
       - prettier
 
-  custom-element-vs-code-integration@1.5.0(patch_hash=58b94a75082e1fec46cba4aeeac80735e109a43580ba3885de3602418b79e9f2)(prettier@3.3.2):
+  custom-element-vs-code-integration@1.5.0(prettier@3.3.2):
     dependencies:
       '@prettier/sync': 0.5.5(prettier@3.3.2)
     transitivePeerDependencies:
@@ -10602,7 +10594,7 @@ snapshots:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
       '@vitest/mocker': 3.2.4(vite@5.3.3(@types/node@20.14.10)(lightningcss@1.30.1)(terser@5.37.0))
-      '@vitest/pretty-format': 3.2.4(patch_hash=f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e)
+      '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
       '@vitest/spy': 3.2.4
