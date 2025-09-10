@@ -3,22 +3,23 @@ import { LitElement, html, nothing } from 'lit';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import {
-  addDays,
   addMonths,
   differenceInCalendarDays,
   eachDayOfInterval,
   eachWeekOfInterval,
   endOfWeek,
   format,
+  formatISO,
   getDate,
   getWeekOfMonth,
+  isSameDay,
   isSameMonth,
+  isToday,
   lastDayOfMonth,
   Locale,
   startOfMonth,
   startOfToday,
   startOfWeek,
-  subDays,
   subMonths,
 } from 'date-fns';
 import { property, query, state } from 'lit/decorators.js';
@@ -36,6 +37,7 @@ import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
 import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { fromISOToDate } from './utils.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 const isIOS = /iP(hone|od|ad)/.test(ua);
@@ -88,14 +90,19 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   dayFormat = 'PPPP';
 
   @state()
-  isCalendarOpen: boolean;
+  isCalendarOpen = false;
 
   /** The current input value as a stringified date-like */
   @state()
-  internalValue: string;
+  internalValue = '';
 
   @state()
-  navigationDate: Date;
+  navigationDate: Date = startOfToday();
+
+  @state()
+  get selectedDate(): Date | null {
+    return fromISOToDate(this.value) ?? null;
+  }
 
   @state()
   get month() {
@@ -153,8 +160,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   wrapper: HTMLDivElement;
 
   #commitValue(newValue: string) {
-    this.value = newValue;
-    // TODO: emit change event
   }
 
   #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
@@ -192,7 +197,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   #onInputBlur(e: FocusEvent) {
-    this.#commitValue((e.target as HTMLInputElement).value);
+    this.value = (e.target as HTMLInputElement).value;
+    // TODO: emit change event
   }
 
   #onInputKeyDown(e: KeyboardEvent) {
@@ -202,16 +208,32 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     }
   }
 
-  #onSelect(date: string) {
-    this.internalValue = date;
-    this.isCalendarOpen = false;
-    this.#commitValue(date);
+  #onCalendarSelect(event: MouseEvent | KeyboardEvent) {
+    const isoDate = (event.target as HTMLTableCellElement).dataset.date;
+    if ('key' in event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        // Prevents whitespace from being added to the input field
+        event.preventDefault();
+        this.internalValue = this.value = isoDate;
+        this.isCalendarOpen = false;
+        // TODO: emit change event
+      }
+    } else {
+      this.internalValue = this.value = isoDate;
+      this.isCalendarOpen = false;
+      // TODO: emit change event
+    }
   }
 
   connectedCallback(): void {
+    super.connectedCallback();
+
     this.internalValue = this.value;
     if (this.value) {
-      this.navigationDate = fromISOToDate(this.value) ?? startOfToday();
+      const iso = fromISOToDate(this.value);
+      if (iso) {
+        this.navigationDate = iso;
+      }
     }
 
     document.addEventListener('mousedown', this.#onClickOutside);
@@ -220,6 +242,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   disconnectedCallback(): void {
+    super.disconnectedCallback();
+
     document.removeEventListener('mousedown', this.#onClickOutside);
     document.removeEventListener('touchend', this.#onClickOutside);
     document.removeEventListener('focusin', this.#onClickOutside);
@@ -284,9 +308,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       <tr>
                         ${this.weeks[0].map(
                           (day) =>
-                            html`<th className="w-datepicker__weekday" key="{day.toISOString()}">
-                              ${format(day, this.weekdayFormat, { locale: this.#locale })}
-                            </th> `,
+                            html`<th className="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.#locale })}</th> `,
                         )}
                       </tr>
                     </thead>
@@ -294,15 +316,35 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       ${this.weeks.map(
                         (week) =>
                           html`<tr>
-                            ${week.map(
-                              (day) =>
-                                html`<td class="w-datepicker__day" role="gridcell">
-                                  <!-- TODO: td class variants -->
-                                  <!-- TODO: aria attributes -->
-                                  <!-- TODO: JS handlers everywhere -->
-                                  <div>${getDate(day)}</div>
-                                </td>`,
-                            )}
+                            ${week.map((day) => {
+                              if (!isSameMonth(this.month, day)) {
+                                return html`<td />`;
+                              }
+
+                              const isDisabled = false; // TODO: support isDayDisabled function
+                              const isSelected = isSameDay(day, this.selectedDate);
+                              const isNavigationDate = day === this.navigationDate;
+
+                              return html`<td
+                                aria-current="${ifDefined(isToday(day) ? 'date' : undefined)}"
+                                aria-disabled="${isDisabled}"
+                                aria-label="${format(day, this.dayFormat, { locale: this.#locale })}"
+                                aria-selected="${isSelected}"
+                                class="${classMap({
+                                  'w-datepicker__day': true,
+                                  'w-datepicker__day--today': isToday(day),
+                                  'w-datepicker__day--selected': isSelected,
+                                  'w-datepicker__day--disabled': isDisabled,
+                                  'w-datepicker__day--navigation': isNavigationDate,
+                                })}"
+                                data-date="${formatISO(day, { representation: 'date' })}"
+                                role="gridcell"
+                                tabindex="${isNavigationDate ? 0 : -1}"
+                                @click="${isDisabled ? undefined : this.#onCalendarSelect}"
+                                @keydown="${isDisabled ? undefined : this.#onCalendarSelect}">
+                                <div>${getDate(day)}</div>
+                              </td>`;
+                            })}
                           </tr>`,
                       )}
                     </tbody>

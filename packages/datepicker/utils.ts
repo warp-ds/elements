@@ -12,7 +12,7 @@ const dateOnlyRe = /^\d{4}-\d{2}-\d{2}$/;
  * @throws {TypeError} if input isn’t a string
  * @throws {Error} if string is not a valid ISO-8601 date
  */
-export function fromISOToDate(isoString) {
+export function fromISOToDate(isoString: string): Date | null {
   if (typeof isoString !== 'string') {
     return null;
   }
