@@ -8,7 +8,13 @@ export default {
   },
 
   // Globs to analyze
-  globs: ['packages/**/index.ts', 'packages/**/index.js', 'packages/modal/modal-*.ts', 'packages/toast/toast*.js'],
+  globs: [
+    'packages/**/index.ts',
+    'packages/**/index.js',
+    'packages/datepicker/datepicker.ts',
+    'packages/modal/modal-*.ts',
+    'packages/toast/toast*.js',
+  ],
 
   // Globs to exclude
   exclude: [],

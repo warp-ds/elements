@@ -147,6 +147,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @state()
   navigationDate: Date = startOfToday();
 
+  /** @internal This gets picked up by the custom element manifest analyzer as a property for some reason */
   @state()
   locale: Locale = enGB;
 
