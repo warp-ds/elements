@@ -140,10 +140,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @state()
   isCalendarOpen = false;
 
-  /** The current input value as a stringified date-like */
-  @state()
-  internalValue = '';
-
   @state()
   navigationDate: Date = startOfToday();
 
@@ -245,12 +241,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent) {
-    this.internalValue = (e.target as HTMLInputElement).value;
-  }
-
-  #onInputBlur(e: FocusEvent) {
     this.value = (e.target as HTMLInputElement).value;
-    this.#dispatchChangeEvent();
   }
 
   #onInputKeyDown(e: KeyboardEvent) {
@@ -316,13 +307,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       if (event.key === 'Enter' || event.key === ' ') {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
-        this.internalValue = this.value = isoDate;
+        this.value = isoDate;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
-      this.internalValue = this.value = isoDate;
+      this.value = isoDate;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
@@ -348,7 +339,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       this.locale = datefnsLocale[lang];
     }
 
-    this.internalValue = this.value;
     if (this.value) {
       const iso = fromISOToDate(this.value);
       if (iso) {
@@ -369,6 +359,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     document.removeEventListener('focusin', this.#onClickOutside);
   }
 
+  updated(changedProperties: Map<string, unknown>): void {
+    if (changedProperties.has('value')) {
+      // https://www.npmjs.com/package/@open-wc/form-control#setvalue
+      this.setValue(this.value);
+    }
+  }
+
   render() {
     return html`
       <div class="w-datepicker-wrapper" id="${wrapperId}">
@@ -381,11 +378,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             value="${ifDefined(this.value)}"
             class="w-datepicker-input"
             @input="${this.#onInput}"
-            @blur="${this.#onInputBlur}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
-            id="${toggleButtonId}"
-            class="w-datepicker-button"
             aria-label="${this.value
               ? i18n.t({
                   id: 'datepicker.toggle.changeDate',
@@ -400,6 +394,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   comment:
                     'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
                 })}"
+            class="w-datepicker-button"
+            data-testid="${toggleButtonId}"
+            id="${toggleButtonId}"
             variant="utility"
             quiet
             type="button"
@@ -418,6 +415,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   comment: 'Used by screen readers to announce that the calendar element is a date picker.',
                 })}"
                 class="w-datepicker__calendar"
+                data-testid="${calendarId}"
                 id="${calendarId}"
                 @keydown="${this.#onCalendarKeyDown}">
                 <div class="w-datepicker__month-nav">
@@ -428,6 +426,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       comment: 'Screen reader label for the previous month button.',
                     })}"
                     class="w-datepicker__month__nav__button"
+                    data-testid="${calendarId}-previous"
                     variant="utility"
                     quiet
                     small
@@ -442,6 +441,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       comment: 'Screen reader label for the next month button.',
                     })}"
                     class="w-datepicker__month__nav__button"
+                    data-testid="${calendarId}-next"
                     variant="utility"
                     quiet
                     small
