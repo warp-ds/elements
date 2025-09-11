@@ -369,6 +369,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     document.removeEventListener('focusin', this.#onClickOutside);
   }
 
+  updated(changedProperties: Map<string, unknown>): void {
+    if (changedProperties.has('value')) {
+      // https://www.npmjs.com/package/@open-wc/form-control#setvalue
+      this.setValue(this.value);
+    }
+  }
+
   render() {
     return html`
       <div class="w-datepicker-wrapper" id="${wrapperId}">
@@ -384,8 +391,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             @blur="${this.#onInputBlur}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
-            id="${toggleButtonId}"
-            class="w-datepicker-button"
             aria-label="${this.value
               ? i18n.t({
                   id: 'datepicker.toggle.changeDate',
@@ -400,6 +405,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   comment:
                     'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
                 })}"
+            class="w-datepicker-button"
+            data-testid="${toggleButtonId}"
+            id="${toggleButtonId}"
             variant="utility"
             quiet
             type="button"
@@ -418,6 +426,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   comment: 'Used by screen readers to announce that the calendar element is a date picker.',
                 })}"
                 class="w-datepicker__calendar"
+                data-testid="${calendarId}"
                 id="${calendarId}"
                 @keydown="${this.#onCalendarKeyDown}">
                 <div class="w-datepicker__month-nav">
@@ -428,6 +437,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       comment: 'Screen reader label for the previous month button.',
                     })}"
                     class="w-datepicker__month__nav__button"
+                    data-testid="${calendarId}-previous"
                     variant="utility"
                     quiet
                     small
@@ -442,6 +452,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       comment: 'Screen reader label for the next month button.',
                     })}"
                     class="w-datepicker__month__nav__button"
+                    data-testid="${calendarId}-next"
                     variant="utility"
                     quiet
                     small
