@@ -17,14 +17,14 @@ msgstr ""
 "X-Crowdin-File-ID: 16174\n"
 "PO-Revision-Date: \n"
 
-#. Fallback screenreader message for open filter
+#. Fallback screen reader message for open filter
 #. js-lingui-explicit-id
-#: packages/pill/index.js:35
+#: packages/pill/index.ts:66
 msgid "pill.aria.openFilter"
 msgstr "Åbn filter"
 
-#. Fallback screenreader message for removal of the filter
+#. Fallback screen reader message for removal of the filter
 #. js-lingui-explicit-id
-#: packages/pill/index.js:41
+#: packages/pill/index.ts:72
 msgid "pill.aria.removeFilter"
 msgstr "Fjern filter {label}"

@@ -17,8 +17,8 @@ msgstr ""
 "X-Crowdin-File-ID: 1450\n"
 "PO-Revision-Date: \n"
 
-#. Screenreader message for buttons that are loading
+#. Screen reader message for buttons that are loading
 #. js-lingui-explicit-id
-#: packages/button/index.js:55
+#: packages/button/index.ts:215
 msgid "button.aria.loading"
 msgstr "Laster..."

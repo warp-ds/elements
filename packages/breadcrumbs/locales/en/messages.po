@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Crowdin-SourceKey: msgstr\n"
 
-#. Default screenreader message for the breadcrumb component
+#. Default screen reader message for the breadcrumb component
 #. js-lingui-explicit-id
-#: packages/breadcrumbs/index.js:30
+#: packages/breadcrumbs/index.ts:44
 msgid "breadcrumbs.ariaLabel"
 msgstr "You are here"

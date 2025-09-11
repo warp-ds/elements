@@ -139,6 +139,7 @@
     "@warp-ds/elements-core": "2.0.1",
     "@warp-ds/icons": "2.5.0",
     "@wc-toolkit/type-parser": "^1.2.0",
+    "date-fns": "^4.1.0",
     "scroll-doctor": "2.0.2"
   },
   "publishConfig": {

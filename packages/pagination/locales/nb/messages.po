@@ -15,36 +15,36 @@ msgstr ""
 
 #. Default screenreader message for first page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:99
+#: packages/pagination/index.ts:111
 msgid "pagination.aria.first-page"
 msgstr "Første side"
 
 #. Suffix added at the end of icon titles when img semantics are lost on an html element
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:18
+#: packages/pagination/index.ts:20
 msgid "pagination.aria.icon-suffix"
 msgstr "ikon"
 
 #. Default screenreader message for next page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:154
+#: packages/pagination/index.ts:166
 msgid "pagination.aria.next-page"
 msgstr "Neste side"
 
 #. Default screenreader message for page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:137
+#: packages/pagination/index.ts:149
 msgid "pagination.aria.page"
 msgstr "Side {currentPage}"
 
 #. Default screenreader message for pagination container in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:86
+#: packages/pagination/index.ts:98
 msgid "pagination.aria.pagination"
 msgstr "Sider"
 
 #. Default screenreader message for previous page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:115
+#: packages/pagination/index.ts:127
 msgid "pagination.aria.prev-page"
 msgstr "Forrige side"
