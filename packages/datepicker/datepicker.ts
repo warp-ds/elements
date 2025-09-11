@@ -174,7 +174,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   input: HTMLInputElement;
 
   @query(`#${toggleButtonId}`, true)
-  toggle: HTMLButtonElement;
+  toggleButton: HTMLButtonElement;
 
   @query(`#${wrapperId}`, true)
   wrapper: HTMLDivElement;
@@ -210,7 +210,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       this.wrapper.contains(e.target as Node) ||
       this.calendar.contains(e.target as Node) ||
       this.input.contains(e.target as Node) ||
-      this.toggle.contains(e.target as Node);
+      this.toggleButton.contains(e.target as Node);
 
     if (isInsideDatePicker) {
       return;
@@ -293,6 +293,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         event.preventDefault();
         this.internalValue = this.value = isoDate;
         this.isCalendarOpen = false;
+        this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
@@ -358,7 +359,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
           <w-button
             id="${toggleButtonId}"
             class="w-datepicker-button"
-            aria-label="Open calendar"
+            aria-label="${this.value ? `Change date, ${format(this.value, this.dayFormat)}` : 'Choose date'}"
             variant="utility"
             quiet
             type="button"
