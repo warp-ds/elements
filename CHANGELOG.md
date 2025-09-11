@@ -1,3 +1,10 @@
+# [2.2.0-next.5](https://github.com/warp-ds/elements/compare/v2.2.0-next.4...v2.2.0-next.5) (2025-09-11)
+
+
+### Bug Fixes
+
+* cut release to test change of exports and setup ([9b17365](https://github.com/warp-ds/elements/commit/9b17365d45c2f360c033dd255d42dd4254d480eb))
+
 # [2.2.0-next.4](https://github.com/warp-ds/elements/compare/v2.2.0-next.3...v2.2.0-next.4) (2025-09-02)
 
 
