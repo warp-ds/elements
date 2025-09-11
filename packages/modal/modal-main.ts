@@ -238,3 +238,9 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
 if (!customElements.get('w-modal')) {
   customElements.define('w-modal', ModalMain);
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-modal': ModalMain;
+  }
+}
