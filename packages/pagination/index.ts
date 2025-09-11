@@ -30,6 +30,8 @@ const baseItemStyles =
  * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-pagination--docs)
+ *
+ * @fires {CustomEvent} page-click - Triggered when a link button in the pagination is clicked. Contains the page number in `string` form.
  */
 class WarpPagination extends LitElement {
   @property({ type: String, reflect: true, attribute: 'base-url' })
