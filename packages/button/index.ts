@@ -333,3 +333,9 @@ if (!customElements.get('w-button')) {
 }
 
 export { WarpButton };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-button': WarpButton;
+  }
+}

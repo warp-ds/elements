@@ -56,3 +56,9 @@ if (!customElements.get('w-badge')) {
 }
 
 export { WarpBadge };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-badge': WarpBadge;
+  }
+}

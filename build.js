@@ -23,7 +23,7 @@ generateJetBrainsWebTypes(manifest, {
   typesSrc: 'parsedType', // since we use @wc-toolkit/type-parser the values for enum types are found here, not on `type`
 });
 
-const components = glob.sync('packages/**/index.{js,ts}');
+const components = glob.sync('packages/**/{react,index}.{js,ts}');
 const toastApiPath = 'packages/toast/api.js';
 const indexPath = 'index.js';
 const version = process.argv[2];
@@ -39,17 +39,19 @@ const esbuildDefaults = {
 
 function buildComponents(outDir, extraBuildOptions = {}) {
   components.forEach(async (item) => {
-    const regex = /\/(.+)\/index.(ts|js)/;
+    const regex = /\/(.+)\/(react|index).(ts|js)/;
     const match = item.match(regex);
 
     if (item.includes('utils')) return;
-    if (!match) console.log(item);
-    console.log(`elements: building ${match[1]}.${match[2]}`);
+    if (!match) {
+      console.log('no match for', item);
+    }
 
     try {
+      console.log(`elements: building ${match[1]}/${match[2]}.${match[3]}`);
       await esbuild.build({
         entryPoints: [item],
-        outfile: `${outDir}/packages/${match[1]}/index.${match[2]}`,
+        outfile: `${outDir}/packages/${match[1]}/${match[2]}.js`,
         ...esbuildDefaults,
         ...extraBuildOptions,
       });

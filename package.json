@@ -5,7 +5,10 @@
   "packageManager": "pnpm@10.15.1",
   "description": "Custom elements for Warp",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.js"
+    },
     "./components/affix": "./dist/packages/affix/index.js",
     "./components/alert": "./dist/packages/alert/index.js",
     "./components/attention": "./dist/packages/attention/index.js",
@@ -21,7 +24,15 @@
     "./components/textfield": "./dist/packages/textfield/index.js",
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
-    "./custom-elements.json": "./dist/custom-elements.json"
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./react/*": {
+      "types": "./dist/packages/*/react.d.ts",
+      "module": "./dist/packages/*/react.js"
+    },
+    "./*": {
+      "types": "./dist/packages/*/index.d.ts",
+      "module": "./dist/packages/*/index.js"
+    }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
