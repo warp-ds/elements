@@ -6,6 +6,6 @@ if (!customElements.get('w-checkbox')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-checkbox": WCheckbox
+    'w-checkbox': WCheckbox;
   }
 }

@@ -46,7 +46,7 @@ function buildComponents(outDir, extraBuildOptions = {}) {
     if (!match) {
       console.log('no match for', item);
     }
-    
+
     try {
       console.log(`elements: building ${match[1]}/${match[2]}.${match[3]}`);
       await esbuild.build({

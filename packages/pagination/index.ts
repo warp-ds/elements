@@ -186,6 +186,6 @@ export { WarpPagination };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-pagination": WarpPagination
+    'w-pagination': WarpPagination;
   }
 }

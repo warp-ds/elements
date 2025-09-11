@@ -8,7 +8,7 @@ if (!customElements.get('w-radio')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-radio": WRadio,
-    "w-radio-group": WRadioGroup,
+    'w-radio': WRadio;
+    'w-radio-group': WRadioGroup;
   }
 }

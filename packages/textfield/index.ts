@@ -234,6 +234,6 @@ export { WarpTextField };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-textfield": WarpTextField
+    'w-textfield': WarpTextField;
   }
 }

@@ -88,6 +88,6 @@ if (!customElements.get('w-dead-toggle')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-dead-toggle": WarpDeadToggle
+    'w-dead-toggle': WarpDeadToggle;
   }
 }

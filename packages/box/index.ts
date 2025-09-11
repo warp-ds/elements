@@ -68,6 +68,6 @@ export { WarpBox };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-box": WarpBox
+    'w-box': WarpBox;
   }
 }

@@ -140,6 +140,6 @@ export { WarpAlert };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-alert": WarpAlert
+    'w-alert': WarpAlert;
   }
 }

@@ -117,6 +117,6 @@ export { WarpAffix };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-affix": WarpAffix
+    'w-affix': WarpAffix;
   }
 }

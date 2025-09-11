@@ -336,6 +336,6 @@ export { WarpButton };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-button": WarpButton
+    'w-button': WarpButton;
   }
 }

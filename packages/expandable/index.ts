@@ -198,6 +198,6 @@ export { WarpExpandable };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-expandable": WarpExpandable
+    'w-expandable': WarpExpandable;
   }
 }

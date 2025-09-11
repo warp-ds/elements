@@ -226,6 +226,6 @@ if (!customElements.get('w-modal-header')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-modal-header": ModalHeader
+    'w-modal-header': ModalHeader;
   }
 }

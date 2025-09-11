@@ -88,6 +88,6 @@ export { WarpBreadcrumbs };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-breadcrumbs": WarpBreadcrumbs
+    'w-breadcrumbs': WarpBreadcrumbs;
   }
 }

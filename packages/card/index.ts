@@ -133,6 +133,6 @@ export { WarpCard };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-card": WarpCard
+    'w-card': WarpCard;
   }
 }

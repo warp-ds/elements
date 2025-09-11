@@ -44,6 +44,6 @@ if (!customElements.get('w-modal-footer')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-modal-footer": ModalFooter
+    'w-modal-footer': ModalFooter;
   }
 }

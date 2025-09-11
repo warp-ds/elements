@@ -206,6 +206,6 @@ if (!customElements.get('w-select')) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-select": WarpSelect
+    'w-select': WarpSelect;
   }
 }

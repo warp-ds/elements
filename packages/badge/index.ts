@@ -59,6 +59,6 @@ export { WarpBadge };
 
 declare global {
   interface HTMLElementTagNameMap {
-    "w-badge": WarpBadge
+    'w-badge': WarpBadge;
   }
 }
