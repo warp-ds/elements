@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
-import { page } from '@vitest/browser/context';
-import { expect, test } from 'vitest';
+import { page, userEvent } from '@vitest/browser/context';
+import { expect, test, vi } from 'vitest';
 import './index.js';
 
 test('current page is the active page', async () => {
@@ -61,4 +61,43 @@ test('does not show link to next page if current page is the last page', async (
   const screen = page.render(component);
 
   await expect.poll(() => screen.getByText('Next page').query()).not.toBeInTheDocument();
+});
+
+test('is able to get the correct data-page-number attribute from the element on click', async () => {
+  const component = html`<w-pagination current-page="15" pages="20" base-url="/page/" data-testid="pagination"></w-pagination>`;
+  page.render(component);
+
+  await expect.poll(() => page.getByText('14').query()).toBeInTheDocument();
+
+  let clickedPage = null;
+
+  page
+    .getByTestId('pagination')
+    .element()
+    .addEventListener('click', (e: PointerEvent) => {
+      e.preventDefault();
+    });
+
+  page
+    .getByTestId('pagination')
+    .element()
+    .addEventListener('page-click', (e: CustomEvent) => {
+      clickedPage = e.detail.clickedPage;
+    });
+
+  const element = page.getByLabelText('page 14');
+  await userEvent.click(element);
+
+  await vi.waitFor(
+    () => {
+      if (clickedPage === null) {
+        throw new Error('clickedPage was not set');
+      }
+    },
+    {
+      interval: 100,
+    },
+  );
+
+  expect(clickedPage).toEqual('14');
 });
