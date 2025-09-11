@@ -4,10 +4,10 @@ import { css, html, LitElement, nothing } from 'lit';
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
+import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { attention as ccAttention } from '@warp-ds/css/component-classes';
 
 import { activateI18n } from '../i18n';
 import { generateRandomId } from '../utils/index.js';
@@ -19,7 +19,6 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import '@warp-ds/icons/elements/close-16';
-import { ifDefined } from 'lit/directives/if-defined.js';
 
 class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })

@@ -13,6 +13,19 @@ const { events, args, argTypes } = getStorybookHelpers<WarpAttention>('w-attenti
 
 const meta: Meta<typeof args> = {
   title: 'Overlays/Attention',
+  render(args) {
+    return html`
+      <w-attention ${spread(prespread(args))}>
+        <button
+          ${spread({ id: args.buttonId })}
+          class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+          slot="target">
+          ${args.buttonText}
+        </button>
+        <span slot="message">I'm a message</span>
+      </w-attention>
+    `;
+  },
   args,
   argTypes,
   parameters: {
