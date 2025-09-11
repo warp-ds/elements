@@ -79,7 +79,7 @@ test('can pick a date by typing in the input field', async () => {
   const toggle = page.getByLabelText('From date').element() as HTMLInputElement;
   toggle.focus();
 
-  if (server.browser === 'webkit') {
+  if (server.browser === 'webkit' && server.platform === 'darwin') {
     // Safari/Webkit needs a [Tab] between day, month and year
     await userEvent.keyboard('01[Tab]01[Tab]2025');
     await userEvent.keyboard('[Tab]');
