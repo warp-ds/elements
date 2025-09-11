@@ -6,23 +6,23 @@ const config: LinguiConfig = {
   locales: supportedLocales as unknown as string[],
   catalogs: [
     {
-      include: ['packages/breadcrumbs/index.ts'],
+      include: ['packages/breadcrumbs/'],
       path: 'packages/breadcrumbs/locales/{locale}/messages',
     },
     {
-      include: ['packages/button/index.ts'],
+      include: ['packages/button/'],
       path: 'packages/button/locales/{locale}/messages',
     },
     {
-      include: ['packages/card/index.ts'],
+      include: ['packages/card/'],
       path: 'packages/card/locales/{locale}/messages',
     },
     {
-      include: ['packages/datepicker/*.ts'],
+      include: ['packages/datepicker/'],
       path: 'packages/datepicker/locales/{locale}/messages',
     },
     {
-      include: ['packages/select/index.ts'],
+      include: ['packages/select/'],
       path: 'packages/select/locales/{locale}/messages',
     },
     {
@@ -30,19 +30,19 @@ const config: LinguiConfig = {
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
-      include: ['packages/modal/modal-header.ts'],
+      include: ['packages/modal/'],
       path: 'packages/modal/locales/{locale}/messages',
     },
     {
-      include: ['packages/toast/toast.js'],
+      include: ['packages/toast/'],
       path: 'packages/toast/locales/{locale}/messages',
     },
     {
-      include: ['packages/pill/index.ts'],
+      include: ['packages/pill/'],
       path: 'packages/pill/locales/{locale}/messages',
     },
     {
-      include: ['packages/pagination/index.ts'],
+      include: ['packages/pagination/'],
       path: 'packages/pagination/locales/{locale}/messages',
     },
   ],
