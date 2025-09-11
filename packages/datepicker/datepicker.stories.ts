@@ -39,3 +39,23 @@ export const Default: Story = {
     lang: 'nb',
   },
 };
+
+export const DisableCalendarDates: Story = {
+  args: {
+    label: 'Dato',
+    lang: 'nb',
+  },
+  render(args) {
+    return html`
+      <!-- Workaround for Storybook's overflow hidden -->
+      <div style="min-height: 400px">
+        <w-datepicker ${spread(prespread(args))}></w-datepicker>
+      </div>
+      <script type="module">
+        const datePicker = document.querySelector('w-datepicker');
+        // No working on Sundays!
+        datePicker.isDayDisabled = (day) => day.getDay() === 0;
+      </script>
+    `;
+  },
+};

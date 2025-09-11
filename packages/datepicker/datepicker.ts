@@ -1,5 +1,6 @@
 import { LitElement, html, nothing } from 'lit';
 
+import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import {
@@ -33,8 +34,14 @@ import '@warp-ds/icons/elements/calendar-16';
 import '@warp-ds/icons/elements/chevron-left-16';
 import '@warp-ds/icons/elements/chevron-right-16';
 
+import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wDatepickerCalendarStyles } from './styles/w-datepicker-calendar.styles.js';
 import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
@@ -53,7 +60,7 @@ const wrapperId = 'wrapper';
 // Convenience to support the common locales of our users.
 // For other locales either add to this list or point users
 // to https://date-fns.org/v4.1.0/docs/setDefaultOptions
-const locales = {
+const datefnsLocale = {
   en: enGB,
   nb,
   sv,
@@ -104,6 +111,23 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    */
   @property({ attribute: 'weekday-format' })
   weekdayFormat = 'EEEEEE';
+
+  /**
+   * Lets you control if a date in the calendar should be disabled.
+   *
+   * This needs to be set on the element instance in JavaScript, not as an HTML attribute.
+   *
+   * @example
+   * ```ts
+   * import type { WarpDatepicker } from "@warp-ds/elements";
+   * import { isBefore, startOfDay } from 'date-fns';
+   *
+   * const today = startOfDay(new Date());
+   * const datePicker = document.querySelector('w-datepicker') as WarpDatepicker;
+   * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
+   * ```
+   */
+  isDayDisabled: (day: Date) => boolean;
 
   /**
    * Decides the format of the day in the calendar as read to screen readers.
@@ -306,9 +330,11 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   constructor() {
     super();
 
-    const lang = document.querySelector('html').attributes['lang'];
-    if (lang && locales[lang]) {
-      this.locale = locales[lang];
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+
+    const lang = detectLocale();
+    if (lang && datefnsLocale[lang]) {
+      this.locale = datefnsLocale[lang];
     }
   }
 
@@ -317,8 +343,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
     // Local lang attribute takes precedence
     const lang = this.lang;
-    if (lang && locales[lang]) {
-      this.locale = locales[lang];
+    if (lang && datefnsLocale[lang]) {
+      this.locale = datefnsLocale[lang];
     }
 
     this.internalValue = this.value;
@@ -359,7 +385,20 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
           <w-button
             id="${toggleButtonId}"
             class="w-datepicker-button"
-            aria-label="${this.value ? `Change date, ${format(this.value, this.dayFormat)}` : 'Choose date'}"
+            aria-label="${this.value
+              ? i18n.t({
+                  id: 'datepicker.toggle.changeDate',
+                  values: { currentDate: format(this.value, this.dayFormat) },
+                  message: `Change date, {currentDate}`,
+                  comment:
+                    'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date',
+                })
+              : i18n.t({
+                  id: 'datepicker.toggle.chooseDate',
+                  message: `Choose date`,
+                  comment:
+                    'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
+                })}"
             variant="utility"
             quiet
             type="button"
@@ -371,10 +410,22 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       ${this.isCalendarOpen
         ? html`
             <div class="w-dropdown__popover w-dropdown__popover--open">
-              <div aria-roledescription="TODO" class="w-datepicker__calendar" id="${calendarId}" @keydown="${this.#onCalendarKeyDown}">
+              <div
+                aria-roledescription="${i18n.t({
+                  id: 'datepicker.calendar.roleDescription',
+                  message: `Date picker`,
+                  comment: 'Used by screen readers to announce that the calendar element is a date picker.',
+                })}"
+                class="w-datepicker__calendar"
+                id="${calendarId}"
+                @keydown="${this.#onCalendarKeyDown}">
                 <div class="w-datepicker__month-nav">
                   <w-button
-                    aria-label="TODO"
+                    aria-label="${i18n.t({
+                      id: 'datepicker.calendar.previousMonth',
+                      message: `Previous month`,
+                      comment: 'Screen reader label for the previous month button.',
+                    })}"
                     class="w-datepicker__month__nav__button"
                     variant="utility"
                     quiet
@@ -384,7 +435,11 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   </w-button>
                   <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.locale })}</div>
                   <w-button
-                    aria-label="TODO"
+                    aria-label="${i18n.t({
+                      id: 'datepicker.calendar.nextMonth',
+                      message: `Next month`,
+                      comment: 'Screen reader label for the next month button.',
+                    })}"
                     class="w-datepicker__month__nav__button"
                     variant="utility"
                     quiet
@@ -409,10 +464,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                           html`<tr>
                             ${week.map((day) => {
                               if (!isSameMonth(this.month, day)) {
-                                return html`<td />`;
+                                return html`<td></td>`;
                               }
 
-                              const isDisabled = false; // TODO: support isDayDisabled function
+                              const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
                               const isSelected = isSameDay(day, this.selectedDate);
                               const isNavigationDate = day === this.navigationDate;
 
