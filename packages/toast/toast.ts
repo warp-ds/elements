@@ -5,8 +5,7 @@ import { i18n } from '@lingui/core';
 import { expand, collapse } from 'element-collapse';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
-import { reset } from '../styles';
-import { styles } from './styles';
+
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
@@ -20,6 +19,9 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import type { ToastType } from './types';
+
+import { reset } from '../styles';
+import { styles } from './styles';
 
 const ccToast = {
   wrapper: 'relative overflow-hidden w-full',
