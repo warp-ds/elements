@@ -140,10 +140,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @state()
   isCalendarOpen = false;
 
-  /** The current input value as a stringified date-like */
-  @state()
-  internalValue = '';
-
   @state()
   navigationDate: Date = startOfToday();
 
@@ -245,12 +241,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent) {
-    this.internalValue = (e.target as HTMLInputElement).value;
-  }
-
-  #onInputBlur(e: FocusEvent) {
     this.value = (e.target as HTMLInputElement).value;
-    this.#dispatchChangeEvent();
   }
 
   #onInputKeyDown(e: KeyboardEvent) {
@@ -316,13 +307,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       if (event.key === 'Enter' || event.key === ' ') {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
-        this.internalValue = this.value = isoDate;
+        this.value = isoDate;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
-      this.internalValue = this.value = isoDate;
+      this.value = isoDate;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
@@ -388,7 +379,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             value="${ifDefined(this.value)}"
             class="w-datepicker-input"
             @input="${this.#onInput}"
-            @blur="${this.#onInputBlur}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
             aria-label="${this.value

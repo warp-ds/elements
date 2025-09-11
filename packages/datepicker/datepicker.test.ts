@@ -79,21 +79,7 @@ test('can pick a date by typing in the input field', async () => {
   const toggle = page.getByLabelText('From date').element() as HTMLInputElement;
   toggle.focus();
 
-  if (server.browser === 'webkit' && server.platform === 'darwin') {
-    // Safari/Webkit needs a [Tab] between day, month and year
-    await userEvent.keyboard('01[Tab]01[Tab]2025');
-    await userEvent.keyboard('[Tab]');
-  } else {
-    await userEvent.keyboard('01012025');
-
-    if (server.browser === 'firefox') {
-      // For some reason Firefox needs two tabs to fire the blur event
-      await userEvent.keyboard('[Tab][Tab]');
-    } else {
-      await userEvent.keyboard('[Tab]');
-    }
-  }
-
+  await page.getByLabelText('From date').fill('2025-01-01');
   await expect.element(page.getByLabelText('From date')).toHaveValue();
 
   const formData = new FormData(page.getByTestId('flight').element() as HTMLFormElement);
