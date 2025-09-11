@@ -24,6 +24,7 @@ import {
   subDays,
   subMonths,
 } from 'date-fns';
+import { enGB, nb, sv, da, fi } from 'date-fns/locale';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -44,12 +45,28 @@ const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
 const isIOS = /iP(hone|od|ad)/.test(ua);
 const inputType = isIOS ? 'text' : 'date';
 
+const calendarId = 'calendar';
+const inputId = 'input';
+const toggleButtonId = 'toggle';
+const wrapperId = 'wrapper';
+
+// Convenience to support the common locales of our users.
+// For other locales either add to this list or point users
+// to https://date-fns.org/v4.1.0/docs/setDefaultOptions
+const locales = {
+  en: enGB,
+  nb,
+  sv,
+  da,
+  fi,
+};
+
 /**
  * An input for dates.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-datepicker--docs)
+ * Uses the `lang` attribute on either the element or on `<html>` to determine the locale options.
  *
- * @fires {Event}
+ * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-datepicker--docs)
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
@@ -61,6 +78,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   @property({ reflect: true })
   label: string;
+
+  /** Takes precedence over the `<html>` lang attribute. */
+  @property({ reflect: true })
+  lang: string;
 
   @property({ reflect: true })
   name: string;
@@ -103,6 +124,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   navigationDate: Date = startOfToday();
 
   @state()
+  locale: Locale = enGB;
+
+  @state()
   get selectedDate(): Date | null {
     return fromISOToDate(this.value) ?? null;
   }
@@ -121,45 +145,38 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         start: startOfMonth(month),
         end: lastDayOfMonth(month),
       },
-      { locale: this.#locale },
+      { locale: this.locale },
     );
     const weekIntervals = weekStarts
       .map((weekStart) => ({
         start: weekStart,
-        end: endOfWeek(weekStart, { locale: this.#locale }),
+        end: endOfWeek(weekStart, { locale: this.locale }),
       }))
       .map((week) => eachDayOfInterval(week));
 
     // Inserts the navigation date into the date matrix
     if (isSameMonth(navigationDate, month)) {
-      const weekOfMonth = getWeekOfMonth(navigationDate, { locale: this.#locale }) - 1;
+      const weekOfMonth = getWeekOfMonth(navigationDate, { locale: this.locale }) - 1;
 
       // we need to get the day of the week to index into the correct day after we've gotten the week
       // getDay() however isn't locale aware. This is a good replacement
-      const day = differenceInCalendarDays(navigationDate, startOfWeek(navigationDate, { locale: this.#locale }));
+      const day = differenceInCalendarDays(navigationDate, startOfWeek(navigationDate, { locale: this.locale }));
 
       weekIntervals[weekOfMonth][day] = navigationDate;
     }
     return weekIntervals;
   }
 
-  #calendarId = 'calendar';
-  #inputId = 'input';
-  #toggleButtonId = 'toggle';
-  #wrapperId = 'wrapper';
-
-  #locale: Locale | undefined; // TODO: should we support locale as a property? Or use setDefaultOptions?
-
-  @query('#calendar')
+  @query(`#${calendarId}`)
   calendar: HTMLDivElement;
 
-  @query('#input', true)
+  @query(`#${inputId}`, true)
   input: HTMLInputElement;
 
-  @query('#toggle', true)
+  @query(`#${toggleButtonId}`, true)
   toggle: HTMLButtonElement;
 
-  @query('#wrapper', true)
+  @query(`#${wrapperId}`, true)
   wrapper: HTMLDivElement;
 
   @query('[data-navigation="true"]')
@@ -230,7 +247,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         newNavigationDate = subDays(navigationDate, 1);
         break;
       case 'Home':
-        newNavigationDate = startOfWeek(navigationDate, { locale: this.#locale });
+        newNavigationDate = startOfWeek(navigationDate, { locale: this.locale });
         break;
       case 'PageUp':
         newNavigationDate = subMonths(navigationDate, 1);
@@ -242,7 +259,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         newNavigationDate = addDays(navigationDate, 1);
         break;
       case 'End':
-        newNavigationDate = endOfWeek(navigationDate, { locale: this.#locale });
+        newNavigationDate = endOfWeek(navigationDate, { locale: this.locale });
         break;
       case 'PageDown':
         newNavigationDate = addMonths(navigationDate, 1);
@@ -265,10 +282,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   #onCalendarSelect(event: MouseEvent | KeyboardEvent) {
-    // Clicks can hit the `<div>` inside the `<td>`, in
-    // which case we need to get the parentElement to look
-    // up the data-date attribute for the selected value.
-    const isoDate = (event.target as HTMLElement).parentElement.dataset.date || (event.target as HTMLTableCellElement).dataset.date;
+    // Clicks can hit the `<div>` inside the `<td>`, so look at
+    // currentTarget (where the listener is registered) to get
+    // the `<td>` consistently.
+    const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
 
     if ('key' in event) {
       if (event.key === 'Enter' || event.key === ' ') {
@@ -285,8 +302,23 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     }
   }
 
+  constructor() {
+    super();
+
+    const lang = document.querySelector('html').attributes['lang'];
+    if (lang && locales[lang]) {
+      this.locale = locales[lang];
+    }
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
+
+    // Local lang attribute takes precedence
+    const lang = this.lang;
+    if (lang && locales[lang]) {
+      this.locale = locales[lang];
+    }
 
     this.internalValue = this.value;
     if (this.value) {
@@ -311,11 +343,11 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div class="w-datepicker-wrapper" id="${this.#wrapperId}">
-        <label class="w-datepicker-input-label" for="${this.#inputId}">${this.label}</label>
+      <div class="w-datepicker-wrapper" id="${wrapperId}">
+        <label class="w-datepicker-input-label" for="${inputId}">${this.label}</label>
         <div class="w-datepicker-input-wrapper">
           <input
-            id="${this.#inputId}"
+            id="${inputId}"
             type="${inputType}"
             name="${ifDefined(this.name)}"
             value="${ifDefined(this.value)}"
@@ -324,7 +356,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             @blur="${this.#onInputBlur}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
-            id="${this.#toggleButtonId}"
+            id="${toggleButtonId}"
             class="w-datepicker-button"
             aria-label="Open calendar"
             variant="utility"
@@ -338,11 +370,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       ${this.isCalendarOpen
         ? html`
             <div class="w-dropdown__popover w-dropdown__popover--open">
-              <div
-                aria-roledescription="TODO"
-                class="w-datepicker__calendar"
-                id="${this.#calendarId}"
-                @keydown="${this.#onCalendarKeyDown}">
+              <div aria-roledescription="TODO" class="w-datepicker__calendar" id="${calendarId}" @keydown="${this.#onCalendarKeyDown}">
                 <div class="w-datepicker__month-nav">
                   <w-button
                     aria-label="TODO"
@@ -353,7 +381,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                     @click="${this.#previousMonth}">
                     <w-icon-chevron-left-16></w-icon-chevron-left-16>
                   </w-button>
-                  <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.#locale })}</div>
+                  <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.locale })}</div>
                   <w-button
                     aria-label="TODO"
                     class="w-datepicker__month__nav__button"
@@ -370,7 +398,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                       <tr>
                         ${this.weeks[0].map(
                           (day) =>
-                            html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.#locale })}</th> `,
+                            html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
                         )}
                       </tr>
                     </thead>
@@ -390,7 +418,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                               return html`<td
                                 aria-current="${ifDefined(isToday(day) ? 'date' : undefined)}"
                                 aria-disabled="${isDisabled}"
-                                aria-label="${format(day, this.dayFormat, { locale: this.#locale })}"
+                                aria-label="${format(day, this.dayFormat, { locale: this.locale })}"
                                 aria-selected="${isSelected}"
                                 class="${classMap({
                                   'w-datepicker__day': true,

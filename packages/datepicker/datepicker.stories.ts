@@ -36,5 +36,6 @@ type Story = StoryObj<typeof args>;
 export const Default: Story = {
   args: {
     label: 'Dato',
+    lang: 'nb',
   },
 };
