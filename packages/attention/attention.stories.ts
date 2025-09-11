@@ -65,4 +65,139 @@ export const Default: Story = {
       </script>
     `;
   },
+  decorators: [
+    (story) => html`
+      ${story()}
+      <script>
+        // use IIFE to create local scope
+        (() => {
+          const popoverIconEl = document.getElementById('attention-element');
+          const popoverIconTarget = document.getElementById('icon-button-target');
+          popoverIconTarget.addEventListener('click', () => {
+            popoverIconEl.show = !popoverIconEl.show;
+          });
+        })();
+      </script>
+    `,
+  ],
+};
+
+export const ToolTip: Story = {
+  args: { placement: 'right', buttonText: 'hover me', id: 'tooltip', tooltip: true, flip: true, buttonId: 'tooltip-target' },
+  decorators: [
+    (story) => html`
+      ${story()}
+      <script>
+        (() => {
+          const button = document.getElementById('tooltip-target');
+          const tooltip = document.getElementById('tooltip');
+          button.addEventListener('mouseenter', () => {
+            tooltip.show = true;
+          });
+          button.addEventListener('mouseleave', () => {
+            tooltip.show = false;
+          });
+          button.addEventListener('focus', () => {
+            tooltip.show = true;
+          });
+          button.addEventListener('blur', () => {
+            tooltip.show = false;
+          });
+        })();
+      </script>
+    `,
+  ],
+};
+
+export const Callout: Story = {
+  args: { buttonText: 'i need a callout', class: 'flex items-center gap-8', placement: 'right', callout: true, show: true },
+};
+
+export const Highlight: Story = {
+  args: {
+    buttonId: 'highlight-target1',
+    id: 'highlight-message',
+    buttonText: `I'm highlighted`,
+    placement: 'right',
+    highlight: true,
+    flip: true,
+  },
+  decorators: [
+    (story) => html`
+      ${story()}
+      <script>
+        (() => {
+          const button = document.getElementById('highlight-target1');
+          const highlight = document.getElementById('highlight-message');
+          button.addEventListener('click', () => {
+            highlight.show = !highlight.show;
+          });
+        })();
+      </script>
+    `,
+  ],
+};
+export const DismissibleHighlight: Story = {
+  args: {
+    class: 'flex items-center gap-8',
+    placement: 'bottom',
+    buttonId: 'highlight-target2',
+    buttonText: 'click me',
+    id: 'dismissible-highlight-message',
+    ['can-close']: true,
+    ['cross-axis']: true,
+    highlight: true,
+    flip: true,
+  },
+  decorators: [
+    (story) => html`
+      ${story()}
+      <script>
+        (() => {
+          const button = document.getElementById('highlight-target2');
+          const highlight = document.getElementById('dismissible-highlight-message');
+          button.addEventListener('click', () => {
+            highlight.show = true;
+          });
+          highlight.addEventListener('close', () => {
+            highlight.show = false;
+          });
+        })();
+      </script>
+    `,
+  ],
+};
+
+export const AccessibleTooltip: Story = {
+  args: {},
+  render() {
+    return html`
+      <w-attention id="accessible-attention" placement="right" popover>
+        <div slot="message">
+          <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
+          <p>(this text is less relevant)</p>
+        </div>
+        <button
+          aria-details="aria-content"
+          id="accessible-target"
+          class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+          slot="target">
+          Click to toggle a popover
+        </button>
+      </w-attention>
+    `;
+  },
+  decorators: [
+    (story) =>
+      html` ${story()}
+        <script>
+          (() => {
+            const button = document.getElementById('accessible-target');
+            const accessibleAttention = document.getElementById('accessible-attention');
+            button.addEventListener('click', () => {
+              accessibleAttention.show = !accessibleAttention.show;
+            });
+          })();
+        </script>`,
+  ],
 };
