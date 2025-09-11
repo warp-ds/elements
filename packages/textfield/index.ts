@@ -231,3 +231,9 @@ if (!customElements.get('w-textfield')) {
 }
 
 export { WarpTextField };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "w-textfield": WarpTextField
+  }
+}

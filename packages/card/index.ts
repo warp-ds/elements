@@ -130,3 +130,9 @@ if (!customElements.get('w-card')) {
 }
 
 export { WarpCard };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "w-card": WarpCard
+  }
+}

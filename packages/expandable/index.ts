@@ -195,3 +195,9 @@ if (!customElements.get('w-expandable')) {
 }
 
 export { WarpExpandable };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "w-expandable": WarpExpandable
+  }
+}

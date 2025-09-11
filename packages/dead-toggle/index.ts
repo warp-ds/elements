@@ -85,3 +85,9 @@ export class WarpDeadToggle extends LitElement {
 if (!customElements.get('w-dead-toggle')) {
   customElements.define('w-dead-toggle', WarpDeadToggle);
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "w-dead-toggle": WarpDeadToggle
+  }
+}

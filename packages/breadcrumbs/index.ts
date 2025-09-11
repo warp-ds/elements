@@ -85,3 +85,9 @@ if (!customElements.get('w-breadcrumbs')) {
 }
 
 export { WarpBreadcrumbs };
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "w-breadcrumbs": WarpBreadcrumbs
+  }
+}
