@@ -8,6 +8,10 @@ import * as PaginationStories from './pagination.stories';
 
 Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
 
+## Events
+
+- `page-click` - Triggered when a link button in the pagination is clicked. Contains the page number in `string` form.
+
 ## Usage guidelines
 
 **When to use:** Use pagination when you have a large dataset that needs to be split across multiple pages to improve performance and user experience.
@@ -41,4 +45,3 @@ The pagination component includes proper ARIA labels and semantic navigation str
 ### Single page (no pagination)
 
 <Canvas of={PaginationStories.SinglePage} />
-

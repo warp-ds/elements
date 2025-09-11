@@ -90,10 +90,22 @@ class WarpPagination extends LitElement {
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
 
+  #dispatchClickPage(e: PointerEvent) {
+    const clickedPage = (e.target as Element).getAttribute('data-page-number');
+
+    this.dispatchEvent(
+      new CustomEvent('page-click', {
+        detail: { clickedPage },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
   render() {
     const visiblePages = this.visiblePageNumbers;
 
-    return html`<nav class="flex items-center justify-center p-8">
+    return html`<nav class="flex items-center justify-center p-8" @click="${this.#dispatchClickPage}">
       <h1 class="sr-only">
         ${i18n._({
           id: 'pagination.aria.pagination',
@@ -104,6 +116,7 @@ class WarpPagination extends LitElement {
       <div class="md:block s-text-link">
         ${this.shouldShowShowFirstPageButton
           ? html`<a
+              data-page-number="1"
               href="${this.baseUrl}1"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
@@ -120,6 +133,7 @@ class WarpPagination extends LitElement {
           : nothing}
         ${this.shouldShowPreviousPageButton
           ? html`<a
+              data-page-number="${this.currentPageNumber - 1}"
               href="${this.baseUrl}${this.currentPageNumber - 1}"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
@@ -153,12 +167,18 @@ class WarpPagination extends LitElement {
             comment: 'Default screenreader message for page link in the pagination component',
           });
 
-          return html`<a aria-label="${ariaLabel}" href="${url}" class="${styles}" aria-current="${isCurrentPage ? 'page' : ''}"
+          return html`<a
+            data-page-number="${pageNumber}"
+            aria-label="${ariaLabel}"
+            href="${url}"
+            class="${styles}"
+            aria-current="${isCurrentPage ? 'page' : ''}"
             >${pageNumber}</a
           >`;
         })}
         ${this.shouldShowNextPageButton
           ? html`<a
+              data-page-number="${this.currentPageNumber + 1}"
               href="${this.baseUrl}${this.currentPageNumber + 1}"
               class="${baseItemStyles +
               ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">

@@ -62,3 +62,23 @@ test('does not show link to next page if current page is the last page', async (
 
   await expect.poll(() => screen.getByText('Next page').query()).not.toBeInTheDocument();
 });
+
+test('is able to get the correct data-page-number attribute from the element on click', async () => {
+  const component = html`<w-pagination current-page="15" pages="20" base-url="/page/" data-testid="pagination"></w-pagination>`;
+  const screen = page.render(component);
+
+  await expect.poll(() => screen.getByText('14').query()).toBeInTheDocument();
+
+  let clickedPage = null;
+
+  screen
+    .getByTestId('pagination')
+    .element()
+    .addEventListener('page-click', (e: CustomEvent) => {
+      clickedPage = e.detail.clickedPage;
+    });
+
+  await screen.getByLabelText('Page 14').click();
+
+  await expect.poll(() => expect(clickedPage).toEqual('14'));
+});
