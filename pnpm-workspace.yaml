@@ -1,3 +1,5 @@
+packages:
+  - 'packages/*'
 patchedDependencies:
   '@vitest/pretty-format': patches/@vitest__pretty-format.patch
   custom-element-vs-code-integration: patches/custom-element-vs-code-integration.patch
