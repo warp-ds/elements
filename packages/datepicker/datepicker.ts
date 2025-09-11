@@ -339,7 +339,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       this.locale = datefnsLocale[lang];
     }
 
-    this.internalValue = this.value;
     if (this.value) {
       const iso = fromISOToDate(this.value);
       if (iso) {

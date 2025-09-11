@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import { page, userEvent, server } from '@vitest/browser/context';
+import { page, userEvent } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
 import '../button/index.js';
 import './index.js';
