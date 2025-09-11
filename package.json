@@ -52,7 +52,7 @@
     "build": "rimraf dist && rimraf eik && pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
     "commit": "cz",
     "dev": "vite",
-    "storybook": "storybook dev",
+    "storybook": "storybook dev --port 63900",
     "lint:check": "eslint .",
     "lint": "eslint . --fix",
     "messages:compile": "lingui compile",
