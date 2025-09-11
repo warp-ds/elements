@@ -163,6 +163,9 @@ class WarpButton extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   variant: ButtonVariant;
 
+  /**
+   * @type {boolean}
+   */
   @property({ type: Boolean, reflect: true })
   quiet: boolean;
 
