@@ -79,8 +79,7 @@ export class WarpSwitch extends LitElement {
           class=${this._baseClasses}
           aria-disabled=${this.disabled}
           ?disabled=${this.disabled}
-          @click=${this._handleClick}
-        >
+          @click=${this._handleClick}>
           <span data-testid="track" class=${this._trackClasses}></span>
           <span data-testid="handle" class=${this._handleClasses}></span>
         </button>
