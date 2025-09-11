@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -8,7 +8,7 @@ import { range } from 'lit/directives/range.js';
 import { styles } from './style.js';
 
 export class WarpPageIndicator extends LitElement {
-  static styles = [unsafeCSS(styles)];
+  static styles = [styles];
 
   /** Currently selected page (1-based index) */
   @property({ type: Number, attribute: 'selected-page' })

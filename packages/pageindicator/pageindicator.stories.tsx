@@ -3,7 +3,7 @@ import './index.ts';
 
 export default {
   component: 'w-pageindicator',
-  title: 'PageIndicator',
+  title: 'Navigation/PageIndicator',
   render: ({ pageCount, selectedPage }) => html`
     <w-pageindicator page-count=${pageCount} selected-page=${selectedPage}></w-pageindicator>
   `,
