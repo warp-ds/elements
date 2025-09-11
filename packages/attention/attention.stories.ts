@@ -137,10 +137,10 @@ export const Highlight: Story = {
     `,
   ],
 };
-
 export const DismissibleHighlight: Story = {
   args: {
-    placement: 'right',
+    class: 'flex items-center gap-8',
+    placement: 'bottom',
     buttonId: 'highlight-target2',
     buttonText: 'click me',
     id: 'dismissible-highlight-message',
@@ -170,7 +170,7 @@ export const DismissibleHighlight: Story = {
 
 export const AccessibleTooltip: Story = {
   args: {},
-  render() {
+  render(args) {
     return html`
       <w-attention id="accessible-attention" placement="right" popover>
         <div slot="message">
