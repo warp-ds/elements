@@ -1,3 +1,10 @@
+# [2.2.0-next.6](https://github.com/warp-ds/elements/compare/v2.2.0-next.5...v2.2.0-next.6) (2025-09-11)
+
+
+### Features
+
+* dispatch event containing page number on page number click ([e5458aa](https://github.com/warp-ds/elements/commit/e5458aa40ba41e3ae0ec5a433efd121778c04ddf))
+
 # [2.2.0-next.5](https://github.com/warp-ds/elements/compare/v2.2.0-next.4...v2.2.0-next.5) (2025-09-11)
 
 
