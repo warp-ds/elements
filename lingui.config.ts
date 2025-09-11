@@ -18,7 +18,7 @@ const config: LinguiConfig = {
       path: 'packages/card/locales/{locale}/messages',
     },
     {
-      include: ['packages/datepicker/index.ts'],
+      include: ['packages/datepicker/*.ts'],
       path: 'packages/datepicker/locales/{locale}/messages',
     },
     {
