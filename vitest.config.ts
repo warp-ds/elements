@@ -1,4 +1,5 @@
 /// <reference types="@vitest/browser/matchers" />
+import react from '@vitejs/plugin-react';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import { defineConfig } from 'vitest/config';
 
@@ -7,6 +8,7 @@ export default defineConfig({
     target: 'esnext',
   },
   plugins: [
+    react(),
     topLevelAwait({
       // The export name of top-level await promise for each chunk module
       promiseExportName: '__tla',

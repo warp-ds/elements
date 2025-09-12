@@ -90,7 +90,9 @@
     "@storybook/web-components": "^9.1.4",
     "@storybook/web-components-vite": "^9.1.4",
     "@types/node": "20.14.10",
+    "@types/react": "^19.1.12",
     "@unocss/core": "^66.5.0",
+    "@vitejs/plugin-react": "^5.0.2",
     "@vitest/browser": "^3.2.4",
     "@vitest/utils": "^3.2.4",
     "@warp-ds/eslint-config": "1.1.0",
@@ -117,6 +119,7 @@
     "nanoid": "^5.1.5",
     "playwright": "^1.55.0",
     "prettier": "3.3.2",
+    "react": "^19.1.1",
     "rimraf": "6.0.1",
     "semantic-release": "24.0.0",
     "storybook": "^9.1.4",
@@ -125,7 +128,8 @@
     "unocss": "0.x",
     "vite-plugin-top-level-await": "^1.6.0",
     "vitest": "^3.2.4",
-    "vitest-browser-lit": "^0.1.0"
+    "vitest-browser-lit": "^0.1.0",
+    "vitest-browser-react": "^1.0.1"
   },
   "dependencies": {
     "@lingui/core": "5.2.0",
