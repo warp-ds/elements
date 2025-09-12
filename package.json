@@ -44,6 +44,7 @@
     "./dist/custom-elements.json"
   ],
   "scripts": {
+    "clean": "rimraf .pnpm-store node_modules dist eik storybook-static",
     "build:storybook": "pnpm run messages:compile && pnpm run build:manifest && storybook build && touch ./storybook-static/.nojekyll",
     "build:eik": "node build.js eik",
     "build:npm": "node build.js npm",
