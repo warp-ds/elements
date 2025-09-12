@@ -1,7 +1,9 @@
 import { html } from 'lit';
 
-import { page, userEvent } from '@vitest/browser/context';
+import { userEvent } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
+import { render } from 'vitest-browser-lit';
+
 import '../button/index.js';
 import './index.js';
 
@@ -12,7 +14,7 @@ test('can pick a date using a pointer', async () => {
     </form>
   `;
 
-  page.render(component);
+  const page = render(component);
 
   await expect.element(page.getByLabelText('From date')).not.toHaveValue();
 
@@ -40,7 +42,7 @@ test('can pick a date using a keyboard', async () => {
     </form>
   `;
 
-  page.render(component);
+  const page = render(component);
 
   await expect.element(page.getByLabelText('From date')).not.toHaveValue();
 
@@ -72,7 +74,7 @@ test('can pick a date by typing in the input field', async () => {
     </form>
   `;
 
-  page.render(component);
+  const page = render(component);
 
   await expect.element(page.getByLabelText('From date')).not.toHaveValue();
 

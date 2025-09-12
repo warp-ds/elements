@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { userEvent } from '@vitest/browser/context';
 import { expect, test, vi } from 'vitest';
