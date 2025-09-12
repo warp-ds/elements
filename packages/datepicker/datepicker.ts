@@ -244,6 +244,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     this.value = (e.target as HTMLInputElement).value;
   }
 
+  #onInputClick(e: PointerEvent) {
+    // stop Safari on macOS from showing the native calendar
+    e.preventDefault();
+    this.isCalendarOpen = true;
+  }
+
   #onInputKeyDown(e: KeyboardEvent) {
     if (e.key === ' ') return this.#toggleCalendarOpen(e);
     if (e.key === ',' || e.key === 'Enter') {
@@ -377,6 +383,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             name="${ifDefined(this.name)}"
             value="${ifDefined(this.value)}"
             class="w-datepicker-input"
+            @click="${this.#onInputClick}"
             @input="${this.#onInput}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
