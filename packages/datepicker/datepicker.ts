@@ -223,16 +223,21 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     this.input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
-  #onClickOutside(e: MouseEvent | FocusEvent) {
+  /**
+   * We can't use private fields (`#` prefix) for this method
+   * since we can't overwrite private field methods. We need
+   * to `.bind(this)` in the constructor because we need one
+   * stable method handler we can register and unregister on
+   * `document`, that has access to this specific instance
+   * of WarpDatepicker to control the calendar.
+   * @internal
+   */
+  private _onClickOutside(e: MouseEvent | FocusEvent) {
     if (!this.isCalendarOpen) {
       return;
     }
-    const isInsideDatePicker =
-      this.wrapper.contains(e.target as Node) ||
-      this.calendar.contains(e.target as Node) ||
-      this.input.contains(e.target as Node) ||
-      this.toggleButton.contains(e.target as Node);
 
+    const isInsideDatePicker = this.contains(e.target as Node);
     if (isInsideDatePicker) {
       return;
     }
@@ -242,6 +247,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   #onInput(e: InputEvent) {
     this.value = (e.target as HTMLInputElement).value;
+  }
+
+  #onInputClick(e: PointerEvent) {
+    // stop Safari on macOS from showing the native calendar
+    e.preventDefault();
+    this.isCalendarOpen = true;
   }
 
   #onInputKeyDown(e: KeyboardEvent) {
@@ -328,6 +339,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     if (lang && datefnsLocale[lang]) {
       this.locale = datefnsLocale[lang];
     }
+
+    this._onClickOutside = this._onClickOutside.bind(this);
   }
 
   connectedCallback(): void {
@@ -346,17 +359,17 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
       }
     }
 
-    document.addEventListener('mousedown', this.#onClickOutside);
-    document.addEventListener('touchend', this.#onClickOutside);
-    document.addEventListener('focusin', this.#onClickOutside);
+    document.addEventListener('mousedown', this._onClickOutside);
+    document.addEventListener('touchend', this._onClickOutside);
+    document.addEventListener('focusin', this._onClickOutside);
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
 
-    document.removeEventListener('mousedown', this.#onClickOutside);
-    document.removeEventListener('touchend', this.#onClickOutside);
-    document.removeEventListener('focusin', this.#onClickOutside);
+    document.removeEventListener('mousedown', this._onClickOutside);
+    document.removeEventListener('touchend', this._onClickOutside);
+    document.removeEventListener('focusin', this._onClickOutside);
   }
 
   updated(changedProperties: Map<string, unknown>): void {
@@ -377,6 +390,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             name="${ifDefined(this.name)}"
             value="${ifDefined(this.value)}"
             class="w-datepicker-input"
+            @click="${this.#onInputClick}"
             @input="${this.#onInput}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
