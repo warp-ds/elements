@@ -46,11 +46,6 @@ export const wDatepickerStyles = css`
     outline-offset: -2px;
   }
 
-  /* extra rules for IE/Edge */
-  .w-datepicker-input::-ms-clear,
-  .w-datepicker-input::-ms-expand {
-    display: none;
-  }
   .w-datepicker-input-label {
     font-size: var(--w-font-size-s);
     line-height: var(--w-line-height-s);
