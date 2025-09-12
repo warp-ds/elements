@@ -137,10 +137,10 @@ export const Highlight: Story = {
     `,
   ],
 };
+
 export const DismissibleHighlight: Story = {
   args: {
-    class: 'flex items-center gap-8',
-    placement: 'bottom',
+    placement: 'right',
     buttonId: 'highlight-target2',
     buttonText: 'click me',
     id: 'dismissible-highlight-message',

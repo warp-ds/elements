@@ -245,7 +245,7 @@ class WarpAttention extends LitElement {
   get _closeBtnHtml() {
     return html`
       <button aria-label="${this._ariaClose}" @click="${this.close}" @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
-        <w-icon-close-16></w-icon-close-16>
+        <w-icon-close-16 style="height: 16px; width: 16px; display: flex;"></w-icon-close-16>
       </button>
     `;
   }
