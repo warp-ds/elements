@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "module": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./components/affix": "./dist/packages/affix/index.js",
     "./components/alert": "./dist/packages/alert/index.js",
@@ -27,11 +27,11 @@
     "./custom-elements.json": "./dist/custom-elements.json",
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
-      "module": "./dist/packages/*/react.js"
+      "import": "./dist/packages/*/react.js"
     },
     "./*": {
       "types": "./dist/packages/*/index.d.ts",
-      "module": "./dist/packages/*/index.js"
+      "import": "./dist/packages/*/index.js"
     }
   },
   "main": "./dist/index.js",
