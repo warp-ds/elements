@@ -1,3 +1,0 @@
-import{g as t,x as a}from"./iframe-BkMo4IhO.js";import{s as o,p as s}from"./utilities-DSkOJ0vx.js";const{events:d,args:g,argTypes:l}=t("w-dead-toggle"),n={title:"Forms/Dead toggle",render(r){return a`<w-dead-toggle ${o(s(r))}></w-dead-toggle>`},args:g,argTypes:l,parameters:{actions:{handles:d}}},e={args:{}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
-  args: {}
-}`,...e.parameters?.docs?.source}}};const p=["Default"],u=Object.freeze(Object.defineProperty({__proto__:null,Default:e,__namedExportsOrder:p,default:n},Symbol.toStringTag,{value:"Module"}));export{u as D};
