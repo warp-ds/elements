@@ -62,7 +62,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   label: string;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
   @property({ type: String, reflect: true })
