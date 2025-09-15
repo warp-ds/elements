@@ -18,39 +18,30 @@ const {
 
 const meta: Meta = {
   title: 'Forms/Slider and Range Slider',
+  args: sliderArgs,
+  argTypes: sliderArgTypes,
+  parameters: {
+    actions: {
+      handles: sliderEvents,
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj;
 
 export const Single: Story = {
-  render({}) {
+  render() {
     return html`
       <w-slider>
         <w-slider-thumb></w-slider-thumb>
       </w-slider>
     `;
   },
-  args: {
-    ...sliderArgs,
-    ...sliderThumbArgs,
-  },
-  argTypes: {
-    ...sliderArgTypes,
-    ...sliderThumbArgTypes,
-  },
-  parameters: {
-    actions: {
-      handles: {
-        ...sliderEvents,
-        ...sliderThumbEvents,
-      },
-    },
-  },
 };
 
 export const Range: Story = {
-  render({}) {
+  render() {
     return html`
       <w-slider>
         <slot name="from">
@@ -62,20 +53,104 @@ export const Range: Story = {
       </w-slider>
     `;
   },
-  args: {
-    ...sliderArgs,
-    ...sliderThumbArgs,
+};
+
+export const SuffixSquareMeters: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
   },
-  argTypes: {
-    ...sliderArgTypes,
-    ...sliderThumbArgTypes,
+};
+
+export const SuffixCurrency: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
   },
-  parameters: {
-    actions: {
-      handles: {
-        ...sliderEvents,
-        ...sliderThumbEvents,
-      },
-    },
+};
+
+export const SuffixKilometers: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
+  },
+};
+
+export const Time: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
+  },
+};
+
+export const OverUnder: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
+  },
+};
+
+export const SingleError: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <w-slider-thumb></w-slider-thumb>
+      </w-slider>
+    `;
+  },
+};
+
+export const RangeError: Story = {
+  render() {
+    return html`
+      <w-slider>
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+    `;
   },
 };

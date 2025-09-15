@@ -1,6 +1,8 @@
-import { LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
+import WarpElement from '@warp-ds/elements-core';
+import { property } from 'lit/decorators.js';
 
 /**
  * Parent component for sliders (both single and range sliders). Used in combination with a `<w-slider-thumb>`.
@@ -13,8 +15,20 @@ import { FormControlMixin } from '@open-wc/form-control';
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  */
 class WarpSlider extends FormControlMixin(LitElement) {
-  constructor() {
-    super();
+  static shadowRootOptions = {
+    ...WarpElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
+  @property()
+  label: string;
+
+  // Inspo:
+  //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
+  //   https://css-tricks.com/multi-thumb-sliders-general-case/
+  //   https://css-tricks.com/lets-make-a-multi-thumb-slider-that-calculates-the-width-between-thumbs/
+  render() {
+    return html`<div></div>`;
   }
 }
 

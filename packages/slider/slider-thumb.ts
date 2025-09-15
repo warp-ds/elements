@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
 
@@ -8,8 +8,8 @@ import { FormControlMixin } from '@open-wc/form-control';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-slider-and-range-slider--docs)
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
-  constructor() {
-    super();
+  render() {
+    return html`<div></div>`;
   }
 }
 
