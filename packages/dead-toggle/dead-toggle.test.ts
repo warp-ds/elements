@@ -1,12 +1,13 @@
 import { html } from 'lit';
 
-import { page } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
+import { render } from 'vitest-browser-lit';
+
 import './index.js';
 
 test('renders the dead toggle', async () => {
   const component = html`<w-dead-toggle data-testid="dead-toggle"></w-dead-toggle>`;
 
-  const screen = page.render(component);
-  await expect.element(screen.getByTestId('dead-toggle')).toBeVisible();
+  const page = render(component);
+  await expect.element(page.getByTestId('dead-toggle')).toBeVisible();
 });

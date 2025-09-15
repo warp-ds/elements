@@ -1,22 +1,22 @@
 import { html } from 'lit';
 
-import { page } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
+import { render } from 'vitest-browser-lit';
 
 import './index.js';
 
 test('renders a bread crumb', async () => {
-  const screen = page.render(
+  const page = render(
     html` <w-breadcrumb>
       <a href="/foo">Foo</a>
       <a href="/bar">Bar</a>
     </w-breadcrumb>`,
   );
-  await expect.element(screen.getByText('Foo')).toBeVisible();
-  await expect.element(screen.getByText('Bar')).toBeVisible();
+  await expect.element(page.getByText('Foo')).toBeVisible();
+  await expect.element(page.getByText('Bar')).toBeVisible();
 });
 
 test('renders an aria-label if set', async () => {
-  const screen = page.render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
-  await expect.element(screen.getByLabelText('You are here', { hasText: 'w-breadcrumb' })).toBeDefined();
+  const page = render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
+  await expect.element(page.getByLabelText('You are here', { hasText: 'w-breadcrumb' })).toBeDefined();
 });

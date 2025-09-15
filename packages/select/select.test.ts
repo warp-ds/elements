@@ -1,7 +1,9 @@
 import { html } from 'lit';
 
-import { page, userEvent } from '@vitest/browser/context';
+import { userEvent } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
+import { render } from 'vitest-browser-lit';
+
 import './index.js';
 
 test('works in a form', async () => {
@@ -17,7 +19,7 @@ test('works in a form', async () => {
     </form>
   `;
 
-  page.render(component);
+  const page = render(component);
 
   // Confirm we have a form associated field berry
   const form = page.getByTestId('flavour');

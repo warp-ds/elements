@@ -1,7 +1,8 @@
 import { html } from 'lit';
 
-import { page } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
+import { render } from 'vitest-browser-lit';
+
 import './index.js';
 
 test('renders the given title prop and hides the slotted content', async () => {
@@ -11,9 +12,9 @@ test('renders the given title prop and hides the slotted content', async () => {
     </w-expandable>
   `;
 
-  const screen = page.render(component);
-  await expect.element(screen.getByText("I'm expandable")).toBeVisible();
-  await expect.element(screen.getByText('with expanded content')).not.toBeVisible();
+  const page = render(component);
+  await expect.element(page.getByText("I'm expandable")).toBeVisible();
+  await expect.element(page.getByText('with expanded content')).not.toBeVisible();
 });
 
 test('clicking the expandable shows the slotted content', async () => {
@@ -23,7 +24,7 @@ test('clicking the expandable shows the slotted content', async () => {
     </w-expandable>
   `;
 
-  const screen = page.render(component);
-  await screen.getByRole('button').click();
-  await expect.element(screen.getByText('with expanded content')).toBeVisible();
+  const page = render(component);
+  await page.getByRole('button').click();
+  await expect.element(page.getByText('with expanded content')).toBeVisible();
 });
