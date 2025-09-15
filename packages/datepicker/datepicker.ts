@@ -1,4 +1,4 @@
-import { LitElement, html, nothing } from 'lit';
+import { LitElement, html } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
@@ -29,6 +29,7 @@ import { enGB, nb, sv, da, fi } from 'date-fns/locale';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 import '@warp-ds/icons/elements/calendar-16';
 import '@warp-ds/icons/elements/chevron-left-16';
@@ -56,6 +57,7 @@ const calendarId = 'calendar';
 const inputId = 'input';
 const toggleButtonId = 'toggle';
 const wrapperId = 'wrapper';
+const previousMonthButtonId = 'previous';
 
 // Convenience to support the common locales of our users.
 // For other locales either add to this list or point users
@@ -200,12 +202,31 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @query(`#${wrapperId}`, true)
   wrapper: HTMLDivElement;
 
+  /**
+   * This is the first focusable element, needed for the modal focus trap.
+   *
+   * Don't cache this and other `@query` fields from inside the calendar modal.
+   * They work the first time, but once the calendar is closed and reopened
+   * the query will point to an element that doesn't exist anymore.
+   */
+  @query(`#${previousMonthButtonId}`)
+  previousMonthButton: HTMLButtonElement;
+
+  @query('[aria-current="date"]')
+  todayCell: HTMLTableCellElement;
+
   @query('[data-navigation="true"]')
   selectedCell: HTMLTableCellElement;
 
-  #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
+  async #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
     e.preventDefault();
     this.isCalendarOpen = !this.isCalendarOpen;
+    if (this.isCalendarOpen) {
+      // Move into the calendar and announce the availability
+      // of the calendar grid to screen reader users.
+      await this.updateComplete;
+      (this.selectedCell || this.todayCell).focus();
+    }
   }
 
   #nextMonth() {
@@ -293,6 +314,21 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         break;
       case 'Escape':
         this.isCalendarOpen = false;
+        break;
+      case 'Tab':
+        if ((e.target as HTMLElement).tagName === 'TD' && !e.shiftKey) {
+          // If Tab and no Shift we are about to leave the modal and should move focus
+          // to the Previous month button. If Shift is held, proceed as normal.
+          e.preventDefault();
+          this.previousMonthButton.focus();
+        } else if ((e.target as HTMLElement).id === previousMonthButtonId && e.shiftKey) {
+          // If we're holding Shift and pressing Tab we are moving back in the focus
+          // order. If we're about to leave the previous month button (the first focusable
+          // element in the modal), move the focus to the last focusable element, which
+          // is the current navigation date in the calendar grid.
+          e.preventDefault();
+          (this.selectedCell || this.todayCell).focus();
+        }
         break;
     }
 
@@ -408,6 +444,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                   comment:
                     'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
                 })}"
+            aria-controls="${calendarId}"
             class="w-datepicker-button"
             data-testid="${toggleButtonId}"
             id="${toggleButtonId}"
@@ -419,103 +456,103 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
           </w-button>
         </div>
       </div>
-      ${this.isCalendarOpen
-        ? html`
-            <div class="w-dropdown__popover w-dropdown__popover--open">
-              <div
-                aria-roledescription="${i18n.t({
-                  id: 'datepicker.calendar.roleDescription',
-                  message: `Date picker`,
-                  comment: 'Used by screen readers to announce that the calendar element is a date picker.',
-                })}"
-                class="w-datepicker__calendar"
-                data-testid="${calendarId}"
-                id="${calendarId}"
-                @keydown="${this.#onCalendarKeyDown}">
-                <div class="w-datepicker__month-nav">
-                  <w-button
-                    aria-label="${i18n.t({
-                      id: 'datepicker.calendar.previousMonth',
-                      message: `Previous month`,
-                      comment: 'Screen reader label for the previous month button.',
-                    })}"
-                    class="w-datepicker__month__nav__button"
-                    data-testid="${calendarId}-previous"
-                    variant="utility"
-                    quiet
-                    small
-                    @click="${this.#previousMonth}">
-                    <w-icon-chevron-left-16></w-icon-chevron-left-16>
-                  </w-button>
-                  <div class="w-datepicker__month__nav__header">${format(this.month, this.headerFormat, { locale: this.locale })}</div>
-                  <w-button
-                    aria-label="${i18n.t({
-                      id: 'datepicker.calendar.nextMonth',
-                      message: `Next month`,
-                      comment: 'Screen reader label for the next month button.',
-                    })}"
-                    class="w-datepicker__month__nav__button"
-                    data-testid="${calendarId}-next"
-                    variant="utility"
-                    quiet
-                    small
-                    @click="${this.#nextMonth}">
-                    <w-icon-chevron-right-16></w-icon-chevron-right-16>
-                  </w-button>
-                </div>
-                <div class="w-datepicker__month">
-                  <table class="w-datepicker__table" role="grid">
-                    <thead class="w-datepicker__weekdays">
-                      <tr>
-                        ${this.weeks[0].map(
-                          (day) =>
-                            html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
-                        )}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${this.weeks.map(
-                        (week) =>
-                          html`<tr>
-                            ${week.map((day) => {
-                              if (!isSameMonth(this.month, day)) {
-                                return html`<td></td>`;
-                              }
-
-                              const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
-                              const isSelected = isSameDay(day, this.selectedDate);
-                              const isNavigationDate = day === this.navigationDate;
-
-                              return html`<td
-                                aria-current="${ifDefined(isToday(day) ? 'date' : undefined)}"
-                                aria-disabled="${isDisabled}"
-                                aria-label="${format(day, this.dayFormat, { locale: this.locale })}"
-                                aria-selected="${isSelected}"
-                                class="${classMap({
-                                  'w-datepicker__day': true,
-                                  'w-datepicker__day--today': isToday(day),
-                                  'w-datepicker__day--selected': isSelected,
-                                  'w-datepicker__day--disabled': isDisabled,
-                                  'w-datepicker__day--navigation': isNavigationDate,
-                                })}"
-                                data-navigation="${isNavigationDate}"
-                                data-date="${formatISO(day, { representation: 'date' })}"
-                                role="gridcell"
-                                tabindex="${isNavigationDate ? 0 : -1}"
-                                @click="${isDisabled ? undefined : this.#onCalendarSelect}"
-                                @keydown="${isDisabled ? undefined : this.#onCalendarSelect}">
-                                <div>${getDate(day)}</div>
-                              </td>`;
-                            })}
-                          </tr>`,
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+      <div class="w-dropdown__popover w-dropdown__popover--open" style="${styleMap({ display: this.isCalendarOpen ? undefined : 'none' })}">
+        <div
+          aria-label="${i18n.t({
+            id: 'datepicker.calendar.roleDescription',
+            message: `Date picker`,
+            comment: 'Used by screen readers to announce that the calendar element is a date picker.',
+          })}"
+          aria-modal="true"
+          role="dialog"
+          class="w-datepicker__calendar"
+          data-testid="${calendarId}"
+          id="${calendarId}"
+          @keydown="${this.#onCalendarKeyDown}">
+          <div class="w-datepicker__month-nav">
+            <w-button
+              aria-label="${i18n.t({
+                id: 'datepicker.calendar.previousMonth',
+                message: `Previous month`,
+                comment: 'Screen reader label for the previous month button.',
+              })}"
+              class="w-datepicker__month__nav__button"
+              id="${previousMonthButtonId}"
+              data-testid="${previousMonthButtonId}"
+              variant="utility"
+              quiet
+              small
+              @click="${this.#previousMonth}">
+              <w-icon-chevron-left-16></w-icon-chevron-left-16>
+            </w-button>
+            <div aria-live="polite" class="w-datepicker__month__nav__header">
+              ${format(this.month, this.headerFormat, { locale: this.locale })}
             </div>
-          `
-        : nothing}
+            <w-button
+              aria-label="${i18n.t({
+                id: 'datepicker.calendar.nextMonth',
+                message: `Next month`,
+                comment: 'Screen reader label for the next month button.',
+              })}"
+              class="w-datepicker__month__nav__button"
+              data-testid="${calendarId}-next"
+              variant="utility"
+              quiet
+              small
+              @click="${this.#nextMonth}">
+              <w-icon-chevron-right-16></w-icon-chevron-right-16>
+            </w-button>
+          </div>
+          <div class="w-datepicker__month">
+            <table class="w-datepicker__table" role="grid">
+              <thead class="w-datepicker__weekdays">
+                <tr>
+                  ${this.weeks[0].map(
+                    (day) => html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                ${this.weeks.map(
+                  (week) =>
+                    html`<tr>
+                      ${week.map((day) => {
+                        if (!isSameMonth(this.month, day)) {
+                          return html`<td></td>`;
+                        }
+
+                        const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
+                        const isSelected = isSameDay(day, this.selectedDate);
+                        const isNavigationDate = day === this.navigationDate;
+
+                        return html`<td
+                          aria-current="${ifDefined(isToday(day) ? 'date' : undefined)}"
+                          aria-disabled="${isDisabled}"
+                          aria-label="${format(day, this.dayFormat, { locale: this.locale })}"
+                          aria-selected="${isSelected}"
+                          class="${classMap({
+                            'w-datepicker__day': true,
+                            'w-datepicker__day--today': isToday(day),
+                            'w-datepicker__day--selected': isSelected,
+                            'w-datepicker__day--disabled': isDisabled,
+                            'w-datepicker__day--navigation': isNavigationDate,
+                          })}"
+                          data-navigation="${isNavigationDate}"
+                          data-date="${formatISO(day, { representation: 'date' })}"
+                          role="gridcell"
+                          tabindex="${isNavigationDate ? 0 : -1}"
+                          @click="${isDisabled ? undefined : this.#onCalendarSelect}"
+                          @keydown="${isDisabled ? undefined : this.#onCalendarSelect}">
+                          <div>${getDate(day)}</div>
+                        </td>`;
+                      })}
+                    </tr>`,
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     `;
   }
 }

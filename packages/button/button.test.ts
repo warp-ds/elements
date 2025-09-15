@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './index.js';
@@ -22,3 +22,13 @@ test('by default button type is button', async () => {
 test.todo('works in a form as type submit');
 
 test.todo('works in a form as type reset');
+
+test('calling focus on w-button focuses the button inside the shadow root', async () => {
+  const component = html`<w-button>This is a button</w-button>`;
+  const page = render(component);
+  await expect.element(page.getByRole('button')).toBeVisible();
+
+  page.container.querySelector('w-button').focus();
+
+  await vi.waitFor(() => page.container.querySelector(':focus').tagName === 'BUTTON');
+});

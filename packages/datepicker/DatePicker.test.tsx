@@ -14,7 +14,7 @@ test('renders the date picker component', async () => {
     </form>,
   );
 
-  await expect.element(page.getByLabelText('From date')).toBeInTheDocument();
+  await expect.element(page.getByLabelText('From date')).toBeVisible();
 });
 
 test('can pick a date using a pointer', async () => {
@@ -45,7 +45,7 @@ test('can pick a date using keyboard', async () => {
 
   await expect.element(page.getByLabelText('From date')).not.toHaveValue();
 
-  await expect.element(page.getByTestId('calendar').query()).not.toBeInTheDocument();
+  await expect.element(page.getByTestId('calendar').query()).not.toBeVisible();
 
   const toggle = page.getByRole('button').element() as HTMLButtonElement;
   toggle.focus();
@@ -58,7 +58,7 @@ test('can pick a date using keyboard', async () => {
 
   await expect
     .element(page.getByTestId('calendar').query(), { message: 'expected calendar to close after clicking a date' })
-    .not.toBeInTheDocument();
+    .not.toBeVisible();
 
   await expect.element(page.getByLabelText('From date')).toHaveValue();
 
