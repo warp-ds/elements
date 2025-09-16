@@ -42,6 +42,11 @@ if (typeof window !== 'undefined') {
   window.updateToast = updateToast;
   // @ts-expect-error We depend on these being global in our examples
   window.removeToast = removeToast;
+
+  // @ts-expect-error Used in slider examples
+  window.getNumberFormatter = (locale, opts = {}) => {
+    return new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts });
+  };
 }
 
 export default preview;

@@ -218,6 +218,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
           ?required="${this.required}"
           @blur="${this.handler}"
           @change="${this.handler}"
+          @input="${this.handler}"
           @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
