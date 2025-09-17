@@ -1,10 +1,9 @@
 // @warp-css;
 
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import WarpElement from '@warp-ds/elements-core';
 import { property, state } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/check-16';
@@ -56,7 +55,7 @@ const ccStep = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/components-steps--docs)
  */
-class WarpSteps extends WarpElement {
+class WarpSteps extends LitElement {
   @property({ type: Boolean, reflect: true })
   horizontal = false;
 
@@ -131,7 +130,7 @@ interface StepsContext {
 /**
  * Individual step component that shows a single step in a process
  */
-class WarpStep extends WarpElement {
+class WarpStep extends LitElement {
   @property({ type: Boolean, reflect: true })
   active = false;
 
