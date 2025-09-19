@@ -1,3 +1,4 @@
+import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import * as eik from '@eik/esbuild-plugin';
 import { generateJetBrainsWebTypes } from 'custom-element-jet-brains-integration';
 import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integration';
@@ -34,10 +35,14 @@ const esbuildDefaults = {
   sourcemap: true,
   target: 'es2018',
   minify: true,
-  external: ['lit', '@warp-ds/elements-core'],
+  external: ['@warp-ds/elements-core'],
 };
 
 function buildComponents(outDir, extraBuildOptions = {}) {
+  if (!existsSync(outDir)) {
+    mkdirSync(outDir, { recursive: true });
+  }
+  let componentsSet = new Set();
   components.forEach(async (item) => {
     const regex = /\/(.+)\/(react|index).(ts|js)/;
     const match = item.match(regex);
@@ -48,6 +53,7 @@ function buildComponents(outDir, extraBuildOptions = {}) {
     }
 
     try {
+      componentsSet.add(match[1]);
       console.log(`elements: building ${match[1]}/${match[2]}.${match[3]}`);
       await esbuild.build({
         entryPoints: [item],
@@ -59,6 +65,18 @@ function buildComponents(outDir, extraBuildOptions = {}) {
       console.error(err);
     }
   });
+
+  const selectors = Array.from(componentsSet).map(comp => `${comp}:not(:defined)`);
+
+  // Each component hidden until defined.
+  // This does nothing if warp-clock is used but provides a better experience on any page where warp-clock is not used.
+  const perComp = selectors.map(s => `${s}{visibility:hidden;}`).join("");
+
+  // Cloak hides until *any* of them is not defined
+  // 2s step-end is used to provide a CSS only fallback reveal in case of issues
+  const cloak = `.warp-cloak:has(${selectors.join(",")}){animation:2s step-end warp-fouce-cloak;} @keyframes warp-fouce-cloak {from {opacity: 0;} to {opacity: 1;}}`;
+
+  writeFileSync(new URL(`${outDir}/styles.css`, import.meta.url), perComp + cloak, { encoding: 'utf8' });
 }
 
 async function buildToastApi(outDir, extraBuildOptions = {}) {
@@ -104,3 +122,4 @@ if (version === 'eik') {
   buildToastApi('dist');
   buildIndex('dist');
 }
+
