@@ -45,6 +45,10 @@ const config: LinguiConfig = {
       include: ['packages/pagination/'],
       path: 'packages/pagination/locales/{locale}/messages',
     },
+    {
+      include: ['packages/steps/'],
+      path: 'packages/steps/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

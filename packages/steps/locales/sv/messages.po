@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-10-24 09:48+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: sv\n"
+"Project-Id-Version: 2853b3c41d7b7a59e7cd64c0153b540a\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Swedish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: 2853b3c41d7b7a59e7cd64c0153b540a\n"
+"X-Crowdin-Project-ID: 141\n"
+"X-Crowdin-Language: sv\n"
+"X-Crowdin-File-ID: 12468\n"
+"PO-Revision-Date: \n"
+
+#. Empty circle
+#. js-lingui-explicit-id
+#: packages/steps/src/step.tsx:28
+msgid "steps.aria.emptyCircle"
+msgstr "Tom cirkel"
+
+#. Active circle
+#. js-lingui-explicit-id
+#: packages/steps/src/step.tsx:23
+msgid "steps.aria.active"
+msgstr "Stegindikator aktiv cirkel"
+
+#. Completed circle
+#. js-lingui-explicit-id
+#: packages/steps/src/step.tsx:18
+msgid "steps.aria.completed"
+msgstr "Stegindikator fulländad cirkel"
