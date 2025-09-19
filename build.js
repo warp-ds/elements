@@ -66,19 +66,6 @@ function getTagName(entry) {
   return null;
 }
 
-// const componentsMap = new Map();
-// components.forEach(async (item) => {
-//   const regex = /\/(.+)\/(react|index).(ts|js)/;
-//   const match = item.match(regex);
-//   if (item.includes('utils')) return;
-//   if (!match) {
-//     console.log('no match for', item);
-//   }
-//   componentsMap.set(match[1], { path: item, componentName: match[1], componentTag: `w-${match[1]}`, filename: match[2], extension: match[3]});
-// });
-
-// console.log(componentsMap)
-
 function buildComponents(outDir, extraBuildOptions = {}) {
   if (!existsSync(outDir)) {
     mkdirSync(outDir, { recursive: true });
@@ -98,7 +85,7 @@ function buildComponents(outDir, extraBuildOptions = {}) {
     }
   });
 
-  const selectors = manifest.modules.map((item) => `${getTagName(item)}:not(:defined)`);
+  const selectors = manifest.modules.filter(getTagName).map((item) => `${getTagName(item)}:not(:defined)`);
 
   // Each component hidden until defined.
   // This does nothing if warp-clock is used but provides a better experience on any page where warp-clock is not used.
