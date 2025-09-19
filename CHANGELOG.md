@@ -1,3 +1,10 @@
+# [2.2.0-next.8](https://github.com/warp-ds/elements/compare/v2.2.0-next.7...v2.2.0-next.8) (2025-09-19)
+
+
+### Bug Fixes
+
+* adding link component ([b5a737d](https://github.com/warp-ds/elements/commit/b5a737d344237cfe7eb5785fb7fe0e9ac3dc01c3))
+
 # [2.2.0-next.7](https://github.com/warp-ds/elements/compare/v2.2.0-next.6...v2.2.0-next.7) (2025-09-12)
 
 
