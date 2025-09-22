@@ -8,6 +8,7 @@ import { attention as ccAttention } from '@warp-ds/css/component-classes';
 import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { styles } from './styles';
 
 import { activateI18n } from '../i18n';
 import { generateRandomId } from '../utils/index.js';
@@ -69,7 +70,7 @@ class WarpAttention extends LitElement {
   _initialPlacement: Directions;
 
   static styles = [
-    WarpElement.styles,
+    styles,
     css`
       #attention {
         position: absolute;
