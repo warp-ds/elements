@@ -2,7 +2,7 @@ import { html, LitElement, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
 
@@ -74,6 +74,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property()
   suffix: string;
 
+  @query('#fieldset')
+  fieldset: HTMLFieldSetElement;
+
   #formatter: (value: string) => string;
 
   /** JS hook to help you format the numeric value how you want. */
@@ -101,13 +104,16 @@ class WarpSlider extends FormControlMixin(LitElement) {
       }
       thumb.formatter = this.formatter;
 
-      // Set forceDisabled state based on radio group's disabled state
+      // Set forceDisabled state based on slider component disabled state
       thumb.forceDisabled = this.disabled;
+
+      this.#updateActiveTrack(thumb);
     }
   }
 
-  connectedCallback(): void {
+  async connectedCallback() {
     super.connectedCallback();
+    await this.updateComplete;
     this.#syncSliderThumbs();
   }
 
@@ -125,9 +131,37 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
+  #onChange(e: InputEvent) {
+    const input = e.target as WarpSliderThumb;
+    this.#updateActiveTrack(input);
+  }
+
+  /**
+   * We use CSS variables to fill the active track with a background color.
+   */
+  #updateActiveTrack(input: WarpSliderThumb) {
+    const slotName = input.slot;
+
+    if (slotName === 'from') {
+      // Default to the minimum value if no value has been chosen yet.
+      const from = input.value ?? String(Number.parseInt(this.min));
+      this.fieldset.style.setProperty('--from', from);
+    }
+
+    if (!slotName || slotName === 'to') {
+      if (!slotName) {
+        this.fieldset.style.setProperty('--from', '0');
+      }
+      // A range that starts off without a value is placed in the middle by
+      // browsers, so we mimic that behavior (max / 2).
+      const to = input.value ?? String(Number.parseInt(this.max) / 2);
+      this.fieldset.style.setProperty('--to', to);
+    }
+  }
+
   render() {
     return html`
-      <fieldset class="w-slider">
+      <fieldset id="fieldset" class="w-slider" @input="${this.#onChange}">
         <legend class="w-slider__label">
           <slot id="label" name="label">${this.label}</slot>
         </legend>

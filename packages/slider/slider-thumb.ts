@@ -96,6 +96,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <label for="range">${this.label}</label>
 
+      <div class="w-slider__active-range"></div>
+
       <input
         id="range"
         class="w-slider__range"
