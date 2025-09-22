@@ -5,12 +5,16 @@ import { property, query, state } from 'lit/decorators.js';
 import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated-element.js';
 import type { WarpTextField } from '../textfield/index.js';
 
+import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
+
 /**
  * Component to place inside a `<w-slider>`.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-slider-and-range-slider--docs)
  */
 class WarpSliderThumb extends BaseFormAssociatedElement {
+  static css = [wSliderThumbStyles];
+
   @property()
   label: string;
 
@@ -49,6 +53,18 @@ class WarpSliderThumb extends BaseFormAssociatedElement {
   @query('input[type="range"]')
   range: HTMLInputElement;
 
+  /** @internal */
+  @state()
+  _showTooltip = true;
+
+  #onFocus(): void {
+    this._showTooltip = true;
+  }
+
+  #onBlur(): void {
+    // this._showTooltip = false;
+  }
+
   #onInput(e: InputEvent | CustomEvent): void {
     const value = (e as CustomEvent<{ value: string }>).detail?.value || (e.currentTarget as WarpTextField).value;
     this.value = String(value);
@@ -67,7 +83,12 @@ class WarpSliderThumb extends BaseFormAssociatedElement {
   render() {
     return html`
       <label for="range">${this.label}</label>
-      <!-- TODO: this doesn't visually update when I set the value with the text field :( It should work, I/Lit must have broken something -->
+
+      <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
+        <output class="w-slider-thumb__tooltip-target" slot="target"></output>
+        <p slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0} ${this.suffix}</p>
+      </w-attention>
+
       <input
         id="range"
         type="range"
@@ -76,6 +97,8 @@ class WarpSliderThumb extends BaseFormAssociatedElement {
         max="${this.max}"
         name="${this.name}"
         .disabled="${this.disabled || this.forceDisabled}"
+        @focus="${this.#onFocus}"
+        @blur="${this.#onBlur}"
         @input="${this.#onInput}" />
 
       <!-- TODO: hide from screen readers, use aria-label instead? -->
@@ -83,7 +106,7 @@ class WarpSliderThumb extends BaseFormAssociatedElement {
       <p>${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</p>
 
       <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
-      <!-- TODO: masking function in textfield would be nice -->
+      <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
       <w-textfield label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
         ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
       </w-textfield>

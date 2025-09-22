@@ -1,10 +1,16 @@
 import { html, PropertyValues } from 'lit';
 
-import { property, queryAll, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 
 import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated-element';
 
-import type { WarpSliderThumb } from './slider-thumb';
+import type { WarpSliderThumb } from './slider-thumb.js';
+import { wSliderStyles } from './styles/w-slider.styles.js';
+
+// Inspo:
+//   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
+//   https://css-tricks.com/multi-thumb-sliders-general-case/
+//   https://css-tricks.com/lets-make-a-multi-thumb-slider-that-calculates-the-width-between-thumbs/
 
 /**
  * Parent component for sliders (both single and range sliders). Used in combination with a `<w-slider-thumb>`.
@@ -19,6 +25,8 @@ import type { WarpSliderThumb } from './slider-thumb';
  */
 class WarpSlider extends BaseFormAssociatedElement {
   static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+
+  static css = [wSliderStyles];
 
   @property({ reflect: true })
   min: string;
@@ -82,15 +90,11 @@ class WarpSlider extends BaseFormAssociatedElement {
     this.#syncSliderThumbs();
   }
 
-  // Inspo:
-  //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
-  //   https://css-tricks.com/multi-thumb-sliders-general-case/
-  //   https://css-tricks.com/lets-make-a-multi-thumb-slider-that-calculates-the-width-between-thumbs/
   render() {
     // Div with role group to be able to style it as a CSS grid
     // (fieldset does not support that in chrome apparently).
     return html`
-      <div role="group" aria-labelledby="label">
+      <div role="group" aria-labelledby="label" class="w-slider">
         <slot id="label" name="label"></slot>
         <slot name="body"></slot>
         <slot @slotchange=${this.#syncSliderThumbs}></slot>
