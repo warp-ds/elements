@@ -14,6 +14,11 @@ export const wSliderStyles = css`
     --w-slider-thumb-offset: calc(var(--w-slider-thumb-size) / 2);
     --w-slider-tick-color: var(--w-s-color-background-disabled-subtle);
     --w-slider-tick-value-color: var(--w-s-color-text-subtle);
+
+    position: relative;
+    border: none;
+    padding: 0;
+    margin: 0;
   }
 
   .w-slider__slider {

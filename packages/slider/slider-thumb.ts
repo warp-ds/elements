@@ -4,6 +4,7 @@ import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import { property, query, state } from 'lit/decorators.js';
 
+import { reset } from '../styles.js';
 import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
@@ -19,7 +20,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static css = [wSliderThumbStyles];
+  static css = [reset, wSliderThumbStyles];
 
   @property()
   label: string;

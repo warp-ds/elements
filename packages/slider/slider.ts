@@ -4,6 +4,8 @@ import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 
+import { reset } from '../styles.js';
+
 import type { WarpSliderThumb } from './slider-thumb.js';
 import { wSliderStyles } from './styles/w-slider.styles.js';
 
@@ -41,7 +43,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static css = [wSliderStyles];
+  static css = [reset, wSliderStyles];
 
   /**
    * The slider fieldset label. Required for proper accessibility.
@@ -80,7 +82,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
     this.#syncSliderThumbs();
   }
 
-  async #syncSliderThumbs(): Promise<void> {
+  #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     for (const thumb of sliderThumbs.values()) {
       // Used to style the width of the input field, which is wider in the single slider.
@@ -100,6 +102,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
   }
 
   connectedCallback(): void {
+    super.connectedCallback();
     this.#syncSliderThumbs();
   }
 
