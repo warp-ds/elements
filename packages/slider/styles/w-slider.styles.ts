@@ -21,13 +21,15 @@ export const wSliderStyles = css`
     --w-slider-tick-value-color: var(--w-s-color-text-subtle);
   }
 
-  .w-slider__slider {
+  .w-slider__label {
+    font-size: var(--w-font-size-s);
+    line-height: var(--w-line-height-s);
+    font-weight: bold;
+    padding-bottom: 8px;
+    color: var(--w-s-color-text);
+  }
+
+  .w-slider__body {
     width: 100%;
-    position: relative;
-    user-select: none;
-    touch-action: pan-y;
-    padding-inline: var(--w-slider-thumb-size);
-    display: flex;
-    align-items: center;
   }
 `;

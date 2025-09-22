@@ -3,6 +3,7 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import { property, query, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
 import type { WarpTextField } from '../textfield/index.js';
@@ -33,6 +34,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
+
+  /** Set by `<w-slider>` */
+  @state()
+  markers: string;
 
   /** Set by `<w-slider>` */
   @state()
@@ -91,11 +96,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <label for="range">${this.label}</label>
 
-      <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
-        <output class="w-slider-thumb__tooltip-target" slot="target"></output>
-        <span slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0} ${this.suffix}</span>
-      </w-attention>
-
       <input
         id="range"
         class="w-slider__range"
@@ -104,10 +104,18 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         min="${this.min}"
         max="${this.max}"
         name="${this.name}"
+        list="${ifDefined(this.markers ? 'markers' : undefined)}"
         .disabled="${this.disabled || this.forceDisabled}"
         @focus="${this.#onFocus}"
         @blur="${this.#onBlur}"
         @input="${this.#onInput}" />
+
+      ${this.markers
+        ? // Set up a native datalist to use as markers: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#adding_tick_marks
+          // Has to be inside the same shadow root as the input element since the relationship uses IDs,
+          // which don't work across shadow root boundaries.
+          html`<datalist id="markers">${this.markers.split(',').map((csv) => html`<option value="${csv.trim()}"></option>`)}</datalist> `
+        : nothing}
 
       <!-- TODO: hide from screen readers, use aria-label instead? -->
       <p>${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix}</p>
@@ -118,6 +126,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       <w-textfield label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
         ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
       </w-textfield>
+
+      <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
+        <output class="w-slider-thumb__tooltip-target" slot="target"></output>
+        <span slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}&nbsp;${this.suffix}</span>
+      </w-attention>
     `;
   }
 }

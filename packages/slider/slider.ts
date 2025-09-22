@@ -66,6 +66,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   max: string;
 
+  /** Pass a comma-separated list of numbers to show markers at those values. */
+  @property()
+  markers: string;
+
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property()
   suffix: string;
@@ -90,6 +94,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
       // Set attributes that should be in sync between slider thumbs
       thumb.min = this.min;
+      thumb.markers = this.markers;
       thumb.max = this.max;
       if (this.suffix) {
         thumb.suffix = this.suffix;
@@ -111,6 +116,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       changedProperties.has('disabled') ||
       changedProperties.has('required') ||
       changedProperties.has('min') ||
+      changedProperties.has('markers') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
       changedProperties.has('formatter')
@@ -122,10 +128,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
   render() {
     return html`
       <fieldset class="w-slider">
-        <legend>
+        <legend class="w-slider__label">
           <slot id="label" name="label">${this.label}</slot>
         </legend>
-        <div class="w-slider__slider">
+        <div class="w-slider__body">
           <slot name="body"></slot>
           <slot @slotchange=${this.#syncSliderThumbs}></slot>
           <slot name="from" @slotchange=${this.#syncSliderThumbs}></slot>

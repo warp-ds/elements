@@ -32,8 +32,7 @@ type Story = StoryObj;
 export const Single: Story = {
   render() {
     return html`
-      <w-slider min="0" max="100">
-        <slot name="label">Single</slot>
+      <w-slider label="Single" min="0" max="100">
         <w-slider-thumb></w-slider-thumb>
       </w-slider>
     `;
@@ -43,8 +42,7 @@ export const Single: Story = {
 export const Range: Story = {
   render() {
     return html`
-      <w-slider min="0" max="100">
-        <slot name="label">Range</slot>
+      <w-slider label="Range" min="0" max="100">
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
@@ -64,8 +62,7 @@ export const SuffixSquareMeters: Story = {
   },
   render({ locale, suffix }) {
     return html`
-      <w-slider min="0" max="250" suffix="${suffix}" data-testid="sqm">
-        <slot name="label">Apartment size</slot>
+      <w-slider label="Apartment size" min="0" max="250" suffix="${suffix}" data-testid="sqm">
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
@@ -89,8 +86,7 @@ export const SuffixCurrency: Story = {
   },
   render({ locale, suffix }) {
     return html`
-      <w-slider min="0" max="250000" suffix="${suffix}" data-testid="currency">
-        <slot name="label">Price</slot>
+      <w-slider label="Price" min="0" max="250000" suffix="${suffix}" data-testid="currency">
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
@@ -114,8 +110,7 @@ export const SuffixKilometers: Story = {
   },
   render({ locale, suffix }) {
     return html`
-      <w-slider min="0" max="250000" suffix="${suffix}" data-testid="km">
-        <slot name="label">Distance</slot>
+      <w-slider label="Distance" min="0" max="250000" suffix="${suffix}" data-testid="km">
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
@@ -132,12 +127,35 @@ export const SuffixKilometers: Story = {
   },
 };
 
-// For this and the Suffix ones
+export const Marks: Story = {
+  args: {
+    locale: 'nb',
+    suffix: 'km',
+  },
+  render({ locale, suffix }) {
+    return html`
+      <w-slider label="Distance" markers="0,50000,100000,150000,200000,250000" min="0" max="250000" suffix="${suffix}" data-testid="km">
+        <slot name="from">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+        <slot name="to">
+          <w-slider-thumb></w-slider-thumb>
+        </slot>
+      </w-slider>
+
+      <script type="module">
+        const slider = document.querySelector('w-slider[data-testid="km"]');
+        const formatter = window.getNumberFormatter('${locale}');
+        slider.formatter = formatter.format;
+      </script>
+    `;
+  },
+};
+
 export const Time: Story = {
   render() {
     return html`
-      <w-slider min="0" max="2400" data-testid="time">
-        <slot name="label">Time of day</slot>
+      <w-slider label="Time of day" min="0" max="2400" data-testid="time">
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
@@ -162,7 +180,7 @@ export const OverUnder: Story = {
   },
   render() {
     return html`
-      <w-slider min="1950" max="2025" over under>
+      <w-slider label="Production year" min="1950" max="2025" over under>
         <slot name="label">Production year</slot>
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
@@ -181,9 +199,10 @@ export const SingleError: Story = {
   },
   render() {
     return html`
-      <w-slider min="0" max="100">
-        <slot name="label">Single</slot>
-        <slot name="body">Try typing a value over 100</slot>
+      <w-slider label="Single" min="0" max="100">
+        <slot name="body">
+          <p>Try typing a value over 100</p>
+        </slot>
         <w-slider-thumb></w-slider-thumb>
       </w-slider>
     `;
@@ -196,9 +215,10 @@ export const RangeError: Story = {
   },
   render() {
     return html`
-      <w-slider min="1950" max="2025" over under>
-        <slot name="label">Production year</slot>
-        <slot name="body">Try typing a from value higher than a to value</slot>
+      <w-slider label="Production year" min="1950" max="2025" over under>
+        <slot name="body">
+          <p>Try typing a from value higher than a to value</p>
+        </slot>
         <slot name="from">
           <w-slider-thumb></w-slider-thumb>
         </slot>
