@@ -1,3 +1,24 @@
+# [2.2.0-next.8](https://github.com/warp-ds/elements/compare/v2.2.0-next.7...v2.2.0-next.8) (2025-09-19)
+
+
+### Bug Fixes
+
+* adding link component ([b5a737d](https://github.com/warp-ds/elements/commit/b5a737d344237cfe7eb5785fb7fe0e9ac3dc01c3))
+
+# [2.2.0-next.7](https://github.com/warp-ds/elements/compare/v2.2.0-next.6...v2.2.0-next.7) (2025-09-12)
+
+
+### Bug Fixes
+
+* import ✓ vs module x ([968f8c4](https://github.com/warp-ds/elements/commit/968f8c4e8aa05c39a6af91afbc77c1b5c0eb15cd))
+
+# [2.2.0-next.6](https://github.com/warp-ds/elements/compare/v2.2.0-next.5...v2.2.0-next.6) (2025-09-11)
+
+
+### Features
+
+* dispatch event containing page number on page number click ([e5458aa](https://github.com/warp-ds/elements/commit/e5458aa40ba41e3ae0ec5a433efd121778c04ddf))
+
 # [2.2.0-next.5](https://github.com/warp-ds/elements/compare/v2.2.0-next.4...v2.2.0-next.5) (2025-09-11)
 
 

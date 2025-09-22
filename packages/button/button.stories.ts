@@ -60,6 +60,8 @@ export const Link: Story = {
   args: {
     variant: 'link',
     type: 'button',
+    href: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_components',
+    target: '_new',
   },
 };
 
