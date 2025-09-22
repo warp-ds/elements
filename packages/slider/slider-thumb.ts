@@ -1,8 +1,9 @@
-import { html, nothing, PropertyValues } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 
+import { FormControlMixin } from '@open-wc/form-control';
+import WarpElement from '@warp-ds/elements-core';
 import { property, query, state } from 'lit/decorators.js';
 
-import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated-element.js';
 import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
@@ -12,7 +13,12 @@ import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-slider-and-range-slider--docs)
  */
-class WarpSliderThumb extends BaseFormAssociatedElement {
+class WarpSliderThumb extends FormControlMixin(LitElement) {
+  static shadowRootOptions = {
+    ...WarpElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   static css = [wSliderThumbStyles];
 
   @property()
@@ -86,11 +92,12 @@ class WarpSliderThumb extends BaseFormAssociatedElement {
 
       <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
         <output class="w-slider-thumb__tooltip-target" slot="target"></output>
-        <p slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0} ${this.suffix}</p>
+        <span slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0} ${this.suffix}</span>
       </w-attention>
 
       <input
         id="range"
+        class="w-slider__range"
         type="range"
         value="${this.value}"
         min="${this.min}"

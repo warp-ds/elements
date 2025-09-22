@@ -1,8 +1,8 @@
-import { html, PropertyValues } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 
+import { FormControlMixin } from '@open-wc/form-control';
+import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
-
-import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated-element';
 
 import type { WarpSliderThumb } from './slider-thumb.js';
 import { wSliderStyles } from './styles/w-slider.styles.js';
@@ -22,11 +22,41 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @slot body - Optional body text between the label and slider.
  * @slot from - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
+ *
+ * @cssproperty [--w-slider-track-background=var(--w-s-color-background-disabled-subtle)] - Unfilled background color of the slider track.
+ * @cssproperty [--w-slider-track-active-background=var(--w-s-color-background-primary)] - Filled background color of the slider track.
+ * @cssproperty [--w-slider-track-height=4px] - Height of the unfilled slider track.
+ * @cssproperty [--w-slider-track-active-height=6px] - Height of the filled slider track.
+ * @cssproperty [--w-slider-thumb-background=var(--w-s-color-background-primary)] - Background color of the slider thumb (draggable circle).
+ * @cssproperty [--w-slider-thumb-background-hover=var(--w-s-color-background-primary-hover)] - Background color when hovered of the slider thumb (draggable circle).
+ * @cssproperty [--w-slider-thumb-shadow=none] - Shadow under the slider thumb (draggable circle).
+ * @cssproperty [--w-slider-thumb-size=28px] - Size of the slider thumb (draggable circle).
+ * @cssproperty [--w-slider-thumb-offset=calc(var(--w-slider-thumb-size) / 2)] - Position of the slider thumb (draggable circle).
+ * @cssproperty [--w-slider-tick-color=var(--w-s-color-background-disabled-subtle)] - Color of the slider track ticks (indicator lines).
+ * @cssproperty [--w-slider-tick-value-color=var(--w-s-color-text-subtle)] - Color of the labels for slider track ticks (indicator lines).
  */
-class WarpSlider extends BaseFormAssociatedElement {
-  static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+class WarpSlider extends FormControlMixin(LitElement) {
+  static shadowRootOptions = {
+    ...WarpElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   static css = [wSliderStyles];
+
+  /**
+   * The slider fieldset label. Required for proper accessibility.
+   *
+   * If you need to display HTML, use the `label` slot instead.
+   */
+  @property()
+  label: string;
+
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
+  /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
+  @property({ type: Boolean, reflect: true })
+  required = false;
 
   @property({ reflect: true })
   min: string;
@@ -76,6 +106,7 @@ class WarpSlider extends BaseFormAssociatedElement {
   updated(changedProperties: PropertyValues<this>) {
     if (
       changedProperties.has('disabled') ||
+      changedProperties.has('required') ||
       changedProperties.has('min') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
@@ -85,22 +116,19 @@ class WarpSlider extends BaseFormAssociatedElement {
     }
   }
 
-  formResetCallback(...args: Parameters<BaseFormAssociatedElement['formResetCallback']>) {
-    super.formResetCallback(...args);
-    this.#syncSliderThumbs();
-  }
-
   render() {
-    // Div with role group to be able to style it as a CSS grid
-    // (fieldset does not support that in chrome apparently).
     return html`
-      <div role="group" aria-labelledby="label" class="w-slider">
-        <slot id="label" name="label"></slot>
-        <slot name="body"></slot>
-        <slot @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot name="from" @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot name="to" @slotchange=${this.#syncSliderThumbs}></slot>
-      </div>
+      <fieldset class="w-slider">
+        <legend>
+          <slot id="label" name="label">${this.label}</slot>
+        </legend>
+        <div class="w-slider__slider">
+          <slot name="body"></slot>
+          <slot @slotchange=${this.#syncSliderThumbs}></slot>
+          <slot name="from" @slotchange=${this.#syncSliderThumbs}></slot>
+          <slot name="to" @slotchange=${this.#syncSliderThumbs}></slot>
+        </div>
+      </fieldset>
     `;
   }
 }

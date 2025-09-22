@@ -5,6 +5,12 @@ export const wSliderThumbStyles = css`
     position: relative; /* Set for the fallback positioning of the tooltip ([anchor]) */
   }
 
+  .w-slider__range {
+    border-radius: 4px;
+    height: var(--w-slider-track-height);
+    background-color: var(--w-slider-track-background);
+  }
+
   /*
     Use anchor positioning to place the tooltip target in relation to the slider thumb.
     Browsers that don't support CSS anchors (older Safari, Firefox at time of writing)
@@ -19,6 +25,8 @@ export const wSliderThumbStyles = css`
 
   @supports (position-area: start) {
     .w-slider-thumb__tooltip-target {
+      display: block;
+      pointer-events: none;
       position: absolute;
       width: 10px;
       height: 10px;
