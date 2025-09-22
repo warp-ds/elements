@@ -115,6 +115,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
     super.connectedCallback();
     await this.updateComplete;
     this.#syncSliderThumbs();
+    this.fieldset.style.setProperty('--min', this.min);
+    this.fieldset.style.setProperty('--max', this.max);
   }
 
   updated(changedProperties: PropertyValues<this>) {

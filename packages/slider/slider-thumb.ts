@@ -94,45 +94,46 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <label for="range">${this.label}</label>
+      <div class="w-slider-thumb">
+        <label for="range">${this.label}</label>
 
-      <div class="w-slider__active-range"></div>
+        <input
+          id="range"
+          class="w-slider-thumb__range"
+          type="range"
+          value="${this.value}"
+          min="${this.min}"
+          max="${this.max}"
+          name="${this.name}"
+          list="${ifDefined(this.markers ? 'markers' : undefined)}"
+          .disabled="${this.disabled || this.forceDisabled}"
+          @focus="${this.#onFocus}"
+          @blur="${this.#onBlur}"
+          @input="${this.#onInput}" />
+        <div class="w-slider-thumb__active-range"></div>
 
-      <input
-        id="range"
-        class="w-slider__range"
-        type="range"
-        value="${this.value}"
-        min="${this.min}"
-        max="${this.max}"
-        name="${this.name}"
-        list="${ifDefined(this.markers ? 'markers' : undefined)}"
-        .disabled="${this.disabled || this.forceDisabled}"
-        @focus="${this.#onFocus}"
-        @blur="${this.#onBlur}"
-        @input="${this.#onInput}" />
+        ${this.markers
+          ? // Set up a native datalist to use as markers: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#adding_tick_marks
+            // Has to be inside the same shadow root as the input element since the relationship uses IDs,
+            // which don't work across shadow root boundaries.
+            html`<datalist id="markers">${this.markers.split(',').map((csv) => html`<option value="${csv.trim()}"></option>`)}</datalist> `
+          : nothing}
 
-      ${this.markers
-        ? // Set up a native datalist to use as markers: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#adding_tick_marks
-          // Has to be inside the same shadow root as the input element since the relationship uses IDs,
-          // which don't work across shadow root boundaries.
-          html`<datalist id="markers">${this.markers.split(',').map((csv) => html`<option value="${csv.trim()}"></option>`)}</datalist> `
-        : nothing}
+        <!-- TODO: hide from screen readers, use aria-label instead? -->
+        <span class="w-slider-thumb__from-marker"> ${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix} </span>
+        <span class="w-slider-thumb__to-marker">${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</span>
 
-      <!-- TODO: hide from screen readers, use aria-label instead? -->
-      <p>${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix}</p>
-      <p>${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</p>
+        <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
+        <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
+        <w-textfield class="w-slider-thumb__textfield" label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
+          ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
+        </w-textfield>
 
-      <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
-      <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
-      <w-textfield label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
-        ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
-      </w-textfield>
-
-      <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
-        <output class="w-slider-thumb__tooltip-target" slot="target"></output>
-        <span slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}&nbsp;${this.suffix}</span>
-      </w-attention>
+        <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
+          <output class="w-slider-thumb__tooltip-target" slot="target"></output>
+          <span slot="message">${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}&nbsp;${this.suffix}</span>
+        </w-attention>
+      </div>
     `;
   }
 }
