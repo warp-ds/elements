@@ -43,7 +43,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static css = [reset, wSliderStyles];
+  static styles = [reset, wSliderStyles];
 
   /**
    * The slider fieldset label. Required for proper accessibility.

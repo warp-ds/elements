@@ -2,6 +2,11 @@ import { css } from 'lit';
 
 export const wSliderStyles = css`
   .w-slider {
+    position: relative;
+    border: none;
+    padding: 0;
+    margin: 0;
+
     /* Public override points (can be safely overridden externally) */
     --w-slider-track-background: var(--w-s-color-background-disabled-subtle);
     --w-slider-track-active-background: var(--w-s-color-background-primary);
@@ -14,11 +19,6 @@ export const wSliderStyles = css`
     --w-slider-thumb-offset: calc(var(--w-slider-thumb-size) / 2);
     --w-slider-tick-color: var(--w-s-color-background-disabled-subtle);
     --w-slider-tick-value-color: var(--w-s-color-text-subtle);
-
-    position: relative;
-    border: none;
-    padding: 0;
-    margin: 0;
   }
 
   .w-slider__slider {
@@ -29,6 +29,5 @@ export const wSliderStyles = css`
     padding-inline: var(--w-slider-thumb-size);
     display: flex;
     align-items: center;
-    height: var(--w-slider-thumb-size);
   }
 `;

@@ -20,7 +20,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static css = [reset, wSliderThumbStyles];
+  static styles = [reset, wSliderThumbStyles];
 
   @property()
   label: string;
