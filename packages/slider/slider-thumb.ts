@@ -67,14 +67,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** @internal */
   @state()
-  _showTooltip = true;
+  _showTooltip = false;
 
   #onFocus(): void {
     this._showTooltip = true;
   }
 
   #onBlur(): void {
-    // this._showTooltip = false;
+    this._showTooltip = false;
   }
 
   #onInput(e: InputEvent | CustomEvent): void {

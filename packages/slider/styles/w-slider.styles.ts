@@ -51,4 +51,7 @@ export const wSliderStyles = css`
     bottom: 0;
     grid-area: slider;
   }
+  slot[name='from']::slotted(w-slider-thumb) {
+    z-index: 1;
+  }
 `;

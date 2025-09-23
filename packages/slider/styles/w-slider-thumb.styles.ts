@@ -40,8 +40,11 @@ export const wSliderThumbStyles = css`
     width: calc(var(--_filled-values) * 1%);
   }
 
-  .w-slider-thumb__range::-webkit-slider-runnable-track {
+  .w-slider-thumb__range {
     pointer-events: none; /* let clicks pass through for range slider where we place two inputs over each other */
+  }
+
+  .w-slider-thumb__range::-webkit-slider-runnable-track {
     background: var(--w-slider-track-background);
     border-radius: 4px;
     box-shadow: none;
@@ -67,8 +70,9 @@ export const wSliderThumbStyles = css`
     box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
-    pointer-events: initial;
+    pointer-events: auto;
     width: var(--w-slider-thumb-size);
+    z-index: 1;
   }
   .w-slider-thumb__range::-moz-range-thumb {
     anchor-name: --thumb;
@@ -81,6 +85,7 @@ export const wSliderThumbStyles = css`
     margin-top: calc(-1 * var(--w-slider-thumb-offset));
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
+    z-index: 1;
   }
 
   @supports (position-area: start) {
@@ -96,12 +101,12 @@ export const wSliderThumbStyles = css`
   }
 
   /* Uncomment to debug this invisible target */
-  .w-slider-thumb__tooltip-target {
+  /* .w-slider-thumb__tooltip-target {
     border: 2px solid lime;
     width: 10px;
     height: 10px;
     border-radius: 20px;
-  }
+  } */
 
   /* [anchor] Fallback for browsers without CSS anchors. */
   @supports not (position-area: start) {

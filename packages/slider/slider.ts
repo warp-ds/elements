@@ -146,7 +146,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
     if (slotName === 'from') {
       // Default to the minimum value if no value has been chosen yet.
-      const from = input.value ?? String(Number.parseInt(this.min));
+      const from = (input.value ??= this.min);
       this.fieldset.style.setProperty('--from', from);
     }
 
@@ -154,9 +154,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
       if (!slotName) {
         this.fieldset.style.setProperty('--from', '0');
       }
-      // A range that starts off without a value is placed in the middle by
-      // browsers, so we mimic that behavior (max / 2).
-      const to = input.value ?? String(Number.parseInt(this.max) / 2);
+      // Default to the maximum value if no value has been chosen yet.
+      const to = (input.value ??= this.max);
       this.fieldset.style.setProperty('--to', to);
     }
   }
