@@ -42,6 +42,31 @@ export const wSliderStyles = css`
     grid-area: description;
   }
 
+  .w-slider__active-range {
+    align-self: center;
+    background: var(--w-slider-track-background);
+    border-radius: 4px;
+    position: absolute;
+    top: calc(var(--w-slider-thumb-size) / 2 + calc(var(--w-slider-track-active-height) - calc(var(--w-slider-track-height) / 2) + 1px));
+    left: 0;
+    right: 0;
+    grid-area: slider;
+  }
+
+  .w-slider__active-range::before {
+    background: var(--w-slider-track-active-background);
+    border-radius: 4px;
+    content: '';
+    display: block;
+    height: var(--w-slider-track-active-height);
+    /* Position the starting point of the fill in the case of a non-zero --from value */
+    --_blank-values-before: calc(var(--from) - var(--min));
+    margin-left: calc(var(--_blank-values-before) * 1%);
+    /* Set the width of the fill as a percentage. */
+    --_filled-values: calc(var(--to) - var(--from));
+    width: calc(var(--_filled-values) * 1%);
+  }
+
   slot[name='from']::slotted(w-slider-thumb),
   slot[name='to']::slotted(w-slider-thumb) {
     position: absolute;

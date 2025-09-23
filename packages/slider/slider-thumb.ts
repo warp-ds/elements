@@ -110,7 +110,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @focus="${this.#onFocus}"
           @blur="${this.#onBlur}"
           @input="${this.#onInput}" />
-        <div class="w-slider-thumb__active-range"></div>
 
         ${this.markers
           ? // Set up a native datalist to use as markers: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#adding_tick_marks

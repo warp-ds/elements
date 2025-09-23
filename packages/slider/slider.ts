@@ -167,6 +167,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
           <slot id="label" name="label">${this.label}</slot>
         </legend>
         <slot class="w-slider__description" name="description"></slot>
+        <div class="w-slider__active-range"></div>
         <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>

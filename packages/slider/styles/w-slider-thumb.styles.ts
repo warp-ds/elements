@@ -21,32 +21,11 @@ export const wSliderThumbStyles = css`
     grid-area: slider;
   }
 
-  .w-slider-thumb__active-range {
-    align-self: center;
-    grid-area: slider;
-  }
-
-  .w-slider-thumb__active-range::before {
-    background: var(--w-slider-track-active-background);
-    border-radius: 4px;
-    content: '';
-    display: block;
-    height: var(--w-slider-track-active-height);
-    /* Position the starting point of the fill in the case of a non-zero --from value */
-    --_blank-values-before: calc(var(--from) - var(--min));
-    margin-left: calc(var(--_blank-values-before) * 1%);
-    /* Set the width of the fill as a percentage. */
-    --_filled-values: calc(var(--to) - var(--from));
-    width: calc(var(--_filled-values) * 1%);
-  }
-
   .w-slider-thumb__range {
     pointer-events: none; /* let clicks pass through for range slider where we place two inputs over each other */
   }
 
   .w-slider-thumb__range::-webkit-slider-runnable-track {
-    background: var(--w-slider-track-background);
-    border-radius: 4px;
     box-shadow: none;
     color: var(--w-s-color-text);
     height: var(--w-slider-track-height);
