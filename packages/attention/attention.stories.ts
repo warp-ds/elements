@@ -83,15 +83,17 @@ export const Default: Story = {
 };
 
 export const ToolTip: Story = {
-  args: { placement: 'right', buttonText: 'hover me', id: 'tooltip', tooltip: true, flip: true, buttonId: 'tooltip-target' },
+  args: { placement: 'right', buttonText: 'hover me', id: 'tooltip-element', tooltip: true, flip: true, buttonId: 'tooltip-target' },
   decorators: [
     (story) => html`
       ${story()}
       <script>
         (() => {
           const button = document.getElementById('tooltip-target');
-          const tooltip = document.getElementById('tooltip');
+          const tooltip = document.getElementById('tooltip-element');
+          console.log(tooltip);
           button.addEventListener('mouseenter', () => {
+            console.log('hello');
             tooltip.show = true;
           });
           button.addEventListener('mouseleave', () => {
@@ -137,10 +139,11 @@ export const Highlight: Story = {
     `,
   ],
 };
+
 export const DismissibleHighlight: Story = {
   args: {
     class: 'flex items-center gap-8',
-    placement: 'bottom',
+    placement: 'right',
     buttonId: 'highlight-target2',
     buttonText: 'click me',
     id: 'dismissible-highlight-message',
