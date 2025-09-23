@@ -21,7 +21,7 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  *
  * @slot - For single sliders place a `<w-slider-thumb>` in the default slot.
  * @slot label - Label for the slider or range slider as a whole.
- * @slot body - Optional body text between the label and slider.
+ * @slot description - Optional description between the label and slider.
  * @slot from - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  *
@@ -167,12 +167,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
         <legend class="w-slider__label">
           <slot id="label" name="label">${this.label}</slot>
         </legend>
-        <div class="w-slider__body">
-          <slot name="body"></slot>
-          <slot @slotchange=${this.#syncSliderThumbs}></slot>
-          <slot name="from" @slotchange=${this.#syncSliderThumbs}></slot>
-          <slot name="to" @slotchange=${this.#syncSliderThumbs}></slot>
-        </div>
+        <slot class="w-slider__description" name="description"></slot>
+        <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
+        <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
+        <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>
       </fieldset>
     `;
   }

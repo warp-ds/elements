@@ -6,22 +6,18 @@ export const wSliderThumbStyles = css`
   .w-slider-thumb {
     position: relative; /* Set for the fallback positioning of the tooltip ([anchor]) */
     display: grid;
+    pointer-events: none; /* For range inputs we position two of these on top of each other. Let clicks go through the top one. */
     grid-template-areas:
       'slider slider'
       'frommarker tomarker'
       'fromtextfield totextfield';
   }
 
-  /* Uncomment to debug this invisible target */
-  .w-slider-thumb__tooltip-target {
-    border: 2px solid lime;
-    border-radius: 20px;
-  }
-
   .w-slider-thumb__range {
     appearance: none;
     height: 44px; /* touch target */
     background-color: transparent;
+    pointer-events: initial;
     grid-area: slider;
   }
 
@@ -71,15 +67,19 @@ export const wSliderThumbStyles = css`
     box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
+    pointer-events: initial;
     width: var(--w-slider-thumb-size);
   }
   .w-slider-thumb__range::-moz-range-thumb {
     anchor-name: --thumb;
 
+    appearance: none;
     background: var(--w-s-color-background-primary);
+    border-radius: calc(calc(var(--w-slider-thumb-size)) / 2);
     box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * var(--w-slider-thumb-offset));
+    pointer-events: initial;
     width: var(--w-slider-thumb-size);
   }
 
@@ -88,11 +88,19 @@ export const wSliderThumbStyles = css`
       display: block;
       pointer-events: none;
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 1px;
+      height: 1px;
       position-anchor: --thumb;
       position-area: center; /* Position the tooltip target right on the range thumb */
     }
+  }
+
+  /* Uncomment to debug this invisible target */
+  .w-slider-thumb__tooltip-target {
+    border: 2px solid lime;
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
   }
 
   /* [anchor] Fallback for browsers without CSS anchors. */
@@ -114,6 +122,11 @@ export const wSliderThumbStyles = css`
   }
 
   .w-slider-thumb__textfield {
+    pointer-events: initial;
     grid-area: fromtextfield;
+  }
+
+  :host([name='to']) .w-slider-thumb__textfield {
+    grid-area: totextfield;
   }
 `;

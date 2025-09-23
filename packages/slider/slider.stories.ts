@@ -157,7 +157,6 @@ export const OverUnder: Story = {
   render() {
     return html`
       <w-slider label="Production year" min="1950" max="2025" over under>
-        <slot name="label">Production year</slot>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
@@ -172,9 +171,7 @@ export const SingleError: Story = {
   render() {
     return html`
       <w-slider label="Single" min="0" max="100">
-        <slot name="body">
-          <p>Try typing a value over 100</p>
-        </slot>
+        <p slot="description">Try typing a value over 100</p>
         <w-slider-thumb></w-slider-thumb>
       </w-slider>
     `;
@@ -188,9 +185,7 @@ export const RangeError: Story = {
   render() {
     return html`
       <w-slider label="Production year" min="1950" max="2025" over under>
-        <slot name="body">
-          <p>Try typing a from value higher than a to value</p>
-        </slot>
+        <p slot="description">Try typing a from value higher than a to value</p>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
