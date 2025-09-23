@@ -91,9 +91,7 @@ export const ToolTip: Story = {
         (() => {
           const button = document.getElementById('tooltip-target');
           const tooltip = document.getElementById('tooltip-element');
-          console.log(tooltip);
           button.addEventListener('mouseenter', () => {
-            console.log('hello');
             tooltip.show = true;
           });
           button.addEventListener('mouseleave', () => {
