@@ -9,11 +9,10 @@ export const wSliderStyles = css`
     display: grid;
     width: 100%;
     grid-template-areas:
-      'label label'
-      'description description'
-      'slider slider'
-      'frommarker tomarker'
-      'fromtextfield totextfield';
+      'label'
+      'description'
+      'slider';
+    grid-template-columns: 1fr;
 
     /* Public override points (can be safely overridden externally) */
     --w-slider-track-background: var(--w-s-color-background-disabled-subtle);
@@ -75,8 +74,5 @@ export const wSliderStyles = css`
     right: 0;
     bottom: 0;
     grid-area: slider;
-  }
-  slot[name='from']::slotted(w-slider-thumb) {
-    z-index: 1;
   }
 `;

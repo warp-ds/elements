@@ -8,17 +8,18 @@ export const wSliderThumbStyles = css`
     display: grid;
     pointer-events: none; /* For range inputs we position two of these on top of each other. Let clicks go through the top one. */
     grid-template-areas:
-      'slider slider'
-      'frommarker tomarker'
-      'fromtextfield totextfield';
+      'slider slider slider'
+      'frommarker . tomarker'
+      'fromtextfield . totextfield';
+    grid-template-columns: 1fr 24px 1fr;
   }
 
   .w-slider-thumb__range {
     appearance: none;
-    height: 44px; /* touch target */
     background-color: transparent;
-    pointer-events: initial;
     grid-area: slider;
+    height: 44px; /* touch target */
+    pointer-events: initial;
   }
 
   .w-slider-thumb__range {
@@ -96,6 +97,14 @@ export const wSliderThumbStyles = css`
     }
   }
 
+  .w-slider-thumb__from-marker,
+  .w-slider-thumb__to-marker {
+    margin-inline: 2px; /* visual alignment with input border, slider thumb */
+    color: var(--w-s-color-text-subtle);
+    font-size: var(--w-font-size-s);
+    line-height: var(--w-line-height-s);
+  }
+
   .w-slider-thumb__from-marker {
     grid-area: frommarker;
   }
@@ -106,11 +115,18 @@ export const wSliderThumbStyles = css`
   }
 
   .w-slider-thumb__textfield {
-    pointer-events: initial;
-    grid-area: fromtextfield;
+    margin-top: 10px;
+    pointer-events: auto;
+    grid-row: 3 / 4;
+    grid-column: 1 / 3; /* Single sliders should have the text field use the fromtextfield _and_ gap portion of the CSS grid. */
+  }
+
+  :host([name='from']) .w-slider-thumb__textfield {
+    grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
   :host([name='to']) .w-slider-thumb__textfield {
-    grid-area: totextfield;
+    grid-row: 3 / 4;
+    grid-column: 3 / 4;
   }
 `;
