@@ -24,7 +24,7 @@ generateJetBrainsWebTypes(manifest, {
 });
 
 const components = glob.sync('packages/**/{react,index}.{js,ts}');
-const toastApiPath = 'packages/toast/api.js';
+const toastApiPath = 'packages/toast/api.ts';
 const indexPath = 'index.js';
 const version = process.argv[2];
 
