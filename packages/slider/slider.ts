@@ -81,7 +81,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
   fieldset: HTMLFieldSetElement;
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
-  @property()
+  @property({ attribute: false })
   formatter: (value: string) => string;
 
   #syncSliderThumbs(): void {
@@ -94,6 +94,18 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.markers = this.markers;
       thumb.suffix = this.suffix;
       thumb.formatter = this.formatter;
+
+      if (!thumb.ariaLabel) {
+        if (!thumb.slot) {
+          thumb.ariaLabel = this.label;
+        }
+        if (thumb.slot === 'from') {
+          thumb.ariaLabel = `${this.label} min`;
+        }
+        if (thumb.slot === 'to') {
+          thumb.ariaLabel = `${this.label} max`;
+        }
+      }
 
       // Set forceDisabled state based on slider component disabled state
       thumb.forceDisabled = this.disabled;

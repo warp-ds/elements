@@ -23,6 +23,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   static styles = [reset, wSliderThumbStyles];
 
+  @property({ attribute: 'aria-label' })
+  ariaLabel: string;
+
   @property()
   label: string;
 
@@ -105,6 +108,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         <input
           id="range"
+          aria-label="${this.ariaLabel}"
           class="w-slider-thumb__range"
           type="range"
           value="${this.value}"
@@ -134,7 +138,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
         <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
-        <w-textfield class="w-slider-thumb__textfield" label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
+        <w-textfield
+          aria-label="${this.ariaLabel}"
+          class="w-slider-thumb__textfield"
+          type="text"
+          value="${this.value}"
+          @input="${this.#onInput}">
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
 

@@ -43,8 +43,8 @@ export const Range: Story = {
   render() {
     return html`
       <w-slider label="Range" min="0" max="100">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        <w-slider-thumb slot="from" aria-label="From value" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" aria-label="To value" name="to"></w-slider-thumb>
       </w-slider>
     `;
   },
@@ -54,13 +54,13 @@ export const Range: Story = {
 export const SuffixSquareMeters: Story = {
   args: {
     locale: 'nb',
-    suffix: 'm2',
+    suffix: 'm²',
   },
   render({ locale, suffix }) {
     return html`
       <w-slider label="Apartment size" min="0" max="250" suffix="${suffix}" data-testid="sqm">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        <w-slider-thumb slot="from" aria-label="From size" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" aria-label="To size" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
         const sqmSlider = document.querySelector('w-slider[data-testid="sqm"]');

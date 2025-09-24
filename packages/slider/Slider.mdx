@@ -10,6 +10,19 @@ Sliders allow users to adjust a numeric value within a given continuous range.
 
 A slider provides a visual indication of an adjustable value within a defined range (minimum and maximum values) by moving a handle along a horizontal track.
 
+## Accessibility
+
+When you use [range sliders](#range-slider) you must provide an `aria-label` to each `<w-slider-thumb>` component. The `<w-slider>` component's label is used as a fallback with the suffixes "min" and "max", but these should not be relied on.
+
+The label is announced by screen readers for the range input and related text input.
+
+```html
+<w-slider label="Apartment size" min="0" max="250" suffix="m²">
+  <w-slider-thumb slot="from" aria-label="From square meters" name="from"></w-slider-thumb>
+  <w-slider-thumb slot="to" aria-label="To square meters" name="to"></w-slider-thumb>
+</w-slider>
+```
+
 ## Variants
 
 Sliders come in two variants:
