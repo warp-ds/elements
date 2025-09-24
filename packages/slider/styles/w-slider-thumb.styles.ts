@@ -32,7 +32,11 @@ export const wSliderThumbStyles = css`
     height: var(--w-slider-track-height);
   }
 
-  .w-slider-thumb__range::-webkit-slider-thumb::hover::-webkit-slider-thumb {
+  .w-slider-thumb__range:hover::-webkit-slider-thumb {
+    background: var(--w-s-color-background-primary-hover);
+  }
+
+  .w-slider-thumb__range:hover::-moz-range-thumb {
     background: var(--w-s-color-background-primary-hover);
   }
 
