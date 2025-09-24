@@ -86,13 +86,37 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this._showTooltip = false;
   }
 
-  #onInput(e: InputEvent | CustomEvent): void {
+  #onInput(e: InputEvent | CustomEvent): boolean {
     const value = (e as CustomEvent<{ value: string }>).detail?.value || (e.currentTarget as WarpTextField).value;
-    this.value = String(value);
 
+    if (this.slot) {
+      // Stop a range slider's from value from reaching past the to value and vice versa
+      // by updating the other component's min and max values.
+      const computedStyle = getComputedStyle(this);
+      if (this.slot === 'from') {
+        // Check that the from value is not about to go past the --to value
+        if (Number.parseInt(value) > Number.parseInt(computedStyle.getPropertyValue('--to'))) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.range.value = this.value; // need to set the range value here to stop it from moving independendtly of the value
+          return false;
+        }
+      } else {
+        // Check that the to value is not about to go past the --from value
+        if (Number.parseInt(value) < Number.parseInt(computedStyle.getPropertyValue('--from'))) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.range.value = this.value; // need to set the range value here to stop it from moving independendtly of the value
+          return false;
+        }
+      }
+    }
+
+    this.value = value;
     // Need to set value this way as well, not just via the attribute,
     // to trigger visual update when changing the textfield.
     this.range.value = this.value;
+    return true;
   }
 
   async connectedCallback() {

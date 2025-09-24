@@ -117,8 +117,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
-    this.fieldset.style.setProperty('--min', this.min);
-    this.fieldset.style.setProperty('--max', this.max);
+    this.style.setProperty('--min', this.min);
+    this.style.setProperty('--max', this.max);
     this.#syncSliderThumbs();
   }
 
@@ -137,7 +137,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
-  #onChange(e: InputEvent) {
+  #onInput(e: InputEvent) {
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
   }
@@ -151,23 +151,23 @@ class WarpSlider extends FormControlMixin(LitElement) {
     if (slotName === 'from') {
       // Default to the minimum value if no value has been chosen yet.
       const from = (input.value ??= this.min);
-      this.fieldset.style.setProperty('--from', from);
+      this.style.setProperty('--from', from);
     }
 
     if (!slotName) {
-      this.fieldset.style.setProperty('--from', '0');
+      this.style.setProperty('--from', '0');
     }
 
     if (!slotName || slotName === 'to') {
       // Default to the maximum value if no value has been chosen yet.
       const to = (input.value ??= this.max);
-      this.fieldset.style.setProperty('--to', to);
+      this.style.setProperty('--to', to);
     }
   }
 
   render() {
     return html`
-      <fieldset id="fieldset" class="w-slider" @input="${this.#onChange}">
+      <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}">
         <legend class="w-slider__label">
           <slot id="label" name="label">${this.label}</slot>
         </legend>
