@@ -58,17 +58,28 @@ export const wSliderStyles = css`
     content: '';
     display: block;
     height: var(--w-slider-track-active-height);
+
+    /* Math corner to calculate the fill of the slider. */
+
+    /* The --min value can be non-zero, f. ex. choosing a year from 1950 to 2025. Normalize the values so we start at 0 and run to max - min. */
+    --_value-range: calc(var(--max) - var(--min));
+    --_from-in-range: calc(var(--from) - var(--min));
+    --_to-in-range: calc(var(--to) - var(--min));
+
     /* Position the starting point of the fill in the case of a non-zero --from value */
-    --_blank-values-before: calc(var(--from) - var(--min));
-    margin-left: calc(var(--_blank-values-before) * 1%);
+    --_from-as-percent-of-max: calc(var(--_from-in-range) / var(--_value-range) * 100);
+    --_blank-values-before: var(--_from-as-percent-of-max);
+
     /* Set the width of the fill as a percentage. */
-    --_filled-values: calc(var(--to) - var(--from));
+    --_to-as-percent-of-max: calc(var(--_to-in-range) / var(--_value-range) * 100);
+    --_filled-values: calc(var(--_to-as-percent-of-max) - var(--_blank-values-before));
+
+    margin-left: calc(var(--_blank-values-before) * 1%);
     width: calc(var(--_filled-values) * 1%);
   }
 
-  slot[name='from']::slotted(w-slider-thumb),
-  slot[name='to']::slotted(w-slider-thumb) {
-    position: absolute;
+  slot::slotted(w-slider-thumb) {
+    position: static;
     top: 0;
     left: 0;
     right: 0;
