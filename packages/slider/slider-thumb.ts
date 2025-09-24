@@ -69,11 +69,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   _showTooltip = false;
 
-  #onFocus(): void {
+  #showTooltip(): void {
     this._showTooltip = true;
   }
 
-  #onBlur(): void {
+  #hideTooltip(): void {
     this._showTooltip = false;
   }
 
@@ -114,8 +114,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           step="${ifDefined(this.step ? this.step : undefined)}"
           list="${ifDefined(this.markers ? 'markers' : undefined)}"
           .disabled="${this.disabled || this.forceDisabled}"
-          @focus="${this.#onFocus}"
-          @blur="${this.#onBlur}"
+          @mousedown="${this.#showTooltip}"
+          @mouseup="${this.#hideTooltip}"
+          @touchstart="${this.#showTooltip}"
+          @touchend="${this.#hideTooltip}"
+          @focus="${this.#showTooltip}"
+          @blur="${this.#hideTooltip}"
           @input="${this.#onInput}" />
 
         ${this.markers

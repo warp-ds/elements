@@ -45,7 +45,7 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
-    border-radius: calc(calc(var(--w-slider-thumb-size)) / 2);
+    border-radius: 50%;
     background: var(--w-s-color-background-primary);
     box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
@@ -54,15 +54,17 @@ export const wSliderThumbStyles = css`
     width: var(--w-slider-thumb-size);
     z-index: 1;
   }
+
   .w-slider-thumb__range::-moz-range-thumb {
     anchor-name: --thumb;
 
     appearance: none;
     background: var(--w-s-color-background-primary);
-    border-radius: calc(calc(var(--w-slider-thumb-size)) / 2);
+    border-radius: 50%;
+    border-color: transparent;
     box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
-    margin-top: calc(-1 * var(--w-slider-thumb-offset));
+    margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
@@ -80,7 +82,7 @@ export const wSliderThumbStyles = css`
     }
   }
 
-  /* Uncomment to debug this invisible target */
+  /* Uncomment this to debug the invisible anchor target */
   /* .w-slider-thumb__tooltip-target {
     border: 2px solid lime;
     width: 10px;
@@ -92,6 +94,7 @@ export const wSliderThumbStyles = css`
   @supports not (position-area: start) {
     .w-slider-thumb__tooltip-target {
       position: absolute;
+      top: 16px;
       left: 50%;
       right: 50%;
     }
