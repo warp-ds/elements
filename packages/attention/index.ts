@@ -6,17 +6,18 @@ import { i18n } from '@lingui/core';
 import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { styles as layoutStyles } from './layout-styles';
-import { styles } from './styles';
-import { reset } from '../styles';
+
 import { activateI18n } from '../i18n';
+import { reset } from '../styles';
 import { generateRandomId } from '../utils/index.js';
 
+import { styles as layoutStyles } from './layout-styles';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles';
 
 import '@warp-ds/icons/elements/close-16';
 

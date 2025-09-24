@@ -171,7 +171,7 @@ export const DismissibleHighlight: Story = {
 
 export const AccessibleTooltip: Story = {
   args: {},
-  render(args) {
+  render() {
     return html`
       <w-attention id="accessible-attention" placement="right" popover>
         <div slot="message">
