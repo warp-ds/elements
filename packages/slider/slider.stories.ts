@@ -33,7 +33,7 @@ export const Single: Story = {
   render() {
     return html`
       <w-slider label="Single" min="0" max="100">
-        <w-slider-thumb></w-slider-thumb>
+        <w-slider-thumb name="value"></w-slider-thumb>
       </w-slider>
     `;
   },
@@ -78,8 +78,8 @@ export const SuffixCurrency: Story = {
   render({ locale, suffix }) {
     return html`
       <w-slider label="Price" min="0" max="250000" suffix="${suffix}" data-testid="currency">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        <w-slider-thumb slot="from" aria-label="From price" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" aria-label="To price" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
         const currencySlider = document.querySelector('w-slider[data-testid="currency"]');
@@ -97,8 +97,8 @@ export const SuffixKilometers: Story = {
   render({ locale, suffix }) {
     return html`
       <w-slider label="Distance" min="0" max="250000" suffix="${suffix}" data-testid="km">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        <w-slider-thumb slot="from" aria-label="From distance" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" aria-label="To distance" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
         const kmSlider = document.querySelector('w-slider[data-testid="km"]');
@@ -122,8 +122,8 @@ export const Marks: Story = {
         max="250000"
         suffix="${suffix}"
         data-testid="markers">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        <w-slider-thumb slot="from" aria-label="From distance" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" aria-label="To distance" name="to"></w-slider-thumb>
       </w-slider>
 
       <script type="module">
@@ -141,7 +141,7 @@ export const Step: Story = {
   render({ step }) {
     return html`
       <w-slider label="Single" step="${step}" min="0" max="100">
-        <w-slider-thumb name="single"></w-slider-thumb>
+        <w-slider-thumb name="value"></w-slider-thumb>
       </w-slider>
     `;
   },
@@ -151,10 +151,18 @@ export const OverUnder: Story = {
   args: {},
   render() {
     return html`
-      <form id="overunder" style="margin-bottom: 16px">
-        <w-slider label="Production year" min="1950" max="2025" data-testid="overunder">
-          <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-          <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      <form id="overunder" style="margin-bottom: 16px" lang="nb">
+        <w-slider label="Produksjonsår" min="1950" max="2025" data-testid="overunder">
+          <w-slider-thumb
+            slot="from"
+            aria-label="Fra år"
+            aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
+            name="from"></w-slider-thumb>
+          <w-slider-thumb
+            slot="to"
+            aria-label="Til år"
+            aria-description="2025 inkluderer kjøretøy produsert etter 2025"
+            name="to"></w-slider-thumb>
         </w-slider>
       </form>
       <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>

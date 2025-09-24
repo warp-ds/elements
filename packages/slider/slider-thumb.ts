@@ -1,3 +1,5 @@
+// @warp-css;
+
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
@@ -9,6 +11,7 @@ import { reset } from '../styles.js';
 import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
+import { styles as unoStyles } from './styles.js';
 
 /**
  * Component to place inside a `<w-slider>`.
@@ -21,10 +24,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  static styles = [reset, wSliderThumbStyles];
+  static styles = [reset, unoStyles, wSliderThumbStyles];
 
   @property({ attribute: 'aria-label' })
   ariaLabel: string;
+
+  @property({ attribute: 'aria-description' })
+  ariaDescription: string;
 
   @property()
   label: string;
@@ -109,6 +115,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         <input
           id="range"
           aria-label="${this.ariaLabel}"
+          aria-describedby="${ifDefined(this.ariaDescription ? 'aria-description' : undefined)}"
           class="w-slider-thumb__range"
           type="range"
           value="${this.value}"
@@ -140,6 +147,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
         <w-textfield
           aria-label="${this.ariaLabel}"
+          aria-description="${ifDefined(this.ariaDescription)}"
           class="w-slider-thumb__textfield"
           type="text"
           value="${this.value}"
@@ -155,6 +163,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
               : nothing}
           </span>
         </w-attention>
+
+        <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
+        <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
       </div>
     `;
   }

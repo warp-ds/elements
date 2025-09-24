@@ -76,6 +76,10 @@ Use the `formatter` property to create sliders that should include values before
 
 The input will always produce a value. You should treat a value equal to `min` as the signal to include all values up to that value. Similarly, a value equal to `max` should mean "value and over" for this type of slider.
 
+#### Accessibility
+
+Use `aria-description` on `<w-slider-thumb>` to explain that a value of X means "up to and including X" and vice versa for the to-value. Internally the attribute is rendered in a visually hidden element and refered to with `aria-describedby` since [`aria-description` support is still not great](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-description).
+
 <Canvas of={SliderStories.OverUnder} />
 
 ### Error state

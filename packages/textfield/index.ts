@@ -209,7 +209,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
           pattern="${ifDefined(this.pattern)}"
           placeholder="${ifDefined(this.placeholder)}"
           value="${ifDefined(this.value)}"
-          aria-describedby="${ifDefined(this._helpId)}"
+          aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
           aria-invalid="${ifDefined(this.invalid)}"
           id="${this._id}"
@@ -222,6 +222,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
           @focus="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
+      <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
       ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
     `;
   }
