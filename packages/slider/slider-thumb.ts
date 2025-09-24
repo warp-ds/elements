@@ -41,6 +41,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** Set by `<w-slider>` */
   @state()
+  step: number;
+
+  /** Set by `<w-slider>` */
+  @state()
   min: string;
 
   /** Set by `<w-slider>` */
@@ -107,6 +111,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           min="${this.min}"
           max="${this.max}"
           name="${this.name}"
+          step="${ifDefined(this.step ? this.step : undefined)}"
           list="${ifDefined(this.markers ? 'markers' : undefined)}"
           .disabled="${this.disabled || this.forceDisabled}"
           @focus="${this.#onFocus}"

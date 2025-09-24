@@ -70,6 +70,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property()
   markers: string;
 
+  @property({ type: Number })
+  step: number;
+
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property()
   suffix: string;
@@ -77,17 +80,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @query('#fieldset')
   fieldset: HTMLFieldSetElement;
 
-  #formatter: (value: string) => string;
-
-  /** JS hook to help you format the numeric value how you want. */
-  get formatter() {
-    return this.#formatter;
-  }
-
-  set formatter(fmt) {
-    this.#formatter = fmt;
-    this.#syncSliderThumbs();
-  }
+  /** Function to format the to- and from labels and value in the slider thumb tooltip. */
+  @property()
+  formatter: (value: string) => string;
 
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
@@ -95,12 +90,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
       // Set attributes that should be in sync between slider thumbs
       thumb.min = this.min;
       thumb.max = this.max;
-      if (this.markers) {
-        thumb.markers = this.markers;
-      }
-      if (this.suffix) {
-        thumb.suffix = this.suffix;
-      }
+      thumb.step = this.step;
+      thumb.markers = this.markers;
+      thumb.suffix = this.suffix;
       thumb.formatter = this.formatter;
 
       // Set forceDisabled state based on slider component disabled state
@@ -124,6 +116,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       changedProperties.has('required') ||
       changedProperties.has('min') ||
       changedProperties.has('markers') ||
+      changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
       changedProperties.has('formatter')

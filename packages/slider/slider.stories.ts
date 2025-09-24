@@ -63,9 +63,8 @@ export const SuffixSquareMeters: Story = {
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
-        const slider = document.querySelector('w-slider[data-testid="sqm"]');
-        const formatter = window.getNumberFormatter('${locale}');
-        slider.formatter = formatter.format;
+        const sqmSlider = document.querySelector('w-slider[data-testid="sqm"]');
+        sqmSlider.formatter = window.getNumberFormatter('${locale}').format;
       </script>
     `;
   },
@@ -83,9 +82,8 @@ export const SuffixCurrency: Story = {
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
-        const slider = document.querySelector('w-slider[data-testid="currency"]');
-        const formatter = window.getNumberFormatter('${locale}');
-        slider.formatter = formatter.format;
+        const currencySlider = document.querySelector('w-slider[data-testid="currency"]');
+        currencySlider.formatter = window.getNumberFormatter('${locale}').format;
       </script>
     `;
   },
@@ -103,9 +101,8 @@ export const SuffixKilometers: Story = {
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
       <script type="module">
-        const slider = document.querySelector('w-slider[data-testid="km"]');
-        const formatter = window.getNumberFormatter('${locale}');
-        slider.formatter = formatter.format;
+        const kmSlider = document.querySelector('w-slider[data-testid="km"]');
+        kmSlider.formatter = window.getNumberFormatter('${locale}').format;
       </script>
     `;
   },
@@ -118,48 +115,79 @@ export const Marks: Story = {
   },
   render({ locale, suffix }) {
     return html`
-      <w-slider label="Distance" markers="0,50000,100000,150000,200000,250000" min="0" max="250000" suffix="${suffix}" data-testid="km">
+      <w-slider
+        label="Distance"
+        markers="0,50000,100000,150000,200000,250000"
+        min="0"
+        max="250000"
+        suffix="${suffix}"
+        data-testid="markers">
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
 
       <script type="module">
-        const slider = document.querySelector('w-slider[data-testid="km"]');
-        const formatter = window.getNumberFormatter('${locale}');
-        slider.formatter = formatter.format;
+        const markersSlider = document.querySelector('w-slider[data-testid="markers"]');
+        markersSlider.formatter = window.getNumberFormatter('${locale}').format;
       </script>
     `;
   },
 };
 
-export const Time: Story = {
-  render() {
+export const Step: Story = {
+  args: {
+    step: 5,
+  },
+  render({ step }) {
     return html`
-      <w-slider label="Time of day" min="0" max="2400" data-testid="time">
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      <w-slider label="Single" step="${step}" min="0" max="100">
+        <w-slider-thumb name="single"></w-slider-thumb>
       </w-slider>
-      <script type="module">
-        const slider = document.querySelector('w-slider[data-testid="time"]');
-        slider.formatter = (value) => {
-          const padded = value.padStart(4, '0');
-          return padded.substring(0, 2) + ':' + padded.substring(2);
-        };
-      </script>
     `;
   },
 };
 
 export const OverUnder: Story = {
-  args: {
-    locale: 'nb',
-  },
+  args: {},
   render() {
     return html`
-      <w-slider label="Production year" min="1950" max="2025" over under>
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
+      <form id="overunder" style="margin-bottom: 16px">
+        <w-slider label="Production year" min="1950" max="2025" data-testid="overunder">
+          <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+          <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        </w-slider>
+      </form>
+      <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
+      <output>
+        <dl>
+          <dt>From:</dt>
+          <dd id="overunder-from"></dd>
+          <dt>To:</dt>
+          <dd id="overunder-to"></dd>
+        </dl>
+      </output>
+      <script>
+        /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
+        const overunderSlider = document.querySelector('w-slider[data-testid="overunder"]');
+        overunderSlider.formatter = function (value) {
+          if (value === '1950') {
+            return 'Før 1950';
+          }
+          if (value === '2025') {
+            return 'Etter 2025';
+          }
+          return value;
+        };
+
+        /** Code to show the form values in output */
+        document.forms['overunder'].addEventListener('input', function () {
+          const formData = new FormData(this);
+          const from = formData.get('from');
+          const to = formData.get('to');
+          document.getElementById('overunder-from').innerText = from;
+          document.getElementById('overunder-to').innerText = to;
+        });
+      </script>
     `;
   },
 };

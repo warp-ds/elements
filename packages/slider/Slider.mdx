@@ -48,11 +48,20 @@ The sliders can have tick marks shown at selected intervals below the slider tra
 
 <Canvas of={SliderStories.Marks} />
 
+### Granularity
+
+You can define a [`step` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#setting_the_values_granularity) to control the possible granularity in the slider. The default value in browsers is `1`.
+
+<Canvas of={SliderStories.Step} />
+
 ### Slider with over and under max values
 
-Sliders can be configured so that the minimum and maximum values are empty.
+Use the `formatter` property to create sliders that should include values before and after the minimum and maximum values.
 
-You can use that as a signal to treat the value as not set, for example if you want to have a selection for "Before 1950" to "After 2025" or "Over 200 000 km".
+- Before and after a year.
+- Under and over a sum or distance.
+
+The input will always produce a value. You should treat a value equal to `min` as the signal to include all values up to that value. Similarly, a value equal to `max` should mean "value and over" for this type of slider.
 
 <Canvas of={SliderStories.OverUnder} />
 
