@@ -51,10 +51,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix: string;
 
-  /** Set by `<w-slider>`. True if there is more than one `<w-slider-thumb>`, e.g. we are a range slider. */
-  @state()
-  isRange: boolean;
-
   @state()
   forceDisabled: boolean;
 
@@ -84,6 +80,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Need to set value this way as well, not just via the attribute,
     // to trigger visual update when changing the textfield.
     this.range.value = this.value;
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    await this.updateComplete;
+    this.range.value = this.value ?? this.max;
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -118,17 +120,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             html`<datalist id="markers">${this.markers.split(',').map((csv) => html`<option value="${csv.trim()}"></option>`)}</datalist> `
           : nothing}
 
-        <!-- TODO: hide from screen readers, use aria-label instead? -->
         <span class="w-slider-thumb__from-marker"> ${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix} </span>
         <span class="w-slider-thumb__to-marker">${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</span>
 
         <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
         <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
-        <w-textfield class="w-slider-thumb__textfield" label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}" size="">
+        <w-textfield class="w-slider-thumb__textfield" label="${this.label}" type="text" value="${this.value}" @input="${this.#onInput}">
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
 
-        <w-attention tooltip placement="top" flip distance="16" .show="${this._showTooltip}">
+        <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
           <output class="w-slider-thumb__tooltip-target" slot="target"></output>
           <span slot="message">
             ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix

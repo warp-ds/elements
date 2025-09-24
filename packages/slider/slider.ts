@@ -92,13 +92,12 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     for (const thumb of sliderThumbs.values()) {
-      // Used to style the width of the input field, which is wider in the single slider.
-      thumb.isRange = sliderThumbs.length > 1;
-
       // Set attributes that should be in sync between slider thumbs
       thumb.min = this.min;
-      thumb.markers = this.markers;
       thumb.max = this.max;
+      if (this.markers) {
+        thumb.markers = this.markers;
+      }
       if (this.suffix) {
         thumb.suffix = this.suffix;
       }
@@ -114,9 +113,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
-    this.#syncSliderThumbs();
     this.fieldset.style.setProperty('--min', this.min);
     this.fieldset.style.setProperty('--max', this.max);
+    this.#syncSliderThumbs();
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -150,10 +149,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
       this.fieldset.style.setProperty('--from', from);
     }
 
+    if (!slotName) {
+      this.fieldset.style.setProperty('--from', '0');
+    }
+
     if (!slotName || slotName === 'to') {
-      if (!slotName) {
-        this.fieldset.style.setProperty('--from', '0');
-      }
       // Default to the maximum value if no value has been chosen yet.
       const to = (input.value ??= this.max);
       this.fieldset.style.setProperty('--to', to);
