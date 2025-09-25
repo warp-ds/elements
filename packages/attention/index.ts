@@ -1,56 +1,139 @@
-import { css, html, nothing } from 'lit';
+// @warp-css;
+import { css, html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { opposites, directions, arrowDirectionClassname, useRecompute as recompute } from '@warp-ds/core/attention';
-import { attention as ccAttention } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n';
-import { kebabCaseAttributes, generateRandomId } from '../utils/index.js';
+import { reset } from '../styles';
+import { generateRandomId } from '../utils/index.js';
 
+import { styles as layoutStyles } from './layout-styles';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles';
 
 import '@warp-ds/icons/elements/close-16';
 
-class WarpAttention extends kebabCaseAttributes(WarpElement) {
-  static properties = {
-    // Whether Attention element should be visible.
-    show: { type: Boolean, reflect: true },
-    // Placement according to the target element
-    // Arrow would be on the opposite side of this position
-    placement: { type: String, reflect: true },
-    // Whether Attention element is rendered as a tooltip
-    tooltip: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as an inline callout
-    callout: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as a popover
-    popover: { type: Boolean, reflect: true },
-    // Whether Attention element is rendered as a highlight
-    highlight: { type: Boolean, reflect: true },
-    // Render Attention element with a close button
-    canClose: { type: Boolean, reflect: true },
-    // Render Attention element without an arrow
-    noArrow: { type: Boolean, reflect: true },
-    // Distance from which to offset the attentionEl from the targetEl vertically
-    distance: { type: Number, reflect: true },
-    // Distance from which to offset the attentionEl along its targetEl horizontally
-    skidding: { type: Number, reflect: true },
-    // Whether Attention element should flip its placement in order to keep it in view
-    flip: { type: Boolean, reflect: true },
-    // Whether Attention element should ignore cross axis overflow when flip is enabled
-    crossAxis: { type: Boolean, reflect: true },
-    // Choose which preferred placements the Attention element should flip to
-    fallbackPlacements: { type: Array, reflect: true },
-  };
+const buttonTextSizes = {
+  medium: 'text-m leading-[24]',
+  xsmall: 'text-xs',
+};
+
+const buttonColors = {
+  primary:
+    's-text-inverted bg-[--w-color-button-primary-background] hover:bg-[--w-color-button-primary-background-hover] active:bg-[--w-color-button-primary-background-active]',
+  secondary: 's-text-link s-border s-bg hover:s-bg-hover hover:s-border-hover active:s-bg-active',
+  utility: 's-text s-bg hover:s-bg-hover active:s-bg-active s-border hover:s-border-hover active:s-border-active',
+  destructive: 's-bg-negative s-text-inverted hover:s-bg-negative-hover active:s-bg-negative-active',
+  pill: 's-icon hover:s-icon-hover active:s-icon-active bg-transparent hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]',
+  disabled: 's-text-inverted s-bg-disabled',
+  quiet: 'bg-transparent s-text-link hover:s-bg-hover active:s-bg-active',
+  utilityQuiet: 's-text bg-transparent hover:s-bg-hover active:s-bg-active',
+  negativeQuiet: 'bg-transparent s-text-negative hover:s-bg-negative-subtle-hover active:s-bg-negative-subtle-active',
+  loading: 's-text s-bg-subtle',
+  link: 's-text-link',
+};
+
+const buttonDefaultStyling = 'font-bold focusable justify-center transition-colors ease-in-out';
+const buttonTypes = {
+  primary: `border-0 rounded-8 ${buttonDefaultStyling}`,
+  secondary: `border-2 rounded-8 ${buttonDefaultStyling}`,
+  utility: `border rounded-4 ${buttonDefaultStyling}`,
+  negative: `border-0 rounded-8 ${buttonDefaultStyling}`,
+  pill: `p-4 rounded-full border-0 inline-flex items-center justify-center hover:bg-clip-padding ${buttonDefaultStyling}`,
+  link: `bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${buttonColors.link}`,
+};
+
+export const ccAttention = {
+  base: 'border-2 relative flex items-start',
+  tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
+  callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',
+  highlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8 drop-shadow-m translate-z-0',
+  popover:
+    'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300] s-text rounded-8 p-16 drop-shadow-m translate-z-0',
+
+  arrowBase: 'absolute h-[14px] w-[14px] border-2 border-b-0 border-r-0 rounded-tl-4 transform',
+  arrowDirectionLeftStart: '-left-[8px]',
+  arrowDirectionLeft: '-left-[8px]',
+  arrowDirectionLeftEnd: '-left-[8px]',
+  arrowDirectionRightStart: '-right-[8px]',
+  arrowDirectionRight: '-right-[8px]',
+  arrowDirectionRightEnd: '-right-[8px]',
+  arrowDirectionBottomStart: '-bottom-[8px]',
+  arrowDirectionBottom: '-bottom-[8px]',
+  arrowDirectionBottomEnd: '-bottom-[8px]',
+  arrowDirectionTopStart: '-top-[8px]',
+  arrowDirectionTop: '-top-[8px]',
+  arrowDirectionTopEnd: '-top-[8px]',
+  arrowTooltip: 's-bg-inverted border-[--w-s-color-background-inverted]',
+  arrowCallout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
+  arrowPopover: 'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300]',
+  arrowHighlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border]',
+
+  content: 'last-child:mb-0',
+  notCallout: 'absolute z-50',
+  closeBtn: `${buttonTextSizes.medium} ${buttonTypes.pill} ${buttonColors.pill} justify-self-end -mr-8 ml-8`,
+};
+
+class WarpAttention extends LitElement {
+  @property({ type: Boolean, reflect: true })
+  show: boolean;
+
+  @property({ type: String, reflect: true })
+  placement: Directions;
+
+  @property({ type: Boolean, reflect: true })
+  tooltip: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  callout: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  // @ts-expect-error This was introduced before native HTML popover
+  popover: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  highlight: boolean;
+
+  @property({ attribute: 'can-close', type: Boolean, reflect: true })
+  canClose: boolean;
+
+  @property({ attribute: 'no-arrow', type: Boolean, reflect: true })
+  noArrow: boolean;
+
+  @property({ type: Number, reflect: true })
+  distance: number;
+
+  @property({ type: Number, reflect: true })
+  skidding: number;
+
+  @property({ type: Boolean, reflect: true })
+  flip: boolean;
+
+  @property({ attribute: 'cross-axis', type: Boolean, reflect: true })
+  crossAxis: boolean;
+
+  @property({ attribute: 'fallback-placements', type: Array, reflect: true })
+  fallbackPlacements: Directions[];
+
+  /** @internal */
+  attentionState;
+
+  // To store the initial placement value for reference when computing the actual direction
+  /** @internal */
+  _initialPlacement: Directions;
 
   static styles = [
-    WarpElement.styles,
+    reset,
+    layoutStyles,
+    styles,
     css`
       #attention {
         position: absolute;
@@ -58,7 +141,6 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
         visibility: var(--attention-visibility);
         display: var(--attention-display);
       }
-
       :host([popover]:not(:popover-open):not(dialog[open])) {
         display: contents;
       }
@@ -193,20 +275,20 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   }
 
   /** @internal */
-  get _attentionEl() {
+  get _attentionEl(): HTMLDivElement {
     return this.renderRoot.querySelector('#attention');
   }
 
   /** @internal */
-  get _targetEl() {
-    const targetSlot = this.renderRoot?.querySelector("slot[name='target']");
-    return targetSlot ? targetSlot.assignedNodes()[0] : null;
+  get _targetEl(): Element | null {
+    const targetSlot: HTMLSlotElement = this.renderRoot?.querySelector("slot[name='target']");
+    return targetSlot ? targetSlot.assignedElements()[0] : null;
   }
 
   /** @internal */
-  get _messageEl() {
-    const messageSlot = this.renderRoot.querySelector("slot[name='message']");
-    return messageSlot ? messageSlot.assignedNodes()[0] : null;
+  get _messageEl(): Element | null {
+    const messageSlot: HTMLSlotElement = this.renderRoot.querySelector("slot[name='message']");
+    return messageSlot ? messageSlot.assignedElements()[0] : null;
   }
 
   /** @internal */
@@ -227,7 +309,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
   get _closeBtnHtml() {
     return html`
       <button aria-label="${this._ariaClose}" @click="${this.close}" @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
-        <w-icon-close-16></w-icon-close-16>
+        <w-icon-close-16 style="height: 16px; width: 16px; display: flex;"></w-icon-close-16>
       </button>
     `;
   }
@@ -360,7 +442,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
     this.updateComplete.then(() => this.dispatchEvent(event));
   }
 
-  keypressed(e) {
+  keypressed(e: KeyboardEvent) {
     if (!this.canClose) return;
     if (e.key === 'Escape') {
       e.preventDefault();
@@ -401,6 +483,7 @@ class WarpAttention extends kebabCaseAttributes(WarpElement) {
 }
 
 if (!customElements.get('w-attention')) {
+  // @ts-expect-error Overriding native HTML popover global attribute
   customElements.define('w-attention', WarpAttention);
 }
 

@@ -15,6 +15,7 @@ export * from './packages/pill';
 export * from './packages/rip-and-tear-radio/';
 export * from './packages/rip-and-tear-checkbox/';
 export * from './packages/select';
+export * from './packages/steps';
 export * from './packages/switch';
 export * from './packages/tabs';
 export * from './packages/textfield';

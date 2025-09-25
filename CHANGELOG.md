@@ -1,3 +1,18 @@
+# [2.2.0-next.9](https://github.com/warp-ds/elements/compare/v2.2.0-next.8...v2.2.0-next.9) (2025-09-24)
+
+
+### Bug Fixes
+
+* fix lint error ([fa6bd1c](https://github.com/warp-ds/elements/commit/fa6bd1c6fb08de44994f134079f4e4d07ccbb7f6))
+* lint error ([19681e7](https://github.com/warp-ds/elements/commit/19681e73add55cd442de4201715096b539e75397))
+
+# [2.2.0-next.8](https://github.com/warp-ds/elements/compare/v2.2.0-next.7...v2.2.0-next.8) (2025-09-19)
+
+
+### Bug Fixes
+
+* adding link component ([b5a737d](https://github.com/warp-ds/elements/commit/b5a737d344237cfe7eb5785fb7fe0e9ac3dc01c3))
+
 # [2.2.0-next.7](https://github.com/warp-ds/elements/compare/v2.2.0-next.6...v2.2.0-next.7) (2025-09-12)
 
 

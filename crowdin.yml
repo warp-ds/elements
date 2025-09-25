@@ -52,4 +52,9 @@ files:
       "dest": "elements/packages/pill/messages.po",
       "translation": "/packages/pill/locales/%two_letters_code%/messages.po",
     },
+    {
+      "source": "/packages/steps/locales/en/messages.po",
+      "dest": "elements/packages/steps/messages.po",
+      "translation": "/packages/steps/locales/%two_letters_code%/messages.po",
+    },
   ]
