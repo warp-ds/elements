@@ -77,9 +77,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property()
   suffix: string;
 
-  @query('#fieldset')
-  fieldset: HTMLFieldSetElement;
-
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
   formatter: (value: string) => string;
