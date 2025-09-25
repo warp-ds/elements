@@ -3,7 +3,7 @@
 import { html, LitElement, PropertyValues } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
-import { property, query, queryAll } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
 
@@ -66,9 +66,6 @@ export class WarpTabs extends LitElement {
   @query('.selection-indicator')
   private selectionIndicator!: HTMLElement;
 
-  @queryAll('w-tab')
-  private tabs!: NodeListOf<Element>;
-
   private _activeTab: string = '';
   private _resizeObserver?: ResizeObserver;
   private _updateSelectionIndicatorDebounced = debounce(this.updateSelectionIndicator.bind(this), 100);
@@ -119,12 +116,6 @@ export class WarpTabs extends LitElement {
   }
 
   private _initializeActiveTab() {
-    if (this.active) {
-      this._activeTab = this.active;
-      return;
-    }
-
-    // Find first tab with isActive attribute or use first tab
     const tabs = Array.from(this.querySelectorAll('w-tab'));
     const activeTab = tabs.find((tab) => tab.hasAttribute('active'));
 
@@ -185,13 +176,17 @@ export class WarpTabs extends LitElement {
       const panelName = panel.getAttribute('name');
       if (panelName === this._activeTab) {
         panel.removeAttribute('hidden');
+        // Also explicitly set hidden property to false for web components
+        (panel as HTMLElement).hidden = false;
       } else {
         panel.setAttribute('hidden', '');
+        (panel as HTMLElement).hidden = true;
       }
     });
 
     // Update tab active states
-    this.tabs.forEach((tab) => {
+    const tabs = this.querySelectorAll('w-tab');
+    tabs.forEach((tab) => {
       const tabName = tab.getAttribute('name');
       if (tabName === this._activeTab) {
         tab.setAttribute('active', '');

@@ -1,5 +1,3 @@
-// @warp-css;
-
 export { WarpTabs } from './tabs.js';
 export { WarpTab } from './tab.js';
 export { WarpTabPanel } from './tab-panel.js';

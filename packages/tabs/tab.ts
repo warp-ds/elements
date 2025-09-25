@@ -1,5 +1,3 @@
-// @warp-css;
-
 import { html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
@@ -10,7 +8,7 @@ import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
 const ccTab = {
-  base: 'grid items-center font-bold gap-8 focusable antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary',
+  base: 'grid w-full items-center font-bold gap-8 focusable antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary',
   inactive: 's-text-subtle',
   active: 's-text-link s-border-selected',
   icon: 'mx-auto',

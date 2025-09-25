@@ -1,5 +1,3 @@
-// @warp-css;
-
 import { html, LitElement, PropertyValues } from 'lit';
 
 import { property } from 'lit/decorators.js';
