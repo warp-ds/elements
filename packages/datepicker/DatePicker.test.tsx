@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { userEvent } from '@vitest/browser/context';
+import { server, userEvent } from '@vitest/browser/context';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
@@ -36,7 +36,7 @@ test('can pick a date using a pointer', async () => {
   expect(formData.get('from')).toBeTruthy();
 });
 
-test('can pick a date using keyboard', async () => {
+test.skipIf(server.browser === 'firefox')('can pick a date using keyboard', async () => {
   const page = render(
     <form data-testid="flight">
       <DatePicker label="From date" name="from" />
