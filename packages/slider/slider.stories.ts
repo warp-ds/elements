@@ -112,16 +112,11 @@ export const Marks: Story = {
   args: {
     locale: 'nb',
     suffix: 'km',
+    markers: '0,50000,100000,150000,200000,250000',
   },
-  render({ locale, suffix }) {
+  render({ locale, suffix, markers }) {
     return html`
-      <w-slider
-        label="Distance"
-        markers="0,50000,100000,150000,200000,250000"
-        min="0"
-        max="250000"
-        suffix="${suffix}"
-        data-testid="markers">
+      <w-slider label="Distance" markers="${markers}" min="0" max="250000" suffix="${suffix}" data-testid="markers">
         <w-slider-thumb slot="from" aria-label="From distance" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" aria-label="To distance" name="to"></w-slider-thumb>
       </w-slider>
