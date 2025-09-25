@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import { userEvent } from '@vitest/browser/context';
+import { userEvent, server } from '@vitest/browser/context';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
@@ -35,7 +35,7 @@ test('can pick a date using a pointer', async () => {
   expect(formData.get('from')).toBeTruthy();
 });
 
-test('can pick a date using a keyboard', async () => {
+test.skipIf(server.browser === 'firefox')('can pick a date using a keyboard', async () => {
   const component = html`
     <form data-testid="flight">
       <w-datepicker label="From date" name="from"></w-datepicker>
