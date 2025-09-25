@@ -12,6 +12,6 @@ export default [
     },
   },
   {
-    ignores: ['site', 'dist', 'eik', 'pages', 'storybook-static', '*/**/styles.ts'],
+    ignores: ['site', 'dist', 'eik', 'pages', 'storybook-static', '*/**/styles.ts', 'entrypoint.js'],
   },
 ];
