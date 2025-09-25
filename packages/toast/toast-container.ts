@@ -1,18 +1,14 @@
-import { css, html } from 'lit';
+// @warp-css;
+import { css, html, LitElement } from 'lit';
 
-import { toaster as ccToastContainer } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
+import { state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-/**
- * Toast helper function options
- * @typedef    {Object}                               ToastOptions
- * @property   {(number|string)}                      [id]        Custom identifier
- * @property   {('success'|'error'|'warning')}        [type]      Type of alert
- * @property   {String}                               [text]      The toast message. Only needed when updating text on existing toast
- * @property   {(number|string)}                      [duration]  Duration of toast in milliseconds. Defaults to 5000. For accessibility reasons, toasts should never be interactive and therefore need to auto remove. If you must disable auto remove, set duration to Number.POSITIVE_INFINITY.
- * @property   {Boolean}                              [canClose]  Whether the toast can be dismissed. Defaults to false. WARNING! For accessibility reasons, toasts should not be interactive and canclose should always be false. If the toast absolutely must be dismissble, set this to true.
- */
+import { reset } from '../styles';
+
+import { styles } from './styles';
+import type { WarpToast } from './toast';
+import type { ToastOptions, ToastInternal } from './types';
 
 /**
  * You should probably not include this component in HTML markup.
@@ -28,9 +24,18 @@ import { repeat } from 'lit/directives/repeat.js';
  *
  * @internal
  */
-export class WarpToastContainer extends WarpElement {
+
+// all class objects have to be in this file when generating
+const ccToastContainer = {
+  wrapper: 'fixed transform translate-z-0 bottom-16 left-0 right-0 mx-8 sm:mx-16 z-50 pointer-events-none',
+  base: 'grid auto-rows-auto justify-items-center justify-center mx-auto pointer-events-none',
+  content: 'w-full',
+};
+
+export class WarpToastContainer extends LitElement {
   static styles = [
-    WarpElement.styles,
+    reset,
+    styles,
     css`
       :host {
         display: block;
@@ -38,15 +43,10 @@ export class WarpToastContainer extends WarpElement {
     `,
   ];
 
-  static properties = {
-    /** @internal */
-    _toasts: { state: true },
-  };
+  @state()
+  private _toasts: Map<string | number, ToastInternal> = new Map();
 
-  constructor() {
-    super();
-    this._toasts = new Map();
-  }
+  private _interval: NodeJS.Timeout | undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -60,30 +60,39 @@ export class WarpToastContainer extends WarpElement {
         if (Date.now() <= toast[1].duration) keep.push(toast);
         else remove.push(toast);
       }
+
       // collapse toasts that will be removed
       const collapseTasks = [];
       for (const [id] of remove) {
-        const el = this.renderRoot.querySelector(`#${id}`);
+        const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
         collapseTasks.push(el.collapse());
       }
+
       // once all toasts that should be removed have been collapsed, remove them from the map
       Promise.all(collapseTasks).then(() => {
-        if (keep.length !== this._toasts.size) this._toasts = new Map(keep);
+        if (keep.length !== this._toasts.size) {
+          this._toasts = new Map(keep);
+        }
       });
     }, 500);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this._interval) clearTimeout(this._interval);
+
+    if (this._interval) {
+      clearTimeout(this._interval);
+    }
   }
 
-  static init() {
+  public static init() {
     let el = document.querySelector('w-toast-container');
+
     if (!el) {
       el = document.createElement('w-toast-container');
       document.body.appendChild(el);
     }
+
     return el;
   }
 
@@ -92,48 +101,53 @@ export class WarpToastContainer extends WarpElement {
     return Array.from(this._toasts).map(([, toast]) => toast);
   }
 
-  /**
-   *
-   * @param {String|Number} id
-   * @returns {ToastOptions}
-   */
-  get(id) {
+  get(id: string | number): ToastInternal | undefined {
     if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
     }
-    if (typeof id !== 'string' && !Number.isInteger(id)) throw new Error('"id" must be number or string when attempting to retrieve toast');
+
+    if (typeof id !== 'string' && !Number.isInteger(id)) {
+      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    }
+
     return this._toasts.get(id);
   }
 
-  /**
-   *
-   * @param {Object} toast
-   * @returns {WarpToastContainer}
-   */
-  set(toast) {
-    if (!toast.id) throw new Error('invalid or undefined "id" on toast object');
+  set(toast: ToastOptions): Map<string | number, ToastInternal> {
+    if (!toast.id) {
+      throw new Error('invalid or undefined "id" on toast object');
+    }
+
     const result = this._toasts.set(toast.id, {
-      ...toast,
+      id: toast.id,
+      type: toast.type ?? 'success',
+      text: toast.text ?? '',
+      canclose: toast.canclose ?? false,
       duration: Date.now() + (toast.duration || 5000),
     });
+
     this._toasts = new Map(Array.from(this._toasts));
     return result;
   }
 
-  /**
-   *
-   * @param {String|Number} id
-   * @returns {ToastOptions | false}
-   */
-  async del(id) {
+  async del(id: string | number): Promise<boolean> {
     if (!id) {
       throw new Error('undefined "id" given when attempting to retrieve toast');
     }
-    if (typeof id !== 'string' && !Number.isInteger(id)) throw new Error('"id" must be number or string when attempting to retrieve toast');
-    const el = this.renderRoot.querySelector(`#${id}`);
-    if (!this._toasts.has(id)) return false;
+
+    if (typeof id !== 'string' && !Number.isInteger(id)) {
+      throw new Error('"id" must be number or string when attempting to retrieve toast');
+    }
+
+    const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
+
+    if (!this._toasts.has(id)) {
+      return false;
+    }
+
     await el.collapse();
     const result = this._toasts.delete(id);
+
     this._toasts = new Map(Array.from(this._toasts));
     return result;
   }

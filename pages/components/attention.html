@@ -1,0 +1,352 @@
+<html lang="en">
+  <%- include('head.html'); -%>
+  <body data-await-elements="w-attention,sidebar-element">
+    <script type="module" src="../sidebar-element.js"></script>
+    <div class="flex">
+      <sidebar-element class="sidebar"></sidebar-element>
+      <main slot="content">
+        <h1 class="mb-16">Attention</h1>
+        <h2 class="mt-24 mb-16">Props</h2>
+        <table class="w-full docs-table">
+          <thead>
+            <tr class="text-left text-gray-400 uppercase">
+              <th>prop</th>
+              <th>type</th>
+              <th>default</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr>
+              <td>target-selector *</td>
+              <td>
+                <div>string</div>
+                <div class="annotation">Selector of element that the Attention component is rendered relatively to.</div>
+              </td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>show</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element should be visible.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td>
+                <div>
+                  "top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" |
+                  "left-start" | "left" | "left-end"
+                </div>
+                <div class="annotation">
+                  Placement according to the target element. Arrow would be on the opposite side of this position.
+                </div>
+              </td>
+              <td>"bottom"</td>
+            </tr>
+            <tr>
+              <td>tooltip</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element is rendered as a tooltip.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>callout</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element is rendered as an inline callout.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>popover</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element is rendered as a popover.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>no-arrow</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Render Attention element without an arrow.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>can-close</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Render Attention element with a close button.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>distance</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">The distance from which to offset the attention element from the target element vertically.</div>
+              </td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>skidding</td>
+              <td>
+                <div>number</div>
+                <div class="annotation">The distance from which to offset the attention element along its target element horizontally.</div>
+              </td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>flip</td>
+              <td>
+                <div>boolean</div>
+                <div class="annotation">Whether Attention element should flip its placement in order to keep it in view.</div>
+              </td>
+              <td>false</td>
+            </tr>
+            <tr>
+              <td>fallback-placements</td>
+              <td>
+                <div>array</div>
+                <div class="annotation">Choose which preferred placements the Attention element should flip to.</div>
+              </td>
+              <td>opposite placement, ex: placement: "bottom", fallbackPlacements: ["top"]</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="mt-24 mb-16">Visual Options</h2>
+
+        <h3 class="mt-24 mb-16">Popover</h3>
+        <syntax-highlight>
+          <w-attention placement="bottom" popover flip>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target"
+              onclick="toggleShow()">
+              Click to toggle a popover
+            </button>
+            <span slot="message">I'm a popover</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="bottom" popover flip>
+            <button id="popoverTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+              Click to toggle a popover
+            </button>
+            <span slot="message">I'm a popover</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Popover with icon as target element</h3>
+        <syntax-highlight>
+          <w-attention placement="bottom-end" popover distance="5" skidding="2">
+            <w-button id="target" quiet variant="utility" slot="target" class="relative" onclick="toggleShow()">
+              <w-icon-info-16></w-icon-info-16>
+            </w-button>
+            <span slot="message">I'm a popover on bottom-end</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="bottom-end" popover id="popoverIconTargetExample" distance="5" skidding="2">
+            <w-button id="popoverIconTarget" quiet variant="utility" slot="target" class="relative">
+              <w-icon-info-16></w-icon-info-16>
+            </w-button>
+            <span slot="message">I'm a popover on bottom-end</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Tooltip</h3>
+        <syntax-highlight>
+          <w-attention placement="right" tooltip flip>
+            <button id="target" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+              Hover or focus to show a tooltip
+            </button>
+            <span slot="message">I'm a tooltip</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" tooltip flip>
+            <button id="tooltipTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+              Hover or focus to show a tooltip
+            </button>
+            <span slot="message">I'm a tooltip</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Callout</h3>
+        <syntax-highlight>
+          <w-attention placement="right" show callout class="flex items-center">
+            <div id="target" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+              <p>This is a target to callout attention element</p>
+            </div>
+            <span slot="message">Callout on right</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="right" show callout class="flex items-center">
+            <div id="calloutTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle mr-8" slot="target">
+              <p>This is a target to callout attention element</p>
+            </div>
+            <span slot="message">Callout on right</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Highlight</h3>
+        <syntax-highlight>
+          <w-attention placement="bottom" highlight flip>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target">
+              Click to toggle a highlight
+            </button>
+            <span slot="message">I'm a highlight</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention placement="bottom" highlight flip>
+            <button id="highlightTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
+              Click to toggle a highlight
+            </button>
+            <span slot="message">I'm a highlight</span>
+          </w-attention>
+        </div>
+
+        <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
+        <syntax-highlight>
+          <w-attention placement="bottom" highlight can-close flip cross-axis fallback-placements='["right", "top", "left", "bottom"]'>
+            <button
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              onclick="toggleShow()"
+              slot="target">
+              Click to toggle a dismissible highlight
+            </button>
+            <span slot="message">I'm a dismissible highlight</span>
+          </w-attention>
+        </syntax-highlight>
+        <div class="example">
+          <w-attention
+            placement="bottom"
+            highlight
+            id="dismissibleHighlight"
+            can-close
+            flip
+            cross-axis
+            fallback-placements='["right", "top", "left", "bottom"]'>
+            <button
+              id="dismissibleHighlightTarget"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target">
+              Click to toggle a dismissible highlight
+            </button>
+            <span slot="message">I'm a dismissible highlight</span>
+          </w-attention>
+        </div>
+
+        <h2 class="mt-24 mb-16">Accessibility</h2>
+        <p>If the Attention element has "left" or "top" position, it should be placed before the target element in the DOM.</p>
+        <p>
+          Attention element handles accessibility automatically by wrapping its slotted content with a <code>div</code> with either
+          <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and
+          setting an <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
+        </p>
+        <p>
+          It is possible to tell assistive technologies to recognize only a part of Attention's text content. To do that set the
+          <code>role</code> attribute on the relevant text element nested in <code>w-attention</code> and reference it by id through the use
+          of <code>aria-details</code>. The <code>aria-details</code> attribute is on the target element, not on <code>w-attention</code>.
+        </p>
+
+        <syntax-highlight>
+          <w-attention placement="top" popover>
+            <div slot="message">
+              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
+              <p>(this text is less relevant)</p>
+            </div>
+            <button
+              aria-details="aria-content"
+              id="target"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target">
+              Click to toggle a popover on top
+            </button>
+          </w-attention>
+        </syntax-highlight>
+        <div id="accessibilityExample" class="example">
+          <w-attention placement="top" popover>
+            <div slot="message">
+              <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
+              <p>(this text is less relevant)</p>
+            </div>
+            <button
+              aria-details="aria-content"
+              id="popoverTarget2"
+              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+              slot="target">
+              Click to toggle a popover on top
+            </button>
+          </w-attention>
+        </div>
+
+        <script>
+          const tooltipTarget = document.querySelector('.example #tooltipTarget');
+          const popoverTarget = document.querySelector('.example #popoverTarget');
+          const highlightTarget = document.querySelector('.example #highlightTarget');
+          const popoverTarget2 = document.querySelector('.example #popoverTarget2');
+          const popoverIconTarget = document.querySelector('.example #popoverIconTarget');
+          const tooltipEl = document.querySelector('.example [tooltip]');
+          const popoverEl = document.querySelector('.example [popover]');
+          const highlightEl = document.querySelector('.example [highlight]');
+          const popoverEl2 = document.querySelector('#accessibilityExample [popover]');
+          const popoverIconEl = document.getElementById('popoverIconTargetExample');
+
+          tooltipTarget.addEventListener('mouseenter', () => {
+            tooltipEl.show = true;
+          });
+          tooltipTarget.addEventListener('mouseleave', () => {
+            tooltipEl.show = false;
+          });
+          tooltipTarget.addEventListener('focus', () => {
+            tooltipEl.show = true;
+          });
+          tooltipTarget.addEventListener('blur', () => {
+            tooltipEl.show = false;
+          });
+          popoverTarget.addEventListener('click', () => {
+            popoverEl.show = !popoverEl.show;
+          });
+          highlightTarget.addEventListener('click', () => {
+            highlightEl.show = !highlightEl.show;
+          });
+          popoverTarget2.addEventListener('click', () => {
+            popoverEl2.show = !popoverEl2.show;
+          });
+          popoverIconTarget.addEventListener('click', () => {
+            popoverIconEl.show = !popoverIconEl.show;
+          });
+
+          // Dismissible Attention
+
+          const dismissibleHighlightTarget = document.querySelector('.example #dismissibleHighlightTarget');
+          const dismissibleHighlightEl = document.getElementById('dismissibleHighlight');
+
+          dismissibleHighlightTarget.addEventListener('click', () => {
+            dismissibleHighlightEl.show = !dismissibleHighlightEl.show;
+          });
+          dismissibleHighlightEl.addEventListener('close', () => {
+            dismissibleHighlightEl.show = false;
+          });
+        </script>
+      </main>
+    </div>
+    <%- include('footer.html'); -%>
+  </body>
+</html>

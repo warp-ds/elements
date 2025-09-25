@@ -1,28 +1,40 @@
-import { css, html } from 'lit';
+import { css, html, LitElement } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { toast as ccToast } from '@warp-ds/css/component-classes';
-import WarpElement from '@warp-ds/elements-core';
 import { expand, collapse } from 'element-collapse';
+import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
+
 import '@warp-ds/icons/elements/warning-16';
 import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/close-16';
 
 import { activateI18n } from '../i18n';
+import { reset } from '../styles';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { styles } from './styles';
+import type { ToastType } from './types';
 
-const toastType = {
-  success: 'success',
-  error: 'error',
-  warning: 'warning',
+const ccToast = {
+  wrapper: 'relative overflow-hidden w-full',
+  base: 'flex group p-8 mt-16 rounded-8 border-2 pointer-events-auto transition-all',
+  positive: 's-bg-positive-subtle s-border-positive-subtle s-text',
+  warning: 's-bg-warning-subtle s-border-warning-subtle s-text',
+  negative: 's-bg-negative-subtle s-border-negative-subtle s-text',
+  iconBase: 'shrink-0 rounded-full w-[16px] h-[16px] m-[8px]',
+  iconPositive: 's-icon-positive',
+  iconWarning: 's-icon-warning',
+  iconNegative: 's-icon-negative',
+  iconLoading: 'animate-bounce',
+  content: 'self-center mr-8 py-4 last-child:mb-0',
+  close: 'bg-transparent ml-auto p-[8px] s-icon hover:s-icon-hover active:s-icon-active',
 };
 
 /**
@@ -39,9 +51,11 @@ const toastType = {
  *
  * @internal
  */
-export class WarpToast extends WarpElement {
+
+export class WarpToast extends LitElement {
   static styles = [
-    WarpElement.styles,
+    reset,
+    styles,
     css`
       :host {
         display: block;
@@ -49,21 +63,24 @@ export class WarpToast extends WarpElement {
     `,
   ];
 
-  static properties = {
-    id: { type: String, attribute: true, reflect: true },
-    type: { type: String, attribute: true, reflect: true },
-    text: { type: String, attribute: true, reflect: true },
-    canclose: { type: Boolean, attribute: true, reflect: true },
-  };
+  @property({ type: String, attribute: true, reflect: true })
+  id: string = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+
+  @property({ type: String, attribute: true, reflect: true })
+  type: ToastType = 'success';
+
+  @property({ type: String, attribute: true, reflect: true })
+  text: string = '';
+
+  @property({ type: Boolean, attribute: true, reflect: true })
+  canclose: boolean = false;
+
+  @state()
+  private _expanded: boolean = false;
 
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-    this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    this.type = 'success';
-    this.text = '';
-    this.canclose = false;
   }
 
   connectedCallback() {
@@ -81,18 +98,18 @@ export class WarpToast extends WarpElement {
   get #primaryClasses() {
     return classNames([
       ccToast.base,
-      this.type === toastType.success && ccToast.positive,
-      this.type === toastType.warning && ccToast.warning,
-      this.type === toastType.error && ccToast.negative,
+      this.type === 'success' && ccToast.positive,
+      this.type === 'warning' && ccToast.warning,
+      this.type === 'error' && ccToast.negative,
     ]);
   }
 
   get #iconClasses() {
     return classNames([
       ccToast.iconBase,
-      this.type === toastType.success && ccToast.iconPositive,
-      this.type === toastType.warning && ccToast.iconWarning,
-      this.type === toastType.error && ccToast.iconNegative,
+      this.type === 'success' && ccToast.iconPositive,
+      this.type === 'warning' && ccToast.iconWarning,
+      this.type === 'error' && ccToast.iconNegative,
     ]);
   }
 
@@ -103,12 +120,12 @@ export class WarpToast extends WarpElement {
 
   /** @internal */
   get _warning() {
-    return this.type === toastType.warning;
+    return this.type === 'warning';
   }
 
   /** @internal */
   get _error() {
-    return this.type === toastType.error;
+    return this.type === 'error';
   }
 
   /** @internal */
@@ -148,9 +165,12 @@ export class WarpToast extends WarpElement {
   }
 
   async collapse() {
-    return new Promise((resolve) => {
-      if (this._expanded && this._wrapper) collapse(this._wrapper, resolve);
-      else resolve();
+    return new Promise<void>((resolve) => {
+      if (this._expanded && this._wrapper) {
+        collapse(this._wrapper, resolve);
+      } else {
+        resolve();
+      }
     });
   }
 
@@ -165,6 +185,7 @@ export class WarpToast extends WarpElement {
 
   render() {
     if (!this.text) return html``;
+
     return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
       <div class="${this.#primaryClasses}">
         <div class="${this.#iconClasses}">${this._iconMarkup}</div>
