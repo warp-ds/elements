@@ -1,8 +1,8 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
-import { property, query } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
 
@@ -34,8 +34,7 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @cssproperty [--w-slider-thumb-shadow=none] - Shadow under the slider thumb (draggable circle).
  * @cssproperty [--w-slider-thumb-size=28px] - Size of the slider thumb (draggable circle).
  * @cssproperty [--w-slider-thumb-offset=calc(var(--w-slider-thumb-size) / 2)] - Position of the slider thumb (draggable circle).
- * @cssproperty [--w-slider-tick-color=var(--w-s-color-background-disabled-subtle)] - Color of the slider track ticks (indicator lines).
- * @cssproperty [--w-slider-tick-value-color=var(--w-s-color-text-subtle)] - Color of the labels for slider track ticks (indicator lines).
+ * @cssproperty [--w-slider-marker-color=var(--w-s-color-border)] - Color of the slider track markers (indicator lines).
  */
 class WarpSlider extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
@@ -66,9 +65,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   max: string;
 
-  /** Pass a comma-separated list of numbers to show markers at those values. */
-  @property()
-  markers: string;
+  /** Pass a value similar to step to create visual markers at that interval */
+  @property({ type: Number })
+  markers: number;
 
   @property({ type: Number })
   step: number;
@@ -88,7 +87,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.min = this.min;
       thumb.max = this.max;
       thumb.step = this.step;
-      thumb.markers = this.markers;
       thumb.suffix = this.suffix;
       thumb.formatter = this.formatter;
 
@@ -116,6 +114,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
     await this.updateComplete;
     this.style.setProperty('--min', this.min);
     this.style.setProperty('--max', this.max);
+    if (this.markers) {
+      this.style.setProperty('--markers', String(this.markers));
+    }
     this.#syncSliderThumbs();
   }
 
@@ -124,7 +125,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
       changedProperties.has('disabled') ||
       changedProperties.has('required') ||
       changedProperties.has('min') ||
-      changedProperties.has('markers') ||
       changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
@@ -169,6 +169,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
           <slot id="label" name="label">${this.label}</slot>
         </legend>
         <slot class="w-slider__description" name="description"></slot>
+        ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
         <div class="w-slider__active-range"></div>
         <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>

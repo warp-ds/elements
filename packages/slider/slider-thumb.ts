@@ -147,7 +147,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           max="${this.max}"
           name="${this.name}"
           step="${ifDefined(this.step ? this.step : undefined)}"
-          list="${ifDefined(this.markers ? 'markers' : undefined)}"
           .disabled="${this.disabled || this.forceDisabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
@@ -157,14 +156,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @blur="${this.#hideTooltip}"
           @input="${this.#onInput}" />
 
-        ${this.markers
-          ? // Set up a native datalist to use as markers: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#adding_tick_marks
-            // Has to be inside the same shadow root as the input element since the relationship uses IDs,
-            // which don't work across shadow root boundaries.
-            html`<datalist id="markers">${this.markers.split(',').map((csv) => html`<option value="${csv.trim()}"></option>`)}</datalist> `
-          : nothing}
-
-        <span class="w-slider-thumb__from-marker"> ${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix} </span>
+        <span class="w-slider-thumb__from-marker">${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix}</span>
         <span class="w-slider-thumb__to-marker">${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</span>
 
         <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
