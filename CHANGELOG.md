@@ -1,3 +1,10 @@
+# [2.2.0-next.10](https://github.com/warp-ds/elements/compare/v2.2.0-next.9...v2.2.0-next.10) (2025-09-25)
+
+
+### Bug Fixes
+
+* add build css for cloaking ([d175130](https://github.com/warp-ds/elements/commit/d17513044445642edfa7c8f58c06bfa8db368742))
+
 # [2.2.0-next.9](https://github.com/warp-ds/elements/compare/v2.2.0-next.8...v2.2.0-next.9) (2025-09-24)
 
 
