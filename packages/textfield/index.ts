@@ -208,7 +208,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
           name="${ifDefined(this.name)}"
           pattern="${ifDefined(this.pattern)}"
           placeholder="${ifDefined(this.placeholder)}"
-          value="${ifDefined(this.value)}"
+          .value="${this.value}"
           aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
           aria-invalid="${ifDefined(this.invalid)}"

@@ -30,7 +30,7 @@ export const wSliderStyles = css`
 
     /* The --min value can be non-zero, f. ex. choosing a year from 1950 to 2025. Normalize the values so we start at 0 and run to max - min. */
     --_value-range: calc(var(--max) - var(--min));
-    --_from-in-range: calc(var(--from) - var(--min));
+    --_from-in-range: max(calc(var(--from) - var(--min)), 0);
 
     /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
     --_to-in-range: min(calc(var(--to) - var(--min)), var(--_value-range));

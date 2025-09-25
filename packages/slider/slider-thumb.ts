@@ -74,6 +74,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @query('input[type="range"]')
   range: HTMLInputElement;
 
+  @query('w-textfield')
+  textfield: WarpTextField;
+
+  /** @internal */
+  @state()
+  _invalid = false;
+
   /** @internal */
   @state()
   _showTooltip = false;
@@ -87,35 +94,54 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent | CustomEvent): boolean {
-    const value = (e as CustomEvent<{ value: string }>).detail?.value || (e.currentTarget as WarpTextField).value;
+    const textInputValue = (e as CustomEvent<{ value: string }>).detail?.value;
+    if (textInputValue && this._invalid) this._invalid = false;
 
+    const value = textInputValue || (e.currentTarget as WarpSliderThumb).value;
+    const valueNum = Number.parseInt(value);
+
+    // Update validation state
+    // Check that the user hasn't typed in a value beyond max or min
+    const maxNum = Number.parseInt(this.max);
+    const minNum = Number.parseInt(this.min);
+    if (valueNum > maxNum || valueNum < minNum) {
+      this._invalid = true;
+    }
+
+    // Stop a range slider's from value from reaching past the to value and vice versa
+    // by updating the other component's min and max values.
+    let shouldCancel = false;
     if (this.slot) {
-      // Stop a range slider's from value from reaching past the to value and vice versa
-      // by updating the other component's min and max values.
       const computedStyle = getComputedStyle(this);
       if (this.slot === 'from') {
         // Check that the from value is not about to go past the --to value
-        if (Number.parseInt(value) > Number.parseInt(computedStyle.getPropertyValue('--to'))) {
-          e.preventDefault();
-          e.stopPropagation();
-          this.range.value = this.value; // need to set the range value here to stop it from moving independendtly of the value
-          return false;
+        if (valueNum > Number.parseInt(computedStyle.getPropertyValue('--to'))) {
+          if (textInputValue) {
+            this._invalid = true;
+            return false;
+          }
+          shouldCancel = true;
         }
       } else {
         // Check that the to value is not about to go past the --from value
-        if (Number.parseInt(value) < Number.parseInt(computedStyle.getPropertyValue('--from'))) {
-          e.preventDefault();
-          e.stopPropagation();
-          this.range.value = this.value; // need to set the range value here to stop it from moving independendtly of the value
-          return false;
+        if (valueNum < Number.parseInt(computedStyle.getPropertyValue('--from'))) {
+          if (textInputValue) {
+            this._invalid = true;
+            return false;
+          }
+          shouldCancel = true;
         }
       }
     }
 
+    if (shouldCancel) {
+      e.preventDefault();
+      e.stopPropagation();
+      // Needed to stop slider from moving independendtly of the value when we cancel the event
+      this.range.value = this.value;
+      return false;
+    }
     this.value = value;
-    // Need to set value this way as well, not just via the attribute,
-    // to trigger visual update when changing the textfield.
-    this.range.value = this.value;
     return true;
   }
 
@@ -142,12 +168,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           aria-describedby="${ifDefined(this.ariaDescription ? 'aria-description' : undefined)}"
           class="w-slider-thumb__range"
           type="range"
-          value="${this.value}"
+          .value="${this.value}"
           min="${this.min}"
           max="${this.max}"
           name="${this.name}"
           step="${ifDefined(this.step ? this.step : undefined)}"
-          .disabled="${this.disabled || this.forceDisabled}"
+          ?disabled="${this.disabled || this.forceDisabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
           @touchstart="${this.#showTooltip}"
@@ -165,8 +191,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           aria-label="${this.ariaLabel}"
           aria-description="${ifDefined(this.ariaDescription)}"
           class="w-slider-thumb__textfield"
-          type="text"
-          value="${this.value}"
+          type="number"
+          min="${this.min}"
+          max="${this.max}"
+          .value="${this.value}"
+          ?invalid="${this._invalid}"
           @input="${this.#onInput}">
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
