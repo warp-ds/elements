@@ -19,10 +19,6 @@ export const wSliderThumbStyles = css`
     background-color: transparent;
     grid-area: slider;
     height: 44px; /* touch target */
-    pointer-events: initial;
-  }
-
-  .w-slider-thumb__range {
     pointer-events: none; /* let clicks pass through for range slider where we place two inputs over each other */
   }
 
