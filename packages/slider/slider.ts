@@ -1,7 +1,6 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -24,21 +23,10 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @slot description - Optional description between the label and slider.
  * @slot from - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
- *
- * @cssproperty [--w-slider-track-background=var(--w-s-color-background-disabled-subtle)] - Unfilled background color of the slider track.
- * @cssproperty [--w-slider-track-active-background=var(--w-s-color-background-primary)] - Filled background color of the slider track.
- * @cssproperty [--w-slider-track-height=4px] - Height of the unfilled slider track.
- * @cssproperty [--w-slider-track-active-height=6px] - Height of the filled slider track.
- * @cssproperty [--w-slider-thumb-background=var(--w-s-color-background-primary)] - Background color of the slider thumb (draggable circle).
- * @cssproperty [--w-slider-thumb-background-hover=var(--w-s-color-background-primary-hover)] - Background color when hovered of the slider thumb (draggable circle).
- * @cssproperty [--w-slider-thumb-shadow=none] - Shadow under the slider thumb (draggable circle).
- * @cssproperty [--w-slider-thumb-size=28px] - Size of the slider thumb (draggable circle).
- * @cssproperty [--w-slider-thumb-offset=calc(var(--w-slider-thumb-size) / 2)] - Position of the slider thumb (draggable circle).
- * @cssproperty [--w-slider-marker-color=var(--w-s-color-border)] - Color of the slider track markers (indicator lines).
  */
 class WarpSlider extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
@@ -80,6 +68,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ attribute: false })
   formatter: (value: string) => string;
 
+  #thumbSize: number;
+
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     for (const thumb of sliderThumbs.values()) {
@@ -117,6 +107,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
     if (this.markers) {
       this.style.setProperty('--markers', String(this.markers));
     }
+
+    const sliderStyles = getComputedStyle(this.shadowRoot.querySelector('.w-slider'));
+    this.#thumbSize = Number.parseFloat(sliderStyles.getPropertyValue('--w-slider-thumb-size').replace('px', ''));
+
     this.#syncSliderThumbs();
   }
 
@@ -145,14 +139,27 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #updateActiveTrack(input: WarpSliderThumb) {
     const slotName = input.slot;
 
-    if (slotName === 'from') {
-      // Default to the minimum value if no value has been chosen yet.
-      const from = (input.value ??= this.min);
-      this.style.setProperty('--from', from);
+    if (slotName) {
+      // To avoid visually overlapping the two thumbs we measure the width of the active range,
+      // and if it's about to become narrower than the width of a thumb we add enough margin to
+      // where they don't visually overlap. This is only relevant for range sliders (using named
+      // slots), so save the call to getComputedStyle for simple sliders.
+      const activeRangeWidth: number = this.#getActiveRangeWidth();
+      const threshold = this.#thumbSize;
+      const diff = threshold - activeRangeWidth;
+      if (activeRangeWidth <= threshold) {
+        this.style.setProperty('--thumb-offset', String(diff));
+      }
     }
 
     if (!slotName) {
       this.style.setProperty('--from', '0');
+    }
+
+    if (slotName === 'from') {
+      // Default to the minimum value if no value has been chosen yet.
+      const from = (input.value ??= this.min);
+      this.style.setProperty('--from', from);
     }
 
     if (!slotName || slotName === 'to') {
@@ -160,6 +167,12 @@ class WarpSlider extends FormControlMixin(LitElement) {
       const to = (input.value ??= this.max);
       this.style.setProperty('--to', to);
     }
+  }
+
+  #getActiveRangeWidth(): number {
+    const widthPxString = window.getComputedStyle(this.shadowRoot.querySelector('.w-slider__active-range'), '::before').width;
+    const width = Number.parseFloat(widthPxString.replace('px', ''));
+    return width;
   }
 
   render() {

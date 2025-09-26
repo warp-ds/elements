@@ -3,7 +3,6 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -20,7 +19,7 @@ import { styles as unoStyles } from './styles.js';
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 

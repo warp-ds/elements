@@ -45,9 +45,8 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
-    border-radius: 50%;
     background: var(--w-s-color-background-primary);
-    box-shadow: var(--w-slider-thumb-shadow);
+    border-radius: 50%;
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
     pointer-events: auto;
@@ -62,7 +61,6 @@ export const wSliderThumbStyles = css`
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     border-color: transparent;
-    box-shadow: var(--w-slider-thumb-shadow);
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
     pointer-events: initial;
@@ -128,8 +126,16 @@ export const wSliderThumbStyles = css`
     grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
+  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb {
+    margin-left: calc(-1px * var(--thumb-offset) / 2);
+  }
+
   :host([name='to']) .w-slider-thumb__textfield {
     grid-row: 3 / 4;
     grid-column: 3 / 4;
+  }
+
+  :host([name='to']) .w-slider-thumb__range::-webkit-slider-thumb {
+    margin-left: calc(1px * var(--thumb-offset) / 2);
   }
 `;
