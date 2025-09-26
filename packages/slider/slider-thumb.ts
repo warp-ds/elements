@@ -114,29 +114,36 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (this.slot) {
       const computedStyle = getComputedStyle(this);
       if (this.slot === 'from') {
+        const toValue = computedStyle.getPropertyValue('--to');
         // Check that the from value is not about to go past the --to value
-        if (valueNum > Number.parseInt(computedStyle.getPropertyValue('--to'))) {
+        if (valueNum > Number.parseInt(toValue)) {
           if (textInputValue) {
             this._invalid = true;
             return false;
           }
           shouldCancel = true;
+          // The user might have moved the slider so fast that this.value is far away from overlapping.
+          // Set it to be equal to the to/from value, depending on what slider the user's moving.
+          this.value = toValue;
         }
       } else {
+        const fromValue = computedStyle.getPropertyValue('--from');
         // Check that the to value is not about to go past the --from value
-        if (valueNum < Number.parseInt(computedStyle.getPropertyValue('--from'))) {
+        if (valueNum < Number.parseInt(fromValue)) {
           if (textInputValue) {
             this._invalid = true;
             return false;
           }
           shouldCancel = true;
+          // The user might have moved the slider so fast that this.value is far away from overlapping.
+          // Set it to be equal to the to/from value, depending on what slider the user's moving.
+          this.value = fromValue;
         }
       }
     }
 
     if (shouldCancel) {
       e.preventDefault();
-      e.stopPropagation();
       // Needed to stop slider from moving independendtly of the value when we cancel the event
       this.range.value = this.value;
       return false;
