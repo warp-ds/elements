@@ -2,7 +2,6 @@ import { LitElement, html } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import {
   addDays,
   addMonths,
@@ -79,7 +78,7 @@ const datefnsLocale = {
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 

@@ -1,14 +1,11 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
-import WarpElement from '@warp-ds/elements-core';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-class UnstyledHeading extends WarpElement {
+class UnstyledHeading extends LitElement {
   static properties = {
     level: { type: Number },
   };
-
-  static styles = [WarpElement.styles];
 
   get _markup() {
     return `<h${this.level}
