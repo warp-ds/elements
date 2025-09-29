@@ -6,7 +6,7 @@ import { property, state } from 'lit/decorators.js';
 import { BaseFormAssociatedElement } from './form-associated-element';
 // eslint-disable-next-line
 // @ts-ignore
-import styles from './radio.css?inline';
+import { styles } from './radio-styles';
 
 export class WRadio extends BaseFormAssociatedElement {
   static css = [styles];

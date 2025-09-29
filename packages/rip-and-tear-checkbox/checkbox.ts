@@ -14,7 +14,7 @@ import '@warp-ds/icons/elements/check-16';
 
 // eslint-disable-next-line
 // @ts-ignore
-import styles from './checkbox.css?inline';
+import { styles } from './styles';
 
 export class WCheckbox extends BaseFormAssociatedElement {
   static css = [styles];

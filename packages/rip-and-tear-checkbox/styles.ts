@@ -1,3 +1,5 @@
+import { css } from 'lit';
+export const styles = css`
 :host {
   display: block;
   user-select: none;
@@ -111,5 +113,4 @@ input {
   content: var(--wa-form-control-required-content);
   color: var(--wa-form-control-required-content-color);
   margin-inline-start: var(--wa-form-control-required-content-offset);
-}
-
+}`;

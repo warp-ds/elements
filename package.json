@@ -46,11 +46,13 @@
   "scripts": {
     "clean": "rimraf .pnpm-store node_modules dist eik storybook-static",
     "build:storybook": "npm run build && storybook build && touch ./storybook-static/.nojekyll",
-    "build:eik": "node build.js eik",
-    "build:npm": "node build.js npm",
     "build:manifest": "custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js",
-    "build:styles": "node build.js styles",
-    "build": "rimraf dist && rimraf eik && pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:npm && pnpm build:eik",
+    "build": "rimraf dist && rimraf eik && pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:editor && pnpm run build:components && pnpm run build:cloak && pnpm run build:bundle",
+    "build:cloak": "node ./build/cloak.js",
+    "build:components": "node ./build/components.js",
+    "build:editor": "node ./build/editor.js",
+    "build:styles": "node ./build/styles.js",
+    "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
     "commit": "cz",
     "dev": "pnpm run storybook",
     "storybook": "storybook dev --port 63900",
@@ -105,7 +107,7 @@
     "custom-element-vs-code-integration": "^1.5.0",
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
-    "esbuild": "0.23.0",
+    "esbuild": "0.25.10",
     "eslint": "9.16.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",
@@ -135,23 +137,27 @@
   },
   "dependencies": {
     "@lingui/core": "5.2.0",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
     "@lit/react": "^1.0.8",
     "@open-wc/form-control": "^1.0.0",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.1.1",
     "@warp-ds/elements-core": "2.0.1",
     "@warp-ds/icons": "2.5.0",
     "date-fns": "^4.1.0",
-    "scroll-doctor": "2.0.2"
+    "rollup": "^4.52.3",
+    "scroll-doctor": "2.0.2",
+    "tslib": "^2.8.1"
   },
   "publishConfig": {
     "access": "public"
   },
   "eik": {
     "files": "eik",
-    "import-map": [
-      "https://assets.finn.no/map/custom-elements/v3"
-    ],
     "server": "https://assets.finn.no",
     "type": "package"
   },

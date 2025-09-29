@@ -1,3 +1,5 @@
+import { css } from 'lit';
+export const styles = css`
 :host {
   color: var(--wa-form-control-value-color);
   display: inline-flex;
@@ -166,5 +168,4 @@
 
 :host([appearance='button']:focus-visible) {
   z-index: 2;
-}
-
+}`;
