@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync } from 'node:fs';
+
 import esbuild from 'esbuild';
 
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
@@ -7,36 +8,36 @@ const toastApiPath = new URL('../packages/toast/api.js', import.meta.url).pathna
 const outdir = new URL('../dist', import.meta.url).pathname;
 
 const esbuildDefaults = {
-    bundle: true,
-    format: 'esm',
-    sourcemap: true,
-    target: 'es2018',
-    minify: true,
-    external: ['lit', 'lit-html', 'lit-element'],
+  bundle: true,
+  format: 'esm',
+  sourcemap: true,
+  target: 'es2018',
+  minify: true,
+  external: ['lit', 'lit-html', 'lit-element'],
 };
 
 if (!existsSync(outdir)) {
-    mkdirSync(outdir, { recursive: true });
+  mkdirSync(outdir, { recursive: true });
 }
 
 manifest.modules.map(async (item) => {
-    try {
-        await esbuild.build({
-            entryPoints: [item.path],
-            outfile: `${outdir}/${item.path.replace('.ts', '.js')}`,
-            ...esbuildDefaults,
-        });
-    } catch (err) {
-        console.error(err);
-    }
+  try {
+    await esbuild.build({
+      entryPoints: [item.path],
+      outfile: `${outdir}/${item.path.replace('.ts', '.js')}`,
+      ...esbuildDefaults,
+    });
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 try {
-    await esbuild.build({
-        entryPoints: [toastApiPath],
-        outfile: `${outdir}/api.js`,
-        ...esbuildDefaults,
-    });
+  await esbuild.build({
+    entryPoints: [toastApiPath],
+    outfile: `${outdir}/api.js`,
+    ...esbuildDefaults,
+  });
 } catch (err) {
-    console.error(err);
+  console.error(err);
 }

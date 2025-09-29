@@ -1,10 +1,11 @@
-import path from 'node:path';
+import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
-import esbuild from 'esbuild';
+import path from 'node:path';
+
 import { createGenerator } from '@unocss/core';
 import { presetWarp } from '@warp-ds/uno';
+import esbuild from 'esbuild';
 import * as lightning from 'lightningcss';
-import { writeFileSync } from 'node:fs';
 
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
 
@@ -78,18 +79,16 @@ const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } 
 };
 
 try {
-    await esbuild.build(
-        {
-            entryPoints: ['entrypoint.js'],
-            outfile: 'dist/index.js',
-            bundle: true,
-            minify: true,
-            format: 'esm',
-            sourcemap: true,
-            target: 'es2018',
-            plugins: [plugin()],
-        }
-    );
+  await esbuild.build({
+    entryPoints: ['entrypoint.js'],
+    outfile: 'dist/index.js',
+    bundle: true,
+    minify: true,
+    format: 'esm',
+    sourcemap: true,
+    target: 'es2018',
+    plugins: [plugin()],
+  });
 } catch (err) {
-    console.error(err);
+  console.error(err);
 }
