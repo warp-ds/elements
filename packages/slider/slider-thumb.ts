@@ -63,8 +63,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix: string;
 
+  /** @internal */
   @state()
   forceDisabled: boolean;
+
+  /** @internal */
+  @state()
+  forceInvalid: boolean;
 
   /** JS hook to help you format the numeric value how you want. */
   @state()
@@ -161,6 +166,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
+    if (changedProperties.has('_invalid')) {
+      this.dispatchEvent(new CustomEvent('slidervalidity', { bubbles: true, detail: { invalid: this._invalid } }));
+    }
   }
 
   render() {
@@ -200,7 +208,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           max="${this.max}"
           .formatter=${this.formatter}
           .value="${this.value}"
-          ?invalid="${this._invalid}"
+          ?invalid="${this.forceInvalid || this._invalid}"
           @input="${this.#onInput}">
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>

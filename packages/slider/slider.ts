@@ -43,6 +43,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
   /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true })
   required = false;
@@ -94,6 +97,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
       // Set forceDisabled state based on slider component disabled state
       thumb.forceDisabled = this.disabled;
+      thumb.forceInvalid = this.invalid;
 
       this.#updateActiveTrack(thumb);
     }
@@ -117,6 +121,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>) {
     if (
       changedProperties.has('disabled') ||
+      changedProperties.has('invalid') ||
       changedProperties.has('required') ||
       changedProperties.has('min') ||
       changedProperties.has('step') ||
@@ -131,6 +136,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #onInput(e: InputEvent) {
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
+  }
+
+  #onSliderValidity(e: CustomEvent) {
+    e.stopPropagation();
+    this.invalid = e.detail.invalid;
   }
 
   /**
@@ -177,7 +187,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}">
+      <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}" @slidervalidity="${this.#onSliderValidity}">
         <legend class="w-slider__label">
           <slot id="label" name="label">${this.label}</slot>
         </legend>
