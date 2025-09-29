@@ -101,3 +101,23 @@ export const WithAffix: Story = {
     `;
   },
 };
+
+export const Masking: Story = {
+  args: {
+    label: 'Price',
+    placeholder: '1 000 000',
+    type: 'text',
+    locale: 'nb',
+  },
+  render({ locale, ...args }) {
+    return html`
+      <w-textfield ${spread(prespread(args))} data-testid="masking">
+        <w-affix slot="suffix" label="kr"></w-affix>
+      </w-textfield>
+      <script type="module">
+        const maskingTextfield = document.querySelector('w-textfield[data-testid="masking"]');
+        maskingTextfield.formatter = window.getNumberFormatter('${locale}').format;
+      </script>
+    `;
+  },
+};

@@ -1,20 +1,20 @@
 // @warp-css;
 
-import { LitElement, html, PropertyValues } from 'lit';
+import { LitElement, html, PropertyValues, nothing } from 'lit';
 
 import { classNames as classnames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
 
+import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 export const ccinput = {
-  // wrapper classes
-  wrapper: 'relative',
   // input classes
   base: 'block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current', // true
   default: 'border-1 s-text s-bg s-border hover:s-border-hover active:s-border-selected', // !isInvalid && !isDisabled && !isReadOnly
@@ -101,6 +101,22 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   name: string;
 
+  /**
+   * Function to format value when the input field.
+   *
+   * Only active when the input field does not have focus,
+   * similar to the accessible input masking example from Filament Group
+   *
+   * https://css-tricks.com/input-masking/
+   * https://filamentgroup.github.io/politespace/demo/demo.html
+   */
+  @property({ attribute: false })
+  formatter: (value: string) => string;
+
+  /** @internal */
+  @query('.w-textfield__mask')
+  mask: HTMLDivElement;
+
   /** @internal */
   @property({ type: Boolean })
   _hasPrefix = false;
@@ -113,6 +129,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
+    if (this.formatter && this.value) {
+      this.mask.innerText = this.formatter(this.value);
+    }
   }
 
   // Note about styling slotted elements:
@@ -122,7 +141,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [reset, styles];
+  static styles = [reset, styles, wTextfieldStyles];
 
   /** @internal */
   get _inputstyles() {
@@ -169,7 +188,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   handler(e: Event) {
     const { name, value } = e.currentTarget as HTMLInputElement;
-    this.setValue(value);
+    this.value = value;
     const event = new CustomEvent(e.type, {
       detail: {
         name,
@@ -195,31 +214,41 @@ class WarpTextField extends FormControlMixin(LitElement) {
   render() {
     return html`
       ${this._label}
-      <div class="${ccinput.wrapper}">
+      <div
+        class="${classMap({
+          'w-textfield': true,
+          // This could likely be replaced in the future by
+          // https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
+          'w-textfield--has-prefix': this._hasPrefix,
+          'w-textfield--has-suffix': this._hasSuffix,
+        })}">
         <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
-        <input
-          class="${this._inputstyles}"
-          type="${this.type}"
-          min="${ifDefined(this.min)}"
-          max="${ifDefined(this.max)}"
-          size="${ifDefined(this.size)}"
-          minlength="${ifDefined(this.minLength)}"
-          maxlength="${ifDefined(this.maxLength)}"
-          name="${ifDefined(this.name)}"
-          pattern="${ifDefined(this.pattern)}"
-          placeholder="${ifDefined(this.placeholder)}"
-          .value="${this.value}"
-          aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
-          aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid="${ifDefined(this.invalid)}"
-          id="${this._id}"
-          ?disabled="${this.disabled}"
-          ?readonly="${this.readOnly}"
-          ?required="${this.required}"
-          @blur="${this.handler}"
-          @change="${this.handler}"
-          @input="${this.handler}"
-          @focus="${this.handler}" />
+        <div class="w-textfield__input-wrapper">
+          ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
+          <input
+            class="${this._inputstyles}"
+            type="${this.type}"
+            min="${ifDefined(this.min)}"
+            max="${ifDefined(this.max)}"
+            size="${ifDefined(this.size)}"
+            minlength="${ifDefined(this.minLength)}"
+            maxlength="${ifDefined(this.maxLength)}"
+            name="${ifDefined(this.name)}"
+            pattern="${ifDefined(this.pattern)}"
+            placeholder="${ifDefined(this.placeholder)}"
+            .value="${this.value || ''}"
+            aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
+            aria-errormessage="${ifDefined(this._error)}"
+            aria-invalid="${ifDefined(this.invalid)}"
+            id="${this._id}"
+            ?disabled="${this.disabled}"
+            ?readonly="${this.readOnly}"
+            ?required="${this.required}"
+            @blur="${this.handler}"
+            @change="${this.handler}"
+            @input="${this.handler}"
+            @focus="${this.handler}" />
+        </div>
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
