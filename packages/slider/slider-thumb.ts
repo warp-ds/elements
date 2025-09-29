@@ -191,8 +191,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         <span class="w-slider-thumb__from-marker">${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix}</span>
         <span class="w-slider-thumb__to-marker">${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</span>
 
-        <!-- TODO: this input field should get validation error styling in a few cases, see Slider.mdx -->
-        <!-- TODO: masking function in textfield would be nice, not available at time of writing -->
         <w-textfield
           aria-label="${this.ariaLabel}"
           aria-description="${ifDefined(this.ariaDescription)}"
@@ -200,6 +198,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           type="number"
           min="${this.min}"
           max="${this.max}"
+          .formatter=${this.formatter}
           .value="${this.value}"
           ?invalid="${this._invalid}"
           @input="${this.#onInput}">
