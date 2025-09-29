@@ -6,13 +6,13 @@ import { classNames as classnames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
 import WarpElement from '@warp-ds/elements-core';
 import { property, query } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
 
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 export const ccinput = {
   // input classes
