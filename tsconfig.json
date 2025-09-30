@@ -10,7 +10,6 @@
     "skipLibCheck": true,
     "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "dist",
     "moduleResolution": "bundler"
   }

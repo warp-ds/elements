@@ -1,9 +1,22 @@
+// This is an interrim script used to generate styles with uno based on which
+// classes are in use in each component and as such it does not run as part of
+// every build. You just run it when you need to regen styles for components and
+// then commit the result.
+// Eventually, when all components have been rewritten to BEM we can remove this.
+
+import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { createGenerator } from '@unocss/core';
 import { presetWarp } from '@warp-ds/uno';
+import esbuild from 'esbuild';
 import * as lightning from 'lightningcss';
+
+import manifest from '../dist/custom-elements.json' with { type: 'json' };
+
+const componentExports = manifest.modules.map((item) => `export * from './${item.path.replace('.ts', '')}';`);
+writeFileSync(new URL(`../entrypoint.js`, import.meta.url), componentExports.join('\n'), { encoding: 'utf8' });
 
 const uno = await createGenerator({
   presets: [presetWarp({ skipResets: true, externalizeClasses: false })],
@@ -46,7 +59,7 @@ const buildCSS = async (
  * @param {boolean} [options.minify]
  * @returns object
  */
-export const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } = {}) => {
+const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } = {}) => {
   /** @type {import('esbuild').Plugin}*/
   return {
     name: 'warp-esbuild-plugin',
@@ -70,3 +83,18 @@ export const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = 
     },
   };
 };
+
+try {
+  await esbuild.build({
+    entryPoints: ['entrypoint.js'],
+    outfile: 'dist/index.js',
+    bundle: true,
+    minify: true,
+    format: 'esm',
+    sourcemap: true,
+    target: 'es2018',
+    plugins: [plugin()],
+  });
+} catch (err) {
+  console.error(err);
+}

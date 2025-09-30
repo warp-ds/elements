@@ -4,7 +4,6 @@ import { LitElement, html, PropertyValues } from 'lit';
 
 import { classNames as classnames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -46,7 +45,7 @@ export const ccHelpText = {
  */
 class WarpTextField extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
