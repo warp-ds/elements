@@ -18,6 +18,8 @@ jobs:
       - run: pnpm i
       - name: Build storybook
         run: pnpm run build:storybook
+        env:
+          STORYBOOK_BASE: '/elements/'
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
