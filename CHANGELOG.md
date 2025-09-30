@@ -1,3 +1,11 @@
+# [2.2.0-next.11](https://github.com/warp-ds/elements/compare/v2.2.0-next.10...v2.2.0-next.11) (2025-09-30)
+
+
+### Bug Fixes
+
+* improve bundle size by using rollup with minification ([4a6f65c](https://github.com/warp-ds/elements/commit/4a6f65c6e16c6a642a8df01fcba2c6d2180c9c50))
+* remove elements core from elements library ([a4f0252](https://github.com/warp-ds/elements/commit/a4f02528c0d4310ae9aa99aefebef11166283d7d))
+
 # [2.2.0-next.10](https://github.com/warp-ds/elements/compare/v2.2.0-next.9...v2.2.0-next.10) (2025-09-25)
 
 
