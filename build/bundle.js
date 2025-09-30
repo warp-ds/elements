@@ -1,3 +1,10 @@
+// Produce final production bundle using Rollup so we can use Lit's
+// official template minification plugin.
+// We inline Lit so there are no Eik dependencies
+
+// expects that we first compile TS to JS into .tmp with:
+// tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true
+
 import { writeFileSync } from 'node:fs';
 
 import minifyHTML from '@lit-labs/rollup-plugin-minify-html-literals';
@@ -31,7 +38,6 @@ export default {
       browser: true, // prefer browser-compatible versions
       preferBuiltins: false, // don't use Node built-ins
     }),
-
     commonjs(),
     minifyHTML(),
     terser(),

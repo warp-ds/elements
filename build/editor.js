@@ -1,3 +1,7 @@
+// Build editor integrations
+// Depends on custom element manifest file first being generated with:
+// custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js
+
 import { generateJetBrainsWebTypes } from 'custom-element-jet-brains-integration';
 import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integration';
 

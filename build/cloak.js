@@ -1,3 +1,8 @@
+// produces styles.css in the eik folder for upload with the main
+// production build file. This CSS file provides page cloaking styles
+// Page cloaking hides the page contents until the components are defined
+// and includes a 2 second fallback in case something fails
+
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs';
 
 import manifest from '../dist/custom-elements.json' with { type: 'json' };

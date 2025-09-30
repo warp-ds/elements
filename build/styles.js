@@ -1,3 +1,9 @@
+// This is an interrim script used to generate styles with uno based on which
+// classes are in use in each component and as such it does not run as part of
+// every build. You just run it when you need to regen styles for components and
+// then commit the result.
+// Eventually, when all components have been rewritten to BEM we can remove this.
+
 import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';

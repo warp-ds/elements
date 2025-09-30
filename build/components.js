@@ -1,3 +1,9 @@
+// Build for package exports
+// Basically just strips types and builds api script
+// We could probably replace this with just a TS compile
+// Depends on custom element manifest file first being generated with:
+// custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js
+
 import { existsSync, mkdirSync } from 'node:fs';
 
 import esbuild from 'esbuild';
