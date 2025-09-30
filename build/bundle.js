@@ -1,6 +1,6 @@
 // Produce final production bundle using Rollup so we can use Lit's
 // official template minification plugin.
-// We inline Lit so there are no Eik dependencies
+// We inline Lit so there are no Eik dependencies which we see improves load times at the cost of only about 10kb
 
 // expects that we first compile TS to JS into .tmp with:
 // tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true
