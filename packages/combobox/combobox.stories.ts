@@ -1,9 +1,12 @@
 import { html } from 'lit';
 
 import type { Meta, StoryObj } from '@storybook/web-components';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import './index.js';
 import type { WarpCombobox } from './index.js';
+
+const { events, args, argTypes } = getStorybookHelpers<WarpCombobox>('w-combobox');
 
 const meta: Meta<WarpCombobox> = {
   title: 'Forms/Combobox',
@@ -14,61 +17,12 @@ const meta: Meta<WarpCombobox> = {
         component: 'A combobox element for text input with selectable options.',
       },
     },
-  },
-  argTypes: {
-    options: {
-      control: { type: 'object' },
-      description: 'The available options to select from',
-    },
-    value: {
-      control: { type: 'text' },
-      description: 'The input value',
-    },
-    label: {
-      control: { type: 'text' },
-      description: 'Label above input',
-    },
-    placeholder: {
-      control: { type: 'text' },
-      description: 'Input placeholder',
-    },
-    openOnFocus: {
-      control: { type: 'boolean' },
-      description: 'Whether the popover opens when focus is on the text field',
-    },
-    selectOnBlur: {
-      control: { type: 'boolean' },
-      description: 'Select active option on blur',
-    },
-    matchTextSegments: {
-      control: { type: 'boolean' },
-      description: 'Whether the matching text segments in the options should be highlighted',
-    },
-    disableStaticFiltering: {
-      control: { type: 'boolean' },
-      description: 'Disable client-side static filtering',
-    },
-    invalid: {
-      control: { type: 'boolean' },
-      description: 'Renders the input field in an invalid state',
-    },
-    helpText: {
-      control: { type: 'text' },
-      description: 'The content to display as the help text',
-    },
-    disabled: {
-      control: { type: 'boolean' },
-      description: 'Whether the element is disabled',
-    },
-    required: {
-      control: { type: 'boolean' },
-      description: 'Whether the element is required',
-    },
-    optional: {
-      control: { type: 'boolean' },
-      description: 'Whether to show optional text',
+    actions: {
+      handles: events,
     },
   },
+  args,
+  argTypes,
 };
 
 export default meta;
@@ -85,48 +39,30 @@ const sampleOptions = [
 ];
 
 export const Default: Story = {
-  render: () => html`
-    <w-combobox id="combobox-default" label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox>
-  `,
+  render: () => html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
 };
 
 export const WithValue: Story = {
   render: () => html`
-    <w-combobox
-      id="combobox-with-value"
-      label="Select a fruit"
-      placeholder="Type to search..."
-      .options="${sampleOptions}"
-      value="Apple"></w-combobox>
+    <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}" value="Apple"></w-combobox>
   `,
 };
 
 export const OpenOnFocus: Story = {
   render: () => html`
-    <w-combobox
-      id="combobox-open-focus"
-      label="Select a fruit"
-      placeholder="Type to search..."
-      open-on-focus
-      .options="${sampleOptions}"></w-combobox>
+    <w-combobox label="Select a fruit" placeholder="Type to search..." open-on-focus .options="${sampleOptions}"></w-combobox>
   `,
 };
 
 export const WithTextMatching: Story = {
   render: () => html`
-    <w-combobox
-      id="combobox-text-match"
-      label="Select a fruit"
-      placeholder="Type to search..."
-      match-text-segments
-      .options="${sampleOptions}"></w-combobox>
+    <w-combobox label="Select a fruit" placeholder="Type to search..." match-text-segments .options="${sampleOptions}"></w-combobox>
   `,
 };
 
 export const Invalid: Story = {
   render: () => html`
     <w-combobox
-      id="combobox-invalid"
       label="Select a fruit"
       placeholder="Type to search..."
       invalid
@@ -138,24 +74,13 @@ export const Invalid: Story = {
 
 export const Disabled: Story = {
   render: () => html`
-    <w-combobox
-      id="combobox-disabled"
-      label="Select a fruit"
-      placeholder="Type to search..."
-      disabled
-      .options="${sampleOptions}"
-      value="Apple"></w-combobox>
+    <w-combobox label="Select a fruit" placeholder="Type to search..." disabled .options="${sampleOptions}" value="Apple"></w-combobox>
   `,
 };
 
 export const Optional: Story = {
   render: () => html`
-    <w-combobox
-      id="combobox-optional"
-      label="Select a fruit"
-      placeholder="Type to search..."
-      optional
-      .options="${sampleOptions}"></w-combobox>
+    <w-combobox label="Select a fruit" placeholder="Type to search..." optional .options="${sampleOptions}"></w-combobox>
   `,
 };
 
