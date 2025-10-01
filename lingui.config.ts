@@ -49,6 +49,10 @@ const config: LinguiConfig = {
       include: ['packages/steps/'],
       path: 'packages/steps/locales/{locale}/messages',
     },
+    {
+      include: ['packages/combobox/'],
+      path: 'packages/combobox/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',
