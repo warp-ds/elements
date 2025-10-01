@@ -86,77 +86,40 @@ const sampleOptions = [
 
 export const Default: Story = {
   render: () => html`
-    <w-combobox id="combobox-default" label="Select a fruit" placeholder="Type to search..."></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-default');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = '';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox id="combobox-default" label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox>
   `,
 };
 
 export const WithValue: Story = {
   render: () => html`
-    <w-combobox id="combobox-with-value" label="Select a fruit" placeholder="Type to search..."></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-with-value');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = 'Apple';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox
+      id="combobox-with-value"
+      label="Select a fruit"
+      placeholder="Type to search..."
+      .options="${sampleOptions}"
+      value="Apple"></w-combobox>
   `,
 };
 
 export const OpenOnFocus: Story = {
   render: () => html`
-    <w-combobox id="combobox-open-focus" label="Select a fruit" placeholder="Type to search..." open-on-focus></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-open-focus');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = '';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox
+      id="combobox-open-focus"
+      label="Select a fruit"
+      placeholder="Type to search..."
+      open-on-focus
+      .options="${sampleOptions}"></w-combobox>
   `,
 };
 
 export const WithTextMatching: Story = {
   render: () => html`
-    <w-combobox id="combobox-text-match" label="Select a fruit" placeholder="Type to search..." match-text-segments></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-text-match');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = '';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox
+      id="combobox-text-match"
+      label="Select a fruit"
+      placeholder="Type to search..."
+      match-text-segments
+      .options="${sampleOptions}"></w-combobox>
   `,
 };
 
@@ -167,58 +130,32 @@ export const Invalid: Story = {
       label="Select a fruit"
       placeholder="Type to search..."
       invalid
+      .options="${sampleOptions}"
+      value="Invalid fruit"
       help-text="Please select a valid fruit from the list"></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-invalid');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = 'Invalid fruit';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
   `,
 };
 
 export const Disabled: Story = {
   render: () => html`
-    <w-combobox id="combobox-disabled" label="Select a fruit" placeholder="Type to search..." disabled></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-disabled');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = 'Apple';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox
+      id="combobox-disabled"
+      label="Select a fruit"
+      placeholder="Type to search..."
+      disabled
+      .options="${sampleOptions}"
+      value="Apple"></w-combobox>
   `,
 };
 
 export const Optional: Story = {
   render: () => html`
-    <w-combobox id="combobox-optional" label="Select a fruit" placeholder="Type to search..." optional></w-combobox>
-    <script type="module">
-      const combobox = document.querySelector('#combobox-optional');
-      combobox.options = ${JSON.stringify(sampleOptions)};
-      combobox.value = '';
-
-      combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
-      });
-
-      combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
-      });
-    </script>
+    <w-combobox
+      id="combobox-optional"
+      label="Select a fruit"
+      placeholder="Type to search..."
+      optional
+      .options="${sampleOptions}"></w-combobox>
   `,
 };
 
