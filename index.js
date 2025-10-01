@@ -6,6 +6,7 @@ export * from './packages/box';
 export * from './packages/breadcrumbs';
 export * from './packages/button';
 export * from './packages/card';
+export * from './packages/combobox';
 export * from './packages/dead-toggle/';
 export * from './packages/expandable';
 export * from './packages/modal';
