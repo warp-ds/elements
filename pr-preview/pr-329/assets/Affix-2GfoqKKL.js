@@ -1,0 +1,4 @@
+import{j as t}from"./index-C8ADKtso.js";import{useMDXComponents as s}from"./index-BwRnHMUQ.js";import{M as r,C as i}from"./blocks-CJRU-XnJ.js";import{A as f,D as m}from"./affix.stories-CgqBdHHH.js";import"./preload-helper-Ct5FWWRu.js";import"./iframe-DQhzE2Ry.js";import"./utilities-DmqnRFQe.js";import"./index-C4mMAA14.js";import"./if-defined-By2RKSRC.js";function n(e){const o={a:"a",h1:"h1",p:"p",...s(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(r,{of:f,name:"Docs"}),`
+`,t.jsx(o.h1,{id:"affix",children:"Affix"}),`
+`,t.jsxs(o.p,{children:["This component is usually used in other components like form elements to show a prefix or suffix. See for example ",t.jsx(o.a,{href:"https://warp-ds.github.io/elements/?path=/story/forms-textfield--with-affix",rel:"nofollow",children:"w-textfield"}),"."]}),`
+`,t.jsx(i,{of:m})]})}function w(e={}){const{wrapper:o}={...s(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(n,{...e})}):n(e)}export{w as default};
