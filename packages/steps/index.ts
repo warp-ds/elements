@@ -69,11 +69,6 @@ class WarpSteps extends LitElement {
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateStepsContext();
-  }
-
   updated() {
     this.updateStepsContext();
   }
