@@ -25,6 +25,8 @@ jobs:
       - run: pnpm i
       - name: Build storybook
         run: pnpm run build:storybook
+        env:
+          STORYBOOK_BASE: ''
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:

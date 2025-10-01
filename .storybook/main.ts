@@ -15,7 +15,7 @@ const config: StorybookConfig = {
   },
   viteFinal(config, { configType }) {
     return mergeConfig(config, {
-      base: configType === 'PRODUCTION' ? '/elements/' : '',
+      base: process.env.STORYBOOK_BASE || '',
       build: {
         target: 'esnext',
       },
