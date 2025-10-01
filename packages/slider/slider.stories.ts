@@ -5,16 +5,10 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import type { WarpSlider } from './index.js';
 import '../affix/index.js';
-import '../attention/index.js';
 import '../textfield/index.js';
 import './index.js';
 
 const { events: sliderEvents, args: sliderArgs, argTypes: sliderArgTypes } = getStorybookHelpers<WarpSlider>('w-slider');
-// const {
-//   events: sliderThumbEvents,
-//   args: sliderThumbArgs,
-//   argTypes: sliderThumbArgTypes,
-// } = getStorybookHelpers<WarpSliderThumb>('w-slider-thumb');
 
 const meta: Meta = {
   title: 'Forms/Slider and Range Slider',

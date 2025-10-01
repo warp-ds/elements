@@ -67,23 +67,30 @@ export const wSliderThumbStyles = css`
     z-index: 1;
   }
 
-  .w-slider-thumb__tooltip-target {
-    display: block;
-    pointer-events: none;
+  .w-slider-thumb__tooltip {
+    display: none;
     position: absolute;
-    width: 1px;
-    height: 1px;
+
+    background-color: var(--w-s-color-background-inverted);
+    color: var(--w-s-color-text-inverted-static);
+    border-color: var(--w-s-color-background-inverted);
+
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    max-width: 50px;
+    z-index: 1;
+
     position-anchor: --thumb;
-    position-area: center; /* Position the tooltip target right on the range thumb */
+
+    bottom: calc(anchor(top) + 5px);
+    justify-self: anchor-center;
   }
 
-  /* Uncomment this to debug the invisible anchor target */
-  /* .w-slider-thumb__tooltip-target {
-    border: 2px solid lime;
-    width: 10px;
-    height: 10px;
-    border-radius: 20px;
-  } */
+  .w-slider-thumb__tooltip--visible {
+    display: block;
+  }
 
   .w-slider-thumb__from-marker,
   .w-slider-thumb__to-marker {

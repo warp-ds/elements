@@ -4,6 +4,7 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
 import { property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
@@ -212,7 +213,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         #target {
           position: absolute;
-          top: anchor(--polyfilled-thumb center);
+
+          position-anchor: --polyfilled-thumb;
+          bottom: calc(anchor(top) + 16px);
           left: anchor(--polyfilled-thumb right);
         }
 
@@ -238,6 +241,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
+      if (!('anchorName' in document.documentElement.style)) {
+        // Center the tooltip visually since the polyfill workaround doesn't let us do that.
+        // Calculate the width of the tooltip and set a negative left margin of half that.
+        const target = this.shadowRoot.querySelector('#target') as HTMLOutputElement;
+        const computedWidthPx = getComputedStyle(target).getPropertyValue('width');
+        const margin = Number.parseFloat(computedWidthPx.replace('px', '')) / 2;
+        target.style.setProperty('margin-left', `-${margin}px`);
+      }
     }
     if (changedProperties.has('_invalid')) {
       this.dispatchEvent(new CustomEvent('slidervalidity', { bubbles: true, detail: { invalid: this._invalid } }));
@@ -286,14 +297,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
 
-        <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
-          <output id="target" class="w-slider-thumb__tooltip-target" slot="target"></output>
-          <span slot="message">
-            ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
-              ? html`&nbsp;${this.suffix}`
-              : nothing}
-          </span>
-        </w-attention>
+        <div id="target" class="${classMap({ 'w-slider-thumb__tooltip': true, 'w-slider-thumb__tooltip--visible': this._showTooltip })}">
+          ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
+            ? html`&nbsp;${this.suffix}`
+            : nothing}
+        </div>
 
         <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
         <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
