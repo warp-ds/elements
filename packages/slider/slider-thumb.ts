@@ -172,7 +172,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       const [{ default: polyfill }] = await Promise.all([
         import(
           /* @vite-ignore */
-          `${dirname}/oddbird-anchor-positioning.js`
+          `${dirname}/oddbird-css-anchor-positioning.js`
         ),
         this.updateComplete,
       ]);
