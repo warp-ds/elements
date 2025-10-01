@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@oddbird/css-anchor-positioning': link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
+
 patchedDependencies:
   '@vitest/pretty-format':
     hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
@@ -42,7 +45,7 @@ importers:
         version: 0.4.4(rollup@4.52.3)
       '@warp-ds/core':
         specifier: 1.1.8
-        version: 1.1.8(@floating-ui/dom@1.6.13)
+        version: 1.1.8(@floating-ui/dom@1.7.4)
       '@warp-ds/css':
         specifier: 2.1.1
         version: 2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.52.3)(vite@6.3.6(@types/node@20.14.10)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(tsx@4.20.5))(vue@3.5.21(typescript@5.5.3))))
@@ -89,6 +92,9 @@ importers:
       '@lingui/conf':
         specifier: 5.2.0
         version: 5.2.0(typescript@5.5.3)
+      '@oddbird/css-anchor-positioning':
+        specifier: link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
+        version: link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
       '@open-wc/lit-helpers':
         specifier: ^0.7.0
         version: 0.7.0(lit@3.3.1)
@@ -722,8 +728,8 @@ packages:
   '@floating-ui/core@1.7.3':
     resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
 
-  '@floating-ui/dom@1.6.13':
-    resolution: {integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==}
+  '@floating-ui/dom@1.7.4':
+    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
@@ -5447,7 +5453,7 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.10
 
-  '@floating-ui/dom@1.6.13':
+  '@floating-ui/dom@1.7.4':
     dependencies:
       '@floating-ui/core': 1.7.3
       '@floating-ui/utils': 0.2.10
@@ -6517,9 +6523,9 @@ snapshots:
 
   '@vue/shared@3.5.21': {}
 
-  '@warp-ds/core@1.1.8(@floating-ui/dom@1.6.13)':
+  '@warp-ds/core@1.1.8(@floating-ui/dom@1.7.4)':
     dependencies:
-      '@floating-ui/dom': 1.6.13
+      '@floating-ui/dom': 1.7.4
 
   '@warp-ds/css@2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.52.3)(vite@6.3.6(@types/node@20.14.10)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.44.0)(tsx@4.20.5))(vue@3.5.21(typescript@5.5.3))))':
     dependencies:

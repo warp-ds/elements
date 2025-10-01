@@ -4,7 +4,7 @@ import { css } from 'lit';
 
 export const wSliderThumbStyles = css`
   .w-slider-thumb {
-    position: relative; /* Set for the fallback positioning of the tooltip ([anchor]) */
+    position: relative;
     display: grid;
     pointer-events: none; /* For range inputs we position two of these on top of each other. Let clicks go through the top one. */
     grid-template-areas:
@@ -38,8 +38,7 @@ export const wSliderThumbStyles = css`
 
   /*
     Use anchor positioning to place the tooltip target in relation to the slider thumb.
-    Browsers that don't support CSS anchors (older Safari, Firefox at time of writing)
-    show the tooltip placed in the middle of the slider ([anchor]).
+    We use a polyfill to bring support to older Safari, Firefox at time of writing.
    */
   .w-slider-thumb__range::-webkit-slider-thumb {
     anchor-name: --thumb;
@@ -68,16 +67,14 @@ export const wSliderThumbStyles = css`
     z-index: 1;
   }
 
-  @supports (position-area: start) {
-    .w-slider-thumb__tooltip-target {
-      display: block;
-      pointer-events: none;
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      position-anchor: --thumb;
-      position-area: center; /* Position the tooltip target right on the range thumb */
-    }
+  .w-slider-thumb__tooltip-target {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    position-anchor: --thumb;
+    position-area: center; /* Position the tooltip target right on the range thumb */
   }
 
   /* Uncomment this to debug the invisible anchor target */
@@ -87,16 +84,6 @@ export const wSliderThumbStyles = css`
     height: 10px;
     border-radius: 20px;
   } */
-
-  /* [anchor] Fallback for browsers without CSS anchors. */
-  @supports not (position-area: start) {
-    .w-slider-thumb__tooltip-target {
-      position: absolute;
-      top: 16px;
-      left: 50%;
-      right: 50%;
-    }
-  }
 
   .w-slider-thumb__from-marker,
   .w-slider-thumb__to-marker {

@@ -4,6 +4,9 @@ packages:
 ignoredBuiltDependencies:
   - esbuild
 
+overrides:
+  '@oddbird/css-anchor-positioning': link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
+
 patchedDependencies:
   '@vitest/pretty-format': patches/@vitest__pretty-format.patch
   custom-element-vs-code-integration: patches/custom-element-vs-code-integration.patch

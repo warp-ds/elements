@@ -89,6 +89,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   _showTooltip = false;
 
+  /**
+   * Reference to the anchor positioning style element used by the polyfill.
+   * @internal
+   */
+  anchorPositioningStyleElement: HTMLStyleElement | null = null;
+
   #showTooltip(): void {
     this._showTooltip = true;
   }
@@ -158,7 +164,61 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   async connectedCallback() {
     super.connectedCallback();
-    await this.updateComplete;
+    if (!('anchorName' in document.documentElement.style)) {
+      // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
+      const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));
+
+      const [{ default: polyfill }] = await Promise.all([
+        import(
+          /* @vite-ignore */
+          `${dirname}/oddbird-anchor-positioning.js`
+        ),
+        this.updateComplete,
+      ]);
+
+      // We need to work around a limitation in the polyfill. It doesn't support constructed stylesheets.
+      // This is based on the approach in Fluent UI: https://github.com/microsoft/fluentui/pull/32852/files#diff-7b316dca1b4391eae93d5edf48e9689e83d39f1c82cb3f8d61450dfad6f3c59eR73
+      if (!this.anchorPositioningStyleElement) {
+        this.anchorPositioningStyleElement = document.createElement('style');
+        this.shadowRoot.prepend(this.anchorPositioningStyleElement);
+      }
+
+      this.anchorPositioningStyleElement.textContent = `
+        /*
+         * The polyfill can only anchor to ::before and ::after pseudo elements.
+         * We work around that by recreating a transparent version of the active range
+         * so that we can position relative to that, without crossing the shadow root boundary.
+         */
+        #anchor {
+          anchor-name: --polyfilled-thumb;
+
+          align-self: center;
+          background: transparent;
+          position: absolute;
+          top: var(--_range-top);
+          height: var(--w-slider-track-active-height);
+          left: 0;
+          right: 0;
+          grid-area: slider;
+          margin-left: calc(var(--_blank-values-before) * 1%);
+          width: calc(calc(var(--_filled-values) * 1%));
+        }
+
+        #target {
+          position: absolute;
+          top: anchor(--polyfilled-thumb center);
+          left: anchor(--polyfilled-thumb right);
+        }
+
+        :host([name='from']) #target {
+          left: anchor(--polyfilled-thumb left);
+        }
+      `;
+
+      await polyfill.call(this, { elements: [this.anchorPositioningStyleElement] });
+    } else {
+      await this.updateComplete;
+    }
     this.range.value = this.value ?? this.max;
   }
 
@@ -175,7 +235,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <div class="w-slider-thumb">
         <label for="range">${this.label}</label>
-
+        ${!('anchorName' in document.documentElement.style) ? html`<div id="anchor"></div>` : nothing}
         <input
           id="range"
           aria-label="${this.ariaLabel}"
@@ -214,7 +274,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         </w-textfield>
 
         <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
-          <output class="w-slider-thumb__tooltip-target" slot="target"></output>
+          <output id="target" class="w-slider-thumb__tooltip-target" slot="target"></output>
           <span slot="message">
             ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
               ? html`&nbsp;${this.suffix}`
