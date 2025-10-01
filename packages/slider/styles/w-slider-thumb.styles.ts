@@ -79,7 +79,6 @@ export const wSliderThumbStyles = css`
     border-radius: 4px;
     font-size: 12px;
     white-space: nowrap;
-    max-width: 50px;
     z-index: 1;
 
     position-anchor: --thumb;
