@@ -1,3 +1,10 @@
+# [2.2.0-next.12](https://github.com/warp-ds/elements/compare/v2.2.0-next.11...v2.2.0-next.12) (2025-10-01)
+
+
+### Bug Fixes
+
+* ensure w-step is loaded before setContext is used ([b653a55](https://github.com/warp-ds/elements/commit/b653a55bd4fab852d6cfaabcef5e046f3cc0f963))
+
 # [2.2.0-next.11](https://github.com/warp-ds/elements/compare/v2.2.0-next.10...v2.2.0-next.11) (2025-09-30)
 
 
