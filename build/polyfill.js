@@ -6,7 +6,10 @@ import esbuild from 'esbuild';
 
 const { resolve } = createRequire(import.meta.url);
 
-const outdir = new URL('../eik', import.meta.url).pathname;
+const outdir =
+  typeof process.env.STORYBOOK_BASE !== 'undefined'
+    ? new URL('../storybook-static/assets/', import.meta.url).pathname
+    : new URL('../eik', import.meta.url).pathname;
 
 await esbuild.build({
   entryPoints: [resolve('@oddbird/css-anchor-positioning/fn')],
