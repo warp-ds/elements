@@ -199,7 +199,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           --_thumb-offset-pixels: calc(var(--w-slider-thumb-size) * calc(var(--_thumb-offset-percent) / 100));
 
           align-self: center;
-          background: lime;
+          background: transparent;
           position: absolute;
           top: var(--_range-top);
           height: var(--w-slider-track-active-height);
@@ -218,6 +218,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         :host([name='from']) #anchor {
           --_value: var(--_from-as-percent-of-max);
+
+          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--_thumb-offset-pixels));
+          width: calc(calc(var(--_filled-values) * 1%) - var(--w-slider-thumb-size));
         }
 
         :host([name='from']) #target {
