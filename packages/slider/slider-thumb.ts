@@ -192,8 +192,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         #anchor {
           anchor-name: --polyfilled-thumb;
 
+          /* We have to compensate for the width of the thumb inside the track to find its center. */
+          --_value: var(--_to-as-percent-of-max);
+          --_offset-origin: 50; /* at this point the offset is zero */
+          --_thumb-offset-percent: calc(var(--_value) - var(--_offset-origin));
+          --_thumb-offset-pixels: calc(var(--w-slider-thumb-size) * calc(var(--_thumb-offset-percent) / 100));
+
           align-self: center;
-          background: transparent;
+          background: lime;
           position: absolute;
           top: var(--_range-top);
           height: var(--w-slider-track-active-height);
@@ -201,13 +207,17 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           right: 0;
           grid-area: slider;
           margin-left: calc(var(--_blank-values-before) * 1%);
-          width: calc(calc(var(--_filled-values) * 1%));
+          width: calc(calc(var(--_filled-values) * 1%) - var(--_thumb-offset-pixels));
         }
 
         #target {
           position: absolute;
           top: anchor(--polyfilled-thumb center);
           left: anchor(--polyfilled-thumb right);
+        }
+
+        :host([name='from']) #anchor {
+          --_value: var(--_from-as-percent-of-max);
         }
 
         :host([name='from']) #target {
