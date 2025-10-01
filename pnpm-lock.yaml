@@ -4,10 +4,10 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@oddbird/css-anchor-positioning': link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
-
 patchedDependencies:
+  '@oddbird/css-anchor-positioning':
+    hash: 0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd
+    path: patches/@oddbird__css-anchor-positioning.patch
   '@vitest/pretty-format':
     hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
     path: patches/@vitest__pretty-format.patch
@@ -93,8 +93,8 @@ importers:
         specifier: 5.2.0
         version: 5.2.0(typescript@5.5.3)
       '@oddbird/css-anchor-positioning':
-        specifier: link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
-        version: link:../../../Library/pnpm/global/5/node_modules/@oddbird/css-anchor-positioning
+        specifier: ^0.6.1
+        version: 0.6.1(patch_hash=0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd)
       '@open-wc/lit-helpers':
         specifier: ^0.7.0
         version: 0.7.0(lit@3.3.1)
@@ -944,6 +944,9 @@ packages:
   '@octokit/types@14.1.0':
     resolution: {integrity: sha512-1y6DgTy8Jomcpu33N+p5w58l6xyt55Ar2I91RPiIA0xCJBXyUAhXCcmZaDWSANiha7R9a6qJJ2CRomGPZ6f46g==}
 
+  '@oddbird/css-anchor-positioning@0.6.1':
+    resolution: {integrity: sha512-/M1guQMJROMAFjS0uTmcg93S2X5r0Gwe6m5DqmRrGxNEUe1llmY6/Qw8UuhvexP6yeD+GDCP9CJtXBJS1vS9UQ==}
+
   '@open-wc/form-control@1.0.0':
     resolution: {integrity: sha512-4QW7FZcq1r7vKzs+ULAqc8vcjs+15kiGksoLiNMi1lbHX52MC+jonveEhvzX1rs0QUXv57V7F6rGt/q+UZh61Q==}
 
@@ -1284,6 +1287,9 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
+
+  '@types/css-tree@2.3.11':
+    resolution: {integrity: sha512-aEokibJOI77uIlqoBOkVbaQGC9zII0A+JH1kcTNKW2CwyYWD8KM6qdo+4c77wD3wZOQfJuNWAr9M4hdk+YhDIg==}
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
@@ -5744,6 +5750,13 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 25.1.0
 
+  '@oddbird/css-anchor-positioning@0.6.1(patch_hash=0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd)':
+    dependencies:
+      '@floating-ui/dom': 1.7.4
+      '@types/css-tree': 2.3.11
+      css-tree: 3.1.0
+      nanoid: 5.1.5
+
   '@open-wc/form-control@1.0.0': {}
 
   '@open-wc/lit-helpers@0.7.0(lit@3.3.1)':
@@ -6106,6 +6119,8 @@ snapshots:
     dependencies:
       '@types/node': 20.14.10
     optional: true
+
+  '@types/css-tree@2.3.11': {}
 
   '@types/deep-eql@4.0.2': {}
 
