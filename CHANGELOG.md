@@ -1,3 +1,10 @@
+# [2.2.0-next.13](https://github.com/warp-ds/elements/compare/v2.2.0-next.12...v2.2.0-next.13) (2025-10-01)
+
+
+### Bug Fixes
+
+* add missing utility dependencies ([9b8c35f](https://github.com/warp-ds/elements/commit/9b8c35f2dd2e95ecff4027bc71c9436461dbd3eb))
+
 # [2.2.0-next.12](https://github.com/warp-ds/elements/compare/v2.2.0-next.11...v2.2.0-next.12) (2025-10-01)
 
 
