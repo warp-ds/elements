@@ -1,0 +1,4 @@
+import{j as n}from"./index-C8ADKtso.js";import{useMDXComponents as s}from"./index-BwRnHMUQ.js";import{M as r,C as m}from"./blocks-fXU6KD94.js";import{S as a,D as c}from"./select.stories-B9Ueq-kF.js";import"./preload-helper-Ct5FWWRu.js";import"./iframe-Cy-UY58g.js";import"./utilities-B31i9vTx.js";function o(t){const e={h1:"h1",p:"p",...s(),...t.components};return n.jsxs(n.Fragment,{children:[n.jsx(r,{of:a,name:"Docs"}),`
+`,n.jsx(e.h1,{id:"select",children:"Select"}),`
+`,n.jsx(e.p,{children:"A dropdown component for selecting a single value."}),`
+`,n.jsx(m,{of:c})]})}function j(t={}){const{wrapper:e}={...s(),...t.components};return e?n.jsx(e,{...t,children:n.jsx(o,{...t})}):o(t)}export{j as default};
