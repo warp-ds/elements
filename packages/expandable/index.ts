@@ -7,6 +7,8 @@ import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/chevron-down-16';
 import '@warp-ds/icons/elements/chevron-up-16';
+import '../utils/expand-transition';
+import '../utils/unstyled-heading';
 
 import { reset } from '../styles.js';
 
