@@ -5,7 +5,7 @@ import { LitElement, unsafeCSS } from 'lit';
 
 import { property } from 'lit/decorators.js';
 
-import hostStyles from './host.css?inline';
+import { styles as hostStyles } from './host-styles';
 
 // Augment Lit's module
 declare module 'lit' {

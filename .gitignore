@@ -11,3 +11,4 @@ __screenshots__
 vite.config.js.timestamp*
 # # i18n related files
 packages/*/locales/*/*.mjs
+/entrypoint.js

@@ -5,7 +5,6 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
@@ -151,7 +150,7 @@ export const ccButton = {
  */
 class WarpButton extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 

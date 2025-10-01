@@ -1,7 +1,6 @@
 import { html, LitElement } from 'lit';
 
 import { FormControlMixin } from '@open-wc/form-control';
-import WarpElement from '@warp-ds/elements-core';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -20,7 +19,7 @@ const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility'
  */
 class WarpLink extends FormControlMixin(LitElement) {
   static shadowRootOptions = {
-    ...WarpElement.shadowRootOptions,
+    ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
