@@ -291,6 +291,7 @@ export class WarpCombobox extends LitElement {
   /** Handle option selection */
   private _handleSelect(option: OptionWithIdAndMatch) {
     this.value = option.value;
+    console.log('Selected option:', option);
 
     const selectEvent = new CustomEvent('select', {
       detail: { value: option.value },
@@ -373,6 +374,7 @@ export class WarpCombobox extends LitElement {
 
   /** Handle option click */
   private _handleOptionClick(e: MouseEvent, option: OptionWithIdAndMatch) {
+    console.log('Option:', option);
     this._handleSelect(option);
 
     // Force update the textfield's internal input value
@@ -429,6 +431,8 @@ export class WarpCombobox extends LitElement {
   }
 
   render() {
+    console.log('this._navigationValueOrInputValue', this._navigationValueOrInputValue);
+
     return html`
       <div class=${classNames(ccCombobox.wrapper, this.containerClassName)} @blur=${this._handleContainerBlur}>
         <w-textfield

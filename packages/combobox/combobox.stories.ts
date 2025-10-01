@@ -87,7 +87,7 @@ const sampleOptions = [
 export const Default: Story = {
   render: () => html`
     <w-combobox id="combobox-default" label="Select a fruit" placeholder="Type to search..."></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-default');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = '';
@@ -106,7 +106,7 @@ export const Default: Story = {
 export const WithValue: Story = {
   render: () => html`
     <w-combobox id="combobox-with-value" label="Select a fruit" placeholder="Type to search..."></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-with-value');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = 'Apple';
@@ -125,7 +125,7 @@ export const WithValue: Story = {
 export const OpenOnFocus: Story = {
   render: () => html`
     <w-combobox id="combobox-open-focus" label="Select a fruit" placeholder="Type to search..." open-on-focus></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-open-focus');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = '';
@@ -144,7 +144,7 @@ export const OpenOnFocus: Story = {
 export const WithTextMatching: Story = {
   render: () => html`
     <w-combobox id="combobox-text-match" label="Select a fruit" placeholder="Type to search..." match-text-segments></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-text-match');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = '';
@@ -168,7 +168,7 @@ export const Invalid: Story = {
       placeholder="Type to search..."
       invalid
       help-text="Please select a valid fruit from the list"></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-invalid');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = 'Invalid fruit';
@@ -187,7 +187,7 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   render: () => html`
     <w-combobox id="combobox-disabled" label="Select a fruit" placeholder="Type to search..." disabled></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-disabled');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = 'Apple';
@@ -206,7 +206,7 @@ export const Disabled: Story = {
 export const Optional: Story = {
   render: () => html`
     <w-combobox id="combobox-optional" label="Select a fruit" placeholder="Type to search..." optional></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-optional');
       combobox.options = ${JSON.stringify(sampleOptions)};
       combobox.value = '';
@@ -229,7 +229,7 @@ export const DisableStaticFiltering: Story = {
       label="Select a fruit (dynamic)"
       placeholder="Type to search..."
       disable-static-filtering></w-combobox>
-    <script>
+    <script type="module">
       const combobox = document.querySelector('#combobox-dynamic');
       const sampleOptions = ${JSON.stringify(sampleOptions)};
       combobox.options = sampleOptions;

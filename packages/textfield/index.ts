@@ -217,7 +217,8 @@ class WarpTextField extends FormControlMixin(LitElement) {
           ?required="${this.required}"
           @blur="${this.handler}"
           @change="${this.handler}"
-          @focus="${this.handler}" />
+          @focus="${this.handler}"
+          @input="${this.handler}" />
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
