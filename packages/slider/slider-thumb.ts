@@ -168,23 +168,23 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (!('anchorName' in document.documentElement.style)) {
       // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
       const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));
+      try {
+        const [{ default: polyfill }] = await Promise.all([
+          import(
+            /* @vite-ignore */
+            `${dirname}/oddbird-css-anchor-positioning.js`
+          ),
+          this.updateComplete,
+        ]);
 
-      const [{ default: polyfill }] = await Promise.all([
-        import(
-          /* @vite-ignore */
-          `${dirname}/oddbird-css-anchor-positioning.js`
-        ),
-        this.updateComplete,
-      ]);
+        // We need to work around a limitation in the polyfill. It doesn't support constructed stylesheets.
+        // This is based on the approach in Fluent UI: https://github.com/microsoft/fluentui/pull/32852/files#diff-7b316dca1b4391eae93d5edf48e9689e83d39f1c82cb3f8d61450dfad6f3c59eR73
+        if (!this.anchorPositioningStyleElement) {
+          this.anchorPositioningStyleElement = document.createElement('style');
+          this.shadowRoot.prepend(this.anchorPositioningStyleElement);
+        }
 
-      // We need to work around a limitation in the polyfill. It doesn't support constructed stylesheets.
-      // This is based on the approach in Fluent UI: https://github.com/microsoft/fluentui/pull/32852/files#diff-7b316dca1b4391eae93d5edf48e9689e83d39f1c82cb3f8d61450dfad6f3c59eR73
-      if (!this.anchorPositioningStyleElement) {
-        this.anchorPositioningStyleElement = document.createElement('style');
-        this.shadowRoot.prepend(this.anchorPositioningStyleElement);
-      }
-
-      this.anchorPositioningStyleElement.textContent = `
+        this.anchorPositioningStyleElement.textContent = `
         /*
          * The polyfill can only anchor to ::before and ::after pseudo elements.
          * We work around that by recreating a transparent version of the active range
@@ -231,7 +231,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       `;
 
-      await polyfill.call(this, { elements: [this.anchorPositioningStyleElement] });
+        await polyfill.call(this, { elements: [this.anchorPositioningStyleElement] });
+      } catch (e) {
+        console.error(new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }));
+      }
     } else {
       await this.updateComplete;
     }
