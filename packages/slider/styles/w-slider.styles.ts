@@ -33,8 +33,7 @@ export const wSliderStyles = css`
     /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
     --_to-in-range: min(calc(var(--to) - var(--min)), var(--_value-range));
 
-    /* Position the starting point of the fill in the case of a non-zero --from value */
-    --_thumb-width-as-percent-of-max: calc(var(--w-slider-thumb-size) / var(--_value-range) * 100);
+    /* Position the starting point of the fill in the case of a non-zero --from value in a range slider */
     --_from-as-percent-of-max: calc(var(--_from-in-range) / var(--_value-range) * 100);
     --_blank-values-before: var(--_from-as-percent-of-max);
 
