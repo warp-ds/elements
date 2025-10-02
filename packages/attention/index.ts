@@ -197,7 +197,6 @@ class WarpAttention extends LitElement {
     if (this.tooltip) {
       window.addEventListener('mouseover', this.handleDone);
       window.addEventListener('mouseout', this.handleDone);
-      window.addEventListener('mousemove', this.handleDone);
     }
   }
 
