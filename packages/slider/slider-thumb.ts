@@ -50,6 +50,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** Set by `<w-slider>` */
   @state()
+  required: boolean;
+
+  /** Set by `<w-slider>` */
+  @state()
   step: number;
 
   /** Set by `<w-slider>` */
@@ -105,13 +109,18 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent | CustomEvent): boolean {
-    const textInputValue =
-      (e as CustomEvent<{ value: string }>).detail?.value ?? (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD'
-        ? (e.currentTarget as WarpTextField).value
-        : undefined;
-    if (textInputValue && this._invalid) this._invalid = false;
+    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
+    if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
 
-    const value = textInputValue || (e.currentTarget as WarpSliderThumb).value;
+    const value = (e.currentTarget as HTMLInputElement).value;
+    if (value === '') {
+      if (this.required) {
+        this._invalid = true;
+      }
+      return false;
+    }
+
+    if (isFromTextInput && this._invalid) this._invalid = false;
     const valueNum = Number.parseInt(value);
 
     // Update validation state
@@ -131,7 +140,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         const toValue = computedStyle.getPropertyValue('--to');
         // Check that the from value is not about to go past the --to value
         if (valueNum > Number.parseInt(toValue)) {
-          if (textInputValue) {
+          if (isFromTextInput) {
             this._invalid = true;
             return false;
           }
@@ -144,7 +153,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         const fromValue = computedStyle.getPropertyValue('--from');
         // Check that the to value is not about to go past the --from value
         if (valueNum < Number.parseInt(fromValue)) {
-          if (textInputValue) {
+          if (isFromTextInput) {
             this._invalid = true;
             return false;
           }
