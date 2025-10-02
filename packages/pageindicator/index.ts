@@ -40,7 +40,7 @@ if (!customElements.get('w-pageindicator')) {
   customElements.define('w-pageindicator', WarpPageIndicator);
 }
 
-export { WarpPageIndicator }
+export { WarpPageIndicator };
 
 declare global {
   interface HTMLElementTagNameMap {
