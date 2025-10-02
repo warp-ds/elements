@@ -1,3 +1,10 @@
+# [2.2.0-next.14](https://github.com/warp-ds/elements/compare/v2.2.0-next.13...v2.2.0-next.14) (2025-10-02)
+
+
+### Features
+
+* add slider and range slider implementations ([#329](https://github.com/warp-ds/elements/issues/329)) ([12b8ca7](https://github.com/warp-ds/elements/commit/12b8ca70e6947491a858125f33d37d3f79598db4))
+
 # [2.2.0-next.13](https://github.com/warp-ds/elements/compare/v2.2.0-next.12...v2.2.0-next.13) (2025-10-01)
 
 
