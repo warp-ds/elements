@@ -73,7 +73,7 @@ importers:
         version: 2.0.0
       '@custom-elements-manifest/analyzer':
         specifier: ^0.10.5
-        version: 0.10.9
+        version: 0.10.10
       '@eik/cli':
         specifier: 2.0.38
         version: 2.0.38
@@ -369,8 +369,8 @@ packages:
     resolution: {integrity: sha512-bVUNBqG6aznYcYjTjnc3+Cat/iBgbgpflxbIBTnsHTX0YVpnmINPEkSRWymT2Q8aSH3Y7aKnEbunilkYe8TybA==}
     engines: {node: '>=v18'}
 
-  '@custom-elements-manifest/analyzer@0.10.9':
-    resolution: {integrity: sha512-cabAmmC3UlZ+fHLSnToiHf5NJ5OTL11BASVw2neggrLFhvS5fEEdRW1wgQmnTrVwpJXQLcA4e8qq0Zdpg+hqBQ==}
+  '@custom-elements-manifest/analyzer@0.10.10':
+    resolution: {integrity: sha512-R1pbKssP3Psb2OiGfheiUbXtBgTGQ0Vu5cn2CHSdZoJV66oZPSSw/TdCf8WlnQ6dfKSy5L8hNneClnmD80GEwA==}
     hasBin: true
 
   '@custom-elements-manifest/find-dependencies@0.0.6':
@@ -5266,7 +5266,7 @@ snapshots:
       chalk: 5.6.2
     optional: true
 
-  '@custom-elements-manifest/analyzer@0.10.9':
+  '@custom-elements-manifest/analyzer@0.10.10':
     dependencies:
       '@custom-elements-manifest/find-dependencies': 0.0.6
       '@github/catalyst': 1.7.0
