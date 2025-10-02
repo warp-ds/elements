@@ -96,7 +96,6 @@
     "@storybook/web-components": "^9.1.4",
     "@storybook/web-components-vite": "^9.1.4",
     "@types/node": "20.14.10",
-    "@types/react": "^19.1.12",
     "@unocss/core": "^66.5.0",
     "@vitejs/plugin-react": "^5.0.2",
     "@vitest/browser": "^3.2.4",

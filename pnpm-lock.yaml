@@ -73,7 +73,7 @@ importers:
         version: 2.0.0
       '@custom-elements-manifest/analyzer':
         specifier: ^0.10.5
-        version: 0.10.8
+        version: 0.10.9
       '@eik/cli':
         specifier: 2.0.38
         version: 2.0.38
@@ -119,9 +119,6 @@ importers:
       '@types/node':
         specifier: 20.14.10
         version: 20.14.10
-      '@types/react':
-        specifier: ^19.1.12
-        version: 19.2.0
       '@unocss/core':
         specifier: ^66.5.0
         version: 66.5.2
@@ -372,8 +369,8 @@ packages:
     resolution: {integrity: sha512-bVUNBqG6aznYcYjTjnc3+Cat/iBgbgpflxbIBTnsHTX0YVpnmINPEkSRWymT2Q8aSH3Y7aKnEbunilkYe8TybA==}
     engines: {node: '>=v18'}
 
-  '@custom-elements-manifest/analyzer@0.10.8':
-    resolution: {integrity: sha512-SyZMf0lE6PzZzS2pYy9ONReNZ3duQj9/Cd2n6j79hxVgLS333l+0SAeXadsn9/RYmDQ+oXm+VuNAJujeR7SMoA==}
+  '@custom-elements-manifest/analyzer@0.10.9':
+    resolution: {integrity: sha512-cabAmmC3UlZ+fHLSnToiHf5NJ5OTL11BASVw2neggrLFhvS5fEEdRW1wgQmnTrVwpJXQLcA4e8qq0Zdpg+hqBQ==}
     hasBin: true
 
   '@custom-elements-manifest/find-dependencies@0.0.6':
@@ -5269,7 +5266,7 @@ snapshots:
       chalk: 5.6.2
     optional: true
 
-  '@custom-elements-manifest/analyzer@0.10.8':
+  '@custom-elements-manifest/analyzer@0.10.9':
     dependencies:
       '@custom-elements-manifest/find-dependencies': 0.0.6
       '@github/catalyst': 1.7.0
@@ -5824,7 +5821,7 @@ snapshots:
       '@floating-ui/dom': 1.7.4
       '@types/css-tree': 2.3.11
       css-tree: 3.1.0
-      nanoid: 5.1.5
+      nanoid: 5.1.6
 
   '@open-wc/form-control@1.0.0': {}
 
