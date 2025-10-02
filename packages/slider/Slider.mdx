@@ -1,0 +1,91 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as SliderStories from './slider.stories';
+
+<Meta of={SliderStories} name="Docs" />
+
+# Sliders
+
+Sliders allow users to adjust a numeric value within a given continuous range.
+
+A slider provides a visual indication of an adjustable value within a defined range (minimum and maximum values) by moving a handle along a horizontal track.
+
+## Accessibility
+
+When you use [range sliders](#range-slider) you must provide an `aria-label` to each `<w-slider-thumb>` component. The `<w-slider>` component's label is used as a fallback with the suffixes "min" and "max", but these should not be relied on.
+
+The label is announced by screen readers for the range input and related text input.
+
+```html
+<w-slider label="Apartment size" min="0" max="250" suffix="m²">
+  <w-slider-thumb slot="from" aria-label="From square meters" name="from"></w-slider-thumb>
+  <w-slider-thumb slot="to" aria-label="To square meters" name="to"></w-slider-thumb>
+</w-slider>
+```
+
+## Variants
+
+Sliders come in two variants:
+
+- Single (default)
+- Range
+
+## Single slider
+
+Single sliders allow users to select a single value within the slider track.
+
+<Canvas of={SliderStories.Single} />
+
+## Range slider
+
+Range sliders allow users to define minimum and maximum values from a predefined range within the slider track.
+
+<Canvas of={SliderStories.Range} />
+
+## Examples
+
+These examples show the range slider, but the single slider has the same options.
+
+### Suffixes
+
+Sliders can define a suffix that will be added to the labels and input fields.
+
+<Canvas of={SliderStories.SuffixSquareMeters} />
+<Canvas of={SliderStories.SuffixCurrency} />
+<Canvas of={SliderStories.SuffixKilometers} />
+
+
+### Tick marks
+
+The sliders can have tick marks shown at selected intervals below the slider track.
+
+<Canvas of={SliderStories.Marks} />
+
+### Granularity
+
+You can define a [`step` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#setting_the_values_granularity) to control the possible granularity in the slider. The default value in browsers is `1`.
+
+<Canvas of={SliderStories.Step} />
+
+### Slider with over and under max values
+
+Use the `formatter` property to create sliders that should include values before and after the minimum and maximum values.
+
+- Before and after a year.
+- Under and over a sum or distance.
+
+The input will always produce a value. You should treat a value equal to `min` as the signal to include all values up to that value. Similarly, a value equal to `max` should mean "value and over" for this type of slider.
+
+#### Accessibility
+
+Use `aria-description` on `<w-slider-thumb>` to explain that a value of X means "up to and including X" and vice versa for the to-value. Internally the attribute is rendered in a visually hidden element and refered to with `aria-describedby` since [`aria-description` support is still not great](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-description).
+
+<Canvas of={SliderStories.OverUnder} />
+
+### Error state
+
+With the input fields a user might input values that are outside the allowed minimum and maximum values, or where the from value is higher than the to value in range sliders. In these cases the input field gets highlighted with the error color and a validation error message is shown below it.
+
+<Canvas of={SliderStories.SingleError} />
+
+<Canvas of={SliderStories.RangeError} />

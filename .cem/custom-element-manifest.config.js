@@ -12,6 +12,8 @@ export default {
     'packages/**/index.ts',
     'packages/**/index.js',
     'packages/datepicker/datepicker.ts',
+    'packages/slider/slider.ts',
+    'packages/slider/slider-thumb.ts',
     'packages/modal/modal-*.ts',
     'packages/toast/toast*.js',
   ],

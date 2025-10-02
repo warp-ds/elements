@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@oddbird/css-anchor-positioning':
+    hash: 0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd
+    path: patches/@oddbird__css-anchor-positioning.patch
   '@vitest/pretty-format':
     hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
     path: patches/@vitest__pretty-format.patch
@@ -42,7 +45,7 @@ importers:
         version: 0.4.4(rollup@4.52.3)
       '@warp-ds/core':
         specifier: 1.1.8
-        version: 1.1.8(@floating-ui/dom@1.6.13)
+        version: 1.1.8(@floating-ui/dom@1.7.4)
       '@warp-ds/css':
         specifier: 2.1.1
         version: 2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.52.3)(vite@6.3.6(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6))(vue@3.5.22(typescript@5.5.3))))
@@ -89,6 +92,9 @@ importers:
       '@lingui/conf':
         specifier: 5.2.0
         version: 5.2.0(typescript@5.5.3)
+      '@oddbird/css-anchor-positioning':
+        specifier: ^0.6.1
+        version: 0.6.1(patch_hash=0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd)
       '@open-wc/lit-helpers':
         specifier: ^0.7.0
         version: 0.7.0(lit@3.3.1)
@@ -722,8 +728,8 @@ packages:
   '@floating-ui/core@1.7.3':
     resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
 
-  '@floating-ui/dom@1.6.13':
-    resolution: {integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==}
+  '@floating-ui/dom@1.7.4':
+    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
@@ -937,6 +943,9 @@ packages:
 
   '@octokit/types@14.1.0':
     resolution: {integrity: sha512-1y6DgTy8Jomcpu33N+p5w58l6xyt55Ar2I91RPiIA0xCJBXyUAhXCcmZaDWSANiha7R9a6qJJ2CRomGPZ6f46g==}
+
+  '@oddbird/css-anchor-positioning@0.6.1':
+    resolution: {integrity: sha512-/M1guQMJROMAFjS0uTmcg93S2X5r0Gwe6m5DqmRrGxNEUe1llmY6/Qw8UuhvexP6yeD+GDCP9CJtXBJS1vS9UQ==}
 
   '@open-wc/form-control@1.0.0':
     resolution: {integrity: sha512-4QW7FZcq1r7vKzs+ULAqc8vcjs+15kiGksoLiNMi1lbHX52MC+jonveEhvzX1rs0QUXv57V7F6rGt/q+UZh61Q==}
@@ -1278,6 +1287,9 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
+
+  '@types/css-tree@2.3.11':
+    resolution: {integrity: sha512-aEokibJOI77uIlqoBOkVbaQGC9zII0A+JH1kcTNKW2CwyYWD8KM6qdo+4c77wD3wZOQfJuNWAr9M4hdk+YhDIg==}
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
@@ -5516,7 +5528,7 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.10
 
-  '@floating-ui/dom@1.6.13':
+  '@floating-ui/dom@1.7.4':
     dependencies:
       '@floating-ui/core': 1.7.3
       '@floating-ui/utils': 0.2.10
@@ -5806,6 +5818,13 @@ snapshots:
   '@octokit/types@14.1.0':
     dependencies:
       '@octokit/openapi-types': 25.1.0
+
+  '@oddbird/css-anchor-positioning@0.6.1(patch_hash=0a63a5fe8b91281a9ba21b6c62a960e3b120d0dc7ba1d6ce147e79e9608ab3bd)':
+    dependencies:
+      '@floating-ui/dom': 1.7.4
+      '@types/css-tree': 2.3.11
+      css-tree: 3.1.0
+      nanoid: 5.1.5
 
   '@open-wc/form-control@1.0.0': {}
 
@@ -6169,6 +6188,8 @@ snapshots:
     dependencies:
       '@types/node': 20.14.10
     optional: true
+
+  '@types/css-tree@2.3.11': {}
 
   '@types/deep-eql@4.0.2': {}
 
@@ -6586,9 +6607,9 @@ snapshots:
 
   '@vue/shared@3.5.22': {}
 
-  '@warp-ds/core@1.1.8(@floating-ui/dom@1.6.13)':
+  '@warp-ds/core@1.1.8(@floating-ui/dom@1.7.4)':
     dependencies:
-      '@floating-ui/dom': 1.6.13
+      '@floating-ui/dom': 1.7.4
 
   '@warp-ds/css@2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.52.3)(vite@6.3.6(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6))(vue@3.5.22(typescript@5.5.3))))':
     dependencies:
