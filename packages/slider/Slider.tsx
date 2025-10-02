@@ -2,10 +2,10 @@ import React from 'react';
 
 import { createComponent } from '@lit/react';
 
-import { WarpSliderThumb } from './slider-thumb.js';
+import { WarpSlider } from './slider.js';
 
-export const SliderThumb = createComponent({
-  tagName: 'w-slider-thumb',
-  elementClass: WarpSliderThumb,
+export const Slider = createComponent({
+  tagName: 'w-slider',
+  elementClass: WarpSlider,
   react: React,
 });
