@@ -81,6 +81,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.max = this.max;
       thumb.step = this.step;
       thumb.suffix = this.suffix;
+      thumb.required = this.required;
       thumb.formatter = this.formatter;
 
       if (!thumb.ariaLabel) {

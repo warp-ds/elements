@@ -77,3 +77,31 @@ test('can set slider value via the number input', async () => {
   const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
   expect(formData.get('value')).toBe('50');
 });
+
+test('deleting from number input works as expected', async () => {
+  const component = html`
+    <form data-testid="form">
+      <w-slider label="Production year" min="1950" max="2025" over under>
+        <p slot="description">Try typing a from value higher than a to value</p>
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
+    </form>
+  `;
+
+  const page = render(component);
+
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2025);
+
+  await userEvent.type(page.getByRole('spinbutton').last(), '{Backspace}');
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(202);
+
+  await userEvent.type(page.getByRole('spinbutton').last(), '{Backspace}');
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(20);
+
+  await userEvent.type(page.getByRole('spinbutton').last(), '{Backspace}');
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2);
+
+  await userEvent.type(page.getByRole('spinbutton').last(), '{Backspace}');
+  await expect.element(page.getByRole('spinbutton').last()).not.toHaveValue();
+});
