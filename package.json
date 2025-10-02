@@ -74,9 +74,8 @@
   "peerDependencies": {
     "@lingui/core": "5.x",
     "@warp-ds/css": "2.1.1",
-    "@warp-ds/elements-core": "2.x",
     "lit": "3.x",
-    "react": "^19.1.1"
+    "react": "^18.x"
   },
   "devDependencies": {
     "@chbphone55/classnames": "2.0.0",
