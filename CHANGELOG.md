@@ -1,3 +1,11 @@
+# [2.2.0-next.15](https://github.com/warp-ds/elements/compare/v2.2.0-next.14...v2.2.0-next.15) (2025-10-02)
+
+
+### Bug Fixes
+
+* don't update slider position when emptying textfield ([0384af1](https://github.com/warp-ds/elements/commit/0384af1d1bf42040cc8ea29d83501f12b91ef097))
+* handle both event types coming from t-textfield ([4c21cd0](https://github.com/warp-ds/elements/commit/4c21cd056d2ba70c69250eb28a37045cfefc33bd)), closes [#341](https://github.com/warp-ds/elements/issues/341)
+
 # [2.2.0-next.14](https://github.com/warp-ds/elements/compare/v2.2.0-next.13...v2.2.0-next.14) (2025-10-02)
 
 
