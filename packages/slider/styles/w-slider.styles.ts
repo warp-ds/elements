@@ -33,11 +33,15 @@ export const wSliderStyles = css`
     /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
     --_to-in-range: min(calc(var(--to) - var(--min)), var(--_value-range));
 
-    /* Position the starting point of the fill in the case of a non-zero --from value in a range slider */
+    /* Position the starting point of the fill in the case of a non-zero --from value in a range slider.
+     * In other words, given a width of 100% how many percent should be left unfilled/blank
+     * at the beginning of the range slider (dashes in this ASCII-range-slider: |---O******O|) */
     --_from-as-percent-of-max: calc(var(--_from-in-range) / var(--_value-range) * 100);
     --_blank-values-before: var(--_from-as-percent-of-max);
 
-    /* Set the width of the fill as a percentage. */
+    /* Set the width of the fill as a percentage.
+     * In other words, given a width of 100% how many percent should be left unfilled/blank
+     * at the end of the slider (dashes in this ASCII-slider: |******O---|) */
     --_to-as-percent-of-max: calc(var(--_to-in-range) / var(--_value-range) * 100);
     --_filled-values: calc(var(--_to-as-percent-of-max) - var(--_blank-values-before));
 
