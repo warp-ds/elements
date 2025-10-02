@@ -105,7 +105,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent | CustomEvent): boolean {
-    const textInputValue = (e as CustomEvent<{ value: string }>).detail?.value;
+    const textInputValue =
+      (e as CustomEvent<{ value: string }>).detail?.value ?? (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD'
+        ? (e.currentTarget as WarpTextField).value
+        : undefined;
     if (textInputValue && this._invalid) this._invalid = false;
 
     const value = textInputValue || (e.currentTarget as WarpSliderThumb).value;
