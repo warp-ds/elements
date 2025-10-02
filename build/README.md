@@ -37,9 +37,17 @@ The production bundle is a single file with all components packaged optimally wi
 pnpm run build:bundle
 ```
 
+## Polyfill
+
+We rely on a polyfill for CSS anchor positioning for certain components. The polyfill gets built to a separate bundle and lazy loaded when those components are used, and only for the browsers that don't have native support.
+
+```
+pnpm run build:polyfill
+```
+
 ## Cloaking
 
-Along with the production bundle, we supply cloaking CSS rules so that pages 
+Along with the production bundle, we supply cloaking CSS rules so that pages
 can easily hide the first page render until the components are loaded. It's important that the components and the cloaking CSS file are loaded early and effectively to avoid delay on the first render.
 
 ```

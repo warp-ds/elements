@@ -5,7 +5,7 @@ import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
 import { withActions } from 'storybook/actions/decorator';
 
 import customElements from '../dist/custom-elements.json' with { type: 'json' };
-import { toast, updateToast, removeToast, WarpToastContainer } from '../entrypoint.js';
+import { toast, updateToast, removeToast, WarpToastContainer } from '../packages/toast/index.js';
 
 setCustomElementsManifest(customElements);
 
@@ -42,6 +42,11 @@ if (typeof window !== 'undefined') {
   window.updateToast = updateToast;
   // @ts-expect-error We depend on these being global in our examples
   window.removeToast = removeToast;
+
+  // @ts-expect-error Used in slider examples
+  window.getNumberFormatter = (locale, opts = {}) => {
+    return new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts });
+  };
 }
 
 export default preview;

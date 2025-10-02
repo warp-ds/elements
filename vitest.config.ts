@@ -27,6 +27,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
+    include: ['@oddbird/css-anchor-positioning/fn'],
     esbuildOptions: {
       target: 'esnext',
     },
