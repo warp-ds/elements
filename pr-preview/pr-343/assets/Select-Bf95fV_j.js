@@ -1,0 +1,4 @@
+import{j as t}from"./index-C8ADKtso.js";import{useMDXComponents as r}from"./index-BwRnHMUQ.js";import{M as s,C as m}from"./blocks-UF9EuDXn.js";import{S as i,D as a}from"./select.stories-BuI9-M4m.js";import"./preload-helper-Ct5FWWRu.js";import"./iframe-CJ6hWjSN.js";import"./utilities-CJ6u0kit.js";import"./if-defined-BBKmJoLW.js";import"./chevron-down-16-D59QDkvb.js";import"./FormControlMixin-DJnJZbro.js";function e(o){const n={h1:"h1",p:"p",...r(),...o.components};return t.jsxs(t.Fragment,{children:[t.jsx(s,{of:i,name:"Docs"}),`
+`,t.jsx(n.h1,{id:"select",children:"Select"}),`
+`,t.jsx(n.p,{children:"A dropdown component for selecting a single value."}),`
+`,t.jsx(m,{of:a})]})}function M(o={}){const{wrapper:n}={...r(),...o.components};return n?t.jsx(n,{...o,children:t.jsx(e,{...o})}):e(o)}export{M as default};
