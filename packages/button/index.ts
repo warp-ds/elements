@@ -342,3 +342,10 @@ declare global {
     'w-button': WarpButton;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-button': WarpButton;
+    }
+  }
+}

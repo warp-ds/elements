@@ -140,3 +140,10 @@ declare global {
     'w-pill': WarpPill;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-pill': WarpPill;
+    }
+  }
+}

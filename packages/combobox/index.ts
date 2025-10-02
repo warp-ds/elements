@@ -489,3 +489,10 @@ declare global {
     'w-combobox': WarpCombobox;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-combobox': WarpCombobox;
+    }
+  }
+}

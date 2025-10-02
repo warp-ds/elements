@@ -229,3 +229,10 @@ declare global {
     'w-modal-header': ModalHeader;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-modal-header': ModalHeader;
+    }
+  }
+}

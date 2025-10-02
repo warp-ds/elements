@@ -9,3 +9,10 @@ declare global {
     'w-checkbox': WCheckbox;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-checkbox': WCheckbox;
+    }
+  }
+}

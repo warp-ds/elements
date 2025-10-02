@@ -178,3 +178,16 @@ export class WarpToastContainer extends LitElement {
 if (!customElements.get('w-toast-container')) {
   customElements.define('w-toast-container', WarpToastContainer);
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-toast-container': WarpToastContainer;
+  }
+}
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-toast-container': WarpToastContainer;
+    }
+  }
+}

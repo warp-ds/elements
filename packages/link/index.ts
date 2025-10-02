@@ -114,3 +114,10 @@ declare global {
     'w-link': WarpLink;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-link': WarpLink;
+    }
+  }
+}

@@ -47,3 +47,10 @@ declare global {
     'w-modal-footer': ModalFooter;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-modal-footer': ModalFooter;
+    }
+  }
+}

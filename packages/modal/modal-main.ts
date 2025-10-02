@@ -244,3 +244,10 @@ declare global {
     'w-modal': ModalMain;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-modal': ModalMain;
+    }
+  }
+}

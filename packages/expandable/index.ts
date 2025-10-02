@@ -203,3 +203,10 @@ declare global {
     'w-expandable': WarpExpandable;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-expandable': WarpExpandable;
+    }
+  }
+}

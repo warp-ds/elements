@@ -237,3 +237,10 @@ declare global {
     'w-textfield': WarpTextField;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-textfield': WarpTextField;
+    }
+  }
+}

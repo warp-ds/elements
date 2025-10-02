@@ -219,3 +219,11 @@ declare global {
     'w-step': WarpStep;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-steps': WarpSteps;
+      'w-step': WarpStep;
+    }
+  }
+}

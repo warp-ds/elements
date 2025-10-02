@@ -62,3 +62,10 @@ declare global {
     'w-badge': WarpBadge;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-badge': WarpBadge;
+    }
+  }
+}

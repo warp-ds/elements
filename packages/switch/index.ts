@@ -97,3 +97,10 @@ declare global {
     'w-switch': WarpSwitch;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-switch': WarpSwitch;
+    }
+  }
+}

@@ -12,3 +12,11 @@ declare global {
     'w-radio-group': WRadioGroup;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-radio': WRadio;
+      'w-radio-group': WRadioGroup;
+    }
+  }
+}

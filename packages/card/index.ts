@@ -136,3 +136,10 @@ declare global {
     'w-card': WarpCard;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-card': WarpCard;
+    }
+  }
+}

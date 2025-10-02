@@ -211,3 +211,10 @@ declare global {
     'w-pagination': WarpPagination;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-pagination': WarpPagination;
+    }
+  }
+}

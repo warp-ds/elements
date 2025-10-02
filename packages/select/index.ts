@@ -209,3 +209,10 @@ declare global {
     'w-select': WarpSelect;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-select': WarpSelect;
+    }
+  }
+}

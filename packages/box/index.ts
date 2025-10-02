@@ -71,3 +71,10 @@ declare global {
     'w-box': WarpBox;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-box': WarpBox;
+    }
+  }
+}

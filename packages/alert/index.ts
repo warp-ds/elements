@@ -143,3 +143,10 @@ declare global {
     'w-alert': WarpAlert;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-alert': WarpAlert;
+    }
+  }
+}

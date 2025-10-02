@@ -7,7 +7,7 @@ import { range } from 'lit/directives/range.js';
 
 import { styles } from './style.js';
 
-export class WarpPageIndicator extends LitElement {
+class WarpPageIndicator extends LitElement {
   static styles = [styles];
 
   /** Currently selected page (1-based index) */
@@ -36,12 +36,21 @@ export class WarpPageIndicator extends LitElement {
   }
 }
 
+if (!customElements.get('w-pageindicator')) {
+  customElements.define('w-pageindicator', WarpPageIndicator);
+}
+
+export { WarpPageIndicator }
+
 declare global {
   interface HTMLElementTagNameMap {
     'w-pageindicator': WarpPageIndicator;
   }
 }
-
-if (!customElements.get('w-pageindicator')) {
-  customElements.define('w-pageindicator', WarpPageIndicator);
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-pageindicator': WarpPageIndicator;
+    }
+  }
 }

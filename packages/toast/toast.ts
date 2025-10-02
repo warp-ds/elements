@@ -208,3 +208,16 @@ export class WarpToast extends LitElement {
 if (!customElements.get('w-toast')) {
   customElements.define('w-toast', WarpToast);
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-toast': WarpToast;
+  }
+}
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-toast': WarpToast;
+    }
+  }
+}

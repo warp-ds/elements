@@ -274,3 +274,10 @@ declare global {
     'w-tabs': WarpTabs;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-tabs': WarpTabs;
+    }
+  }
+}

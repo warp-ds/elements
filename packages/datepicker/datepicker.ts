@@ -560,10 +560,18 @@ if (!customElements.get('w-datepicker')) {
   customElements.define('w-datepicker', WarpDatepicker);
 }
 
+export { WarpDatepicker };
+
 declare global {
   interface HTMLElementTagNameMap {
     'w-datepicker': WarpDatepicker;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-datepicker': WarpDatepicker;
+    }
+  }
+}
 
-export { WarpDatepicker };

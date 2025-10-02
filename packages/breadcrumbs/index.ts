@@ -91,3 +91,10 @@ declare global {
     'w-breadcrumbs': WarpBreadcrumbs;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-breadcrumbs': WarpBreadcrumbs;
+    }
+  }
+}

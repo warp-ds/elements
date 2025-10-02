@@ -120,3 +120,10 @@ declare global {
     'w-affix': WarpAffix;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-affix': WarpAffix;
+    }
+  }
+}

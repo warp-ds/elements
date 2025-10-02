@@ -91,3 +91,10 @@ declare global {
     'w-dead-toggle': WarpDeadToggle;
   }
 }
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-dead-toggle': WarpDeadToggle;
+    }
+  }
+}
