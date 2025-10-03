@@ -14,9 +14,11 @@ start by reviewing the [contributing guidelines](CONTRIBUTING.md).
 
 ### Installation
 
-Warp custom elements are supplied by Eik CDN. 
+Warp custom elements are supplied by the Eik CDN. 
 In addition, you can install the `@warp-ds/elements` package to get intellisense
 in your editor.
+
+#### Step 1.
 
 Add the following script and style to the very top of your document head to ensure performant loading
 
@@ -24,6 +26,8 @@ Add the following script and style to the very top of your document head to ensu
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/elements/2.2.0-next.13/styles.css" crossorigin />
 <script src="https://assets.finn.no/pkg/@warp-ds/elements/2.2.0-next.13/index.js" type="module"></script>
 ```
+
+#### Step 2.
 
 Be sure to preload whichever brand fonts you need for a page and load the correct font file:
 
@@ -34,6 +38,8 @@ Be sure to preload whichever brand fonts you need for a page and load the correc
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" crossorigin>
 ```
 
+#### Step 3.
+
 You'll also want to load Warp tokens and resets CSS files to ensure consistent and correct styling for the brand.
 
 ```html
@@ -41,22 +47,27 @@ You'll also want to load Warp tokens and resets CSS files to ensure consistent a
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/finn-no.css" crossorigin>
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
 ```
+#### Step 4.
 
-Next, to add intellisense to your editor install `@warp-ds/elements` by using npm/pnpm.
+Next, to add intellisense to your editor install `@warp-ds/elements` by using npm/pnpm. See the Editor integration below.
 
-#### Install using npm
+##### Install using npm
 
 ```sh
 npm install @warp-ds/elements
 ```
 
-#### Install using pnpm
+##### Install using pnpm
 
 ```sh
 pnpm add @warp-ds/elements
 ```
 
 And then head on down to the editor configuration section below to complete setup.
+
+### Using Warp elements with Borealis
+
+If you are using Borealis modules from the Web Platform Team (and you should be) and keeping your app dependencies up to date (and you should be), then steps 2 and 3 are already taken care of for you, you just need to do steps 1 and 4.
 
 ### Documentation
 
@@ -69,7 +80,7 @@ see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/)
 
 This module includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
 
-## Using Warp Elements in a plain HTML page
+##### Using Warp Elements in a plain HTML page
 
 When developing, install Warp Elements locally using npm
 
@@ -100,11 +111,11 @@ Now, inside any .html files, you will get intellisense when using Warp Elements
 <w-button variant=""><w-button>
 ```
 
-## Using Warp Elements in JavaScript template literals
+##### Using Warp Elements in JavaScript template literals
 
 IntelliSense in JavaScript strings is not supported without additional plugins and syntax, such as comment hints (`/* html */`) or a tagged template literal similar to Lit.
 
-## Using Warp Elements in Lit html tagged template literals
+##### Using Warp Elements in Lit html tagged template literals
 
 When developing, install Warp Elements locally using npm
 
@@ -135,7 +146,7 @@ Now, inside any html`` tagged template literals, you will get intellisense when 
 <w-button variant=""><w-button>
 ```
 
-## Using Warp Elements in a React app, v19 or later
+##### Using Warp Elements in a React app, v19 or later
 
 ```
 npm install @warp-ds/elements
@@ -147,7 +158,7 @@ Now, inside your react components, you will get intellisense when using Warp Ele
 <w-button variant=""><w-button>
 ```
 
-## Using Warp Elements in a React app, v18 or earlier
+##### Using Warp Elements in a React app, v18 or earlier
 
 React 18 and earlier do not support custom elements.
 
@@ -178,6 +189,20 @@ you should get intellisense when using Warp Elements.
 We ship `web-types.json` which should get picked up automatically by JetBrains IDEA and similar products.
 
 You should see code completions and inline docs for Warp elements when writing HTML.
+
+### Ensure elements are ready (and avoid CLS and FOUCE)
+
+To avoid issues like CLS (cumulative layout shift) and FOUCE (flash of unstyled custom elements), its important that Warp Elements is loaded before the page is rendered. For this reason, elements should not be bundled into the rest of your client side application and code and should be loaded in the document head, as early as possible (see installation above). When this is done correctly, elements will be loaded and ready about the same time as the rest of the page styles and wont cause delays in page load times. However, due to the way browsers work, a page render will occur without the components and an immediate re-render will occur with the components. This causes things to jump around on the page which in turn impacts lighthouse and other performance scores. Warp elements ships with a tool to prevent the initial render without components and only do the second, with components, render. This tool is called Warp Cloak and its usage is described below.
+
+#### The Warp cloaking device
+
+To use the Warp cloaking device to avoid CLS and FOUCE, simply add the warp-cloak class to your pages body, html or a wrapper div that contains all the pages visible elements (including the header and footer)
+
+```html
+<body class="warp-cloak">
+```
+
+That's it, your components should render just 1x, fully ready with no CLS and FOUCE.
 
 ## Releases
 
