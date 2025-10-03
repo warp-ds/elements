@@ -56,16 +56,3 @@ if (!customElements.get('w-badge')) {
 }
 
 export { WarpBadge };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-badge': WarpBadge;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-badge': WarpBadge;
-    }
-  }
-}

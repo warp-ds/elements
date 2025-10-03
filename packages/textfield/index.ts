@@ -261,16 +261,3 @@ if (!customElements.get('w-textfield')) {
 }
 
 export { WarpTextField };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-textfield': WarpTextField;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-textfield': WarpTextField;
-    }
-  }
-}

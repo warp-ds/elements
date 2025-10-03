@@ -65,16 +65,3 @@ if (!customElements.get('w-box')) {
 }
 
 export { WarpBox };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-box': WarpBox;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-box': WarpBox;
-    }
-  }
-}

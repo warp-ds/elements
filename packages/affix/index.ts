@@ -114,16 +114,3 @@ if (!customElements.get('w-affix')) {
 }
 
 export { WarpAffix };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-affix': WarpAffix;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-affix': WarpAffix;
-    }
-  }
-}

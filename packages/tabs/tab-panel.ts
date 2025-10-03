@@ -54,10 +54,3 @@ declare global {
     'w-tab-panel': WarpTabPanel;
   }
 }
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-tab-panel': WarpTabPanel;
-    }
-  }
-}

@@ -336,16 +336,3 @@ if (!customElements.get('w-button')) {
 }
 
 export { WarpButton };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-button': WarpButton;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-button': WarpButton;
-    }
-  }
-}

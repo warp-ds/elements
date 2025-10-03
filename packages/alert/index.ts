@@ -137,16 +137,3 @@ if (!customElements.get('w-alert')) {
 }
 
 export { WarpAlert };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-alert': WarpAlert;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-alert': WarpAlert;
-    }
-  }
-}

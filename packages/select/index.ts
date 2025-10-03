@@ -203,16 +203,3 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 if (!customElements.get('w-select')) {
   customElements.define('w-select', WarpSelect);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-select': WarpSelect;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-select': WarpSelect;
-    }
-  }
-}

@@ -329,10 +329,4 @@ if (!customElements.get('w-slider-thumb')) {
   customElements.define('w-slider-thumb', WarpSliderThumb);
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-slider-thumb': WarpSliderThumb;
-  }
-}
-
 export { WarpSliderThumb };

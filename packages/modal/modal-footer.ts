@@ -41,16 +41,3 @@ export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitE
 if (!customElements.get('w-modal-footer')) {
   customElements.define('w-modal-footer', ModalFooter);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-modal-footer': ModalFooter;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-modal-footer': ModalFooter;
-    }
-  }
-}

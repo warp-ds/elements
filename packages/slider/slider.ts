@@ -207,10 +207,4 @@ if (!customElements.get('w-slider')) {
   customElements.define('w-slider', WarpSlider);
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-slider': WarpSlider;
-  }
-}
-
 export { WarpSlider };

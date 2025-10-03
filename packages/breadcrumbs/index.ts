@@ -85,16 +85,3 @@ if (!customElements.get('w-breadcrumbs')) {
 }
 
 export { WarpBreadcrumbs };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-breadcrumbs': WarpBreadcrumbs;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-breadcrumbs': WarpBreadcrumbs;
-    }
-  }
-}

@@ -55,7 +55,7 @@
     "build:styles": "node ./build/styles.js",
     "build:polyfill": "node ./build/polyfill.js",
     "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
-    "build:types": "tsc --project tsconfig.json --outFile dist/index.d.ts --declaration true --emitDeclarationOnly",
+    "build:types": "cp ./index.d.ts ./dist/index.d.ts",
     "commit": "cz",
     "dev": "pnpm run storybook",
     "storybook": "storybook dev --port 63900",

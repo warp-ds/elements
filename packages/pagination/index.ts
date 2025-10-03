@@ -205,16 +205,3 @@ if (!customElements.get('w-pagination')) {
 }
 
 export { WarpPagination };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-pagination': WarpPagination;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-pagination': WarpPagination;
-    }
-  }
-}

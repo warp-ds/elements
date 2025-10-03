@@ -488,16 +488,3 @@ if (!customElements.get('w-attention')) {
 }
 
 export { WarpAttention };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-attention': WarpAttention;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-attention': WarpAttention;
-    }
-  }
-}

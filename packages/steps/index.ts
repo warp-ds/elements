@@ -212,18 +212,3 @@ if (!customElements.get('w-step')) {
 }
 
 export { WarpSteps, WarpStep };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-steps': WarpSteps;
-    'w-step': WarpStep;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-steps': WarpSteps;
-      'w-step': WarpStep;
-    }
-  }
-}

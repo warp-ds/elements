@@ -41,16 +41,3 @@ if (!customElements.get('w-pageindicator')) {
 }
 
 export { WarpPageIndicator };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-pageindicator': WarpPageIndicator;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-pageindicator': WarpPageIndicator;
-    }
-  }
-}

@@ -108,16 +108,3 @@ if (!customElements.get('w-link')) {
 }
 
 export { WarpLink };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-link': WarpLink;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-link': WarpLink;
-    }
-  }
-}

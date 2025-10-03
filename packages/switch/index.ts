@@ -91,16 +91,3 @@ export class WarpSwitch extends LitElement {
 if (!customElements.get('w-switch')) {
   customElements.define('w-switch', WarpSwitch);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-switch': WarpSwitch;
-  }
-}
-declare module 'react' {
-  namespace JSX {
-    interface IntrinsicElements {
-      'w-switch': WarpSwitch;
-    }
-  }
-}
