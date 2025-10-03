@@ -1,3 +1,11 @@
+# [2.2.0-next.16](https://github.com/warp-ds/elements/compare/v2.2.0-next.15...v2.2.0-next.16) (2025-10-03)
+
+
+### Bug Fixes
+
+* add types build command ([2499704](https://github.com/warp-ds/elements/commit/2499704e436e1aa90bc2f044cab188584cc864b0))
+* use correct JSX declarations ([6380d19](https://github.com/warp-ds/elements/commit/6380d19a28f9773e9a3ce7f64b48fe90f385e108))
+
 # [2.2.0-next.15](https://github.com/warp-ds/elements/compare/v2.2.0-next.14...v2.2.0-next.15) (2025-10-02)
 
 
