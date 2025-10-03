@@ -29,8 +29,8 @@ test('calling focus on w-button focuses the button inside the shadow root', asyn
   const page = render(component);
   await expect.element(page.getByRole('button')).toBeVisible();
 
-  const button: WarpButton = page.container.querySelector('w-button')
-  
+  const button: WarpButton = page.container.querySelector('w-button');
+
   button.focus();
 
   await vi.waitFor(() => page.container.querySelector(':focus').tagName === 'BUTTON');
