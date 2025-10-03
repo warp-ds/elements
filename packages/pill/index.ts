@@ -134,9 +134,3 @@ if (!customElements.get('w-pill')) {
 }
 
 export { WarpPill };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-pill': WarpPill;
-  }
-}

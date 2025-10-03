@@ -205,9 +205,3 @@ if (!customElements.get('w-pagination')) {
 }
 
 export { WarpPagination };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-pagination': WarpPagination;
-  }
-}

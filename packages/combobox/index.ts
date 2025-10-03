@@ -483,9 +483,3 @@ export class WarpCombobox extends LitElement {
 if (!customElements.get('w-combobox')) {
   customElements.define('w-combobox', WarpCombobox);
 }
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-combobox': WarpCombobox;
-  }
-}

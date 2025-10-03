@@ -9,6 +9,9 @@ export default [
       // Disabled in the ts variant of imports, but we get it via warp-ds/eslint-config
       // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/named.md
       'import/named': 'off',
+
+      // We need to disable this so we can declare module 'react/jsx-runtime' in component files
+      '@typescript-eslint/no-namespace': ['error', { allowDeclarations: true, allowDefinitionFiles: true }],
     },
   },
   {

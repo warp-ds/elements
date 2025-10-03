@@ -560,10 +560,4 @@ if (!customElements.get('w-datepicker')) {
   customElements.define('w-datepicker', WarpDatepicker);
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-datepicker': WarpDatepicker;
-  }
-}
-
 export { WarpDatepicker };

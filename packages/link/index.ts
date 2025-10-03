@@ -108,9 +108,3 @@ if (!customElements.get('w-link')) {
 }
 
 export { WarpLink };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-link': WarpLink;
-  }
-}

@@ -65,9 +65,3 @@ if (!customElements.get('w-box')) {
 }
 
 export { WarpBox };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-box': WarpBox;
-  }
-}

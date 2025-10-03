@@ -137,9 +137,3 @@ if (!customElements.get('w-alert')) {
 }
 
 export { WarpAlert };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-alert': WarpAlert;
-  }
-}

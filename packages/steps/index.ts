@@ -212,10 +212,3 @@ if (!customElements.get('w-step')) {
 }
 
 export { WarpSteps, WarpStep };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-steps': WarpSteps;
-    'w-step': WarpStep;
-  }
-}

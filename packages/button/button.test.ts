@@ -28,6 +28,7 @@ test('calling focus on w-button focuses the button inside the shadow root', asyn
   const page = render(component);
   await expect.element(page.getByRole('button')).toBeVisible();
 
+  // @ts-expect-error if we import and type using WarpButton, the test fails which is nonsense so I've opted to simply ignore this error.
   page.container.querySelector('w-button').focus();
 
   await vi.waitFor(() => page.container.querySelector(':focus').tagName === 'BUTTON');
