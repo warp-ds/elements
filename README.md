@@ -38,6 +38,29 @@ Be sure to preload whichever brand fonts you need for a page and load the correc
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" crossorigin>
 ```
 
+```html
+<!-- Tori example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/tori-fi.css" crossorigin>
+```
+
+```html
+<!-- DBA example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ProximaNova-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ProximaNova-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/dba-dk.css" crossorigin>
+```
+
+```html
+<!-- Blocket example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/blocket-se.css" crossorigin>
+```
+
 #### Step 3.
 
 You'll also want to load Warp tokens and resets CSS files to ensure consistent and correct styling for the brand.
@@ -47,6 +70,25 @@ You'll also want to load Warp tokens and resets CSS files to ensure consistent a
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/finn-no.css" crossorigin>
 <link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
 ```
+
+```html
+<!-- Tori example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/tori-fi.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+```html
+<!-- DBA example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/dba-dk.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+```html
+<!-- Blocket example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/blocket-se.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
 #### Step 4.
 
 Next, to add intellisense to your editor install `@warp-ds/elements` by using npm/pnpm. See the Editor integration below.
@@ -206,7 +248,7 @@ That's it, your components should render just 1x, fully ready with no CLS and FO
 
 ## Releases
 
-This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
+This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `2.2.0-next.13`).
 Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
 
 ## Changelog
