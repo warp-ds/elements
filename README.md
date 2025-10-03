@@ -100,9 +100,9 @@ Now, inside any .html files, you will get intellisense when using Warp Elements
 <w-button variant=""><w-button>
 ```
 
-## Using Warp Elements in JavaScript template literals [not yet Supported]
+## Using Warp Elements in JavaScript template literals
 
-TBD
+IntelliSense in JavaScript strings is not supported without additional plugins and syntax, such as comment hints (`/* html */`) or a tagged template literal similar to Lit.
 
 ## Using Warp Elements in Lit html tagged template literals
 
