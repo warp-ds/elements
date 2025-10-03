@@ -4,7 +4,6 @@ import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './index.js';
-import { WarpButton } from './index.js';
 
 test('renders the slotted label', async () => {
   const component = html`<w-button>This is a button</w-button>`;
@@ -29,9 +28,8 @@ test('calling focus on w-button focuses the button inside the shadow root', asyn
   const page = render(component);
   await expect.element(page.getByRole('button')).toBeVisible();
 
-  const button: WarpButton = page.container.querySelector('w-button');
-
-  button.focus();
+  // @ts-expect-error if we import and type using WarpButton, the test fails which is nonsense so I've opted to simply ignore this error.
+  page.container.querySelector('w-button').focus();
 
   await vi.waitFor(() => page.container.querySelector(':focus').tagName === 'BUTTON');
 });
