@@ -6,6 +6,7 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 
 import { prespread } from '../../.storybook/utilities.js';
 
+import '../button/index.js';
 import type { WarpDatepicker } from './index.js';
 import './index.js';
 
