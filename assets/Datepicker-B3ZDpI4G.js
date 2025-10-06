@@ -1,4 +1,0 @@
-import{j as t}from"./index-hdMx_IMH.js";import{useMDXComponents as n}from"./index-DH_uTf8R.js";import{M as i,C as s}from"./blocks-CNrhk6w5.js";import{D as a,a as m}from"./datepicker.stories-BZORVjAI.js";import"./preload-helper-DvrX7W50.js";import"./iframe-KOL2i0YR.js";import"./utilities-CAiooft_.js";import"./query-NYTjQBeo.js";import"./class-map-n1fvZ5-Q.js";import"./if-defined-CsPiV55A.js";import"./chevron-right-16-vnj3U34w.js";import"./FormControlMixin-DJnJZbro.js";function r(e){const o={h1:"h1",p:"p",...n(),...e.components};return t.jsxs(t.Fragment,{children:[t.jsx(i,{of:a,name:"Docs"}),`
-`,t.jsx(o.h1,{id:"datepicker",children:"Datepicker"}),`
-`,t.jsx(o.p,{children:"A date picker allows the user to select a specific calendar date."}),`
-`,t.jsx(s,{of:m})]})}function k(e={}){const{wrapper:o}={...n(),...e.components};return o?t.jsx(o,{...e,children:t.jsx(r,{...e})}):r(e)}export{k as default};
