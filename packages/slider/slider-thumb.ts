@@ -243,7 +243,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       `;
 
-        await polyfill.call(this, { elements: [this.anchorPositioningStyleElement] });
+        await polyfill({ roots: [this.shadowRoot], elements: [this.anchorPositioningStyleElement] });
       } catch (e) {
         console.error(new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }));
       }

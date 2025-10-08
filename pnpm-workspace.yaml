@@ -5,6 +5,5 @@ ignoredBuiltDependencies:
   - esbuild
 
 patchedDependencies:
-  '@oddbird/css-anchor-positioning': patches/@oddbird__css-anchor-positioning.patch
   '@vitest/pretty-format': patches/@vitest__pretty-format.patch
   custom-element-vs-code-integration: patches/custom-element-vs-code-integration.patch

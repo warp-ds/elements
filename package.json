@@ -81,7 +81,7 @@
     "@itsy/animate": "0.0.9",
     "@lingui/cli": "5.2.0",
     "@lingui/conf": "5.2.0",
-    "@oddbird/css-anchor-positioning": "^0.6.1",
+    "@oddbird/css-anchor-positioning": "^0.7.0",
     "@open-wc/lit-helpers": "^0.7.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
