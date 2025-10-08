@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 
-import { WarpDatepicker } from './index.js';
+// decouple from CDN by providing a dummy class
+class Component extends LitElement {}
 
 export const DatePicker = createComponent({
   tagName: 'w-datepicker',
-  elementClass: WarpDatepicker,
+  elementClass: Component,
   react: React,
 });

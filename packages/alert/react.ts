@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 
-import { WarpAlert } from './index.js';
+// decouple from CDN by providing a dummy class
+class Component extends LitElement {}
 
 export const Alert = createComponent({
   tagName: 'w-alert',
-  elementClass: WarpAlert,
+  elementClass: Component,
   react: React,
 });

@@ -1,12 +1,13 @@
 import React from 'react';
 
+import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 
-import { WarpAttention } from './index.js';
+// decouple from CDN by providing a dummy class
+class Component extends LitElement {}
 
 export const Attention = createComponent({
   tagName: 'w-attention',
-  // @ts-expect-error WarpAttention has a popover attribute which conflicts with global HTML popover attribute, will be changed
-  elementClass: WarpAttention,
+  elementClass: Component,
   react: React,
 });

@@ -1,23 +1,25 @@
 import React from 'react';
 
+import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 
-import { WarpTabs, WarpTab, WarpTabPanel } from './index.js';
+// decouple from CDN by providing a dummy class
+class Component extends LitElement {}
 
 export const Tabs = createComponent({
   tagName: 'w-tabs',
-  elementClass: WarpTabs,
+  elementClass: Component,
   react: React,
 });
 
 export const Tab = createComponent({
   tagName: 'w-tab',
-  elementClass: WarpTab,
+  elementClass: Component,
   react: React,
 });
 
 export const TabPanel = createComponent({
   tagName: 'w-tab-panel',
-  elementClass: WarpTabPanel,
+  elementClass: Component,
   react: React,
 });
