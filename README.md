@@ -118,6 +118,24 @@ see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/)
 
 ### Editor integration
 
+#### Typescript
+
+Install the `@warp-ds/elements` package
+
+```
+npm install @warp-ds/elements
+```
+
+Add `@warp-ds/elements` to tsconfig types in compilerOptions.
+
+```json
+{
+  "compilerOptions": {
+    "types": ["react", "react-dom", "@warp-ds/elements"]
+  }
+}
+```
+
 #### Visual Studio Code
 
 This module includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
