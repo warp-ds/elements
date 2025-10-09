@@ -1,3 +1,17 @@
+# [2.2.0-next.18](https://github.com/warp-ds/elements/compare/v2.2.0-next.17...v2.2.0-next.18) (2025-10-09)
+
+
+### Bug Fixes
+
+* update pagination styles ([8a356b8](https://github.com/warp-ds/elements/commit/8a356b864c982e06c7800e099c2348aa50c047aa))
+
+# [2.2.0-next.17](https://github.com/warp-ds/elements/compare/v2.2.0-next.16...v2.2.0-next.17) (2025-10-09)
+
+
+### Bug Fixes
+
+* center icons and buttons, and don't trigger click on icons ([#347](https://github.com/warp-ds/elements/issues/347)) ([c25a0de](https://github.com/warp-ds/elements/commit/c25a0deebf9d76d6d11851463442fcca7a26f79a))
+
 # [2.2.0-next.16](https://github.com/warp-ds/elements/compare/v2.2.0-next.15...v2.2.0-next.16) (2025-10-03)
 
 
