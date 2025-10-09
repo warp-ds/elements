@@ -143,6 +143,9 @@ importers:
       '@wc-toolkit/cem-validator':
         specifier: ^1.0.3
         version: 1.0.3
+      '@wc-toolkit/jsx-types':
+        specifier: ^1.4.2
+        version: 1.4.2
       '@wc-toolkit/storybook-helpers':
         specifier: ^9.0.1
         version: 9.0.1(lit@3.3.1)(storybook@9.1.10(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@6.3.6(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)))
@@ -1600,6 +1603,9 @@ packages:
 
   '@wc-toolkit/cem-validator@1.0.3':
     resolution: {integrity: sha512-teKgwoyUaIUmJQCnYVjaxOLo6wOSNN/cCRh3jeeF84rNDuzyygl+zHfwgU5H8Z02hSvgvCJjKX+r7un9A70svw==}
+
+  '@wc-toolkit/jsx-types@1.4.2':
+    resolution: {integrity: sha512-NunzM5fvgZrov8iwJe0mEqgCL/pEZiM0/JoEV4PGAKiNngNHQo0CO2aI2yt2TQVF+gZVWA3hN3gtV+Llq7jHAw==}
 
   '@wc-toolkit/storybook-helpers@9.0.1':
     resolution: {integrity: sha512-FrVWcNi54Jaof9uEfva3xOA0geZKRVTDwJLIMcy4s2LIJXuHubnNOEgBKlmA05HNtRp3SHpkJ06mxQeOqrORTQ==}
@@ -6651,6 +6657,8 @@ snapshots:
       unocss: 0.65.4(postcss@8.5.6)(rollup@4.52.4)(vite@6.3.6(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6))(vue@3.5.22(typescript@5.5.3))
 
   '@wc-toolkit/cem-validator@1.0.3': {}
+
+  '@wc-toolkit/jsx-types@1.4.2': {}
 
   '@wc-toolkit/storybook-helpers@9.0.1(lit@3.3.1)(storybook@9.1.10(@testing-library/dom@10.4.1)(prettier@3.3.2)(vite@6.3.6(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6)))':
     dependencies:
