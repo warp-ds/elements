@@ -1,3 +1,10 @@
+# [2.2.0-next.19](https://github.com/warp-ds/elements/compare/v2.2.0-next.18...v2.2.0-next.19) (2025-10-09)
+
+
+### Bug Fixes
+
+* generate types using CEM ([1c481bc](https://github.com/warp-ds/elements/commit/1c481bc1608fefcffcb6d91ab30d73cb3276b72b))
+
 # [2.2.0-next.18](https://github.com/warp-ds/elements/compare/v2.2.0-next.17...v2.2.0-next.18) (2025-10-09)
 
 
