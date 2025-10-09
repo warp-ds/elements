@@ -129,7 +129,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for first page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-double-left-16></w-icon-chevron-double-left-16>
+              <w-icon-chevron-double-left-16 class="pointer-events-none"></w-icon-chevron-double-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
           : nothing}
@@ -146,7 +146,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for previous page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-left-16></w-icon-chevron-left-16>
+              <w-icon-chevron-left-16 class="pointer-events-none"></w-icon-chevron-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
           : nothing}
@@ -191,7 +191,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for next page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-right-16></w-icon-chevron-right-16>
+              <w-icon-chevron-right-16 class="pointer-events-none"></w-icon-chevron-right-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
           : nothing}
