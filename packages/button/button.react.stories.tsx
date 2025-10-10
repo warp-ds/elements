@@ -2,17 +2,15 @@ import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Button } from "./react";
 
-const meta = {
+export default {
   component: Button,
 } satisfies Meta<typeof Button>;
-
-export default meta;
 
 export type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    variant: "primary",
+    variant:"primary",
     children: "Hello"
   },
 };

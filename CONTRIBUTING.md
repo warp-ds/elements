@@ -91,6 +91,45 @@ There are two branches to keep in mind:
 When adding a new feature, fixing a bug, or adding to the repository in any other way,
 you should always do this in a feature branch that is branched off the `next` branch.
 
+### Types
+
+Types are provided to consumers via `dist/index.d.ts`. for TS and JS projects, however how you deliver your markup decides where intellisense support is derrived.
+In the case of a plain HTML file, we ship `dist/custom-elements.json` and a couple other meta files in formats for vscode and jetbrains products. (See README.md for details).
+The same is true for Lit html tagged template literals except that the consumer must also install the lit-plugin plugin for vscode.
+For JSX and TSX, however, intellisense is derrived from the types so our metafiles have no effect.
+Also worth noting is that for JSX projects in JS projects, TS will use autoacquire and pick up intellisense hinting with no additional configuration. Install @warp-ds/elements and it just works. This is not the case for TSX/TS projects where, according to the TS docs, auto acquire is intentionally turned off. This means you need to add @warp-ds/elements to compilerOptions.types in tsconfig.
+
+#### Type generation
+
+Types are generated from the custom elements manifest which is generated from the components.
+Its important that all components get picked up in the globs property of .cem/custom-elements-manifest.config.js.
+Be sure to check this when adding a new component in particular.
+
+#### Annotating events
+
+Events are only typed from the @fires jsdoc annotation in each custom element file. Native events such as click are not picked up automatically so
+any events that you want get intellisense and type safety need to be defined in this way.
+
+Eg.
+```
+@fires {CustomEvent} page-click - Triggered when a link button in the pagination is clicked. Contains the page number in `string` form.
+```
+
+#### Private properties
+
+To avoid typing of private properties, define them as private
+
+```
+private myThing() {}
+```
+
+or mark as internal using jsdoc annotations
+
+```
+/* @internal */
+myThing() {}
+```
+
 ### Committing
 
 It is important to follow [Conventional Commits](https://www.conventionalcommits.org/) when making changes ([Commitizen](#commitizen) to the rescue),
