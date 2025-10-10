@@ -96,7 +96,6 @@ class WarpAttention extends LitElement {
   callout: boolean;
 
   @property({ type: Boolean, reflect: true })
-  // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
   @property({ type: Boolean, reflect: true })
@@ -483,7 +482,6 @@ class WarpAttention extends LitElement {
 }
 
 if (!customElements.get('w-attention')) {
-  // @ts-expect-error Overriding native HTML popover global attribute
   customElements.define('w-attention', WarpAttention);
 }
 

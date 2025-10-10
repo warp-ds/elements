@@ -109,9 +109,9 @@ export const ToolTip: Story = {
   ],
 };
 
-export const Callout: Story = {
-  args: { buttonText: 'i need a callout', class: 'flex items-center gap-8', placement: 'right', callout: true, show: true },
-};
+// export const Callout: Story = {
+//   args: { buttonText: 'i need a callout', class: 'flex items-center gap-8', placement: 'right', callout: true, show: true },
+// };
 
 export const Highlight: Story = {
   args: {

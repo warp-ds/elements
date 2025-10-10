@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LitElement } from 'lit';
-import { createComponent } from '@lit/react';
+import { createComponent, ReactWebComponent } from '@lit/react';
 import { WarpAttention } from './index';
 
 // decouple from CDN by providing a dummy class
@@ -9,7 +9,6 @@ class Component extends LitElement {}
 
 export const Attention = createComponent({
   tagName: 'w-attention',
-  // @ts-expect-error Overriding native HTML popover global attribute
-  elementClass: Component as unknown as typeof WarpAttention,
+  elementClass: Component,
   react: React,
-});
+}) as unknown as Omit<ReactWebComponent<Omit<WarpAttention, 'popover'> & Pick<HTMLElement, 'popover'>>, 'popover' & Pick<WarpAttention, 'popover'>>;
