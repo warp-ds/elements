@@ -2,12 +2,13 @@ import React from 'react';
 
 import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+import { WarpDeadToggle } from '.';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
 
 export const DeadToggle = createComponent({
   tagName: 'w-dead-toggle',
-  elementClass: Component,
+  elementClass: Component as unknown as typeof WarpDeadToggle,
   react: React,
 });
