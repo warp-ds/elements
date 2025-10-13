@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import './index.ts';
+import './index';
 
 export default {
   title: 'Forms/Radio',
