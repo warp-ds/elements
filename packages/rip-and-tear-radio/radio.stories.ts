@@ -5,7 +5,7 @@ import './index.ts';
 
 export default {
   title: 'Forms/Radio',
-  render: (args) => {
+  render: () => {
     return html`
       <w-radio-group label="Group" name="foobar" value="foo">
         <w-radio value="foo">foo</w-radio>
@@ -15,4 +15,4 @@ export default {
   },
 } satisfies Meta;
 
-export const Default: Story = {};
+export const Default: StoryObj = {};
