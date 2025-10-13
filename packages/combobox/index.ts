@@ -408,7 +408,7 @@ export class WarpCombobox extends LitElement {
     return display;
   }
 
-  protected updated(changedProperties: PropertyValues<this>) {
+  protected willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('options') || changedProperties.has('value') || changedProperties.has('disableStaticFiltering')) {
       this._optionIdCounter += this.options.length;
 
@@ -421,7 +421,8 @@ export class WarpCombobox extends LitElement {
       this.disableStaticFiltering &&
       this._currentOptions.length &&
       this._currentOptions.length === 1 &&
-      !this._currentOptions.some((o) => o.value === this.value)
+      !this._currentOptions.some((o) => o.value === this.value) &&
+      !this._isOpen
     ) {
       this._isOpen = true;
     }
