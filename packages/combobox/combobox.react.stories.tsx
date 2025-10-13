@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Combobox } from "./react";
 
 export default {
+  title: 'Forms/Combobox',
   component: Combobox,
 } satisfies Meta<typeof Combobox>;
 
