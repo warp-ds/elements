@@ -11,4 +11,8 @@ export const DatePicker = createComponent({
   tagName: 'w-datepicker',
   elementClass: Component as unknown as typeof WarpDatepicker,
   react: React,
+  events: {
+    onChange: 'change',
+    onchange: 'change',
+  }
 });

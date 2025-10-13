@@ -18,4 +18,10 @@ export const RadioGroup = createComponent({
   tagName: 'w-radio-group',
   elementClass: Component as unknown as typeof WRadioGroup,
   react: React,
+  events: {
+    onInput: 'input',
+    oninput: 'input',
+    onChange: 'change',
+    onchange: 'change',
+  }
 });

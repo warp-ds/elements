@@ -11,4 +11,8 @@ export const Checkbox = createComponent({
   tagName: 'w-checkbox',
   elementClass: Component as unknown as typeof WCheckbox,
   react: React,
+  events: {
+    onChange: 'change',
+    onchange: 'change',
+  }
 });

@@ -11,4 +11,8 @@ export const Pagination = createComponent({
   tagName: 'w-pagination',
   elementClass: Component as unknown as typeof WarpPagination,
   react: React,
+  events: {
+    onPageClick: 'page-click',
+    "onpage-click": 'page-click',
+  }
 });

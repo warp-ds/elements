@@ -96,6 +96,7 @@ class WarpAttention extends LitElement {
   callout: boolean;
 
   @property({ type: Boolean, reflect: true })
+  // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
   @property({ type: Boolean, reflect: true })
@@ -307,7 +308,7 @@ class WarpAttention extends LitElement {
   /** @internal */
   get _closeBtnHtml() {
     return html`
-      <button aria-label="${this._ariaClose}" @click="${this.close}" @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
+      <button aria-label="${this._ariaClose}" @click=${this.close} @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
         <w-icon-close-16 style="height: 16px; width: 16px; display: flex;"></w-icon-close-16>
       </button>
     `;
@@ -482,6 +483,7 @@ class WarpAttention extends LitElement {
 }
 
 if (!customElements.get('w-attention')) {
+  // @ts-expect-error Overriding native HTML popover global attribute
   customElements.define('w-attention', WarpAttention);
 }
 

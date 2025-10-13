@@ -11,4 +11,8 @@ export const Switch = createComponent({
   tagName: 'w-switch',
   elementClass: Component as unknown as typeof WarpSwitch,
   react: React,
+  events: {
+    onChange: 'change',
+    onchange: 'change',
+  }
 });

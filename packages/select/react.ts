@@ -11,4 +11,8 @@ export const Select = createComponent({
   tagName: 'w-select',
   elementClass: Component as unknown as typeof WarpSelect,
   react: React,
+  events: {
+    onChange: 'change',
+    onchange: 'change',
+  }
 });

@@ -13,12 +13,22 @@ export const Tabs = createComponent({
   tagName: 'w-tabs',
   elementClass: Component as unknown as typeof WarpTabs,
   react: React,
+  events: {
+    onChange: 'change',
+    onchange: 'change',
+  }
 });
 
 export const Tab = createComponent({
   tagName: 'w-tab',
   elementClass: Component as unknown as typeof WarpTab,
   react: React,
+  events: {
+    onTabClick: 'tab-click',
+    "ontab-click": 'tab-click',
+    onClick: 'click',
+    onclick: 'click',
+  }
 });
 
 export const TabPanel = createComponent({

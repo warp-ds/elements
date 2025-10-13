@@ -18,4 +18,8 @@ export const SliderThumb = createComponent({
   tagName: 'w-slider-thumb',
   elementClass: Component as unknown as typeof WarpSliderThumb,
   react: React,
+  events: {
+    onSliderValidity: 'slidervalidity',
+    "onslider-validity": 'slidervalidity', // should be slider-validity
+  }
 });

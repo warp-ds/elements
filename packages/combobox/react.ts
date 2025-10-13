@@ -11,4 +11,10 @@ export const Combobox = createComponent({
   tagName: 'w-combobox',
   elementClass: Component as unknown as typeof WarpCombobox,
   react: React,
+  events: {
+    onSelect: 'select',
+    onselect: 'select',
+    onChange: 'change',
+    onchange: 'change',
+  }
 });
