@@ -3,13 +3,41 @@ import { Meta, StoryObj } from '@storybook/react';
 import { DeadToggle } from "./react";
 
 export default {
+  title: 'Forms/Dead toggle',
+  render(args) {
+    return (<DeadToggle {...args}></DeadToggle>);
+  },
   component: DeadToggle,
 } satisfies Meta<typeof DeadToggle>;
 
 export type Story = StoryObj<typeof DeadToggle>;
 
-export const Primary: Story = {
+export const Radio: Story = {
   args: {
-    children: "Hello"
+    type: "radio",
+  },
+};
+
+export const Checkbox: Story = {
+  args: {
+    type: "checkbox",
+  },
+};
+
+export const Indeterminate: Story = {
+  args: {
+    indeterminate: true,
+  },
+};
+
+export const Checked: Story = {
+  args: {
+    checked: true,
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    invalid: true,
   },
 };

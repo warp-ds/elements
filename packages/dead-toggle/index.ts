@@ -11,10 +11,17 @@ import { reset } from '../styles';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-dead-toggle--docs)
  */
 export class WarpDeadToggle extends LitElement {
-  @property({ type: String }) type: 'radio' | 'checkbox' = 'radio';
-  @property({ type: Boolean, reflect: true }) checked: boolean = false;
-  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: String, reflect: true })
+  type: 'radio' | 'checkbox' = 'radio';
+
+  @property({ type: Boolean, reflect: true })
+  checked: boolean = false;
+
+  @property({ type: Boolean, reflect: true })
+  indeterminate: boolean = false;
+
+  @property({ type: Boolean, reflect: true })
+  invalid: boolean = false;
 
   /** @internal */
   get indeterminateMarker() {
