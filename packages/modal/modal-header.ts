@@ -51,6 +51,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
 
   async willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('back')) {
+      if (!this.titleEl) return;
       const move = new Move(this.titleEl);
       move.when(async () => {
         await this.updateComplete;

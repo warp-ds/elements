@@ -71,7 +71,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
     `;
   }
 
-  updated(changedProperties: Map<string, unknown>) {
+  willUpdate(changedProperties: Map<string, unknown>) {
     if (changedProperties.has('show')) this[this.show ? 'open' : 'close']();
   }
 
