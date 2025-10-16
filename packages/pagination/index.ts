@@ -1,5 +1,5 @@
 // @warp-css;
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing, css } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { property } from 'lit/decorators.js';
@@ -46,7 +46,11 @@ class WarpPagination extends LitElement {
   @property({ type: Number, reflect: true, attribute: 'visible-pages' })
   visiblePages = 7;
 
-  static styles = [reset, styles];
+  static styles = [
+    reset,
+    styles,
+    css`w-icon-chevron-left-16, w-icon-chevron-double-left-16, w-icon-chevron-right-16 { height: 16px; }`
+  ];
 
   constructor() {
     super();
@@ -110,46 +114,46 @@ class WarpPagination extends LitElement {
     return html`<nav class="flex items-center justify-center p-8" @click="${this.#dispatchClickPage}">
       <h1 class="sr-only">
         ${i18n._({
-          id: 'pagination.aria.pagination',
-          message: 'Pages',
-          comment: 'Default screenreader message for pagination container in the pagination component',
-        })}
+      id: 'pagination.aria.pagination',
+      message: 'Pages',
+      comment: 'Default screenreader message for pagination container in the pagination component',
+    })}
       </h1>
       <div class="md:block s-text-link">
         ${this.shouldShowShowFirstPageButton
-          ? html`<a
+        ? html`<a
               data-page-number="1"
               href="${this.baseUrl}1"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+          ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
                 >${i18n._({
-                  id: 'pagination.aria.first-page',
-                  message: 'First page',
-                  comment: 'Default screenreader message for first page link in the pagination component',
-                })},</span
+            id: 'pagination.aria.first-page',
+            message: 'First page',
+            comment: 'Default screenreader message for first page link in the pagination component',
+          })},</span
               >
               <w-icon-chevron-double-left-16></w-icon-chevron-double-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
+        : nothing}
         ${this.shouldShowPreviousPageButton
-          ? html`<a
+        ? html`<a
               data-page-number="${this.currentPageNumber - 1}"
               href="${this.baseUrl}${this.currentPageNumber - 1}"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+          ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only"
                 >${i18n._({
-                  id: 'pagination.aria.prev-page',
-                  message: 'Previous page',
-                  comment: 'Default screenreader message for previous page link in the pagination component',
-                })},</span
+            id: 'pagination.aria.prev-page',
+            message: 'Previous page',
+            comment: 'Default screenreader message for previous page link in the pagination component',
+          })},</span
               >
               <w-icon-chevron-left-16></w-icon-chevron-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
+        : nothing}
         ${visiblePages.map((pageNumber) => {
           const isCurrentPage = pageNumber === this.currentPageNumber;
           const url = `${this.baseUrl}${pageNumber}`;
@@ -179,22 +183,22 @@ class WarpPagination extends LitElement {
           >`;
         })}
         ${this.shouldShowNextPageButton
-          ? html`<a
+        ? html`<a
               data-page-number="${this.currentPageNumber + 1}"
               href="${this.baseUrl}${this.currentPageNumber + 1}"
               class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+          ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
               <span class="sr-only">
                 ${i18n._({
-                  id: 'pagination.aria.next-page',
-                  message: 'Next page',
-                  comment: 'Default screenreader message for next page link in the pagination component',
-                })},</span
+            id: 'pagination.aria.next-page',
+            message: 'Next page',
+            comment: 'Default screenreader message for next page link in the pagination component',
+          })},</span
               >
               <w-icon-chevron-right-16></w-icon-chevron-right-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
+        : nothing}
       </div>
     </nav>`;
   }

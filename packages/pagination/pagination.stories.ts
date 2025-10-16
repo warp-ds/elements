@@ -30,7 +30,7 @@ type Story = StoryObj<typeof args>;
 
 export const BasicPagination: Story = {
   args: {
-    'current-page': 1,
+    'current-page-number': 1,
     pages: 5,
     'base-url': '/search?page=',
   },
@@ -38,7 +38,7 @@ export const BasicPagination: Story = {
 
 export const MiddlePageSelected: Story = {
   args: {
-    'current-page': 3,
+    'current-page-number': 3,
     pages: 7,
     'base-url': '/search?page=',
   },
@@ -46,7 +46,7 @@ export const MiddlePageSelected: Story = {
 
 export const LastPageSelected: Story = {
   args: {
-    'current-page': 10,
+    'current-page-number': 10,
     pages: 10,
     'base-url': '/search?page=',
   },
@@ -54,7 +54,7 @@ export const LastPageSelected: Story = {
 
 export const ManyPagesWithLimitedVisible: Story = {
   args: {
-    'current-page': 15,
+    'current-page-number': 15,
     pages: 50,
     'visible-pages': 5,
     'base-url': '/search?page=',
@@ -63,7 +63,7 @@ export const ManyPagesWithLimitedVisible: Story = {
 
 export const SinglePage: Story = {
   args: {
-    'current-page': 1,
+    'current-page-number': 1,
     pages: 1,
     'base-url': '/search?page=',
   },
