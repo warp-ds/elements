@@ -16,7 +16,7 @@ const meta: Meta<typeof args> = {
   render(args) {
     return html`
       <w-select ${spread(prespread(args))}>
-        <option value="strawberries">Strawberries</option>
+        <w-option value="strawberries">Strawberries</w-option>
         <option value="raspberries" selected>Raspberries</option>
         <option value="cloudberries">Cloudberries</option>
       </w-select>

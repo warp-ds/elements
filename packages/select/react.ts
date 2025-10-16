@@ -16,3 +16,9 @@ export const Select = createComponent({
     onchange: 'change',
   }
 });
+
+export const Option = createComponent({
+  tagName: 'w-option',
+  elementClass: Component as unknown as typeof HTMLOptionElement,
+  react: React,
+});

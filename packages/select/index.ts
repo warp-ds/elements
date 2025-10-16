@@ -1,5 +1,5 @@
 // @warp-css;
-import { html, LitElement } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
@@ -85,8 +85,8 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   readOnly: boolean;
 
   /** @internal */
-  @property({ state: true })
-  _options: string;
+  @property({ attribute: false, state: true })
+  _options: Array<TemplateResult>;
 
   @property({ reflect: true })
   name: string;
@@ -99,7 +99,6 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-    this._options = this.innerHTML;
   }
 
   /** @internal */
@@ -108,16 +107,32 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this.setValue(value);
   };
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
     if (this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
-    // Set initial value based on any slotted options that are selected
-    Array.from(this.children).map((child: HTMLOptionElement) => {
-      if (child.selected) {
-        this._setValue(child.value);
-      }
-    });
+    // Gather both <option> and <w-option> children
+    const optionNodes = Array.from(this.children).filter(
+      (child) => child.tagName.toLowerCase() === 'option' || child.tagName.toLowerCase() === 'w-option',
+    );
+
+    // Convert them into HTML strings for the template
+    const options = optionNodes
+      .map((child: HTMLElement) => {
+        const value = child.getAttribute('value') ?? '';
+        const label = child.textContent ?? '';
+        const selected = child.hasAttribute('selected');
+        const disabled = child.hasAttribute('disabled');
+
+        if (selected) {
+          this._setValue(value);
+        }
+
+        return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`; 
+      });
+
+    this._options = options;
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -189,7 +204,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
           @keydown=${this.handleKeyDown}
           @change=${this.onChange}>
-          ${unsafeHTML(this._options)}
+          ${this._options}
         </select>
         <div class="${this.#chevronClasses}">
           <w-icon-chevron-down-16></w-icon-chevron-down-16>
