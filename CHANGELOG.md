@@ -1,3 +1,10 @@
+# [2.2.0-next.20](https://github.com/warp-ds/elements/compare/v2.2.0-next.19...v2.2.0-next.20) (2025-10-16)
+
+
+### Bug Fixes
+
+* box missing last-child slotted selector and button-as-link ([#348](https://github.com/warp-ds/elements/issues/348)) ([4367c1c](https://github.com/warp-ds/elements/commit/4367c1cf05deefa247818a200a60f4465c7e8241))
+
 # [2.2.0-next.19](https://github.com/warp-ds/elements/compare/v2.2.0-next.18...v2.2.0-next.19) (2025-10-09)
 
 
