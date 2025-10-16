@@ -318,8 +318,11 @@ class WarpButton extends FormControlMixin(LitElement) {
       ? html`<w-link
           href=${this.href}
           target=${this.target}
-          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
-          class=${this._classes}>
+          variant=${this.variant}
+          ?small=${this.small}
+          ?quiet=${this.quiet}
+          ?loading=${this.loading}
+          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}>
           <slot></slot>
         </w-link>`
       : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
