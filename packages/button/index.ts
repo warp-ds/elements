@@ -228,7 +228,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
 
   firstUpdated() {
-    if (this.autofocus) {
+    if (this.autofocus && !this.href) {
       setTimeout(() => this.focus(), 0);
     }
   }
@@ -322,6 +322,9 @@ class WarpButton extends FormControlMixin(LitElement) {
           ?small=${this.small}
           ?quiet=${this.quiet}
           ?loading=${this.loading}
+          ?autofocus=${this.autofocus}
+          ?full-width=${this.fullWidth}
+          class=${this.buttonClass}
           rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}>
           <slot></slot>
         </w-link>`
