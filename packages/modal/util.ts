@@ -1,9 +1,9 @@
 // eslint-disable-next-line
 export declare type Constructor<T = Record<string, unknown>> = new (...args: any[]) => T;
 
-export const CanCloseMixin: <TBase extends Constructor<HTMLElement>>(SuperClass: TBase) => Constructor<{ close: () => void }> & TBase = (
-  superClass,
-) =>
+export const CanCloseMixin: <TBase extends Constructor<HTMLElement>>(
+  SuperClass: TBase,
+) => Constructor<{ close: () => void }> & TBase = (superClass) =>
   class extends superClass {
     patchClose = true;
     _close = null;

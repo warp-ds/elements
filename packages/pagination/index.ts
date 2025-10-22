@@ -1,7 +1,7 @@
 // @warp-css;
-import { html, LitElement, nothing } from 'lit';
 
 import { i18n } from '@lingui/core';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/chevron-double-left-16';
@@ -116,12 +116,15 @@ class WarpPagination extends LitElement {
         })}
       </h1>
       <div class="flex items-center s-text-link">
-        ${this.shouldShowShowFirstPageButton
-          ? html`<a
+        ${
+          this.shouldShowShowFirstPageButton
+            ? html`<a
               data-page-number="1"
               href="${this.baseUrl}1"
-              class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+              class="${
+                baseItemStyles +
+                ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'
+              }">
               <span class="sr-only"
                 >${i18n._({
                   id: 'pagination.aria.first-page',
@@ -132,13 +135,17 @@ class WarpPagination extends LitElement {
               <w-icon-chevron-double-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-double-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
-        ${this.shouldShowPreviousPageButton
-          ? html`<a
+            : nothing
+        }
+        ${
+          this.shouldShowPreviousPageButton
+            ? html`<a
               data-page-number="${this.currentPageNumber - 1}"
               href="${this.baseUrl}${this.currentPageNumber - 1}"
-              class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+              class="${
+                baseItemStyles +
+                ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'
+              }">
               <span class="sr-only"
                 >${i18n._({
                   id: 'pagination.aria.prev-page',
@@ -149,7 +156,8 @@ class WarpPagination extends LitElement {
               <w-icon-chevron-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-left-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
+            : nothing
+        }
         ${visiblePages.map((pageNumber) => {
           const isCurrentPage = pageNumber === this.currentPageNumber;
           const url = `${this.baseUrl}${pageNumber}`;
@@ -159,7 +167,8 @@ class WarpPagination extends LitElement {
           if (isCurrentPage) {
             styles += ' s-bg-primary s-text-inverted';
           } else {
-            styles += ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
+            styles +=
+              ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
           }
 
           const ariaLabel = i18n._({
@@ -178,12 +187,15 @@ class WarpPagination extends LitElement {
             >${pageNumber}</a
           >`;
         })}
-        ${this.shouldShowNextPageButton
-          ? html`<a
+        ${
+          this.shouldShowNextPageButton
+            ? html`<a
               data-page-number="${this.currentPageNumber + 1}"
               href="${this.baseUrl}${this.currentPageNumber + 1}"
-              class="${baseItemStyles +
-              ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'}">
+              class="${
+                baseItemStyles +
+                ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'
+              }">
               <span class="sr-only">
                 ${i18n._({
                   id: 'pagination.aria.next-page',
@@ -194,7 +206,8 @@ class WarpPagination extends LitElement {
               <w-icon-chevron-right-16 class="pointer-events-none flex items-center"></w-icon-chevron-right-16>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
-          : nothing}
+            : nothing
+        }
       </div>
     </nav>`;
   }

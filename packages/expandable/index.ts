@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { css, html, LitElement, PropertyValues } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/chevron-down-16';
@@ -42,8 +41,10 @@ export const ccExpandable = {
 
   expansion: 'overflow-hidden',
   expansionNotExpanded: 'h-0 invisible',
-  button: 'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline',
-  buttonBox: 'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 p-16 rounded-8',
+  button:
+    'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline',
+  buttonBox:
+    'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 p-16 rounded-8',
   contentWithTitle: 'pt-0',
   title: 'flex w-full justify-between items-center',
   titleType: 't4',
@@ -58,16 +59,16 @@ export const ccExpandable = {
  */
 class WarpExpandable extends LitElement {
   @property({ type: Boolean, reflect: true })
-  expanded: boolean = false;
+  expanded = false;
 
   @property({ type: String })
   title: string;
 
   @property({ type: Boolean })
-  box: boolean = false;
+  box = false;
 
   @property({ type: Boolean })
-  bleed: boolean = false;
+  bleed = false;
 
   @property({ attribute: 'button-class', type: String })
   buttonClass: string;
@@ -76,21 +77,21 @@ class WarpExpandable extends LitElement {
   contentClass: string;
 
   @property({ attribute: 'no-chevron', type: Boolean })
-  noChevron: boolean = false;
+  noChevron = false;
 
   @property({ type: Boolean })
-  animated: boolean = false;
+  animated = false;
 
   @property({ attribute: 'heading-level', type: Number })
   headingLevel: number;
 
   @property({ type: Boolean, state: true })
   /** @internal */
-  _hasTitle: boolean = true;
+  _hasTitle = true;
 
   @property({ type: Boolean, state: true })
   /** @internal */
-  _showChevronUp: boolean = false;
+  _showChevronUp = false;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
@@ -120,7 +121,8 @@ class WarpExpandable extends LitElement {
 
   firstUpdated() {
     const hasTitleProp = Boolean(this.title);
-    const hasTitleSlot = (this.renderRoot.querySelector("slot[name='title']") as HTMLSlotElement)?.assignedNodes().length > 0;
+    const hasTitleSlot =
+      (this.renderRoot.querySelector("slot[name='title']") as HTMLSlotElement)?.assignedNodes().length > 0;
 
     this._hasTitle = hasTitleProp || hasTitleSlot;
   }
@@ -153,7 +155,10 @@ class WarpExpandable extends LitElement {
   }
 
   get #contentClasses() {
-    return classNames(this.contentClass, [this.box && ccBox.base, this._hasTitle && this.box && ccExpandable.contentWithTitle]);
+    return classNames(this.contentClass, [
+      this.box && ccBox.base,
+      this._hasTitle && this.box && ccExpandable.contentWithTitle,
+    ]);
   }
 
   get #expansionClasses() {
@@ -169,8 +174,9 @@ class WarpExpandable extends LitElement {
 
   render() {
     return html` <div class="${this.#wrapperClasses}">
-      ${this._hasTitle
-        ? html`<w-unstyled-heading level=${this.headingLevel}>
+      ${
+        this._hasTitle
+          ? html`<w-unstyled-heading level=${this.headingLevel}>
             <button
               type="button"
               aria-expanded="${this.expanded}"
@@ -182,12 +188,15 @@ class WarpExpandable extends LitElement {
               </div>
             </button>
           </w-unstyled-heading>`
-        : ''}
-      ${this.animated
-        ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
-        : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
+          : ''
+      }
+      ${
+        this.animated
+          ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
+          : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
             ${this._expandableSlot}
-          </div>`}
+          </div>`
+      }
     </div>`;
   }
 }

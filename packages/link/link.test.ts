@@ -1,6 +1,5 @@
-import { html } from 'lit';
-
 import { page } from '@vitest/browser/context';
+import { html } from 'lit';
 import { expect, test } from 'vitest';
 import './index.js';
 

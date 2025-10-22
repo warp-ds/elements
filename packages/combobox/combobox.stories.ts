@@ -1,7 +1,6 @@
-import { html } from 'lit';
-
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import './index.js';
 import type { WarpCombobox } from './index.js';
@@ -39,7 +38,8 @@ const sampleOptions = [
 ];
 
 export const Default: Story = {
-  render: () => html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
+  render: () =>
+    html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
 };
 
 export const WithValue: Story = {

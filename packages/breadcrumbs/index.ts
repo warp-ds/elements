@@ -1,9 +1,8 @@
 // @warp-css;
 
-import { html, LitElement, TemplateResult } from 'lit';
-
 import { i18n } from '@lingui/core';
 import { interleave } from '@warp-ds/core/breadcrumbs';
+import { html, LitElement, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
@@ -55,7 +54,7 @@ class WarpBreadcrumbs extends LitElement {
     super.connectedCallback();
     // Grab existing children at the point that the component is added to the page
     const flattenedChildren = Array.from(this.children)
-      .flat(Infinity)
+      .flat(Number.POSITIVE_INFINITY)
       .filter((child) => child);
     const styledChildren = flattenedChildren.map((child, index) => {
       if (typeof child === 'string') {

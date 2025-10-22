@@ -1,4 +1,4 @@
-import { css, CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, css, html, LitElement } from 'lit';
 
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -12,9 +12,9 @@ import { reset } from '../styles';
  */
 export class WarpDeadToggle extends LitElement {
   @property({ type: String }) type: 'radio' | 'checkbox' = 'radio';
-  @property({ type: Boolean, reflect: true }) checked: boolean = false;
-  @property({ type: Boolean, reflect: true }) indeterminate: boolean = false;
-  @property({ type: Boolean, reflect: true }) invalid: boolean = false;
+  @property({ type: Boolean, reflect: true }) checked = false;
+  @property({ type: Boolean, reflect: true }) indeterminate = false;
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** @internal */
   get indeterminateMarker() {

@@ -1,6 +1,5 @@
-import { html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -30,16 +29,16 @@ export class WarpTab extends LitElement {
   name!: string;
 
   @property({ reflect: true })
-  label: string = '';
+  label = '';
 
   @property({ type: Boolean, reflect: true })
-  active: boolean = false;
+  active = false;
 
   @property({ type: Boolean, reflect: true })
-  over: boolean = false;
+  over = false;
 
   @property({ attribute: 'tab-class', reflect: true })
-  tabClass: string = '';
+  tabClass = '';
 
   private _handleClick = (event: MouseEvent) => {
     // Dispatch a custom event that the parent tabs component can listen to
@@ -82,21 +81,23 @@ export class WarpTab extends LitElement {
         tabindex="${this.active ? '0' : '-1'}"
         class="${this._classes}"
         @click="${this._handleClick}">
-        ${!hasChildren
-          ? html`<span class="${ccTab.contentUnderlined}">${this.label}</span>`
-          : this.over
-            ? html`
+        ${
+          !hasChildren
+            ? html`<span class="${ccTab.contentUnderlined}">${this.label}</span>`
+            : this.over
+              ? html`
                 <span class="${ccTab.icon}">
                   <slot name="icon"></slot>
                 </span>
                 <span class="${ccTab.contentUnderlined}">${this.label}</span>
               `
-            : html`
+              : html`
                 <div class="${ccTab.content}">
                   <slot name="icon"></slot>
                   ${this.label}
                 </div>
-              `}
+              `
+        }
       </button>
     `;
   }

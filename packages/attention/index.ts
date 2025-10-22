@@ -1,9 +1,15 @@
 // @warp-css;
-import { css, html, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { opposites, directions, arrowDirectionClassname, useRecompute as recompute, Directions } from '@warp-ds/core/attention';
+import {
+  arrowDirectionClassname,
+  Directions,
+  directions,
+  opposites,
+  useRecompute as recompute,
+} from '@warp-ds/core/attention';
+import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -55,7 +61,8 @@ export const ccAttention = {
   base: 'border-2 relative flex items-start',
   tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
   callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',
-  highlight: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8 drop-shadow-m translate-z-0',
+  highlight:
+    'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8 drop-shadow-m translate-z-0',
   popover:
     'bg-[--w-s-color-surface-elevated-300] border-[--w-s-color-surface-elevated-300] s-text rounded-8 p-16 drop-shadow-m translate-z-0',
 
@@ -172,10 +179,15 @@ class WarpAttention extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     if (this.placement && !Object.keys(opposites).includes(this.placement)) {
-      throw new Error(`Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`);
+      throw new Error(
+        `Invalid "placement" attribute. Set its value to one of the following:\n${JSON.stringify(Object.keys(opposites))}`,
+      );
     }
 
-    if (this.fallbackPlacements && !this.fallbackPlacements.every((fallbackPlacement) => directions.includes(fallbackPlacement))) {
+    if (
+      this.fallbackPlacements &&
+      !this.fallbackPlacements.every((fallbackPlacement) => directions.includes(fallbackPlacement))
+    ) {
       throw new Error(
         `Invalid "fallbackPlacements" attribute. Set its value to an array with one or more of the following:\n${JSON.stringify(directions)}`,
       );
@@ -454,13 +466,14 @@ class WarpAttention extends LitElement {
     if (!this.callout && this._targetEl === undefined) return html``;
     return html`
       <div class=${ifDefined(this.className ? this.className : undefined)}>
-        ${this.placement === 'right-start' ||
-        this.placement === 'right' ||
-        this.placement === 'right-end' ||
-        this.placement === 'bottom-start' ||
-        this.placement === 'bottom' ||
-        this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
-          ? html`
+        ${
+          this.placement === 'right-start' ||
+          this.placement === 'right' ||
+          this.placement === 'right-end' ||
+          this.placement === 'bottom-start' ||
+          this.placement === 'bottom' ||
+          this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
+            ? html`
               <slot name="target"></slot>
 
               <div id="attention" class="${this._wrapperClasses}">
@@ -469,14 +482,15 @@ class WarpAttention extends LitElement {
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
-          : html`
+            : html`
               <div id="attention" class="${this._wrapperClasses}">
                 <slot name="message"></slot>
                 <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
               <slot name="target"></slot>
-            `}
+            `
+        }
       </div>
     `;
   }

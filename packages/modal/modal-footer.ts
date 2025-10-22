@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 
 import { reset } from '../styles.js';
 

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { server, userEvent } from '@vitest/browser/context';
+import React, { useState } from 'react';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 

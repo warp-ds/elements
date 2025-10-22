@@ -1,8 +1,7 @@
-import { html } from 'lit';
-
 import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';

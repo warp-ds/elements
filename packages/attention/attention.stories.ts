@@ -1,8 +1,7 @@
-import { html } from 'lit';
-
 import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
@@ -83,7 +82,14 @@ export const Default: Story = {
 };
 
 export const ToolTip: Story = {
-  args: { placement: 'right', buttonText: 'hover me', id: 'tooltip-element', tooltip: true, flip: true, buttonId: 'tooltip-target' },
+  args: {
+    placement: 'right',
+    buttonText: 'hover me',
+    id: 'tooltip-element',
+    tooltip: true,
+    flip: true,
+    buttonId: 'tooltip-target',
+  },
   decorators: [
     (story) => html`
       ${story()}
@@ -110,7 +116,13 @@ export const ToolTip: Story = {
 };
 
 export const Callout: Story = {
-  args: { buttonText: 'i need a callout', class: 'flex items-center gap-8', placement: 'right', callout: true, show: true },
+  args: {
+    buttonText: 'i need a callout',
+    class: 'flex items-center gap-8',
+    placement: 'right',
+    callout: true,
+    show: true,
+  },
 };
 
 export const Highlight: Story = {

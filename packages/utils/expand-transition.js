@@ -1,6 +1,5 @@
-import { css, html, LitElement } from 'lit';
-
 import { collapse, expand } from 'element-collapse';
+import { css, html, LitElement } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 class ExpandTransition extends LitElement {

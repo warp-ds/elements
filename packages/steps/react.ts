@@ -1,8 +1,7 @@
+import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { createComponent } from '@lit/react';
-
-import { WarpSteps, WarpStep } from './index.js';
+import { WarpStep, WarpSteps } from './index.js';
 
 export const Steps = createComponent({
   tagName: 'w-steps',

@@ -1,12 +1,11 @@
-import { html } from 'lit';
-
 import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpModal, WarpModalHeader, WarpModalFooter } from './index.ts';
+import type { WarpModal, WarpModalFooter, WarpModalHeader } from './index.ts';
 import './index.ts';
 
 const { events: modalEvents, args: modalArgs, argTypes: modalArgTypes } = getStorybookHelpers<WarpModal>('w-modal');

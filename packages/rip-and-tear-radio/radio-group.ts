@@ -282,7 +282,7 @@ export class WRadioGroup extends BaseFormAssociatedElement {
       radios[index].setAttribute('tabindex', '0');
       radios[index].focus();
     } else {
-      radios[index].shadowRoot!.querySelector('button')!.focus();
+      radios[index].shadowRoot?.querySelector('button')?.focus();
     }
 
     if (this.value !== oldValue) {

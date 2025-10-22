@@ -1,8 +1,4 @@
 {
-  "html.customData": [
-    "./dist/vscode.html-custom-data.json"
-  ],
-  "css.customData": [
-    "./dist/vscode.css-custom-data.json"
-  ]
+  "html.customData": ["./dist/vscode.html-custom-data.json"],
+  "css.customData": ["./dist/vscode.css-custom-data.json"]
 }

@@ -1,10 +1,9 @@
 // @warp-css;
 
-import { html, LitElement, PropertyValues } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
@@ -314,8 +313,9 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
 
   render() {
-    return html` ${this.href
-      ? html`<w-link
+    return html` ${
+      this.href
+        ? html`<w-link
           href=${this.href}
           target=${this.target}
           variant=${this.variant}
@@ -328,12 +328,15 @@ class WarpButton extends FormControlMixin(LitElement) {
           rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}>
           <slot></slot>
         </w-link>`
-      : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
+        : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
           <slot></slot>
-        </button>`}
-    ${this.loading
-      ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
-      : null}`;
+        </button>`
+    }
+    ${
+      this.loading
+        ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
+        : null
+    }`;
   }
 }
 

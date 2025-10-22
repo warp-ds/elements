@@ -1,9 +1,8 @@
 // @warp-css;
 
-import { html, css, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -19,7 +18,8 @@ import { styles } from './styles.js';
 
 export const ccCard = {
   base: 'cursor-pointer overflow-hidden relative transition-all',
-  shadow: 'group rounded-8 s-surface-elevated-200 hover:s-surface-elevated-200-hover active:s-surface-elevated-200-active',
+  shadow:
+    'group rounded-8 s-surface-elevated-200 hover:s-surface-elevated-200-hover active:s-surface-elevated-200-active',
   selected: '!s-bg-selected !hover:s-bg-selected-hover !active:s-bg-selected-active',
   outline: 'absolute border-2 rounded-8 inset-0 transition-all',
   outlineUnselected: 'border-transparent group-active:s-border-active',
@@ -61,13 +61,13 @@ class WarpCard extends LitElement {
   ];
 
   @property({ type: Boolean, reflect: true })
-  selected: boolean = false;
+  selected = false;
 
   @property({ type: Boolean })
-  flat: boolean = false;
+  flat = false;
 
   @property({ type: Boolean })
-  clickable: boolean = false;
+  clickable = false;
 
   /** @internal */
   buttonText: string;

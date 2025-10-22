@@ -19,7 +19,7 @@ export class WarpTabPanel extends LitElement {
   name!: string;
 
   @property({ type: Boolean, reflect: true })
-  hidden: boolean = true;
+  hidden = true;
 
   connectedCallback() {
     super.connectedCallback();

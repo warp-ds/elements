@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { html, LitElement, PropertyValues } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property, query } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -28,7 +27,7 @@ const ccGridLayout = {
 };
 
 // Simple debounce utility
-function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait: number = 200, immediate: boolean = false): T {
+function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200, immediate = false): T {
   let timeout: NodeJS.Timeout | null;
   return ((...args: unknown[]) => {
     const later = () => {
@@ -55,10 +54,10 @@ export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
   @property({ reflect: true })
-  active: string = '';
+  active = '';
 
   @property({ attribute: 'tab-class', reflect: true })
-  tabClass: string = '';
+  tabClass = '';
 
   @query('[role="tablist"]')
   private tabList!: HTMLElement;
@@ -66,7 +65,7 @@ export class WarpTabs extends LitElement {
   @query('.selection-indicator')
   private selectionIndicator!: HTMLElement;
 
-  private _activeTab: string = '';
+  private _activeTab = '';
   private _resizeObserver?: ResizeObserver;
   private _updateSelectionIndicatorDebounced = debounce(this.updateSelectionIndicator.bind(this), 100);
 
@@ -197,7 +196,12 @@ export class WarpTabs extends LitElement {
   }
 
   private _handleKeyDown = (event: KeyboardEvent) => {
-    if (event.altKey || event.ctrlKey || event.shiftKey || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+    if (
+      event.altKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)
+    ) {
       return;
     }
 

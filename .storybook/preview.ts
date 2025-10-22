@@ -5,7 +5,7 @@ import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
 import { withActions } from 'storybook/actions/decorator';
 
 import customElements from '../dist/custom-elements.json' with { type: 'json' };
-import { toast, updateToast, removeToast, WarpToastContainer } from '../packages/toast/index.js';
+import { removeToast, toast, updateToast, WarpToastContainer } from '../packages/toast/index.js';
 
 setCustomElementsManifest(customElements);
 

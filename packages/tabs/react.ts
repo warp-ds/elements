@@ -1,8 +1,7 @@
+import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { createComponent } from '@lit/react';
-
-import { WarpTabs, WarpTab, WarpTabPanel } from './index.js';
+import { WarpTab, WarpTabPanel, WarpTabs } from './index.js';
 
 export const Tabs = createComponent({
   tagName: 'w-tabs',

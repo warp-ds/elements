@@ -1,6 +1,5 @@
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-
 import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -181,7 +180,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
   }
 
   #getActiveRangeWidth(): number {
-    const widthPxString = window.getComputedStyle(this.shadowRoot.querySelector('.w-slider__active-range'), '::before').width;
+    const widthPxString = window.getComputedStyle(
+      this.shadowRoot.querySelector('.w-slider__active-range'),
+      '::before',
+    ).width;
     const width = Number.parseFloat(widthPxString.replace('px', ''));
     return width;
   }

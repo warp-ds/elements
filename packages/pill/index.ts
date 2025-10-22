@@ -88,7 +88,11 @@ class WarpPill extends LitElement {
 
   /** @internal */
   get _closeClasses() {
-    return classNames([pillStyles.button, pillStyles.close, this.suggestion ? pillStyles.suggestion : pillStyles.filter]);
+    return classNames([
+      pillStyles.button,
+      pillStyles.close,
+      this.suggestion ? pillStyles.suggestion : pillStyles.filter,
+    ]);
   }
 
   /** @internal */
@@ -118,12 +122,14 @@ class WarpPill extends LitElement {
           <span class="${pillStyles.a11y}">${this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText}</span>
           <slot></slot>
         </button>
-        ${this.canClose
-          ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
+        ${
+          this.canClose
+            ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
               <span class="${pillStyles.a11y}">${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span>
               <w-icon-close-16 class="${pillStyles.closeIcon}"></w-icon-close-16>
             </button>`
-          : null}
+            : null
+        }
       </div>
     `;
   }

@@ -1,5 +1,3 @@
-import { LitElement, html } from 'lit';
-
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import {
@@ -16,15 +14,16 @@ import {
   isSameDay,
   isSameMonth,
   isToday,
-  lastDayOfMonth,
   Locale,
+  lastDayOfMonth,
   startOfMonth,
   startOfToday,
   startOfWeek,
   subDays,
   subMonths,
 } from 'date-fns';
-import { enGB, nb, sv, da, fi } from 'date-fns/locale';
+import { da, enGB, fi, nb, sv } from 'date-fns/locale';
+import { html, LitElement } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -42,10 +41,10 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { wDatepickerCalendarStyles } from './styles/w-datepicker-calendar.styles.js';
 import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
-import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { fromISOToDate } from './utils.js';
 
 const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
@@ -429,20 +428,22 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             @input="${this.#onInput}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
-            aria-label="${this.value
-              ? i18n.t({
-                  id: 'datepicker.toggle.changeDate',
-                  values: { currentDate: format(this.value, this.dayFormat) },
-                  message: `Change date, {currentDate}`,
-                  comment:
-                    'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date',
-                })
-              : i18n.t({
-                  id: 'datepicker.toggle.chooseDate',
-                  message: `Choose date`,
-                  comment:
-                    'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
-                })}"
+            aria-label="${
+              this.value
+                ? i18n.t({
+                    id: 'datepicker.toggle.changeDate',
+                    values: { currentDate: format(this.value, this.dayFormat) },
+                    message: 'Change date, {currentDate}',
+                    comment:
+                      'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date',
+                  })
+                : i18n.t({
+                    id: 'datepicker.toggle.chooseDate',
+                    message: 'Choose date',
+                    comment:
+                      'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
+                  })
+            }"
             aria-controls="${calendarId}"
             class="w-datepicker-button"
             data-testid="${toggleButtonId}"
@@ -459,7 +460,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         <div
           aria-label="${i18n.t({
             id: 'datepicker.calendar.roleDescription',
-            message: `Date picker`,
+            message: 'Date picker',
             comment: 'Used by screen readers to announce that the calendar element is a date picker.',
           })}"
           aria-modal="true"
@@ -472,7 +473,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             <w-button
               aria-label="${i18n.t({
                 id: 'datepicker.calendar.previousMonth',
-                message: `Previous month`,
+                message: 'Previous month',
                 comment: 'Screen reader label for the previous month button.',
               })}"
               class="w-datepicker__month__nav__button"
@@ -490,7 +491,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             <w-button
               aria-label="${i18n.t({
                 id: 'datepicker.calendar.nextMonth',
-                message: `Next month`,
+                message: 'Next month',
                 comment: 'Screen reader label for the next month button.',
               })}"
               class="w-datepicker__month__nav__button"
@@ -507,7 +508,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
               <thead class="w-datepicker__weekdays">
                 <tr>
                   ${this.weeks[0].map(
-                    (day) => html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
+                    (day) =>
+                      html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
                   )}
                 </tr>
               </thead>

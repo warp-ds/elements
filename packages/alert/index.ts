@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { css, html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/info-16';
@@ -50,10 +49,10 @@ class WarpAlert extends LitElement {
   variant: AlertVariants = 'info';
 
   @property({ type: Boolean, reflect: true })
-  show: boolean = true;
+  show = true;
 
   @property({ reflect: true })
-  role: string = 'alert';
+  role = 'alert';
 
   constructor() {
     super();
@@ -64,7 +63,9 @@ class WarpAlert extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     if (!this.variant || !alertVariants[this.variant]) {
-      throw new Error(`Invalid 'variant' attribute. Set its value to one of the following:\nnegative, positive, warning, info.`);
+      throw new Error(
+        `Invalid 'variant' attribute. Set its value to one of the following:\nnegative, positive, warning, info.`,
+      );
     }
   }
 
@@ -115,7 +116,8 @@ class WarpAlert extends LitElement {
     }
     if (this.variant === alertVariants.positive) {
       return html` <w-icon-success-16></w-icon-success-16>`;
-    } else return '';
+    }
+    return '';
   }
 
   render() {

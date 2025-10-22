@@ -1,7 +1,7 @@
 // @warp-css;
-import { html, css, LitElement, nothing } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
+import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles';
@@ -59,7 +59,7 @@ class WarpBox extends LitElement {
 
   /** @internal */
   get _optOutRoleWithDefault() {
-    return this.role === '' ? nothing : this.role ?? 'region';
+    return this.role === '' ? nothing : (this.role ?? 'region');
   }
 
   render() {

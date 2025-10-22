@@ -8,7 +8,7 @@ import { reset } from '../styles';
 
 import { styles } from './styles';
 import type { WarpToast } from './toast';
-import type { ToastOptions, ToastInternal } from './types';
+import type { ToastInternal, ToastOptions } from './types';
 
 /**
  * You should probably not include this component in HTML markup.
