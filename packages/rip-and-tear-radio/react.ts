@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WRadio } from './radio';
 import { WRadioGroup } from './radio-group';
 
@@ -23,5 +24,5 @@ export const RadioGroup = createComponent({
     oninput: 'input',
     onChange: 'change',
     onchange: 'change',
-  }
+  },
 });

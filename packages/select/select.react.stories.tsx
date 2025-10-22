@@ -1,7 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Select, Option } from "./react";
+
+import { Select, Option } from './react';
 
 export default {
   title: 'Forms/Select',
@@ -9,7 +10,9 @@ export default {
     return (
       <Select {...args}>
         <Option value="strawberries">Strawberries</Option>
-        <Option value="raspberries" selected>Raspberries</Option>
+        <Option value="raspberries" selected>
+          Raspberries
+        </Option>
         <Option value="cloudberries">Cloudberries</Option>
       </Select>
     );
@@ -32,9 +35,11 @@ export const ChangeEvent = (args) => {
       <div>Selected Value: {selectedValue}</div>
       <Select {...args} onChange={(e: CustomEvent) => setSelectedValue(e.detail)}>
         <Option value="strawberries">Strawberries</Option>
-        <Option value="raspberries" selected>Raspberries</Option>
+        <Option value="raspberries" selected>
+          Raspberries
+        </Option>
         <Option value="cloudberries">Cloudberries</Option>
       </Select>
     </>
   );
-}
+};

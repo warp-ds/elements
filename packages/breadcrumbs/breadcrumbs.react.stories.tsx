@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Breadcrumbs } from "./react";
+
+import { Breadcrumbs } from './react';
 
 export default {
   title: 'Navigation/Breadcrumbs',
@@ -12,7 +14,7 @@ export default {
         <a href="#/subcategory">Subcategory</a>
         <span aria-current="page">Current Page</span>
       </Breadcrumbs>
-    )
+    );
   },
   component: Breadcrumbs,
 } satisfies Meta<typeof Breadcrumbs>;
@@ -34,9 +36,11 @@ export const WithLinks: Story = {
       <Breadcrumbs {...args}>
         <a href="#/eiendom">Eiendom</a>
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
-        <a href="#/oslo" aria-current="page">Oslo</a>
+        <a href="#/oslo" aria-current="page">
+          Oslo
+        </a>
       </Breadcrumbs>
-    )
+    );
   },
 };
 
@@ -51,6 +55,6 @@ export const WithSpanForCurrentPage: Story = {
         <a href="#/bolig-til-salgs">Bolig til salgs</a>
         <span aria-current="page">Oslo</span>
       </Breadcrumbs>
-    )
+    );
   },
 };

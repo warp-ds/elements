@@ -1,19 +1,22 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { TextField } from "./react";
-import { Affix } from "../affix/react";
+
+import { Affix } from '../affix/react';
+
+import { TextField } from './react';
 
 const locale = 'nb';
 
 const getNumberFormatter = (locale: string, opts = {}) => {
   return (value: string) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
-}
+};
 
 export default {
   title: 'Forms/Textfield',
-    render(args) {
-      return (<TextField {...args}></TextField>);
-    },
+  render(args) {
+    return <TextField {...args}></TextField>;
+  },
   component: TextField,
 } satisfies Meta<typeof TextField>;
 

@@ -120,7 +120,7 @@ export class WarpTabs extends LitElement {
     // Get the slotted elements
     const slottedElements = slot.assignedElements({ flatten: true });
     // Filter only w-tab elements
-    return slottedElements.filter(el => el.tagName.toLowerCase() === 'w-tab');
+    return slottedElements.filter((el) => el.tagName.toLowerCase() === 'w-tab');
   }
 
   get activeTab() {

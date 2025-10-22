@@ -1,11 +1,13 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Link } from "./react";
+
+import { Link } from './react';
 
 export default {
   title: 'Buttons/Link',
   render(args) {
-    return (<Link {...args}>Link Button Text</Link>);
+    return <Link {...args}>Link Button Text</Link>;
   },
   component: Link,
 } satisfies Meta<typeof Link>;
@@ -75,7 +77,7 @@ export const Pill: Story = {
     target: '_new',
   },
   render(args) {
-    return (<Link {...args}>💙</Link>);
+    return <Link {...args}>💙</Link>;
   },
 };
 

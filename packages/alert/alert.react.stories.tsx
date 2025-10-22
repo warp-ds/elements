@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Alert } from "./react";
+
+import { Alert } from './react';
 
 export default {
   title: 'Feedback/Alert',
@@ -51,6 +53,6 @@ export const WithDescription: Story = {
         <h3>Alert Title</h3>
         <p>This is a more detailed alert message with additional description.</p>
       </>
-    )
+    ),
   },
 };

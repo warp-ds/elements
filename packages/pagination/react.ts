@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WarpPagination } from '.';
 
 // decouple from CDN by providing a dummy class
@@ -13,6 +14,6 @@ export const Pagination = createComponent({
   react: React,
   events: {
     onPageClick: 'page-click',
-    "onpage-click": 'page-click',
-  }
+    'onpage-click': 'page-click',
+  },
 });

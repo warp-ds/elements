@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Combobox } from "./react";
+
+import { Combobox } from './react';
 
 export default {
   title: 'Forms/Combobox',
   component: Combobox,
   render(args) {
-    return (<Combobox {...args} options={sampleOptions}></Combobox>)
+    return <Combobox {...args} options={sampleOptions}></Combobox>;
   },
 } satisfies Meta<typeof Combobox>;
 
@@ -25,25 +27,25 @@ const sampleOptions = [
 export const Default: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-  }
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+  },
 };
 
 export const WithValue: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Apple",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
   },
 };
 
 export const OpenOnFocus: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     openOnFocus: true,
   },
 };
@@ -51,8 +53,8 @@ export const OpenOnFocus: Story = {
 export const WithTextMatching: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     matchTextSegments: true,
   },
 };
@@ -60,10 +62,10 @@ export const WithTextMatching: Story = {
 export const Invalid: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Invalid fruit",
-    helpText: "Please select a valid fruit from the list",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Invalid fruit',
+    helpText: 'Please select a valid fruit from the list',
     invalid: true,
   },
 };
@@ -71,9 +73,9 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Apple",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
     disabled: true,
   },
 };
@@ -81,8 +83,8 @@ export const Disabled: Story = {
 export const Optional: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     optional: true,
   },
 };
@@ -107,8 +109,7 @@ export const DisableStaticFiltering: Story = {
         }}
         onSelect={(e: CustomEvent) => {
           setVal(e.detail.value);
-        }}
-      ></Combobox>
-    )
+        }}></Combobox>
+    );
   },
 };

@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WarpPill } from '.';
 
 // decouple from CDN by providing a dummy class
@@ -16,5 +17,5 @@ export const Pill = createComponent({
     onclick: 'w-pill-click',
     onClose: 'w-pill-close', // should be close
     onclose: 'w-pill-close',
-  }
+  },
 });

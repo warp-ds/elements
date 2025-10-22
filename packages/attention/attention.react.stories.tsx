@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Attention } from './react';
+
 import { Button } from '../button/react';
+
+import { Attention } from './react';
 
 export default {
   title: 'Overlays/Attention',
@@ -44,11 +47,12 @@ export const ToolTip: Story = {
       <Attention {...args} show={show}>
         <Button
           slot="target"
-          onMouseEnter={() => { setShow(true) }}
+          onMouseEnter={() => {
+            setShow(true);
+          }}
           onMouseLeave={() => setShow(false)}
           onFocus={() => setShow(true)}
-          onBlur={() => setShow(false)}
-        >
+          onBlur={() => setShow(false)}>
           hover me
         </Button>
         <span slot="message">Tooltip content</span>
@@ -62,14 +66,12 @@ export const Callout: Story = {
     placement: 'right',
     callout: false,
     show: true,
-    className: 'flex items-center gap-8'
+    className: 'flex items-center gap-8',
   },
   render: (args) => {
     return (
       <Attention {...args}>
-        <Button slot="target">
-          I need a callout
-        </Button>
+        <Button slot="target">I need a callout</Button>
         <span slot="message">Callout</span>
       </Attention>
     );
@@ -121,7 +123,7 @@ export const DismissibleHighlight: Story = {
 
 export const AccessibleTooltip: Story = {
   args: {
-    placement: "right",
+    placement: 'right',
     popover: true,
   },
   render: (args) => {
@@ -140,8 +142,7 @@ export const AccessibleTooltip: Story = {
           aria-details="aria-content"
           id="accessible-target"
           className="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-          slot="target"
-        >
+          slot="target">
           Click to toggle a popover
         </button>
       </Attention>

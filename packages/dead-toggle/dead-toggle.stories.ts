@@ -30,13 +30,13 @@ type Story = StoryObj<typeof args>;
 
 export const Radio: Story = {
   args: {
-    type: "radio",
+    type: 'radio',
   },
 };
 
 export const Checkbox: Story = {
   args: {
-    type: "checkbox",
+    type: 'checkbox',
   },
 };
 

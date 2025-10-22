@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Expandable } from "./react";
+
 import { Button } from '../button/react';
+
+import { Expandable } from './react';
 
 export default {
   title: 'Layout/Expandable',
@@ -96,8 +99,8 @@ export const CustomTitle: Story = {
   render(args) {
     return (
       <Expandable {...args}>
-        <div slot="title" style={{ display: "flex", alignItems: "center" }}>
-          <span style={{ marginRight: "8px" }}>🎯</span>
+        <div slot="title" style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ marginRight: '8px' }}>🎯</span>
           <span>Custom title with icon</span>
         </div>
         <p>This expandable has a custom title slot with an icon.</p>
@@ -116,10 +119,16 @@ export const NoTitle: Story = {
     const [expanded, setExpanded] = useState(false);
     return (
       <>
-        <Button onClick={() => setExpanded(!expanded)} aria-label="Toggle expandable content without title" aria-controls="expandableWithoutTitle">Toggle</Button>
+        <Button
+          onClick={() => setExpanded(!expanded)}
+          aria-label="Toggle expandable content without title"
+          aria-controls="expandableWithoutTitle">
+          Toggle
+        </Button>
         <Expandable {...args} id="expandableWithoutTitle" expanded={expanded}>
           <p>with expanded content</p>
         </Expandable>
-      </>);
+      </>
+    );
   },
 };

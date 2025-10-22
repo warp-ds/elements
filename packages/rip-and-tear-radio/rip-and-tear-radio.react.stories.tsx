@@ -1,6 +1,6 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Radio } from "./react";
+
+import { Radio } from './react';
 
 export default {
   component: Radio,
@@ -10,6 +10,6 @@ export type Story = StoryObj<typeof Radio>;
 
 export const Primary: Story = {
   args: {
-    children: "Hello"
+    children: 'Hello',
   },
 };

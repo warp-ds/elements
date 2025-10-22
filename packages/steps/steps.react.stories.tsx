@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Steps, Step } from "./react";
+
+import { Steps, Step } from './react';
 
 export default {
   title: 'Components/Steps',

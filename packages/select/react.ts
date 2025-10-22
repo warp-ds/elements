@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WarpSelect } from '.';
 
 // decouple from CDN by providing a dummy class
@@ -14,7 +15,7 @@ export const Select = createComponent({
   events: {
     onChange: 'change',
     onchange: 'change',
-  }
+  },
 });
 
 export const Option = createComponent({

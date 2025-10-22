@@ -1,9 +1,10 @@
 import { html } from 'lit';
 
 import { spread } from '@open-wc/lit-helpers';
-import { prespread } from '../../.storybook/utilities.js';
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+
+import { prespread } from '../../.storybook/utilities.js';
 
 import './index.js';
 import type { WarpCombobox } from './index.js';
@@ -14,7 +15,7 @@ const meta: Meta<typeof args> = {
   title: 'Forms/Combobox',
   component: 'w-combobox',
   render(args) {
-    return html` <w-combobox ${spread(prespread(args))} .options="${sampleOptions}"></w-combobox> `
+    return html` <w-combobox ${spread(prespread(args))} .options="${sampleOptions}"></w-combobox> `;
   },
   parameters: {
     docs: {
@@ -46,25 +47,25 @@ const sampleOptions = [
 export const Default: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-  }
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+  },
 };
 
 export const WithValue: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Apple",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
   },
 };
 
 export const OpenOnFocus: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     openOnFocus: true,
   },
 };
@@ -72,8 +73,8 @@ export const OpenOnFocus: Story = {
 export const WithTextMatching: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     matchTextSegments: true,
   },
 };
@@ -81,10 +82,10 @@ export const WithTextMatching: Story = {
 export const Invalid: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Invalid fruit",
-    helpText: "Please select a valid fruit from the list",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Invalid fruit',
+    helpText: 'Please select a valid fruit from the list',
     invalid: true,
   },
 };
@@ -92,9 +93,9 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
-    value: "Apple",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
     disabled: true,
   },
 };
@@ -102,8 +103,8 @@ export const Disabled: Story = {
 export const Optional: Story = {
   args: {
     options: sampleOptions,
-    label: "Select a fruit",
-    placeholder: "Type to search...",
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
     optional: true,
   },
 };

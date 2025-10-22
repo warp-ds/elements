@@ -1,6 +1,6 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Switch } from "./react";
+
+import { Switch } from './react';
 
 export default {
   title: 'Forms/Switch',

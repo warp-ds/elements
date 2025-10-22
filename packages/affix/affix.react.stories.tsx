@@ -1,6 +1,6 @@
-import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Affix } from "./react";
+
+import { Affix } from './react';
 
 export default {
   title: 'Forms/Affix',

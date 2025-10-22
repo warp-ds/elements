@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Pill } from "./react";
+
+import { Pill } from './react';
 
 export default {
   title: 'Buttons/Pill',
-    render(args) {
-      return (<Pill {...args}>Lorem</Pill>);
-    },
+  render(args) {
+    return <Pill {...args}>Lorem</Pill>;
+  },
   component: Pill,
 } satisfies Meta<typeof Pill>;
 

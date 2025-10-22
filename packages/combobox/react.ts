@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WarpCombobox } from '.';
 
 // decouple from CDN by providing a dummy class
@@ -16,5 +17,5 @@ export const Combobox = createComponent({
     onselect: 'select',
     onChange: 'change',
     onchange: 'change',
-  }
+  },
 });

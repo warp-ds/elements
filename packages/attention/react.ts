@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
-import { createComponent, ReactWebComponent } from '@lit/react';
+import { createComponent } from '@lit/react';
+
 import { WarpAttention } from './index';
 
 // decouple from CDN by providing a dummy class
@@ -14,14 +15,14 @@ const BaseAttention = createComponent({
   events: {
     onClose: 'close',
     // additionally support React v19 syntax for CE events
-    onclose: 'close'
-  }
+    onclose: 'close',
+  },
 });
 
 // Derive props from BaseAttention, then merge in real element's props
 type BaseProps = React.ComponentProps<typeof BaseAttention>;
 
 // Drop conflicting DOM prop `popover` and add all props back in
-export type AttentionProps = Omit<BaseProps, "popover"> & { popover?: boolean } & Partial<Omit<WarpAttention, keyof HTMLElement>>;
+export type AttentionProps = Omit<BaseProps, 'popover'> & { popover?: boolean } & Partial<Omit<WarpAttention, keyof HTMLElement>>;
 
 export const Attention = BaseAttention as unknown as React.FC<AttentionProps>;

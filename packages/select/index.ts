@@ -6,7 +6,6 @@ import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
 import { activateI18n } from '../i18n.js';
@@ -118,19 +117,18 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     );
 
     // Convert them into HTML strings for the template
-    const options = optionNodes
-      .map((child: HTMLElement) => {
-        const value = child.getAttribute('value') ?? '';
-        const label = child.textContent ?? '';
-        const selected = child.hasAttribute('selected');
-        const disabled = child.hasAttribute('disabled');
+    const options = optionNodes.map((child: HTMLElement) => {
+      const value = child.getAttribute('value') ?? '';
+      const label = child.textContent ?? '';
+      const selected = child.hasAttribute('selected');
+      const disabled = child.hasAttribute('disabled');
 
-        if (selected) {
-          this._setValue(value);
-        }
+      if (selected) {
+        this._setValue(value);
+      }
 
-        return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`; 
-      });
+      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+    });
 
     this._options = options;
   }

@@ -1,11 +1,13 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Button } from "./react";
+
+import { Button } from './react';
 
 export default {
   title: 'Buttons/Button',
   render(args) {
-    return (<Button {...args}>Button Text</Button>);
+    return <Button {...args}>Button Text</Button>;
   },
   component: Button,
 } satisfies Meta<typeof Button>;
@@ -55,7 +57,7 @@ export const Pill: Story = {
     type: 'button',
   },
   render(args) {
-    return (<Button {...args}>💙</Button>);
+    return <Button {...args}>💙</Button>;
   },
 };
 
@@ -106,7 +108,7 @@ export const AsLink: Story = {
     type: 'button',
   },
   render(args) {
-    return (<Button {...args}>Visit Example</Button>);
+    return <Button {...args}>Visit Example</Button>;
   },
 };
 
@@ -115,9 +117,13 @@ export const FormControl: Story = {
   render() {
     return (
       <form name="form-control">
-        <input type="text" defaultValue="I am an input field" name="demoValue" style={{border: "1px solid lime"}} />
-        <Button type="reset" name="resetButton" value="fooyoo">Reset</Button>
-        <Button type="submit" name="submuitButtton" value="fooyoo">Send thing</Button>
+        <input type="text" defaultValue="I am an input field" name="demoValue" style={{ border: '1px solid lime' }} />
+        <Button type="reset" name="resetButton" value="fooyoo">
+          Reset
+        </Button>
+        <Button type="submit" name="submuitButtton" value="fooyoo">
+          Send thing
+        </Button>
       </form>
     );
   },

@@ -1,7 +1,8 @@
+import { LitElement } from 'lit';
 import React from 'react';
 
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+
 import { WarpTextField } from '.';
 
 // decouple from CDN by providing a dummy class
@@ -20,5 +21,5 @@ export const TextField = createComponent({
     oninput: 'input',
     onFocus: 'focus',
     onfocus: 'focus',
-  }
+  },
 });

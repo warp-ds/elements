@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Pagination } from "./react";
+
+import { Pagination } from './react';
 
 export default {
   title: 'Navigation/Pagination',
-    render(args) {
-      return (<Pagination {...args}></Pagination>);
-    },
+  render(args) {
+    return <Pagination {...args}></Pagination>;
+  },
   component: Pagination,
 } satisfies Meta<typeof Pagination>;
 

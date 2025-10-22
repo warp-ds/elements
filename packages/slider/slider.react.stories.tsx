@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Slider, SliderThumb } from "./react";
+
+import { Slider, SliderThumb } from './react';
 
 const locale = 'nb';
 
 const getNumberFormatter = (locale: string, opts = {}) => {
   return (value: string) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
-}
+};
 
 export default {
   title: 'Forms/Slider and Range Slider',
@@ -74,7 +76,7 @@ export const SuffixKilometers: Story = {
       <Slider label="Distance" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
         <SliderThumb slot="from" aria-label="From distance" name="from"></SliderThumb>
         <SliderThumb slot="to" aria-label="To distance" name="to"></SliderThumb>
-      </Slider >
+      </Slider>
     );
   },
 };
@@ -83,7 +85,7 @@ export const Marks: Story = {
   args: {
     suffix: 'km',
   },
-  render({ suffix, markers, step }) {
+  render({ suffix }) {
     return (
       <>
         <Slider label="Distance" markers={25000} step={25000} min="0" max="250000" suffix={suffix} data-testid="markers">
@@ -110,24 +112,33 @@ export const Step: Story = {
 
 export const OverUnder: Story = {
   render() {
-    const [overUnderFrom, setOverUnderFrom] = useState("");
-    const [overUnderTo, setOverUnderTo] = useState("");
+    const [overUnderFrom, setOverUnderFrom] = useState('');
+    const [overUnderTo, setOverUnderTo] = useState('');
     return (
       <>
-        <form id="overunder" style={{ marginBottom: 16 }} lang="nb" onInput={(val) => {
-          const formData = new FormData(val.currentTarget);
-          setOverUnderFrom(formData.get('from') as unknown as string);
-          setOverUnderTo(formData.get('to') as unknown as string);
-        }}>
-          <Slider label="Produksjonsår" min="1950" max="2025" data-testid="overunder" formatter={(value) => {
-            if (value === '1950') {
-              return 'Før 1950';
-            }
-            if (value === '2025') {
-              return 'Etter 2025';
-            }
-            return value;
+        <form
+          id="overunder"
+          style={{ marginBottom: 16 }}
+          lang="nb"
+          onInput={(val) => {
+            const formData = new FormData(val.currentTarget);
+            setOverUnderFrom(formData.get('from') as unknown as string);
+            setOverUnderTo(formData.get('to') as unknown as string);
           }}>
+          <Slider
+            label="Produksjonsår"
+            min="1950"
+            max="2025"
+            data-testid="overunder"
+            formatter={(value) => {
+              if (value === '1950') {
+                return 'Før 1950';
+              }
+              if (value === '2025') {
+                return 'Etter 2025';
+              }
+              return value;
+            }}>
             <SliderThumb
               slot="from"
               aria-label="Fra år"

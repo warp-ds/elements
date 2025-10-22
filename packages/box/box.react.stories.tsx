@@ -1,16 +1,20 @@
 import React from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
-import { Box } from "./react";
+
+import { Box } from './react';
 
 export default {
   title: 'Layout/Box',
   component: Box,
   render(args) {
-    return <Box {...args}>
-      <h3>Box Content</h3>
-      <p>This is content inside a box component.</p>
-    </Box>
-  }
+    return (
+      <Box {...args}>
+        <h3>Box Content</h3>
+        <p>This is content inside a box component.</p>
+      </Box>
+    );
+  },
 } satisfies Meta<typeof Box>;
 
 export type Story = StoryObj<typeof Box>;
