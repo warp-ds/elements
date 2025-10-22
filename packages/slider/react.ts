@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LitElement } from 'lit';
-import { createComponent } from '@lit/react';
+import { createComponent, EventName } from '@lit/react';
 import { WarpSlider } from './slider';
 import { WarpSliderThumb } from './slider-thumb';
 
@@ -19,7 +19,7 @@ export const SliderThumb = createComponent({
   elementClass: Component as unknown as typeof WarpSliderThumb,
   react: React,
   events: {
-    onSliderValidity: 'slidervalidity',
-    "onslider-validity": 'slidervalidity', // should be slider-validity
+    onSliderValidity: 'slidervalidity' as EventName<CustomEvent>,
+    "onslider-validity": 'slidervalidity' as EventName<CustomEvent>, // should be slider-validity
   }
 });
