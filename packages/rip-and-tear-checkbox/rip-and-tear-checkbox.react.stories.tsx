@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from './react';
 
 export default {
+  title: 'Forms/Checkbox',
   component: Checkbox,
 } satisfies Meta<typeof Checkbox>;
 
