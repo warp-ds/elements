@@ -85,6 +85,7 @@
     "@open-wc/lit-helpers": "^0.7.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
+    "@storybook/addon-a11y": "^9.1.4",
     "@storybook/addon-docs": "^9.1.4",
     "@storybook/builder-vite": "^9.1.4",
     "@storybook/web-components": "^9.1.4",
