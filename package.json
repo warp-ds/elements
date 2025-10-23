@@ -97,7 +97,7 @@
     "@storybook/react-vite": "^9.1.10",
     "@storybook/web-components": "^9.1.4",
     "@storybook/web-components-vite": "^9.1.4",
-    "@types/node": "20.14.10",
+    "@types/node": "22.18.12",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@unocss/core": "^66.5.0",
