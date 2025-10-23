@@ -1,3 +1,10 @@
+# [2.2.0-next.21](https://github.com/warp-ds/elements/compare/v2.2.0-next.20...v2.2.0-next.21) (2025-10-23)
+
+
+### Bug Fixes
+
+* decouple react wrappers ([#359](https://github.com/warp-ds/elements/issues/359)) ([a81ca55](https://github.com/warp-ds/elements/commit/a81ca5507d75190877e967e014bd67c3ffa07374))
+
 # [2.2.0-next.20](https://github.com/warp-ds/elements/compare/v2.2.0-next.19...v2.2.0-next.20) (2025-10-16)
 
 
