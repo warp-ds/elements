@@ -21,7 +21,7 @@ export const Single: Story = {
   render() {
     return (
       <Slider label="Single" min="0" max="100">
-        <SliderThumb name="value"></SliderThumb>
+        <SliderThumb name="value" />
       </Slider>
     );
   },
@@ -31,8 +31,8 @@ export const Range: Story = {
   render() {
     return (
       <Slider label="Range" min="0" max="100">
-        <SliderThumb name="from" slot="from" aria-label="From value"></SliderThumb>
-        <SliderThumb name="to" slot="to" aria-label="To value"></SliderThumb>
+        <SliderThumb name="from" slot="from" aria-label="From value" />
+        <SliderThumb name="to" slot="to" aria-label="To value" />
       </Slider>
     );
   },
@@ -46,8 +46,8 @@ export const SuffixSquareMeters: Story = {
   render({ suffix }) {
     return (
       <Slider label="Apartment size" min="0" max="250" suffix={suffix} formatter={getNumberFormatter(locale)}>
-        <SliderThumb slot="from" aria-label="From size" name="from"></SliderThumb>
-        <SliderThumb slot="to" aria-label="To size" name="to"></SliderThumb>
+        <SliderThumb slot="from" aria-label="From size" name="from" />
+        <SliderThumb slot="to" aria-label="To size" name="to" />
       </Slider>
     );
   },
@@ -60,8 +60,8 @@ export const SuffixCurrency: Story = {
   render({ suffix }) {
     return (
       <Slider label="Price" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
-        <SliderThumb slot="from" aria-label="From price" name="from"></SliderThumb>
-        <SliderThumb slot="to" aria-label="To price" name="to"></SliderThumb>
+        <SliderThumb slot="from" aria-label="From price" name="from" />
+        <SliderThumb slot="to" aria-label="To price" name="to" />
       </Slider>
     );
   },
@@ -74,8 +74,8 @@ export const SuffixKilometers: Story = {
   render({ suffix }) {
     return (
       <Slider label="Distance" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
-        <SliderThumb slot="from" aria-label="From distance" name="from"></SliderThumb>
-        <SliderThumb slot="to" aria-label="To distance" name="to"></SliderThumb>
+        <SliderThumb slot="from" aria-label="From distance" name="from" />
+        <SliderThumb slot="to" aria-label="To distance" name="to" />
       </Slider>
     );
   },
@@ -89,8 +89,8 @@ export const Marks: Story = {
     return (
       <>
         <Slider label="Distance" markers={25000} step={25000} min="0" max="250000" suffix={suffix} data-testid="markers">
-          <SliderThumb slot="from" aria-label="From distance" name="from"></SliderThumb>
-          <SliderThumb slot="to" aria-label="To distance" name="to"></SliderThumb>
+          <SliderThumb slot="from" aria-label="From distance" name="from" />
+          <SliderThumb slot="to" aria-label="To distance" name="to" />
         </Slider>
       </>
     );
@@ -104,7 +104,7 @@ export const Step: Story = {
   render({ step }) {
     return (
       <Slider label="Single" step={step} min="0" max="100">
-        <SliderThumb name="value"></SliderThumb>
+        <SliderThumb name="value" />
       </Slider>
     );
   },
@@ -143,12 +143,12 @@ export const OverUnder: Story = {
               slot="from"
               aria-label="Fra år"
               aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
-              name="from"></SliderThumb>
+              name="from" />
             <SliderThumb
               slot="to"
               aria-label="Til år"
               aria-description="2025 inkluderer kjøretøy produsert etter 2025"
-              name="to"></SliderThumb>
+              name="to" />
           </Slider>
         </form>
         <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
@@ -170,7 +170,7 @@ export const SingleError: Story = {
     return (
       <Slider label="Single" min="0" max="100">
         <p slot="description">Try typing a value over 100</p>
-        <SliderThumb></SliderThumb>
+        <SliderThumb />
       </Slider>
     );
   },
@@ -181,8 +181,8 @@ export const RangeError: Story = {
     return (
       <Slider label="Production year" min="1950" max="2025">
         <p slot="description">Try typing a from value higher than a to value</p>
-        <SliderThumb slot="from" name="from"></SliderThumb>
-        <SliderThumb slot="to" name="to"></SliderThumb>
+        <SliderThumb slot="from" name="from" />
+        <SliderThumb slot="to" name="to" />
       </Slider>
     );
   },

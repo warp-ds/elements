@@ -7,7 +7,7 @@ import { Pagination } from './react';
 export default {
   title: 'Navigation/Pagination',
   render(args) {
-    return <Pagination {...args}></Pagination>;
+    return <Pagination {...args} />;
   },
   component: Pagination,
 } satisfies Meta<typeof Pagination>;

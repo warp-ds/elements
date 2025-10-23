@@ -6,7 +6,7 @@ import { PageIndicator } from './react';
 
 export default {
   title: 'Navigation/PageIndicator',
-  render: ({ pageCount, selectedPage }) => <PageIndicator pageCount={pageCount} selectedPage={selectedPage}></PageIndicator>,
+  render: ({ pageCount, selectedPage }) => <PageIndicator pageCount={pageCount} selectedPage={selectedPage} />,
   component: PageIndicator,
 } satisfies Meta<typeof PageIndicator>;
 
@@ -37,7 +37,7 @@ export const InsideContainer10Pages = () => (
 
 export const OutsideContainer = () => (
   <div style={{ height: '450px', border: '1px solid lightgrey' }}>
-    <div style={{ height: '300px', borderBottom: '1px solid #e6e6e6' }}></div>
+    <div style={{ height: '300px', borderBottom: '1px solid #e6e6e6' }} />
     <PageIndicator pageCount={5} selectedPage={1} style={{ paddingTop: '16px' }}>
       {' '}
     </PageIndicator>

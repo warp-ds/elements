@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import './index.ts';
+import './index.js';
 
 export default {
   component: 'w-pageindicator',

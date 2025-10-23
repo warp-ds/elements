@@ -8,7 +8,7 @@ export default {
   title: 'Forms/Combobox',
   component: Combobox,
   render(args) {
-    return <Combobox {...args} options={sampleOptions}></Combobox>;
+    return <Combobox {...args} options={sampleOptions} />;
   },
 } satisfies Meta<typeof Combobox>;
 
@@ -109,7 +109,7 @@ export const DisableStaticFiltering: Story = {
         }}
         onSelect={(e: CustomEvent) => {
           setVal(e.detail.value);
-        }}></Combobox>
+        }} />
     );
   },
 };

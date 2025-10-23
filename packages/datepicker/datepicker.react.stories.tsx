@@ -9,7 +9,7 @@ export default {
   render(args) {
     return (
       <div style={{ minHeight: '400px' }}>
-        <DatePicker {...args}></DatePicker>
+        <DatePicker {...args} />
       </div>
     );
   },
@@ -33,7 +33,7 @@ export const DisableCalendarDates: Story = {
   render(args) {
     return (
       <div style={{ minHeight: '400px' }}>
-        <DatePicker {...args} isDayDisabled={(day) => day.getDay() === 0}></DatePicker>
+        <DatePicker {...args} isDayDisabled={(day) => day.getDay() === 0} />
       </div>
     );
   },

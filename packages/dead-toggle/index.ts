@@ -15,13 +15,13 @@ export class WarpDeadToggle extends LitElement {
   type: 'radio' | 'checkbox' = 'radio';
 
   @property({ type: Boolean, reflect: true })
-  checked: boolean = false;
+  checked = false;
 
   @property({ type: Boolean, reflect: true })
-  indeterminate: boolean = false;
+  indeterminate = false;
 
   @property({ type: Boolean, reflect: true })
-  invalid: boolean = false;
+  invalid = false;
 
   /** @internal */
   get indeterminateMarker() {

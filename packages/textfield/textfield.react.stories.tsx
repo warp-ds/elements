@@ -15,7 +15,7 @@ const getNumberFormatter = (locale: string, opts = {}) => {
 export default {
   title: 'Forms/Textfield',
   render(args) {
-    return <TextField {...args}></TextField>;
+    return <TextField {...args} />;
   },
   component: TextField,
 } satisfies Meta<typeof TextField>;
@@ -90,7 +90,7 @@ export const WithAffix: Story = {
   render(args) {
     return (
       <TextField {...args}>
-        <Affix slot="suffix" label="kr"></Affix>
+        <Affix slot="suffix" label="kr" />
       </TextField>
     );
   },
@@ -105,7 +105,7 @@ export const Masking: Story = {
   render({ ...args }) {
     return (
       <TextField {...args} formatter={getNumberFormatter(locale)}>
-        <Affix slot="suffix" label="kr"></Affix>
+        <Affix slot="suffix" label="kr" />
       </TextField>
     );
   },

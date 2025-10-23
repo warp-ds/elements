@@ -24,7 +24,7 @@ export const Default: StoryObj = {
           Open Modal
         </Button>
         <Modal show={open} id="example-modal-one">
-          <ModalHeader slot="header" title="An example modal" back={back}></ModalHeader>
+          <ModalHeader slot="header" title="An example modal" back={back} />
           <div slot="content">
             <div style={{ marginBottom: '12px' }}>
               <Button id="modal-toggle-back-one" variant="utility" small onClick={() => setBack(!back)}>

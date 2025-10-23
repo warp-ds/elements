@@ -7,7 +7,7 @@ import { DeadToggle } from './react';
 export default {
   title: 'Forms/Dead toggle',
   render(args) {
-    return <DeadToggle {...args}></DeadToggle>;
+    return <DeadToggle {...args} />;
   },
   component: DeadToggle,
 } satisfies Meta<typeof DeadToggle>;
