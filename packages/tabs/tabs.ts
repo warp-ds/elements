@@ -115,7 +115,7 @@ export class WarpTabs extends LitElement {
   }
 
   get tabs() {
-    const slot = this.shadowRoot!.querySelector('slot') as HTMLSlotElement;
+    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
     // Get the slotted elements
     const slottedElements = slot.assignedElements({ flatten: true });
     // Filter only w-tab elements
