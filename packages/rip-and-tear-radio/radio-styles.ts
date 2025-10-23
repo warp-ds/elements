@@ -27,27 +27,25 @@ export const styles = css`
   }
 
   /* Default appearance */
-  :host([appearance='default']) {
-    .control {
-      flex: 0 0 auto;
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: var(--wa-form-control-toggle-size, 2rem);
-      height: var(--wa-form-control-toggle-size, 2rem);
-      border-color: var(--wa-form-control-border-color, gray);
-      border-radius: 50%;
-      border-style: var(--wa-form-control-border-style, solid);
-      border-width: var(--wa-form-control-border-width, 1px);
-      background-color: var(--wa-form-control-background-color, white);
-      color: transparent;
-      transition-property: all;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 150ms;
+  :host([appearance='default']) .control {
+    flex: 0 0 auto;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--wa-form-control-toggle-size, 2rem);
+    height: var(--wa-form-control-toggle-size, 2rem);
+    border-color: var(--wa-form-control-border-color, gray);
+    border-radius: 50%;
+    border-style: var(--wa-form-control-border-style, solid);
+    border-width: var(--wa-form-control-border-width, 1px);
+    background-color: var(--wa-form-control-background-color, white);
+    color: transparent;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 
-      margin-inline-end: 0.5em;
-    }
+    margin-inline-end: 0.5em;
   }
 
   :host([appearance='clickable']) .control {
@@ -94,10 +92,10 @@ export const styles = css`
     transition:
       background-color var(--wa-transition-fast),
       border-color var(--wa-transition-fast);
+  }
 
-    .control {
-      display: none;
-    }
+  :host([appearance='button']) .control {
+    display: none;
   }
 
   /* Horizontal grouping - remove inner border radius */

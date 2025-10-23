@@ -1,14 +1,17 @@
-import { html } from 'lit';
-
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import type { WarpSlider } from './index.js';
 import '../affix/index.js';
 import '../textfield/index.js';
 import './index.js';
 
-const { events: sliderEvents, args: sliderArgs, argTypes: sliderArgTypes } = getStorybookHelpers<WarpSlider>('w-slider');
+const {
+  events: sliderEvents,
+  args: sliderArgs,
+  argTypes: sliderArgTypes,
+} = getStorybookHelpers<WarpSlider>('w-slider');
 
 const meta: Meta = {
   title: 'Forms/Slider and Range Slider',

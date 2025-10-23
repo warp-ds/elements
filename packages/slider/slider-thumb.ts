@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-
 import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -245,7 +244,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         await polyfill({ roots: [this.shadowRoot], elements: [this.anchorPositioningStyleElement] });
       } catch (e) {
-        console.error(new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }));
+        console.error(
+          new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }),
+        );
       }
     } else {
       await this.updateComplete;
@@ -313,9 +314,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         </w-textfield>
 
         <div id="target" class="${classMap({ 'w-slider-thumb__tooltip': true, 'w-slider-thumb__tooltip--visible': this._showTooltip })}">
-          ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
-            ? html`&nbsp;${this.suffix}`
-            : nothing}
+          ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${
+            this.suffix ? html`&nbsp;${this.suffix}` : nothing
+          }
         </div>
 
         <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->

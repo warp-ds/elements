@@ -16,7 +16,7 @@ import * as lightning from 'lightningcss';
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
 
 const componentExports = manifest.modules.map((item) => `export * from './${item.path.replace('.ts', '')}';`);
-writeFileSync(new URL(`../entrypoint.js`, import.meta.url), componentExports.join('\n'), { encoding: 'utf8' });
+writeFileSync(new URL('../entrypoint.js', import.meta.url), componentExports.join('\n'), { encoding: 'utf8' });
 
 const uno = await createGenerator({
   presets: [presetWarp({ skipResets: true, externalizeClasses: false })],
@@ -66,7 +66,7 @@ const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } 
     setup(build) {
       build.onLoad({ filter }, async (args) => {
         const { ext } = path.parse(args.path);
-        let contents = await readFile(args.path, 'utf8');
+        const contents = await readFile(args.path, 'utf8');
         if (contents.includes(placeholder)) {
           const css = await buildCSS(contents, { minify });
           await writeFile(

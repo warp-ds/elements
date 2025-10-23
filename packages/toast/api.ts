@@ -1,7 +1,7 @@
 import { windowExists } from '../utils/window-exists';
 
 import { WarpToastContainer } from './toast-container';
-import type { ToastOptions, ToastInternal } from './types';
+import type { ToastInternal, ToastOptions } from './types';
 
 function getToastContainer() {
   const container = customElements.get('w-toast-container');

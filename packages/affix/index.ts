@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -62,7 +61,10 @@ class WarpAffix extends LitElement {
 
   /** @internal */
   get _classes() {
-    return classNames([this._classBase.wrapper, this.label ? this._classBase.wrapperWithLabel : this._classBase.wrapperWithIcon]);
+    return classNames([
+      this._classBase.wrapper,
+      this.label ? this._classBase.wrapperWithLabel : this._classBase.wrapperWithIcon,
+    ]);
   }
 
   /** @internal */
@@ -96,9 +98,11 @@ class WarpAffix extends LitElement {
   get _markup() {
     if (this.label) {
       return this._text;
-    } else if (this.search) {
+    }
+    if (this.search) {
       return this._searchButton;
-    } else if (this.clear) {
+    }
+    if (this.clear) {
       return this._clearButton;
     }
     return undefined;

@@ -1,8 +1,7 @@
 // @warp-css;
 
-import { html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles';
@@ -25,10 +24,10 @@ const ccSwitch = {
 
 export class WarpSwitch extends LitElement {
   @property({ type: Boolean, reflect: true })
-  value: boolean = false;
+  value = false;
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
+  disabled = false;
 
   static styles = [reset, styles];
 

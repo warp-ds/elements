@@ -1,6 +1,5 @@
-import { html, LitElement } from 'lit';
-
 import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -8,7 +7,16 @@ import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
 
-type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'negativeQuiet' | 'utility' | 'pill' | 'link' | 'quiet' | 'utilityQuiet';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'negative'
+  | 'negativeQuiet'
+  | 'utility'
+  | 'pill'
+  | 'link'
+  | 'quiet'
+  | 'utilityQuiet';
 
 const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'pill', 'link'];
 

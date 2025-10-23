@@ -1,8 +1,8 @@
 // @warp-css;
-import { html, LitElement, PropertyValues } from 'lit';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
@@ -59,27 +59,27 @@ export class WarpCombobox extends LitElement {
 
   /** The input value */
   @property({ type: String, reflect: true })
-  value: string = '';
+  value = '';
 
   /** Whether the popover opens when focus is on the text field */
   @property({ type: Boolean, attribute: 'open-on-focus' })
-  openOnFocus: boolean = false;
+  openOnFocus = false;
 
   /** Select active option on blur */
   @property({ type: Boolean, attribute: 'select-on-blur' })
-  selectOnBlur: boolean = true;
+  selectOnBlur = true;
 
   /** Whether the matching text segments in the options should be highlighted */
   @property({ type: Boolean, attribute: 'match-text-segments' })
-  matchTextSegments: boolean = false;
+  matchTextSegments = false;
 
   /** Disable client-side static filtering */
   @property({ type: Boolean, attribute: 'disable-static-filtering' })
-  disableStaticFiltering: boolean = false;
+  disableStaticFiltering = false;
 
   /** Renders the input field in an invalid state */
   @property({ type: Boolean, reflect: true })
-  invalid: boolean = false;
+  invalid = false;
 
   /** The content to display as the help text */
   @property({ type: String, attribute: 'help-text', reflect: true })
@@ -87,15 +87,15 @@ export class WarpCombobox extends LitElement {
 
   /** Whether the element is disabled */
   @property({ type: Boolean, reflect: true })
-  disabled: boolean = false;
+  disabled = false;
 
   /** Whether the element is required */
   @property({ type: Boolean, reflect: true })
-  required: boolean = false;
+  required = false;
 
   /** Whether to show optional text */
   @property({ type: Boolean, reflect: true })
-  optional: boolean = false;
+  optional = false;
 
   /** Additional container styling */
   @property({ type: String, reflect: true, attribute: 'class-name' })
@@ -111,7 +111,7 @@ export class WarpCombobox extends LitElement {
 
   /** @internal Options list open boolean */
   @state()
-  private _isOpen: boolean = false;
+  private _isOpen = false;
 
   /** @internal The option the user has navigated to with their keyboard */
   @state()
@@ -123,7 +123,7 @@ export class WarpCombobox extends LitElement {
 
   /** @internal Unique identifier counter for options */
   @state()
-  private _optionIdCounter: number = 0;
+  private _optionIdCounter = 0;
 
   static styles = [reset, styles];
 
@@ -162,7 +162,9 @@ export class WarpCombobox extends LitElement {
   private _getAriaText(options: OptionWithIdAndMatch[], value: string) {
     if (!options || !value) return '';
 
-    const filteredOptionsByInputValue = options.filter((option) => option.value.toLowerCase().includes(value.toLowerCase()));
+    const filteredOptionsByInputValue = options.filter((option) =>
+      option.value.toLowerCase().includes(value.toLowerCase()),
+    );
 
     const pluralResults = i18n._({
       id: 'combobox.aria.pluralResults',
@@ -196,10 +198,12 @@ export class WarpCombobox extends LitElement {
     if (isNavigationKey && !this._isOpen) {
       this._isOpen = true;
       return;
-    } else if (isNavigationKey && this._isOpen) {
+    }
+    if (isNavigationKey && this._isOpen) {
       this._findAndSetActiveOption(e);
       return;
-    } else if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
+    }
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
       return;
     }
 
@@ -268,7 +272,11 @@ export class WarpCombobox extends LitElement {
         break;
       case 'ArrowUp':
         this._navigationOption =
-          prevIndex === -2 ? this._currentOptions[this._currentOptions.length - 1] : prevIndex < 0 ? null : this._currentOptions[prevIndex];
+          prevIndex === -2
+            ? this._currentOptions[this._currentOptions.length - 1]
+            : prevIndex < 0
+              ? null
+              : this._currentOptions[prevIndex];
         break;
       case 'PageUp':
         this._navigationOption = currIndex - 10 < 0 ? this._currentOptions[0] : this._currentOptions[currIndex - 10];
@@ -348,7 +356,8 @@ export class WarpCombobox extends LitElement {
     // If user has navigated to an option on blur || the input value equals one of the options' value -> select value
     if (
       this.selectOnBlur &&
-      (this._navigationOption || (!this._navigationOption && this._currentOptions.findIndex((o) => o.value === this.value) !== -1))
+      (this._navigationOption ||
+        (!this._navigationOption && this._currentOptions.findIndex((o) => o.value === this.value) !== -1))
     ) {
       const selectedValue = this._navigationOption?.value || this.value;
       this.value = selectedValue;
@@ -387,7 +396,8 @@ export class WarpCombobox extends LitElement {
 
   /** Handle container blur */
   private _handleContainerBlur(e: FocusEvent) {
-    const isClickOutsideContainer = !e.currentTarget || !(e.currentTarget as Element).contains(e.relatedTarget as Element);
+    const isClickOutsideContainer =
+      !e.currentTarget || !(e.currentTarget as Element).contains(e.relatedTarget as Element);
     if (isClickOutsideContainer) {
       this._isOpen = false;
     }

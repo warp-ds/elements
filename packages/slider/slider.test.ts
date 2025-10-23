@@ -1,6 +1,5 @@
-import { html } from 'lit';
-
 import { userEvent } from '@vitest/browser/context';
+import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 

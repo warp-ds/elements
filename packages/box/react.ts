@@ -1,7 +1,6 @@
 import { LitElement } from 'lit';
-import React from 'react';
-
 import { createComponent } from '@lit/react';
+import React from 'react';
 
 import { WarpBox } from '.';
 

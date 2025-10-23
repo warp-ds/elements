@@ -1,3 +1,31 @@
+# [2.2.0-next.20](https://github.com/warp-ds/elements/compare/v2.2.0-next.19...v2.2.0-next.20) (2025-10-16)
+
+
+### Bug Fixes
+
+* box missing last-child slotted selector and button-as-link ([#348](https://github.com/warp-ds/elements/issues/348)) ([4367c1c](https://github.com/warp-ds/elements/commit/4367c1cf05deefa247818a200a60f4465c7e8241))
+
+# [2.2.0-next.19](https://github.com/warp-ds/elements/compare/v2.2.0-next.18...v2.2.0-next.19) (2025-10-09)
+
+
+### Bug Fixes
+
+* generate types using CEM ([1c481bc](https://github.com/warp-ds/elements/commit/1c481bc1608fefcffcb6d91ab30d73cb3276b72b))
+
+# [2.2.0-next.18](https://github.com/warp-ds/elements/compare/v2.2.0-next.17...v2.2.0-next.18) (2025-10-09)
+
+
+### Bug Fixes
+
+* update pagination styles ([8a356b8](https://github.com/warp-ds/elements/commit/8a356b864c982e06c7800e099c2348aa50c047aa))
+
+# [2.2.0-next.17](https://github.com/warp-ds/elements/compare/v2.2.0-next.16...v2.2.0-next.17) (2025-10-09)
+
+
+### Bug Fixes
+
+* center icons and buttons, and don't trigger click on icons ([#347](https://github.com/warp-ds/elements/issues/347)) ([c25a0de](https://github.com/warp-ds/elements/commit/c25a0deebf9d76d6d11851463442fcca7a26f79a))
+
 # [2.2.0-next.16](https://github.com/warp-ds/elements/compare/v2.2.0-next.15...v2.2.0-next.16) (2025-10-03)
 
 

@@ -1,8 +1,7 @@
-import { css, html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { expand, collapse } from 'element-collapse';
+import { collapse, expand } from 'element-collapse';
+import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 
@@ -70,13 +69,13 @@ export class WarpToast extends LitElement {
   type: ToastType = 'success';
 
   @property({ type: String, attribute: true, reflect: true })
-  text: string = '';
+  text = '';
 
   @property({ type: Boolean, attribute: true, reflect: true })
-  canclose: boolean = false;
+  canclose = false;
 
   @state()
-  private _expanded: boolean = false;
+  private _expanded = false;
 
   constructor() {
     super();
@@ -115,7 +114,7 @@ export class WarpToast extends LitElement {
 
   /** @internal */
   get _wrapper() {
-    return this.renderRoot?.querySelector(`section`) ?? null;
+    return this.renderRoot?.querySelector('section') ?? null;
   }
 
   /** @internal */
@@ -148,20 +147,19 @@ export class WarpToast extends LitElement {
         message: 'Error',
         comment: 'Default screenreader message for error in toast component',
       });
-    } else {
-      return i18n._({
-        id: 'toast.aria.successful',
-        message: 'Successful',
-        comment: 'Default screenreader message for successful in toast component',
-      });
     }
+    return i18n._({
+      id: 'toast.aria.successful',
+      message: 'Successful',
+      comment: 'Default screenreader message for successful in toast component',
+    });
   }
 
   /** @internal */
   get _iconMarkup() {
     if (this._warning) return html`<w-icon-warning-16></w-icon-warning-16>`;
     if (this._error) return html`<w-icon-error-16></w-icon-error-16>`;
-    else return html`<w-icon-success-16></w-icon-success-16>`;
+    return html`<w-icon-success-16></w-icon-success-16>`;
   }
 
   async collapse() {

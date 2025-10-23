@@ -1,9 +1,8 @@
 // @warp-css;
 
-import { html, LitElement } from 'lit';
-
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/check-16';
@@ -186,7 +185,11 @@ class WarpStep extends LitElement {
       isLast ? 'invisible' : '',
     ]);
 
-    const contentClasses = classNames([ccStep.content, vertical ? ccStep.contentVertical : ccStep.contentHorizontal, isLast ? 'pb-0' : '']);
+    const contentClasses = classNames([
+      ccStep.content,
+      vertical ? ccStep.contentVertical : ccStep.contentHorizontal,
+      isLast ? 'pb-0' : '',
+    ]);
 
     return html`
       <li class=${stepClasses}>

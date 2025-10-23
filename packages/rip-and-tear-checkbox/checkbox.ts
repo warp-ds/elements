@@ -72,7 +72,8 @@ export class WCheckbox extends BaseFormAssociatedElement {
   @property({ type: Boolean, attribute: false }) checked: boolean = this.hasAttribute('checked');
 
   /** The default value of the form control. Primarily used for resetting the form control. */
-  @property({ type: Boolean, reflect: true, attribute: 'checked' }) defaultChecked: boolean = this.hasAttribute('checked');
+  @property({ type: Boolean, reflect: true, attribute: 'checked' }) defaultChecked: boolean =
+    this.hasAttribute('checked');
 
   /**
    * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you

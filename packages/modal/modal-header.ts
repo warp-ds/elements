@@ -1,7 +1,6 @@
-import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-
 import { Move } from '@itsy/animate/move';
 import { i18n } from '@lingui/core';
+import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import '@warp-ds/icons/elements/arrow-left-16';
 import '@warp-ds/icons/elements/close-16';

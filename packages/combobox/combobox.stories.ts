@@ -1,8 +1,7 @@
-import { html } from 'lit';
-
 import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
@@ -45,11 +44,9 @@ const sampleOptions = [
 ];
 
 export const Default: Story = {
-  args: {
-    options: sampleOptions,
-    label: 'Select a fruit',
-    placeholder: 'Type to search...',
-  },
+  args: {},
+  render: () =>
+    html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
 };
 
 export const WithValue: Story = {
