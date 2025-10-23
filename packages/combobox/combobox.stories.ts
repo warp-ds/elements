@@ -6,6 +6,7 @@ import { html } from 'lit';
 import { prespread } from '../../.storybook/utilities.js';
 
 import './index.js';
+import '../textfield/index.js';
 import type { WarpCombobox } from './index.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpCombobox>('w-combobox');

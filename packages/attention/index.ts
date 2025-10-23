@@ -26,6 +26,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
 import '@warp-ds/icons/elements/close-16';
+import '../button/index';
 
 const buttonTextSizes = {
   medium: 'text-m leading-[24]',

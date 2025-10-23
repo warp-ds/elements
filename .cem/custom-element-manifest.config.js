@@ -20,6 +20,8 @@ export default {
     'packages/rip-and-tear-radio/radio*.ts',
     'packages/rip-and-tear-checkbox/checkbox.ts',
     'packages/tabs/tab*.ts',
+    'packages/toast/toast.ts',
+    'packages/toast/toast-container.ts',
   ],
 
   // Globs to exclude

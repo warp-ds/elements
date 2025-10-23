@@ -46,39 +46,11 @@ export const Default: Story = {
   render(args) {
     return html`
       <w-attention ${spread(prespread(args))}>
-        <w-button id="popoverTarget" slot="target"> Click to toggle a popover </w-button>
+        <w-button id="popoverTarget" slot="target" @click=${(e) => {const attention = e.currentTarget.closest('w-attention'); attention.show = !attention.show;}}> Click to toggle a popover </w-button>
         <span slot="message">I'm a popover</span>
       </w-attention>
-
-      <script>
-        const popoverTarget = document.querySelector('#popoverTarget');
-        const popoverEl = document.querySelector('[popover]');
-
-        popoverTarget.addEventListener('click', () => {
-          if (popoverEl.show) {
-            popoverEl.removeAttribute('show');
-          } else {
-            popoverEl.setAttribute('show', 'true');
-          }
-        });
-      </script>
     `;
   },
-  decorators: [
-    (story) => html`
-      ${story()}
-      <script>
-        // use IIFE to create local scope
-        (() => {
-          const popoverIconEl = document.getElementById('attention-element');
-          const popoverIconTarget = document.getElementById('icon-button-target');
-          popoverIconTarget.addEventListener('click', () => {
-            popoverIconEl.show = !popoverIconEl.show;
-          });
-        })();
-      </script>
-    `,
-  ],
 };
 
 export const ToolTip: Story = {
