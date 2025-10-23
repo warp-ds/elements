@@ -1,15 +1,22 @@
+import { spread } from '@open-wc/lit-helpers';
 import type { Meta, StoryObj } from '@storybook/web-components';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 
+import { prespread } from '../../.storybook/utilities.js';
+
 import './index.js';
+import '../textfield/index.js';
 import type { WarpCombobox } from './index.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpCombobox>('w-combobox');
 
-const meta: Meta<WarpCombobox> = {
+const meta: Meta<typeof args> = {
   title: 'Forms/Combobox',
   component: 'w-combobox',
+  render(args) {
+    return html` <w-combobox ${spread(prespread(args))} .options="${sampleOptions}"></w-combobox> `;
+  },
   parameters: {
     docs: {
       description: {
@@ -38,50 +45,66 @@ const sampleOptions = [
 ];
 
 export const Default: Story = {
+  args: {},
   render: () =>
     html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
 };
 
 export const WithValue: Story = {
-  render: () => html`
-    <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}" value="Apple"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
+  },
 };
 
 export const OpenOnFocus: Story = {
-  render: () => html`
-    <w-combobox label="Select a fruit" placeholder="Type to search..." open-on-focus .options="${sampleOptions}"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    openOnFocus: true,
+  },
 };
 
 export const WithTextMatching: Story = {
-  render: () => html`
-    <w-combobox label="Select a fruit" placeholder="Type to search..." match-text-segments .options="${sampleOptions}"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    matchTextSegments: true,
+  },
 };
 
 export const Invalid: Story = {
-  render: () => html`
-    <w-combobox
-      label="Select a fruit"
-      placeholder="Type to search..."
-      invalid
-      .options="${sampleOptions}"
-      value="Invalid fruit"
-      help-text="Please select a valid fruit from the list"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Invalid fruit',
+    helpText: 'Please select a valid fruit from the list',
+    invalid: true,
+  },
 };
 
 export const Disabled: Story = {
-  render: () => html`
-    <w-combobox label="Select a fruit" placeholder="Type to search..." disabled .options="${sampleOptions}" value="Apple"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    value: 'Apple',
+    disabled: true,
+  },
 };
 
 export const Optional: Story = {
-  render: () => html`
-    <w-combobox label="Select a fruit" placeholder="Type to search..." optional .options="${sampleOptions}"></w-combobox>
-  `,
+  args: {
+    options: sampleOptions,
+    label: 'Select a fruit',
+    placeholder: 'Type to search...',
+    optional: true,
+  },
 };
 
 export const DisableStaticFiltering: Story = {

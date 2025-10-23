@@ -1,10 +1,14 @@
+import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { WarpBox } from './index.js';
+import { WarpBox } from '.';
+
+// decouple from CDN by providing a dummy class
+class Component extends LitElement {}
 
 export const Box = createComponent({
   tagName: 'w-box',
-  elementClass: WarpBox,
+  elementClass: Component as unknown as typeof WarpBox,
   react: React,
 });

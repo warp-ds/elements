@@ -27,6 +27,32 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Default: Story = {
-  args: {},
+export const Radio: Story = {
+  args: {
+    type: 'radio',
+  },
+};
+
+export const Checkbox: Story = {
+  args: {
+    type: 'checkbox',
+  },
+};
+
+export const Indeterminate: Story = {
+  args: {
+    indeterminate: true,
+  },
+};
+
+export const Checked: Story = {
+  args: {
+    checked: true,
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    invalid: true,
+  },
 };

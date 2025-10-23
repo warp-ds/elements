@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import '../button/index.js'; // TODO: figure out a good way of including the required definition without bundling the button in datepicker
+import '../button/index.js';
+import './index.js';
 import { DatePicker } from './react.js';
 
 test('renders the date picker component', async () => {

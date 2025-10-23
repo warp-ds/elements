@@ -25,16 +25,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   static styles = [reset, unoStyles, wSliderThumbStyles];
 
-  @property({ attribute: 'aria-label' })
+  @property({ attribute: 'aria-label', reflect: true })
   ariaLabel: string;
 
-  @property({ attribute: 'aria-description' })
+  @property({ attribute: 'aria-description', reflect: true })
   ariaDescription: string;
 
-  @property()
+  @property({ reflect: true })
   label: string;
 
-  @property()
+  @property({ reflect: true })
   name: string;
 
   @property({ reflect: true })

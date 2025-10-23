@@ -30,7 +30,6 @@ type Story = StoryObj<typeof args>;
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -39,7 +38,6 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -48,7 +46,6 @@ export const Secondary: Story = {
 export const Negative: Story = {
   args: {
     variant: 'negative',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -57,7 +54,6 @@ export const Negative: Story = {
 export const NegativeQuiet: Story = {
   args: {
     variant: 'negativeQuiet',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -66,7 +62,6 @@ export const NegativeQuiet: Story = {
 export const Utility: Story = {
   args: {
     variant: 'utility',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -75,7 +70,6 @@ export const Utility: Story = {
 export const UtilityQuiet: Story = {
   args: {
     variant: 'utilityQuiet',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -84,7 +78,6 @@ export const UtilityQuiet: Story = {
 export const Link: Story = {
   args: {
     variant: 'link',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -93,7 +86,6 @@ export const Link: Story = {
 export const Pill: Story = {
   args: {
     variant: 'pill',
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -106,7 +98,6 @@ export const Small: Story = {
   args: {
     variant: 'primary',
     small: true,
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -116,7 +107,6 @@ export const Quiet: Story = {
   args: {
     variant: 'secondary',
     quiet: true,
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
@@ -126,7 +116,6 @@ export const FullWidth: Story = {
   args: {
     variant: 'primary',
     'full-width': true,
-    type: 'button',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },

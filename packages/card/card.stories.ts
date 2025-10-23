@@ -83,7 +83,7 @@ export const PropertyExample: Story = {
   render(args) {
     return html`
       <w-card ${spread(prespread(args))} style="max-width: 300px;">
-        <img style="width: 100%; height: 200px; object-fit: cover;" src="https://source.unsplash.com/300x200" alt="Example image" />
+        <img style="width: 100%; height: 200px; object-fit: cover;" src="https://unsplash.it/300/200?random" alt="Example image" />
         <div style="padding: 16px;">
           <p style="font-size: 12px; color: #666; margin: 0 0 8px 0;">DNB Eiendom</p>
           <p style="margin: 0 0 8px 0;">Stilfull og gjennomgående 3-roms m/balkong. Oppusset i 2019.</p>

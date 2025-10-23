@@ -36,7 +36,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
    *
    * If you need to display HTML, use the `label` slot instead.
    */
-  @property()
+  @property({ reflect: true })
   label: string;
 
   @property({ type: Boolean, reflect: true })
@@ -56,14 +56,14 @@ class WarpSlider extends FormControlMixin(LitElement) {
   max: string;
 
   /** Pass a value similar to step to create visual markers at that interval */
-  @property({ type: Number })
+  @property({ type: Number, reflect: true })
   markers: number;
 
-  @property({ type: Number })
+  @property({ type: Number, reflect: true })
   step: number;
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
-  @property()
+  @property({ reflect: true })
   suffix: string;
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */

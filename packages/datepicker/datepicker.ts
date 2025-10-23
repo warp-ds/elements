@@ -127,6 +127,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
    * ```
    */
+  @property({ attribute: false })
   isDayDisabled: (day: Date) => boolean;
 
   /**

@@ -114,14 +114,24 @@ export class WarpTabs extends LitElement {
     }
   }
 
-  private _initializeActiveTab() {
-    const tabs = Array.from(this.querySelectorAll('w-tab'));
-    const activeTab = tabs.find((tab) => tab.hasAttribute('active'));
+  get tabs() {
+    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
+    // Get the slotted elements
+    const slottedElements = slot.assignedElements({ flatten: true });
+    // Filter only w-tab elements
+    return slottedElements.filter((el) => el.tagName.toLowerCase() === 'w-tab');
+  }
 
-    if (activeTab) {
-      this._activeTab = activeTab.getAttribute('name') || '';
-    } else if (tabs.length > 0) {
-      this._activeTab = tabs[0].getAttribute('name') || '';
+  get activeTab() {
+    const activeTabs = this.tabs.filter((tab: HTMLElement & { name: string }) => tab.name === this._activeTab);
+    return activeTabs[0];
+  }
+
+  private _initializeActiveTab() {
+    if (this.activeTab) {
+      this._activeTab = this.activeTab.getAttribute('name') || '';
+    } else if (this.tabs.length > 0) {
+      this._activeTab = this.tabs[0].getAttribute('name') || '';
     }
 
     if (this._activeTab) {
@@ -154,11 +164,10 @@ export class WarpTabs extends LitElement {
     requestAnimationFrame(() => {
       if (!this.tabList || !this.selectionIndicator) return;
 
-      const activeTab = this.tabList.querySelector(`w-tab[name="${this._activeTab}"]`) as HTMLElement;
-      if (!activeTab) return;
+      if (!this.activeTab) return;
 
       const tabListRect = this.tabList.getBoundingClientRect();
-      const activeTabRect = activeTab.getBoundingClientRect();
+      const activeTabRect = this.activeTab.getBoundingClientRect();
 
       const left = activeTabRect.left - tabListRect.left;
       const width = activeTabRect.width;
@@ -172,8 +181,7 @@ export class WarpTabs extends LitElement {
     // Update tab panels visibility
     const panels = document.querySelectorAll('w-tab-panel');
     panels.forEach((panel) => {
-      const panelName = panel.getAttribute('name');
-      if (panelName === this._activeTab) {
+      if (panel.name === this._activeTab) {
         panel.removeAttribute('hidden');
         // Also explicitly set hidden property to false for web components
         (panel as HTMLElement).hidden = false;
