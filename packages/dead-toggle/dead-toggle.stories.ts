@@ -27,6 +27,12 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
+export const Nothing: Story = {
+  render(args) {
+    return html`<w-dead-toggle></w-dead-toggle>`;
+  },
+}
+
 export const Radio: Story = {
   args: {
     type: 'radio',

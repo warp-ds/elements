@@ -54,6 +54,7 @@
     "build:storybook": "pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:entrypoint && storybook build && pnpm run build:polyfill && touch ./storybook-static/.nojekyll",
     "build:styles": "node ./build/styles.js",
     "build": "rimraf dist && rimraf eik && pnpm messages:compile && tsc && pnpm build:manifest && pnpm build:editor && pnpm build:components && pnpm run build:cloak && pnpm build:bundle && pnpm run build:polyfill",
+    "build:x": "tsc && pnpm build:manifest && pnpm build:components && pnpm build:bundle",
     "check": "pnpm biome check --write .",
     "clean": "rimraf .pnpm-store node_modules dist eik storybook-static entrypoint.js",
     "commit": "cz",

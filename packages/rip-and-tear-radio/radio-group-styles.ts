@@ -38,7 +38,6 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 0.75em;
   }
 
   /* Horizontal */
