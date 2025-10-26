@@ -64,6 +64,8 @@ export const toggleStyles = css`
     border-radius: 50%;
   }
   :host([type='radio'][checked]) .control,
+  /* :state is newly available, so we set an attribute in radio for compat */
+  :host([role='radio'][checked-ui]) .control,
   :host([role='radio']:state(checked)) .control {
     border-color: var(--w-s-color-border-selected);
     border-width: 0.6rem;
@@ -91,6 +93,8 @@ export const toggleStyles = css`
   }
 
   :host([type='radio'][disabled]) .control,
+  /* :state is newly available, so we set an attribute in radio for compat */
+  :host([role='radio'][disabled-ui]) .control,
   :host([role='radio']:state(disabled)) .control,
   :host([type='checkbox'][disabled]) .control,
   .checkbox:has(> input:disabled) {
