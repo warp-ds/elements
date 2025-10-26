@@ -23,6 +23,9 @@ export class WarpDeadToggle extends LitElement {
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
   /** @internal */
   get indeterminateMarker() {
     return !this.checked && this.indeterminate ? '–' : '';

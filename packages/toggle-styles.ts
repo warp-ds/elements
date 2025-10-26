@@ -1,7 +1,5 @@
 import { css } from 'lit';
 
-/* :host(:state(checked)) */
-/* :host(:state(disabled)) */
 export const toggleStyles = css`
   [part~='label'] {
     display: block;
@@ -92,11 +90,17 @@ export const toggleStyles = css`
     outline-offset: var(--w-outline-offset, 1px);
   }
 
+  :host([type='radio'][disabled]) .control,
+  :host([role='radio']:state(disabled)) .control,
+  :host([type='checkbox'][disabled]) .control,
   .checkbox:has(> input:disabled) {
     border-color: var(--w-s-color-border-disabled);
     background-color: var(--w-s-color-background-disabled-subtle);
   }
-  .checkbox:has(:checked):has(> input:disabled) {
+
+  :host([type='checkbox'][disabled][checked]) .control,
+  :host([type='checkbox'][disabled][indeterminate]) .control,
+  .checkbox:has(:checked, :indeterminate):has(> input:disabled) {
     background-color: var(--w-s-color-background-disabled);
   }
 `
