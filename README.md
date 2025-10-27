@@ -14,7 +14,7 @@ start by reviewing the [contributing guidelines](CONTRIBUTING.md).
 
 ### Installation
 
-Warp custom elements are supplied by the Eik CDN. 
+Warp custom elements are supplied by the Eik CDN.
 In addition, you can install the `@warp-ds/elements` package to get intellisense
 in your editor.
 
@@ -138,34 +138,19 @@ Add `@warp-ds/elements` to tsconfig types in compilerOptions.
 
 #### Visual Studio Code
 
-This module includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension. The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
 
 ##### Using Warp Elements in a plain HTML page
 
-When developing, install Warp Elements locally using npm
+Install Warp Elements locally using npm:
 
 ```
 npm install @warp-ds/elements
 ```
 
-Add the following snippet to settings.json in vscode to tell it about Warp components
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
 
-.vscode/settings.json
-
-```json
-{
-  "html.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
-  ],
-  "css.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
-  ]
-}
-```
-
-restart vscode
-
-Now, inside any .html files, you will get intellisense when using Warp Elements
+Now, inside any `.html` files, you will get IntelliSense when using Warp Elements:
 
 ```html
 <w-button variant=""><w-button>
@@ -177,28 +162,15 @@ IntelliSense in JavaScript strings is not supported without additional plugins a
 
 ##### Using Warp Elements in Lit html tagged template literals
 
-When developing, install Warp Elements locally using npm
+Install Warp Elements locally using npm:
 
 ```
 npm install @warp-ds/elements
 ```
 
-Add the following snippet to settings.json in vscode to tell it about Warp components
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
 
-.vscode/settings.json
-
-```json
-{
-  "html.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
-  ],
-  "css.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
-  ]
-}
-```
-
-Install the lit-plugin vscode extension and restart vscode
+Install the [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension.
 
 Now, inside any html`` tagged template literals, you will get intellisense when using Warp Elements.
 
@@ -222,7 +194,7 @@ Now, inside your react components, you will get intellisense when using Warp Ele
 
 React 18 and earlier do not support custom elements.
 
-If you are on React 18 or early, we strongly urge you to please consider upgrading to React v19. 
+If you are on React 18 or early, we strongly urge you to please consider upgrading to React v19.
 
 If you cannot upgrade right away, Warp supplies custom element wrappers to add backwards compatibility. Use them like so:
 
@@ -243,6 +215,23 @@ and use the component
 ```
 
 you should get intellisense when using Warp Elements.
+
+#### CustomData fallback
+
+`@warp-ds/elements` also includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
+
+If you can't get the Web Components Language Server to work, add the following snippet to `.vscode/settings.json`, then restart VS Code.
+
+```json
+{
+  "html.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
+  ]
+}
+```
 
 #### JetBrains products
 
