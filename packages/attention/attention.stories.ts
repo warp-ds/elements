@@ -7,6 +7,7 @@ import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpAttention } from './index.js';
 import './index.js';
+import '../button/index.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpAttention>('w-attention');
 
@@ -15,12 +16,12 @@ const meta: Meta<typeof args> = {
   render(args) {
     return html`
       <w-attention ${spread(prespread(args))}>
-        <button
+        <w-button
           ${spread({ id: args.buttonId })}
-          class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
+          variant="secondary"
           slot="target">
           ${args.buttonText}
-        </button>
+        </w-button>
         <span slot="message">I'm a message</span>
       </w-attention>
     `;
@@ -46,7 +47,13 @@ export const Default: Story = {
   render(args) {
     return html`
       <w-attention ${spread(prespread(args))}>
-        <w-button id="popoverTarget" slot="target" @click=${(e) => {const attention = e.currentTarget.closest('w-attention'); attention.show = !attention.show;}}> Click to toggle a popover </w-button>
+        <w-button 
+          id="popoverTarget" 
+          slot="target"
+          variant="secondary"
+          @click=${(e) => {const attention = e.currentTarget.closest('w-attention'); attention.show = !attention.show;}}>
+            Click to toggle a popover
+        </w-button>
         <span slot="message">I'm a popover</span>
       </w-attention>
     `;
@@ -162,13 +169,13 @@ export const AccessibleTooltip: Story = {
           <p id="aria-content" role="tooltip">I'm a popover with ARIA "tooltip" role</p>
           <p>(this text is less relevant)</p>
         </div>
-        <button
+        <w-button
           aria-details="aria-content"
           id="accessible-target"
-          class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-          slot="target">
+          slot="target"
+          variant="secondary">
           Click to toggle a popover
-        </button>
+        </w-button>
       </w-attention>
     `;
   },
