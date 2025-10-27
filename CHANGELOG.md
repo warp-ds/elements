@@ -1,3 +1,10 @@
+# [2.2.0-next.22](https://github.com/warp-ds/elements/compare/v2.2.0-next.21...v2.2.0-next.22) (2025-10-27)
+
+
+### Bug Fixes
+
+* remove components.css from storybook ([#371](https://github.com/warp-ds/elements/issues/371)) ([95d4e89](https://github.com/warp-ds/elements/commit/95d4e89fcd5d505f9289bd53f9a0ad6ee0f37dbd))
+
 # [2.2.0-next.21](https://github.com/warp-ds/elements/compare/v2.2.0-next.20...v2.2.0-next.21) (2025-10-23)
 
 
