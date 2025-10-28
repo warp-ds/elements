@@ -1,3 +1,10 @@
+# [2.2.0-next.23](https://github.com/warp-ds/elements/compare/v2.2.0-next.22...v2.2.0-next.23) (2025-10-28)
+
+
+### Bug Fixes
+
+* rework radio and checkbox ([#363](https://github.com/warp-ds/elements/issues/363)) ([d145edd](https://github.com/warp-ds/elements/commit/d145edd11ab8ce4ba88893c627a7bdb5d15cd0b5))
+
 # [2.2.0-next.22](https://github.com/warp-ds/elements/compare/v2.2.0-next.21...v2.2.0-next.22) (2025-10-27)
 
 
