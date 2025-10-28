@@ -12,12 +12,11 @@ import { HasSlotController } from '../rip-and-tear-radio/slot';
 import { watch } from '../rip-and-tear-radio/watch';
 import '@warp-ds/icons/elements/check-16';
 
-// eslint-disable-next-line
-// @ts-ignore
-import { styles } from './styles';
+import { reset } from '../styles';
+import { toggleStyles } from '../toggle-styles';
 
 export class WCheckbox extends BaseFormAssociatedElement {
-  static css = [styles];
+  static css = [reset, toggleStyles];
 
   static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
 
@@ -87,6 +86,16 @@ export class WCheckbox extends BaseFormAssociatedElement {
 
   /** The checkbox's hint. If you need to display HTML, use the `hint` slot instead. */
   @property() hint = '';
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setInitialAttributes();
+  }
+
+  // NB: not from WA, this eases shared-styling
+  private setInitialAttributes() {
+    this.setAttribute('type', 'checkbox')
+  }
 
   private handleClick() {
     this.hasInteracted = true;
@@ -170,10 +179,10 @@ export class WCheckbox extends BaseFormAssociatedElement {
     const isIndeterminate = !this.checked && this.indeterminate;
 
     return html`
-      <label part="base">
-        <span part="control">
+      <label part="base" class="wrapper">
+        <span part="control" class="checkbox control">
           <input
-            class="input"
+            class="input hide-toggle"
             type="checkbox"
             title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
             name=${this.name}

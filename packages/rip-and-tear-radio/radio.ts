@@ -6,10 +6,11 @@ import { property, state } from 'lit/decorators.js';
 import { BaseFormAssociatedElement } from './form-associated-element';
 // eslint-disable-next-line
 // @ts-ignore
-import { styles } from './radio-styles';
+import { toggleStyles } from '../toggle-styles';
+import { reset } from '../styles';
 
 export class WRadio extends BaseFormAssociatedElement {
-  static css = [styles];
+  static css = [reset, toggleStyles];
 
   @state() checked = false;
 
@@ -57,6 +58,7 @@ export class WRadio extends BaseFormAssociatedElement {
 
     if (changedProperties.has('checked')) {
       this.customStates.set('checked', this.checked);
+      this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
       // Only set tabIndex if not disabled
       if (!this.disabled && !this.forceDisabled) {
@@ -67,6 +69,7 @@ export class WRadio extends BaseFormAssociatedElement {
     if (changedProperties.has('disabled') || changedProperties.has('forceDisabled')) {
       const effectivelyDisabled = this.disabled || this.forceDisabled;
       this.customStates.set('disabled', effectivelyDisabled);
+      this[effectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.setAttribute('aria-disabled', effectivelyDisabled ? 'true' : 'false');
 
       // Set tabIndex based on disabled state
@@ -95,8 +98,10 @@ export class WRadio extends BaseFormAssociatedElement {
 
   render() {
     return html`
-      <span part="control" class="control"></span>
-      <slot part="label" class="label"></slot>
+      <div class="wrapper">
+        <div part="control" class="control"></div>
+        <slot part="label" class="label"></slot>
+      </div>
     `;
   }
 }
