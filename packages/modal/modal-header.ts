@@ -104,6 +104,9 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   static styles = [
     reset,
     css`
+      w-icon-close-16, w-icon-arrow-left-16 {
+        display: flex;
+      }
       .header {
         position: relative;
         padding-bottom: 0.8rem;
