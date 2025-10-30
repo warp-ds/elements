@@ -113,7 +113,6 @@ export const CustomTitle: Story = {
     return html`
       <w-expandable ${spread(prespread(args))}>
         <div slot="title" style="display: flex; align-items: center;">
-          <span style="margin-right: 8px;">🎯</span>
           <span>Custom title with icon</span>
         </div>
         <p>This expandable has a custom title slot with an icon.</p>
