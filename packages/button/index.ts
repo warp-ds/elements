@@ -3,7 +3,7 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, PropertyValues } from 'lit';
+import { html, LitElement, PropertyValues, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
@@ -198,7 +198,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   /** @internal */
   ariaValueTextLoading: string;
 
-  static styles = [reset, styles];
+  static styles = [reset, styles, css`:host([full-width]) { width: 100%; }`];
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {

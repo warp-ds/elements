@@ -76,7 +76,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
           })}"
           class="header-button header-button-left"
           @click="${this.emitBack}">
-          <w-icon-arrow-left-16></w-icon-arrow-left-16>
+          <w-icon-arrow-left-16 style="display: flex;"></w-icon-arrow-left-16>
         </button>`
       : nothing;
   }
@@ -91,7 +91,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
       })}"
       class="header-button ${this._hasTopContent ? 'header-close-button-on-image' : 'header-close-button'}"
       @click="${this.close}">
-      <w-icon-close-16></w-icon-close-16>
+      <w-icon-close-16 style="display: flex;"></w-icon-close-16>
     </button>`;
   }
   emitBack() {
