@@ -37,7 +37,7 @@ export const Default: StoryObj = {
           <div style="margin-bottom: 12px">
             <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
           </div>
-          <h1 class="h4 mb-16">Triumph by Wu Tang Clan</h1>
+          <h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
           <p>
             I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed
             robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous
