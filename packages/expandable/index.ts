@@ -150,8 +150,8 @@ class WarpExpandable extends LitElement {
     ]);
 
     return this._showChevronUp
-      ? html`<w-icon-chevron-up-16 class="${upClasses}"></w-icon-chevron-up-16>`
-      : html`<w-icon-chevron-down-16 class="${downClasses}"></w-icon-chevron-down-16>`;
+      ? html`<w-icon-chevron-up-16 style="display: flex;" class="${upClasses}"></w-icon-chevron-up-16>`
+      : html`<w-icon-chevron-down-16 style="display: flex;" class="${downClasses}"></w-icon-chevron-down-16>`;
   }
 
   get #contentClasses() {
