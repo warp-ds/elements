@@ -188,18 +188,18 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         background-color: var(--w-color-button-pill-background-active);
       }
       .header-close-button-on-image {
-        background-color: rgba(var(--w-rgb-black), 0.7);
+        background-color: transparent;
+        color: var(--w-s-color-text-inverted);
         right: 0.8rem;
         top: 0.8rem;
         position: absolute;
         z-index: 10;
-        color: var(--w-s-color-text-inverted);
       }
       .header-close-button-on-image:hover {
-        background-color: rgba(var(--w-rgb-black), 0.85);
+        background-color: var(--w-color-button-pill-background-hover);
       }
       .header-close-button-on-image:active {
-        background-color: var(--w-black);
+        background-color: var(--w-color-button-pill-background-active);
       }
       @media (min-width: 480px) {
         .header-title-bar {
