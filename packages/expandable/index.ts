@@ -23,7 +23,7 @@ export const ccBox = {
 
 export const ccExpandable = {
   wrapper: 'will-change-height s-text',
-  box: 's-surface-sunken hover:s-bg-hover active:s-bg-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
+  box: 's-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
   bleed: '-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8',
   chevron: 'inline-block align-middle s-icon',
   chevronNonBox: 'ml-8',
