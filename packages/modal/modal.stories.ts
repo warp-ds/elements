@@ -34,10 +34,10 @@ export const Default: StoryObj = {
       <w-modal id="example-modal-one">
         <w-modal-header id="modal-header-one" slot="header" title="An example modal"></w-modal-header>
         <div slot="content">
+          <h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
           <div style="margin-bottom: 12px">
             <w-button id="modal-toggle-back-one" variant="utility" small>Toggle back button</w-button>
           </div>
-          <h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
           <p>
             I bomb atomically, Socrates' philosophies and hypotheses Can't define how I be droppin' these mockeries Lyrically perform armed
             robbery Flee with the lottery, possibly they spotted me Battle-scarred Shogun, explosion when my pen hits tremendous
@@ -72,7 +72,10 @@ export const Default: StoryObj = {
           </p>
         </div>
         <w-modal-footer slot="footer">
-          <w-button variant="primary" id="modal-close-button-one">OK</w-button>
+          <div class="flex gap-16">
+            <w-button variant="secondary" id="modal-close-button-cancel">Cancel</w-button>
+            <w-button variant="primary" id="modal-close-button-one">Confirm</w-button>
+          </div>
         </w-modal-footer>
       </w-modal>
 
@@ -81,10 +84,12 @@ export const Default: StoryObj = {
           const openButtonOne = document.querySelector('#modal-open-button-one');
           const closeButtonOne = document.querySelector('#modal-close-button-one');
           const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
+          const cancelButton = document.querySelector('#modal-close-button-cancel');
           const modalOne = document.querySelector('#example-modal-one');
           const modalHeaderOne = document.querySelector('#modal-header-one');
           openButtonOne.addEventListener('click', () => modalOne.open());
           closeButtonOne.addEventListener('click', () => modalOne.close());
+          cancelButton.addEventListener('click', () => modalOne.close());
           toggleBackButtonOne.addEventListener('click', () => {
             modalHeaderOne.back = !modalHeaderOne.back;
           });
