@@ -1,3 +1,10 @@
+# [2.2.0-next.26](https://github.com/warp-ds/elements/compare/v2.2.0-next.25...v2.2.0-next.26) (2025-10-30)
+
+
+### Bug Fixes
+
+* make the close button for images stand out a bit more ([8cb0718](https://github.com/warp-ds/elements/commit/8cb0718fa5b7666b6b4c2e4280e9dbfad454cb55))
+
 # [2.2.0-next.25](https://github.com/warp-ds/elements/compare/v2.2.0-next.24...v2.2.0-next.25) (2025-10-30)
 
 
