@@ -1,3 +1,15 @@
+# [2.2.0-next.25](https://github.com/warp-ds/elements/compare/v2.2.0-next.24...v2.2.0-next.25) (2025-10-30)
+
+
+### Bug Fixes
+
+* set correct expandable paddings and background colours ([#387](https://github.com/warp-ds/elements/issues/387)) ([464978c](https://github.com/warp-ds/elements/commit/464978c299e87c30c19ebd61fe4b095f456bb889))
+
+
+### Features
+
+* support placeholder in select ([#383](https://github.com/warp-ds/elements/issues/383)) ([3fd55f8](https://github.com/warp-ds/elements/commit/3fd55f857a544fbdcb457f7e7ce4819c27880217))
+
 # [2.2.0-next.24](https://github.com/warp-ds/elements/compare/v2.2.0-next.23...v2.2.0-next.24) (2025-10-30)
 
 
