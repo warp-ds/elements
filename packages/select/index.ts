@@ -1,5 +1,5 @@
 // @warp-css;
-import { html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, TemplateResult } from 'lit';
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
@@ -93,7 +93,14 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
-  static styles = [reset, styles];
+  static styles = [reset, styles, css`
+    /* if there is an option with an empty value and it is selected */
+    select:has(option[value=""][selected]),
+    /* if there is an option with an empty value, and no other options are selected */
+    select:has(option[value=""]):not(:has(option[selected])) {
+      color: var(--w-s-color-text-placeholder);
+    }
+  `];
 
   constructor() {
     super();
@@ -169,6 +176,23 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   onChange({ target }) {
     this._setValue(target.value);
     const event = new CustomEvent('change', { detail: target.value });
+
+    // Gather both <option> and <w-option> children to update the selected attribute
+    const optionNodes = Array.from(this.children).filter(
+      (child) => child.tagName.toLowerCase() === 'option' || child.tagName.toLowerCase() === 'w-option',
+    );
+
+    // Convert them into HTML strings for the template
+    const options = optionNodes.map((child: HTMLElement) => {
+      const value = child.getAttribute('value') ?? '';
+      const selected = value === target.value;
+
+      const label = child.textContent ?? '';
+      const disabled = child.hasAttribute('disabled');
+      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+    });
+    this._options = options;
+
     this.dispatchEvent(event);
   }
 

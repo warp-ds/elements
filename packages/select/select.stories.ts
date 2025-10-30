@@ -92,11 +92,26 @@ export const NoLabel: Story = {
   },
 };
 
-
 export const Optional: Story = {
   args: {
     label: 'Berries',
     optional: true,
+  },
+};
+
+export const Placeholder: Story = {
+  args: {
+    label: 'Berries',
+  },
+  render(args) {
+    return html`
+      <w-select ${spread(prespread(args))}>
+        <option value="">Select an option</option>
+        <option value="raspberries">Raspberries</option>
+        <option value="strawberries">Strawberries</option>
+        <option value="cloudberries">Cloudberries</option>
+      </w-select>
+    `;
   },
 };
 
