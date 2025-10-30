@@ -77,16 +77,18 @@ export const Default: StoryObj = {
       </w-modal>
 
       <script>
-        const openButtonOne = document.querySelector('#modal-open-button-one');
-        const closeButtonOne = document.querySelector('#modal-close-button-one');
-        const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
-        const modalOne = document.querySelector('#example-modal-one');
-        const modalHeaderOne = document.querySelector('#modal-header-one');
-        openButtonOne.addEventListener('click', () => modalOne.open());
-        closeButtonOne.addEventListener('click', () => modalOne.close());
-        toggleBackButtonOne.addEventListener('click', () => {
-          modalHeaderOne.back = !modalHeaderOne.back;
-        });
+        (() => {
+          const openButtonOne = document.querySelector('#modal-open-button-one');
+          const closeButtonOne = document.querySelector('#modal-close-button-one');
+          const toggleBackButtonOne = document.querySelector('#modal-toggle-back-one');
+          const modalOne = document.querySelector('#example-modal-one');
+          const modalHeaderOne = document.querySelector('#modal-header-one');
+          openButtonOne.addEventListener('click', () => modalOne.open());
+          closeButtonOne.addEventListener('click', () => modalOne.close());
+          toggleBackButtonOne.addEventListener('click', () => {
+            modalHeaderOne.back = !modalHeaderOne.back;
+          });
+        })();
       </script>
     `;
   },
@@ -122,11 +124,13 @@ export const WithImage: StoryObj = {
       </w-modal>
 
       <script>
-        const openButtonTwo = document.querySelector('#modal-open-button-two');
-        const closeButtonTwo = document.querySelector('#modal-close-button-two');
-        const modalTwo = document.querySelector('#example-modal-two');
-        openButtonTwo.addEventListener('click', () => modalTwo.open());
-        closeButtonTwo.addEventListener('click', () => modalTwo.close());
+        (() => {
+          const openButtonTwo = document.querySelector('#modal-open-button-two');
+          const closeButtonTwo = document.querySelector('#modal-close-button-two');
+          const modalTwo = document.querySelector('#example-modal-two');
+          openButtonTwo.addEventListener('click', () => modalTwo.open());
+          closeButtonTwo.addEventListener('click', () => modalTwo.close());
+        })();
       </script>
     `;
   },
