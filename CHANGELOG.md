@@ -1,3 +1,10 @@
+# [2.2.0-next.24](https://github.com/warp-ds/elements/compare/v2.2.0-next.23...v2.2.0-next.24) (2025-10-30)
+
+
+### Bug Fixes
+
+* icon alignments and button full-width ([#373](https://github.com/warp-ds/elements/issues/373)) ([1028d3f](https://github.com/warp-ds/elements/commit/1028d3f07392eb2cccb0c28a22f5652ba51e1838))
+
 # [2.2.0-next.23](https://github.com/warp-ds/elements/compare/v2.2.0-next.22...v2.2.0-next.23) (2025-10-28)
 
 
