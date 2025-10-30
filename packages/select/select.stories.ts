@@ -15,8 +15,8 @@ const meta: Meta<typeof args> = {
   render(args) {
     return html`
       <w-select ${spread(prespread(args))}>
-        <w-option value="strawberries">Strawberries</w-option>
-        <option value="raspberries" selected>Raspberries</option>
+        <option value="raspberries">Raspberries</option>
+        <option value="strawberries" selected>Strawberries</option>
         <option value="cloudberries">Cloudberries</option>
       </w-select>
     `;
@@ -38,3 +38,65 @@ export const Default: Story = {
     label: 'Berries',
   },
 };
+
+export const Hint: Story = {
+  args: {
+    label: 'Berries',
+    always: true,
+    hint: 'We assume this is your jam preference'
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    label: 'Berries',
+    invalid: true,
+    hint: 'Wrong choice'
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Berries',
+    disabled: true,
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    label: 'Berries',
+    'read-only': true,
+  },
+};
+
+export const NoLabel: Story = {
+  render(args) {
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+        <w-select ${spread(prespread(args))} aria-label="Your selection is berry nice!">
+          <option value="raspberries">Raspberries</option>
+          <option value="strawberries" selected>Strawberries</option>
+          <option value="cloudberries">Cloudberries</option>
+        </w-select>
+
+        <label id="select-label" htmlFor="warp-aria-labelledby-example">
+          You're berry good at selecting!
+        </label>
+        <w-select ${spread(prespread(args))} id="warp-aria-labelledby-example">
+          <option value="raspberries">Raspberries</option>
+          <option value="strawberries" selected>Strawberries</option>
+          <option value="cloudberries">Cloudberries</option>
+        </w-select>
+      </div>
+    `;
+  },
+};
+
+
+export const Optional: Story = {
+  args: {
+    label: 'Berries',
+    optional: true,
+  },
+};
+
