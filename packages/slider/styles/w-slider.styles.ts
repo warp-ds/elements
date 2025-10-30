@@ -64,15 +64,33 @@ export const wSliderStyles = css`
     grid-area: description;
   }
 
-  .w-slider__active-range {
+  .w-slider__range {
     align-self: center;
     background: var(--w-slider-track-background);
     border-radius: 4px;
+    height: var(--w-slider-track-active-height);
     position: absolute;
+    /* For range sliders to avoid overlapping the slider thumbs we transform them to
+    be visually to the left and right of their respective input[type="range"]. This
+    padding is here so the active-range element is the same width as the input fields. */
+    padding-inline-start: var(--active-range-inline-start-padding, 0);
+    padding-inline-end: var(--active-range-inline-end-padding, 0);
     top: var(--_range-top);
     left: 0;
     right: 0;
     grid-area: slider;
+  }
+
+  .w-slider__active-range {
+    box-sizing: content-box;
+    background: var(--w-slider-track-active-background);
+    height: var(--w-slider-track-active-height);
+
+    border-start-start-radius: var(--active-range-border-radius, 0);
+    border-end-start-radius: var(--active-range-border-radius, 0);
+
+    margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+    width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
   }
 
   .w-slider__markers {
@@ -95,17 +113,6 @@ export const wSliderStyles = css`
     right: 1px;
     grid-area: slider;
     height: var(--_marker-height);
-  }
-
-  .w-slider__active-range::before {
-    background: var(--w-slider-track-active-background);
-    border-radius: 4px;
-    content: '';
-    display: block;
-    height: var(--w-slider-track-active-height);
-
-    margin-left: calc(var(--_blank-values-before) * 1%);
-    width: calc(var(--_filled-values) * 1%);
   }
 
   slot::slotted(w-slider-thumb) {
