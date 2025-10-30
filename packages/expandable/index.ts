@@ -14,7 +14,7 @@ import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
 export const ccBox = {
-  base: 'group block relative break-words last-child:mb-0 p-16 rounded-8', // Relative here enables w-clickable
+  base: 'group block relative break-words last-child:mb-0 px-16 rounded-8', // Relative here enables w-clickable
   bleed: '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8', // We target L and R to override the default rounded-8
   info: 's-bg-info-subtle',
   neutral: 's-surface-sunken',
@@ -22,8 +22,8 @@ export const ccBox = {
 };
 
 export const ccExpandable = {
-  wrapper: 'will-change-height s-text',
-  box: 's-surface-sunken hover:s-bg-hover active:s-bg-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
+  wrapper: 'will-change-height s-text py-16',
+  box: 's-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
   bleed: '-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8',
   chevron: 'inline-block align-middle s-icon',
   chevronNonBox: 'ml-8',
@@ -44,7 +44,7 @@ export const ccExpandable = {
   button:
     'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline',
   buttonBox:
-    'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 p-16 rounded-8',
+    'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 px-16 rounded-8',
   contentWithTitle: 'pt-0',
   title: 'flex w-full justify-between items-center',
   titleType: 't4',
@@ -156,6 +156,7 @@ class WarpExpandable extends LitElement {
 
   get #contentClasses() {
     return classNames(this.contentClass, [
+      this.box ? 'pt-16' : 'pt-8',
       this.box && ccBox.base,
       this._hasTitle && this.box && ccExpandable.contentWithTitle,
     ]);
