@@ -29,14 +29,6 @@ export const wSliderThumbStyles = css`
     height: var(--w-slider-track-height);
   }
 
-  .w-slider-thumb__range:hover::-webkit-slider-thumb {
-    background: var(--w-s-color-background-primary-hover);
-  }
-
-  .w-slider-thumb__range:hover::-moz-range-thumb {
-    background: var(--w-s-color-background-primary-hover);
-  }
-
   /*
     Use anchor positioning to place the tooltip target in relation to the slider thumb.
     We use a polyfill to bring support to older Safari, Firefox at time of writing.
@@ -45,6 +37,7 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
+    cursor: pointer;
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     height: var(--w-slider-thumb-size);
@@ -58,6 +51,7 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
+    cursor: pointer;
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     border-color: transparent;
@@ -66,6 +60,37 @@ export const wSliderThumbStyles = css`
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
+
+    box-shadow: none;
+  }
+
+  .w-slider-thumb__range:active::-webkit-slider-thumb,
+  .w-slider-thumb__range:hover::-webkit-slider-thumb {
+    background: var(--w-s-color-background-primary-hover);
+    box-shadow: var(--w-shadow-slider-handle-hover);
+  }
+
+  .w-slider-thumb__range:focus,
+  .w-slider-thumb__range:focus-visible {
+    outline: none;
+  }
+
+  .w-slider-thumb__range:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--w-s-color-border-focus);
+    outline-offset: var(--w-outline-offset, 1px);
+    box-shadow: none;
+  }
+
+  .w-slider-thumb__range:active::-moz-range-thumb,
+  .w-slider-thumb__range:hover::-moz-range-thumb {
+    background: var(--w-s-color-background-primary-hover);
+    box-shadow: var(--w-shadow-slider-handle-hover);
+  }
+
+  .w-slider-thumb__range:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--w-s-color-border-focus);
+    outline-offset: var(--w-outline-offset, 1px);
+    box-shadow: none;
   }
 
   .w-slider-thumb__tooltip {
