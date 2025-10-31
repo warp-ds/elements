@@ -146,11 +146,11 @@ export const wSliderThumbStyles = css`
 
   :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb,
   :host([name='from']) .w-slider-thumb__tooltip-target {
-    transform: translateX(calc(-1 * var(--w-slider-thumb-size)));
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
   :host([name='from']) .w-slider-thumb__range::-moz-range-thumb {
-    transform: translateX(calc(-1 * var(--w-slider-thumb-size)));
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
   :host([name='to']) .w-slider-thumb__textfield {
@@ -160,10 +160,10 @@ export const wSliderThumbStyles = css`
 
   :host([name='to']) .w-slider-thumb__tooltip-target,
   :host([name='to']) .w-slider-thumb__range::-webkit-slider-thumb {
-    transform: translateX(var(--w-slider-thumb-size));
+    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 
   :host([name='to']) .w-slider-thumb__range::-moz-range-thumb {
-    transform: translateX(var(--w-slider-thumb-size));
+    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 `;
