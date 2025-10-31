@@ -70,8 +70,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ attribute: false })
   formatter: (value: string) => string;
 
-  #thumbSize: number;
-
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     let usedNamedSlots = false;
@@ -135,9 +133,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
       this.style.setProperty('--markers', String(this.markers));
     }
 
-    const sliderStyles = getComputedStyle(this.shadowRoot.querySelector('.w-slider'));
-    this.#thumbSize = Number.parseFloat(sliderStyles.getPropertyValue('--w-slider-thumb-size').replace('px', ''));
-
     this.#syncSliderThumbs();
   }
 
@@ -196,10 +191,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
           <slot id="label" name="label">${this.label}</slot>
         </legend>
         <slot class="w-slider__description" name="description"></slot>
+        ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
         <div class="w-slider__range">
           <div class="w-slider__active-range"></div>
         </div>
-        ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
         <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>

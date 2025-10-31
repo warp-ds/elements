@@ -91,6 +91,7 @@ export const wSliderStyles = css`
 
     margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
     width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
+    z-index: 1;
   }
 
   .w-slider__markers {
@@ -102,9 +103,14 @@ export const wSliderStyles = css`
     /* Creates a linear gradient with --_marker-width wide markers
        followed by enough transparent that we can repeat the gradient
        along the X axis and have markers visible where we want them. */
-    background: linear-gradient(to right, var(--w-slider-marker-color) var(--_marker-width), rgba(0, 0, 0, 0) 1px) repeat-x;
+    background: linear-gradient(
+      to right,
+      var(--w-slider-marker-color) var(--_marker-width),
+      rgba(0, 0, 0, 0) 1px calc(100% - 1px),
+      var(--w-slider-marker-color) 100%
+    ) repeat-x;
     --_step-width-as-percent: calc(var(--markers) / var(--_value-range) * 100);
-    background-size: calc(var(--_step-width-as-percent) * 1% - 0.1%) var(--_marker-height);
+    background-size: calc(var(--_step-width-as-percent) * 1%) var(--_marker-height);
 
     background-position: bottom 0 left 8px right 8px;
     position: absolute;
@@ -113,6 +119,7 @@ export const wSliderStyles = css`
     right: 1px;
     grid-area: slider;
     height: var(--_marker-height);
+    margin-inline: var(--w-slider-thumb-offset);
   }
 
   slot::slotted(w-slider-thumb) {

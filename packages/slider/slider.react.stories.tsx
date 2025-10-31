@@ -88,9 +88,8 @@ export const Marks: Story = {
   render({ suffix }) {
     return (
       <>
-        <Slider label="Distance" markers={25000} step={25000} min="0" max="250000" suffix={suffix} data-testid="markers">
-          <SliderThumb slot="from" aria-label="From distance" name="from" />
-          <SliderThumb slot="to" aria-label="To distance" name="to" />
+        <Slider label="Single" min="0" max="100">
+          <SliderThumb name="value" />
         </Slider>
       </>
     );

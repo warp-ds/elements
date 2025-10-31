@@ -110,21 +110,14 @@ export const SuffixKilometers: Story = {
 export const Marks: Story = {
   args: {
     locale: 'nb',
-    suffix: 'km',
-    step: '25000',
-    markers: '25000',
+    step: '5',
+    markers: '5',
   },
-  render({ locale, suffix, markers, step }) {
+  render({ markers, step }) {
     return html`
-      <w-slider label="Distance" markers="${markers}" step="${step}" min="0" max="250000" suffix="${suffix}" data-testid="markers">
-        <w-slider-thumb slot="from" aria-label="From distance" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" aria-label="To distance" name="to"></w-slider-thumb>
+      <w-slider label="Single" min="0" max="100" step="${step}" markers="${markers}">
+        <w-slider-thumb name="value"></w-slider-thumb>
       </w-slider>
-
-      <script type="module">
-        const markersSlider = document.querySelector('w-slider[data-testid="markers"]');
-        markersSlider.formatter = window.getNumberFormatter('${locale}').format;
-      </script>
     `;
   },
 };
