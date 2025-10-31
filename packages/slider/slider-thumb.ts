@@ -200,47 +200,52 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         this.anchorPositioningStyleElement.textContent = `
         /*
-         * The polyfill can only anchor to ::before and ::after pseudo elements.
+         * The polyfill can only anchor to ::before and ::after pseudo elements, not the pseudo element slider thumb.
          * We work around that by recreating a transparent version of the active range
          * so that we can position relative to that, without crossing the shadow root boundary.
          */
-        #anchor {
-          anchor-name: --polyfilled-thumb;
-
-          /* We have to compensate for the width of the thumb inside the track to find its center. */
-          --_value: var(--_to-as-percent-of-max);
-          --_offset-origin: 50; /* at this point the offset is zero */
-          --_thumb-offset-percent: calc(var(--_value) - var(--_offset-origin));
-          --_thumb-offset-pixels: calc(var(--w-slider-thumb-size) * calc(var(--_thumb-offset-percent) / 100));
-
+        .polyfill-range {
           align-self: center;
           background: transparent;
-          position: absolute;
-          top: var(--_range-top);
           height: var(--w-slider-track-active-height);
+          position: absolute;
+          padding-inline-start: var(--active-range-inline-start-padding, 0);
+          padding-inline-end: var(--active-range-inline-end-padding, 0);
+          top: var(--_range-top);
           left: 0;
           right: 0;
           grid-area: slider;
-          margin-left: calc(var(--_blank-values-before) * 1%);
-          width: calc(calc(var(--_filled-values) * 1%) - var(--_thumb-offset-pixels));
+        }
+
+        .polyfill-active-range {
+          anchor-name: --polyfilled-thumb;
+
+          box-sizing: content-box;
+          background: transparent;
+          height: var(--w-slider-track-active-height);
+
+          border-start-start-radius: var(--active-range-border-radius, 0);
+          border-end-start-radius: var(--active-range-border-radius, 0);
+
+          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+          width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
         }
 
         #target {
           position: absolute;
-
-          top: anchor(--polyfilled-thumb center);
-          left: anchor(--polyfilled-thumb right);
+          top: anchor(--polyfilled-thumb top);
+          right: anchor(--polyfilled-thumb right);
+          margin-right: 12px;
         }
 
-        :host([name='from']) #anchor {
-          --_value: var(--_from-as-percent-of-max);
-
-          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--_thumb-offset-pixels));
-          width: calc(calc(var(--_filled-values) * 1%) - var(--w-slider-thumb-size));
+        :host([name='from']) .polyfill-active-range {
+          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+          width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
         }
 
         :host([name='from']) #target {
           left: anchor(--polyfilled-thumb left);
+          margin-left: 38px;
         }
       `;
 
@@ -269,7 +274,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <div class="w-slider-thumb">
         <label for="range">${this.label}</label>
-        ${!('anchorName' in document.documentElement.style) ? html`<div id="anchor"></div>` : nothing}
+        ${!('anchorName' in document.documentElement.style) ? html`<div class="polyfill-range"><div class="polyfill-active-range"></div></div>` : nothing}
         <input
           id="range"
           aria-label="${this.ariaLabel}"
