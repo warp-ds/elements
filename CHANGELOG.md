@@ -1,3 +1,10 @@
+# [2.2.0-next.27](https://github.com/warp-ds/elements/compare/v2.2.0-next.26...v2.2.0-next.27) (2025-10-31)
+
+
+### Bug Fixes
+
+* steps horizontal bug fixed ([#403](https://github.com/warp-ds/elements/issues/403)) ([62ba3c7](https://github.com/warp-ds/elements/commit/62ba3c716f9ad915c30da98d86e5192643cd9b01))
+
 # [2.2.0-next.26](https://github.com/warp-ds/elements/compare/v2.2.0-next.25...v2.2.0-next.26) (2025-10-30)
 
 
