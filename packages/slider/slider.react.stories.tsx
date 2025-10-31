@@ -88,7 +88,7 @@ export const Marks: Story = {
   render({ suffix }) {
     return (
       <>
-        <Slider label="Single" min="0" max="100">
+        <Slider label="Single" min="0" max="100" markers={5} step={5}>
           <SliderThumb name="value" />
         </Slider>
       </>
