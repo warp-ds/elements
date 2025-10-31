@@ -28,10 +28,12 @@ export const wSliderStyles = css`
 
     /* The --min value can be non-zero, f. ex. choosing a year from 1950 to 2025. Normalize the values so we start at 0 and run to max - min. */
     --_value-range: calc(var(--max) - var(--min));
-    --_from-in-range: max(calc(var(--from) - var(--min)), 0);
+
+    /** Round up to the nearest --step, which defaults to 1 (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#step) */
+    --_from-in-range: round(up, max(calc(var(--from) - var(--min)), 0), var(--step, 1));
 
     /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
-    --_to-in-range: min(calc(var(--to) - var(--min)), var(--_value-range));
+    --_to-in-range: round(up, min(calc(var(--to) - var(--min)), var(--_value-range)), var(--step, 1));
 
     /* Position the starting point of the fill in the case of a non-zero --from value in a range slider.
      * In other words, given a width of 100% how many percent should be left unfilled/blank

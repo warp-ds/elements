@@ -127,6 +127,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
+    if (this.step) {
+      this.style.setProperty('--step', String(this.step));
+    }
     this.style.setProperty('--min', this.min);
     this.style.setProperty('--max', this.max);
     if (this.markers) {
