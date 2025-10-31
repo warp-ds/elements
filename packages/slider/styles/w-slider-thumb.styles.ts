@@ -93,29 +93,20 @@ export const wSliderThumbStyles = css`
     box-shadow: none;
   }
 
-  .w-slider-thumb__tooltip {
-    display: none;
-    position: absolute;
-
-    background-color: var(--w-s-color-background-inverted);
-    color: var(--w-s-color-text-inverted-static);
-    border-color: var(--w-s-color-background-inverted);
-
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 1;
-
-    position-anchor: --thumb;
-
-    bottom: calc(anchor(top) + 5px);
-    justify-self: anchor-center;
-  }
-
-  .w-slider-thumb__tooltip--visible {
+  .w-slider-thumb__tooltip-target {
     display: block;
+    pointer-events: none;
+    position: absolute;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    width: 8px;
+    height: 8px;
+    position-anchor: --thumb;
+    position-area: center; /* Position the tooltip target right on the range thumb */
   }
+
+  /* Uncomment this to debug the invisible anchor target */
+  /* .w-slider-thumb__tooltip-target { border-color: lime; } */
 
   .w-slider-thumb__from-marker,
   .w-slider-thumb__to-marker {
@@ -153,7 +144,8 @@ export const wSliderThumbStyles = css`
     margin-right: var(--w-slider-thumb-size);
   }
 
-  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb {
+  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb,
+  :host([name='from']) .w-slider-thumb__tooltip-target {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size)));
   }
 
@@ -166,6 +158,7 @@ export const wSliderThumbStyles = css`
     grid-column: 3 / 4;
   }
 
+  :host([name='to']) .w-slider-thumb__tooltip-target,
   :host([name='to']) .w-slider-thumb__range::-webkit-slider-thumb {
     transform: translateX(var(--w-slider-thumb-size));
   }

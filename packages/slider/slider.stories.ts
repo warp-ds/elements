@@ -4,6 +4,7 @@ import { html } from 'lit';
 
 import type { WarpSlider } from './index.js';
 import '../affix/index.js';
+import '../attention/index.js';
 import '../textfield/index.js';
 import './index.js';
 
