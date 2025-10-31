@@ -25,7 +25,7 @@ const ccSteps = {
 const ccStep = {
   base: 'group/step',
   vertical: 'group/stepv grid-rows-[20px_auto] grid grid-flow-col gap-x-16',
-  horizontal: 'group/steph grid-rows-[auto_20px] grid-cols-[1fr_20px_1fr] flex-1 grid gap-y-16 items-center',
+  horizontal: 'group/steph grid-rows-[auto_20px] grid-cols-[1fr_20px_1fr] flex-1 grid items-center',
 
   alignLeft: 'grid-cols-[20px_1fr]',
   alignRight: 'grid-cols-[1fr_20px] text-right',
@@ -89,7 +89,7 @@ class WarpSteps extends LitElement {
     const classes = classNames([ccSteps.wrapper, this.horizontal && ccSteps.horizontal]);
 
     return html`
-      <ul class=${classes}>
+      <ul class=${classes} ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}>
         <slot></slot>
       </ul>
     `;
@@ -192,13 +192,13 @@ class WarpStep extends LitElement {
     ]);
 
     return html`
-      <li class=${stepClasses}>
+      <li class="${stepClasses}" style=${this._context.horizontal && 'height: 100%;'}>
         ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : ''}
         <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} ${this.active ? 'aria-current="step"' : ''}>
           ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : ''}
         </div>
         <div class=${lineClasses}></div>
-        <div class=${contentClasses}>
+        <div class=${contentClasses} ${this._context.horizontal && `style='height:100%;'`}>
           <slot></slot>
         </div>
       </li>
