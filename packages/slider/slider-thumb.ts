@@ -121,7 +121,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       return false;
     }
 
-    if (isFromTextInput && this._invalid) this._invalid = false;
+    if (this._invalid) this._invalid = false;
     const valueNum = Number.parseInt(value);
 
     // Update validation state
