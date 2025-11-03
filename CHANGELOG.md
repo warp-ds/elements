@@ -1,3 +1,10 @@
+# [2.2.0-next.28](https://github.com/warp-ds/elements/compare/v2.2.0-next.27...v2.2.0-next.28) (2025-11-03)
+
+
+### Bug Fixes
+
+* visual overlap of range slider thumbs ([#404](https://github.com/warp-ds/elements/issues/404)) ([06f33ab](https://github.com/warp-ds/elements/commit/06f33abc519acd5c3e504bdc80550362b6223368))
+
 # [2.2.0-next.27](https://github.com/warp-ds/elements/compare/v2.2.0-next.26...v2.2.0-next.27) (2025-10-31)
 
 
