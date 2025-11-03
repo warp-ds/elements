@@ -137,27 +137,27 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     let shouldCancel = false;
     if (this.slot) {
       const computedStyle = getComputedStyle(this);
+      const toValue = computedStyle.getPropertyValue('--to');
+      const fromValue = computedStyle.getPropertyValue('--from');
+      if (isFromTextInput) {
+        if (valueNum > Number.parseInt(toValue) || valueNum < Number.parseInt(fromValue)) {
+          // Don't update the slider position when text input is invalid
+          this._invalid = true;
+          return false;
+        }
+      }
+
       if (this.slot === 'from') {
-        const toValue = computedStyle.getPropertyValue('--to');
-        // Check that the from value is not about to go past the --to value
+        // Check that the from value is not about to be dragged past the --to value
         if (valueNum > Number.parseInt(toValue)) {
-          if (isFromTextInput) {
-            this._invalid = true;
-            return false;
-          }
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
           this.value = toValue;
         }
       } else {
-        const fromValue = computedStyle.getPropertyValue('--from');
-        // Check that the to value is not about to go past the --from value
+        // Check that the to value is not about to be dragged past the --from value
         if (valueNum < Number.parseInt(fromValue)) {
-          if (isFromTextInput) {
-            this._invalid = true;
-            return false;
-          }
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
