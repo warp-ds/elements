@@ -27,6 +27,15 @@ export const wTextfieldStyles = css`
     display: none;
   }
 
+  /* Hide the native browser controls */
+  input[type="number"] {
+    -moz-appearance:textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+
   /* Could also consider giving the input mask a background color instead of this */
   .w-textfield__input-wrapper:has(.w-textfield__mask):not(:focus-within) input {
     color: transparent;

@@ -70,10 +70,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ attribute: false })
   formatter: (value: string) => string;
 
-  #thumbSize: number;
-
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    let usedNamedSlots = false;
     for (const thumb of sliderThumbs.values()) {
       // Set attributes that should be in sync between slider thumbs
       thumb.min = this.min;
@@ -95,25 +94,47 @@ class WarpSlider extends FormControlMixin(LitElement) {
         }
       }
 
+      if (thumb.slot === 'from' || thumb.slot === 'to') {
+        usedNamedSlots = true;
+      }
+
       // Set forceDisabled state based on slider component disabled state
       thumb.forceDisabled = this.disabled;
       thumb.forceInvalid = this.invalid;
 
       this.#updateActiveTrack(thumb);
     }
+
+    // Missing a CSS-only way to detect if something is slotted in the named slots
+    const fieldset = this.shadowRoot.querySelector('fieldset');
+    if (usedNamedSlots) {
+      fieldset.style.setProperty(
+        '--active-range-inline-start-padding',
+        'var(--w-slider-thumb-size)',
+      );
+      fieldset.style.setProperty(
+        '--active-range-inline-end-padding',
+        'var(--w-slider-thumb-size)',
+      );
+    } else {
+      fieldset.style.setProperty(
+        '--active-range-border-radius',
+        '4px',
+      );
+    }
   }
 
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
+    if (this.step) {
+      this.style.setProperty('--step', String(this.step));
+    }
     this.style.setProperty('--min', this.min);
     this.style.setProperty('--max', this.max);
     if (this.markers) {
       this.style.setProperty('--markers', String(this.markers));
     }
-
-    const sliderStyles = getComputedStyle(this.shadowRoot.querySelector('.w-slider'));
-    this.#thumbSize = Number.parseFloat(sliderStyles.getPropertyValue('--w-slider-thumb-size').replace('px', ''));
 
     this.#syncSliderThumbs();
   }
@@ -149,19 +170,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #updateActiveTrack(input: WarpSliderThumb) {
     const slotName = input.slot;
 
-    if (slotName) {
-      // To avoid visually overlapping the two thumbs we measure the width of the active range,
-      // and if it's about to become narrower than the width of a thumb we add enough margin to
-      // where they don't visually overlap. This is only relevant for range sliders (using named
-      // slots), so save the call to getComputedStyle for simple sliders.
-      const activeRangeWidth: number = this.#getActiveRangeWidth();
-      const threshold = this.#thumbSize;
-      const diff = threshold - activeRangeWidth;
-      if (activeRangeWidth <= threshold) {
-        this.style.setProperty('--thumb-offset', String(diff));
-      }
-    }
-
     if (!slotName) {
       this.style.setProperty('--from', '0');
     }
@@ -179,15 +187,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
-  #getActiveRangeWidth(): number {
-    const widthPxString = window.getComputedStyle(
-      this.shadowRoot.querySelector('.w-slider__active-range'),
-      '::before',
-    ).width;
-    const width = Number.parseFloat(widthPxString.replace('px', ''));
-    return width;
-  }
-
   render() {
     return html`
       <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}" @slidervalidity="${this.#onSliderValidity}">
@@ -196,7 +195,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
         </legend>
         <slot class="w-slider__description" name="description"></slot>
         ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
-        <div class="w-slider__active-range"></div>
+        <div class="w-slider__range">
+          <div class="w-slider__active-range"></div>
+        </div>
         <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
         <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>

@@ -28,10 +28,12 @@ export const wSliderStyles = css`
 
     /* The --min value can be non-zero, f. ex. choosing a year from 1950 to 2025. Normalize the values so we start at 0 and run to max - min. */
     --_value-range: calc(var(--max) - var(--min));
-    --_from-in-range: max(calc(var(--from) - var(--min)), 0);
+
+    /** Round up to the nearest --step, which defaults to 1 (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#step) */
+    --_from-in-range: round(up, max(calc(var(--from) - var(--min)), 0), var(--step, 1));
 
     /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
-    --_to-in-range: min(calc(var(--to) - var(--min)), var(--_value-range));
+    --_to-in-range: round(up, min(calc(var(--to) - var(--min)), var(--_value-range)), var(--step, 1));
 
     /* Position the starting point of the fill in the case of a non-zero --from value in a range slider.
      * In other words, given a width of 100% how many percent should be left unfilled/blank
@@ -64,15 +66,34 @@ export const wSliderStyles = css`
     grid-area: description;
   }
 
-  .w-slider__active-range {
+  .w-slider__range {
     align-self: center;
     background: var(--w-slider-track-background);
     border-radius: 4px;
+    height: var(--w-slider-track-active-height);
     position: absolute;
+    /* For range sliders to avoid overlapping the slider thumbs we transform them to
+    be visually to the left and right of their respective input[type="range"]. This
+    padding is here so the active-range element is the same width as the input fields. */
+    padding-inline-start: var(--active-range-inline-start-padding, 0);
+    padding-inline-end: var(--active-range-inline-end-padding, 0);
     top: var(--_range-top);
     left: 0;
     right: 0;
     grid-area: slider;
+  }
+
+  .w-slider__active-range {
+    box-sizing: content-box;
+    background: var(--w-slider-track-active-background);
+    height: var(--w-slider-track-active-height);
+
+    border-start-start-radius: var(--active-range-border-radius, 0);
+    border-end-start-radius: var(--active-range-border-radius, 0);
+
+    margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+    width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
+    z-index: 1;
   }
 
   .w-slider__markers {
@@ -84,9 +105,14 @@ export const wSliderStyles = css`
     /* Creates a linear gradient with --_marker-width wide markers
        followed by enough transparent that we can repeat the gradient
        along the X axis and have markers visible where we want them. */
-    background: linear-gradient(to right, var(--w-slider-marker-color) var(--_marker-width), rgba(0, 0, 0, 0) 1px) repeat-x;
+    background: linear-gradient(
+      to right,
+      var(--w-slider-marker-color) var(--_marker-width),
+      rgba(0, 0, 0, 0) 1px calc(100% - 1px),
+      var(--w-slider-marker-color) 100%
+    ) repeat-x;
     --_step-width-as-percent: calc(var(--markers) / var(--_value-range) * 100);
-    background-size: calc(var(--_step-width-as-percent) * 1% - 0.1%) var(--_marker-height);
+    background-size: calc(var(--_step-width-as-percent) * 1%) var(--_marker-height);
 
     background-position: bottom 0 left 8px right 8px;
     position: absolute;
@@ -95,17 +121,7 @@ export const wSliderStyles = css`
     right: 1px;
     grid-area: slider;
     height: var(--_marker-height);
-  }
-
-  .w-slider__active-range::before {
-    background: var(--w-slider-track-active-background);
-    border-radius: 4px;
-    content: '';
-    display: block;
-    height: var(--w-slider-track-active-height);
-
-    margin-left: calc(var(--_blank-values-before) * 1%);
-    width: calc(var(--_filled-values) * 1%);
+    margin-inline: var(--w-slider-thumb-offset);
   }
 
   slot::slotted(w-slider-thumb) {

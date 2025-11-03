@@ -19,6 +19,7 @@ export const wSliderThumbStyles = css`
     background-color: transparent;
     grid-area: slider;
     height: 44px; /* touch target */
+    margin-left: 0;
     pointer-events: none; /* let clicks pass through for range slider where we place two inputs over each other */
   }
 
@@ -26,14 +27,6 @@ export const wSliderThumbStyles = css`
     box-shadow: none;
     color: var(--w-s-color-text);
     height: var(--w-slider-track-height);
-  }
-
-  .w-slider-thumb__range:hover::-webkit-slider-thumb {
-    background: var(--w-s-color-background-primary-hover);
-  }
-
-  .w-slider-thumb__range:hover::-moz-range-thumb {
-    background: var(--w-s-color-background-primary-hover);
   }
 
   /*
@@ -44,11 +37,12 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
+    cursor: pointer;
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     height: var(--w-slider-thumb-size);
     margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
-    pointer-events: auto;
+    pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
   }
@@ -57,6 +51,7 @@ export const wSliderThumbStyles = css`
     anchor-name: --thumb;
 
     appearance: none;
+    cursor: pointer;
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     border-color: transparent;
@@ -65,31 +60,53 @@ export const wSliderThumbStyles = css`
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
+
+    box-shadow: none;
   }
 
-  .w-slider-thumb__tooltip {
-    display: none;
-    position: absolute;
-
-    background-color: var(--w-s-color-background-inverted);
-    color: var(--w-s-color-text-inverted-static);
-    border-color: var(--w-s-color-background-inverted);
-
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 1;
-
-    position-anchor: --thumb;
-
-    bottom: calc(anchor(top) + 5px);
-    justify-self: anchor-center;
+  .w-slider-thumb__range:active::-webkit-slider-thumb,
+  .w-slider-thumb__range:hover::-webkit-slider-thumb {
+    background: var(--w-s-color-background-primary-hover);
+    box-shadow: var(--w-shadow-slider-handle-hover);
   }
 
-  .w-slider-thumb__tooltip--visible {
+  .w-slider-thumb__range:focus,
+  .w-slider-thumb__range:focus-visible {
+    outline: none;
+  }
+
+  .w-slider-thumb__range:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--w-s-color-border-focus);
+    outline-offset: var(--w-outline-offset, 1px);
+    box-shadow: none;
+  }
+
+  .w-slider-thumb__range:active::-moz-range-thumb,
+  .w-slider-thumb__range:hover::-moz-range-thumb {
+    background: var(--w-s-color-background-primary-hover);
+    box-shadow: var(--w-shadow-slider-handle-hover);
+  }
+
+  .w-slider-thumb__range:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--w-s-color-border-focus);
+    outline-offset: var(--w-outline-offset, 1px);
+    box-shadow: none;
+  }
+
+  .w-slider-thumb__tooltip-target {
     display: block;
+    pointer-events: none;
+    position: absolute;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    width: 8px;
+    height: 8px;
+    position-anchor: --thumb;
+    position-area: center; /* Position the tooltip target right on the range thumb */
   }
+
+  /* Uncomment this to debug the invisible anchor target */
+  /* .w-slider-thumb__tooltip-target { border-color: lime; } */
 
   .w-slider-thumb__from-marker,
   .w-slider-thumb__to-marker {
@@ -119,8 +136,21 @@ export const wSliderThumbStyles = css`
     grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
-  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb {
-    margin-left: calc(-1px * var(--thumb-offset) / 2);
+  :host([name='from']) .w-slider-thumb__range {
+    margin-left: var(--w-slider-thumb-size);
+  }
+
+  :host([name='to']) .w-slider-thumb__range {
+    margin-right: var(--w-slider-thumb-size);
+  }
+
+  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb,
+  :host([name='from']) .w-slider-thumb__tooltip-target {
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
+  }
+
+  :host([name='from']) .w-slider-thumb__range::-moz-range-thumb {
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
   :host([name='to']) .w-slider-thumb__textfield {
@@ -128,7 +158,12 @@ export const wSliderThumbStyles = css`
     grid-column: 3 / 4;
   }
 
+  :host([name='to']) .w-slider-thumb__tooltip-target,
   :host([name='to']) .w-slider-thumb__range::-webkit-slider-thumb {
-    margin-left: calc(1px * var(--thumb-offset) / 2);
+    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
+  }
+
+  :host([name='to']) .w-slider-thumb__range::-moz-range-thumb {
+    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 `;

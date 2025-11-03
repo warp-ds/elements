@@ -7,6 +7,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
+import type { WarpAttention } from '../attention/index.js';
 import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
@@ -101,6 +102,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   #showTooltip(): void {
     this._showTooltip = true;
+    (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
   }
 
   #hideTooltip(): void {
@@ -119,7 +121,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       return false;
     }
 
-    if (isFromTextInput && this._invalid) this._invalid = false;
+    if (this._invalid) this._invalid = false;
     const valueNum = Number.parseInt(value);
 
     // Update validation state
@@ -135,27 +137,27 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     let shouldCancel = false;
     if (this.slot) {
       const computedStyle = getComputedStyle(this);
+      const toValue = computedStyle.getPropertyValue('--to');
+      const fromValue = computedStyle.getPropertyValue('--from');
+      if (isFromTextInput) {
+        if (valueNum > Number.parseInt(toValue) || valueNum < Number.parseInt(fromValue)) {
+          // Don't update the slider position when text input is invalid
+          this._invalid = true;
+          return false;
+        }
+      }
+
       if (this.slot === 'from') {
-        const toValue = computedStyle.getPropertyValue('--to');
-        // Check that the from value is not about to go past the --to value
+        // Check that the from value is not about to be dragged past the --to value
         if (valueNum > Number.parseInt(toValue)) {
-          if (isFromTextInput) {
-            this._invalid = true;
-            return false;
-          }
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
           this.value = toValue;
         }
       } else {
-        const fromValue = computedStyle.getPropertyValue('--from');
-        // Check that the to value is not about to go past the --from value
+        // Check that the to value is not about to be dragged past the --from value
         if (valueNum < Number.parseInt(fromValue)) {
-          if (isFromTextInput) {
-            this._invalid = true;
-            return false;
-          }
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
@@ -171,6 +173,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       return false;
     }
     this.value = value;
+    (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
     return true;
   }
 
@@ -197,48 +200,52 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         this.anchorPositioningStyleElement.textContent = `
         /*
-         * The polyfill can only anchor to ::before and ::after pseudo elements.
+         * The polyfill can only anchor to ::before and ::after pseudo elements, not the pseudo element slider thumb.
          * We work around that by recreating a transparent version of the active range
          * so that we can position relative to that, without crossing the shadow root boundary.
          */
-        #anchor {
-          anchor-name: --polyfilled-thumb;
-
-          /* We have to compensate for the width of the thumb inside the track to find its center. */
-          --_value: var(--_to-as-percent-of-max);
-          --_offset-origin: 50; /* at this point the offset is zero */
-          --_thumb-offset-percent: calc(var(--_value) - var(--_offset-origin));
-          --_thumb-offset-pixels: calc(var(--w-slider-thumb-size) * calc(var(--_thumb-offset-percent) / 100));
-
+        .polyfill-range {
           align-self: center;
           background: transparent;
-          position: absolute;
-          top: var(--_range-top);
           height: var(--w-slider-track-active-height);
+          position: absolute;
+          padding-inline-start: var(--active-range-inline-start-padding, 0);
+          padding-inline-end: var(--active-range-inline-end-padding, 0);
+          top: var(--_range-top);
           left: 0;
           right: 0;
           grid-area: slider;
-          margin-left: calc(var(--_blank-values-before) * 1%);
-          width: calc(calc(var(--_filled-values) * 1%) - var(--_thumb-offset-pixels));
+        }
+
+        .polyfill-active-range {
+          anchor-name: --polyfilled-thumb;
+
+          box-sizing: content-box;
+          background: transparent;
+          height: var(--w-slider-track-active-height);
+
+          border-start-start-radius: var(--active-range-border-radius, 0);
+          border-end-start-radius: var(--active-range-border-radius, 0);
+
+          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+          width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
         }
 
         #target {
           position: absolute;
-
-          position-anchor: --polyfilled-thumb;
-          bottom: calc(anchor(top) + 16px);
-          left: anchor(--polyfilled-thumb right);
+          top: anchor(--polyfilled-thumb top);
+          right: anchor(--polyfilled-thumb right);
+          margin-right: 12px;
         }
 
-        :host([name='from']) #anchor {
-          --_value: var(--_from-as-percent-of-max);
-
-          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--_thumb-offset-pixels));
-          width: calc(calc(var(--_filled-values) * 1%) - var(--w-slider-thumb-size));
+        :host([name='from']) .polyfill-active-range {
+          margin-left: calc(calc(var(--_blank-values-before) * 1%) - var(--active-range-inline-start-padding, 0px));
+          width: calc(calc(var(--_filled-values) * 1%) + var(--active-range-inline-end-padding, 0px));
         }
 
         :host([name='from']) #target {
           left: anchor(--polyfilled-thumb left);
+          margin-left: 38px;
         }
       `;
 
@@ -257,14 +264,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
-      if (!('anchorName' in document.documentElement.style)) {
-        // Center the tooltip visually since the polyfill workaround doesn't let us do that.
-        // Calculate the width of the tooltip and set a negative left margin of half that.
-        const target = this.shadowRoot.querySelector('#target') as HTMLOutputElement;
-        const computedWidthPx = getComputedStyle(target).getPropertyValue('width');
-        const margin = Number.parseFloat(computedWidthPx.replace('px', '')) / 2;
-        target.style.setProperty('margin-left', `-${margin}px`);
-      }
     }
     if (changedProperties.has('_invalid')) {
       this.dispatchEvent(new CustomEvent('slidervalidity', { bubbles: true, detail: { invalid: this._invalid } }));
@@ -275,7 +274,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <div class="w-slider-thumb">
         <label for="range">${this.label}</label>
-        ${!('anchorName' in document.documentElement.style) ? html`<div id="anchor"></div>` : nothing}
+        ${!('anchorName' in document.documentElement.style) ? html`<div class="polyfill-range"><div class="polyfill-active-range"></div></div>` : nothing}
         <input
           id="range"
           aria-label="${this.ariaLabel}"
@@ -313,11 +312,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
 
-        <div id="target" class="${classMap({ 'w-slider-thumb__tooltip': true, 'w-slider-thumb__tooltip--visible': this._showTooltip })}">
-          ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${
-            this.suffix ? html`&nbsp;${this.suffix}` : nothing
-          }
-        </div>
+        <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
+          <output id="target" class="w-slider-thumb__tooltip-target" slot="target"></output>
+          <span slot="message">
+            ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
+              ? html`&nbsp;${this.suffix}`
+              : nothing}
+          </span>
+        </w-attention>
 
         <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
         <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
