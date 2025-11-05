@@ -1,5 +1,21 @@
 {
-  "include": ["packages", "setup-tests.ts"],
+  "include": [
+    "packages/affix",
+    "packages/alert",
+    "packages/attention",
+    "packages/badge",
+    "packages/box",
+    "packages/breadcrumbs",
+    "packages/button",
+    "packages/card",
+    "packages/expandable",
+    "packages/modal",
+    "packages/pill",
+    "packages/select",
+    "packages/textfield",
+    "packages/toast",
+    "setup-tests.ts"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
