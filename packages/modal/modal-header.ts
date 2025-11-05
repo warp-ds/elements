@@ -82,17 +82,20 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   }
   get closeButton() {
     if (this.noClose) return nothing;
-    return html`<button
-      type="button"
-      aria-label="${i18n._({
-        id: 'modal.aria.close',
-        message: 'Close',
-        comment: 'Aria label for the close button in modal',
-      })}"
-      class="header-button ${this._hasTopContent ? 'header-close-button-on-image' : 'header-close-button'}"
-      @click="${this.close}">
-      <w-icon-close-16 style="display: flex;"></w-icon-close-16>
-    </button>`;
+    return html`<div class="header-close-button-container">
+        <w-button
+            type="button"
+            aria-label="${i18n._({
+                id: 'modal.aria.close',
+                message: 'Close',
+                comment: 'Aria label for the close button in modal',
+            })}"
+            variant="pill"
+            small=""
+            @click="${this.close}">
+                <w-icon-close-16 style="display: flex;"></w-icon-close-16>
+        </w-button>
+    </div>`;
   }
   emitBack() {
     this.dispatchEvent(new CustomEvent('backClicked', { bubbles: true, composed: true }));
@@ -176,30 +179,10 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
       .header-button-left:active {
         background-color: var(--w-color-button-pill-background-active);
       }
-      .header-close-button {
-        background-color: transparent;
-        color: var(--w-s-color-icon);
-        margin-right: -0.8rem;
-      }
-      .header-close-button:hover {
-        background-color: var(--w-color-button-pill-background-hover);
-      }
-      .header-close-button:active {
-        background-color: var(--w-color-button-pill-background-active);
-      }
-      .header-close-button-on-image {
-        background-color: transparent;
-        color: var(--w-s-color-text-inverted);
-        right: 0.8rem;
-        top: 0.8rem;
+      .header-close-button-container {
         position: absolute;
-        z-index: 10;
-      }
-      .header-close-button-on-image:hover {
-        background-color: var(--w-color-button-pill-background-hover);
-      }
-      .header-close-button-on-image:active {
-        background-color: var(--w-color-button-pill-background-active);
+        right: 2rem;
+        top: 2.4rem;
       }
       @media (min-width: 480px) {
         .header-title-bar {

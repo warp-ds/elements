@@ -170,7 +170,7 @@ export const WithImage: StoryObj = {
       <w-button id="modal-open-button-two" aria-haspopup="dialog"
         >Open a modal</w-button
       >
-      <w-modal id="example-modal-two">
+      <w-modal id="example-modal-two" style="--w-s-color-icon: var(--w-s-color-icon-inverted)">
         <w-modal-header slot="header" title="Look a doggo!">
           <img
             slot="top"

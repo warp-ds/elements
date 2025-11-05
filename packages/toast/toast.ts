@@ -193,9 +193,9 @@ export class WarpToast extends LitElement {
         ${when(
           this.canclose === true,
           () => html`
-            <button class="${ccToast.close}" @click="${this.close}">
-              <w-icon-close-16></w-icon-close-16>
-            </button>
+            <w-button variant="pill" small="" @click="${this.close}">
+              <w-icon-close-16 style="display: flex"></w-icon-close-16>
+            </w-button>
           `,
         )}
       </div>

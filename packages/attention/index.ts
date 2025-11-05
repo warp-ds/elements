@@ -59,7 +59,7 @@ const buttonTypes = {
 };
 
 export const ccAttention = {
-  base: 'border-2 relative flex items-start',
+  base: 'border-2 relative flex items-center',
   tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
   callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',
   highlight:
@@ -87,7 +87,6 @@ export const ccAttention = {
 
   content: 'last-child:mb-0',
   notCallout: 'absolute z-50',
-  closeBtn: `${buttonTextSizes.medium} ${buttonTypes.pill} ${buttonColors.pill} justify-self-end -mr-8 ml-8`,
 };
 
 class WarpAttention extends LitElement {
@@ -321,9 +320,18 @@ class WarpAttention extends LitElement {
   /** @internal */
   get _closeBtnHtml() {
     return html`
-      <button aria-label="${this._ariaClose}" @click=${this.close} @keydown=${this.keypressed} class="${ccAttention.closeBtn}">
-        <w-icon-close-16 style="height: 16px; width: 16px; display: flex;"></w-icon-close-16>
-      </button>
+      <w-button
+        aria-label="${this._ariaClose}"
+        @click=${this.close}
+        @keydown=${this.keypressed}
+        variant="pill"
+        small=""
+        class="ml-8"
+      >
+        <w-icon-close-16
+          style="height: 16px; width: 16px; display: flex;"
+        ></w-icon-close-16>
+      </w-button>
     `;
   }
 
