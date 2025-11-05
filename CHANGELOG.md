@@ -1,3 +1,10 @@
+# [2.2.0-next.30](https://github.com/warp-ds/elements/compare/v2.2.0-next.29...v2.2.0-next.30) (2025-11-05)
+
+
+### Bug Fixes
+
+* restrict components to release to just existing ([#408](https://github.com/warp-ds/elements/issues/408)) ([cd7154c](https://github.com/warp-ds/elements/commit/cd7154c5e58e7d21bc8c1da18c1f06047877ed21))
+
 # [2.2.0-next.29](https://github.com/warp-ds/elements/compare/v2.2.0-next.28...v2.2.0-next.29) (2025-11-05)
 
 
