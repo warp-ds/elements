@@ -216,23 +216,6 @@ and use the component
 
 you should get intellisense when using Warp Elements.
 
-#### CustomData fallback
-
-`@warp-ds/elements` also includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
-
-If you can't get the Web Components Language Server to work, add the following snippet to `.vscode/settings.json`, then restart VS Code.
-
-```json
-{
-  "html.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
-  ],
-  "css.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
-  ]
-}
-```
-
 #### JetBrains products
 
 We ship `web-types.json` which should get picked up automatically by JetBrains IDEA and similar products.
