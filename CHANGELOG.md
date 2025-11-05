@@ -1,3 +1,12 @@
+# [2.2.0-next.29](https://github.com/warp-ds/elements/compare/v2.2.0-next.28...v2.2.0-next.29) (2025-11-05)
+
+
+### Bug Fixes
+
+* use w-button in stead of button ([111ca76](https://github.com/warp-ds/elements/commit/111ca763a0348a420ba95d8a01a9129c8702675e))
+* use w-button in stead of button in toast ([b490535](https://github.com/warp-ds/elements/commit/b490535300f780c5f41f44399b4124bd89f1a9a5))
+* use w-button in stead of button pill in modal ([c9bd076](https://github.com/warp-ds/elements/commit/c9bd076f0c79cab0f589dd607d6e2912b3dede41))
+
 # [2.2.0-next.28](https://github.com/warp-ds/elements/compare/v2.2.0-next.27...v2.2.0-next.28) (2025-11-03)
 
 
