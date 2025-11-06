@@ -19,7 +19,10 @@ const tmpEntrypoint = new URL('../.tmp/entrypoint.js', import.meta.url).pathname
 const outdir = new URL('../eik', import.meta.url).pathname;
 
 // write entrypoint file
-const componentExports = manifest.modules.map((item) => `export * from './${item.path.replace('.ts', '.js')}';`);
+const componentExports = manifest.modules
+  // here we only want files called index.ts
+  .filter((item) => item.path.match('index.ts'))
+  .map((item) => `export * from './${item.path.replace('.ts', '.js')}';`);
 writeFileSync(tmpEntrypoint, componentExports.join('\n'), { encoding: 'utf8' });
 
 export default {

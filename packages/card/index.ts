@@ -16,7 +16,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
-export const ccCard = {
+const ccCard = {
   base: 'cursor-pointer overflow-hidden relative transition-all',
   shadow:
     'group rounded-8 s-surface-elevated-200 hover:s-surface-elevated-200-hover active:s-surface-elevated-200-active',

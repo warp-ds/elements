@@ -16,7 +16,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
-export const ccCombobox = {
+const ccCombobox = {
   wrapper: 'relative',
   base: 'absolute left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m',
   listbox: 'm-0 p-0 select-none list-none',

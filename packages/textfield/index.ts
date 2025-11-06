@@ -12,7 +12,7 @@ import { reset } from '../styles.js';
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
 
-export const ccinput = {
+const ccinput = {
   // input classes
   base: 'block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current', // true
   default: 'border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected', // !isInvalid && !isDisabled && !isReadOnly
@@ -27,12 +27,12 @@ export const ccinput = {
   textArea: 'min-h-[42] sm:min-h-[45]',
 };
 
-export const ccLabel = {
+const ccLabel = {
   base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
   optional: 'pl-8 font-normal text-s s-text-subtle',
 };
 
-export const ccHelpText = {
+const ccHelpText = {
   base: 'text-xs mt-4 block',
   color: 's-text-subtle',
   colorInvalid: 's-text-negative',

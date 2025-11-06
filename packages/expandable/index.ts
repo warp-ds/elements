@@ -13,7 +13,7 @@ import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
 
-export const ccBox = {
+const ccBox = {
   base: 'group block relative break-words last-child:mb-0 px-16 rounded-8', // Relative here enables w-clickable
   bleed: '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8', // We target L and R to override the default rounded-8
   info: 's-bg-info-subtle',
@@ -21,7 +21,7 @@ export const ccBox = {
   bordered: 'border-2 s-border s-bg',
 };
 
-export const ccExpandable = {
+const ccExpandable = {
   wrapper: 'will-change-height s-text py-16',
   box: 's-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
   bleed: '-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8',

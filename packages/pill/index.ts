@@ -17,7 +17,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
-export const pillStyles = {
+const pillStyles = {
   wrapper: 'flex items-center',
   button: 'inline-flex items-center focusable text-xs transition-all',
   suggestion:
