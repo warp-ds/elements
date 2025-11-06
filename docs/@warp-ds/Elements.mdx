@@ -61,20 +61,10 @@ Check the sidebar to see available components in interactive demos. The demos in
 
 ### Visual Studio Code
 
-This module includes [Custom HTML and CSS data for Visual Studio Code](https://code.visualstudio.com/blogs/2020/02/24/custom-data-format).
 
-Add this to your `settings.json` and restart VS Code to get IntelliSense and inline documentation for Warp elements.
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
 
-```json
-{
-  "html.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.html-custom-data.json"
-  ],
-  "css.customData": [
-    "./node_modules/@warp-ds/elements/dist/vscode.css-custom-data.json"
-  ]
-}
-```
+The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
 
 ### JetBrains products
 
