@@ -58,7 +58,7 @@ const buttonTypes = {
   link: `bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${buttonColors.link}`,
 };
 
-export const ccAttention = {
+const ccAttention = {
   base: 'border-2 relative flex items-center',
   tooltip: 's-bg-inverted border-[--w-s-color-background-inverted] shadow-m s-text-inverted-static rounded-4 py-6 px-8',
   callout: 'bg-[--w-color-callout-background] border-[--w-color-callout-border] s-text py-8 px-16 rounded-8',

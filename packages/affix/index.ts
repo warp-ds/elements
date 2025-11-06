@@ -14,14 +14,14 @@ import '@warp-ds/icons/elements/close-16';
 const prefixSuffixWrapper =
   'absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ';
 
-export const ccSuffix = {
+const ccSuffix = {
   wrapper: prefixSuffixWrapper + 'right-0',
   wrapperWithLabel: 'w-max pr-12',
   wrapperWithIcon: 'w-40',
   label: 'antialiased block relative cursor-default pb-0 font-bold text-xs s-text',
 };
 
-export const ccPrefix = {
+const ccPrefix = {
   wrapper: prefixSuffixWrapper + 'left-0',
   wrapperWithLabel: 'w-max pl-12',
   wrapperWithIcon: 'w-40',

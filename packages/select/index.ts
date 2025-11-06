@@ -19,7 +19,7 @@ import { styles } from './styles.js';
 
 import '@warp-ds/icons/elements/chevron-down-16';
 
-export const ccSelect = {
+const ccSelect = {
   base: 'block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current',
   default: 's-text s-bg pl-8 border-1 s-border-strong hover:s-border-strong-hover active:s-border-active',
   disabled:
@@ -34,12 +34,12 @@ export const ccSelect = {
   chevronDisabled: 'opacity-25',
 };
 
-export const ccLabel = {
+const ccLabel = {
   base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
   optional: 'pl-8 font-normal text-s s-text-subtle',
 };
 
-export const ccHelpText = {
+const ccHelpText = {
   base: 'text-xs mt-4 block',
   color: 's-text-subtle',
   colorInvalid: 's-text-negative',

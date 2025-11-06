@@ -15,7 +15,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
-export const ccBreadcrumbs = {
+const ccBreadcrumbs = {
   wrapper: 'flex space-x-8',
   text: 's-text',
   link: 's-text-link',
