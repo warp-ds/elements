@@ -1,3 +1,10 @@
+# [2.2.0-next.32](https://github.com/warp-ds/elements/compare/v2.2.0-next.31...v2.2.0-next.32) (2025-11-06)
+
+
+### Bug Fixes
+
+* ensure bundle exports match previous bundle exports ([#413](https://github.com/warp-ds/elements/issues/413)) ([d5fce40](https://github.com/warp-ds/elements/commit/d5fce402c5afc62fb874b40e02a40e1ffc2f4b58))
+
 # [2.2.0-next.31](https://github.com/warp-ds/elements/compare/v2.2.0-next.30...v2.2.0-next.31) (2025-11-06)
 
 
