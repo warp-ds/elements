@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.2.0-next.30",
+  "version": "2.2.0-next.31",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {

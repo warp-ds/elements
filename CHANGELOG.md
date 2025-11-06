@@ -1,3 +1,10 @@
+# [2.2.0-next.31](https://github.com/warp-ds/elements/compare/v2.2.0-next.30...v2.2.0-next.31) (2025-11-06)
+
+
+### Bug Fixes
+
+* add backwards compatible builds for packages ([#411](https://github.com/warp-ds/elements/issues/411)) ([68b2ebf](https://github.com/warp-ds/elements/commit/68b2ebf72de84508aef83ca17f6d23e3e83a3a39))
+
 # [2.2.0-next.30](https://github.com/warp-ds/elements/compare/v2.2.0-next.29...v2.2.0-next.30) (2025-11-05)
 
 
