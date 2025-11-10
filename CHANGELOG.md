@@ -1,3 +1,240 @@
+# [2.2.0-next.32](https://github.com/warp-ds/elements/compare/v2.2.0-next.31...v2.2.0-next.32) (2025-11-06)
+
+
+### Bug Fixes
+
+* ensure bundle exports match previous bundle exports ([#413](https://github.com/warp-ds/elements/issues/413)) ([d5fce40](https://github.com/warp-ds/elements/commit/d5fce402c5afc62fb874b40e02a40e1ffc2f4b58))
+
+# [2.2.0-next.31](https://github.com/warp-ds/elements/compare/v2.2.0-next.30...v2.2.0-next.31) (2025-11-06)
+
+
+### Bug Fixes
+
+* add backwards compatible builds for packages ([#411](https://github.com/warp-ds/elements/issues/411)) ([68b2ebf](https://github.com/warp-ds/elements/commit/68b2ebf72de84508aef83ca17f6d23e3e83a3a39))
+
+# [2.2.0-next.30](https://github.com/warp-ds/elements/compare/v2.2.0-next.29...v2.2.0-next.30) (2025-11-05)
+
+
+### Bug Fixes
+
+* restrict components to release to just existing ([#408](https://github.com/warp-ds/elements/issues/408)) ([cd7154c](https://github.com/warp-ds/elements/commit/cd7154c5e58e7d21bc8c1da18c1f06047877ed21))
+
+# [2.2.0-next.29](https://github.com/warp-ds/elements/compare/v2.2.0-next.28...v2.2.0-next.29) (2025-11-05)
+
+
+### Bug Fixes
+
+* use w-button in stead of button ([111ca76](https://github.com/warp-ds/elements/commit/111ca763a0348a420ba95d8a01a9129c8702675e))
+* use w-button in stead of button in toast ([b490535](https://github.com/warp-ds/elements/commit/b490535300f780c5f41f44399b4124bd89f1a9a5))
+* use w-button in stead of button pill in modal ([c9bd076](https://github.com/warp-ds/elements/commit/c9bd076f0c79cab0f589dd607d6e2912b3dede41))
+
+# [2.2.0-next.28](https://github.com/warp-ds/elements/compare/v2.2.0-next.27...v2.2.0-next.28) (2025-11-03)
+
+
+### Bug Fixes
+
+* visual overlap of range slider thumbs ([#404](https://github.com/warp-ds/elements/issues/404)) ([06f33ab](https://github.com/warp-ds/elements/commit/06f33abc519acd5c3e504bdc80550362b6223368))
+
+# [2.2.0-next.27](https://github.com/warp-ds/elements/compare/v2.2.0-next.26...v2.2.0-next.27) (2025-10-31)
+
+
+### Bug Fixes
+
+* steps horizontal bug fixed ([#403](https://github.com/warp-ds/elements/issues/403)) ([62ba3c7](https://github.com/warp-ds/elements/commit/62ba3c716f9ad915c30da98d86e5192643cd9b01))
+
+# [2.2.0-next.26](https://github.com/warp-ds/elements/compare/v2.2.0-next.25...v2.2.0-next.26) (2025-10-30)
+
+
+### Bug Fixes
+
+* make the close button for images stand out a bit more ([8cb0718](https://github.com/warp-ds/elements/commit/8cb0718fa5b7666b6b4c2e4280e9dbfad454cb55))
+
+# [2.2.0-next.25](https://github.com/warp-ds/elements/compare/v2.2.0-next.24...v2.2.0-next.25) (2025-10-30)
+
+
+### Bug Fixes
+
+* set correct expandable paddings and background colours ([#387](https://github.com/warp-ds/elements/issues/387)) ([464978c](https://github.com/warp-ds/elements/commit/464978c299e87c30c19ebd61fe4b095f456bb889))
+
+
+### Features
+
+* support placeholder in select ([#383](https://github.com/warp-ds/elements/issues/383)) ([3fd55f8](https://github.com/warp-ds/elements/commit/3fd55f857a544fbdcb457f7e7ce4819c27880217))
+
+# [2.2.0-next.24](https://github.com/warp-ds/elements/compare/v2.2.0-next.23...v2.2.0-next.24) (2025-10-30)
+
+
+### Bug Fixes
+
+* icon alignments and button full-width ([#373](https://github.com/warp-ds/elements/issues/373)) ([1028d3f](https://github.com/warp-ds/elements/commit/1028d3f07392eb2cccb0c28a22f5652ba51e1838))
+
+# [2.2.0-next.23](https://github.com/warp-ds/elements/compare/v2.2.0-next.22...v2.2.0-next.23) (2025-10-28)
+
+
+### Bug Fixes
+
+* rework radio and checkbox ([#363](https://github.com/warp-ds/elements/issues/363)) ([d145edd](https://github.com/warp-ds/elements/commit/d145edd11ab8ce4ba88893c627a7bdb5d15cd0b5))
+
+# [2.2.0-next.22](https://github.com/warp-ds/elements/compare/v2.2.0-next.21...v2.2.0-next.22) (2025-10-27)
+
+
+### Bug Fixes
+
+* remove components.css from storybook ([#371](https://github.com/warp-ds/elements/issues/371)) ([95d4e89](https://github.com/warp-ds/elements/commit/95d4e89fcd5d505f9289bd53f9a0ad6ee0f37dbd))
+
+# [2.2.0-next.21](https://github.com/warp-ds/elements/compare/v2.2.0-next.20...v2.2.0-next.21) (2025-10-23)
+
+
+### Bug Fixes
+
+* decouple react wrappers ([#359](https://github.com/warp-ds/elements/issues/359)) ([a81ca55](https://github.com/warp-ds/elements/commit/a81ca5507d75190877e967e014bd67c3ffa07374))
+
+# [2.2.0-next.20](https://github.com/warp-ds/elements/compare/v2.2.0-next.19...v2.2.0-next.20) (2025-10-16)
+
+
+### Bug Fixes
+
+* box missing last-child slotted selector and button-as-link ([#348](https://github.com/warp-ds/elements/issues/348)) ([4367c1c](https://github.com/warp-ds/elements/commit/4367c1cf05deefa247818a200a60f4465c7e8241))
+
+# [2.2.0-next.19](https://github.com/warp-ds/elements/compare/v2.2.0-next.18...v2.2.0-next.19) (2025-10-09)
+
+
+### Bug Fixes
+
+* generate types using CEM ([1c481bc](https://github.com/warp-ds/elements/commit/1c481bc1608fefcffcb6d91ab30d73cb3276b72b))
+
+# [2.2.0-next.18](https://github.com/warp-ds/elements/compare/v2.2.0-next.17...v2.2.0-next.18) (2025-10-09)
+
+
+### Bug Fixes
+
+* update pagination styles ([8a356b8](https://github.com/warp-ds/elements/commit/8a356b864c982e06c7800e099c2348aa50c047aa))
+
+# [2.2.0-next.17](https://github.com/warp-ds/elements/compare/v2.2.0-next.16...v2.2.0-next.17) (2025-10-09)
+
+
+### Bug Fixes
+
+* center icons and buttons, and don't trigger click on icons ([#347](https://github.com/warp-ds/elements/issues/347)) ([c25a0de](https://github.com/warp-ds/elements/commit/c25a0deebf9d76d6d11851463442fcca7a26f79a))
+
+# [2.2.0-next.16](https://github.com/warp-ds/elements/compare/v2.2.0-next.15...v2.2.0-next.16) (2025-10-03)
+
+
+### Bug Fixes
+
+* add types build command ([2499704](https://github.com/warp-ds/elements/commit/2499704e436e1aa90bc2f044cab188584cc864b0))
+* use correct JSX declarations ([6380d19](https://github.com/warp-ds/elements/commit/6380d19a28f9773e9a3ce7f64b48fe90f385e108))
+
+# [2.2.0-next.15](https://github.com/warp-ds/elements/compare/v2.2.0-next.14...v2.2.0-next.15) (2025-10-02)
+
+
+### Bug Fixes
+
+* don't update slider position when emptying textfield ([0384af1](https://github.com/warp-ds/elements/commit/0384af1d1bf42040cc8ea29d83501f12b91ef097))
+* handle both event types coming from t-textfield ([4c21cd0](https://github.com/warp-ds/elements/commit/4c21cd056d2ba70c69250eb28a37045cfefc33bd)), closes [#341](https://github.com/warp-ds/elements/issues/341)
+
+# [2.2.0-next.14](https://github.com/warp-ds/elements/compare/v2.2.0-next.13...v2.2.0-next.14) (2025-10-02)
+
+
+### Features
+
+* add slider and range slider implementations ([#329](https://github.com/warp-ds/elements/issues/329)) ([12b8ca7](https://github.com/warp-ds/elements/commit/12b8ca70e6947491a858125f33d37d3f79598db4))
+
+# [2.2.0-next.13](https://github.com/warp-ds/elements/compare/v2.2.0-next.12...v2.2.0-next.13) (2025-10-01)
+
+
+### Bug Fixes
+
+* add missing utility dependencies ([9b8c35f](https://github.com/warp-ds/elements/commit/9b8c35f2dd2e95ecff4027bc71c9436461dbd3eb))
+
+# [2.2.0-next.12](https://github.com/warp-ds/elements/compare/v2.2.0-next.11...v2.2.0-next.12) (2025-10-01)
+
+
+### Bug Fixes
+
+* ensure w-step is loaded before setContext is used ([b653a55](https://github.com/warp-ds/elements/commit/b653a55bd4fab852d6cfaabcef5e046f3cc0f963))
+
+# [2.2.0-next.11](https://github.com/warp-ds/elements/compare/v2.2.0-next.10...v2.2.0-next.11) (2025-09-30)
+
+
+### Bug Fixes
+
+* improve bundle size by using rollup with minification ([4a6f65c](https://github.com/warp-ds/elements/commit/4a6f65c6e16c6a642a8df01fcba2c6d2180c9c50))
+* remove elements core from elements library ([a4f0252](https://github.com/warp-ds/elements/commit/a4f02528c0d4310ae9aa99aefebef11166283d7d))
+
+# [2.2.0-next.10](https://github.com/warp-ds/elements/compare/v2.2.0-next.9...v2.2.0-next.10) (2025-09-25)
+
+
+### Bug Fixes
+
+* add build css for cloaking ([d175130](https://github.com/warp-ds/elements/commit/d17513044445642edfa7c8f58c06bfa8db368742))
+
+# [2.2.0-next.9](https://github.com/warp-ds/elements/compare/v2.2.0-next.8...v2.2.0-next.9) (2025-09-24)
+
+
+### Bug Fixes
+
+* fix lint error ([fa6bd1c](https://github.com/warp-ds/elements/commit/fa6bd1c6fb08de44994f134079f4e4d07ccbb7f6))
+* lint error ([19681e7](https://github.com/warp-ds/elements/commit/19681e73add55cd442de4201715096b539e75397))
+
+# [2.2.0-next.8](https://github.com/warp-ds/elements/compare/v2.2.0-next.7...v2.2.0-next.8) (2025-09-19)
+
+
+### Bug Fixes
+
+* adding link component ([b5a737d](https://github.com/warp-ds/elements/commit/b5a737d344237cfe7eb5785fb7fe0e9ac3dc01c3))
+
+# [2.2.0-next.7](https://github.com/warp-ds/elements/compare/v2.2.0-next.6...v2.2.0-next.7) (2025-09-12)
+
+
+### Bug Fixes
+
+* import ✓ vs module x ([968f8c4](https://github.com/warp-ds/elements/commit/968f8c4e8aa05c39a6af91afbc77c1b5c0eb15cd))
+
+# [2.2.0-next.6](https://github.com/warp-ds/elements/compare/v2.2.0-next.5...v2.2.0-next.6) (2025-09-11)
+
+
+### Features
+
+* dispatch event containing page number on page number click ([e5458aa](https://github.com/warp-ds/elements/commit/e5458aa40ba41e3ae0ec5a433efd121778c04ddf))
+
+# [2.2.0-next.5](https://github.com/warp-ds/elements/compare/v2.2.0-next.4...v2.2.0-next.5) (2025-09-11)
+
+
+### Bug Fixes
+
+* cut release to test change of exports and setup ([9b17365](https://github.com/warp-ds/elements/commit/9b17365d45c2f360c033dd255d42dd4254d480eb))
+
+# [2.2.0-next.4](https://github.com/warp-ds/elements/compare/v2.2.0-next.3...v2.2.0-next.4) (2025-09-02)
+
+
+### Bug Fixes
+
+* adding setup test script for tests ([b02f5b4](https://github.com/warp-ds/elements/commit/b02f5b4143590c888619dcd4ed9b15f01d68bbfa))
+
+# [2.2.0-next.3](https://github.com/warp-ds/elements/compare/v2.2.0-next.2...v2.2.0-next.3) (2025-09-01)
+
+
+### Bug Fixes
+
+* add form association to select ([eaebfd0](https://github.com/warp-ds/elements/commit/eaebfd0936ddb34eed6f9ebff4b11987d370a9e9))
+* add form participation to w-button ([5870570](https://github.com/warp-ds/elements/commit/58705705ee215b527e1830da61c9eee74c09e9eb))
+* add form participation to w-textfield ([ac13366](https://github.com/warp-ds/elements/commit/ac13366ebfb72713e7acd131be2ecc6d17003f4d))
+
+# [2.2.0-next.2](https://github.com/warp-ds/elements/compare/v2.2.0-next.1...v2.2.0-next.2) (2025-07-29)
+
+
+### Bug Fixes
+
+* replace ref to avoid hydration errors and change willupdate lifecycle hook for SSR ([#215](https://github.com/warp-ds/elements/issues/215)) ([81197d0](https://github.com/warp-ds/elements/commit/81197d0a3b1594163df0c241791bd7c39bd54fa5))
+
+# [2.2.0-next.1](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0-next.1) (2025-05-07)
+
+
+### Features
+
+* remove broadcast component and related files ([#213](https://github.com/warp-ds/elements/issues/213)) ([f555f50](https://github.com/warp-ds/elements/commit/f555f50df67aeff94381b1b28430d4b0d8117a4a))
+
 ## [2.1.1](https://github.com/warp-ds/elements/compare/v2.1.0...v2.1.1) (2025-02-13)
 
 

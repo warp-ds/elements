@@ -1,0 +1,43 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as AlertStories from './alert.stories';
+
+<Meta of={AlertStories} name="Docs" />
+
+# Alert
+
+Alert is an inline component used for displaying different types of messages. For accessibility reasons, alert should appear close to the element that triggered it.
+
+## Accessibility
+
+Use the ARIA live region role attribute to provide meaning to the alert element (defaults to "alert"). If you want to remove the role from the alert and assign it to its particular child (e.g. title), you can do so by setting role attribute to an empty string on w-alert element and assigning a respective role on the child element. Read more about live region role attribute on MDN.
+
+```html
+<w-alert id="selfHidingAlertId" variant="info" show role>
+  <h3 role="alert" class="t5">This is a "info" variant of the alert element</h3>
+  <p>You see this warning because you did something wrong</p>
+  <w-button variant="primary" small aria-controls="selfHidingAlertId">Hide and show alert</w-button>
+</w-alert>
+```
+
+## Variants
+
+### Info
+
+<Canvas of={AlertStories.Info} />
+
+### Warning
+
+<Canvas of={AlertStories.Warning} />
+
+### Negative
+
+<Canvas of={AlertStories.Negative} />
+
+### Positive
+
+<Canvas of={AlertStories.Positive} />
+
+## With description
+
+<Canvas of={AlertStories.WithDescription} />

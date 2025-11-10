@@ -1,6 +1,6 @@
 <html lang="en">
   <%- include('head.html'); -%>
-  <body>
+  <body data-await-elements="w-attention,sidebar-element">
     <script type="module" src="../sidebar-element.js"></script>
     <div class="flex">
       <sidebar-element class="sidebar"></sidebar-element>
@@ -20,9 +20,7 @@
               <td>target-selector *</td>
               <td>
                 <div>string</div>
-                <div class="annotation">
-                  Selector of element that the Attention component is rendered relatively to.
-                </div>
+                <div class="annotation">Selector of element that the Attention component is rendered relatively to.</div>
               </td>
               <td>-</td>
             </tr>
@@ -37,10 +35,12 @@
             <tr>
               <td>placement</td>
               <td>
-                <div>"top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" | "left-start" | "left" | "left-end"</div>
+                <div>
+                  "top-start" | "top" | "top-end" | "right-start" | "right" | "right-end" | "bottom-start" | "bottom" | "bottom-end" |
+                  "left-start" | "left" | "left-end"
+                </div>
                 <div class="annotation">
-                  Placement according to the target element. Arrow would be on the opposite side of
-                  this position.
+                  Placement according to the target element. Arrow would be on the opposite side of this position.
                 </div>
               </td>
               <td>"bottom"</td>
@@ -57,9 +57,7 @@
               <td>callout</td>
               <td>
                 <div>boolean</div>
-                <div class="annotation">
-                  Whether Attention element is rendered as an inline callout.
-                </div>
+                <div class="annotation">Whether Attention element is rendered as an inline callout.</div>
               </td>
               <td>false</td>
             </tr>
@@ -117,7 +115,7 @@
                 <div>array</div>
                 <div class="annotation">Choose which preferred placements the Attention element should flip to.</div>
               </td>
-              <td>opposite placement, ex: placement: "bottom", fallbackPlacements: ["top"] </td>
+              <td>opposite placement, ex: placement: "bottom", fallbackPlacements: ["top"]</td>
             </tr>
           </tbody>
         </table>
@@ -131,8 +129,7 @@
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               slot="target"
-              onclick="toggleShow()"
-            >
+              onclick="toggleShow()">
               Click to toggle a popover
             </button>
             <span slot="message">I'm a popover</span>
@@ -140,11 +137,7 @@
         </syntax-highlight>
         <div class="example">
           <w-attention placement="bottom" popover flip>
-            <button
-              id="popoverTarget"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+            <button id="popoverTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
               Click to toggle a popover
             </button>
             <span slot="message">I'm a popover</span>
@@ -153,29 +146,16 @@
 
         <h3 class="mt-24 mb-16">Popover with icon as target element</h3>
         <syntax-highlight>
-          <w-attention placement="bottom-end" popover distance='5' skidding='2'>
-            <w-button
-              id="target"
-              quiet
-              variant="utility"
-              slot="target"
-              class="relative"
-              onclick="toggleShow()"
-            >
+          <w-attention placement="bottom-end" popover distance="5" skidding="2">
+            <w-button id="target" quiet variant="utility" slot="target" class="relative" onclick="toggleShow()">
               <w-icon-info-16></w-icon-info-16>
             </w-button>
             <span slot="message">I'm a popover on bottom-end</span>
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom-end" popover id="popoverIconTargetExample" distance='5' skidding='2'>
-            <w-button
-              id="popoverIconTarget"
-              quiet
-              variant="utility"
-              slot="target"
-              class="relative"
-            >
+          <w-attention placement="bottom-end" popover id="popoverIconTargetExample" distance="5" skidding="2">
+            <w-button id="popoverIconTarget" quiet variant="utility" slot="target" class="relative">
               <w-icon-info-16></w-icon-info-16>
             </w-button>
             <span slot="message">I'm a popover on bottom-end</span>
@@ -185,11 +165,7 @@
         <h3 class="mt-24 mb-16">Tooltip</h3>
         <syntax-highlight>
           <w-attention placement="right" tooltip flip>
-            <button
-              id="target"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+            <button id="target" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
               Hover or focus to show a tooltip
             </button>
             <span slot="message">I'm a tooltip</span>
@@ -197,26 +173,17 @@
         </syntax-highlight>
         <div class="example">
           <w-attention placement="right" tooltip flip>
-            <button
-              id="tooltipTarget"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+            <button id="tooltipTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
               Hover or focus to show a tooltip
             </button>
             <span slot="message">I'm a tooltip</span>
           </w-attention>
         </div>
-        
 
         <h3 class="mt-24 mb-16">Callout</h3>
         <syntax-highlight>
           <w-attention placement="right" show callout class="flex items-center">
-            <div
-              id="target"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+            <div id="target" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
               <p>This is a target to callout attention element</p>
             </div>
             <span slot="message">Callout on right</span>
@@ -224,11 +191,7 @@
         </syntax-highlight>
         <div class="example">
           <w-attention placement="right" show callout class="flex items-center">
-            <div
-              id="calloutTarget"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle mr-8"
-              slot="target"
-            >
+            <div id="calloutTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle mr-8" slot="target">
               <p>This is a target to callout attention element</p>
             </div>
             <span slot="message">Callout on right</span>
@@ -242,8 +205,7 @@
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               onclick="toggleShow()"
-              slot="target"
-            >
+              slot="target">
               Click to toggle a highlight
             </button>
             <span slot="message">I'm a highlight</span>
@@ -251,17 +213,12 @@
         </syntax-highlight>
         <div class="example">
           <w-attention placement="bottom" highlight flip>
-            <button
-              id="highlightTarget"
-              class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+            <button id="highlightTarget" class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle" slot="target">
               Click to toggle a highlight
             </button>
             <span slot="message">I'm a highlight</span>
           </w-attention>
         </div>
-
 
         <h3 class="mt-24 mb-16">Dismissible Highlight</h3>
         <syntax-highlight>
@@ -270,20 +227,25 @@
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
               onclick="toggleShow()"
-              slot="target"
-            >
+              slot="target">
               Click to toggle a dismissible highlight
             </button>
             <span slot="message">I'm a dismissible highlight</span>
           </w-attention>
         </syntax-highlight>
         <div class="example">
-          <w-attention placement="bottom" highlight id="dismissibleHighlight" can-close flip cross-axis fallback-placements='["right", "top", "left", "bottom"]'>
+          <w-attention
+            placement="bottom"
+            highlight
+            id="dismissibleHighlight"
+            can-close
+            flip
+            cross-axis
+            fallback-placements='["right", "top", "left", "bottom"]'>
             <button
               id="dismissibleHighlightTarget"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+              slot="target">
               Click to toggle a dismissible highlight
             </button>
             <span slot="message">I'm a dismissible highlight</span>
@@ -291,21 +253,16 @@
         </div>
 
         <h2 class="mt-24 mb-16">Accessibility</h2>
+        <p>If the Attention element has "left" or "top" position, it should be placed before the target element in the DOM.</p>
         <p>
-          If the Attention element has "left" or "top" position, it should be placed before the
-          target element in the DOM.
+          Attention element handles accessibility automatically by wrapping its slotted content with a <code>div</code> with either
+          <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and
+          setting an <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
         </p>
         <p>
-          Attention element handles accessibility automatically by wrapping its slotted content with
-          a <code>div</code> with either <code>role="tooltip"</code> for tooltip or <code>role="img"</code> for callout and popover, a default <code>aria-label</code>and setting an
-          <code>aria-details</code> attribute on the target element. The default <code>aria-label</code> also supports i18n.
-        </p>
-        <p>
-          It is possible to tell assistive technologies to recognize only a part of Attention's text
-          content. To do that set the <code>role</code> attribute on the relevant text element nested in
-          <code>w-attention</code> and reference it by id through the use of
-          <code>aria-details</code>. The <code>aria-details</code> attribute is on the
-          target element, not on <code>w-attention</code>.
+          It is possible to tell assistive technologies to recognize only a part of Attention's text content. To do that set the
+          <code>role</code> attribute on the relevant text element nested in <code>w-attention</code> and reference it by id through the use
+          of <code>aria-details</code>. The <code>aria-details</code> attribute is on the target element, not on <code>w-attention</code>.
         </p>
 
         <syntax-highlight>
@@ -318,8 +275,7 @@
               aria-details="aria-content"
               id="target"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+              slot="target">
               Click to toggle a popover on top
             </button>
           </w-attention>
@@ -334,8 +290,7 @@
               aria-details="aria-content"
               id="popoverTarget2"
               class="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-              slot="target"
-            >
+              slot="target">
               Click to toggle a popover on top
             </button>
           </w-attention>
@@ -381,18 +336,17 @@
           // Dismissible Attention
 
           const dismissibleHighlightTarget = document.querySelector('.example #dismissibleHighlightTarget');
-          const dismissibleHighlightEl = document.getElementById('dismissibleHighlight')
-          
+          const dismissibleHighlightEl = document.getElementById('dismissibleHighlight');
+
           dismissibleHighlightTarget.addEventListener('click', () => {
             dismissibleHighlightEl.show = !dismissibleHighlightEl.show;
           });
           dismissibleHighlightEl.addEventListener('close', () => {
             dismissibleHighlightEl.show = false;
-          })
+          });
         </script>
       </main>
     </div>
-      <%- include('footer.html'); -%>
-
+    <%- include('footer.html'); -%>
   </body>
 </html>

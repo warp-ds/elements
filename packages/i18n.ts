@@ -1,4 +1,4 @@
-import { Messages, i18n } from '@lingui/core';
+import { i18n, Messages } from '@lingui/core';
 
 export const supportedLocales = ['en', 'nb', 'fi', 'da', 'sv'] as const;
 type SupportedLocale = (typeof supportedLocales)[number];
@@ -7,10 +7,8 @@ export const defaultLocale = 'en';
 
 export const getSupportedLocale = (usedLocale: string) => {
   return (
-    supportedLocales.find(
-      (locale) =>
-        usedLocale === locale || usedLocale.toLowerCase().includes(locale)
-    ) || defaultLocale
+    supportedLocales.find((locale) => usedLocale === locale || usedLocale.toLowerCase().includes(locale)) ||
+    defaultLocale
   );
 };
 
@@ -19,9 +17,7 @@ export function detectLocale(): SupportedLocale {
     /**
      * Server locale detection. This requires e.g LANG environment variable to be set on the server.
      */
-    const serverLocale =
-      process.env.NMP_LANGUAGE ||
-      Intl.DateTimeFormat().resolvedOptions().locale;
+    const serverLocale = process.env.NMP_LANGUAGE || Intl.DateTimeFormat().resolvedOptions().locale;
     return getSupportedLocale(serverLocale);
   }
 

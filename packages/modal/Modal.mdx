@@ -1,0 +1,19 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ModalStories from './modal.stories';
+
+<Meta of={ModalStories} name="Docs" />
+
+# Modal
+
+Modals (or dialogs) display important information that users need to acknowledge.
+
+## Variants
+
+### With a title bar
+
+<Canvas of={ModalStories.Default} />
+
+### With an image at the top
+
+<Canvas of={ModalStories.WithImage} />

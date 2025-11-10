@@ -19,12 +19,12 @@ msgstr ""
 
 #. Aria label for the back button in modal
 #. js-lingui-explicit-id
-#: packages/modal/modal-header.js:71
+#: packages/modal/modal-header.ts:72
 msgid "modal.aria.back"
 msgstr "Takaisin"
 
 #. Aria label for the close button in modal
 #. js-lingui-explicit-id
-#: packages/modal/modal-header.js:86
+#: packages/modal/modal-header.ts:87
 msgid "modal.aria.close"
 msgstr "Sulje"

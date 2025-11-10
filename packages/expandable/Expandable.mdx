@@ -1,0 +1,46 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ExpandableStories from './expandable.stories';
+
+<Meta of={ExpandableStories} name="Docs" />
+
+# Expandable
+
+Expandable is a layout component used for creating expandable content areas on a page.
+
+<Canvas of={ExpandableStories.Default} />
+
+## Visual options
+
+### Start expanded
+
+<Canvas of={ExpandableStories.Expanded} />
+
+### With or without animation
+
+By default the box expands immediately, but you can animate it.
+
+<Canvas of={ExpandableStories.Box} />
+<Canvas of={ExpandableStories.Animated} />
+
+### With a heading wrapping the toggle button
+
+This can be used to wrap the toggle button in a heading for navigational and structural purposes. It's a feature that is needed typically in scenarios where multiple consecutive Expandable components are used.
+
+<Canvas of={ExpandableStories.WithHeading} />
+
+### With custom title
+
+This can be used if more control over styling is needed than the title prop allows
+
+<Canvas of={ExpandableStories.CustomTitle} />
+
+### Without a title
+
+This can be used if more control over styling is needed than the title prop allows
+
+<Canvas of={ExpandableStories.NoTitle} />
+
+### Without chevron icon
+
+<Canvas of={ExpandableStories.NoChevron} />

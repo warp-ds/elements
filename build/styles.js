@@ -1,0 +1,100 @@
+// This is an interrim script used to generate styles with uno based on which
+// classes are in use in each component and as such it does not run as part of
+// every build. You just run it when you need to regen styles for components and
+// then commit the result.
+// Eventually, when all components have been rewritten to BEM we can remove this.
+
+import { writeFileSync } from 'node:fs';
+import { readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+
+import { createGenerator } from '@unocss/core';
+import { presetWarp } from '@warp-ds/uno';
+import esbuild from 'esbuild';
+import * as lightning from 'lightningcss';
+
+import manifest from '../dist/custom-elements.json' with { type: 'json' };
+
+const componentExports = manifest.modules.map((item) => `export * from './${item.path.replace('.ts', '')}';`);
+writeFileSync(new URL('../entrypoint.js', import.meta.url), componentExports.join('\n'), { encoding: 'utf8' });
+
+const uno = await createGenerator({
+  presets: [presetWarp({ skipResets: true, externalizeClasses: false })],
+  safelist: [],
+});
+
+/**
+ *
+ * @param {string} content
+ * @param {object} options
+ * @param {boolean} [options.minify]
+ * @returns lightningcss minified css
+ */
+const buildCSS = async (
+  content,
+  options = {
+    minify: false,
+  },
+) => {
+  const { css } = await uno.generate(content);
+  let output = css;
+
+  const { code } = lightning.transform({
+    filename: '',
+    code: Buffer.from(css),
+    minify: options.minify,
+    targets: {
+      safari: 13 << 16,
+    },
+  });
+  output = code.toString();
+
+  return output.replace(/\\/g, '\\\\');
+};
+
+/**
+ * @param {object} options
+ * @param {RegExp} [options.filter]
+ * @param {string} [options.placeholder]
+ * @param {boolean} [options.minify]
+ * @returns object
+ */
+const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } = {}) => {
+  /** @type {import('esbuild').Plugin}*/
+  return {
+    name: 'warp-esbuild-plugin',
+    setup(build) {
+      build.onLoad({ filter }, async (args) => {
+        const { ext } = path.parse(args.path);
+        const contents = await readFile(args.path, 'utf8');
+        if (contents.includes(placeholder)) {
+          const css = await buildCSS(contents, { minify });
+          await writeFile(
+            path.dirname(args.path) + '/styles.ts',
+            `import { css } from 'lit'; export const styles = css\`${css}\`;
+`,
+          );
+        }
+        return {
+          contents,
+          loader: ext.replace('.', ''),
+        };
+      });
+    },
+  };
+};
+
+try {
+  await esbuild.build({
+    entryPoints: ['entrypoint.js'],
+    outfile: 'dist/index.js',
+    bundle: true,
+    minify: true,
+    format: 'esm',
+    sourcemap: true,
+    target: 'es2018',
+    plugins: [plugin()],
+  });
+} catch (err) {
+  console.error(err);
+}

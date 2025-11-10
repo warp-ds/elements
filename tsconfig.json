@@ -1,11 +1,32 @@
 {
-  "include": ["index.js"],
+  "include": [
+    "packages/affix",
+    "packages/alert",
+    "packages/attention",
+    "packages/badge",
+    "packages/box",
+    "packages/breadcrumbs",
+    "packages/button",
+    "packages/card",
+    "packages/expandable",
+    "packages/modal",
+    "packages/pill",
+    "packages/select",
+    "packages/textfield",
+    "packages/toast",
+    "setup-tests.ts"
+  ],
   "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react",
+    "skipLibCheck": true,
     "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "dist",
-    "moduleResolution": "node",
-    "skipLibCheck": true
-  },
+    "moduleResolution": "bundler"
+  }
 }

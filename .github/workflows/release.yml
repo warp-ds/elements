@@ -12,17 +12,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Node.js
+      - uses: pnpm/action-setup@v4
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
+          cache: 'pnpm'
           node-version: lts/*
-      - name: Install pnpm and dependencies
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-          run_install: true
+      - run: pnpm i
+
+
       - name: Build
         run: pnpm build
+
+      # test after build so we have compiled Lingui files to import
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps
+      - name: Test
+        run: pnpm test
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

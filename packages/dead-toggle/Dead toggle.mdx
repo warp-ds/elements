@@ -1,0 +1,13 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as DeadToggleStories from './dead-toggle.stories';
+
+<Meta of={DeadToggleStories} name="Docs" />
+
+# Dead toggle
+
+Dead toggle can be used where the appearance of a checkbox or radio is needed - but for accessibility purposes an actual input element should not be present.
+
+Typically this happens in a component like a Card, where the whole card should behave as a checkbox and be clickable - but the representation of a checkbox-UI is part of the card
+
+[For examples see the Warp Card documentation](https://warp-ds.github.io/docs/components/card/).

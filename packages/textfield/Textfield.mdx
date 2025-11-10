@@ -1,0 +1,53 @@
+
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as TextFieldStories from './textfield.stories';
+
+<Meta of={TextFieldStories} name="Docs" />
+
+# TextField
+
+A single line text input element.
+
+<Canvas of={TextFieldStories.Default} />
+
+## Validation
+
+Text fields can communicate to the user whether the current value is invalid. Implement your own validation logic in your app and set the error prop to display it as invalid. error is often paired with help-text to provide feedback to the user about the error.
+
+<Canvas of={TextFieldStories.Invalid} />
+
+## Visual options
+
+### Placeholder
+
+Placeholder text can be used to describe the expected value or formatting for the w-textfield. Placeholder text will only appear when the w-textfield is empty, and should not be used as a substitute for labeling the element with a visible label.
+
+<Canvas of={TextFieldStories.WithPlaceholder} />
+
+### Disabled
+
+Keep in mind that using disabled in its current form is an anti-pattern. There will ALWAYS be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons. Please consider more informative alternatives before choosing to use disabled on an element.
+
+<Canvas of={TextFieldStories.Disabled} />
+
+### Affix
+
+If you wish to use an affix you must first use the w-affix element in conjunction with w-textfield. Include the affix as a child of w-textfield and set the appropiate attributes. You must specify which slot to set the affix into (either prefix or suffix).
+
+<Canvas of={TextFieldStories.WithAffix} />
+
+Use the `slot` attribute on `w-affix` to control its position. You can use both a prefix and suffix should you need to.
+
+```html
+<w-textfield label="Price" placeholder="1 000 000">
+  <w-affix slot="prefix" label="kr"></w-affix>
+  <w-affix slot="suffix" search aria-label="Search"></w-affix>
+</w-textfield>
+```
+
+### Read only
+
+The read-only boolean attribute makes the w-textfield's text content immutable. Unlike disabled the w-textfield remains focusable and the contents can still be copied. See the MDN docs for more information.
+
+<Canvas of={TextFieldStories.ReadOnly} />

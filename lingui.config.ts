@@ -1,23 +1,28 @@
 import type { LinguiConfig } from '@lingui/conf';
+
 import { supportedLocales } from './packages/i18n';
 
 const config: LinguiConfig = {
   locales: supportedLocales as unknown as string[],
   catalogs: [
     {
-      include: ['packages/breadcrumbs/index.js'],
+      include: ['packages/breadcrumbs/'],
       path: 'packages/breadcrumbs/locales/{locale}/messages',
     },
     {
-      include: ['packages/button/index.js'],
+      include: ['packages/button/'],
       path: 'packages/button/locales/{locale}/messages',
     },
     {
-      include: ['packages/card/index.js'],
+      include: ['packages/card/'],
       path: 'packages/card/locales/{locale}/messages',
     },
     {
-      include: ['packages/select/index.js'],
+      include: ['packages/datepicker/'],
+      path: 'packages/datepicker/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/select/'],
       path: 'packages/select/locales/{locale}/messages',
     },
     {
@@ -25,16 +30,28 @@ const config: LinguiConfig = {
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
-      include: ['packages/modal/modal-header.js'],
+      include: ['packages/modal/'],
       path: 'packages/modal/locales/{locale}/messages',
     },
     {
-      include: ['packages/toast/toast.js'],
+      include: ['packages/toast/'],
       path: 'packages/toast/locales/{locale}/messages',
     },
     {
-      include: ['packages/pill/index.js'],
+      include: ['packages/pill/'],
       path: 'packages/pill/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/pagination/'],
+      path: 'packages/pagination/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/steps/'],
+      path: 'packages/steps/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/combobox/'],
+      path: 'packages/combobox/locales/{locale}/messages',
     },
   ],
   compileNamespace: 'es',

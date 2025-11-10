@@ -1,0 +1,36 @@
+diff --git a/dist/index.js b/dist/index.js
+index 35f8c01ff005ffefbee108e9501254db0f0aa2d5..8146be247daa047a9e3ac64c1eff91ea17af4227 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -236,6 +236,22 @@ function printProps(keys, props, config, indentation, depth, refs, printer) {
+ function printChildren(children, config, indentation, depth, refs, printer) {
+ 	return children.map((child) => config.spacingOuter + indentation + (typeof child === "string" ? printText(child, config) : printer(child, config, indentation, depth, refs))).join("");
+ }
++function printShadowDOM(shadowRoot, config, indentation, depth, refs, printer) {
++	if (!shadowRoot) {
++		return "";
++	}
++	return [
++		config.spacingOuter + indentation + "#shadow-root",
++		printChildren(
++			Array.prototype.slice.call(shadowRoot.children),
++			config,
++			indentation + config.indent,
++			depth,
++			refs,
++			printer
++		)
++	].flat().join("");
++}
+ function printText(text, config) {
+ 	const contentColor = config.colors.content;
+ 	return contentColor.open + escapeHTML(text) + contentColor.close;
+@@ -302,7 +318,7 @@ const serialize$3 = (node, config, indentation, depth, refs, printer) => {
+ 	return printElement(type, printProps(nodeIsFragment(node) ? [] : Array.from(node.attributes, (attr) => attr.name).sort(), nodeIsFragment(node) ? {} : [...node.attributes].reduce((props, attribute) => {
+ 		props[attribute.name] = attribute.value;
+ 		return props;
+-	}, {}), config, indentation + config.indent, depth, refs, printer), printChildren(Array.prototype.slice.call(node.childNodes || node.children), config, indentation + config.indent, depth, refs, printer), config, indentation);
++	}, {}), config, indentation + config.indent, depth, refs, printer), printShadowDOM(node.shadowRoot, config, indentation + config.indent, depth, refs, printer) + printChildren(Array.prototype.slice.call(node.childNodes || node.children), config, indentation + config.indent, depth, refs, printer), config, indentation);
+ };
+ const plugin$3 = {
+ 	serialize: serialize$3,

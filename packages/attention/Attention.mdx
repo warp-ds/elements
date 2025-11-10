@@ -1,0 +1,29 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as AttentionStories from './attention.stories';
+
+<Meta of={AttentionStories} name="Docs" />
+
+# Attention
+
+## Tooltip
+<Canvas of={AttentionStories.ToolTip} />
+
+## Callout
+<Canvas of={AttentionStories.Callout} />
+
+## Highlight
+<Canvas of={AttentionStories.Highlight} />
+
+## Dismissible Highlight
+<Canvas of={AttentionStories.DismissibleHighlight} />
+
+## Accessibility
+If the Attention element has "left" or "top" position, it should be placed before the target element in the DOM.
+
+Attention element handles accessibility automatically by wrapping its slotted content with a `div` with either `role="tooltip"` for tooltip or `role="img"` for callout and popover, a default `aria-label` and setting an `aria-details` attribute on the target element. The default `aria-label` also supports i18n.
+
+It is possible to tell assistive technologies to recognize only a part of Attention's text content. To do that set the role attribute on the relevant text element nested in w-attention and reference it by id through the use of aria-details. The aria-details attribute is on the target element, not on w-attention.
+
+<Canvas of={AttentionStories.AccessibleTooltip} />
+

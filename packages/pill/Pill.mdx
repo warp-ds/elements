@@ -1,0 +1,21 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as PillStories from './pill.stories';
+
+<Meta of={PillStories} name="Docs" />
+
+# Pill
+
+Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
+
+## Default
+
+<Canvas of={PillStories.Default} />
+
+## Suggestion
+
+<Canvas of={PillStories.Suggestion} />
+
+## Closable
+
+<Canvas of={PillStories.Closable} />

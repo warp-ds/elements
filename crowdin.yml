@@ -23,6 +23,11 @@ files:
       "translation": "/packages/card/locales/%two_letters_code%/messages.po",
     },
     {
+      "source": "/packages/datepicker/locales/en/messages.po",
+      "dest": "elements/packages/datepicker/messages.po",
+      "translation": "/packages/datepicker/locales/%two_letters_code%/messages.po",
+    },
+    {
       "source": "/packages/select/locales/en/messages.po",
       "dest": "elements/packages/select/messages.po",
       "translation": "/packages/select/locales/%two_letters_code%/messages.po",
@@ -46,5 +51,15 @@ files:
       "source": "/packages/pill/locales/en/messages.po",
       "dest": "elements/packages/pill/messages.po",
       "translation": "/packages/pill/locales/%two_letters_code%/messages.po",
+    },
+    {
+      "source": "/packages/steps/locales/en/messages.po",
+      "dest": "elements/packages/steps/messages.po",
+      "translation": "/packages/steps/locales/%two_letters_code%/messages.po",
+    },
+    {
+      "source": "/packages/combobox/locales/en/messages.po",
+      "dest": "elements/packages/combobox/messages.po",
+      "translation": "/packages/combobox/locales/%two_letters_code%/messages.po",
     },
   ]

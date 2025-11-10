@@ -14,64 +14,236 @@ start by reviewing the [contributing guidelines](CONTRIBUTING.md).
 
 ### Installation
 
-Install by using npm/pnpm or by adding a script link:
+Warp custom elements are supplied by the Eik CDN.
+In addition, you can install the `@warp-ds/elements` package to get intellisense
+in your editor.
 
-#### Install using npm
+#### Step 1.
+
+Add the following script and style to the very top of your document head to ensure performant loading
+
+```html
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/elements/2.2.0-next.13/styles.css" crossorigin />
+<script src="https://assets.finn.no/pkg/@warp-ds/elements/2.2.0-next.13/index.js" type="module"></script>
+```
+
+#### Step 2.
+
+Be sure to preload whichever brand fonts you need for a page and load the correct font file:
+
+```html
+<!-- Finn example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/FINNTypeAlleTegn-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/FINNTypeAlleTegn-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/finn-no.css" crossorigin>
+```
+
+```html
+<!-- Tori example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ToriSans-Italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/tori-fi.css" crossorigin>
+```
+
+```html
+<!-- DBA example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ProximaNova-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/ProximaNova-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/dba-dk.css" crossorigin>
+```
+
+```html
+<!-- Blocket example -->
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/BlocketSans-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/fonts/v1/blocket-se.css" crossorigin>
+```
+
+#### Step 3.
+
+You'll also want to load Warp tokens and resets CSS files to ensure consistent and correct styling for the brand.
+
+```html
+<!-- Finn example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/finn-no.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+```html
+<!-- Tori example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/tori-fi.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+```html
+<!-- DBA example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/dba-dk.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+```html
+<!-- Blocket example -->
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/blocket-se.css" crossorigin>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" crossorigin>
+```
+
+#### Step 4.
+
+Next, to add intellisense to your editor install `@warp-ds/elements` by using npm/pnpm. See the Editor integration below.
+
+##### Install using npm
 
 ```sh
 npm install @warp-ds/elements
 ```
 
-#### Install using pnpm
+##### Install using pnpm
 
 ```sh
 pnpm add @warp-ds/elements
 ```
 
-#### Using a direct link to Eik
+And then head on down to the editor configuration section below to complete setup.
 
-```html
-<script src="https://assets.finn.no/pkg/@warp-ds/elements/v1"></script>
-```
-### Import components
-This project builds both the whole Elements package and separate component packages that are published to EIK, making it possible for the user to choose to either import all of the components:
-```js
-import '@warp-ds/elements';
-```
-or a specific component: 
-```js
-import '@warp-ds/elements/components/toast';
-```
+### Using Warp elements with Borealis
+
+If you are using Borealis modules from the Web Platform Team (and you should be) and keeping your app dependencies up to date (and you should be), then steps 2 and 3 are already taken care of for you, you just need to do steps 1 and 4.
 
 ### Documentation
 
 For information on the components available in the package and how to use them,
 see the [Warp Design System documentation](https://warp-ds.github.io/tech-docs/).
 
+### Editor integration
+
+#### Typescript
+
+Install the `@warp-ds/elements` package
+
+```
+npm install @warp-ds/elements
+```
+
+Add `@warp-ds/elements` to tsconfig types in compilerOptions.
+
+```json
+{
+  "compilerOptions": {
+    "types": ["react", "react-dom", "@warp-ds/elements"]
+  }
+}
+```
+
+#### Visual Studio Code
+
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension. The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
+
+##### Using Warp Elements in a plain HTML page
+
+Install Warp Elements locally using npm:
+
+```
+npm install @warp-ds/elements
+```
+
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
+
+Now, inside any `.html` files, you will get IntelliSense when using Warp Elements:
+
+```html
+<w-button variant=""><w-button>
+```
+
+##### Using Warp Elements in JavaScript template literals
+
+IntelliSense in JavaScript strings is not supported without additional plugins and syntax, such as comment hints (`/* html */`) or a tagged template literal similar to Lit.
+
+##### Using Warp Elements in Lit html tagged template literals
+
+Install Warp Elements locally using npm:
+
+```
+npm install @warp-ds/elements
+```
+
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
+
+Install the [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension.
+
+Now, inside any html`` tagged template literals, you will get intellisense when using Warp Elements.
+
+```html
+<w-button variant=""><w-button>
+```
+
+##### Using Warp Elements in a React app, v19 or later
+
+```
+npm install @warp-ds/elements
+```
+
+Now, inside your react components, you will get intellisense when using Warp Elements.
+
+```html
+<w-button variant=""><w-button>
+```
+
+##### Using Warp Elements in a React app, v18 or earlier
+
+React 18 and earlier do not support custom elements.
+
+If you are on React 18 or early, we strongly urge you to please consider upgrading to React v19.
+
+If you cannot upgrade right away, Warp supplies custom element wrappers to add backwards compatibility. Use them like so:
+
+```
+npm install @warp-ds/elements
+```
+
+Wherever you need to use a component in your app, import the appropriate element from the React namespace
+
+```js
+import { Button } from "@warp-ds/elements/react/button";
+```
+
+and use the component
+
+```js
+<Button variant="primary"></Button>
+```
+
+you should get intellisense when using Warp Elements.
+
+#### JetBrains products
+
+We ship `web-types.json` which should get picked up automatically by JetBrains IDEA and similar products.
+
+You should see code completions and inline docs for Warp elements when writing HTML.
+
+### Ensure elements are ready (and avoid CLS and FOUCE)
+
+To avoid issues like CLS (cumulative layout shift) and FOUCE (flash of unstyled custom elements), its important that Warp Elements is loaded before the page is rendered. For this reason, elements should not be bundled into the rest of your client side application and code and should be loaded in the document head, as early as possible (see installation above). When this is done correctly, elements will be loaded and ready about the same time as the rest of the page styles and wont cause delays in page load times. However, due to the way browsers work, a page render will occur without the components and an immediate re-render will occur with the components. This causes things to jump around on the page which in turn impacts lighthouse and other performance scores. Warp elements ships with a tool to prevent the initial render without components and only do the second, with components, render. This tool is called Warp Cloak and its usage is described below.
+
+#### The Warp cloaking device
+
+To use the Warp cloaking device to avoid CLS and FOUCE, simply add the warp-cloak class to your pages body, html or a wrapper div that contains all the pages visible elements (including the header and footer)
+
+```html
+<body class="warp-cloak">
+```
+
+That's it, your components should render just 1x, fully ready with no CLS and FOUCE.
+
 ## Releases
 
-This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `1.1.0-next.1`).
+This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `2.2.0-next.13`).
 Anyone needing to use the latest changes of this package can point to the `next` version while waiting for the stable release.
 
 ## Changelog
 
 Detailed changes for each release can be found in the [CHANGELOG](CHANGELOG.md) file.
-
-## How to test component-classes locally
-
-It is possible to test changes that have been made to component-classes from the [@warp-ds/css](https://github.com/warp-ds/css) package but that has not yet been published to Eik. You simply need to link the `@warp-ds/css` package in this repository and add `@unocss-placeholder` inside the static styles of the component that you want to test:
-
-```js
-static styles = [
-    css`
-      @unocss-placeholder
-      `,
-  ]
-```
-
-Run `pnpm dev` to see the linked styles in action.
-
-Once you have tested it locally, make sure to remove the `@unocss-placeholder` from the static styles before pushing any changes to the repository.
 
 ## License
 

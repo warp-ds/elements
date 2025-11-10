@@ -1,0 +1,26 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as BadgeStories from './badge.stories';
+
+<Meta of={BadgeStories} name="Docs" />
+
+# Badge
+
+Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.
+
+## Visual options
+
+### Default
+
+<Canvas of={BadgeStories.Neutral} />
+
+### Variants
+
+<Canvas of={BadgeStories.Neutral} />
+<Canvas of={BadgeStories.Info} />
+<Canvas of={BadgeStories.Positive} />
+<Canvas of={BadgeStories.Warning} />
+<Canvas of={BadgeStories.Negative} />
+<Canvas of={BadgeStories.Price} />
+<Canvas of={BadgeStories.Sponsored} />
+<Canvas of={BadgeStories.Positioned} />
