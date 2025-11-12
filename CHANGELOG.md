@@ -1,3 +1,10 @@
+# [2.3.0-next.2](https://github.com/warp-ds/elements/compare/v2.3.0-next.1...v2.3.0-next.2) (2025-11-12)
+
+
+### Bug Fixes
+
+* add components back in post release ([a35010b](https://github.com/warp-ds/elements/commit/a35010b1e39306a22b31b85dd29fe56a61f6c9dc))
+
 # [2.3.0-next.1](https://github.com/warp-ds/elements/compare/v2.2.0...v2.3.0-next.1) (2025-11-12)
 
 
