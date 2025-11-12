@@ -16,6 +16,18 @@
     "packages/slider",
     "packages/textfield",
     "packages/toast",
+    "packages/combobox",
+    "packages/datepicker",
+    "packages/dead-toggle",
+    "packages/link",
+    "packages/pageindicator",
+    "packages/pagination",
+    "packages/rip-and-tear-radio",
+    "packages/rip-and-tear-checkbox",
+    "packages/steps",
+    "packages/switch",
+    "packages/tabs",
+    "packages/tabs",
     "setup-tests.ts"
   ],
   "compilerOptions": {
