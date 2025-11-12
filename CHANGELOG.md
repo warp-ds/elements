@@ -1,3 +1,10 @@
+# [2.3.0-next.1](https://github.com/warp-ds/elements/compare/v2.2.0...v2.3.0-next.1) (2025-11-12)
+
+
+### Features
+
+* expose pagination and slider for testing ([c673d42](https://github.com/warp-ds/elements/commit/c673d42a4c40dc041e3c8cfb7dbf5511a0ccd7fb))
+
 # [2.2.0](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0) (2025-11-10)
 
 
