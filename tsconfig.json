@@ -10,8 +10,10 @@
     "packages/card",
     "packages/expandable",
     "packages/modal",
+    "packages/pagination",
     "packages/pill",
     "packages/select",
+    "packages/slider",
     "packages/textfield",
     "packages/toast",
     "setup-tests.ts"
