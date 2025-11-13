@@ -16,10 +16,9 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          cache: 'pnpm'
+          cache: "pnpm"
           node-version: lts/*
       - run: pnpm i
-
 
       - name: Build
         run: pnpm build
@@ -28,7 +27,7 @@ jobs:
       - name: Install Playwright
         run: pnpm exec playwright install --with-deps
       - name: Test
-        run: pnpm test
+        run: pnpm test && pnpm test:module-resolution
 
       - name: Release
         env:

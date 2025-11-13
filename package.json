@@ -251,6 +251,7 @@
     "prepare": "husky",
     "semantic-release": "semantic-release",
     "test": "vitest",
+    "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {
