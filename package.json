@@ -25,6 +25,106 @@
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./react/affix": {
+      "types": "./dist/packages/affix/react.d.ts",
+      "import": "./dist/packages/affix/react.js"
+    },
+    "./react/alert": {
+      "types": "./dist/packages/alert/react.d.ts",
+      "import": "./dist/packages/alert/react.js"
+    },
+    "./react/attention": {
+      "types": "./dist/packages/attention/react.d.ts",
+      "import": "./dist/packages/attention/react.js"
+    },
+    "./react/badge": {
+      "types": "./dist/packages/badge/react.d.ts",
+      "import": "./dist/packages/badge/react.js"
+    },
+    "./react/box": {
+      "types": "./dist/packages/box/react.d.ts",
+      "import": "./dist/packages/box/react.js"
+    },
+    "./react/breadcrumbs": {
+      "types": "./dist/packages/breadcrumbs/react.d.ts",
+      "import": "./dist/packages/breadcrumbs/react.js"
+    },
+    "./react/button": {
+      "types": "./dist/packages/button/react.d.ts",
+      "import": "./dist/packages/button/react.js"
+    },
+    "./react/card": {
+      "types": "./dist/packages/card/react.d.ts",
+      "import": "./dist/packages/card/react.js"
+    },
+    "./react/combobox": {
+      "types": "./dist/packages/combobox/react.d.ts",
+      "import": "./dist/packages/combobox/react.js"
+    },
+    "./react/datepicker": {
+      "types": "./dist/packages/datepicker/react.d.ts",
+      "import": "./dist/packages/datepicker/react.js"
+    },
+    "./react/dead-toggle": {
+      "types": "./dist/packages/dead-toggle/react.d.ts",
+      "import": "./dist/packages/dead-toggle/react.js"
+    },
+    "./react/expandable": {
+      "types": "./dist/packages/expandable/react.d.ts",
+      "import": "./dist/packages/expandable/react.js"
+    },
+    "./react/link": {
+      "types": "./dist/packages/link/react.d.ts",
+      "import": "./dist/packages/link/react.js"
+    },
+    "./react/modal": {
+      "types": "./dist/packages/modal/react.d.ts",
+      "import": "./dist/packages/modal/react.js"
+    },
+    "./react/pageindicator": {
+      "types": "./dist/packages/pageindicator/react.d.ts",
+      "import": "./dist/packages/pageindicator/react.js"
+    },
+    "./react/pagination": {
+      "types": "./dist/packages/pagination/react.d.ts",
+      "import": "./dist/packages/pagination/react.js"
+    },
+    "./react/pill": {
+      "types": "./dist/packages/pill/react.d.ts",
+      "import": "./dist/packages/pill/react.js"
+    },
+    "./react/rip-and-tear-checkbox": {
+      "types": "./dist/packages/rip-and-tear-checkbox/react.d.ts",
+      "import": "./dist/packages/rip-and-tear-checkbox/react.js"
+    },
+    "./react/rip-and-tear-radio": {
+      "types": "./dist/packages/rip-and-tear-radio/react.d.ts",
+      "import": "./dist/packages/rip-and-tear-radio/react.js"
+    },
+    "./react/select": {
+      "types": "./dist/packages/select/react.d.ts",
+      "import": "./dist/packages/select/react.js"
+    },
+    "./react/slider": {
+      "types": "./dist/packages/slider/react.d.ts",
+      "import": "./dist/packages/slider/react.js"
+    },
+    "./react/steps": {
+      "types": "./dist/packages/steps/react.d.ts",
+      "import": "./dist/packages/steps/react.js"
+    },
+    "./react/switch": {
+      "types": "./dist/packages/switch/react.d.ts",
+      "import": "./dist/packages/switch/react.js"
+    },
+    "./react/tabs": {
+      "types": "./dist/packages/tabs/react.d.ts",
+      "import": "./dist/packages/tabs/react.js"
+    },
+    "./react/textfield": {
+      "types": "./dist/packages/textfield/react.d.ts",
+      "import": "./dist/packages/textfield/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
@@ -39,6 +139,88 @@
   "customElements": "./dist/custom-elements.json",
   "web-types": "./dist/web-types.json",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "react/affix": [
+        "./dist/packages/affix/react.d.ts"
+      ],
+      "react/alert": [
+        "./dist/packages/alert/react.d.ts"
+      ],
+      "react/attention": [
+        "./dist/packages/attention/react.d.ts"
+      ],
+      "react/badge": [
+        "./dist/packages/badge/react.d.ts"
+      ],
+      "react/box": [
+        "./dist/packages/box/react.d.ts"
+      ],
+      "react/breadcrumbs": [
+        "./dist/packages/breadcrumbs/react.d.ts"
+      ],
+      "react/button": [
+        "./dist/packages/button/react.d.ts"
+      ],
+      "react/card": [
+        "./dist/packages/card/react.d.ts"
+      ],
+      "react/combobox": [
+        "./dist/packages/combobox/react.d.ts"
+      ],
+      "react/datepicker": [
+        "./dist/packages/datepicker/react.d.ts"
+      ],
+      "react/dead-toggle": [
+        "./dist/packages/dead-toggle/react.d.ts"
+      ],
+      "react/expandable": [
+        "./dist/packages/expandable/react.d.ts"
+      ],
+      "react/link": [
+        "./dist/packages/link/react.d.ts"
+      ],
+      "react/modal": [
+        "./dist/packages/modal/react.d.ts"
+      ],
+      "react/pageindicator": [
+        "./dist/packages/pageindicator/react.d.ts"
+      ],
+      "react/pagination": [
+        "./dist/packages/pagination/react.d.ts"
+      ],
+      "react/pill": [
+        "./dist/packages/pill/react.d.ts"
+      ],
+      "react/rip-and-tear-checkbox": [
+        "./dist/packages/rip-and-tear-checkbox/react.d.ts"
+      ],
+      "react/rip-and-tear-radio": [
+        "./dist/packages/rip-and-tear-radio/react.d.ts"
+      ],
+      "react/select": [
+        "./dist/packages/select/react.d.ts"
+      ],
+      "react/slider": [
+        "./dist/packages/slider/react.d.ts"
+      ],
+      "react/steps": [
+        "./dist/packages/steps/react.d.ts"
+      ],
+      "react/switch": [
+        "./dist/packages/switch/react.d.ts"
+      ],
+      "react/tabs": [
+        "./dist/packages/tabs/react.d.ts"
+      ],
+      "react/textfield": [
+        "./dist/packages/textfield/react.d.ts"
+      ],
+      "toast": [
+        "./dist/packages/toast/api.d.ts"
+      ]
+    }
+  },
   "files": [
     "./dist/",
     "./dist/custom-elements.json"
@@ -69,6 +251,7 @@
     "prepare": "husky",
     "semantic-release": "semantic-release",
     "test": "vitest",
+    "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {

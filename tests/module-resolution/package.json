@@ -1,0 +1,11 @@
+{
+  "name": "module-resolution-test",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Test package to verify module resolution for @warp-ds/elements",
+  "dependencies": {
+    "@warp-ds/elements": "*",
+    "react": "19.0.0"
+  }
+}
