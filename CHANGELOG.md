@@ -1,3 +1,10 @@
+# [2.3.0-next.3](https://github.com/warp-ds/elements/compare/v2.3.0-next.2...v2.3.0-next.3) (2025-11-13)
+
+
+### Bug Fixes
+
+* use explicit exports to support module resolution from 🦖-age ([edf4319](https://github.com/warp-ds/elements/commit/edf431939426dec5d2ea4ad0e4deafb4f16139dc))
+
 # [2.3.0-next.2](https://github.com/warp-ds/elements/compare/v2.3.0-next.1...v2.3.0-next.2) (2025-11-12)
 
 
