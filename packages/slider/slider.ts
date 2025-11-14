@@ -1,11 +1,11 @@
-import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { FormControlMixin } from "@open-wc/form-control";
+import { html, LitElement, nothing, PropertyValues } from "lit";
+import { property } from "lit/decorators.js";
 
-import { reset } from '../styles.js';
+import { reset } from "../styles.js";
 
-import type { WarpSliderThumb } from './slider-thumb.js';
-import { wSliderStyles } from './styles/w-slider.styles.js';
+import type { WarpSliderThumb } from "./slider-thumb.js";
+import { wSliderStyles } from "./styles/w-slider.styles.js";
 
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
@@ -71,7 +71,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
   formatter: (value: string) => string;
 
   #syncSliderThumbs(): void {
-    const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    const sliderThumbs =
+      this.querySelectorAll<WarpSliderThumb>("w-slider-thumb");
     let usedNamedSlots = false;
     for (const thumb of sliderThumbs.values()) {
       // Set attributes that should be in sync between slider thumbs
@@ -86,15 +87,15 @@ class WarpSlider extends FormControlMixin(LitElement) {
         if (!thumb.slot) {
           thumb.ariaLabel = this.label;
         }
-        if (thumb.slot === 'from') {
+        if (thumb.slot === "from") {
           thumb.ariaLabel = `${this.label} min`;
         }
-        if (thumb.slot === 'to') {
+        if (thumb.slot === "to") {
           thumb.ariaLabel = `${this.label} max`;
         }
       }
 
-      if (thumb.slot === 'from' || thumb.slot === 'to') {
+      if (thumb.slot === "from" || thumb.slot === "to") {
         usedNamedSlots = true;
       }
 
@@ -106,21 +107,18 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
 
     // Missing a CSS-only way to detect if something is slotted in the named slots
-    const fieldset = this.shadowRoot.querySelector('fieldset');
+    const fieldset = this.shadowRoot.querySelector("fieldset");
     if (usedNamedSlots) {
       fieldset.style.setProperty(
-        '--active-range-inline-start-padding',
-        'var(--w-slider-thumb-size)',
+        "--active-range-inline-start-padding",
+        "var(--w-slider-thumb-size)",
       );
       fieldset.style.setProperty(
-        '--active-range-inline-end-padding',
-        'var(--w-slider-thumb-size)',
+        "--active-range-inline-end-padding",
+        "var(--w-slider-thumb-size)",
       );
     } else {
-      fieldset.style.setProperty(
-        '--active-range-border-radius',
-        '4px',
-      );
+      fieldset.style.setProperty("--active-range-border-radius", "4px");
     }
   }
 
@@ -128,12 +126,12 @@ class WarpSlider extends FormControlMixin(LitElement) {
     super.connectedCallback();
     await this.updateComplete;
     if (this.step) {
-      this.style.setProperty('--step', String(this.step));
+      this.style.setProperty("--step", String(this.step));
     }
-    this.style.setProperty('--min', this.min);
-    this.style.setProperty('--max', this.max);
+    this.style.setProperty("--min", this.min);
+    this.style.setProperty("--max", this.max);
     if (this.markers) {
-      this.style.setProperty('--markers', String(this.markers));
+      this.style.setProperty("--markers", String(this.markers));
     }
 
     this.#syncSliderThumbs();
@@ -141,14 +139,14 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   updated(changedProperties: PropertyValues<this>) {
     if (
-      changedProperties.has('disabled') ||
-      changedProperties.has('invalid') ||
-      changedProperties.has('required') ||
-      changedProperties.has('min') ||
-      changedProperties.has('step') ||
-      changedProperties.has('max') ||
-      changedProperties.has('suffix') ||
-      changedProperties.has('formatter')
+      changedProperties.has("disabled") ||
+      changedProperties.has("invalid") ||
+      changedProperties.has("required") ||
+      changedProperties.has("min") ||
+      changedProperties.has("step") ||
+      changedProperties.has("max") ||
+      changedProperties.has("suffix") ||
+      changedProperties.has("formatter")
     ) {
       this.#syncSliderThumbs();
     }
@@ -171,43 +169,61 @@ class WarpSlider extends FormControlMixin(LitElement) {
     const slotName = input.slot;
 
     if (!slotName) {
-      this.style.setProperty('--from', '0');
+      this.style.setProperty("--from", "0");
     }
 
-    if (slotName === 'from') {
+    if (slotName === "from") {
       // Default to the minimum value if no value has been chosen yet.
       const from = (input.value ??= this.min);
-      this.style.setProperty('--from', from);
+      this.style.setProperty("--from", from);
     }
 
-    if (!slotName || slotName === 'to') {
+    if (!slotName || slotName === "to") {
       // Default to the maximum value if no value has been chosen yet.
       const to = (input.value ??= this.max);
-      this.style.setProperty('--to', to);
+      this.style.setProperty("--to", to);
     }
   }
 
   render() {
     return html`
-      <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}" @slidervalidity="${this.#onSliderValidity}">
-        <legend class="w-slider__label">
-          <slot id="label" name="label">${this.label}</slot>
-        </legend>
+      <fieldset
+        id="fieldset"
+        class="w-slider"
+        @input="${this.#onInput}"
+        @slidervalidity="${this.#onSliderValidity}"
+      >
+        ${this.label
+          ? html`<legend class="w-slider__label">
+              <slot id="label" name="label">${this.label}</slot>
+            </legend>`
+          : nothing}
         <slot class="w-slider__description" name="description"></slot>
         ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
         <div class="w-slider__range">
           <div class="w-slider__active-range"></div>
         </div>
-        <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>
+        <slot
+          class="w-slider__slider"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        <slot
+          class="w-slider__slider"
+          name="from"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        <slot
+          class="w-slider__slider"
+          name="to"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
       </fieldset>
     `;
   }
 }
 
-if (!customElements.get('w-slider')) {
-  customElements.define('w-slider', WarpSlider);
+if (!customElements.get("w-slider")) {
+  customElements.define("w-slider", WarpSlider);
 }
 
 export { WarpSlider };
