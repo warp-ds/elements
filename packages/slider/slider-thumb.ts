@@ -315,9 +315,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
           <output id="target" class="w-slider-thumb__tooltip-target" slot="target"></output>
           <span slot="message">
-            ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
-              ? html`&nbsp;${this.suffix}`
-              : nothing}
+            ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${
+              this.suffix ? html`&nbsp;${this.suffix}` : nothing
+            }
           </span>
         </w-attention>
 

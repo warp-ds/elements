@@ -7,7 +7,8 @@ import { Slider, SliderThumb } from './react';
 const locale = 'nb';
 
 const getNumberFormatter = (locale: string, opts = {}) => {
-  return (value: string) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
+  return (value: string) =>
+    new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
 };
 
 export default {
@@ -123,7 +124,8 @@ export const OverUnder: Story = {
             const formData = new FormData(val.currentTarget);
             setOverUnderFrom(formData.get('from') as unknown as string);
             setOverUnderTo(formData.get('to') as unknown as string);
-          }}>
+          }}
+        >
           <Slider
             label="Produksjonsår"
             min="1950"
@@ -137,17 +139,20 @@ export const OverUnder: Story = {
                 return 'Etter 2025';
               }
               return value;
-            }}>
+            }}
+          >
             <SliderThumb
               slot="from"
               aria-label="Fra år"
               aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
-              name="from" />
+              name="from"
+            />
             <SliderThumb
               slot="to"
               aria-label="Til år"
               aria-description="2025 inkluderer kjøretøy produsert etter 2025"
-              name="to" />
+              name="to"
+            />
           </Slider>
         </form>
         <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
