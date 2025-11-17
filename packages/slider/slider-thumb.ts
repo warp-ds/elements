@@ -303,8 +303,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           aria-description="${ifDefined(this.ariaDescription)}"
           class="w-slider-thumb__textfield"
           type="number"
-          min="${this.min}"
-          max="${this.max}"
           .formatter=${this.formatter}
           .value="${this.value}"
           ?invalid="${this.forceInvalid || this._invalid}"
