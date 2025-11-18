@@ -297,7 +297,7 @@
     "cz-conventional-changelog": "3.3.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.25.10",
-    "express": "4.19.2",
+    "express": "5.1.0",
     "glob": "11.0.0",
     "globals": "15.13.0",
     "html-format": "1.1.7",
