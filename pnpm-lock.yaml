@@ -78,8 +78,8 @@ importers:
         specifier: 1.1.47
         version: 1.1.47
       '@itsy/animate':
-        specifier: 0.0.9
-        version: 0.0.9
+        specifier: 1.0.1
+        version: 1.0.1
       '@lingui/cli':
         specifier: 5.2.0
         version: 5.2.0(typescript@5.5.3)
@@ -764,8 +764,8 @@ packages:
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
 
-  '@itsy/animate@0.0.9':
-    resolution: {integrity: sha512-S4Oh1h5mMS4Rd2kJaSH0cxrWycOHUceTAh1is9WKgVEY3/euETJFQuCwyOpx2l8ixkEPbc4Y2ZYgrhED0/i3tQ==}
+  '@itsy/animate@1.0.1':
+    resolution: {integrity: sha512-C/6wyD6XylJh1PN2TFjVaFIb559zTdMPA6UTdM1SFwxE4xNg0MHCmtrs9JKe1wJg0gWl+qH/kVo5MsxaHdEBFg==}
 
   '@jest/schemas@29.6.3':
     resolution: {integrity: sha512-mo5j5X+jIZmJQveBKeS/clAueipV7KgiX1vMgCxam1RNYiqE1w62n0/tJJnHtjW8ZHcQco5gY85jA3mi0L+nSA==}
@@ -1670,6 +1670,7 @@ packages:
 
   '@warp-ds/icons@2.5.0':
     resolution: {integrity: sha512-tOI8hdXb2wlybpknhnySZ4m6jqA0fS+ycE7pHnpAeg27sN+XJJehL07cNuJ27MmZc0hvZtzv/L1O2F8ivjVbfQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       '@lingui/core': 5.x
 
@@ -5173,7 +5174,7 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@itsy/animate@0.0.9': {}
+  '@itsy/animate@1.0.1': {}
 
   '@jest/schemas@29.6.3':
     dependencies:
