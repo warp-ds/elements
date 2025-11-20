@@ -3,8 +3,8 @@ import React from 'react';
 
 import { createComponent } from '@lit/react';
 
-import { WRadio } from './radio';
-import { WRadioGroup } from './radio-group';
+import { WRadio } from './radio.js';
+import { WRadioGroup } from './radio-group.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
