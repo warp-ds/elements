@@ -21,6 +21,7 @@
     "./components/modal": "./dist/packages/modal/index.js",
     "./components/pill": "./dist/packages/pill/index.js",
     "./components/select": "./dist/packages/select/index.js",
+    "./components/textarea": "./dist/packages/textarea/index.js",
     "./components/textfield": "./dist/packages/textfield/index.js",
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
@@ -121,6 +122,10 @@
       "types": "./dist/packages/tabs/react.d.ts",
       "import": "./dist/packages/tabs/react.js"
     },
+    "./react/textarea": {
+      "types": "./dist/packages/textarea/react.d.ts",
+      "import": "./dist/packages/textarea/react.js"
+    },
     "./react/textfield": {
       "types": "./dist/packages/textfield/react.d.ts",
       "import": "./dist/packages/textfield/react.js"
@@ -212,6 +217,9 @@
       ],
       "react/tabs": [
         "./dist/packages/tabs/react.d.ts"
+      ],
+      "react/textarea": [
+        "./dist/packages/textarea/react.d.ts"
       ],
       "react/textfield": [
         "./dist/packages/textfield/react.d.ts"
