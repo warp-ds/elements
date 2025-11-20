@@ -140,7 +140,7 @@ export const OverUnder: Story = {
   render() {
     return html`
       <form id="overunder" style="margin-bottom: 16px" lang="nb">
-        <w-slider label="Produksjonsår" min="1950" max="2025" data-testid="overunder">
+        <w-slider label="Produksjonsår" min="1950" max="2025" data-testid="overunder" allow-values-outside-range="true">
           <w-slider-thumb
             slot="from"
             aria-label="Fra år"
@@ -165,11 +165,12 @@ export const OverUnder: Story = {
       <script>
         /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
         const overunderSlider = document.querySelector('w-slider[data-testid="overunder"]');
-        overunderSlider.formatter = function (value) {
-          if (value === '1950') {
+        overunderSlider.formatter = function (value, type) {
+
+          if (value === '' && type === "from") {
             return 'Før 1950';
           }
-          if (value === '2025') {
+          if (value === '' && type === "to") {
             return 'Etter 2025';
           }
           return value;

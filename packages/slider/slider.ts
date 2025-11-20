@@ -42,6 +42,13 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  @property({ type: Boolean, attribute: 'allow-values-outside-range' })
+  allowValuesOutsideRange = false;
+
+  // TODO Implement error texts
+  @property({ reflect: true })
+  helpText = '';
+
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
@@ -68,7 +75,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
-  formatter: (value: string) => string;
+  formatter: (value: string, type: 'to' | 'from') => string;
 
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
@@ -81,6 +88,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.suffix = this.suffix;
       thumb.required = this.required;
       thumb.formatter = this.formatter;
+      thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -185,6 +193,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
         class="w-slider"
         @input="${this.#onInput}"
         @slidervalidity="${this.#onSliderValidity}"
+        aria-invalid="${this.invalid ? 'true' : nothing}"
+        aria-describedby="${this.invalid ? 'error-slot' : nothing}"
       >
         ${
           this.label
@@ -211,6 +221,12 @@ class WarpSlider extends FormControlMixin(LitElement) {
           class="w-slider__slider"
           name="to"
           @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        <slot
+          class="w-slider__error"
+          id="error-slot"
+          name="error"
+          aria-describes="fieldset"
         ></slot>
       </fieldset>
     `;
