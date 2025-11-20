@@ -3,7 +3,7 @@ import React from 'react';
 
 import { createComponent } from '@lit/react';
 
-import { WarpPill } from '.';
+import { WarpPill } from './index.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -3,8 +3,8 @@ import React from 'react';
 
 import { createComponent, EventName } from '@lit/react';
 
-import { WarpSlider } from './slider';
-import { WarpSliderThumb } from './slider-thumb';
+import { WarpSlider } from './slider.js';
+import { WarpSliderThumb } from './slider-thumb.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
