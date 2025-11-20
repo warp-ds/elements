@@ -18,5 +18,14 @@ export const Invalid: StoryObj = {
 };
 
 export const Disabled: StoryObj = {
-  render: () => html`<w-checkbox name="invalidfoo" value="bar" disabled>Disabled checkbox</w-checkbox>`,
+  render: () => html`<w-checkbox name="disabledfoo" value="bar" disabled>Disabled checkbox</w-checkbox>`,
 };
+
+export const BunchOfCheckboxes: StoryObj = {
+  render: () => html`
+    <w-checkbox-group>
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+}
