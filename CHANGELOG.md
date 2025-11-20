@@ -1,3 +1,10 @@
+# [2.3.0-next.4](https://github.com/warp-ds/elements/compare/v2.3.0-next.3...v2.3.0-next.4) (2025-11-20)
+
+
+### Bug Fixes
+
+* **types:** add react wrapper .js extension when importing ([#436](https://github.com/warp-ds/elements/issues/436)) ([b8373d5](https://github.com/warp-ds/elements/commit/b8373d5e4254984a3a2aea7c70dc5ba19371b2c1))
+
 # [2.3.0-next.3](https://github.com/warp-ds/elements/compare/v2.3.0-next.2...v2.3.0-next.3) (2025-11-13)
 
 
