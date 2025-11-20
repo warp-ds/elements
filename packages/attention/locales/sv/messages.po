@@ -20,53 +20,53 @@ msgstr ""
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:313
-msgid "attention.aria.callout"
-msgstr "En grön pratbubbla som introducerar något nytt"
+#~ msgid "attention.aria.callout"
+#~ msgstr "En grön pratbubbla som introducerar något nytt"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
 #: packages/attention/index.js:219
-msgid "attention.aria.close"
-msgstr "Stäng"
+#~ msgid "attention.aria.close"
+#~ msgstr "Stäng"
 
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:325
-msgid "attention.aria.highlight"
-msgstr "En pratbubbla med viktig information"
+#~ msgid "attention.aria.highlight"
+#~ msgstr "En pratbubbla med viktig information"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:286
-msgid "attention.aria.pointingDown"
-msgstr "pekar ned"
+#~ msgid "attention.aria.pointingDown"
+#~ msgstr "pekar ned"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:294
-msgid "attention.aria.pointingLeft"
-msgstr "pekar vänster"
+#~ msgid "attention.aria.pointingLeft"
+#~ msgstr "pekar vänster"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:278
-msgid "attention.aria.pointingRight"
-msgstr "pekar höger"
+#~ msgid "attention.aria.pointingRight"
+#~ msgstr "pekar höger"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:270
-msgid "attention.aria.pointingUp"
-msgstr "pekar upp"
+#~ msgid "attention.aria.pointingUp"
+#~ msgstr "pekar upp"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:319
-msgid "attention.aria.popover"
-msgstr "En vit pratbubbla som ger ytterligare information"
+#~ msgid "attention.aria.popover"
+#~ msgstr "En vit pratbubbla som ger ytterligare information"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
 #: packages/attention/index.js:307
-msgid "attention.aria.tooltip"
-msgstr "En svart pratbubbla som ger kompletterande information"
+#~ msgid "attention.aria.tooltip"
+#~ msgstr "En svart pratbubbla som ger kompletterande information"

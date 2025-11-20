@@ -19,12 +19,12 @@ msgstr ""
 
 #. Aria text for combobox when one or more results
 #. js-lingui-explicit-id
-#: packages/combobox/src/utils.ts:21
+#: packages/combobox/index.ts:169
 msgid "combobox.aria.pluralResults"
 msgstr "{numResults, plural, one {# tulos} other {# tulosta}}"
 
 #. Aria text for combobox when no results
 #. js-lingui-explicit-id
-#: packages/combobox/src/utils.ts:28
+#: packages/combobox/index.ts:176
 msgid "combobox.aria.noResults"
 msgstr "Ei tuloksia"
