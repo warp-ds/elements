@@ -12,3 +12,11 @@ export default {
 } satisfies Meta;
 
 export const Default: StoryObj = {};
+
+export const Invalid: StoryObj = {
+  render: () => html`<w-checkbox name="invalidfoo" value="bar" invalid>Invalid checkbox</w-checkbox>`,
+};
+
+export const Disabled: StoryObj = {
+  render: () => html`<w-checkbox name="invalidfoo" value="bar" disabled>Disabled checkbox</w-checkbox>`,
+};
