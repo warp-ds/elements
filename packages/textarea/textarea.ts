@@ -100,13 +100,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     }
   }
 
-  // Note about styling slotted elements:
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
-  // https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#styling_slotted_elements
-  // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
-  // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
-  // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
-  // https://stackoverflow.com/a/61631668
   static styles = [reset, styles];
 
   /** @internal */
@@ -119,7 +112,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
       this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccInput.invalid,
       !this.invalid && this.disabled && !(this.readonly || this.readOnly) && ccInput.disabled,
       !this.invalid && !this.disabled && (this.readonly || this.readOnly) && ccInput.readOnly,
-      (this.maxRows) && ccInput.fixed,
+      this.maxRows && ccInput.fixed,
     ]);
   }
 
@@ -208,19 +201,20 @@ class WarpTextarea extends FormControlMixin(LitElement) {
             : nothing
         }
         <textarea
-        id="${this._id}"
-        class="${this._textareaStyles}"
-        name="${ifDefined(this.name)}"
-        placeholder="${ifDefined(this.placeholder)}"
-        .value="${this.value || ''}"
-        aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
-        aria-errormessage="${ifDefined(this._error)}"
-        aria-invalid="${ifDefined(this.invalid)}"
-        ?disabled="${this.disabled}"
-        ?readonly="${this.readonly || this.readOnly}"
-        ?required="${this.required}"
-        @input="${this.handler}"></textarea>
-        ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
+          id="${this._id}"
+          class="${this._textareaStyles}"
+          name="${ifDefined(this.name)}"
+          placeholder="${ifDefined(this.placeholder)}"
+          .value="${this.value || ''}"
+          aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
+          aria-errormessage="${ifDefined(this._error)}"
+          aria-invalid="${ifDefined(this.invalid)}"
+          ?disabled="${this.disabled}"
+          ?readonly="${this.readonly || this.readOnly}"
+          ?required="${this.required}"
+          @input="${this.handler}">
+        </textarea>
+        ${this.helpText ? html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>` : nothing}
     `;
   }
 }
