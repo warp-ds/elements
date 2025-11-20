@@ -240,7 +240,7 @@
     "check": "pnpm biome check --write .",
     "clean": "rimraf .pnpm-store node_modules dist eik storybook-static entrypoint.js",
     "commit": "cz",
-    "dev": "pnpm run storybook",
+    "dev": "pnpm run build:manifest && pnpm run storybook",
     "storybook": "storybook dev --port 63900",
     "storybook:react": "storybook dev -p 63901 -c .storybook-react",
     "format": "pnpm biome format --write .",
