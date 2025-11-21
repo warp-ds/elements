@@ -373,17 +373,17 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         ${
           this.slot === 'from'
             ? html`<span class="w-slider-thumb__from-marker"
-                >${this.formatter ? this.formatter(this.value, 'from') : this.min}
-                ${this.suffix}</span
-              >`
+              >${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from') : this.min}
+              ${this.suffix}</span
+            >`
             : nothing
         }
         ${
           this.slot === 'to'
             ? html`<span class="w-slider-thumb__to-marker"
-                >${this.formatter ? this.formatter(this.value, 'to') : this.max}
-                ${this.suffix}</span
-              >`
+              >${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to') : this.max}
+              ${this.suffix}</span
+            >`
             : nothing
         }
 
