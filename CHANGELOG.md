@@ -1,3 +1,10 @@
+# [2.3.0-next.6](https://github.com/warp-ds/elements/compare/v2.3.0-next.5...v2.3.0-next.6) (2025-11-21)
+
+
+### Features
+
+* add new component w-textarea ([#439](https://github.com/warp-ds/elements/issues/439)) ([bf7d781](https://github.com/warp-ds/elements/commit/bf7d78199242dc0368cfc6f566540f56da0902a3))
+
 # [2.3.0-next.5](https://github.com/warp-ds/elements/compare/v2.3.0-next.4...v2.3.0-next.5) (2025-11-21)
 
 
