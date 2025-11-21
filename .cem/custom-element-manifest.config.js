@@ -39,6 +39,7 @@ export default {
     'packages/pagination/index.ts',
     'packages/rip-and-tear-radio/radio*.ts',
     'packages/rip-and-tear-checkbox/checkbox.ts',
+    'packages/rip-and-tear-checkbox/checkbox-group.ts',
     'packages/slider/slider.ts',
     'packages/slider/slider-thumb.ts',
     'packages/steps/index.ts',
