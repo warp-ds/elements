@@ -7,7 +7,7 @@ import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
 const ccTab = {
-  base: 'grid w-full items-center font-bold gap-8 focusable antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary',
+  base: 'grid w-full items-center font-bold gap-8 antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary',
   inactive: 's-text-subtle',
   active: 's-text-link s-border-selected',
   icon: 'mx-auto',
@@ -78,9 +78,10 @@ export class WarpTab extends LitElement {
         aria-selected="${this.active ? 'true' : 'false'}"
         aria-controls="${this.active ? `warp-tabpanel-${this.name}` : ''}"
         id="warp-tab-${this.name}"
-        tabindex="${this.active ? '0' : '-1'}"
         class="${this._classes}"
-        @click="${this._handleClick}">
+        @click="${this._handleClick}"
+        tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */-1}"
+        style="height: 100%">
         ${
           !hasChildren
             ? html`<span class="${ccTab.contentUnderlined}">${this.label}</span>`

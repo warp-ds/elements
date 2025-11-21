@@ -139,7 +139,7 @@ export class WarpTabs extends LitElement {
     }
   }
 
-  private _handleTabClick = (event: CustomEvent<TabChangeEvent>) => {
+   private _handleTabClick = (event: CustomEvent<TabChangeEvent>) => {
     const newActiveTab = event.detail.name;
     if (newActiveTab !== this._activeTab) {
       this.active = newActiveTab;
@@ -197,8 +197,10 @@ export class WarpTabs extends LitElement {
       const tabName = tab.getAttribute('name');
       if (tabName === this._activeTab) {
         tab.setAttribute('active', '');
+        (tab as HTMLFormElement).tabIndex = 0;
       } else {
         tab.removeAttribute('active');
+        (tab as HTMLFormElement).tabIndex = -1;
       }
     });
   }
@@ -248,7 +250,12 @@ export class WarpTabs extends LitElement {
         this._notifyTabChange();
 
         // Focus the next tab
-        (nextTab as HTMLElement).focus();
+       const el = (nextTab as HTMLElement);
+       el.tabIndex = 0; // All tabs are initially -1
+       el.focus();
+       tabs.forEach((t) => {
+          (t as HTMLFormElement).tabIndex = t === el ? 0 : -1;
+       });
       }
     }
   };
