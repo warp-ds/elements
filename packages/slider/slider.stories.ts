@@ -239,7 +239,6 @@ export const OverUnder: Story = {
           'w-slider[data-testid="overunder"]',
         );
         overunderSlider.formatter = function (value, type) {
-          console.log({ value, type });
           if (value === "" && type === "from") {
             return "Før 1950";
           }
@@ -254,7 +253,6 @@ export const OverUnder: Story = {
           const formData = new FormData(this);
           const from = formData.get("from");
           const to = formData.get("to");
-          console.log({ from, to }, this);
           document.getElementById("overunder-from").innerText = from;
           document.getElementById("overunder-to").innerText = to;
         });
