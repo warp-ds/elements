@@ -126,7 +126,7 @@ export const wSliderThumbStyles = css`
   }
 
   .w-slider-thumb__textfield {
-    margin-top: 10px;
+    margin-top: 12px;
     pointer-events: auto;
     grid-row: 3 / 4;
     grid-column: 1 / 3; /* Single sliders should have the text field use the fromtextfield _and_ gap portion of the CSS grid. */
