@@ -169,20 +169,25 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #updateActiveTrack(input: WarpSliderThumb) {
     const slotName = input.slot;
 
+    // Helper to initialize value if needed and return CSS value
+    const initializeValue = (boundary: string): string => {
+      if (input.value === undefined || input.value === null) {
+        input.value = this.allowValuesOutsideRange ? '' : boundary;
+      }
+      // Use boundary for CSS positioning when value is empty
+      return input.value === '' ? boundary : input.value;
+    };
+
     if (!slotName) {
       this.style.setProperty('--from', '0');
     }
 
     if (slotName === 'from') {
-      // Default to the minimum value if no value has been chosen yet.
-      const from = (input.value ??= this.min);
-      this.style.setProperty('--from', from);
+      this.style.setProperty('--from', initializeValue(this.min));
     }
 
     if (!slotName || slotName === 'to') {
-      // Default to the maximum value if no value has been chosen yet.
-      const to = (input.value ??= this.max);
-      this.style.setProperty('--to', to);
+      this.style.setProperty('--to', initializeValue(this.max));
     }
   }
 
