@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/warp-ds/elements/compare/v2.2.0...v2.2.1) (2025-11-21)
+
+
+### Bug Fixes
+
+* use correct tokens for primary link ([#443](https://github.com/warp-ds/elements/issues/443)) ([b1b05b9](https://github.com/warp-ds/elements/commit/b1b05b90a4dae2be02d05358617cce01039840d8))
+
 # [2.2.0](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0) (2025-11-10)
 
 
