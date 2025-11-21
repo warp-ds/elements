@@ -289,3 +289,24 @@ export const RangeError: Story = {
     `;
   },
 };
+
+export const CustomError: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render() {
+    return html`
+      <w-slider
+        label="Production year"
+        min="1950"
+        max="2025"
+        over
+        under
+        error="I'm an external error telling you something is wrong"
+      >
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
+    `;
+  },
+};

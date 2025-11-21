@@ -11,7 +11,8 @@ export const wSliderStyles = css`
     grid-template-areas:
       'label'
       'description'
-      'slider';
+      'slider'
+      'error';
     grid-template-columns: 1fr;
 
     --w-slider-track-background: var(--w-s-color-background-disabled-subtle);
@@ -122,6 +123,10 @@ export const wSliderStyles = css`
     grid-area: slider;
     height: var(--_marker-height);
     margin-inline: var(--w-slider-thumb-offset);
+  }
+
+  .w-slider__error {
+    grid-area: error;
   }
 
   slot::slotted(w-slider-thumb) {

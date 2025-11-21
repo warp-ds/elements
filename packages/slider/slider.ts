@@ -45,12 +45,14 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: Boolean, attribute: 'allow-values-outside-range' })
   allowValuesOutsideRange = false;
 
-  // TODO Implement error texts
   @property({ reflect: true })
-  helpText = '';
+  help = '';
 
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
+  @property({ reflect: true })
+  error = '';
+
+  @property({ type: String, reflect: true })
+  invalid = '';
 
   /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true })
@@ -71,7 +73,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix: string;
+  suffix = '';
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
@@ -89,6 +91,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.required = this.required;
       thumb.formatter = this.formatter;
       thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
+      thumb._invalid = this.errorText;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -108,7 +111,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
       // Set forceDisabled state based on slider component disabled state
       thumb.forceDisabled = this.disabled;
-      thumb.forceInvalid = this.invalid;
+      thumb.forceInvalid = Boolean(this.invalid);
 
       this.#updateActiveTrack(thumb);
     }
@@ -191,6 +194,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
+  get errorText() {
+    return this.error || this.invalid;
+  }
+
   render() {
     return html`
       <fieldset
@@ -198,8 +205,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
         class="w-slider"
         @input="${this.#onInput}"
         @slidervalidity="${this.#onSliderValidity}"
-        aria-invalid="${this.invalid ? 'true' : nothing}"
-        aria-describedby="${this.invalid ? 'error-slot' : nothing}"
+        aria-invalid="${this.errorText ? 'true' : nothing}"
+        aria-describedby="${this.errorText ? 'error-slot' : nothing}"
       >
         ${
           this.label
@@ -227,12 +234,16 @@ class WarpSlider extends FormControlMixin(LitElement) {
           name="to"
           @slotchange=${this.#syncSliderThumbs}
         ></slot>
-        <slot
-          class="w-slider__error"
-          id="error-slot"
-          name="error"
-          aria-describes="fieldset"
-        ></slot>
+        ${
+          this.errorText
+            ? html`<p
+              class="w-slider__error"
+              aria-describes="fieldset"
+            >
+              ${this.errorText}
+            </p>`
+            : nothing
+        }
       </fieldset>
     `;
   }
