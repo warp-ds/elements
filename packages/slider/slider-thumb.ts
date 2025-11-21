@@ -370,14 +370,22 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @input="${this.#onInput}"
         />
 
-        <span class="w-slider-thumb__from-marker"
-          >${this.formatter ? this.formatter(this.value, 'from') : this.min}
-          ${this.suffix}</span
-        >
-        <span class="w-slider-thumb__to-marker"
-          >${this.formatter ? this.formatter(this.value, 'to') : this.max}
-          ${this.suffix}</span
-        >
+        ${
+          this.slot === 'from'
+            ? html`<span class="w-slider-thumb__from-marker"
+                >${this.formatter ? this.formatter(this.value, 'from') : this.min}
+                ${this.suffix}</span
+              >`
+            : nothing
+        }
+        ${
+          this.slot === 'to'
+            ? html`<span class="w-slider-thumb__to-marker"
+                >${this.formatter ? this.formatter(this.value, 'to') : this.max}
+                ${this.suffix}</span
+              >`
+            : nothing
+        }
 
         <w-textfield
           aria-label="${this.ariaLabel}"
