@@ -28,6 +28,7 @@
     "packages/switch",
     "packages/tabs",
     "packages/tabs",
+    "packages/textarea",
     "setup-tests.ts"
   ],
   "compilerOptions": {

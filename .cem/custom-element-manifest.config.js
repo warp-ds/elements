@@ -45,6 +45,7 @@ export default {
     'packages/switch/index.ts',
     'packages/tabs/tab.ts',
     'packages/tabs/tabs.ts',
+    'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude

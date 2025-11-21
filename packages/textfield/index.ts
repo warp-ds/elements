@@ -85,8 +85,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   placeholder: string;
 
+  /** @deprecated Use the native readonly attribute instead. */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly: boolean;
+  
+  @property({ type: Boolean, reflect: true })
+  readonly: boolean;
 
   @property({ type: Boolean, reflect: true })
   required: boolean;
@@ -148,10 +152,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
       ccinput.base,
       this._hasSuffix && ccinput.suffix,
       this._hasPrefix && ccinput.prefix,
-      !this.invalid && !this.disabled && !this.readOnly && ccinput.default,
-      this.invalid && !this.disabled && !this.readOnly && ccinput.invalid,
-      !this.invalid && this.disabled && !this.readOnly && ccinput.disabled,
-      !this.invalid && !this.disabled && this.readOnly && ccinput.readOnly,
+      !this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccinput.default,
+      this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccinput.invalid,
+      !this.invalid && this.disabled && !(this.readonly || this.readOnly) && ccinput.disabled,
+      !this.invalid && !this.disabled && (this.readonly || this.readOnly) && ccinput.readOnly,
     ]);
   }
 
@@ -241,7 +245,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
             aria-invalid="${ifDefined(this.invalid)}"
             id="${this._id}"
             ?disabled="${this.disabled}"
-            ?readonly="${this.readOnly}"
+            ?readonly="${this.readonly || this.readOnly}"
             ?required="${this.required}"
             @blur="${this.handler}"
             @change="${this.handler}"
