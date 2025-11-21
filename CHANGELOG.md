@@ -1,3 +1,10 @@
+# [2.3.0-next.5](https://github.com/warp-ds/elements/compare/v2.3.0-next.4...v2.3.0-next.5) (2025-11-21)
+
+
+### Features
+
+* add performance measuring to eik bundle ([5951664](https://github.com/warp-ds/elements/commit/595166499172f36398a53ac9e2403557bd79c5d6))
+
 # [2.3.0-next.4](https://github.com/warp-ds/elements/compare/v2.3.0-next.3...v2.3.0-next.4) (2025-11-20)
 
 
