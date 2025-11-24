@@ -142,7 +142,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
     if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
-      console.log(this.suffix);
       this._invalid = i18n.t({
         id: 'slider.error.out_of_bounds',
         message: 'Value must be between {min} and {max}',
