@@ -1,3 +1,10 @@
+# [2.3.0-next.8](https://github.com/warp-ds/elements/compare/v2.3.0-next.7...v2.3.0-next.8) (2025-11-24)
+
+
+### Bug Fixes
+
+* checkbox styles, add w-checkbox-group component ([#438](https://github.com/warp-ds/elements/issues/438)) ([e07fa1a](https://github.com/warp-ds/elements/commit/e07fa1a263e1c06f87daa37103023f8f9f8dd3dd))
+
 # [2.3.0-next.7](https://github.com/warp-ds/elements/compare/v2.3.0-next.6...v2.3.0-next.7) (2025-11-21)
 
 
