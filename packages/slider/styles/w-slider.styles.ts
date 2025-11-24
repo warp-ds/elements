@@ -127,6 +127,10 @@ export const wSliderStyles = css`
 
   .w-slider__error {
     grid-area: error;
+    padding-top: 8px;
+    font-size: var(--w-font-size-xs);
+    line-height: var(--w-line-height-xs);
+    color: var(--w-s-color-text-negative);
   }
 
   slot::slotted(w-slider-thumb) {
