@@ -1,3 +1,10 @@
+# [2.3.0-next.9](https://github.com/warp-ds/elements/compare/v2.3.0-next.8...v2.3.0-next.9) (2025-11-24)
+
+
+### Bug Fixes
+
+* tabs fixes ([eb0cc40](https://github.com/warp-ds/elements/commit/eb0cc4083e69789ef1c3d148872b05e4b7306ad1))
+
 # [2.3.0-next.8](https://github.com/warp-ds/elements/compare/v2.3.0-next.7...v2.3.0-next.8) (2025-11-24)
 
 
