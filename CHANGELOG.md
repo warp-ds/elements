@@ -1,3 +1,10 @@
+# [2.3.0-next.11](https://github.com/warp-ds/elements/compare/v2.3.0-next.10...v2.3.0-next.11) (2025-11-25)
+
+
+### Bug Fixes
+
+* add same help/validation message API as other form components ([#447](https://github.com/warp-ds/elements/issues/447)) ([b77940a](https://github.com/warp-ds/elements/commit/b77940a2813b20311117c6d106b85ca56acc6c7a))
+
 # [2.3.0-next.10](https://github.com/warp-ds/elements/compare/v2.3.0-next.9...v2.3.0-next.10) (2025-11-25)
 
 
