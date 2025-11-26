@@ -45,6 +45,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   disabled: boolean;
 
   /** Set by `<w-slider>` */
+  @property({ attribute: false, reflect: false })
+  allowValuesOutsideRange = false;
+
+  /** Set by `<w-slider>` */
   @state()
   markers: string;
 
@@ -67,10 +71,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   /** Set by `<w-slider>` */
   @state()
   suffix: string;
-
-  /** Set by `<w-slider>` */
-  @state()
-  allowValuesOutsideRange = false;
 
   /** @internal */
   @state()
