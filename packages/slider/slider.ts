@@ -82,8 +82,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
     let usedNamedSlots = false;
     for (const thumb of sliderThumbs.values()) {
       // Set attributes that should be in sync between slider thumbs
-      thumb.min = this.min;
-      thumb.max = this.max;
+      thumb.min = this.edgeMin;
+      thumb.max = this.edgeMax;
       thumb.step = this.step;
       thumb.suffix = this.suffix;
       thumb.required = this.required;
@@ -123,14 +123,21 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
+  get edgeMin() {
+    return this.allowValuesOutsideRange ? (Number(this.min) - 1).toString() : this.min;
+  }
+  get edgeMax() {
+    return this.allowValuesOutsideRange ? (Number(this.max) + 1).toString() : this.max;
+  }
+
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
     if (this.step) {
       this.style.setProperty('--step', String(this.step));
     }
-    this.style.setProperty('--min', this.min);
-    this.style.setProperty('--max', this.max);
+    this.style.setProperty('--min', this.edgeMin);
+    this.style.setProperty('--max', this.edgeMax);
     if (this.markers) {
       this.style.setProperty('--markers', String(this.markers));
     }
@@ -183,11 +190,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
 
     if (slotName === 'from') {
-      this.style.setProperty('--from', initializeValue(this.min));
+      this.style.setProperty('--from', initializeValue(this.edgeMin));
     }
 
     if (!slotName || slotName === 'to') {
-      this.style.setProperty('--to', initializeValue(this.max));
+      this.style.setProperty('--to', initializeValue(this.edgeMax));
     }
   }
 
