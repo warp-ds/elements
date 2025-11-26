@@ -159,8 +159,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
     // Stop a range slider's from value from reaching past the to value and vice versa
     // by updating the other component's min and max values.
+    // Skip this check when typing in textfield with allowValuesOutsideRange enabled
     let shouldCancel = false;
-    if (this.slot) {
+    if (this.slot && !(isFromTextInput && this.allowValuesOutsideRange)) {
       const computedStyle = getComputedStyle(this);
       const toValue = computedStyle.getPropertyValue('--to');
       const fromValue = computedStyle.getPropertyValue('--from');
