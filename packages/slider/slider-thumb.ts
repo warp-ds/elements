@@ -198,10 +198,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       // Needed to stop slider from moving independendtly of the value when we cancel the event
       return true;
     }
+
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
 
     const valueIsAtTheSliderEdge =
-      (!this.range || this.range?.value === value) && (value === this.max || value === this.min);
+      (!this.range || this.range?.value === value) && ((this.slot === "to" && value === this.max) || ( this.slot === "from" && value === this.min ));
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
 
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
@@ -358,8 +359,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           class="w-slider-thumb__range"
           type="range"
           .value="${this.value}"
-          min="${this.min}"
-          max="${this.max}"
+          min="${this.allowValuesOutsideRange && this.slot === "to" ? Number(this.min) + 1 :this.min}"
+          max="${this.allowValuesOutsideRange && this.slot === "from" ? Number(this.max) -  1 : this.max}"
           step="${ifDefined(this.step ? this.step : undefined)}"
           ?disabled="${this.disabled || this.forceDisabled}"
           @mousedown="${this.#showTooltip}"

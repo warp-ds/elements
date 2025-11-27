@@ -137,7 +137,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       this.style.setProperty('--step', String(this.step));
     }
     this.style.setProperty('--min', this.edgeMin);
-    this.style.setProperty('--max', this.edgeMax);
+    this.style.setProperty('--max', this.max);
     if (this.markers) {
       this.style.setProperty('--markers', String(this.markers));
     }
