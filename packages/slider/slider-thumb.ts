@@ -168,11 +168,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value
-        if (valueNum > Number.parseInt(toValue)) {
+        if (valueNum > Number.parseInt(toValue) || (this.allowValuesOutsideRange && valueNum >= Number(toValue))) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          this.value = toValue;
+          if (this.allowValuesOutsideRange) {
+            this.value = (Number(toValue) - 1).toString();
+          } else {
+            this.value = toValue;
+          }
 
           if (isFromTextInput) {
             this._invalid = true;
@@ -180,11 +184,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       } else {
         // Check that the to value is not about to be dragged past the --from value
-        if (valueNum < Number.parseInt(fromValue)) {
+        if (valueNum < Number.parseInt(fromValue) || (this.allowValuesOutsideRange && valueNum <= Number(fromValue))) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          this.value = fromValue;
+          if (this.allowValuesOutsideRange) {
+            this.value = (Number(fromValue) + 1).toString();
+          } else {
+            this.value = fromValue;
+          }
 
           if (isFromTextInput) {
             this._invalid = true;
@@ -196,8 +204,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (shouldCancel) {
       e.preventDefault();
       // Needed to stop slider from moving independendtly of the value when we cancel the event
+
       return true;
     }
+
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
 
     const valueIsAtTheSliderEdge =
