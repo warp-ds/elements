@@ -3,7 +3,6 @@
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
@@ -44,6 +43,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
+  @property({ type: Boolean, reflect: true })
+  invalid: boolean;
+
   /** Set by `<w-slider>` */
   @property({ attribute: false, reflect: false })
   allowValuesOutsideRange = false;
@@ -72,14 +74,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix: string;
 
-  /** @internal */
-  @state()
-  forceDisabled: boolean;
-
-  /** @internal */
-  @state()
-  forceInvalid: boolean;
-
   /** JS hook to help you format the numeric value how you want. */
   @state()
   formatter: (value: string, type: 'from' | 'to') => string;
@@ -89,10 +83,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   @query('w-textfield')
   textfield: WarpTextField;
-
-  /** @internal */
-  @state()
-  _invalid = false;
 
   /** @internal */
   @state()
@@ -140,20 +130,20 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
     if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
-      this._invalid = true;
+      this.invalid = true;
       return false;
     }
 
     if (value === '') {
       if (this.required) {
-        this._invalid = true;
+        this.invalid = true;
       }
       // To not bork when input field is empty
       return false;
     }
 
-    if (this._invalid) {
-      this._invalid = false;
+    if (this.invalid) {
+      this.invalid = false;
     }
     this.value = value;
 
@@ -184,7 +174,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this._invalid = true;
+            this.invalid = true;
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -204,7 +194,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this._invalid = true;
+            this.invalid = true;
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -349,11 +339,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       this.setValue(this.value);
       this.#syncRangeValue();
     }
-    if (changedProperties.has('_invalid')) {
+    if (changedProperties.has('invalid')) {
       this.dispatchEvent(
         new CustomEvent('slidervalidity', {
           bubbles: true,
-          detail: { invalid: this._invalid },
+          detail: { invalid: this.invalid },
         }),
       );
     }
@@ -380,7 +370,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           min="${this.min}"
           max="${this.max}"
           step="${ifDefined(this.step ? this.step : undefined)}"
-          ?disabled="${this.disabled || this.forceDisabled}"
+          ?disabled="${this.disabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
           @touchstart="${this.#showTooltip}"
@@ -416,7 +406,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           .value="${this.textFieldDisplayValue}"
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
-          ?invalid="${this.forceInvalid || this._invalid}"
+          ?invalid="${this.invalid}"
           @input="${this.#onInput}"
           @focus="${() => (this._inputHasFocus = true)}"
           @blur="${() => (this._inputHasFocus = false)}"

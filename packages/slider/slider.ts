@@ -106,9 +106,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
         usedNamedSlots = true;
       }
 
-      // Set forceDisabled state based on slider component disabled state
-      thumb.forceDisabled = this.disabled;
-      thumb.forceInvalid = this.invalid;
+      thumb.disabled = this.disabled;
+      thumb.invalid = this.invalid;
 
       this.#updateActiveTrack(thumb);
     }
@@ -167,7 +166,21 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
-    this.invalid = e.detail.invalid;
+    // If either one is invalid, the fieldset is invalid
+    if (e.detail.invalid) {
+      this.invalid = true;
+    } else {
+      // Check that both slotted slider thumbs are valid
+      // before marking the fieldset valid.
+      let invalid = false;
+      const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+      for (const thumb of sliderThumbs.values()) {
+        if (thumb.invalid) {
+          invalid = true;
+        }
+      }
+      this.invalid = invalid;
+    }
   }
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
@@ -195,8 +208,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
     if (!slotName || slotName === 'to') {
       this.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
     }
-
-    // TODO: resolve validity of range inputs
   }
 
   render() {
