@@ -128,7 +128,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
-  #onInput(e: InputEvent | CustomEvent): boolean {
+  async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
     const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
     if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
 
@@ -175,16 +175,19 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         const toBoundary = Math.min(Number.parseInt(toValue), this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
         if (valueNum > toBoundary) {
           shouldCancel = true;
+          // The user might have moved the slider so fast that this.value is far away from overlapping.
+          // Set it to be equal to the to/from value, depending on what slider the user's moving.
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+            this.value = String(toBoundary);
+          } else {
+            this.value = toValue;
+          }
+
           if (isFromTextInput) {
             this._invalid = true;
-          } else {
-            // The user might have moved the slider so fast that this.value is far away from overlapping.
-            // Set it to be equal to the to/from value, depending on what slider the user's moving.
-            if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
-              this.value = String(toBoundary);
-            } else {
-              this.value = toValue;
-            }
+            // Don't override the user's input in the textfield
+            await this.updateComplete;
+            this.textfield.value = value;
           }
         }
       } else {
@@ -192,16 +195,19 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         const fromBoundary = Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
         if (valueNum < fromBoundary) {
           shouldCancel = true;
+          // The user might have moved the slider so fast that this.value is far away from overlapping.
+          // Set it to be equal to the to/from value, depending on what slider the user's moving.
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+            this.value = String(fromBoundary);
+          } else {
+            this.value = fromValue;
+          }
+
           if (isFromTextInput) {
             this._invalid = true;
-          } else {
-            // The user might have moved the slider so fast that this.value is far away from overlapping.
-            // Set it to be equal to the to/from value, depending on what slider the user's moving.
-            if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
-              this.value = String(fromBoundary);
-            } else {
-              this.value = fromValue;
-            }
+            // Don't override the user's input in the textfield
+            await this.updateComplete;
+            this.textfield.value = value;
           }
         }
       }

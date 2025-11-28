@@ -195,6 +195,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
     if (!slotName || slotName === 'to') {
       this.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
     }
+
+    // TODO: resolve validity of range inputs
   }
 
   render() {
