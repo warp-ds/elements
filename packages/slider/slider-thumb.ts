@@ -157,6 +157,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
     this.value = value;
 
+    const valueIsAtTheSliderEdge = (value === this.max || value === this.min);
+
     // Stop a range slider's from value from reaching past the to value and vice versa
     // by updating the other component's min and max values.
     // Skip this check when typing in textfield with allowValuesOutsideRange enabled
@@ -172,7 +174,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.allowValuesOutsideRange) {
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
             this.value = (Number(toValue) - 1).toString();
           } else {
             this.value = toValue;
@@ -188,7 +190,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.allowValuesOutsideRange) {
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
             this.value = (Number(fromValue) + 1).toString();
           } else {
             this.value = fromValue;
@@ -209,12 +211,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
-
-    const valueIsAtTheSliderEdge =
-      (!this.range || this.range?.value === value) && (value === this.max || value === this.min);
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
 
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
+
     return true;
   }
 
