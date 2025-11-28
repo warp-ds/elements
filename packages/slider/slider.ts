@@ -170,31 +170,30 @@ class WarpSlider extends FormControlMixin(LitElement) {
     this.invalid = e.detail.invalid;
   }
 
+  #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
+    if (input.value === undefined || input.value === null) {
+      input.value = this.allowValuesOutsideRange ? '' : boundary;
+    }
+    // Use boundary for CSS positioning when value is empty
+    return input.value === '' ? boundary : input.value;
+  }
+
   /**
    * We use CSS variables to fill the active track with a background color.
    */
   #updateActiveTrack(input: WarpSliderThumb) {
     const slotName = input.slot;
 
-    // Helper to initialize value if needed and return CSS value
-    const initializeValue = (boundary: string): string => {
-      if (input.value === undefined || input.value === null) {
-        input.value = this.allowValuesOutsideRange ? '' : boundary;
-      }
-      // Use boundary for CSS positioning when value is empty
-      return input.value === '' ? boundary : input.value;
-    };
-
     if (!slotName) {
       this.style.setProperty('--from', '0');
     }
 
     if (slotName === 'from') {
-      this.style.setProperty('--from', initializeValue(this.edgeMin));
+      this.style.setProperty('--from', this.#getEdgeValue(this.edgeMin, input));
     }
 
     if (!slotName || slotName === 'to') {
-      this.style.setProperty('--to', initializeValue(this.edgeMax));
+      this.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
     }
   }
 
