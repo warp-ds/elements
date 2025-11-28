@@ -178,7 +178,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
           if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
-            this.value = (Number(toValue) - 1).toString();
+            this.value = String(toBoundary);
           } else {
             this.value = toValue;
           }
@@ -195,7 +195,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
           if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
-            this.value = (Number(fromValue) + 1).toString();
+            this.value = String(fromBoundary);
           } else {
             this.value = fromValue;
           }
