@@ -157,20 +157,23 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
     this.value = value;
 
-    const valueIsAtTheSliderEdge = (value === this.max || value === this.min);
+    const valueIsAtTheSliderEdge = value === this.max || value === this.min;
 
     // Stop a range slider's from value from reaching past the to value and vice versa
     // by updating the other component's min and max values.
     // Skip this check when typing in textfield with allowValuesOutsideRange enabled
     let shouldCancel = false;
-    if (this.slot && !(isFromTextInput && this.allowValuesOutsideRange)) {
+    if (this.slot) {
       const computedStyle = getComputedStyle(this);
+
       const toValue = computedStyle.getPropertyValue('--to');
       const fromValue = computedStyle.getPropertyValue('--from');
 
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value
-        if (valueNum > Number.parseInt(toValue) || (this.allowValuesOutsideRange && valueNum >= Number(toValue))) {
+
+        const toBoundary = Math.min(Number.parseInt(toValue), this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
+        if (valueNum > toBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
@@ -186,7 +189,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       } else {
         // Check that the to value is not about to be dragged past the --from value
-        if (valueNum < Number.parseInt(fromValue) || (this.allowValuesOutsideRange && valueNum <= Number(fromValue))) {
+        const fromBoundary = Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
+        if (valueNum < fromBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
@@ -206,8 +210,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (shouldCancel) {
       e.preventDefault();
       // Needed to stop slider from moving independendtly of the value when we cancel the event
-
-      return true;
+      return false;
     }
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
