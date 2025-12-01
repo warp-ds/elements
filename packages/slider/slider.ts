@@ -2,6 +2,7 @@ import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
+import type { WarpTextField } from '../textfield/index.js';
 import { reset } from '../styles.js';
 
 import type { WarpSliderThumb } from './slider-thumb.js';
@@ -162,6 +163,55 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #onInput(e: InputEvent) {
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
+
+    const isRangeSlider = input.slot;
+    if (isRangeSlider) {
+      this.#doValidation();
+    }
+  }
+
+  #doValidation() {
+    // In a range slider changing the value in one input can change the validity
+    // of the second input. Specifically, what was a value outside the mininum or
+    // maximum can become inside those limits when the limits change, by changing
+    // the from or to values. Check to see if a field is invalid, but should be
+    // valid based on those rules.
+
+    let from: WarpSliderThumb;
+    let to: WarpSliderThumb;
+    const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    for (const thumb of sliderThumbs.values()) {
+      if (thumb.slot === 'from') from = thumb;
+      if (thumb.slot === 'to') to = thumb;
+    }
+
+    if (!from || !to) {
+      // Not a range slider, nothing to do here.
+      return;
+    }
+    if (!from.invalid && !to.invalid) {
+      // Both are valid, nothing to do here
+      return;
+    }
+
+    // We need to check the value of the text input, not the range input,
+    // since the range input value is not updated with an invalid value.
+    const fromTextInput = from.shadowRoot.querySelector<WarpTextField>('w-textfield');
+    const toTextInput = to.shadowRoot.querySelector<WarpTextField>('w-textfield');
+
+    const fromLowerThanOrEqualToTo = Number(fromTextInput.value) <= Number(toTextInput.value);
+    const toHigherThanOrEqualToFrom = Number(toTextInput.value) >= Number(fromTextInput.value);
+    if (fromLowerThanOrEqualToTo && toHigherThanOrEqualToFrom) {
+      from.invalid = false;
+      to.invalid = false;
+
+      if (from.value !== fromTextInput.value) {
+        from.value = fromTextInput.value;
+      }
+      if (to.value !== toTextInput.value) {
+        to.value = toTextInput.value;
+      }
+    }
   }
 
   #onSliderValidity(e: CustomEvent) {
