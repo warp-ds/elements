@@ -79,6 +79,8 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   /** The default value of the form control. Primarily used for resetting the form control. */
   @property({ attribute: 'value', reflect: true }) defaultValue: string | null = this.getAttribute('value') || null;
 
+  // TODO: The size prop doesn't work. awaiting decision from designers on the future of radios
+
   /** The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
@@ -99,7 +101,10 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   // We need this because if we don't have it, FormValidation yells at us that it's "not focusable".
   //   If we use `this.tabIndex = -1` we can't focus the radio inside.
   //
-  static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+  static shadowRootOptions = {
+    ...BaseFormAssociatedElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   constructor() {
     super();
@@ -329,17 +334,22 @@ export class WRadioGroup extends BaseFormAssociatedElement {
         aria-labelledby="label"
         aria-describedby="hint"
         aria-errormessage="error-message"
-        aria-orientation=${this.orientation}>
+        aria-orientation=${this.orientation}
+      >
         <label
           part="form-control-label"
           id="label"
           class="label"
           aria-hidden=${hasLabel ? 'false' : 'true'}
-          @click=${this.handleLabelClick}>
+          @click=${this.handleLabelClick}
+        >
           <slot name="label">${this.label}</slot>
         </label>
 
-        <slot part="form-control-input" @slotchange=${this.syncRadioElements}></slot>
+        <slot
+          part="form-control-input"
+          @slotchange=${this.syncRadioElements}
+        ></slot>
 
         <slot
           id="hint"
@@ -360,4 +370,8 @@ declare global {
   interface HTMLElementTagNameMap {
     'w-radio-group': WRadioGroup;
   }
+}
+
+if (!customElements.get('w-radio-group')) {
+  customElements.define('w-radio-group', WRadioGroup);
 }

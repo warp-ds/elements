@@ -1,7 +1,7 @@
 import { css } from 'lit';
 
 export const toggleStyles = css`
-  [part~='label'] {
+  [part~="label"] {
     display: block;
     font-size: var(--w-font-size-m);
     line-height: var(--w-line-height-m);
@@ -35,7 +35,7 @@ export const toggleStyles = css`
     height: 2rem;
     width: 2rem;
     background-color: var(--w-s-color-background);
-    border-color: var(--w-s-color-border);
+    border-color: var(--w-s-color-border-strong);
     color: var(--w-s-color-icon-inverted);
     font-weight: 700;
     text-align: center;
@@ -45,22 +45,22 @@ export const toggleStyles = css`
   .checkbox {
     position: relative;
   }
-  :host([type='checkbox']) .control {
+  :host([type="checkbox"]) .control {
     border-radius: 2px;
   }
   .checkbox:has(:checked, :indeterminate),
-  :host([type='checkbox'][checked]) .control,
-  :host([type='checkbox'][indeterminate]) .control {
+  :host([type="checkbox"][checked]) .control,
+  :host([type="checkbox"][indeterminate]) .control {
     background-color: var(--w-s-color-background-primary);
     border-color: var(--w-s-color-border-primary);
   }
   .checkbox:has(:checked),
-  :host([type='checkbox'][checked]) .control {
+  :host([type="checkbox"][checked]) .control {
     background-image: var(--w-icon-toggle-checked);
     background-position: center;
   }
-  :host([type='radio']) .control,
-  :host([role='radio']) .control {
+  :host([type="radio"]) .control,
+  :host([role="radio"]) .control {
     border-radius: 50%;
   }
   :host([type='radio'][checked]) .control,
@@ -102,9 +102,9 @@ export const toggleStyles = css`
     background-color: var(--w-s-color-background-disabled-subtle);
   }
 
-  :host([type='checkbox'][disabled][checked]) .control,
-  :host([type='checkbox'][disabled][indeterminate]) .control,
+  :host([type="checkbox"][disabled][checked]) .control,
+  :host([type="checkbox"][disabled][indeterminate]) .control,
   .checkbox:has(:checked, :indeterminate):has(> input:disabled) {
     background-color: var(--w-s-color-background-disabled);
   }
-`
+`;

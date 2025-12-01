@@ -50,7 +50,7 @@ const ccHelpText = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-select--docs)
  */
-export class WarpSelect extends FormControlMixin(LitElement) {
+export class WSelect extends FormControlMixin(LitElement) {
   /** Whether the element should receive focus on render */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus: boolean;
@@ -93,14 +93,18 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
-  static styles = [reset, styles, css`
-    /* if there is an option with an empty value and it is selected */
-    select:has(option[value=""][selected]),
+  static styles = [
+    reset,
+    styles,
+    css`
+      /* if there is an option with an empty value and it is selected */
+      select:has(option[value=""][selected]),
     /* if there is an option with an empty value, and no other options are selected */
     select:has(option[value=""]):not(:has(option[selected])) {
-      color: var(--w-s-color-text-placeholder);
-    }
-  `];
+        color: var(--w-s-color-text-placeholder);
+      }
+    `,
+  ];
 
   constructor() {
     super();
@@ -134,7 +138,13 @@ export class WarpSelect extends FormControlMixin(LitElement) {
         this._setValue(value);
       }
 
-      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+      return html`<option
+        value="${value}"
+        ?selected=${selected}
+        ?disabled=${disabled}
+      >
+        ${label}
+      </option>`;
     });
 
     this._options = options;
@@ -189,7 +199,13 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
       const label = child.textContent ?? '';
       const disabled = child.hasAttribute('disabled');
-      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+      return html`<option
+        value="${value}"
+        ?selected=${selected}
+        ?disabled=${disabled}
+      >
+        ${label}
+      </option>`;
     });
     this._options = options;
 
@@ -199,23 +215,23 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   render() {
     return html`<div class="${ccSelect.wrapper}">
       ${when(
-        this.label,
-        () =>
-          html`<label class="${ccLabel.base}" for="${this.#id}">
+      this.label,
+      () =>
+        html`<label class="${ccLabel.base}" for="${this.#id}">
             ${this.label}
             ${when(
-              this.optional,
-              () =>
-                html`<span class="${ccLabel.optional}"
+          this.optional,
+          () =>
+            html`<span class="${ccLabel.optional}"
                   >${i18n._({
-                    id: 'select.label.optional',
-                    message: '(optional)',
-                    comment: 'Shown behind label when marked as optional',
-                  })}</span
+              id: 'select.label.optional',
+              message: '(optional)',
+              comment: 'Shown behind label when marked as optional',
+            })}</span
                 >`,
-            )}</label
+        )}</label
           >`,
-      )}
+    )}
       <div class="${ccSelect.selectWrapper}">
         <select
           class="${this.#classes}"
@@ -225,18 +241,25 @@ export class WarpSelect extends FormControlMixin(LitElement) {
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
           @keydown=${this.handleKeyDown}
-          @change=${this.onChange}>
+          @change=${this.onChange}
+        >
           ${this._options}
         </select>
         <div class="${this.#chevronClasses}">
           <w-icon-chevron-down-16></w-icon-chevron-down-16>
         </div>
       </div>
-      ${when(this.always || this.invalid, () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.hint}</div>`)}
+      ${when(
+      this.always || this.invalid,
+      () =>
+        html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
+            ${this.hint}
+          </div>`,
+    )}
     </div>`;
   }
 }
 
 if (!customElements.get('w-select')) {
-  customElements.define('w-select', WarpSelect);
+  customElements.define('w-select', WSelect);
 }
