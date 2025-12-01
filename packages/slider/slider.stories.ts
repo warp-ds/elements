@@ -276,16 +276,38 @@ export const SingleError: Story = {
 };
 
 export const RangeError: Story = {
-  args: {
-    locale: 'nb',
-  },
+  args: {},
   render() {
     return html`
-      <w-slider label="Production year" min="1950" max="2025" over under>
-        <p slot="description">Try typing a from value higher than a to value</p>
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
+      <form id="rangeerror" style="margin-bottom: 16px">
+        <w-slider label="Production year" min="1950" max="2025" over under>
+          <p slot="description">Try typing a from value higher than a to value</p>
+          <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+          <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+        </w-slider>
+      </form>
+      <p>
+        Drag the slider to show the value below. See the Code tab for how to
+        format the labels.
+      </p>
+      <output>
+        <dl>
+          <dt>From:</dt>
+          <dd id="rangeerror-from"></dd>
+          <dt>To:</dt>
+          <dd id="rangeerror-to"></dd>
+        </dl>
+      </output>
+      <script>
+        /** Code to show the form values in output */
+        document.forms["rangeerror"].addEventListener("input", function () {
+          const formData = new FormData(this);
+          const from = formData.get("from");
+          const to = formData.get("to");
+          document.getElementById("rangeerror-from").innerText = from;
+          document.getElementById("rangeerror-to").innerText = to;
+        });
+      </script>
     `;
   },
 };
