@@ -367,6 +367,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           class="w-slider-thumb__range"
           type="range"
           .value="${this.value}"
+          aria-valuetext="${this.tooltipDisplayValue}"
           min="${this.min}"
           max="${this.max}"
           step="${ifDefined(this.step ? this.step : undefined)}"
