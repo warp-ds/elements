@@ -206,8 +206,8 @@ class WarpStep extends LitElement {
   }
 }
 
-if (!customElements.get('w-steps')) {
-  customElements.define('w-steps', WarpSteps);
+if (!customElements.get('w-step-indicator')) {
+  customElements.define('w-step-indicator', WarpSteps);
 }
 
 if (!customElements.get('w-step')) {

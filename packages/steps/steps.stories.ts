@@ -5,7 +5,7 @@ import './index.js';
 
 const meta: Meta = {
   title: 'Components/Steps',
-  component: 'w-steps',
+  component: 'w-step-indicator',
   argTypes: {
     horizontal: {
       control: { type: 'boolean' },
@@ -29,7 +29,7 @@ export const Default: Story = {
     right: false,
   },
   render: (args) => html`
-    <w-steps ?horizontal=${args.horizontal} ?right=${args.right}>
+    <w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
       <w-step completed>
         <h3>Step 1: Account Setup</h3>
         <p>Create your account and verify your email address.</p>
@@ -46,7 +46,7 @@ export const Default: Story = {
         <h3>Step 4: Confirmation</h3>
         <p>Review and confirm your information.</p>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
@@ -56,7 +56,7 @@ export const Horizontal: Story = {
     right: false,
   },
   render: (args) => html`
-    <w-steps ?horizontal=${args.horizontal} ?right=${args.right}>
+    <w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
       <w-step completed>
         <h4>Setup</h4>
         <p>Account created</p>
@@ -73,7 +73,7 @@ export const Horizontal: Story = {
         <h4>Done</h4>
         <p>Complete setup</p>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
@@ -83,7 +83,7 @@ export const RightAligned: Story = {
     right: true,
   },
   render: (args) => html`
-    <w-steps ?horizontal=${args.horizontal} ?right=${args.right}>
+    <w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
       <w-step completed>
         <h3>Order Placed</h3>
         <p>Your order has been received and is being processed.</p>
@@ -102,13 +102,13 @@ export const RightAligned: Story = {
         <h3>Shipped</h3>
         <p>Your order is on its way!</p>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
 export const SimpleSteps: Story = {
   render: () => html`
-    <w-steps>
+    <w-step-indicator>
       <w-step completed>
         <strong>Step 1</strong>
       </w-step>
@@ -124,13 +124,13 @@ export const SimpleSteps: Story = {
       <w-step>
         <strong>Step 5</strong>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
 export const SimpleHorizontal: Story = {
   render: () => html`
-    <w-steps horizontal>
+    <w-step-indicator horizontal>
       <w-step completed>
         <strong>Start</strong>
       </w-step>
@@ -146,13 +146,13 @@ export const SimpleHorizontal: Story = {
       <w-step>
         <strong>End</strong>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
 export const AllCompleted: Story = {
   render: () => html`
-    <w-steps>
+    <w-step-indicator>
       <w-step completed>
         <h3>Registration</h3>
         <p>Account successfully created</p>
@@ -169,16 +169,16 @@ export const AllCompleted: Story = {
         <h3>Welcome</h3>
         <p>You're all set to get started!</p>
       </w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };
 
 export const MinimalExample: Story = {
   render: () => html`
-    <w-steps>
+    <w-step-indicator>
       <w-step completed>First</w-step>
       <w-step active>Second</w-step>
       <w-step>Third</w-step>
-    </w-steps>
+    </w-step-indicator>
   `,
 };

@@ -7,7 +7,7 @@ import { WarpStep, WarpSteps } from './index.js';
 class Component extends LitElement {}
 
 export const Steps = createComponent({
-  tagName: 'w-steps',
+  tagName: 'w-step-indicator',
   elementClass: Component as unknown as typeof WarpSteps,
   react: React,
 });
