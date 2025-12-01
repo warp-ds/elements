@@ -177,7 +177,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if ((this.readonly || this.readOnly) && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+    if (
+      (this.readonly || this.readOnly) &&
+      (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')
+    ) {
       event.preventDefault();
     }
   }
@@ -241,23 +244,23 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   render() {
     return html`<div class="${ccSelect.wrapper}">
       ${when(
-      this.label,
-      () =>
-        html`<label class="${ccLabel.base}" for="${this.#id}">
+        this.label,
+        () =>
+          html`<label class="${ccLabel.base}" for="${this.#id}">
             ${this.label}
             ${when(
-          this.optional,
-          () =>
-            html`<span class="${ccLabel.optional}"
+              this.optional,
+              () =>
+                html`<span class="${ccLabel.optional}"
                   >${i18n._({
-              id: 'select.label.optional',
-              message: '(optional)',
-              comment: 'Shown behind label when marked as optional',
-            })}</span
+                    id: 'select.label.optional',
+                    message: '(optional)',
+                    comment: 'Shown behind label when marked as optional',
+                  })}</span
                 >`,
-        )}</label
+            )}</label
           >`,
-    )}
+      )}
       <div class="${ccSelect.selectWrapper}">
         <select
           class="${this.#classes}"
@@ -281,7 +284,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
         // A help text should always be visible.
         when(
           this.helpText || this.always || this.invalid,
-          () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.helpText || this.hint}</div>`
+          () =>
+            html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
+              ${this.helpText || this.hint}
+            </div>`,
         )
       }
     </div>`;
@@ -289,5 +295,5 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 }
 
 if (!customElements.get('w-select')) {
-  customElements.define('w-select', WSelect);
+  customElements.define('w-select', WarpSelect);
 }

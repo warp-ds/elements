@@ -5,10 +5,10 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WSelect } from './index.js';
+import type { WarpSelect } from './index.js';
 import './index.js';
 
-const { events, args, argTypes } = getStorybookHelpers<WSelect>('w-select');
+const { events, args, argTypes } = getStorybookHelpers<WarpSelect>('w-select');
 
 const meta: Meta<typeof args> = {
   title: 'Forms/Select',
