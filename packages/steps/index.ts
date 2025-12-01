@@ -54,7 +54,7 @@ const ccStep = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/components-steps--docs)
  */
-class WarpSteps extends LitElement {
+class WarpStepIndicator extends LitElement {
   @property({ type: Boolean, reflect: true })
   horizontal = false;
 
@@ -212,11 +212,11 @@ class WarpStep extends LitElement {
 }
 
 if (!customElements.get('w-step-indicator')) {
-  customElements.define('w-step-indicator', WarpSteps);
+  customElements.define('w-step-indicator', WarpStepIndicator);
 }
 
 if (!customElements.get('w-step')) {
   customElements.define('w-step', WarpStep);
 }
 
-export { WarpSteps, WarpStep };
+export { WarpStepIndicator, WarpStep };

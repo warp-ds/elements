@@ -4,7 +4,7 @@ import { html } from 'lit';
 import './index.js';
 
 const meta: Meta = {
-  title: 'Components/Steps',
+  title: 'Components/Step Indicator',
   component: 'w-step-indicator',
   argTypes: {
     horizontal: {
