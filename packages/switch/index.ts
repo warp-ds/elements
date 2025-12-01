@@ -11,14 +11,26 @@ import { styles } from './styles.js';
 const ccSwitch = {
   base: 'block relative h-24 w-44 cursor-pointer group focusable rounded-full',
   disabled: 'pointer-events-none',
+
   track: 'absolute top-0 left-0 h-full w-full rounded-full transition-colors',
   trackActive: 's-bg-primary group-hover:s-bg-primary-hover',
-  trackInactive: 'bg-[--w-color-switch-track-background] group-hover:bg-[--w-color-switch-track-background-hover]',
-  trackDisabled: 's-bg-disabled-subtle',
+  trackInactive: 's-bg border s-border-strong group-hover:s-bg-hover group-hover:s-border-strong-hover',
+
+  trackDisabledOn: 's-bg-disabled',
+  trackDisabledOff: 's-bg-disabled-subtle border s-border-disabled',
+
   handle: 'absolute transform-gpu h-16 w-16 top-4 left-4 rounded-full transition-transform',
   handleSelected: 'translate-x-20',
-  handleNotDisabled: 's-bg shadow-s',
-  handleDisabled: 's-bg-disabled',
+
+  // ON + enabled
+  handleActive: 's-bg',
+
+  // OFF + enabled
+  handleNotDisabled: 'bg-[--w-s-color-border-strong] group-hover:bg-[--w-s-color-border-strong-hover]',
+
+  handleDisabledOn: 's-bg-disabled-subtle',
+  handleDisabledOff: 's-bg-disabled',
+
   a11y: 'sr-only',
 };
 
@@ -40,8 +52,13 @@ export class WarpSwitch extends LitElement {
   get _trackClasses() {
     return classNames([
       ccSwitch.track,
-      this.disabled && ccSwitch.trackDisabled,
-      !this.disabled && (this.value ? ccSwitch.trackActive : ccSwitch.trackInactive),
+      this.disabled
+        ? this.value
+          ? ccSwitch.trackDisabledOn   // disabled + ON
+          : ccSwitch.trackDisabledOff  // disabled + OFF
+        : this.value
+          ? ccSwitch.trackActive       // enabled + ON
+          : ccSwitch.trackInactive,    // enabled + OFF
     ]);
   }
 
@@ -49,8 +66,15 @@ export class WarpSwitch extends LitElement {
   get _handleClasses() {
     return classNames([
       ccSwitch.handle,
-      this.value && ccSwitch.handleSelected,
-      this.disabled ? ccSwitch.handleDisabled : ccSwitch.handleNotDisabled,
+      this.value && ccSwitch.handleSelected, // position (ON → translated)
+
+      this.disabled
+        ? this.value
+          ? ccSwitch.handleDisabledOn        // disabled + ON
+          : ccSwitch.handleDisabledOff       // disabled + OFF
+        : this.value
+          ? ccSwitch.handleActive            // enabled + ON
+          : ccSwitch.handleNotDisabled,      // enabled + OFF
     ]);
   }
 
@@ -78,7 +102,8 @@ export class WarpSwitch extends LitElement {
           class=${this._baseClasses}
           aria-disabled=${this.disabled}
           ?disabled=${this.disabled}
-          @click=${this._handleClick}>
+          @click=${this._handleClick}
+        >
           <span data-testid="track" class=${this._trackClasses}></span>
           <span data-testid="handle" class=${this._handleClasses}></span>
         </button>

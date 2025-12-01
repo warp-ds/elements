@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.3.0-next.3",
+  "version": "2.3.0-next.11",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {
@@ -121,6 +121,10 @@
       "types": "./dist/packages/tabs/react.d.ts",
       "import": "./dist/packages/tabs/react.js"
     },
+    "./react/textarea": {
+      "types": "./dist/packages/textarea/react.d.ts",
+      "import": "./dist/packages/textarea/react.js"
+    },
     "./react/textfield": {
       "types": "./dist/packages/textfield/react.d.ts",
       "import": "./dist/packages/textfield/react.js"
@@ -212,6 +216,9 @@
       ],
       "react/tabs": [
         "./dist/packages/tabs/react.d.ts"
+      ],
+      "react/textarea": [
+        "./dist/packages/textarea/react.d.ts"
       ],
       "react/textfield": [
         "./dist/packages/textfield/react.d.ts"

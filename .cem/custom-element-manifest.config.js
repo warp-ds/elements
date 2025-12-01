@@ -42,12 +42,14 @@ export default {
     'packages/rip-and-tear-radio/index.ts',
     'packages/rip-and-tear-radio/radio-group.ts',
     'packages/rip-and-tear-checkbox/checkbox.ts',
+    'packages/rip-and-tear-checkbox/checkbox-group.ts',
     'packages/slider/slider.ts',
     'packages/slider/slider-thumb.ts',
     'packages/steps/index.ts',
     'packages/switch/index.ts',
     'packages/tabs/tab.ts',
     'packages/tabs/tabs.ts',
+    'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude

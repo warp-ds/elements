@@ -59,9 +59,9 @@ export const styles = css`.w-button,
 
     /* Variants config */
     .w-button--primary {
-        --background: var(--w-s-color-background-primary);
-        --background-hover: var(--w-s-color-background-primary-hover);
-        --background-active: var(--w-s-color-background-primary-active);
+        --background: var(--w-color-button-primary-background);
+        --background-hover: var(--w-color-button-primary-background-hover);
+        --background-active: var(--w-color-button-primary-background-active);
         --color: var(--w-s-color-text-inverted);
         --border-width: 0px;
     }

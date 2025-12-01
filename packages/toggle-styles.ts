@@ -12,7 +12,6 @@ export const toggleStyles = css`
     display: grid;
     grid-template-columns: 2rem max-content;
     gap: 8px;
-    padding: 0.2rem 0;
   }
   .hide-toggle {
     position: absolute;

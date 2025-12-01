@@ -53,6 +53,10 @@ const config: LinguiConfig = {
       include: ['packages/combobox/'],
       path: 'packages/combobox/locales/{locale}/messages',
     },
+    {
+      include: ['packages/textarea/'],
+      path: 'packages/textarea/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

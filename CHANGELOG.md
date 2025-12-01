@@ -1,3 +1,59 @@
+# [2.3.0-next.11](https://github.com/warp-ds/elements/compare/v2.3.0-next.10...v2.3.0-next.11) (2025-11-25)
+
+
+### Bug Fixes
+
+* add same help/validation message API as other form components ([#447](https://github.com/warp-ds/elements/issues/447)) ([b77940a](https://github.com/warp-ds/elements/commit/b77940a2813b20311117c6d106b85ca56acc6c7a))
+
+# [2.3.0-next.10](https://github.com/warp-ds/elements/compare/v2.3.0-next.9...v2.3.0-next.10) (2025-11-25)
+
+
+### Bug Fixes
+
+* updated styling and logic to make it possible ([#448](https://github.com/warp-ds/elements/issues/448)) ([92e3df7](https://github.com/warp-ds/elements/commit/92e3df7bd5e3095869e903a8563a927aa7267135))
+
+# [2.3.0-next.9](https://github.com/warp-ds/elements/compare/v2.3.0-next.8...v2.3.0-next.9) (2025-11-24)
+
+
+### Bug Fixes
+
+* tabs fixes ([eb0cc40](https://github.com/warp-ds/elements/commit/eb0cc4083e69789ef1c3d148872b05e4b7306ad1))
+
+# [2.3.0-next.8](https://github.com/warp-ds/elements/compare/v2.3.0-next.7...v2.3.0-next.8) (2025-11-24)
+
+
+### Bug Fixes
+
+* checkbox styles, add w-checkbox-group component ([#438](https://github.com/warp-ds/elements/issues/438)) ([e07fa1a](https://github.com/warp-ds/elements/commit/e07fa1a263e1c06f87daa37103023f8f9f8dd3dd))
+
+# [2.3.0-next.7](https://github.com/warp-ds/elements/compare/v2.3.0-next.6...v2.3.0-next.7) (2025-11-21)
+
+
+### Bug Fixes
+
+* use correct tokens for primary link ([#443](https://github.com/warp-ds/elements/issues/443)) ([b1b05b9](https://github.com/warp-ds/elements/commit/b1b05b90a4dae2be02d05358617cce01039840d8))
+
+# [2.3.0-next.6](https://github.com/warp-ds/elements/compare/v2.3.0-next.5...v2.3.0-next.6) (2025-11-21)
+
+
+### Features
+
+* add new component w-textarea ([#439](https://github.com/warp-ds/elements/issues/439)) ([bf7d781](https://github.com/warp-ds/elements/commit/bf7d78199242dc0368cfc6f566540f56da0902a3))
+
+# [2.3.0-next.5](https://github.com/warp-ds/elements/compare/v2.3.0-next.4...v2.3.0-next.5) (2025-11-21)
+
+
+### Features
+
+* add performance measuring to eik bundle ([5951664](https://github.com/warp-ds/elements/commit/595166499172f36398a53ac9e2403557bd79c5d6))
+
+# [2.3.0-next.4](https://github.com/warp-ds/elements/compare/v2.3.0-next.3...v2.3.0-next.4) (2025-11-20)
+
+
+### Bug Fixes
+
+* **types:** add react wrapper .js extension when importing ([#436](https://github.com/warp-ds/elements/issues/436)) ([b8373d5](https://github.com/warp-ds/elements/commit/b8373d5e4254984a3a2aea7c70dc5ba19371b2c1))
+
 # [2.3.0-next.3](https://github.com/warp-ds/elements/compare/v2.3.0-next.2...v2.3.0-next.3) (2025-11-13)
 
 
@@ -18,6 +74,14 @@
 ### Features
 
 * expose pagination and slider for testing ([c673d42](https://github.com/warp-ds/elements/commit/c673d42a4c40dc041e3c8cfb7dbf5511a0ccd7fb))
+
+
+## [2.2.1](https://github.com/warp-ds/elements/compare/v2.2.0...v2.2.1) (2025-11-21)
+
+
+### Bug Fixes
+
+* use correct tokens for primary link ([#443](https://github.com/warp-ds/elements/issues/443)) ([b1b05b9](https://github.com/warp-ds/elements/commit/b1b05b90a4dae2be02d05358617cce01039840d8))
 
 # [2.2.0](https://github.com/warp-ds/elements/compare/v2.1.1...v2.2.0) (2025-11-10)
 

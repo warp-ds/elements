@@ -39,7 +39,7 @@ export const Default: Story = {
   },
 };
 
-export const Hint: Story = {
+export const HelpText: Story = {
   args: {
     label: 'Berries',
     always: true,

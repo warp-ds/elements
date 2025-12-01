@@ -50,20 +50,39 @@ const ccHelpText = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-select--docs)
  */
-export class WSelect extends FormControlMixin(LitElement) {
-  /** Whether the element should receive focus on render */
+export class WarpSelect extends FormControlMixin(LitElement) {
+  /**
+   * Whether the element should receive focus on render.
+   * @deprecated Use the native `autofocus` attribute instead.
+   */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus: boolean;
 
-  /** Renders the field in an invalid state. Often paired with `hint` to provide feedback about the error */
+  /** Whether the element should receive focus on render */
+  @property({ type: Boolean, reflect: true })
+  autofocus: boolean;
+
+  /**
+   * The content displayed as the help text. Paired with `invalid` to show the text as a validation error.
+   */
+  @property({ attribute: 'help-text', reflect: true })
+  helpText: string;
+
+  /** Renders the field in an invalid state. Paired with `help-text` to provide feedback about the error. */
   @property({ type: Boolean, reflect: true })
   invalid: boolean;
 
-  /** Whether to always show a hint */
+  /**
+   * Whether to always show a hint.
+   * @deprecated Use `help-text` instead and only set it if you want to display the help text.
+   */
   @property({ type: Boolean, reflect: true })
   always: boolean;
 
-  /** The content displayed as the help text */
+  /**
+   * The content displayed as the help text.
+   * @deprecated Use `help-text` instead.
+   */
   @property({ reflect: true })
   hint: string;
 
@@ -79,9 +98,16 @@ export class WSelect extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
-  /** Renders the field in a readonly state. */
+  /**
+   * Renders the field in a readonly state.
+   * @deprecated Use the native readonly attribute instead.
+   */
   @property({ attribute: 'read-only', type: Boolean, reflect: true })
   readOnly: boolean;
+
+  /** Renders the field in a readonly state. */
+  @property({ type: Boolean, reflect: true })
+  readonly: boolean;
 
   /** @internal */
   @property({ attribute: false, state: true })
@@ -120,7 +146,7 @@ export class WSelect extends FormControlMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
-    if (this.autoFocus) this.shadowRoot.querySelector('select').focus();
+    if (this.autofocus || this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
     // Gather both <option> and <w-option> children
     const optionNodes = Array.from(this.children).filter(
@@ -151,7 +177,7 @@ export class WSelect extends FormControlMixin(LitElement) {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (this.readOnly && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+    if ((this.readonly || this.readOnly) && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
     }
   }
@@ -159,10 +185,10 @@ export class WSelect extends FormControlMixin(LitElement) {
   get #classes() {
     return classNames([
       ccSelect.base,
-      !this.invalid && !this.disabled && !this.readOnly && ccSelect.default,
+      !this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccSelect.default,
       this.invalid && ccSelect.invalid,
       this.disabled && ccSelect.disabled,
-      this.readOnly && ccSelect.readOnly,
+      (this.readonly || this.readOnly) && ccSelect.readOnly,
     ]);
   }
 
@@ -237,6 +263,7 @@ export class WSelect extends FormControlMixin(LitElement) {
           class="${this.#classes}"
           id="${this.#id}"
           ?disabled=${this.disabled}
+          aria-readonly="${this.readonly}"
           aria-describedby="${ifDefined(this.#helpId)}"
           aria-invalid="${ifDefined(this.invalid)}"
           aria-errormessage="${ifDefined(this.invalid && this.#helpId)}"
@@ -249,13 +276,14 @@ export class WSelect extends FormControlMixin(LitElement) {
           <w-icon-chevron-down-16></w-icon-chevron-down-16>
         </div>
       </div>
-      ${when(
-      this.always || this.invalid,
-      () =>
-        html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
-            ${this.hint}
-          </div>`,
-    )}
+      ${
+        // This when() can be removed in a future major when we drop `hint` and `always`.
+        // A help text should always be visible.
+        when(
+          this.helpText || this.always || this.invalid,
+          () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.helpText || this.hint}</div>`
+        )
+      }
     </div>`;
   }
 }
