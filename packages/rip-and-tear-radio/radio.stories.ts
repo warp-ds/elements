@@ -83,12 +83,28 @@ export const Appearance: Story = {
   render() {
     return html`
       <form>
-        <w-radio-group required>
+        <w-radio-group>
           <w-radio value="foo" appearance="button">button</w-radio>
           <w-radio value="bar" appearance="clickable">clickable</w-radio>
         </w-radio-group>
         <button>click me</button>
       </form>
+    `;
+  },
+};
+
+export const DisabledGroup: Story = {
+  args: { disabled: true },
+};
+
+export const DisabledRadio: Story = {
+  args: {},
+  render() {
+    return html`
+      <w-radio-group>
+        <w-radio value="foo" disabled appearance="button">disabled</w-radio>
+        <w-radio value="bar" appearance="clickable">not disabled</w-radio>
+      </w-radio-group>
     `;
   },
 };
