@@ -52,7 +52,8 @@ export const ToolTip: Story = {
           }}
           onMouseLeave={() => setShow(false)}
           onFocus={() => setShow(true)}
-          onBlur={() => setShow(false)}>
+          onBlur={() => setShow(false)}
+        >
           hover me
         </Button>
         <span slot="message">Tooltip content</span>
@@ -142,7 +143,8 @@ export const AccessibleTooltip: Story = {
           aria-details="aria-content"
           id="accessible-target"
           className="group block relative break-words last-child:mb-0 p-16 rounded-8 s-bg-subtle"
-          slot="target">
+          slot="target"
+        >
           Click to toggle a popover
         </button>
       </Attention>

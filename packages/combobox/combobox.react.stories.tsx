@@ -104,12 +104,15 @@ export const DisableStaticFiltering: Story = {
         onChange={(e: CustomEvent) => {
           setVal(e.detail.value);
           // Simulate dynamic filtering
-          const filteredOptions = sampleOptions.filter((option) => option.value.toLowerCase().includes(e.detail.value.toLowerCase()));
+          const filteredOptions = sampleOptions.filter((option) =>
+            option.value.toLowerCase().includes(e.detail.value.toLowerCase()),
+          );
           setOptions(filteredOptions);
         }}
         onSelect={(e: CustomEvent) => {
           setVal(e.detail.value);
-        }} />
+        }}
+      />
     );
   },
 };

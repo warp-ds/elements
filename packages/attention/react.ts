@@ -22,6 +22,8 @@ const BaseAttention = createComponent({
 type BaseProps = React.ComponentProps<typeof BaseAttention>;
 
 // Drop conflicting DOM prop `popover` and add all props back in
-export type AttentionProps = Omit<BaseProps, 'popover'> & { popover?: boolean } & Partial<Omit<WarpAttention, keyof HTMLElement>>;
+export type AttentionProps = Omit<BaseProps, 'popover'> & { popover?: boolean } & Partial<
+    Omit<WarpAttention, keyof HTMLElement>
+  >;
 
 export const Attention = BaseAttention as unknown as React.FC<AttentionProps>;

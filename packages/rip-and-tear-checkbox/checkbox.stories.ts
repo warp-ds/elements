@@ -28,4 +28,4 @@ export const BunchOfCheckboxes: StoryObj = {
       <w-checkbox name="group" value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
-}
+};

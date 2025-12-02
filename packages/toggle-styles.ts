@@ -106,4 +106,4 @@ export const toggleStyles = css`
   .checkbox:has(:checked, :indeterminate):has(> input:disabled) {
     background-color: var(--w-s-color-background-disabled);
   }
-`
+`;
