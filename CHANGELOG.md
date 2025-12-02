@@ -1,3 +1,10 @@
+# [2.3.0-next.13](https://github.com/warp-ds/elements/compare/v2.3.0-next.12...v2.3.0-next.13) (2025-12-02)
+
+
+### Bug Fixes
+
+* release previous pls 🙏 ([140e97f](https://github.com/warp-ds/elements/commit/140e97f6ecb19d5c9a7e05c33010df7de2b50f76))
+
 # [2.3.0-next.12](https://github.com/warp-ds/elements/compare/v2.3.0-next.11...v2.3.0-next.12) (2025-12-01)
 
 
