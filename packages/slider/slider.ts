@@ -46,9 +46,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: Boolean, attribute: 'allow-values-outside-range' })
   allowValuesOutsideRange = false;
 
-  @property({ reflect: true })
-  helpText = '';
-
   @property({ type: String, reflect: true })
   error = '';
 
