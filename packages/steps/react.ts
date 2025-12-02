@@ -6,7 +6,7 @@ import { WarpStep, WarpStepIndicator } from './index.js';
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
 
-export const Steps = createComponent({
+export const StepIndicator = createComponent({
   tagName: 'w-step-indicator',
   elementClass: Component as unknown as typeof WarpStepIndicator,
   react: React,

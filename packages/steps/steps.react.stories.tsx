@@ -2,14 +2,14 @@ import React from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Steps, Step } from './react';
+import { Step, StepIndicator } from './react';
 
 export default {
-  title: 'Components/Steps',
-  component: Steps,
-} satisfies Meta<typeof Steps>;
+  title: 'Components/Step Indicator',
+  component: StepIndicator,
+} satisfies Meta<typeof StepIndicator>;
 
-export type Story = StoryObj<typeof Steps>;
+export type Story = StoryObj<typeof StepIndicator>;
 
 export const Default: Story = {
   args: {
@@ -17,7 +17,7 @@ export const Default: Story = {
     right: false,
   },
   render: (args) => (
-    <Steps horizontal={args.horizontal} right={args.right}>
+    <StepIndicator horizontal={args.horizontal} right={args.right}>
       <Step completed>
         <h3>Step 1: Account Setup</h3>
         <p>Create your account and verify your email address.</p>
@@ -34,7 +34,7 @@ export const Default: Story = {
         <h3>Step 4: Confirmation</h3>
         <p>Review and confirm your information.</p>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
@@ -44,7 +44,7 @@ export const Horizontal: Story = {
     right: false,
   },
   render: (args) => (
-    <Steps horizontal={args.horizontal} right={args.right}>
+    <StepIndicator horizontal={args.horizontal} right={args.right}>
       <Step completed>
         <h4>Setup</h4>
         <p>Account created</p>
@@ -61,7 +61,7 @@ export const Horizontal: Story = {
         <h4>Done</h4>
         <p>Complete setup</p>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
@@ -71,7 +71,7 @@ export const RightAligned: Story = {
     right: true,
   },
   render: (args) => (
-    <Steps horizontal={args.horizontal} right={args.right}>
+    <StepIndicator horizontal={args.horizontal} right={args.right}>
       <Step completed>
         <h3>Order Placed</h3>
         <p>Your order has been received and is being processed.</p>
@@ -90,13 +90,13 @@ export const RightAligned: Story = {
         <h3>Shipped</h3>
         <p>Your order is on its way!</p>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
-export const SimpleSteps: Story = {
+export const SimpleStepIndicator: Story = {
   render: () => (
-    <Steps>
+    <StepIndicator>
       <Step completed>
         <strong>Step 1</strong>
       </Step>
@@ -112,13 +112,13 @@ export const SimpleSteps: Story = {
       <Step>
         <strong>Step 5</strong>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
 export const SimpleHorizontal: Story = {
   render: () => (
-    <Steps horizontal>
+    <StepIndicator horizontal>
       <Step completed>
         <strong>Start</strong>
       </Step>
@@ -134,13 +134,13 @@ export const SimpleHorizontal: Story = {
       <Step>
         <strong>End</strong>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
 export const AllCompleted: Story = {
   render: () => (
-    <Steps>
+    <StepIndicator>
       <Step completed>
         <h3>Registration</h3>
         <p>Account successfully created</p>
@@ -157,16 +157,16 @@ export const AllCompleted: Story = {
         <h3>Welcome</h3>
         <p>You're all set to get started!</p>
       </Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
 
 export const MinimalExample: Story = {
   render: () => (
-    <Steps>
+    <StepIndicator>
       <Step completed>First</Step>
       <Step active>Second</Step>
       <Step>Third</Step>
-    </Steps>
+    </StepIndicator>
   ),
 };
