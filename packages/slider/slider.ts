@@ -110,7 +110,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       }
 
       thumb.disabled = this.disabled;
-      thumb.invalid = this.errorText;
+      thumb.invalid = Boolean(this.errorText);
 
       this.#updateActiveTrack(thumb);
     }
@@ -195,44 +195,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
       // Both are valid, nothing to do here
       return;
     }
-
-    // We need to check the value of the text input, not the range input,
-    // since the range input value is not updated with an invalid value.
-    const fromTextInput = from.shadowRoot.querySelector<WarpTextField>('w-textfield');
-    const toTextInput = to.shadowRoot.querySelector<WarpTextField>('w-textfield');
-
-    const fromLowerThanOrEqualToTo = Number(fromTextInput.value) <= Number(toTextInput.value);
-    const toHigherThanOrEqualToFrom = Number(toTextInput.value) >= Number(fromTextInput.value);
-    if (fromLowerThanOrEqualToTo && toHigherThanOrEqualToFrom) {
-      from.invalid = '';
-      to.invalid = '';
-
-      if (from.value !== fromTextInput.value) {
-        from.value = fromTextInput.value;
-      }
-      if (to.value !== toTextInput.value) {
-        to.value = toTextInput.value;
-      }
-    }
   }
 
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
-    // If either one is invalid, the fieldset is invalid
-    if (e.detail.invalid) {
-      this.invalid = e.detail.invalid;
-    } else {
-      // Check that both slotted slider thumbs are valid
-      // before marking the fieldset valid.
-      let invalid = '';
-      const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
-      for (const thumb of sliderThumbs.values()) {
-        if (thumb.invalid) {
-          invalid = 'Feilmelding 11';
-        }
-      }
-      this.invalid = invalid;
-    }
+    this.invalid = e.detail.invalid;
   }
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {

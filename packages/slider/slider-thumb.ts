@@ -44,8 +44,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
-  @property({ type: String, reflect: true })
-  invalid = '';
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
 
   /** Set by `<w-slider>` */
   @property({ attribute: false, reflect: false })
@@ -119,6 +119,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
+  #handleValidity(error: string) {
+    this.dispatchEvent(
+      new CustomEvent('slidervalidity', {
+        bubbles: true,
+        detail: { invalid: error, slot: this.slot },
+      }),
+    );
+  }
+
   async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
     const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
     if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
@@ -131,31 +140,35 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
     if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
-      this.invalid = i18n.t({
-        id: 'slider.error.out_of_bounds',
-        message: 'Value must be between {min} and {max}',
-        values: {
-          min: `${this.min} ${this.suffix}`.trim(),
-          max: `${this.max} ${this.suffix}`.trim(),
-        },
-      });
+      this.#handleValidity(
+        i18n.t({
+          id: 'slider.error.out_of_bounds',
+          message: 'Value must be between {min} and {max}',
+          values: {
+            min: `${this.min} ${this.suffix}`.trim(),
+            max: `${this.max} ${this.suffix}`.trim(),
+          },
+        }),
+      );
       return false;
     }
 
     if (value === '') {
       if (this.required) {
-        this.invalid = i18n.t({
-          id: 'slider.error.required',
-          message: 'This field is required',
-        });
+        this.#handleValidity(
+          i18n.t({
+            id: 'slider.error.required',
+            message: 'This field is required',
+          }),
+        );
       }
       // To not bork when input field is empty
       return false;
     }
 
-    if (this.invalid) {
-      this.invalid = '';
-    }
+    // if (this.invalid) {
+    //   this.invalid = '';
+    // }
     this.value = value;
 
     const valueIsAtTheSliderEdge = value === this.max || value === this.min;
@@ -190,7 +203,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this.invalid = numberOverLapError;
+            this.#handleValidity(numberOverLapError);
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -210,7 +223,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this.invalid = numberOverLapError;
+            this.#handleValidity(numberOverLapError);
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -224,6 +237,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       // Needed to stop slider from moving independendtly of the value when we cancel the event
       return false;
     }
+
+    this.#handleValidity('');
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
@@ -355,14 +370,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       this.setValue(this.value);
       this.#syncRangeValue();
     }
-    if (changedProperties.has('invalid')) {
-      this.dispatchEvent(
-        new CustomEvent('slidervalidity', {
-          bubbles: true,
-          detail: { invalid: this.invalid },
-        }),
-      );
-    }
+    // if (changedProperties.has('invalid')) {
+    //   this.dispatchEvent(
+    //     new CustomEvent('slidervalidity', {
+    //       bubbles: true,
+    //       detail: { invalid: this.invalid },
+    //     }),
+    //   );
+    // }
   }
 
   render() {
