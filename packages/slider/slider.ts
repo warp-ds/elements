@@ -92,7 +92,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.required = this.required;
       thumb.formatter = this.formatter;
       thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
-      thumb.invalid = this.errorText;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -111,7 +110,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       }
 
       thumb.disabled = this.disabled;
-      thumb.invalid = this.invalid;
+      thumb.invalid = this.errorText;
 
       this.#updateActiveTrack(thumb);
     }
