@@ -423,7 +423,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           .value="${this.textFieldDisplayValue}"
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
-          ?invalid="${this.invalid}"
+          ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
           @focus="${() => (this._inputHasFocus = true)}"
           @blur="${() => (this._inputHasFocus = false)}"
