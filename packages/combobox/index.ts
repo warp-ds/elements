@@ -419,7 +419,11 @@ export class WarpCombobox extends LitElement {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('options') || changedProperties.has('value') || changedProperties.has('disableStaticFiltering')) {
+    if (
+      changedProperties.has('options') ||
+      changedProperties.has('value') ||
+      changedProperties.has('disableStaticFiltering')
+    ) {
       this._optionIdCounter += this.options.length;
 
       this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this.value).filter((option) =>

@@ -6,9 +6,9 @@ export class WCheckboxGroup extends LitElement {
       display: grid;
       gap: 16px;
     }
-  `
+  `;
   render() {
-    return html`<slot part="checkbox-group"></slot>`
+    return html`<slot part="checkbox-group"></slot>`;
   }
 }
 
