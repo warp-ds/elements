@@ -281,7 +281,9 @@ export const RangeError: Story = {
     return html`
       <form id="rangeerror" style="margin-bottom: 16px">
         <w-slider label="Production year" min="1950" max="2025" over under>
-          <p slot="description">Try typing a from value higher than a to value</p>
+          <p slot="description">
+            Try typing a from value higher than a to value
+          </p>
           <w-slider-thumb slot="from" name="from"></w-slider-thumb>
           <w-slider-thumb slot="to" name="to"></w-slider-thumb>
         </w-slider>
@@ -308,6 +310,27 @@ export const RangeError: Story = {
           document.getElementById("rangeerror-to").innerText = to;
         });
       </script>
+    `;
+  },
+};
+
+export const CustomError: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render() {
+    return html`
+      <w-slider
+        label="Production year"
+        min="1950"
+        max="2025"
+        over
+        under
+        error="I'm an external error telling you something is wrong"
+      >
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
     `;
   },
 };

@@ -46,12 +46,14 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: Boolean, attribute: 'allow-values-outside-range' })
   allowValuesOutsideRange = false;
 
-  // TODO Implement error texts
   @property({ reflect: true })
   helpText = '';
 
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
+  @property({ type: String, reflect: true })
+  error = '';
+
+  @property({ type: String, reflect: true })
+  invalid = '';
 
   /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true })
@@ -72,7 +74,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix: string;
+  suffix = '';
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
@@ -90,6 +92,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       thumb.required = this.required;
       thumb.formatter = this.formatter;
       thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
+      thumb.invalid = this.errorText;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -202,8 +205,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
     const fromLowerThanOrEqualToTo = Number(fromTextInput.value) <= Number(toTextInput.value);
     const toHigherThanOrEqualToFrom = Number(toTextInput.value) >= Number(fromTextInput.value);
     if (fromLowerThanOrEqualToTo && toHigherThanOrEqualToFrom) {
-      from.invalid = false;
-      to.invalid = false;
+      from.invalid = '';
+      to.invalid = '';
 
       if (from.value !== fromTextInput.value) {
         from.value = fromTextInput.value;
@@ -218,15 +221,15 @@ class WarpSlider extends FormControlMixin(LitElement) {
     e.stopPropagation();
     // If either one is invalid, the fieldset is invalid
     if (e.detail.invalid) {
-      this.invalid = true;
+      this.invalid = e.detail.invalid;
     } else {
       // Check that both slotted slider thumbs are valid
       // before marking the fieldset valid.
-      let invalid = false;
+      let invalid = '';
       const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
       for (const thumb of sliderThumbs.values()) {
         if (thumb.invalid) {
-          invalid = true;
+          invalid = 'Feilmelding 11';
         }
       }
       this.invalid = invalid;
@@ -260,6 +263,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
+  get errorText() {
+    return this.error || this.invalid;
+  }
+
   render() {
     return html`
       <fieldset
@@ -267,8 +274,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
         class="w-slider"
         @input="${this.#onInput}"
         @slidervalidity="${this.#onSliderValidity}"
-        aria-invalid="${this.invalid ? 'true' : nothing}"
-        aria-describedby="${this.invalid ? 'error-slot' : nothing}"
+        aria-invalid="${this.errorText ? 'true' : nothing}"
+        aria-describedby="${this.errorText ? 'error-slot' : nothing}"
       >
         ${
           this.label
@@ -296,12 +303,13 @@ class WarpSlider extends FormControlMixin(LitElement) {
           name="to"
           @slotchange=${this.#syncSliderThumbs}
         ></slot>
-        <slot
-          class="w-slider__error"
-          id="error-slot"
-          name="error"
-          aria-describes="fieldset"
-        ></slot>
+        ${
+          this.errorText
+            ? html`<p class="w-slider__error" aria-describes="fieldset">
+              ${this.errorText}
+            </p>`
+            : nothing
+        }
       </fieldset>
     `;
   }
