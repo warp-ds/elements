@@ -1,3 +1,10 @@
+# [2.3.0-next.15](https://github.com/warp-ds/elements/compare/v2.3.0-next.14...v2.3.0-next.15) (2025-12-03)
+
+
+### Bug Fixes
+
+* don't to step calculation unless steps are defined ([7a3644f](https://github.com/warp-ds/elements/commit/7a3644ff00dbbe2df890176a273c8df3ffabc54e))
+
 # [2.3.0-next.14](https://github.com/warp-ds/elements/compare/v2.3.0-next.13...v2.3.0-next.14) (2025-12-03)
 
 
