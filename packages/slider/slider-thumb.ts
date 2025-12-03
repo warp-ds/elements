@@ -121,7 +121,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   async #handleValueChange(value: string, isFromTextInput: boolean): Promise<{ shouldCancel: boolean; originalValue?: string }> {
     let valueNum = Number.parseInt(value);
 
-    if (this.allowValuesOutsideRange && !isFromTextInput) {
+    if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
       const valueIsCloseToSliderEdge =
         (this.slot === 'to' && valueNum >= Number(this.max) - 1) ||
         (this.slot === 'from' && valueNum <= Number(this.min) + 1);
@@ -217,6 +217,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
+
 
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
 
