@@ -1,3 +1,10 @@
+# [2.3.0-next.14](https://github.com/warp-ds/elements/compare/v2.3.0-next.13...v2.3.0-next.14) (2025-12-03)
+
+
+### Bug Fixes
+
+* fix interaction between steps and allowing values outside range ([bc7004b](https://github.com/warp-ds/elements/commit/bc7004bf653b2fc348f4b4e7f3b6e5f979eb18d2))
+
 # [2.3.0-next.13](https://github.com/warp-ds/elements/compare/v2.3.0-next.12...v2.3.0-next.13) (2025-12-02)
 
 
