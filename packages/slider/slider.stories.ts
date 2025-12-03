@@ -311,3 +311,71 @@ export const RangeError: Story = {
     `;
   },
 };
+
+export const TestCase: Story = {
+  args: {},
+  render() {
+    return html`
+      <form id="overunder" style="margin-bottom: 16px" lang="nb">
+        <w-slider
+          label="Pris"
+              suffix="kr"
+          min="0"
+          max="700000"
+          data-testid="overunder"
+          allow-values-outside-range="true"
+            step="10000"
+        >
+          <w-slider-thumb
+            slot="from"
+            aria-label="Fra år"
+            aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
+            name="from"
+          ></w-slider-thumb>
+          <w-slider-thumb
+            slot="to"
+            aria-label="Til år"
+            aria-description="2025 inkluderer kjøretøy produsert etter 2025"
+            name="to"
+          ></w-slider-thumb>
+        </w-slider>
+      </form>
+      <p>
+        Drag the slider to show the value below. See the Code tab for how to
+        format the labels.
+      </p>
+      <output>
+        <dl>
+          <dt>From:</dt>
+          <dd id="overunder-from"></dd>
+          <dt>To:</dt>
+          <dd id="overunder-to"></dd>
+        </dl>
+      </output>
+      <script>
+        /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
+        const overunderSlider = document.querySelector(
+          'w-slider[data-testid="overunder"]',
+        );
+        overunderSlider.formatter = function (value, type) {
+          if (value === "" && type === "from") {
+            return "0";
+          }
+          if (value === "" && type === "to") {
+            return "Over 700 000";
+          }
+          return value;
+        };
+
+        /** Code to show the form values in output */
+        document.forms["overunder"].addEventListener("input", function () {
+          const formData = new FormData(this);
+          const from = formData.get("from");
+          const to = formData.get("to");
+          document.getElementById("overunder-from").innerText = from;
+          document.getElementById("overunder-to").innerText = to;
+        });
+      </script>
+    `;
+  },
+};
