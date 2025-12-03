@@ -1,3 +1,10 @@
+# [2.3.0-next.16](https://github.com/warp-ds/elements/compare/v2.3.0-next.15...v2.3.0-next.16) (2025-12-03)
+
+
+### Bug Fixes
+
+* use non-static token for inverted text ([8bd33aa](https://github.com/warp-ds/elements/commit/8bd33aa4570a63218cf47781fd2b5b05b336bfbc))
+
 # [2.3.0-next.15](https://github.com/warp-ds/elements/compare/v2.3.0-next.14...v2.3.0-next.15) (2025-12-03)
 
 
