@@ -358,7 +358,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   #onTextFieldBlur(e) {
     if (e instanceof CustomEvent && e.type === "blur") {
-      console.log(e);
       this._inputHasFocus = false;
     }
   }
