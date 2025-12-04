@@ -1,3 +1,10 @@
+# [2.3.0-next.17](https://github.com/warp-ds/elements/compare/v2.3.0-next.16...v2.3.0-next.17) (2025-12-04)
+
+
+### Bug Fixes
+
+* don't rely on native events since they're broken in Safari ([28a43e3](https://github.com/warp-ds/elements/commit/28a43e306c54816b74559e9ef4a4124baa0772ed))
+
 # [2.3.0-next.16](https://github.com/warp-ds/elements/compare/v2.3.0-next.15...v2.3.0-next.16) (2025-12-03)
 
 
