@@ -218,7 +218,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
 
-
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
 
     return { shouldCancel: false };
@@ -348,6 +347,22 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this.#syncRangeValue();
   }
 
+  #onTextFieldFocus(e) {
+    // Safari fires the focus event we register on `w-textfield` also when the range input
+    // is focused. This breaks the input masking. Rely on the custom event that is also
+    // fired by w-textfield on focus.
+    if (e instanceof CustomEvent && e.type === "focus") {
+      this._inputHasFocus = true;
+    }
+  }
+
+  #onTextFieldBlur(e) {
+    if (e instanceof CustomEvent && e.type === "blur") {
+      console.log(e);
+      this._inputHasFocus = false;
+    }
+  }
+
   // The boundary value for this thumb (min for 'from', max for 'to' or default)
   get boundaryValue(): string {
     return this.slot === 'from' ? this.min : this.max;
@@ -454,8 +469,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
           ?invalid="${this.invalid}"
           @input="${this.#onInput}"
-          @focus="${() => (this._inputHasFocus = true)}"
-          @blur="${() => (this._inputHasFocus = false)}"
+          @focus="${this.#onTextFieldFocus}"
+          @blur="${this.#onTextFieldBlur}"
         >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
