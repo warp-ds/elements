@@ -88,7 +88,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   /** @deprecated Use the native readonly attribute instead. */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly: boolean;
-  
+
   @property({ type: Boolean, reflect: true })
   readonly: boolean;
 
@@ -131,9 +131,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
-    }
-    if (this.formatter && this.value) {
-      this.mask.innerText = this.formatter(this.value);
+      if (this.formatter) {
+        this.mask.innerText = this.formatter(this.value);
+      }
     }
   }
 

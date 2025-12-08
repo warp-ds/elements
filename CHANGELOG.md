@@ -1,3 +1,63 @@
+# [2.3.0-next.18](https://github.com/warp-ds/elements/compare/v2.3.0-next.17...v2.3.0-next.18) (2025-12-08)
+
+
+### Bug Fixes
+
+* move most deps to dev deps ([#454](https://github.com/warp-ds/elements/issues/454)) ([61375a3](https://github.com/warp-ds/elements/commit/61375a3049e5a8fa896dd66056ba130e9878348e))
+
+# [2.3.0-next.17](https://github.com/warp-ds/elements/compare/v2.3.0-next.16...v2.3.0-next.17) (2025-12-04)
+
+
+### Bug Fixes
+
+* don't rely on native events since they're broken in Safari ([28a43e3](https://github.com/warp-ds/elements/commit/28a43e306c54816b74559e9ef4a4124baa0772ed))
+
+# [2.3.0-next.16](https://github.com/warp-ds/elements/compare/v2.3.0-next.15...v2.3.0-next.16) (2025-12-03)
+
+
+### Bug Fixes
+
+* use non-static token for inverted text ([8bd33aa](https://github.com/warp-ds/elements/commit/8bd33aa4570a63218cf47781fd2b5b05b336bfbc))
+
+# [2.3.0-next.15](https://github.com/warp-ds/elements/compare/v2.3.0-next.14...v2.3.0-next.15) (2025-12-03)
+
+
+### Bug Fixes
+
+* don't to step calculation unless steps are defined ([7a3644f](https://github.com/warp-ds/elements/commit/7a3644ff00dbbe2df890176a273c8df3ffabc54e))
+
+# [2.3.0-next.14](https://github.com/warp-ds/elements/compare/v2.3.0-next.13...v2.3.0-next.14) (2025-12-03)
+
+
+### Bug Fixes
+
+* fix interaction between steps and allowing values outside range ([bc7004b](https://github.com/warp-ds/elements/commit/bc7004bf653b2fc348f4b4e7f3b6e5f979eb18d2))
+
+# [2.3.0-next.13](https://github.com/warp-ds/elements/compare/v2.3.0-next.12...v2.3.0-next.13) (2025-12-02)
+
+
+### Bug Fixes
+
+* release previous pls 🙏 ([140e97f](https://github.com/warp-ds/elements/commit/140e97f6ecb19d5c9a7e05c33010df7de2b50f76))
+
+# [2.3.0-next.12](https://github.com/warp-ds/elements/compare/v2.3.0-next.11...v2.3.0-next.12) (2025-12-01)
+
+
+### Bug Fixes
+
+* [#421](https://github.com/warp-ds/elements/issues/421) don't apply min-max to the input field ([add39d8](https://github.com/warp-ds/elements/commit/add39d8585a6503f289b7830cc1e03cadee6c446))
+* [#421](https://github.com/warp-ds/elements/issues/421) don't render the legend if there is no label ([957c713](https://github.com/warp-ds/elements/commit/957c713be03f0933b1b986267080cc30d06e6049))
+* [#421](https://github.com/warp-ds/elements/issues/421) ensure that there's only one marker per thumb ([b4c9186](https://github.com/warp-ds/elements/commit/b4c9186b94d9b21bc2dbf8f4d8d03e049ab2e0cd))
+* [#421](https://github.com/warp-ds/elements/issues/421) fix interaction problems in the range slider ([03c5167](https://github.com/warp-ds/elements/commit/03c51677d3a45c3fda40977c1b72654fa2507693))
+* [#421](https://github.com/warp-ds/elements/issues/421) make going outside of boundaries work in a good way ([e292f28](https://github.com/warp-ds/elements/commit/e292f28757c06d4537e784a896f37dafd3ed0fcf))
+* [#421](https://github.com/warp-ds/elements/issues/421) use the correct value for labels beneath the range slider ([7661c61](https://github.com/warp-ds/elements/commit/7661c6142907f344f41ad1151a2b11698e12b1a2))
+* add the max value as an extra step before going over ([571fc9b](https://github.com/warp-ds/elements/commit/571fc9bde3bdef520f1892a3719744e34cc4bc1a))
+* always trigger the formatter ([7d05326](https://github.com/warp-ds/elements/commit/7d05326ec6164485885f1350822ab6f50d3510b4))
+* prevent input field from being reset to min on input ([01c15c3](https://github.com/warp-ds/elements/commit/01c15c39642ecf27cad6e2b2950f483b5d74dd8d))
+* update range slider cross-field validity ([2d3f349](https://github.com/warp-ds/elements/commit/2d3f349e39db3d5430feed364bfebde85747aa44))
+* use the correct value type for allowValuesOutsideRange ([fbbd658](https://github.com/warp-ds/elements/commit/fbbd6586030f1e41c051e54c1cff865756559a37))
+* use tooltip text as aria description for value ([ae6d622](https://github.com/warp-ds/elements/commit/ae6d6229aa89c4e49e8421cf790a77bb4fd8b55a))
+
 # [2.3.0-next.11](https://github.com/warp-ds/elements/compare/v2.3.0-next.10...v2.3.0-next.11) (2025-11-25)
 
 

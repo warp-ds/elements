@@ -42,7 +42,7 @@ export const Default: Story = {
 export const HelpText: Story = {
   args: {
     label: 'Berries',
-    'help-text': 'We assume this is your jam preference'
+    'help-text': 'We assume this is your jam preference',
   },
 };
 
@@ -50,7 +50,7 @@ export const Invalid: Story = {
   args: {
     label: 'Berries',
     invalid: true,
-    'help-text': 'Wrong choice'
+    'help-text': 'Wrong choice',
   },
 };
 
@@ -113,4 +113,3 @@ export const Placeholder: Story = {
     `;
   },
 };
-

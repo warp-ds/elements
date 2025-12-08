@@ -119,14 +119,18 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
-  static styles = [reset, styles, css`
+  static styles = [
+    reset,
+    styles,
+    css`
     /* if there is an option with an empty value and it is selected */
     select:has(option[value=""][selected]),
     /* if there is an option with an empty value, and no other options are selected */
     select:has(option[value=""]):not(:has(option[selected])) {
       color: var(--w-s-color-text-placeholder);
     }
-  `];
+  `,
+  ];
 
   constructor() {
     super();
@@ -167,7 +171,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if ((this.readonly || this.readOnly) && (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+    if (
+      (this.readonly || this.readOnly) &&
+      (event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp')
+    ) {
       event.preventDefault();
     }
   }
@@ -264,7 +271,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
         // A help text should always be visible.
         when(
           this.helpText || this.always || this.invalid,
-          () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.helpText || this.hint}</div>`
+          () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.helpText || this.hint}</div>`,
         )
       }
     </div>`;

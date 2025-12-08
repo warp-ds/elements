@@ -23,6 +23,10 @@ export const themes = {
   'DBA dark': 'dba-dk-dark',
   'Blocket light': 'blocket-se',
   'Blocket dark': 'blocket-se-dark',
+  'Vend light': 'vend-com',
+  'Vend dark': 'vend-com-dark',
+  'Neutral light': 'neutral-com',
+  'Neutral dark': 'neutral-com-dark',
 };
 
 export const rewriteStylesheets = (theme: string) => {

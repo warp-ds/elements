@@ -9,10 +9,10 @@ import type { WarpButton } from './index.js';
 import './index.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
-import "@warp-ds/icons/elements/close-16";
-import "@warp-ds/icons/elements/heart-16";
-import "@warp-ds/icons/elements/chevron-right-16";
-import "@warp-ds/icons/elements/chevron-left-16";
+import '@warp-ds/icons/elements/close-16';
+import '@warp-ds/icons/elements/heart-16';
+import '@warp-ds/icons/elements/chevron-right-16';
+import '@warp-ds/icons/elements/chevron-left-16';
 
 const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
