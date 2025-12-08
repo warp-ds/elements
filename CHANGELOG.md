@@ -1,3 +1,10 @@
+# [2.3.0-next.18](https://github.com/warp-ds/elements/compare/v2.3.0-next.17...v2.3.0-next.18) (2025-12-08)
+
+
+### Bug Fixes
+
+* move most deps to dev deps ([#454](https://github.com/warp-ds/elements/issues/454)) ([61375a3](https://github.com/warp-ds/elements/commit/61375a3049e5a8fa896dd66056ba130e9878348e))
+
 # [2.3.0-next.17](https://github.com/warp-ds/elements/compare/v2.3.0-next.16...v2.3.0-next.17) (2025-12-04)
 
 
