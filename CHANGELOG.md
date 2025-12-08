@@ -1,3 +1,10 @@
+# [2.3.0-next.19](https://github.com/warp-ds/elements/compare/v2.3.0-next.18...v2.3.0-next.19) (2025-12-08)
+
+
+### Bug Fixes
+
+* rename step indicator ([#452](https://github.com/warp-ds/elements/issues/452)) ([a2d7a21](https://github.com/warp-ds/elements/commit/a2d7a21ab1d85212cb2eac960dddac56d02ea061))
+
 # [2.3.0-next.18](https://github.com/warp-ds/elements/compare/v2.3.0-next.17...v2.3.0-next.18) (2025-12-08)
 
 
