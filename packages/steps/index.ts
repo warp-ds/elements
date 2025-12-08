@@ -54,7 +54,7 @@ const ccStep = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/components-steps--docs)
  */
-class WarpSteps extends LitElement {
+class WarpStepIndicator extends LitElement {
   @property({ type: Boolean, reflect: true })
   horizontal = false;
 
@@ -89,9 +89,9 @@ class WarpSteps extends LitElement {
     const classes = classNames([ccSteps.wrapper, this.horizontal && ccSteps.horizontal]);
 
     return html`
-      <ul class=${classes} ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}>
+      <div role="list" class=${classes} ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}>
         <slot></slot>
-      </ul>
+      </div>
     `;
   }
 }
@@ -139,6 +139,11 @@ class WarpStep extends LitElement {
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('role', 'listitem');
   }
 
   setContext(context: StepsContext) {
@@ -192,7 +197,7 @@ class WarpStep extends LitElement {
     ]);
 
     return html`
-      <li class="${stepClasses}" style=${this._context.horizontal && 'height: 100%;'}>
+      <div class="${stepClasses}" style=${this._context.horizontal && 'height: 100%;'}>
         ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : ''}
         <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} ${this.active ? 'aria-current="step"' : ''}>
           ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : ''}
@@ -201,17 +206,17 @@ class WarpStep extends LitElement {
         <div class=${contentClasses} ${this._context.horizontal && `style='height:100%;'`}>
           <slot></slot>
         </div>
-      </li>
+      </div>
     `;
   }
 }
 
-if (!customElements.get('w-steps')) {
-  customElements.define('w-steps', WarpSteps);
+if (!customElements.get('w-step-indicator')) {
+  customElements.define('w-step-indicator', WarpStepIndicator);
 }
 
 if (!customElements.get('w-step')) {
   customElements.define('w-step', WarpStep);
 }
 
-export { WarpSteps, WarpStep };
+export { WarpStepIndicator, WarpStep };
