@@ -33,7 +33,7 @@ export default {
     // unreleased
     'packages/combobox/index.ts',
     'packages/datepicker/datepicker.ts',
-    'packages/dead-toggle/index.ts',
+    'packages/deadtoggle/index.ts',
     'packages/link/index.ts',
     'packages/pageindicator/index.ts',
     'packages/pagination/index.ts',

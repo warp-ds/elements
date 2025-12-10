@@ -66,7 +66,7 @@
       "import": "./dist/packages/datepicker/react.js"
     },
     "./react/deadtoggle": {
-      "types": "./dist/packages/deadtoggle/react.d.ts",
+      "types": "./dist/packages/dead-toggle/react.d.ts",
       "import": "./dist/packages/deadtoggle/react.js"
     },
     "./react/expandable": {
