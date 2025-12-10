@@ -118,7 +118,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
-  async #handleValueChange(value: string, isFromTextInput: boolean): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+  async #handleValueChange(
+    value: string,
+    isFromTextInput: boolean,
+  ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
     let valueNum = Number.parseInt(value);
 
     if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
@@ -351,13 +354,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Safari fires the focus event we register on `w-textfield` also when the range input
     // is focused. This breaks the input masking. Rely on the custom event that is also
     // fired by w-textfield on focus.
-    if (e instanceof CustomEvent && e.type === "focus") {
+    if (e instanceof CustomEvent && e.type === 'focus') {
       this._inputHasFocus = true;
     }
   }
 
   #onTextFieldBlur(e) {
-    if (e instanceof CustomEvent && e.type === "blur") {
+    if (e instanceof CustomEvent && e.type === 'blur') {
       this._inputHasFocus = false;
     }
   }
