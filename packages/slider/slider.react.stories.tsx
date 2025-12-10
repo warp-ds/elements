@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from '@storybook/react';
 
-import { Slider, SliderThumb } from "./react";
+import { Slider, SliderThumb } from './react';
 
-const locale = "nb";
+const locale = 'nb';
 
 const getNumberFormatter = (locale: string, opts = {}) => {
   return (value: string) =>
-    new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(
-      value as unknown as number
-    );
+    new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
 };
 
 export default {
-  title: "Forms/Slider and Range Slider",
+  title: 'Forms/Slider and Range Slider',
   component: Slider,
 } satisfies Meta<typeof Slider>;
 
@@ -44,17 +42,11 @@ export const Range: Story = {
 // Take a suffix attribute on `<Slider>` I think, have `<SliderThumb>` get from that.
 export const SuffixSquareMeters: Story = {
   args: {
-    suffix: "m²",
+    suffix: 'm²',
   },
   render({ suffix }) {
     return (
-      <Slider
-        label="Apartment size"
-        min="0"
-        max="250"
-        suffix={suffix}
-        formatter={getNumberFormatter(locale)}
-      >
+      <Slider label="Apartment size" min="0" max="250" suffix={suffix} formatter={getNumberFormatter(locale)}>
         <SliderThumb slot="from" aria-label="From size" name="from" />
         <SliderThumb slot="to" aria-label="To size" name="to" />
       </Slider>
@@ -64,17 +56,11 @@ export const SuffixSquareMeters: Story = {
 
 export const SuffixCurrency: Story = {
   args: {
-    suffix: "kr",
+    suffix: 'kr',
   },
   render({ suffix }) {
     return (
-      <Slider
-        label="Price"
-        min="0"
-        max="250000"
-        suffix={suffix}
-        formatter={getNumberFormatter(locale)}
-      >
+      <Slider label="Price" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
         <SliderThumb slot="from" aria-label="From price" name="from" />
         <SliderThumb slot="to" aria-label="To price" name="to" />
       </Slider>
@@ -84,17 +70,11 @@ export const SuffixCurrency: Story = {
 
 export const SuffixKilometers: Story = {
   args: {
-    suffix: "km",
+    suffix: 'km',
   },
   render({ suffix }) {
     return (
-      <Slider
-        label="Distance"
-        min="0"
-        max="250000"
-        suffix={suffix}
-        formatter={getNumberFormatter(locale)}
-      >
+      <Slider label="Distance" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
         <SliderThumb slot="from" aria-label="From distance" name="from" />
         <SliderThumb slot="to" aria-label="To distance" name="to" />
       </Slider>
@@ -104,7 +84,7 @@ export const SuffixKilometers: Story = {
 
 export const Marks: Story = {
   args: {
-    suffix: "km",
+    suffix: 'km',
   },
   render({ suffix }) {
     return (
@@ -132,8 +112,8 @@ export const Step: Story = {
 
 export const OverUnder: Story = {
   render() {
-    const [overUnderFrom, setOverUnderFrom] = useState("");
-    const [overUnderTo, setOverUnderTo] = useState("");
+    const [overUnderFrom, setOverUnderFrom] = useState('');
+    const [overUnderTo, setOverUnderTo] = useState('');
     return (
       <>
         <form
@@ -142,8 +122,8 @@ export const OverUnder: Story = {
           lang="nb"
           onInput={(val) => {
             const formData = new FormData(val.currentTarget);
-            setOverUnderFrom(formData.get("from") as unknown as string);
-            setOverUnderTo(formData.get("to") as unknown as string);
+            setOverUnderFrom(formData.get('from') as unknown as string);
+            setOverUnderTo(formData.get('to') as unknown as string);
           }}
         >
           <Slider
@@ -152,11 +132,11 @@ export const OverUnder: Story = {
             max="2025"
             data-testid="overunder"
             formatter={(value) => {
-              if (value === "1950") {
-                return "Før 1950";
+              if (value === '1950') {
+                return 'Før 1950';
               }
-              if (value === "2025") {
-                return "Etter 2025";
+              if (value === '2025') {
+                return 'Etter 2025';
               }
               return value;
             }}
@@ -175,10 +155,7 @@ export const OverUnder: Story = {
             />
           </Slider>
         </form>
-        <p>
-          Drag the slider to show the value below. See the Code tab for how to
-          format the labels.
-        </p>
+        <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
         <output>
           <dl>
             <dt>From:</dt>
@@ -217,9 +194,9 @@ export const RangeError: Story = {
 
 export const TestCase: Story = {
   render() {
-    const [fromValue, setFromValue] = useState("0");
-    const [toValue, setToValue] = useState("150000");
-     return (
+    const [fromValue, setFromValue] = useState('0');
+    const [toValue, setToValue] = useState('150000');
+    return (
       <>
         <form
           id="overunder"
@@ -227,21 +204,12 @@ export const TestCase: Story = {
           lang="nb"
           onInput={(val) => {
             const formData = new FormData(val.currentTarget);
-            setFromValue(formData.get("from") as unknown as string);
-            setToValue(formData.get("to") as unknown as string);
+            setFromValue(formData.get('from') as unknown as string);
+            setToValue(formData.get('to') as unknown as string);
           }}
         >
-          <Slider
-            label="Pris"
-            min="0"
-            max="700000"
-          >
-            <SliderThumb
-              slot="from"
-              aria-label="Fra pris"
-              name="from"
-              value={fromValue}
-            />
+          <Slider label="Pris" min="0" max="700000">
+            <SliderThumb slot="from" aria-label="Fra pris" name="from" value={fromValue} />
             <SliderThumb
               slot="to"
               aria-label="Til pris"
@@ -251,10 +219,7 @@ export const TestCase: Story = {
             />
           </Slider>
         </form>
-        <p>
-          Drag the slider to show the value below. See the Code tab for how to
-          format the labels.
-        </p>
+        <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
         <output>
           <dl>
             <dt>From:</dt>

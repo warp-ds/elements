@@ -1,21 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import { html } from "lit";
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
-import type { WarpSlider } from "./index.js";
-import "../affix/index.js";
-import "../attention/index.js";
-import "../textfield/index.js";
-import "./index.js";
+import type { WarpSlider } from './index.js';
+import '../affix/index.js';
+import '../attention/index.js';
+import '../textfield/index.js';
+import './index.js';
 
 const {
   events: sliderEvents,
   args: sliderArgs,
   argTypes: sliderArgTypes,
-} = getStorybookHelpers<WarpSlider>("w-slider");
+} = getStorybookHelpers<WarpSlider>('w-slider');
 
 const meta: Meta = {
-  title: "Forms/Slider and Range Slider",
+  title: 'Forms/Slider and Range Slider',
   args: sliderArgs,
   argTypes: sliderArgTypes,
   parameters: {
@@ -60,8 +60,8 @@ export const Range: Story = {
 // Take a suffix attribute on `<w-slider>` I think, have `<w-slider-thumb>` get from that.
 export const SuffixSquareMeters: Story = {
   args: {
-    locale: "nb",
-    suffix: "m²",
+    locale: 'nb',
+    suffix: 'm²',
   },
   render({ locale, suffix }) {
     return html`
@@ -93,8 +93,8 @@ export const SuffixSquareMeters: Story = {
 
 export const SuffixCurrency: Story = {
   args: {
-    locale: "nb",
-    suffix: "kr",
+    locale: 'nb',
+    suffix: 'kr',
   },
   render({ locale, suffix }) {
     return html`
@@ -130,8 +130,8 @@ export const SuffixCurrency: Story = {
 
 export const SuffixKilometers: Story = {
   args: {
-    locale: "nb",
-    suffix: "km",
+    locale: 'nb',
+    suffix: 'km',
   },
   render({ locale, suffix }) {
     return html`
@@ -163,9 +163,9 @@ export const SuffixKilometers: Story = {
 
 export const Marks: Story = {
   args: {
-    locale: "nb",
-    step: "5",
-    markers: "5",
+    locale: 'nb',
+    step: '5',
+    markers: '5',
   },
   render({ markers, step }) {
     return html`
@@ -263,7 +263,7 @@ export const OverUnder: Story = {
 
 export const SingleError: Story = {
   args: {
-    locale: "nb",
+    locale: 'nb',
   },
   render() {
     return html`

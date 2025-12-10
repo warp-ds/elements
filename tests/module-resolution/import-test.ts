@@ -19,7 +19,7 @@ import { Checkbox } from '@warp-ds/elements/react/rip-and-tear-checkbox';
 import { Radio } from '@warp-ds/elements/react/rip-and-tear-radio';
 import { Select } from '@warp-ds/elements/react/select';
 import { Slider } from '@warp-ds/elements/react/slider';
-import { StepIndicator } from "@warp-ds/elements/react/steps";
+import { StepIndicator } from '@warp-ds/elements/react/steps';
 import { Switch } from '@warp-ds/elements/react/switch';
 import { Tabs } from '@warp-ds/elements/react/tabs';
 import { TextField } from '@warp-ds/elements/react/textfield';
