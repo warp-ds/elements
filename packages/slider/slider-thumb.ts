@@ -372,7 +372,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (this._inputHasFocus) {
       // When focused, show the range's clamped value if the form value is empty (slider at boundary)
       // This allows users to see and edit the actual min/max value
-      return this.value === '' ? (this.range?.value ?? '') : this.value;
+      if (this.value !== '') {
+        return this.value;
+      }
+
+      if (!this.range?.value) {
+        return '';
+      }
+
+      return Math.min(Math.max(Number(this.range.value), Number(this.min) + 1), Number(this.max) - 1).toString();
     }
 
     // When not focused, display the value as-is:
