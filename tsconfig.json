@@ -22,7 +22,7 @@
     "packages/link",
     "packages/pageindicator",
     "packages/pagination",
-    "packages/rip-and-tear-radio",
+    "packages/radio",
     "packages/checkbox",
     "packages/stepindicator",
     "packages/switch",

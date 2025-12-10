@@ -118,7 +118,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
-  async #handleValueChange(value: string, isFromTextInput: boolean): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+  async #handleValueChange(
+    value: string,
+    isFromTextInput: boolean,
+  ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
     let valueNum = Number.parseInt(value);
 
     if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
@@ -351,13 +354,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Safari fires the focus event we register on `w-textfield` also when the range input
     // is focused. This breaks the input masking. Rely on the custom event that is also
     // fired by w-textfield on focus.
-    if (e instanceof CustomEvent && e.type === "focus") {
+    if (e instanceof CustomEvent && e.type === 'focus') {
       this._inputHasFocus = true;
     }
   }
 
   #onTextFieldBlur(e) {
-    if (e instanceof CustomEvent && e.type === "blur") {
+    if (e instanceof CustomEvent && e.type === 'blur') {
       this._inputHasFocus = false;
     }
   }
@@ -372,7 +375,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (this._inputHasFocus) {
       // When focused, show the range's clamped value if the form value is empty (slider at boundary)
       // This allows users to see and edit the actual min/max value
-      return this.value === '' ? (this.range?.value ?? '') : this.value;
+      if (this.value !== '') {
+        return this.value;
+      }
+
+      if (!this.range?.value) {
+        return '';
+      }
+
+      return Math.min(Math.max(Number(this.range.value), Number(this.min) + 1), Number(this.max) - 1).toString();
     }
 
     // When not focused, display the value as-is:
