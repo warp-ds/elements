@@ -128,12 +128,23 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     );
   }
 
-  async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
-    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
-    if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
+  async #handleValueChange(
+    value: string,
+    isFromTextInput: boolean,
+  ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+    let valueNum = Number.parseInt(value);
 
-    const value = (e.currentTarget as HTMLInputElement).value;
-    const valueNum = Number.parseInt(value);
+    if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
+      const valueIsCloseToSliderEdge =
+        (this.slot === 'to' && valueNum >= Number(this.max) - 1) ||
+        (this.slot === 'from' && valueNum <= Number(this.min) + 1);
+
+      if (!valueIsCloseToSliderEdge) {
+        const multiplier = 1 / this.step;
+        valueNum = Math.round(valueNum * multiplier) / multiplier;
+        value = valueNum.toString();
+      }
+    }
 
     // Update validation state
     // Check that the user hasn't typed in a value beyond max or min
@@ -150,7 +161,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           },
         }),
       );
-      return false;
+      return { shouldCancel: true };
+
     }
 
     if (value === '') {
@@ -163,7 +175,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         );
       }
       // To not bork when input field is empty
-      return false;
+      return { shouldCancel: true };
     }
 
     // if (this.invalid) {
@@ -233,9 +245,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
 
     if (shouldCancel) {
-      e.preventDefault();
-      // Needed to stop slider from moving independendtly of the value when we cancel the event
-      return false;
+      return { shouldCancel: true };
     }
 
     this.#handleValidity('');
@@ -245,7 +255,44 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
 
+    return { shouldCancel: false };
+  }
+
+  async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
+    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
+    if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
+
+    const value = (e.currentTarget as HTMLInputElement).value;
+    const result = await this.#handleValueChange(value, isFromTextInput);
+
+    if (result.shouldCancel) {
+      e.preventDefault();
+      // Needed to stop slider from moving independendtly of the value when we cancel the event
+      return false;
+    }
+
     return true;
+  }
+
+  async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
+    const currentValue = Number(this.range.value);
+    const stepValue = this.step || 1;
+
+    let newValue: number;
+    if (e.key === 'ArrowLeft') {
+      newValue = currentValue - stepValue;
+    } else {
+      newValue = currentValue + stepValue;
+    }
+
+    newValue = Math.min(Math.max(newValue, Number(this.min)), Number(this.max));
+
+    const result = await this.#handleValueChange(newValue.toString(), false);
+    if (result.shouldCancel) {
+      e.preventDefault();
+    }
   }
 
   async connectedCallback() {
@@ -335,6 +382,21 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this.#syncRangeValue();
   }
 
+  #onTextFieldFocus(e) {
+    // Safari fires the focus event we register on `w-textfield` also when the range input
+    // is focused. This breaks the input masking. Rely on the custom event that is also
+    // fired by w-textfield on focus.
+    if (e instanceof CustomEvent && e.type === 'focus') {
+      this._inputHasFocus = true;
+    }
+  }
+
+  #onTextFieldBlur(e) {
+    if (e instanceof CustomEvent && e.type === 'blur') {
+      this._inputHasFocus = false;
+    }
+  }
+
   // The boundary value for this thumb (min for 'from', max for 'to' or default)
   get boundaryValue(): string {
     return this.slot === 'from' ? this.min : this.max;
@@ -345,7 +407,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (this._inputHasFocus) {
       // When focused, show the range's clamped value if the form value is empty (slider at boundary)
       // This allows users to see and edit the actual min/max value
-      return this.value === '' ? (this.range?.value ?? '') : this.value;
+      if (this.value !== '') {
+        return this.value;
+      }
+
+      if (!this.range?.value) {
+        return '';
+      }
+
+      return Math.min(Math.max(Number(this.range.value), Number(this.min) + 1), Number(this.max) - 1).toString();
     }
 
     // When not focused, display the value as-is:
@@ -401,7 +471,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           aria-valuetext="${this.tooltipDisplayValue}"
           min="${this.min}"
           max="${this.max}"
-          step="${ifDefined(this.step)}"
+          step="${ifDefined(!this.allowValuesOutsideRange && this.step ? this.step : undefined)}"
           ?disabled="${this.disabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
@@ -410,6 +480,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @focus="${this.#showTooltip}"
           @blur="${this.#hideTooltip}"
           @input="${this.#onInput}"
+          @keydown="${this.allowValuesOutsideRange ? this.#onRangeSliderKeyDown : nothing}"
         />
 
         ${
@@ -441,8 +512,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           step="${ifDefined(this.step)}"
           ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
-          @focus="${() => (this._inputHasFocus = true)}"
-          @blur="${() => (this._inputHasFocus = false)}"
+          @focus="${this.#onTextFieldFocus}"
+          @blur="${this.#onTextFieldBlur}"
         >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>

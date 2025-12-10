@@ -134,9 +134,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
-    }
-    if (this.formatter) {
-      this.mask.innerText = this.formatter(this.value);
+      if (this.formatter) {
+        this.mask.innerText = this.formatter(this.value);
+      }
     }
   }
 

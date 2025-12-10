@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.3.0-next.12",
+  "version": "2.3.0-next.19",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {
@@ -310,7 +310,6 @@
     "html-format": "1.1.7",
     "husky": "^9.1.7",
     "lightningcss": "^1.30.1",
-    "lit": "3.x",
     "nanoid": "^5.1.5",
     "playwright": "^1.55.0",
     "prettier": "3.3.2",
@@ -324,25 +323,25 @@
     "vite": "^6.0.0",
     "vitest": "^3.2.4",
     "vitest-browser-lit": "^0.1.0",
-    "vitest-browser-react": "^1.0.1"
-  },
-  "dependencies": {
-    "@lingui/core": "5.2.0",
-    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
-    "@lit/react": "^1.0.8",
-    "@open-wc/form-control": "^1.0.0",
+    "vitest-browser-react": "^1.0.1",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-terser": "^0.4.4",
+    "tslib": "^2.8.1",
+    "rollup": "^4.52.3",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
+    "@lingui/core": "5.2.0",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.1.1",
-    "@warp-ds/elements-core": "2.0.1",
     "@warp-ds/icons": "2.5.0",
     "date-fns": "^4.1.0",
-    "rollup": "^4.52.3",
     "scroll-doctor": "2.0.2",
-    "tslib": "^2.8.1"
+    "@open-wc/form-control": "^1.0.0"
+  },
+  "dependencies": {
+    "lit": "3.x",
+    "@lit/react": "^1.0.8"
   },
   "publishConfig": {
     "access": "public"

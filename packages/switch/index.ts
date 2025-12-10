@@ -54,11 +54,11 @@ export class WarpSwitch extends LitElement {
       ccSwitch.track,
       this.disabled
         ? this.value
-          ? ccSwitch.trackDisabledOn   // disabled + ON
-          : ccSwitch.trackDisabledOff  // disabled + OFF
+          ? ccSwitch.trackDisabledOn // disabled + ON
+          : ccSwitch.trackDisabledOff // disabled + OFF
         : this.value
-          ? ccSwitch.trackActive       // enabled + ON
-          : ccSwitch.trackInactive,    // enabled + OFF
+          ? ccSwitch.trackActive // enabled + ON
+          : ccSwitch.trackInactive, // enabled + OFF
     ]);
   }
 
@@ -70,11 +70,11 @@ export class WarpSwitch extends LitElement {
 
       this.disabled
         ? this.value
-          ? ccSwitch.handleDisabledOn        // disabled + ON
-          : ccSwitch.handleDisabledOff       // disabled + OFF
+          ? ccSwitch.handleDisabledOn // disabled + ON
+          : ccSwitch.handleDisabledOff // disabled + OFF
         : this.value
-          ? ccSwitch.handleActive            // enabled + ON
-          : ccSwitch.handleNotDisabled,      // enabled + OFF
+          ? ccSwitch.handleActive // enabled + ON
+          : ccSwitch.handleNotDisabled, // enabled + OFF
     ]);
   }
 

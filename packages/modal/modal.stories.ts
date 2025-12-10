@@ -1,33 +1,29 @@
-import { spread } from "@open-wc/lit-helpers";
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
-import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
-import { html } from "lit";
+import { spread } from '@open-wc/lit-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import { html } from 'lit';
 
-import { prespread } from "../../.storybook/utilities.js";
+import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpModal, WarpModalFooter, WarpModalHeader } from "./index.ts";
-import type { ModalMain } from "./modal-main.js";
-import type { ModalHeader as ModalHeaderType } from "./modal-header.js";
-import "./index.ts";
+import type { WarpModal, WarpModalFooter, WarpModalHeader } from './index.ts';
+import type { ModalMain } from './modal-main.js';
+import type { ModalHeader as ModalHeaderType } from './modal-header.js';
+import './index.ts';
 
-const {
-  events: modalEvents,
-  args: modalArgs,
-  argTypes: modalArgTypes,
-} = getStorybookHelpers<WarpModal>("w-modal");
+const { events: modalEvents, args: modalArgs, argTypes: modalArgTypes } = getStorybookHelpers<WarpModal>('w-modal');
 const {
   events: modalHeaderEvents,
   args: modalHeaderArgs,
   argTypes: modalHeaderArgTypes,
-} = getStorybookHelpers<WarpModalHeader>("w-modal-header");
+} = getStorybookHelpers<WarpModalHeader>('w-modal-header');
 const {
   events: modalFooterEvents,
   args: modalFooterArgs,
   argTypes: modalFooterArgTypes,
-} = getStorybookHelpers<WarpModalFooter>("w-modal-footer");
+} = getStorybookHelpers<WarpModalFooter>('w-modal-footer');
 
 const meta: Meta = {
-  title: "Overlays/Modal",
+  title: 'Overlays/Modal',
 };
 
 export default meta;
@@ -121,35 +117,30 @@ export const Default: StoryObj = {
   },
   play: async ({ canvasElement }) => {
     await Promise.all([
-      customElements.whenDefined("w-button"),
-      customElements.whenDefined("w-modal"),
-      customElements.whenDefined("w-modal-header"),
-      customElements.whenDefined("w-modal-footer"),
+      customElements.whenDefined('w-button'),
+      customElements.whenDefined('w-modal'),
+      customElements.whenDefined('w-modal-header'),
+      customElements.whenDefined('w-modal-footer'),
     ]);
 
-    const openButton = canvasElement.querySelector("#modal-open-button-one");
-    const closeButton = canvasElement.querySelector("#modal-close-button-one");
-    const toggleBackButton = canvasElement.querySelector(
-      "#modal-toggle-back-one",
-    );
-    const cancelButton = canvasElement.querySelector(
-      "#modal-close-button-cancel",
-    );
-    const modal: ModalMain = canvasElement.querySelector("#example-modal-one");
-    const modalHeader: ModalHeaderType =
-      canvasElement.querySelector("#modal-header-one");
+    const openButton = canvasElement.querySelector('#modal-open-button-one');
+    const closeButton = canvasElement.querySelector('#modal-close-button-one');
+    const toggleBackButton = canvasElement.querySelector('#modal-toggle-back-one');
+    const cancelButton = canvasElement.querySelector('#modal-close-button-cancel');
+    const modal: ModalMain = canvasElement.querySelector('#example-modal-one');
+    const modalHeader: ModalHeaderType = canvasElement.querySelector('#modal-header-one');
 
     if (openButton && modal) {
-      openButton.addEventListener("click", () => modal.open());
+      openButton.addEventListener('click', () => modal.open());
     }
     if (closeButton && modal) {
-      closeButton.addEventListener("click", () => modal.close());
+      closeButton.addEventListener('click', () => modal.close());
     }
     if (cancelButton && modal) {
-      cancelButton.addEventListener("click", () => modal.close());
+      cancelButton.addEventListener('click', () => modal.close());
     }
     if (toggleBackButton && modalHeader) {
-      toggleBackButton.addEventListener("click", () => {
+      toggleBackButton.addEventListener('click', () => {
         modalHeader.back = !modalHeader.back;
       });
     }
@@ -205,21 +196,21 @@ export const WithImage: StoryObj = {
   },
   play: async ({ canvasElement }) => {
     await Promise.all([
-      customElements.whenDefined("w-button"),
-      customElements.whenDefined("w-modal"),
-      customElements.whenDefined("w-modal-header"),
-      customElements.whenDefined("w-modal-footer"),
+      customElements.whenDefined('w-button'),
+      customElements.whenDefined('w-modal'),
+      customElements.whenDefined('w-modal-header'),
+      customElements.whenDefined('w-modal-footer'),
     ]);
 
-    const openButton = canvasElement.querySelector("#modal-open-button-two");
-    const closeButton = canvasElement.querySelector("#modal-close-button-two");
-    const modal: ModalMain = canvasElement.querySelector("#example-modal-two");
+    const openButton = canvasElement.querySelector('#modal-open-button-two');
+    const closeButton = canvasElement.querySelector('#modal-close-button-two');
+    const modal: ModalMain = canvasElement.querySelector('#example-modal-two');
 
     if (openButton && modal) {
-      openButton.addEventListener("click", () => modal.open());
+      openButton.addEventListener('click', () => modal.open());
     }
     if (closeButton && modal) {
-      closeButton.addEventListener("click", () => modal.close());
+      closeButton.addEventListener('click', () => modal.close());
     }
   },
   parameters: {

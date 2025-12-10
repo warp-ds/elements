@@ -86,9 +86,9 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         <w-button
             type="button"
             aria-label="${i18n._({
-                id: 'modal.aria.close',
-                message: 'Close',
-                comment: 'Aria label for the close button in modal',
+              id: 'modal.aria.close',
+              message: 'Close',
+              comment: 'Aria label for the close button in modal',
             })}"
             variant="pill"
             small=""

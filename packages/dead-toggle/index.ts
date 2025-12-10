@@ -35,9 +35,7 @@ export class WarpDeadToggle extends LitElement {
     return html` <div class="control">${this.indeterminateMarker}</div> `;
   }
 
-  static styles?: CSSResultGroup | undefined = [
-    reset, toggleStyles
-  ];
+  static styles?: CSSResultGroup | undefined = [reset, toggleStyles];
 }
 
 if (!customElements.get('w-dead-toggle')) {

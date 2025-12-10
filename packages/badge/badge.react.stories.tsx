@@ -70,7 +70,8 @@ export const Positioned: Story = {
           height: '100px',
           background: '#f0f0f0',
           borderRadius: '8px',
-        }}>
+        }}
+      >
         <Badge {...args}>Badge</Badge>
       </div>
     );

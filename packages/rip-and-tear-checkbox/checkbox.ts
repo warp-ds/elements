@@ -94,7 +94,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
 
   // NB: not from WA, this eases shared-styling
   private setInitialAttributes() {
-    this.setAttribute('type', 'checkbox')
+    this.setAttribute('type', 'checkbox');
   }
 
   private handleClick() {

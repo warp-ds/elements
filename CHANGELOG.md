@@ -1,3 +1,52 @@
+# [2.3.0-next.19](https://github.com/warp-ds/elements/compare/v2.3.0-next.18...v2.3.0-next.19) (2025-12-08)
+
+
+### Bug Fixes
+
+* rename step indicator ([#452](https://github.com/warp-ds/elements/issues/452)) ([a2d7a21](https://github.com/warp-ds/elements/commit/a2d7a21ab1d85212cb2eac960dddac56d02ea061))
+
+# [2.3.0-next.18](https://github.com/warp-ds/elements/compare/v2.3.0-next.17...v2.3.0-next.18) (2025-12-08)
+
+
+### Bug Fixes
+
+* move most deps to dev deps ([#454](https://github.com/warp-ds/elements/issues/454)) ([61375a3](https://github.com/warp-ds/elements/commit/61375a3049e5a8fa896dd66056ba130e9878348e))
+
+# [2.3.0-next.17](https://github.com/warp-ds/elements/compare/v2.3.0-next.16...v2.3.0-next.17) (2025-12-04)
+
+
+### Bug Fixes
+
+* don't rely on native events since they're broken in Safari ([28a43e3](https://github.com/warp-ds/elements/commit/28a43e306c54816b74559e9ef4a4124baa0772ed))
+
+# [2.3.0-next.16](https://github.com/warp-ds/elements/compare/v2.3.0-next.15...v2.3.0-next.16) (2025-12-03)
+
+
+### Bug Fixes
+
+* use non-static token for inverted text ([8bd33aa](https://github.com/warp-ds/elements/commit/8bd33aa4570a63218cf47781fd2b5b05b336bfbc))
+
+# [2.3.0-next.15](https://github.com/warp-ds/elements/compare/v2.3.0-next.14...v2.3.0-next.15) (2025-12-03)
+
+
+### Bug Fixes
+
+* don't to step calculation unless steps are defined ([7a3644f](https://github.com/warp-ds/elements/commit/7a3644ff00dbbe2df890176a273c8df3ffabc54e))
+
+# [2.3.0-next.14](https://github.com/warp-ds/elements/compare/v2.3.0-next.13...v2.3.0-next.14) (2025-12-03)
+
+
+### Bug Fixes
+
+* fix interaction between steps and allowing values outside range ([bc7004b](https://github.com/warp-ds/elements/commit/bc7004bf653b2fc348f4b4e7f3b6e5f979eb18d2))
+
+# [2.3.0-next.13](https://github.com/warp-ds/elements/compare/v2.3.0-next.12...v2.3.0-next.13) (2025-12-02)
+
+
+### Bug Fixes
+
+* release previous pls 🙏 ([140e97f](https://github.com/warp-ds/elements/commit/140e97f6ecb19d5c9a7e05c33010df7de2b50f76))
+
 # [2.3.0-next.12](https://github.com/warp-ds/elements/compare/v2.3.0-next.11...v2.3.0-next.12) (2025-12-01)
 
 
