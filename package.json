@@ -110,8 +110,8 @@
       "import": "./dist/packages/slider/react.js"
     },
     "./react/stepindicator": {
-      "types": "./dist/packages/steps/react.d.ts",
-      "import": "./dist/packages/steps/react.js"
+      "types": "./dist/packages/stepindicator/react.d.ts",
+      "import": "./dist/packages/stepindicator/react.js"
     },
     "./react/switch": {
       "types": "./dist/packages/switch/react.d.ts",
