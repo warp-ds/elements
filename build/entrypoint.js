@@ -18,7 +18,7 @@ export function generateEntrypointFile() {
   // We want to be able to measure the performance of how teams are loading the library so we add this performance mark
   const whenAllDefinedCode = `
 Promise.all([${whenDefinedStatements.join(',')}]).then(() => {
-    performance.mark('warp-ds-elements-loaded');
+    performance.mark('vend/pc-design-system/warp-elements-loaded');
 });`;
 
   const entrypointFile = `${exportStatements}${whenAllDefinedCode}`;
