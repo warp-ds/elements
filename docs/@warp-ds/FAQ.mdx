@@ -1,0 +1,35 @@
+# Frequently Asked Questions
+
+## How do I get IntelliSense for Warp Elements?
+
+Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension (available in several editors).
+
+- [VS Code](https://marketplace.visualstudio.com/items?itemName=wc-toolkit.web-components-language-server)
+- [JetBrains products](https://plugins.jetbrains.com/plugin/29094-web-components-language-server)
+- [VSCodium and other VSCode forks](https://open-vsx.org/extension/wc-toolkit/web-components-language-server)
+
+The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
+
+## Why are inputs and buttons not clickable in my modal or drawer component?
+
+If you use a [focus trap](https://css-tricks.com/a-primer-on-focus-trapping/), or you use a dependency that does, that focus trap might need extra configuration to work with custom elements.
+
+For example, the [focus-trap module](https://github.com/focus-trap/focus-trap#shadow-dom) used by [react-spring-bottom-sheet](https://github.com/stipsan/react-spring-bottom-sheet) will not work with custom elements by default. It thinks clicks inside a custom element is outside of the focus trap, and so cancels the click.
+
+If you run into this problem in a dependency, either work with the maintainer to fix the problem, replace the dependency, patch it locally, or fork it to add support.
+
+```js
+const fallback = fallbackRef.current
+const trap = createFocusTrap(targetRef.current, {
+  // tabbableOptions.getShadowRoot is required in `focus-trap` when using custom elements
+  tabbableOptions: {
+    getShadowRoot: true,
+  },
+  initialFocus: initialFocusRef
+    ? () => initialFocusRef?.current || fallback
+    : undefined,
+  fallbackFocus: fallback,
+  escapeDeactivates: false,
+  clickOutsideDeactivates: false,
+})
+```
