@@ -162,7 +162,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }),
       );
       return { shouldCancel: true };
-
     }
 
     if (value === '') {

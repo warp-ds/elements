@@ -1,6 +1,6 @@
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 
 import type { WarpTextField } from '../textfield/index.js';
 import { reset } from '../styles.js';
@@ -49,8 +49,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   error = '';
 
-  @property({ type: String, reflect: true })
-  invalid = '';
+  @property({ type: String, reflect: true, attribute: 'help-text' })
+  helpText = '';
+
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
 
   /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true })
@@ -76,6 +79,12 @@ class WarpSlider extends FormControlMixin(LitElement) {
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
   formatter: (value: string, type: 'to' | 'from') => string;
+
+  @state()
+  _invalidMessage = '';
+
+  @state()
+  _hasInternalError = false;
 
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
@@ -107,7 +116,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
       }
 
       thumb.disabled = this.disabled;
-      thumb.invalid = Boolean(this.errorText);
+      thumb.invalid = this.invalid || this._hasInternalError;
 
       this.#updateActiveTrack(thumb);
     }
@@ -153,7 +162,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
       changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
-      changedProperties.has('formatter')
+      changedProperties.has('formatter') ||
+      changedProperties.has('_invalidMessage') ||
+      changedProperties.has('_hasInternalError')
     ) {
       this.#syncSliderThumbs();
     }
@@ -196,7 +207,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
-    this.invalid = e.detail.invalid;
+    this._hasInternalError = Boolean(e.detail.invalid);
+    this._invalidMessage = e.detail.invalid;
   }
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
@@ -226,8 +238,16 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
   }
 
-  get errorText() {
-    return this.error || this.invalid;
+  get componentHasError(): boolean {
+    return this.invalid || this._hasInternalError;
+  }
+
+  get errorText(): string {
+    if (!this.componentHasError) {
+      return '';
+    }
+
+    return this.error || this._invalidMessage;
   }
 
   render() {
@@ -271,7 +291,10 @@ class WarpSlider extends FormControlMixin(LitElement) {
             ? html`<p class="w-slider__error" aria-describes="fieldset">
               ${this.errorText}
             </p>`
-            : nothing
+            : this.helpText
+              ? html`<p class="w-slider__help-text" aria-describes="fieldset">
+            ${this.helpText}</p>`
+              : nothing
         }
       </fieldset>
     `;

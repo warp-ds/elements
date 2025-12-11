@@ -397,6 +397,7 @@ export const CustomError: Story = {
         over
         under
         error="I'm an external error telling you something is wrong"
+        invalid
       >
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
