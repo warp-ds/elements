@@ -258,7 +258,6 @@ class WarpSlider extends FormControlMixin(LitElement) {
         @input="${this.#onInput}"
         @slidervalidity="${this.#onSliderValidity}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
-        aria-describedby="${this.errorText ? 'error-slot' : nothing}"
       >
         ${
           this.label
