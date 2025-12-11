@@ -208,8 +208,8 @@
       "react/slider": [
         "./dist/packages/slider/react.d.ts"
       ],
-      "react/steps": [
-        "./dist/packages/steps/react.d.ts"
+      "react/stepindicator": [
+        "./dist/packages/stepindicator/react.d.ts"
       ],
       "react/switch": [
         "./dist/packages/switch/react.d.ts"
