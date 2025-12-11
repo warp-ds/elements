@@ -11,6 +11,7 @@ import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 import { styles as unoStyles } from './styles.js';
+import { i18n } from '@lingui/core';
 
 /**
  * Component to place inside a `<w-slider>`.
@@ -44,7 +45,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   disabled: boolean;
 
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   /** Set by `<w-slider>` */
   @property({ attribute: false, reflect: false })
@@ -72,7 +73,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** Set by `<w-slider>` */
   @state()
-  suffix: string;
+  suffix = '';
 
   /** JS hook to help you format the numeric value how you want. */
   @state()
@@ -118,6 +119,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
+  #handleValidity(error: string) {
+    this.dispatchEvent(
+      new CustomEvent('slidervalidity', {
+        bubbles: true,
+        detail: { invalid: error, slot: this.slot },
+      }),
+    );
+  }
+
   async #handleValueChange(
     value: string,
     isFromTextInput: boolean,
@@ -141,21 +151,32 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
     if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
-      this.invalid = true;
+      this.#handleValidity(
+        i18n.t({
+          id: 'slider.error.out_of_bounds',
+          message: 'Value must be between {min} and {max}',
+          values: {
+            min: `${this.min} ${this.suffix}`.trim(),
+            max: `${this.max} ${this.suffix}`.trim(),
+          },
+        }),
+      );
       return { shouldCancel: true };
     }
 
     if (value === '') {
       if (this.required) {
-        this.invalid = true;
+        this.#handleValidity(
+          i18n.t({
+            id: 'slider.error.required',
+            message: 'This field is required',
+          }),
+        );
       }
       // To not bork when input field is empty
       return { shouldCancel: true };
     }
 
-    if (this.invalid) {
-      this.invalid = false;
-    }
     this.value = value;
 
     const valueIsAtTheSliderEdge = value === this.max || value === this.min;
@@ -169,6 +190,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
       const toValue = computedStyle.getPropertyValue('--to');
       const fromValue = computedStyle.getPropertyValue('--from');
+
+      const numberOverLapError = i18n.t({
+        id: 'slider.error.overlap',
+        message: 'The maximum value cannot be less than the minimum',
+      });
 
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value
@@ -185,7 +211,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this.invalid = true;
+            this.#handleValidity(numberOverLapError);
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -205,7 +231,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           }
 
           if (isFromTextInput) {
-            this.invalid = true;
+            this.#handleValidity(numberOverLapError);
             // Don't override the user's input in the textfield
             await this.updateComplete;
             this.textfield.value = value;
@@ -217,6 +243,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (shouldCancel) {
       return { shouldCancel: true };
     }
+
+    this.#handleValidity('');
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
     this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
@@ -408,14 +436,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       this.setValue(this.value);
       this.#syncRangeValue();
     }
-    if (changedProperties.has('invalid')) {
-      this.dispatchEvent(
-        new CustomEvent('slidervalidity', {
-          bubbles: true,
-          detail: { invalid: this.invalid },
-        }),
-      );
-    }
   }
 
   render() {
@@ -477,7 +497,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           .value="${this.textFieldDisplayValue}"
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
-          ?invalid="${this.invalid}"
+          step="${ifDefined(this.step)}"
+          ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
           @focus="${this.#onTextFieldFocus}"
           @blur="${this.#onTextFieldBlur}"

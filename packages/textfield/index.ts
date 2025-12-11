@@ -104,6 +104,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   name: string;
 
+  @property({ type: Number, reflect: true })
+  step: number;
+
   /**
    * Function to format value when the input field.
    *
@@ -247,6 +250,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
             ?disabled="${this.disabled}"
             ?readonly="${this.readonly || this.readOnly}"
             ?required="${this.required}"
+            step="${ifDefined(this.step)}"
             @blur="${this.handler}"
             @change="${this.handler}"
             @input="${this.handler}"

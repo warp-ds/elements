@@ -8,9 +8,9 @@ export const wSliderThumbStyles = css`
     display: grid;
     pointer-events: none; /* For range inputs we position two of these on top of each other. Let clicks go through the top one. */
     grid-template-areas:
-      'slider slider slider'
-      'frommarker . tomarker'
-      'fromtextfield . totextfield';
+      "slider slider slider"
+      "frommarker . tomarker"
+      "fromtextfield . totextfield";
     grid-template-columns: 1fr 24px 1fr;
   }
 
@@ -41,7 +41,11 @@ export const wSliderThumbStyles = css`
     background: var(--w-s-color-background-primary);
     border-radius: 50%;
     height: var(--w-slider-thumb-size);
-    margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
+    margin-top: calc(
+      -1 * calc(var(--w-slider-thumb-offset) - calc(
+              var(--w-slider-track-height) / 2
+            ))
+    );
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
@@ -56,7 +60,11 @@ export const wSliderThumbStyles = css`
     border-radius: 50%;
     border-color: transparent;
     height: var(--w-slider-thumb-size);
-    margin-top: calc(-1 * calc(var(--w-slider-thumb-offset) - calc(var(--w-slider-track-height) / 2)));
+    margin-top: calc(
+      -1 * calc(var(--w-slider-thumb-offset) - calc(
+              var(--w-slider-track-height) / 2
+            ))
+    );
     pointer-events: initial;
     width: var(--w-slider-thumb-size);
     z-index: 1;
@@ -126,44 +134,44 @@ export const wSliderThumbStyles = css`
   }
 
   .w-slider-thumb__textfield {
-    margin-top: 10px;
+    margin-top: 12px;
     pointer-events: auto;
     grid-row: 3 / 4;
     grid-column: 1 / 3; /* Single sliders should have the text field use the fromtextfield _and_ gap portion of the CSS grid. */
   }
 
-  :host([name='from']) .w-slider-thumb__textfield {
+  :host([name="from"]) .w-slider-thumb__textfield {
     grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
-  :host([name='from']) .w-slider-thumb__range {
+  :host([name="from"]) .w-slider-thumb__range {
     margin-left: var(--w-slider-thumb-size);
   }
 
-  :host([name='to']) .w-slider-thumb__range {
+  :host([name="to"]) .w-slider-thumb__range {
     margin-right: var(--w-slider-thumb-size);
   }
 
-  :host([name='from']) .w-slider-thumb__range::-webkit-slider-thumb,
-  :host([name='from']) .w-slider-thumb__tooltip-target {
+  :host([name="from"]) .w-slider-thumb__range::-webkit-slider-thumb,
+  :host([name="from"]) .w-slider-thumb__tooltip-target {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name='from']) .w-slider-thumb__range::-moz-range-thumb {
+  :host([name="from"]) .w-slider-thumb__range::-moz-range-thumb {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name='to']) .w-slider-thumb__textfield {
+  :host([name="to"]) .w-slider-thumb__textfield {
     grid-row: 3 / 4;
     grid-column: 3 / 4;
   }
 
-  :host([name='to']) .w-slider-thumb__tooltip-target,
-  :host([name='to']) .w-slider-thumb__range::-webkit-slider-thumb {
+  :host([name="to"]) .w-slider-thumb__tooltip-target,
+  :host([name="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name='to']) .w-slider-thumb__range::-moz-range-thumb {
+  :host([name="to"]) .w-slider-thumb__range::-moz-range-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 `;
