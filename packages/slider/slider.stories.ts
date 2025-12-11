@@ -405,3 +405,24 @@ export const CustomError: Story = {
     `;
   },
 };
+
+export const Description: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render() {
+    return html`
+      <w-slider
+        label="Production year"
+        min="1950"
+        max="2025"
+        over
+        under
+        help-text="Production year of the car"
+      >
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
+    `;
+  },
+};

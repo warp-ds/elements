@@ -164,6 +164,13 @@ export const wSliderStyles = css`
     color: var(--w-s-color-text-negative);
   }
 
+  .w-slider__help-text {
+    grid-area: error;
+    padding-top: 8px;
+    font-size: var(--w-font-size-xs);
+    line-height: var(--w-line-height-xs);
+  }
+
   slot::slotted(w-slider-thumb) {
     position: static;
     top: 0;
