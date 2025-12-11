@@ -178,9 +178,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       return { shouldCancel: true };
     }
 
-    // if (this.invalid) {
-    //   this.invalid = '';
-    // }
     this.value = value;
 
     const valueIsAtTheSliderEdge = value === this.max || value === this.min;
