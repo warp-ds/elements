@@ -437,14 +437,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       this.setValue(this.value);
       this.#syncRangeValue();
     }
-    // if (changedProperties.has('invalid')) {
-    //   this.dispatchEvent(
-    //     new CustomEvent('slidervalidity', {
-    //       bubbles: true,
-    //       detail: { invalid: this.invalid },
-    //     }),
-    //   );
-    // }
   }
 
   render() {
