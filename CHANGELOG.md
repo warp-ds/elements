@@ -1,3 +1,18 @@
+# [2.3.0-next.20](https://github.com/warp-ds/elements/compare/v2.3.0-next.19...v2.3.0-next.20) (2025-12-12)
+
+
+### Bug Fixes
+
+* actually implement help-text ([5bdf46d](https://github.com/warp-ds/elements/commit/5bdf46d8364943f18cc91021e4a0db7edfd48b3d))
+* add support for step to textinput ([752101f](https://github.com/warp-ds/elements/commit/752101fad56b54e3c1776e2c7c3da0419c31c5f9))
+* clamp values on focus when range is at end ([2204f75](https://github.com/warp-ds/elements/commit/2204f75d6a89cfaf1fa5ff19d3d493190f6b93ac))
+* implement error messages ([235387f](https://github.com/warp-ds/elements/commit/235387fc8b3b296fa796729ea0bc9c6bb05cdcbe))
+* make the error state flow top to bottom ([5dd1726](https://github.com/warp-ds/elements/commit/5dd1726c8321f278193b314f8e9d82b1a2fbef68))
+* remove duplicate definition of thumb.invalid ([9e169b8](https://github.com/warp-ds/elements/commit/9e169b876f3680b9a4c725e2a87538a5467f4531))
+* separate internal and external states ([d8a74d9](https://github.com/warp-ds/elements/commit/d8a74d9ad32c7ab1efde33fda37336df064f233c))
+* update performance mark for pulse ([#461](https://github.com/warp-ds/elements/issues/461)) ([68e5bf5](https://github.com/warp-ds/elements/commit/68e5bf5391f2aecb8c4845c2e9fb063ae582b0b6))
+* use correct type for invalid state in textinput ([0adc7fd](https://github.com/warp-ds/elements/commit/0adc7fd1ecf2ea4462eaa687f02bbf90018ae759))
+
 # [2.3.0-next.19](https://github.com/warp-ds/elements/compare/v2.3.0-next.18...v2.3.0-next.19) (2025-12-08)
 
 
