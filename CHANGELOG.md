@@ -1,3 +1,10 @@
+# [2.3.0-next.22](https://github.com/warp-ds/elements/compare/v2.3.0-next.21...v2.3.0-next.22) (2025-12-15)
+
+
+### Bug Fixes
+
+* add translations for slider ([9688ca9](https://github.com/warp-ds/elements/commit/9688ca9f886be522ee468db17ff70854993ec8d3))
+
 # [2.3.0-next.21](https://github.com/warp-ds/elements/compare/v2.3.0-next.20...v2.3.0-next.21) (2025-12-15)
 
 
