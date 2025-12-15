@@ -1,6 +1,13 @@
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { activateI18n } from '../i18n.js';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import type { WarpTextField } from '../textfield/index.js';
 import { reset } from '../styles.js';
@@ -85,6 +92,11 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   @state()
   _hasInternalError = false;
+
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+  }
 
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
@@ -292,7 +304,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
             </p>`
             : this.helpText
               ? html`<p class="w-slider__help-text" aria-describes="fieldset">
-            ${this.helpText}</p>`
+                ${this.helpText}
+              </p>`
               : nothing
         }
       </fieldset>
