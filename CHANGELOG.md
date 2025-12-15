@@ -1,3 +1,10 @@
+# [2.3.0-next.21](https://github.com/warp-ds/elements/compare/v2.3.0-next.20...v2.3.0-next.21) (2025-12-15)
+
+
+### Bug Fixes
+
+* align filenaming across components ([#464](https://github.com/warp-ds/elements/issues/464)) ([a6bb37b](https://github.com/warp-ds/elements/commit/a6bb37bb8dfdeff2aac9670d5e156ee184a52664))
+
 # [2.3.0-next.20](https://github.com/warp-ds/elements/compare/v2.3.0-next.19...v2.3.0-next.20) (2025-12-12)
 
 
