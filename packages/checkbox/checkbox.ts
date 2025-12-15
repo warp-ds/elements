@@ -6,10 +6,10 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 
-import { BaseFormAssociatedElement } from '../rip-and-tear-radio/form-associated-element';
-import { RequiredValidator } from '../rip-and-tear-radio/required-validator';
-import { HasSlotController } from '../rip-and-tear-radio/slot';
-import { watch } from '../rip-and-tear-radio/watch';
+import { BaseFormAssociatedElement } from '../radio/form-associated-element';
+import { RequiredValidator } from '../radio/required-validator';
+import { HasSlotController } from '../radio/slot';
+import { watch } from '../radio/watch';
 import '@warp-ds/icons/elements/check-16';
 
 import { reset } from '../styles';

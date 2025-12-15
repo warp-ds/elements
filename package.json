@@ -65,9 +65,9 @@
       "types": "./dist/packages/datepicker/react.d.ts",
       "import": "./dist/packages/datepicker/react.js"
     },
-    "./react/dead-toggle": {
+    "./react/deadtoggle": {
       "types": "./dist/packages/dead-toggle/react.d.ts",
-      "import": "./dist/packages/dead-toggle/react.js"
+      "import": "./dist/packages/deadtoggle/react.js"
     },
     "./react/expandable": {
       "types": "./dist/packages/expandable/react.d.ts",
@@ -93,13 +93,13 @@
       "types": "./dist/packages/pill/react.d.ts",
       "import": "./dist/packages/pill/react.js"
     },
-    "./react/rip-and-tear-checkbox": {
-      "types": "./dist/packages/rip-and-tear-checkbox/react.d.ts",
-      "import": "./dist/packages/rip-and-tear-checkbox/react.js"
+    "./react/checkbox": {
+      "types": "./dist/packages/checkbox/react.d.ts",
+      "import": "./dist/packages/checkbox/react.js"
     },
-    "./react/rip-and-tear-radio": {
-      "types": "./dist/packages/rip-and-tear-radio/react.d.ts",
-      "import": "./dist/packages/rip-and-tear-radio/react.js"
+    "./react/radio": {
+      "types": "./dist/packages/radio/react.d.ts",
+      "import": "./dist/packages/radio/react.js"
     },
     "./react/select": {
       "types": "./dist/packages/select/react.d.ts",
@@ -109,9 +109,9 @@
       "types": "./dist/packages/slider/react.d.ts",
       "import": "./dist/packages/slider/react.js"
     },
-    "./react/steps": {
-      "types": "./dist/packages/steps/react.d.ts",
-      "import": "./dist/packages/steps/react.js"
+    "./react/stepindicator": {
+      "types": "./dist/packages/stepindicator/react.d.ts",
+      "import": "./dist/packages/stepindicator/react.js"
     },
     "./react/switch": {
       "types": "./dist/packages/switch/react.d.ts",
@@ -175,8 +175,8 @@
       "react/datepicker": [
         "./dist/packages/datepicker/react.d.ts"
       ],
-      "react/dead-toggle": [
-        "./dist/packages/dead-toggle/react.d.ts"
+      "react/deadtoggle": [
+        "./dist/packages/deadtoggle/react.d.ts"
       ],
       "react/expandable": [
         "./dist/packages/expandable/react.d.ts"
@@ -196,11 +196,11 @@
       "react/pill": [
         "./dist/packages/pill/react.d.ts"
       ],
-      "react/rip-and-tear-checkbox": [
-        "./dist/packages/rip-and-tear-checkbox/react.d.ts"
+      "react/checkbox": [
+        "./dist/packages/checkbox/react.d.ts"
       ],
-      "react/rip-and-tear-radio": [
-        "./dist/packages/rip-and-tear-radio/react.d.ts"
+      "react/radio": [
+        "./dist/packages/radio/react.d.ts"
       ],
       "react/select": [
         "./dist/packages/select/react.d.ts"
@@ -208,8 +208,8 @@
       "react/slider": [
         "./dist/packages/slider/react.d.ts"
       ],
-      "react/steps": [
-        "./dist/packages/steps/react.d.ts"
+      "react/stepindicator": [
+        "./dist/packages/stepindicator/react.d.ts"
       ],
       "react/switch": [
         "./dist/packages/switch/react.d.ts"

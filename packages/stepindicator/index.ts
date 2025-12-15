@@ -7,7 +7,7 @@ import { property, state } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/check-16';
 
-import { activateI18n } from '../i18n';
+import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
