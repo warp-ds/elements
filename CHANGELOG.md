@@ -1,3 +1,10 @@
+# [2.3.0-next.23](https://github.com/warp-ds/elements/compare/v2.3.0-next.22...v2.3.0-next.23) (2025-12-15)
+
+
+### Bug Fixes
+
+* run messages compile ([c632b26](https://github.com/warp-ds/elements/commit/c632b263f9415ded4c9c9d25ce0ebccdeed9a895))
+
 # [2.3.0-next.22](https://github.com/warp-ds/elements/compare/v2.3.0-next.21...v2.3.0-next.22) (2025-12-15)
 
 
