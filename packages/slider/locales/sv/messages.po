@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-12-15 14:33+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: sv\n"
+
+#. js-lingui-explicit-id
+#: packages/slider/slider-thumb.ts:194
+msgid "slider.error.overlap"
+msgstr "Maxvärdet kan inte vara mindre än minimivärdet"
+
+#. js-lingui-explicit-id
+#: packages/slider/slider-thumb.ts:170
+msgid "slider.error.required"
+msgstr "Detta fält är obligatoriskt"
+
+#. js-lingui-explicit-id
+#: packages/slider/slider-thumb.ts:155
+msgid "slider.error.out_of_bounds"
+msgstr "Värdet måste vara mellan {min} och {max}"
