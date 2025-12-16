@@ -2,6 +2,7 @@
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
+import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
@@ -44,7 +45,7 @@ interface OptionWithIdAndMatch extends ComboboxOption {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-combobox--docs)
  */
-export class WarpCombobox extends LitElement {
+export class WarpCombobox extends FormControlMixin(LitElement) {
   /** The available options to select from */
   @property({ type: Array })
   options: ComboboxOption[] = [];
@@ -130,6 +131,23 @@ export class WarpCombobox extends LitElement {
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+  }
+
+  // capture the initial value using firstUpdated and #initialValue
+  #initialValue: string | null = null;
+
+  firstUpdated(changedProps: Map<string, unknown>) {
+    this.#initialValue = this.value;
+  }
+
+  updated(changedProperties: Map<string, unknown>): void {
+    if (changedProperties.has('value')) {
+      this.setValue(this.value);
+    }
+  }
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
   }
 
   private get _listboxId() {
@@ -299,6 +317,7 @@ export class WarpCombobox extends LitElement {
   /** Handle option selection */
   private _handleSelect(option: OptionWithIdAndMatch) {
     this.value = option.value;
+    this.setValue(this.value);
 
     const selectEvent = new CustomEvent('select', {
       detail: { value: option.value },
@@ -461,7 +480,7 @@ export class WarpCombobox extends LitElement {
           aria-expanded=${this._isOpen && this._currentOptions.length !== 0}
           aria-activedescendant=${this._isOpen ? this._navigationOption?.id : undefined}
           aria-controls=${this._listboxId}
-          @input=${(e: CustomEvent) => this._handleChange(e.detail.value)}
+          @input=${(e: CustomEvent) => this._handleChange(e?.detail?.value)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           @keydown=${this._handleKeyDown}></w-textfield>
