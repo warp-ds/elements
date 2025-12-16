@@ -140,6 +140,17 @@ class WarpTextField extends FormControlMixin(LitElement) {
     }
   }
 
+  // capture the initial value using firstUpdated and #initialValue
+  #initialValue: string | null = null;
+
+  firstUpdated(changedProps: Map<string, unknown>) {
+    this.#initialValue = this.value;
+  }
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
+  }
+
   // Note about styling slotted elements:
   // https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
   // https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#styling_slotted_elements
