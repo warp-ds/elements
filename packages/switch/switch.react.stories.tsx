@@ -11,28 +11,28 @@ export type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
   args: {
-    value: false,
+    checked: false,
     disabled: false,
   },
 };
 
 export const Checked: Story = {
   args: {
-    value: true,
+    checked: true,
     disabled: false,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    value: false,
+    checked: false,
     disabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    value: true,
+    checked: true,
     disabled: true,
   },
 };

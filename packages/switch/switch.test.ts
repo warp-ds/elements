@@ -20,7 +20,7 @@ test('can reset switch by resetting surrounding form', async () => {
   `);
 
   const form = document.querySelector('form') as HTMLFormElement;
-  const wSwitch = document.querySelector('w-switch') as HTMLElement & { value: string };
+  const wSwitch = document.querySelector('w-switch') as HTMLElement & { checked: boolean, value: string, updateComplete: Promise<undefined> };
 
   // sanity
   expect(form).not.toBeNull();
