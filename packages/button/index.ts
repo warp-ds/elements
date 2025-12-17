@@ -198,6 +198,9 @@ class WarpButton extends FormControlMixin(LitElement) {
   /** @internal */
   ariaValueTextLoading: string;
 
+  // capture the initial value using firstUpdated and #initialValue
+  #initialValue: string | null = null;
+
   static styles = [reset, styles, css`:host([full-width]) { width: 100%; }`];
 
   updated(changedProperties: PropertyValues<this>) {
@@ -224,6 +227,8 @@ class WarpButton extends FormControlMixin(LitElement) {
     if (!variants.includes(this.variant)) {
       throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(', ')}.`);
     }
+
+    this.#initialValue = this.value;
   }
 
   firstUpdated() {
@@ -310,6 +315,10 @@ class WarpButton extends FormControlMixin(LitElement) {
   _handleButtonClick() {
     if (this.type === 'submit') this.internals.form.requestSubmit();
     else if (this.type === 'reset') this.internals.form.reset();
+  }
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
   }
 
   render() {
