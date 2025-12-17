@@ -119,6 +119,9 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
+  // capture the initial value using connectedCallback and #initialValue
+  #initialValue: string | null = null;
+
   static styles = [
     reset,
     styles,
@@ -137,6 +140,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
+  resetFormControl(): void {
+    this.value = this.#initialValue;
+  }
+
   /** @internal */
   _setValue = (value: string) => {
     this.value = value;
@@ -145,6 +152,9 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
+
+    this.#initialValue = this.value;
+
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
     if (this.autofocus || this.autoFocus) this.shadowRoot.querySelector('select').focus();
 

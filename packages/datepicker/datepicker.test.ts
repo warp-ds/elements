@@ -97,7 +97,6 @@ test('can reset datepicker by resetting surrounding form', async () => {
         name="test"
         value="2025-01-01"
       >
-        Reset the form
       </w-datepicker>
     </form>
   `);
