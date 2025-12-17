@@ -63,10 +63,10 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     return classNames([
       ccSwitch.track,
       this.disabled
-        ? this.value
+        ? this.checked
           ? ccSwitch.trackDisabledOn // disabled + ON
           : ccSwitch.trackDisabledOff // disabled + OFF
-        : this.value
+        : this.checked
           ? ccSwitch.trackActive // enabled + ON
           : ccSwitch.trackInactive, // enabled + OFF
     ]);

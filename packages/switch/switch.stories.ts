@@ -8,6 +8,7 @@ const meta: Meta = {
   argTypes: {
     checked: { control: 'boolean' },
     disabled: { control: 'boolean' },
+    value: { control: 'text' },
   },
 };
 
