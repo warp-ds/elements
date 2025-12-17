@@ -158,6 +158,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     return startOfMonth(this.navigationDate);
   }
 
+  // capture the initial value using connectedCallback and #initialValue
+  #initialValue: string | null = null;
+
   @state()
   get weeks() {
     const month = this.month;
@@ -216,6 +219,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   @query('[data-navigation="true"]')
   selectedCell: HTMLTableCellElement;
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
+  }
 
   async #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
     e.preventDefault();
@@ -380,6 +387,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   connectedCallback(): void {
     super.connectedCallback();
+
+    this.#initialValue = this.value;
 
     // Local lang attribute takes precedence
     const lang = this.lang;

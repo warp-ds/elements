@@ -198,7 +198,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   /** @internal */
   ariaValueTextLoading: string;
 
-  // capture the initial value using firstUpdated and #initialValue
+  // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
 
   static styles = [reset, styles, css`:host([full-width]) { width: 100%; }`];

@@ -86,3 +86,39 @@ test('can pick a date by typing in the input field', async () => {
   const formData = new FormData(page.getByTestId('flight').element() as HTMLFormElement);
   expect(formData.get('from')).toBeTruthy();
 });
+
+test('can reset datepicker by resetting surrounding form', async () => {
+  const label = 'Test label';
+
+  render(html`
+    <form>
+      <w-datepicker
+        label=${label}
+        name="test"
+        value="2025-01-01"
+      >
+        Reset the form
+      </w-datepicker>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const wDatepicker = document.querySelector('w-datepicker') as HTMLElement & { value: string };
+
+  // sanity
+  expect(form).not.toBeNull();
+  expect(wDatepicker).not.toBeNull();
+
+  // Initial value is "2025-01-01"
+  expect(wDatepicker.value).toBe('2025-01-01');
+
+  // Change the value to "definitely not 2025-01-01"
+  wDatepicker.value = 'definitely not 2025-01-01';
+  expect(wDatepicker.value).toBe('definitely not 2025-01-01');
+
+  // Reset the form
+  form.reset();
+
+  // Value should be reset back to "2025-01-01"
+  expect(wDatepicker.value).toBe('2025-01-01');
+});
