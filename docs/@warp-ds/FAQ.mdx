@@ -16,7 +16,17 @@ If you use a [focus trap](https://css-tricks.com/a-primer-on-focus-trapping/), o
 
 For example, the [focus-trap module](https://github.com/focus-trap/focus-trap#shadow-dom) used by [react-spring-bottom-sheet](https://github.com/stipsan/react-spring-bottom-sheet) will not work with custom elements by default. It thinks clicks inside a custom element is outside of the focus trap, and so cancels the click.
 
-If you run into this problem in a dependency, either work with the maintainer to fix the problem, replace the dependency, patch it locally, or fork it to add support.
+Another quirk with `react-spring-bottom-sheet` is that its focus trap doesn't support re-renders in its current version (`3.4.1`) due to an out-of-date `focus-trap` version. If you use that dependency, override the version of `focus-trap` to a minimum of [7.4.2](https://github.com/focus-trap/focus-trap/blob/master/CHANGELOG.md#742).
+
+```json
+{
+  "overrides": {
+    "focus-trap": "^7.4.2"
+  }
+}
+```
+
+If you run into this problem in a dependency, either work with the maintainer to fix the problem, replace the dependency, patch it locally to add `tabbableOptions:{getShadowRoot: true}` after `clickOutsideDeactivates:!1`, or fork it to add support.
 
 ```js
 const fallback = fallbackRef.current
