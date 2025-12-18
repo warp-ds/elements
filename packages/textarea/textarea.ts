@@ -94,10 +94,17 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   @state()
   maxHeight = Number.POSITIVE_INFINITY;
 
+  // capture the initial value using connectedCallback and #initialValue
+  #initialValue: string | null = null;
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
+  }
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
   }
 
   static styles = [reset, styles];
@@ -140,6 +147,8 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   async connectedCallback() {
     super.connectedCallback();
+    this.#initialValue = this.value;
+    this.setValue(this.value);
     await this.updateComplete;
     if (this.value || this.minRows) {
       // If the component starts with a value or minHeight,
