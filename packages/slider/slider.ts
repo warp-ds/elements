@@ -1,8 +1,6 @@
-import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
-import type { WarpTextField } from '../textfield/index.js';
 import { reset } from '../styles.js';
 
 import type { WarpSliderThumb } from './slider-thumb.js';
@@ -24,7 +22,7 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @slot from - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  */
-class WarpSlider extends FormControlMixin(LitElement) {
+class WarpSlider extends LitElement {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,

@@ -205,7 +205,7 @@ export const OverUnder: Story = {
           min="1950"
           max="2025"
           data-testid="overunder"
-          allow-values-outside-range="true"
+          allow-values-outside-range
         >
           <w-slider-thumb
             slot="from"
@@ -325,7 +325,7 @@ export const TestCase: Story = {
           min="0"
           max="700000"
           data-testid="overunder"
-          allow-values-outside-range="true"
+          allow-values-outside-range
           step="10000"
         >
           <w-slider-thumb

@@ -93,6 +93,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   _inputHasFocus = false;
 
+  // capture the initial value using connectedCallback and #initialValue
+  #initialValue: string | null = null;
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
+  }
+
   /**
    * Reference to the anchor positioning style element used by the polyfill.
    * @internal
@@ -293,6 +300,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   async connectedCallback() {
     super.connectedCallback();
+    this.#initialValue = this.value;
+    this.setValue(this.value);
     if (!('anchorName' in document.documentElement.style)) {
       // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
       const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));

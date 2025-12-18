@@ -104,3 +104,39 @@ test('deleting from number input works as expected', async () => {
   await userEvent.type(page.getByRole('spinbutton').last(), '{Backspace}');
   await expect.element(page.getByRole('spinbutton').last()).not.toHaveValue();
 });
+
+test('can reset slider by resetting surrounding form', async () => {
+  render(html`
+    <form>
+      <w-slider label="Slider from 0 - 10" min="0" max="10">
+        <p slot="description">If you want to slide between 0 and 10, this slider has you covered.</p>
+        <w-slider-thumb name="zero-ten" value="3"></w-slider-thumb>
+      </w-slider>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const wSlider = document.querySelector('w-slider') as HTMLElement & { value: string };
+  const wSliderThumb = wSlider.querySelector('w-slider-thumb') as HTMLElement & { value: string; updateComplete: any };
+
+  // sanity
+  expect(form).not.toBeNull();
+  expect(wSlider).not.toBeNull();
+  expect(wSliderThumb).not.toBeNull();
+
+  expect(wSliderThumb.value).toBe('3');
+  expect(Object.fromEntries(new FormData(form).entries())['zero-ten']).toBe('3');
+
+  wSliderThumb.value = '5';
+
+  await wSliderThumb.updateComplete;
+  expect(wSliderThumb.value).toBe('5');
+  expect(Object.fromEntries(new FormData(form).entries())['zero-ten']).toBe('5');
+
+  // Reset the form
+  form.reset();
+
+  await wSliderThumb.updateComplete;
+  expect(wSliderThumb.value).toBe('3');
+  expect(Object.fromEntries(new FormData(form).entries())['zero-ten']).toBe('3');
+});
