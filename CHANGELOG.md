@@ -1,3 +1,10 @@
+# [2.3.0-next.25](https://github.com/warp-ds/elements/compare/v2.3.0-next.24...v2.3.0-next.25) (2025-12-18)
+
+
+### Features
+
+* form participation in combobox ([#467](https://github.com/warp-ds/elements/issues/467)) ([6d6b3f1](https://github.com/warp-ds/elements/commit/6d6b3f18301dfbfd5f15b6a6080881dc279b4cae))
+
 # [2.3.0-next.24](https://github.com/warp-ds/elements/compare/v2.3.0-next.23...v2.3.0-next.24) (2025-12-15)
 
 
