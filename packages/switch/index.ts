@@ -1,6 +1,7 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
+import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
@@ -34,12 +35,21 @@ const ccSwitch = {
   a11y: 'sr-only',
 };
 
-export class WarpSwitch extends LitElement {
+export class WarpSwitch extends FormControlMixin(LitElement) {
+  @property({ type: String, reflect: true })
+  name = '';
+
+  @property({ type: String, reflect: true })
+  value = '';
+
   @property({ type: Boolean, reflect: true })
-  value = false;
+  checked = false;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  // capture the initial state using connectedCallback and #initialState
+  #initialState: boolean | null = null;
 
   static styles = [reset, styles];
 
@@ -53,10 +63,10 @@ export class WarpSwitch extends LitElement {
     return classNames([
       ccSwitch.track,
       this.disabled
-        ? this.value
+        ? this.checked
           ? ccSwitch.trackDisabledOn // disabled + ON
           : ccSwitch.trackDisabledOff // disabled + OFF
-        : this.value
+        : this.checked
           ? ccSwitch.trackActive // enabled + ON
           : ccSwitch.trackInactive, // enabled + OFF
     ]);
@@ -66,13 +76,13 @@ export class WarpSwitch extends LitElement {
   get _handleClasses() {
     return classNames([
       ccSwitch.handle,
-      this.value && ccSwitch.handleSelected, // position (ON → translated)
+      this.checked && ccSwitch.handleSelected, // position (ON → translated)
 
       this.disabled
-        ? this.value
+        ? this.checked
           ? ccSwitch.handleDisabledOn // disabled + ON
           : ccSwitch.handleDisabledOff // disabled + OFF
-        : this.value
+        : this.checked
           ? ccSwitch.handleActive // enabled + ON
           : ccSwitch.handleNotDisabled, // enabled + OFF
     ]);
@@ -81,15 +91,35 @@ export class WarpSwitch extends LitElement {
   /** @internal */
   _handleClick() {
     if (!this.disabled) {
-      this.value = !this.value;
+      this.checked = !this.checked;
       this.dispatchEvent(
         new CustomEvent('change', {
-          detail: { value: this.value },
+          detail: { checked: this.checked, value: this.value || null },
           bubbles: true,
           composed: true,
         }),
       );
     }
+  }
+
+  connectedCallback(): void {
+    this.#initialState = this.checked;
+    super.connectedCallback();
+    if (!this.disabled) {
+      this.setValue(this.checked && this.value ? this.value : null);
+    }
+  }
+
+  willUpdate(changedProperties) {
+    if (changedProperties.has('checked')) {
+      if (!this.disabled) {
+        this.setValue(this.checked && this.value ? this.value : null);
+      }
+    }
+  }
+
+  resetFormControl(): void {
+    this.checked = this.#initialState;
   }
 
   render() {
@@ -98,7 +128,7 @@ export class WarpSwitch extends LitElement {
         <button
           type="button"
           role="switch"
-          aria-checked=${this.value}
+          aria-checked=${this.checked}
           class=${this._baseClasses}
           aria-disabled=${this.disabled}
           ?disabled=${this.disabled}

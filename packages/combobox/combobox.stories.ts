@@ -121,15 +121,42 @@ export const DisableStaticFiltering: Story = {
       combobox.value = '';
 
       combobox.addEventListener('change', (e) => {
-        combobox.value = e.detail.value;
+        combobox.value = e?.detail?.value;
         // Simulate dynamic filtering
-        const filteredOptions = sampleOptions.filter((option) => option.value.toLowerCase().includes(e.detail.value.toLowerCase()));
+        const filteredOptions = sampleOptions.filter((option) => option.value.toLowerCase().includes(e?.detail?.value.toLowerCase()));
         combobox.options = filteredOptions;
       });
 
       combobox.addEventListener('select', (e) => {
-        combobox.value = e.detail.value;
+        combobox.value = e?.detail?.value;
       });
     </script>
+  `,
+};
+
+export const FormSubmission: Story = {
+  render: () => html`
+    <p>Resetting the form should return values to the initial values</p>
+    <p>Submitting the form should result in the values being in the resulting pages query parameters</p>
+    <form>
+      <w-combobox
+        id="form-submission"
+        name="warp-combo-1"
+        label="Select a fruit (dynamic)"
+        placeholder="Type to search..."
+        .options="${sampleOptions}"
+      ></w-combobox>
+      <br>
+      <w-combobox
+        id="form-submission"
+        name="warp-combo-2"
+        label="Select a fruit (dynamic)"
+        value="Banana"
+        placeholder="Type to search..."
+        .options="${sampleOptions}"
+      ></w-combobox>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+    </form>
   `,
 };

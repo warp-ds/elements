@@ -35,3 +35,41 @@ test('works in a form', async () => {
     berry: 'raspberries',
   });
 });
+
+test('can reset select by resetting surrounding form', async () => {
+  const label = 'Test label';
+
+  render(html`
+    <form>
+      <w-select
+        label=${label}
+        name="test"
+        value="strawberries"
+      >
+        <option value="strawberries">Strawberries</option>
+        <option value="raspberries">Raspberries</option>
+        <option value="cloudberries">Cloudberries</option>
+      </w-select>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const wSelect = document.querySelector('w-select') as HTMLElement & { value: string };
+
+  // sanity
+  expect(form).not.toBeNull();
+  expect(wSelect).not.toBeNull();
+
+  // Initial value is "strawberries"
+  expect(wSelect.value).toBe('strawberries');
+
+  // Change the value to "raspberries"
+  wSelect.value = 'raspberries';
+  expect(wSelect.value).toBe('raspberries');
+
+  // Reset the form
+  form.reset();
+
+  // Value should be reset back to "strawberries"
+  expect(wSelect.value).toBe('strawberries');
+});

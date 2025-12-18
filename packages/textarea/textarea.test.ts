@@ -66,3 +66,33 @@ test('marks input field as readonly if the readonly prop is true', async () => {
   const page = render(component);
   await expect.element(page.getByLabelText('Test label')).toHaveAttribute('readonly', '');
 });
+
+test('can reset textarea by resetting surrounding form', async () => {
+  render(html`
+    <form>
+      <w-textarea name="message" value="Hola el Mundo"></w-textarea>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const wTextArea = document.querySelector('w-textarea') as HTMLElement & {
+    checked: boolean;
+    value: string;
+    updateComplete: Promise<undefined>;
+  };
+
+  // sanity
+  expect(form).not.toBeNull();
+  expect(wTextArea).not.toBeNull();
+
+  expect(wTextArea.value).toBe('Hola el Mundo');
+
+  wTextArea.value = 'Definitely not Hola el Mundo';
+  await wTextArea.updateComplete;
+
+  // Reset the form
+  form.reset();
+  await wTextArea.updateComplete;
+
+  expect(wTextArea.value).toBe('Hola el Mundo');
+});
