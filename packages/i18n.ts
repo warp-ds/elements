@@ -5,6 +5,15 @@ type SupportedLocale = (typeof supportedLocales)[number];
 
 export const defaultLocale = 'en';
 
+/**
+ * Build-time baked locale. When set via Rollup replace plugin during build,
+ * this locale will be used instead of runtime detection.
+ * For per-language bundles, this is set to the target locale.
+ * For the backwards-compatible all-languages bundle, this remains undefined.
+ */
+declare const __WARP_LOCALE__: SupportedLocale | undefined;
+const bakedLocale: SupportedLocale | undefined = typeof __WARP_LOCALE__ !== 'undefined' ? __WARP_LOCALE__ : undefined;
+
 export const getSupportedLocale = (usedLocale: string) => {
   return (
     supportedLocales.find((locale) => usedLocale === locale || usedLocale.toLowerCase().includes(locale)) ||
@@ -13,6 +22,11 @@ export const getSupportedLocale = (usedLocale: string) => {
 };
 
 export function detectLocale(): SupportedLocale {
+  // If we have a baked-in locale from build time, use it directly
+  if (bakedLocale) {
+    return bakedLocale;
+  }
+
   if (typeof window === 'undefined') {
     /**
      * Server locale detection. This requires e.g LANG environment variable to be set on the server.

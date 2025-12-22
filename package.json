@@ -233,7 +233,8 @@
     "./dist/custom-elements.json"
   ],
   "scripts": {
-    "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
+    "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && node ./build/bundle-all-locales.js && rimraf .tmp",
+    "build:bundle:locale": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
     "build:cloak": "node ./build/cloak.js",
     "build:components": "node ./build/components.js",
     "build:eik-components-backwards-compat": "node ./build/components-eik.js",
