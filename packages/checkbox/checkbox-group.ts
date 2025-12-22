@@ -12,6 +12,10 @@ export class WCheckboxGroup extends LitElement {
   }
 }
 
+if (!customElements.get('w-checkbox-group')) {
+  customElements.define('w-checkbox-group', WCheckboxGroup);
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     'w-checkbox-group': WCheckboxGroup;

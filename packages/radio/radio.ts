@@ -106,6 +106,10 @@ export class WRadio extends BaseFormAssociatedElement {
   }
 }
 
+if (!customElements.get('w-radio')) {
+  customElements.define('w-radio', WRadio);
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     'w-radio': WRadio;

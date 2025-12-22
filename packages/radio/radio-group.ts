@@ -356,6 +356,10 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   }
 }
 
+if (!customElements.get('w-radio-group')) {
+  customElements.define('w-radio-group', WRadioGroup);
+}
+
 declare global {
   interface HTMLElementTagNameMap {
     'w-radio-group': WRadioGroup;
