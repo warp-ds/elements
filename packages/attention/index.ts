@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import {
   arrowDirectionClassname,
   Directions,
@@ -13,16 +13,10 @@ import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { activateI18n } from '../i18n';
 import { reset } from '../styles';
 import { generateRandomId } from '../utils/index.js';
 
 import { styles as layoutStyles } from './layout-styles';
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
 import '@warp-ds/icons/elements/close-16';
@@ -156,7 +150,6 @@ class WarpAttention extends LitElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
     this.handleDone = this.handleDone.bind(this);
 
@@ -310,11 +303,7 @@ class WarpAttention extends LitElement {
 
   /** @internal */
   get _ariaClose() {
-    return i18n._({
-      id: 'attention.aria.close',
-      message: 'Close',
-      comment: 'Aria label for the close button in attention',
-    });
+    return msg('Close', { id: 'attention.aria.close' });
   }
 
   /** @internal */
@@ -370,35 +359,19 @@ class WarpAttention extends LitElement {
       case 'top-start':
       case 'top':
       case 'top-end':
-        return i18n._({
-          id: 'attention.aria.pointingUp',
-          message: 'pointing up',
-          comment: 'Default screenreader message for top direction in the attention component',
-        });
+        return msg('pointing up', { id: 'attention.aria.pointingUp' });
       case 'right-start':
       case 'right':
       case 'right-end':
-        return i18n._({
-          id: 'attention.aria.pointingRight',
-          message: 'pointing right',
-          comment: 'Default screenreader message for right direction in the attention component',
-        });
+        return msg('pointing right', { id: 'attention.aria.pointingRight' });
       case 'bottom-start':
       case 'bottom':
       case 'bottom-end':
-        return i18n._({
-          id: 'attention.aria.pointingDown',
-          message: 'pointing down',
-          comment: 'Default screenreader message for bottom direction in the attention component',
-        });
+        return msg('pointing down', { id: 'attention.aria.pointingDown' });
       case 'left-start':
       case 'left':
       case 'left-end':
-        return i18n._({
-          id: 'attention.aria.pointingLeft',
-          message: 'pointing left',
-          comment: 'Default screenreader message for left direction in the attention component',
-        });
+        return msg('pointing left', { id: 'attention.aria.pointingLeft' });
       default:
         return '';
     }
@@ -407,29 +380,13 @@ class WarpAttention extends LitElement {
   activeAttentionType() {
     switch (true) {
       case this.tooltip:
-        return i18n._({
-          id: 'attention.aria.tooltip',
-          message: 'tooltip',
-          comment: 'Default screenreader message for tooltip in the attention component',
-        });
+        return msg('A black speech bubble providing complementary information', { id: 'attention.aria.tooltip' });
       case this.callout:
-        return i18n._({
-          id: 'attention.aria.callout',
-          message: 'callout speech bubble',
-          comment: 'Default screenreader message for callout speech bubble in the attention component',
-        });
+        return msg('A green speech bubble introducing something new', { id: 'attention.aria.callout' });
       case this.popover:
-        return i18n._({
-          id: 'attention.aria.popover',
-          message: 'popover speech bubble',
-          comment: 'Default screenreader message for popover speech bubble in the attention component',
-        });
+        return msg('A white speech bubble providing additional information', { id: 'attention.aria.popover' });
       case this.highlight:
-        return i18n._({
-          id: 'attention.aria.highlight',
-          message: 'highlighted speech bubble',
-          comment: 'Default screenreader message for highlighted speech bubble in the attention component',
-        });
+        return msg('An attention speech bubble with important information', { id: 'attention.aria.highlight' });
       default:
         return '';
     }

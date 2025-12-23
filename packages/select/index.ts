@@ -1,20 +1,13 @@
 // @warp-css;
 import { css, html, LitElement, TemplateResult } from 'lit';
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { FormControlMixin } from '@open-wc/form-control';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 
-import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 import '@warp-ds/icons/elements/chevron-down-16';
@@ -137,7 +130,6 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   resetFormControl(): void {
@@ -250,11 +242,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
               this.optional,
               () =>
                 html`<span class="${ccLabel.optional}"
-                  >${i18n._({
-                    id: 'select.label.optional',
-                    message: '(optional)',
-                    comment: 'Shown behind label when marked as optional',
-                  })}</span
+                  >${msg('(optional)', { id: 'select.label.optional' })}</span
                 >`,
             )}</label
           >`,

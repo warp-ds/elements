@@ -1,20 +1,13 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/check-16';
 
-import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const ccSteps = {
@@ -65,7 +58,6 @@ class WarpStepIndicator extends LitElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   updated() {
@@ -96,23 +88,16 @@ class WarpStepIndicator extends LitElement {
   }
 }
 
-const availableAriaLabels = {
-  completed: i18n._({
-    id: 'steps.aria.completed',
-    message: 'Step indicator completed circle',
-    comment: 'Completed circle',
-  }),
-  active: i18n._({
-    id: 'steps.aria.active',
-    message: 'Step indicator active circle',
-    comment: 'Active circle',
-  }),
-  default: i18n._({
-    id: 'steps.aria.emptyCircle',
-    message: 'Empty circle',
-    comment: 'Empty circle',
-  }),
-};
+// Helper function to get localized aria labels at render time
+function getAriaLabelFor(type: 'completed' | 'active' | 'default'): string {
+  if (type === 'completed') {
+    return msg('Step indicator completed circle', { id: 'steps.aria.completed' });
+  }
+  if (type === 'active') {
+    return msg('Step indicator active circle', { id: 'steps.aria.active' });
+  }
+  return msg('Empty circle', { id: 'steps.aria.emptyCircle' });
+}
 
 interface StepsContext {
   horizontal?: boolean;
@@ -138,7 +123,6 @@ class WarpStep extends LitElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   connectedCallback() {
@@ -152,9 +136,9 @@ class WarpStep extends LitElement {
   }
 
   getAriaLabel() {
-    if (this.completed) return availableAriaLabels.completed;
-    if (this.active) return availableAriaLabels.active;
-    return availableAriaLabels.default;
+    if (this.completed) return getAriaLabelFor('completed');
+    if (this.active) return getAriaLabelFor('active');
+    return getAriaLabelFor('default');
   }
 
   render() {

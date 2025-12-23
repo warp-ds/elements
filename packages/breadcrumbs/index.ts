@@ -1,18 +1,11 @@
 // @warp-css;
 
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { interleave } from '@warp-ds/core/breadcrumbs';
 import { html, LitElement, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const ccBreadcrumbs = {
@@ -38,13 +31,7 @@ class WarpBreadcrumbs extends LitElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-    this.ariaLabel = i18n._({
-      id: 'breadcrumbs.ariaLabel',
-      message: 'You are here',
-      comment: 'Default screen reader message for the breadcrumb component',
-    });
+    this.ariaLabel = msg('You are here', { id: 'breadcrumbs.ariaLabel' });
   }
 
   /** @internal */

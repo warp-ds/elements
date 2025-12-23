@@ -29,6 +29,8 @@
     "packages/tabs",
     "packages/tabs",
     "packages/textarea",
+    "packages/localization.ts",
+    "packages/generated",
     "setup-tests.ts"
   ],
   "compilerOptions": {

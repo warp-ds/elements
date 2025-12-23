@@ -4,17 +4,10 @@ import { html, LitElement } from 'lit';
 import '@warp-ds/icons/elements/close-16';
 
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { property } from 'lit/decorators.js';
 
-import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const pillStyles = {
@@ -50,30 +43,22 @@ class WarpPill extends LitElement {
   @property({ attribute: 'close-sr-label', type: String }) closeSrLabel: string;
   @property({ attribute: 'close-aria-label', type: String }) closeAriaLabel: string;
 
-  /** @internal */
-  openFilterSrText: string;
-  /** @internal */
-  removeFilterSrText: string;
-
   static styles = [reset, styles];
+
+  /** @internal */
+  get openFilterSrText(): string {
+    return msg('Open filter', { id: 'pill.aria.openFilter' });
+  }
+
+  /** @internal */
+  get removeFilterSrText(): string {
+    return msg('Remove filter {label}', { id: 'pill.aria.removeFilter' });
+  }
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
     this.canClose = false;
     this.suggestion = false;
-
-    this.openFilterSrText = i18n._({
-      id: 'pill.aria.openFilter',
-      message: 'Open filter',
-      comment: 'Fallback screen reader message for open filter',
-    });
-
-    this.removeFilterSrText = i18n._({
-      id: 'pill.aria.removeFilter',
-      message: 'Remove filter {label}',
-      comment: 'Fallback screen reader message for removal of the filter',
-    });
   }
 
   /** @internal */

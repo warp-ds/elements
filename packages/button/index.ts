@@ -1,20 +1,13 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, PropertyValues, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { activateI18n } from '../i18n';
 import '../link';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'utility' | 'pill' | 'link';
@@ -195,9 +188,6 @@ class WarpButton extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
-  /** @internal */
-  ariaValueTextLoading: string;
-
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
 
@@ -211,14 +201,12 @@ class WarpButton extends FormControlMixin(LitElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
     this.variant = 'secondary';
-    this.ariaValueTextLoading = i18n._({
-      id: 'button.aria.loading',
-      message: 'Loading...',
-      comment: 'Screen reader message for buttons that are loading',
-    });
+  }
+
+  /** @internal */
+  get ariaValueTextLoading(): string {
+    return msg('Loading...', { id: 'button.aria.loading' });
   }
 
   connectedCallback() {

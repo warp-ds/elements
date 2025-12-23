@@ -9,9 +9,10 @@ import { reset } from '../styles.js';
 import type { WarpAttention } from '../attention/index.js';
 import type { WarpTextField } from '../textfield/index.js';
 
+import { msg, str } from '@lit/localize';
+
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 import { styles as unoStyles } from './styles.js';
-import { i18n } from '@lingui/core';
 
 /**
  * Component to place inside a `<w-slider>`.
@@ -158,15 +159,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
     if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
+      const minWithSuffix = `${this.min} ${this.suffix}`.trim();
+      const maxWithSuffix = `${this.max} ${this.suffix}`.trim();
       this.#handleValidity(
-        i18n.t({
-          id: 'slider.error.out_of_bounds',
-          message: 'Value must be between {min} and {max}',
-          values: {
-            min: `${this.min} ${this.suffix}`.trim(),
-            max: `${this.max} ${this.suffix}`.trim(),
-          },
-        }),
+        msg(str`Value must be between ${minWithSuffix} and ${maxWithSuffix}`, { id: 'slider.error.out_of_bounds' }),
       );
       return { shouldCancel: true };
     }
@@ -174,10 +170,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (value === '') {
       if (this.required) {
         this.#handleValidity(
-          i18n.t({
-            id: 'slider.error.required',
-            message: 'This field is required',
-          }),
+          msg('This field is required', { id: 'slider.error.required' }),
         );
       }
       // To not bork when input field is empty
@@ -198,10 +191,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       const toValue = computedStyle.getPropertyValue('--to');
       const fromValue = computedStyle.getPropertyValue('--from');
 
-      const numberOverLapError = i18n.t({
-        id: 'slider.error.overlap',
-        message: 'The maximum value cannot be less than the minimum',
-      });
+      const numberOverLapError = msg('The maximum value cannot be less than the minimum', { id: 'slider.error.overlap' });
 
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value

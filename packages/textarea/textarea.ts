@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { classNames as classnames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
@@ -197,11 +197,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
                     this.optional
                       ? html`
                           <span class="${ccLabel.optional}">
-                            ${i18n.t({
-                              id: 'textarea.label.optional',
-                              message: '(optional)',
-                              comment: 'Shown behind label when marked as optional',
-                            })}
+                            ${msg('(optional)', { id: 'textarea.label.optional' })}
                           </span>
                     `
                       : nothing

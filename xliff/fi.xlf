@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="fi" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="button.aria.loading">
+  <source>Loading...</source>
+  <target>Ladataan...</target>
+</trans-unit>
+<trans-unit id="attention.aria.close">
+  <source>Close</source>
+  <target>Sulje</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingUp">
+  <source>pointing up</source>
+  <target>osoittaa ylös</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingRight">
+  <source>pointing right</source>
+  <target>osoittaa oikealle</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingDown">
+  <source>pointing down</source>
+  <target>osoittaa alas</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingLeft">
+  <source>pointing left</source>
+  <target>osoittaa vasemmalle</target>
+</trans-unit>
+<trans-unit id="attention.aria.tooltip">
+  <source>A black speech bubble providing complementary information</source>
+  <target>Musta puhekupla, joka tarjoaa täydentävää tietoa</target>
+</trans-unit>
+<trans-unit id="attention.aria.callout">
+  <source>A green speech bubble introducing something new</source>
+  <target>Vihreä puhekupla, joka esittelee jotain uutta</target>
+</trans-unit>
+<trans-unit id="attention.aria.popover">
+  <source>A white speech bubble providing additional information</source>
+  <target>Valkoinen puhekupla, joka tarjoaa lisätietoa</target>
+</trans-unit>
+<trans-unit id="attention.aria.highlight">
+  <source>An attention speech bubble with important information</source>
+  <target>Puhekupla, joka sisältää tärkeää tietoa</target>
+</trans-unit>
+<trans-unit id="breadcrumbs.ariaLabel">
+  <source>You are here</source>
+  <target>Olet tässä</target>
+</trans-unit>
+<trans-unit id="card.button.text">
+  <source>Select</source>
+  <target>Valitse</target>
+</trans-unit>
+<trans-unit id="combobox.aria.noResults">
+  <source>No results</source>
+  <target>Ei tuloksia</target>
+</trans-unit>
+<trans-unit id="combobox.aria.oneResult">
+  <source>1 result</source>
+  <target>1 tulos</target>
+</trans-unit>
+<trans-unit id="combobox.aria.multipleResults">
+  <source><x id="0" equiv-text="${numResults}"/> results</source>
+  <target><x id="0" equiv-text="${numResults}"/> tulosta</target>
+</trans-unit>
+<trans-unit id="datepicker.toggle.changeDate">
+  <source>Change date, <x id="0" equiv-text="${format(this.value, this.dayFormat)}"/></source>
+  <target>Vaihda päivämäärä, <x id="0" equiv-text="${format(this.value, this.dayFormat)}"/></target>
+</trans-unit>
+<trans-unit id="datepicker.toggle.chooseDate">
+  <source>Choose date</source>
+  <target>Valitse päivämäärä</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.roleDescription">
+  <source>Date picker</source>
+  <target>Päivämäärävalitsin</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.previousMonth">
+  <source>Previous month</source>
+  <target>Edellinen kuukausi</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.nextMonth">
+  <source>Next month</source>
+  <target>Seuraava kuukausi</target>
+</trans-unit>
+<trans-unit id="modal.aria.back">
+  <source>Back</source>
+  <target>Takaisin</target>
+</trans-unit>
+<trans-unit id="modal.aria.close">
+  <source>Close</source>
+  <target>Sulje</target>
+</trans-unit>
+<trans-unit id="pagination.aria.icon-suffix">
+  <source>icon</source>
+  <target>kuvake</target>
+</trans-unit>
+<trans-unit id="pagination.aria.pagination">
+  <source>Pages</source>
+  <target>Sivut</target>
+</trans-unit>
+<trans-unit id="pagination.aria.first-page">
+  <source>First page</source>
+  <target>Ensimmäinen sivu</target>
+</trans-unit>
+<trans-unit id="pagination.aria.prev-page">
+  <source>Previous page</source>
+  <target>Edellinen sivu</target>
+</trans-unit>
+<trans-unit id="pagination.aria.page">
+  <source>Page <x id="0" equiv-text="${pageNumber}"/></source>
+  <target>Sivu <x id="0" equiv-text="${pageNumber}"/></target>
+</trans-unit>
+<trans-unit id="pagination.aria.next-page">
+  <source>Next page</source>
+  <target>Seuraava sivu</target>
+</trans-unit>
+<trans-unit id="pill.aria.openFilter">
+  <source>Open filter</source>
+  <target>Avaa suodatin</target>
+</trans-unit>
+<trans-unit id="pill.aria.removeFilter">
+  <source>Remove filter {label}</source>
+  <target>Tyhjennä suodatin {label}</target>
+</trans-unit>
+<trans-unit id="select.label.optional">
+  <source>(optional)</source>
+  <target>(vapaaehtoinen)</target>
+</trans-unit>
+<trans-unit id="slider.error.out_of_bounds">
+  <source>Value must be between <x id="0" equiv-text="${minWithSuffix}"/> and <x id="1" equiv-text="${maxWithSuffix}"/></source>
+  <target>Arvon on oltava välillä <x id="0" equiv-text="${minWithSuffix}"/> - <x id="1" equiv-text="${maxWithSuffix}"/></target>
+</trans-unit>
+<trans-unit id="slider.error.required">
+  <source>This field is required</source>
+  <target>Tämä kenttä on pakollinen</target>
+</trans-unit>
+<trans-unit id="slider.error.overlap">
+  <source>The maximum value cannot be less than the minimum</source>
+  <target>Maksimiarvo ei voi olla pienempi kuin minimiarvo</target>
+</trans-unit>
+<trans-unit id="steps.aria.completed">
+  <source>Step indicator completed circle</source>
+  <target>Vaiheilmaisin valmis ympyrä</target>
+</trans-unit>
+<trans-unit id="steps.aria.active">
+  <source>Step indicator active circle</source>
+  <target>Vaiheilmaisin aktiivinen ympyrä</target>
+</trans-unit>
+<trans-unit id="steps.aria.emptyCircle">
+  <source>Empty circle</source>
+  <target>Tyhjä ympyrä</target>
+</trans-unit>
+<trans-unit id="textarea.label.optional">
+  <source>(optional)</source>
+  <target>(vapaaehtoinen)</target>
+</trans-unit>
+<trans-unit id="toast.aria.warning">
+  <source>Warning</source>
+  <target>Varoitus</target>
+</trans-unit>
+<trans-unit id="toast.aria.error">
+  <source>Error</source>
+  <target>Virhe</target>
+</trans-unit>
+<trans-unit id="toast.aria.successful">
+  <source>Successful</source>
+  <target>Onnistui</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

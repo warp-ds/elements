@@ -9,6 +9,9 @@ eik
 .tap
 __screenshots__
 vite.config.js.timestamp*
-# # i18n related files
-packages/*/locales/*/*.mjs
+# @lit/localize generated files
+lit-locales/
+packages/generated/
+.tmp
+.tmp-*
 /entrypoint.js

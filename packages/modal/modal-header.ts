@@ -1,18 +1,11 @@
 import { Move } from '@itsy/animate/move';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import '@warp-ds/icons/elements/arrow-left-16';
 import '@warp-ds/icons/elements/close-16';
 
-import { activateI18n } from '../i18n';
 import { reset } from '../styles';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { CanCloseMixin } from './util.js';
 
 /**
@@ -33,7 +26,6 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
   render() {
     return html`
@@ -69,11 +61,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
     return this.back && !this._hasTopContent // Not showing back button when there is a top image
       ? html`<button
           type="button"
-          aria-label="${i18n._({
-            id: 'modal.aria.back',
-            message: 'Back',
-            comment: 'Aria label for the back button in modal',
-          })}"
+          aria-label="${msg('Back', { id: 'modal.aria.back' })}"
           class="header-button header-button-left"
           @click="${this.emitBack}">
           <w-icon-arrow-left-16 style="display: flex;"></w-icon-arrow-left-16>
@@ -85,11 +73,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
     return html`<div class="header-close-button-container">
         <w-button
             type="button"
-            aria-label="${i18n._({
-              id: 'modal.aria.close',
-              message: 'Close',
-              comment: 'Aria label for the close button in modal',
-            })}"
+            aria-label="${msg('Close', { id: 'modal.aria.close' })}"
             variant="pill"
             small=""
             @click="${this.close}">

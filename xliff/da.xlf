@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="da" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="button.aria.loading">
+  <source>Loading...</source>
+  <target>Indlæser...</target>
+</trans-unit>
+<trans-unit id="attention.aria.close">
+  <source>Close</source>
+  <target>Luk</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingUp">
+  <source>pointing up</source>
+  <target>peger opad</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingRight">
+  <source>pointing right</source>
+  <target>peger til højre</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingDown">
+  <source>pointing down</source>
+  <target>peger nedad</target>
+</trans-unit>
+<trans-unit id="attention.aria.pointingLeft">
+  <source>pointing left</source>
+  <target>peger til venstre</target>
+</trans-unit>
+<trans-unit id="attention.aria.tooltip">
+  <source>A black speech bubble providing complementary information</source>
+  <target>En sort taleboble med flere oplysninger</target>
+</trans-unit>
+<trans-unit id="attention.aria.callout">
+  <source>A green speech bubble introducing something new</source>
+  <target>En grøn taleboble der introducerer noget nyt</target>
+</trans-unit>
+<trans-unit id="attention.aria.popover">
+  <source>A white speech bubble providing additional information</source>
+  <target>En hvid taleboble med mere information</target>
+</trans-unit>
+<trans-unit id="attention.aria.highlight">
+  <source>An attention speech bubble with important information</source>
+  <target>En opmærksomhedsskabende taleboble med vigtig information</target>
+</trans-unit>
+<trans-unit id="breadcrumbs.ariaLabel">
+  <source>You are here</source>
+  <target>Du er her</target>
+</trans-unit>
+<trans-unit id="card.button.text">
+  <source>Select</source>
+  <target>Vælg</target>
+</trans-unit>
+<trans-unit id="combobox.aria.noResults">
+  <source>No results</source>
+  <target>Ingen resultater</target>
+</trans-unit>
+<trans-unit id="combobox.aria.oneResult">
+  <source>1 result</source>
+  <target>1 resultat</target>
+</trans-unit>
+<trans-unit id="combobox.aria.multipleResults">
+  <source><x id="0" equiv-text="${numResults}"/> results</source>
+  <target><x id="0" equiv-text="${numResults}"/> resultater</target>
+</trans-unit>
+<trans-unit id="datepicker.toggle.changeDate">
+  <source>Change date, <x id="0" equiv-text="${format(this.value, this.dayFormat)}"/></source>
+  <target>Skift dato, <x id="0" equiv-text="${format(this.value, this.dayFormat)}"/></target>
+</trans-unit>
+<trans-unit id="datepicker.toggle.chooseDate">
+  <source>Choose date</source>
+  <target>Vælg dato</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.roleDescription">
+  <source>Date picker</source>
+  <target>Datovælger</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.previousMonth">
+  <source>Previous month</source>
+  <target>Forrige måned</target>
+</trans-unit>
+<trans-unit id="datepicker.calendar.nextMonth">
+  <source>Next month</source>
+  <target>Næste måned</target>
+</trans-unit>
+<trans-unit id="modal.aria.back">
+  <source>Back</source>
+  <target>Tilbage</target>
+</trans-unit>
+<trans-unit id="modal.aria.close">
+  <source>Close</source>
+  <target>Luk</target>
+</trans-unit>
+<trans-unit id="pagination.aria.icon-suffix">
+  <source>icon</source>
+  <target>ikon</target>
+</trans-unit>
+<trans-unit id="pagination.aria.pagination">
+  <source>Pages</source>
+  <target>Sider</target>
+</trans-unit>
+<trans-unit id="pagination.aria.first-page">
+  <source>First page</source>
+  <target>Første side</target>
+</trans-unit>
+<trans-unit id="pagination.aria.prev-page">
+  <source>Previous page</source>
+  <target>Forrige side</target>
+</trans-unit>
+<trans-unit id="pagination.aria.page">
+  <source>Page <x id="0" equiv-text="${pageNumber}"/></source>
+  <target>Side <x id="0" equiv-text="${pageNumber}"/></target>
+</trans-unit>
+<trans-unit id="pagination.aria.next-page">
+  <source>Next page</source>
+  <target>Næste side</target>
+</trans-unit>
+<trans-unit id="pill.aria.openFilter">
+  <source>Open filter</source>
+  <target>Åbn filter</target>
+</trans-unit>
+<trans-unit id="pill.aria.removeFilter">
+  <source>Remove filter {label}</source>
+  <target>Fjern filter {label}</target>
+</trans-unit>
+<trans-unit id="select.label.optional">
+  <source>(optional)</source>
+  <target>(valgfrit)</target>
+</trans-unit>
+<trans-unit id="slider.error.out_of_bounds">
+  <source>Value must be between <x id="0" equiv-text="${minWithSuffix}"/> and <x id="1" equiv-text="${maxWithSuffix}"/></source>
+  <target>Værdien skal være mellem <x id="0" equiv-text="${minWithSuffix}"/> og <x id="1" equiv-text="${maxWithSuffix}"/></target>
+</trans-unit>
+<trans-unit id="slider.error.required">
+  <source>This field is required</source>
+  <target>Dette felt er påkrævet</target>
+</trans-unit>
+<trans-unit id="slider.error.overlap">
+  <source>The maximum value cannot be less than the minimum</source>
+  <target>Maksimumværdien må ikke være mindre end minimumværdien</target>
+</trans-unit>
+<trans-unit id="steps.aria.completed">
+  <source>Step indicator completed circle</source>
+  <target>Trinindikator fuldført cirkel</target>
+</trans-unit>
+<trans-unit id="steps.aria.active">
+  <source>Step indicator active circle</source>
+  <target>Trinindikator aktiv cirkel</target>
+</trans-unit>
+<trans-unit id="steps.aria.emptyCircle">
+  <source>Empty circle</source>
+  <target>Tom cirkel</target>
+</trans-unit>
+<trans-unit id="textarea.label.optional">
+  <source>(optional)</source>
+  <target>(valgfrit)</target>
+</trans-unit>
+<trans-unit id="toast.aria.warning">
+  <source>Warning</source>
+  <target>Advarsel</target>
+</trans-unit>
+<trans-unit id="toast.aria.error">
+  <source>Error</source>
+  <target>Fejl</target>
+</trans-unit>
+<trans-unit id="toast.aria.successful">
+  <source>Successful</source>
+  <target>Fuldført</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

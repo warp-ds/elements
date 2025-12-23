@@ -1,5 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg } from '@lit/localize';
 import { collapse, expand } from 'element-collapse';
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
@@ -10,14 +10,7 @@ import '@warp-ds/icons/elements/error-16';
 import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/close-16';
 
-import { activateI18n } from '../i18n';
 import { reset } from '../styles';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 import type { ToastType } from './types';
 
@@ -79,7 +72,6 @@ export class WarpToast extends LitElement {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   connectedCallback() {
@@ -135,24 +127,12 @@ export class WarpToast extends LitElement {
   /** @internal */
   get _typeLabel() {
     if (this._warning) {
-      return i18n._({
-        id: 'toast.aria.warning',
-        message: 'Warning',
-        comment: 'Default screenreader message for warning in toast component',
-      });
+      return msg('Warning', { id: 'toast.aria.warning' });
     }
     if (this._error) {
-      return i18n._({
-        id: 'toast.aria.error',
-        message: 'Error',
-        comment: 'Default screenreader message for error in toast component',
-      });
+      return msg('Error', { id: 'toast.aria.error' });
     }
-    return i18n._({
-      id: 'toast.aria.successful',
-      message: 'Successful',
-      comment: 'Default screenreader message for successful in toast component',
-    });
+    return msg('Successful', { id: 'toast.aria.successful' });
   }
 
   /** @internal */

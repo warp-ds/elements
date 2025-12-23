@@ -1,20 +1,13 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
+import { msg, str } from '@lit/localize';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
-
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const ccCombobox = {
@@ -130,7 +123,6 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   constructor() {
     super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   // capture the initial value using firstUpdated and #initialValue
@@ -184,20 +176,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       option.value.toLowerCase().includes(value.toLowerCase()),
     );
 
-    const pluralResults = i18n._({
-      id: 'combobox.aria.pluralResults',
-      message: '{numResults, plural, one {# result} other {# results}}',
-      comment: 'Aria text for combobox when one or more results',
-      values: { numResults: filteredOptionsByInputValue.length },
-    });
-
-    const noResults = i18n._({
-      id: 'combobox.aria.noResults',
-      message: 'No results',
-      comment: 'Aria text for combobox when no results',
-    });
-
-    return filteredOptionsByInputValue.length ? pluralResults : noResults;
+    const numResults = filteredOptionsByInputValue.length;
+    if (numResults === 0) {
+      return msg('No results', { id: 'combobox.aria.noResults' });
+    }
+    if (numResults === 1) {
+      return msg('1 result', { id: 'combobox.aria.oneResult' });
+    }
+    return msg(str`${numResults} results`, { id: 'combobox.aria.multipleResults' });
   }
 
   /** Get option classes */
