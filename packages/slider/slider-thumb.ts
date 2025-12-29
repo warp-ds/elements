@@ -198,6 +198,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       const toValue = computedStyle.getPropertyValue('--to');
       const fromValue = computedStyle.getPropertyValue('--from');
 
+      const numericToValue = Number.parseInt(toValue);
+      const numericFromValue = Number.parseInt(fromValue);
+
       const numberOverLapError = i18n.t({
         id: 'slider.error.overlap',
         message: 'The maximum value cannot be less than the minimum',
@@ -206,7 +209,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value
 
-        const toBoundary = Math.min(Number.parseInt(toValue), this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
+        const toBoundary =
+          this.allowValuesOutsideRange && numericToValue > maxNum
+            ? numericToValue
+            : Math.min(numericToValue, this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
+
         if (valueNum > toBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
@@ -226,7 +233,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       } else {
         // Check that the to value is not about to be dragged past the --from value
-        const fromBoundary = Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
+        const fromBoundary =
+          this.allowValuesOutsideRange && numericFromValue < minNum
+            ? numericFromValue
+            : Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
+
         if (valueNum < fromBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.

@@ -320,27 +320,27 @@ export const TestCase: Story = {
     return html`
       <form id="overunder" style="margin-bottom: 16px" lang="nb">
         <w-slider
-          label="Pris"
-          suffix="kr"
-          min="0"
-          max="700000"
+          label="Hestekrefter"
+          suffix="hk"
+          min="50"
+          max="500"
           data-testid="overunder"
           allow-values-outside-range
-          step="10000"
+          step="10"
         >
           <w-slider-thumb
             slot="from"
             aria-label="Fra år"
             aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
             name="from"
-            value="0"
+            value=""
           ></w-slider-thumb>
           <w-slider-thumb
             slot="to"
             aria-label="Til år"
             aria-description="2025 inkluderer kjøretøy produsert etter 2025"
             name="to"
-            value="150000"
+            value=""
           ></w-slider-thumb>
         </w-slider>
       </form>
@@ -363,10 +363,10 @@ export const TestCase: Story = {
         );
         overunderSlider.formatter = function (value, type) {
           if (value === "" && type === "from") {
-            return "0";
+            return "Under 50";
           }
           if (value === "" && type === "to") {
-            return "Over 700 000";
+            return "Over 500";
           }
           return value;
         };
