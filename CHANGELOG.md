@@ -1,3 +1,10 @@
+# [2.3.0-next.27](https://github.com/warp-ds/elements/compare/v2.3.0-next.26...v2.3.0-next.27) (2025-12-29)
+
+
+### Bug Fixes
+
+* allow both values to be above or below min/max ([df0aba9](https://github.com/warp-ds/elements/commit/df0aba97fdd7fc6c24a3ae1b79e0cc795c18635d))
+
 # [2.3.0-next.26](https://github.com/warp-ds/elements/compare/v2.3.0-next.25...v2.3.0-next.26) (2025-12-22)
 
 
