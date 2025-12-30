@@ -218,11 +218,11 @@ class WarpSlider extends LitElement {
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
 
-    const didHaveInternalError = this._hasInternalError;
+    const didHaveInternalError = this._hasInternalError || this.invalid;
 
     const triggeredThumb = e.target as WarpSliderThumb;
 
-    this._hasInternalError = Boolean(e.detail.invalid);
+    this._hasInternalError = Boolean(e.detail.invalid) || this.invalid;
     this._invalidMessage = e.detail.invalid;
 
     if (didHaveInternalError === true && this._hasInternalError === false) {
