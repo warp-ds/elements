@@ -135,6 +135,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     );
   }
 
+  async updateFieldAfterValidation() {
+    const input = this.shadowRoot.querySelector('w-textfield') as HTMLInputElement;
+    await this.#handleValueChange(input.value, true);
+  }
+
   async #handleValueChange(
     value: string,
     isFromTextInput: boolean,

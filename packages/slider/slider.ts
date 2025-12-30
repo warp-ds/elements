@@ -217,8 +217,22 @@ class WarpSlider extends LitElement {
 
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
+
+    const didHaveInternalError = this._hasInternalError;
+
+    const triggeredThumb = e.target as WarpSliderThumb;
+
     this._hasInternalError = Boolean(e.detail.invalid);
     this._invalidMessage = e.detail.invalid;
+
+    if (didHaveInternalError === true && this._hasInternalError === false) {
+      const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+      for (const thumb of sliderThumbs.values()) {
+        if (thumb !== triggeredThumb) {
+          thumb.updateFieldAfterValidation();
+        }
+      }
+    }
   }
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
