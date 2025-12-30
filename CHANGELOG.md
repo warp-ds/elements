@@ -1,3 +1,11 @@
+# [2.3.0-next.28](https://github.com/warp-ds/elements/compare/v2.3.0-next.27...v2.3.0-next.28) (2025-12-30)
+
+
+### Bug Fixes
+
+* support external error change too ([0adfce6](https://github.com/warp-ds/elements/commit/0adfce63473753c05f16cf487edcb8ff665135da))
+* trigger a field update when errors are removed ([5ec5fcf](https://github.com/warp-ds/elements/commit/5ec5fcf7e4eb579b95297c9c21dbe27c8c033726))
+
 # [2.3.0-next.27](https://github.com/warp-ds/elements/compare/v2.3.0-next.26...v2.3.0-next.27) (2025-12-29)
 
 
