@@ -135,6 +135,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     );
   }
 
+  async updateFieldAfterValidation() {
+    const input = this.shadowRoot.querySelector('w-textfield') as HTMLInputElement;
+    await this.#handleValueChange(input.value, true);
+  }
+
   async #handleValueChange(
     value: string,
     isFromTextInput: boolean,
@@ -193,10 +198,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Skip this check when typing in textfield with allowValuesOutsideRange enabled
     let shouldCancel = false;
     if (this.slot) {
-      const computedStyle = getComputedStyle(this);
+      const toThumb = this.parentElement.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
+      const fromThumb = this.parentElement.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
 
-      const toValue = computedStyle.getPropertyValue('--to');
-      const fromValue = computedStyle.getPropertyValue('--from');
+      const toValue = toThumb.textfield.value || this.max;
+      const fromValue = fromThumb.textfield.value || this.min;
 
       const numericToValue = Number.parseInt(toValue);
       const numericFromValue = Number.parseInt(fromValue);
