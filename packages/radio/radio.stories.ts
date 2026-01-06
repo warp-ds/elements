@@ -57,21 +57,6 @@ export const Required: Story = {
   },
 };
 
-export const Appearance: Story = {
-  args: {},
-  render() {
-    return html`
-      <form>
-        <w-radio-group>
-          <w-radio value="foo" appearance="button">button</w-radio>
-          <w-radio value="bar" appearance="clickable">clickable</w-radio>
-        </w-radio-group>
-        <button>click me</button>
-      </form>
-    `;
-  },
-};
-
 export const DisabledGroup: Story = {
   args: { disabled: true },
 };
