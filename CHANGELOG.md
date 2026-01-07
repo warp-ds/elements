@@ -1,3 +1,11 @@
+# [2.3.0-next.29](https://github.com/warp-ds/elements/compare/v2.3.0-next.28...v2.3.0-next.29) (2026-01-07)
+
+
+### Bug Fixes
+
+* z-index stack ([ec88fe3](https://github.com/warp-ds/elements/commit/ec88fe3b09d5315960b6ff0e435262b536a7c5db))
+* z-index stacking order ([5eae561](https://github.com/warp-ds/elements/commit/5eae561dbf2fa4fe1a51ae8dd0d6a942ff0fb3be))
+
 # [2.3.0-next.28](https://github.com/warp-ds/elements/compare/v2.3.0-next.27...v2.3.0-next.28) (2025-12-30)
 
 
