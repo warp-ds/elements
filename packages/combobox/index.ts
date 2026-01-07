@@ -18,8 +18,8 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const ccCombobox = {
-  wrapper: 'relative',
-  base: 'absolute left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m',
+  wrapper: 'relative z-0',
+  base: 'absolute z-20 left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m',
   listbox: 'm-0 p-0 select-none list-none',
   option: 'block cursor-pointer p-8',
   optionUnselected: 'hover:s-bg-hover',
