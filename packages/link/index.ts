@@ -1,4 +1,3 @@
-import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -25,7 +24,7 @@ const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility'
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-link--docs)
  */
-class WarpLink extends FormControlMixin(LitElement) {
+class WarpLink extends LitElement {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -54,9 +53,6 @@ class WarpLink extends FormControlMixin(LitElement) {
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth: boolean;
-
-  @property({ reflect: true })
-  name: string;
 
   static styles = [reset, styles];
 
