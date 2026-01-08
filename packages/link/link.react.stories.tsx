@@ -81,19 +81,18 @@ export const Pill: Story = {
   },
 };
 
-export const Small: Story = {
+export const Quiet: Story = {
   args: {
-    variant: 'primary',
-    small: true,
+    variant: 'quiet',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
 };
 
-export const Quiet: Story = {
+export const Small: Story = {
   args: {
-    variant: 'secondary',
-    quiet: true,
+    variant: 'primary',
+    small: true,
     href: 'http://developer.mozilla.org',
     target: '_new',
   },

@@ -35,10 +35,7 @@ class WarpLink extends FormControlMixin(LitElement) {
   autofocus: boolean;
 
   @property({ reflect: true })
-  variant: ButtonVariant;
-
-  @property({ type: Boolean, reflect: true })
-  quiet: boolean;
+  variant: ButtonVariant = 'secondary';
 
   @property({ type: Boolean, reflect: true })
   small: boolean;
@@ -58,20 +55,10 @@ class WarpLink extends FormControlMixin(LitElement) {
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth: boolean;
 
-  @property({ attribute: 'button-class', reflect: true })
-  buttonClass: string;
-
   @property({ reflect: true })
   name: string;
 
-  classes: string;
-
   static styles = [reset, styles];
-
-  constructor() {
-    super();
-    this.variant = 'secondary';
-  }
 
   connectedCallback() {
     super.connectedCallback();
