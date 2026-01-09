@@ -12,12 +12,15 @@ type ButtonVariant =
   | 'negative'
   | 'negativeQuiet'
   | 'utility'
-  | 'pill'
   | 'link'
   | 'quiet'
-  | 'utilityQuiet';
+  | 'utilityQuiet'
+  | 'overlay'
+  | 'overlayInverted'
+  | 'overlayQuiet'
+  | 'overlayInvertedQuiet';
 
-const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'pill', 'link'];
+const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'link', 'overlay', 'overlayInverted', 'overlayQuiet', 'overlayInvertedQuiet'];
 
 /**
  * Buttons are used to perform actions, with different visuals for different needs.
@@ -80,6 +83,10 @@ class WarpLink extends LitElement {
       'w-button--quiet': this.variant === 'quiet',
       'w-button--negative-quiet': this.variant === 'negativeQuiet',
       'w-button--utility-quiet': this.variant === 'utilityQuiet',
+      'w-button--overlay': this.variant === 'overlay',
+      'w-button--overlay-inverted': this.variant === 'overlayInverted',
+      'w-button--overlay-quiet': this.variant === 'overlayQuiet',
+      'w-button--overlay-inverted-quiet': this.variant === 'overlayInvertedQuiet',
       'w-button--small': this.small,
       'w-button--full-width': this.fullWidth,
       'w-button--disabled': this.disabled,

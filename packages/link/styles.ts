@@ -137,6 +137,38 @@ export const styles = css`.w-button,
         --font-weight: normal;
         display: inline;
     }
+    .w-button--overlay {
+        --background: var(--w-color-background);
+        --background-hover: var(--w-color-background-hover);
+        --background-active: var(--w-color-background-active);
+        --color: var(--w-s-color-text);
+        --border-radius: 9999px;
+        --border-width: 0px;
+    }
+    .w-button--overlay-quiet {
+        --background: transparent;
+        --background-hover: var(--w-s-color-background-hover);
+        --background-active: var(--w-s-color-background-active);
+        --color: var(--w-s-color-text);
+        --border-radius: 9999px;
+        --border-width: 0px;
+    }
+    .w-button--overlay-inverted {
+        --background: var(--w-s-color-background-inverted);
+        --background-hover: var(--w-s-color-background-inverted-hover);
+        --background-active: var(--w-s-color-background-inverted-active);
+        --color: var(--w-s-color-text-inverted);
+        --border-radius: 9999px;
+        --border-width: 0px;
+    }
+    .w-button--overlay-inverted-quiet {
+        --background: transparent;
+        --background-hover: var(--w-s-color-background-inverted-hover);
+        --background-active: var(--w-s-color-background-inverted-active);
+        --color: var(--w-s-color-text-inverted);
+        --border-radius: 9999px;
+        --border-width: 0px;
+    }
 
     /* States config,  selects --loading as well since loading is always supposed to be disabled */
     .w-button:disabled,
