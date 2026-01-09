@@ -92,6 +92,10 @@ export const styles = css`.w-button,
         --color: var(--w-s-color-text);
         --border-width: 0px;
     }
+    .w-button--quiet {
+        --background: transparent;
+        --border-width: 0px;
+    }
     .w-button--overlay {
         --background: var(--w-color-background);
         --background-hover: var(--w-color-background-hover);
