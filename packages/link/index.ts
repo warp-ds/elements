@@ -12,7 +12,6 @@ type ButtonVariant =
   | 'negative'
   | 'negativeQuiet'
   | 'utility'
-  | 'link'
   | 'quiet'
   | 'utilityQuiet'
   | 'overlay'
@@ -75,6 +74,7 @@ class WarpLink extends LitElement {
 
   render() {
     const classes = {
+      // @ts-expect-error link should be removed so we hide it from types until we can do so
       'w-button': this.variant !== 'link',
       'w-button--primary': this.variant === 'primary',
       'w-button--secondary': this.variant === 'secondary',
