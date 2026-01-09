@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/warp-ds/elements/compare/v2.3.1...v2.3.2) (2026-01-09)
+
+
+### Bug Fixes
+
+* ensure custom element manifest also includes datepicker ([d0a0d29](https://github.com/warp-ds/elements/commit/d0a0d297774375cb2f262517224d522080f7ea1c))
+
 ## [2.3.1](https://github.com/warp-ds/elements/compare/v2.3.0...v2.3.1) (2026-01-09)
 
 
