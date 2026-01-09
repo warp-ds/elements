@@ -75,14 +75,6 @@ export const UtilityQuiet: Story = {
   },
 };
 
-export const Link: Story = {
-  args: {
-    variant: 'link',
-    href: 'http://developer.mozilla.org',
-    target: '_new',
-  },
-};
-
 export const Quiet: Story = {
   args: {
     variant: 'quiet',
