@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/warp-ds/elements/compare/v2.2.1...v2.3.0) (2026-01-09)
+
+
+### Features
+
+* release w-datepicker and w-link ([#483](https://github.com/warp-ds/elements/issues/483)) ([8adac6c](https://github.com/warp-ds/elements/commit/8adac6c1ead4403ec555dea569ee30dd3bb3d0f7))
+
 # [2.3.0-next.32](https://github.com/warp-ds/elements/compare/v2.3.0-next.31...v2.3.0-next.32) (2026-01-09)
 
 
