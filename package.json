@@ -57,17 +57,9 @@
       "types": "./dist/packages/card/react.d.ts",
       "import": "./dist/packages/card/react.js"
     },
-    "./react/combobox": {
-      "types": "./dist/packages/combobox/react.d.ts",
-      "import": "./dist/packages/combobox/react.js"
-    },
     "./react/datepicker": {
       "types": "./dist/packages/datepicker/react.d.ts",
       "import": "./dist/packages/datepicker/react.js"
-    },
-    "./react/deadtoggle": {
-      "types": "./dist/packages/dead-toggle/react.d.ts",
-      "import": "./dist/packages/deadtoggle/react.js"
     },
     "./react/expandable": {
       "types": "./dist/packages/expandable/react.d.ts",
@@ -81,49 +73,13 @@
       "types": "./dist/packages/modal/react.d.ts",
       "import": "./dist/packages/modal/react.js"
     },
-    "./react/pageindicator": {
-      "types": "./dist/packages/pageindicator/react.d.ts",
-      "import": "./dist/packages/pageindicator/react.js"
-    },
-    "./react/pagination": {
-      "types": "./dist/packages/pagination/react.d.ts",
-      "import": "./dist/packages/pagination/react.js"
-    },
     "./react/pill": {
       "types": "./dist/packages/pill/react.d.ts",
       "import": "./dist/packages/pill/react.js"
     },
-    "./react/checkbox": {
-      "types": "./dist/packages/checkbox/react.d.ts",
-      "import": "./dist/packages/checkbox/react.js"
-    },
-    "./react/radio": {
-      "types": "./dist/packages/radio/react.d.ts",
-      "import": "./dist/packages/radio/react.js"
-    },
     "./react/select": {
       "types": "./dist/packages/select/react.d.ts",
       "import": "./dist/packages/select/react.js"
-    },
-    "./react/slider": {
-      "types": "./dist/packages/slider/react.d.ts",
-      "import": "./dist/packages/slider/react.js"
-    },
-    "./react/stepindicator": {
-      "types": "./dist/packages/stepindicator/react.d.ts",
-      "import": "./dist/packages/stepindicator/react.js"
-    },
-    "./react/switch": {
-      "types": "./dist/packages/switch/react.d.ts",
-      "import": "./dist/packages/switch/react.js"
-    },
-    "./react/tabs": {
-      "types": "./dist/packages/tabs/react.d.ts",
-      "import": "./dist/packages/tabs/react.js"
-    },
-    "./react/textarea": {
-      "types": "./dist/packages/textarea/react.d.ts",
-      "import": "./dist/packages/textarea/react.js"
     },
     "./react/textfield": {
       "types": "./dist/packages/textfield/react.d.ts",
@@ -169,14 +125,8 @@
       "react/card": [
         "./dist/packages/card/react.d.ts"
       ],
-      "react/combobox": [
-        "./dist/packages/combobox/react.d.ts"
-      ],
       "react/datepicker": [
         "./dist/packages/datepicker/react.d.ts"
-      ],
-      "react/deadtoggle": [
-        "./dist/packages/deadtoggle/react.d.ts"
       ],
       "react/expandable": [
         "./dist/packages/expandable/react.d.ts"
@@ -187,38 +137,11 @@
       "react/modal": [
         "./dist/packages/modal/react.d.ts"
       ],
-      "react/pageindicator": [
-        "./dist/packages/pageindicator/react.d.ts"
-      ],
-      "react/pagination": [
-        "./dist/packages/pagination/react.d.ts"
-      ],
       "react/pill": [
         "./dist/packages/pill/react.d.ts"
       ],
-      "react/checkbox": [
-        "./dist/packages/checkbox/react.d.ts"
-      ],
-      "react/radio": [
-        "./dist/packages/radio/react.d.ts"
-      ],
       "react/select": [
         "./dist/packages/select/react.d.ts"
-      ],
-      "react/slider": [
-        "./dist/packages/slider/react.d.ts"
-      ],
-      "react/stepindicator": [
-        "./dist/packages/stepindicator/react.d.ts"
-      ],
-      "react/switch": [
-        "./dist/packages/switch/react.d.ts"
-      ],
-      "react/tabs": [
-        "./dist/packages/tabs/react.d.ts"
-      ],
-      "react/textarea": [
-        "./dist/packages/textarea/react.d.ts"
       ],
       "react/textfield": [
         "./dist/packages/textfield/react.d.ts"
