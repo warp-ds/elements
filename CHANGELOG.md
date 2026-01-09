@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/warp-ds/elements/compare/v2.3.0...v2.3.1) (2026-01-09)
+
+
+### Bug Fixes
+
+* ensure datepicker is included in bundle ([ea3af88](https://github.com/warp-ds/elements/commit/ea3af88f8084a925a4cbe2b6e3a5a0f0a6f64020))
+
 # [2.3.0](https://github.com/warp-ds/elements/compare/v2.2.1...v2.3.0) (2026-01-09)
 
 
