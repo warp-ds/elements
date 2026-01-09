@@ -1,3 +1,10 @@
+# [2.3.0-next.31](https://github.com/warp-ds/elements/compare/v2.3.0-next.30...v2.3.0-next.31) (2026-01-09)
+
+
+### Bug Fixes
+
+* **link:** add missing quiet variant to validated options ([#479](https://github.com/warp-ds/elements/issues/479)) ([4d96c79](https://github.com/warp-ds/elements/commit/4d96c79e81e5afa21b78b75b466b1fd8cc1e342e))
+
 # [2.3.0-next.30](https://github.com/warp-ds/elements/compare/v2.3.0-next.29...v2.3.0-next.30) (2026-01-09)
 
 
