@@ -1,3 +1,10 @@
+# [2.3.0-next.30](https://github.com/warp-ds/elements/compare/v2.3.0-next.29...v2.3.0-next.30) (2026-01-09)
+
+
+### Bug Fixes
+
+* **link:** remove unused properties ([#478](https://github.com/warp-ds/elements/issues/478)) ([5533b95](https://github.com/warp-ds/elements/commit/5533b95cf883571391226cf2248472e2ebedba60))
+
 # [2.3.0-next.29](https://github.com/warp-ds/elements/compare/v2.3.0-next.28...v2.3.0-next.29) (2026-01-07)
 
 
