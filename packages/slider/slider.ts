@@ -160,6 +160,10 @@ class WarpSlider extends LitElement {
       this.style.setProperty('--markers', String(this.markers));
     }
 
+    if (this.allowValuesOutsideRange) {
+      this.style.setProperty('--over-under-offset', '1');
+    }
+
     this.#syncSliderThumbs();
   }
 

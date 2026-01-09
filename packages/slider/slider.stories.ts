@@ -41,7 +41,7 @@ export const Single: Story = {
 export const Range: Story = {
   render() {
     return html`
-      <w-slider label="Range" min="0" max="100">
+      <w-slider label="Range" min="0" max="100" step="25">
         <w-slider-thumb
           slot="from"
           aria-label="From value"
@@ -320,13 +320,13 @@ export const TestCase: Story = {
     return html`
       <form id="overunder" style="margin-bottom: 16px" lang="nb">
         <w-slider
-          label="Hestekrefter"
-          suffix="hk"
-          min="50"
-          max="500"
+          label="Bredde"
+          suffix="cm"
+          min="200"
+          max="350"
           data-testid="overunder"
           allow-values-outside-range
-          step="10"
+          step="50"
         >
           <w-slider-thumb
             slot="from"
@@ -363,10 +363,10 @@ export const TestCase: Story = {
         );
         overunderSlider.formatter = function (value, type) {
           if (value === "" && type === "from") {
-            return "Under 50";
+            return "Under 200";
           }
           if (value === "" && type === "to") {
-            return "Over 500";
+            return "Over 350";
           }
           return value;
         };

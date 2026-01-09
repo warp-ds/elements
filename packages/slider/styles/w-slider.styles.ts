@@ -113,16 +113,19 @@ export const wSliderStyles = css`
     border-start-start-radius: var(--active-range-border-radius, 0);
     border-end-start-radius: var(--active-range-border-radius, 0);
 
-    margin-left: calc(
-      calc(var(--_blank-values-before) * 1%) - var(
-          --active-range-inline-start-padding,
-          0px
-        )
-    );
-    width: calc(
-      calc(var(--_filled-values) * 1%) +
-        var(--active-range-inline-end-padding, 0px)
-    );
+    /* takes over-under into the calculation if set, as this makes the ranges longer in reality */
+    --max-with-offset: calc(var(--max) + var(--over-under-offset, 0));
+
+    /* calculate the offset for the "from" thumb in percentage to move the range visualisation from the left edge, using max() to avoid going off screen */
+    --offset-percentage: calc(calc(var(--from) - var(--min)) / calc(var(--max-with-offset) - var(--min)) * 100);
+    margin-left: calc(max(var(--offset-percentage) * 1%, 0px) - 1px);
+
+    /* calculate the width of the selected range in percentage, clamped between min/max */
+    --value-range: calc(var(--max-with-offset) - var(--min));
+    --range-span-percentage: calc(calc(min(var(--to), var(--max-with-offset)) - max(var(--min), var(--from))) / var(--value-range) * 100 );
+    width: calc(var(--range-span-percentage) * 1% + 1px);
+
+
     z-index: 1;
   }
 
