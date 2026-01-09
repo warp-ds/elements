@@ -1,6 +1,12 @@
-import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
+import { activateI18n } from '../i18n.js';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import { reset } from '../styles.js';
 
@@ -23,7 +29,7 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @slot from - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  */
-class WarpSlider extends FormControlMixin(LitElement) {
+class WarpSlider extends LitElement {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -41,6 +47,15 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  @property({ type: Boolean, attribute: 'allow-values-outside-range' })
+  allowValuesOutsideRange = false;
+
+  @property({ type: String, reflect: true })
+  error = '';
+
+  @property({ type: String, reflect: true, attribute: 'help-text' })
+  helpText = '';
 
   @property({ type: Boolean, reflect: true })
   invalid = false;
@@ -64,23 +79,35 @@ class WarpSlider extends FormControlMixin(LitElement) {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix: string;
+  suffix = '';
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
-  formatter: (value: string) => string;
+  formatter: (value: string, type: 'to' | 'from') => string;
+
+  @state()
+  _invalidMessage = '';
+
+  @state()
+  _hasInternalError = false;
+
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+  }
 
   #syncSliderThumbs(): void {
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     let usedNamedSlots = false;
     for (const thumb of sliderThumbs.values()) {
       // Set attributes that should be in sync between slider thumbs
-      thumb.min = this.min;
-      thumb.max = this.max;
+      thumb.min = this.edgeMin;
+      thumb.max = this.edgeMax;
       thumb.step = this.step;
       thumb.suffix = this.suffix;
       thumb.required = this.required;
       thumb.formatter = this.formatter;
+      thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -98,9 +125,8 @@ class WarpSlider extends FormControlMixin(LitElement) {
         usedNamedSlots = true;
       }
 
-      // Set forceDisabled state based on slider component disabled state
-      thumb.forceDisabled = this.disabled;
-      thumb.forceInvalid = this.invalid;
+      thumb.disabled = this.disabled;
+      thumb.invalid = this.invalid || this._hasInternalError;
 
       this.#updateActiveTrack(thumb);
     }
@@ -108,20 +134,18 @@ class WarpSlider extends FormControlMixin(LitElement) {
     // Missing a CSS-only way to detect if something is slotted in the named slots
     const fieldset = this.shadowRoot.querySelector('fieldset');
     if (usedNamedSlots) {
-      fieldset.style.setProperty(
-        '--active-range-inline-start-padding',
-        'var(--w-slider-thumb-size)',
-      );
-      fieldset.style.setProperty(
-        '--active-range-inline-end-padding',
-        'var(--w-slider-thumb-size)',
-      );
+      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size)');
+      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size)');
     } else {
-      fieldset.style.setProperty(
-        '--active-range-border-radius',
-        '4px',
-      );
+      fieldset.style.setProperty('--active-range-border-radius', '4px');
     }
+  }
+
+  get edgeMin() {
+    return this.allowValuesOutsideRange ? (Number(this.min) - 1).toString() : this.min;
+  }
+  get edgeMax() {
+    return this.allowValuesOutsideRange ? (Number(this.max) + 1).toString() : this.max;
   }
 
   async connectedCallback() {
@@ -130,7 +154,7 @@ class WarpSlider extends FormControlMixin(LitElement) {
     if (this.step) {
       this.style.setProperty('--step', String(this.step));
     }
-    this.style.setProperty('--min', this.min);
+    this.style.setProperty('--min', this.edgeMin);
     this.style.setProperty('--max', this.max);
     if (this.markers) {
       this.style.setProperty('--markers', String(this.markers));
@@ -148,7 +172,9 @@ class WarpSlider extends FormControlMixin(LitElement) {
       changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
-      changedProperties.has('formatter')
+      changedProperties.has('formatter') ||
+      changedProperties.has('_invalidMessage') ||
+      changedProperties.has('_hasInternalError')
     ) {
       this.#syncSliderThumbs();
     }
@@ -157,11 +183,64 @@ class WarpSlider extends FormControlMixin(LitElement) {
   #onInput(e: InputEvent) {
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
+
+    const isRangeSlider = input.slot;
+    if (isRangeSlider) {
+      this.#doValidation();
+    }
+  }
+
+  #doValidation() {
+    // In a range slider changing the value in one input can change the validity
+    // of the second input. Specifically, what was a value outside the mininum or
+    // maximum can become inside those limits when the limits change, by changing
+    // the from or to values. Check to see if a field is invalid, but should be
+    // valid based on those rules.
+
+    let from: WarpSliderThumb;
+    let to: WarpSliderThumb;
+    const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    for (const thumb of sliderThumbs.values()) {
+      if (thumb.slot === 'from') from = thumb;
+      if (thumb.slot === 'to') to = thumb;
+    }
+
+    if (!from || !to) {
+      // Not a range slider, nothing to do here.
+      return;
+    }
+    if (!from.invalid && !to.invalid) {
+      // Both are valid, nothing to do here
+      return;
+    }
   }
 
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
-    this.invalid = e.detail.invalid;
+
+    const didHaveInternalError = this._hasInternalError || this.invalid;
+
+    const triggeredThumb = e.target as WarpSliderThumb;
+
+    this._hasInternalError = Boolean(e.detail.invalid) || this.invalid;
+    this._invalidMessage = e.detail.invalid;
+
+    if (didHaveInternalError === true && this._hasInternalError === false) {
+      const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+      for (const thumb of sliderThumbs.values()) {
+        if (thumb !== triggeredThumb) {
+          thumb.updateFieldAfterValidation();
+        }
+      }
+    }
+  }
+
+  #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
+    if (input.value === undefined || input.value === null) {
+      input.value = this.allowValuesOutsideRange ? '' : boundary;
+    }
+    // Use boundary for CSS positioning when value is empty
+    return input.value === '' ? boundary : input.value;
   }
 
   /**
@@ -175,32 +254,72 @@ class WarpSlider extends FormControlMixin(LitElement) {
     }
 
     if (slotName === 'from') {
-      // Default to the minimum value if no value has been chosen yet.
-      const from = (input.value ??= this.min);
-      this.style.setProperty('--from', from);
+      this.style.setProperty('--from', this.#getEdgeValue(this.edgeMin, input));
     }
 
     if (!slotName || slotName === 'to') {
-      // Default to the maximum value if no value has been chosen yet.
-      const to = (input.value ??= this.max);
-      this.style.setProperty('--to', to);
+      this.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
     }
+  }
+
+  get componentHasError(): boolean {
+    return this.invalid || this._hasInternalError;
+  }
+
+  get errorText(): string {
+    if (!this.componentHasError) {
+      return '';
+    }
+
+    return this.error || this._invalidMessage;
   }
 
   render() {
     return html`
-      <fieldset id="fieldset" class="w-slider" @input="${this.#onInput}" @slidervalidity="${this.#onSliderValidity}">
-        <legend class="w-slider__label">
-          <slot id="label" name="label">${this.label}</slot>
-        </legend>
+      <fieldset
+        id="fieldset"
+        class="w-slider"
+        @input="${this.#onInput}"
+        @slidervalidity="${this.#onSliderValidity}"
+        aria-invalid="${this.errorText ? 'true' : nothing}"
+      >
+        ${
+          this.label
+            ? html`<legend class="w-slider__label">
+              <slot id="label" name="label">${this.label}</slot>
+            </legend>`
+            : nothing
+        }
         <slot class="w-slider__description" name="description"></slot>
         ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
         <div class="w-slider__range">
           <div class="w-slider__active-range"></div>
         </div>
-        <slot class="w-slider__slider" @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot class="w-slider__slider" name="from" @slotchange=${this.#syncSliderThumbs}></slot>
-        <slot class="w-slider__slider" name="to" @slotchange=${this.#syncSliderThumbs}></slot>
+        <slot
+          class="w-slider__slider"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        <slot
+          class="w-slider__slider"
+          name="from"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        <slot
+          class="w-slider__slider"
+          name="to"
+          @slotchange=${this.#syncSliderThumbs}
+        ></slot>
+        ${
+          this.errorText
+            ? html`<p class="w-slider__error" aria-describes="fieldset">
+              ${this.errorText}
+            </p>`
+            : this.helpText
+              ? html`<p class="w-slider__help-text" aria-describes="fieldset">
+                ${this.helpText}
+              </p>`
+              : nothing
+        }
       </fieldset>
     `;
   }

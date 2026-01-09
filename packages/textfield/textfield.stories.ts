@@ -120,3 +120,21 @@ export const Masking: Story = {
     `;
   },
 };
+
+export const FormParticipation: Story = {
+  args: {
+    type: 'text',
+  },
+  render({ locale, ...args }) {
+    return html`
+      <p>Resetting the form should return values to the initial values</p>
+      <p>Submitting the form should result in the values being in the resulting pages query parameters</p>
+      <form>
+        <w-textfield ${spread(prespread(args))} name="warp-textfield-1" placeholder="type here" label="field 1"></w-textfield>
+        <w-textfield ${spread(prespread(args))} name="warp-textfield-2" value="prefilled" label="field 2"></w-textfield>
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+      </form>
+    `;
+  },
+};

@@ -51,7 +51,10 @@ export const Default: Story = {
           id="popoverTarget" 
           slot="target"
           variant="secondary"
-          @click=${(e) => {const attention = e.currentTarget.closest('w-attention'); attention.show = !attention.show;}}>
+          @click=${(e) => {
+            const attention = e.currentTarget.closest('w-attention');
+            attention.show = !attention.show;
+          }}>
             Click to toggle a popover
         </w-button>
         <span slot="message">I'm a popover</span>

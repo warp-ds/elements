@@ -1,4 +1,3 @@
-import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -13,19 +12,21 @@ type ButtonVariant =
   | 'negative'
   | 'negativeQuiet'
   | 'utility'
-  | 'pill'
-  | 'link'
   | 'quiet'
-  | 'utilityQuiet';
+  | 'utilityQuiet'
+  | 'overlay'
+  | 'overlayInverted'
+  | 'overlayQuiet'
+  | 'overlayInvertedQuiet';
 
-const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'pill', 'link'];
+const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'quiet', 'link', 'overlay', 'overlayInverted', 'overlayQuiet', 'overlayInvertedQuiet'];
 
 /**
  * Buttons are used to perform actions, with different visuals for different needs.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-link--docs)
  */
-class WarpLink extends FormControlMixin(LitElement) {
+class WarpLink extends LitElement {
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -35,10 +36,7 @@ class WarpLink extends FormControlMixin(LitElement) {
   autofocus: boolean;
 
   @property({ reflect: true })
-  variant: ButtonVariant;
-
-  @property({ type: Boolean, reflect: true })
-  quiet: boolean;
+  variant: ButtonVariant = 'secondary';
 
   @property({ type: Boolean, reflect: true })
   small: boolean;
@@ -58,20 +56,7 @@ class WarpLink extends FormControlMixin(LitElement) {
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth: boolean;
 
-  @property({ attribute: 'button-class', reflect: true })
-  buttonClass: string;
-
-  @property({ reflect: true })
-  name: string;
-
-  classes: string;
-
   static styles = [reset, styles];
-
-  constructor() {
-    super();
-    this.variant = 'secondary';
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -89,6 +74,7 @@ class WarpLink extends FormControlMixin(LitElement) {
 
   render() {
     const classes = {
+      // @ts-expect-error link should be removed so we hide it from types until we can do so
       'w-button': this.variant !== 'link',
       'w-button--primary': this.variant === 'primary',
       'w-button--secondary': this.variant === 'secondary',
@@ -97,6 +83,10 @@ class WarpLink extends FormControlMixin(LitElement) {
       'w-button--quiet': this.variant === 'quiet',
       'w-button--negative-quiet': this.variant === 'negativeQuiet',
       'w-button--utility-quiet': this.variant === 'utilityQuiet',
+      'w-button--overlay': this.variant === 'overlay',
+      'w-button--overlay-inverted': this.variant === 'overlayInverted',
+      'w-button--overlay-quiet': this.variant === 'overlayQuiet',
+      'w-button--overlay-inverted-quiet': this.variant === 'overlayInvertedQuiet',
       'w-button--small': this.small,
       'w-button--full-width': this.fullWidth,
       'w-button--disabled': this.disabled,

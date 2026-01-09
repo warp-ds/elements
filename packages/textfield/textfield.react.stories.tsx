@@ -9,7 +9,8 @@ import { TextField } from './react';
 const locale = 'nb';
 
 const getNumberFormatter = (locale: string, opts = {}) => {
-  return (value: string) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
+  return (value: string) =>
+    new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts }).format(value as unknown as number);
 };
 
 export default {

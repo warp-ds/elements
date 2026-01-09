@@ -4,10 +4,10 @@
 // We want teams to move away from importing individual components and only import the entire bundle
 
 import { existsSync, mkdirSync } from 'node:fs';
-import * as eik from "@eik/esbuild-plugin";
+import * as eik from '@eik/esbuild-plugin';
 import esbuild from 'esbuild';
 
-await eik.load({ urls: ["https://assets.finn.no/map/lit/v3"] });
+await eik.load({ urls: ['https://assets.finn.no/map/lit/v3'] });
 
 const modules = [
   'packages/affix/index.ts',

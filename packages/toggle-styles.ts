@@ -12,7 +12,6 @@ export const toggleStyles = css`
     display: grid;
     grid-template-columns: 2rem max-content;
     gap: 8px;
-    padding: 0.2rem 0;
   }
   .hide-toggle {
     position: absolute;
@@ -35,7 +34,7 @@ export const toggleStyles = css`
     height: 2rem;
     width: 2rem;
     background-color: var(--w-s-color-background);
-    border-color: var(--w-s-color-border);
+    border-color: var(--w-s-color-border-strong);
     color: var(--w-s-color-icon-inverted);
     font-weight: 700;
     text-align: center;
@@ -46,7 +45,7 @@ export const toggleStyles = css`
     position: relative;
   }
   :host([type='checkbox']) .control {
-    border-radius: 2px;
+    border-radius: 4px;
   }
   .checkbox:has(:checked, :indeterminate),
   :host([type='checkbox'][checked]) .control,
@@ -107,4 +106,4 @@ export const toggleStyles = css`
   .checkbox:has(:checked, :indeterminate):has(> input:disabled) {
     background-color: var(--w-s-color-background-disabled);
   }
-`
+`;

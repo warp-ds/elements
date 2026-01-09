@@ -75,22 +75,43 @@ export const UtilityQuiet: Story = {
   },
 };
 
-export const Link: Story = {
+export const Quiet: Story = {
   args: {
-    variant: 'link',
+    variant: 'quiet',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
 };
 
-export const Pill: Story = {
+export const Overlay: Story = {
   args: {
-    variant: 'pill',
+    variant: 'overlay',
     href: 'http://developer.mozilla.org',
     target: '_new',
   },
-  render(args) {
-    return html`<w-link ${spread(prespread(args))}>💙</w-link>`;
+};
+
+export const OverlayInverted: Story = {
+  args: {
+    variant: 'overlayInverted',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
+  },
+};
+
+export const OverlayQuiet: Story = {
+  args: {
+    variant: 'overlayQuiet',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
+  },
+};
+
+export const OverlayInvertedQuiet: Story = {
+  args: {
+    variant: 'overlayInvertedQuiet',
+    href: 'http://developer.mozilla.org',
+    target: '_new',
   },
 };
 
@@ -98,15 +119,6 @@ export const Small: Story = {
   args: {
     variant: 'primary',
     small: true,
-    href: 'http://developer.mozilla.org',
-    target: '_new',
-  },
-};
-
-export const Quiet: Story = {
-  args: {
-    variant: 'secondary',
-    quiet: true,
     href: 'http://developer.mozilla.org',
     target: '_new',
   },

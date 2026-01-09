@@ -6,24 +6,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    - uses: pnpm/action-setup@v4
-    - name: Set up Node
-      uses: actions/setup-node@v4
-      with:
-        cache: 'pnpm'
-        node-version: lts/*
-    - run: pnpm i
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+          node-version: lts/*
+      - run: pnpm i
 
-    - name: Lint
-      run: pnpm lint:check
+      - name: Lint
+        run: pnpm lint:check
 
-    - name: Build
-      run: pnpm build
+      - name: Build
+        run: pnpm build
 
-    # test after build so we have compiled Lingui files to import
-    - name: Install Playwright
-      run: pnpm exec playwright install --with-deps
-    - name: Test
-      run: pnpm test
+      # test after build so we have compiled Lingui files to import
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps
+      - name: Test
+        run: pnpm test && pnpm test:module-resolution

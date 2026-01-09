@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { WarpAttention } from './index';
+import { WarpAttention } from './index.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -22,6 +22,8 @@ const BaseAttention = createComponent({
 type BaseProps = React.ComponentProps<typeof BaseAttention>;
 
 // Drop conflicting DOM prop `popover` and add all props back in
-export type AttentionProps = Omit<BaseProps, 'popover'> & { popover?: boolean } & Partial<Omit<WarpAttention, keyof HTMLElement>>;
+export type AttentionProps = Omit<BaseProps, 'popover'> & { popover?: boolean } & Partial<
+    Omit<WarpAttention, keyof HTMLElement>
+  >;
 
 export const Attention = BaseAttention as unknown as React.FC<AttentionProps>;

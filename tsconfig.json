@@ -14,7 +14,20 @@
     "packages/select",
     "packages/textfield",
     "packages/toast",
-    "setup-tests.ts"
+    "packages/datepicker",
+    "packages/link",
+    // "packages/slider",
+    // "packages/combobox",
+    // "packages/deadtoggle",
+    // "packages/pageindicator",
+    // "packages/pagination",
+    // "packages/radio",
+    // "packages/checkbox",
+    // "packages/stepindicator",
+    // "packages/switch",
+    // "packages/tabs",
+    // "packages/textarea",
+    // "setup-tests.ts"
   ],
   "compilerOptions": {
     "target": "ES2022",

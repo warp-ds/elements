@@ -122,7 +122,8 @@ export const NoTitle: Story = {
         <Button
           onClick={() => setExpanded(!expanded)}
           aria-label="Toggle expandable content without title"
-          aria-controls="expandableWithoutTitle">
+          aria-controls="expandableWithoutTitle"
+        >
           Toggle
         </Button>
         <Expandable {...args} id="expandableWithoutTitle" expanded={expanded}>

@@ -3,7 +3,6 @@
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
@@ -12,6 +11,7 @@ import type { WarpTextField } from '../textfield/index.js';
 
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 import { styles as unoStyles } from './styles.js';
+import { i18n } from '@lingui/core';
 
 /**
  * Component to place inside a `<w-slider>`.
@@ -44,6 +44,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+
+  /** Set by `<w-slider>` */
+  @property({ attribute: false, reflect: false })
+  allowValuesOutsideRange = false;
+
   /** Set by `<w-slider>` */
   @state()
   markers: string;
@@ -66,19 +73,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** Set by `<w-slider>` */
   @state()
-  suffix: string;
-
-  /** @internal */
-  @state()
-  forceDisabled: boolean;
-
-  /** @internal */
-  @state()
-  forceInvalid: boolean;
+  suffix = '';
 
   /** JS hook to help you format the numeric value how you want. */
   @state()
-  formatter: (value: string) => string;
+  formatter: (value: string, type: 'from' | 'to') => string;
 
   @query('input[type="range"]')
   range: HTMLInputElement;
@@ -88,11 +87,18 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** @internal */
   @state()
-  _invalid = false;
+  _showTooltip = false;
 
   /** @internal */
   @state()
-  _showTooltip = false;
+  _inputHasFocus = false;
+
+  // capture the initial value using connectedCallback and #initialValue
+  #initialValue: string | null = null;
+
+  resetFormControl(): void {
+    this.value = this.#initialValue;
+  }
 
   /**
    * Reference to the anchor positioning style element used by the polyfill.
@@ -109,76 +115,210 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this._showTooltip = false;
   }
 
-  #onInput(e: InputEvent | CustomEvent): boolean {
-    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
-    if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
+  // Synchronizes the range input's value with the form value
+  #syncRangeValue(): void {
+    if (!this.range) return;
 
-    const value = (e.currentTarget as HTMLInputElement).value;
-    if (value === '') {
-      if (this.required) {
-        this._invalid = true;
-      }
-      return false;
+    if (this.value === '') {
+      this.range.value = this.boundaryValue;
+    } else if (this.value) {
+      this.range.value = this.value;
     }
+  }
 
-    if (this._invalid) this._invalid = false;
-    const valueNum = Number.parseInt(value);
+  #handleValidity(error: string) {
+    this.dispatchEvent(
+      new CustomEvent('slidervalidity', {
+        bubbles: true,
+        detail: { invalid: error, slot: this.slot },
+      }),
+    );
+  }
+
+  async updateFieldAfterValidation() {
+    const input = this.shadowRoot.querySelector('w-textfield') as HTMLInputElement;
+    await this.#handleValueChange(input.value, true);
+  }
+
+  async #handleValueChange(
+    value: string,
+    isFromTextInput: boolean,
+  ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+    let valueNum = Number.parseInt(value);
+
+    if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
+      const valueIsCloseToSliderEdge =
+        (this.slot === 'to' && valueNum >= Number(this.max) - 1) ||
+        (this.slot === 'from' && valueNum <= Number(this.min) + 1);
+
+      if (!valueIsCloseToSliderEdge) {
+        const multiplier = 1 / this.step;
+        valueNum = Math.round(valueNum * multiplier) / multiplier;
+        value = valueNum.toString();
+      }
+    }
 
     // Update validation state
     // Check that the user hasn't typed in a value beyond max or min
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
-    if (valueNum > maxNum || valueNum < minNum) {
-      this._invalid = true;
+    if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
+      this.#handleValidity(
+        i18n.t({
+          id: 'slider.error.out_of_bounds',
+          message: 'Value must be between {min} and {max}',
+          values: {
+            min: `${this.min} ${this.suffix}`.trim(),
+            max: `${this.max} ${this.suffix}`.trim(),
+          },
+        }),
+      );
+      return { shouldCancel: true };
     }
+
+    if (value === '') {
+      if (this.required) {
+        this.#handleValidity(
+          i18n.t({
+            id: 'slider.error.required',
+            message: 'This field is required',
+          }),
+        );
+      }
+      // To not bork when input field is empty
+      return { shouldCancel: true };
+    }
+
+    this.value = value;
+
+    const valueIsAtTheSliderEdge = value === this.max || value === this.min;
 
     // Stop a range slider's from value from reaching past the to value and vice versa
     // by updating the other component's min and max values.
+    // Skip this check when typing in textfield with allowValuesOutsideRange enabled
     let shouldCancel = false;
     if (this.slot) {
-      const computedStyle = getComputedStyle(this);
-      const toValue = computedStyle.getPropertyValue('--to');
-      const fromValue = computedStyle.getPropertyValue('--from');
-      if (isFromTextInput) {
-        if (valueNum > Number.parseInt(toValue) || valueNum < Number.parseInt(fromValue)) {
-          // Don't update the slider position when text input is invalid
-          this._invalid = true;
-          return false;
-        }
-      }
+      const toThumb = this.parentElement.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
+      const fromThumb = this.parentElement.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
+
+      const toValue = toThumb.textfield.value || this.max;
+      const fromValue = fromThumb.textfield.value || this.min;
+
+      const numericToValue = Number.parseInt(toValue);
+      const numericFromValue = Number.parseInt(fromValue);
+
+      const numberOverLapError = i18n.t({
+        id: 'slider.error.overlap',
+        message: 'The maximum value cannot be less than the minimum',
+      });
 
       if (this.slot === 'from') {
         // Check that the from value is not about to be dragged past the --to value
-        if (valueNum > Number.parseInt(toValue)) {
+
+        const toBoundary =
+          this.allowValuesOutsideRange && numericToValue > maxNum
+            ? numericToValue
+            : Math.min(numericToValue, this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
+
+        if (valueNum > toBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          this.value = toValue;
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+            this.value = String(toBoundary);
+          } else {
+            this.value = toValue;
+          }
+
+          if (isFromTextInput) {
+            this.#handleValidity(numberOverLapError);
+            // Don't override the user's input in the textfield
+            await this.updateComplete;
+            this.textfield.value = value;
+          }
         }
       } else {
         // Check that the to value is not about to be dragged past the --from value
-        if (valueNum < Number.parseInt(fromValue)) {
+        const fromBoundary =
+          this.allowValuesOutsideRange && numericFromValue < minNum
+            ? numericFromValue
+            : Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
+
+        if (valueNum < fromBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          this.value = fromValue;
+          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+            this.value = String(fromBoundary);
+          } else {
+            this.value = fromValue;
+          }
+
+          if (isFromTextInput) {
+            this.#handleValidity(numberOverLapError);
+            // Don't override the user's input in the textfield
+            await this.updateComplete;
+            this.textfield.value = value;
+          }
         }
       }
     }
 
     if (shouldCancel) {
+      return { shouldCancel: true };
+    }
+
+    this.#handleValidity('');
+
+    this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
+    this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
+
+    (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
+
+    return { shouldCancel: false };
+  }
+
+  async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
+    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
+    if (e instanceof CustomEvent) return; // We rely on the InputEvent event that fires right after the CustomEvent
+
+    const value = (e.currentTarget as HTMLInputElement).value;
+    const result = await this.#handleValueChange(value, isFromTextInput);
+
+    if (result.shouldCancel) {
       e.preventDefault();
       // Needed to stop slider from moving independendtly of the value when we cancel the event
-      this.range.value = this.value;
       return false;
     }
-    this.value = value;
-    (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
+
     return true;
+  }
+
+  async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+
+    const currentValue = Number(this.range.value);
+    const stepValue = this.step || 1;
+
+    let newValue: number;
+    if (e.key === 'ArrowLeft') {
+      newValue = currentValue - stepValue;
+    } else {
+      newValue = currentValue + stepValue;
+    }
+
+    newValue = Math.min(Math.max(newValue, Number(this.min)), Number(this.max));
+
+    const result = await this.#handleValueChange(newValue.toString(), false);
+    if (result.shouldCancel) {
+      e.preventDefault();
+    }
   }
 
   async connectedCallback() {
     super.connectedCallback();
+    this.#initialValue = this.value;
+    this.setValue(this.value);
     if (!('anchorName' in document.documentElement.style)) {
       // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
       const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));
@@ -249,7 +389,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       `;
 
-        await polyfill({ roots: [this.shadowRoot], elements: [this.anchorPositioningStyleElement] });
+        await polyfill({
+          roots: [this.shadowRoot],
+          elements: [this.anchorPositioningStyleElement],
+        });
       } catch (e) {
         console.error(
           new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }),
@@ -258,15 +401,66 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     } else {
       await this.updateComplete;
     }
-    this.range.value = this.value ?? this.max;
+    this.#syncRangeValue();
+  }
+
+  #onTextFieldFocus(e) {
+    // Safari fires the focus event we register on `w-textfield` also when the range input
+    // is focused. This breaks the input masking. Rely on the custom event that is also
+    // fired by w-textfield on focus.
+    if (e instanceof CustomEvent && e.type === 'focus') {
+      this._inputHasFocus = true;
+    }
+  }
+
+  #onTextFieldBlur(e) {
+    if (e instanceof CustomEvent && e.type === 'blur') {
+      this._inputHasFocus = false;
+    }
+  }
+
+  // The boundary value for this thumb (min for 'from', max for 'to' or default)
+  get boundaryValue(): string {
+    return this.slot === 'from' ? this.min : this.max;
+  }
+
+  /** Value to display in the textfield (shows boundary when focused on empty value) */
+  get textFieldDisplayValue() {
+    if (this._inputHasFocus) {
+      // When focused, show the range's clamped value if the form value is empty (slider at boundary)
+      // This allows users to see and edit the actual min/max value
+      if (this.value !== '') {
+        return this.value;
+      }
+
+      if (!this.range?.value) {
+        return '';
+      }
+
+      return Math.min(Math.max(Number(this.range.value), Number(this.min) + 1), Number(this.max) - 1).toString();
+    }
+
+    // When not focused, display the value as-is:
+    // - Empty string if slider set it to empty (at boundary)
+    // - Actual value if user typed it (even if it equals min/max)
+    return this.value;
+  }
+
+  /** Value to display in the tooltip */
+  get tooltipDisplayValue(): string | number {
+    if (this.formatter) {
+      return this.formatter(this.value, this.slot as 'from' | 'to');
+    }
+    if (this.value === '') {
+      return this.range?.value ?? this.boundaryValue;
+    }
+    return this.value || 0;
   }
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
-    }
-    if (changedProperties.has('_invalid')) {
-      this.dispatchEvent(new CustomEvent('slidervalidity', { bubbles: true, detail: { invalid: this._invalid } }));
+      this.#syncRangeValue();
     }
   }
 
@@ -274,7 +468,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return html`
       <div class="w-slider-thumb">
         <label for="range">${this.label}</label>
-        ${!('anchorName' in document.documentElement.style) ? html`<div class="polyfill-range"><div class="polyfill-active-range"></div></div>` : nothing}
+        ${
+          !('anchorName' in document.documentElement.style)
+            ? html`<div class="polyfill-range">
+              <div class="polyfill-active-range"></div>
+            </div>`
+            : nothing
+        }
         <input
           id="range"
           aria-label="${this.ariaLabel}"
@@ -282,47 +482,77 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           class="w-slider-thumb__range"
           type="range"
           .value="${this.value}"
+          aria-valuetext="${this.tooltipDisplayValue}"
           min="${this.min}"
           max="${this.max}"
-          name="${this.name}"
-          step="${ifDefined(this.step ? this.step : undefined)}"
-          ?disabled="${this.disabled || this.forceDisabled}"
+          step="${ifDefined(!this.allowValuesOutsideRange && this.step ? this.step : undefined)}"
+          ?disabled="${this.disabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
           @touchstart="${this.#showTooltip}"
           @touchend="${this.#hideTooltip}"
           @focus="${this.#showTooltip}"
           @blur="${this.#hideTooltip}"
-          @input="${this.#onInput}" />
+          @input="${this.#onInput}"
+          @keydown="${this.allowValuesOutsideRange ? this.#onRangeSliderKeyDown : nothing}"
+        />
 
-        <span class="w-slider-thumb__from-marker">${this.formatter ? this.formatter(this.min) : this.min} ${this.suffix}</span>
-        <span class="w-slider-thumb__to-marker">${this.formatter ? this.formatter(this.max) : this.max} ${this.suffix}</span>
+        ${
+          this.slot === 'from'
+            ? html`<span class="w-slider-thumb__from-marker"
+              >${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from') : this.min}
+              ${this.suffix}</span
+            >`
+            : nothing
+        }
+        ${
+          this.slot === 'to'
+            ? html`<span class="w-slider-thumb__to-marker"
+              >${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to') : this.max}
+              ${this.suffix}</span
+            >`
+            : nothing
+        }
 
         <w-textfield
           aria-label="${this.ariaLabel}"
           aria-description="${ifDefined(this.ariaDescription)}"
           class="w-slider-thumb__textfield"
           type="number"
-          min="${this.min}"
-          max="${this.max}"
-          .formatter=${this.formatter}
-          .value="${this.value}"
-          ?invalid="${this.forceInvalid || this._invalid}"
-          @input="${this.#onInput}">
+          .formatter=${this.formatter ? (value: string) => this.formatter(value, this.slot as 'from' | 'to') : nothing}
+          .value="${this.textFieldDisplayValue}"
+          min="${this.allowValuesOutsideRange ? nothing : this.min}"
+          max="${this.allowValuesOutsideRange ? nothing : this.max}"
+          step="${ifDefined(this.step)}"
+          ?invalid="${Boolean(this.invalid)}"
+          @input="${this.#onInput}"
+          @focus="${this.#onTextFieldFocus}"
+          @blur="${this.#onTextFieldBlur}"
+        >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
 
-        <w-attention tooltip placement="top" flip distance="24" .show="${this._showTooltip}">
-          <output id="target" class="w-slider-thumb__tooltip-target" slot="target"></output>
+        <w-attention
+          tooltip
+          placement="top"
+          flip
+          distance="24"
+          .show="${this._showTooltip}"
+        >
+          <output
+            id="target"
+            class="w-slider-thumb__tooltip-target"
+            slot="target"
+          ></output>
           <span slot="message">
-            ${this.value ? (this.formatter ? this.formatter(this.value) : this.value) : 0}${this.suffix
-              ? html`&nbsp;${this.suffix}`
-              : nothing}
+            ${this.tooltipDisplayValue}${this.suffix ? html`&nbsp;${this.suffix}` : nothing}
           </span>
         </w-attention>
 
         <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
-        <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
+        <span class="sr-only" id="aria-description"
+          >${this.ariaDescription}</span
+        >
       </div>
     `;
   }

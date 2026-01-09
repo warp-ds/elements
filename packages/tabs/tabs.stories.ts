@@ -1,4 +1,7 @@
 import { html } from 'lit';
+import '@warp-ds/icons/elements/info-16';
+import '@warp-ds/icons/elements/success-16';
+import '@warp-ds/icons/elements/error-16';
 
 import './index.js';
 
@@ -29,15 +32,21 @@ export const Default = () => html`
 `;
 
 export const WithIcons = () => html`
-  <w-tabs active="home">
-    <w-tab name="home" label="Home">
-      <span slot="icon">🏠</span>
+  <w-tabs active="info">
+    <w-tab name="info" label="Info">
+      <span slot="icon">
+          <w-icon-info-16></w-icon-info-16>
+      </span>
     </w-tab>
-    <w-tab name="search" label="Search">
-      <span slot="icon">🔍</span>
+    <w-tab name="done" label="Done">
+      <span slot="icon">
+          <w-icon-success-16></w-icon-success-16>
+      </span>
     </w-tab>
-    <w-tab name="profile" label="Profile">
-      <span slot="icon">👤</span>
+    <w-tab name="error" label="Failures">
+      <span slot="icon">
+          <w-icon-error-16></w-icon-error-16>
+      </span>
     </w-tab>
   </w-tabs>
 

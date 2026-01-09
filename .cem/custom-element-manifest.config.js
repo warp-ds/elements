@@ -10,6 +10,7 @@ export default {
 
   // Globs to analyze
   globs: [
+    // released
     'packages/affix/index.ts',
     'packages/alert/index.ts',
     'packages/attention/index.ts',
@@ -28,14 +29,24 @@ export default {
     'packages/toast/toast.ts',
     'packages/toast/index.ts',
     'packages/toast/toast-container.ts',
-    // 'packages/**/index.ts',
-    // 'packages/**/index.js',
-    // 'packages/datepicker/datepicker.ts',
+    'packages/datepicker/datepicker.ts',
+    'packages/link/index.ts',
+
+    // unreleased
+    // 'packages/combobox/index.ts',
+    // 'packages/deadtoggle/index.ts',
+    // 'packages/pageindicator/index.ts',
+    // 'packages/pagination/index.ts',
+    // 'packages/radio/radio*.ts',
+    // 'packages/checkbox/checkbox.ts',
+    // 'packages/checkbox/checkbox-group.ts',
     // 'packages/slider/slider.ts',
     // 'packages/slider/slider-thumb.ts',
-    // 'packages/rip-and-tear-radio/radio*.ts',
-    // 'packages/rip-and-tear-checkbox/checkbox.ts',
-    // 'packages/tabs/tab*.ts',
+    // 'packages/stepindicator/index.ts',
+    // 'packages/switch/index.ts',
+    // 'packages/tabs/tab.ts',
+    // 'packages/tabs/tabs.ts',
+    // 'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude

@@ -21,7 +21,43 @@ test('by default button type is button', async () => {
 
 test.todo('works in a form as type submit');
 
-test.todo('works in a form as type reset');
+test('Works in a form as type reset', async () => {
+  const label = 'Test label';
+
+  render(html`
+    <form>
+      <w-button
+        label=${label}
+        name="test"
+        type="reset"
+        value="test"
+        variant="secondary"
+      >
+        Reset the form
+      </w-button>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const wButton = document.querySelector('w-button') as HTMLElement & { value: string };
+
+  // sanity
+  expect(form).not.toBeNull();
+  expect(wButton).not.toBeNull();
+
+  // Initial value is "test"
+  expect(wButton.value).toBe('test');
+
+  // Change the value to "definitely not test"
+  wButton.value = 'definitely not test';
+  expect(wButton.value).toBe('definitely not test');
+
+  // Reset the form
+  form.reset();
+
+  // Value should be reset back to "test"
+  expect(wButton.value).toBe('test');
+});
 
 test('calling focus on w-button focuses the button inside the shadow root', async () => {
   const component = html`<w-button>This is a button</w-button>`;
