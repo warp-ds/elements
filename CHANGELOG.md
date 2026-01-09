@@ -1,3 +1,10 @@
+# [2.3.0-next.32](https://github.com/warp-ds/elements/compare/v2.3.0-next.31...v2.3.0-next.32) (2026-01-09)
+
+
+### Bug Fixes
+
+* **link:** add missing variant, remove link variant ([#481](https://github.com/warp-ds/elements/issues/481)) ([5df8300](https://github.com/warp-ds/elements/commit/5df830071d4807adeaa0349aa95dc20948950ed2))
+
 # [2.3.0-next.31](https://github.com/warp-ds/elements/compare/v2.3.0-next.30...v2.3.0-next.31) (2026-01-09)
 
 
