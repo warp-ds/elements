@@ -29,7 +29,7 @@ export default {
     'packages/toast/toast.ts',
     'packages/toast/index.ts',
     'packages/toast/toast-container.ts',
-    'packages/datepicker/datepicker.ts',
+    'packages/datepicker/index.ts',
     'packages/link/index.ts',
 
     // unreleased
