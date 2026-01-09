@@ -30,6 +30,7 @@ export default {
     'packages/toast/index.ts',
     'packages/toast/toast-container.ts',
     'packages/datepicker/index.ts',
+    'packages/datepicker/datepicker.ts',
     'packages/link/index.ts',
 
     // unreleased
