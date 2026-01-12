@@ -1,3 +1,24 @@
+## [2.3.2](https://github.com/warp-ds/elements/compare/v2.3.1...v2.3.2) (2026-01-09)
+
+
+### Bug Fixes
+
+* ensure custom element manifest also includes datepicker ([d0a0d29](https://github.com/warp-ds/elements/commit/d0a0d297774375cb2f262517224d522080f7ea1c))
+
+## [2.3.1](https://github.com/warp-ds/elements/compare/v2.3.0...v2.3.1) (2026-01-09)
+
+
+### Bug Fixes
+
+* ensure datepicker is included in bundle ([ea3af88](https://github.com/warp-ds/elements/commit/ea3af88f8084a925a4cbe2b6e3a5a0f0a6f64020))
+
+# [2.3.0](https://github.com/warp-ds/elements/compare/v2.2.1...v2.3.0) (2026-01-09)
+
+
+### Features
+
+* release w-datepicker and w-link ([#483](https://github.com/warp-ds/elements/issues/483)) ([8adac6c](https://github.com/warp-ds/elements/commit/8adac6c1ead4403ec555dea569ee30dd3bb3d0f7))
+
 # [2.3.0-next.32](https://github.com/warp-ds/elements/compare/v2.3.0-next.31...v2.3.0-next.32) (2026-01-09)
 
 
