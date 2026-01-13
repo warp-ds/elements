@@ -98,14 +98,6 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   optional = false;
 
-  /** Additional container styling */
-  @property({ type: String, reflect: true, attribute: 'class-name' })
-  containerClassName?: string;
-
-  /** Additional list styling */
-  @property({ type: String, attribute: 'list-class-name', reflect: true })
-  listClassName?: string;
-
   /** Name attribute for form submission */
   @property({ type: String, reflect: true })
   name?: string;
@@ -467,7 +459,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div class=${classNames(ccCombobox.wrapper, this.containerClassName)} @blur=${this._handleContainerBlur}>
+      <div class=${classNames(ccCombobox.wrapper)} @blur=${this._handleContainerBlur}>
         <w-textfield
           class="w-combobox-textfield"
           .value=${this._navigationValueOrInputValue}
@@ -492,7 +484,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
         <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this.value)} </span>
 
-        <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base, this.listClassName)}>
+        <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
           <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">
             ${repeat(
               this._currentOptions,
