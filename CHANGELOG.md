@@ -1,3 +1,10 @@
+# [2.4.0-next.3](https://github.com/warp-ds/elements/compare/v2.4.0-next.2...v2.4.0-next.3) (2026-01-13)
+
+
+### Features
+
+* add autocomplete option to textfield and combobox ([#484](https://github.com/warp-ds/elements/issues/484)) ([4708239](https://github.com/warp-ds/elements/commit/4708239429d0d81d7241c20a466b9566f3642db1))
+
 # [2.4.0-next.2](https://github.com/warp-ds/elements/compare/v2.4.0-next.1...v2.4.0-next.2) (2026-01-13)
 
 
