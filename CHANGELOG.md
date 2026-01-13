@@ -1,3 +1,10 @@
+# [2.4.0-next.2](https://github.com/warp-ds/elements/compare/v2.4.0-next.1...v2.4.0-next.2) (2026-01-13)
+
+
+### Bug Fixes
+
+* calculate correct width and offset for progress bar ([d0776b8](https://github.com/warp-ds/elements/commit/d0776b8d293d4a8a0eb911c655dee20247f43a3c))
+
 # [2.4.0-next.1](https://github.com/warp-ds/elements/compare/v2.3.2...v2.4.0-next.1) (2026-01-12)
 
 
