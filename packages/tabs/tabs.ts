@@ -7,6 +7,7 @@ import { property, query } from 'lit/decorators.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
+import { WarpTabPanel } from './tab-panel.js';
 
 const ccTabs = {
   wrapper: 'inline-block border-b s-border mb-32',
@@ -40,6 +41,8 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
     if (callNow) func(...args);
   }) as T;
 }
+
+let tabsInstanceCounter = 0;
 
 export interface TabChangeEvent {
   name: string;
@@ -76,6 +79,11 @@ export class WarpTabs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    if (!this.id) {
+      tabsInstanceCounter += 1;
+      this.id = `warp-tabs-${tabsInstanceCounter}`;
+    }
 
     // Set up resize observer for selection indicator updates
     if (typeof ResizeObserver !== 'undefined') {
@@ -179,7 +187,7 @@ export class WarpTabs extends LitElement {
 
   private updatePanels() {
     // Update tab panels visibility
-    const panels = document.querySelectorAll('w-tab-panel');
+    const panels: WarpTabPanel[] = Array.from(document.querySelectorAll(`w-tab-panel[for="${this.id}"]`));
     panels.forEach((panel) => {
       if (panel.name === this._activeTab) {
         panel.removeAttribute('hidden');

@@ -76,8 +76,14 @@ export class WarpTab extends LitElement {
         type="button"
         role="tab"
         aria-selected="${this.active ? 'true' : 'false'}"
-        aria-controls="${this.active ? `warp-tabpanel-${this.name}` : ''}"
-        id="warp-tab-${this.name}"
+        aria-controls="${(() => {
+          const tabsId = this.closest('w-tabs')?.id;
+          return tabsId ? `${tabsId}-tabpanel-${this.name}` : `warp-tabpanel-${this.name}`;
+        })()}"
+        id="${(() => {
+          const tabsId = this.closest('w-tabs')?.id;
+          return tabsId ? `${tabsId}-tab-${this.name}` : `warp-tab-${this.name}`;
+        })()}"
         class="${this._classes}"
         @click="${this._handleClick}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
