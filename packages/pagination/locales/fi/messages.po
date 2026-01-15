@@ -15,36 +15,36 @@ msgstr ""
 
 #. Default screenreader message for first page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:111
+#: packages/pagination/index.ts:138
 msgid "pagination.aria.first-page"
 msgstr "Ensimmäinen sivu"
 
 #. Suffix added at the end of icon titles when img semantics are lost on an html element
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:20
+#: packages/pagination/index.ts:19
 msgid "pagination.aria.icon-suffix"
 msgstr "kuvake"
 
 #. Default screenreader message for next page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:166
+#: packages/pagination/index.ts:209
 msgid "pagination.aria.next-page"
 msgstr "Seuraava sivu"
 
 #. Default screenreader message for page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:149
+#: packages/pagination/index.ts:183
 msgid "pagination.aria.page"
 msgstr "Sivu {currentPage}"
 
 #. Default screenreader message for pagination container in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:98
+#: packages/pagination/index.ts:121
 msgid "pagination.aria.pagination"
 msgstr "Sivut"
 
 #. Default screenreader message for previous page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/index.ts:127
+#: packages/pagination/index.ts:159
 msgid "pagination.aria.prev-page"
 msgstr "Edellinen sivu"

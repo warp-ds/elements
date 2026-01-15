@@ -6,9 +6,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: sv\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/textarea/textarea.ts:164
+#: packages/textarea/textarea.ts:200
 msgid "textarea.label.optional"
 msgstr "(valfritt)"
