@@ -40,17 +40,6 @@ export class WarpTab extends LitElement {
   @property({ attribute: 'tab-class', reflect: true })
   tabClass = '';
 
-  private _handleClick = (event: MouseEvent) => {
-    // Dispatch a custom event that the parent tabs component can listen to
-    this.dispatchEvent(
-      new CustomEvent('tab-click', {
-        detail: { id: this.for },
-        bubbles: true,
-        composed: true,
-      }),
-    );
-  };
-
   private get _classes() {
     return classNames(this.tabClass, [ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
   }
@@ -70,7 +59,6 @@ export class WarpTab extends LitElement {
         aria-controls="${this.for}"
         id="warp-tab-${this.for}"
         class="${this._classes}"
-        @click="${this._handleClick}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
         style="height: 100%">
         ${

@@ -83,7 +83,7 @@ export class WarpTabs extends LitElement {
 
   constructor() {
     super();
-    this.addEventListener('tab-click', this._handleTabClick);
+    this.addEventListener('click', this._handleTabClick);
   }
 
   connectedCallback() {
@@ -110,7 +110,7 @@ export class WarpTabs extends LitElement {
       this._resizeObserver.disconnect();
     }
     window.removeEventListener('resize', this._updateSelectionIndicatorDebounced);
-    this.removeEventListener('tab-click', this._handleTabClick);
+    this.removeEventListener('click', this._handleTabClick);
   }
 
   firstUpdated() {
@@ -155,7 +155,7 @@ export class WarpTabs extends LitElement {
   }
 
   private _handleTabClick = (event: CustomEvent<TabChangeEvent>) => {
-    const newActiveTab = event.detail.id;
+    const newActiveTab = (event.target as WarpTab).for;
     if (newActiveTab !== this._activeTabFor) {
       this.active = newActiveTab;
       this._activeTabFor = newActiveTab;
