@@ -15,12 +15,6 @@ import { styles } from './styles.js';
 export class WarpTabPanel extends LitElement {
   static styles = [reset, styles];
 
-  @property({ reflect: true })
-  name!: string;
-
-  @property({ attribute: 'for', reflect: true })
-  for = '';
-
   @property({ type: Boolean, reflect: true })
   hidden = true;
 
@@ -32,22 +26,15 @@ export class WarpTabPanel extends LitElement {
     this._syncA11yAttributes();
   }
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('name') || changedProperties.has('for')) {
-      this._syncA11yAttributes();
-    }
+  updated() {
+    this._syncA11yAttributes();
   }
 
   private _syncA11yAttributes() {
-    if (!this.name) return;
+    // Panel identity comes from its own id attribute.
+    if (!this.id) return;
 
-    const tabsId = this.for || '';
-
-    const tabId = tabsId ? `${tabsId}-tab-${this.name}` : `warp-tab-${this.name}`;
-    const panelId = tabsId ? `${tabsId}-tabpanel-${this.name}` : `warp-tabpanel-${this.name}`;
-
-    this.setAttribute('aria-labelledby', tabId);
-    this.setAttribute('id', panelId);
+    this.setAttribute('aria-labelledby', `warp-tab-${this.id}`);
   }
 
   render() {

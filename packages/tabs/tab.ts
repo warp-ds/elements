@@ -25,8 +25,8 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
 export class WarpTab extends LitElement {
   static styles = [reset, styles];
 
-  @property({ reflect: true })
-  name!: string;
+  @property({ attribute: 'for', reflect: true })
+  for = '';
 
   @property({ reflect: true })
   label = '';
@@ -44,16 +44,7 @@ export class WarpTab extends LitElement {
     // Dispatch a custom event that the parent tabs component can listen to
     this.dispatchEvent(
       new CustomEvent('tab-click', {
-        detail: { name: this.name },
-        bubbles: true,
-        composed: true,
-      }),
-    );
-
-    // Also dispatch a generic click event for any click handlers
-    this.dispatchEvent(
-      new CustomEvent('click', {
-        detail: { name: this.name, originalEvent: event },
+        detail: { id: this.for },
         bubbles: true,
         composed: true,
       }),
@@ -76,14 +67,8 @@ export class WarpTab extends LitElement {
         type="button"
         role="tab"
         aria-selected="${this.active ? 'true' : 'false'}"
-        aria-controls="${(() => {
-          const tabsId = this.closest('w-tabs')?.id;
-          return tabsId ? `${tabsId}-tabpanel-${this.name}` : `warp-tabpanel-${this.name}`;
-        })()}"
-        id="${(() => {
-          const tabsId = this.closest('w-tabs')?.id;
-          return tabsId ? `${tabsId}-tab-${this.name}` : `warp-tab-${this.name}`;
-        })()}"
+        aria-controls="${this.for}"
+        id="warp-tab-${this.for}"
         class="${this._classes}"
         @click="${this._handleClick}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
