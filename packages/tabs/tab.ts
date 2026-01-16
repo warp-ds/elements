@@ -60,6 +60,7 @@ export class WarpTab extends LitElement {
         id="warp-tab-${this.for}"
         class="${this._classes}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
+        @click="${(e) => { e.tab = this; }}"
         style="height: 100%">
         ${
           !hasChildren
