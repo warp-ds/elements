@@ -13,18 +13,19 @@ import { Modal } from '@warp-ds/elements/react/modal';
 import { Pill } from '@warp-ds/elements/react/pill';
 import { Select } from '@warp-ds/elements/react/select';
 import { TextField } from '@warp-ds/elements/react/textfield';
+import { Switch } from '@warp-ds/elements/react/switch';
+import { Combobox } from '@warp-ds/elements/react/combobox';
 
 // unreleased
-import { Combobox } from '@warp-ds/elements/react/combobox';
-import { DeadToggle } from '@warp-ds/elements/react/deadtoggle';
-import { PageIndicator } from '@warp-ds/elements/react/pageindicator';
-import { Pagination } from '@warp-ds/elements/react/pagination';
-import { Checkbox } from '@warp-ds/elements/react/checkbox';
-import { Radio } from '@warp-ds/elements/react/radio';
-import { Slider } from '@warp-ds/elements/react/slider';
-import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
-import { Switch } from '@warp-ds/elements/react/switch';
-import { Tabs } from '@warp-ds/elements/react/tabs';
+// import { DeadToggle } from '@warp-ds/elements/react/deadtoggle';
+// import { PageIndicator } from '@warp-ds/elements/react/pageindicator';
+// import { Pagination } from '@warp-ds/elements/react/pagination';
+// import { Checkbox } from '@warp-ds/elements/react/checkbox';
+// import { Radio } from '@warp-ds/elements/react/radio';
+// import { Slider } from '@warp-ds/elements/react/slider';
+// import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
+// import { Tabs } from '@warp-ds/elements/react/tabs';
+// import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;
@@ -42,17 +43,18 @@ const _modal: typeof Modal = Modal;
 const _pill: typeof Pill = Pill;
 const _select: typeof Select = Select;
 const _textField: typeof TextField = TextField;
+const _combobox: typeof Combobox = Combobox;
+const _switch: typeof Switch = Switch;
 
 // unreleased
-const _combobox: typeof Combobox = Combobox;
-const _deadToggle: typeof DeadToggle = DeadToggle;
-const _pageIndicator: typeof PageIndicator = PageIndicator;
-const _pagination: typeof Pagination = Pagination;
-const _checkbox: typeof Checkbox = Checkbox;
-const _radio: typeof Radio = Radio;
-const _slider: typeof Slider = Slider;
-const _stepIndicator: typeof StepIndicator = StepIndicator;
-const _switch: typeof Switch = Switch;
-const _tabs: typeof Tabs = Tabs;
+// const _deadToggle: typeof DeadToggle = DeadToggle;
+// const _pageIndicator: typeof PageIndicator = PageIndicator;
+// const _pagination: typeof Pagination = Pagination;
+// const _checkbox: typeof Checkbox = Checkbox;
+// const _radio: typeof Radio = Radio;
+// const _slider: typeof Slider = Slider;
+// const _stepIndicator: typeof StepIndicator = StepIndicator;
+// const _tabs: typeof Tabs = Tabs;
+// const _textarea: typeof Textarea = Textarea;
 
 console.log('✓ All imports resolved successfully');

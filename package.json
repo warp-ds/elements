@@ -65,10 +65,6 @@
       "types": "./dist/packages/datepicker/react.d.ts",
       "import": "./dist/packages/datepicker/react.js"
     },
-    "./react/deadtoggle": {
-      "types": "./dist/packages/dead-toggle/react.d.ts",
-      "import": "./dist/packages/deadtoggle/react.js"
-    },
     "./react/expandable": {
       "types": "./dist/packages/expandable/react.d.ts",
       "import": "./dist/packages/expandable/react.js"
@@ -81,49 +77,17 @@
       "types": "./dist/packages/modal/react.d.ts",
       "import": "./dist/packages/modal/react.js"
     },
-    "./react/pageindicator": {
-      "types": "./dist/packages/pageindicator/react.d.ts",
-      "import": "./dist/packages/pageindicator/react.js"
-    },
-    "./react/pagination": {
-      "types": "./dist/packages/pagination/react.d.ts",
-      "import": "./dist/packages/pagination/react.js"
-    },
     "./react/pill": {
       "types": "./dist/packages/pill/react.d.ts",
       "import": "./dist/packages/pill/react.js"
-    },
-    "./react/checkbox": {
-      "types": "./dist/packages/checkbox/react.d.ts",
-      "import": "./dist/packages/checkbox/react.js"
-    },
-    "./react/radio": {
-      "types": "./dist/packages/radio/react.d.ts",
-      "import": "./dist/packages/radio/react.js"
     },
     "./react/select": {
       "types": "./dist/packages/select/react.d.ts",
       "import": "./dist/packages/select/react.js"
     },
-    "./react/slider": {
-      "types": "./dist/packages/slider/react.d.ts",
-      "import": "./dist/packages/slider/react.js"
-    },
-    "./react/stepindicator": {
-      "types": "./dist/packages/stepindicator/react.d.ts",
-      "import": "./dist/packages/stepindicator/react.js"
-    },
     "./react/switch": {
       "types": "./dist/packages/switch/react.d.ts",
       "import": "./dist/packages/switch/react.js"
-    },
-    "./react/tabs": {
-      "types": "./dist/packages/tabs/react.d.ts",
-      "import": "./dist/packages/tabs/react.js"
-    },
-    "./react/textarea": {
-      "types": "./dist/packages/textarea/react.d.ts",
-      "import": "./dist/packages/textarea/react.js"
     },
     "./react/textfield": {
       "types": "./dist/packages/textfield/react.d.ts",
