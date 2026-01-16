@@ -43,10 +43,6 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
   }) as T;
 }
 
-export interface TabChangeEvent {
-  id: string;
-}
-
 /**
  * Tabs are used to organize content by grouping similar information on the same page.
  *
@@ -79,6 +75,7 @@ export class WarpTabs extends LitElement {
       if (child.tagName === 'W-TAB' && !child.getAttribute('slot')) child.setAttribute('slot', 'tabs');
       if (child.tagName === 'W-TAB-PANEL' && !child.getAttribute('slot')) child.setAttribute('slot', 'panels');
     });
+    this.requestUpdate();
   };
 
   constructor() {
@@ -154,8 +151,8 @@ export class WarpTabs extends LitElement {
     }
   }
 
-  private _handleTabClick = (event: CustomEvent<TabChangeEvent>) => {
-    const newActiveTab = (event.target as WarpTab).for;
+  private _handleTabClick = (event: PointerEvent & { tab: WarpTab }) => {
+    const newActiveTab = event.tab.for;
     if (newActiveTab !== this._activeTabFor) {
       this.active = newActiveTab;
       this._activeTabFor = newActiveTab;
@@ -293,6 +290,7 @@ export class WarpTabs extends LitElement {
         </div>
       </div>
       <slot name="panels" @slotchange="${this._assignSlots}"></slot>
+      <slot @slotchange="${this._assignSlots}"></slot>
     `;
   }
 }
