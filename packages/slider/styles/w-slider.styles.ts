@@ -27,42 +27,6 @@ export const wSliderStyles = css`
     --w-slider-thumb-offset: calc(var(--w-slider-thumb-size) / 2);
     --w-slider-marker-color: var(--w-s-color-border);
 
-    /* Math corner to calculate the fill of the slider and placement of markers. */
-
-    /* The --min value can be non-zero, f. ex. choosing a year from 1950 to 2025. Normalize the values so we start at 0 and run to max - min. */
-    --_value-range: calc(var(--max) - var(--min));
-
-    /** Round up to the nearest --step, which defaults to 1 (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range#step) */
-    --_from-in-range: round(
-      up,
-      max(calc(var(--from) - var(--min)), 0),
-      var(--step, 1)
-    );
-
-    /* limit to maximum value in range so typing a value larger than max doesn't explode layouts */
-    --_to-in-range: round(
-      up,
-      min(calc(var(--to) - var(--min)), var(--_value-range)),
-      var(--step, 1)
-    );
-
-    /* Position the starting point of the fill in the case of a non-zero --from value in a range slider.
-     * In other words, given a width of 100% how many percent should be left unfilled/blank
-     * at the beginning of the range slider (dashes in this ASCII-range-slider: |---O******O|) */
-    --_from-as-percent-of-max: calc(
-      var(--_from-in-range) / var(--_value-range) * 100
-    );
-    --_blank-values-before: var(--_from-as-percent-of-max);
-
-    /* Set the width of the fill as a percentage.
-     * In other words, given a width of 100% how many percent should be left unfilled/blank
-     * at the end of the slider (dashes in this ASCII-slider: |******O---|) */
-    --_to-as-percent-of-max: calc(
-      var(--_to-in-range) / var(--_value-range) * 100
-    );
-    --_filled-values: calc(
-      var(--_to-as-percent-of-max) - var(--_blank-values-before)
-    );
 
     /* Vertical position of range and markers */
     --_range-top: calc(
@@ -113,16 +77,19 @@ export const wSliderStyles = css`
     border-start-start-radius: var(--active-range-border-radius, 0);
     border-end-start-radius: var(--active-range-border-radius, 0);
 
-    margin-left: calc(
-      calc(var(--_blank-values-before) * 1%) - var(
-          --active-range-inline-start-padding,
-          0px
-        )
-    );
-    width: calc(
-      calc(var(--_filled-values) * 1%) +
-        var(--active-range-inline-end-padding, 0px)
-    );
+    /* takes over-under into the calculation if set, as this makes the ranges longer in reality */
+    --max-with-offset: calc(var(--max) + var(--over-under-offset, 0));
+
+    /* calculate the offset for the "from" thumb in percentage to move the range visualisation from the left edge, using max() to avoid going off screen */
+    --offset-percentage: calc(calc(var(--from) - var(--min)) / calc(var(--max-with-offset) - var(--min)) * 100);
+    margin-left: calc(max(var(--offset-percentage) * 1%, 0px) - 1px);
+
+    /* calculate the width of the selected range in percentage, clamped between min/max */
+    --value-range: calc(var(--max-with-offset) - var(--min));
+    --range-span-percentage: calc(calc(min(var(--to), var(--max-with-offset)) - max(var(--min), var(--from))) / var(--value-range) * 100 );
+    width: calc(var(--range-span-percentage) * 1% + 1px);
+
+
     z-index: 1;
   }
 

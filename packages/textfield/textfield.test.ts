@@ -89,3 +89,17 @@ test('renders affix component in the suffix slot', async () => {
   const page = render(component);
   await expect.element(page.getByText('kr')).toBeVisible();
 });
+
+test('renders with no autocomplete attribute when none provided', async () => {
+  const component = html`<w-textfield data-testid="textfield"></w-textfield>`;
+
+  const page = render(component);
+  const locator = page.getByTestId('textfield');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement;
+  expect(el.hasAttribute('autocomplete')).toBe(false);
+
+  expect(el.shadowRoot.querySelector('input').hasAttribute('autocomplete')).toBe(false);
+});
