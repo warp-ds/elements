@@ -19,11 +19,11 @@ const modules = [
   'packages/button/button.ts',
   'packages/card/card.ts',
   'packages/expandable/expandable.ts',
-  'packages/modal/modal.ts',
+  'packages/modal/index.ts',
   'packages/pill/pill.ts',
   'packages/select/select.ts',
   'packages/textfield/textfield.ts',
-  'packages/toast/toast.ts',
+  'packages/toast/index.ts',
 ];
 
 const toastApiPath = new URL('../packages/toast/api.js', import.meta.url).pathname;
