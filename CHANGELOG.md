@@ -1,3 +1,10 @@
+# [2.4.0-next.5](https://github.com/warp-ds/elements/compare/v2.4.0-next.4...v2.4.0-next.5) (2026-01-19)
+
+
+### Bug Fixes
+
+* re-enable unreleased components ([21b9a2c](https://github.com/warp-ds/elements/commit/21b9a2c1eb8d4afdc94d29984445a9e49942444d))
+
 # [2.4.0-next.4](https://github.com/warp-ds/elements/compare/v2.4.0-next.3...v2.4.0-next.4) (2026-01-19)
 
 
