@@ -1,3 +1,11 @@
+# [2.4.0-next.6](https://github.com/warp-ds/elements/compare/v2.4.0-next.5...v2.4.0-next.6) (2026-01-19)
+
+
+### Bug Fixes
+
+* add back in package.json exports ([7411f95](https://github.com/warp-ds/elements/commit/7411f95beb90ca5476bc2051f6ab78176925ac82))
+* improve module resolution check for tabs ([ad51071](https://github.com/warp-ds/elements/commit/ad51071811c63fe71a679880d131bd7a3937044a))
+
 # [2.4.0-next.5](https://github.com/warp-ds/elements/compare/v2.4.0-next.4...v2.4.0-next.5) (2026-01-19)
 
 

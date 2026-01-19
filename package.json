@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.4.0-next.5",
+  "version": "2.4.0-next.6",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {
@@ -93,7 +93,6 @@
       "types": "./dist/packages/textfield/react.d.ts",
       "import": "./dist/packages/textfield/react.js"
     },
-
     "./react/tabs": {
       "types": "./dist/packages/tabs/react.d.ts",
       "import": "./dist/packages/tabs/react.js"
@@ -102,7 +101,6 @@
       "types": "./dist/packages/checkbox/react.d.ts",
       "import": "./dist/packages/checkbox/react.js"
     },
-
     "./react/deadtoggle": {
       "types": "./dist/packages/dead-toggle/react.d.ts",
       "import": "./dist/packages/deadtoggle/react.js"
