@@ -26,7 +26,7 @@ const config: LinguiConfig = {
       path: 'packages/select/locales/{locale}/messages',
     },
     {
-      include: ['packages/attention/index.js'],
+      include: ['packages/attention/'],
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
