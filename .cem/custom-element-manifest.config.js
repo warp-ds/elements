@@ -45,8 +45,10 @@ export default {
     'packages/slider/slider.ts',
     'packages/slider/slider-thumb.ts',
     'packages/stepindicator/index.ts',
+    'packages/tabs/index.ts',
     'packages/tabs/tab.ts',
     'packages/tabs/tabs.ts',
+    'packages/tabs/tab-panel.ts',
     'packages/textarea/textarea.ts',
   ],
 

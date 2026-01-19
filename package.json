@@ -93,6 +93,44 @@
       "types": "./dist/packages/textfield/react.d.ts",
       "import": "./dist/packages/textfield/react.js"
     },
+
+    "./react/tabs": {
+      "types": "./dist/packages/tabs/react.d.ts",
+      "import": "./dist/packages/tabs/react.js"
+    },
+    "./react/checkbox": {
+      "types": "./dist/packages/checkbox/react.d.ts",
+      "import": "./dist/packages/checkbox/react.js"
+    },
+
+    "./react/deadtoggle": {
+      "types": "./dist/packages/dead-toggle/react.d.ts",
+      "import": "./dist/packages/deadtoggle/react.js"
+    },
+    "./react/pageindicator": {
+      "types": "./dist/packages/pageindicator/react.d.ts",
+      "import": "./dist/packages/pageindicator/react.js"
+    },
+    "./react/pagination": {
+      "types": "./dist/packages/pagination/react.d.ts",
+      "import": "./dist/packages/pagination/react.js"
+    },
+    "./react/radio": {
+      "types": "./dist/packages/radio/react.d.ts",
+      "import": "./dist/packages/radio/react.js"
+    },
+    "./react/slider": {
+      "types": "./dist/packages/slider/react.d.ts",
+      "import": "./dist/packages/slider/react.js"
+    },
+    "./react/stepindicator": {
+      "types": "./dist/packages/stepindicator/react.d.ts",
+      "import": "./dist/packages/stepindicator/react.js"
+    },
+    "./react/textarea": {
+      "types": "./dist/packages/textarea/react.d.ts",
+      "import": "./dist/packages/textarea/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
