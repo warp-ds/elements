@@ -17,13 +17,13 @@ import { Switch } from '@warp-ds/elements/react/switch';
 import { Combobox } from '@warp-ds/elements/react/combobox';
 
 // unreleased
-import { DeadToggle } from '@warp-ds/elements/react/deadtoggle';
-import { PageIndicator } from '@warp-ds/elements/react/pageindicator';
+import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
+import { PageIndicator } from '@warp-ds/elements/react/page-indicator';
 import { Pagination } from '@warp-ds/elements/react/pagination';
 import { Checkbox } from '@warp-ds/elements/react/checkbox';
 import { Radio } from '@warp-ds/elements/react/radio';
 import { Slider } from '@warp-ds/elements/react/slider';
-import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
+import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
 import { Tabs, TabPanel, Tab } from '@warp-ds/elements/react/tabs';
 import { Textarea } from '@warp-ds/elements/react/textarea';
 
