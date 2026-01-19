@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpTextField } from './index.js';
-import './index.js';
+import type { WarpTextField } from './textfield.js';
+import './textfield.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfield');
 

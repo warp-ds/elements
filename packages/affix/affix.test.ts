@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './affix.js';
 
 test('renders the affix', async () => {
   const component = html`<w-affix label="kr"></w-affix>`;

@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { WarpBadge } from './index.js';
+import { WarpBadge } from './badge.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

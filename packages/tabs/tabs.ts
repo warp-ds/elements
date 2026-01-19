@@ -7,8 +7,8 @@ import { property, query } from 'lit/decorators.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
-import { WarpTabPanel } from './tab-panel.js';
-import { WarpTab } from './tab.js';
+import { WarpTabPanel } from '../tab-panel/tab-panel.js';
+import { WarpTab } from '../tab/tab.js';
 
 const ccTabs = {
   wrapper: 'inline-block border-b s-border mb-32',

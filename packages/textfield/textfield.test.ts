@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import '../affix/index.js';
-import './index.js';
+import '../affix/affix.js';
+import './textfield.js';
 
 test('renders the textfield', async () => {
   const component = html`<w-textfield label="Test label"></w-textfield>`;

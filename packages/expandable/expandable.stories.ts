@@ -7,8 +7,8 @@ import { prespread } from '../../.storybook/utilities.js';
 import '../utils/expand-transition.js';
 import '../utils/unstyled-heading.js';
 
-import type { WarpExpandable } from './index.js';
-import './index.js';
+import type { WarpExpandable } from './expandable.js';
+import './expandable.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpExpandable>('w-expandable');
 

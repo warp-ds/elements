@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpBreadcrumbs } from './index.js';
-import './index.js';
+import type { WarpBreadcrumbs } from './breadcrumbs.js';
+import './breadcrumbs.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpBreadcrumbs>('w-breadcrumbs');
 

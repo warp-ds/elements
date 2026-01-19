@@ -10,20 +10,20 @@ import esbuild from 'esbuild';
 await eik.load({ urls: ['https://assets.finn.no/map/lit/v3'] });
 
 const modules = [
-  'packages/affix/index.ts',
-  'packages/alert/index.ts',
-  'packages/attention/index.ts',
-  'packages/badge/index.ts',
-  'packages/box/index.ts',
-  'packages/breadcrumbs/index.ts',
-  'packages/button/index.ts',
-  'packages/card/index.ts',
-  'packages/expandable/index.ts',
-  'packages/modal/index.ts',
-  'packages/pill/index.ts',
-  'packages/select/index.ts',
-  'packages/textfield/index.ts',
-  'packages/toast/index.ts',
+  'packages/affix/affix.ts',
+  'packages/alert/alert.ts',
+  'packages/attention/attention.ts',
+  'packages/badge/badge.ts',
+  'packages/box/box.ts',
+  'packages/breadcrumbs/breadcrumbs.ts',
+  'packages/button/button.ts',
+  'packages/card/card.ts',
+  'packages/expandable/expandable.ts',
+  'packages/modal/modal.ts',
+  'packages/pill/pill.ts',
+  'packages/select/select.ts',
+  'packages/textfield/textfield.ts',
+  'packages/toast/toast.ts',
 ];
 
 const toastApiPath = new URL('../packages/toast/api.js', import.meta.url).pathname;

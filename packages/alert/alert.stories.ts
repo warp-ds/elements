@@ -6,8 +6,8 @@ import { html } from 'lit';
 import { prespread } from '../../.storybook/utilities.js';
 
 import '../utils/expand-transition.js';
-import type { WarpAlert } from './index.js';
-import './index.js';
+import type { WarpAlert } from './alert.js';
+import './alert.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpAlert>('w-alert');
 

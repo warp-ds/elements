@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './alert.js';
 
 test('renders an info', async () => {
   const page = render(html`<w-alert variant="info" show data-testid="infoMessage">This is information</w-alert>`);

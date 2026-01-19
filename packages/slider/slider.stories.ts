@@ -2,11 +2,12 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 
-import type { WarpSlider } from './index.js';
-import '../affix/index.js';
-import '../attention/index.js';
-import '../textfield/index.js';
-import './index.js';
+import type { WarpSlider } from './slider.js';
+import '../affix/affix.js';
+import '../attention/attention.js';
+import '../textfield/textfield.js';
+import './slider.js';
+import '../slider-thumb/slider-thumb.js';
 
 const {
   events: sliderEvents,

@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
 import React from 'react';
 
-import { WarpSelect } from './index.js';
+import { WarpSelect } from './select.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

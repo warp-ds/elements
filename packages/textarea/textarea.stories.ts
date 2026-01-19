@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpTextarea } from './index.js';
-import './index.js';
+import type { WarpTextarea } from './textarea.js';
+import './textarea.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpTextarea>('w-textarea');
 
