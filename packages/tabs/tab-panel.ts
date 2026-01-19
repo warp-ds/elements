@@ -15,9 +15,6 @@ import { styles } from './styles.js';
 export class WarpTabPanel extends LitElement {
   static styles = [reset, styles];
 
-  @property({ reflect: true })
-  name!: string;
-
   @property({ type: Boolean, reflect: true })
   hidden = true;
 
@@ -26,18 +23,18 @@ export class WarpTabPanel extends LitElement {
     this.setAttribute('tabindex', '-1');
     this.setAttribute('role', 'tabpanel');
 
-    // Set aria-labelledby to reference the corresponding tab
-    if (this.name) {
-      this.setAttribute('aria-labelledby', `warp-tab-${this.name}`);
-      this.setAttribute('id', `warp-tabpanel-${this.name}`);
-    }
+    this._syncA11yAttributes();
   }
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('name') && this.name) {
-      this.setAttribute('aria-labelledby', `warp-tab-${this.name}`);
-      this.setAttribute('id', `warp-tabpanel-${this.name}`);
-    }
+  updated() {
+    this._syncA11yAttributes();
+  }
+
+  private _syncA11yAttributes() {
+    // Panel identity comes from its own id attribute.
+    if (!this.id) return;
+
+    this.setAttribute('aria-labelledby', `warp-tab-${this.id}`);
   }
 
   render() {

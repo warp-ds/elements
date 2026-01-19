@@ -7,6 +7,8 @@ import { property, query } from 'lit/decorators.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
+import { WarpTabPanel } from './tab-panel.js';
+import { WarpTab } from './tab.js';
 
 const ccTabs = {
   wrapper: 'inline-block border-b s-border mb-32',
@@ -41,10 +43,6 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
   }) as T;
 }
 
-export interface TabChangeEvent {
-  name: string;
-}
-
 /**
  * Tabs are used to organize content by grouping similar information on the same page.
  *
@@ -65,17 +63,30 @@ export class WarpTabs extends LitElement {
   @query('.selection-indicator')
   private selectionIndicator!: HTMLElement;
 
-  private _activeTab = '';
+  private _activeTabFor = '';
   private _resizeObserver?: ResizeObserver;
   private _updateSelectionIndicatorDebounced = debounce(this.updateSelectionIndicator.bind(this), 100);
 
+  private _assignSlots = () => {
+    Array.from(this.children).forEach((child) => {
+      if (!(child instanceof HTMLElement)) return;
+
+      // Only set slot if not already set by the consumer.
+      if (child.tagName === 'W-TAB' && !child.getAttribute('slot')) child.setAttribute('slot', 'tabs');
+      if (child.tagName === 'W-TAB-PANEL' && !child.getAttribute('slot')) child.setAttribute('slot', 'panels');
+    });
+    this.requestUpdate();
+  };
+
   constructor() {
     super();
-    this.addEventListener('tab-click', this._handleTabClick);
+    this.addEventListener('click', this._handleTabClick);
   }
 
   connectedCallback() {
     super.connectedCallback();
+
+    this._assignSlots();
 
     // Set up resize observer for selection indicator updates
     if (typeof ResizeObserver !== 'undefined') {
@@ -96,18 +107,19 @@ export class WarpTabs extends LitElement {
       this._resizeObserver.disconnect();
     }
     window.removeEventListener('resize', this._updateSelectionIndicatorDebounced);
-    this.removeEventListener('tab-click', this._handleTabClick);
+    this.removeEventListener('click', this._handleTabClick);
   }
 
   firstUpdated() {
+    this._assignSlots();
     this._initializeActiveTab();
     this.updateSelectionIndicator();
     this.updatePanels();
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('active') && this.active !== this._activeTab) {
-      this._activeTab = this.active;
+    if (changedProperties.has('active') && this.active !== this._activeTabFor) {
+      this._activeTabFor = this.active;
       this.updateSelectionIndicator();
       this.updatePanels();
       this._notifyTabChange();
@@ -115,35 +127,35 @@ export class WarpTabs extends LitElement {
   }
 
   get tabs() {
-    const slot = this.shadowRoot?.querySelector('slot') as HTMLSlotElement;
-    // Get the slotted elements
+    const slot = this.shadowRoot?.querySelector('slot[name="tabs"]') as HTMLSlotElement | null;
+    if (!slot) return [];
+
     const slottedElements = slot.assignedElements({ flatten: true });
-    // Filter only w-tab elements
     return slottedElements.filter((el) => el.tagName.toLowerCase() === 'w-tab');
   }
 
   get activeTab() {
-    const activeTabs = this.tabs.filter((tab: HTMLElement & { name: string }) => tab.name === this._activeTab);
+    const activeTabs = this.tabs.filter((tab: HTMLElement & { for: string }) => tab.for === this._activeTabFor);
     return activeTabs[0];
   }
 
   private _initializeActiveTab() {
     if (this.activeTab) {
-      this._activeTab = this.activeTab.getAttribute('name') || '';
+      this._activeTabFor = this.activeTab.getAttribute('for') || '';
     } else if (this.tabs.length > 0) {
-      this._activeTab = this.tabs[0].getAttribute('name') || '';
+      this._activeTabFor = this.tabs[0].getAttribute('for') || '';
     }
 
-    if (this._activeTab) {
-      this.active = this._activeTab;
+    if (this._activeTabFor) {
+      this.active = this._activeTabFor;
     }
   }
 
-  private _handleTabClick = (event: CustomEvent<TabChangeEvent>) => {
-    const newActiveTab = event.detail.name;
-    if (newActiveTab !== this._activeTab) {
+  private _handleTabClick = (event: PointerEvent & { tab: WarpTab }) => {
+    const newActiveTab = event.tab.for;
+    if (newActiveTab !== this._activeTabFor) {
       this.active = newActiveTab;
-      this._activeTab = newActiveTab;
+      this._activeTabFor = newActiveTab;
       this.updateSelectionIndicator();
       this.updatePanels();
       this._notifyTabChange();
@@ -153,7 +165,7 @@ export class WarpTabs extends LitElement {
   private _notifyTabChange() {
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { name: this._activeTab },
+        detail: { panelId: this._activeTabFor },
         bubbles: true,
         composed: true,
       }),
@@ -179,28 +191,25 @@ export class WarpTabs extends LitElement {
 
   private updatePanels() {
     // Update tab panels visibility
-    const panels = document.querySelectorAll('w-tab-panel');
+    const panels: WarpTabPanel[] = Array.from(this.querySelectorAll('w-tab-panel'));
+
     panels.forEach((panel) => {
-      if (panel.name === this._activeTab) {
-        panel.removeAttribute('hidden');
-        // Also explicitly set hidden property to false for web components
-        (panel as HTMLElement).hidden = false;
+      if (panel.id === this._activeTabFor) {
+        panel.hidden = false;
       } else {
-        panel.setAttribute('hidden', '');
-        (panel as HTMLElement).hidden = true;
+        panel.hidden = true;
       }
     });
 
     // Update tab active states
-    const tabs = this.querySelectorAll('w-tab');
+    const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
     tabs.forEach((tab) => {
-      const tabName = tab.getAttribute('name');
-      if (tabName === this._activeTab) {
-        tab.setAttribute('active', '');
-        (tab as HTMLFormElement).tabIndex = 0;
+      if (tab.for === this._activeTabFor) {
+        tab.active = true;
+        tab.tabIndex = 0;
       } else {
-        tab.removeAttribute('active');
-        (tab as HTMLFormElement).tabIndex = -1;
+        tab.active = false;
+        tab.tabIndex = -1;
       }
     });
   }
@@ -215,8 +224,8 @@ export class WarpTabs extends LitElement {
       return;
     }
 
-    const tabs = Array.from(this.querySelectorAll('w-tab'));
-    const currentIndex = tabs.findIndex((tab) => tab.getAttribute('name') === this._activeTab);
+    const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
+    const currentIndex = tabs.findIndex((tab) => tab.for === this._activeTabFor);
 
     if (currentIndex === -1) return;
 
@@ -240,21 +249,21 @@ export class WarpTabs extends LitElement {
     if (nextIndex !== currentIndex) {
       event.preventDefault();
       const nextTab = tabs[nextIndex];
-      const nextTabName = nextTab.getAttribute('name');
+      const nextTabName = nextTab.for;
 
       if (nextTabName) {
         this.active = nextTabName;
-        this._activeTab = nextTabName;
+        this._activeTabFor = nextTabName;
         this.updateSelectionIndicator();
         this.updatePanels();
         this._notifyTabChange();
 
         // Focus the next tab
-        const el = nextTab as HTMLElement;
+        const el = nextTab;
         el.tabIndex = 0; // All tabs are initially -1
         el.focus();
         tabs.forEach((t) => {
-          (t as HTMLFormElement).tabIndex = t === el ? 0 : -1;
+          t.tabIndex = t === el ? 0 : -1;
         });
       }
     }
@@ -276,10 +285,12 @@ export class WarpTabs extends LitElement {
     return html`
       <div class="${navClasses}">
         <div role="tablist" class="${divClasses}" @keydown="${this._handleKeyDown}">
-          <slot></slot>
+          <slot name="tabs" @slotchange="${this._assignSlots}"></slot>
           <span class="selection-indicator ${ccTabs.selectionIndicator}" data-testid="selection-indicator"></span>
         </div>
       </div>
+      <slot name="panels" @slotchange="${this._assignSlots}"></slot>
+      <slot @slotchange="${this._assignSlots}"></slot>
     `;
   }
 }
