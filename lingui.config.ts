@@ -30,7 +30,7 @@ const config: LinguiConfig = {
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
-      include: ['packages/modal/'],
+      include: ['packages/modal/', 'packages/modal-header/'],
       path: 'packages/modal/locales/{locale}/messages',
     },
     {
@@ -46,8 +46,8 @@ const config: LinguiConfig = {
       path: 'packages/pagination/locales/{locale}/messages',
     },
     {
-      include: ['packages/stepindicator/'],
-      path: 'packages/stepindicator/locales/{locale}/messages',
+      include: ['packages/step-indicator/', 'packages/step/'],
+      path: 'packages/step-indicator/locales/{locale}/messages',
     },
     {
       include: ['packages/combobox/'],
