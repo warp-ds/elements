@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/warp-ds/elements/compare/v2.3.2...v2.4.0) (2026-01-16)
+
+
+### Features
+
+* release w-switch and w-combobox ([#488](https://github.com/warp-ds/elements/issues/488)) ([5cd69b1](https://github.com/warp-ds/elements/commit/5cd69b10f94b6e003de13413f6a2c0aababbcb1b))
+
 # [2.4.0-next.3](https://github.com/warp-ds/elements/compare/v2.4.0-next.2...v2.4.0-next.3) (2026-01-13)
 
 
