@@ -17,15 +17,15 @@ import { Switch } from '@warp-ds/elements/react/switch';
 import { Combobox } from '@warp-ds/elements/react/combobox';
 
 // unreleased
-// import { DeadToggle } from '@warp-ds/elements/react/deadtoggle';
-// import { PageIndicator } from '@warp-ds/elements/react/pageindicator';
-// import { Pagination } from '@warp-ds/elements/react/pagination';
-// import { Checkbox } from '@warp-ds/elements/react/checkbox';
-// import { Radio } from '@warp-ds/elements/react/radio';
-// import { Slider } from '@warp-ds/elements/react/slider';
-// import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
-// import { Tabs } from '@warp-ds/elements/react/tabs';
-// import { Textarea } from '@warp-ds/elements/react/textarea';
+import { DeadToggle } from '@warp-ds/elements/react/deadtoggle';
+import { PageIndicator } from '@warp-ds/elements/react/pageindicator';
+import { Pagination } from '@warp-ds/elements/react/pagination';
+import { Checkbox } from '@warp-ds/elements/react/checkbox';
+import { Radio } from '@warp-ds/elements/react/radio';
+import { Slider } from '@warp-ds/elements/react/slider';
+import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
+import { Tabs } from '@warp-ds/elements/react/tabs';
+import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;
@@ -47,14 +47,14 @@ const _combobox: typeof Combobox = Combobox;
 const _switch: typeof Switch = Switch;
 
 // unreleased
-// const _deadToggle: typeof DeadToggle = DeadToggle;
-// const _pageIndicator: typeof PageIndicator = PageIndicator;
-// const _pagination: typeof Pagination = Pagination;
-// const _checkbox: typeof Checkbox = Checkbox;
-// const _radio: typeof Radio = Radio;
-// const _slider: typeof Slider = Slider;
-// const _stepIndicator: typeof StepIndicator = StepIndicator;
-// const _tabs: typeof Tabs = Tabs;
-// const _textarea: typeof Textarea = Textarea;
+const _deadToggle: typeof DeadToggle = DeadToggle;
+const _pageIndicator: typeof PageIndicator = PageIndicator;
+const _pagination: typeof Pagination = Pagination;
+const _checkbox: typeof Checkbox = Checkbox;
+const _radio: typeof Radio = Radio;
+const _slider: typeof Slider = Slider;
+const _stepIndicator: typeof StepIndicator = StepIndicator;
+const _tabs: typeof Tabs = Tabs;
+const _textarea: typeof Textarea = Textarea;
 
 console.log('✓ All imports resolved successfully');
