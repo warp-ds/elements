@@ -24,7 +24,7 @@ import { Checkbox } from '@warp-ds/elements/react/checkbox';
 import { Radio } from '@warp-ds/elements/react/radio';
 import { Slider } from '@warp-ds/elements/react/slider';
 import { StepIndicator } from "@warp-ds/elements/react/stepindicator";
-import { Tabs } from '@warp-ds/elements/react/tabs';
+import { Tabs, TabPanel, Tab } from '@warp-ds/elements/react/tabs';
 import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // Type assertions to ensure imports are working
@@ -55,6 +55,8 @@ const _radio: typeof Radio = Radio;
 const _slider: typeof Slider = Slider;
 const _stepIndicator: typeof StepIndicator = StepIndicator;
 const _tabs: typeof Tabs = Tabs;
+const _tab: typeof Tab = Tab;
+const _tabPanel: typeof TabPanel = TabPanel;
 const _textarea: typeof Textarea = Textarea;
 
 console.log('✓ All imports resolved successfully');
