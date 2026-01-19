@@ -1,3 +1,10 @@
+# [2.4.0-next.4](https://github.com/warp-ds/elements/compare/v2.4.0-next.3...v2.4.0-next.4) (2026-01-19)
+
+
+### Features
+
+* rework tabs structure ([#486](https://github.com/warp-ds/elements/issues/486)) ([d919391](https://github.com/warp-ds/elements/commit/d91939109851e610ee51e5a2486bd6e90859d6f7))
+
 # [2.4.0](https://github.com/warp-ds/elements/compare/v2.3.2...v2.4.0) (2026-01-16)
 
 
