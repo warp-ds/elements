@@ -49,6 +49,7 @@ export default {
     'packages/tabs/tab.ts',
     'packages/tabs/tabs.ts',
     'packages/tabs/tab-panel.ts',
+    'packages/textarea/index.ts',
     'packages/textarea/textarea.ts',
   ],
 
