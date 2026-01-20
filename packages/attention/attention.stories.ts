@@ -5,9 +5,9 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpAttention } from './index.js';
-import './index.js';
-import '../button/index.js';
+import type { WarpAttention } from './attention.js';
+import './attention.js';
+import '../button/button.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpAttention>('w-attention');
 

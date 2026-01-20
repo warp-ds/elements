@@ -5,9 +5,9 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import '../button/index.js';
-import type { WarpDatepicker } from './index.js';
-import './index.js';
+import '../button/button.js';
+import type { WarpDatepicker } from './datepicker.js';
+import './datepicker.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpDatepicker>('w-datepicker');
 

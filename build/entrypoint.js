@@ -5,8 +5,7 @@ import { getTagName } from './utils.js';
 
 export function generateEntrypointFile() {
   const exportStatements = manifest.modules
-    // here we only want files called index.ts
-    .filter((item) => item.path.match('index.ts') || item.path.match('slider.ts') || item.path.match('slider-thumb.ts'))
+    // All component files are now named after the component (e.g., button.ts, slider.ts)
     .map((item) => `export * from './${item.path.replace('.ts', '.js')}';`)
     .join('\n');
 

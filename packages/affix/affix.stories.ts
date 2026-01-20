@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpAffix } from './index.js';
-import './index.js';
+import type { WarpAffix } from './affix.js';
+import './affix.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpAffix>('w-affix');
 

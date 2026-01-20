@@ -3,7 +3,9 @@ import '@warp-ds/icons/elements/info-16';
 import '@warp-ds/icons/elements/success-16';
 import '@warp-ds/icons/elements/error-16';
 
-import './index.js';
+import './tabs.js';
+import '../tab/tab.js';
+import '../tab-panel/tab-panel.js';
 
 const meta = {
   title: 'Components/Tabs',

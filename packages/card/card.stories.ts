@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpCard } from './index.js';
-import './index.js';
+import type { WarpCard } from './card.js';
+import './card.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpCard>('w-card');
 

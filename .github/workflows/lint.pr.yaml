@@ -26,4 +26,4 @@ jobs:
       - name: Install Playwright
         run: pnpm exec playwright install --with-deps
       - name: Test
-        run: pnpm test && pnpm test:module-resolution
+        run: pnpm test && pnpm test:module-resolution && pnpm test:output-validation

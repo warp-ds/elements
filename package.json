@@ -9,19 +9,19 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./components/affix": "./dist/packages/affix/index.js",
-    "./components/alert": "./dist/packages/alert/index.js",
-    "./components/attention": "./dist/packages/attention/index.js",
-    "./components/badge": "./dist/packages/badge/index.js",
-    "./components/box": "./dist/packages/box/index.js",
-    "./components/breadcrumbs": "./dist/packages/breadcrumbs/index.js",
-    "./components/button": "./dist/packages/button/index.js",
-    "./components/card": "./dist/packages/card/index.js",
-    "./components/expandable": "./dist/packages/expandable/index.js",
+    "./components/affix": "./dist/packages/affix/affix.js",
+    "./components/alert": "./dist/packages/alert/alert.js",
+    "./components/attention": "./dist/packages/attention/attention.js",
+    "./components/badge": "./dist/packages/badge/badge.js",
+    "./components/box": "./dist/packages/box/box.js",
+    "./components/breadcrumbs": "./dist/packages/breadcrumbs/breadcrumbs.js",
+    "./components/button": "./dist/packages/button/button.js",
+    "./components/card": "./dist/packages/card/card.js",
+    "./components/expandable": "./dist/packages/expandable/expandable.js",
     "./components/modal": "./dist/packages/modal/index.js",
-    "./components/pill": "./dist/packages/pill/index.js",
-    "./components/select": "./dist/packages/select/index.js",
-    "./components/textfield": "./dist/packages/textfield/index.js",
+    "./components/pill": "./dist/packages/pill/pill.js",
+    "./components/select": "./dist/packages/select/select.js",
+    "./components/textfield": "./dist/packages/textfield/textfield.js",
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
     "./custom-elements.json": "./dist/custom-elements.json",
@@ -101,13 +101,53 @@
       "types": "./dist/packages/checkbox/react.d.ts",
       "import": "./dist/packages/checkbox/react.js"
     },
-    "./react/deadtoggle": {
+    "./react/dead-toggle": {
       "types": "./dist/packages/dead-toggle/react.d.ts",
-      "import": "./dist/packages/deadtoggle/react.js"
+      "import": "./dist/packages/dead-toggle/react.js"
     },
-    "./react/pageindicator": {
-      "types": "./dist/packages/pageindicator/react.d.ts",
-      "import": "./dist/packages/pageindicator/react.js"
+    "./react/page-indicator": {
+      "types": "./dist/packages/page-indicator/react.d.ts",
+      "import": "./dist/packages/page-indicator/react.js"
+    },
+    "./react/modal-header": {
+      "types": "./dist/packages/modal-header/react.d.ts",
+      "import": "./dist/packages/modal-header/react.js"
+    },
+    "./react/modal-footer": {
+      "types": "./dist/packages/modal-footer/react.d.ts",
+      "import": "./dist/packages/modal-footer/react.js"
+    },
+    "./react/toast-container": {
+      "types": "./dist/packages/toast-container/react.d.ts",
+      "import": "./dist/packages/toast-container/react.js"
+    },
+    "./react/checkbox-group": {
+      "types": "./dist/packages/checkbox-group/react.d.ts",
+      "import": "./dist/packages/checkbox-group/react.js"
+    },
+    "./react/radio-group": {
+      "types": "./dist/packages/radio-group/react.d.ts",
+      "import": "./dist/packages/radio-group/react.js"
+    },
+    "./react/slider-thumb": {
+      "types": "./dist/packages/slider-thumb/react.d.ts",
+      "import": "./dist/packages/slider-thumb/react.js"
+    },
+    "./react/step-indicator": {
+      "types": "./dist/packages/step-indicator/react.d.ts",
+      "import": "./dist/packages/step-indicator/react.js"
+    },
+    "./react/step": {
+      "types": "./dist/packages/step/react.d.ts",
+      "import": "./dist/packages/step/react.js"
+    },
+    "./react/tab": {
+      "types": "./dist/packages/tab/react.d.ts",
+      "import": "./dist/packages/tab/react.js"
+    },
+    "./react/tab-panel": {
+      "types": "./dist/packages/tab-panel/react.d.ts",
+      "import": "./dist/packages/tab-panel/react.js"
     },
     "./react/pagination": {
       "types": "./dist/packages/pagination/react.d.ts",
@@ -121,10 +161,6 @@
       "types": "./dist/packages/slider/react.d.ts",
       "import": "./dist/packages/slider/react.js"
     },
-    "./react/stepindicator": {
-      "types": "./dist/packages/stepindicator/react.d.ts",
-      "import": "./dist/packages/stepindicator/react.js"
-    },
     "./react/textarea": {
       "types": "./dist/packages/textarea/react.d.ts",
       "import": "./dist/packages/textarea/react.js"
@@ -134,8 +170,8 @@
       "import": "./dist/packages/*/react.js"
     },
     "./*": {
-      "types": "./dist/packages/*/index.d.ts",
-      "import": "./dist/packages/*/index.js"
+      "types": "./dist/packages/*/*.d.ts",
+      "import": "./dist/packages/*/*.js"
     }
   },
   "main": "./dist/index.js",
@@ -175,8 +211,8 @@
       "react/datepicker": [
         "./dist/packages/datepicker/react.d.ts"
       ],
-      "react/deadtoggle": [
-        "./dist/packages/deadtoggle/react.d.ts"
+      "react/dead-toggle": [
+        "./dist/packages/dead-toggle/react.d.ts"
       ],
       "react/expandable": [
         "./dist/packages/expandable/react.d.ts"
@@ -187,8 +223,8 @@
       "react/modal": [
         "./dist/packages/modal/react.d.ts"
       ],
-      "react/pageindicator": [
-        "./dist/packages/pageindicator/react.d.ts"
+      "react/page-indicator": [
+        "./dist/packages/page-indicator/react.d.ts"
       ],
       "react/pagination": [
         "./dist/packages/pagination/react.d.ts"
@@ -208,8 +244,35 @@
       "react/slider": [
         "./dist/packages/slider/react.d.ts"
       ],
-      "react/stepindicator": [
-        "./dist/packages/stepindicator/react.d.ts"
+      "react/step-indicator": [
+        "./dist/packages/step-indicator/react.d.ts"
+      ],
+      "react/step": [
+        "./dist/packages/step/react.d.ts"
+      ],
+      "react/modal-header": [
+        "./dist/packages/modal-header/react.d.ts"
+      ],
+      "react/modal-footer": [
+        "./dist/packages/modal-footer/react.d.ts"
+      ],
+      "react/toast-container": [
+        "./dist/packages/toast-container/react.d.ts"
+      ],
+      "react/checkbox-group": [
+        "./dist/packages/checkbox-group/react.d.ts"
+      ],
+      "react/radio-group": [
+        "./dist/packages/radio-group/react.d.ts"
+      ],
+      "react/slider-thumb": [
+        "./dist/packages/slider-thumb/react.d.ts"
+      ],
+      "react/tab": [
+        "./dist/packages/tab/react.d.ts"
+      ],
+      "react/tab-panel": [
+        "./dist/packages/tab-panel/react.d.ts"
       ],
       "react/switch": [
         "./dist/packages/switch/react.d.ts"
@@ -259,6 +322,7 @@
     "semantic-release": "semantic-release",
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
+    "test:output-validation": "node tests/output-validation/validate-eik-output.js",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {

@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { WarpAffix } from './index.js';
+import { WarpAffix } from './affix.js';
 
 // We do this in order to prevent users from bundling in the CE implementation when
 // they should be getting it from Eik.

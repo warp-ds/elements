@@ -10,7 +10,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 
 import { reset } from '../styles.js';
 
-import type { WarpSliderThumb } from './slider-thumb.js';
+import type { WarpSliderThumb } from '../slider-thumb/slider-thumb.js';
 import { wSliderStyles } from './styles/w-slider.styles.js';
 
 // Inspo:

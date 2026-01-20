@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpLink } from './index.js';
-import './index.js';
+import type { WarpLink } from './link.js';
+import './link.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpLink>('w-link');
 

@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './switch.js';
 
 test('can reset switch by resetting surrounding form', async () => {
   const label = 'Test label';

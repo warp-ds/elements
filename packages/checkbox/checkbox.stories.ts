@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import './index';
+import './checkbox.js';
+import '../checkbox-group/checkbox-group.js';
 
 export default {
   title: 'Forms/Checkbox',

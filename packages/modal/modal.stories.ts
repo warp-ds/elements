@@ -5,10 +5,12 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpModal, WarpModalFooter, WarpModalHeader } from './index.ts';
-import type { ModalMain } from './modal-main.js';
-import type { ModalHeader as ModalHeaderType } from './modal-header.js';
-import './index.ts';
+import type { WarpModal, WarpModalFooter, WarpModalHeader } from './index.js';
+import type { ModalMain } from './modal.js';
+import type { ModalHeader as ModalHeaderType } from '../modal-header/modal-header.js';
+import './modal.js';
+import '../modal-header/modal-header.js';
+import '../modal-footer/modal-footer.js';
 
 const { events: modalEvents, args: modalArgs, argTypes: modalArgTypes } = getStorybookHelpers<WarpModal>('w-modal');
 const {

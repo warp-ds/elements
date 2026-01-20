@@ -1,6 +1,6 @@
 import { windowExists } from '../utils/window-exists';
 
-import { WarpToastContainer } from './toast-container';
+import { WarpToastContainer } from '../toast-container/toast-container.js';
 import type { ToastInternal, ToastOptions } from './types';
 
 function getToastContainer() {

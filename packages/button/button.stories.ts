@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpButton } from './index.js';
-import './index.js';
+import type { WarpButton } from './button.js';
+import './button.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
 import '@warp-ds/icons/elements/close-16';

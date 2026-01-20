@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import '../button/index.js';
-import './index.js';
+import '../button/button.js';
+import './datepicker.js';
 
 test('can pick a date using a pointer', async () => {
   const component = html`
