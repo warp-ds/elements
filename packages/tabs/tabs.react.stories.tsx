@@ -13,9 +13,9 @@ export type Story = StoryObj<typeof Tabs>;
 
 export const Default = () => (
   <Tabs active="tab1">
-    <Tab for="tab1" label="First Tab" />
-    <Tab for="tab2" label="Second Tab" />
-    <Tab for="tab3" label="Third Tab" />
+    <Tab for="tab1">First Tab</Tab>
+    <Tab for="tab2">Second Tab</Tab>
+    <Tab for="tab3">Third Tab</Tab>
 
     <TabPanel id="tab1">
       <p>Content for the first tab. This panel is visible when the first tab is active.</p>
@@ -29,20 +29,22 @@ export const Default = () => (
       <p>Content for the third tab. This panel is visible when the third tab is active.</p>
     </TabPanel>
   </Tabs>
-
 );
 
 export const WithIcons = () => (
   <>
     <Tabs active="home">
-      <Tab for="home" label="Home">
+      <Tab for="home">
         <span slot="icon">🏠</span>
+        Home
       </Tab>
-      <Tab for="search" label="Search">
+      <Tab for="search">
         <span slot="icon">🔍</span>
+        Search
       </Tab>
-      <Tab for="profile" label="Profile">
+      <Tab for="profile">
         <span slot="icon">👤</span>
+        Profile
       </Tab>
     </Tabs>
 
@@ -63,12 +65,12 @@ export const WithIcons = () => (
 export const ManyTabs = () => (
   <>
     <Tabs active="tab1" id='tabs-many'>
-      <Tab for="tab1" label="Tab 1" />
-      <Tab for="tab2" label="Tab 2" />
-      <Tab for="tab3" label="Tab 3" />
-      <Tab for="tab4" label="Tab 4" />
-      <Tab for="tab5" label="Tab 5" />
-      <Tab for="tab6" label="Tab 6" />
+      <Tab for="tab1">Tab 1</Tab>
+      <Tab for="tab2">Tab 2</Tab>
+      <Tab for="tab3">Tab 3</Tab>
+      <Tab for="tab4">Tab 4</Tab>
+      <Tab for="tab5">Tab 5</Tab>
+      <Tab for="tab6">Tab 6</Tab>
     </Tabs>
 
     <TabPanel id="tab1">
