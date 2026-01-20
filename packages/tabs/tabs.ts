@@ -11,7 +11,7 @@ import { WarpTabPanel } from '../tab-panel/tab-panel.js';
 import { WarpTab } from '../tab/tab.js';
 
 const ccTabs = {
-  wrapper: 'inline-block border-b s-border mb-32',
+  wrapper: 'border-b s-border mb-32',
   base: 'inline-grid relative -mb-1',
   selectionIndicator: 'absolute s-border-selected -bottom-0 border-b-4 transition-all',
 };
@@ -53,9 +53,6 @@ export class WarpTabs extends LitElement {
 
   @property({ reflect: true })
   active = '';
-
-  @property({ attribute: 'tab-class', reflect: true })
-  tabClass = '';
 
   @query('[role="tablist"]')
   private tabList!: HTMLElement;
@@ -151,8 +148,9 @@ export class WarpTabs extends LitElement {
     }
   }
 
-  private _handleTabClick = (event: PointerEvent & { tab: WarpTab }) => {
-    const newActiveTab = event.tab.for;
+  private _handleTabClick = (event: PointerEvent & { tab?: WarpTab }) => {
+    const newActiveTab = event.tab?.for;
+    if (!newActiveTab) return;
     if (newActiveTab !== this._activeTabFor) {
       this.active = newActiveTab;
       this._activeTabFor = newActiveTab;
@@ -279,7 +277,7 @@ export class WarpTabs extends LitElement {
   }
 
   render() {
-    const navClasses = classNames(this.tabClass, ccTabs.wrapper);
+    const navClasses = classNames(ccTabs.wrapper);
     const divClasses = classNames([ccTabs.base, this._gridClass]);
 
     return html`

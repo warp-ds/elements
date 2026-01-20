@@ -37,11 +37,8 @@ export class WarpTab extends LitElement {
   @property({ type: Boolean, reflect: true })
   over = false;
 
-  @property({ attribute: 'tab-class', reflect: true })
-  tabClass = '';
-
   private get _classes() {
-    return classNames(this.tabClass, [ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
+    return classNames([ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
   }
 
   private get _hasChildren() {
