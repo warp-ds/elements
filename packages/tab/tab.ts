@@ -1,5 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
-import { html, LitElement } from 'lit';
+import { html, LitElement, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -23,7 +23,7 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTab extends LitElement {
-  static styles = [reset, styles];
+  static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
   @property({ attribute: 'for', reflect: true })
   for = '';

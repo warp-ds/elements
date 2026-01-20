@@ -38,9 +38,7 @@ export const Default = () => html`
 export const WithIcons = () => html`
   <w-tabs active="info">
     <w-tab for="info">
-      <span slot="icon">
-        <w-icon-info-16></w-icon-info-16>
-      </span>
+      <w-icon-info-16 slot="icon"></w-icon-info-16>
       Info
     </w-tab>
     <w-tab-panel id="info">
@@ -48,9 +46,7 @@ export const WithIcons = () => html`
     </w-tab-panel>
 
     <w-tab for="done">
-      <span slot="icon">
-        <w-icon-success-16></w-icon-success-16>
-      </span>
+      <w-icon-success-16 slot="icon"></w-icon-success-16>
       Done
     </w-tab>
     <w-tab-panel id="done" hidden>
@@ -58,9 +54,7 @@ export const WithIcons = () => html`
     </w-tab-panel>
 
     <w-tab for="error">
-      <span slot="icon">
-        <w-icon-error-16></w-icon-error-16>
-      </span>
+      <w-icon-error-16 slot="icon"></w-icon-error-16>
       Failures
     </w-tab>
     <w-tab-panel id="error" hidden>
