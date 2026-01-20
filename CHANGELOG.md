@@ -1,3 +1,10 @@
+# [2.4.0-next.7](https://github.com/warp-ds/elements/compare/v2.4.0-next.6...v2.4.0-next.7) (2026-01-20)
+
+
+### Bug Fixes
+
+* refactor folder and filenames ([#489](https://github.com/warp-ds/elements/issues/489)) ([af5d8e1](https://github.com/warp-ds/elements/commit/af5d8e10dde93cdcc7a12f679680e1198b660b7f))
+
 # [2.4.0-next.6](https://github.com/warp-ds/elements/compare/v2.4.0-next.5...v2.4.0-next.6) (2026-01-19)
 
 
