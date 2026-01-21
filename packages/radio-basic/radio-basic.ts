@@ -35,7 +35,23 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
 
           const isRequired = element.required || element.hasAttribute('required');
 
-          if (!isRequired || element.checked) {
+          if (!isRequired) {
+            return { message: '', isValid: true, invalidKeys: [] as ('valueMissing')[] };
+          }
+
+          // For radio groups, check if ANY radio in the group is checked
+          if (element.name) {
+            const root = element.getRootNode() as Document | ShadowRoot;
+            const allRadios = Array.from(
+              root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${element.name}"]`),
+            );
+            const hasCheckedRadio = allRadios.some((radio) => radio.checked);
+
+            if (hasCheckedRadio) {
+              return { message: '', isValid: true, invalidKeys: [] as ('valueMissing')[] };
+            }
+          } else if (element.checked) {
+            // Single radio (no group) - just check if it's checked
             return { message: '', isValid: true, invalidKeys: [] as ('valueMissing')[] };
           }
 
@@ -71,7 +87,6 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
     super.connectedCallback();
     this.updateFormValue();
     this.addEventListener('keydown', this.#handleKeyDown);
-    this.addEventListener('focusin', this.#handleFocusIn);
     // Defer tabindex sync to after all radios in the group have connected
     requestAnimationFrame(() => this.#syncGroupTabIndex());
   }
@@ -79,43 +94,7 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.removeEventListener('keydown', this.#handleKeyDown);
-    this.removeEventListener('focusin', this.#handleFocusIn);
   }
-
-  /**
-   * When tabbing into the group and no radio is selected, select this one.
-   */
-  #handleFocusIn = () => {
-    if (this.disabled || this.checked) {
-      return;
-    }
-
-    // Check if any radio in the group is already checked
-    if (this.name) {
-      const root = this.getRootNode() as Document | ShadowRoot;
-      const allRadios = Array.from(
-        root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`),
-      );
-      const hasCheckedRadio = allRadios.some((radio) => radio.checked);
-
-      if (hasCheckedRadio) {
-        return;
-      }
-    }
-
-    // No radio is checked, select this one
-    this.checked = true;
-    this.hasInteracted = true;
-    this.updateFormValue();
-
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { checked: true, value: this.value },
-        bubbles: true,
-        composed: true,
-      }),
-    );
-  };
 
   /**
    * Syncs tabindex across all radios in the same group.
@@ -157,6 +136,42 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
   }
 
   #handleKeyDown = (event: KeyboardEvent) => {
+    // Handle Space key to select the focused radio
+    if (event.key === ' ') {
+      if (this.disabled || this.checked) {
+        return;
+      }
+
+      event.preventDefault();
+
+      // Select this radio
+      this.checked = true;
+      this.hasInteracted = true;
+
+      // Uncheck other radios in the group
+      if (this.name) {
+        const root = this.getRootNode() as Document | ShadowRoot;
+        const siblings = root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`);
+        for (const radio of siblings) {
+          if (radio !== this && radio.checked) {
+            radio.checked = false;
+            radio.updateFormValue();
+          }
+        }
+      }
+
+      this.updateFormValue();
+
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { checked: true, value: this.value },
+          bubbles: true,
+          composed: true,
+        }),
+      );
+      return;
+    }
+
     if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
       return;
     }
@@ -217,6 +232,18 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
       this.setValue(null);
     }
     this.updateValidity();
+
+    // Also update validity for all other radios in the group
+    // so they all reflect the correct validation state
+    if (this.name && this.checked) {
+      const root = this.getRootNode() as Document | ShadowRoot;
+      const siblings = root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`);
+      for (const radio of siblings) {
+        if (radio !== this) {
+          radio.updateValidity();
+        }
+      }
+    }
   }
 
   private _handleChange(e: Event) {

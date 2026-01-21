@@ -232,12 +232,42 @@ test('keyboard navigation with arrow keys', async () => {
   expect(radioC.checked).toBe(false);
 });
 
-test('tabbing into unselected group selects first radio', async () => {
+test('required validation passes when any radio in group is checked', async () => {
+  render(html`
+    <form>
+      <w-radio-basic name="required-group" value="a" required>Option A</w-radio-basic>
+      <w-radio-basic name="required-group" value="b" required>Option B</w-radio-basic>
+      <w-radio-basic name="required-group" value="c" required>Option C</w-radio-basic>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const radios = document.querySelectorAll('w-radio-basic') as NodeListOf<RadioBasicElement>;
+  const [radioA, radioB, radioC] = Array.from(radios);
+
+  // Wait for components to be ready
+  await radioA.updateComplete;
+  await radioB.updateComplete;
+  await radioC.updateComplete;
+
+  // Initially form should be invalid (no radio checked)
+  expect(form.checkValidity()).toBe(false);
+
+  // Select Option B
+  const inputB = radioB.shadowRoot?.querySelector('input') as HTMLInputElement;
+  inputB.click();
+  await radioB.updateComplete;
+
+  // Now form should be valid (one radio in group is checked)
+  expect(form.checkValidity()).toBe(true);
+});
+
+test('space key selects focused radio', async () => {
   render(html`
     <div>
-      <w-radio-basic name="focus-group" value="a">Option A</w-radio-basic>
-      <w-radio-basic name="focus-group" value="b">Option B</w-radio-basic>
-      <w-radio-basic name="focus-group" value="c">Option C</w-radio-basic>
+      <w-radio-basic name="space-group" value="a">Option A</w-radio-basic>
+      <w-radio-basic name="space-group" value="b">Option B</w-radio-basic>
+      <w-radio-basic name="space-group" value="c">Option C</w-radio-basic>
     </div>
   `);
 
@@ -254,13 +284,26 @@ test('tabbing into unselected group selects first radio', async () => {
   expect(radioB.checked).toBe(false);
   expect(radioC.checked).toBe(false);
 
-  // Focus the first radio (simulating tab)
+  // Focus the first radio (simulating Tab)
   radioA.focus();
+
+  // Press Space to select
+  radioA.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
   await radioA.updateComplete;
 
   // First radio should now be checked
   expect(radioA.checked).toBe(true);
   expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(false);
+
+  // Focus second radio and press Space
+  radioB.focus();
+  radioB.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+  await radioB.updateComplete;
+
+  // Second radio should now be checked, first unchecked
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(true);
   expect(radioC.checked).toBe(false);
 });
 

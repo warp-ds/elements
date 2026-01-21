@@ -104,9 +104,14 @@ export const KeyboardNavigation: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 16px;">
       <p style="margin: 0; max-width: 400px;">
-        Use <kbd>Arrow Up</kbd>/<kbd>Arrow Down</kbd> or <kbd>Arrow Left</kbd>/<kbd>Arrow Right</kbd>
-        to navigate between radio buttons. Focus any radio and use arrow keys to move selection.
+        Keyboard navigation matches native radio behavior:
       </p>
+      <ul style="margin: 0; max-width: 400px; padding-left: 20px;">
+        <li><kbd>Tab</kbd> - Focus the radio group (first or checked radio)</li>
+        <li><kbd>Space</kbd> - Select the focused radio</li>
+        <li><kbd>Arrow keys</kbd> - Move focus AND selection between radios</li>
+        <li><kbd>Shift+Tab</kbd> - Leave the radio group</li>
+      </ul>
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <w-radio-basic name="keyboard-demo" value="first">First option</w-radio-basic>
         <w-radio-basic name="keyboard-demo" value="second">Second option</w-radio-basic>
