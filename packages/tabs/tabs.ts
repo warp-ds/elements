@@ -5,10 +5,9 @@ import { html, LitElement, PropertyValues } from 'lit';
 import { property, query } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
-
-import { styles } from './styles.js';
-import { WarpTabPanel } from '../tab-panel/tab-panel.js';
 import { WarpTab } from '../tab/tab.js';
+import { WarpTabPanel } from '../tab-panel/tab-panel.js';
+import { styles } from './styles.js';
 
 const ccTabs = {
   wrapper: 'inline-block border-b s-border mb-32',

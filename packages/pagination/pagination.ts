@@ -1,6 +1,7 @@
 // @warp-css;
-import { html, LitElement, nothing, css } from 'lit';
+
 import { i18n } from '@lingui/core';
+import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '@warp-ds/icons/elements/chevron-double-left-16';

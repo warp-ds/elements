@@ -8,11 +8,11 @@ import { BaseFormAssociatedElement } from '../radio/form-associated-element.js';
 import { uniqueId } from '../radio/math.js';
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
+import { RequiredValidator } from '../radio/required-validator.js';
+import { HasSlotController } from '../radio/slot.js';
 // eslint-disable-next-line
 // @ts-ignore
 import { styles } from './radio-group-styles.js';
-import { RequiredValidator } from '../radio/required-validator.js';
-import { HasSlotController } from '../radio/slot.js';
 
 /**
  * @slot label - Alternative to the `label` attribute should you need custom HTML.

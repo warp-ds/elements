@@ -1,8 +1,7 @@
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
-
-import { Tabs, Tab, TabPanel } from './react';
+import { Tab, TabPanel, Tabs } from './react';
 
 export default {
   title: 'Components/Tabs',
@@ -29,7 +28,6 @@ export const Default = () => (
       <p>Content for the third tab. This panel is visible when the third tab is active.</p>
     </TabPanel>
   </Tabs>
-
 );
 
 export const WithIcons = () => (
@@ -62,7 +60,7 @@ export const WithIcons = () => (
 
 export const ManyTabs = () => (
   <>
-    <Tabs active="tab1" id='tabs-many'>
+    <Tabs active="tab1" id="tabs-many">
       <Tab for="tab1" label="Tab 1" />
       <Tab for="tab2" label="Tab 2" />
       <Tab for="tab3" label="Tab 3" />

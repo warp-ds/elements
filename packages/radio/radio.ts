@@ -2,12 +2,11 @@ import type { PropertyValues } from 'lit';
 import { html } from 'lit';
 
 import { property, state } from 'lit/decorators.js';
-
-import { BaseFormAssociatedElement } from './form-associated-element';
+import { reset } from '../styles';
 // eslint-disable-next-line
 // @ts-ignore
 import { toggleStyles } from '../toggle-styles';
-import { reset } from '../styles';
+import { BaseFormAssociatedElement } from './form-associated-element';
 
 export class WRadio extends BaseFormAssociatedElement {
   static css = [reset, toggleStyles];

@@ -19,7 +19,20 @@ type ButtonVariant =
   | 'overlayQuiet'
   | 'overlayInvertedQuiet';
 
-const variants = ['primary', 'secondary', 'negative', 'negativeQuiet', 'utility', 'utilityQuiet', 'quiet', 'link', 'overlay', 'overlayInverted', 'overlayQuiet', 'overlayInvertedQuiet'];
+const variants = [
+  'primary',
+  'secondary',
+  'negative',
+  'negativeQuiet',
+  'utility',
+  'utilityQuiet',
+  'quiet',
+  'link',
+  'overlay',
+  'overlayInverted',
+  'overlayQuiet',
+  'overlayInvertedQuiet',
+];
 
 /**
  * Buttons are used to perform actions, with different visuals for different needs.
