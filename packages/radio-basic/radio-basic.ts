@@ -70,9 +70,147 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
     this.#initialChecked = this.checked;
     super.connectedCallback();
     this.updateFormValue();
+    this.addEventListener('keydown', this.#handleKeyDown);
+    this.addEventListener('focusin', this.#handleFocusIn);
+    // Defer tabindex sync to after all radios in the group have connected
+    requestAnimationFrame(() => this.#syncGroupTabIndex());
   }
 
-  private updateFormValue() {
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListener('keydown', this.#handleKeyDown);
+    this.removeEventListener('focusin', this.#handleFocusIn);
+  }
+
+  /**
+   * When tabbing into the group and no radio is selected, select this one.
+   */
+  #handleFocusIn = () => {
+    if (this.disabled || this.checked) {
+      return;
+    }
+
+    // Check if any radio in the group is already checked
+    if (this.name) {
+      const root = this.getRootNode() as Document | ShadowRoot;
+      const allRadios = Array.from(
+        root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`),
+      );
+      const hasCheckedRadio = allRadios.some((radio) => radio.checked);
+
+      if (hasCheckedRadio) {
+        return;
+      }
+    }
+
+    // No radio is checked, select this one
+    this.checked = true;
+    this.hasInteracted = true;
+    this.updateFormValue();
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { checked: true, value: this.value },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
+
+  /**
+   * Syncs tabindex across all radios in the same group.
+   * Only the checked radio (or first enabled if none checked) should be tabbable.
+   */
+  #syncGroupTabIndex() {
+    if (!this.name) {
+      // No group, this radio is independently tabbable
+      this.#setInputTabIndex(this.disabled ? -1 : 0);
+      return;
+    }
+
+    const root = this.getRootNode() as Document | ShadowRoot;
+    const allRadios = Array.from(
+      root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`),
+    );
+
+    const enabledRadios = allRadios.filter((radio) => !radio.disabled);
+    const checkedRadio = enabledRadios.find((radio) => radio.checked);
+
+    for (const radio of allRadios) {
+      if (radio.disabled) {
+        radio.#setInputTabIndex(-1);
+      } else if (checkedRadio) {
+        // If there's a checked radio, only it should be tabbable
+        radio.#setInputTabIndex(radio === checkedRadio ? 0 : -1);
+      } else {
+        // No checked radio - first enabled radio should be tabbable
+        radio.#setInputTabIndex(radio === enabledRadios[0] ? 0 : -1);
+      }
+    }
+  }
+
+  #setInputTabIndex(value: number) {
+    const input = this.shadowRoot?.querySelector('input');
+    if (input) {
+      input.tabIndex = value;
+    }
+  }
+
+  #handleKeyDown = (event: KeyboardEvent) => {
+    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      return;
+    }
+
+    if (this.disabled || !this.name) {
+      return;
+    }
+
+    const root = this.getRootNode() as Document | ShadowRoot;
+    const allRadios = Array.from(
+      root.querySelectorAll<WarpRadioBasic>(`w-radio-basic[name="${this.name}"]`),
+    ).filter((radio) => !radio.disabled);
+
+    if (allRadios.length <= 1) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const currentIndex = allRadios.indexOf(this);
+    const direction = ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
+    let nextIndex = currentIndex + direction;
+
+    // Wrap around
+    if (nextIndex < 0) {
+      nextIndex = allRadios.length - 1;
+    } else if (nextIndex >= allRadios.length) {
+      nextIndex = 0;
+    }
+
+    const nextRadio = allRadios[nextIndex];
+
+    // Select and focus the next radio
+    nextRadio.checked = true;
+    nextRadio.focus();
+
+    // Uncheck current radio
+    if (nextRadio !== this) {
+      this.checked = false;
+      this.updateFormValue();
+    }
+
+    // Update form value and dispatch change event for the newly checked radio
+    nextRadio.updateFormValue();
+    nextRadio.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { checked: true, value: nextRadio.value },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  };
+
+  updateFormValue() {
     if (this.checked && this.value) {
       this.setValue(this.value);
     } else if (!this.checked) {
@@ -120,6 +258,11 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
 
     if (changedProperties.has('checked') || changedProperties.has('value')) {
       this.updateFormValue();
+    }
+
+    if (changedProperties.has('checked') || changedProperties.has('disabled')) {
+      // Sync tabindex after the update completes
+      this.updateComplete.then(() => this.#syncGroupTabIndex());
     }
   }
 

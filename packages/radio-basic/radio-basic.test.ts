@@ -172,3 +172,143 @@ test('dispatches change event when clicked', async () => {
   expect(changeEventFired).toBe(true);
   expect(eventDetail).toEqual({ checked: true, value: 'option1' });
 });
+
+test('keyboard navigation with arrow keys', async () => {
+  render(html`
+    <div>
+      <w-radio-basic name="keyboard-group" value="a">Option A</w-radio-basic>
+      <w-radio-basic name="keyboard-group" value="b">Option B</w-radio-basic>
+      <w-radio-basic name="keyboard-group" value="c">Option C</w-radio-basic>
+    </div>
+  `);
+
+  const radios = document.querySelectorAll('w-radio-basic') as NodeListOf<RadioBasicElement>;
+  const [radioA, radioB, radioC] = Array.from(radios);
+
+  // Wait for components to be ready
+  await radioA.updateComplete;
+  await radioB.updateComplete;
+  await radioC.updateComplete;
+
+  // Click Option A to select and focus it
+  const inputA = radioA.shadowRoot?.querySelector('input') as HTMLInputElement;
+  inputA.click();
+  await radioA.updateComplete;
+  expect(radioA.checked).toBe(true);
+
+  // Press ArrowDown to move to Option B
+  radioA.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  await radioB.updateComplete;
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(true);
+  expect(radioC.checked).toBe(false);
+
+  // Press ArrowRight to move to Option C
+  radioB.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+  await radioC.updateComplete;
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(true);
+
+  // Press ArrowDown to wrap around to Option A
+  radioC.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  await radioA.updateComplete;
+  expect(radioA.checked).toBe(true);
+  expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(false);
+
+  // Press ArrowUp to wrap around to Option C
+  radioA.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+  await radioC.updateComplete;
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(true);
+
+  // Press ArrowLeft to move to Option B
+  radioC.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+  await radioB.updateComplete;
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(true);
+  expect(radioC.checked).toBe(false);
+});
+
+test('tabbing into unselected group selects first radio', async () => {
+  render(html`
+    <div>
+      <w-radio-basic name="focus-group" value="a">Option A</w-radio-basic>
+      <w-radio-basic name="focus-group" value="b">Option B</w-radio-basic>
+      <w-radio-basic name="focus-group" value="c">Option C</w-radio-basic>
+    </div>
+  `);
+
+  const radios = document.querySelectorAll('w-radio-basic') as NodeListOf<RadioBasicElement>;
+  const [radioA, radioB, radioC] = Array.from(radios);
+
+  // Wait for components to be ready
+  await radioA.updateComplete;
+  await radioB.updateComplete;
+  await radioC.updateComplete;
+
+  // Initially no radio is checked
+  expect(radioA.checked).toBe(false);
+  expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(false);
+
+  // Focus the first radio (simulating tab)
+  radioA.focus();
+  await radioA.updateComplete;
+
+  // First radio should now be checked
+  expect(radioA.checked).toBe(true);
+  expect(radioB.checked).toBe(false);
+  expect(radioC.checked).toBe(false);
+});
+
+test('tabindex management - only checked radio is tabbable', async () => {
+  render(html`
+    <div>
+      <w-radio-basic name="tabindex-group" value="a">Option A</w-radio-basic>
+      <w-radio-basic name="tabindex-group" value="b">Option B</w-radio-basic>
+      <w-radio-basic name="tabindex-group" value="c">Option C</w-radio-basic>
+    </div>
+  `);
+
+  const radios = document.querySelectorAll('w-radio-basic') as NodeListOf<RadioBasicElement>;
+  const [radioA, radioB, radioC] = Array.from(radios);
+
+  // Wait for components to be ready and tabindex sync
+  await radioA.updateComplete;
+  await radioB.updateComplete;
+  await radioC.updateComplete;
+  // Allow requestAnimationFrame to fire
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  const inputA = radioA.shadowRoot?.querySelector('input') as HTMLInputElement;
+  const inputB = radioB.shadowRoot?.querySelector('input') as HTMLInputElement;
+  const inputC = radioC.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+  // Initially no radio is checked, first enabled radio should be tabbable
+  expect(inputA.tabIndex).toBe(0);
+  expect(inputB.tabIndex).toBe(-1);
+  expect(inputC.tabIndex).toBe(-1);
+
+  // Click Option B to select it
+  inputB.click();
+  await radioB.updateComplete;
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  // Now only Option B should be tabbable
+  expect(inputA.tabIndex).toBe(-1);
+  expect(inputB.tabIndex).toBe(0);
+  expect(inputC.tabIndex).toBe(-1);
+
+  // Use arrow key to move to Option C
+  radioB.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  await radioC.updateComplete;
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
+  // Now only Option C should be tabbable
+  expect(inputA.tabIndex).toBe(-1);
+  expect(inputB.tabIndex).toBe(-1);
+  expect(inputC.tabIndex).toBe(0);
+});

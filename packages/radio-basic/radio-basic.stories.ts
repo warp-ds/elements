@@ -99,3 +99,23 @@ export const InForm: Story = {
     </form>
   `,
 };
+
+export const KeyboardNavigation: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <p style="margin: 0; max-width: 400px;">
+        Use <kbd>Arrow Up</kbd>/<kbd>Arrow Down</kbd> or <kbd>Arrow Left</kbd>/<kbd>Arrow Right</kbd>
+        to navigate between radio buttons. Focus any radio and use arrow keys to move selection.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <w-radio-basic name="keyboard-demo" value="first">First option</w-radio-basic>
+        <w-radio-basic name="keyboard-demo" value="second">Second option</w-radio-basic>
+        <w-radio-basic name="keyboard-demo" value="third">Third option</w-radio-basic>
+        <w-radio-basic name="keyboard-demo" value="fourth">Fourth option</w-radio-basic>
+      </div>
+      <p style="margin: 0; font-size: 0.875rem; color: #666;">
+        Arrow keys wrap around: pressing Down on the last option moves to the first.
+      </p>
+    </div>
+  `,
+};
