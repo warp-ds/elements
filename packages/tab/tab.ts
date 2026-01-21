@@ -1,5 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
-import { html, LitElement, css } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -54,7 +54,9 @@ export class WarpTab extends LitElement {
         id="warp-tab-${this.for}"
         class="${this._classes}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
-        @click="${(e) => { e.tab = this; }}"
+        @click="${(e) => {
+          e.tab = this;
+        }}"
         style="height: 100%">
         ${
           !hasIcon

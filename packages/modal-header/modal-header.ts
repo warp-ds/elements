@@ -6,14 +6,13 @@ import '@warp-ds/icons/elements/arrow-left-16';
 import '@warp-ds/icons/elements/close-16';
 
 import { activateI18n } from '../i18n.js';
-import { reset } from '../styles.js';
-
 import { messages as daMessages } from '../modal/locales/da/messages.mjs';
 import { messages as enMessages } from '../modal/locales/en/messages.mjs';
 import { messages as fiMessages } from '../modal/locales/fi/messages.mjs';
 import { messages as nbMessages } from '../modal/locales/nb/messages.mjs';
 import { messages as svMessages } from '../modal/locales/sv/messages.mjs';
 import { CanCloseMixin } from '../modal/util.js';
+import { reset } from '../styles.js';
 
 /**
  * The header section of a modal, typically where you place the title and a close button.

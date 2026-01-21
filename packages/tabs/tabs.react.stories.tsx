@@ -1,8 +1,8 @@
+import { Meta, StoryObj } from '@storybook/react';
+import { IconError16, IconInfo16, IconSuccess16 } from '@warp-ds/icons/react';
 import React from 'react';
 
-import { Meta, StoryObj } from '@storybook/react';
-
-import { Tabs, Tab, TabPanel } from './react';
+import { Tab, TabPanel, Tabs } from './react';
 
 export default {
   title: 'Components/Tabs',
@@ -33,38 +33,81 @@ export const Default = () => (
 
 export const WithIcons = () => (
   <>
-    <Tabs active="home">
-      <Tab for="home">
-        <span slot="icon">🏠</span>
-        Home
+    <Tabs active="info">
+      <Tab for="info">
+        <span slot="icon">
+          <IconInfo16 />
+        </span>
+        Info
       </Tab>
-      <Tab for="search">
-        <span slot="icon">🔍</span>
-        Search
+      <Tab for="done">
+        <span slot="icon">
+          <IconSuccess16 />
+        </span>
+        Done
       </Tab>
-      <Tab for="profile">
-        <span slot="icon">👤</span>
-        Profile
+      <Tab for="error">
+        <span slot="icon">
+          <IconError16 />
+        </span>
+        Failures
       </Tab>
     </Tabs>
 
-    <TabPanel id="home">
-      <p>Welcome to the home page!</p>
+    <TabPanel id="info">
+      <p>Info content.</p>
     </TabPanel>
 
-    <TabPanel id="search" hidden>
-      <p>Search functionality goes here.</p>
+    <TabPanel id="done" hidden>
+      <p>Done content.</p>
     </TabPanel>
 
-    <TabPanel id="profile" hidden>
-      <p>User profile information.</p>
+    <TabPanel id="error" hidden>
+      <p>Error content.</p>
+    </TabPanel>
+  </>
+);
+
+export const WithIconsOver = () => (
+  <>
+    <Tabs active="info">
+      <Tab for="info" over>
+        <span slot="icon">
+          <IconInfo16 />
+        </span>
+        Info
+      </Tab>
+      <Tab for="done" over>
+        <span slot="icon">
+          <IconSuccess16 />
+        </span>
+        Done
+      </Tab>
+      <Tab for="error" over>
+        <span slot="icon">
+          <IconError16 />
+        </span>
+        Failures
+      </Tab>
+    </Tabs>
+
+    <TabPanel id="info">
+      <p>Info content.</p>
+    </TabPanel>
+
+    <TabPanel id="done" hidden>
+      <p>Done content.</p>
+    </TabPanel>
+
+    <TabPanel id="error" hidden>
+      <p>Error content.</p>
     </TabPanel>
   </>
 );
 
 export const ManyTabs = () => (
   <>
-    <Tabs active="tab1" id='tabs-many'>
+    <Tabs active="tab1" id="tabs-many">
       <Tab for="tab1">Tab 1</Tab>
       <Tab for="tab2">Tab 2</Tab>
       <Tab for="tab3">Tab 3</Tab>

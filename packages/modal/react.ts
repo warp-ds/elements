@@ -1,13 +1,12 @@
+import { createComponent } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { createComponent } from '@lit/react';
-
 import { ModalMain as WarpModal } from './modal.js';
 
+export { ModalFooter } from '../modal-footer/react.js';
 // Re-export from split packages
 export { ModalHeader } from '../modal-header/react.js';
-export { ModalFooter } from '../modal-footer/react.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

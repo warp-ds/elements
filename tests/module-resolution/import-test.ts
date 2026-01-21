@@ -6,26 +6,25 @@ import { Box } from '@warp-ds/elements/react/box';
 import { Breadcrumbs } from '@warp-ds/elements/react/breadcrumbs';
 import { Button } from '@warp-ds/elements/react/button';
 import { Card } from '@warp-ds/elements/react/card';
+import { Checkbox } from '@warp-ds/elements/react/checkbox';
+import { Combobox } from '@warp-ds/elements/react/combobox';
 import { DatePicker } from '@warp-ds/elements/react/datepicker';
+// unreleased
+import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
 import { Expandable } from '@warp-ds/elements/react/expandable';
 import { Link } from '@warp-ds/elements/react/link';
 import { Modal } from '@warp-ds/elements/react/modal';
-import { Pill } from '@warp-ds/elements/react/pill';
-import { Select } from '@warp-ds/elements/react/select';
-import { TextField } from '@warp-ds/elements/react/textfield';
-import { Switch } from '@warp-ds/elements/react/switch';
-import { Combobox } from '@warp-ds/elements/react/combobox';
-
-// unreleased
-import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
 import { PageIndicator } from '@warp-ds/elements/react/page-indicator';
 import { Pagination } from '@warp-ds/elements/react/pagination';
-import { Checkbox } from '@warp-ds/elements/react/checkbox';
+import { Pill } from '@warp-ds/elements/react/pill';
 import { Radio } from '@warp-ds/elements/react/radio';
+import { Select } from '@warp-ds/elements/react/select';
 import { Slider } from '@warp-ds/elements/react/slider';
 import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
-import { Tabs, TabPanel, Tab } from '@warp-ds/elements/react/tabs';
+import { Switch } from '@warp-ds/elements/react/switch';
+import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
 import { Textarea } from '@warp-ds/elements/react/textarea';
+import { TextField } from '@warp-ds/elements/react/textfield';
 
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;

@@ -77,9 +77,7 @@ function validateEikOutput() {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf-8'));
 
   // Get expected components from manifest (matching cloak.js logic)
-  const manifestComponents = new Set(
-    manifest.modules.map(getTagName).filter(Boolean)
-  );
+  const manifestComponents = new Set(manifest.modules.map(getTagName).filter(Boolean));
 
   log(`Found ${manifestComponents.size} components in custom-elements.json manifest`);
 

@@ -1,5 +1,5 @@
-import { LitElement } from 'lit';
 import { createComponent } from '@lit/react';
+import { LitElement } from 'lit';
 import React from 'react';
 
 import { WarpTextField } from './textfield.js';

@@ -63,6 +63,34 @@ export const WithIcons = () => html`
   </w-tabs>
 `;
 
+export const WithIconsOver = () => html`
+  <w-tabs active="info">
+    <w-tab for="info" over>
+      <w-icon-info-16 slot="icon"></w-icon-info-16>
+      Info
+    </w-tab>
+    <w-tab-panel id="info">
+      <p>Info content.</p>
+    </w-tab-panel>
+
+    <w-tab for="done" over>
+      <w-icon-success-16 slot="icon"></w-icon-success-16>
+      Done
+    </w-tab>
+    <w-tab-panel id="done" hidden>
+      <p>Done content.</p>
+    </w-tab-panel>
+
+    <w-tab for="error" over>
+      <w-icon-error-16 slot="icon"></w-icon-error-16>
+      Failures
+    </w-tab>
+    <w-tab-panel id="error" hidden>
+      <p>Error content.</p>
+    </w-tab-panel>
+  </w-tabs>
+`;
+
 export const ManyTabs = () => html`
   <w-tabs active="tab1">
     <w-tab for="tab1">Tab 1</w-tab>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
 
 import { Slider, SliderThumb } from './react';
 

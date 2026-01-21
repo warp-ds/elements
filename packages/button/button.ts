@@ -3,7 +3,7 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, PropertyValues, css } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
