@@ -64,6 +64,26 @@ export const Required: Story = {
   `,
 };
 
+export const ReducedMotion: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <p style="margin: 0; max-width: 400px;">
+        When <code>prefers-reduced-motion: reduce</code> is enabled in your OS settings,
+        the radio button transitions are disabled. Click the radios below and observe
+        the transition behavior.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <w-radio-basic name="motion-demo" value="one">Option one</w-radio-basic>
+        <w-radio-basic name="motion-demo" value="two">Option two</w-radio-basic>
+        <w-radio-basic name="motion-demo" value="three">Option three</w-radio-basic>
+      </div>
+      <p style="margin: 0; font-size: 0.875rem; color: #666;">
+        To test: Enable "Reduce motion" in your OS accessibility settings, then refresh.
+      </p>
+    </div>
+  `,
+};
+
 export const InForm: Story = {
   render: () => html`
     <form @submit=${(e: Event) => { e.preventDefault(); console.log(new FormData(e.target as HTMLFormElement)); }}>

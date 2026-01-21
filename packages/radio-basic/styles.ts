@@ -54,4 +54,10 @@ export const styles = css`
     cursor: not-allowed;
     color: var(--w-s-color-text-disabled);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    input[type='radio'] {
+      transition: none;
+    }
+  }
 `;
