@@ -39,6 +39,10 @@ export const styles = css`
     cursor: not-allowed;
   }
 
+  input[type='radio']:disabled:checked {
+    border-color: var(--w-s-color-border-disabled);
+  }
+
   label {
     font-size: var(--w-font-size-m);
     line-height: var(--w-line-height-m);

@@ -37,6 +37,23 @@ export const Disabled: Story = {
   `,
 };
 
+export const DisabledComparison: Story = {
+  render: () => html`
+    <div style="display: flex; gap: 32px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <strong>Enabled</strong>
+        <w-radio-basic name="enabled-compare" value="unchecked">Unchecked</w-radio-basic>
+        <w-radio-basic name="enabled-compare" value="checked" checked>Checked</w-radio-basic>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <strong>Disabled</strong>
+        <w-radio-basic name="disabled-compare" value="unchecked" disabled>Unchecked</w-radio-basic>
+        <w-radio-basic name="disabled-compare" value="checked" disabled checked>Checked</w-radio-basic>
+      </div>
+    </div>
+  `,
+};
+
 export const Required: Story = {
   render: () => html`
     <form style="display: flex; flex-direction: column; gap: 8px;">
