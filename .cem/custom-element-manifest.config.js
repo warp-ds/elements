@@ -49,6 +49,7 @@ export default {
     'packages/tab/tab.ts',
     'packages/tab-panel/tab-panel.ts',
     'packages/textarea/textarea.ts',
+    'packages/radio-basic/radio-basic.ts',
   ],
 
   // Globs to exclude

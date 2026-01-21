@@ -38,6 +38,7 @@
     "packages/tab",
     "packages/tab-panel",
     "packages/textarea",
+    "packages/radio-basic",
     "setup-tests.ts"
   ],
   "compilerOptions": {
