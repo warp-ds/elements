@@ -60,4 +60,40 @@ export const styles = css`
       transition: none;
     }
   }
+
+  /* Windows High Contrast Mode support */
+  @media (forced-colors: active) {
+    input[type='radio'] {
+      forced-color-adjust: none;
+      background-color: Canvas;
+      border-color: ButtonText;
+    }
+
+    input[type='radio']:checked {
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+
+    input[type='radio']:focus-visible {
+      outline-color: Highlight;
+    }
+
+    input[type='radio']:disabled {
+      border-color: GrayText;
+      background-color: Canvas;
+    }
+
+    input[type='radio']:disabled:checked {
+      background-color: GrayText;
+      border-color: GrayText;
+    }
+
+    label {
+      color: CanvasText;
+    }
+
+    :host([disabled]) label {
+      color: GrayText;
+    }
+  }
 `;
