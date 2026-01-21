@@ -1,3 +1,10 @@
+# [2.4.0-next.8](https://github.com/warp-ds/elements/compare/v2.4.0-next.7...v2.4.0-next.8) (2026-01-21)
+
+
+### Features
+
+* introduce button border radius tokens ([#491](https://github.com/warp-ds/elements/issues/491)) ([229ca67](https://github.com/warp-ds/elements/commit/229ca676d9adc2e85456178af89aba1758c3e0e7))
+
 # [2.4.0-next.7](https://github.com/warp-ds/elements/compare/v2.4.0-next.6...v2.4.0-next.7) (2026-01-20)
 
 
