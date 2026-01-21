@@ -1,7 +1,6 @@
+import { createComponent, EventName } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
-
-import { createComponent, EventName } from '@lit/react';
 
 import { WarpSliderThumb } from './slider-thumb.js';
 

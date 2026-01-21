@@ -1,17 +1,15 @@
 // @warp-css;
 
+import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
-import { reset } from '../styles.js';
 import type { WarpAttention } from '../attention/attention.js';
-import type { WarpTextField } from '../textfield/textfield.js';
-
-import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 import { styles as unoStyles } from '../slider/styles.js';
-import { i18n } from '@lingui/core';
+import { reset } from '../styles.js';
+import type { WarpTextField } from '../textfield/textfield.js';
+import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 
 /**
  * Component to place inside a `<w-slider>`.

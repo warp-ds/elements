@@ -20,27 +20,31 @@ test('can reset switch by resetting surrounding form', async () => {
   `);
 
   const form = document.querySelector('form') as HTMLFormElement;
-  const wSwitch = document.querySelector('w-switch') as HTMLElement & { checked: boolean, value: string, updateComplete: Promise<undefined> };
+  const wSwitch = document.querySelector('w-switch') as HTMLElement & {
+    checked: boolean;
+    value: string;
+    updateComplete: Promise<undefined>;
+  };
 
   // sanity
   expect(form).not.toBeNull();
   expect(wSwitch).not.toBeNull();
 
   // Initial value is "some value"
-  expect(wSwitch.value).toBe("some value");
+  expect(wSwitch.value).toBe('some value');
 
   // value should be associated with the form
   const data = new FormData(form);
   expect(Array.from(data.entries()).length).toBe(1);
-  
+
   // uncheck
   wSwitch.checked = false;
   await wSwitch.updateComplete;
-  
+
   // value should no longer be associated with the form
   const data2 = new FormData(form);
   expect(Array.from(data2.entries()).length).toBe(0);
-  
+
   // Reset the form
   form.reset();
   await wSwitch.updateComplete;

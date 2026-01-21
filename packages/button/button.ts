@@ -3,7 +3,7 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, PropertyValues, css } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
@@ -41,10 +41,10 @@ const buttonColors = {
 };
 
 const buttonTypes = {
-  primary: `border-0 rounded-8 ${buttonDefaultStyling}`,
-  secondary: `border-2 rounded-8 ${buttonDefaultStyling}`,
-  utility: `border rounded-4 ${buttonDefaultStyling}`,
-  negative: `border-0 rounded-8 ${buttonDefaultStyling}`,
+  primary: `border-0 rounded-radius-default ${buttonDefaultStyling}`,
+  secondary: `border-2 rounded-radius-default ${buttonDefaultStyling}`,
+  utility: `border rounded-radius-utility ${buttonDefaultStyling}`,
+  negative: `border-0 rounded-radius-default ${buttonDefaultStyling}`,
   pill: `p-4 rounded-full border-0 inline-flex items-center justify-center hover:bg-clip-padding ${buttonDefaultStyling}`,
   link: `bg-transparent focusable ease-in-out inline active:underline hover:underline focus:underline ${buttonColors.link}`,
 };
@@ -201,7 +201,12 @@ class WarpButton extends FormControlMixin(LitElement) {
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
 
-  static styles = [reset, styles, css`:host([full-width]) { width: 100%; }`];
+  static styles = [
+    reset,
+    styles,
+    css`:host([full-width]) { width: 100%; }`,
+    css`.rounded-radius-default{border-radius:var(--w-button-radius-default,8px);}.rounded-radius-utility{border-radius:var(--w-button-radius-utility,4px);}`,
+  ];
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {

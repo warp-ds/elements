@@ -1,8 +1,6 @@
 import { css, html, LitElement } from 'lit';
-
-import { reset } from '../styles.js';
-
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from '../modal/util.js';
+import { reset } from '../styles.js';
 
 /**
  * The footer section of a modal, typically where you place actions.
