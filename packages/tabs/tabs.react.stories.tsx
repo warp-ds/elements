@@ -46,15 +46,15 @@ export const WithIcons = () => (
   <>
     <Tabs active="info">
       <Tab for="info">
-        <w-icon name="info-16" slot="icon" />
+        <w-icon name="Info" slot="icon" />
         Info
       </Tab>
       <Tab for="done">
-        <w-icon name="success-16" slot="icon" />
+        <w-icon name="Success" slot="icon" />
         Done
       </Tab>
       <Tab for="error">
-        <w-icon name="error-16" slot="icon" />
+        <w-icon name="Error" slot="icon" />
         Failures
       </Tab>
     </Tabs>
@@ -77,15 +77,15 @@ export const WithIconsOver = () => (
   <>
     <Tabs active="info">
       <Tab for="info" over>
-        <w-icon name="info-16" slot="icon" />
+        <w-icon name="Info" slot="icon" />
         Info
       </Tab>
       <Tab for="done" over>
-        <w-icon name="success-16" slot="icon" />
+        <w-icon name="Success" slot="icon" />
         Done
       </Tab>
       <Tab for="error" over>
-        <w-icon name="error-16" slot="icon" />
+        <w-icon name="Error" slot="icon" />
         Failures
       </Tab>
     </Tabs>
