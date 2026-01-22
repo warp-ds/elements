@@ -1,11 +1,9 @@
+import '@warp-ds/components/icon';
 import { html } from 'lit';
-import '@warp-ds/icons/elements/info-16';
-import '@warp-ds/icons/elements/success-16';
-import '@warp-ds/icons/elements/error-16';
 
-import './tabs.js';
-import '../tab/tab.js';
 import '../tab-panel/tab-panel.js';
+import '../tab/tab.js';
+import './tabs.js';
 
 const meta = {
   title: 'Components/Tabs',
@@ -38,7 +36,7 @@ export const Default = () => html`
 export const WithIcons = () => html`
   <w-tabs active="info">
     <w-tab for="info">
-      <w-icon-info-16 slot="icon"></w-icon-info-16>
+      <w-icon name="Info" slot="icon"></w-icon>
       Info
     </w-tab>
     <w-tab-panel id="info">
@@ -46,7 +44,7 @@ export const WithIcons = () => html`
     </w-tab-panel>
 
     <w-tab for="done">
-      <w-icon-success-16 slot="icon"></w-icon-success-16>
+      <w-icon name="Success" slot="icon"></w-icon>
       Done
     </w-tab>
     <w-tab-panel id="done" hidden>
@@ -54,7 +52,7 @@ export const WithIcons = () => html`
     </w-tab-panel>
 
     <w-tab for="error">
-      <w-icon-error-16 slot="icon"></w-icon-error-16>
+      <w-icon name="Error" slot="icon"></w-icon>
       Failures
     </w-tab>
     <w-tab-panel id="error" hidden>
@@ -66,7 +64,7 @@ export const WithIcons = () => html`
 export const WithIconsOver = () => html`
   <w-tabs active="info">
     <w-tab for="info" over>
-      <w-icon-info-16 slot="icon"></w-icon-info-16>
+      <w-icon name="Info" slot="icon"></w-icon>
       Info
     </w-tab>
     <w-tab-panel id="info">
@@ -74,7 +72,7 @@ export const WithIconsOver = () => html`
     </w-tab-panel>
 
     <w-tab for="done" over>
-      <w-icon-success-16 slot="icon"></w-icon-success-16>
+      <w-icon name="Success" slot="icon"></w-icon>
       Done
     </w-tab>
     <w-tab-panel id="done" hidden>
@@ -82,7 +80,7 @@ export const WithIconsOver = () => html`
     </w-tab-panel>
 
     <w-tab for="error" over>
-      <w-icon-error-16 slot="icon"></w-icon-error-16>
+      <w-icon name="Error" slot="icon"></w-icon>
       Failures
     </w-tab>
     <w-tab-panel id="error" hidden>

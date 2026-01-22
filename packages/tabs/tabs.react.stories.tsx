@@ -1,8 +1,19 @@
+import '@warp-ds/components/icon';
 import { Meta, StoryObj } from '@storybook/react';
-import { IconError16, IconInfo16, IconSuccess16 } from '@warp-ds/icons/react';
 import React from 'react';
 
 import { Tab, TabPanel, Tabs } from './react';
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-icon': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { name?: string; size?: string; locale?: string },
+        HTMLElement
+      >;
+    }
+  }
+}
 
 export default {
   title: 'Components/Tabs',
@@ -35,21 +46,15 @@ export const WithIcons = () => (
   <>
     <Tabs active="info">
       <Tab for="info">
-        <span slot="icon">
-          <IconInfo16 />
-        </span>
+        <w-icon name="info-16" slot="icon" />
         Info
       </Tab>
       <Tab for="done">
-        <span slot="icon">
-          <IconSuccess16 />
-        </span>
+        <w-icon name="success-16" slot="icon" />
         Done
       </Tab>
       <Tab for="error">
-        <span slot="icon">
-          <IconError16 />
-        </span>
+        <w-icon name="error-16" slot="icon" />
         Failures
       </Tab>
     </Tabs>
@@ -72,21 +77,15 @@ export const WithIconsOver = () => (
   <>
     <Tabs active="info">
       <Tab for="info" over>
-        <span slot="icon">
-          <IconInfo16 />
-        </span>
+        <w-icon name="info-16" slot="icon" />
         Info
       </Tab>
       <Tab for="done" over>
-        <span slot="icon">
-          <IconSuccess16 />
-        </span>
+        <w-icon name="success-16" slot="icon" />
         Done
       </Tab>
       <Tab for="error" over>
-        <span slot="icon">
-          <IconError16 />
-        </span>
+        <w-icon name="error-16" slot="icon" />
         Failures
       </Tab>
     </Tabs>
