@@ -15,18 +15,18 @@ msgstr ""
 
 #. Default screenreader message for page indicator group
 #. js-lingui-explicit-id
-#: packages/page-indicator/page-indicator.ts
+#: packages/page-indicator/page-indicator.ts:57
 msgid "page-indicator.aria.label"
 msgstr "Page {selectedPage} of {pageCount}"
 
-#. Default screenreader message for a page dot
-#. js-lingui-explicit-id
-#: packages/page-indicator/page-indicator.ts
-msgid "page-indicator.aria.page"
-msgstr "Page {pageNumber}"
-
 #. Default screenreader message for the current page dot
 #. js-lingui-explicit-id
-#: packages/page-indicator/page-indicator.ts
+#: packages/page-indicator/page-indicator.ts:75
 msgid "page-indicator.aria.current-page"
 msgstr "Page {pageNumber}, current"
+
+#. Default screenreader message for a page dot
+#. js-lingui-explicit-id
+#: packages/page-indicator/page-indicator.ts:81
+msgid "page-indicator.aria.page"
+msgstr "Page {pageNumber}"

@@ -56,6 +56,7 @@ class WarpPageIndicator extends LitElement {
 
     const groupLabel = i18n._({
       id: 'page-indicator.aria.label',
+      comment: 'Default screenreader message for page indicator group',
       message: `Page ${selectedPage} of ${pageCount}`,
       values: { selectedPage, pageCount },
     });
@@ -73,11 +74,13 @@ class WarpPageIndicator extends LitElement {
             const dotLabel = isSelected
               ? i18n._({
                   id: 'page-indicator.aria.current-page',
+                  comment: 'Default screenreader message for the current page dot',
                   message: `Page ${pageNumber}, current`,
                   values: { pageNumber },
                 })
               : i18n._({
                   id: 'page-indicator.aria.page',
+                  comment: 'Default screenreader message for a page dot',
                   message: `Page ${pageNumber}`,
                   values: { pageNumber },
                 });
