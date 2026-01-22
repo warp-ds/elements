@@ -1,3 +1,10 @@
+# [2.4.0-next.9](https://github.com/warp-ds/elements/compare/v2.4.0-next.8...v2.4.0-next.9) (2026-01-22)
+
+
+### Bug Fixes
+
+* **tabs:** use default slots instead of label property, small fixes  ([7850581](https://github.com/warp-ds/elements/commit/7850581fe321fc7890a8861b659afac21957c50a))
+
 # [2.4.0-next.8](https://github.com/warp-ds/elements/compare/v2.4.0-next.7...v2.4.0-next.8) (2026-01-21)
 
 
