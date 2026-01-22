@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-01-22 14:00+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: fi\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. Default screenreader message for page indicator group
+#. js-lingui-explicit-id
+#: packages/page-indicator/page-indicator.ts
+msgid "page-indicator.aria.label"
+msgstr "Sivu {selectedPage} / {pageCount}"
+
+#. Default screenreader message for a page dot
+#. js-lingui-explicit-id
+#: packages/page-indicator/page-indicator.ts
+msgid "page-indicator.aria.page"
+msgstr "Sivu {pageNumber}"
+
+#. Default screenreader message for the current page dot
+#. js-lingui-explicit-id
+#: packages/page-indicator/page-indicator.ts
+msgid "page-indicator.aria.current-page"
+msgstr "Sivu {pageNumber}, nykyinen"
