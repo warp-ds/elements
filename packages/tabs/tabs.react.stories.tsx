@@ -1,7 +1,19 @@
+import '@warp-ds/components/icon';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import { Tab, TabPanel, Tabs } from './react';
+
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements {
+      'w-icon': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { name?: string; size?: string; locale?: string },
+        HTMLElement
+      >;
+    }
+  }
+}
 
 export default {
   title: 'Components/Tabs',
@@ -12,9 +24,9 @@ export type Story = StoryObj<typeof Tabs>;
 
 export const Default = () => (
   <Tabs active="tab1">
-    <Tab for="tab1" label="First Tab" />
-    <Tab for="tab2" label="Second Tab" />
-    <Tab for="tab3" label="Third Tab" />
+    <Tab for="tab1">First Tab</Tab>
+    <Tab for="tab2">Second Tab</Tab>
+    <Tab for="tab3">Third Tab</Tab>
 
     <TabPanel id="tab1">
       <p>Content for the first tab. This panel is visible when the first tab is active.</p>
@@ -32,28 +44,62 @@ export const Default = () => (
 
 export const WithIcons = () => (
   <>
-    <Tabs active="home">
-      <Tab for="home" label="Home">
-        <span slot="icon">🏠</span>
+    <Tabs active="info">
+      <Tab for="info">
+        <w-icon name="info-16" slot="icon" />
+        Info
       </Tab>
-      <Tab for="search" label="Search">
-        <span slot="icon">🔍</span>
+      <Tab for="done">
+        <w-icon name="success-16" slot="icon" />
+        Done
       </Tab>
-      <Tab for="profile" label="Profile">
-        <span slot="icon">👤</span>
+      <Tab for="error">
+        <w-icon name="error-16" slot="icon" />
+        Failures
       </Tab>
     </Tabs>
 
-    <TabPanel id="home">
-      <p>Welcome to the home page!</p>
+    <TabPanel id="info">
+      <p>Info content.</p>
     </TabPanel>
 
-    <TabPanel id="search" hidden>
-      <p>Search functionality goes here.</p>
+    <TabPanel id="done" hidden>
+      <p>Done content.</p>
     </TabPanel>
 
-    <TabPanel id="profile" hidden>
-      <p>User profile information.</p>
+    <TabPanel id="error" hidden>
+      <p>Error content.</p>
+    </TabPanel>
+  </>
+);
+
+export const WithIconsOver = () => (
+  <>
+    <Tabs active="info">
+      <Tab for="info" over>
+        <w-icon name="info-16" slot="icon" />
+        Info
+      </Tab>
+      <Tab for="done" over>
+        <w-icon name="success-16" slot="icon" />
+        Done
+      </Tab>
+      <Tab for="error" over>
+        <w-icon name="error-16" slot="icon" />
+        Failures
+      </Tab>
+    </Tabs>
+
+    <TabPanel id="info">
+      <p>Info content.</p>
+    </TabPanel>
+
+    <TabPanel id="done" hidden>
+      <p>Done content.</p>
+    </TabPanel>
+
+    <TabPanel id="error" hidden>
+      <p>Error content.</p>
     </TabPanel>
   </>
 );
@@ -61,12 +107,12 @@ export const WithIcons = () => (
 export const ManyTabs = () => (
   <>
     <Tabs active="tab1" id="tabs-many">
-      <Tab for="tab1" label="Tab 1" />
-      <Tab for="tab2" label="Tab 2" />
-      <Tab for="tab3" label="Tab 3" />
-      <Tab for="tab4" label="Tab 4" />
-      <Tab for="tab5" label="Tab 5" />
-      <Tab for="tab6" label="Tab 6" />
+      <Tab for="tab1">Tab 1</Tab>
+      <Tab for="tab2">Tab 2</Tab>
+      <Tab for="tab3">Tab 3</Tab>
+      <Tab for="tab4">Tab 4</Tab>
+      <Tab for="tab5">Tab 5</Tab>
+      <Tab for="tab6">Tab 6</Tab>
     </Tabs>
 
     <TabPanel id="tab1">

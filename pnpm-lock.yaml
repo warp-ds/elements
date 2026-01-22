@@ -16,6 +16,9 @@ importers:
       '@lit/react':
         specifier: ^1.0.8
         version: 1.0.8(@types/react@19.2.8)
+      '@warp-ds/components':
+        specifier: 1.0.0-beta.2
+        version: 1.0.0-beta.2(@lingui/core@5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0))(@lit/react@1.0.8(@types/react@19.2.8))(lit@3.3.2)
       lit:
         specifier: 3.x
         version: 3.3.2
@@ -1814,6 +1817,13 @@ packages:
 
   '@vue/shared@3.5.27':
     resolution: {integrity: sha512-dXr/3CgqXsJkZ0n9F3I4elY8wM9jMJpP3pvRG52r6m0tu/MsAFIe6JpXVGeNMd/D9F4hQynWT8Rfuj0bdm9kFQ==}
+
+  '@warp-ds/components@1.0.0-beta.2':
+    resolution: {integrity: sha512-xZ3YJ0TB0FT2O0S7WlU3YMEAD7j5pqu+Dn7COodR4ogJ0OrF3VYu8IOBrshfxi4VRDYB3uOZB0HayZ4NshyNvA==}
+    peerDependencies:
+      '@lingui/core': 5.x
+      '@lit/react': ^1.0.3
+      lit: ^3.1.2
 
   '@warp-ds/core@1.1.8':
     resolution: {integrity: sha512-sQNhqtwug5ZvnQ/b5ENHM10eGxoFplLWPp8/ICECxzBfkDfwQHfu3Z71CRiuf3VQYEYvvGQ21uQHNfC4YTQAxg==}
@@ -6626,6 +6636,12 @@ snapshots:
       vue: 3.5.27(typescript@5.5.3)
 
   '@vue/shared@3.5.27': {}
+
+  '@warp-ds/components@1.0.0-beta.2(@lingui/core@5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0))(@lit/react@1.0.8(@types/react@19.2.8))(lit@3.3.2)':
+    dependencies:
+      '@lingui/core': 5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0)
+      '@lit/react': 1.0.8(@types/react@19.2.8)
+      lit: 3.3.2
 
   '@warp-ds/core@1.1.8(@floating-ui/dom@1.7.4)':
     dependencies:

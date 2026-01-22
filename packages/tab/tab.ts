@@ -1,5 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
-import { html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -23,13 +23,10 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTab extends LitElement {
-  static styles = [reset, styles];
+  static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
   @property({ attribute: 'for', reflect: true })
   for = '';
-
-  @property({ reflect: true })
-  label = '';
 
   @property({ type: Boolean, reflect: true })
   active = false;
@@ -37,19 +34,16 @@ export class WarpTab extends LitElement {
   @property({ type: Boolean, reflect: true })
   over = false;
 
-  @property({ attribute: 'tab-class', reflect: true })
-  tabClass = '';
-
   private get _classes() {
-    return classNames(this.tabClass, [ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
+    return classNames([ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
   }
 
-  private get _hasChildren() {
-    return this.querySelector('[slot="icon"]') !== null || this.innerHTML.trim() !== this.label;
+  private get _hasIcon() {
+    return this.querySelector('[slot="icon"]') !== null;
   }
 
   render() {
-    const hasChildren = this._hasChildren;
+    const hasIcon = this._hasIcon;
 
     return html`
       <button
@@ -65,19 +59,19 @@ export class WarpTab extends LitElement {
         }}"
         style="height: 100%">
         ${
-          !hasChildren
-            ? html`<span class="${ccTab.contentUnderlined}">${this.label}</span>`
+          !hasIcon
+            ? html`<span class="${ccTab.contentUnderlined}"><slot></slot></span>`
             : this.over
               ? html`
                 <span class="${ccTab.icon}">
                   <slot name="icon"></slot>
                 </span>
-                <span class="${ccTab.contentUnderlined}">${this.label}</span>
+                <span class="${ccTab.contentUnderlined}"><slot></slot></span>
               `
               : html`
                 <div class="${ccTab.content}">
                   <slot name="icon"></slot>
-                  ${this.label}
+                  <slot></slot>
                 </div>
               `
         }
