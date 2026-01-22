@@ -57,10 +57,13 @@ const config: LinguiConfig = {
       include: ['packages/slider/'],
       path: 'packages/slider/locales/{locale}/messages',
     },
-
     {
       include: ['packages/textarea/'],
       path: 'packages/textarea/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/page-indicator/'],
+      path: 'packages/page-indicator/locales/{locale}/messages',
     },
   ],
   compileNamespace: 'es',
