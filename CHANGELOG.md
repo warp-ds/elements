@@ -1,3 +1,10 @@
+# [2.4.0-next.10](https://github.com/warp-ds/elements/compare/v2.4.0-next.9...v2.4.0-next.10) (2026-01-22)
+
+
+### Features
+
+* add icon component with storybook support and styles ([#493](https://github.com/warp-ds/elements/issues/493)) ([7b78621](https://github.com/warp-ds/elements/commit/7b78621231967b7b0be1c7e557ace67ed62ac04e))
+
 # [2.4.0-next.9](https://github.com/warp-ds/elements/compare/v2.4.0-next.8...v2.4.0-next.9) (2026-01-22)
 
 
