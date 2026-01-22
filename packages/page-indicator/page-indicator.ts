@@ -1,11 +1,20 @@
+import { i18n } from '@lingui/core';
 import { html, LitElement, TemplateResult } from 'lit';
-
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
 
+import { activateI18n } from '../i18n.js';
+
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './style.js';
+
+activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 /**
  * A page indicator component that displays a series of dots representing pages.
@@ -45,16 +54,38 @@ class WarpPageIndicator extends LitElement {
     const pageCount = this._validPageCount;
     const selectedPage = this._validSelectedPage;
 
+    const groupLabel = i18n._({
+      id: 'page-indicator.aria.label',
+      message: `Page ${selectedPage} of ${pageCount}`,
+      values: { selectedPage, pageCount },
+    });
+
     return html`
-      <div class="w-page-indicator">
+      <div class="w-page-indicator" role="group" aria-label="${groupLabel}">
         <div class="w-page-indicator--container">
           ${map(range(pageCount), (i) => {
-            const isSelected = i === selectedPage - 1;
+            const pageNumber = i + 1;
+            const isSelected = pageNumber === selectedPage;
             const classes = {
               'w-page-indicator--dot': true,
               'w-page-indicator--selecteddot': isSelected,
             };
-            return html`<div class="${classMap(classes)}"></div>`;
+            const dotLabel = isSelected
+              ? i18n._({
+                  id: 'page-indicator.aria.current-page',
+                  message: `Page ${pageNumber}, current`,
+                  values: { pageNumber },
+                })
+              : i18n._({
+                  id: 'page-indicator.aria.page',
+                  message: `Page ${pageNumber}`,
+                  values: { pageNumber },
+                });
+            return html`<div
+              class="${classMap(classes)}"
+              role="img"
+              aria-label="${dotLabel}"
+            ></div>`;
           })}
         </div>
       </div>
