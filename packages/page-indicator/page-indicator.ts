@@ -11,11 +11,11 @@ class WarpPageIndicator extends LitElement {
   static styles = [styles];
 
   /** Currently selected page (1-based index) */
-  @property({ type: Number, attribute: 'selected-page' })
+  @property({ type: Number, attribute: 'selected-page', reflect: true })
   selectedPage = 1;
 
   /** Total number of pages */
-  @property({ type: Number, attribute: 'page-count' })
+  @property({ type: Number, attribute: 'page-count', reflect: true })
   pageCount = 1;
 
   render(): TemplateResult {
