@@ -1,3 +1,4 @@
+import { i18n } from '@lingui/core';
 import 'virtual:uno.css';
 import { setCustomElementsManifest } from '@storybook/web-components';
 import type { Preview } from '@storybook/web-components-vite';
@@ -27,6 +28,21 @@ export const themes = {
   'Vend dark': 'vend-com-dark',
   'Neutral light': 'neutral-com',
   'Neutral dark': 'neutral-com-dark',
+};
+
+export const themeToLocale: Record<string, string> = {
+  'finn-no': 'nb',
+  'finn-no-dark': 'nb',
+  'tori-fi': 'fi',
+  'tori-fi-dark': 'fi',
+  'dba-dk': 'da',
+  'dba-dk-dark': 'da',
+  'blocket-se': 'sv',
+  'blocket-se-dark': 'sv',
+  'vend-com': 'en',
+  'vend-com-dark': 'en',
+  'neutral-com': 'en',
+  'neutral-com-dark': 'en',
 };
 
 export const rewriteStylesheets = (theme: string) => {
@@ -71,6 +87,11 @@ export const decorators = [
     // Swap stylesheet
     rewriteStylesheets(theme);
 
+    // Set lang attribute for i18n detection and activate locale
+    const locale = themeToLocale[theme] || 'en';
+    document.documentElement.lang = locale;
+    i18n.activate(locale);
+
     return Story();
   },
 ];
@@ -78,6 +99,9 @@ export const decorators = [
 const defaultTheme = typeof window !== 'undefined' && localStorage.getItem('warpTheme');
 if (defaultTheme) {
   rewriteStylesheets(defaultTheme);
+  // Set initial lang attribute for i18n detection
+  const locale = themeToLocale[defaultTheme] || 'en';
+  document.documentElement.lang = locale;
 }
 
 const preview: Preview = {

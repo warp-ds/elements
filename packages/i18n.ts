@@ -56,8 +56,13 @@ export const activateI18n = (
   daMessages: Messages,
   svMessages: Messages,
 ) => {
+  // Load all locales upfront to support dynamic locale switching
+  i18n.load('en', enMessages);
+  i18n.load('nb', nbMessages);
+  i18n.load('fi', fiMessages);
+  i18n.load('da', daMessages);
+  i18n.load('sv', svMessages);
+
   const locale = detectLocale();
-  const messages = getMessages(locale, enMessages, nbMessages, fiMessages, daMessages, svMessages);
-  i18n.load(locale, messages);
   i18n.activate(locale);
 };
