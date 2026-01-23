@@ -78,6 +78,7 @@ export const globalTypes = {
 };
 
 export const decorators = [
+  // @ts-expect-error Explict any for Story and context
   (Story, context) => {
     const theme = context.globals.brand;
 
