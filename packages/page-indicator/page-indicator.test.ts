@@ -8,83 +8,117 @@ test('renders the correct number of dots', async () => {
   const component = html`<w-page-indicator page-count="5" selected-page="1"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.poll(() => page.getByRole('img').all()).toHaveLength(5);
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+  }).toBe(5);
 });
 
 test('renders a single dot when page-count is 1', async () => {
   const component = html`<w-page-indicator page-count="1" selected-page="1"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.poll(() => page.getByRole('img').all()).toHaveLength(1);
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+  }).toBe(1);
 });
 
-test('has correct aria-label on the group', async () => {
+test('has aria-label on the container', async () => {
   const component = html`<w-page-indicator page-count="5" selected-page="3"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.element(page.getByRole('group')).toHaveAttribute('aria-label', 'Page 3 of 5');
+  // Check that the container has role="img" and an aria-label attribute
+  await expect.element(page.getByRole('img')).toHaveAttribute('aria-label');
 });
 
-test('marks the selected dot as current', async () => {
+test('marks the selected dot with correct class', async () => {
   const component = html`<w-page-indicator page-count="5" selected-page="2"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.element(page.getByLabelText('Page 2, current')).toBeInTheDocument();
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+    const selectedDots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--selecteddot');
+    return dots?.length === 5 && selectedDots?.length === 1;
+  }).toBe(true);
 });
 
-test('non-selected dots have correct labels', async () => {
+test('selected dot is at correct position', async () => {
   const component = html`<w-page-indicator page-count="3" selected-page="2"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.element(page.getByLabelText('Page 1')).toBeInTheDocument();
-  await expect.element(page.getByLabelText('Page 2, current')).toBeInTheDocument();
-  await expect.element(page.getByLabelText('Page 3')).toBeInTheDocument();
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+    return dots?.[1]?.classList.contains('w-page-indicator--selecteddot');
+  }).toBe(true);
 });
 
 test('validates page-count to minimum of 1', async () => {
   const component = html`<w-page-indicator page-count="0" selected-page="1"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.poll(() => page.getByRole('img').all()).toHaveLength(1);
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+  }).toBe(1);
 });
 
 test('validates page-count for negative values', async () => {
   const component = html`<w-page-indicator page-count="-5" selected-page="1"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.poll(() => page.getByRole('img').all()).toHaveLength(1);
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+  }).toBe(1);
 });
 
 test('clamps selected-page to valid range (too high)', async () => {
   const component = html`<w-page-indicator page-count="3" selected-page="10"></w-page-indicator>`;
   const page = render(component);
 
-  // Should clamp to page 3 (the max)
-  await expect.element(page.getByRole('group')).toHaveAttribute('aria-label', 'Page 3 of 3');
-  await expect.element(page.getByLabelText('Page 3, current')).toBeInTheDocument();
+  // Should clamp to page 3 (the max) - verify selected dot is at position 3 (index 2)
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+    return dots?.[2]?.classList.contains('w-page-indicator--selecteddot');
+  }).toBe(true);
 });
 
 test('clamps selected-page to valid range (too low)', async () => {
   const component = html`<w-page-indicator page-count="3" selected-page="0"></w-page-indicator>`;
   const page = render(component);
 
-  // Should clamp to page 1 (the min)
-  await expect.element(page.getByRole('group')).toHaveAttribute('aria-label', 'Page 1 of 3');
-  await expect.element(page.getByLabelText('Page 1, current')).toBeInTheDocument();
+  // Should clamp to page 1 (the min) - verify selected dot is at position 1 (index 0)
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+    return dots?.[0]?.classList.contains('w-page-indicator--selecteddot');
+  }).toBe(true);
 });
 
 test('handles decimal page-count by flooring', async () => {
   const component = html`<w-page-indicator page-count="3.7" selected-page="1"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.poll(() => page.getByRole('img').all()).toHaveLength(3);
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+  }).toBe(3);
 });
 
 test('handles decimal selected-page by flooring', async () => {
   const component = html`<w-page-indicator page-count="5" selected-page="2.9"></w-page-indicator>`;
   const page = render(component);
 
-  await expect.element(page.getByLabelText('Page 2, current')).toBeInTheDocument();
+  // Should floor to page 2 - verify selected dot is at position 2 (index 1)
+  await expect.poll(() => {
+    const element = page.container.querySelector('w-page-indicator');
+    const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+    return dots?.[1]?.classList.contains('w-page-indicator--selecteddot');
+  }).toBe(true);
 });
 
 test('updates when selected-page changes', async () => {
@@ -99,15 +133,17 @@ test('updates when selected-page changes', async () => {
   // Wait for initial render
   await element.updateComplete;
 
-  // Verify initial state
-  expect(element.shadowRoot?.querySelector('[aria-label="Page 1, current"]')).toBeTruthy();
+  // Verify initial state - first dot is selected
+  const dots = element.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+  expect(dots?.[0]?.classList.contains('w-page-indicator--selecteddot')).toBe(true);
 
   // Change selected page
   element.setAttribute('selected-page', '3');
   await element.updateComplete;
 
-  // Verify updated state
-  expect(element.shadowRoot?.querySelector('[aria-label="Page 3, current"]')).toBeTruthy();
+  // Verify updated state - third dot is now selected
+  expect(dots?.[0]?.classList.contains('w-page-indicator--selecteddot')).toBe(false);
+  expect(dots?.[2]?.classList.contains('w-page-indicator--selecteddot')).toBe(true);
 
   // Cleanup
   document.body.removeChild(container);

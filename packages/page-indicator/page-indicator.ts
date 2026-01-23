@@ -57,7 +57,7 @@ class WarpPageIndicator extends LitElement {
     const groupLabel = i18n._({
       id: 'page-indicator.aria.label',
       comment: 'Default screenreader message for page indicator group',
-      message: `Dot ${selectedPage} is highlighted in a row of ${pageCount} dots`,
+      message: 'Dot {selectedPage} is highlighted in a row of {pageCount} dots',
       values: { selectedPage, pageCount },
     });
 
