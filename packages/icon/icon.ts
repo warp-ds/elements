@@ -1,5 +1,5 @@
 import { styles } from './style.js';
-import { html, LitElement, TemplateResult, unsafeCSS } from 'lit';
+import { html, LitElement, TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -96,12 +96,6 @@ export class WIcon extends LitElement {
     };
     const customStyle = typeof this.size === 'string' && this.size.endsWith('px') ? `--w-icon-size: ${this.size};` : '';
     return html`<div class="${classMap(classes)}" style="${customStyle}" part="w-${this.name.toLowerCase()}">${this.svg}</div>`;
-  }
-}
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'w-icon': WIcon;
   }
 }
 
