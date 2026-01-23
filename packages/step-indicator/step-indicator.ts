@@ -4,7 +4,6 @@ import { classNames } from '@chbphone55/classnames';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { activateI18n } from '../i18n.js';
 import type { WarpStep } from '../step/step.js';
 import { reset } from '../styles.js';
 import { styles } from './styles.js';
