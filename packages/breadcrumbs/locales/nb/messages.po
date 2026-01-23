@@ -19,6 +19,6 @@ msgstr ""
 
 #. Default screen reader message for the breadcrumb component
 #. js-lingui-explicit-id
-#: packages/breadcrumbs/index.ts:43
+#: packages/breadcrumbs/breadcrumbs.ts:43
 msgid "breadcrumbs.ariaLabel"
 msgstr "Her er du"
