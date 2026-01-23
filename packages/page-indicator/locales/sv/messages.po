@@ -17,4 +17,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/page-indicator/page-indicator.ts:57
 msgid "page-indicator.aria.label"
-msgstr ""
+msgstr "Prick {selectedPage} är markerad i en rad med {pageCount} prickar"

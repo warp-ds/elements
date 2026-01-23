@@ -17,4 +17,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/page-indicator/page-indicator.ts:57
 msgid "page-indicator.aria.label"
-msgstr ""
+msgstr "Piste {selectedPage} on korostettuna {pageCount} pisteen rivissä"

@@ -17,4 +17,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/page-indicator/page-indicator.ts:57
 msgid "page-indicator.aria.label"
-msgstr "page-indicator.aria.label"
+msgstr "Dot {selectedPage} is highlighted in a row of {pageCount} dots"
