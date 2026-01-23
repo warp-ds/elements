@@ -1,3 +1,10 @@
+# [2.4.0-next.11](https://github.com/warp-ds/elements/compare/v2.4.0-next.10...v2.4.0-next.11) (2026-01-23)
+
+
+### Bug Fixes
+
+* add aria-labels, reflect: true, jsdoc comments and prop validation ([#495](https://github.com/warp-ds/elements/issues/495)) ([e846bcd](https://github.com/warp-ds/elements/commit/e846bcdc281f9317a8c097193ba1da84f0434590))
+
 # [2.4.0-next.10](https://github.com/warp-ds/elements/compare/v2.4.0-next.9...v2.4.0-next.10) (2026-01-22)
 
 
