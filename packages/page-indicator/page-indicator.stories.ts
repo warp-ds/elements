@@ -1,4 +1,6 @@
 import { html, LitElement } from 'lit';
+import { state } from 'lit/decorators.js';
+
 import './page-indicator.js';
 
 export default {
@@ -25,21 +27,31 @@ export const Default = {
 };
 
 export const InsideContainer = () => html`
-  <div style="display: grid; height: 60vh; border: 1px solid lightgrey;">
+  <div style="display: grid; height: 10vh; border: 1px solid lightgrey;">
     <w-page-indicator page-count="5" selected-page="1" style="padding-bottom: 12px; align-self: end;"> </w-page-indicator>
   </div>
 `;
 
 class PageIndicatorChangePage extends LitElement {
+  @state()
   private page = 1;
+
+  private intervalId?: ReturnType<typeof setInterval>;
 
   connectedCallback() {
     super.connectedCallback();
     this.startPageChanger();
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
   private startPageChanger() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       if (this.page > 4) {
         this.page = 1;
       } else {
@@ -50,7 +62,7 @@ class PageIndicatorChangePage extends LitElement {
 
   render() {
     return html`
-      <div style="display: grid; height: 60vh; border: 1px solid lightgrey;">
+      <div style="display: grid; height: 10vh; border: 1px solid lightgrey;">
         <div style="align-self: center; justify-self: center;">Page ${this.page}</div>
         <w-page-indicator page-count="5" selected-page=${this.page} style="padding-bottom: 12px; align-self: end;"> </w-page-indicator>
       </div>
@@ -65,14 +77,14 @@ if (!customElements.get('page-indicator-change-page')) {
 export const InsideContainerChangePage = () => html` <page-indicator-change-page></page-indicator-change-page> `;
 
 export const InsideContainer10Pages = () => html`
-  <div style="display: grid; height: 60vh; border: 1px solid lightgrey;">
+  <div style="display: grid; height: 10vh; border: 1px solid lightgrey;">
     <w-page-indicator page-count="10" selected-page="3" style="padding-bottom: 12px; align-self: end;"> </w-page-indicator>
   </div>
 `;
 
 export const OutsideContainer = () => html`
-  <div style="height: 450px; border: 1px solid lightgrey;">
-    <div style="height: 300px; border-bottom: 1px solid #e6e6e6;"></div>
+  <div style="height: 11vh; border: 1px solid lightgrey;">
+    <div style="height: 5vh; border-bottom: 1px solid #e6e6e6; margin-bottom: 10px;"></div>
     <w-page-indicator page-count="5" selected-page="1" style="padding-top: 16px;"> </w-page-indicator>
   </div>
 `;
