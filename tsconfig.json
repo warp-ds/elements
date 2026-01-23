@@ -21,24 +21,24 @@
     "packages/textfield",
     "packages/toast-container",
     "packages/toast",
-
-    // unreleased components
-    "packages/checkbox-group",
-    "packages/checkbox",
-    "packages/dead-toggle",
-    "packages/icon",
     "packages/page-indicator",
-    "packages/pagination",
-    "packages/radio-group",
-    "packages/radio",
-    "packages/slider-thumb",
-    "packages/slider",
-    "packages/step-indicator",
-    "packages/step",
     "packages/tab-panel",
     "packages/tab",
     "packages/tabs",
-    "packages/textarea",
+    "packages/icon",
+
+    // unreleased components
+    // "packages/checkbox-group",
+    // "packages/checkbox",
+    // "packages/dead-toggle",
+    // "packages/pagination",
+    // "packages/radio-group",
+    // "packages/radio",
+    // "packages/slider-thumb",
+    // "packages/slider",
+    // "packages/step-indicator",
+    // "packages/step",
+    // "packages/textarea",
     "setup-tests.ts"
   ],
   "compilerOptions": {

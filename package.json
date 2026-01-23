@@ -77,6 +77,14 @@
       "types": "./dist/packages/modal/react.d.ts",
       "import": "./dist/packages/modal/react.js"
     },
+    "./react/modal-header": {
+      "types": "./dist/packages/modal-header/react.d.ts",
+      "import": "./dist/packages/modal-header/react.js"
+    },
+    "./react/modal-footer": {
+      "types": "./dist/packages/modal-footer/react.d.ts",
+      "import": "./dist/packages/modal-footer/react.js"
+    },
     "./react/pill": {
       "types": "./dist/packages/pill/react.d.ts",
       "import": "./dist/packages/pill/react.js"
@@ -97,50 +105,6 @@
       "types": "./dist/packages/tabs/react.d.ts",
       "import": "./dist/packages/tabs/react.js"
     },
-    "./react/checkbox": {
-      "types": "./dist/packages/checkbox/react.d.ts",
-      "import": "./dist/packages/checkbox/react.js"
-    },
-    "./react/dead-toggle": {
-      "types": "./dist/packages/dead-toggle/react.d.ts",
-      "import": "./dist/packages/dead-toggle/react.js"
-    },
-    "./react/page-indicator": {
-      "types": "./dist/packages/page-indicator/react.d.ts",
-      "import": "./dist/packages/page-indicator/react.js"
-    },
-    "./react/modal-header": {
-      "types": "./dist/packages/modal-header/react.d.ts",
-      "import": "./dist/packages/modal-header/react.js"
-    },
-    "./react/modal-footer": {
-      "types": "./dist/packages/modal-footer/react.d.ts",
-      "import": "./dist/packages/modal-footer/react.js"
-    },
-    "./react/toast-container": {
-      "types": "./dist/packages/toast-container/react.d.ts",
-      "import": "./dist/packages/toast-container/react.js"
-    },
-    "./react/checkbox-group": {
-      "types": "./dist/packages/checkbox-group/react.d.ts",
-      "import": "./dist/packages/checkbox-group/react.js"
-    },
-    "./react/radio-group": {
-      "types": "./dist/packages/radio-group/react.d.ts",
-      "import": "./dist/packages/radio-group/react.js"
-    },
-    "./react/slider-thumb": {
-      "types": "./dist/packages/slider-thumb/react.d.ts",
-      "import": "./dist/packages/slider-thumb/react.js"
-    },
-    "./react/step-indicator": {
-      "types": "./dist/packages/step-indicator/react.d.ts",
-      "import": "./dist/packages/step-indicator/react.js"
-    },
-    "./react/step": {
-      "types": "./dist/packages/step/react.d.ts",
-      "import": "./dist/packages/step/react.js"
-    },
     "./react/tab": {
       "types": "./dist/packages/tab/react.d.ts",
       "import": "./dist/packages/tab/react.js"
@@ -149,21 +113,9 @@
       "types": "./dist/packages/tab-panel/react.d.ts",
       "import": "./dist/packages/tab-panel/react.js"
     },
-    "./react/pagination": {
-      "types": "./dist/packages/pagination/react.d.ts",
-      "import": "./dist/packages/pagination/react.js"
-    },
-    "./react/radio": {
-      "types": "./dist/packages/radio/react.d.ts",
-      "import": "./dist/packages/radio/react.js"
-    },
-    "./react/slider": {
-      "types": "./dist/packages/slider/react.d.ts",
-      "import": "./dist/packages/slider/react.js"
-    },
-    "./react/textarea": {
-      "types": "./dist/packages/textarea/react.d.ts",
-      "import": "./dist/packages/textarea/react.js"
+    "./react/page-indicator": {
+      "types": "./dist/packages/page-indicator/react.d.ts",
+      "import": "./dist/packages/page-indicator/react.js"
     },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",

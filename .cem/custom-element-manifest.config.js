@@ -32,23 +32,24 @@ export default {
     'packages/link/link.ts',
     'packages/switch/switch.ts',
     'packages/combobox/combobox.ts',
-
-    // unreleased
-    'packages/dead-toggle/dead-toggle.ts',
     'packages/page-indicator/page-indicator.ts',
-    'packages/pagination/pagination.ts',
-    'packages/radio/radio.ts',
-    'packages/radio-group/radio-group.ts',
-    'packages/checkbox/checkbox.ts',
-    'packages/checkbox-group/checkbox-group.ts',
-    'packages/slider/slider.ts',
-    'packages/slider-thumb/slider-thumb.ts',
-    'packages/step-indicator/step-indicator.ts',
-    'packages/step/step.ts',
     'packages/tabs/tabs.ts',
     'packages/tab/tab.ts',
     'packages/tab-panel/tab-panel.ts',
-    'packages/textarea/textarea.ts',
+    "packages/icon/icon.ts",
+
+    // unreleased
+    // 'packages/dead-toggle/dead-toggle.ts',
+    // 'packages/pagination/pagination.ts',
+    // 'packages/radio/radio.ts',
+    // 'packages/radio-group/radio-group.ts',
+    // 'packages/checkbox/checkbox.ts',
+    // 'packages/checkbox-group/checkbox-group.ts',
+    // 'packages/slider/slider.ts',
+    // 'packages/slider-thumb/slider-thumb.ts',
+    // 'packages/step-indicator/step-indicator.ts',
+    // 'packages/step/step.ts',
+    // 'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude
