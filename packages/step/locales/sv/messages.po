@@ -19,18 +19,18 @@ msgstr ""
 
 #. Empty circle
 #. js-lingui-explicit-id
-#: packages/stepindicator/index.ts:110
+#: packages/step/step.ts:55
 msgid "steps.aria.emptyCircle"
 msgstr "Tom cirkel"
 
 #. Active circle
 #. js-lingui-explicit-id
-#: packages/stepindicator/index.ts:105
+#: packages/step/step.ts:50
 msgid "steps.aria.active"
 msgstr "Stegindikator aktiv cirkel"
 
 #. Completed circle
 #. js-lingui-explicit-id
-#: packages/stepindicator/index.ts:100
+#: packages/step/step.ts:45
 msgid "steps.aria.completed"
 msgstr "Stegindikator fulländad cirkel"
