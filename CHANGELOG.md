@@ -1,3 +1,10 @@
+# [2.4.0-next.12](https://github.com/warp-ds/elements/compare/v2.4.0-next.11...v2.4.0-next.12) (2026-01-23)
+
+
+### Bug Fixes
+
+* update crowdin.yml ([fce327b](https://github.com/warp-ds/elements/commit/fce327ba276b3e73cb6cd5af083527a883e0185a))
+
 # [2.4.0-next.11](https://github.com/warp-ds/elements/compare/v2.4.0-next.10...v2.4.0-next.11) (2026-01-23)
 
 
