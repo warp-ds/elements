@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './expandable.js';
 
 test('renders the given title prop and hides the slotted content', async () => {
   const component = html`

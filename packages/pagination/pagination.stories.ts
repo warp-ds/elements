@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpPagination } from './index.js';
-import './index.js';
+import type { WarpPagination } from './pagination.js';
+import './pagination.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpPagination>('w-pagination');
 

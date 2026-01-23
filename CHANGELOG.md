@@ -1,3 +1,148 @@
+# [2.5.0-next.2](https://github.com/warp-ds/elements/compare/v2.5.0-next.1...v2.5.0-next.2) (2026-01-23)
+
+
+### Bug Fixes
+
+* trigger publish to eik ([150d523](https://github.com/warp-ds/elements/commit/150d523198c02e417cde46ac084d5b61824fb5e0))
+
+# [2.5.0-next.1](https://github.com/warp-ds/elements/compare/v2.4.0...v2.5.0-next.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* [#421](https://github.com/warp-ds/elements/issues/421) don't apply min-max to the input field ([add39d8](https://github.com/warp-ds/elements/commit/add39d8585a6503f289b7830cc1e03cadee6c446))
+* [#421](https://github.com/warp-ds/elements/issues/421) don't render the legend if there is no label ([957c713](https://github.com/warp-ds/elements/commit/957c713be03f0933b1b986267080cc30d06e6049))
+* [#421](https://github.com/warp-ds/elements/issues/421) ensure that there's only one marker per thumb ([b4c9186](https://github.com/warp-ds/elements/commit/b4c9186b94d9b21bc2dbf8f4d8d03e049ab2e0cd))
+* [#421](https://github.com/warp-ds/elements/issues/421) fix interaction problems in the range slider ([03c5167](https://github.com/warp-ds/elements/commit/03c51677d3a45c3fda40977c1b72654fa2507693))
+* [#421](https://github.com/warp-ds/elements/issues/421) make going outside of boundaries work in a good way ([e292f28](https://github.com/warp-ds/elements/commit/e292f28757c06d4537e784a896f37dafd3ed0fcf))
+* [#421](https://github.com/warp-ds/elements/issues/421) use the correct value for labels beneath the range slider ([7661c61](https://github.com/warp-ds/elements/commit/7661c6142907f344f41ad1151a2b11698e12b1a2))
+* actually implement help-text ([5bdf46d](https://github.com/warp-ds/elements/commit/5bdf46d8364943f18cc91021e4a0db7edfd48b3d))
+* add aria-labels, reflect: true, jsdoc comments and prop validation ([#495](https://github.com/warp-ds/elements/issues/495)) ([e846bcd](https://github.com/warp-ds/elements/commit/e846bcdc281f9317a8c097193ba1da84f0434590))
+* add back in package.json exports ([7411f95](https://github.com/warp-ds/elements/commit/7411f95beb90ca5476bc2051f6ab78176925ac82))
+* add components back in post release ([a35010b](https://github.com/warp-ds/elements/commit/a35010b1e39306a22b31b85dd29fe56a61f6c9dc))
+* add missing components back into build ([#471](https://github.com/warp-ds/elements/issues/471)) ([1d025a6](https://github.com/warp-ds/elements/commit/1d025a66ec42e2c14999f4216d98e12e7cf812b8))
+* add same help/validation message API as other form components ([#447](https://github.com/warp-ds/elements/issues/447)) ([b77940a](https://github.com/warp-ds/elements/commit/b77940a2813b20311117c6d106b85ca56acc6c7a))
+* add support for step to textinput ([752101f](https://github.com/warp-ds/elements/commit/752101fad56b54e3c1776e2c7c3da0419c31c5f9))
+* add the max value as an extra step before going over ([571fc9b](https://github.com/warp-ds/elements/commit/571fc9bde3bdef520f1892a3719744e34cc4bc1a))
+* add translations for slider ([9688ca9](https://github.com/warp-ds/elements/commit/9688ca9f886be522ee468db17ff70854993ec8d3))
+* add translations for slider! ([ab87c0a](https://github.com/warp-ds/elements/commit/ab87c0a12f97bc6be27217429ecbcb787c6195bd))
+* align filenaming across components ([#464](https://github.com/warp-ds/elements/issues/464)) ([a6bb37b](https://github.com/warp-ds/elements/commit/a6bb37bb8dfdeff2aac9670d5e156ee184a52664))
+* allow both values to be above or below min/max ([df0aba9](https://github.com/warp-ds/elements/commit/df0aba97fdd7fc6c24a3ae1b79e0cc795c18635d))
+* always trigger the formatter ([7d05326](https://github.com/warp-ds/elements/commit/7d05326ec6164485885f1350822ab6f50d3510b4))
+* calculate correct width and offset for progress bar ([d0776b8](https://github.com/warp-ds/elements/commit/d0776b8d293d4a8a0eb911c655dee20247f43a3c))
+* checkbox styles, add w-checkbox-group component ([#438](https://github.com/warp-ds/elements/issues/438)) ([e07fa1a](https://github.com/warp-ds/elements/commit/e07fa1a263e1c06f87daa37103023f8f9f8dd3dd))
+* clamp values on focus when range is at end ([2204f75](https://github.com/warp-ds/elements/commit/2204f75d6a89cfaf1fa5ff19d3d493190f6b93ac))
+* don't rely on native events since they're broken in Safari ([28a43e3](https://github.com/warp-ds/elements/commit/28a43e306c54816b74559e9ef4a4124baa0772ed))
+* don't to step calculation unless steps are defined ([7a3644f](https://github.com/warp-ds/elements/commit/7a3644ff00dbbe2df890176a273c8df3ffabc54e))
+* fix interaction between steps and allowing values outside range ([bc7004b](https://github.com/warp-ds/elements/commit/bc7004bf653b2fc348f4b4e7f3b6e5f979eb18d2))
+* implement error messages ([235387f](https://github.com/warp-ds/elements/commit/235387fc8b3b296fa796729ea0bc9c6bb05cdcbe))
+* improve module resolution check for tabs ([ad51071](https://github.com/warp-ds/elements/commit/ad51071811c63fe71a679880d131bd7a3937044a))
+* **link:** add missing quiet variant to validated options ([#479](https://github.com/warp-ds/elements/issues/479)) ([4d96c79](https://github.com/warp-ds/elements/commit/4d96c79e81e5afa21b78b75b466b1fd8cc1e342e))
+* **link:** add missing variant, remove link variant ([#481](https://github.com/warp-ds/elements/issues/481)) ([5df8300](https://github.com/warp-ds/elements/commit/5df830071d4807adeaa0349aa95dc20948950ed2))
+* **link:** remove unused properties ([#478](https://github.com/warp-ds/elements/issues/478)) ([5533b95](https://github.com/warp-ds/elements/commit/5533b95cf883571391226cf2248472e2ebedba60))
+* make the error state flow top to bottom ([5dd1726](https://github.com/warp-ds/elements/commit/5dd1726c8321f278193b314f8e9d82b1a2fbef68))
+* move most deps to dev deps ([#454](https://github.com/warp-ds/elements/issues/454)) ([61375a3](https://github.com/warp-ds/elements/commit/61375a3049e5a8fa896dd66056ba130e9878348e))
+* prevent input field from being reset to min on input ([01c15c3](https://github.com/warp-ds/elements/commit/01c15c39642ecf27cad6e2b2950f483b5d74dd8d))
+* re-enable unreleased components ([21b9a2c](https://github.com/warp-ds/elements/commit/21b9a2c1eb8d4afdc94d29984445a9e49942444d))
+* refactor folder and filenames ([#489](https://github.com/warp-ds/elements/issues/489)) ([af5d8e1](https://github.com/warp-ds/elements/commit/af5d8e10dde93cdcc7a12f679680e1198b660b7f))
+* release previous pls 🙏 ([140e97f](https://github.com/warp-ds/elements/commit/140e97f6ecb19d5c9a7e05c33010df7de2b50f76))
+* remove duplicate definition of thumb.invalid ([9e169b8](https://github.com/warp-ds/elements/commit/9e169b876f3680b9a4c725e2a87538a5467f4531))
+* rename step indicator ([#452](https://github.com/warp-ds/elements/issues/452)) ([a2d7a21](https://github.com/warp-ds/elements/commit/a2d7a21ab1d85212cb2eac960dddac56d02ea061))
+* run messages compile ([c632b26](https://github.com/warp-ds/elements/commit/c632b263f9415ded4c9c9d25ce0ebccdeed9a895))
+* separate internal and external states ([d8a74d9](https://github.com/warp-ds/elements/commit/d8a74d9ad32c7ab1efde33fda37336df064f233c))
+* support external error change too ([0adfce6](https://github.com/warp-ds/elements/commit/0adfce63473753c05f16cf487edcb8ff665135da))
+* tabs fixes ([eb0cc40](https://github.com/warp-ds/elements/commit/eb0cc4083e69789ef1c3d148872b05e4b7306ad1))
+* **tabs:** use default slots instead of label property, small fixes  ([7850581](https://github.com/warp-ds/elements/commit/7850581fe321fc7890a8861b659afac21957c50a))
+* trigger a field update when errors are removed ([5ec5fcf](https://github.com/warp-ds/elements/commit/5ec5fcf7e4eb579b95297c9c21dbe27c8c033726))
+* **types:** add react wrapper .js extension when importing ([#436](https://github.com/warp-ds/elements/issues/436)) ([b8373d5](https://github.com/warp-ds/elements/commit/b8373d5e4254984a3a2aea7c70dc5ba19371b2c1))
+* update crowdin.yml ([fce327b](https://github.com/warp-ds/elements/commit/fce327ba276b3e73cb6cd5af083527a883e0185a))
+* update performance mark for pulse ([#461](https://github.com/warp-ds/elements/issues/461)) ([68e5bf5](https://github.com/warp-ds/elements/commit/68e5bf5391f2aecb8c4845c2e9fb063ae582b0b6))
+* update range slider cross-field validity ([2d3f349](https://github.com/warp-ds/elements/commit/2d3f349e39db3d5430feed364bfebde85747aa44))
+* updated styling and logic to make it possible ([#448](https://github.com/warp-ds/elements/issues/448)) ([92e3df7](https://github.com/warp-ds/elements/commit/92e3df7bd5e3095869e903a8563a927aa7267135))
+* use correct type for invalid state in textinput ([0adc7fd](https://github.com/warp-ds/elements/commit/0adc7fd1ecf2ea4462eaa687f02bbf90018ae759))
+* use explicit exports to support module resolution from 🦖-age ([edf4319](https://github.com/warp-ds/elements/commit/edf431939426dec5d2ea4ad0e4deafb4f16139dc))
+* use non-static token for inverted text ([8bd33aa](https://github.com/warp-ds/elements/commit/8bd33aa4570a63218cf47781fd2b5b05b336bfbc))
+* use the correct value type for allowValuesOutsideRange ([fbbd658](https://github.com/warp-ds/elements/commit/fbbd6586030f1e41c051e54c1cff865756559a37))
+* use tooltip text as aria description for value ([ae6d622](https://github.com/warp-ds/elements/commit/ae6d6229aa89c4e49e8421cf790a77bb4fd8b55a))
+* z-index stack ([ec88fe3](https://github.com/warp-ds/elements/commit/ec88fe3b09d5315960b6ff0e435262b536a7c5db))
+* z-index stacking order ([5eae561](https://github.com/warp-ds/elements/commit/5eae561dbf2fa4fe1a51ae8dd0d6a942ff0fb3be))
+
+
+### Features
+
+* add autocomplete option to textfield and combobox ([#484](https://github.com/warp-ds/elements/issues/484)) ([4708239](https://github.com/warp-ds/elements/commit/4708239429d0d81d7241c20a466b9566f3642db1))
+* add icon component with storybook support and styles ([#493](https://github.com/warp-ds/elements/issues/493)) ([7b78621](https://github.com/warp-ds/elements/commit/7b78621231967b7b0be1c7e557ace67ed62ac04e))
+* add new component w-textarea ([#439](https://github.com/warp-ds/elements/issues/439)) ([bf7d781](https://github.com/warp-ds/elements/commit/bf7d78199242dc0368cfc6f566540f56da0902a3))
+* add performance measuring to eik bundle ([5951664](https://github.com/warp-ds/elements/commit/595166499172f36398a53ac9e2403557bd79c5d6))
+* expose pagination and slider for testing ([c673d42](https://github.com/warp-ds/elements/commit/c673d42a4c40dc041e3c8cfb7dbf5511a0ccd7fb))
+* form participation in combobox ([#467](https://github.com/warp-ds/elements/issues/467)) ([6d6b3f1](https://github.com/warp-ds/elements/commit/6d6b3f18301dfbfd5f15b6a6080881dc279b4cae))
+* introduce button border radius tokens ([#491](https://github.com/warp-ds/elements/issues/491)) ([229ca67](https://github.com/warp-ds/elements/commit/229ca676d9adc2e85456178af89aba1758c3e0e7))
+* rework tabs structure ([#486](https://github.com/warp-ds/elements/issues/486)) ([d919391](https://github.com/warp-ds/elements/commit/d91939109851e610ee51e5a2486bd6e90859d6f7))
+
+# [2.4.0-next.12](https://github.com/warp-ds/elements/compare/v2.4.0-next.11...v2.4.0-next.12) (2026-01-23)
+
+
+### Bug Fixes
+
+* update crowdin.yml ([fce327b](https://github.com/warp-ds/elements/commit/fce327ba276b3e73cb6cd5af083527a883e0185a))
+
+# [2.4.0-next.11](https://github.com/warp-ds/elements/compare/v2.4.0-next.10...v2.4.0-next.11) (2026-01-23)
+
+
+### Bug Fixes
+
+* add aria-labels, reflect: true, jsdoc comments and prop validation ([#495](https://github.com/warp-ds/elements/issues/495)) ([e846bcd](https://github.com/warp-ds/elements/commit/e846bcdc281f9317a8c097193ba1da84f0434590))
+
+# [2.4.0-next.10](https://github.com/warp-ds/elements/compare/v2.4.0-next.9...v2.4.0-next.10) (2026-01-22)
+
+
+### Features
+
+* add icon component with storybook support and styles ([#493](https://github.com/warp-ds/elements/issues/493)) ([7b78621](https://github.com/warp-ds/elements/commit/7b78621231967b7b0be1c7e557ace67ed62ac04e))
+
+# [2.4.0-next.9](https://github.com/warp-ds/elements/compare/v2.4.0-next.8...v2.4.0-next.9) (2026-01-22)
+
+
+### Bug Fixes
+
+* **tabs:** use default slots instead of label property, small fixes  ([7850581](https://github.com/warp-ds/elements/commit/7850581fe321fc7890a8861b659afac21957c50a))
+
+# [2.4.0-next.8](https://github.com/warp-ds/elements/compare/v2.4.0-next.7...v2.4.0-next.8) (2026-01-21)
+
+
+### Features
+
+* introduce button border radius tokens ([#491](https://github.com/warp-ds/elements/issues/491)) ([229ca67](https://github.com/warp-ds/elements/commit/229ca676d9adc2e85456178af89aba1758c3e0e7))
+
+# [2.4.0-next.7](https://github.com/warp-ds/elements/compare/v2.4.0-next.6...v2.4.0-next.7) (2026-01-20)
+
+
+### Bug Fixes
+
+* refactor folder and filenames ([#489](https://github.com/warp-ds/elements/issues/489)) ([af5d8e1](https://github.com/warp-ds/elements/commit/af5d8e10dde93cdcc7a12f679680e1198b660b7f))
+
+# [2.4.0-next.6](https://github.com/warp-ds/elements/compare/v2.4.0-next.5...v2.4.0-next.6) (2026-01-19)
+
+
+### Bug Fixes
+
+* add back in package.json exports ([7411f95](https://github.com/warp-ds/elements/commit/7411f95beb90ca5476bc2051f6ab78176925ac82))
+* improve module resolution check for tabs ([ad51071](https://github.com/warp-ds/elements/commit/ad51071811c63fe71a679880d131bd7a3937044a))
+
+# [2.4.0-next.5](https://github.com/warp-ds/elements/compare/v2.4.0-next.4...v2.4.0-next.5) (2026-01-19)
+
+
+### Bug Fixes
+
+* re-enable unreleased components ([21b9a2c](https://github.com/warp-ds/elements/commit/21b9a2c1eb8d4afdc94d29984445a9e49942444d))
+
+# [2.4.0-next.4](https://github.com/warp-ds/elements/compare/v2.4.0-next.3...v2.4.0-next.4) (2026-01-19)
+
+
+### Features
+
+* rework tabs structure ([#486](https://github.com/warp-ds/elements/issues/486)) ([d919391](https://github.com/warp-ds/elements/commit/d91939109851e610ee51e5a2486bd6e90859d6f7))
+
 # [2.4.0](https://github.com/warp-ds/elements/compare/v2.3.2...v2.4.0) (2026-01-16)
 
 

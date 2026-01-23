@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpBadge } from './index.js';
-import './index.js';
+import type { WarpBadge } from './badge.js';
+import './badge.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpBadge>('w-badge');
 

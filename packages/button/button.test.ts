@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './button.js';
 
 test('renders the slotted label', async () => {
   const component = html`<w-button>This is a button</w-button>`;

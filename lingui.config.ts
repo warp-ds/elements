@@ -26,11 +26,11 @@ const config: LinguiConfig = {
       path: 'packages/select/locales/{locale}/messages',
     },
     {
-      include: ['packages/attention/index.js'],
+      include: ['packages/attention/'],
       path: 'packages/attention/locales/{locale}/messages',
     },
     {
-      include: ['packages/modal/'],
+      include: ['packages/modal/', 'packages/modal-header/'],
       path: 'packages/modal/locales/{locale}/messages',
     },
     {
@@ -46,8 +46,8 @@ const config: LinguiConfig = {
       path: 'packages/pagination/locales/{locale}/messages',
     },
     {
-      include: ['packages/stepindicator/'],
-      path: 'packages/stepindicator/locales/{locale}/messages',
+      include: ['packages/step/'],
+      path: 'packages/step/locales/{locale}/messages',
     },
     {
       include: ['packages/combobox/'],
@@ -57,10 +57,13 @@ const config: LinguiConfig = {
       include: ['packages/slider/'],
       path: 'packages/slider/locales/{locale}/messages',
     },
-
     {
       include: ['packages/textarea/'],
       path: 'packages/textarea/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/page-indicator/'],
+      path: 'packages/page-indicator/locales/{locale}/messages',
     },
   ],
   compileNamespace: 'es',

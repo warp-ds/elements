@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpPill } from './index.js';
-import './index.js';
+import type { WarpPill } from './pill.js';
+import './pill.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpPill>('w-pill');
 

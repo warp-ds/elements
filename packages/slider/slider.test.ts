@@ -3,10 +3,11 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import '../attention/index.js';
-import '../affix/index.js';
-import '../textfield/index.js';
-import './index.js';
+import '../attention/attention.js';
+import '../affix/affix.js';
+import '../textfield/textfield.js';
+import './slider.js';
+import '../slider-thumb/slider-thumb.js';
 
 test('single slider starts with a default value equal to max', async () => {
   const component = html`

@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpBox } from './index.js';
-import './index.js';
+import type { WarpBox } from './box.js';
+import './box.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpBox>('w-box');
 

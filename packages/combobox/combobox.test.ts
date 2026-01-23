@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import '../textfield/index.js';
-import './index.js';
+import '../textfield/textfield.js';
+import './combobox.js';
 
 test('renders with autocomplete="off" when attribute not provided', async () => {
   const component = html`<w-combobox data-testid="combobox"></w-combobox>`;

@@ -3,11 +3,11 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 import { prespread } from '../../.storybook/utilities.js';
+import type { WRadioGroup } from '../radio-group/radio-group.js';
 import type { WRadio } from './radio.js';
-import type { WRadioGroup } from './radio-group.js';
 
-import './radio';
-import './radio-group';
+import './radio.js';
+import '../radio-group/radio-group.js';
 
 const { events: radioEvents, args: radioArgs, argTypes: radioArgTypes } = getStorybookHelpers<WRadio>('w-radio');
 const { events, args, argTypes } = getStorybookHelpers<WRadioGroup>('w-radio-group');

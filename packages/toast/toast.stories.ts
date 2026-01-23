@@ -4,10 +4,11 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
-
-import type { WarpToast, WarpToastContainer } from './index.js';
-import '../button/index.js';
-import './index.js';
+import type { WarpToastContainer } from '../toast-container/toast-container.js';
+import type { WarpToast } from './toast.js';
+import '../button/button.js';
+import './toast.js';
+import '../toast-container/toast-container.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpToast>('w-pill');
 const {

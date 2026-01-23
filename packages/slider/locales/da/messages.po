@@ -14,16 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: packages/slider/slider-thumb.ts:194
-msgid "slider.error.overlap"
-msgstr "Maksimumværdien må ikke være mindre end minimumværdien"
+#: packages/slider/slider-thumb.ts:210
+#~ msgid "slider.error.overlap"
+#~ msgstr "Maksimumværdien må ikke være mindre end minimumværdien"
 
 #. js-lingui-explicit-id
-#: packages/slider/slider-thumb.ts:170
-msgid "slider.error.required"
-msgstr "Dette felt er påkrævet"
+#: packages/slider/slider-thumb.ts:182
+#~ msgid "slider.error.required"
+#~ msgstr "Dette felt er påkrævet"
 
 #. js-lingui-explicit-id
-#: packages/slider/slider-thumb.ts:155
-msgid "slider.error.out_of_bounds"
-msgstr "Værdien skal være mellem {min} og {max}"
+#: packages/slider/slider-thumb.ts:167
+#~ msgid "slider.error.out_of_bounds"
+#~ msgstr "Værdien skal være mellem {min} og {max}"

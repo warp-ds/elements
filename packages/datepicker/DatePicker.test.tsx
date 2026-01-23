@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import '../button/index.js';
-import './index.js';
+import '../button/button.js';
+import './datepicker.js';
 import { DatePicker } from './react.js';
 
 test('renders the date picker component', async () => {

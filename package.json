@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.4.0",
+  "version": "2.5.0-next.2",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {
@@ -9,19 +9,19 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./components/affix": "./dist/packages/affix/index.js",
-    "./components/alert": "./dist/packages/alert/index.js",
-    "./components/attention": "./dist/packages/attention/index.js",
-    "./components/badge": "./dist/packages/badge/index.js",
-    "./components/box": "./dist/packages/box/index.js",
-    "./components/breadcrumbs": "./dist/packages/breadcrumbs/index.js",
-    "./components/button": "./dist/packages/button/index.js",
-    "./components/card": "./dist/packages/card/index.js",
-    "./components/expandable": "./dist/packages/expandable/index.js",
+    "./components/affix": "./dist/packages/affix/affix.js",
+    "./components/alert": "./dist/packages/alert/alert.js",
+    "./components/attention": "./dist/packages/attention/attention.js",
+    "./components/badge": "./dist/packages/badge/badge.js",
+    "./components/box": "./dist/packages/box/box.js",
+    "./components/breadcrumbs": "./dist/packages/breadcrumbs/breadcrumbs.js",
+    "./components/button": "./dist/packages/button/button.js",
+    "./components/card": "./dist/packages/card/card.js",
+    "./components/expandable": "./dist/packages/expandable/expandable.js",
     "./components/modal": "./dist/packages/modal/index.js",
-    "./components/pill": "./dist/packages/pill/index.js",
-    "./components/select": "./dist/packages/select/index.js",
-    "./components/textfield": "./dist/packages/textfield/index.js",
+    "./components/pill": "./dist/packages/pill/pill.js",
+    "./components/select": "./dist/packages/select/select.js",
+    "./components/textfield": "./dist/packages/textfield/textfield.js",
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
     "./custom-elements.json": "./dist/custom-elements.json",
@@ -77,6 +77,14 @@
       "types": "./dist/packages/modal/react.d.ts",
       "import": "./dist/packages/modal/react.js"
     },
+    "./react/modal-header": {
+      "types": "./dist/packages/modal-header/react.d.ts",
+      "import": "./dist/packages/modal-header/react.js"
+    },
+    "./react/modal-footer": {
+      "types": "./dist/packages/modal-footer/react.d.ts",
+      "import": "./dist/packages/modal-footer/react.js"
+    },
     "./react/pill": {
       "types": "./dist/packages/pill/react.d.ts",
       "import": "./dist/packages/pill/react.js"
@@ -93,13 +101,29 @@
       "types": "./dist/packages/textfield/react.d.ts",
       "import": "./dist/packages/textfield/react.js"
     },
+    "./react/tabs": {
+      "types": "./dist/packages/tabs/react.d.ts",
+      "import": "./dist/packages/tabs/react.js"
+    },
+    "./react/tab": {
+      "types": "./dist/packages/tab/react.d.ts",
+      "import": "./dist/packages/tab/react.js"
+    },
+    "./react/tab-panel": {
+      "types": "./dist/packages/tab-panel/react.d.ts",
+      "import": "./dist/packages/tab-panel/react.js"
+    },
+    "./react/page-indicator": {
+      "types": "./dist/packages/page-indicator/react.d.ts",
+      "import": "./dist/packages/page-indicator/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
     },
     "./*": {
-      "types": "./dist/packages/*/index.d.ts",
-      "import": "./dist/packages/*/index.js"
+      "types": "./dist/packages/*/*.d.ts",
+      "import": "./dist/packages/*/*.js"
     }
   },
   "main": "./dist/index.js",
@@ -139,8 +163,8 @@
       "react/datepicker": [
         "./dist/packages/datepicker/react.d.ts"
       ],
-      "react/deadtoggle": [
-        "./dist/packages/deadtoggle/react.d.ts"
+      "react/dead-toggle": [
+        "./dist/packages/dead-toggle/react.d.ts"
       ],
       "react/expandable": [
         "./dist/packages/expandable/react.d.ts"
@@ -151,8 +175,8 @@
       "react/modal": [
         "./dist/packages/modal/react.d.ts"
       ],
-      "react/pageindicator": [
-        "./dist/packages/pageindicator/react.d.ts"
+      "react/page-indicator": [
+        "./dist/packages/page-indicator/react.d.ts"
       ],
       "react/pagination": [
         "./dist/packages/pagination/react.d.ts"
@@ -172,8 +196,35 @@
       "react/slider": [
         "./dist/packages/slider/react.d.ts"
       ],
-      "react/stepindicator": [
-        "./dist/packages/stepindicator/react.d.ts"
+      "react/step-indicator": [
+        "./dist/packages/step-indicator/react.d.ts"
+      ],
+      "react/step": [
+        "./dist/packages/step/react.d.ts"
+      ],
+      "react/modal-header": [
+        "./dist/packages/modal-header/react.d.ts"
+      ],
+      "react/modal-footer": [
+        "./dist/packages/modal-footer/react.d.ts"
+      ],
+      "react/toast-container": [
+        "./dist/packages/toast-container/react.d.ts"
+      ],
+      "react/checkbox-group": [
+        "./dist/packages/checkbox-group/react.d.ts"
+      ],
+      "react/radio-group": [
+        "./dist/packages/radio-group/react.d.ts"
+      ],
+      "react/slider-thumb": [
+        "./dist/packages/slider-thumb/react.d.ts"
+      ],
+      "react/tab": [
+        "./dist/packages/tab/react.d.ts"
+      ],
+      "react/tab-panel": [
+        "./dist/packages/tab-panel/react.d.ts"
       ],
       "react/switch": [
         "./dist/packages/switch/react.d.ts"
@@ -223,6 +274,7 @@
     "semantic-release": "semantic-release",
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
+    "test:output-validation": "node tests/output-validation/validate-eik-output.js",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {
@@ -239,8 +291,15 @@
     "@itsy/animate": "0.0.9",
     "@lingui/cli": "5.2.0",
     "@lingui/conf": "5.2.0",
+    "@lingui/core": "5.2.0",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
     "@oddbird/css-anchor-positioning": "^0.7.0",
+    "@open-wc/form-control": "^1.0.0",
     "@open-wc/lit-helpers": "^0.7.0",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@storybook/addon-a11y": "^9.1.4",
@@ -259,6 +318,9 @@
     "@vitejs/plugin-react": "^5.0.2",
     "@vitest/browser": "^3.2.4",
     "@vitest/utils": "^3.2.4",
+    "@warp-ds/core": "1.1.8",
+    "@warp-ds/css": "2.1.1",
+    "@warp-ds/icons": "2.5.0",
     "@warp-ds/uno": "2.1.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
     "@wc-toolkit/jsx-types": "^1.4.2",
@@ -266,6 +328,7 @@
     "@wc-toolkit/type-parser": "^1.2.0",
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
+    "date-fns": "^4.1.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.25.10",
     "express": "4.19.2",
@@ -280,32 +343,22 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rimraf": "6.0.1",
+    "rollup": "^4.52.3",
+    "scroll-doctor": "2.0.2",
     "semantic-release": "24.0.0",
     "storybook": "^9.1.4",
+    "tslib": "^2.8.1",
     "typescript": "5.5.3",
     "unocss": "0.x",
     "vite": "^6.0.0",
     "vitest": "^3.2.4",
     "vitest-browser-lit": "^0.1.0",
-    "vitest-browser-react": "^1.0.1",
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-replace": "^6.0.2",
-    "@rollup/plugin-terser": "^0.4.4",
-    "tslib": "^2.8.1",
-    "rollup": "^4.52.3",
-    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
-    "@lingui/core": "5.2.0",
-    "@warp-ds/core": "1.1.8",
-    "@warp-ds/css": "2.1.1",
-    "@warp-ds/icons": "2.5.0",
-    "date-fns": "^4.1.0",
-    "scroll-doctor": "2.0.2",
-    "@open-wc/form-control": "^1.0.0"
+    "vitest-browser-react": "^1.0.1"
   },
   "dependencies": {
-    "lit": "3.x",
-    "@lit/react": "^1.0.8"
+    "@lit/react": "^1.0.8",
+    "@warp-ds/components": "1.0.0-beta.2",
+    "lit": "3.x"
   },
   "publishConfig": {
     "access": "public"

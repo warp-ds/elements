@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
 
-import './index.js';
+import './switch.js';
 
 const meta: Meta = {
   title: 'Forms/Switch',

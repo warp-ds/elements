@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
 
 import { Affix } from '../affix/react';
 

@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './pagination.js';
 
 test('current page is the active page', async () => {
   const component = html`<w-pagination current-page="5" pages="10" base-url="/page/"></w-pagination>`;

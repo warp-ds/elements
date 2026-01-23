@@ -19,18 +19,18 @@ msgstr ""
 
 #. Default screenreader message for error in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:129
+#: packages/toast/toast.ts:145
 msgid "toast.aria.error"
 msgstr "Virhe"
 
 #. Default screenreader message for successful in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:135
+#: packages/toast/toast.ts:151
 msgid "toast.aria.successful"
 msgstr "Onnistui"
 
 #. Default screenreader message for warning in toast component
 #. js-lingui-explicit-id
-#: packages/toast/toast.js:122
+#: packages/toast/toast.ts:138
 msgid "toast.aria.warning"
 msgstr "Varoitus"

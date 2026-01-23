@@ -5,8 +5,8 @@ import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
 
-import type { WarpSelect } from './index.js';
-import './index.js';
+import type { WarpSelect } from './select.js';
+import './select.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpSelect>('w-select');
 

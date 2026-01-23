@@ -11,7 +11,7 @@ export const styles = css`.w-button,
     --_border: var(--border, var(--w-s-color-border));
     --_border-hover: var(--border-hover, var(--w-s-color-border-hover));
     --_border-active: var(--border-active, var(--w-s-color-border-active));
-    --_border-radius: var(--border-radius, 8px);
+    --_border-radius: var(--w-button-radius-default, 8px);
     --_font-size: var(--font-size, var(--w-font-size-m));
     --_line-height: var(--line-height, var(--w-line-height-m));
     --_font-weight: var(--font-weight, bold);
@@ -84,7 +84,7 @@ export const styles = css`.w-button,
         --background-hover: var(--w-s-color-background-hover);
         --background-active: var(--w-s-color-background-active);
         --color: var(--w-s-color-text);
-        --border-radius: 4px;
+        --border-radius: var(--w-button-radius-utility, 4px);
         --border-width: 1px;
     }
     .w-button--utility-quiet {

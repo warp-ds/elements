@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import './index.js';
+import './pill.js';
 
 test('renders a pill', async () => {
   const page = render(html` <w-pill>Standard</w-pill>`);
