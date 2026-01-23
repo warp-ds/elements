@@ -1,3 +1,10 @@
+# [2.5.0-next.2](https://github.com/warp-ds/elements/compare/v2.5.0-next.1...v2.5.0-next.2) (2026-01-23)
+
+
+### Bug Fixes
+
+* trigger publish to eik ([150d523](https://github.com/warp-ds/elements/commit/150d523198c02e417cde46ac084d5b61824fb5e0))
+
 # [2.5.0-next.1](https://github.com/warp-ds/elements/compare/v2.4.0...v2.5.0-next.1) (2026-01-23)
 
 
