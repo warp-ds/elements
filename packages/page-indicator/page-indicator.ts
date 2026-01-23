@@ -57,12 +57,12 @@ class WarpPageIndicator extends LitElement {
     const groupLabel = i18n._({
       id: 'page-indicator.aria.label',
       comment: 'Default screenreader message for page indicator group',
-      message: `Page ${selectedPage} of ${pageCount}`,
+      message: `Dot ${selectedPage} is highlighted in a row of ${pageCount} dots`,
       values: { selectedPage, pageCount },
     });
 
     return html`
-      <div class="w-page-indicator" role="group" aria-label="${groupLabel}">
+      <div class="w-page-indicator" role="img" aria-label="${groupLabel}">
         <div class="w-page-indicator--container">
           ${map(range(pageCount), (i) => {
             const pageNumber = i + 1;
@@ -71,24 +71,7 @@ class WarpPageIndicator extends LitElement {
               'w-page-indicator--dot': true,
               'w-page-indicator--selecteddot': isSelected,
             };
-            const dotLabel = isSelected
-              ? i18n._({
-                  id: 'page-indicator.aria.current-page',
-                  comment: 'Default screenreader message for the current page dot',
-                  message: `Page ${pageNumber}, current`,
-                  values: { pageNumber },
-                })
-              : i18n._({
-                  id: 'page-indicator.aria.page',
-                  comment: 'Default screenreader message for a page dot',
-                  message: `Page ${pageNumber}`,
-                  values: { pageNumber },
-                });
-            return html`<div
-              class="${classMap(classes)}"
-              role="img"
-              aria-label="${dotLabel}"
-            ></div>`;
+            return html`<div class="${classMap(classes)}"></div>`;
           })}
         </div>
       </div>

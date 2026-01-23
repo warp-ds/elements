@@ -22,11 +22,11 @@ msgstr "Sivu {selectedPage} / {pageCount}"
 #. Default screenreader message for the current page dot
 #. js-lingui-explicit-id
 #: packages/page-indicator/page-indicator.ts:75
-msgid "page-indicator.aria.current-page"
-msgstr "Sivu {pageNumber}, nykyinen"
+#~ msgid "page-indicator.aria.current-page"
+#~ msgstr "Sivu {pageNumber}, nykyinen"
 
 #. Default screenreader message for a page dot
 #. js-lingui-explicit-id
 #: packages/page-indicator/page-indicator.ts:81
-msgid "page-indicator.aria.page"
-msgstr "Sivu {pageNumber}"
+#~ msgid "page-indicator.aria.page"
+#~ msgstr "Sivu {pageNumber}"
