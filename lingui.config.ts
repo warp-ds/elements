@@ -46,8 +46,8 @@ const config: LinguiConfig = {
       path: 'packages/pagination/locales/{locale}/messages',
     },
     {
-      include: ['packages/step-indicator/', 'packages/step/'],
-      path: 'packages/step-indicator/locales/{locale}/messages',
+      include: ['packages/step/'],
+      path: 'packages/step/locales/{locale}/messages',
     },
     {
       include: ['packages/combobox/'],

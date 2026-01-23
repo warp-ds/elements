@@ -7,11 +7,6 @@ import { property } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
 import type { WarpStep } from '../step/step.js';
 import { reset } from '../styles.js';
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
 const ccSteps = {
@@ -32,11 +27,6 @@ export class WarpStepIndicator extends LitElement {
   right = false;
 
   static styles = [reset, styles];
-
-  constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-  }
 
   updated() {
     this.updateStepsContext();
