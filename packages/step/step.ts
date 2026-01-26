@@ -144,9 +144,9 @@ export class WarpStep extends LitElement {
 
     return html`
       <div class="${stepClasses}" style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
-        ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : ''}
+        ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing}
         <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} aria-current=${this.active ? 'step' : nothing}>
-          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : ''}
+          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : nothing}
         </div>
         <div class=${lineClasses}></div>
         <div class=${contentClasses} style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
