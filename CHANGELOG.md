@@ -1,3 +1,10 @@
+## [2.5.1-next.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1-next.1) (2026-01-26)
+
+
+### Bug Fixes
+
+* support different labels and values ([#497](https://github.com/warp-ds/elements/issues/497)) ([4e39a2a](https://github.com/warp-ds/elements/commit/4e39a2a13fb949f3edc7cc55504d83bd9d59897d))
+
 # [2.5.0](https://github.com/warp-ds/elements/compare/v2.4.0...v2.5.0) (2026-01-23)
 
 
