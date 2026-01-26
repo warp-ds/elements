@@ -49,7 +49,7 @@ export default {
     // 'packages/slider-thumb/slider-thumb.ts',
     // 'packages/step-indicator/step-indicator.ts',
     // 'packages/step/step.ts',
-    // 'packages/textarea/textarea.ts',
+    'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude

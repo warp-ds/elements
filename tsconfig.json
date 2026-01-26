@@ -38,7 +38,7 @@
     // "packages/slider",
     // "packages/step-indicator",
     // "packages/step",
-    // "packages/textarea",
+    "packages/textarea",
     "setup-tests.ts"
   ],
   "compilerOptions": {
