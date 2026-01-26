@@ -76,7 +76,6 @@ export class WarpStep extends LitElement {
 
   setContext(context: StepsContext) {
     this._context = context;
-    this.requestUpdate();
   }
 
   getAriaLabel() {
