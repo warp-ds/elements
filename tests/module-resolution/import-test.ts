@@ -17,11 +17,11 @@ import { Select } from '@warp-ds/elements/react/select';
 import { Switch } from '@warp-ds/elements/react/switch';
 import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
 import { TextField } from '@warp-ds/elements/react/textfield';
+import { Pagination } from '@warp-ds/elements/react/pagination';
 
 // unreleased
 // import { Checkbox } from '@warp-ds/elements/react/checkbox';
 // import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
-// import { Pagination } from '@warp-ds/elements/react/pagination';
 // import { Radio } from '@warp-ds/elements/react/radio';
 // import { Slider } from '@warp-ds/elements/react/slider';
 // import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
@@ -49,10 +49,10 @@ const _pageIndicator: typeof PageIndicator = PageIndicator;
 const _tabs: typeof Tabs = Tabs;
 const _tab: typeof Tab = Tab;
 const _tabPanel: typeof TabPanel = TabPanel;
+const _pagination: typeof Pagination = Pagination;
 
 // unreleased
 // const _deadToggle: typeof DeadToggle = DeadToggle;
-// const _pagination: typeof Pagination = Pagination;
 // const _checkbox: typeof Checkbox = Checkbox;
 // const _radio: typeof Radio = Radio;
 // const _slider: typeof Slider = Slider;

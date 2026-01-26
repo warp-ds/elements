@@ -117,6 +117,10 @@
       "types": "./dist/packages/page-indicator/react.d.ts",
       "import": "./dist/packages/page-indicator/react.js"
     },
+    "./react/pagination": {
+      "types": "./dist/packages/pagination/react.d.ts",
+      "import": "./dist/packages/pagination/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
