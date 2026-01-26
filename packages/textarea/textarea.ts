@@ -177,8 +177,8 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     if (this.minRows) {
       this.minHeight = lineHeight * this.minRows + offset;
     }
-    if (this.minRows) {
-      this.maxHeight = lineHeight * this.minRows + offset;
+    if (this.maxRows) {
+      this.maxHeight = lineHeight * this.maxRows + offset;
     }
 
     const borderBoxHeight = target.scrollHeight + borderTopWidth + borderBottomWidth;
