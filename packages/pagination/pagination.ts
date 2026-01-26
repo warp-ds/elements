@@ -168,35 +168,43 @@ class WarpPagination extends LitElement {
             </a>`
             : nothing
         }
-        ${visiblePages.map((pageNumber) => {
-          const isCurrentPage = pageNumber === this.currentPageNumber;
-          const url = `${this.baseUrl}${pageNumber}`;
+        <div class="hidden md:block">
+          ${visiblePages.map((pageNumber) => {
+            const isCurrentPage = pageNumber === this.currentPageNumber;
+            const url = `${this.baseUrl}${pageNumber}`;
 
-          let styles = baseItemStyles;
+            let styles = baseItemStyles;
 
-          if (isCurrentPage) {
-            styles += ' s-bg-primary s-text-inverted';
-          } else {
-            styles +=
-              ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
-          }
+            if (isCurrentPage) {
+              styles += ' s-bg-primary s-text-inverted';
+            } else {
+              styles +=
+                ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
+            }
 
-          const ariaLabel = i18n._({
-            id: 'pagination.aria.page',
-            message: 'Page {currentPage}',
-            values: { currentPage: pageNumber },
-            comment: 'Default screenreader message for page link in the pagination component',
-          });
+            const ariaLabel = i18n._({
+              id: 'pagination.aria.page',
+              message: 'Page {currentPage}',
+              values: { currentPage: pageNumber },
+              comment: 'Default screenreader message for page link in the pagination component',
+            });
 
-          return html`<a
-            data-page-number="${pageNumber}"
-            aria-label="${ariaLabel}"
-            href="${url}"
-            class="${styles}"
-            aria-current="${isCurrentPage ? 'page' : ''}"
-            >${pageNumber}</a
-          >`;
-        })}
+            return html`<a
+              data-page-number="${pageNumber}"
+              aria-label="${ariaLabel}"
+              href="${url}"
+              class="${styles}"
+              aria-current="${isCurrentPage ? 'page' : ''}"
+              >${pageNumber}</a
+            >`;
+          })}
+        </div>
+        <span class="block md:hidden p-8 font-bold">${i18n._({
+          id: 'pagination.label.current-page',
+          message: 'Page {currentPage}',
+          values: { currentPage: this.currentPageNumber },
+          comment: 'Default message for current page label in the pagination component',
+        })}</span>
         ${
           this.shouldShowNextPageButton
             ? html`<a

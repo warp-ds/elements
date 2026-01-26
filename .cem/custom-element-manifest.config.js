@@ -40,7 +40,7 @@ export default {
 
     // unreleased
     // 'packages/dead-toggle/dead-toggle.ts',
-    // 'packages/pagination/pagination.ts',
+    'packages/pagination/pagination.ts',
     // 'packages/radio/radio.ts',
     // 'packages/radio-group/radio-group.ts',
     // 'packages/checkbox/checkbox.ts',
