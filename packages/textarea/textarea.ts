@@ -167,12 +167,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   /** Calculate the new height for the area on input */
   #resize(target: HTMLTextAreaElement) {
     const style = getComputedStyle(target);
-    const borderTopWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
-    const borderBottomWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderTopWidth = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderBottomWidth = Number.parseFloat(style.getPropertyValue('border-bottom-width'));
     const lineHeight = Number.parseFloat(style.getPropertyValue('line-height'));
     const topPadding = Number.parseFloat(style.getPropertyValue('padding-top'));
     const bottomPadding = Number.parseFloat(style.getPropertyValue('padding-bottom'));
-    const offset = topPadding + bottomPadding + borderBottomWitdh + borderTopWitdh;
+    const offset = topPadding + bottomPadding + borderBottomWidth + borderTopWidth;
 
     if (this.minRows) {
       this.minHeight = lineHeight * this.minRows + offset;
@@ -181,7 +181,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
       this.maxHeight = lineHeight * this.minRows + offset;
     }
 
-    const borderBoxHeight = target.scrollHeight + borderTopWitdh + borderBottomWitdh;
+    const borderBoxHeight = target.scrollHeight + borderTopWidth + borderBottomWidth;
     const height = Math.min(this.maxHeight, Math.max(this.minHeight, borderBoxHeight));
     target.style.setProperty('height', height + 'px');
   }
