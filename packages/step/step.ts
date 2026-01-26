@@ -42,24 +42,6 @@ const ccStep = {
   contentHorizontal: 'col-span-3 px-16 row-start-1 text-center',
 };
 
-const availableAriaLabels = {
-  completed: i18n._({
-    id: 'steps.aria.completed',
-    message: 'Step indicator completed circle',
-    comment: 'Completed circle',
-  }),
-  active: i18n._({
-    id: 'steps.aria.active',
-    message: 'Step indicator active circle',
-    comment: 'Active circle',
-  }),
-  default: i18n._({
-    id: 'steps.aria.emptyCircle',
-    message: 'Empty circle',
-    comment: 'Empty circle',
-  }),
-};
-
 export interface StepsContext {
   horizontal?: boolean;
   right?: boolean;
@@ -98,9 +80,25 @@ export class WarpStep extends LitElement {
   }
 
   getAriaLabel() {
-    if (this.completed) return availableAriaLabels.completed;
-    if (this.active) return availableAriaLabels.active;
-    return availableAriaLabels.default;
+    if (this.completed) {
+      return i18n._({
+        id: 'steps.aria.completed',
+        message: 'Step indicator completed circle',
+        comment: 'Completed circle',
+      });
+    }
+    if (this.active) {
+      return i18n._({
+        id: 'steps.aria.active',
+        message: 'Step indicator active circle',
+        comment: 'Active circle',
+      });
+    }
+    return i18n._({
+      id: 'steps.aria.emptyCircle',
+      message: 'Empty circle',
+      comment: 'Empty circle',
+    });
   }
 
   render() {
