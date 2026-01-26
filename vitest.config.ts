@@ -24,6 +24,7 @@ export default defineConfig({
       enabled: true,
       headless: true,
       instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }],
+      viewport: { width: 1024, height: 768 },
     },
   },
   optimizeDeps: {
