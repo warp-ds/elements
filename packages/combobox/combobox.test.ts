@@ -29,3 +29,49 @@ test('renders with autocomplete attribute when provided', async () => {
   const el = (await locator.element()) as HTMLElement;
   expect(el.getAttribute('autocomplete')).toBe('on');
 });
+
+test('displays option label in textfield but stores option value', async () => {
+  const optionsWithDifferentLabelAndValue = [
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'no', label: 'Norway' },
+  ];
+
+  const component = html`<w-combobox
+    data-testid="combobox"
+    open-on-focus
+    .options="${optionsWithDifferentLabelAndValue}"
+  ></w-combobox>`;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement & { value: string };
+
+  // Get the textfield's input element
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input');
+
+  // Focus to open the dropdown
+  input?.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Find and click the "Norway" option (which has value "no")
+  const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+  const options = listbox?.querySelectorAll('[role="option"]');
+  const norwayOption = Array.from(options || []).find((opt) => opt.textContent?.trim() === 'Norway');
+
+  expect(norwayOption).toBeDefined();
+
+  // Simulate mousedown on the option
+  norwayOption?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Verify the displayed text is the label "Norway", not the value "no"
+  expect(input?.value).toBe('Norway');
+
+  // Verify the combobox value is "no", not "Norway"
+  expect(el.value).toBe('no');
+});

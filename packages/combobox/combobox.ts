@@ -122,6 +122,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   @state()
   private _optionIdCounter = 0;
 
+  /** @internal The text displayed in the input field (may differ from value when option has label) */
+  @state()
+  private _displayValue = '';
+
   static styles = [reset, styles];
 
   constructor() {
@@ -158,6 +162,15 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     return this.helpText ? `${this._id}__hint` : undefined;
   }
 
+  /** Get the display text for the navigation option or current display value */
+  private get _navigationLabelOrDisplayValue() {
+    if (this._navigationOption) {
+      return this._navigationOption.label || this._navigationOption.value;
+    }
+    return this._displayValue;
+  }
+
+  /** Get the actual value for the navigation option or current value */
   private get _navigationValueOrInputValue() {
     return this._navigationOption?.value || this.value;
   }
@@ -228,12 +241,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           e.preventDefault();
           this._handleSelect(this._navigationOption);
 
-          // Force update the textfield's internal input value
+          // Force update the textfield's internal input value with the label
           requestAnimationFrame(() => {
             const textfield = this.shadowRoot?.querySelector('w-textfield');
             const input = textfield?.shadowRoot?.querySelector('input');
             if (input) {
-              input.value = this.value;
+              input.value = this._displayValue;
             }
           });
         }
@@ -252,7 +265,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
         this._navigationOption = null;
         break;
       case 'Backspace':
-        this._handleChange(this._navigationValueOrInputValue);
+        this._handleChange(this._navigationLabelOrDisplayValue);
         this._navigationOption = null;
         this._isOpen = true;
         break;
@@ -313,6 +326,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   /** Handle option selection */
   private _handleSelect(option: OptionWithIdAndMatch) {
     this.value = option.value;
+    this._displayValue = option.label || option.value;
     this.setValue(this.value);
 
     const selectEvent = new CustomEvent('select', {
@@ -336,6 +350,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     if (newValue === undefined) return;
 
     this.value = newValue;
+    this._displayValue = newValue;
 
     const changeEvent = new CustomEvent('change', {
       detail: { value: newValue },
@@ -399,12 +414,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   private _handleOptionClick(e: MouseEvent, option: OptionWithIdAndMatch) {
     this._handleSelect(option);
 
-    // Force update the textfield's internal input value
+    // Force update the textfield's internal input value with the label
     requestAnimationFrame(() => {
       const textfield = this.shadowRoot?.querySelector('w-textfield');
       const input = textfield?.shadowRoot?.querySelector('input');
       if (input) {
-        input.value = option.value;
+        input.value = option.label || option.value;
       }
     });
   }
@@ -462,7 +477,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       <div class=${classNames(ccCombobox.wrapper)} @blur=${this._handleContainerBlur}>
         <w-textfield
           class="w-combobox-textfield"
-          .value=${this._navigationValueOrInputValue}
+          .value=${this._navigationLabelOrDisplayValue}
           .label=${this.label}
           .placeholder=${this.placeholder}
           .invalid=${this.invalid}
