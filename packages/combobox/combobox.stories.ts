@@ -44,10 +44,24 @@ const sampleOptions = [
   { value: 'mango', label: 'Mango' },
 ];
 
+const otherSampleOptions = [
+  { value: 'us', label: 'United States' },
+  { value: 'uk', label: 'United Kingdom' },
+  { value: 'no', label: 'Norway' },
+]
+
 export const Default: Story = {
   args: {},
   render: () =>
     html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
+};
+
+const log = (e) => console.log('Combobox changed to: ', e?.detail?.value);
+
+export const Countries: Story = {
+  args: {},
+  render: () =>
+    html` <w-combobox label="Select a country" placeholder="Type to search..." @change="${log}" .options="${otherSampleOptions}"></w-combobox> `,
 };
 
 export const WithValue: Story = {
