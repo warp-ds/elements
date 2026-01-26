@@ -38,7 +38,7 @@ test('works as expected in forms', async () => {
   expect(changeHandler).not.toHaveBeenCalled();
 
   await userEvent.tab(); // trigger a blur to fire the change event
-  expect(changeHandler).toHaveBeenCalled();
+  await expect.poll(() => changeHandler.mock.calls.length).toBeGreaterThan(0);
 
   await expect.element(page.getByLabelText(label)).toHaveValue('Hello, World');
 
