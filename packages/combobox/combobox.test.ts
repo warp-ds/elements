@@ -30,6 +30,36 @@ test('renders with autocomplete attribute when provided', async () => {
   expect(el.getAttribute('autocomplete')).toBe('on');
 });
 
+test('displays initial value correctly when value prop is set', async () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+  ];
+
+  const component = html`<w-combobox
+    data-testid="combobox"
+    value="apple"
+    .options="${options}"
+  ></w-combobox>`;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement & { value: string };
+
+  // Get the textfield's input element
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input');
+
+  // Verify the displayed text shows the label "Apple", not the value "apple"
+  expect(input?.value).toBe('Apple');
+
+  // Verify the combobox value is "apple"
+  expect(el.value).toBe('apple');
+});
+
 test('displays option label in textfield but stores option value', async () => {
   const optionsWithDifferentLabelAndValue = [
     { value: 'us', label: 'United States' },

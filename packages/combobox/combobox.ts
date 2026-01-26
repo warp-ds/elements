@@ -459,6 +459,16 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this.value).filter((option) =>
         !this.disableStaticFiltering ? option.value.toLowerCase().includes(this.value.toLowerCase()) : true,
       );
+
+      // Sync _displayValue when value or options change externally
+      // Look up the matching option to get its label for display
+      const matchingOption = this.options.find((o) => o.value === this.value);
+      if (matchingOption) {
+        this._displayValue = matchingOption.label || matchingOption.value;
+      } else if (changedProperties.has('value') && !matchingOption) {
+        // If value changed but no matching option, use the value as display
+        this._displayValue = this.value;
+      }
     }
 
     if (
