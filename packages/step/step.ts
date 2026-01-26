@@ -1,7 +1,8 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '@warp-ds/icons/elements/check-16';
 
@@ -142,13 +143,13 @@ export class WarpStep extends LitElement {
     ]);
 
     return html`
-      <div class="${stepClasses}" style=${this._context.horizontal && 'height: 100%;'}>
+      <div class="${stepClasses}" style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
         ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : ''}
-        <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} ${this.active ? 'aria-current="step"' : ''}>
+        <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} aria-current=${this.active ? 'step' : nothing}>
           ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : ''}
         </div>
         <div class=${lineClasses}></div>
-        <div class=${contentClasses} ${this._context.horizontal && `style='height:100%;'`}>
+        <div class=${contentClasses} style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
           <slot></slot>
         </div>
       </div>
