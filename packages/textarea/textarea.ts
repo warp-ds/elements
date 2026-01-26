@@ -7,7 +7,7 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { uniqueId } from '../radio/math.js';
+import { uniqueId } from '../utils.js';
 import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
