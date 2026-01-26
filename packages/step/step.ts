@@ -1,7 +1,8 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '@warp-ds/icons/elements/check-16';
 
@@ -41,24 +42,6 @@ const ccStep = {
   contentHorizontal: 'col-span-3 px-16 row-start-1 text-center',
 };
 
-const availableAriaLabels = {
-  completed: i18n._({
-    id: 'steps.aria.completed',
-    message: 'Step indicator completed circle',
-    comment: 'Completed circle',
-  }),
-  active: i18n._({
-    id: 'steps.aria.active',
-    message: 'Step indicator active circle',
-    comment: 'Active circle',
-  }),
-  default: i18n._({
-    id: 'steps.aria.emptyCircle',
-    message: 'Empty circle',
-    comment: 'Empty circle',
-  }),
-};
-
 export interface StepsContext {
   horizontal?: boolean;
   right?: boolean;
@@ -93,13 +76,28 @@ export class WarpStep extends LitElement {
 
   setContext(context: StepsContext) {
     this._context = context;
-    this.requestUpdate();
   }
 
   getAriaLabel() {
-    if (this.completed) return availableAriaLabels.completed;
-    if (this.active) return availableAriaLabels.active;
-    return availableAriaLabels.default;
+    if (this.completed) {
+      return i18n._({
+        id: 'steps.aria.completed',
+        message: 'Step indicator completed circle',
+        comment: 'Completed circle',
+      });
+    }
+    if (this.active) {
+      return i18n._({
+        id: 'steps.aria.active',
+        message: 'Step indicator active circle',
+        comment: 'Active circle',
+      });
+    }
+    return i18n._({
+      id: 'steps.aria.emptyCircle',
+      message: 'Empty circle',
+      comment: 'Empty circle',
+    });
   }
 
   render() {
@@ -142,13 +140,13 @@ export class WarpStep extends LitElement {
     ]);
 
     return html`
-      <div class="${stepClasses}" style=${this._context.horizontal && 'height: 100%;'}>
-        ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : ''}
-        <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} ${this.active ? 'aria-current="step"' : ''}>
-          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : ''}
+      <div class="${stepClasses}" style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
+        ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing}
+        <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} aria-current=${this.active ? 'step' : nothing}>
+          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : nothing}
         </div>
         <div class=${lineClasses}></div>
-        <div class=${contentClasses} ${this._context.horizontal && `style='height:100%;'`}>
+        <div class=${contentClasses} style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
           <slot></slot>
         </div>
       </div>
