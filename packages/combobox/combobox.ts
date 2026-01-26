@@ -190,7 +190,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     if (!options || !value) return '';
 
     const filteredOptionsByInputValue = options.filter((option) =>
-      option.value.toLowerCase().includes(value.toLowerCase()),
+      (option.label || option.value).toLowerCase().includes(value.toLowerCase()),
     );
 
     const pluralResults = i18n._({
@@ -449,26 +449,34 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
+    // Sync _displayValue when value or options change externally (before filtering)
+    if (changedProperties.has('value') || changedProperties.has('options')) {
+      const matchingOption = this.options.find((o) => o.value === this.value);
+      // Only sync if this is an external value change (not from user typing)
+      // We detect this by checking if _displayValue doesn't match the expected label
+      const expectedDisplay = matchingOption ? matchingOption.label || matchingOption.value : this.value;
+      if (this._displayValue !== expectedDisplay && this._displayValue !== this.value) {
+        this._displayValue = expectedDisplay;
+      }
+      // Handle initial value or external value set
+      if (!this._displayValue && this.value) {
+        this._displayValue = expectedDisplay;
+      }
+    }
+
     if (
       changedProperties.has('options') ||
       changedProperties.has('value') ||
-      changedProperties.has('disableStaticFiltering')
+      changedProperties.has('disableStaticFiltering') ||
+      changedProperties.has('_displayValue')
     ) {
       this._optionIdCounter += this.options.length;
 
-      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this.value).filter((option) =>
-        !this.disableStaticFiltering ? option.value.toLowerCase().includes(this.value.toLowerCase()) : true,
+      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this._displayValue).filter((option) =>
+        !this.disableStaticFiltering
+          ? (option.label || option.value).toLowerCase().includes(this._displayValue.toLowerCase())
+          : true,
       );
-
-      // Sync _displayValue when value or options change externally
-      // Look up the matching option to get its label for display
-      const matchingOption = this.options.find((o) => o.value === this.value);
-      if (matchingOption) {
-        this._displayValue = matchingOption.label || matchingOption.value;
-      } else if (changedProperties.has('value') && !matchingOption) {
-        // If value changed but no matching option, use the value as display
-        this._displayValue = this.value;
-      }
     }
 
     if (
@@ -507,7 +515,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           @blur=${this._handleBlur}
           @keydown=${this._handleKeyDown}></w-textfield>
 
-        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this.value)} </span>
+        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this._displayValue)} </span>
 
         <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
           <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">

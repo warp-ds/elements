@@ -60,6 +60,50 @@ test('displays initial value correctly when value prop is set', async () => {
   expect(el.value).toBe('apple');
 });
 
+test('filters options by label, not value', async () => {
+  const options = [
+    { value: 'us', label: 'United States' },
+    { value: 'uk', label: 'United Kingdom' },
+    { value: 'no', label: 'Norway' },
+  ];
+
+  const component = html`<w-combobox
+    data-testid="combobox"
+    open-on-focus
+    .options="${options}"
+  ></w-combobox>`;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement & { value: string };
+
+  // Get the textfield's input element
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+  // Type "United" which should match labels "United States" and "United Kingdom"
+  // but NOT match any values (us, uk, no)
+  input?.focus();
+  input.value = 'United';
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Check that the dropdown shows the matching options
+  const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+  const visibleOptions = listbox?.querySelectorAll('[role="option"]');
+
+  // Should show 2 options: "United States" and "United Kingdom"
+  expect(visibleOptions?.length).toBe(2);
+
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+  expect(optionTexts).toContain('United States');
+  expect(optionTexts).toContain('United Kingdom');
+  expect(optionTexts).not.toContain('Norway');
+});
+
 test('displays option label in textfield but stores option value', async () => {
   const optionsWithDifferentLabelAndValue = [
     { value: 'us', label: 'United States' },
