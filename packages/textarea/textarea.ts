@@ -220,7 +220,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
           .value="${this.value || ''}"
           aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid="${ifDefined(this.invalid)}"
+          aria-invalid=${this.invalid ? 'true' : nothing}
           ?disabled="${this.disabled}"
           ?readonly="${this.readonly || this.readOnly}"
           ?required="${this.required}"
