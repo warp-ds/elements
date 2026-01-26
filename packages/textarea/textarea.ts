@@ -200,7 +200,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
                     this.optional
                       ? html`
                           <span class="${ccLabel.optional}">
-                            ${i18n.t({
+                            ${i18n._({
                               id: 'textarea.label.optional',
                               message: '(optional)',
                               comment: 'Shown behind label when marked as optional',
