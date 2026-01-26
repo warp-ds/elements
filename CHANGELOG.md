@@ -1,3 +1,11 @@
+## [2.5.1-next.2](https://github.com/warp-ds/elements/compare/v2.5.1-next.1...v2.5.1-next.2) (2026-01-26)
+
+
+### Bug Fixes
+
+* step improvements ([#500](https://github.com/warp-ds/elements/issues/500)) ([2c0623c](https://github.com/warp-ds/elements/commit/2c0623cc7e19d7a15f9f88124899f0bb6e899a4b))
+* update pagination component to use 'current-page' prop and impro… ([#498](https://github.com/warp-ds/elements/issues/498)) ([f55e355](https://github.com/warp-ds/elements/commit/f55e355b3752c3bac6e32dabb14e2d16bbf3fbd5))
+
 ## [2.5.1-next.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1-next.1) (2026-01-26)
 
 
