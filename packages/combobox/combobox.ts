@@ -468,7 +468,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       changedProperties.has('options') ||
       changedProperties.has('value') ||
       changedProperties.has('disableStaticFiltering') ||
-      changedProperties.has('_displayValue')
+      (changedProperties as Map<string, unknown>).has('_displayValue')
     ) {
       this._optionIdCounter += this.options.length;
 
