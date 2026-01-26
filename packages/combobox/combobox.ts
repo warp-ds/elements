@@ -122,6 +122,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   @state()
   private _optionIdCounter = 0;
 
+  /** @internal The text displayed in the input field (may differ from value when option has label) */
+  @state()
+  private _displayValue = '';
+
   static styles = [reset, styles];
 
   constructor() {
@@ -158,6 +162,15 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     return this.helpText ? `${this._id}__hint` : undefined;
   }
 
+  /** Get the display text for the navigation option or current display value */
+  private get _navigationLabelOrDisplayValue() {
+    if (this._navigationOption) {
+      return this._navigationOption.label || this._navigationOption.value;
+    }
+    return this._displayValue;
+  }
+
+  /** Get the actual value for the navigation option or current value */
   private get _navigationValueOrInputValue() {
     return this._navigationOption?.value || this.value;
   }
@@ -177,7 +190,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     if (!options || !value) return '';
 
     const filteredOptionsByInputValue = options.filter((option) =>
-      option.value.toLowerCase().includes(value.toLowerCase()),
+      (option.label || option.value).toLowerCase().includes(value.toLowerCase()),
     );
 
     const pluralResults = i18n._({
@@ -228,12 +241,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           e.preventDefault();
           this._handleSelect(this._navigationOption);
 
-          // Force update the textfield's internal input value
+          // Force update the textfield's internal input value with the label
           requestAnimationFrame(() => {
             const textfield = this.shadowRoot?.querySelector('w-textfield');
             const input = textfield?.shadowRoot?.querySelector('input');
             if (input) {
-              input.value = this.value;
+              input.value = this._displayValue;
             }
           });
         }
@@ -252,7 +265,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
         this._navigationOption = null;
         break;
       case 'Backspace':
-        this._handleChange(this._navigationValueOrInputValue);
+        this._handleChange(this._navigationLabelOrDisplayValue);
         this._navigationOption = null;
         this._isOpen = true;
         break;
@@ -313,6 +326,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   /** Handle option selection */
   private _handleSelect(option: OptionWithIdAndMatch) {
     this.value = option.value;
+    this._displayValue = option.label || option.value;
     this.setValue(this.value);
 
     const selectEvent = new CustomEvent('select', {
@@ -336,6 +350,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     if (newValue === undefined) return;
 
     this.value = newValue;
+    this._displayValue = newValue;
 
     const changeEvent = new CustomEvent('change', {
       detail: { value: newValue },
@@ -399,12 +414,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   private _handleOptionClick(e: MouseEvent, option: OptionWithIdAndMatch) {
     this._handleSelect(option);
 
-    // Force update the textfield's internal input value
+    // Force update the textfield's internal input value with the label
     requestAnimationFrame(() => {
       const textfield = this.shadowRoot?.querySelector('w-textfield');
       const input = textfield?.shadowRoot?.querySelector('input');
       if (input) {
-        input.value = option.value;
+        input.value = option.label || option.value;
       }
     });
   }
@@ -434,15 +449,33 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
+    // Sync _displayValue when value or options change externally (before filtering)
+    if (changedProperties.has('value') || changedProperties.has('options')) {
+      const matchingOption = this.options.find((o) => o.value === this.value);
+      // Only sync if this is an external value change (not from user typing)
+      // We detect this by checking if _displayValue doesn't match the expected label
+      const expectedDisplay = matchingOption ? matchingOption.label || matchingOption.value : this.value;
+      if (this._displayValue !== expectedDisplay && this._displayValue !== this.value) {
+        this._displayValue = expectedDisplay;
+      }
+      // Handle initial value or external value set
+      if (!this._displayValue && this.value) {
+        this._displayValue = expectedDisplay;
+      }
+    }
+
     if (
       changedProperties.has('options') ||
       changedProperties.has('value') ||
-      changedProperties.has('disableStaticFiltering')
+      changedProperties.has('disableStaticFiltering') ||
+      (changedProperties as Map<string, unknown>).has('_displayValue')
     ) {
       this._optionIdCounter += this.options.length;
 
-      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this.value).filter((option) =>
-        !this.disableStaticFiltering ? option.value.toLowerCase().includes(this.value.toLowerCase()) : true,
+      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this._displayValue).filter((option) =>
+        !this.disableStaticFiltering
+          ? (option.label || option.value).toLowerCase().includes(this._displayValue.toLowerCase())
+          : true,
       );
     }
 
@@ -462,7 +495,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       <div class=${classNames(ccCombobox.wrapper)} @blur=${this._handleContainerBlur}>
         <w-textfield
           class="w-combobox-textfield"
-          .value=${this._navigationValueOrInputValue}
+          .value=${this._navigationLabelOrDisplayValue}
           .label=${this.label}
           .placeholder=${this.placeholder}
           .invalid=${this.invalid}
@@ -482,7 +515,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           @blur=${this._handleBlur}
           @keydown=${this._handleKeyDown}></w-textfield>
 
-        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this.value)} </span>
+        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this._displayValue)} </span>
 
         <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
           <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">
