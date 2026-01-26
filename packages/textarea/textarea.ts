@@ -7,6 +7,7 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
+import { uniqueId } from '../radio/math.js';
 import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
@@ -97,6 +98,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
 
+  // unique ID for this component instance
+  #uniqueId = uniqueId('textarea-');
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
@@ -136,7 +140,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _id() {
-    return 'textfield';
+    return this.#uniqueId;
   }
 
   /** @internal */
