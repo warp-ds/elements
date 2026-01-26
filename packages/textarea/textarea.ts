@@ -153,7 +153,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     if (this.value || this.minRows) {
       // If the component starts with a value or minHeight,
       // resize it automatically to show all the content, or maxHeight.
-      this.#resize(this.shadowRoot.querySelector('textarea'));
+      const textarea = this.shadowRoot?.querySelector('textarea');
+      if (textarea) {
+        this.#resize(textarea);
+      }
     }
   }
 
