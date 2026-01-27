@@ -5,7 +5,7 @@ import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import { BaseFormAssociatedElement } from '../radio/form-associated-element.js';
-import { uniqueId } from '../radio/math.js';
+import { uniqueId } from '../utils.js';
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
 import { RequiredValidator } from '../radio/required-validator.js';

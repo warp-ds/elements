@@ -18,6 +18,7 @@ import { Switch } from '@warp-ds/elements/react/switch';
 import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
 import { TextField } from '@warp-ds/elements/react/textfield';
 import { Pagination } from '@warp-ds/elements/react/pagination';
+import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // unreleased
 // import { Checkbox } from '@warp-ds/elements/react/checkbox';
@@ -25,7 +26,6 @@ import { Pagination } from '@warp-ds/elements/react/pagination';
 // import { Radio } from '@warp-ds/elements/react/radio';
 // import { Slider } from '@warp-ds/elements/react/slider';
 // import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
-// import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;
@@ -50,6 +50,7 @@ const _tabs: typeof Tabs = Tabs;
 const _tab: typeof Tab = Tab;
 const _tabPanel: typeof TabPanel = TabPanel;
 const _pagination: typeof Pagination = Pagination;
+const _textarea: typeof Textarea = Textarea;
 
 // unreleased
 // const _deadToggle: typeof DeadToggle = DeadToggle;
@@ -57,6 +58,5 @@ const _pagination: typeof Pagination = Pagination;
 // const _radio: typeof Radio = Radio;
 // const _slider: typeof Slider = Slider;
 // const _stepIndicator: typeof StepIndicator = StepIndicator;
-// const _textarea: typeof Textarea = Textarea;
 
 console.log('✓ All imports resolved successfully');

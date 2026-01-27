@@ -121,6 +121,10 @@
       "types": "./dist/packages/pagination/react.d.ts",
       "import": "./dist/packages/pagination/react.js"
     },
+    "./react/textarea": {
+      "types": "./dist/packages/textarea/react.d.ts",
+      "import": "./dist/packages/textarea/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"

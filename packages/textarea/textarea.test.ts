@@ -60,6 +60,30 @@ test('marks input field as aria-invalid if the invalid prop is true', async () =
   await expect.element(page.getByLabelText('Test label')).toHaveAccessibleErrorMessage('No, bad input!');
 });
 
+test('aria-invalid attribute is absent when textarea is valid', async () => {
+  const component = html`<w-textarea label="Test label" data-testid="textarea"></w-textarea>`;
+
+  const page = render(component);
+  const textarea = page.getByLabelText('Test label');
+
+  await expect.element(textarea).toBeVisible();
+
+  // aria-invalid should NOT be present when valid
+  await expect.element(textarea).not.toHaveAttribute('aria-invalid');
+});
+
+test('aria-invalid attribute is "true" when textarea is invalid', async () => {
+  const component = html`<w-textarea label="Test label" invalid></w-textarea>`;
+
+  const page = render(component);
+  const textarea = page.getByLabelText('Test label');
+
+  await expect.element(textarea).toBeVisible();
+
+  // aria-invalid should be "true" when invalid
+  await expect.element(textarea).toHaveAttribute('aria-invalid', 'true');
+});
+
 test('marks input field as readonly if the readonly prop is true', async () => {
   const component = html`<w-textarea label="Test label" readonly></w-textarea>`;
 

@@ -7,6 +7,7 @@ import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
+import { uniqueId } from '../utils.js';
 import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
@@ -97,6 +98,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
 
+  // unique ID for this component instance
+  #uniqueId = uniqueId('textarea-');
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
@@ -136,7 +140,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _id() {
-    return 'textfield';
+    return this.#uniqueId;
   }
 
   /** @internal */
@@ -153,7 +157,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     if (this.value || this.minRows) {
       // If the component starts with a value or minHeight,
       // resize it automatically to show all the content, or maxHeight.
-      this.#resize(this.shadowRoot.querySelector('textarea'));
+      const textarea = this.shadowRoot?.querySelector('textarea');
+      if (textarea) {
+        this.#resize(textarea);
+      }
     }
   }
 
@@ -167,21 +174,21 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   /** Calculate the new height for the area on input */
   #resize(target: HTMLTextAreaElement) {
     const style = getComputedStyle(target);
-    const borderTopWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
-    const borderBottomWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderTopWidth = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderBottomWidth = Number.parseFloat(style.getPropertyValue('border-bottom-width'));
     const lineHeight = Number.parseFloat(style.getPropertyValue('line-height'));
     const topPadding = Number.parseFloat(style.getPropertyValue('padding-top'));
     const bottomPadding = Number.parseFloat(style.getPropertyValue('padding-bottom'));
-    const offset = topPadding + bottomPadding + borderBottomWitdh + borderTopWitdh;
+    const offset = topPadding + bottomPadding + borderBottomWidth + borderTopWidth;
 
     if (this.minRows) {
       this.minHeight = lineHeight * this.minRows + offset;
     }
-    if (this.minRows) {
-      this.maxHeight = lineHeight * this.minRows + offset;
+    if (this.maxRows) {
+      this.maxHeight = lineHeight * this.maxRows + offset;
     }
 
-    const borderBoxHeight = target.scrollHeight + borderTopWitdh + borderBottomWitdh;
+    const borderBoxHeight = target.scrollHeight + borderTopWidth + borderBottomWidth;
     const height = Math.min(this.maxHeight, Math.max(this.minHeight, borderBoxHeight));
     target.style.setProperty('height', height + 'px');
   }
@@ -197,7 +204,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
                     this.optional
                       ? html`
                           <span class="${ccLabel.optional}">
-                            ${i18n.t({
+                            ${i18n._({
                               id: 'textarea.label.optional',
                               message: '(optional)',
                               comment: 'Shown behind label when marked as optional',
@@ -217,7 +224,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
           .value="${this.value || ''}"
           aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid="${ifDefined(this.invalid)}"
+          aria-invalid=${this.invalid ? 'true' : nothing}
           ?disabled="${this.disabled}"
           ?readonly="${this.readonly || this.readOnly}"
           ?required="${this.required}"
