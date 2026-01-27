@@ -1,3 +1,10 @@
+## [2.5.1-next.3](https://github.com/warp-ds/elements/compare/v2.5.1-next.2...v2.5.1-next.3) (2026-01-27)
+
+
+### Bug Fixes
+
+* textarea improvements ([#502](https://github.com/warp-ds/elements/issues/502)) ([7de4f5b](https://github.com/warp-ds/elements/commit/7de4f5ba0863e01d83344e76f4c1adb050ed82c7))
+
 ## [2.5.1-next.2](https://github.com/warp-ds/elements/compare/v2.5.1-next.1...v2.5.1-next.2) (2026-01-26)
 
 
