@@ -296,8 +296,9 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
   render() {
     return html`
       <input
-        id=${this.#uniqueId}
         type="radio"
+        part="control"
+        id=${this.#uniqueId}
         .name=${this.name ?? ''}
         .value=${this.value}
         .checked=${this.checked}
@@ -305,7 +306,7 @@ export class WarpRadioBasic extends BaseFormAssociatedElement {
         ?required=${this.required}
         @change=${this._handleChange}
       />
-      <label for=${this.#uniqueId}><slot></slot></label>
+      <label part="label" for=${this.#uniqueId}><slot></slot></label>
     `;
   }
 }
