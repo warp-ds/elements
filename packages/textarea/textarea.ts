@@ -84,12 +84,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   required: boolean;
 
-  @property({ type: Number, reflect: true, attribute: 'minlength' })
-  minLength: number;
-
-  @property({ type: Number, reflect: true, attribute: 'maxlength' })
-  maxLength: number;
-
   @property({ type: String, reflect: true })
   value: string;
 
@@ -124,13 +118,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
-    if (
-      changedProperties.has('value') ||
-      changedProperties.has('required') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('minLength') ||
-      changedProperties.has('maxLength')
-    ) {
+    if (changedProperties.has('value') || changedProperties.has('required') || changedProperties.has('disabled')) {
       this.#updateValidity();
     }
   }
@@ -205,10 +193,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
       return;
     }
 
-    const valueLength = this.value?.length || 0;
-
     // Check required validation
     if (this.required && !this.value) {
+      // Get the browser's native validation message from the internal textarea
       const message = this._textarea?.validationMessage || '';
       this.internals.setValidity(
         { valueMissing: true },
@@ -216,38 +203,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
         this._textarea,
       );
 
-      if (this.#hasInteracted) {
-        this.#setValidationState(message);
-      }
-      return;
-    }
-
-    // Check minlength validation
-    if (this.minLength && valueLength > 0 && valueLength < this.minLength) {
-      // Get message from native textarea, or provide a fallback
-      const message = this._textarea?.validationMessage || `Please use at least ${this.minLength} characters`;
-      this.internals.setValidity(
-        { tooShort: true },
-        message,
-        this._textarea,
-      );
-
-      if (this.#hasInteracted) {
-        this.#setValidationState(message);
-      }
-      return;
-    }
-
-    // Check maxlength validation (for programmatically set values that exceed the limit)
-    if (this.maxLength && valueLength > this.maxLength) {
-      // Get message from native textarea, or provide a fallback
-      const message = this._textarea?.validationMessage || `Please use no more than ${this.maxLength} characters`;
-      this.internals.setValidity(
-        { tooLong: true },
-        message,
-        this._textarea,
-      );
-
+      // Only show visual validation state after user interaction
       if (this.#hasInteracted) {
         this.#setValidationState(message);
       }
@@ -332,11 +288,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     this.value = target.value;
 
     this.#resize(target);
-
-    // If user has interacted and is typing, update validation immediately
-    if (this.#hasInteracted) {
-      this.#updateValidity();
-    }
   }
 
   /** @internal */
@@ -404,8 +355,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
           class="${this._textareaStyles}"
           name="${ifDefined(this.name)}"
           placeholder="${ifDefined(this.placeholder)}"
-          minlength="${ifDefined(this.minLength)}"
-          maxlength="${ifDefined(this.maxLength)}"
           .value="${this.value || ''}"
           aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
