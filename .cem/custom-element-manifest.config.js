@@ -36,7 +36,7 @@ export default {
     'packages/tabs/tabs.ts',
     'packages/tab/tab.ts',
     'packages/tab-panel/tab-panel.ts',
-    "packages/icon/icon.ts",
+    'packages/icon/icon.ts',
 
     // unreleased
     // 'packages/dead-toggle/dead-toggle.ts',
@@ -45,8 +45,8 @@ export default {
     // 'packages/radio-group/radio-group.ts',
     // 'packages/checkbox/checkbox.ts',
     // 'packages/checkbox-group/checkbox-group.ts',
-    // 'packages/slider/slider.ts',
-    // 'packages/slider-thumb/slider-thumb.ts',
+    'packages/slider/slider.ts',
+    'packages/slider-thumb/slider-thumb.ts',
     // 'packages/step-indicator/step-indicator.ts',
     // 'packages/step/step.ts',
     'packages/textarea/textarea.ts',

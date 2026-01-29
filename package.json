@@ -21,6 +21,8 @@
     "./components/modal": "./dist/packages/modal/index.js",
     "./components/pill": "./dist/packages/pill/pill.js",
     "./components/select": "./dist/packages/select/select.js",
+    "./components/slider": "./dist/packages/slider/slider.js",
+    "./components/slider-thumb": "./dist/packages/slider-thumb/slider-thumb.js",
     "./components/textfield": "./dist/packages/textfield/textfield.js",
     "./components/toast": "./dist/packages/toast/index.js",
     "./toast": "./dist/api.js",
@@ -92,6 +94,14 @@
     "./react/select": {
       "types": "./dist/packages/select/react.d.ts",
       "import": "./dist/packages/select/react.js"
+    },
+    "./react/slider": {
+      "types": "./dist/packages/slider/react.d.ts",
+      "import": "./dist/packages/slider/react.js"
+    },
+    "./react/slider-thumb": {
+      "types": "./dist/packages/slider-thumb/react.d.ts",
+      "import": "./dist/packages/slider-thumb/react.js"
     },
     "./react/switch": {
       "types": "./dist/packages/switch/react.d.ts",

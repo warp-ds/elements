@@ -22,6 +22,8 @@ const modules = [
   'packages/modal/index.ts',
   'packages/pill/pill.ts',
   'packages/select/select.ts',
+  'packages/slider/slider.ts',
+  'packages/slider-thumb/slider-thumb.ts',
   'packages/textfield/textfield.ts',
   'packages/toast/index.ts',
 ];
