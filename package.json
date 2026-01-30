@@ -23,7 +23,10 @@
     "./components/select": "./dist/packages/select/select.js",
     "./components/textfield": "./dist/packages/textfield/textfield.js",
     "./components/toast": "./dist/packages/toast/index.js",
-    "./toast": "./dist/api.js",
+    "./toast": {
+      "types": "./dist/packages/toast/api.d.ts",
+      "import": "./dist/api.js"
+    },
     "./custom-elements.json": "./dist/custom-elements.json",
     "./react/affix": {
       "types": "./dist/packages/affix/react.d.ts",
