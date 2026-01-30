@@ -9,11 +9,6 @@ export function generateEntrypointFile() {
     .map((item) => `export * from './${item.path.replace('.ts', '.js')}';`)
     .join('\n');
 
-  // Backwards compatibility: re-export toast API functions (toast, removeToast, updateToast)
-  // These were previously exported via packages/toast/index.ts in the CEM manifest
-  const backwardsCompatExports = `
-export { toast, removeToast, updateToast } from './packages/toast/api.js';`;
-
   const whenDefinedStatements = manifest.modules
     .filter(getTagName)
     .map(getTagName)
@@ -25,6 +20,6 @@ Promise.all([${whenDefinedStatements.join(',')}]).then(() => {
     performance.mark('vend/pc-design-system/warp-elements-loaded');
 });`;
 
-  const entrypointFile = `${exportStatements}${backwardsCompatExports}${whenAllDefinedCode}`;
+  const entrypointFile = `${exportStatements}${whenAllDefinedCode}`;
   writeFileSync(new URL('../.tmp/entrypoint.js', import.meta.url), entrypointFile, { encoding: 'utf8' });
 }
