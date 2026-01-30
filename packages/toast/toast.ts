@@ -21,6 +21,8 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 import type { ToastType } from './types';
 
+export { removeToast, toast, updateToast } from './api.js';
+
 const ccToast = {
   wrapper: 'relative overflow-hidden w-full',
   base: 'flex group p-8 mt-16 rounded-8 border-2 pointer-events-auto transition-all',

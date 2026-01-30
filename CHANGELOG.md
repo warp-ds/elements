@@ -1,3 +1,20 @@
+# [2.6.0-next.1](https://github.com/warp-ds/elements/compare/v2.5.1...v2.6.0-next.1) (2026-01-30)
+
+
+### Bug Fixes
+
+* **build:** hotfix, set correct filename for backwards compatible paths ([e57185a](https://github.com/warp-ds/elements/commit/e57185a30139a251854676e041b2913dad5a0253))
+* improve textarea validation ([#503](https://github.com/warp-ds/elements/issues/503)) ([e99f4e8](https://github.com/warp-ds/elements/commit/e99f4e8034a2aefc775313c7a1c79c26e3d54b90))
+* step improvements ([#500](https://github.com/warp-ds/elements/issues/500)) ([2c0623c](https://github.com/warp-ds/elements/commit/2c0623cc7e19d7a15f9f88124899f0bb6e899a4b))
+* support different labels and values ([#497](https://github.com/warp-ds/elements/issues/497)) ([4e39a2a](https://github.com/warp-ds/elements/commit/4e39a2a13fb949f3edc7cc55504d83bd9d59897d))
+* textarea improvements ([#502](https://github.com/warp-ds/elements/issues/502)) ([7de4f5b](https://github.com/warp-ds/elements/commit/7de4f5ba0863e01d83344e76f4c1adb050ed82c7))
+* update pagination component to use 'current-page' prop and impro… ([#498](https://github.com/warp-ds/elements/issues/498)) ([f55e355](https://github.com/warp-ds/elements/commit/f55e355b3752c3bac6e32dabb14e2d16bbf3fbd5))
+
+
+### Features
+
+* add step-indicator ([#507](https://github.com/warp-ds/elements/issues/507)) ([a3deaf9](https://github.com/warp-ds/elements/commit/a3deaf97ee8a98f755e72cbbb6688b94e2c8b439))
+
 ## [2.5.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1) (2026-01-30)
 
 
