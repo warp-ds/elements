@@ -125,6 +125,14 @@
       "types": "./dist/packages/textarea/react.d.ts",
       "import": "./dist/packages/textarea/react.js"
     },
+    "./react/step": {
+      "types": "./dist/packages/step/react.d.ts",
+      "import": "./dist/packages/step/react.js"
+    },
+    "./react/step-indicator": {
+      "types": "./dist/packages/step-indicator/react.d.ts",
+      "import": "./dist/packages/step-indicator/react.js"
+    },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
