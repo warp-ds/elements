@@ -1,3 +1,10 @@
+## [2.5.1-next.5](https://github.com/warp-ds/elements/compare/v2.5.1-next.4...v2.5.1-next.5) (2026-01-30)
+
+
+### Bug Fixes
+
+* **build:** hotfix, set correct filename for backwards compatible paths ([e57185a](https://github.com/warp-ds/elements/commit/e57185a30139a251854676e041b2913dad5a0253))
+
 ## [2.5.1-next.4](https://github.com/warp-ds/elements/compare/v2.5.1-next.3...v2.5.1-next.4) (2026-01-30)
 
 
