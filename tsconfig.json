@@ -26,19 +26,19 @@
     "packages/tab",
     "packages/tabs",
     "packages/icon",
+    "packages/pagination",
+    "packages/step-indicator",
+    "packages/step",
+    "packages/textarea",
 
     // unreleased components
     // "packages/checkbox-group",
     // "packages/checkbox",
     // "packages/dead-toggle",
-    "packages/pagination",
     // "packages/radio-group",
     // "packages/radio",
     // "packages/slider-thumb",
     // "packages/slider",
-    // "packages/step-indicator",
-    // "packages/step",
-    "packages/textarea",
     "setup-tests.ts"
   ],
   "compilerOptions": {

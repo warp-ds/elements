@@ -37,19 +37,19 @@ export default {
     'packages/tab/tab.ts',
     'packages/tab-panel/tab-panel.ts',
     "packages/icon/icon.ts",
+    'packages/step-indicator/step-indicator.ts',
+    'packages/step/step.ts',
+    'packages/pagination/pagination.ts',
+    'packages/textarea/textarea.ts',
 
     // unreleased
     // 'packages/dead-toggle/dead-toggle.ts',
-    'packages/pagination/pagination.ts',
     // 'packages/radio/radio.ts',
     // 'packages/radio-group/radio-group.ts',
     // 'packages/checkbox/checkbox.ts',
     // 'packages/checkbox-group/checkbox-group.ts',
     // 'packages/slider/slider.ts',
     // 'packages/slider-thumb/slider-thumb.ts',
-    // 'packages/step-indicator/step-indicator.ts',
-    // 'packages/step/step.ts',
-    'packages/textarea/textarea.ts',
   ],
 
   // Globs to exclude
