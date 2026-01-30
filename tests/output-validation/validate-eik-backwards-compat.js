@@ -78,7 +78,7 @@ function validateBundleExports() {
   const indexPath = join(eikDir, 'index.js');
 
   if (!existsSync(indexPath)) {
-    log(`  eik/index.js not found`, RED);
+    log('  eik/index.js not found', RED);
     return REQUIRED_EXPORTS.map((name) => ({ name, reason: 'eik/index.js not found' }));
   }
 
