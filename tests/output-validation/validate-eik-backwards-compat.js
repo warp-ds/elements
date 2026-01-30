@@ -6,6 +6,8 @@
  * Validates that:
  * 1. Each legacy component has an index.js file at eik/packages/{component}/index.js
  * 2. The toast API functions (toast, removeToast, updateToast) are exported from eik/index.js
+ * 3. The toast API functions are exported from eik/api.js
+ * 4. The ./toast export in package.json points to ./dist/api.js
  */
 
 import { existsSync, readFileSync } from 'node:fs';
@@ -44,8 +46,7 @@ const LEGACY_COMPONENTS = [
   'toast',
 ];
 
-// These API functions must be exported from eik/index.js for backwards compatibility
-// Previously exported via packages/toast/index.ts in the CEM manifest
+// These API functions must be exported for backwards compatibility
 const REQUIRED_EXPORTS = ['toast', 'removeToast', 'updateToast'];
 
 function validateLegacyComponentPaths() {
@@ -64,7 +65,6 @@ function validateLegacyComponentPaths() {
     }
   }
 
-  // Report found components
   if (found.length > 0) {
     log(`  Found ${found.length}/${LEGACY_COMPONENTS.length} component paths`, GREEN);
   }
@@ -72,20 +72,16 @@ function validateLegacyComponentPaths() {
   return missing;
 }
 
-function validateBundleExports() {
-  log(`Validating ${REQUIRED_EXPORTS.length} required exports in eik/index.js...`);
+function validateFileExports(filePath, displayName) {
+  log(`Validating ${REQUIRED_EXPORTS.length} required exports in ${displayName}...`);
 
-  const indexPath = join(eikDir, 'index.js');
-
-  if (!existsSync(indexPath)) {
-    log('  eik/index.js not found', RED);
-    return REQUIRED_EXPORTS.map((name) => ({ name, reason: 'eik/index.js not found' }));
+  if (!existsSync(filePath)) {
+    log(`  ${displayName} not found`, RED);
+    return REQUIRED_EXPORTS.map((name) => ({ name, reason: `${displayName} not found` }));
   }
 
-  const indexContent = readFileSync(indexPath, 'utf-8');
+  const content = readFileSync(filePath, 'utf-8');
 
-  // Look for exports in the minified bundle
-  // The format is: export{...,Xx as toast,...} or export{...,toast,...}
   const missing = [];
   const found = [];
 
@@ -93,10 +89,10 @@ function validateBundleExports() {
     // Match patterns like "as toast" or ",toast," or "{toast," or ",toast}"
     const exportPattern = new RegExp(`(as ${exportName}[,}]|[{,]${exportName}[,}])`);
 
-    if (exportPattern.test(indexContent)) {
+    if (exportPattern.test(content)) {
       found.push(exportName);
     } else {
-      missing.push({ name: exportName, reason: `'${exportName}' not found in exports` });
+      missing.push({ name: exportName, reason: `'${exportName}' not found in ${displayName}` });
     }
   }
 
@@ -107,48 +103,109 @@ function validateBundleExports() {
   return missing;
 }
 
+function validatePackageJsonExports() {
+  log('Validating package.json exports...');
+
+  const packageJsonPath = join(rootDir, 'package.json');
+
+  if (!existsSync(packageJsonPath)) {
+    log('  package.json not found', RED);
+    return [{ field: './toast', reason: 'package.json not found' }];
+  }
+
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+  const exports = packageJson.exports || {};
+
+  const errors = [];
+
+  // Check that ./toast points to ./dist/api.js
+  const toastExport = exports['./toast'];
+  const expectedToastExport = './dist/api.js';
+
+  if (!toastExport) {
+    errors.push({ field: './toast', reason: 'export not found in package.json' });
+  } else if (toastExport !== expectedToastExport) {
+    errors.push({
+      field: './toast',
+      reason: `expected "${expectedToastExport}", got "${toastExport}"`,
+    });
+  } else {
+    log(`  "./toast" correctly points to "${expectedToastExport}"`, GREEN);
+  }
+
+  return errors;
+}
+
 function validateEikBackwardsCompat() {
   log('');
   log('=== Backwards Compatibility Validation ===');
   log('');
 
   let hasErrors = false;
+  const allErrors = [];
 
-  // Validate legacy component paths
+  // 1. Validate legacy component paths
   const missingPaths = validateLegacyComponentPaths();
   if (missingPaths.length > 0) {
     hasErrors = true;
-    log('');
-    log('MISSING COMPONENT PATHS:', RED);
-    for (const { component, expectedPath } of missingPaths) {
-      log(`  ${component}: Expected ${expectedPath}`, RED);
-    }
+    allErrors.push({
+      category: 'MISSING COMPONENT PATHS',
+      errors: missingPaths.map(({ component, expectedPath }) => `${component}: Expected ${expectedPath}`),
+      fix: 'Run `pnpm build:eik-components-backwards-compat` to generate component files.',
+    });
   }
 
   log('');
 
-  // Validate bundle exports
-  const missingExports = validateBundleExports();
-  if (missingExports.length > 0) {
+  // 2. Validate eik/index.js exports
+  const missingIndexExports = validateFileExports(join(eikDir, 'index.js'), 'eik/index.js');
+  if (missingIndexExports.length > 0) {
     hasErrors = true;
-    log('');
-    log('MISSING BUNDLE EXPORTS:', RED);
-    for (const { name, reason } of missingExports) {
-      log(`  ${name}: ${reason}`, RED);
-    }
+    allErrors.push({
+      category: 'MISSING eik/index.js EXPORTS',
+      errors: missingIndexExports.map(({ name, reason }) => `${name}: ${reason}`),
+      fix: 'Check build/entrypoint.js to ensure required exports are included.',
+    });
+  }
+
+  log('');
+
+  // 3. Validate eik/api.js exports
+  const missingApiExports = validateFileExports(join(eikDir, 'api.js'), 'eik/api.js');
+  if (missingApiExports.length > 0) {
+    hasErrors = true;
+    allErrors.push({
+      category: 'MISSING eik/api.js EXPORTS',
+      errors: missingApiExports.map(({ name, reason }) => `${name}: ${reason}`),
+      fix: 'Check build/components-eik.js to ensure api.js is built correctly.',
+    });
+  }
+
+  log('');
+
+  // 4. Validate package.json exports
+  const packageJsonErrors = validatePackageJsonExports();
+  if (packageJsonErrors.length > 0) {
+    hasErrors = true;
+    allErrors.push({
+      category: 'INVALID package.json EXPORTS',
+      errors: packageJsonErrors.map(({ field, reason }) => `${field}: ${reason}`),
+      fix: 'Update package.json exports to point "./toast" to "./dist/api.js".',
+    });
   }
 
   log('');
 
   if (hasErrors) {
+    for (const { category, errors, fix } of allErrors) {
+      log(`${category}:`, RED);
+      for (const error of errors) {
+        log(`  ${error}`, RED);
+      }
+      log(`  Fix: ${fix}`, RED);
+      log('');
+    }
     log('Validation FAILED', RED);
-    log('');
-    if (missingPaths.length > 0) {
-      log('Run `pnpm build:eik-components-backwards-compat` to generate component files.', RED);
-    }
-    if (missingExports.length > 0) {
-      log('Check build/entrypoint.js to ensure required exports are included.', RED);
-    }
     process.exit(1);
   }
 
