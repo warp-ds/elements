@@ -39,6 +39,7 @@
     // "packages/step-indicator",
     // "packages/step",
     "packages/textarea",
+    "packages/radio-basic",
     "setup-tests.ts"
   ],
   "compilerOptions": {

@@ -50,6 +50,7 @@ export default {
     // 'packages/step-indicator/step-indicator.ts',
     // 'packages/step/step.ts',
     'packages/textarea/textarea.ts',
+    'packages/radio-basic/radio-basic.ts',
   ],
 
   // Globs to exclude
