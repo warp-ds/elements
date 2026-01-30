@@ -7,7 +7,7 @@
  * 1. Each legacy component has an index.js file at eik/packages/{component}/index.js
  * 2. The toast API functions (toast, removeToast, updateToast) are exported from eik/index.js
  * 3. The toast API functions are exported from eik/api.js
- * 4. The ./toast export in package.json points to ./dist/api.js
+ * 4. The ./toast export in package.json has correct types and import fields
  */
 
 import { existsSync, readFileSync } from 'node:fs';
@@ -118,19 +118,44 @@ function validatePackageJsonExports() {
 
   const errors = [];
 
-  // Check that ./toast points to ./dist/api.js
+  // Check that ./toast export exists and has correct structure
   const toastExport = exports['./toast'];
-  const expectedToastExport = './dist/api.js';
+  const expectedImport = './dist/api.js';
+  const expectedTypes = './dist/packages/toast/api.d.ts';
 
   if (!toastExport) {
     errors.push({ field: './toast', reason: 'export not found in package.json' });
-  } else if (toastExport !== expectedToastExport) {
+  } else if (typeof toastExport === 'string') {
+    // Old format without types - this is an error now
     errors.push({
       field: './toast',
-      reason: `expected "${expectedToastExport}", got "${toastExport}"`,
+      reason: `must be an object with "types" and "import" fields, got string "${toastExport}"`,
     });
   } else {
-    log(`  "./toast" correctly points to "${expectedToastExport}"`, GREEN);
+    // Check import field
+    if (toastExport.import !== expectedImport) {
+      errors.push({
+        field: './toast.import',
+        reason: `expected "${expectedImport}", got "${toastExport.import}"`,
+      });
+    } else {
+      log(`  "./toast".import correctly points to "${expectedImport}"`, GREEN);
+    }
+
+    // Check types field
+    if (!toastExport.types) {
+      errors.push({
+        field: './toast.types',
+        reason: 'missing "types" field - TypeScript users will get errors',
+      });
+    } else if (toastExport.types !== expectedTypes) {
+      errors.push({
+        field: './toast.types',
+        reason: `expected "${expectedTypes}", got "${toastExport.types}"`,
+      });
+    } else {
+      log(`  "./toast".types correctly points to "${expectedTypes}"`, GREEN);
+    }
   }
 
   return errors;
@@ -190,7 +215,7 @@ function validateEikBackwardsCompat() {
     allErrors.push({
       category: 'INVALID package.json EXPORTS',
       errors: packageJsonErrors.map(({ field, reason }) => `${field}: ${reason}`),
-      fix: 'Update package.json exports to point "./toast" to "./dist/api.js".',
+      fix: 'Update package.json "./toast" export to include both "types" and "import" fields.',
     });
   }
 
