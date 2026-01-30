@@ -283,6 +283,7 @@
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
     "test:output-validation": "node tests/output-validation/validate-eik-output.js",
+    "test:eik-backwards-compat": "node tests/output-validation/validate-eik-backwards-compat.js",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {
