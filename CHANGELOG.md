@@ -1,38 +1,9 @@
-## [2.5.1-next.5](https://github.com/warp-ds/elements/compare/v2.5.1-next.4...v2.5.1-next.5) (2026-01-30)
+## [2.5.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1) (2026-01-30)
 
 
 ### Bug Fixes
 
-* **build:** hotfix, set correct filename for backwards compatible paths ([e57185a](https://github.com/warp-ds/elements/commit/e57185a30139a251854676e041b2913dad5a0253))
-
-## [2.5.1-next.4](https://github.com/warp-ds/elements/compare/v2.5.1-next.3...v2.5.1-next.4) (2026-01-30)
-
-
-### Bug Fixes
-
-* improve textarea validation ([#503](https://github.com/warp-ds/elements/issues/503)) ([e99f4e8](https://github.com/warp-ds/elements/commit/e99f4e8034a2aefc775313c7a1c79c26e3d54b90))
-
-## [2.5.1-next.3](https://github.com/warp-ds/elements/compare/v2.5.1-next.2...v2.5.1-next.3) (2026-01-27)
-
-
-### Bug Fixes
-
-* textarea improvements ([#502](https://github.com/warp-ds/elements/issues/502)) ([7de4f5b](https://github.com/warp-ds/elements/commit/7de4f5ba0863e01d83344e76f4c1adb050ed82c7))
-
-## [2.5.1-next.2](https://github.com/warp-ds/elements/compare/v2.5.1-next.1...v2.5.1-next.2) (2026-01-26)
-
-
-### Bug Fixes
-
-* step improvements ([#500](https://github.com/warp-ds/elements/issues/500)) ([2c0623c](https://github.com/warp-ds/elements/commit/2c0623cc7e19d7a15f9f88124899f0bb6e899a4b))
-* update pagination component to use 'current-page' prop and impro… ([#498](https://github.com/warp-ds/elements/issues/498)) ([f55e355](https://github.com/warp-ds/elements/commit/f55e355b3752c3bac6e32dabb14e2d16bbf3fbd5))
-
-## [2.5.1-next.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1-next.1) (2026-01-26)
-
-
-### Bug Fixes
-
-* support different labels and values ([#497](https://github.com/warp-ds/elements/issues/497)) ([4e39a2a](https://github.com/warp-ds/elements/commit/4e39a2a13fb949f3edc7cc55504d83bd9d59897d))
+* **build:** hotfix, set correct filename for backwards compatible paths ([#505](https://github.com/warp-ds/elements/issues/505)) ([d0b26ca](https://github.com/warp-ds/elements/commit/d0b26cacda6d60e12bea912b20a9e394376a1102))
 
 # [2.5.0](https://github.com/warp-ds/elements/compare/v2.4.0...v2.5.0) (2026-01-23)
 
