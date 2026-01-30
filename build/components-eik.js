@@ -44,9 +44,11 @@ if (!existsSync(outdir)) {
 
 modules.map(async (item) => {
   try {
+    // Extract the directory path (e.g., "packages/affix" from "packages/affix/affix.ts")
+    const dir = item.substring(0, item.lastIndexOf('/'));
     await esbuild.build({
       entryPoints: [item],
-      outfile: `${outdir}/${item.replace('.ts', '.js')}`,
+      outfile: `${outdir}/${dir}/index.js`,
       ...esbuildDefaults,
     });
   } catch (err) {
