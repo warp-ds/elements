@@ -29,6 +29,13 @@
 
 * add step-indicator ([#507](https://github.com/warp-ds/elements/issues/507)) ([a3deaf9](https://github.com/warp-ds/elements/commit/a3deaf97ee8a98f755e72cbbb6688b94e2c8b439))
 
+## [2.5.2](https://github.com/warp-ds/elements/compare/v2.5.1...v2.5.2) (2026-02-02)
+
+
+### Bug Fixes
+
+* add back missing exports from index.js for backwards compatibility ([#508](https://github.com/warp-ds/elements/issues/508)) ([eedef0b](https://github.com/warp-ds/elements/commit/eedef0bd5edd0be2682750e5a9761649cacc273c))
+
 ## [2.5.1](https://github.com/warp-ds/elements/compare/v2.5.0...v2.5.1) (2026-01-30)
 
 
