@@ -12,15 +12,15 @@ import { Expandable } from '@warp-ds/elements/react/expandable';
 import { Link } from '@warp-ds/elements/react/link';
 import { Modal } from '@warp-ds/elements/react/modal';
 import { PageIndicator } from '@warp-ds/elements/react/page-indicator';
+import { Pagination } from '@warp-ds/elements/react/pagination';
 import { Pill } from '@warp-ds/elements/react/pill';
 import { Select } from '@warp-ds/elements/react/select';
-import { Switch } from '@warp-ds/elements/react/switch';
-import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
-import { TextField } from '@warp-ds/elements/react/textfield';
-import { Pagination } from '@warp-ds/elements/react/pagination';
-import { Textarea } from '@warp-ds/elements/react/textarea';
 import { Step } from '@warp-ds/elements/react/step';
 import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
+import { Switch } from '@warp-ds/elements/react/switch';
+import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
+import { Textarea } from '@warp-ds/elements/react/textarea';
+import { TextField } from '@warp-ds/elements/react/textfield';
 
 // unreleased
 // import { Checkbox } from '@warp-ds/elements/react/checkbox';
