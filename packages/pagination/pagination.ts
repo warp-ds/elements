@@ -4,10 +4,8 @@ import { i18n } from '@lingui/core';
 import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import '@warp-ds/icons/elements/chevron-double-left-16';
-import '@warp-ds/icons/elements/chevron-left-16';
-import '@warp-ds/icons/elements/chevron-right-16';
-import { activateI18n } from '../i18n.js';
+import '../icon/icon.js';
+import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -50,9 +48,7 @@ class WarpPagination extends LitElement {
     reset,
     styles,
     css`
-      w-icon-chevron-left-16,
-      w-icon-chevron-double-left-16,
-      w-icon-chevron-right-16 {
+      w-icon {
         height: 16px;
       }
     `,
@@ -142,7 +138,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for first page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-double-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-double-left-16>
+              <w-icon name="ChevronDoubleLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
             : nothing
@@ -163,7 +159,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for previous page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-left-16>
+              <w-icon name="ChevronLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
             : nothing
@@ -221,7 +217,7 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for next page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-right-16 class="pointer-events-none flex items-center"></w-icon-chevron-right-16>
+              <w-icon name="ChevronRight" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
               <span class="sr-only">${iconSuffix}</span>
             </a>`
             : nothing

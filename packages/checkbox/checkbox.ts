@@ -10,7 +10,6 @@ import { BaseFormAssociatedElement } from '../radio/form-associated-element';
 import { RequiredValidator } from '../radio/required-validator';
 import { HasSlotController } from '../radio/slot';
 import { watch } from '../radio/watch';
-import '@warp-ds/icons/elements/check-16';
 
 import { reset } from '../styles';
 import { toggleStyles } from '../toggle-styles';

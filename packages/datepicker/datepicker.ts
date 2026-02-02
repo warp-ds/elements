@@ -29,9 +29,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import '@warp-ds/icons/elements/calendar-16';
-import '@warp-ds/icons/elements/chevron-left-16';
-import '@warp-ds/icons/elements/chevron-right-16';
+import '../icon/icon.js';
 
 import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
@@ -462,7 +460,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             quiet
             type="button"
             @click="${this.#toggleCalendarOpen}">
-            <w-icon-calendar-16></w-icon-calendar-16>
+            <w-icon name="Calendar" size="small" locale="${detectLocale()}" class="flex"></w-icon>
           </w-button>
         </div>
       </div>
@@ -493,7 +491,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
               quiet
               small
               @click="${this.#previousMonth}">
-              <w-icon-chevron-left-16></w-icon-chevron-left-16>
+              <w-icon name="ChevronLeft" size="small" locale="${detectLocale()}" class="flex"></w-icon>
             </w-button>
             <div aria-live="polite" class="w-datepicker__month__nav__header">
               ${format(this.month, this.headerFormat, { locale: this.locale })}
@@ -510,7 +508,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
               quiet
               small
               @click="${this.#nextMonth}">
-              <w-icon-chevron-right-16></w-icon-chevron-right-16>
+              <w-icon name="ChevronRight" size="small" locale="${detectLocale()}" class="flex"></w-icon>
             </w-button>
           </div>
           <div class="w-datepicker__month">

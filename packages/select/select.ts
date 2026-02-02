@@ -8,7 +8,7 @@ import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
 
-import { activateI18n } from '../i18n.js';
+import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -18,7 +18,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
 
-import '@warp-ds/icons/elements/chevron-down-16';
+import '../icon/icon.js';
 
 const ccSelect = {
   base: 'block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current',
@@ -274,7 +274,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
           ${this._options}
         </select>
         <div class="${this.#chevronClasses}">
-          <w-icon-chevron-down-16></w-icon-chevron-down-16>
+          <w-icon name="ChevronDown" size="small" locale="${detectLocale()}" class="flex"></w-icon>
         </div>
       </div>
       ${

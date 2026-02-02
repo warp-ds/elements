@@ -2,10 +2,9 @@ import { Move } from '@itsy/animate/move';
 import { i18n } from '@lingui/core';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import '@warp-ds/icons/elements/arrow-left-16';
-import '@warp-ds/icons/elements/close-16';
+import '../icon/icon.js';
 
-import { activateI18n } from '../i18n.js';
+import { activateI18n, detectLocale } from '../i18n.js';
 import { messages as daMessages } from '../modal/locales/da/messages.mjs';
 import { messages as enMessages } from '../modal/locales/en/messages.mjs';
 import { messages as fiMessages } from '../modal/locales/fi/messages.mjs';
@@ -75,7 +74,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
           })}"
           class="header-button header-button-left"
           @click="${this.emitBack}">
-          <w-icon-arrow-left-16 style="display: flex;"></w-icon-arrow-left-16>
+          <w-icon name="ArrowLeft" size="small" locale="${detectLocale()}" style="display: flex;" class="flex"></w-icon>
         </button>`
       : nothing;
   }
@@ -92,7 +91,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
             variant="pill"
             small=""
             @click="${this.close}">
-                <w-icon-close-16 style="display: flex;"></w-icon-close-16>
+                <w-icon name="Close" size="small" locale="${detectLocale()}" style="display: flex;" class="flex"></w-icon>
         </w-button>
     </div>`;
   }
