@@ -1,3 +1,10 @@
+# [2.6.0-next.4](https://github.com/warp-ds/elements/compare/v2.6.0-next.3...v2.6.0-next.4) (2026-02-02)
+
+
+### Bug Fixes
+
+* add back missing exports from index.js for backwards compatibility ([#508](https://github.com/warp-ds/elements/issues/508)) ([eedef0b](https://github.com/warp-ds/elements/commit/eedef0bd5edd0be2682750e5a9761649cacc273c))
+
 # [2.6.0-next.3](https://github.com/warp-ds/elements/compare/v2.6.0-next.2...v2.6.0-next.3) (2026-01-30)
 
 
