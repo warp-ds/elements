@@ -168,7 +168,7 @@ class WarpExpandable extends LitElement {
 
   /** @internal */
   get _expandableSlot() {
-    return html`<div class="${this.#contentClasses}">
+    return html`<div class="${this.#contentClasses}" part="expandable-content ${this.expanded ? 'expanded' : 'collapsed'}">
       <slot></slot>
     </div>`;
   }
@@ -183,6 +183,7 @@ class WarpExpandable extends LitElement {
               aria-expanded="${this.expanded}"
               class="${this.#buttonClasses}"
               @click=${() => (this.expanded = !this.expanded)}>
+              part="expandable-button ${this.expanded ? 'expanded' : 'collapsed'}"
               <div class="${ccExpandable.title}">
                 ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
                 ${this.noChevron ? '' : html`<div class="${this.#chevronClasses}">${this.#chevronIcon}</div>`}
