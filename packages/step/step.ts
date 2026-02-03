@@ -7,13 +7,13 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import '@warp-ds/icons/elements/check-16';
 
 import { activateI18n } from '../i18n.js';
+import { styles } from '../step-indicator/styles.js';
+import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
-import { styles } from '../step-indicator/styles.js';
-import { reset } from '../styles.js';
 
 const ccStep = {
   base: 'group/step',
@@ -60,7 +60,12 @@ export class WarpStep extends LitElement {
   completed = false;
 
   @state()
-  private _context: StepsContext = { horizontal: false, right: false, isLast: false, isFirst: false };
+  private _context: StepsContext = {
+    horizontal: false,
+    right: false,
+    isLast: false,
+    isFirst: false,
+  };
 
   static styles = [reset, styles];
 
@@ -140,13 +145,31 @@ export class WarpStep extends LitElement {
     ]);
 
     return html`
-      <div class="${stepClasses}" style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
+      <div
+        class="${stepClasses}"
+        style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}
+      >
         ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing}
-        <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} aria-current=${this.active ? 'step' : nothing}>
-          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : nothing}
+        <div
+          class=${dotClasses}
+          role="img"
+          aria-label=${this.getAriaLabel()}
+          aria-current=${this.active ? 'step' : nothing}
+        >
+          ${
+            this.completed
+              ? html`<w-icon-check-16
+                data-testid="completed-icon"
+              ></w-icon-check-16>`
+              : nothing
+          }
         </div>
         <div class=${lineClasses}></div>
-        <div class=${contentClasses} style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
+        <div
+          class=${contentClasses}
+          part="step-content"
+          style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}
+        >
           <slot></slot>
         </div>
       </div>

@@ -204,8 +204,19 @@ class WarpButton extends FormControlMixin(LitElement) {
   static styles = [
     reset,
     styles,
-    css`:host([full-width]) { width: 100%; }`,
-    css`.rounded-radius-default{border-radius:var(--w-button-radius-default,8px);}.rounded-radius-utility{border-radius:var(--w-button-radius-utility,4px);}`,
+    css`
+      :host([full-width]) {
+        width: 100%;
+      }
+    `,
+    css`
+      .rounded-radius-default {
+        border-radius: var(--w-button-radius-default, 8px);
+      }
+      .rounded-radius-utility {
+        border-radius: var(--w-button-radius-utility, 4px);
+      }
+    `,
   ];
 
   updated(changedProperties: PropertyValues<this>) {
@@ -339,16 +350,27 @@ class WarpButton extends FormControlMixin(LitElement) {
           ?autofocus=${this.autofocus}
           ?full-width=${this.fullWidth}
           class=${this.buttonClass}
-          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}>
-          <slot></slot>
+          rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
+        >
+          <slot part="button-content"></slot>
         </w-link>`
-        : html`<button type=${this.type || 'button'} class=${this._classes} @click="${this._handleButtonClick}">
-          <slot></slot>
+        : html`<button
+          type=${this.type || 'button'}
+          class=${this._classes}
+          part="button"
+          @click="${this._handleButtonClick}"
+        >
+          <slot part="button-content"></slot>
         </button>`
     }
     ${
       this.loading
-        ? html`<span class="sr-only" role="progressbar" aria-valuenow="{0}" aria-valuetext=${this.ariaValueTextLoading}></span>`
+        ? html`<span
+          class="sr-only"
+          role="progressbar"
+          aria-valuenow="{0}"
+          aria-valuetext=${this.ariaValueTextLoading}
+        ></span>`
         : null
     }`;
   }

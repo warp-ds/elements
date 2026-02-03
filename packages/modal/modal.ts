@@ -19,7 +19,8 @@ import { ProvidesCanCloseToSlotsMixin } from './util.js';
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   @property({ type: Boolean }) show: boolean;
   @property({ type: String, attribute: 'content-id' }) contentId: string;
-  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean;
+  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' })
+  ignoreBackdropClicks: boolean;
 
   @query('.dialog-el') dialogEl: HTMLDialogElement;
   @query('.dialog-inner-el') dialogInnerEl: HTMLElement;
@@ -59,13 +60,21 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
   render() {
     return html`
-      <dialog class="dialog-el">
-        <div class="dialog-inner-el">
-          <slot name="header" @slotchange="${this.handleSlotChange}"></slot>
-          <div class="content-el" id=${this.contentId}>
+      <dialog class="dialog-el" part="dialog">
+        <div class="dialog-inner-el" part="dialog-inner">
+          <slot
+            name="header"
+            part="modal-header"
+            @slotchange="${this.handleSlotChange}"
+          ></slot>
+          <div class="content-el" part="modal-content" id=${this.contentId}>
             <slot name="content" @slotchange="${this.handleSlotChange}"></slot>
           </div>
-          <slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
+          <slot
+            name="footer"
+            part="modal-footer"
+            @slotchange="${this.handleSlotChange}"
+          ></slot>
         </div>
       </dialog>
     `;

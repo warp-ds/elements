@@ -23,7 +23,15 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTab extends LitElement {
-  static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
+  static styles = [
+    reset,
+    styles,
+    css`
+      ::slotted([slot="icon"]) {
+        display: flex;
+      }
+    `,
+  ];
 
   @property({ attribute: 'for', reflect: true })
   for = '';
@@ -53,24 +61,30 @@ export class WarpTab extends LitElement {
         aria-controls="${this.for}"
         id="warp-tab-${this.for}"
         class="${this._classes}"
+        part="tab-button"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
         @click="${(e) => {
           e.tab = this;
         }}"
-        style="height: 100%">
+        style="height: 100%"
+      >
         ${
           !hasIcon
-            ? html`<span class="${ccTab.contentUnderlined}"><slot></slot></span>`
+            ? html`<span class="${ccTab.contentUnderlined}" part="tab-content"
+              ><slot></slot
+            ></span>`
             : this.over
               ? html`
-                <span class="${ccTab.icon}">
+                <span class="${ccTab.icon}" part="tab-icon">
                   <slot name="icon"></slot>
                 </span>
-                <span class="${ccTab.contentUnderlined}"><slot></slot></span>
+                <span class="${ccTab.contentUnderlined}" part="tab-content"
+                  ><slot></slot
+                ></span>
               `
               : html`
-                <div class="${ccTab.content}">
-                  <slot name="icon"></slot>
+                <div class="${ccTab.content}" part="tab-content">
+                  <slot name="icon" part="tab-icon"></slot>
                   <slot></slot>
                 </div>
               `

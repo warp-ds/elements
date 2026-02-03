@@ -184,7 +184,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   /** @internal */
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
+      return html`<label for="${this._id}" class=${ccLabel.base}
+        >${this.label}</label
+      >`;
     }
     return undefined;
   }
@@ -235,14 +237,20 @@ class WarpTextField extends FormControlMixin(LitElement) {
     return html`
       ${this._label}
       <div
+        part="textfield"
         class="${classMap({
           'w-textfield': true,
           // This could likely be replaced in the future by
           // https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
           'w-textfield--has-prefix': this._hasPrefix,
           'w-textfield--has-suffix': this._hasSuffix,
-        })}">
-        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
+        })}"
+      >
+        <slot
+          @slotchange="${this.prefixSlotChange}"
+          name="prefix"
+          part="prefix"
+        ></slot>
         <div class="w-textfield__input-wrapper">
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
@@ -269,12 +277,22 @@ class WarpTextField extends FormControlMixin(LitElement) {
             @blur="${this.handler}"
             @change="${this.handler}"
             @input="${this.handler}"
-            @focus="${this.handler}" />
+            @focus="${this.handler}"
+          />
         </div>
-        <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
+        <slot
+          @slotchange="${this.suffixSlotChange}"
+          name="suffix"
+          part="suffix"
+        ></slot>
       </div>
       <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
-      ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
+      ${
+        this.helpText &&
+        html`<div class="${this._helptextstyles}" id="${this._helpId}">
+        ${this.helpText}
+      </div>`
+      }
     `;
   }
 }

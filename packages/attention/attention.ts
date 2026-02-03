@@ -483,21 +483,39 @@ class WarpAttention extends LitElement {
           this.placement === 'bottom' ||
           this.placement === 'bottom-end' // Attention's and its arrow's visual position should be reflected in the DOM
             ? html`
-              <slot name="target"></slot>
+              <slot name="target" part="attention-target"></slot>
 
-              <div id="attention" class="${this._wrapperClasses}">
-                <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
-                <slot name="message"></slot>
+              <div
+                id="attention"
+                class="${this._wrapperClasses}"
+                part="attention"
+              >
+                <div
+                  role="${this.tooltip ? 'tooltip' : 'img'}"
+                  aria-label="${this.defaultAriaLabel()}"
+                >
+                  ${this._arrowHtml}
+                </div>
+                <slot name="message" part="attention-message"></slot>
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
             `
             : html`
-              <div id="attention" class="${this._wrapperClasses}">
-                <slot name="message"></slot>
-                <div role="${this.tooltip ? 'tooltip' : 'img'}" aria-label="${this.defaultAriaLabel()}">${this._arrowHtml}</div>
+              <div
+                id="attention"
+                class="${this._wrapperClasses}"
+                part="attention"
+              >
+                <slot name="message" part="attention-message"></slot>
+                <div
+                  role="${this.tooltip ? 'tooltip' : 'img'}"
+                  aria-label="${this.defaultAriaLabel()}"
+                >
+                  ${this._arrowHtml}
+                </div>
                 ${this.canClose ? this._closeBtnHtml : nothing}
               </div>
-              <slot name="target"></slot>
+              <slot name="target" part="attention-target"></slot>
             `
         }
       </div>

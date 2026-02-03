@@ -286,28 +286,35 @@ class WarpSlider extends LitElement {
       >
         ${
           this.label
-            ? html`<legend class="w-slider__label">
+            ? html`<legend class="w-slider__label" part="slider-label">
               <slot id="label" name="label">${this.label}</slot>
             </legend>`
             : nothing
         }
-        <slot class="w-slider__description" name="description"></slot>
-        ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
-        <div class="w-slider__range">
-          <div class="w-slider__active-range"></div>
+        <slot
+          class="w-slider__description"
+          name="description"
+          part="slider-description"
+        ></slot>
+        ${this.markers ? html`<div class="w-slider__markers" part="slider-markers"></div>` : nothing}
+        <div class="w-slider__range" part="slider-range">
+          <div class="w-slider__active-range" part="slider-active-range"></div>
         </div>
         <slot
           class="w-slider__slider"
+          part="slider-thumb"
           @slotchange=${this.#syncSliderThumbs}
         ></slot>
         <slot
           class="w-slider__slider"
           name="from"
+          part="slider-from"
           @slotchange=${this.#syncSliderThumbs}
         ></slot>
         <slot
           class="w-slider__slider"
           name="to"
+          part="slider-to"
           @slotchange=${this.#syncSliderThumbs}
         ></slot>
         ${

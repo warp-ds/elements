@@ -44,8 +44,8 @@ class WarpBadge extends LitElement {
 
   render() {
     return html`
-      <div class="${this._class}">
-        <slot></slot>
+      <div class="${this._class}" part="badge">
+        <slot part="badge-content"></slot>
       </div>
     `;
   }

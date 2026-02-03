@@ -43,12 +43,14 @@ class WarpPill extends LitElement {
    * @deprecated Used "open-arial-label" instead.
    */
   @property({ attribute: 'open-sr-label', type: String }) openSrLabel: string;
-  @property({ attribute: 'open-aria-label', type: String }) openAriaLabel: string;
+  @property({ attribute: 'open-aria-label', type: String })
+  openAriaLabel: string;
   /**
    * @deprecated Used "close-arial-label" instead.
    */
   @property({ attribute: 'close-sr-label', type: String }) closeSrLabel: string;
-  @property({ attribute: 'close-aria-label', type: String }) closeAriaLabel: string;
+  @property({ attribute: 'close-aria-label', type: String })
+  closeAriaLabel: string;
 
   /** @internal */
   openFilterSrText: string;
@@ -117,16 +119,32 @@ class WarpPill extends LitElement {
 
   render() {
     return html`
-      <div class="${pillStyles.wrapper}">
-        <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
-          <span class="${pillStyles.a11y}">${this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText}</span>
-          <slot></slot>
+      <div class="${pillStyles.wrapper}" part="pill-wrapper">
+        <button
+          type="button"
+          class="${this._labelClasses}"
+          part="pill-button"
+          @click="${this._onClick}"
+        >
+          <span class="${pillStyles.a11y}"
+            >${this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText}</span
+          >
+          <slot part="pill-content"></slot>
         </button>
         ${
           this.canClose
-            ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
-              <span class="${pillStyles.a11y}">${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span>
-              <w-icon-close-16 class="${pillStyles.closeIcon}"></w-icon-close-16>
+            ? html` <button
+              type="button"
+              class="${this._closeClasses}"
+              part="pill-close"
+              @click="${this._onClose}"
+            >
+              <span class="${pillStyles.a11y}"
+                >${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span
+              >
+              <w-icon-close-16
+                class="${pillStyles.closeIcon}"
+              ></w-icon-close-16>
             </button>`
             : null
         }

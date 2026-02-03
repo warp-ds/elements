@@ -48,8 +48,13 @@ export class WarpStepIndicator extends LitElement {
     const classes = classNames([ccSteps.wrapper, this.horizontal && ccSteps.horizontal]);
 
     return html`
-      <div role="list" class=${classes} ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}>
-        <slot></slot>
+      <div
+        role="list"
+        part="step-list"
+        class=${classes}
+        ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}
+      >
+        <slot part="steps"></slot>
       </div>
     `;
   }

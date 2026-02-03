@@ -123,9 +123,9 @@ class WarpAlert extends LitElement {
   render() {
     return html`
       <w-expand-transition ?show=${this.show}>
-        <div role=${this.role} class=${this._wrapperClasses}>
-          <div class=${this._iconClasses}>${this._icon}</div>
-          <div class=${ccAlert.textWrapper}>
+        <div role=${this.role} class=${this._wrapperClasses} part="alert">
+          <div class=${this._iconClasses} part="alert-icon">${this._icon}</div>
+          <div class=${ccAlert.textWrapper} part="alert-content">
             <slot></slot>
           </div>
         </div>

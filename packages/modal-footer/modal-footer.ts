@@ -10,8 +10,11 @@ import { reset } from '../styles.js';
 export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitElement)) {
   render() {
     return html`
-      <div class="footer">
-        <slot @slotchange="${this.handleSlotChange}"></slot>
+      <div class="footer" part="footer">
+        <slot
+          part="footer-content"
+          @slotchange="${this.handleSlotChange}"
+        ></slot>
       </div>
     `;
   }

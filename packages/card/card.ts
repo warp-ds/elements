@@ -47,7 +47,7 @@ class WarpCard extends LitElement {
     styles,
     css`
       a::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         right: 0;
@@ -101,8 +101,19 @@ class WarpCard extends LitElement {
   /** @internal */
   get _interactiveElement() {
     const renderButton = () =>
-      html`<button class="${ccCard.a11y}" aria-pressed="${this.selected}" tabindex="-1">${this.buttonText}</button>`;
-    const renderSpan = () => html`<span role="checkbox" aria-checked="true" aria-disabled="true"></span>`;
+      html`<button
+        class="${ccCard.a11y}"
+        aria-pressed="${this.selected}"
+        tabindex="-1"
+      >
+        ${this.buttonText}
+      </button>`;
+    const renderSpan = () =>
+      html`<span
+        role="checkbox"
+        aria-checked="true"
+        aria-disabled="true"
+      ></span>`;
 
     return this.clickable ? renderButton() : this.selected ? renderSpan() : '';
   }
@@ -117,9 +128,22 @@ class WarpCard extends LitElement {
 
   render() {
     return html`
-      <div tabindex=${ifDefined(this.clickable ? '0' : undefined)} class="${this._containerClasses}" @keydown=${this.keypressed}>
-        ${this._interactiveElement} ${this.flat ? '' : html`<div class="${this._outlineClasses}"></div>`}
-        <slot></slot>
+      <div
+        tabindex=${ifDefined(this.clickable ? '0' : undefined)}
+        class="${this._containerClasses}"
+        part="card"
+        @keydown=${this.keypressed}
+      >
+        ${this._interactiveElement}
+        ${
+          this.flat
+            ? ''
+            : html`<div
+              class="${this._outlineClasses}"
+              part="card-outline"
+            ></div>`
+        }
+        <slot part="card-content"></slot>
       </div>
     `;
   }

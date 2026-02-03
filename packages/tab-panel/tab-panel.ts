@@ -38,7 +38,7 @@ export class WarpTabPanel extends LitElement {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`<slot part="panel-content"></slot>`;
   }
 }
 

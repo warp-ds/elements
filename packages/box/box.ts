@@ -64,8 +64,12 @@ class WarpBox extends LitElement {
 
   render() {
     return html`
-      <div role="${this._optOutRoleWithDefault}" class="${this._class}">
-        <slot></slot>
+      <div
+        role="${this._optOutRoleWithDefault}"
+        class="${this._class}"
+        part="box"
+      >
+        <slot part="box-content"></slot>
       </div>
     `;
   }

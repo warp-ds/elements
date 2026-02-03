@@ -108,8 +108,10 @@ class WarpLink extends LitElement {
       href=${this.href}
       target=${this.target}
       rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
-      class=${classMap(classes)}>
-      <slot></slot>
+      part="link"
+      class=${classMap(classes)}
+    >
+      <slot part="link-content"></slot>
     </a>`;
   }
 }

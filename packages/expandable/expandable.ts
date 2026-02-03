@@ -150,8 +150,14 @@ class WarpExpandable extends LitElement {
     ]);
 
     return this._showChevronUp
-      ? html`<w-icon-chevron-up-16 style="display: flex;" class="${upClasses}"></w-icon-chevron-up-16>`
-      : html`<w-icon-chevron-down-16 style="display: flex;" class="${downClasses}"></w-icon-chevron-down-16>`;
+      ? html`<w-icon-chevron-up-16
+          style="display: flex;"
+          class="${upClasses}"
+        ></w-icon-chevron-up-16>`
+      : html`<w-icon-chevron-down-16
+          style="display: flex;"
+          class="${downClasses}"
+        ></w-icon-chevron-down-16>`;
   }
 
   get #contentClasses() {
@@ -168,7 +174,10 @@ class WarpExpandable extends LitElement {
 
   /** @internal */
   get _expandableSlot() {
-    return html`<div class="${this.#contentClasses}" part="expandable-content ${this.expanded ? 'expanded' : 'collapsed'}">
+    return html`<div
+      class="${this.#contentClasses}"
+      part="expandable-content ${this.expanded ? 'expanded' : 'collapsed'}"
+    >
       <slot></slot>
     </div>`;
   }
@@ -182,11 +191,24 @@ class WarpExpandable extends LitElement {
               type="button"
               aria-expanded="${this.expanded}"
               class="${this.#buttonClasses}"
-              @click=${() => (this.expanded = !this.expanded)}>
-              part="expandable-button ${this.expanded ? 'expanded' : 'collapsed'}"
-              <div class="${ccExpandable.title}">
-                ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
-                ${this.noChevron ? '' : html`<div class="${this.#chevronClasses}">${this.#chevronIcon}</div>`}
+              part="expandable-button"
+              @click=${() => (this.expanded = !this.expanded)}
+            >
+              <div class="${ccExpandable.title}" part="expandable-title">
+                ${
+                  this.title
+                    ? html`<span class="${ccExpandable.titleType}"
+                      >${this.title}</span
+                    >`
+                    : html`<slot name="title" part="title-slot"></slot>`
+                }
+                ${
+                  this.noChevron
+                    ? ''
+                    : html`<div class="${this.#chevronClasses}">
+                      ${this.#chevronIcon}
+                    </div>`
+                }
               </div>
             </button>
           </w-unstyled-heading>`
@@ -194,8 +216,13 @@ class WarpExpandable extends LitElement {
       }
       ${
         this.animated
-          ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
-          : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
+          ? html`<w-expand-transition ?show=${this.expanded}>
+            ${this._expandableSlot}
+          </w-expand-transition>`
+          : html`<div
+            class="${this.#expansionClasses}"
+            aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
+          >
             ${this._expandableSlot}
           </div>`
       }

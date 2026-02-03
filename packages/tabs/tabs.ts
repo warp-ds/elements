@@ -280,13 +280,30 @@ export class WarpTabs extends LitElement {
     const divClasses = classNames([ccTabs.base, this._gridClass]);
 
     return html`
-      <div class="${navClasses}">
-        <div role="tablist" class="${divClasses}" @keydown="${this._handleKeyDown}">
-          <slot name="tabs" @slotchange="${this._assignSlots}"></slot>
-          <span class="selection-indicator ${ccTabs.selectionIndicator}" data-testid="selection-indicator"></span>
+      <div class="${navClasses}" part="tabs-wrapper">
+        <div
+          role="tablist"
+          class="${divClasses}"
+          part="tablist"
+          @keydown="${this._handleKeyDown}"
+        >
+          <slot
+            name="tabs"
+            part="tabs"
+            @slotchange="${this._assignSlots}"
+          ></slot>
+          <span
+            class="selection-indicator ${ccTabs.selectionIndicator}"
+            part="selection-indicator"
+            data-testid="selection-indicator"
+          ></span>
         </div>
       </div>
-      <slot name="panels" @slotchange="${this._assignSlots}"></slot>
+      <slot
+        name="panels"
+        part="panels"
+        @slotchange="${this._assignSlots}"
+      ></slot>
       <slot @slotchange="${this._assignSlots}"></slot>
     `;
   }

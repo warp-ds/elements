@@ -36,11 +36,20 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   }
   render() {
     return html`
-      <div class="header">
-        <slot name="top" @slotchange=${this.handleTopSlotChange}></slot>
-        <div class="${this._hasTopContent ? '' : 'header-title-bar'}">
+      <div class="header" part="header">
+        <slot
+          name="top"
+          part="header-top"
+          @slotchange=${this.handleTopSlotChange}
+        ></slot>
+        <div
+          class="${this._hasTopContent ? '' : 'header-title-bar'}"
+          part="header-title-bar"
+        >
           ${this.backButton}
-          <h1 class="title-el ${this.titleClasses}">${this.title}</h1>
+          <h1 class="title-el ${this.titleClasses}" part="header-title">
+            ${this.title}
+          </h1>
           ${this.closeButton}
         </div>
       </div>
@@ -74,7 +83,8 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
             comment: 'Aria label for the back button in modal',
           })}"
           class="header-button header-button-left"
-          @click="${this.emitBack}">
+          @click="${this.emitBack}"
+        >
           <w-icon-arrow-left-16 style="display: flex;"></w-icon-arrow-left-16>
         </button>`
       : nothing;
@@ -82,18 +92,19 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   get closeButton() {
     if (this.noClose) return nothing;
     return html`<div class="header-close-button-container">
-        <w-button
-            type="button"
-            aria-label="${i18n._({
-              id: 'modal.aria.close',
-              message: 'Close',
-              comment: 'Aria label for the close button in modal',
-            })}"
-            variant="pill"
-            small=""
-            @click="${this.close}">
-                <w-icon-close-16 style="display: flex;"></w-icon-close-16>
-        </w-button>
+      <w-button
+        type="button"
+        aria-label="${i18n._({
+          id: 'modal.aria.close',
+          message: 'Close',
+          comment: 'Aria label for the close button in modal',
+        })}"
+        variant="pill"
+        small=""
+        @click="${this.close}"
+      >
+        <w-icon-close-16 style="display: flex;"></w-icon-close-16>
+      </w-button>
     </div>`;
   }
   emitBack() {
@@ -160,7 +171,8 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         min-width: 40px;
         padding: 0.4rem;
         font-weight: 700;
-        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+        transition-property: color, background-color, border-color,
+          text-decoration-color, fill, stroke;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
         font-size: var(--w-font-size-m);
