@@ -64,8 +64,7 @@ function resolveAxeContainer(received: unknown): Element {
   return document.body;
 }
 
-expect.extend({
-  toHaveNoViolations(results: AxeResults) {
+function toHaveNoViolations(results: AxeResults) {
     if (typeof results.violations === 'undefined') {
       throw new Error('No axe-core results found, unable to assert');
     }
@@ -81,26 +80,15 @@ expect.extend({
           : `Expected no accessibility violations, but found ${violations.length}:\n\n${formatViolations(violations)}`,
       actual: violations,
     };
-  },
+  }
+
+expect.extend({
+  toHaveNoViolations,
 
   async toHaveNoAxeViolations(received: unknown) {
     const container = resolveAxeContainer(received);
     const results = await runAxe(container);
 
-    if (typeof results.violations === 'undefined') {
-      throw new Error('Invalid axe results: missing `violations` array');
-    }
-
-    const violations = results.violations;
-    const pass = violations.length === 0;
-
-    return {
-      pass,
-      message: () =>
-        pass
-          ? 'Expected to have accessibility violations, but none were found'
-          : `Expected no accessibility violations, but found ${violations.length}:\n\n${formatViolations(violations)}`,
-      actual: violations,
-    };
-  },
+    return toHaveNoViolations(results);
+  }
 });
