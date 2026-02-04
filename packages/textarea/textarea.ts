@@ -68,10 +68,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
   minRows: number;
 
-  @property()
+  @property({ type: String, reflect: true })
   name: string;
 
-  @property()
+  @property({ type: String, reflect: true })
   placeholder: string;
 
   /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`. */

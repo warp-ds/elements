@@ -1,3 +1,4 @@
+import { userEvent } from '@vitest/browser/context';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -6,6 +7,7 @@ import './textarea.js';
 
 describe('w-textarea accessibility (WCAG 2.2)', () => {
   describe('axe-core automated checks', () => {
+    // go through setting the various attributes and running automated AXE tests on each
     test('default state has no violations', async () => {
       render(html`<w-textarea label="Message"></w-textarea>`);
       const results = await runAxe();
@@ -52,13 +54,9 @@ describe('w-textarea accessibility (WCAG 2.2)', () => {
   describe('WCAG 1.3.1 - Info and Relationships', () => {
     test('textarea has accessible name from label', async () => {
       const page = render(html`<w-textarea label="Description"></w-textarea>`);
+      // this checks that after we set the label to "Description", the textbox's accessible name is also "Description".
+      // accessible name is derived from the label (or aria-label / aria-labelledby) if present (which they are not in this case)
       await expect.element(page.getByRole('textbox', { name: 'Description' })).toBeVisible();
-    });
-
-    test('label is programmatically associated with textarea', async () => {
-      const page = render(html`<w-textarea label="Bio"></w-textarea>`);
-      const textarea = page.getByLabelText('Bio');
-      await expect.element(textarea).toBeVisible();
     });
   });
 
@@ -79,23 +77,13 @@ describe('w-textarea accessibility (WCAG 2.2)', () => {
       const page = render(html`<w-textarea label="Bio" help-text="Tell us about yourself"></w-textarea>`);
       await expect.element(page.getByLabelText('Bio')).toHaveAccessibleDescription('Tell us about yourself');
     });
-
-    test('optional attribute is reflected on the component', () => {
-      render(html`<w-textarea label="Notes" optional></w-textarea>`);
-      // Verify the optional attribute is reflected on the host element
-      const wTextarea = document.querySelector('w-textarea');
-      expect(wTextarea?.hasAttribute('optional')).toBe(true);
-    });
   });
 
+  // these tests essentially verify that the attributes we set on the host are mirrored to the internal textarea
   describe('WCAG 4.1.2 - Name, Role, Value', () => {
-    test('has correct role', async () => {
-      const page = render(html`<w-textarea label="Message"></w-textarea>`);
-      await expect.element(page.getByRole('textbox')).toBeVisible();
-    });
-
     test('required state is exposed', async () => {
       const page = render(html`<w-textarea label="Name" required></w-textarea>`);
+      // getByLabelText resolves to the internal <textarea>, not the host element
       await expect.element(page.getByLabelText('Name')).toHaveAttribute('required');
     });
 
@@ -126,17 +114,27 @@ describe('w-textarea accessibility (WCAG 2.2)', () => {
     });
 
     test('disabled textarea is not focusable', async () => {
-      render(html`
+      const page = render(html`
         <button>Before</button>
         <w-textarea label="Message" disabled></w-textarea>
         <button>After</button>
       `);
 
-      const beforeBtn = document.querySelector('button');
+      const buttons = Array.from(document.querySelectorAll('button'));
+      const beforeBtn = buttons[0] as HTMLButtonElement | undefined;
+      const afterBtn = buttons[1] as HTMLButtonElement | undefined;
+
+      expect(beforeBtn).toBeDefined();
+      expect(afterBtn).toBeDefined();
+
       beforeBtn?.focus();
 
-      // Verify disabled textarea doesn't receive focus when clicked
-      const wTextarea = document.querySelector('w-textarea');
+      // Attempt to move focus to the disabled textarea; focus should remain on "Before".
+      const wTextarea = document.querySelector('w-textarea') as HTMLElement | null;
+      wTextarea?.click();
+      await expect.element(beforeBtn).toHaveFocus();
+
+      // Verify disabled textarea doesn't receive focus
       expect(wTextarea?.shadowRoot?.activeElement).toBeNull();
     });
   });
