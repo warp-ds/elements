@@ -1,52 +1,44 @@
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
-import { runAxe } from '../../tests/a11y/utils.js';
 import './textarea.js';
 
 describe('w-textarea accessibility (WCAG 2.2)', () => {
   describe('axe-core automated checks', () => {
     // go through setting the various attributes and running automated AXE tests on each
     test('default state has no violations', async () => {
-      render(html`<w-textarea label="Message"></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message"></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('with help text has no violations', async () => {
-      render(html`<w-textarea label="Message" help-text="Enter your message"></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" help-text="Enter your message"></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('invalid state has no violations', async () => {
-      render(html`<w-textarea label="Message" invalid help-text="This field is required"></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" invalid help-text="This field is required"></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('disabled state has no violations', async () => {
-      render(html`<w-textarea label="Message" disabled></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" disabled></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('readonly state has no violations', async () => {
-      render(html`<w-textarea label="Message" readonly value="Read only text"></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" readonly value="Read only text"></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('required state has no violations', async () => {
-      render(html`<w-textarea label="Message" required></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" required></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
 
     test('optional state has no violations', async () => {
-      render(html`<w-textarea label="Message" optional></w-textarea>`);
-      const results = await runAxe();
-      expect(results).toHaveNoViolations();
+      const page = render(html`<w-textarea label="Message" optional></w-textarea>`);
+      await expect(page).toHaveNoAxeViolations();
     });
   });
 
