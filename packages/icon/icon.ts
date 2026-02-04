@@ -1,7 +1,7 @@
-import { styles } from './style.js';
 import { html, LitElement, TemplateResult } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { styles } from './style.js';
 
 // Generic parser for fetch responses
 type ResponseParser<T> = (response: Response) => Promise<T>;

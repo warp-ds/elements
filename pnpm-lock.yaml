@@ -134,9 +134,6 @@ importers:
       '@warp-ds/css':
         specifier: 2.1.1
         version: 2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.55.2)(vite@6.4.1(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vue@3.5.27(typescript@5.5.3))))
-      '@warp-ds/icons':
-        specifier: 2.5.0
-        version: 2.5.0(@lingui/core@5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0))
       '@warp-ds/uno':
         specifier: 2.1.0
         version: 2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.55.2)(vite@6.4.1(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vue@3.5.27(typescript@5.5.3)))
@@ -1834,12 +1831,6 @@ packages:
     resolution: {integrity: sha512-deHiQasuAPX9aUYos11WHWbKTOVdfcDxJJeBy+Tyc2bXrz/Su6ISFZATT9zaVZEjJJr8RVinkbkVysUdma15vg==}
     peerDependencies:
       '@warp-ds/uno': 2.x
-
-  '@warp-ds/icons@2.5.0':
-    resolution: {integrity: sha512-tOI8hdXb2wlybpknhnySZ4m6jqA0fS+ycE7pHnpAeg27sN+XJJehL07cNuJ27MmZc0hvZtzv/L1O2F8ivjVbfQ==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      '@lingui/core': 5.x
 
   '@warp-ds/uno@2.1.0':
     resolution: {integrity: sha512-EI3z8OovMZ6ylDvLt35H36TC357kJIadAeATdHIT2PfY0ux+Ey58cEDF1Q83w6okWMLh1/4ZJeiVzhjPsoqNQQ==}
@@ -6650,10 +6641,6 @@ snapshots:
   '@warp-ds/css@2.1.1(@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.55.2)(vite@6.4.1(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vue@3.5.27(typescript@5.5.3))))':
     dependencies:
       '@warp-ds/uno': 2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.55.2)(vite@6.4.1(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vue@3.5.27(typescript@5.5.3)))
-
-  '@warp-ds/icons@2.5.0(@lingui/core@5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0))':
-    dependencies:
-      '@lingui/core': 5.2.0(@lingui/babel-plugin-lingui-macro@5.2.0(babel-plugin-macros@3.1.0)(typescript@5.5.3))(babel-plugin-macros@3.1.0)
 
   '@warp-ds/uno@2.1.0(unocss@0.65.4(postcss@8.5.6)(rollup@4.55.2)(vite@6.4.1(@types/node@20.14.10)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vue@3.5.27(typescript@5.5.3)))':
     dependencies:

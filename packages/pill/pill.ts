@@ -1,13 +1,13 @@
 // @warp-css;
 
 import { html, LitElement } from 'lit';
-import '@warp-ds/icons/elements/close-16';
+import '../icon/icon.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { property } from 'lit/decorators.js';
 
-import { activateI18n } from '../i18n';
+import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -126,7 +126,7 @@ class WarpPill extends LitElement {
           this.canClose
             ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
               <span class="${pillStyles.a11y}">${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span>
-              <w-icon-close-16 class="${pillStyles.closeIcon}"></w-icon-close-16>
+              <w-icon name="Close" size="small" locale="${detectLocale()}" class="${pillStyles.closeIcon}" class="flex"></w-icon>
             </button>`
             : null
         }

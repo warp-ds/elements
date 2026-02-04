@@ -5,12 +5,9 @@ import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 
-import '@warp-ds/icons/elements/warning-16';
-import '@warp-ds/icons/elements/error-16';
-import '@warp-ds/icons/elements/success-16';
-import '@warp-ds/icons/elements/close-16';
+import '../icon/icon.js';
 
-import { activateI18n } from '../i18n';
+import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -159,9 +156,10 @@ export class WarpToast extends LitElement {
 
   /** @internal */
   get _iconMarkup() {
-    if (this._warning) return html`<w-icon-warning-16></w-icon-warning-16>`;
-    if (this._error) return html`<w-icon-error-16></w-icon-error-16>`;
-    return html`<w-icon-success-16></w-icon-success-16>`;
+    const locale = detectLocale();
+    if (this._warning) return html`<w-icon name="Warning" size="small" locale="${locale}" class="flex"></w-icon>`;
+    if (this._error) return html`<w-icon name="Error" size="small" locale="${locale}" class="flex"></w-icon>`;
+    return html`<w-icon name="Success" size="small" locale="${locale}" class="flex"></w-icon>`;
   }
 
   async collapse() {
@@ -196,7 +194,7 @@ export class WarpToast extends LitElement {
           this.canclose === true,
           () => html`
             <w-button variant="pill" small="" @click="${this.close}">
-              <w-icon-close-16 style="display: flex"></w-icon-close-16>
+              <w-icon name="Close" size="small" locale="${detectLocale()}" style="display: flex" class="flex"></w-icon>
             </w-button>
           `,
         )}

@@ -4,9 +4,9 @@ import { classNames } from '@chbphone55/classnames';
 import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '@warp-ds/icons/elements/chevron-down-16';
-import '@warp-ds/icons/elements/chevron-up-16';
+import '../icon/icon.js';
 import '../utils/expand-transition';
+import { detectLocale } from '../i18n.js';
 import '../utils/unstyled-heading';
 
 import { reset } from '../styles.js';
@@ -33,11 +33,11 @@ const ccExpandable = {
 
   // These are web component specific classes, using the ::part-selector:
   elementsChevronDownTransform:
-    'part-[w-icon-chevron-down-16-part]:transform part-[w-icon-chevron-down-16-part]:transition-transform part-[w-icon-chevron-down-16-part]:transform-gpu part-[w-icon-chevron-down-16-part]:ease-in-out',
+    'part-[w-chevrondown]:transform part-[w-chevrondown]:transition-transform part-[w-chevrondown]:transform-gpu part-[w-chevrondown]:ease-in-out',
   elementsChevronUpTransform:
-    'part-[w-icon-chevron-up-16-part]:transform part-[w-icon-chevron-up-16-part]:transition-transform part-[w-icon-chevron-up-16-part]:transform-gpu part-[w-icon-chevron-up-16-part]:ease-in-out',
-  elementsChevronExpand: 'part-[w-icon-chevron-down-16-part]:-rotate-180',
-  elementsChevronCollapse: 'part-[w-icon-chevron-up-16-part]:rotate-180',
+    'part-[w-chevronup]:transform part-[w-chevronup]:transition-transform part-[w-chevronup]:transform-gpu part-[w-chevronup]:ease-in-out',
+  elementsChevronExpand: 'part-[w-chevrondown]:-rotate-180',
+  elementsChevronCollapse: 'part-[w-chevronup]:rotate-180',
 
   expansion: 'overflow-hidden',
   expansionNotExpanded: 'h-0 invisible',
@@ -142,16 +142,19 @@ class WarpExpandable extends LitElement {
   get #chevronIcon() {
     const upClasses = classNames([
       ccExpandable.elementsChevronUpTransform,
+      'flex',
       !this.expanded && this._showChevronUp && ccExpandable.elementsChevronCollapse,
     ]);
     const downClasses = classNames([
       ccExpandable.elementsChevronDownTransform,
+      'flex',
       this.expanded && !this._showChevronUp && ccExpandable.elementsChevronExpand,
     ]);
 
+    const locale = detectLocale();
     return this._showChevronUp
-      ? html`<w-icon-chevron-up-16 style="display: flex;" class="${upClasses}"></w-icon-chevron-up-16>`
-      : html`<w-icon-chevron-down-16 style="display: flex;" class="${downClasses}"></w-icon-chevron-down-16>`;
+      ? html`<w-icon name="ChevronUp" size="small" locale="${locale}" class="${upClasses}"></w-icon>`
+      : html`<w-icon name="ChevronDown" size="small" locale="${locale}" class="${downClasses}"></w-icon>`;
   }
 
   get #contentClasses() {

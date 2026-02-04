@@ -6,11 +6,9 @@ import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
-import { uniqueId } from '../utils.js';
 import { reset } from '../styles.js';
+import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
-
 
 const ccInput = {
   // input classes
@@ -197,11 +195,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     if (this.required && !this.value) {
       // Get the browser's native validation message from the internal textarea
       const message = this._textarea?.validationMessage || '';
-      this.internals.setValidity(
-        { valueMissing: true },
-        message,
-        this._textarea,
-      );
+      this.internals.setValidity({ valueMissing: true }, message, this._textarea);
 
       // Only show visual validation state after user interaction
       if (this.#hasInteracted) {

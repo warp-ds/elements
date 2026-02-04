@@ -4,16 +4,16 @@ import { html, LitElement, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import '@warp-ds/icons/elements/check-16';
+import '../icon/icon.js';
 
-import { activateI18n } from '../i18n.js';
+import { activateI18n, detectLocale } from '../i18n.js';
+import { styles } from '../step-indicator/styles.js';
+import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
-import { styles } from '../step-indicator/styles.js';
-import { reset } from '../styles.js';
 
 const ccStep = {
   base: 'group/step',
@@ -143,7 +143,7 @@ export class WarpStep extends LitElement {
       <div class="${stepClasses}" style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
         ${!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing}
         <div class=${dotClasses} role="img" aria-label=${this.getAriaLabel()} aria-current=${this.active ? 'step' : nothing}>
-          ${this.completed ? html`<w-icon-check-16 data-testid="completed-icon"></w-icon-check-16>` : nothing}
+          ${this.completed ? html`<w-icon name="Check" size="small" locale="${detectLocale()}" data-testid="completed-icon" class="flex"></w-icon>` : nothing}
         </div>
         <div class=${lineClasses}></div>
         <div class=${contentClasses} style=${ifDefined(this._context.horizontal ? 'height: 100%;' : undefined)}>
