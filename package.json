@@ -345,6 +345,7 @@
     "@wc-toolkit/jsx-types": "^1.4.2",
     "@wc-toolkit/storybook-helpers": "^9.0.1",
     "@wc-toolkit/type-parser": "^1.2.0",
+    "axe-core": "^4.11.1",
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",
