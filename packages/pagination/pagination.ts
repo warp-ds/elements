@@ -15,11 +15,12 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
-const iconSuffix = i18n._({
-  id: 'pagination.aria.icon-suffix',
-  message: 'icon',
-  comment: 'Suffix added at the end of icon titles when img semantics are lost on an html element',
-});
+const getIconSuffix = () =>
+  i18n._({
+    id: 'pagination.aria.icon-suffix',
+    message: 'icon',
+    comment: 'Suffix added at the end of icon titles when img semantics are lost on an html element',
+  });
 
 const baseItemStyles =
   'hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding';
@@ -139,7 +140,7 @@ class WarpPagination extends LitElement {
                 })},</span
               >
               <w-icon name="ChevronDoubleLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
-              <span class="sr-only">${iconSuffix}</span>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }
@@ -160,7 +161,7 @@ class WarpPagination extends LitElement {
                 })},</span
               >
               <w-icon name="ChevronLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
-              <span class="sr-only">${iconSuffix}</span>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }
@@ -218,7 +219,7 @@ class WarpPagination extends LitElement {
                 })},</span
               >
               <w-icon name="ChevronRight" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
-              <span class="sr-only">${iconSuffix}</span>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }
