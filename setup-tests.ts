@@ -38,7 +38,7 @@ function formatViolations(violations: Result[]): string {
 expect.extend({
   toHaveNoViolations(results: AxeResults) {
     if (typeof results.violations === 'undefined') {
-      throw new Error('No violations found in axe results object');
+      throw new Error('No axe-core results found, unable to assert');
     }
 
     const violations = results.violations;
