@@ -5,7 +5,6 @@ import type { RenderResult } from 'vitest-browser-lit';
 import { expect } from 'vitest';
 
 interface AxeMatchers {
-  toHaveNoViolations(): void;
   toHaveNoAxeViolations(): Promise<void>;
 }
 
@@ -78,8 +77,6 @@ function toHaveNoViolations(results: AxeResults) {
   }
 
 expect.extend({
-  toHaveNoViolations,
-
   async toHaveNoAxeViolations(received: unknown) {
     const container = resolveAxeContainer(received);
     const results = await runAxe(container);
