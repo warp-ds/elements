@@ -4,7 +4,7 @@ import { classNames } from '@chbphone55/classnames';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import '#icon';
+import '../icon/icon.js';
 import { detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 

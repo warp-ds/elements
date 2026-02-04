@@ -4,7 +4,7 @@ import { html, LitElement, nothing } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import '#icon';
+import '../icon/icon.js';
 
 import { activateI18n, detectLocale } from '../i18n.js';
 import { styles } from '../step-indicator/styles.js';

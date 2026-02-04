@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { html, LitElement } from 'lit';
-import '#icon';
+import '../icon/icon.js';
 
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
