@@ -52,6 +52,7 @@
     "allowJs": true,
     "declaration": true,
     "outDir": "dist",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "rootDir": ".",
   }
 }
