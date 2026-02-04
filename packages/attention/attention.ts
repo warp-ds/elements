@@ -25,7 +25,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
-import '../icon/icon.js';
+import '#icon';
 import '../button/button.js';
 
 const buttonTextSizes = {

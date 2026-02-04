@@ -8,7 +8,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
-import '../icon/icon.js';
+import '#icon';
 import { detectLocale } from '../i18n.js';
 
 const prefixSuffixWrapper =

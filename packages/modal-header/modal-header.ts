@@ -2,7 +2,7 @@ import { Move } from '@itsy/animate/move';
 import { i18n } from '@lingui/core';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
-import '../icon/icon.js';
+import '#icon';
 
 import { activateI18n, detectLocale } from '../i18n.js';
 import { messages as daMessages } from '../modal/locales/da/messages.mjs';

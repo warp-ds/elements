@@ -5,7 +5,7 @@ import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 
-import '../icon/icon.js';
+import '#icon';
 
 import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles';

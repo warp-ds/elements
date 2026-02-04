@@ -9,7 +9,7 @@ import type { WarpButton } from './button.js';
 import './button.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
-import '../icon/icon.js';
+import '#icon';
 import { detectLocale } from '../i18n.js';
 
 const meta: Meta<typeof args> = {

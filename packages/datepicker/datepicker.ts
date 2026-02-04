@@ -29,7 +29,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
 
-import '../icon/icon.js';
+import '#icon';
 
 import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';

@@ -4,7 +4,7 @@ import { classNames } from '@chbphone55/classnames';
 import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import '../icon/icon.js';
+import '#icon';
 import '../utils/expand-transition';
 import { detectLocale } from '../i18n.js';
 import '../utils/unstyled-heading';
