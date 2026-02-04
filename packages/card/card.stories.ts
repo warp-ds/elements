@@ -42,6 +42,56 @@ export const Default: Story = {
   },
 };
 
+export const TwoCardHorizontal: Story = {
+  render() {
+    return html`
+      <section style="display: grid; grid-auto-rows: 1fr; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+        <w-card>
+          <ul>
+            <li>First item</li>
+            <li>Second item</li>
+          </ul>
+          <button>Click me</button>
+        </w-card>
+        <w-card>
+          <ul>
+            <li>First item</li>
+            <li>Second item</li>
+            <li>Third item</li>
+            <li>Fourth item</li>
+          </ul>
+          <button>Click me</button>
+        </w-card>
+      </section>
+    `
+  }
+}
+
+export const TwoCardVertical: Story = {
+  render() {
+    return html`
+      <section style="display: grid; grid-auto-rows: 1fr; gap: 16px;">
+        <w-card>
+          <ul>
+            <li>First item</li>
+            <li>Second item</li>
+          </ul>
+          <button>Click me</button>
+        </w-card>
+        <w-card>
+          <ul>
+            <li>First item</li>
+            <li>Second item</li>
+            <li>Third item</li>
+            <li>Fourth item</li>
+          </ul>
+          <button>Click me</button>
+        </w-card>
+      </section>
+    `
+  }
+}
+
 export const Selected: Story = {
   args: {
     selected: true,
