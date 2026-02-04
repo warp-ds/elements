@@ -1,4 +1,3 @@
-import { userEvent } from '@vitest/browser/context';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
