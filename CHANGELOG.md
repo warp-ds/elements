@@ -1,3 +1,10 @@
+# [2.6.0-next.5](https://github.com/warp-ds/elements/compare/v2.6.0-next.4...v2.6.0-next.5) (2026-02-04)
+
+
+### Features
+
+* Replace old icons with new icons ([#510](https://github.com/warp-ds/elements/issues/510)) ([8cbb622](https://github.com/warp-ds/elements/commit/8cbb62201f84b54ed85cff70270fa174166bc6c4))
+
 # [2.6.0-next.4](https://github.com/warp-ds/elements/compare/v2.6.0-next.3...v2.6.0-next.4) (2026-02-02)
 
 
