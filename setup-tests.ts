@@ -1,13 +1,8 @@
 import 'vitest-browser-lit';
-import { i18n } from '@lingui/core';
 import axe from 'axe-core';
 import type { AxeResults, Result } from 'axe-core';
 import type { RenderResult } from 'vitest-browser-lit';
 import { expect } from 'vitest';
-
-// Initialize i18n with English locale for tests
-i18n.load('en', {});
-i18n.activate('en');
 
 interface AxeMatchers {
   toHaveNoViolations(): void;

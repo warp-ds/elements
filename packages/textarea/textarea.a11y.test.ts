@@ -1,7 +1,12 @@
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
+import { i18n } from '@lingui/core';
 import './textarea.js';
+
+// Initialize i18n with English locale for tests
+i18n.load('en', {});
+i18n.activate('en');
 
 describe('w-textarea accessibility (WCAG 2.2)', () => {
   describe('axe-core automated checks', () => {
