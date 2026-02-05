@@ -69,10 +69,10 @@ describe('WCAG 4.1.2 - Name, Role, Value', () => {
 
       const completedStep = document.querySelector('w-step[completed]') as HTMLElement | null;
       expect(completedStep).toBeTruthy();
-      await expect.poll(() => completedStep?.shadowRoot?.querySelector('[data-testid="completed-icon"]')).toBeTruthy();
+      await expect.poll(() => completedStep?.shadowRoot?.querySelector('[aria-label="Step indicator completed circle"]')).toBeTruthy();
 
       const incompleteStep = document.querySelector('w-step:not([completed])') as HTMLElement | null;
       expect(incompleteStep).toBeTruthy();
-      await expect.poll(() => incompleteStep?.shadowRoot?.querySelector('[data-testid="completed-icon"]')).toBeFalsy();
+      await expect.poll(() => incompleteStep?.shadowRoot?.querySelector('[aria-label="Step indicator completed circle"]')).toBeFalsy();
     });
 });
