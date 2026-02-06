@@ -126,6 +126,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @query('.w-textfield__mask')
   mask: HTMLDivElement;
 
+  @query('input')
+  private _input: HTMLInputElement;
+
   /** @internal */
   @property({ type: Boolean })
   _hasPrefix = false;
@@ -141,17 +144,151 @@ class WarpTextField extends FormControlMixin(LitElement) {
         this.mask.innerText = this.formatter(this.value);
       }
     }
+    if (
+      changedProperties.has('value') ||
+      changedProperties.has('required') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('min') ||
+      changedProperties.has('max') ||
+      changedProperties.has('minLength') ||
+      changedProperties.has('maxLength') ||
+      changedProperties.has('pattern') ||
+      changedProperties.has('type') ||
+      changedProperties.has('step')
+    ) {
+      this.#updateValidity();
+    }
   }
 
   // capture the initial value using firstUpdated and #initialValue
   #initialValue: string | null = null;
 
+  // Track whether the current invalid/helpText state was set by validation
+  #validationActive = false;
+
+  // Store the original helpText to restore when validation passes
+  #originalHelpText: string | undefined = undefined;
+
+  // Track whether the user has interacted with the field
+  #hasInteracted = false;
+
   firstUpdated(changedProps: Map<string, unknown>) {
+    super.firstUpdated(changedProps);
     this.#initialValue = this.value;
+    this.#updateValidity();
   }
 
   resetFormControl(): void {
     this.value = this.#initialValue;
+    this.#hasInteracted = false;
+    this.#clearValidationState();
+    this.#updateValidity();
+  }
+
+  /** Returns the validation message if the input is invalid, otherwise an empty string */
+  get validationMessage(): string {
+    return this.internals.validationMessage;
+  }
+
+  /** Returns the validity state of the input */
+  get validity(): ValidityState {
+    return this.internals.validity;
+  }
+
+  /** Checks whether the input passes constraint validation */
+  checkValidity(): boolean {
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Checks validity and shows the validation message if invalid */
+  reportValidity(): boolean {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Sets a custom validation message. Pass an empty string to clear. */
+  setCustomValidity(message: string): void {
+    if (message) {
+      this.internals.setValidity({ customError: true }, message, this._input);
+      this.#setValidationState(message);
+    } else {
+      this.#clearValidationState();
+      this.#updateValidity();
+    }
+  }
+
+  /** @internal */
+  #setValidationState(message: string): void {
+    if (!this.#validationActive) {
+      this.#originalHelpText = this.helpText;
+    }
+    this.#validationActive = true;
+    this.invalid = true;
+    this.helpText = message;
+  }
+
+  /** @internal */
+  #clearValidationState(): void {
+    if (this.#validationActive) {
+      this.invalid = false;
+      this.helpText = this.#originalHelpText;
+      this.#originalHelpText = undefined;
+      this.#validationActive = false;
+    }
+  }
+
+  /** @internal */
+  #updateValidity(): void {
+    if (this.disabled) {
+      this.internals.setValidity({});
+      this.#clearValidationState();
+      return;
+    }
+
+    const input = this._input;
+    if (!input) return;
+
+    const validity = input.validity;
+    if (!validity.valid) {
+      const message = input.validationMessage || '';
+      this.internals.setValidity(
+        {
+          valueMissing: validity.valueMissing,
+          typeMismatch: validity.typeMismatch,
+          patternMismatch: validity.patternMismatch,
+          tooLong: validity.tooLong,
+          tooShort: validity.tooShort,
+          rangeUnderflow: validity.rangeUnderflow,
+          rangeOverflow: validity.rangeOverflow,
+          stepMismatch: validity.stepMismatch,
+          badInput: validity.badInput,
+          customError: validity.customError,
+        },
+        message,
+        input
+      );
+
+      if (this.#hasInteracted) {
+        this.#setValidationState(message);
+      }
+      return;
+    }
+
+    this.internals.setValidity({});
+    this.#clearValidationState();
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    // Listen for invalid event on the host element (fired by form validation)
+    this.addEventListener('invalid', this.#handleInvalid);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('invalid', this.#handleInvalid);
   }
 
   // Note about styling slotted elements:
@@ -219,6 +356,21 @@ class WarpTextField extends FormControlMixin(LitElement) {
     this.dispatchEvent(event);
   }
 
+  /** @internal */
+  #handleBlur = (e: Event) => {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+    this.handler(e);
+  };
+
+  /** @internal */
+  #handleInvalid = (e: Event) => {
+    // Prevent browser's native validation bubble
+    e.preventDefault();
+    this.#hasInteracted = true;
+    this.#updateValidity();
+  };
+
   prefixSlotChange() {
     const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=prefix]');
     const affixes = el.assignedElements();
@@ -259,14 +411,14 @@ class WarpTextField extends FormControlMixin(LitElement) {
             .value="${this.value || ''}"
             aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
             aria-errormessage="${ifDefined(this._error)}"
-            aria-invalid="${ifDefined(this.invalid)}"
+            aria-invalid=${this.invalid ? 'true' : nothing}
             id="${this._id}"
             ?disabled="${this.disabled}"
             ?readonly="${this.readonly || this.readOnly}"
             ?required="${this.required}"
             autocomplete="${ifDefined(this.autocomplete)}"
             step="${ifDefined(this.step)}"
-            @blur="${this.handler}"
+            @blur="${this.#handleBlur}"
             @change="${this.handler}"
             @input="${this.handler}"
             @focus="${this.handler}" />

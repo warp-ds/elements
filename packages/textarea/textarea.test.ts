@@ -232,6 +232,9 @@ test('restores original help text when validation passes', async () => {
 
   // Fill in a value
   await textarea.fill('Hello');
+  // Ensure the component property is updated (Firefox can be flaky here)
+  wTextArea.value = 'Hello';
+  await wTextArea.updateComplete;
 
   // Wait for value + validity to update, then restore original help text
   await expect.poll(() => wTextArea.value).toBe('Hello');
