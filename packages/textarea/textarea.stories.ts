@@ -86,6 +86,21 @@ export const Optional: Story = {
   },
 };
 
+export const InfoTooltip: Story = {
+  args: {
+    label: 'Description',
+    'info-tooltip': true,
+  },
+};
+
+export const OptionalWithInfoTooltip: Story = {
+  args: {
+    label: 'Description',
+    optional: true,
+    'info-tooltip': true,
+  },
+};
+
 export const ControlledSize: Story = {
   args: {
     label: 'Description',

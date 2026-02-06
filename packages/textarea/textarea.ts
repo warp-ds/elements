@@ -9,6 +9,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
+import { detectLocale } from '../i18n.js';
+
+import '../icon/icon.js';
 
 const ccInput = {
   // input classes
@@ -29,6 +32,7 @@ const ccInput = {
 const ccLabel = {
   base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text flex',
   optional: 'pl-8 font-normal text-s s-text-subtle',
+  infoIcon: 'pl-8',
 };
 
 const ccHelpText = {
@@ -87,6 +91,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   @property({ type: Boolean, reflect: true })
   optional: boolean;
+
+  @property({ type: Boolean, reflect: true, attribute: 'info-tooltip' })
+  infoTooltip: boolean;
 
   @state()
   minHeight = Number.NEGATIVE_INFINITY;
@@ -334,9 +341,18 @@ class WarpTextarea extends FormControlMixin(LitElement) {
                           <span class="${ccLabel.optional}">
                             ${i18n._({
                               id: 'textarea.label.optional',
-                              message: '(optional)',
+                              message: 'Optional',
                               comment: 'Shown behind label when marked as optional',
                             })}
+                          </span>
+                    `
+                      : nothing
+                  }
+                  ${
+                    this.infoTooltip
+                      ? html`
+                          <span class="${ccLabel.infoIcon}">
+                            <w-icon name="Info" size="small" class="flex" locale="${detectLocale()}"></w-icon>
                           </span>
                     `
                       : nothing

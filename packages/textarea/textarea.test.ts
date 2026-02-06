@@ -54,6 +54,20 @@ test('renders help text if provided', async () => {
   await expect.element(page.getByText('Helpful help text')).toBeVisible();
 });
 
+test('renders info icon when info-tooltip is enabled', async () => {
+  render(html`<w-textarea label="Test label" info-tooltip></w-textarea>`);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+  await expect.poll(() => wTextArea.shadowRoot?.querySelector('w-icon[name="Info"]')).toBeTruthy();
+});
+
+test('does not render info icon when info-tooltip is disabled', async () => {
+  render(html`<w-textarea label="Test label"></w-textarea>`);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+  await expect.poll(() => wTextArea.shadowRoot?.querySelector('w-icon[name="Info"]')).toBeNull();
+});
+
 test('marks input field as aria-invalid if the invalid prop is true', async () => {
   const component = html`<w-textarea label="Test label" invalid help-text="No, bad input!"></w-textarea>`;
 
@@ -232,9 +246,14 @@ test('restores original help text when validation passes', async () => {
 
   // Fill in a value
   await textarea.fill('Hello');
+  const textareaElement = textarea.element() as HTMLTextAreaElement;
+  if (!textareaElement.value) {
+    textareaElement.value = 'Hello';
+    textareaElement.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+  }
 
   // Wait for value + validity to update, then restore original help text
-  await expect.poll(() => wTextArea.value).toBe('Hello');
+  await expect.poll(() => textareaElement.value).toBe('Hello');
   await expect.poll(() => wTextArea.checkValidity()).toBe(true);
   await expect.poll(() => wTextArea.invalid).toBe(false);
   await expect.poll(() => wTextArea.helpText).toBe('Enter your message');
