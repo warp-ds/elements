@@ -12,20 +12,21 @@ import { Expandable } from '@warp-ds/elements/react/expandable';
 import { Link } from '@warp-ds/elements/react/link';
 import { Modal } from '@warp-ds/elements/react/modal';
 import { PageIndicator } from '@warp-ds/elements/react/page-indicator';
+import { Pagination } from '@warp-ds/elements/react/pagination';
 import { Pill } from '@warp-ds/elements/react/pill';
 import { Select } from '@warp-ds/elements/react/select';
+import { Step } from '@warp-ds/elements/react/step';
+import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
 import { Switch } from '@warp-ds/elements/react/switch';
 import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
+import { Textarea } from '@warp-ds/elements/react/textarea';
 import { TextField } from '@warp-ds/elements/react/textfield';
 
 // unreleased
 // import { Checkbox } from '@warp-ds/elements/react/checkbox';
 // import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
-// import { Pagination } from '@warp-ds/elements/react/pagination';
 // import { Radio } from '@warp-ds/elements/react/radio';
 // import { Slider } from '@warp-ds/elements/react/slider';
-// import { StepIndicator } from '@warp-ds/elements/react/step-indicator';
-// import { Textarea } from '@warp-ds/elements/react/textarea';
 
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;
@@ -49,14 +50,15 @@ const _pageIndicator: typeof PageIndicator = PageIndicator;
 const _tabs: typeof Tabs = Tabs;
 const _tab: typeof Tab = Tab;
 const _tabPanel: typeof TabPanel = TabPanel;
+const _pagination: typeof Pagination = Pagination;
+const _textarea: typeof Textarea = Textarea;
+const _step: typeof Step = Step;
+const _stepIndicator: typeof StepIndicator = StepIndicator;
 
 // unreleased
 // const _deadToggle: typeof DeadToggle = DeadToggle;
-// const _pagination: typeof Pagination = Pagination;
 // const _checkbox: typeof Checkbox = Checkbox;
 // const _radio: typeof Radio = Radio;
 // const _slider: typeof Slider = Slider;
-// const _stepIndicator: typeof StepIndicator = StepIndicator;
-// const _textarea: typeof Textarea = Textarea;
 
 console.log('✓ All imports resolved successfully');

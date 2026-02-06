@@ -103,3 +103,33 @@ export const Autofocus: Story = {
     autofocus: true,
   },
 };
+
+export const FormParticipation: Story = {
+  render: () => html`
+    <form
+      @submit=${(e: Event) => {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        const formData = new FormData(form);
+        alert('Form submitted with message: ' + formData.get('message'));
+      }}>
+      <w-textarea
+        label="Message"
+        name="message"
+        required
+        help-text="This field is required. Try submitting without a value."></w-textarea>
+      <div style="margin-top: 16px; display: flex; gap: 8px;">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  `,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates form validation using ElementInternals. The textarea participates in native form validation - submission is blocked when the required field is empty, and the browser shows a validation message.',
+      },
+    },
+  },
+};

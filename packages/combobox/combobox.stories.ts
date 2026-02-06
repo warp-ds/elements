@@ -35,13 +35,13 @@ export default meta;
 type Story = StoryObj<WarpCombobox>;
 
 const sampleOptions = [
-  { value: 'Apple', label: 'Apple' },
-  { value: 'Banana', label: 'Banana' },
-  { value: 'Orange', label: 'Orange' },
-  { value: 'Grape', label: 'Grape' },
-  { value: 'Strawberry', label: 'Strawberry' },
-  { value: 'Pineapple', label: 'Pineapple' },
-  { value: 'Mango', label: 'Mango' },
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'grape', label: 'Grape' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'pineapple', label: 'Pineapple' },
+  { value: 'mango', label: 'Mango' },
 ];
 
 export const Default: Story = {

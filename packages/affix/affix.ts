@@ -8,8 +8,8 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
-import '@warp-ds/icons/elements/search-16';
-import '@warp-ds/icons/elements/close-16';
+import '../icon/icon.js';
+import { detectLocale } from '../i18n.js';
 
 const prefixSuffixWrapper =
   'absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ';
@@ -71,7 +71,7 @@ class WarpAffix extends LitElement {
   get _searchButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="submit">
-        <w-icon-search-16></w-icon-search-16>
+        <w-icon name="Search" size="small" locale="${detectLocale()}" class="flex"></w-icon>
       </button>
     `;
   }
@@ -80,7 +80,7 @@ class WarpAffix extends LitElement {
   get _clearButton() {
     return html`
       <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="reset">
-        <w-icon-close-16></w-icon-close-16>
+        <w-icon name="Close" size="small" locale="${detectLocale()}" class="flex"></w-icon>
       </button>
     `;
   }

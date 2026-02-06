@@ -4,10 +4,8 @@ import { classNames } from '@chbphone55/classnames';
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import '@warp-ds/icons/elements/info-16';
-import '@warp-ds/icons/elements/warning-16';
-import '@warp-ds/icons/elements/error-16';
-import '@warp-ds/icons/elements/success-16';
+import '../icon/icon.js';
+import { detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
@@ -105,17 +103,18 @@ class WarpAlert extends LitElement {
 
   /** @internal */
   get _icon() {
+    const locale = detectLocale();
     if (this.variant === alertVariants.info) {
-      return html` <w-icon-info-16></w-icon-info-16>`;
+      return html`<w-icon name="Info" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     if (this.variant === alertVariants.warning) {
-      return html` <w-icon-warning-16></w-icon-warning-16>`;
+      return html`<w-icon name="Warning" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     if (this.variant === alertVariants.negative) {
-      return html` <w-icon-error-16></w-icon-error-16>`;
+      return html`<w-icon name="Error" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     if (this.variant === alertVariants.positive) {
-      return html` <w-icon-success-16></w-icon-success-16>`;
+      return html`<w-icon name="Success" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     return '';
   }

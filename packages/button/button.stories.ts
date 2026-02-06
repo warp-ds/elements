@@ -9,10 +9,8 @@ import type { WarpButton } from './button.js';
 import './button.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpButton>('w-button');
-import '@warp-ds/icons/elements/close-16';
-import '@warp-ds/icons/elements/heart-16';
-import '@warp-ds/icons/elements/chevron-right-16';
-import '@warp-ds/icons/elements/chevron-left-16';
+import '../icon/icon.js';
+import { detectLocale } from '../i18n.js';
 
 const meta: Meta<typeof args> = {
   title: 'Buttons/Button',
@@ -74,34 +72,31 @@ export const Pill: Story = {
     type: 'button',
   },
   render(args) {
+    const locale = detectLocale();
     return html`<w-button ${spread(prespread(args))}>
-        <w-icon-chevron-left-16 style="height: 16px;"></w-icon-chevron-left-16>
+        <w-icon name="ChevronLeft" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))}>
-        <w-icon-close-16 style="height: 16px;"></w-icon-close-16>
+        <w-icon name="Close" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))}>
-        <w-icon-heart-16 style="height: 16px;"></w-icon-heart-16>
+        <w-icon name="Heart" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))}>
-        <w-icon-chevron-right-16
-          style="height: 16px;"
-        ></w-icon-chevron-right-16>
+        <w-icon name="ChevronRight" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <br />
       <w-button ${spread(prespread(args))} small="">
-        <w-icon-chevron-left-16 style="height: 16px;"></w-icon-chevron-left-16>
+        <w-icon name="ChevronLeft" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))} small="">
-        <w-icon-close-16 style="height: 16px;"></w-icon-close-16>
+        <w-icon name="Close" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))} small="">
-        <w-icon-heart-16 style="height: 16px;"></w-icon-heart-16>
+        <w-icon name="Heart" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>
       <w-button ${spread(prespread(args))} small="">
-        <w-icon-chevron-right-16
-          style="height: 16px;"
-        ></w-icon-chevron-right-16>
+        <w-icon name="ChevronRight" size="small" locale="${locale}" style="height: 16px;" class="flex"></w-icon>
       </w-button>`;
   },
 };

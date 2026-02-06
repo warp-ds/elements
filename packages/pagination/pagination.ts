@@ -4,10 +4,8 @@ import { i18n } from '@lingui/core';
 import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import '@warp-ds/icons/elements/chevron-double-left-16';
-import '@warp-ds/icons/elements/chevron-left-16';
-import '@warp-ds/icons/elements/chevron-right-16';
-import { activateI18n } from '../i18n.js';
+import '../icon/icon.js';
+import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -17,11 +15,12 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
-const iconSuffix = i18n._({
-  id: 'pagination.aria.icon-suffix',
-  message: 'icon',
-  comment: 'Suffix added at the end of icon titles when img semantics are lost on an html element',
-});
+const getIconSuffix = () =>
+  i18n._({
+    id: 'pagination.aria.icon-suffix',
+    message: 'icon',
+    comment: 'Suffix added at the end of icon titles when img semantics are lost on an html element',
+  });
 
 const baseItemStyles =
   'hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding';
@@ -50,9 +49,7 @@ class WarpPagination extends LitElement {
     reset,
     styles,
     css`
-      w-icon-chevron-left-16,
-      w-icon-chevron-double-left-16,
-      w-icon-chevron-right-16 {
+      w-icon {
         height: 16px;
       }
     `,
@@ -142,8 +139,8 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for first page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-double-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-double-left-16>
-              <span class="sr-only">${iconSuffix}</span>
+              <w-icon name="ChevronDoubleLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }
@@ -163,40 +160,48 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for previous page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-left-16 class="pointer-events-none flex items-center"></w-icon-chevron-left-16>
-              <span class="sr-only">${iconSuffix}</span>
+              <w-icon name="ChevronLeft" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }
-        ${visiblePages.map((pageNumber) => {
-          const isCurrentPage = pageNumber === this.currentPageNumber;
-          const url = `${this.baseUrl}${pageNumber}`;
+        <div class="hidden md:block">
+          ${visiblePages.map((pageNumber) => {
+            const isCurrentPage = pageNumber === this.currentPageNumber;
+            const url = `${this.baseUrl}${pageNumber}`;
 
-          let styles = baseItemStyles;
+            let styles = baseItemStyles;
 
-          if (isCurrentPage) {
-            styles += ' s-bg-primary s-text-inverted';
-          } else {
-            styles +=
-              ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
-          }
+            if (isCurrentPage) {
+              styles += ' s-bg-primary s-text-inverted';
+            } else {
+              styles +=
+                ' hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]';
+            }
 
-          const ariaLabel = i18n._({
-            id: 'pagination.aria.page',
-            message: 'Page {currentPage}',
-            values: { currentPage: pageNumber },
-            comment: 'Default screenreader message for page link in the pagination component',
-          });
+            const ariaLabel = i18n._({
+              id: 'pagination.aria.page',
+              message: 'Page {currentPage}',
+              values: { currentPage: pageNumber },
+              comment: 'Default screenreader message for page link in the pagination component',
+            });
 
-          return html`<a
-            data-page-number="${pageNumber}"
-            aria-label="${ariaLabel}"
-            href="${url}"
-            class="${styles}"
-            aria-current="${isCurrentPage ? 'page' : ''}"
-            >${pageNumber}</a
-          >`;
-        })}
+            return html`<a
+              data-page-number="${pageNumber}"
+              aria-label="${ariaLabel}"
+              href="${url}"
+              class="${styles}"
+              aria-current="${isCurrentPage ? 'page' : ''}"
+              >${pageNumber}</a
+            >`;
+          })}
+        </div>
+        <span class="block md:hidden p-8 font-bold">${i18n._({
+          id: 'pagination.label.current-page',
+          message: 'Page {currentPage}',
+          values: { currentPage: this.currentPageNumber },
+          comment: 'Default message for current page label in the pagination component',
+        })}</span>
         ${
           this.shouldShowNextPageButton
             ? html`<a
@@ -213,8 +218,8 @@ class WarpPagination extends LitElement {
                   comment: 'Default screenreader message for next page link in the pagination component',
                 })},</span
               >
-              <w-icon-chevron-right-16 class="pointer-events-none flex items-center"></w-icon-chevron-right-16>
-              <span class="sr-only">${iconSuffix}</span>
+              <w-icon name="ChevronRight" size="small" locale="${detectLocale()}" class="pointer-events-none flex items-center" class="flex"></w-icon>
+              <span class="sr-only">${getIconSuffix()}</span>
             </a>`
             : nothing
         }

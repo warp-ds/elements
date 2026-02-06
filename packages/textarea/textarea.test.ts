@@ -4,6 +4,7 @@ import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './textarea.js';
+import { WarpTextarea } from './textarea.js';
 
 test('renders the textarea', async () => {
   const component = html`<w-textarea label="Test label"></w-textarea>`;
@@ -38,7 +39,7 @@ test('works as expected in forms', async () => {
   expect(changeHandler).not.toHaveBeenCalled();
 
   await userEvent.tab(); // trigger a blur to fire the change event
-  expect(changeHandler).toHaveBeenCalled();
+  await expect.poll(() => changeHandler.mock.calls.length).toBeGreaterThan(0);
 
   await expect.element(page.getByLabelText(label)).toHaveValue('Hello, World');
 
@@ -60,6 +61,30 @@ test('marks input field as aria-invalid if the invalid prop is true', async () =
   await expect.element(page.getByLabelText('Test label')).toHaveAccessibleErrorMessage('No, bad input!');
 });
 
+test('aria-invalid attribute is absent when textarea is valid', async () => {
+  const component = html`<w-textarea label="Test label" data-testid="textarea"></w-textarea>`;
+
+  const page = render(component);
+  const textarea = page.getByLabelText('Test label');
+
+  await expect.element(textarea).toBeVisible();
+
+  // aria-invalid should NOT be present when valid
+  await expect.element(textarea).not.toHaveAttribute('aria-invalid');
+});
+
+test('aria-invalid attribute is "true" when textarea is invalid', async () => {
+  const component = html`<w-textarea label="Test label" invalid></w-textarea>`;
+
+  const page = render(component);
+  const textarea = page.getByLabelText('Test label');
+
+  await expect.element(textarea).toBeVisible();
+
+  // aria-invalid should be "true" when invalid
+  await expect.element(textarea).toHaveAttribute('aria-invalid', 'true');
+});
+
 test('marks input field as readonly if the readonly prop is true', async () => {
   const component = html`<w-textarea label="Test label" readonly></w-textarea>`;
 
@@ -75,24 +100,142 @@ test('can reset textarea by resetting surrounding form', async () => {
   `);
 
   const form = document.querySelector('form') as HTMLFormElement;
-  const wTextArea = document.querySelector('w-textarea') as HTMLElement & {
-    checked: boolean;
-    value: string;
-    updateComplete: Promise<undefined>;
-  };
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
 
   // sanity
   expect(form).not.toBeNull();
   expect(wTextArea).not.toBeNull();
 
-  expect(wTextArea.value).toBe('Hola el Mundo');
+  await expect.poll(() => wTextArea.value).toBe('Hola el Mundo');
 
   wTextArea.value = 'Definitely not Hola el Mundo';
-  await wTextArea.updateComplete;
+  await expect.poll(() => wTextArea.value).toBe('Definitely not Hola el Mundo');
 
   // Reset the form
   form.reset();
-  await wTextArea.updateComplete;
+  await expect.poll(() => wTextArea.value).toBe('Hola el Mundo');
+});
 
-  expect(wTextArea.value).toBe('Hola el Mundo');
+test('checkValidity returns false when required textarea is empty', async () => {
+  render(html`<w-textarea label="Message" name="message" required></w-textarea>`);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Wait for component to be ready
+  await expect.poll(() => wTextArea.checkValidity()).toBe(false);
+  expect(wTextArea.validity.valueMissing).toBe(true);
+  expect(wTextArea.validationMessage).not.toBe('');
+});
+
+test('checkValidity returns true when required textarea has a value', async () => {
+  render(html`<w-textarea label="Message" name="message" required value="Hello"></w-textarea>`);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Wait for component to be ready
+  await expect.poll(() => wTextArea.checkValidity()).toBe(true);
+  expect(wTextArea.validity.valid).toBe(true);
+});
+
+test('form submission is blocked when required textarea is empty', async () => {
+  const submitHandler = vi.fn((e: Event) => e.preventDefault());
+
+  render(html`
+    <form data-testid="form">
+      <w-textarea label="Message" name="message" required></w-textarea>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', submitHandler);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Wait for component to be ready
+  await expect.poll(() => wTextArea.checkValidity()).toBe(false);
+
+  // Try to submit - should be blocked by validation
+  const submitButton = document.querySelector('button') as HTMLButtonElement;
+  submitButton.click();
+
+  // Component should show invalid state with error message
+  await expect.poll(() => wTextArea.invalid).toBe(true);
+  await expect.poll(() => wTextArea.helpText).not.toBe('');
+
+  // Form should not have been submitted
+  expect(submitHandler).not.toHaveBeenCalled();
+});
+
+test('form submission succeeds when required textarea has a value', async () => {
+  const submitHandler = vi.fn((e: Event) => e.preventDefault());
+
+  render(html`
+    <form data-testid="form">
+      <w-textarea label="Message" name="message" required value="Hello"></w-textarea>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', submitHandler);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Wait for component to be ready
+  await expect.poll(() => wTextArea.checkValidity()).toBe(true);
+
+  // Submit should succeed
+  const submitButton = document.querySelector('button') as HTMLButtonElement;
+  submitButton.click();
+
+  // Form should have been submitted
+  await expect.poll(() => submitHandler.mock.calls.length).toBeGreaterThan(0);
+});
+
+test('shows validation error on blur when required field is empty', async () => {
+  const page = render(html`<w-textarea label="Message" name="message" required></w-textarea>`);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Initially should not show error (no interaction yet)
+  await expect.poll(() => wTextArea.invalid).toBeFalsy();
+
+  // Focus and blur the textarea
+  const textarea = page.getByLabelText('Message');
+  await textarea.click();
+  await userEvent.tab(); // blur
+
+  // Should now show validation error
+  await expect.poll(() => wTextArea.invalid).toBe(true);
+  await expect.poll(() => wTextArea.helpText).not.toBe('');
+});
+
+test('restores original help text when validation passes', async () => {
+  const page = render(html`
+    <w-textarea label="Message" name="message" required help-text="Enter your message"></w-textarea>
+  `);
+
+  const wTextArea = document.querySelector('w-textarea') as WarpTextarea;
+
+  // Initially should show original help text
+  await expect.poll(() => wTextArea.helpText).toBe('Enter your message');
+
+  // Focus and blur to trigger validation
+  const textarea = page.getByLabelText('Message');
+  await textarea.click();
+  await userEvent.tab();
+
+  // Should show validation error
+  await expect.poll(() => wTextArea.invalid).toBe(true);
+  await expect.poll(() => wTextArea.helpText).not.toBe('Enter your message');
+
+  // Fill in a value
+  await textarea.fill('Hello');
+
+  // Wait for value + validity to update, then restore original help text
+  await expect.poll(() => wTextArea.value).toBe('Hello');
+  await expect.poll(() => wTextArea.checkValidity()).toBe(true);
+  await expect.poll(() => wTextArea.invalid).toBe(false);
+  await expect.poll(() => wTextArea.helpText).toBe('Enter your message');
 });

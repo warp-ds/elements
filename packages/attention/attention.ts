@@ -13,7 +13,7 @@ import { css, html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-import { activateI18n } from '../i18n';
+import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles';
 import { generateRandomId } from '../utils/index.js';
 
@@ -25,7 +25,7 @@ import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles';
 
-import '@warp-ds/icons/elements/close-16';
+import '../icon/icon.js';
 import '../button/button.js';
 
 const buttonTextSizes = {
@@ -328,9 +328,11 @@ class WarpAttention extends LitElement {
         small=""
         class="ml-8"
       >
-        <w-icon-close-16
-          style="height: 16px; width: 16px; display: flex;"
-        ></w-icon-close-16>
+        <w-icon
+          name="Close"
+          size="small"
+          locale="${detectLocale()}"
+          class="flex"></w-icon>
       </w-button>
     `;
   }

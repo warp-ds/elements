@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.5.2",
+  "version": "2.6.0-next.5",
   "packageManager": "pnpm@10.20.0",
   "description": "Custom elements for Warp",
   "exports": {
@@ -23,7 +23,10 @@
     "./components/select": "./dist/packages/select/select.js",
     "./components/textfield": "./dist/packages/textfield/textfield.js",
     "./components/toast": "./dist/packages/toast/index.js",
-    "./toast": "./dist/api.js",
+    "./toast": {
+      "types": "./dist/packages/toast/api.d.ts",
+      "import": "./dist/api.js"
+    },
     "./custom-elements.json": "./dist/custom-elements.json",
     "./react/affix": {
       "types": "./dist/packages/affix/react.d.ts",
@@ -116,6 +119,22 @@
     "./react/page-indicator": {
       "types": "./dist/packages/page-indicator/react.d.ts",
       "import": "./dist/packages/page-indicator/react.js"
+    },
+    "./react/pagination": {
+      "types": "./dist/packages/pagination/react.d.ts",
+      "import": "./dist/packages/pagination/react.js"
+    },
+    "./react/textarea": {
+      "types": "./dist/packages/textarea/react.d.ts",
+      "import": "./dist/packages/textarea/react.js"
+    },
+    "./react/step": {
+      "types": "./dist/packages/step/react.d.ts",
+      "import": "./dist/packages/step/react.js"
+    },
+    "./react/step-indicator": {
+      "types": "./dist/packages/step-indicator/react.d.ts",
+      "import": "./dist/packages/step-indicator/react.js"
     },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
@@ -275,6 +294,7 @@
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
     "test:output-validation": "node tests/output-validation/validate-eik-output.js",
+    "test:eik-backwards-compat": "node tests/output-validation/validate-eik-backwards-compat.js",
     "watch:npm": "npx esbuild ./index.js --outdir=dist/ --target=es2017 --bundle --sourcemap --format=esm --minify --watch"
   },
   "repository": {
@@ -320,12 +340,12 @@
     "@vitest/utils": "^3.2.4",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.1.1",
-    "@warp-ds/icons": "2.5.0",
     "@warp-ds/uno": "2.1.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
     "@wc-toolkit/jsx-types": "^1.4.2",
     "@wc-toolkit/storybook-helpers": "^9.0.1",
     "@wc-toolkit/type-parser": "^1.2.0",
+    "axe-core": "^4.11.1",
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",

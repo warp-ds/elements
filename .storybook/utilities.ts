@@ -1,8 +1,17 @@
 /**
+ * Converts camelCase to kebab-case.
+ * @example camelToKebab('openOnFocus') // 'open-on-focus'
+ */
+function camelToKebab(str: string): string {
+  return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+/**
  * Massages storybook args before being spread to HTML attributes.
  *
  * - Empty strings are treated as not set.
  * - Boolean false don't get set.
+ * - camelCase property names are converted to kebab-case attribute names.
  *
  * @example
  * ```ts
@@ -26,30 +35,34 @@
  * ```
  */
 export function prespread(args: Record<string, unknown>): Record<string, unknown> {
-  const newArgs = {
-    ...args,
-  };
-  for (const field of Object.keys(newArgs)) {
+  const newArgs: Record<string, unknown> = {};
+
+  for (const field of Object.keys(args)) {
     const value = args[field];
+
+    // Skip empty strings
+    if (value === '') {
+      continue;
+    }
+
+    // Convert camelCase to kebab-case for attribute names
+    const attrName = camelToKebab(field);
 
     // Add Lit syntax for boolean attributes
     if (typeof value === 'boolean') {
-      newArgs[`?${field}`] = value;
-      delete newArgs[field];
+      newArgs[`?${attrName}`] = value;
+      continue;
     }
 
-    // Add Lit syntax for complex properties
+    // Add Lit syntax for complex properties (keep camelCase for properties)
     if (typeof value === 'object') {
       newArgs[`.${field}`] = value;
-      delete newArgs[field];
+      continue;
     }
 
-    // The manifest has a bunch of default empty strings (which we should probably investigate)
-    // that turn on features that should be off in Storybook canvases.
-    // Remove the empty strings.
-    if (newArgs[field] === '') {
-      delete newArgs[field];
-    }
+    // String and number values use kebab-case attribute names
+    newArgs[attrName] = value;
   }
+
   return newArgs;
 }

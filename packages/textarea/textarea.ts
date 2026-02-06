@@ -4,10 +4,10 @@ import { classNames as classnames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
 import { reset } from '../styles.js';
+import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
 
 const ccInput = {
@@ -66,10 +66,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
   minRows: number;
 
-  @property()
+  @property({ type: String, reflect: true })
   name: string;
 
-  @property()
+  @property({ type: String, reflect: true })
   placeholder: string;
 
   /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`. */
@@ -94,17 +94,119 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   @state()
   maxHeight = Number.POSITIVE_INFINITY;
 
+  @query('textarea')
+  private _textarea: HTMLTextAreaElement;
+
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
+
+  // unique ID for this component instance
+  #uniqueId = uniqueId('textarea-');
+
+  // Track whether the current invalid/helpText state was set by validation
+  #validationActive = false;
+
+  // Store the original helpText to restore when validation passes
+  #originalHelpText: string | undefined = undefined;
+
+  // Track whether the user has interacted with the field
+  #hasInteracted = false;
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
     }
+    if (changedProperties.has('value') || changedProperties.has('required') || changedProperties.has('disabled')) {
+      this.#updateValidity();
+    }
   }
 
   resetFormControl(): void {
     this.value = this.#initialValue;
+    this.#hasInteracted = false;
+    this.#clearValidationState();
+    this.#updateValidity();
+  }
+
+  /** Returns the validation message if the textarea is invalid, otherwise an empty string */
+  get validationMessage(): string {
+    return this.internals.validationMessage;
+  }
+
+  /** Returns the validity state of the textarea */
+  get validity(): ValidityState {
+    return this.internals.validity;
+  }
+
+  /** Checks whether the textarea passes constraint validation */
+  checkValidity(): boolean {
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Checks validity and shows the browser's validation message if invalid */
+  reportValidity(): boolean {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Sets a custom validation message. Pass an empty string to clear. */
+  setCustomValidity(message: string): void {
+    if (message) {
+      this.internals.setValidity({ customError: true }, message, this._textarea);
+      this.#setValidationState(message);
+    } else {
+      this.#clearValidationState();
+      this.#updateValidity();
+    }
+  }
+
+  /** @internal */
+  #setValidationState(message: string): void {
+    if (!this.#validationActive) {
+      this.#originalHelpText = this.helpText;
+    }
+    this.#validationActive = true;
+    this.invalid = true;
+    this.helpText = message;
+  }
+
+  /** @internal */
+  #clearValidationState(): void {
+    if (this.#validationActive) {
+      this.invalid = false;
+      this.helpText = this.#originalHelpText;
+      this.#originalHelpText = undefined;
+      this.#validationActive = false;
+    }
+  }
+
+  /** @internal */
+  #updateValidity(): void {
+    // Skip validation if disabled
+    if (this.disabled) {
+      this.internals.setValidity({});
+      this.#clearValidationState();
+      return;
+    }
+
+    // Check required validation
+    if (this.required && !this.value) {
+      // Get the browser's native validation message from the internal textarea
+      const message = this._textarea?.validationMessage || '';
+      this.internals.setValidity({ valueMissing: true }, message, this._textarea);
+
+      // Only show visual validation state after user interaction
+      if (this.#hasInteracted) {
+        this.#setValidationState(message);
+      }
+      return;
+    }
+
+    // Valid state
+    this.internals.setValidity({});
+    this.#clearValidationState();
   }
 
   static styles = [reset, styles];
@@ -136,7 +238,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _id() {
-    return 'textfield';
+    return this.#uniqueId;
   }
 
   /** @internal */
@@ -149,12 +251,30 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     super.connectedCallback();
     this.#initialValue = this.value;
     this.setValue(this.value);
+
+    // Listen for invalid event on the host element (fired by form validation)
+    this.addEventListener('invalid', this.#handleInvalid);
+
     await this.updateComplete;
     if (this.value || this.minRows) {
       // If the component starts with a value or minHeight,
       // resize it automatically to show all the content, or maxHeight.
-      this.#resize(this.shadowRoot.querySelector('textarea'));
+      const textarea = this.shadowRoot?.querySelector('textarea');
+      if (textarea) {
+        this.#resize(textarea);
+      }
     }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('invalid', this.#handleInvalid);
+  }
+
+  firstUpdated(changedProperties: PropertyValues<this>) {
+    super.firstUpdated(changedProperties);
+    // Initialize validity after the shadow DOM is ready
+    this.#updateValidity();
   }
 
   handler(e: InputEvent) {
@@ -164,24 +284,39 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     this.#resize(target);
   }
 
+  /** @internal */
+  #handleBlur() {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+  }
+
+  /** @internal */
+  #handleInvalid = (e: Event) => {
+    // Prevent browser's native validation bubble
+    e.preventDefault();
+    // Mark as interacted and show validation state
+    this.#hasInteracted = true;
+    this.#updateValidity();
+  };
+
   /** Calculate the new height for the area on input */
   #resize(target: HTMLTextAreaElement) {
     const style = getComputedStyle(target);
-    const borderTopWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
-    const borderBottomWitdh = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderTopWidth = Number.parseFloat(style.getPropertyValue('border-top-width'));
+    const borderBottomWidth = Number.parseFloat(style.getPropertyValue('border-bottom-width'));
     const lineHeight = Number.parseFloat(style.getPropertyValue('line-height'));
     const topPadding = Number.parseFloat(style.getPropertyValue('padding-top'));
     const bottomPadding = Number.parseFloat(style.getPropertyValue('padding-bottom'));
-    const offset = topPadding + bottomPadding + borderBottomWitdh + borderTopWitdh;
+    const offset = topPadding + bottomPadding + borderBottomWidth + borderTopWidth;
 
     if (this.minRows) {
       this.minHeight = lineHeight * this.minRows + offset;
     }
-    if (this.minRows) {
-      this.maxHeight = lineHeight * this.minRows + offset;
+    if (this.maxRows) {
+      this.maxHeight = lineHeight * this.maxRows + offset;
     }
 
-    const borderBoxHeight = target.scrollHeight + borderTopWitdh + borderBottomWitdh;
+    const borderBoxHeight = target.scrollHeight + borderTopWidth + borderBottomWidth;
     const height = Math.min(this.maxHeight, Math.max(this.minHeight, borderBoxHeight));
     target.style.setProperty('height', height + 'px');
   }
@@ -197,7 +332,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
                     this.optional
                       ? html`
                           <span class="${ccLabel.optional}">
-                            ${i18n.t({
+                            ${i18n._({
                               id: 'textarea.label.optional',
                               message: '(optional)',
                               comment: 'Shown behind label when marked as optional',
@@ -217,11 +352,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
           .value="${this.value || ''}"
           aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
           aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid="${ifDefined(this.invalid)}"
+          aria-invalid=${this.invalid ? 'true' : nothing}
           ?disabled="${this.disabled}"
           ?readonly="${this.readonly || this.readOnly}"
           ?required="${this.required}"
-          @input="${this.handler}">
+          @input="${this.handler}"
+          @blur="${this.#handleBlur}">
         </textarea>
         ${this.helpText ? html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>` : nothing}
     `;
