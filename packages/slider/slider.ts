@@ -78,6 +78,9 @@ class WarpSlider extends LitElement {
   @property({ reflect: true })
   suffix = '';
 
+  @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
+  hiddenTextfield = false;
+
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
   formatter: (value: string, type: 'to-label' | 'from-label' | 'to-value' | 'from-value') => string;
@@ -105,6 +108,7 @@ class WarpSlider extends LitElement {
       thumb.required = this.required;
       thumb.formatter = this.formatter;
       thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
+      thumb._hiddenTextfield = this.hiddenTextfield;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {

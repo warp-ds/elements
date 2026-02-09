@@ -120,10 +120,10 @@ export const SuffixCurrency: Story = {
       </w-slider>
       <script type="module">
         const currencySlider = document.querySelector(
-          'w-slider[data-testid="currency"]'
+          'w-slider[data-testid="currency"]',
         );
         currencySlider.formatter = window.getNumberFormatter(
-          "${locale}"
+          "${locale}",
         ).format;
       </script>
     `;
@@ -238,7 +238,7 @@ export const OverUnder: Story = {
       <script>
         /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
         const overunderSlider = document.querySelector(
-          'w-slider[data-testid="overunder"]'
+          'w-slider[data-testid="overunder"]',
         );
         overunderSlider.formatter = function (value, type) {
           if (value === "" && type.startsWith("from")) {
@@ -361,7 +361,7 @@ export const TestCase: Story = {
       <script>
         /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
         const overunderSlider = document.querySelector(
-          'w-slider[data-testid="overunder"]'
+          'w-slider[data-testid="overunder"]',
         );
         overunderSlider.formatter = function (value, type) {
           if (value === "" && type.startsWith("from")) {
@@ -442,9 +442,7 @@ export const VisuallyHiddenLabel: Story = {
         under
         help-text="Production year of the car"
       >
-        <legend class="sr-only" slot="label">
-          Production year
-        </legend>
+        <legend class="sr-only" slot="label">Production year</legend>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
@@ -466,15 +464,13 @@ export const HiddenMinimumMaximumLabels: Story = {
         help-text="Production year of the car"
         data-testid="hidden-minmax-label"
       >
-        <legend class="sr-only" slot="label">
-          Production year
-        </legend>
+        <legend class="sr-only" slot="label">Production year</legend>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
       <script>
         const hiddenMinMaxSlider = document.querySelector(
-          'w-slider[data-testid="hidden-minmax-label"]'
+          'w-slider[data-testid="hidden-minmax-label"]',
         );
         hiddenMinMaxSlider.formatter = function (value, type) {
           if (type.endsWith("label")) return ""; // this is the magic passphrase
@@ -492,3 +488,54 @@ export const HiddenMinimumMaximumLabels: Story = {
   },
 };
 
+export const TheMapCase: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render({ locale }) {
+    return html`
+      <output class="text-xs">
+        <span class="font-bold">Distance:</span>
+        <span id="distance-value"></span>
+      </output>
+      <form name="map">
+        <w-slider min="0" max="20" hidden-textfield data-testid="map-radius">
+          <legend class="sr-only" slot="label">Location filter radius</legend>
+          <w-slider-thumb name="distance"></w-slider-thumb>
+        </w-slider>
+      </form>
+      <script>
+        const radiusSteps = [
+          200, 300, 400, 500, 700, 1000, 1500, 2000, 3000, 5000, 7000, 10000,
+          20000, 30000, 50000, 75000, 100000, 200000, 300000, 400000, 500000,
+        ];
+        const mapRadiusSlider = document.querySelector(
+          'w-slider[data-testid="map-radius"]',
+        );
+        const formatter = window.getNumberFormatter("${locale}");
+        mapRadiusSlider.formatter = function (value, type) {
+          const index = Number.parseInt(value);
+          const numValue = radiusSteps[index];
+
+          let formattedValue = "";
+
+          if (numValue < 1000) {
+            // Use non-breaking space here
+            formattedValue = formatter.format(numValue) + " m";
+          } else {
+            formattedValue = formatter.format(numValue / 1000) + " km";
+          }
+
+          document.getElementById("distance-value").innerText = formattedValue;
+
+          return formattedValue;
+        };
+
+        document.forms["map"].addEventListener("input", function () {
+          const formData = new FormData(this);
+          const distance = formData.get("distance");
+        });
+      </script>
+    `;
+  },
+};
