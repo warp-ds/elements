@@ -117,3 +117,29 @@ test('clears indeterminate on click', async () => {
   expect(wCheckbox.indeterminate).toBe(false);
   expect(wCheckbox.checked).toBe(true);
 });
+
+test('does not toggle or emit change when disabled', async () => {
+  render(html`<w-checkbox disabled>Disabled</w-checkbox>`);
+
+  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
+    checked: boolean;
+    updateComplete: Promise<unknown>;
+    click: () => void;
+  };
+
+  const onChange = vi.fn();
+  wCheckbox.addEventListener('change', onChange);
+
+  await wCheckbox.updateComplete;
+  expect(wCheckbox.checked).toBe(false);
+
+  const input = getInput(wCheckbox);
+  expect(input).not.toBeNull();
+  expect(input?.disabled).toBe(true);
+
+  wCheckbox.click();
+  await wCheckbox.updateComplete;
+
+  expect(wCheckbox.checked).toBe(false);
+  expect(onChange).not.toHaveBeenCalled();
+});
