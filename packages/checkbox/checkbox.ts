@@ -1,37 +1,18 @@
-import type { PropertyValues } from 'lit';
-import { html } from 'lit';
-
+import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 
-import { BaseFormAssociatedElement } from '../radio/form-associated-element';
-import { RequiredValidator } from '../radio/required-validator';
-import { watch } from '../radio/watch';
-
 import { reset } from '../styles';
 import { toggleStyles } from '../toggle-styles';
 
-export class WCheckbox extends BaseFormAssociatedElement {
-  static css = [reset, toggleStyles];
+export class WCheckbox extends FormControlMixin(LitElement) {
+  static styles = [reset, toggleStyles];
 
-  static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+  static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
-  static get validators() {
-    const validators = [
-      RequiredValidator({
-        validationProperty: 'checked',
-        // Use a checkbox so we get "free" translation strings.
-        validationElement: Object.assign(document.createElement('input'), {
-          type: 'checkbox',
-          required: true,
-        }),
-      }),
-    ];
-    return [...super.validators, ...validators];
-  }
-
-  @query('input[type="checkbox"]') input: HTMLInputElement;
+  @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
@@ -48,13 +29,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
     this._value = val;
   }
 
-  /** Disables the checkbox. */
-  @property({ type: Boolean }) disabled = false;
-
-  /**
-   * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
-   * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
-   */
+  /** Draws the checkbox in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** Draws the checkbox in a checked state. */
@@ -64,28 +39,25 @@ export class WCheckbox extends BaseFormAssociatedElement {
   @property({ type: Boolean, reflect: true, attribute: 'checked' }) defaultChecked: boolean =
     this.hasAttribute('checked');
 
-  /**
-   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
-   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
-   * the same document or shadow root for this to work.
-   */
-  @property({ reflect: true }) form = null;
+  /** Disables the checkbox. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  // Track whether the user has interacted with the control.
+  #hasInteracted = false;
+
   connectedCallback() {
     super.connectedCallback();
-    this.setInitialAttributes();
-  }
-
-  // NB: not from WA, this eases shared-styling
-  private setInitialAttributes() {
+    // NB: not from WA, this eases shared-styling
     this.setAttribute('type', 'checkbox');
+    this.#syncFormValue();
   }
 
   private handleClick() {
-    this.hasInteracted = true;
+    if (this.disabled) return;
+    this.#hasInteracted = true;
     this.checked = !this.checked;
     this.indeterminate = false;
     this.updateComplete.then(() => {
@@ -93,71 +65,109 @@ export class WCheckbox extends BaseFormAssociatedElement {
     });
   }
 
-  @watch('defaultChecked')
-  handleDefaultCheckedChange() {
-    if (!this.hasInteracted && this.checked !== this.defaultChecked) {
-      this.checked = this.defaultChecked;
-      this.handleValueOrCheckedChange();
-    }
-  }
-
-  handleValueOrCheckedChange() {
-    // These @watch() commands seem to override the base element checks for changes, so we need to setValue for the form and and updateValidity()
-    this.setValue(this.checked ? this.value : null, this._value);
-    this.updateValidity();
-  }
-
-  @watch(['checked', 'indeterminate'])
-  handleStateChange() {
-    if (this.hasUpdated) {
-      this.input.checked = this.checked; // force a sync update
-      this.input.indeterminate = this.indeterminate; // force a sync update
-    }
-
-    this.customStates.set('checked', this.checked);
-    this.customStates.set('indeterminate', this.indeterminate);
-    this.updateValidity();
-  }
-
-  @watch('disabled')
-  handleDisabledChange() {
-    this.customStates.set('disabled', this.disabled);
-  }
-
   protected willUpdate(changedProperties: PropertyValues<this>): void {
     super.willUpdate(changedProperties);
 
     if (changedProperties.has('defaultChecked')) {
-      if (!this.hasInteracted) {
+      if (!this.#hasInteracted) {
         this.checked = this.defaultChecked;
       }
     }
+  }
 
-    if (changedProperties.has('value') || changedProperties.has('checked')) {
-      this.handleValueOrCheckedChange();
+  updated(changedProperties: PropertyValues<this>): void {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('checked') || changedProperties.has('indeterminate')) {
+      if (this.input) {
+        this.input.checked = this.checked;
+        this.input.indeterminate = this.indeterminate;
+      }
+    }
+
+    if (
+      changedProperties.has('checked') ||
+      changedProperties.has('value') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('required')
+    ) {
+      this.#syncFormValue();
+      this.#updateValidity();
     }
   }
 
-  formResetCallback() {
-    // Evaluate checked before the super call because of our watcher on value.
+  resetFormControl(): void {
     this.checked = this.defaultChecked;
-    super.formResetCallback();
-    this.handleValueOrCheckedChange();
+    this.#hasInteracted = false;
+    this.#syncFormValue();
+    this.#updateValidity();
   }
 
   /** Simulates a click on the checkbox. */
   click() {
-    this.input.click();
+    if (this.disabled) return;
+    this.input?.click();
   }
 
   /** Sets focus on the checkbox. */
   focus(options?: FocusOptions) {
-    this.input.focus(options);
+    this.input?.focus(options);
   }
 
   /** Removes focus from the checkbox. */
   blur() {
-    this.input.blur();
+    this.input?.blur();
+  }
+
+  /** Returns the validation message if the checkbox is invalid, otherwise an empty string */
+  get validationMessage(): string {
+    return this.internals.validationMessage;
+  }
+
+  /** Returns the validity state of the checkbox */
+  get validity(): ValidityState {
+    return this.internals.validity;
+  }
+
+  /** Checks whether the checkbox passes constraint validation */
+  checkValidity(): boolean {
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Checks validity and shows the browser's validation message if invalid */
+  reportValidity(): boolean {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** @internal */
+  #updateValidity(): void {
+    if (this.disabled) {
+      this.internals.setValidity({});
+      return;
+    }
+
+    if (this.required && !this.checked) {
+      const message = this.input?.validationMessage || 'Please fill out this field.';
+      const anchor = this.input ?? undefined;
+      this.internals.setValidity({ valueMissing: true }, message, anchor);
+      return;
+    }
+
+    this.internals.setValidity({});
+  }
+
+  /** @internal */
+  #syncFormValue(): void {
+    if (this.disabled) {
+      this.setValue(null);
+      return;
+    }
+
+    const value = this.checked ? this.value : null;
+    this.setValue(value);
   }
 
   render() {
