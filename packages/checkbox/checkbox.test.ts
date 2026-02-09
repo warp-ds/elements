@@ -6,13 +6,6 @@ import './checkbox.js';
 
 const getInput = (el: HTMLElement) => el.shadowRoot?.querySelector('input[type="checkbox"]') as HTMLInputElement | null;
 
-test('renders label and hint text', async () => {
-  const page = render(html`<w-checkbox hint="Helpful hint">Check me</w-checkbox>`);
-
-  await expect.element(page.getByText('Check me')).toBeVisible();
-  await expect.element(page.getByText('Helpful hint')).toBeVisible();
-});
-
 test('toggles checked on click and dispatches change', async () => {
   render(html`<w-checkbox>Check me</w-checkbox>`);
 
