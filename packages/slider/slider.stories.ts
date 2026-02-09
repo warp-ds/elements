@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+import 'virtual:uno.css';
 
 import type { WarpSlider } from './slider.js';
 import '../affix/affix.js';
