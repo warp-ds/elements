@@ -452,7 +452,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   /** Value to display in the tooltip */
   get tooltipDisplayValue(): string | number {
     if (this.formatter) {
-      return this.formatter(this.value, (this.slot || 'to-value') as 'from-value' | 'to-value');
+      return this.formatter(this.value, (this.slot + '-label' || 'to-label') as 'from-label' | 'to-label');
     }
     if (this.value === '') {
       return this.range?.value ?? this.boundaryValue;
@@ -517,7 +517,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           type="number"
           .formatter=${
             this.formatter
-              ? (value: string) => this.formatter(value, (this.slot || 'to-value') as 'from-value' | 'to-value')
+              ? (value: string) =>
+                  this.formatter(value, (this.slot + '-value' || 'to-value') as 'from-value' | 'to-value')
               : nothing
           }
           .value="${this.textFieldDisplayValue}"
@@ -532,7 +533,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>
-
         <w-attention
           tooltip
           placement="top"

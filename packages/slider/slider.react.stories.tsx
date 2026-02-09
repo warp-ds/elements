@@ -109,20 +109,20 @@ export const Step: Story = {
   },
 };
 
-export const OverUnder: Story = {
+export const OpenEnded: Story = {
   render() {
-    const [overUnderFrom, setOverUnderFrom] = useState('');
-    const [overUnderTo, setOverUnderTo] = useState('');
+    const [openEndedFrom, setOpenEndedFrom] = useState('');
+    const [openEndedTo, setOpenEndedTo] = useState('');
     return (
       <>
         <form
-          id="overunder"
+          id="openEnded"
           style={{ marginBottom: 16 }}
           lang="nb"
           onInput={(val) => {
             const formData = new FormData(val.currentTarget);
-            setOverUnderFrom(formData.get('from') as unknown as string);
-            setOverUnderTo(formData.get('to') as unknown as string);
+            setOpenEndedFrom(formData.get('from') as unknown as string);
+            setOpenEndedTo(formData.get('to') as unknown as string);
           }}
         >
           <Slider
@@ -130,12 +130,16 @@ export const OverUnder: Story = {
             min="1950"
             max="2025"
             data-testid="overunder"
-            formatter={(value) => {
+            formatter={(value, type) => {
               if (value === '1950') {
                 return 'Før 1950';
               }
               if (value === '2025') {
-                return 'Etter 2025';
+                if (type === 'to-label') {
+                  return '2025 +';
+                }
+
+                return 'Max';
               }
               return value;
             }}
@@ -158,9 +162,9 @@ export const OverUnder: Story = {
         <output>
           <dl>
             <dt>From:</dt>
-            <dd id="overunder-from">{overUnderFrom}</dd>
+            <dd id="openended-from">{openEndedFrom}</dd>
             <dt>To:</dt>
-            <dd id="overunder-to">{overUnderTo}</dd>
+            <dd id="openended-to">{openEndedTo}</dd>
           </dl>
         </output>
       </>
