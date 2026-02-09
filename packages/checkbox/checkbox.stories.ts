@@ -18,6 +18,18 @@ export const Invalid: StoryObj = {
   render: () => html`<w-checkbox name="invalidfoo" value="bar" invalid>Invalid checkbox</w-checkbox>`,
 };
 
+export const Indeterminate: StoryObj = {
+  render: () => html`<w-checkbox name="indeterminatefoo" value="bar" indeterminate>Indeterminate checkbox</w-checkbox>`,
+};
+
+export const IndeterminateError: StoryObj = {
+  render: () => html`<w-checkbox name="indeterminateerrorfoo" value="bar" indeterminate invalid>Indeterminate checkbox</w-checkbox>`,
+};
+
+export const IndeterminateDisabled: StoryObj = {
+  render: () => html`<w-checkbox name="indeterminatedisabledfoo" value="bar" indeterminate disabled>Indeterminate checkbox</w-checkbox>`,
+};
+
 export const Disabled: StoryObj = {
   render: () => html`<w-checkbox name="disabledfoo" value="bar" disabled>Disabled checkbox</w-checkbox>`,
 };
