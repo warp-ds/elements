@@ -23,11 +23,13 @@ export const Indeterminate: StoryObj = {
 };
 
 export const IndeterminateError: StoryObj = {
-  render: () => html`<w-checkbox name="indeterminateerrorfoo" value="bar" indeterminate invalid>Indeterminate checkbox</w-checkbox>`,
+  render: () =>
+    html`<w-checkbox name="indeterminateerrorfoo" value="bar" indeterminate invalid>Indeterminate checkbox</w-checkbox>`,
 };
 
 export const IndeterminateDisabled: StoryObj = {
-  render: () => html`<w-checkbox name="indeterminatedisabledfoo" value="bar" indeterminate disabled>Indeterminate checkbox</w-checkbox>`,
+  render: () =>
+    html`<w-checkbox name="indeterminatedisabledfoo" value="bar" indeterminate disabled>Indeterminate checkbox</w-checkbox>`,
 };
 
 export const Disabled: StoryObj = {

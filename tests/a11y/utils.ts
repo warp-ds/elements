@@ -1,5 +1,5 @@
-import axe from 'axe-core';
 import type { AxeResults } from 'axe-core';
+import axe from 'axe-core';
 
 export { axe };
 export type { AxeResults };
