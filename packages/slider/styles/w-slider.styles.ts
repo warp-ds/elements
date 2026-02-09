@@ -39,6 +39,12 @@ export const wSliderStyles = css`
     );
   }
 
+.w-slider[disabled] {
+    --w-slider-track-active-background: var(--w-s-color-background-disabled-subtle);
+    --w-slider-thumb-background: var(--w-s-color-background-disabled-subtle);
+    --w-slider-thumb-background-hover: var(--w-s-color-background-disabled-subtle);
+}
+
   .w-slider__label {
     grid-area: label;
     font-size: var(--w-font-size-s);

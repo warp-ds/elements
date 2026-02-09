@@ -40,6 +40,16 @@ export const Single: Story = {
   },
 };
 
+export const SingleDisabled: Story = {
+  render() {
+    return html`
+      <w-slider label="Single disabled" min="0" max="100" disabled>
+        <w-slider-thumb name="value"></w-slider-thumb>
+      </w-slider>
+    `;
+  },
+};
+
 export const Range: Story = {
   render() {
     return html`

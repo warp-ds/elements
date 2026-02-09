@@ -287,6 +287,7 @@ class WarpSlider extends LitElement {
         @input="${this.#onInput}"
         @slidervalidity="${this.#onSliderValidity}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
+          ?disabled="${this.disabled}"
       >
         ${
           this.label

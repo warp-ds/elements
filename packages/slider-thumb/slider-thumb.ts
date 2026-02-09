@@ -528,6 +528,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @input="${this.#onInput}"
           @focus="${this.#onTextFieldFocus}"
           @blur="${this.#onTextFieldBlur}"
+          ?disabled="${this.disabled}"
         >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
         </w-textfield>

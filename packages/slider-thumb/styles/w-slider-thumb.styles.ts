@@ -38,7 +38,7 @@ export const wSliderThumbStyles = css`
 
     appearance: none;
     cursor: pointer;
-    background: var(--w-s-color-background-primary);
+    background: var(--w-slider-thumb-background);
     border-radius: 50%;
     height: var(--w-slider-thumb-size);
     margin-top: calc(
@@ -51,12 +51,16 @@ export const wSliderThumbStyles = css`
     z-index: 1;
   }
 
+  .w-slider-thumb__range[disabled]::-webkit-slider-thumb{
+    cursor: auto;
+  }
+
   .w-slider-thumb__range::-moz-range-thumb {
     anchor-name: --thumb;
 
     appearance: none;
     cursor: pointer;
-    background: var(--w-s-color-background-primary);
+    background: var(--w-slider-thumb-background);
     border-radius: 50%;
     border-color: transparent;
     height: var(--w-slider-thumb-size);
@@ -72,9 +76,13 @@ export const wSliderThumbStyles = css`
     box-shadow: none;
   }
 
+  .w-slider-thumb__range[disabled]::-moz-range-thumb{
+    cursor: auto;
+  }
+
   .w-slider-thumb__range:active::-webkit-slider-thumb,
   .w-slider-thumb__range:hover::-webkit-slider-thumb {
-    background: var(--w-s-color-background-primary-hover);
+    background: var(--w-slider-thumb-background);
     box-shadow: var(--w-shadow-slider-handle-hover);
   }
 
