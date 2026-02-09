@@ -231,7 +231,8 @@ test('restores original help text when validation passes', async () => {
   await expect.poll(() => wTextArea.helpText).not.toBe('Enter your message');
 
   // Fill in a value
-  await textarea.fill('Hello');
+  wTextArea.value = 'Hello';
+  await wTextArea.updateComplete;
 
   // Wait for value + validity to update, then restore original help text
   await expect.poll(() => wTextArea.value).toBe('Hello');
