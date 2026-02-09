@@ -241,10 +241,10 @@ export const OverUnder: Story = {
           'w-slider[data-testid="overunder"]'
         );
         overunderSlider.formatter = function (value, type) {
-          if (value === "" && type === "from") {
+          if (value === "" && type.startsWith("from")) {
             return "Før 1950";
           }
-          if (value === "" && type === "to") {
+          if (value === "" && type.startsWith("to")) {
             return "Etter 2025";
           }
           return value;
@@ -364,10 +364,10 @@ export const TestCase: Story = {
           'w-slider[data-testid="overunder"]'
         );
         overunderSlider.formatter = function (value, type) {
-          if (value === "" && type === "from") {
+          if (value === "" && type.startsWith("from")) {
             return "Under 200";
           }
-          if (value === "" && type === "to") {
+          if (value === "" && type.startsWith("to")) {
             return "Over 350";
           }
           return value;
@@ -448,6 +448,46 @@ export const VisuallyHiddenLabel: Story = {
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
+    `;
+  },
+};
+
+export const HiddenMinimumMaximumLabels: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render() {
+    return html`
+      <w-slider
+        min="1950"
+        max="2025"
+        over
+        under
+        help-text="Production year of the car"
+        data-testid="hidden-minmax-label"
+      >
+        <legend class="sr-only" slot="label">
+          Production year
+        </legend>
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
+      <script>
+        const hiddenMinMaxSlider = document.querySelector(
+          'w-slider[data-testid="hidden-minmax-label"]'
+        );
+        hiddenMinMaxSlider.formatter = function (value, type) {
+          if (type.endsWith("label")) return ""; // this is the magic passphrase
+
+          if (value === "" && type === "from-value") {
+            return "Under 200";
+          }
+          if (value === "" && type === "to-value") {
+            return "Over 350";
+          }
+          return value;
+        };
+      </script>
     `;
   },
 };

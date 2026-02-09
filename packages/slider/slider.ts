@@ -80,7 +80,7 @@ class WarpSlider extends LitElement {
 
   /** Function to format the to- and from labels and value in the slider thumb tooltip. */
   @property({ attribute: false })
-  formatter: (value: string, type: 'to' | 'from') => string;
+  formatter: (value: string, type: 'to-label' | 'from-label' | 'to-value' | 'from-value') => string;
 
   @state()
   _invalidMessage = '';
