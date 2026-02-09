@@ -36,7 +36,7 @@ export const Disabled: StoryObj = {
   render: () => html`<w-checkbox name="disabledfoo" value="bar" disabled>Disabled checkbox</w-checkbox>`,
 };
 
-export const BunchOfCheckboxes: StoryObj = {
+export const CheckboxGroup: StoryObj = {
   render: () => html`
     <w-checkbox-group>
       <w-checkbox name="group" value="foo">Foo</w-checkbox>
@@ -45,9 +45,36 @@ export const BunchOfCheckboxes: StoryObj = {
   `,
 };
 
-export const BunchOfCheckboxesWithHelpText: StoryObj = {
+export const CheckboxGroupWithHelpText: StoryObj = {
   render: () => html`
     <w-checkbox-group help-text="Select all that apply">
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+};
+
+export const CheckboxGroupWithLabel: StoryObj = {
+  render: () => html`
+    <w-checkbox-group label="Label">
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+};
+
+export const CheckboxGroupWithHelpTextAndLabel: StoryObj = {
+  render: () => html`
+    <w-checkbox-group label="Label" help-text="help text">
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+};
+
+export const CheckboxGroupWithOptional: StoryObj = {
+  render: () => html`
+    <w-checkbox-group label="Label" optional help-text="help text">
       <w-checkbox name="group" value="foo">Foo</w-checkbox>
       <w-checkbox name="group" value="bar">Bar</w-checkbox>
     </w-checkbox-group>
