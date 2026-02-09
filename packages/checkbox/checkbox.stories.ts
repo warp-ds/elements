@@ -44,3 +44,12 @@ export const BunchOfCheckboxes: StoryObj = {
     </w-checkbox-group>
   `,
 };
+
+export const BunchOfCheckboxesWithHelpText: StoryObj = {
+  render: () => html`
+    <w-checkbox-group help-text="Select all that apply">
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+};
