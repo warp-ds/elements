@@ -37,8 +37,8 @@
     // "packages/dead-toggle",
     // "packages/radio",
     // "packages/radio-group",
-    // "packages/slider",
-    // "packages/slider-thumb",
+    "packages/slider",
+    "packages/slider-thumb",
     "setup-tests.ts"
   ],
   "compilerOptions": {

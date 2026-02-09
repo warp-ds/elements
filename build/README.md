@@ -1,5 +1,12 @@
 # Build Guide
 
+To add a new component to the build:
+
+1. Add it to `.cem/custom-element-manifest.config.js`
+1. Add it to `tsconfig.json`
+1. If it has localization add it to `lingui.config.ts` and `crowdin.yml`
+1. Add exports for it in `package.json`
+
 ## Custom Element Manifest
 
 This scans through the components and produces a JSON manifest file
