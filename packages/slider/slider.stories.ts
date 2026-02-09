@@ -427,3 +427,27 @@ export const Description: Story = {
     `;
   },
 };
+
+export const VisuallyHiddenLabel: Story = {
+  args: {
+    locale: 'nb',
+  },
+  render() {
+    return html`
+      <w-slider
+        min="1950"
+        max="2025"
+        over
+        under
+        help-text="Production year of the car"
+      >
+        <legend class="sr-only" slot="label">
+          Production year
+        </legend>
+        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+      </w-slider>
+    `;
+  },
+};
+

@@ -48,8 +48,8 @@ export default {
     // 'packages/dead-toggle/dead-toggle.ts',
     // 'packages/radio/radio.ts',
     // 'packages/radio-group/radio-group.ts',
-    // 'packages/slider/slider.ts',
-    // 'packages/slider-thumb/slider-thumb.ts',
+    'packages/slider/slider.ts',
+    'packages/slider-thumb/slider-thumb.ts',
   ],
 
   // Globs to exclude

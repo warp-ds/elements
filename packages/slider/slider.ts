@@ -289,7 +289,7 @@ class WarpSlider extends LitElement {
             ? html`<legend class="w-slider__label">
               <slot id="label" name="label">${this.label}</slot>
             </legend>`
-            : nothing
+            : html`<slot id="label" name="label"></slot>`
         }
         <slot class="w-slider__description" name="description"></slot>
         ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
