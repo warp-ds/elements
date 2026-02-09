@@ -182,4 +182,8 @@ export const wSliderThumbStyles = css`
   :host([name="to"]) .w-slider-thumb__range::-moz-range-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
+
+  w-textfield {
+    --w-textfield-placeholder-color-text: var(--w-s-color-text);
+  }
 `;

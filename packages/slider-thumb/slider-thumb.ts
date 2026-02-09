@@ -50,6 +50,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ attribute: false, reflect: false })
   allowValuesOutsideRange = false;
 
+  @property({ reflect: true })
+  placeholder: string;
+
   /** Set by `<w-slider>` */
   @state()
   markers: string;
@@ -179,17 +182,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       return { shouldCancel: true };
     }
 
-    if (value === '') {
-      if (this.required) {
-        this.#handleValidity(
-          i18n.t({
-            id: 'slider.error.required',
-            message: 'This field is required',
-          }),
-        );
-      }
-      // To not bork when input field is empty
-      return { shouldCancel: true };
+    if (value === '' && this.required) {
+      this.#handleValidity(
+        i18n.t({
+          id: 'slider.error.required',
+          message: 'This field is required',
+        }),
+      );
     }
 
     this.value = value;
@@ -461,6 +460,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('allowValuesOutsideRange')) {
+      if (this.allowValuesOutsideRange && !this.placeholder) {
+        if (this.slot === 'to' || this.slot === '') {
+          this.placeholder = 'Max';
+        } else if (this.slot === 'from') {
+          this.placeholder = 'Min';
+        }
+      }
+    }
+
     if (changedProperties.has('value')) {
       this.setValue(this.value);
       this.#syncRangeValue();
@@ -515,20 +524,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             'sr-only': this._hiddenTextfield,
           })}"
           type="number"
-          .formatter=${
-            this.formatter
-              ? (value: string) =>
-                  this.formatter(value, (this.slot + '-value' || 'to-value') as 'from-value' | 'to-value')
-              : nothing
-          }
+          placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
           step="${ifDefined(this.step)}"
           ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
-          @focus="${this.#onTextFieldFocus}"
-          @blur="${this.#onTextFieldBlur}"
           ?disabled="${this.disabled}"
         >
           ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
