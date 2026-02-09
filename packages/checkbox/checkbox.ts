@@ -2,13 +2,11 @@ import type { PropertyValues } from 'lit';
 import { html } from 'lit';
 
 import { property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 
 import { BaseFormAssociatedElement } from '../radio/form-associated-element';
 import { RequiredValidator } from '../radio/required-validator';
-import { HasSlotController } from '../radio/slot';
 import { watch } from '../radio/watch';
 
 import { reset } from '../styles';
@@ -33,11 +31,7 @@ export class WCheckbox extends BaseFormAssociatedElement {
     return [...super.validators, ...validators];
   }
 
-  private readonly hasSlotController = new HasSlotController(this, 'hint');
-
   @query('input[type="checkbox"]') input: HTMLInputElement;
-
-  @property() title = ''; // make reactive to pass through
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
@@ -53,9 +47,6 @@ export class WCheckbox extends BaseFormAssociatedElement {
   set value(val: string | null) {
     this._value = val;
   }
-
-  /** The checkbox's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Disables the checkbox. */
   @property({ type: Boolean }) disabled = false;
@@ -82,9 +73,6 @@ export class WCheckbox extends BaseFormAssociatedElement {
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
-
-  /** The checkbox's hint. If you need to display HTML, use the `hint` slot instead. */
-  @property() hint = '';
 
   connectedCallback() {
     super.connectedCallback();
@@ -173,8 +161,6 @@ export class WCheckbox extends BaseFormAssociatedElement {
   }
 
   render() {
-    const hasHintSlot = this.hasSlotController.test('hint');
-    const hasHint = this.hint ? true : !!hasHintSlot;
     const isIndeterminate = !this.checked && this.indeterminate;
 
     return html`
@@ -183,7 +169,6 @@ export class WCheckbox extends BaseFormAssociatedElement {
           <input
             class="input hide-toggle"
             type="checkbox"
-            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
             name=${this.name}
             value=${ifDefined(this._value)}
             .indeterminate=${live(this.indeterminate)}
@@ -191,17 +176,12 @@ export class WCheckbox extends BaseFormAssociatedElement {
             .disabled=${this.disabled}
             .required=${this.required}
             aria-checked=${this.checked ? 'true' : 'false'}
-            aria-describedby="hint"
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>
 
         <slot part="label"></slot>
       </label>
-
-      <slot id="hint" part="hint" name="hint" aria-hidden=${hasHint ? 'false' : 'true'} class="${classMap({ 'has-slotted': hasHint })}">
-        ${this.hint}
-      </slot>
     `;
   }
 }
