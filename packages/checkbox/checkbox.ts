@@ -5,10 +5,10 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 
 import { reset } from '../styles';
-import { toggleStyles } from '../toggle-styles';
+import { styles } from './styles';
 
 export class WCheckbox extends FormControlMixin(LitElement) {
-  static styles = [reset, toggleStyles];
+  static styles = [reset, styles];
 
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
@@ -20,24 +20,16 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   private _value: string | null = this.getAttribute('value') ?? null;
 
   /** The value of the checkbox, submitted as a name/value pair with form data. */
-  get value(): string | null {
-    return this._value ?? 'on';
-  }
-
-  @property({ reflect: true })
-  set value(val: string | null) {
-    this._value = val;
-  }
+  @property({ reflect: true }) value: string | null = this._value ?? 'on';
 
   /** Draws the checkbox in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** Draws the checkbox in a checked state. */
-  @property({ type: Boolean, attribute: false }) checked: boolean = this.hasAttribute('checked');
+  /** Draws the checkbox in a checked state (reflected to attribute). */
+  @property({ type: Boolean, reflect: true }) checked = this.hasAttribute('checked');
 
-  /** The default value of the form control. Primarily used for resetting the form control. */
-  @property({ type: Boolean, reflect: true, attribute: 'checked' }) defaultChecked: boolean =
-    this.hasAttribute('checked');
+  /** The default value of the form control. Used for resetting. */
+  @property({ type: Boolean }) defaultChecked = this.hasAttribute('checked');
 
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -50,7 +42,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    // NB: not from WA, this eases shared-styling
+    // kept for compat with old shared styling approach
     this.setAttribute('type', 'checkbox');
     this.#syncFormValue();
   }
@@ -172,11 +164,13 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   render() {
     const isIndeterminate = !this.checked && this.indeterminate;
+    const ariaChecked = isIndeterminate ? 'mixed' : this.checked ? 'true' : 'false';
 
     return html`
       <label part="base" class="wrapper">
         <span part="control" class="checkbox control">
           <input
+            part="input"
             class="input hide-toggle"
             type="checkbox"
             name=${this.name}
@@ -185,7 +179,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
-            aria-checked=${this.checked ? 'true' : 'false'}
+            aria-checked=${ariaChecked}
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>
