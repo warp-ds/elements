@@ -160,7 +160,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             class="input hide-toggle"
             type="checkbox"
             name=${this.name}
-            value=${ifDefined(this._value)}
+            value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
