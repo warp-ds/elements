@@ -17,19 +17,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   /** The name of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
 
-  private _value: string | null = this.getAttribute('value') ?? null;
-
   /** The value of the checkbox, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) value: string | null = this._value ?? 'on';
+  @property({ reflect: true }) value: string | null = null;
 
   /** Draws the checkbox in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
   /** Draws the checkbox in a checked state (reflected to attribute). */
-  @property({ type: Boolean, reflect: true }) checked = this.hasAttribute('checked');
-
-  /** The default value of the form control. Used for resetting. */
-  @property({ type: Boolean }) defaultChecked = this.hasAttribute('checked');
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Disables the checkbox. */
   @property({ type: Boolean, reflect: true }) disabled = false;
@@ -37,34 +32,27 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  // Track whether the user has interacted with the control.
-  #hasInteracted = false;
+  /** The default value of the form control. Used for resetting. */
+  #defaultChecked = false;
 
   connectedCallback() {
     super.connectedCallback();
     // kept for compat with old shared styling approach
     this.setAttribute('type', 'checkbox');
+    const attrValue = this.getAttribute('value');
+    this.value = attrValue ?? 'on';
+    this.#defaultChecked = this.hasAttribute('checked');
+    this.checked = this.#defaultChecked;
     this.#syncFormValue();
   }
 
   private handleClick() {
     if (this.disabled) return;
-    this.#hasInteracted = true;
     this.checked = !this.checked;
     this.indeterminate = false;
     this.updateComplete.then(() => {
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     });
-  }
-
-  protected willUpdate(changedProperties: PropertyValues<this>): void {
-    super.willUpdate(changedProperties);
-
-    if (changedProperties.has('defaultChecked')) {
-      if (!this.#hasInteracted) {
-        this.checked = this.defaultChecked;
-      }
-    }
   }
 
   updated(changedProperties: PropertyValues<this>): void {
@@ -89,8 +77,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 
   resetFormControl(): void {
-    this.checked = this.defaultChecked;
-    this.#hasInteracted = false;
+    this.checked = this.#defaultChecked;
     this.#syncFormValue();
     this.#updateValidity();
   }
@@ -129,7 +116,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the browser's validation message if invalid */
   reportValidity(): boolean {
-    this.#hasInteracted = true;
     this.#updateValidity();
     return this.internals.checkValidity();
   }
