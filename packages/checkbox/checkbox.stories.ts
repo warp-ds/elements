@@ -108,64 +108,64 @@ export const Disabled: Story = {
 
 export const CheckboxGroup: StoryObj = {
   render: () => html`
-    <w-checkbox-group>
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupWithHelpText: StoryObj = {
   render: () => html`
-    <w-checkbox-group help-text="Select all that apply">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group help-text="Select all that apply" name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupWithLabel: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Label">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group label="Label" name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupWithHelpTextAndLabel: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Label" help-text="help text">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group label="Label" help-text="help text" name="group" >
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupWithOptional: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Label" optional help-text="help text">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group label="Label" optional help-text="help text" name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupWithInvalid: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Label" invalid help-text="help text">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    <w-checkbox-group label="Label" invalid help-text="help text" name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
     </w-checkbox-group>
   `,
 };
 
 export const CheckboxGroupRequired: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Preferences" required help-text="Help text">
-      <w-checkbox name="group" value="foo">Foo</w-checkbox>
-      <w-checkbox name="group" value="bar">Bar</w-checkbox>
-      <w-checkbox name="group" value="baz">Baz</w-checkbox>
+    <w-checkbox-group label="Preferences" required help-text="Help text" name="group">
+      <w-checkbox value="foo">Foo</w-checkbox>
+      <w-checkbox value="bar">Bar</w-checkbox>
+      <w-checkbox value="baz">Baz</w-checkbox>
     </w-checkbox-group>
   `,
 };
@@ -191,12 +191,13 @@ export const CheckboxGroupFormAssociated: StoryObj = {
         <w-checkbox-group
           label="Preferences"
           required
+          name="group"
           help-text="Choose an option"
           @invalid=${handleInvalid}
         >
-          <w-checkbox name="group" value="foo">Foo</w-checkbox>
-          <w-checkbox name="group" value="bar">Bar</w-checkbox>
-          <w-checkbox name="group" value="baz">Baz</w-checkbox>
+          <w-checkbox value="foo">Foo</w-checkbox>
+          <w-checkbox value="bar">Bar</w-checkbox>
+          <w-checkbox value="baz">Baz</w-checkbox>
         </w-checkbox-group>
         <button type="submit">Submit</button>
         <div data-status aria-live="polite"></div>
