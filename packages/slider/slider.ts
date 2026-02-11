@@ -168,6 +168,12 @@ class WarpSlider extends LitElement {
       this.style.setProperty('--over-under-offset', '1');
     }
 
+    const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    const isRangeSlider = sliderThumbs.length > 1;
+    if (isRangeSlider) {
+      this.style.setProperty('--range-slider-magic-pixel', '1px');
+    }
+
     if (this.invalid && this.error) {
       this._showError = true;
     }

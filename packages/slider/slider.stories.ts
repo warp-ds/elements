@@ -53,7 +53,7 @@ export const SingleDisabled: Story = {
 export const Range: Story = {
   render() {
     return html`
-      <w-slider label="Range" min="0" max="100" step="25">
+      <w-slider label="Range" min="0" max="100">
         <w-slider-thumb
           slot="from"
           aria-label="From value"

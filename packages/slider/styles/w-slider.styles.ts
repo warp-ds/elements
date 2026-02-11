@@ -88,12 +88,12 @@ export const wSliderStyles = css`
 
     /* calculate the offset for the "from" thumb in percentage to move the range visualisation from the left edge, using max() to avoid going off screen */
     --offset-percentage: calc(calc(var(--from) - var(--min)) / calc(var(--max-with-offset) - var(--min)) * 100);
-    margin-left: calc(max(var(--offset-percentage) * 1%, 0px) - 1px);
+    margin-left: calc(max(var(--offset-percentage) * 1%, 0px) - var(--range-slider-magic-pixel, 0px));
 
     /* calculate the width of the selected range in percentage, clamped between min/max */
     --value-range: calc(var(--max-with-offset) - var(--min));
     --range-span-percentage: calc(calc(min(var(--to), var(--max-with-offset)) - max(var(--min), var(--from))) / var(--value-range) * 100 );
-    width: calc(var(--range-span-percentage) * 1% + 1px);
+    width: calc(var(--range-span-percentage) * 1% + var(--range-slider-magic-pixel, 0px));
 
 
     z-index: 1;
