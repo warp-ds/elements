@@ -565,27 +565,22 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
                   ' ' +
                   (this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max)
                 }
-              </span>
-            <span
-              aria-hidden="true"
-              class="w-slider-thumb__from-marker"
-            >
-              ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label') : this.min}
-            </span>
-            <span
-              aria-hidden="true"
-              class="w-slider-thumb__to-marker"
-            >
-              ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max}
-            </span>
-        `
-            : // but take up the space for CSS grid reasons
-              html`
-              <span class="w-slider-thumb__from-marker">&nbsp;</span>
-              <span class="w-slider-thumb__to-marker">&nbsp;</span>
-            `
+              </span>`
+            : nothing
         }
 
+        <span
+          aria-hidden="true"
+          class="w-slider-thumb__from-marker"
+        >
+          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label') : this.min}
+        </span>
+        <span
+          aria-hidden="true"
+          class="w-slider-thumb__to-marker"
+        >
+          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max}
+        </span>
 
         <w-textfield
           aria-label="${this.ariaLabel}"

@@ -436,7 +436,7 @@ export const HiddenMinimumMaximumLabels: Story = {
   },
 };
 
-export const TheMapCase: Story = {
+export const VisuallyHiddenTextfield: Story = {
   args: {
     locale: 'nb',
   },
