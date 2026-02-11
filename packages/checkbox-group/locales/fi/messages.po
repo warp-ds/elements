@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-02-11 15:29+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: fi\n"
+
+#. Shown when required checkbox group has no selections
+#. js-lingui-explicit-id
+#: packages/checkbox-group/checkbox-group.ts:8
+msgid "checkbox-group.validation.required"
+msgstr ""
+
+#. Shown behind label when marked as optional
+#. js-lingui-explicit-id
+#: packages/checkbox-group/checkbox-group.ts:105
+msgid "checkbox-group.label.optional"
+msgstr ""
