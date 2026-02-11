@@ -337,8 +337,10 @@ export const RangeError: Story = {
 export const CustomError: Story = {
   args: {
     locale: 'nb',
+    error: "I'm an external error telling you something is wrong",
+    invalid: true,
   },
-  render() {
+  render(args) {
     return html`
       <w-slider
         label="Production year"
@@ -346,8 +348,8 @@ export const CustomError: Story = {
         max="2025"
         over
         under
-        error="I'm an external error telling you something is wrong"
-        invalid
+        error="${args.error}"
+        ?invalid="${args.invalid}"
       >
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>

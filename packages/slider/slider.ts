@@ -91,6 +91,9 @@ class WarpSlider extends LitElement {
   @state()
   _hasInternalError = false;
 
+  @state()
+  _showError = false;
+
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
@@ -127,7 +130,7 @@ class WarpSlider extends LitElement {
       }
 
       thumb.disabled = this.disabled;
-      thumb.invalid = this.invalid || this._hasInternalError;
+      thumb.invalid = Boolean(this.errorText);
 
       this.#updateActiveTrack(thumb);
     }
@@ -165,13 +168,16 @@ class WarpSlider extends LitElement {
       this.style.setProperty('--over-under-offset', '1');
     }
 
+    if (this.invalid && this.error) {
+      this._showError = true;
+    }
+
     this.#syncSliderThumbs();
   }
 
   updated(changedProperties: PropertyValues<this>) {
     if (
       changedProperties.has('disabled') ||
-      changedProperties.has('invalid') ||
       changedProperties.has('required') ||
       changedProperties.has('min') ||
       changedProperties.has('step') ||
@@ -181,6 +187,15 @@ class WarpSlider extends LitElement {
       changedProperties.has('_invalidMessage') ||
       changedProperties.has('_hasInternalError')
     ) {
+      this.#syncSliderThumbs();
+    }
+
+    if (changedProperties.has('error') || changedProperties.has('invalid')) {
+      if (this.error && this.invalid) {
+        this._showError = true;
+      } else {
+        this._showError = false;
+      }
       this.#syncSliderThumbs();
     }
   }
@@ -193,6 +208,16 @@ class WarpSlider extends LitElement {
     if (isRangeSlider) {
       this.#doValidation();
     }
+  }
+
+  #onBlur() {
+    if (this.componentHasError) {
+      this._showError = true;
+    } else {
+      this._showError = false;
+    }
+
+    this.#syncSliderThumbs();
   }
 
   #doValidation() {
@@ -272,7 +297,7 @@ class WarpSlider extends LitElement {
   }
 
   get errorText(): string {
-    if (!this.componentHasError) {
+    if (!this._showError) {
       return '';
     }
 
@@ -285,9 +310,10 @@ class WarpSlider extends LitElement {
         id="fieldset"
         class="w-slider"
         @input="${this.#onInput}"
+        @focusout="${this.#onBlur}"
         @slidervalidity="${this.#onSliderValidity}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
-          ?disabled="${this.disabled}"
+        ?disabled="${this.disabled}"
       >
         ${
           this.label
