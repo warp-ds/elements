@@ -462,20 +462,21 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   get ariaDescriptionText() {
-    let prefix = "";
-    const description = this.ariaDescription || "";
+    let prefix = '';
+    const description = this.ariaDescription || '';
 
-    const showPlaceholder = this.value === "";
+    const showPlaceholder = this.value === '';
     if (this.allowValuesOutsideRange && showPlaceholder) {
-      prefix = this.slot === 'from'
-        ? i18n.t({
-            id: 'slider.placeholder.from',
-            message: 'Min',
-          })
-        : i18n.t({
-            id: 'slider.placeholder.to',
-            message: 'Max',
-          });
+      prefix =
+        this.slot === 'from'
+          ? i18n.t({
+              id: 'slider.placeholder.from',
+              message: 'Min',
+            })
+          : i18n.t({
+              id: 'slider.placeholder.to',
+              message: 'Max',
+            });
     }
 
     if (prefix) {
@@ -542,12 +543,49 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @keydown="${this.allowValuesOutsideRange ? this.#onRangeSliderKeyDown : nothing}"
         />
 
-        <span class="w-slider-thumb__from-marker">
-          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label') : this.min}
-        </span>
-        <span class="w-slider-thumb__to-marker">
-          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max}
-        </span>
+        ${
+          this.slot === 'from' || !this.slot
+            ? // avoid including these labels twice, for screen readers
+              html`
+              <span class="sr-only">
+                ${
+                  i18n.t({
+                    id: 'slider.label.from',
+                    message: 'From',
+                  }) +
+                  ' ' +
+                  (this.formatter
+                    ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label')
+                    : this.min) +
+                  ', ' +
+                  i18n.t({
+                    id: 'slider.label.to',
+                    message: 'To',
+                  }) +
+                  ' ' +
+                  (this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max)
+                }
+              </span>
+            <span
+              aria-hidden="true"
+              class="w-slider-thumb__from-marker"
+            >
+              ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label') : this.min}
+            </span>
+            <span
+              aria-hidden="true"
+              class="w-slider-thumb__to-marker"
+            >
+              ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max}
+            </span>
+        `
+            : // but take up the space for CSS grid reasons
+              html`
+              <span class="w-slider-thumb__from-marker">&nbsp;</span>
+              <span class="w-slider-thumb__to-marker">&nbsp;</span>
+            `
+        }
+
 
         <w-textfield
           aria-label="${this.ariaLabel}"
