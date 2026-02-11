@@ -120,6 +120,15 @@ export const CheckboxGroupWithOptional: StoryObj = {
   `,
 };
 
+export const CheckboxGroupWithInvalid: StoryObj = {
+  render: () => html`
+    <w-checkbox-group label="Label" invalid help-text="help text">
+      <w-checkbox name="group" value="foo">Foo</w-checkbox>
+      <w-checkbox name="group" value="bar">Bar</w-checkbox>
+    </w-checkbox-group>
+  `,
+};
+
 export const CheckboxGroupRequired: StoryObj = {
   render: () => html`
     <w-checkbox-group label="Preferences" required help-text="Help text">
@@ -128,4 +137,39 @@ export const CheckboxGroupRequired: StoryObj = {
       <w-checkbox name="group" value="baz">Baz</w-checkbox>
     </w-checkbox-group>
   `,
+};
+
+export const CheckboxGroupFormAssociated: StoryObj = {
+  render: () => {
+    const handleSubmit = (event: SubmitEvent) => {
+      event.preventDefault();
+      const form = event.currentTarget as HTMLFormElement;
+      const status = form.querySelector('[data-status]') as HTMLElement | null;
+      if (status) status.textContent = 'Submitted.';
+    };
+
+    const handleInvalid = (event: Event) => {
+      const target = event.currentTarget as HTMLElement;
+      const form = target.closest('form');
+      const status = form?.querySelector('[data-status]') as HTMLElement | null;
+      if (status) status.textContent = 'Invalid: select at least one option.';
+    };
+
+    return html`
+      <form @submit=${handleSubmit} style="display: grid; gap: 12px;">
+        <w-checkbox-group
+          label="Preferences"
+          required
+          help-text="Choose an option"
+          @invalid=${handleInvalid}
+        >
+          <w-checkbox name="group" value="foo">Foo</w-checkbox>
+          <w-checkbox name="group" value="bar">Bar</w-checkbox>
+          <w-checkbox name="group" value="baz">Baz</w-checkbox>
+        </w-checkbox-group>
+        <button type="submit">Submit</button>
+        <div data-status aria-live="polite"></div>
+      </form>
+    `;
+  },
 };

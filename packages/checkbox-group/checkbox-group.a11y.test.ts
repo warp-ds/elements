@@ -10,7 +10,7 @@ import '../checkbox/checkbox.js';
 i18n.load('en', { 'checkbox-group.label.optional': ['(optional)'] });
 i18n.activate('en');
 
-const REQUIRED_MESSAGE = 'Select at least one option.';
+const REQUIRED_MESSAGE = 'At least one selection is required.';
 
 describe('w-checkbox-group accessibility (WCAG 2.2)', () => {
   describe('axe-core automated checks', () => {
