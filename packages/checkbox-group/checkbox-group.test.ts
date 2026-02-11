@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { html } from 'lit';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './checkbox-group.js';
@@ -112,4 +112,33 @@ test('submits checked checkbox values via form data', async () => {
   const form = document.querySelector('form') as HTMLFormElement;
   const data = new FormData(form);
   expect(data.getAll('prefs')).toEqual(['alpha', 'beta']);
+});
+
+test('applies group name to child checkboxes without a name', async () => {
+  render(html`
+    <w-checkbox-group name="prefs">
+      <w-checkbox value="alpha" checked>Alpha</w-checkbox>
+      <w-checkbox name="custom" value="beta" checked>Beta</w-checkbox>
+    </w-checkbox-group>
+  `);
+
+  const [first, second] = Array.from(document.querySelectorAll('w-checkbox')) as Array<{ name?: string }>;
+  await (first as { updateComplete?: Promise<unknown> }).updateComplete;
+
+  expect(first.name).toBe('prefs');
+  expect(second.name).toBe('custom');
+});
+
+test('warns when used in a form without a name', async () => {
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  render(html`
+    <form>
+      <w-checkbox-group>
+        <w-checkbox value="alpha" checked>Alpha</w-checkbox>
+      </w-checkbox-group>
+    </form>
+  `);
+
+  await expect.poll(() => warn).toHaveBeenCalled();
+  warn.mockRestore();
 });

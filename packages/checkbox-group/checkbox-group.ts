@@ -16,6 +16,10 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   label: string;
 
+  /** The name applied to child checkboxes when they do not provide one. */
+  @property({ type: String, reflect: true })
+  name: string;
+
   /** Whether to show optional text next to the label. */
   @property({ type: Boolean, reflect: true })
   optional: boolean;
@@ -39,6 +43,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
   // Track whether the user has interacted with the group.
   #hasInteracted = false;
+
+  // Track whether we've warned about missing name in a form.
+  #hasWarnedMissingName = false;
 
   static styles = css`
     .wrapper {
@@ -126,12 +133,15 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     super.connectedCallback();
     this.addEventListener('change', this.#handleChange);
     this.addEventListener('invalid', this.#handleInvalid);
+    this.addEventListener('slotchange', this.#handleSlotChange);
     this.setValue(null);
+    this.#warnIfMissingName();
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('change', this.#handleChange);
     this.removeEventListener('invalid', this.#handleInvalid);
+    this.removeEventListener('slotchange', this.#handleSlotChange);
     super.disconnectedCallback();
   }
 
@@ -158,10 +168,27 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.#updateValidity();
   };
 
+  #handleSlotChange = () => {
+    this.#applyGroupName();
+    this.#updateValidity();
+  };
+
   #getCheckedCount(): number {
     const slot = this.shadowRoot?.querySelector('slot');
     const assigned = slot?.assignedElements({ flatten: true }) ?? [];
     return assigned.filter(el => (el as { checked?: boolean }).checked).length;
+  }
+
+  #applyGroupName(): void {
+    if (!this.name) return;
+    const slot = this.shadowRoot?.querySelector('slot');
+    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
+    for (const el of assigned) {
+      const checkbox = el as { name?: string };
+      if (checkbox && typeof checkbox === 'object' && !checkbox.name) {
+        checkbox.name = this.name;
+      }
+    }
   }
 
   #syncChildInvalid(isInvalid: boolean): void {
@@ -186,13 +213,21 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     if (
       changedProperties.has('invalid') ||
       changedProperties.has('required') ||
-      changedProperties.has('helpText')
+      changedProperties.has('helpText') ||
+      changedProperties.has('name')
     ) {
+      if (changedProperties.has('name')) {
+        this.#applyGroupName();
+      }
+      if (changedProperties.has('name')) {
+        this.#warnIfMissingName();
+      }
       this.#updateValidity();
     }
   }
 
   #updateValidity(): void {
+    this.#warnIfMissingName();
     const hasSelection = this.#getCheckedCount() > 0;
 
     if (this.required && !hasSelection) {
@@ -230,6 +265,14 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this._validationMessage = null;
     this.internals.setValidity({});
     this.#syncChildInvalid(false);
+  }
+
+  #warnIfMissingName(): void {
+    if (this.#hasWarnedMissingName) return;
+    if (!this.internals.form) return;
+    if (this.name && this.name.trim().length > 0) return;
+    console.warn('w-checkbox-group: "name" is required for form submission.');
+    this.#hasWarnedMissingName = true;
   }
 }
 
