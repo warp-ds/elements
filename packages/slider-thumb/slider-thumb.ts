@@ -590,6 +590,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             'sr-only': this._hiddenTextfield,
           })}"
           type="number"
+          tabindex="${this._hiddenTextfield ? -1 : nothing}"
           placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
