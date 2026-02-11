@@ -94,6 +94,9 @@ class WarpSlider extends LitElement {
   @state()
   _showError = false;
 
+  @state()
+  _tabbableElements: Array<HTMLElement> = [];
+
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
@@ -169,9 +172,19 @@ class WarpSlider extends LitElement {
     }
 
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
-    const isRangeSlider = sliderThumbs.length > 1;
+    const isRangeSlider = sliderThumbs.length === 2;
     if (isRangeSlider) {
       this.style.setProperty('--range-slider-magic-pixel', '1px');
+
+      const sliderThumbsArr = Array.from(sliderThumbs);
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
+      this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
+      this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
+      this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot.querySelector('w-textfield');
+    } else {
+      const sliderThumbsArr = Array.from(sliderThumbs);
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
+      this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
     }
 
     if (this.invalid && this.error) {
@@ -225,6 +238,27 @@ class WarpSlider extends LitElement {
 
     this.#syncSliderThumbs();
   }
+
+    #handleKeyDown(e: KeyboardEvent) {
+        if (e.key === "Tab" && e.shiftKey) {
+            const targetIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement)
+            if (targetIndex === -1 || targetIndex === 0) {
+                return
+            } 
+
+            e.preventDefault();
+            this._tabbableElements[targetIndex - 1].focus();
+        }
+        else if (e.key === "Tab") {
+            const targetIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement)
+            if (targetIndex === -1 || targetIndex === this._tabbableElements.length - 1) {
+                return
+            } 
+
+            e.preventDefault();
+            this._tabbableElements[targetIndex + 1].focus();
+        }
+    }
 
   #doValidation() {
     // In a range slider changing the value in one input can change the validity
@@ -318,6 +352,7 @@ class WarpSlider extends LitElement {
         @input="${this.#onInput}"
         @focusout="${this.#onBlur}"
         @slidervalidity="${this.#onSliderValidity}"
+          @keydown="${this.#handleKeyDown}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
         ?disabled="${this.disabled}"
       >

@@ -455,7 +455,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     let value: string | number = 0;
     if (this.formatter) {
       value = this.formatter(this.value, (this.slot + '-label' || 'to-label') as 'from-label' | 'to-label');
-    } else  if (this.value === '') {
+    } else if (this.value === '') {
       value = this.range?.value ?? this.boundaryValue;
     } else {
       value = this.value || 0;
