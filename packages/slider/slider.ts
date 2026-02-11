@@ -45,8 +45,11 @@ class WarpSlider extends LitElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean, attribute: 'allow-values-outside-range' })
-  allowValuesOutsideRange = false;
+  /**
+   * Whether or not to allow values outside the range such as "Before 1950" and "2025+".
+   */
+  @property({ type: Boolean, attribute: 'open-ended' })
+  openEnded = false;
 
   @property({ type: String, reflect: true })
   error = '';
@@ -113,7 +116,7 @@ class WarpSlider extends LitElement {
       thumb.suffix = this.suffix;
       thumb.required = this.required;
       thumb.formatter = this.formatter;
-      thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
+      thumb.allowValuesOutsideRange = this.openEnded;
       thumb._hiddenTextfield = this.hiddenTextfield;
 
       if (!thumb.ariaLabel) {
@@ -149,10 +152,10 @@ class WarpSlider extends LitElement {
   }
 
   get edgeMin() {
-    return this.allowValuesOutsideRange ? (Number(this.min) - 1).toString() : this.min;
+    return this.openEnded ? (Number(this.min) - 1).toString() : this.min;
   }
   get edgeMax() {
-    return this.allowValuesOutsideRange ? (Number(this.max) + 1).toString() : this.max;
+    return this.openEnded ? (Number(this.max) + 1).toString() : this.max;
   }
 
   async connectedCallback() {
@@ -167,7 +170,7 @@ class WarpSlider extends LitElement {
       this.style.setProperty('--markers', String(this.markers));
     }
 
-    if (this.allowValuesOutsideRange) {
+    if (this.openEnded) {
       this.style.setProperty('--over-under-offset', '1');
     }
 
@@ -241,7 +244,9 @@ class WarpSlider extends LitElement {
 
   #handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Tab') {
-      const knownFocusableElementIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement);
+      const knownFocusableElementIndex = this._tabbableElements.indexOf(
+        (e.target as WarpSliderThumb).shadowRoot.activeElement as HTMLElement,
+      );
       if (knownFocusableElementIndex === -1) {
         return; // shouldn't really happen, but don't prevent anything
       }
@@ -304,7 +309,7 @@ class WarpSlider extends LitElement {
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
     if (input.value === undefined || input.value === null) {
-      input.value = this.allowValuesOutsideRange ? '' : boundary;
+      input.value = this.openEnded ? '' : boundary;
     }
     // Use boundary for CSS positioning when value is empty
     return input.value === '' ? boundary : input.value;

@@ -217,7 +217,7 @@ export const OpenEnded: Story = {
           min="1950"
           max="2025"
           data-testid="openended"
-          allow-values-outside-range
+          open-ended
         >
           <w-slider-thumb
             slot="from"
