@@ -113,15 +113,6 @@ export const styles = css`
     font-size: var(--w-font-size-m);
   }
 
-  /* native invalid support without requiring [invalid] attribute */
-  [part='control']:has(:invalid) {
-    border-color: var(--_border-invalid) !important;
-  }
-
-  [part='control']:has(:checked, :indeterminate):has(:invalid) {
-    background-color: var(--_bg-invalid-checked);
-  }
-
   :host(:focus-visible) {
     outline: none;
   }

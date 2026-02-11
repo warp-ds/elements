@@ -97,3 +97,19 @@ test('required group toggles invalid state for group and children after submit a
   await expect.element(group).not.toHaveAttribute('aria-invalid', 'true');
   await expect.element(firstCheckbox).not.toHaveAttribute('aria-invalid', 'true');
 });
+
+test('submits checked checkbox values via form data', async () => {
+  render(html`
+    <form>
+      <w-checkbox-group label="Preferences">
+        <w-checkbox name="prefs" value="alpha" checked>Alpha</w-checkbox>
+        <w-checkbox name="prefs" value="beta" checked>Beta</w-checkbox>
+        <w-checkbox name="prefs" value="gamma">Gamma</w-checkbox>
+      </w-checkbox-group>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const data = new FormData(form);
+  expect(data.getAll('prefs')).toEqual(['alpha', 'beta']);
+});
