@@ -423,21 +423,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this.#syncRangeValue();
   }
 
-  #onTextFieldFocus(e) {
-    // Safari fires the focus event we register on `w-textfield` also when the range input
-    // is focused. This breaks the input masking. Rely on the custom event that is also
-    // fired by w-textfield on focus.
-    if (e instanceof CustomEvent && e.type === 'focus') {
-      this._inputHasFocus = true;
-    }
-  }
-
-  #onTextFieldBlur(e) {
-    if (e instanceof CustomEvent && e.type === 'blur') {
-      this._inputHasFocus = false;
-    }
-  }
-
   // The boundary value for this thumb (min for 'from', max for 'to' or default)
   get boundaryValue(): string {
     return this.slot === 'from' ? this.min : this.max;
@@ -477,9 +462,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   get ariaDescriptionText() {
-    const valueIsAtTheSliderEdge = this.value === this.max || this.value === this.min;
-    if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
-      return this.slot === 'from'
+    let prefix = "";
+    const description = this.ariaDescription || "";
+
+    const showPlaceholder = this.value === "";
+    if (this.allowValuesOutsideRange && showPlaceholder) {
+      prefix = this.slot === 'from'
         ? i18n.t({
             id: 'slider.placeholder.from',
             message: 'Min',
@@ -489,7 +477,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             message: 'Max',
           });
     }
-    return this.ariaDescription;
+
+    if (prefix) {
+      return `${prefix}, ${description}`;
+    }
+    return description;
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -559,7 +551,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
         <w-textfield
           aria-label="${this.ariaLabel}"
-          aria-description="${ifDefined(this.ariaDescription)}"
+          aria-description="${ifDefined(this.ariaDescriptionText)}"
           class="${classMap({
             'w-slider-thumb__textfield': true,
             'sr-only': this._hiddenTextfield,

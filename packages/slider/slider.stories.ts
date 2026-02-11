@@ -222,12 +222,12 @@ export const OpenEnded: Story = {
           <w-slider-thumb
             slot="from"
             aria-label="Fra år"
-            name="from"
+            name="from-year"
           ></w-slider-thumb>
           <w-slider-thumb
             slot="to"
             aria-label="Til år"
-            name="to"
+            name="to-year"
           ></w-slider-thumb>
         </w-slider>
       </form>
@@ -269,8 +269,8 @@ export const OpenEnded: Story = {
         /** Code to show the form values in output */
         document.forms["openended"].addEventListener("input", function () {
           const formData = new FormData(this);
-          const from = formData.get("from");
-          const to = formData.get("to");
+          const from = formData.get("from-year");
+          const to = formData.get("to-year");
           document.getElementById("openended-from").innerText = from;
           document.getElementById("openended-to").innerText = to;
         });

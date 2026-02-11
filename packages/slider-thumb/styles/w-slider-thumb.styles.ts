@@ -148,38 +148,38 @@ export const wSliderThumbStyles = css`
     grid-column: 1 / 3; /* Single sliders should have the text field use the fromtextfield _and_ gap portion of the CSS grid. */
   }
 
-  :host([name="from"]) .w-slider-thumb__textfield {
+  :host([slot="from"]) .w-slider-thumb__textfield {
     grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
-  :host([name="from"]) .w-slider-thumb__range {
+  :host([slot="from"]) .w-slider-thumb__range {
     margin-left: var(--w-slider-thumb-size);
   }
 
-  :host([name="to"]) .w-slider-thumb__range {
+  :host([slot="to"]) .w-slider-thumb__range {
     margin-right: var(--w-slider-thumb-size);
   }
 
-  :host([name="from"]) .w-slider-thumb__range::-webkit-slider-thumb,
-  :host([name="from"]) .w-slider-thumb__tooltip-target {
+  :host([slot="from"]) .w-slider-thumb__range::-webkit-slider-thumb,
+  :host([slot="from"]) .w-slider-thumb__tooltip-target {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name="from"]) .w-slider-thumb__range::-moz-range-thumb {
+  :host([slot="from"]) .w-slider-thumb__range::-moz-range-thumb {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name="to"]) .w-slider-thumb__textfield {
+  :host([slot="to"]) .w-slider-thumb__textfield {
     grid-row: 3 / 4;
     grid-column: 3 / 4;
   }
 
-  :host([name="to"]) .w-slider-thumb__tooltip-target,
-  :host([name="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
+  :host([slot="to"]) .w-slider-thumb__tooltip-target,
+  :host([slot="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 
-  :host([name="to"]) .w-slider-thumb__range::-moz-range-thumb {
+  :host([slot="to"]) .w-slider-thumb__range::-moz-range-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
 
