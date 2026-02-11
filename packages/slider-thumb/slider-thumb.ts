@@ -452,13 +452,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** Value to display in the tooltip */
   get tooltipDisplayValue(): string | number {
+    let value: string | number = 0;
     if (this.formatter) {
-      return this.formatter(this.value, (this.slot + '-label' || 'to-label') as 'from-label' | 'to-label');
+      value = this.formatter(this.value, (this.slot + '-label' || 'to-label') as 'from-label' | 'to-label');
+    } else  if (this.value === '') {
+      value = this.range?.value ?? this.boundaryValue;
+    } else {
+      value = this.value || 0;
     }
-    if (this.value === '') {
-      return this.range?.value ?? this.boundaryValue;
-    }
-    return this.value || 0;
+    return value;
   }
 
   get ariaDescriptionText() {

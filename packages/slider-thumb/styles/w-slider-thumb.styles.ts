@@ -160,8 +160,7 @@ export const wSliderThumbStyles = css`
     margin-right: var(--w-slider-thumb-size);
   }
 
-  :host([slot="from"]) .w-slider-thumb__range::-webkit-slider-thumb,
-  :host([slot="from"]) .w-slider-thumb__tooltip-target {
+  :host([slot="from"]) .w-slider-thumb__range::-webkit-slider-thumb {
     transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
   }
 
@@ -174,7 +173,6 @@ export const wSliderThumbStyles = css`
     grid-column: 3 / 4;
   }
 
-  :host([slot="to"]) .w-slider-thumb__tooltip-target,
   :host([slot="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
     transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
   }
