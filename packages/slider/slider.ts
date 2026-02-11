@@ -239,26 +239,23 @@ class WarpSlider extends LitElement {
     this.#syncSliderThumbs();
   }
 
-    #handleKeyDown(e: KeyboardEvent) {
-        if (e.key === "Tab" && e.shiftKey) {
-            const targetIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement)
-            if (targetIndex === -1 || targetIndex === 0) {
-                return
-            } 
+  #handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      const knownFocusableElementIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement);
+      if (knownFocusableElementIndex === -1) {
+        return; // shouldn't really happen, but don't prevent anything
+      }
 
-            e.preventDefault();
-            this._tabbableElements[targetIndex - 1].focus();
-        }
-        else if (e.key === "Tab") {
-            const targetIndex = this._tabbableElements.indexOf(e.target.shadowRoot.activeElement)
-            if (targetIndex === -1 || targetIndex === this._tabbableElements.length - 1) {
-                return
-            } 
+      const direction = e.shiftKey ? -1 : +1;
 
-            e.preventDefault();
-            this._tabbableElements[targetIndex + 1].focus();
-        }
+      const nextFocusableElement = this._tabbableElements[knownFocusableElementIndex + direction];
+      if (!nextFocusableElement) {
+        return;
+      }
+      e.preventDefault();
+      nextFocusableElement.focus();
     }
+  }
 
   #doValidation() {
     // In a range slider changing the value in one input can change the validity
