@@ -4,7 +4,12 @@ import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-const REQUIRED_MESSAGE = 'At least one selection is required.';
+const REQUIRED_MESSAGE = () =>
+  i18n._({
+    id: 'checkbox-group.validation.required',
+    message: 'At least one selection is required.',
+    comment: 'Shown when required checkbox group has no selections',
+  });
 
 export class WCheckboxGroup extends FormControlMixin(LitElement) {
   /** The group label displayed above the checkboxes. */
@@ -78,7 +83,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const isInvalid = this.invalid || this._validationMessage;
     const helpId = this.helpText || isInvalid ? 'checkbox-group__help' : undefined;
     const labelId = this.label ? 'checkbox-group__label' : undefined;
-    const helpText = this._validationMessage ?? (this.invalid ? REQUIRED_MESSAGE : this.helpText);
+    const helpText = this._validationMessage ?? (this.invalid ? REQUIRED_MESSAGE() : this.helpText);
     const ariaInvalid = isInvalid ? 'true' : undefined;
 
     return html`
@@ -195,14 +200,16 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
       // Always block form submission, but only show UI after interaction.
       if (this.#hasInteracted) {
+        const message = REQUIRED_MESSAGE();
         this.invalid = true;
-        this._validationMessage = REQUIRED_MESSAGE;
+        this._validationMessage = message;
       } else {
         this.invalid = false;
         this._validationMessage = null;
       }
 
-      this.internals.setValidity({ valueMissing: true }, REQUIRED_MESSAGE, this.#getValidationAnchor());
+      const message = REQUIRED_MESSAGE();
+      this.internals.setValidity({ valueMissing: true }, message, this.#getValidationAnchor());
       this.#syncChildInvalid(this.invalid);
       return;
     }
@@ -213,8 +220,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     }
 
     if (this.invalid) {
-      this._validationMessage = REQUIRED_MESSAGE;
-      this.internals.setValidity({ customError: true }, REQUIRED_MESSAGE, this.#getValidationAnchor());
+      const message = REQUIRED_MESSAGE();
+      this._validationMessage = message;
+      this.internals.setValidity({ customError: true }, message, this.#getValidationAnchor());
       this.#syncChildInvalid(true);
       return;
     }

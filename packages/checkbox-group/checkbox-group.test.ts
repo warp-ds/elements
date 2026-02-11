@@ -7,7 +7,10 @@ import './checkbox-group.js';
 import '../checkbox/checkbox.js';
 
 // Initialize i18n with English locale for tests
-i18n.load('en', { 'checkbox-group.label.optional': ['(optional)'] });
+i18n.load('en', {
+  'checkbox-group.label.optional': ['(optional)'],
+  'checkbox-group.validation.required': ['At least one selection is required.'],
+});
 i18n.activate('en');
 
 test('renders help text when provided', async () => {

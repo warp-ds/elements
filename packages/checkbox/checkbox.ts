@@ -41,6 +41,9 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   // Track whether invalid state was set by required validation.
   #invalidFromRequired = false;
 
+  // Track whether the user has interacted with the checkbox.
+  #hasInteracted = false;
+
   connectedCallback() {
     super.connectedCallback();
     // kept for compat with old shared styling approach
@@ -49,17 +52,29 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.value = attrValue ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
+    this.addEventListener('invalid', this.#handleInvalid);
     this.#syncFormValue();
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('invalid', this.#handleInvalid);
+    super.disconnectedCallback();
   }
 
   private handleClick() {
     if (this.disabled) return;
+    this.#hasInteracted = true;
     this.checked = !this.checked;
     this.indeterminate = false;
     this.updateComplete.then(() => {
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     });
   }
+
+  #handleInvalid = () => {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+  };
 
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
@@ -123,6 +138,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the browser's validation message if invalid */
   reportValidity(): boolean {
+    this.#hasInteracted = true;
     this.#updateValidity();
     return this.internals.checkValidity();
   }
@@ -136,7 +152,11 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
     if (this.required && !this.checked) {
       this.#invalidFromRequired = true;
-      this.invalid = true;
+      if (this.#hasInteracted) {
+        this.invalid = true;
+      } else {
+        this.invalid = false;
+      }
       const message = this.input?.validationMessage || ' ';
       const anchor = this.input ?? undefined;
       this.internals.setValidity({ valueMissing: true }, message, anchor);

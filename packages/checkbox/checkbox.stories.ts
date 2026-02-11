@@ -67,6 +67,37 @@ export const IndeterminateDisabled: Story = {
   },
 };
 
+export const CheckboxFormAssociated: StoryObj = {
+  render: () => {
+    const handleSubmit = (event: SubmitEvent) => {
+      event.preventDefault();
+      const form = event.currentTarget as HTMLFormElement;
+      const status = form.querySelector('[data-status]') as HTMLElement | null;
+      if (!status) return;
+      const data = new FormData(form);
+      status.textContent = `Submitted value: ${data.get('newsletter') ?? 'none'}`;
+    };
+
+    const handleInvalid = (event: Event) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLElement;
+      const form = target.closest('form');
+      const status = form?.querySelector('[data-status]') as HTMLElement | null;
+      if (status) status.textContent = 'Invalid: please check the box.';
+    };
+
+    return html`
+      <form @submit=${handleSubmit} style="display: grid; gap: 12px;">
+        <w-checkbox name="newsletter" value="yes" required @invalid=${handleInvalid}>
+          Sign up for updates
+        </w-checkbox>
+        <button type="submit">Submit</button>
+        <div data-status aria-live="polite"></div>
+      </form>
+    `;
+  },
+};
+
 export const Disabled: Story = {
   args: {
     name: 'disabledfoo',
