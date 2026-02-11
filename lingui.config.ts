@@ -54,7 +54,7 @@ const config: LinguiConfig = {
       path: 'packages/combobox/locales/{locale}/messages',
     },
     {
-      include: ['packages/slider/'],
+      include: ['packages/slider/', 'packages/slider-thumb/'],
       path: 'packages/slider/locales/{locale}/messages',
     },
     {

@@ -321,6 +321,23 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     super.connectedCallback();
     this.#initialValue = this.value;
     this.setValue(this.value);
+
+    if (this.slot && !this.ariaDescription) {
+      if (this.slot === 'from') {
+        this.ariaDescription = i18n.t({
+          id: 'slider.label.from',
+          comment: "Accessible label for the 'from value' input field in a range slider",
+          message: 'From',
+        });
+      } else if (this.slot === 'to') {
+        this.ariaDescription = i18n.t({
+          id: 'slider.label.to',
+          comment: "Accessible label for the 'to value' input field in a range slider",
+          message: 'To',
+        });
+      }
+    }
+
     if (!('anchorName' in document.documentElement.style)) {
       // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
       const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));
@@ -459,13 +476,37 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     return this.value || 0;
   }
 
+  get ariaDescriptionText() {
+    const valueIsAtTheSliderEdge = this.value === this.max || this.value === this.min;
+    if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+      return this.slot === 'from'
+        ? i18n.t({
+            id: 'slider.placeholder.from',
+            message: 'Min',
+          })
+        : i18n.t({
+            id: 'slider.placeholder.to',
+            message: 'Max',
+          });
+    }
+    return this.ariaDescription;
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('allowValuesOutsideRange')) {
       if (this.allowValuesOutsideRange && !this.placeholder) {
         if (this.slot === 'to' || this.slot === '') {
-          this.placeholder = 'Max';
+          this.placeholder = i18n.t({
+            id: 'slider.placeholder.to',
+            message: 'Max',
+            comment: 'Max as in short for Maximum',
+          });
         } else if (this.slot === 'from') {
-          this.placeholder = 'Min';
+          this.placeholder = i18n.t({
+            id: 'slider.placeholder.from',
+            message: 'Min',
+            comment: 'Min as in short for Minimum',
+          });
         }
       }
     }
@@ -553,9 +594,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         </w-attention>
 
         <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
-        <span class="sr-only" id="aria-description"
-          >${this.ariaDescription}</span
-        >
+        <span class="sr-only" id="aria-description">
+          ${this.ariaDescriptionText}
+        </span>
       </div>
     `;
   }

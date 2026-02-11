@@ -222,13 +222,11 @@ export const OpenEnded: Story = {
           <w-slider-thumb
             slot="from"
             aria-label="Fra år"
-            aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
             name="from"
           ></w-slider-thumb>
           <w-slider-thumb
             slot="to"
             aria-label="Til år"
-            aria-description="2025 inkluderer kjøretøy produsert etter 2025"
             name="to"
           ></w-slider-thumb>
         </w-slider>
