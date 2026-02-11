@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { css, html, LitElement, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 export class WCheckboxGroup extends LitElement {
@@ -14,6 +14,13 @@ export class WCheckboxGroup extends LitElement {
 
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
+
+  /** Makes the checkbox group required. */
+  @property({ type: Boolean, reflect: true })
+  required: boolean;
+
+  @state()
+  private _validationMessage: string | null = null;
 
   static styles = css`
     .wrapper {
@@ -48,11 +55,17 @@ export class WCheckboxGroup extends LitElement {
       line-height: var(--w-line-height-xs);
       color: var(--w-s-color-text-subtle);
     }
+
+    .error {
+      color: var(--w-s-color-text-negative);
+    }
   `;
 
   render() {
-    const helpId = this.helpText ? 'checkbox-group__help' : undefined;
+    const helpId = this.helpText || this._validationMessage ? 'checkbox-group__help' : undefined;
     const labelId = this.label ? 'checkbox-group__label' : undefined;
+    const helpText = this._validationMessage ?? this.helpText;
+    const ariaInvalid = this._validationMessage ? 'true' : undefined;
 
     return html`
       <div class="wrapper">
@@ -79,12 +92,58 @@ export class WCheckboxGroup extends LitElement {
           role="group"
           aria-labelledby=${ifDefined(labelId)}
           aria-describedby=${ifDefined(helpId)}
+          aria-invalid=${ifDefined(ariaInvalid)}
         >
           <slot></slot>
         </div>
-        ${this.helpText ? html`<div class="help-text" id="${helpId}">${this.helpText}</div>` : nothing}
+        ${helpText ? html`<div class="${this._validationMessage ? 'help-text error' : 'help-text'}" id="${helpId}">${helpText}</div>` : nothing}
       </div>
     `;
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('change', this.#handleChange);
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('change', this.#handleChange);
+    super.disconnectedCallback();
+  }
+
+  /** Checks whether the group passes constraint validation */
+  checkValidity(): boolean {
+    if (!this.required) return true;
+    return this.#getCheckedCount() > 0;
+  }
+
+  /** Checks validity and shows the validation message if invalid */
+  reportValidity(): boolean {
+    const valid = this.checkValidity();
+    if (valid) {
+      this._validationMessage = null;
+      return true;
+    }
+
+    this._validationMessage = 'At least one selection is required.';
+    return false;
+  }
+
+  #handleChange = () => {
+    if (!this.required) return;
+
+    if (this.#getCheckedCount() > 0) {
+      this._validationMessage = null;
+      return;
+    }
+
+    this._validationMessage = 'At least one selection is required.';
+  };
+
+  #getCheckedCount(): number {
+    const slot = this.shadowRoot?.querySelector('slot');
+    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
+    return assigned.filter(el => (el as { checked?: boolean }).checked).length;
   }
 }
 

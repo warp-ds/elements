@@ -122,7 +122,7 @@ export const CheckboxGroupWithOptional: StoryObj = {
 
 export const CheckboxGroupRequired: StoryObj = {
   render: () => html`
-    <w-checkbox-group label="Preferences" required help-text="Select at least one option">
+    <w-checkbox-group label="Preferences" required help-text="Help text">
       <w-checkbox name="group" value="foo">Foo</w-checkbox>
       <w-checkbox name="group" value="bar">Bar</w-checkbox>
       <w-checkbox name="group" value="baz">Baz</w-checkbox>
