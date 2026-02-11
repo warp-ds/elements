@@ -95,10 +95,6 @@ export const SuffixSquareMeters: Story = {
           name="to"
         ></w-slider-thumb>
       </w-slider>
-      <script type="module">
-        const sqmSlider = document.querySelector('w-slider[data-testid="sqm"]');
-        sqmSlider.formatter = window.getNumberFormatter("${locale}").format;
-      </script>
     `;
   },
 };
@@ -129,12 +125,17 @@ export const SuffixCurrency: Story = {
         ></w-slider-thumb>
       </w-slider>
       <script type="module">
+        const numberFormatter = window.getNumberFormatter(
+          "${locale}",
+        ).format;
         const currencySlider = document.querySelector(
           'w-slider[data-testid="currency"]',
         );
-        currencySlider.formatter = window.getNumberFormatter(
-          "${locale}",
-        ).format;
+        currencySlider.labelFormatter = (slot) => {
+          if (slot === "from") return "0";
+          return numberFormatter("250000");
+        };
+        currencySlider.valueFormatter = numberFormatter;
       </script>
     `;
   },
@@ -166,8 +167,15 @@ export const SuffixKilometers: Story = {
         ></w-slider-thumb>
       </w-slider>
       <script type="module">
+        const numberFormatter = window.getNumberFormatter(
+          "${locale}",
+        ).format;
         const kmSlider = document.querySelector('w-slider[data-testid="km"]');
-        kmSlider.formatter = window.getNumberFormatter("${locale}").format;
+        kmSlider.labelFormatter = (slot) => {
+          if (slot === "from") return "0";
+          return numberFormatter("250000");
+        };
+        kmSlider.valueFormatter = numberFormatter;
       </script>
     `;
   },
@@ -248,20 +256,18 @@ export const OpenEnded: Story = {
         const overunderSlider = document.querySelector(
           'w-slider[data-testid="openended"]',
         );
-        overunderSlider.formatter = function (value, type) {
-          if (value === "" && type.startsWith("from")) {
-            if (type === "from-value") {
-                return "Min"
-            }
-
-            return "Før 1950";
+        overunderSlider.labelFormatter = function (slot) {
+          if (slot === 'from') {
+            return 'Før 1950';
           }
-          if (value === "" && type.startsWith("to")) {
-            if (type === "to-value") {
-                return "Max"
-            }
-
-            return "2025+";
+          return '2025 +';
+        };
+        overunderSlider.valueFormatter = function (value, slot) {
+          if (slot === 'from' && value === '') {
+            return 'Min';
+          }
+          if (slot === 'to' && value === '') {
+            return 'Max';
           }
           return value;
         };
@@ -420,17 +426,7 @@ export const HiddenMinimumMaximumLabels: Story = {
         const hiddenMinMaxSlider = document.querySelector(
           'w-slider[data-testid="hidden-minmax-label"]',
         );
-        hiddenMinMaxSlider.formatter = function (value, type) {
-          if (type.endsWith("label")) return ""; // this is the magic passphrase
-
-          if (value === "" && type === "from-value") {
-            return "Under 200";
-          }
-          if (value === "" && type === "to-value") {
-            return "Over 350";
-          }
-          return value;
-        };
+        hiddenMinMaxSlider.labelFormatter = () => "";
       </script>
     `;
   },
@@ -461,7 +457,7 @@ export const VisuallyHiddenTextfield: Story = {
           'w-slider[data-testid="map-radius"]',
         );
         const formatter = window.getNumberFormatter("${locale}");
-        mapRadiusSlider.formatter = function (value, type) {
+        function formatDistance(value) {
           const index = Number.parseInt(value);
           const numValue = radiusSteps[index];
 
@@ -473,9 +469,17 @@ export const VisuallyHiddenTextfield: Story = {
           } else {
             formattedValue = formatter.format(numValue / 1000) + " km";
           }
-
+          return formattedValue;
+        };
+        mapRadiusSlider.labelFormatter = (slot) => {
+          if (slot === "from") {
+            return formatDistance("0");
+          }
+          return formatDistance(String(radiusSteps.length - 1));
+        };
+        mapRadiusSlider.valueFormatter = (value) => {
+          const formattedValue = formatDistance(value);
           document.getElementById("distance-value").innerText = formattedValue;
-
           return formattedValue;
         };
 

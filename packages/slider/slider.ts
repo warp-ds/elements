@@ -1,7 +1,7 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
-import type { WarpSliderThumb } from '../slider-thumb/slider-thumb.js';
+import type { WarpSliderThumb, SliderSlot} from '../slider-thumb/slider-thumb.js';
 import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -9,6 +9,7 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wSliderStyles } from './styles/w-slider.styles.js';
+
 
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
@@ -84,9 +85,13 @@ class WarpSlider extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;
 
-  /** Function to format the to- and from labels and value in the slider thumb tooltip. */
+  /** Formatter for the tooltip and input mask values. */
   @property({ attribute: false })
-  formatter: (value: string, type: 'to-label' | 'from-label' | 'to-value' | 'from-value') => string;
+  valueFormatter: (value: string, slot: SliderSlot) => string;
+
+  /** Formatter for the min and max labels below the range. */
+  @property({ attribute: false })
+  labelFormatter: (slot: SliderSlot) => string;
 
   @state()
   _invalidMessage = '';
@@ -115,7 +120,8 @@ class WarpSlider extends LitElement {
       thumb.step = this.step;
       thumb.suffix = this.suffix;
       thumb.required = this.required;
-      thumb.formatter = this.formatter;
+      thumb.labelFormatter = this.labelFormatter;
+      thumb.valueFormatter = this.valueFormatter;
       thumb.allowValuesOutsideRange = this.openEnded;
       thumb._hiddenTextfield = this.hiddenTextfield;
 
@@ -205,7 +211,8 @@ class WarpSlider extends LitElement {
       changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
-      changedProperties.has('formatter') ||
+      changedProperties.has('labelFormatter') ||
+      changedProperties.has('valueFormatter') ||
       changedProperties.has('_invalidMessage') ||
       changedProperties.has('_hasInternalError')
     ) {
@@ -354,7 +361,7 @@ class WarpSlider extends LitElement {
         @input="${this.#onInput}"
         @focusout="${this.#onBlur}"
         @slidervalidity="${this.#onSliderValidity}"
-          @keydown="${this.#handleKeyDown}"
+        @keydown="${this.#handleKeyDown}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
         ?disabled="${this.disabled}"
       >

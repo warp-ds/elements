@@ -12,6 +12,8 @@ import { reset } from '../styles.js';
 import type { WarpTextField } from '../textfield/textfield.js';
 import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
 
+export type SliderSlot = 'to' | 'from';
+
 /**
  * Component to place inside a `<w-slider>`.
  *
@@ -77,9 +79,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix = '';
 
-  /** JS hook to help you format the numeric value how you want. */
-  @state()
-  formatter: (value: string, type: 'from-value' | 'to-value' | 'from-label' | 'to-label') => string;
+  /** Formatter for the tooltip and input mask values. */
+  @property({ attribute: false })
+  valueFormatter: (value: string, slot: SliderSlot) => string;
+
+  /** Formatter for the min and max labels below the range. */
+  @property({ attribute: false })
+  labelFormatter: (slot: SliderSlot) => string;
 
   @query('input[type="range"]')
   range: HTMLInputElement;
@@ -453,8 +459,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   /** Value to display in the tooltip */
   get tooltipDisplayValue(): string | number {
     let value: string | number = 0;
-    if (this.formatter) {
-      value = this.formatter(this.value, (this.slot + '-label' || 'to-label') as 'from-label' | 'to-label');
+    if (this.valueFormatter) {
+      value = this.valueFormatter(this.value, this.slot as SliderSlot);
     } else if (this.value === '') {
       value = this.range?.value ?? this.boundaryValue;
     } else {
@@ -556,16 +562,14 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
                     message: 'From',
                   }) +
                   ' ' +
-                  (this.formatter
-                    ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label')
-                    : this.min) +
+                  (this.labelFormatter ? this.labelFormatter('from') : this.min) +
                   ', ' +
                   i18n.t({
                     id: 'slider.label.to',
                     message: 'To',
                   }) +
                   ' ' +
-                  (this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max)
+                  (this.labelFormatter ? this.labelFormatter('to') : this.max)
                 }
               </span>`
             : nothing
@@ -575,13 +579,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           aria-hidden="true"
           class="w-slider-thumb__from-marker"
         >
-          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.min, 'from-label') : this.min}
+          ${this.labelFormatter ? this.labelFormatter('from') : this.min}
         </span>
         <span
           aria-hidden="true"
           class="w-slider-thumb__to-marker"
         >
-          ${this.formatter ? this.formatter(this.allowValuesOutsideRange ? '' : this.max, 'to-label') : this.max}
+          ${this.labelFormatter ? this.labelFormatter('to') : this.max}
         </span>
 
         <w-textfield
@@ -595,6 +599,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           tabindex="${this._hiddenTextfield ? -1 : nothing}"
           placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
+          .formatter=${this.valueFormatter ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
           min="${this.allowValuesOutsideRange ? nothing : this.min}"
           max="${this.allowValuesOutsideRange ? nothing : this.max}"
           step="${ifDefined(this.step)}"
