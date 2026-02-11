@@ -150,8 +150,8 @@ class WarpSlider extends LitElement {
     // Missing a CSS-only way to detect if something is slotted in the named slots
     const fieldset = this.shadowRoot.querySelector('fieldset');
     if (usedNamedSlots) {
-      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size)');
-      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size)');
+      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size, 28px)');
+      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size, 28px)');
     } else {
       fieldset.style.setProperty('--active-range-border-radius', '4px');
     }

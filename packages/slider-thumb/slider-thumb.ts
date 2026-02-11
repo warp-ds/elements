@@ -90,6 +90,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @query('input[type="range"]')
   range: HTMLInputElement;
 
+  @query('.w-slider-thumb__tooltip-target')
+  tooltipTarget: HTMLOutputElement;
+
   @query('w-textfield')
   textfield: WarpTextField;
 
@@ -426,6 +429,13 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     } else {
       await this.updateComplete;
     }
+
+    const UA = window.navigator.userAgent;
+    const needsSafariHack = /WebKit/.test(UA) && !/Chrome/.test(UA);
+    if (needsSafariHack && this.tooltipTarget) {
+      this.tooltipTarget.style.setProperty('--transform-offset', 'var(--w-slider-thumb-size, 28px)');
+    }
+
     this.#syncRangeValue();
   }
 
