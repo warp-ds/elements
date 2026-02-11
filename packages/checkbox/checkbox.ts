@@ -32,8 +32,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Draws the checkbox in an invalid state. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
+
+  // Track whether invalid state was set by required validation.
+  #invalidFromRequired = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -69,7 +75,8 @@ export class WCheckbox extends FormControlMixin(LitElement) {
       changedProperties.has('checked') ||
       changedProperties.has('value') ||
       changedProperties.has('disabled') ||
-      changedProperties.has('required')
+      changedProperties.has('required') ||
+      changedProperties.has('invalid')
     ) {
       this.#syncFormValue();
       this.#updateValidity();
@@ -128,10 +135,24 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     }
 
     if (this.required && !this.checked) {
-      const message = this.input?.validationMessage || 'Please fill out this field.';
+      this.#invalidFromRequired = true;
+      this.invalid = true;
+      const message = this.input?.validationMessage || ' ';
       const anchor = this.input ?? undefined;
       this.internals.setValidity({ valueMissing: true }, message, anchor);
       return;
+    }
+
+    if (this.invalid && !this.#invalidFromRequired) {
+      const message = this.input?.validationMessage || ' ';
+      const anchor = this.input ?? undefined;
+      this.internals.setValidity({ customError: true }, message, anchor);
+      return;
+    }
+
+    if (this.#invalidFromRequired) {
+      this.invalid = false;
+      this.#invalidFromRequired = false;
     }
 
     this.internals.setValidity({});
@@ -166,6 +187,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             .disabled=${this.disabled}
             .required=${this.required}
             aria-checked=${ariaChecked}
+            aria-invalid=${ifDefined(this.invalid ? 'true' : undefined)}
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>

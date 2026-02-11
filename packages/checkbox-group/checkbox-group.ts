@@ -32,6 +32,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   // Track whether invalid state was set by required validation.
   #invalidFromRequired = false;
 
+  // Track whether the user has interacted with the group.
+  #hasInteracted = false;
+
   static styles = css`
     .wrapper {
       display: inline-flex;
@@ -117,11 +120,13 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener('change', this.#handleChange);
+    this.addEventListener('invalid', this.#handleInvalid);
     this.setValue(null);
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('change', this.#handleChange);
+    this.removeEventListener('invalid', this.#handleInvalid);
     super.disconnectedCallback();
   }
 
@@ -133,11 +138,18 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the validation message if invalid */
   reportValidity(): boolean {
+    this.#hasInteracted = true;
     this.#updateValidity();
     return this.internals.checkValidity();
   }
 
   #handleChange = () => {
+    this.#hasInteracted = true;
+    this.#updateValidity();
+  };
+
+  #handleInvalid = () => {
+    this.#hasInteracted = true;
     this.#updateValidity();
   };
 
@@ -145,6 +157,16 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const slot = this.shadowRoot?.querySelector('slot');
     const assigned = slot?.assignedElements({ flatten: true }) ?? [];
     return assigned.filter(el => (el as { checked?: boolean }).checked).length;
+  }
+
+  #syncChildInvalid(isInvalid: boolean): void {
+    const slot = this.shadowRoot?.querySelector('slot');
+    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
+    for (const el of assigned) {
+      if ('invalid' in el) {
+        (el as { invalid: boolean }).invalid = isInvalid;
+      }
+    }
   }
 
   #getValidationAnchor(): HTMLElement | undefined {
@@ -168,17 +190,20 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   #updateValidity(): void {
     const hasSelection = this.#getCheckedCount() > 0;
 
-    if (this.invalid && !this.#invalidFromRequired) {
-      this._validationMessage = REQUIRED_MESSAGE;
-      this.internals.setValidity({ customError: true }, REQUIRED_MESSAGE, this.#getValidationAnchor());
-      return;
-    }
-
     if (this.required && !hasSelection) {
       this.#invalidFromRequired = true;
-      this.invalid = true;
-      this._validationMessage = REQUIRED_MESSAGE;
+
+      // Always block form submission, but only show UI after interaction.
+      if (this.#hasInteracted) {
+        this.invalid = true;
+        this._validationMessage = REQUIRED_MESSAGE;
+      } else {
+        this.invalid = false;
+        this._validationMessage = null;
+      }
+
       this.internals.setValidity({ valueMissing: true }, REQUIRED_MESSAGE, this.#getValidationAnchor());
+      this.#syncChildInvalid(this.invalid);
       return;
     }
 
@@ -187,8 +212,16 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
       this.#invalidFromRequired = false;
     }
 
+    if (this.invalid) {
+      this._validationMessage = REQUIRED_MESSAGE;
+      this.internals.setValidity({ customError: true }, REQUIRED_MESSAGE, this.#getValidationAnchor());
+      this.#syncChildInvalid(true);
+      return;
+    }
+
     this._validationMessage = null;
     this.internals.setValidity({});
+    this.#syncChildInvalid(false);
   }
 }
 
