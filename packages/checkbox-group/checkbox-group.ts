@@ -41,6 +41,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   // Track whether we've warned about missing name in a form.
   #hasWarnedMissingName = false;
 
+  // Track whether we set tabindex automatically for invalid focusability.
+  #autoTabIndex = false;
+
   static styles = css`
     .wrapper {
       display: inline-flex;
@@ -243,8 +246,25 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   #setValidityState(state: ValidityStateFlags): void {
-    // Suppress native validation popovers (Safari)
-    this.internals.setValidity(state, ' ');
+    // Suppress native validation popovers (Safari) and provide a focusable anchor.
+    const anchor = this.#getValidationAnchor();
+    this.internals.setValidity(state, ' ', anchor ?? undefined);
+  }
+
+  #syncHostTabIndex(shouldBeFocusable: boolean): void {
+    const hasTabIndexAttr = this.hasAttribute('tabindex');
+    if (hasTabIndexAttr && !this.#autoTabIndex) return;
+
+    if (shouldBeFocusable) {
+      this.tabIndex = 0;
+      this.#autoTabIndex = true;
+      return;
+    }
+
+    if (this.#autoTabIndex) {
+      this.removeAttribute('tabindex');
+      this.#autoTabIndex = false;
+    }
   }
 
   #updateValidity(): void {
@@ -254,6 +274,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const externalInvalid = this.invalid;
     const showRequiredError = requiredInvalid && this.#hasInteracted;
     const showInvalidUi = externalInvalid || showRequiredError;
+
+    this.#syncHostTabIndex(showInvalidUi);
 
     if (requiredInvalid) {
       this.#setValidityState({ valueMissing: true });
