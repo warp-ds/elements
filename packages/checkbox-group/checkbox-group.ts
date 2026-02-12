@@ -52,6 +52,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   // Track whether we set tabindex automatically for invalid focusability.
   #autoTabIndex = false;
 
+  #unsubscribeI18n?: () => void;
+
   static styles = css`
     .wrapper {
       display: inline-flex;
@@ -142,6 +144,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.addEventListener('change', this.#handleChange);
     this.addEventListener('invalid', this.#handleInvalid);
     this.addEventListener('slotchange', this.#handleSlotChange);
+    this.#unsubscribeI18n = i18n.on('change', this.#handleI18nChange);
     this.setValue(null);
     this.#warnIfMissingName();
   }
@@ -150,6 +153,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.removeEventListener('change', this.#handleChange);
     this.removeEventListener('invalid', this.#handleInvalid);
     this.removeEventListener('slotchange', this.#handleSlotChange);
+    this.#unsubscribeI18n?.();
+    this.#unsubscribeI18n = undefined;
     super.disconnectedCallback();
   }
 
@@ -197,6 +202,10 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   #markInteracted(): void {
     this.#hasInteracted = true;
   }
+
+  #handleI18nChange = () => {
+    this.requestUpdate();
+  };
 
   #getCheckedCount(): number {
     return this.#getAssignedElements().filter(el => (el as { checked?: boolean }).checked).length;
