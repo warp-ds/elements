@@ -80,19 +80,10 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('checked') || changedProperties.has('indeterminate')) {
-      if (this.input) {
-        this.input.checked = this.checked;
-        this.input.indeterminate = this.indeterminate;
-      }
+      this.#syncInputState();
     }
 
-    if (
-      changedProperties.has('checked') ||
-      changedProperties.has('value') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('required') ||
-      changedProperties.has('invalid')
-    ) {
+    if (this.#shouldSyncFormState(changedProperties)) {
       this.#syncFormValue();
       this.#updateValidity();
     }
@@ -148,11 +139,16 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 
   #getValidityMessage(): string {
+    // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
     return this.input?.validationMessage || ' ';
   }
 
   #getValidityAnchor(): HTMLInputElement | undefined {
     return this.input ?? undefined;
+  }
+
+  #setInvalidState(state: ValidityStateFlags): void {
+    this.internals.setValidity(state, this.#getValidityMessage(), this.#getValidityAnchor());
   }
 
   /** @internal */
@@ -165,13 +161,11 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     const requiredInvalid = this.required && !this.checked;
     // this means that invalid was set via the invalid attribute, not by required validation
     const externalInvalid = this.invalid && !this.#invalidFromRequired;
-    const message = this.#getValidityMessage();
-    const anchor = this.#getValidityAnchor();
 
     if (requiredInvalid) {
       this.#invalidFromRequired = true;
       this.invalid = this.#hasInteracted;
-      this.internals.setValidity({ valueMissing: true }, message, anchor);
+      this.#setInvalidState({ valueMissing: true });
       return;
     }
 
@@ -181,7 +175,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     }
 
     if (externalInvalid) {
-      this.internals.setValidity({ customError: true }, message, anchor);
+      this.#setInvalidState({ customError: true });
       return;
     }
 
@@ -197,6 +191,22 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
     const value = this.checked ? this.value : null;
     this.setValue(value);
+  }
+
+  #syncInputState(): void {
+    if (!this.input) return;
+    this.input.checked = this.checked;
+    this.input.indeterminate = this.indeterminate;
+  }
+
+  #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
+    return (
+      changedProperties.has('checked') ||
+      changedProperties.has('value') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('required') ||
+      changedProperties.has('invalid')
+    );
   }
 
   render() {
