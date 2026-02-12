@@ -191,16 +191,12 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   #getCheckedCount(): number {
-    const slot = this.shadowRoot?.querySelector('slot');
-    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
-    return assigned.filter(el => (el as { checked?: boolean }).checked).length;
+    return this.#getAssignedElements().filter(el => (el as { checked?: boolean }).checked).length;
   }
 
   #applyGroupName(): void {
     if (!this.name) return;
-    const slot = this.shadowRoot?.querySelector('slot');
-    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
-    for (const el of assigned) {
+    for (const el of this.#getAssignedElements()) {
       const checkbox = el as { name?: string };
       if (checkbox && typeof checkbox === 'object' && !checkbox.name) {
         checkbox.name = this.name;
@@ -209,9 +205,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   #syncChildInvalid(isInvalid: boolean): void {
-    const slot = this.shadowRoot?.querySelector('slot');
-    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
-    for (const el of assigned) {
+    for (const el of this.#getAssignedElements()) {
       if ('invalid' in el) {
         (el as { invalid: boolean }).invalid = isInvalid;
       }
@@ -219,9 +213,12 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   #getValidationAnchor(): HTMLElement | undefined {
+    return this.#getAssignedElements()[0] as HTMLElement | undefined;
+  }
+
+  #getAssignedElements(): Element[] {
     const slot = this.shadowRoot?.querySelector('slot');
-    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
-    return assigned[0] as HTMLElement | undefined;
+    return slot?.assignedElements({ flatten: true }) ?? [];
   }
 
   #getRequiredMessage(): string {
