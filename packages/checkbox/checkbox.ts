@@ -44,6 +44,9 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   // Track whether the user has interacted with the checkbox.
   #hasInteracted = false;
 
+  // Track whether tabindex was set automatically.
+  #autoTabIndex = false;
+
   connectedCallback() {
     super.connectedCallback();
     // kept for compat with old shared styling approach
@@ -52,12 +55,15 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.value = attrValue ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
+    this.#syncTabIndex();
     this.addEventListener('invalid', this.#handleInvalid);
+    this.addEventListener('keydown', this.#handleKeyDown);
     this.#syncFormValue();
   }
 
   disconnectedCallback(): void {
     this.removeEventListener('invalid', this.#handleInvalid);
+    this.removeEventListener('keydown', this.#handleKeyDown);
     super.disconnectedCallback();
   }
 
@@ -76,6 +82,15 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.#updateValidity();
   };
 
+  #handleKeyDown = (event: KeyboardEvent) => {
+    if (this.disabled) return;
+    if (event.defaultPrevented) return;
+    if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
+    if (event.composedPath()[0] === this.input) return;
+    event.preventDefault();
+    this.click();
+  };
+
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
@@ -86,6 +101,10 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     if (this.#shouldSyncFormState(changedProperties)) {
       this.#syncFormValue();
       this.#updateValidity();
+    }
+
+    if (changedProperties.has('disabled')) {
+      this.#syncTabIndex();
     }
   }
 
@@ -197,6 +216,13 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     if (!this.input) return;
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
+  }
+
+  #syncTabIndex(): void {
+    const hasTabIndexAttr = this.hasAttribute('tabindex');
+    if (hasTabIndexAttr && !this.#autoTabIndex) return;
+    this.tabIndex = this.disabled ? -1 : 0;
+    this.#autoTabIndex = true;
   }
 
   #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {

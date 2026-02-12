@@ -1,4 +1,5 @@
 import { i18n } from '@lingui/core';
+import { userEvent } from '@vitest/browser/context';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -91,6 +92,39 @@ describe('w-checkbox-group accessibility (WCAG 2.2)', () => {
       `);
 
       await expect.element(page.getByRole('group', { name: 'Preferences' })).toHaveAccessibleDescription('Select one');
+    });
+  });
+
+  describe('WCAG 2.1.1 - Keyboard', () => {
+    test('tab moves through checkboxes and space toggles', async () => {
+      const page = render(html`
+        <button>Before</button>
+        <w-checkbox-group label="Preferences">
+          <w-checkbox>One</w-checkbox>
+          <w-checkbox>Two</w-checkbox>
+        </w-checkbox-group>
+        <button>After</button>
+      `);
+
+      const checkboxes = Array.from(document.querySelectorAll('w-checkbox')) as Array<
+        HTMLElement & { checked?: boolean; updateComplete?: Promise<unknown> }
+      >;
+      const firstCheckbox = checkboxes[0];
+      const secondCheckbox = checkboxes[1];
+
+      await firstCheckbox?.updateComplete;
+      firstCheckbox?.focus();
+      await expect.poll(() => firstCheckbox?.shadowRoot?.activeElement?.tagName).toBe('INPUT');
+      expect(firstCheckbox.checked).toBe(false);
+
+      await userEvent.keyboard('[Space]');
+      await expect.poll(() => firstCheckbox.checked).toBe(true);
+
+      await secondCheckbox?.updateComplete;
+      secondCheckbox?.focus();
+      await expect.poll(() => secondCheckbox?.shadowRoot?.activeElement?.tagName).toBe('INPUT');
+      await userEvent.keyboard('[Space]');
+      await expect.poll(() => secondCheckbox.checked).toBe(true);
     });
   });
 });

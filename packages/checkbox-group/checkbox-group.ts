@@ -131,9 +131,6 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.addEventListener('change', this.#handleChange);
     this.addEventListener('invalid', this.#handleInvalid);
     this.addEventListener('slotchange', this.#handleSlotChange);
-    if (!this.hasAttribute('tabindex')) {
-      this.tabIndex = -1;
-    }
     this.setValue(null);
     this.#warnIfMissingName();
   }
