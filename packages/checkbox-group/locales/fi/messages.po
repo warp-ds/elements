@@ -11,10 +11,10 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/checkbox-group/checkbox-group.ts:8
 msgid "checkbox-group.validation.required"
-msgstr ""
+msgstr "Vähintään yksi valinta vaaditaan."
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
 #: packages/checkbox-group/checkbox-group.ts:105
 msgid "checkbox-group.label.optional"
-msgstr ""
+msgstr "Valinnainen"

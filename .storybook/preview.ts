@@ -7,6 +7,7 @@ import { withActions } from 'storybook/actions/decorator';
 
 import customElements from '../dist/custom-elements.json' with { type: 'json' };
 import { removeToast, toast, updateToast, WarpToastContainer } from '../packages/toast/index.js';
+import { supportedLocales } from '../packages/i18n';
 
 setCustomElementsManifest(customElements);
 
@@ -14,6 +15,9 @@ setStorybookHelpersConfig({
   hideArgRef: true,
   renderDefaultValues: true,
 });
+
+// Preload empty catalogs to avoid warnings when activating locales before components load messages.
+supportedLocales.forEach((locale) => i18n.load(locale, {}));
 
 export const themes = {
   'Finn light': 'finn-no',
