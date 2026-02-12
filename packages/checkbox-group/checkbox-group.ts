@@ -134,6 +134,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.addEventListener('change', this.#handleChange);
     this.addEventListener('invalid', this.#handleInvalid);
     this.addEventListener('slotchange', this.#handleSlotChange);
+    if (!this.hasAttribute('tabindex')) {
+      this.tabIndex = -1;
+    }
     this.setValue(null);
     this.#warnIfMissingName();
   }
@@ -156,6 +159,16 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.#hasInteracted = true;
     this.#updateValidity();
     return this.internals.checkValidity();
+  }
+
+  /** Sets focus on the checkbox group. */
+  focus(options?: FocusOptions) {
+    const anchor = this.#getValidationAnchor() as HTMLElement | undefined;
+    if (anchor?.focus) {
+      anchor.focus(options);
+      return;
+    }
+    HTMLElement.prototype.focus.call(this, options);
   }
 
   #handleChange = () => {

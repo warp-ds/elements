@@ -69,7 +69,7 @@ export const IndeterminateDisabled: Story = {
 
 export const CheckboxFormAssociated: StoryObj = {
   render: () => {
-    const handleSubmit = (event: SubmitEvent) => {
+    const handleSubmit = (event: Event) => {
       event.preventDefault();
       const form = event.currentTarget as HTMLFormElement;
       const status = form.querySelector('[data-status]') as HTMLElement | null;
@@ -172,7 +172,7 @@ export const CheckboxGroupRequired: StoryObj = {
 
 export const CheckboxGroupFormAssociated: StoryObj = {
   render: () => {
-    const handleSubmit = (event: SubmitEvent) => {
+    const handleSubmit = (event: Event) => {
       event.preventDefault();
       const form = event.currentTarget as HTMLFormElement;
       const status = form.querySelector('[data-status]') as HTMLElement | null;
