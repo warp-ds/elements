@@ -228,20 +228,26 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
-    if (
+    if (this.#shouldUpdateValidity(changedProperties)) {
+      if (changedProperties.has('name')) {
+        this.#applyGroupName();
+      }
+      this.#updateValidity();
+    }
+  }
+
+  #shouldUpdateValidity(changedProperties: PropertyValues<this>): boolean {
+    return (
       changedProperties.has('invalid') ||
       changedProperties.has('required') ||
       changedProperties.has('helpText') ||
       changedProperties.has('name')
-    ) {
-      if (changedProperties.has('name')) {
-        this.#applyGroupName();
-      }
-      if (changedProperties.has('name')) {
-        this.#warnIfMissingName();
-      }
-      this.#updateValidity();
-    }
+    );
+  }
+
+  #setValidityState(state: ValidityStateFlags): void {
+    // Suppress native validation popovers (Safari)
+    this.internals.setValidity(state, ' ');
   }
 
   #updateValidity(): void {
@@ -249,22 +255,16 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const hasSelection = this.#getCheckedCount() > 0;
     const requiredInvalid = this.required && !hasSelection;
     const externalInvalid = this.invalid && !this.#invalidFromRequired;
-    const message = this.#getRequiredMessage();
 
     if (requiredInvalid) {
       this.#invalidFromRequired = true;
 
       // Always block form submission, but only show UI after interaction.
-      if (this.#hasInteracted) {
-        this.invalid = true;
-        this._validationMessage = message;
-      } else {
-        this.invalid = false;
-        this._validationMessage = null;
-      }
-
-      // ensure the popover validation bubble doesnt show up in safari
-      this.internals.setValidity({ valueMissing: true }, ' ');
+      const message = this.#getRequiredMessage();
+      const showError = this.#hasInteracted;
+      this.invalid = showError;
+      this._validationMessage = showError ? message : null;
+      this.#setValidityState({ valueMissing: true });
       this.#syncChildInvalid(this.invalid);
       return;
     }
@@ -275,9 +275,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     }
 
     if (externalInvalid) {
-      this._validationMessage = message;
-      // ensure the popover validation bubble doesnt show up in safari
-      this.internals.setValidity({ customError: true }, ' ');
+      this._validationMessage = this.#getRequiredMessage();
+      this.#setValidityState({ customError: true });
       this.#syncChildInvalid(true);
       return;
     }
