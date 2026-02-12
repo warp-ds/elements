@@ -51,7 +51,7 @@ export const wSliderThumbStyles = css`
     z-index: 1;
   }
 
-  .w-slider-thumb__range[disabled]::-webkit-slider-thumb{
+  .w-slider-thumb__range[disabled]::-webkit-slider-thumb {
     cursor: auto;
   }
 
@@ -76,7 +76,7 @@ export const wSliderThumbStyles = css`
     box-shadow: none;
   }
 
-  .w-slider-thumb__range[disabled]::-moz-range-thumb{
+  .w-slider-thumb__range[disabled]::-moz-range-thumb {
     cursor: auto;
   }
 
