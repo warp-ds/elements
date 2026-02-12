@@ -156,7 +156,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the validation message if invalid */
   reportValidity(): boolean {
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.#updateValidity();
     return this.internals.checkValidity();
   }
@@ -172,12 +172,12 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   #handleChange = () => {
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.#updateValidity();
   };
 
   #handleInvalid = () => {
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.#updateValidity();
   };
 
@@ -185,6 +185,10 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.#applyGroupName();
     this.#updateValidity();
   };
+
+  #markInteracted(): void {
+    this.#hasInteracted = true;
+  }
 
   #getCheckedCount(): number {
     const slot = this.shadowRoot?.querySelector('slot');
@@ -220,6 +224,10 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     return assigned[0] as HTMLElement | undefined;
   }
 
+  #getRequiredMessage(): string {
+    return REQUIRED_MESSAGE();
+  }
+
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
@@ -242,13 +250,15 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   #updateValidity(): void {
     this.#warnIfMissingName();
     const hasSelection = this.#getCheckedCount() > 0;
+    const requiredInvalid = this.required && !hasSelection;
+    const externalInvalid = this.invalid && !this.#invalidFromRequired;
+    const message = this.#getRequiredMessage();
 
-    if (this.required && !hasSelection) {
+    if (requiredInvalid) {
       this.#invalidFromRequired = true;
 
       // Always block form submission, but only show UI after interaction.
       if (this.#hasInteracted) {
-        const message = REQUIRED_MESSAGE();
         this.invalid = true;
         this._validationMessage = message;
       } else {
@@ -267,8 +277,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
       this.#invalidFromRequired = false;
     }
 
-    if (this.invalid) {
-      const message = REQUIRED_MESSAGE();
+    if (externalInvalid) {
       this._validationMessage = message;
       // ensure the popover validation bubble doesnt show up in safari
       this.internals.setValidity({ customError: true }, ' ');
