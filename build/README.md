@@ -6,6 +6,7 @@ To add a new component to the build:
 1. Add it to `tsconfig.json`
 1. If it has localization add it to `lingui.config.ts` and `crowdin.yml`
 1. Add exports for it in `package.json`
+1. Add it to the components export tests in `tests/module-resolution/import-test.ts`
 
 ## Custom Element Manifest
 
