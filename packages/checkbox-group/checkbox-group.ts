@@ -201,12 +201,6 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     }
   }
 
-  #getValidationAnchor(): HTMLElement | undefined {
-    const slot = this.shadowRoot?.querySelector('slot');
-    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
-    return assigned[0] as HTMLElement | undefined;
-  }
-
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
@@ -243,8 +237,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
         this._validationMessage = null;
       }
 
-      const message = REQUIRED_MESSAGE();
-      this.internals.setValidity({ valueMissing: true }, message, this.#getValidationAnchor());
+      // ensure the popover validation bubble doesnt show up in safari
+      this.internals.setValidity({ valueMissing: true }, ' ');
       this.#syncChildInvalid(this.invalid);
       return;
     }
@@ -257,7 +251,8 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     if (this.invalid) {
       const message = REQUIRED_MESSAGE();
       this._validationMessage = message;
-      this.internals.setValidity({ customError: true }, message, this.#getValidationAnchor());
+      // ensure the popover validation bubble doesnt show up in safari
+      this.internals.setValidity({ customError: true }, ' ');
       this.#syncChildInvalid(true);
       return;
     }
