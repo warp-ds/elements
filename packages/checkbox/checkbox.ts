@@ -63,7 +63,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   private handleClick() {
     if (this.disabled) return;
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.checked = !this.checked;
     this.indeterminate = false;
     this.updateComplete.then(() => {
@@ -72,7 +72,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 
   #handleInvalid = () => {
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.#updateValidity();
   };
 
@@ -138,9 +138,21 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the browser's validation message if invalid */
   reportValidity(): boolean {
-    this.#hasInteracted = true;
+    this.#markInteracted();
     this.#updateValidity();
     return this.internals.checkValidity();
+  }
+
+  #markInteracted(): void {
+    this.#hasInteracted = true;
+  }
+
+  #getValidityMessage(): string {
+    return this.input?.validationMessage || ' ';
+  }
+
+  #getValidityAnchor(): HTMLInputElement | undefined {
+    return this.input ?? undefined;
   }
 
   /** @internal */
@@ -150,29 +162,27 @@ export class WCheckbox extends FormControlMixin(LitElement) {
       return;
     }
 
-    if (this.required && !this.checked) {
-      this.#invalidFromRequired = true;
-      if (this.#hasInteracted) {
-        this.invalid = true;
-      } else {
-        this.invalid = false;
-      }
-      const message = this.input?.validationMessage || ' ';
-      const anchor = this.input ?? undefined;
-      this.internals.setValidity({ valueMissing: true }, message, anchor);
-      return;
-    }
+    const requiredInvalid = this.required && !this.checked;
+    // this means that invalid was set via the invalid attribute, not by required validation
+    const externalInvalid = this.invalid && !this.#invalidFromRequired;
+    const message = this.#getValidityMessage();
+    const anchor = this.#getValidityAnchor();
 
-    if (this.invalid && !this.#invalidFromRequired) {
-      const message = this.input?.validationMessage || ' ';
-      const anchor = this.input ?? undefined;
-      this.internals.setValidity({ customError: true }, message, anchor);
+    if (requiredInvalid) {
+      this.#invalidFromRequired = true;
+      this.invalid = this.#hasInteracted;
+      this.internals.setValidity({ valueMissing: true }, message, anchor);
       return;
     }
 
     if (this.#invalidFromRequired) {
       this.invalid = false;
       this.#invalidFromRequired = false;
+    }
+
+    if (externalInvalid) {
+      this.internals.setValidity({ customError: true }, message, anchor);
+      return;
     }
 
     this.internals.setValidity({});
