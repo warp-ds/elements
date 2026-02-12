@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 const REQUIRED_MESSAGE = () =>
@@ -34,12 +34,6 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   /** Marks the checkbox group as invalid. */
   @property({ type: Boolean, reflect: true })
   invalid: boolean;
-
-  @state()
-  private _validationMessage: string | null = null;
-
-  // Track whether invalid state was set by required validation.
-  #invalidFromRequired = false;
 
   // Track whether the user has interacted with the group.
   #hasInteracted = false;
@@ -87,10 +81,13 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   `;
 
   render() {
-    const isInvalid = this.invalid || this._validationMessage;
-    const helpId = this.helpText || isInvalid ? 'checkbox-group__help' : undefined;
+    const hasSelection = this.#getCheckedCount() > 0;
+    const requiredInvalid = this.required && !hasSelection;
+    const showRequiredError = requiredInvalid && this.#hasInteracted;
+    const isInvalid = this.invalid || showRequiredError;
+    const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
+    const helpId = helpText ? 'checkbox-group__help' : undefined;
     const labelId = this.label ? 'checkbox-group__label' : undefined;
-    const helpText = this._validationMessage ?? (this.invalid ? REQUIRED_MESSAGE() : this.helpText);
     const ariaInvalid = isInvalid ? 'true' : undefined;
 
     return html`
@@ -174,16 +171,19 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   #handleChange = () => {
     this.#markInteracted();
     this.#updateValidity();
+    this.requestUpdate();
   };
 
   #handleInvalid = () => {
     this.#markInteracted();
     this.#updateValidity();
+    this.requestUpdate();
   };
 
   #handleSlotChange = () => {
     this.#applyGroupName();
     this.#updateValidity();
+    this.requestUpdate();
   };
 
   #markInteracted(): void {
@@ -254,34 +254,22 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.#warnIfMissingName();
     const hasSelection = this.#getCheckedCount() > 0;
     const requiredInvalid = this.required && !hasSelection;
-    const externalInvalid = this.invalid && !this.#invalidFromRequired;
+    const externalInvalid = this.invalid;
+    const showRequiredError = requiredInvalid && this.#hasInteracted;
+    const showInvalidUi = externalInvalid || showRequiredError;
 
     if (requiredInvalid) {
-      this.#invalidFromRequired = true;
-
-      // Always block form submission, but only show UI after interaction.
-      const message = this.#getRequiredMessage();
-      const showError = this.#hasInteracted;
-      this.invalid = showError;
-      this._validationMessage = showError ? message : null;
       this.#setValidityState({ valueMissing: true });
-      this.#syncChildInvalid(this.invalid);
+      this.#syncChildInvalid(showInvalidUi);
       return;
     }
 
-    if (this.#invalidFromRequired) {
-      this.invalid = false;
-      this.#invalidFromRequired = false;
-    }
-
     if (externalInvalid) {
-      this._validationMessage = this.#getRequiredMessage();
       this.#setValidityState({ customError: true });
       this.#syncChildInvalid(true);
       return;
     }
 
-    this._validationMessage = null;
     this.internals.setValidity({});
     this.#syncChildInvalid(false);
   }
