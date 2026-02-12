@@ -201,6 +201,12 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     }
   }
 
+  #getValidationAnchor(): HTMLElement | undefined {
+    const slot = this.shadowRoot?.querySelector('slot');
+    const assigned = slot?.assignedElements({ flatten: true }) ?? [];
+    return assigned[0] as HTMLElement | undefined;
+  }
+
   updated(changedProperties: PropertyValues<this>): void {
     super.updated(changedProperties);
 
