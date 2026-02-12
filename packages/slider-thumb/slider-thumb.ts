@@ -34,56 +34,55 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   ariaDescription: string;
 
   @property({ reflect: true })
-  label: string;
-
-  @property({ reflect: true })
   name: string;
 
   @property({ reflect: true })
   value: string;
 
+  /** @internal Set by `<w-slider>` */
   @property({ type: Boolean, reflect: true })
   disabled: boolean;
 
+  /** @internal Set by `<w-slider>` */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @property({ attribute: false, reflect: false })
-  allowValuesOutsideRange = false;
+  openEnded = false;
 
   @property({ reflect: true })
   placeholder: string;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   markers: string;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   required: boolean;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   step: number;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   min: string;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   max: string;
 
-  /** Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>` */
   @state()
   suffix = '';
 
-  /** Formatter for the tooltip and input mask values. */
+  /** @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`. */
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** Formatter for the min and max labels below the range. */
+  /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`. */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 
@@ -161,7 +160,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
     let valueNum = Number.parseInt(value);
 
-    if (this.allowValuesOutsideRange && !isFromTextInput && this.step) {
+    if (this.openEnded && !isFromTextInput && this.step) {
       const valueIsCloseToSliderEdge =
         (this.slot === 'to' && valueNum >= Number(this.max) - 1) ||
         (this.slot === 'from' && valueNum <= Number(this.min) + 1);
@@ -177,7 +176,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Check that the user hasn't typed in a value beyond max or min
     const maxNum = Number.parseInt(this.max);
     const minNum = Number.parseInt(this.min);
-    if (!this.allowValuesOutsideRange && (valueNum > maxNum || valueNum < minNum)) {
+    if (!this.openEnded && (valueNum > maxNum || valueNum < minNum)) {
       this.#handleValidity(
         i18n.t({
           id: 'slider.error.out_of_bounds',
@@ -206,7 +205,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
     // Stop a range slider's from value from reaching past the to value and vice versa
     // by updating the other component's min and max values.
-    // Skip this check when typing in textfield with allowValuesOutsideRange enabled
+    // Skip this check when typing in textfield with openEnded enabled
     let shouldCancel = false;
     if (this.slot) {
       const toThumb = this.parentElement.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
@@ -227,15 +226,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         // Check that the from value is not about to be dragged past the --to value
 
         const toBoundary =
-          this.allowValuesOutsideRange && numericToValue > maxNum
+          this.openEnded && numericToValue > maxNum
             ? numericToValue
-            : Math.min(numericToValue, this.allowValuesOutsideRange ? maxNum - 1 : maxNum);
+            : Math.min(numericToValue, this.openEnded ? maxNum - 1 : maxNum);
 
         if (valueNum > toBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+          if (this.openEnded && valueIsAtTheSliderEdge) {
             this.value = String(toBoundary);
           } else {
             this.value = toValue;
@@ -251,15 +250,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       } else {
         // Check that the to value is not about to be dragged past the --from value
         const fromBoundary =
-          this.allowValuesOutsideRange && numericFromValue < minNum
+          this.openEnded && numericFromValue < minNum
             ? numericFromValue
-            : Math.max(Number.parseInt(fromValue), this.allowValuesOutsideRange ? minNum + 1 : minNum);
+            : Math.max(Number.parseInt(fromValue), this.openEnded ? minNum + 1 : minNum);
 
         if (valueNum < fromBoundary) {
           shouldCancel = true;
           // The user might have moved the slider so fast that this.value is far away from overlapping.
           // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.allowValuesOutsideRange && valueIsAtTheSliderEdge) {
+          if (this.openEnded && valueIsAtTheSliderEdge) {
             this.value = String(fromBoundary);
           } else {
             this.value = fromValue;
@@ -282,7 +281,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     this.#handleValidity('');
 
     this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
-    this.value = this.allowValuesOutsideRange && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
+    this.value = this.openEnded && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
 
     (this.shadowRoot.querySelector('w-attention') as WarpAttention).handleDone();
 
@@ -484,7 +483,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     const description = this.ariaDescription || '';
 
     const showPlaceholder = this.value === '';
-    if (this.allowValuesOutsideRange && showPlaceholder) {
+    if (this.openEnded && showPlaceholder) {
       prefix =
         this.slot === 'from'
           ? i18n.t({
@@ -504,8 +503,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('allowValuesOutsideRange')) {
-      if (this.allowValuesOutsideRange && !this.placeholder) {
+    if (changedProperties.has('openEnded')) {
+      if (this.openEnded && !this.placeholder) {
         if (this.slot === 'to' || this.slot === '') {
           this.placeholder = i18n.t({
             id: 'slider.placeholder.to',
@@ -531,7 +530,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   render() {
     return html`
       <div class="w-slider-thumb">
-        <label for="range">${this.label}</label>
         ${
           !('anchorName' in document.documentElement.style)
             ? html`<div class="polyfill-range">
@@ -548,7 +546,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           .value="${this.value}"
           min="${this.min}"
           max="${this.max}"
-          step="${ifDefined(!this.allowValuesOutsideRange && this.step ? this.step : undefined)}"
+          step="${ifDefined(!this.openEnded && this.step ? this.step : undefined)}"
           ?disabled="${this.disabled}"
           @mousedown="${this.#showTooltip}"
           @mouseup="${this.#hideTooltip}"
@@ -557,7 +555,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @focus="${this.#showTooltip}"
           @blur="${this.#hideTooltip}"
           @input="${this.#onInput}"
-          @keydown="${this.allowValuesOutsideRange ? this.#onRangeSliderKeyDown : nothing}"
+          @keydown="${this.openEnded ? this.#onRangeSliderKeyDown : nothing}"
         />
 
         ${
@@ -609,8 +607,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
           .formatter=${this.valueFormatter ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
-          min="${this.allowValuesOutsideRange ? nothing : this.min}"
-          max="${this.allowValuesOutsideRange ? nothing : this.max}"
+          min="${this.openEnded ? nothing : this.min}"
+          max="${this.openEnded ? nothing : this.max}"
           step="${ifDefined(this.step)}"
           ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"

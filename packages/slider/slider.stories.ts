@@ -392,8 +392,6 @@ export const VisuallyHiddenLabel: Story = {
       <w-slider
         min="1950"
         max="2025"
-        over
-        under
         help-text="Production year of the car"
       >
         <legend class="sr-only" slot="label">Production year</legend>

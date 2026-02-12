@@ -38,7 +38,7 @@ class WarpSlider extends LitElement {
   /**
    * The slider fieldset label. Required for proper accessibility.
    *
-   * If you need to display HTML, use the `label` slot instead.
+   * If you need to display HTML, use the `label` slot instead (f. ex. `<legend class="sr-only" slot="label">Production year</legend>`)
    */
   @property({ reflect: true })
   label: string;
@@ -122,7 +122,7 @@ class WarpSlider extends LitElement {
       thumb.required = this.required;
       thumb.labelFormatter = this.labelFormatter;
       thumb.valueFormatter = this.valueFormatter;
-      thumb.allowValuesOutsideRange = this.openEnded;
+      thumb.openEnded = this.openEnded;
       thumb._hiddenTextfield = this.hiddenTextfield;
 
       if (!thumb.ariaLabel) {
