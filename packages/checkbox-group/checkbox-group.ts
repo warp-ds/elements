@@ -150,9 +150,6 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 
   disconnectedCallback(): void {
-    this.removeEventListener('change', this.#handleChange);
-    this.removeEventListener('invalid', this.#handleInvalid);
-    this.removeEventListener('slotchange', this.#handleSlotChange);
     this.#unsubscribeI18n?.();
     this.#unsubscribeI18n = undefined;
     super.disconnectedCallback();

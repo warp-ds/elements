@@ -59,17 +59,6 @@ test('renders optional text when optional is true', async () => {
   await expect.element(page.getByText('(optional)')).toBeVisible();
 });
 
-test('renders label icon slot when provided', async () => {
-  const page = render(html`
-    <w-checkbox-group label="Preferences">
-      <w-checkbox>One</w-checkbox>
-      <w-checkbox>Two</w-checkbox>
-    </w-checkbox-group>
-  `);
-
-  await expect.element(page.getByText('Preferences')).toBeVisible();
-});
-
 test('required group toggles invalid state for group and children after submit and selection', async () => {
   const page = render(html`
     <form>

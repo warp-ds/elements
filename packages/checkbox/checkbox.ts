@@ -61,12 +61,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.#syncFormValue();
   }
 
-  disconnectedCallback(): void {
-    this.removeEventListener('invalid', this.#handleInvalid);
-    this.removeEventListener('keydown', this.#handleKeyDown);
-    super.disconnectedCallback();
-  }
-
   private handleClick() {
     if (this.disabled) return;
     this.#markInteracted();
