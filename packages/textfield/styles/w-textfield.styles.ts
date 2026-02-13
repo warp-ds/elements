@@ -36,6 +36,12 @@ export const wTextfieldStyles = css`
     display: none;
   }
 
+
+  /* It's supposed to behave like a placeholder, but look like a value. Don't tell the designers 🤫 */
+  input::placeholder {
+    color: var(--w-textfield-placeholder-color-text, var(--w-s-color-text-placeholder));
+  }
+
   /* Could also consider giving the input mask a background color instead of this */
   .w-textfield__input-wrapper:has(.w-textfield__mask):not(:focus-within) input {
     color: transparent;

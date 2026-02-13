@@ -1,7 +1,7 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
-import type { WarpSliderThumb } from '../slider-thumb/slider-thumb.js';
+import type { WarpSliderThumb, SliderSlot} from '../slider-thumb/slider-thumb.js';
 import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -9,6 +9,7 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wSliderStyles } from './styles/w-slider.styles.js';
+
 
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
@@ -37,7 +38,7 @@ class WarpSlider extends LitElement {
   /**
    * The slider fieldset label. Required for proper accessibility.
    *
-   * If you need to display HTML, use the `label` slot instead.
+   * If you need to display HTML, use the `label` slot instead (f. ex. `<legend class="sr-only" slot="label">Production year</legend>`)
    */
   @property({ reflect: true })
   label: string;
@@ -45,8 +46,11 @@ class WarpSlider extends LitElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  @property({ type: Boolean, attribute: 'allow-values-outside-range' })
-  allowValuesOutsideRange = false;
+  /**
+   * Whether or not to allow values outside the range such as "Before 1950" and "2025+".
+   */
+  @property({ type: Boolean, attribute: 'open-ended' })
+  openEnded = false;
 
   @property({ type: String, reflect: true })
   error = '';
@@ -78,15 +82,28 @@ class WarpSlider extends LitElement {
   @property({ reflect: true })
   suffix = '';
 
-  /** Function to format the to- and from labels and value in the slider thumb tooltip. */
+  @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
+  hiddenTextfield = false;
+
+  /** Formatter for the tooltip and input mask values. */
   @property({ attribute: false })
-  formatter: (value: string, type: 'to' | 'from') => string;
+  valueFormatter: (value: string, slot: SliderSlot) => string;
+
+  /** Formatter for the min and max labels below the range. */
+  @property({ attribute: false })
+  labelFormatter: (slot: SliderSlot) => string;
 
   @state()
   _invalidMessage = '';
 
   @state()
   _hasInternalError = false;
+
+  @state()
+  _showError = false;
+
+  @state()
+  _tabbableElements: Array<HTMLElement> = [];
 
   constructor() {
     super();
@@ -103,8 +120,10 @@ class WarpSlider extends LitElement {
       thumb.step = this.step;
       thumb.suffix = this.suffix;
       thumb.required = this.required;
-      thumb.formatter = this.formatter;
-      thumb.allowValuesOutsideRange = this.allowValuesOutsideRange;
+      thumb.labelFormatter = this.labelFormatter;
+      thumb.valueFormatter = this.valueFormatter;
+      thumb.openEnded = this.openEnded;
+      thumb._hiddenTextfield = this.hiddenTextfield;
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
@@ -123,7 +142,7 @@ class WarpSlider extends LitElement {
       }
 
       thumb.disabled = this.disabled;
-      thumb.invalid = this.invalid || this._hasInternalError;
+      thumb.invalid = Boolean(this.errorText);
 
       this.#updateActiveTrack(thumb);
     }
@@ -131,18 +150,18 @@ class WarpSlider extends LitElement {
     // Missing a CSS-only way to detect if something is slotted in the named slots
     const fieldset = this.shadowRoot.querySelector('fieldset');
     if (usedNamedSlots) {
-      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size)');
-      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size)');
+      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size, 28px)');
+      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size, 28px)');
     } else {
       fieldset.style.setProperty('--active-range-border-radius', '4px');
     }
   }
 
   get edgeMin() {
-    return this.allowValuesOutsideRange ? (Number(this.min) - 1).toString() : this.min;
+    return this.openEnded ? (Number(this.min) - 1).toString() : this.min;
   }
   get edgeMax() {
-    return this.allowValuesOutsideRange ? (Number(this.max) + 1).toString() : this.max;
+    return this.openEnded ? (Number(this.max) + 1).toString() : this.max;
   }
 
   async connectedCallback() {
@@ -157,8 +176,28 @@ class WarpSlider extends LitElement {
       this.style.setProperty('--markers', String(this.markers));
     }
 
-    if (this.allowValuesOutsideRange) {
+    if (this.openEnded) {
       this.style.setProperty('--over-under-offset', '1');
+    }
+
+    const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+    const isRangeSlider = sliderThumbs.length === 2;
+    if (isRangeSlider) {
+      this.style.setProperty('--range-slider-magic-pixel', '1px');
+
+      const sliderThumbsArr = Array.from(sliderThumbs);
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
+      this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
+      this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
+      this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot.querySelector('w-textfield');
+    } else {
+      const sliderThumbsArr = Array.from(sliderThumbs);
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
+      this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
+    }
+
+    if (this.invalid && this.error) {
+      this._showError = true;
     }
 
     this.#syncSliderThumbs();
@@ -167,16 +206,25 @@ class WarpSlider extends LitElement {
   updated(changedProperties: PropertyValues<this>) {
     if (
       changedProperties.has('disabled') ||
-      changedProperties.has('invalid') ||
       changedProperties.has('required') ||
       changedProperties.has('min') ||
       changedProperties.has('step') ||
       changedProperties.has('max') ||
       changedProperties.has('suffix') ||
-      changedProperties.has('formatter') ||
+      changedProperties.has('labelFormatter') ||
+      changedProperties.has('valueFormatter') ||
       changedProperties.has('_invalidMessage') ||
       changedProperties.has('_hasInternalError')
     ) {
+      this.#syncSliderThumbs();
+    }
+
+    if (changedProperties.has('error') || changedProperties.has('invalid')) {
+      if (this.error && this.invalid) {
+        this._showError = true;
+      } else {
+        this._showError = false;
+      }
       this.#syncSliderThumbs();
     }
   }
@@ -188,6 +236,36 @@ class WarpSlider extends LitElement {
     const isRangeSlider = input.slot;
     if (isRangeSlider) {
       this.#doValidation();
+    }
+  }
+
+  #onBlur() {
+    if (this.componentHasError) {
+      this._showError = true;
+    } else {
+      this._showError = false;
+    }
+
+    this.#syncSliderThumbs();
+  }
+
+  #handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      const knownFocusableElementIndex = this._tabbableElements.indexOf(
+        (e.target as WarpSliderThumb).shadowRoot.activeElement as HTMLElement,
+      );
+      if (knownFocusableElementIndex === -1) {
+        return; // shouldn't really happen, but don't prevent anything
+      }
+
+      const direction = e.shiftKey ? -1 : +1;
+
+      const nextFocusableElement = this._tabbableElements[knownFocusableElementIndex + direction];
+      if (!nextFocusableElement) {
+        return;
+      }
+      e.preventDefault();
+      nextFocusableElement.focus();
     }
   }
 
@@ -238,7 +316,7 @@ class WarpSlider extends LitElement {
 
   #getEdgeValue(boundary: string, input: WarpSliderThumb): string {
     if (input.value === undefined || input.value === null) {
-      input.value = this.allowValuesOutsideRange ? '' : boundary;
+      input.value = this.openEnded ? '' : boundary;
     }
     // Use boundary for CSS positioning when value is empty
     return input.value === '' ? boundary : input.value;
@@ -268,7 +346,7 @@ class WarpSlider extends LitElement {
   }
 
   get errorText(): string {
-    if (!this.componentHasError) {
+    if (!this._showError) {
       return '';
     }
 
@@ -281,15 +359,18 @@ class WarpSlider extends LitElement {
         id="fieldset"
         class="w-slider"
         @input="${this.#onInput}"
+        @focusout="${this.#onBlur}"
         @slidervalidity="${this.#onSliderValidity}"
+        @keydown="${this.#handleKeyDown}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
+        ?disabled="${this.disabled}"
       >
         ${
           this.label
             ? html`<legend class="w-slider__label">
               <slot id="label" name="label">${this.label}</slot>
             </legend>`
-            : nothing
+            : html`<slot id="label" name="label"></slot>`
         }
         <slot class="w-slider__description" name="description"></slot>
         ${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
