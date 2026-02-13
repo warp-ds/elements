@@ -1,3 +1,21 @@
+# [2.7.0-next.2](https://github.com/warp-ds/elements/compare/v2.7.0-next.1...v2.7.0-next.2) (2026-02-13)
+
+
+### Bug Fixes
+
+* **checkbox:** add form association to checkbox-group ([7781e27](https://github.com/warp-ds/elements/commit/7781e2726266835a8fbc14f0b04d557793ae4a8d))
+* **checkbox:** add name property to checkbox-group ([4a4ec62](https://github.com/warp-ds/elements/commit/4a4ec6282cc153196bededbbc6979019521b0634))
+* **checkbox:** improve checkbox group validation ([803c106](https://github.com/warp-ds/elements/commit/803c106ef91a76c233cfde3871488c4b187efa8c))
+* **checkbox:** improve checkbox validation ([611f249](https://github.com/warp-ds/elements/commit/611f24906ef3c861bbbfd8c5cb892d3d5c1279be))
+* cleaned up styling ([fd8c86d](https://github.com/warp-ds/elements/commit/fd8c86d541e9e5b9da8640b061c19b81f0f21520))
+* Remove forced colors stuff ([a0d5eb9](https://github.com/warp-ds/elements/commit/a0d5eb9a5c9c7cfc03c7cc4fe27ef37ee7181cf8))
+
+
+### Features
+
+* **checkbox:** add help-text to checkbox-group ([5b0bdc1](https://github.com/warp-ds/elements/commit/5b0bdc1a8175d874067a9272ca60a891499f44e4))
+* **checkbox:** add label to checkbox-group ([57d7853](https://github.com/warp-ds/elements/commit/57d7853c544bbf20e8c4d4f1fd1f0aaf63f7c23b))
+
 # [2.7.0-next.1](https://github.com/warp-ds/elements/compare/v2.6.0...v2.7.0-next.1) (2026-02-13)
 
 
