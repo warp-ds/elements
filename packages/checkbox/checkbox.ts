@@ -61,6 +61,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.#syncFormValue();
   }
 
+  /* @internal */
   private handleClick() {
     if (this.disabled) return;
     this.#markInteracted();
@@ -71,11 +72,13 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     });
   }
 
+  /* @internal */
   #handleInvalid = () => {
     this.#markInteracted();
     this.#updateValidity();
   };
 
+  /* @internal */
   #handleKeyDown = (event: KeyboardEvent) => {
     if (this.disabled) return;
     if (event.defaultPrevented) return;
@@ -108,18 +111,18 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.#updateValidity();
   }
 
-  /** Simulates a click on the checkbox. */
+  /* @internal */
   click() {
     if (this.disabled) return;
     this.input?.click();
   }
 
-  /** Sets focus on the checkbox. */
+  /* @internal */
   focus(options?: FocusOptions) {
     this.input?.focus(options);
   }
 
-  /** Removes focus from the checkbox. */
+  /* @internal */
   blur() {
     this.input?.blur();
   }
@@ -147,19 +150,23 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     return this.internals.checkValidity();
   }
 
+  /** @internal */
   #markInteracted(): void {
     this.#hasInteracted = true;
   }
 
+  /** @internal */
   #getValidityMessage(): string {
     // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
     return this.input?.validationMessage || ' ';
   }
 
+  /** @internal */
   #getValidityAnchor(): HTMLInputElement | undefined {
     return this.input ?? undefined;
   }
 
+  /** @internal */
   #setInvalidState(state: ValidityStateFlags): void {
     this.internals.setValidity(state, this.#getValidityMessage(), this.#getValidityAnchor());
   }
@@ -206,12 +213,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.setValue(value);
   }
 
+  /** @internal */
   #syncInputState(): void {
     if (!this.input) return;
     this.input.checked = this.checked;
     this.input.indeterminate = this.indeterminate;
   }
 
+  /** @internal */
   #syncTabIndex(): void {
     const hasTabIndexAttr = this.hasAttribute('tabindex');
     if (hasTabIndexAttr && !this.#autoTabIndex) return;
@@ -219,6 +228,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     this.#autoTabIndex = true;
   }
 
+  /** @internal */
   #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
     return (
       changedProperties.has('checked') ||
