@@ -45,7 +45,7 @@ export const SuffixSquareMeters: Story = {
   },
   render({ suffix }) {
     return (
-      <Slider label="Apartment size" min="0" max="250" suffix={suffix} formatter={getNumberFormatter(locale)}>
+      <Slider label="Apartment size" min="0" max="250" suffix={suffix}>
         <SliderThumb slot="from" aria-label="From size" name="from" />
         <SliderThumb slot="to" aria-label="To size" name="to" />
       </Slider>
@@ -58,8 +58,23 @@ export const SuffixCurrency: Story = {
     suffix: 'kr',
   },
   render({ suffix }) {
+    const numberFormatter = getNumberFormatter(locale);
+    const min = '0';
+    const max = '250000';
     return (
-      <Slider label="Price" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
+      <Slider
+        label="Price"
+        min={min}
+        max={max}
+        suffix={suffix}
+        labelFormatter={(slot) => {
+          if (slot === 'from') {
+            return min;
+          }
+          return numberFormatter(max);
+        }}
+        valueFormatter={numberFormatter}
+      >
         <SliderThumb slot="from" aria-label="From price" name="from" />
         <SliderThumb slot="to" aria-label="To price" name="to" />
       </Slider>
@@ -72,8 +87,23 @@ export const SuffixKilometers: Story = {
     suffix: 'km',
   },
   render({ suffix }) {
+    const numberFormatter = getNumberFormatter(locale);
+    const min = '0';
+    const max = '250000';
     return (
-      <Slider label="Distance" min="0" max="250000" suffix={suffix} formatter={getNumberFormatter(locale)}>
+      <Slider
+        label="Distance"
+        min="0"
+        max="250000"
+        suffix={suffix}
+        labelFormatter={(slot) => {
+          if (slot === 'from') {
+            return min;
+          }
+          return numberFormatter(max);
+        }}
+        valueFormatter={numberFormatter}
+      >
         <SliderThumb slot="from" aria-label="From distance" name="from" />
         <SliderThumb slot="to" aria-label="To distance" name="to" />
       </Slider>
@@ -109,20 +139,20 @@ export const Step: Story = {
   },
 };
 
-export const OverUnder: Story = {
+export const OpenEnded: Story = {
   render() {
-    const [overUnderFrom, setOverUnderFrom] = useState('');
-    const [overUnderTo, setOverUnderTo] = useState('');
+    const [openEndedFrom, setOpenEndedFrom] = useState('');
+    const [openEndedTo, setOpenEndedTo] = useState('');
     return (
       <>
         <form
-          id="overunder"
+          id="openEnded"
           style={{ marginBottom: 16 }}
           lang="nb"
           onInput={(val) => {
             const formData = new FormData(val.currentTarget);
-            setOverUnderFrom(formData.get('from') as unknown as string);
-            setOverUnderTo(formData.get('to') as unknown as string);
+            setOpenEndedFrom(formData.get('from') as unknown as string);
+            setOpenEndedTo(formData.get('to') as unknown as string);
           }}
         >
           <Slider
@@ -130,37 +160,33 @@ export const OverUnder: Story = {
             min="1950"
             max="2025"
             data-testid="overunder"
-            formatter={(value) => {
-              if (value === '1950') {
+            labelFormatter={(slot) => {
+              if (slot === 'from') {
                 return 'Før 1950';
               }
-              if (value === '2025') {
-                return 'Etter 2025';
+              return '2025 +';
+            }}
+            valueFormatter={(value, slot) => {
+              if (slot === 'from' && value === '') {
+                return 'Min';
+              }
+              if (slot === 'to' && value === '') {
+                return 'Max';
               }
               return value;
             }}
           >
-            <SliderThumb
-              slot="from"
-              aria-label="Fra år"
-              aria-description="1950 inkluderer kjøretøy produsert fram til 1950"
-              name="from"
-            />
-            <SliderThumb
-              slot="to"
-              aria-label="Til år"
-              aria-description="2025 inkluderer kjøretøy produsert etter 2025"
-              name="to"
-            />
+            <SliderThumb slot="from" aria-label="Fra år" name="from" />
+            <SliderThumb slot="to" aria-label="Til år" name="to" />
           </Slider>
         </form>
         <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
         <output>
           <dl>
             <dt>From:</dt>
-            <dd id="overunder-from">{overUnderFrom}</dd>
+            <dd id="openended-from">{openEndedFrom}</dd>
             <dt>To:</dt>
-            <dd id="overunder-to">{overUnderTo}</dd>
+            <dd id="openended-to">{openEndedTo}</dd>
           </dl>
         </output>
       </>

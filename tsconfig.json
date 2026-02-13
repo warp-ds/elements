@@ -32,13 +32,13 @@
     "packages/toast-container",
 
     // unreleased components
-    // "packages/checkbox",
-    // "packages/checkbox-group",
+    "packages/checkbox",
+    "packages/checkbox-group",
     // "packages/dead-toggle",
     // "packages/radio",
     // "packages/radio-group",
-    // "packages/slider",
-    // "packages/slider-thumb",
+    "packages/slider",
+    "packages/slider-thumb",
     "setup-tests.ts"
   ],
   "compilerOptions": {

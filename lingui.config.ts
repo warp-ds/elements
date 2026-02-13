@@ -54,7 +54,7 @@ const config: LinguiConfig = {
       path: 'packages/combobox/locales/{locale}/messages',
     },
     {
-      include: ['packages/slider/'],
+      include: ['packages/slider/', 'packages/slider-thumb/'],
       path: 'packages/slider/locales/{locale}/messages',
     },
     {
@@ -64,6 +64,10 @@ const config: LinguiConfig = {
     {
       include: ['packages/page-indicator/'],
       path: 'packages/page-indicator/locales/{locale}/messages',
+    },
+    {
+      include: ['packages/checkbox-group/'],
+      path: 'packages/checkbox-group/locales/{locale}/messages',
     },
   ],
   compileNamespace: 'es',

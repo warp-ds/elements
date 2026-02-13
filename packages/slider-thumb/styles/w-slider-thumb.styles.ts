@@ -38,17 +38,21 @@ export const wSliderThumbStyles = css`
 
     appearance: none;
     cursor: pointer;
-    background: var(--w-s-color-background-primary);
+    background: var(--w-slider-thumb-background);
     border-radius: 50%;
-    height: var(--w-slider-thumb-size);
+    height: var(--w-slider-thumb-size, 28px);
     margin-top: calc(
       -1 * calc(var(--w-slider-thumb-offset) - calc(
               var(--w-slider-track-height) / 2
             ))
     );
     pointer-events: initial;
-    width: var(--w-slider-thumb-size);
+    width: var(--w-slider-thumb-size, 28px);
     z-index: 1;
+  }
+
+  .w-slider-thumb__range[disabled]::-webkit-slider-thumb {
+    cursor: auto;
   }
 
   .w-slider-thumb__range::-moz-range-thumb {
@@ -56,25 +60,29 @@ export const wSliderThumbStyles = css`
 
     appearance: none;
     cursor: pointer;
-    background: var(--w-s-color-background-primary);
+    background: var(--w-slider-thumb-background);
     border-radius: 50%;
     border-color: transparent;
-    height: var(--w-slider-thumb-size);
+    height: var(--w-slider-thumb-size, 28px);
     margin-top: calc(
       -1 * calc(var(--w-slider-thumb-offset) - calc(
               var(--w-slider-track-height) / 2
             ))
     );
     pointer-events: initial;
-    width: var(--w-slider-thumb-size);
+    width: var(--w-slider-thumb-size, 28px);
     z-index: 1;
 
     box-shadow: none;
   }
 
+  .w-slider-thumb__range[disabled]::-moz-range-thumb {
+    cursor: auto;
+  }
+
   .w-slider-thumb__range:active::-webkit-slider-thumb,
   .w-slider-thumb__range:hover::-webkit-slider-thumb {
-    background: var(--w-s-color-background-primary-hover);
+    background: var(--w-slider-thumb-background);
     box-shadow: var(--w-shadow-slider-handle-hover);
   }
 
@@ -140,38 +148,49 @@ export const wSliderThumbStyles = css`
     grid-column: 1 / 3; /* Single sliders should have the text field use the fromtextfield _and_ gap portion of the CSS grid. */
   }
 
-  :host([name="from"]) .w-slider-thumb__textfield {
+  :host([slot="from"]) .w-slider-thumb__textfield {
     grid-column: 1 / 2; /* Range sliders should leave the gap empty. */
   }
 
-  :host([name="from"]) .w-slider-thumb__range {
-    margin-left: var(--w-slider-thumb-size);
+  :host([slot="from"]) .w-slider-thumb__range {
+    margin-left: var(--w-slider-thumb-size, 28px);
   }
 
-  :host([name="to"]) .w-slider-thumb__range {
-    margin-right: var(--w-slider-thumb-size);
+  :host([slot="to"]) .w-slider-thumb__range {
+    margin-right: var(--w-slider-thumb-size, 28px);
   }
 
-  :host([name="from"]) .w-slider-thumb__range::-webkit-slider-thumb,
-  :host([name="from"]) .w-slider-thumb__tooltip-target {
-    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
+
+  :host([slot="from"]) .w-slider-thumb__tooltip-target {
+    transform: translateX(calc(-1 * var(--transform-offset, 0px) - 1px));
   }
 
-  :host([name="from"]) .w-slider-thumb__range::-moz-range-thumb {
-    transform: translateX(calc(-1 * var(--w-slider-thumb-size) - 1px));
+  :host([slot="from"]) .w-slider-thumb__range::-webkit-slider-thumb {
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size, 28px) - 1px));
   }
 
-  :host([name="to"]) .w-slider-thumb__textfield {
+  :host([slot="from"]) .w-slider-thumb__range::-moz-range-thumb {
+    transform: translateX(calc(-1 * var(--w-slider-thumb-size, 28px) - 1px));
+  }
+
+  :host([slot="to"]) .w-slider-thumb__textfield {
     grid-row: 3 / 4;
     grid-column: 3 / 4;
   }
 
-  :host([name="to"]) .w-slider-thumb__tooltip-target,
-  :host([name="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
-    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
+  :host([slot="to"]) .w-slider-thumb__tooltip-target {
+    transform: translateX(calc(var(--transform-offset, 0px) - 1px));
   }
 
-  :host([name="to"]) .w-slider-thumb__range::-moz-range-thumb {
-    transform: translateX(calc(var(--w-slider-thumb-size) - 1px));
+  :host([slot="to"]) .w-slider-thumb__range::-webkit-slider-thumb {
+    transform: translateX(calc(var(--w-slider-thumb-size, 28px) - 1px));
+  }
+
+  :host([slot="to"]) .w-slider-thumb__range::-moz-range-thumb {
+    transform: translateX(calc(var(--w-slider-thumb-size, 28px) - 1px));
+  }
+
+  w-textfield {
+    --w-textfield-placeholder-color-text: var(--w-s-color-text);
   }
 `;

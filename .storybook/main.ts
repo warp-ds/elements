@@ -22,6 +22,7 @@ const config: StorybookConfig = {
       plugins: [
         uno({
           presets: [presetWarp()],
+          safelist: classes,
         }),
         configType === 'DEVELOPMENT' &&
           uno({

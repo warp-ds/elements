@@ -1,7 +1,7 @@
+import { i18n } from '@lingui/core';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
-import { i18n } from '@lingui/core';
 import { messages } from './locales/en/messages.mjs';
 import './textarea.js';
 

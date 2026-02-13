@@ -1,103 +1,70 @@
-import type { PropertyValues } from 'lit';
-import { html } from 'lit';
-
+import { FormControlMixin } from '@open-wc/form-control';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 
-import { BaseFormAssociatedElement } from '../radio/form-associated-element';
-import { RequiredValidator } from '../radio/required-validator';
-import { HasSlotController } from '../radio/slot';
-import { watch } from '../radio/watch';
-
 import { reset } from '../styles';
-import { toggleStyles } from '../toggle-styles';
+import { styles } from './styles';
 
-export class WCheckbox extends BaseFormAssociatedElement {
-  static css = [reset, toggleStyles];
+export class WCheckbox extends FormControlMixin(LitElement) {
+  static styles = [reset, styles];
 
-  static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+  static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
-  static get validators() {
-    const validators = [
-      RequiredValidator({
-        validationProperty: 'checked',
-        // Use a checkbox so we get "free" translation strings.
-        validationElement: Object.assign(document.createElement('input'), {
-          type: 'checkbox',
-          required: true,
-        }),
-      }),
-    ];
-    return [...super.validators, ...validators];
-  }
-
-  private readonly hasSlotController = new HasSlotController(this, 'hint');
-
-  @query('input[type="checkbox"]') input: HTMLInputElement;
-
-  @property() title = ''; // make reactive to pass through
+  @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
 
-  private _value: string | null = this.getAttribute('value') ?? null;
-
   /** The value of the checkbox, submitted as a name/value pair with form data. */
-  get value(): string | null {
-    return this._value ?? 'on';
-  }
+  @property({ reflect: true }) value: string | null = null;
 
-  @property({ reflect: true })
-  set value(val: string | null) {
-    this._value = val;
-  }
-
-  /** The checkbox's size. */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
-
-  /** Disables the checkbox. */
-  @property({ type: Boolean }) disabled = false;
-
-  /**
-   * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
-   * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
-   */
+  /** Draws the checkbox in an indeterminate state. */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** Draws the checkbox in a checked state. */
-  @property({ type: Boolean, attribute: false }) checked: boolean = this.hasAttribute('checked');
+  /** Draws the checkbox in a checked state (reflected to attribute). */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** The default value of the form control. Primarily used for resetting the form control. */
-  @property({ type: Boolean, reflect: true, attribute: 'checked' }) defaultChecked: boolean =
-    this.hasAttribute('checked');
-
-  /**
-   * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
-   * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
-   * the same document or shadow root for this to work.
-   */
-  @property({ reflect: true }) form = null;
+  /** Disables the checkbox. */
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** The checkbox's hint. If you need to display HTML, use the `hint` slot instead. */
-  @property() hint = '';
+  /** Draws the checkbox in an invalid state. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
+  /** The default value of the form control. Used for resetting. */
+  #defaultChecked = false;
+
+  // Track whether invalid state was set by required validation.
+  #invalidFromRequired = false;
+
+  // Track whether the user has interacted with the checkbox.
+  #hasInteracted = false;
+
+  // Track whether tabindex was set automatically.
+  #autoTabIndex = false;
 
   connectedCallback() {
     super.connectedCallback();
-    this.setInitialAttributes();
-  }
-
-  // NB: not from WA, this eases shared-styling
-  private setInitialAttributes() {
+    // kept for compat with old shared styling approach
     this.setAttribute('type', 'checkbox');
+    const attrValue = this.getAttribute('value');
+    this.value = attrValue ?? 'on';
+    this.#defaultChecked = this.hasAttribute('checked');
+    this.checked = this.#defaultChecked;
+    this.#syncTabIndex();
+    this.addEventListener('invalid', this.#handleInvalid);
+    this.addEventListener('keydown', this.#handleKeyDown);
+    this.#syncFormValue();
   }
 
+  /* @internal */
   private handleClick() {
-    this.hasInteracted = true;
+    if (this.disabled) return;
+    this.#markInteracted();
     this.checked = !this.checked;
     this.indeterminate = false;
     this.updateComplete.then(() => {
@@ -105,103 +72,198 @@ export class WCheckbox extends BaseFormAssociatedElement {
     });
   }
 
-  @watch('defaultChecked')
-  handleDefaultCheckedChange() {
-    if (!this.hasInteracted && this.checked !== this.defaultChecked) {
-      this.checked = this.defaultChecked;
-      this.handleValueOrCheckedChange();
+  /* @internal */
+  #handleInvalid = () => {
+    this.#markInteracted();
+    this.#updateValidity();
+  };
+
+  /* @internal */
+  #handleKeyDown = (event: KeyboardEvent) => {
+    if (this.disabled) return;
+    if (event.defaultPrevented) return;
+    if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
+    if (event.composedPath()[0] === this.input) return;
+    event.preventDefault();
+    this.click();
+  };
+
+  updated(changedProperties: PropertyValues<this>): void {
+    super.updated(changedProperties);
+
+    if (changedProperties.has('checked') || changedProperties.has('indeterminate')) {
+      this.#syncInputState();
+    }
+
+    if (this.#shouldSyncFormState(changedProperties)) {
+      this.#syncFormValue();
+      this.#updateValidity();
+    }
+
+    if (changedProperties.has('disabled')) {
+      this.#syncTabIndex();
     }
   }
 
-  handleValueOrCheckedChange() {
-    // These @watch() commands seem to override the base element checks for changes, so we need to setValue for the form and and updateValidity()
-    this.setValue(this.checked ? this.value : null, this._value);
-    this.updateValidity();
+  resetFormControl(): void {
+    this.checked = this.#defaultChecked;
+    this.#syncFormValue();
+    this.#updateValidity();
   }
 
-  @watch(['checked', 'indeterminate'])
-  handleStateChange() {
-    if (this.hasUpdated) {
-      this.input.checked = this.checked; // force a sync update
-      this.input.indeterminate = this.indeterminate; // force a sync update
-    }
-
-    this.customStates.set('checked', this.checked);
-    this.customStates.set('indeterminate', this.indeterminate);
-    this.updateValidity();
-  }
-
-  @watch('disabled')
-  handleDisabledChange() {
-    this.customStates.set('disabled', this.disabled);
-  }
-
-  protected willUpdate(changedProperties: PropertyValues<this>): void {
-    super.willUpdate(changedProperties);
-
-    if (changedProperties.has('defaultChecked')) {
-      if (!this.hasInteracted) {
-        this.checked = this.defaultChecked;
-      }
-    }
-
-    if (changedProperties.has('value') || changedProperties.has('checked')) {
-      this.handleValueOrCheckedChange();
-    }
-  }
-
-  formResetCallback() {
-    // Evaluate checked before the super call because of our watcher on value.
-    this.checked = this.defaultChecked;
-    super.formResetCallback();
-    this.handleValueOrCheckedChange();
-  }
-
-  /** Simulates a click on the checkbox. */
+  /* @internal */
   click() {
-    this.input.click();
+    if (this.disabled) return;
+    this.input?.click();
   }
 
-  /** Sets focus on the checkbox. */
+  /* @internal */
   focus(options?: FocusOptions) {
-    this.input.focus(options);
+    this.input?.focus(options);
   }
 
-  /** Removes focus from the checkbox. */
+  /* @internal */
   blur() {
-    this.input.blur();
+    this.input?.blur();
+  }
+
+  /** Returns the validation message if the checkbox is invalid, otherwise an empty string */
+  get validationMessage(): string {
+    return this.internals.validationMessage;
+  }
+
+  /** Returns the validity state of the checkbox */
+  get validity(): ValidityState {
+    return this.internals.validity;
+  }
+
+  /** Checks whether the checkbox passes constraint validation */
+  checkValidity(): boolean {
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** Checks validity and shows the browser's validation message if invalid */
+  reportValidity(): boolean {
+    this.#markInteracted();
+    this.#updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  /** @internal */
+  #markInteracted(): void {
+    this.#hasInteracted = true;
+  }
+
+  /** @internal */
+  #getValidityMessage(): string {
+    // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
+    return this.input?.validationMessage || ' ';
+  }
+
+  /** @internal */
+  #getValidityAnchor(): HTMLInputElement | undefined {
+    return this.input ?? undefined;
+  }
+
+  /** @internal */
+  #setInvalidState(state: ValidityStateFlags): void {
+    this.internals.setValidity(state, this.#getValidityMessage(), this.#getValidityAnchor());
+  }
+
+  /** @internal */
+  #updateValidity(): void {
+    if (this.disabled) {
+      this.internals.setValidity({});
+      return;
+    }
+
+    const requiredInvalid = this.required && !this.checked;
+    // this means that invalid was set via the invalid attribute, not by required validation
+    const externalInvalid = this.invalid && !this.#invalidFromRequired;
+
+    if (requiredInvalid) {
+      this.#invalidFromRequired = true;
+      this.invalid = this.#hasInteracted;
+      this.#setInvalidState({ valueMissing: true });
+      return;
+    }
+
+    if (this.#invalidFromRequired) {
+      this.invalid = false;
+      this.#invalidFromRequired = false;
+    }
+
+    if (externalInvalid) {
+      this.#setInvalidState({ customError: true });
+      return;
+    }
+
+    this.internals.setValidity({});
+  }
+
+  /** @internal */
+  #syncFormValue(): void {
+    if (this.disabled) {
+      this.setValue(null);
+      return;
+    }
+
+    const value = this.checked ? this.value : null;
+    this.setValue(value);
+  }
+
+  /** @internal */
+  #syncInputState(): void {
+    if (!this.input) return;
+    this.input.checked = this.checked;
+    this.input.indeterminate = this.indeterminate;
+  }
+
+  /** @internal */
+  #syncTabIndex(): void {
+    const hasTabIndexAttr = this.hasAttribute('tabindex');
+    if (hasTabIndexAttr && !this.#autoTabIndex) return;
+    this.tabIndex = this.disabled ? -1 : 0;
+    this.#autoTabIndex = true;
+  }
+
+  /** @internal */
+  #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
+    return (
+      changedProperties.has('checked') ||
+      changedProperties.has('value') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('required') ||
+      changedProperties.has('invalid')
+    );
   }
 
   render() {
-    const hasHintSlot = this.hasSlotController.test('hint');
-    const hasHint = this.hint ? true : !!hasHintSlot;
     const isIndeterminate = !this.checked && this.indeterminate;
+    const ariaChecked = isIndeterminate ? 'mixed' : this.checked ? 'true' : 'false';
 
     return html`
       <label part="base" class="wrapper">
         <span part="control" class="checkbox control">
           <input
+            part="input"
             class="input hide-toggle"
             type="checkbox"
-            title=${this.title /* An empty title prevents browser validation tooltips from appearing on hover */}
             name=${this.name}
-            value=${ifDefined(this._value)}
+            value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
-            aria-checked=${this.checked ? 'true' : 'false'}
-            aria-describedby="hint"
+            aria-checked=${ariaChecked}
+            aria-invalid=${ifDefined(this.invalid ? 'true' : undefined)}
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>
 
         <slot part="label"></slot>
       </label>
-
-      <slot id="hint" part="hint" name="hint" aria-hidden=${hasHint ? 'false' : 'true'} class="${classMap({ 'has-slotted': hasHint })}">
-        ${this.hint}
-      </slot>
     `;
   }
 }

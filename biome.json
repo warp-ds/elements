@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/node_modules", "!**/dist", "!**/eik", "!.husky", "!**/storybook-static"]
+    "includes": ["**", "!**/node_modules", "!**/dist", "!**/eik", "!.husky", "!**/storybook-static", "!.tmp"]
   },
   "formatter": {
     "enabled": true,
