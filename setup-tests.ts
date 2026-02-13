@@ -1,8 +1,8 @@
 import 'vitest-browser-lit';
-import axe from 'axe-core';
 import type { AxeResults, Result } from 'axe-core';
-import type { RenderResult } from 'vitest-browser-lit';
+import axe from 'axe-core';
 import { expect } from 'vitest';
+import type { RenderResult } from 'vitest-browser-lit';
 
 interface AxeMatchers {
   toHaveNoAxeViolations(): Promise<void>;
@@ -59,22 +59,22 @@ function resolveAxeContainer(received: unknown): Element {
 }
 
 function toHaveNoViolations(results: AxeResults) {
-    if (typeof results.violations === 'undefined') {
-      throw new Error('No axe-core results found, unable to assert');
-    }
-
-    const violations = results.violations;
-    const pass = violations.length === 0;
-
-    return {
-      pass,
-      message: () =>
-        pass
-          ? 'Expected to have accessibility violations, but none were found'
-          : `Expected no accessibility violations, but found ${violations.length}:\n\n${formatViolations(violations)}`,
-      actual: violations,
-    };
+  if (typeof results.violations === 'undefined') {
+    throw new Error('No axe-core results found, unable to assert');
   }
+
+  const violations = results.violations;
+  const pass = violations.length === 0;
+
+  return {
+    pass,
+    message: () =>
+      pass
+        ? 'Expected to have accessibility violations, but none were found'
+        : `Expected no accessibility violations, but found ${violations.length}:\n\n${formatViolations(violations)}`,
+    actual: violations,
+  };
+}
 
 expect.extend({
   async toHaveNoAxeViolations(received: unknown) {
@@ -82,5 +82,5 @@ expect.extend({
     const results = await runAxe(container);
 
     return toHaveNoViolations(results);
-  }
+  },
 });

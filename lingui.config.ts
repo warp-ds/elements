@@ -65,6 +65,10 @@ const config: LinguiConfig = {
       include: ['packages/page-indicator/'],
       path: 'packages/page-indicator/locales/{locale}/messages',
     },
+    {
+      include: ['packages/checkbox-group/'],
+      path: 'packages/checkbox-group/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

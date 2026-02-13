@@ -43,8 +43,8 @@ export default {
     'packages/toast-container/toast-container.ts',
 
     // unreleased
-    // 'packages/checkbox/checkbox.ts',
-    // 'packages/checkbox-group/checkbox-group.ts',
+    'packages/checkbox/checkbox.ts',
+    'packages/checkbox-group/checkbox-group.ts',
     // 'packages/dead-toggle/dead-toggle.ts',
     // 'packages/radio/radio.ts',
     // 'packages/radio-group/radio-group.ts',

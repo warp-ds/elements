@@ -1,0 +1,46 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as CheckboxStories from './checkbox.stories';
+
+<Meta of={CheckboxStories} name="Docs" />
+
+# Checkbox
+
+Use checkboxes when a user can select one or more options from a list. Checkboxes can be used
+individually or grouped under a shared label and help text using `w-checkbox-group`.
+
+## Visual options
+
+<Canvas of={CheckboxStories.Default} />
+
+### States
+
+<Canvas of={CheckboxStories.Disabled} />
+<Canvas of={CheckboxStories.Invalid} />
+
+### Indeterminate
+
+Use the indeterminate state when a parent option represents a mixed set of child selections.
+
+<Canvas of={CheckboxStories.Indeterminate} />
+<Canvas of={CheckboxStories.IndeterminateError} />
+<Canvas of={CheckboxStories.IndeterminateDisabled} />
+
+## Checkbox group
+
+Use `w-checkbox-group` to add a shared label, help text, optional indicator, and required validation
+that enforces at least one selection.
+
+<Canvas of={CheckboxStories.CheckboxGroup} />
+<Canvas of={CheckboxStories.CheckboxGroupWithHelpText} />
+<Canvas of={CheckboxStories.CheckboxGroupWithLabel} />
+<Canvas of={CheckboxStories.CheckboxGroupWithOptional} />
+<Canvas of={CheckboxStories.CheckboxGroupRequired} />
+
+### Form association
+
+Both `w-checkbox` and `w-checkbox-group` are form associated. The group is used for validation only.
+Individual checkboxes provide the submitted values.
+
+<Canvas of={CheckboxStories.CheckboxFormAssociated} />
+<Canvas of={CheckboxStories.CheckboxGroupFormAssociated} />
