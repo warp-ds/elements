@@ -132,19 +132,4 @@ export const styles = css`
   @media (prefers-reduced-motion: reduce) {
     :host { --w-c-checkbox-transition: none; }
   }
-
-  @media (forced-colors: active) {
-    :host {
-      --w-c-checkbox-bg: Canvas;
-      --w-c-checkbox-border-color: ButtonText;
-      --w-c-checkbox-bg-checked: Highlight;
-      --w-c-checkbox-border-color-checked: Highlight;
-      --w-c-checkbox-outline-color: Highlight;
-      --w-c-checkbox-bg-disabled: Canvas;
-      --w-c-checkbox-border-color-disabled: GrayText;
-      --w-c-checkbox-icon-color: CanvasText;
-    }
-
-    [part='control'] { forced-color-adjust: none; }
-  }
 `;
