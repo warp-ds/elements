@@ -1,3 +1,38 @@
+# [2.7.0](https://github.com/warp-ds/elements/compare/v2.6.0...v2.7.0) (2026-02-13)
+
+
+### Bug Fixes
+
+* align with updated design spec ([93f37bb](https://github.com/warp-ds/elements/commit/93f37bbff9dd1410d8a9e94606d2c53d37ff2b49))
+* announce min and max values via description ([5ecd881](https://github.com/warp-ds/elements/commit/5ecd881f9f28ce54fc705e31fecdc498e3e56d1c))
+* **checkbox:** add form association to checkbox-group ([7781e27](https://github.com/warp-ds/elements/commit/7781e2726266835a8fbc14f0b04d557793ae4a8d))
+* **checkbox:** add name property to checkbox-group ([4a4ec62](https://github.com/warp-ds/elements/commit/4a4ec6282cc153196bededbbc6979019521b0634))
+* **checkbox:** improve checkbox group validation ([803c106](https://github.com/warp-ds/elements/commit/803c106ef91a76c233cfde3871488c4b187efa8c))
+* **checkbox:** improve checkbox validation ([611f249](https://github.com/warp-ds/elements/commit/611f24906ef3c861bbbfd8c5cb892d3d5c1279be))
+* cleaned up styling ([fd8c86d](https://github.com/warp-ds/elements/commit/fd8c86d541e9e5b9da8640b061c19b81f0f21520))
+* cross browser rendering issues ([39b2269](https://github.com/warp-ds/elements/commit/39b22697c89955a4c760a50ddb3d1ab94a689b9b))
+* hidden minmax labels regression ([a63e5ca](https://github.com/warp-ds/elements/commit/a63e5ca38b618b37310ff79dd74f2d5f73cdf9f1))
+* it ([220bf65](https://github.com/warp-ds/elements/commit/220bf6551b6ca2ba31646c8c2a3916cab41fcefe))
+* locale stuff ([15cddfe](https://github.com/warp-ds/elements/commit/15cddfeb66e4c1b1c39522550aa87caa0d1b918c))
+* make formatters make sense ([e2685c7](https://github.com/warp-ds/elements/commit/e2685c77af0b3559f1cabfe442a0f3b1e47391f4))
+* make hidden textfield not focusable ([8f43920](https://github.com/warp-ds/elements/commit/8f439202017e72b8d05a574ec7c3b52e5a975dec))
+* make text inputs hidable ([5bdfa8c](https://github.com/warp-ds/elements/commit/5bdfa8c3aaeb780e67ae87ef239384938fac2c8c))
+* off by one pixel for single slider ([a8082b7](https://github.com/warp-ds/elements/commit/a8082b767b1637be493517323139ed8508100866))
+* Remove forced colors stuff ([a0d5eb9](https://github.com/warp-ds/elements/commit/a0d5eb9a5c9c7cfc03c7cc4fe27ef37ee7181cf8))
+* sensible tab order using JavaScript™ ([9395c01](https://github.com/warp-ds/elements/commit/9395c01fca0206a2758b360a7ccd08c0b0542d6b))
+* technically possible to hide the min/max labels ([60e55b2](https://github.com/warp-ds/elements/commit/60e55b281d15966be7c46193be3466f6cc085a5c))
+* timing of when to show error message ([e8dd13c](https://github.com/warp-ds/elements/commit/e8dd13ca8dbaf738b8a9bdf33caa51097241aa12))
+* use "min"/"max"/"+" in labels ([e360a2b](https://github.com/warp-ds/elements/commit/e360a2bb46fafa64e4235a6dc8b2ec1dc506e588))
+* weird offset for tooltip in range slider ([56bd396](https://github.com/warp-ds/elements/commit/56bd3967884d46bc7fd4a42298e0241eeedae330))
+
+
+### Features
+
+* **checkbox:** add help-text to checkbox-group ([5b0bdc1](https://github.com/warp-ds/elements/commit/5b0bdc1a8175d874067a9272ca60a891499f44e4))
+* **checkbox:** add label to checkbox-group ([57d7853](https://github.com/warp-ds/elements/commit/57d7853c544bbf20e8c4d4f1fd1f0aaf63f7c23b))
+* implement disabled state ([edc75fc](https://github.com/warp-ds/elements/commit/edc75fce1de649f78505078a14de6b6694e76c30))
+* show placeholders when input fields are empty ([b78eb09](https://github.com/warp-ds/elements/commit/b78eb09bb86581fadaa9190f6f4d86300690c5d9))
+
 # [2.7.0-next.2](https://github.com/warp-ds/elements/compare/v2.7.0-next.1...v2.7.0-next.2) (2026-02-13)
 
 
