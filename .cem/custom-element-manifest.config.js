@@ -19,6 +19,8 @@ export default {
     'packages/breadcrumbs/breadcrumbs.ts',
     'packages/button/button.ts',
     'packages/card/card.ts',
+    'packages/checkbox/checkbox.ts',
+    'packages/checkbox-group/checkbox-group.ts',
     'packages/combobox/combobox.ts',
     'packages/datepicker/datepicker.ts',
     'packages/expandable/expandable.ts',
@@ -30,7 +32,11 @@ export default {
     'packages/page-indicator/page-indicator.ts',
     'packages/pagination/pagination.ts',
     'packages/pill/pill.ts',
+    'packages/radio/radio.ts',
+    'packages/radio-group/radio-group.ts',
     'packages/select/select.ts',
+    'packages/slider/slider.ts',
+    'packages/slider-thumb/slider-thumb.ts',
     'packages/step/step.ts',
     'packages/step-indicator/step-indicator.ts',
     'packages/switch/switch.ts',
@@ -43,13 +49,7 @@ export default {
     'packages/toast-container/toast-container.ts',
 
     // unreleased
-    'packages/checkbox/checkbox.ts',
-    'packages/checkbox-group/checkbox-group.ts',
     // 'packages/dead-toggle/dead-toggle.ts',
-    // 'packages/radio/radio.ts',
-    // 'packages/radio-group/radio-group.ts',
-    'packages/slider/slider.ts',
-    'packages/slider-thumb/slider-thumb.ts',
   ],
 
   // Globs to exclude
