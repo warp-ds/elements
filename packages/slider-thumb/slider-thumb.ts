@@ -528,6 +528,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   render() {
+    const showPlaceholder = this.placeholder && !this.value;
     return html`
       <div class="w-slider-thumb">
         ${
@@ -606,7 +607,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           tabindex="${this._hiddenTextfield ? -1 : nothing}"
           placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
-          .formatter=${this.valueFormatter ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
+          .formatter=${this.valueFormatter && !showPlaceholder ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
           min="${this.openEnded ? nothing : this.min}"
           max="${this.openEnded ? nothing : this.max}"
           step="${ifDefined(this.step)}"
