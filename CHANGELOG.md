@@ -1,3 +1,15 @@
+# [2.8.0-next.1](https://github.com/warp-ds/elements/compare/v2.7.0...v2.8.0-next.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* don't use the textfield mask when showing the placeholder ([0db0656](https://github.com/warp-ds/elements/commit/0db065676fa9b6173b51fb5d9cb565dab958cb99))
+
+
+### Features
+
+* add tooltipFormatter to cater for different result on max/min ([0e9bcca](https://github.com/warp-ds/elements/commit/0e9bccadc28a05920ce8d2065ffa9527b5606447))
+
 # [2.7.0](https://github.com/warp-ds/elements/compare/v2.6.0...v2.7.0) (2026-02-13)
 
 
