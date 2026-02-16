@@ -85,11 +85,23 @@ describe('w-radio accessibility (WCAG 2.2)', () => {
         HTMLElement & { click: () => void }
       >;
 
-      checkedRadio.click();
+      await checkedRadio.click();
       await group.updateComplete;
 
       await expect.poll(() => checkedRadio.getAttribute('aria-checked')).toBe('true');
       await expect.poll(() => uncheckedRadio.getAttribute('aria-checked')).toBe('false');
+    });
+
+    test('appearance variants preserve role and accessible name', async () => {
+      const page = render(html`
+        <w-radio-group label="Options">
+          <w-radio value="one" appearance="button">Button</w-radio>
+          <w-radio value="two" appearance="clickable">Clickable</w-radio>
+        </w-radio-group>
+      `);
+
+      await expect.element(page.getByRole('radio', { name: 'Button' })).toBeVisible();
+      await expect.element(page.getByRole('radio', { name: 'Clickable' })).toBeVisible();
     });
   });
 });

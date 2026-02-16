@@ -63,3 +63,44 @@ test('updates aria-checked and tabIndex when checked', async () => {
   expect(radio.getAttribute('aria-checked')).toBe('true');
   expect(radio.tabIndex).toBe(0);
 });
+
+test('reflects disabled state changes and updates tabIndex', async () => {
+  render(html`<w-radio value="alpha">Alpha</w-radio>`);
+
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    disabled: boolean;
+    updateComplete: Promise<unknown>;
+    tabIndex: number;
+  };
+
+  await radio.updateComplete;
+  expect(radio.getAttribute('aria-disabled')).toBe('false');
+  expect(radio.tabIndex).toBe(-1);
+
+  radio.checked = true;
+  await radio.updateComplete;
+  expect(radio.tabIndex).toBe(0);
+
+  radio.disabled = true;
+  await radio.updateComplete;
+  expect(radio.getAttribute('aria-disabled')).toBe('true');
+  expect(radio.tabIndex).toBe(-1);
+
+  radio.disabled = false;
+  await radio.updateComplete;
+  expect(radio.getAttribute('aria-disabled')).toBe('false');
+  expect(radio.tabIndex).toBe(0);
+});
+
+test('focuses the host element', async () => {
+  render(html`<w-radio value="alpha">Alpha</w-radio>`);
+
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    focus: () => void;
+  };
+
+  await radio.updateComplete;
+  radio.focus();
+  await expect.poll(() => document.activeElement).toBe(radio);
+});

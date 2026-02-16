@@ -68,6 +68,20 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
         'Select one',
       );
     });
+
+    test('slotted label and hint are associated', async () => {
+      const page = render(html`
+        <w-radio-group>
+          <span slot="label">Slotted label</span>
+          <span slot="hint">Slotted hint</span>
+          <w-radio value="one">One</w-radio>
+        </w-radio-group>
+      `);
+
+      await expect.element(page.getByRole('radiogroup', { name: 'Slotted label' })).toHaveAccessibleDescription(
+        'Slotted hint',
+      );
+    });
   });
 
   describe('WCAG 2.1.1 - Keyboard', () => {
@@ -95,6 +109,32 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
       await userEvent.keyboard('[ArrowDown]');
       await expect.poll(() => radios[2].checked).toBe(true);
       await expect.poll(() => document.activeElement).toBe(radios[2]);
+    });
+
+    test('arrow keys wrap and skip disabled radios', async () => {
+      render(html`
+        <w-radio-group label="Preferences">
+          <w-radio value="one">One</w-radio>
+          <w-radio value="two" disabled>Two</w-radio>
+          <w-radio value="three">Three</w-radio>
+        </w-radio-group>
+      `);
+
+      const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+        HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; focus: () => void }
+      >;
+
+      await radios[0].updateComplete;
+      radios[0].focus();
+      await expect.poll(() => document.activeElement).toBe(radios[0]);
+
+      await userEvent.keyboard('[ArrowDown]');
+      await expect.poll(() => radios[2].checked).toBe(true);
+      await expect.poll(() => document.activeElement).toBe(radios[2]);
+
+      await userEvent.keyboard('[ArrowDown]');
+      await expect.poll(() => radios[0].checked).toBe(true);
+      await expect.poll(() => document.activeElement).toBe(radios[0]);
     });
   });
 });
