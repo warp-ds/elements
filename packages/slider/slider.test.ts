@@ -228,6 +228,47 @@ test('valueFormatter formats tooltip display value', async () => {
   expect(tooltipMessage.textContent.trim()).toBe('50000 formatted');
 });
 
+// tooltipFormatter tests
+test('tooltipFormatter formats tooltip display value', async () => {
+  const component = html`
+    <w-slider label="Hestekrefter" min="50" max="300" open-ended suffix="hk">
+      <w-slider-thumb slot="from" name="from-power" value="50"></w-slider-thumb>
+      <w-slider-thumb slot="to" name="to-power" value=""></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+
+  slider.valueFormatter = (value, slot) => {
+    if (slot === 'from' && value === '') {
+      return 'Min';
+    }
+    if (slot === 'to' && value === '') {
+      return 'Max';
+    }
+    return value;
+  };
+
+  // Use 300+ hk in the tooltip
+  slider.tooltipFormatter = (value, slot) => {
+    if (slot === 'to' && value === '') {
+      return `${300}+`;
+    }
+    return value;
+  };
+
+  await slider.updateComplete;
+
+  const thumb = document.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
+  await thumb.updateComplete;
+
+  // Check the tooltip message content in w-attention
+  const tooltipMessage = thumb.shadowRoot.querySelector('w-attention span[slot="message"]');
+  expect(tooltipMessage.textContent.trim()).toBe('300+ hk');
+});
+
 // WCAG 2.1 Accessibility Tests
 
 // Fieldset and legend tests (WCAG 1.3.1 Info and Relationships, 4.1.2 Name, Role, Value)
