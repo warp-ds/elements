@@ -36,6 +36,9 @@ export class WRadio extends LitElement {
   /** Disables the radio. */
   @property({ type: Boolean }) disabled = false;
 
+  /** Draws the radio in an invalid state. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
   constructor() {
     super();
     this.addEventListener('click', this.handleClick);
@@ -75,6 +78,14 @@ export class WRadio extends LitElement {
       } else {
         // Restore proper tabIndex - this will be managed by the radio group
         this.tabIndex = this.checked ? 0 : -1;
+      }
+    }
+
+    if (changedProperties.has('invalid')) {
+      if (this.invalid) {
+        this.setAttribute('aria-invalid', 'true');
+      } else {
+        this.removeAttribute('aria-invalid');
       }
     }
   }

@@ -433,3 +433,129 @@ test('applies group size to child radios', async () => {
   expect(radios[0].getAttribute('size')).toBe('small');
   expect(radios[1].getAttribute('size')).toBe('small');
 });
+
+test('warns when used in a form without a name', async () => {
+  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <form>
+      <w-radio-group label="Choices">
+        <w-radio value="alpha">Alpha</w-radio>
+        <w-radio value="beta">Beta</w-radio>
+      </w-radio-group>
+    </form>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  await group.updateComplete;
+
+  expect(warn).toHaveBeenCalledWith('w-radio-group: "name" is required for form submission.');
+
+  warn.mockRestore();
+});
+
+test('propagates invalid state to child radios', async () => {
+  render(html`
+    <w-radio-group label="Choices" name="choice" required>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    reportValidity: () => boolean;
+  };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<HTMLElement & { invalid?: boolean }>;
+
+  await group.updateComplete;
+  group.reportValidity();
+  await group.updateComplete;
+
+  expect(radios[0].invalid).toBe(true);
+  expect(radios[1].invalid).toBe(true);
+
+  radios[0].click();
+  await group.updateComplete;
+
+  expect(radios[0].invalid).toBe(false);
+  expect(radios[1].invalid).toBe(false);
+});
+
+test('adds and removes tabindex on the host when invalid', async () => {
+  render(html`
+    <w-radio-group label="Choices" name="choice">
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  await group.updateComplete;
+
+  expect(group.hasAttribute('tabindex')).toBe(false);
+
+  group.setAttribute('invalid', '');
+  await group.updateComplete;
+  expect(group.getAttribute('tabindex')).toBe('0');
+
+  group.removeAttribute('invalid');
+  await group.updateComplete;
+  expect(group.hasAttribute('tabindex')).toBe(false);
+});
+
+test('updates optional text when locale changes', async () => {
+  i18n.load('fr', {
+    'checkbox-group.label.optional': ['(optionnel)'],
+    'checkbox-group.validation.required': ['At least one selection is required.'],
+  });
+
+  const page = render(html`
+    <w-radio-group label="Choices" optional>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  await group.updateComplete;
+  await expect.element(page.getByText('(optional)')).toBeVisible();
+
+  i18n.activate('fr');
+  await group.updateComplete;
+  await expect.element(page.getByText('(optionnel)')).toBeVisible();
+
+  i18n.activate('en');
+});
+
+test('does not set aria-labelledby when label is missing', async () => {
+  render(html`
+    <w-radio-group>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  await group.updateComplete;
+
+  const fieldset = group.shadowRoot?.querySelector('fieldset');
+  expect(fieldset?.getAttribute('aria-labelledby')).toBeNull();
+});
+
+test('applies group name to child radios when missing', async () => {
+  render(html`
+    <w-radio-group label="Choices" name="choice">
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as HTMLElement[];
+
+  await group.updateComplete;
+
+  expect(radios[0].getAttribute('name')).toBe('choice');
+  expect(radios[1].getAttribute('name')).toBe('choice');
+});

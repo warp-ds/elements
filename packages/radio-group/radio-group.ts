@@ -5,6 +5,7 @@ import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
@@ -37,6 +38,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   @state() hasRadioButtons = false;
   @state() hasInteracted = false;
+  @state() hasWarnedMissingName = false;
+  @state() autoTabIndex = false;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
@@ -88,6 +91,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private defaultValue: string | null = null;
   private slottedHintText: string | null = null;
+  private unsubscribeI18n?: () => void;
 
   //
   // We need this because if we don't have it, FormValidation yells at us that it's "not focusable".
@@ -114,7 +118,14 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('disabled') || changedProperties.has('value') || changedProperties.has('name')) {
+    if (
+      changedProperties.has('disabled') ||
+      changedProperties.has('value') ||
+      changedProperties.has('name') ||
+      changedProperties.has('required') ||
+      changedProperties.has('invalid') ||
+      changedProperties.has('helpText')
+    ) {
       this.syncRadioElements();
       this.syncFormValue();
       this.updateValidity();
@@ -127,6 +138,14 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.syncSlottedHintText();
     this.syncFormValue();
     this.updateValidity();
+    this.unsubscribeI18n = i18n.on('change', this.handleI18nChange);
+    this.warnIfMissingName();
+  }
+
+  disconnectedCallback() {
+    this.unsubscribeI18n?.();
+    this.unsubscribeI18n = undefined;
+    super.disconnectedCallback();
   }
 
   resetFormControl() {
@@ -159,6 +178,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     if (this.value !== oldValue) {
       this.updateComplete.then(() => {
+        this.hasInteracted = true;
         this.syncFormValue();
         this.updateValidity();
         this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
@@ -187,6 +207,10 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.requestUpdate();
   };
 
+  private handleI18nChange = () => {
+    this.requestUpdate();
+  };
+
   private async syncRadioElements() {
     const radios = this.getAllRadios();
     let hasRadioButtons = false;
@@ -203,6 +227,10 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
       // Set forceDisabled state based on radio group's disabled state
       (radio as WRadio).forceDisabled = this.disabled;
+
+      if (this.name && !radio.getAttribute('name')) {
+        radio.setAttribute('name', this.name);
+      }
     });
 
     // If at least one radio button exists, we assume it's a radio button group
@@ -305,6 +333,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     if (this.value !== oldValue) {
       this.updateComplete.then(() => {
+        this.hasInteracted = true;
         this.syncFormValue();
         this.updateValidity();
         this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
@@ -336,8 +365,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   reportValidity() {
+    this.hasInteracted = true;
     this.updateValidity();
-    return this.internals.reportValidity();
+    return this.internals.checkValidity();
   }
 
   private getHasSlotted(name: 'label' | 'help-text') {
@@ -378,28 +408,78 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private updateValidity() {
+    this.warnIfMissingName();
+
     if (this.disabled) {
       this.internals.setValidity({});
+      this.syncChildInvalid(false);
+      this.syncHostTabIndex(false);
       return;
     }
 
-    if (this.required && !this.value) {
-      const validationMessage = REQUIRED_MESSAGE();
-      this.internals.setValidity({ valueMissing: true }, validationMessage, this.validationTarget);
+    const requiredInvalid = this.required && !this.value;
+    const externalInvalid = this.invalid;
+    const showRequiredError = requiredInvalid && this.hasInteracted;
+    const showInvalidUi = externalInvalid || showRequiredError;
+
+    this.syncHostTabIndex(showInvalidUi);
+
+    if (requiredInvalid) {
+      this.setValidityState({ valueMissing: true });
+      this.syncChildInvalid(showInvalidUi);
       return;
     }
 
-    if (this.invalid) {
-      this.internals.setValidity({ customError: true }, ' ', this.validationTarget);
+    if (externalInvalid) {
+      this.setValidityState({ customError: true });
+      this.syncChildInvalid(true);
       return;
     }
 
     this.internals.setValidity({});
+    this.syncChildInvalid(false);
+  }
+
+  private syncChildInvalid(isInvalid: boolean) {
+    this.getAllRadios().forEach((radio) => {
+      if ('invalid' in radio) {
+        (radio as { invalid: boolean }).invalid = isInvalid;
+      }
+    });
+  }
+
+  private setValidityState(state: ValidityStateFlags) {
+    const anchor = this.validationTarget;
+    this.internals.setValidity(state, ' ', anchor ?? undefined);
+  }
+
+  private syncHostTabIndex(shouldBeFocusable: boolean) {
+    const hasTabIndexAttr = this.hasAttribute('tabindex');
+    if (hasTabIndexAttr && !this.autoTabIndex) return;
+
+    if (shouldBeFocusable) {
+      this.tabIndex = 0;
+      this.autoTabIndex = true;
+      return;
+    }
+
+    if (this.autoTabIndex) {
+      this.removeAttribute('tabindex');
+      this.autoTabIndex = false;
+    }
+  }
+
+  private warnIfMissingName() {
+    if (this.hasWarnedMissingName) return;
+    if (!this.internals.form) return;
+    if (this.name && this.name.trim().length > 0) return;
+    console.warn('w-radio-group: "name" is required for form submission.');
+    this.hasWarnedMissingName = true;
   }
 
   render() {
-    const hasLabelSlot = this.hasUpdated ? this.getHasSlotted('label') : this.withLabel;
-    const hasHintSlot = this.hasUpdated ? this.getHasSlotted('help-text') : this.withHint;
+    const hasLabelSlot = this.getHasSlotted('label') || this.withLabel;
+    const hasHintSlot = this.getHasSlotted('help-text') || this.withHint;
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const combinedHelpText = this.helpText || this.hint;
     const hasHint = combinedHelpText ? true : !!hasHintSlot;
@@ -408,7 +488,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const showInvalidError = this.invalid || showRequiredError;
     const isInvalid = showInvalidError;
     const hintText = showInvalidError ? REQUIRED_MESSAGE() : combinedHelpText;
-    const describedBy = hasHint ? 'help-text' : undefined;
+    const shouldShowHint = showInvalidError || hasHint;
+    const describedBy = shouldShowHint ? 'help-text' : undefined;
     const hintAriaLabel = this.slottedHintText || undefined;
 
     return html`
@@ -422,8 +503,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           'radio-group-required': this.required,
         })}
         role="radiogroup"
-        aria-labelledby="label"
-        aria-describedby=${describedBy}
+        aria-labelledby=${ifDefined(hasLabel ? 'label' : undefined)}
+        aria-describedby=${ifDefined(describedBy)}
         aria-errormessage="error-message"
         aria-invalid=${isInvalid ? 'true' : undefined}
         aria-orientation=${this.orientation}>
@@ -447,17 +528,21 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
         <slot part="form-control-input" @slotchange=${this.syncRadioElements}></slot>
 
-        <div
-          id="help-text"
-          part="hint"
-          class=${classMap({
-            'has-slotted': hasHint,
-            error: isInvalid,
-          })}
-          aria-hidden=${hasHint ? 'false' : 'true'}
-          aria-label=${hintAriaLabel}>
-          <slot name="help-text" @slotchange=${this.handleHintSlotChange}>${hintText}</slot>
-        </div>
+        ${shouldShowHint
+          ? html`
+              <div
+                id="help-text"
+                part="hint"
+                class=${classMap({
+                  'has-slotted': hasHint,
+                  error: isInvalid,
+                })}
+                aria-hidden=${shouldShowHint ? 'false' : 'true'}
+                aria-label=${hintAriaLabel}>
+                <slot name="help-text" @slotchange=${this.handleHintSlotChange}>${hintText}</slot>
+              </div>
+            `
+          : null}
       </fieldset>
     `;
   }
