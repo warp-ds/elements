@@ -1,40 +1,22 @@
 import type { PropertyValues } from 'lit';
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
+import { FormControlMixin } from '@open-wc/form-control';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
-import { BaseFormAssociatedElement } from '../radio/form-associated-element.js';
-import { uniqueId } from '../utils.js';
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
-import { RequiredValidator } from '../radio/required-validator.js';
-import { HasSlotController } from '../radio/slot.js';
 // eslint-disable-next-line
 // @ts-ignore
 import { styles } from './radio-group-styles.js';
+import { styles as hostStyles } from '../radio/host-styles.js';
 
 /**
  * @slot label - Alternative to the `label` attribute should you need custom HTML.
  */
-export class WRadioGroup extends BaseFormAssociatedElement {
-  static css = [styles];
-
-  static get validators() {
-    const validators = [
-      RequiredValidator({
-        validationElement: Object.assign(document.createElement('input'), {
-          required: true,
-          type: 'radio',
-          // we need an id that's guaranteed to be unique; users will never see this
-          name: uniqueId('__w-radio'),
-        }),
-      }),
-    ];
-    return [...super.validators, ...validators];
-  }
-
-  private readonly hasSlotController = new HasSlotController(this, 'hint', 'label');
+export class WRadioGroup extends FormControlMixin(LitElement) {
+  static styles = [hostStyles, styles];
 
   @state() hasRadioButtons = false;
 
@@ -58,26 +40,8 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   /** The orientation in which to show radio items. */
   @property({ reflect: true }) orientation: 'horizontal' | 'vertical' = 'vertical';
 
-  private _value: string | null = null;
-
-  get value() {
-    if (this.valueHasChanged) {
-      return this._value;
-    }
-
-    return this._value ?? this.defaultValue;
-  }
-
   /** The current value of the radio group, submitted as a name/value pair with form data. */
-  @state()
-  set value(val: string | number | null) {
-    if (typeof val === 'number') val = String(val);
-    this.valueHasChanged = true;
-    this._value = val;
-  }
-
-  /** The default value of the form control. Primarily used for resetting the form control. */
-  @property({ attribute: 'value', reflect: true }) defaultValue: string | null = this.getAttribute('value') || null;
+  @property({ attribute: 'value', reflect: true }) value: string | null = null;
 
   /** The radio group's size. This size will be applied to all child radios and radio buttons, except when explicitly overridden. */
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
@@ -95,16 +59,19 @@ export class WRadioGroup extends BaseFormAssociatedElement {
    */
   @property({ type: Boolean, attribute: 'with-hint' }) withHint = false;
 
+  private defaultValue: string | null = null;
+
   //
   // We need this because if we don't have it, FormValidation yells at us that it's "not focusable".
   //   If we use `this.tabIndex = -1` we can't focus the radio inside.
   //
-  static shadowRootOptions = { ...BaseFormAssociatedElement.shadowRootOptions, delegatesFocus: true };
+  static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
   constructor() {
     super();
     this.addEventListener('keydown', this.handleKeyDown);
     this.addEventListener('click', this.handleRadioClick);
+    this.addEventListener('invalid', this.handleInvalid);
   }
 
   /**
@@ -119,17 +86,25 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('disabled') || changedProperties.has('value')) {
+    if (changedProperties.has('disabled') || changedProperties.has('value') || changedProperties.has('name')) {
       this.syncRadioElements();
+      this.syncFormValue();
+      this.updateValidity();
     }
   }
 
-  formResetCallback(...args: Parameters<BaseFormAssociatedElement['formResetCallback']>) {
+  connectedCallback() {
+    super.connectedCallback();
+    this.defaultValue = this.value;
+    this.syncFormValue();
+    this.updateValidity();
+  }
+
+  resetFormControl() {
     this.value = this.defaultValue;
-
-    super.formResetCallback(...args);
-
     this.syncRadioElements();
+    this.syncFormValue();
+    this.updateValidity();
   }
 
   private handleRadioClick = (e: Event) => {
@@ -155,6 +130,8 @@ export class WRadioGroup extends BaseFormAssociatedElement {
 
     if (this.value !== oldValue) {
       this.updateComplete.then(() => {
+        this.syncFormValue();
+        this.updateValidity();
         this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
         this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       });
@@ -168,6 +145,10 @@ export class WRadioGroup extends BaseFormAssociatedElement {
   private handleLabelClick() {
     this.focus();
   }
+
+  private handleInvalid = () => {
+    this.updateValidity();
+  };
 
   private async syncRadioElements() {
     const radios = this.getAllRadios();
@@ -287,6 +268,8 @@ export class WRadioGroup extends BaseFormAssociatedElement {
 
     if (this.value !== oldValue) {
       this.updateComplete.then(() => {
+        this.syncFormValue();
+        this.updateValidity();
         this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
         this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       });
@@ -310,9 +293,62 @@ export class WRadioGroup extends BaseFormAssociatedElement {
     }
   }
 
+  checkValidity() {
+    this.updateValidity();
+    return this.internals.checkValidity();
+  }
+
+  reportValidity() {
+    this.updateValidity();
+    return this.internals.reportValidity();
+  }
+
+  private getHasSlotted(name: 'label' | 'hint') {
+    const slot = this.shadowRoot?.querySelector(`slot[name="${name}"]`) as HTMLSlotElement | null;
+    if (!slot) return false;
+    return slot.assignedNodes({ flatten: true }).some((node) => {
+      if (node.nodeType === Node.ELEMENT_NODE) return true;
+      if (node.nodeType === Node.TEXT_NODE) return Boolean(node.textContent?.trim());
+      return false;
+    });
+  }
+
+  private syncFormValue() {
+    if (this.disabled || !this.name) {
+      this.setValue(null);
+      return;
+    }
+
+    if (!this.value) {
+      this.setValue(null);
+      return;
+    }
+
+    this.setValue(this.value);
+  }
+
+  private updateValidity() {
+    if (this.disabled) {
+      this.internals.setValidity({});
+      return;
+    }
+
+    if (this.required && !this.value) {
+      const validationMessage =
+        Object.assign(document.createElement('input'), {
+          required: true,
+          type: 'radio',
+        }).validationMessage || ' ';
+      this.internals.setValidity({ valueMissing: true }, validationMessage, this.validationTarget);
+      return;
+    }
+
+    this.internals.setValidity({});
+  }
+
   render() {
-    const hasLabelSlot = this.hasUpdated ? this.hasSlotController.test('label') : this.withLabel;
-    const hasHintSlot = this.hasUpdated ? this.hasSlotController.test('hint') : this.withHint;
+    const hasLabelSlot = this.hasUpdated ? this.getHasSlotted('label') : this.withLabel;
+    const hasHintSlot = this.hasUpdated ? this.getHasSlotted('hint') : this.withHint;
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHint = this.hint ? true : !!hasHintSlot;
 

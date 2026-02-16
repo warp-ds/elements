@@ -1,15 +1,15 @@
 import type { PropertyValues } from 'lit';
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 
 import { property, state } from 'lit/decorators.js';
 import { reset } from '../styles';
+import { styles as hostStyles } from './host-styles';
 // eslint-disable-next-line
 // @ts-ignore
 import { toggleStyles } from '../toggle-styles';
-import { BaseFormAssociatedElement } from './form-associated-element';
 
-export class WRadio extends BaseFormAssociatedElement {
-  static css = [reset, toggleStyles];
+export class WRadio extends LitElement {
+  static styles = [hostStyles, reset, toggleStyles];
 
   @state() checked = false;
 
@@ -56,7 +56,6 @@ export class WRadio extends BaseFormAssociatedElement {
     super.updated(changedProperties);
 
     if (changedProperties.has('checked')) {
-      this.customStates.set('checked', this.checked);
       this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
       // Only set tabIndex if not disabled
@@ -67,7 +66,6 @@ export class WRadio extends BaseFormAssociatedElement {
 
     if (changedProperties.has('disabled') || changedProperties.has('forceDisabled')) {
       const effectivelyDisabled = this.disabled || this.forceDisabled;
-      this.customStates.set('disabled', effectivelyDisabled);
       this[effectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.setAttribute('aria-disabled', effectivelyDisabled ? 'true' : 'false');
 
@@ -79,13 +77,6 @@ export class WRadio extends BaseFormAssociatedElement {
         this.tabIndex = this.checked ? 0 : -1;
       }
     }
-  }
-
-  /**
-   * @override
-   */
-  setValue(): void {
-    // We override `setValue` because we don't want to set form values from here. We want to do that in "RadioGroup" itself.
   }
 
   // Update the handleClick method (around line 75)
