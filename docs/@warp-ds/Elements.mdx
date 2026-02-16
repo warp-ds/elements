@@ -78,7 +78,7 @@ Check the sidebar to see available components in interactive demos. The demos in
 
 ### React (v19+)
 
-React 19+ supports custom elements directly. Make sure the Warp assets are loaded in the document head, then use the elements in JSX.
+React 19+ supports custom elements directly. Make sure the Warp assets are loaded in the document head as described above, then use the elements in JSX.
 
 ```tsx
 export function Example() {
@@ -107,6 +107,8 @@ Any event that the component emits, can be used in React by prefixing it with "o
 Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
 
 The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
+
+When starting a new app using Borealis starter templates, Vscode will suggest you install this extension.
 
 ### JetBrains products
 
