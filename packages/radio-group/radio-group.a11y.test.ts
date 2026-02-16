@@ -1,3 +1,4 @@
+import { i18n } from '@lingui/core';
 import { userEvent } from '@vitest/browser/context';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
@@ -5,6 +6,13 @@ import { render } from 'vitest-browser-lit';
 
 import './radio-group.js';
 import '../radio/radio.js';
+
+// Initialize i18n with English locale for tests
+i18n.load('en', {
+  'checkbox-group.label.optional': ['(optional)'],
+  'checkbox-group.validation.required': ['At least one selection is required.'],
+});
+i18n.activate('en');
 
 describe('w-radio-group accessibility (WCAG 2.2)', () => {
   describe('axe-core automated checks', () => {
@@ -18,9 +26,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
       await expect(page).toHaveNoAxeViolations();
     });
 
-    test('with hint has no violations', async () => {
+    test('with help text has no violations', async () => {
       const page = render(html`
-        <w-radio-group label="Preferences" hint="Select one">
+        <w-radio-group label="Preferences" help-text="Select one">
           <w-radio value="one">One</w-radio>
           <w-radio value="two">Two</w-radio>
         </w-radio-group>
@@ -56,9 +64,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
   });
 
   describe('WCAG 3.3.2 - Labels or Instructions', () => {
-    test('hint is programmatically associated', async () => {
+    test('help text is programmatically associated', async () => {
       const page = render(html`
-        <w-radio-group label="Preferences" hint="Select one">
+        <w-radio-group label="Preferences" help-text="Select one">
           <w-radio value="one">One</w-radio>
           <w-radio value="two">Two</w-radio>
         </w-radio-group>
@@ -69,17 +77,17 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
       );
     });
 
-    test('slotted label and hint are associated', async () => {
+    test('slotted label and help text are associated', async () => {
       const page = render(html`
         <w-radio-group>
           <span slot="label">Slotted label</span>
-          <span slot="hint">Slotted hint</span>
+          <span slot="help-text">Slotted help text</span>
           <w-radio value="one">One</w-radio>
         </w-radio-group>
       `);
 
       await expect.element(page.getByRole('radiogroup', { name: 'Slotted label' })).toHaveAccessibleDescription(
-        'Slotted hint',
+        'Slotted help text',
       );
     });
   });

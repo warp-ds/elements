@@ -1,9 +1,17 @@
+import { i18n } from '@lingui/core';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './radio-group.js';
 import '../radio/radio.js';
+
+// Initialize i18n with English locale for tests
+i18n.load('en', {
+  'checkbox-group.label.optional': ['(optional)'],
+  'checkbox-group.validation.required': ['At least one selection is required.'],
+});
+i18n.activate('en');
 
 test('selects radio on click and dispatches input/change', async () => {
   render(html`
@@ -40,6 +48,28 @@ test('selects radio on click and dispatches input/change', async () => {
   radios[1].click();
   await group.updateComplete;
   expect(onChange).toHaveBeenCalledTimes(1);
+});
+
+test('renders help text when provided', async () => {
+  const page = render(html`
+    <w-radio-group label="Choices" help-text="Select one">
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  await expect.element(page.getByText('Select one')).toBeVisible();
+});
+
+test('renders optional text when optional is true', async () => {
+  const page = render(html`
+    <w-radio-group label="Choices" optional>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  await expect.element(page.getByText('(optional)')).toBeVisible();
 });
 
 test('associates selected value with form submission', async () => {

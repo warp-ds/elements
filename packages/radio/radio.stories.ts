@@ -72,3 +72,46 @@ export const DisabledRadio: Story = {
     `;
   },
 };
+
+export const HelpText: Story = {
+  args: {
+    label: 'Help text',
+    helpText: 'Pick one option',
+    name: 'help-text',
+  },
+};
+
+export const Optional: Story = {
+  args: {
+    label: 'Optional',
+    optional: true,
+    helpText: 'This is optional',
+    name: 'optional',
+  },
+};
+
+export const InvalidWithMessage: Story = {
+  args: {},
+  render() {
+    return html`
+      <w-radio-group label="Invalid group" invalid>
+        <w-radio value="foo">foo</w-radio>
+        <w-radio value="bar">bar</w-radio>
+      </w-radio-group>
+    `;
+  },
+};
+
+export const SlottedLabelAndHint: Story = {
+  args: {},
+  render() {
+    return html`
+      <w-radio-group>
+        <span slot="label">Slotted label</span>
+        <span slot="help-text">Slotted hint text</span>
+        <w-radio value="foo">foo</w-radio>
+        <w-radio value="bar">bar</w-radio>
+      </w-radio-group>
+    `;
+  },
+};

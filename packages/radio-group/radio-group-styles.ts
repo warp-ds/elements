@@ -20,9 +20,15 @@ export const styles = css`
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: grayscale;
     cursor: pointer;
-    padding-bottom: 0.4rem;
+    padding-bottom: 16px;
     color: var(--w-s-color-text);
     display: block;
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--w-s-color-text-subtle);
+    margin-inline-start: 0.5rem;
   }
 
   .radio-group-required .label::after {
@@ -38,17 +44,25 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    gap: 16px;
   }
 
   /* Horizontal */
   :host([orientation='horizontal']) [part~='form-control-input'] {
     flex-direction: row;
-    gap: 1em;
+    gap: 16px;
   }
 
   /* Help text */
   [part~='hint'] {
-    margin-block-start: 0.5em;
+    margin-block-start: 16px;
+    font-size: var(--w-font-size-xs);
+    line-height: var(--w-line-height-xs);
+    color: var(--w-s-color-text-subtle);
+  }
+
+  [part~='hint'].error {
+    color: var(--w-s-color-text-negative);
   }
 
   /* Radios have the "button" appearance */

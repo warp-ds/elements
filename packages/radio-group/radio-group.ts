@@ -1,24 +1,42 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 
+import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
+import { activateI18n } from '../i18n';
+import { messages as daMessages } from '../checkbox-group/locales/da/messages.mjs';
+import { messages as enMessages } from '../checkbox-group/locales/en/messages.mjs';
+import { messages as fiMessages } from '../checkbox-group/locales/fi/messages.mjs';
+import { messages as nbMessages } from '../checkbox-group/locales/nb/messages.mjs';
+import { messages as svMessages } from '../checkbox-group/locales/sv/messages.mjs';
 // eslint-disable-next-line
 // @ts-ignore
 import { styles } from './radio-group-styles.js';
 import { styles as hostStyles } from '../radio/host-styles.js';
 
+activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+
+const REQUIRED_MESSAGE = () =>
+  i18n._({
+    id: 'checkbox-group.validation.required',
+    message: 'At least one selection is required.',
+    comment: 'Shown when required radio group has no selections',
+  });
+
 /**
  * @slot label - Alternative to the `label` attribute should you need custom HTML.
+ * @slot help-text - Alternative to the `help-text` attribute should you need custom HTML.
  */
 export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
 
   @state() hasRadioButtons = false;
+  @state() hasInteracted = false;
 
   @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
@@ -28,8 +46,17 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
    */
   @property() label = '';
 
-  /** The radio groups's hint. If you need to display HTML, use the `hint` slot instead. */
+  /** The radio group's help text. If you need to display HTML, use the `help-text` slot instead. */
+  @property({ attribute: 'help-text' }) helpText = '';
+
+  /** @deprecated Use `help-text` instead. */
   @property({ attribute: 'hint' }) hint = '';
+
+  /** Optional indicator for the label. */
+  @property({ type: Boolean, reflect: true }) optional = false;
+
+  /** Marks the radio group as invalid. */
+  @property({ type: Boolean, reflect: true }) invalid = false;
 
   /** The name of the radio group, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name: string | null = null;
@@ -55,11 +82,12 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   @property({ type: Boolean, attribute: 'with-label' }) withLabel = false;
 
   /**
-   * Used for SSR. if true, will show slotted hint on initial render.
+   * Used for SSR. if true, will show slotted help text on initial render.
    */
   @property({ type: Boolean, attribute: 'with-hint' }) withHint = false;
 
   private defaultValue: string | null = null;
+  private slottedHintText: string | null = null;
 
   //
   // We need this because if we don't have it, FormValidation yells at us that it's "not focusable".
@@ -96,6 +124,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     this.defaultValue = this.value;
+    this.syncSlottedHintText();
     this.syncFormValue();
     this.updateValidity();
   }
@@ -146,8 +175,16 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.focus();
   }
 
-  private handleInvalid = () => {
+  private handleInvalid = (event: Event) => {
+    // Prevent native validation popover. We'll surface errors via help text.
+    event.preventDefault();
+    this.hasInteracted = true;
     this.updateValidity();
+  };
+
+  private handleHintSlotChange = () => {
+    this.syncSlottedHintText();
+    this.requestUpdate();
   };
 
   private async syncRadioElements() {
@@ -303,7 +340,10 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     return this.internals.reportValidity();
   }
 
-  private getHasSlotted(name: 'label' | 'hint') {
+  private getHasSlotted(name: 'label' | 'help-text') {
+    if (this.querySelector(`[slot="${name}"]`)) {
+      return true;
+    }
     const slot = this.shadowRoot?.querySelector(`slot[name="${name}"]`) as HTMLSlotElement | null;
     if (!slot) return false;
     return slot.assignedNodes({ flatten: true }).some((node) => {
@@ -327,6 +367,16 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.setValue(this.value);
   }
 
+  private syncSlottedHintText() {
+    const slottedHint = this.querySelector<HTMLElement>('[slot="help-text"]');
+    if (!slottedHint) {
+      this.slottedHintText = null;
+      return;
+    }
+
+    this.slottedHintText = slottedHint.textContent?.trim() || null;
+  }
+
   private updateValidity() {
     if (this.disabled) {
       this.internals.setValidity({});
@@ -334,12 +384,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
 
     if (this.required && !this.value) {
-      const validationMessage =
-        Object.assign(document.createElement('input'), {
-          required: true,
-          type: 'radio',
-        }).validationMessage || ' ';
+      const validationMessage = REQUIRED_MESSAGE();
       this.internals.setValidity({ valueMissing: true }, validationMessage, this.validationTarget);
+      return;
+    }
+
+    if (this.invalid) {
+      this.internals.setValidity({ customError: true }, ' ', this.validationTarget);
       return;
     }
 
@@ -348,9 +399,17 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   render() {
     const hasLabelSlot = this.hasUpdated ? this.getHasSlotted('label') : this.withLabel;
-    const hasHintSlot = this.hasUpdated ? this.getHasSlotted('hint') : this.withHint;
+    const hasHintSlot = this.hasUpdated ? this.getHasSlotted('help-text') : this.withHint;
     const hasLabel = this.label ? true : !!hasLabelSlot;
-    const hasHint = this.hint ? true : !!hasHintSlot;
+    const combinedHelpText = this.helpText || this.hint;
+    const hasHint = combinedHelpText ? true : !!hasHintSlot;
+    const isRequiredInvalid = this.required && !this.value;
+    const showRequiredError = isRequiredInvalid && this.hasInteracted;
+    const showInvalidError = this.invalid || showRequiredError;
+    const isInvalid = showInvalidError;
+    const hintText = showInvalidError ? REQUIRED_MESSAGE() : combinedHelpText;
+    const describedBy = hasHint ? 'help-text' : undefined;
+    const hintAriaLabel = this.slottedHintText || undefined;
 
     return html`
       <fieldset
@@ -360,11 +419,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           'form-control-radio-group': true,
           'form-control-has-label': hasLabel,
           'has-radio-buttons': this.hasRadioButtons,
+          'radio-group-required': this.required,
         })}
         role="radiogroup"
         aria-labelledby="label"
-        aria-describedby="hint"
+        aria-describedby=${describedBy}
         aria-errormessage="error-message"
+        aria-invalid=${isInvalid ? 'true' : undefined}
         aria-orientation=${this.orientation}>
         <label
           part="form-control-label"
@@ -373,20 +434,30 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           aria-hidden=${hasLabel ? 'false' : 'true'}
           @click=${this.handleLabelClick}>
           <slot name="label">${this.label}</slot>
+          ${this.optional
+            ? html` <span class="optional">
+                ${i18n._({
+                  id: 'checkbox-group.label.optional',
+                  message: 'Optional',
+                  comment: 'Shown behind label when marked as optional',
+                })}
+              </span>`
+            : null}
         </label>
 
         <slot part="form-control-input" @slotchange=${this.syncRadioElements}></slot>
 
-        <slot
-          id="hint"
-          name="hint"
+        <div
+          id="help-text"
           part="hint"
           class=${classMap({
             'has-slotted': hasHint,
+            error: isInvalid,
           })}
           aria-hidden=${hasHint ? 'false' : 'true'}
-          >${this.hint}</slot
-        >
+          aria-label=${hintAriaLabel}>
+          <slot name="help-text" @slotchange=${this.handleHintSlotChange}>${hintText}</slot>
+        </div>
       </fieldset>
     `;
   }
