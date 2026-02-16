@@ -129,6 +129,74 @@ test('required group reports validity based on selection', async () => {
   expect(group.validity.valid).toBe(true);
 });
 
+test('required group blocks form submission until a selection is made', async () => {
+  render(html`
+    <form>
+      <w-radio-group label="Choices" name="choice" required>
+        <w-radio value="alpha">Alpha</w-radio>
+        <w-radio value="beta">Beta</w-radio>
+      </w-radio-group>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const group = document.querySelector('w-radio-group') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+  };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; click: () => void }
+  >;
+  const submit = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  const onSubmit = vi.fn(() => {
+    const data = new FormData(form);
+    expect(data.get('choice')).toBe('alpha');
+  });
+
+  form.addEventListener('submit', (event) => {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      return;
+    }
+    event.preventDefault();
+    onSubmit();
+  });
+
+  await group.updateComplete;
+  await expect.poll(() => form.checkValidity()).toBe(false);
+  submit.click();
+  await expect.poll(() => form.checkValidity()).toBe(false);
+  expect(onSubmit).not.toHaveBeenCalled();
+
+  radios[0].click();
+  await group.updateComplete;
+
+  submit.click();
+  await group.updateComplete;
+  await expect.poll(() => form.checkValidity()).toBe(true);
+  expect(onSubmit).toHaveBeenCalledTimes(1);
+});
+
+test('required group exposes a validation message when empty', async () => {
+  render(html`
+    <w-radio-group label="Choices" name="choice" required>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    reportValidity: () => boolean;
+    validationMessage: string;
+  };
+
+  await group.updateComplete;
+  await expect.poll(() => group.reportValidity()).toBe(false);
+  expect(group.validationMessage).not.toBe('');
+});
+
 test('resets to default value on form reset', async () => {
   render(html`
     <form>
@@ -227,6 +295,40 @@ test('disabled group prevents selection and disables child radios', async () => 
 
   expect(group.value).toBe(initialValue ?? null);
   expect(radios[0].checked).toBe(false);
+});
+
+test('name changes after render affect form submission', async () => {
+  render(html`
+    <form>
+      <w-radio-group label="Choices" name="choice">
+        <w-radio value="alpha">Alpha</w-radio>
+        <w-radio value="beta">Beta</w-radio>
+      </w-radio-group>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const group = document.querySelector('w-radio-group') as HTMLElement & {
+    name: string | null;
+    updateComplete: Promise<unknown>;
+  };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { updateComplete: Promise<unknown>; click: () => void }
+  >;
+
+  await group.updateComplete;
+  radios[0].click();
+  await group.updateComplete;
+
+  let data = new FormData(form);
+  expect(data.get('choice')).toBe('alpha');
+
+  group.name = 'preference';
+  await group.updateComplete;
+
+  data = new FormData(form);
+  expect(data.get('choice')).toBeNull();
+  expect(data.get('preference')).toBe('alpha');
 });
 
 test('re-enabling a disabled group restores tabbable radio', async () => {
