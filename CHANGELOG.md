@@ -1,3 +1,10 @@
+# [2.8.0-next.2](https://github.com/warp-ds/elements/compare/v2.8.0-next.1...v2.8.0-next.2) (2026-02-17)
+
+
+### Bug Fixes
+
+* add .js extension to window-exists import in toast/api.ts ([#526](https://github.com/warp-ds/elements/issues/526)) ([49d6ef9](https://github.com/warp-ds/elements/commit/49d6ef9d12c8fba6cd9745cd48a19fc784e630a8))
+
 # [2.8.0-next.1](https://github.com/warp-ds/elements/compare/v2.7.0...v2.8.0-next.1) (2026-02-16)
 
 
