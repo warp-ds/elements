@@ -75,7 +75,9 @@ test('checked state uses selected border color', async () => {
   await radio.updateComplete;
 
   const control = radio.shadowRoot?.querySelector('.control') as HTMLElement | null;
-  expect(control).not.toBeNull();
+  if (!control) {
+    throw new Error('Expected radio control element to exist');
+  }
 
   radio.click();
   await radio.updateComplete;
@@ -86,7 +88,7 @@ test('checked state uses selected border color', async () => {
   const selectedColor = getComputedStyle(swatch).borderColor;
   swatch.remove();
 
-  expect(getComputedStyle(control!).borderColor).toBe(selectedColor);
+  expect(getComputedStyle(control).borderColor).toBe(selectedColor);
 });
 
 test('disabled control uses disabled background and border colors', async () => {
@@ -99,7 +101,9 @@ test('disabled control uses disabled background and border colors', async () => 
   await radio.updateComplete;
 
   const control = radio.shadowRoot?.querySelector('.control') as HTMLElement | null;
-  expect(control).not.toBeNull();
+  if (!control) {
+    throw new Error('Expected radio control element to exist');
+  }
 
   const bgSwatch = document.createElement('div');
   bgSwatch.style.backgroundColor = 'var(--w-s-color-background-disabled-subtle)';
@@ -113,7 +117,7 @@ test('disabled control uses disabled background and border colors', async () => 
   const disabledBorder = getComputedStyle(borderSwatch).borderColor;
   borderSwatch.remove();
 
-  const controlStyle = getComputedStyle(control!);
+  const controlStyle = getComputedStyle(control);
   expect(controlStyle.backgroundColor).toBe(disabledBg);
   expect(controlStyle.borderColor).toBe(disabledBorder);
 });
