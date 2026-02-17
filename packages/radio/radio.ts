@@ -5,12 +5,10 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { reset } from '../styles';
 import { styles as hostStyles } from './host-styles';
-// eslint-disable-next-line
-// @ts-ignore
-import { toggleStyles } from '../toggle-styles';
+import { styles as radioStyles } from './radio-styles';
 
 export class WRadio extends FormControlMixin(LitElement) {
-  static styles = [hostStyles, reset, toggleStyles];
+  static styles = [hostStyles, reset, radioStyles];
 
   /** @internal Used by radio group to force disable radios while preserving their original disabled state. */
   @property({ type: Boolean }) forceDisabled = false;
