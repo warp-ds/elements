@@ -64,6 +64,60 @@ test('updates aria-checked and tabIndex when checked', async () => {
   expect(radio.tabIndex).toBe(0);
 });
 
+test('checked state uses selected border color', async () => {
+  render(html`<w-radio value="alpha">Alpha</w-radio>`);
+
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    click: () => void;
+  };
+
+  await radio.updateComplete;
+
+  const control = radio.shadowRoot?.querySelector('.control') as HTMLElement | null;
+  expect(control).not.toBeNull();
+
+  radio.click();
+  await radio.updateComplete;
+
+  const swatch = document.createElement('div');
+  swatch.style.borderColor = 'var(--w-s-color-border-selected)';
+  document.body.append(swatch);
+  const selectedColor = getComputedStyle(swatch).borderColor;
+  swatch.remove();
+
+  expect(getComputedStyle(control!).borderColor).toBe(selectedColor);
+});
+
+test('disabled control uses disabled background and border colors', async () => {
+  render(html`<w-radio value="alpha" disabled>Alpha</w-radio>`);
+
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+  };
+
+  await radio.updateComplete;
+
+  const control = radio.shadowRoot?.querySelector('.control') as HTMLElement | null;
+  expect(control).not.toBeNull();
+
+  const bgSwatch = document.createElement('div');
+  bgSwatch.style.backgroundColor = 'var(--w-s-color-background-disabled-subtle)';
+  document.body.append(bgSwatch);
+  const disabledBg = getComputedStyle(bgSwatch).backgroundColor;
+  bgSwatch.remove();
+
+  const borderSwatch = document.createElement('div');
+  borderSwatch.style.borderColor = 'var(--w-s-color-border-disabled)';
+  document.body.append(borderSwatch);
+  const disabledBorder = getComputedStyle(borderSwatch).borderColor;
+  borderSwatch.remove();
+
+  const controlStyle = getComputedStyle(control!);
+  expect(controlStyle.backgroundColor).toBe(disabledBg);
+  expect(controlStyle.borderColor).toBe(disabledBorder);
+});
+
 test('reflects disabled state changes and updates tabIndex', async () => {
   render(html`<w-radio value="alpha">Alpha</w-radio>`);
 

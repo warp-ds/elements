@@ -60,6 +60,29 @@ test('renders help text when provided', async () => {
   await expect.element(page.getByText('Select one')).toBeVisible();
 });
 
+test('disabled group renders help text in disabled color', async () => {
+  render(html`
+    <w-radio-group label="Choices" help-text="Select one" disabled>
+      <w-radio value="alpha">Alpha</w-radio>
+      <w-radio value="beta">Beta</w-radio>
+    </w-radio-group>
+  `);
+
+  const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
+  await group.updateComplete;
+
+  const helpText = group.shadowRoot?.querySelector('[part~="hint"]') as HTMLElement | null;
+  expect(helpText).not.toBeNull();
+
+  const swatch = document.createElement('div');
+  swatch.style.color = 'var(--w-s-color-text-disabled)';
+  document.body.append(swatch);
+  const disabledColor = getComputedStyle(swatch).color;
+  swatch.remove();
+
+  expect(getComputedStyle(helpText!).color).toBe(disabledColor);
+});
+
 test('renders optional text when optional is true', async () => {
   const page = render(html`
     <w-radio-group label="Choices" optional>
