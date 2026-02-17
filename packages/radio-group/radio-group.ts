@@ -66,6 +66,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private defaultCheckedValue: string | null | undefined = undefined;
   private slottedHelpText: string | null = null;
+  private readonly nameManagedRadios = new WeakSet<WRadio>();
   private unsubscribeI18n?: () => void;
 
   //
@@ -139,16 +140,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
 
     const oldValue = this.getCheckedValue();
-    clickedRadio.checked = true;
-
     const radios = this.getAllRadios();
-    radios.forEach((radio) => {
-      if (radio === clickedRadio) return;
-      radio.checked = false;
-      radio.setAttribute('tabindex', '-1');
-    });
-
-    clickedRadio.setAttribute('tabindex', '0');
+    this.selectSingleRadio(clickedRadio, radios);
 
     const newValue = this.getCheckedValue();
     if (newValue !== oldValue) {
@@ -163,6 +156,18 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   private getCheckedValue(): string | null {
     const checked = this.getAllRadios().find((radio) => radio.checked);
     return checked?.value ?? null;
+  }
+
+  private getEnabledRadios(radios = this.getAllRadios()): WRadio[] {
+    return radios.filter((radio) => !radio.disabled);
+  }
+
+  private selectSingleRadio(selected: WRadio, radios = this.getAllRadios()): void {
+    radios.forEach((radio) => {
+      const isSelected = radio === selected;
+      radio.checked = isSelected;
+      radio.setAttribute('tabindex', isSelected ? '0' : '-1');
+    });
   }
 
   private handleLabelClick() {
@@ -197,15 +202,14 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       // Set forceDisabled state based on radio group's disabled state
       (radio as WRadio).forceDisabled = this.disabled;
 
-      const nameFromGroup = radio.getAttribute('data-name-from-group') === 'true';
       if (this.name) {
-        if (!radio.getAttribute('name') || nameFromGroup) {
+        if (!radio.getAttribute('name') || this.nameManagedRadios.has(radio)) {
           radio.setAttribute('name', this.name);
-          radio.setAttribute('data-name-from-group', 'true');
+          this.nameManagedRadios.add(radio);
         }
-      } else if (nameFromGroup) {
+      } else if (this.nameManagedRadios.has(radio)) {
         radio.removeAttribute('name');
-        radio.removeAttribute('data-name-from-group');
+        this.nameManagedRadios.delete(radio);
       }
     });
 
@@ -222,7 +226,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       return;
     }
 
-    const enabledRadios = radios.filter((radio) => !radio.disabled);
+    const enabledRadios = this.getEnabledRadios(radios);
     const checkedRadio = enabledRadios.find((radio) => radio.checked);
 
     if (enabledRadios.length > 0) {
@@ -257,7 +261,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       return;
     }
 
-    const radios = this.getAllRadios().filter((radio) => !radio.disabled);
+    const allRadios = this.getAllRadios();
+    const radios = this.getEnabledRadios(allRadios);
 
     if (radios.length <= 0) {
       return;
@@ -279,15 +284,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       index = 0;
     }
 
-    const allRadios = this.getAllRadios();
-    allRadios.forEach((radio) => {
-      radio.checked = false;
-      radio.setAttribute('tabindex', '-1');
-    });
-
-    radios[index].checked = true;
-
-    radios[index].setAttribute('tabindex', '0');
+    this.selectSingleRadio(radios[index], allRadios);
     radios[index].focus();
 
     const newValue = this.getCheckedValue();
@@ -322,7 +319,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     return this.internals.checkValidity();
   }
 
-  private getHasSlotted(name: 'label' | 'help-text') {
+  private hasSlottedContent(name: 'label' | 'help-text') {
     if (this.querySelector(`[slot="${name}"]`)) {
       return true;
     }
@@ -401,9 +398,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private syncChildInvalid(isInvalid: boolean) {
     this.getAllRadios().forEach((radio) => {
-      if ('invalid' in radio) {
-        (radio as { invalid: boolean }).invalid = isInvalid;
-      }
+      radio.invalid = isInvalid;
     });
   }
 
@@ -437,8 +432,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   render() {
-    const hasLabelSlot = this.getHasSlotted('label');
-    const hasHelpTextSlot = this.getHasSlotted('help-text');
+    const hasLabelSlot = this.hasSlottedContent('label');
+    const hasHelpTextSlot = this.hasSlottedContent('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
     const isRequiredInvalid = this.required && !this.getCheckedValue();
