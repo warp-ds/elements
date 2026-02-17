@@ -68,8 +68,12 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.updateValidity();
   }
 
+  private get isEffectivelyDisabled(): boolean {
+    return this.disabled || this.forceDisabled;
+  }
+
   private syncAriaDisabled() {
-    this.setAttribute('aria-disabled', this.disabled || this.forceDisabled ? 'true' : 'false');
+    this.setAttribute('aria-disabled', this.isEffectivelyDisabled ? 'true' : 'false');
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -85,18 +89,13 @@ export class WRadio extends FormControlMixin(LitElement) {
     }
 
     if (changedProperties.has('disabled') || changedProperties.has('forceDisabled')) {
-      const effectivelyDisabled = this.disabled || this.forceDisabled;
-      this[effectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
+      this[this.isEffectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.syncAriaDisabled();
       this.syncTabIndex();
     }
 
     if (changedProperties.has('invalid')) {
-      if (this.invalid) {
-        this.setAttribute('aria-invalid', 'true');
-      } else {
-        this.removeAttribute('aria-invalid');
-      }
+      this.toggleAttribute('aria-invalid', this.invalid);
     }
 
     if (changedProperties.has('name')) {
@@ -113,7 +112,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   private handleClick = () => {
     if (this.isInGroup()) return;
-    if (this.disabled || this.forceDisabled) return;
+    if (this.isEffectivelyDisabled) return;
     this.#hasInteracted = true;
     this.checked = true;
     this.updateComplete.then(() => {
@@ -128,7 +127,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     if (this.isInGroup()) return;
-    if (this.disabled || this.forceDisabled) return;
+    if (this.isEffectivelyDisabled) return;
     if (event.defaultPrevented) return;
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
     event.preventDefault();
@@ -186,7 +185,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private updateValidity(): void {
-    if (this.disabled || this.forceDisabled || this.isInGroup()) {
+    if (this.isEffectivelyDisabled || this.isInGroup()) {
       this.internals.setValidity({});
       return;
     }
@@ -217,7 +216,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private syncFormValue(): void {
-    if (this.disabled || this.forceDisabled) {
+    if (this.isEffectivelyDisabled) {
       this.setValue(null);
       return;
     }
@@ -227,15 +226,14 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   private syncTabIndex(): void {
     if (this.isInGroup()) {
-      if (this.disabled || this.forceDisabled) {
+      if (this.isEffectivelyDisabled) {
         this.tabIndex = -1;
       }
       return;
     }
     const hasTabIndexAttr = this.hasAttribute('tabindex');
     if (hasTabIndexAttr && !this.#autoTabIndex) return;
-    const effectivelyDisabled = this.disabled || this.forceDisabled;
-    this.tabIndex = effectivelyDisabled ? -1 : 0;
+    this.tabIndex = this.isEffectivelyDisabled ? -1 : 0;
     this.#autoTabIndex = true;
   }
 
