@@ -3,7 +3,7 @@ import { html, LitElement } from 'lit';
 
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { property, query, state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
@@ -39,8 +39,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   @state() hasInteracted = false;
   @state() hasWarnedMissingName = false;
   @state() autoTabIndex = false;
-
-  @query('slot:not([name])') defaultSlot: HTMLSlotElement;
 
   /**
    * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
@@ -115,11 +113,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.updateValidity();
     this.unsubscribeI18n = i18n.on('change', this.handleI18nChange);
     this.warnIfMissingName();
-    this.updateComplete.then(() => {
-      if (this.defaultCheckedValue === undefined) {
-        this.defaultCheckedValue = this.getCheckedValue();
-      }
-    });
+    this.updateComplete.then(this.captureDefaultSelection);
   }
 
   disconnectedCallback() {
@@ -140,8 +134,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private handleRadioClick = (e: Event) => {
     const clickedRadio = (e.target as HTMLElement).closest<WRadio>('w-radio');
-    /* eslint-disable */
-    if (!clickedRadio || clickedRadio.disabled || (clickedRadio as any).forceDisabled || this.disabled) {
+    if (!clickedRadio || clickedRadio.disabled || clickedRadio.forceDisabled || this.disabled) {
       return;
     }
 
@@ -149,14 +142,11 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     clickedRadio.checked = true;
 
     const radios = this.getAllRadios();
-    for (const radio of radios) {
-      if (clickedRadio === radio) {
-        continue;
-      }
-
+    radios.forEach((radio) => {
+      if (radio === clickedRadio) return;
       radio.checked = false;
       radio.setAttribute('tabindex', '-1');
-    }
+    });
 
     clickedRadio.setAttribute('tabindex', '0');
 
@@ -226,15 +216,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     });
 
     await Promise.all(radios.map(async (radio) => radio.updateComplete));
-
-    const checkedRadio = radios.find((radio) => radio.checked);
-    if (checkedRadio) {
-      radios.forEach((radio) => {
-        if (radio !== checkedRadio) {
-          radio.checked = false;
-        }
-      });
-    }
+    this.normalizeCheckedRadios(radios);
 
     // Manage tabIndex based on disabled state and checked status
     if (this.disabled) {
@@ -289,13 +271,11 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
     let index = radios.indexOf(checkedRadio) + incr;
 
-    if (!index) index = 0;
-
     if (index < 0) {
       index = radios.length - 1;
     }
 
-    if (index > radios.length - 1) {
+    if (index >= radios.length) {
       index = 0;
     }
 
@@ -320,8 +300,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
         this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       });
     }
-
-    event.preventDefault();
   }
 
   /** Sets focus on the radio group. */
@@ -365,11 +343,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private syncFormValue() {
     // Radio groups should not contribute values to form data. Radios submit their own values.
-    if (this.disabled || !this.name) {
-      this.setValue(null);
-      return;
-    }
-
     this.setValue(null);
   }
 
@@ -415,6 +388,22 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.internals.setValidity({});
     this.syncChildInvalid(false);
   }
+
+  private normalizeCheckedRadios(radios: WRadio[]) {
+    const checkedRadio = radios.find((radio) => radio.checked);
+    if (!checkedRadio) return;
+    radios.forEach((radio) => {
+      if (radio !== checkedRadio) {
+        radio.checked = false;
+      }
+    });
+  }
+
+  private captureDefaultSelection = () => {
+    if (this.defaultCheckedValue === undefined) {
+      this.defaultCheckedValue = this.getCheckedValue();
+    }
+  };
 
   private syncChildInvalid(isInvalid: boolean) {
     this.getAllRadios().forEach((radio) => {

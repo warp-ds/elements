@@ -51,6 +51,10 @@ export const styles = css`
     color: var(--w-s-color-text-subtle);
   }
 
+  :host([disabled]) [part~='hint'] {
+    color: var(--w-s-color-text-disabled);
+  }
+
   [part~='hint'].error {
     color: var(--w-s-color-text-negative);
   }

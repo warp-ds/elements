@@ -56,22 +56,21 @@ export class WRadio extends FormControlMixin(LitElement) {
     super.connectedCallback();
     // kept for compat with old shared styling approach
     this.setAttribute('type', 'radio');
-    const attrValue = this.getAttribute('value');
-    this.value = attrValue ?? 'on';
+    this.value = this.getAttribute('value') ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
-    this.setInitialAttributes();
-    this.syncTabIndex();
-    this.syncFormValue();
-    this.updateValidity();
-  }
-
-  private setInitialAttributes() {
     this.setAttribute('role', 'radio');
     if (!this.hasAttribute('tabindex')) {
       this.#autoTabIndex = true;
       this.tabIndex = 0;
     }
+    this.syncAriaDisabled();
+    this.syncTabIndex();
+    this.syncFormValue();
+    this.updateValidity();
+  }
+
+  private syncAriaDisabled() {
     this.setAttribute('aria-disabled', this.disabled || this.forceDisabled ? 'true' : 'false');
   }
 
@@ -90,7 +89,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (changedProperties.has('disabled') || changedProperties.has('forceDisabled')) {
       const effectivelyDisabled = this.disabled || this.forceDisabled;
       this[effectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
-      this.setAttribute('aria-disabled', effectivelyDisabled ? 'true' : 'false');
+      this.syncAriaDisabled();
       this.syncTabIndex();
     }
 
@@ -117,7 +116,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   private handleClick = () => {
     if (this.isInGroup()) return;
     if (this.disabled || this.forceDisabled) return;
-    this.markInteracted();
+    this.#hasInteracted = true;
     this.checked = true;
     this.updateComplete.then(() => {
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
@@ -125,7 +124,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   };
 
   private handleInvalid = () => {
-    this.markInteracted();
+    this.#hasInteracted = true;
     this.updateValidity();
   };
 
@@ -162,25 +161,17 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the browser's validation message if invalid */
   reportValidity(): boolean {
-    this.markInteracted();
+    this.#hasInteracted = true;
     this.updateValidity();
     return this.internals.checkValidity();
-  }
-
-  private markInteracted(): void {
-    this.#hasInteracted = true;
   }
 
   private isInGroup(): boolean {
     return Boolean(this.closest('w-radio-group'));
   }
 
-  private getFormOwner(): HTMLFormElement | null {
-    return this.internals.form ?? this.closest('form');
-  }
-
   private getRadioScope(): ParentNode {
-    return this.getFormOwner() ?? document;
+    return this.internals.form ?? this.closest('form') ?? document;
   }
 
   private uncheckOtherRadios(): void {
@@ -196,15 +187,6 @@ export class WRadio extends FormControlMixin(LitElement) {
     });
   }
 
-  private getValidityMessage(): string {
-    // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
-    return this.internals.validationMessage || ' ';
-  }
-
-  private setInvalidState(state: ValidityStateFlags): void {
-    this.internals.setValidity(state, this.getValidityMessage());
-  }
-
   private updateValidity(): void {
     if (this.disabled || this.forceDisabled || this.isInGroup()) {
       this.internals.setValidity({});
@@ -218,7 +200,8 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (requiredInvalid) {
       this.#invalidFromRequired = true;
       this.invalid = this.#hasInteracted;
-      this.setInvalidState({ valueMissing: true });
+      // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
+      this.internals.setValidity({ valueMissing: true }, this.internals.validationMessage || ' ');
       return;
     }
 
@@ -228,7 +211,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     }
 
     if (externalInvalid) {
-      this.setInvalidState({ customError: true });
+      this.internals.setValidity({ customError: true }, this.internals.validationMessage || ' ');
       return;
     }
 
@@ -241,8 +224,7 @@ export class WRadio extends FormControlMixin(LitElement) {
       return;
     }
 
-    const value = this.checked ? this.value : null;
-    this.setValue(value);
+    this.setValue(this.checked ? this.value : null);
   }
 
   private syncTabIndex(): void {

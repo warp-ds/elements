@@ -122,7 +122,10 @@ export const Required: Story = {
 };
 
 export const DisabledGroup: Story = {
-  args: { disabled: true },
+  args: {
+    disabled: true,
+    helpText: 'This group is disabled',
+  },
 };
 
 export const DisabledRadio: Story = {
