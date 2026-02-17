@@ -47,12 +47,6 @@ export const styles = css`
     gap: 16px;
   }
 
-  /* Horizontal */
-  :host([orientation='horizontal']) [part~='form-control-input'] {
-    flex-direction: row;
-    gap: 16px;
-  }
-
   /* Help text */
   [part~='hint'] {
     margin-block-start: 16px;

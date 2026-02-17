@@ -17,7 +17,7 @@ const meta: Meta<typeof args> = {
   render: (args) => {
     return html`
       <w-radio-group ${spread(prespread(args))}>
-        <w-radio value="foo">foo</w-radio>
+        <w-radio value="foo" checked>foo</w-radio>
         <w-radio value="bar">bar</w-radio>
       </w-radio-group>
     `;
@@ -31,7 +31,6 @@ export const Default: Story = {
   args: {
     label: 'Group',
     name: 'foobar',
-    value: 'foo',
   },
 };
 

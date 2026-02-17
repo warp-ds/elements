@@ -29,19 +29,11 @@ describe('w-radio accessibility (WCAG 2.2)', () => {
 
     test('checked state has no violations', async () => {
       const page = render(html`
-        <w-radio-group label="Options" value="one">
-          <w-radio value="one">One</w-radio>
+        <w-radio-group label="Options">
+          <w-radio value="one" checked>One</w-radio>
           <w-radio value="two">Two</w-radio>
         </w-radio-group>
       `);
-
-      const group = document.querySelector('w-radio-group') as {
-        updateComplete: Promise<unknown>;
-        value: string | null;
-      };
-      await group.updateComplete;
-      group.value = 'one';
-      await group.updateComplete;
 
       await expect(page).toHaveNoAxeViolations();
     });
