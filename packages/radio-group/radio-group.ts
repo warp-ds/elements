@@ -213,11 +213,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private async syncRadioElements() {
     const radios = this.getAllRadios();
-    let hasRadioButtons = false;
 
     // Add data attributes to support styling
     radios.forEach((radio, index) => {
-      if (radio.appearance === 'button') hasRadioButtons = true;
       radio.setAttribute('size', this.size);
       radio.toggleAttribute('data-w-radio-horizontal', this.orientation !== 'vertical');
       radio.toggleAttribute('data-w-radio-vertical', this.orientation === 'vertical');
@@ -233,8 +231,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       }
     });
 
-    // If at least one radio button exists, we assume it's a radio button group
-    this.hasRadioButtons = hasRadioButtons;
+    // Only treat as a radio button group when all radios use the button appearance
+    this.hasRadioButtons = radios.length > 0 && radios.every((radio) => radio.appearance === 'button');
 
     await Promise.all(
       radios.map(async (radio) => {

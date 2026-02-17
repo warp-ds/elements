@@ -104,7 +104,7 @@ export const Required: Story = {
           <w-radio value="foo">foo</w-radio>
           <w-radio value="bar">bar</w-radio>
         </w-radio-group>
-        <button>click me</button>
+        <button style="margin-top: 16px;">click me</button>
       </form>
     `;
   },
