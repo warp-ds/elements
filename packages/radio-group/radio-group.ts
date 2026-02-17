@@ -55,7 +55,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   /** Marks the radio group as invalid. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
-  /** The name of the radio group, submitted as a name/value pair with form data. */
+  /** The name of the radio group */
   @property({ reflect: true }) name: string | null = null;
 
   /** Disables the radio group and all child radios. */
