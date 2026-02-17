@@ -351,7 +351,7 @@
     "date-fns": "^4.1.0",
     "element-collapse": "1.1.0",
     "esbuild": "0.25.10",
-    "express": "4.19.2",
+    "express": "5.2.1",
     "glob": "11.0.0",
     "globals": "15.13.0",
     "html-format": "1.1.7",
