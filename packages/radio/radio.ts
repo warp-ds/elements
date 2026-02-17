@@ -21,15 +21,6 @@ export class WRadio extends FormControlMixin(LitElement) {
   /** The radio's value. When selected, the radio group will receive this value. */
   @property({ reflect: true }) value: string | null = null;
 
-  /** The radio's value. When selected, the radio group will receive this value. */
-  @property({ reflect: true }) appearance: 'default' | 'button' | 'clickable' = 'default';
-
-  /**
-   * The radio's size. When used inside a radio group, the size will be determined by the radio group's size so this
-   * attribute can typically be omitted.
-   */
-  @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
-
   /** Draws the radio in a checked state (reflected to attribute). */
   @property({ type: Boolean, reflect: true }) checked = false;
 

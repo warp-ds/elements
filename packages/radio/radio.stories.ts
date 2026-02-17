@@ -130,8 +130,8 @@ export const DisabledRadio: Story = {
   render() {
     return html`
       <w-radio-group>
-        <w-radio value="foo" disabled appearance="button">disabled</w-radio>
-        <w-radio value="bar" appearance="clickable">not disabled</w-radio>
+        <w-radio value="foo" disabled>disabled</w-radio>
+        <w-radio value="bar">not disabled</w-radio>
       </w-radio-group>
     `;
   },

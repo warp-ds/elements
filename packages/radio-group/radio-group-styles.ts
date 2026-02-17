@@ -36,10 +36,6 @@ export const styles = css`
     margin-inline-start: var(--wa-form-control-required-content-offset);
   }
 
-  .button-group {
-    display: flex;
-  }
-
   [part~='form-control-input'] {
     display: flex;
     flex-direction: column;
@@ -59,10 +55,4 @@ export const styles = css`
     color: var(--w-s-color-text-negative);
   }
 
-  /* Radios have the "button" appearance */
-  :host fieldset.has-radio-buttons {
-    [part~='form-control-input'] {
-      gap: 0;
-    }
-  }
 `;

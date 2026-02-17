@@ -36,7 +36,6 @@ const REQUIRED_MESSAGE = () =>
 export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
 
-  @state() hasRadioButtons = false;
   @state() hasInteracted = false;
   @state() hasWarnedMissingName = false;
   @state() autoTabIndex = false;
@@ -226,9 +225,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       }
     });
 
-    // Only treat as a radio button group when all radios use the button appearance
-    this.hasRadioButtons = radios.length > 0 && radios.every((radio) => radio.appearance === 'button');
-
     await Promise.all(radios.map(async (radio) => radio.updateComplete));
 
     const checkedRadio = radios.find((radio) => radio.checked);
@@ -303,24 +299,16 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       index = 0;
     }
 
-    const hasRadioButtons = radios.some((radio) => radio.tagName.toLowerCase() === 'w-radio-button');
-
     this.getAllRadios().forEach((radio) => {
       radio.checked = false;
 
-      if (!hasRadioButtons) {
-        radio.setAttribute('tabindex', '-1');
-      }
+      radio.setAttribute('tabindex', '-1');
     });
 
     radios[index].checked = true;
 
-    if (!hasRadioButtons) {
-      radios[index].setAttribute('tabindex', '0');
-      radios[index].focus();
-    } else {
-      radios[index].shadowRoot?.querySelector('button')?.focus();
-    }
+    radios[index].setAttribute('tabindex', '0');
+    radios[index].focus();
 
     const newValue = this.getCheckedValue();
     if (newValue !== oldValue) {
@@ -486,7 +474,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           'form-control': true,
           'form-control-radio-group': true,
           'form-control-has-label': hasLabel,
-          'has-radio-buttons': this.hasRadioButtons,
           'radio-group-required': this.required,
         })}
         role="radiogroup"
