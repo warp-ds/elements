@@ -80,7 +80,11 @@ test('disabled group renders help text in disabled color', async () => {
   const disabledColor = getComputedStyle(swatch).color;
   swatch.remove();
 
-  expect(getComputedStyle(helpText!).color).toBe(disabledColor);
+  if (!helpText) {
+    throw new Error('Expected help text element to exist');
+  }
+
+  expect(getComputedStyle(helpText).color).toBe(disabledColor);
 });
 
 test('renders optional text when optional is true', async () => {
