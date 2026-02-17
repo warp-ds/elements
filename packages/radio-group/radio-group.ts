@@ -10,11 +10,11 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import '../radio/radio.js';
 import type { WRadio } from '../radio/radio.js';
 import { activateI18n } from '../i18n';
-import { messages as daMessages } from '../checkbox-group/locales/da/messages.mjs';
-import { messages as enMessages } from '../checkbox-group/locales/en/messages.mjs';
-import { messages as fiMessages } from '../checkbox-group/locales/fi/messages.mjs';
-import { messages as nbMessages } from '../checkbox-group/locales/nb/messages.mjs';
-import { messages as svMessages } from '../checkbox-group/locales/sv/messages.mjs';
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 // eslint-disable-next-line
 // @ts-ignore
 import { styles } from './radio-group-styles.js';
@@ -24,8 +24,8 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 const REQUIRED_MESSAGE = () =>
   i18n._({
-    id: 'checkbox-group.validation.required',
-    message: 'At least one selection is required.',
+    id: 'radio-group.validation.required',
+    message: 'Please select an option.',
     comment: 'Shown when required radio group has no selections',
   });
 
@@ -518,7 +518,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           ${this.optional
             ? html` <span class="optional">
                 ${i18n._({
-                  id: 'checkbox-group.label.optional',
+                  id: 'radio-group.label.optional',
                   message: 'Optional',
                   comment: 'Shown behind label when marked as optional',
                 })}

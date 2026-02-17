@@ -9,8 +9,8 @@ import '../radio/radio.js';
 
 // Initialize i18n with English locale for tests
 i18n.load('en', {
-  'checkbox-group.label.optional': ['(optional)'],
-  'checkbox-group.validation.required': ['At least one selection is required.'],
+  'radio-group.label.optional': ['(optional)'],
+  'radio-group.validation.required': ['Please select an option.'],
 });
 i18n.activate('en');
 

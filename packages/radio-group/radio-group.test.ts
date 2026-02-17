@@ -8,8 +8,8 @@ import '../radio/radio.js';
 
 // Initialize i18n with English locale for tests
 i18n.load('en', {
-  'checkbox-group.label.optional': ['(optional)'],
-  'checkbox-group.validation.required': ['At least one selection is required.'],
+  'radio-group.label.optional': ['(optional)'],
+  'radio-group.validation.required': ['Please select an option.'],
 });
 i18n.activate('en');
 
@@ -506,8 +506,8 @@ test('adds and removes tabindex on the host when invalid', async () => {
 
 test('updates optional text when locale changes', async () => {
   i18n.load('fr', {
-    'checkbox-group.label.optional': ['(optionnel)'],
-    'checkbox-group.validation.required': ['At least one selection is required.'],
+    'radio-group.label.optional': ['(optionnel)'],
+    'radio-group.validation.required': ['Please select an option.'],
   });
 
   const page = render(html`

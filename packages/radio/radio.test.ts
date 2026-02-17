@@ -75,7 +75,7 @@ test('reflects disabled state changes and updates tabIndex', async () => {
 
   await radio.updateComplete;
   expect(radio.getAttribute('aria-disabled')).toBe('false');
-  expect(radio.tabIndex).toBe(-1);
+  expect(radio.tabIndex).toBe(0);
 
   radio.checked = true;
   await radio.updateComplete;
@@ -103,4 +103,51 @@ test('focuses the host element', async () => {
   await radio.updateComplete;
   radio.focus();
   await expect.poll(() => document.activeElement).toBe(radio);
+});
+
+test('associates selected value with form submission', async () => {
+  render(html`
+    <form>
+      <w-radio name="choice" value="alpha">Alpha</w-radio>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    click: () => void;
+  };
+
+  await radio.updateComplete;
+  let data = new FormData(form);
+  expect(data.get('choice')).toBeNull();
+
+  radio.click();
+  await radio.updateComplete;
+
+  data = new FormData(form);
+  expect(data.get('choice')).toBe('alpha');
+});
+
+test('required radio reports validity based on checked state', async () => {
+  render(html`<w-radio name="choice" value="alpha" required>Alpha</w-radio>`);
+
+  const radio = document.querySelector('w-radio') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+    reportValidity: () => boolean;
+    validationMessage: string;
+    invalid: boolean;
+    click: () => void;
+  };
+
+  await radio.updateComplete;
+  await expect.poll(() => radio.reportValidity()).toBe(false);
+  expect(radio.validationMessage).not.toBe('');
+  expect(radio.invalid).toBe(true);
+
+  radio.click();
+  await radio.updateComplete;
+
+  await expect.poll(() => radio.reportValidity()).toBe(true);
+  expect(radio.invalid).toBe(false);
 });
