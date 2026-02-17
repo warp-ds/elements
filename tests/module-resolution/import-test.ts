@@ -23,6 +23,7 @@ import { Switch } from '@warp-ds/elements/react/switch';
 import { Tab, TabPanel, Tabs } from '@warp-ds/elements/react/tabs';
 import { Textarea } from '@warp-ds/elements/react/textarea';
 import { TextField } from '@warp-ds/elements/react/textfield';
+import { toast } from '@warp-ds/elements/toast';
 
 // unreleased
 // import { Checkbox } from '@warp-ds/elements/react/checkbox';
@@ -58,6 +59,7 @@ const _tabPanel: typeof TabPanel = TabPanel;
 const _tabs: typeof Tabs = Tabs;
 const _textarea: typeof Textarea = Textarea;
 const _textField: typeof TextField = TextField;
+const _toast: typeof toast = toast;
 
 // unreleased
 // const _deadToggle: typeof DeadToggle = DeadToggle;
