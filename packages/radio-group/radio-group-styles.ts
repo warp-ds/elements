@@ -44,18 +44,18 @@ export const styles = css`
   }
 
   /* Help text */
-  [part~='hint'] {
+  [part~='help-text'] {
     margin-block-start: 16px;
     font-size: var(--w-font-size-xs);
     line-height: var(--w-line-height-xs);
     color: var(--w-s-color-text-subtle);
   }
 
-  :host([disabled]) [part~='hint'] {
+  :host([disabled]) [part~='help-text'] {
     color: var(--w-s-color-text-disabled);
   }
 
-  [part~='hint'].error {
+  [part~='help-text'].error {
     color: var(--w-s-color-text-negative);
   }
 

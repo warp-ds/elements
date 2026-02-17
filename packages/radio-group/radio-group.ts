@@ -494,7 +494,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           ? html`
               <div
                 id="help-text"
-                part="hint"
+                part="help-text"
                 class=${classMap({
                   'has-slotted': hasHint,
                   error: isInvalid,

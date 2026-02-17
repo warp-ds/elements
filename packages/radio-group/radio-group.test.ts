@@ -71,7 +71,7 @@ test('disabled group renders help text in disabled color', async () => {
   const group = document.querySelector('w-radio-group') as HTMLElement & { updateComplete: Promise<unknown> };
   await group.updateComplete;
 
-  const helpText = group.shadowRoot?.querySelector('[part~="hint"]') as HTMLElement | null;
+  const helpText = group.shadowRoot?.querySelector('[part~="help-text"]') as HTMLElement | null;
   expect(helpText).not.toBeNull();
 
   const swatch = document.createElement('div');
