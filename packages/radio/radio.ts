@@ -95,6 +95,9 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (changedProperties.has('checked')) {
       this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
       this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+      if (this.checked && !this.isInGroup()) {
+        this.uncheckOtherRadios();
+      }
       this.syncTabIndex();
     }
 
@@ -110,6 +113,12 @@ export class WRadio extends FormControlMixin(LitElement) {
         this.setAttribute('aria-invalid', 'true');
       } else {
         this.removeAttribute('aria-invalid');
+      }
+    }
+
+    if (changedProperties.has('name') || changedProperties.has('form')) {
+      if (this.checked && !this.isInGroup()) {
+        this.uncheckOtherRadios();
       }
     }
 
@@ -188,6 +197,33 @@ export class WRadio extends FormControlMixin(LitElement) {
     return Boolean(this.closest('w-radio-group'));
   }
 
+  private getFormOwner(): HTMLFormElement | null {
+    if (this.form) {
+      const owner = document.getElementById(this.form);
+      if (owner && owner.tagName.toLowerCase() === 'form') {
+        return owner as HTMLFormElement;
+      }
+    }
+    return this.closest('form');
+  }
+
+  private getRadioScope(): ParentNode {
+    return this.getFormOwner() ?? document;
+  }
+
+  private uncheckOtherRadios(): void {
+    if (!this.name) return;
+    const scope = this.getRadioScope();
+    const radios = Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`));
+    radios.forEach((radio) => {
+      if (radio === this) return;
+      if (radio.closest('w-radio-group')) return;
+      if (radio.checked) {
+        radio.checked = false;
+      }
+    });
+  }
+
   private getValidityMessage(): string {
     // Use a non-empty message to avoid native popovers while satisfying ElementInternals.
     return this.internals.validationMessage || ' ';
@@ -228,7 +264,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private syncFormValue(): void {
-    if (this.disabled || this.forceDisabled || this.isInGroup()) {
+    if (this.disabled || this.forceDisabled) {
       this.setValue(null);
       return;
     }

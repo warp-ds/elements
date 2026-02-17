@@ -226,8 +226,15 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       // Set forceDisabled state based on radio group's disabled state
       (radio as WRadio).forceDisabled = this.disabled;
 
-      if (this.name && !radio.getAttribute('name')) {
-        radio.setAttribute('name', this.name);
+      const nameFromGroup = radio.getAttribute('data-name-from-group') === 'true';
+      if (this.name) {
+        if (!radio.getAttribute('name') || nameFromGroup) {
+          radio.setAttribute('name', this.name);
+          radio.setAttribute('data-name-from-group', 'true');
+        }
+      } else if (nameFromGroup) {
+        radio.removeAttribute('name');
+        radio.removeAttribute('data-name-from-group');
       }
     });
 
@@ -382,17 +389,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private syncFormValue() {
+    // Radio groups should not contribute values to form data. Radios submit their own values.
     if (this.disabled || !this.name) {
       this.setValue(null);
       return;
     }
 
-    if (!this.value) {
-      this.setValue(null);
-      return;
-    }
-
-    this.setValue(this.value);
+    this.setValue(null);
   }
 
   private syncSlottedHintText() {

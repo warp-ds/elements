@@ -78,12 +78,24 @@ export const SingleRadioFormAssociated: Story = {
 
     return html`
       <form @submit=${handleSubmit} style="display: grid; gap: 12px;">
-        <w-radio-group name="newsletter" required @invalid=${handleInvalid}>
-          <w-radio value="yes">Sign up for updates</w-radio>
-        </w-radio-group>
+        <w-radio name="newsletter" value="yes" required @invalid=${handleInvalid}>
+          Sign up for updates
+        </w-radio>
         <button type="submit">Submit</button>
         <div data-status aria-live="polite"></div>
       </form>
+    `;
+  },
+};
+
+export const StandaloneRadioGroupByName: Story = {
+  args: {},
+  render() {
+    return html`
+      <div style="display: grid; gap: 12px;">
+        <w-radio name="standalone" value="one">Standalone one</w-radio>
+        <w-radio name="standalone" value="two">Standalone two</w-radio>
+      </div>
     `;
   },
 };

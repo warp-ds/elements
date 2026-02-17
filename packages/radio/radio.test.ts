@@ -109,24 +109,57 @@ test('associates selected value with form submission', async () => {
   render(html`
     <form>
       <w-radio name="choice" value="alpha">Alpha</w-radio>
+      <w-radio name="choice" value="beta">Beta</w-radio>
     </form>
   `);
 
   const form = document.querySelector('form') as HTMLFormElement;
-  const radio = document.querySelector('w-radio') as HTMLElement & {
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { updateComplete: Promise<unknown>; click: () => void; checked: boolean }
+  >;
 
-  await radio.updateComplete;
+  await radios[0].updateComplete;
   let data = new FormData(form);
   expect(data.get('choice')).toBeNull();
 
-  radio.click();
-  await radio.updateComplete;
+  radios[0].click();
+  await radios[0].updateComplete;
 
   data = new FormData(form);
   expect(data.get('choice')).toBe('alpha');
+
+  radios[1].click();
+  await radios[1].updateComplete;
+
+  expect(radios[0].checked).toBe(false);
+  expect(radios[1].checked).toBe(true);
+
+  data = new FormData(form);
+  expect(data.get('choice')).toBe('beta');
+});
+
+test('standalone radios with same name are mutually exclusive', async () => {
+  render(html`
+    <w-radio name="group" value="one">One</w-radio>
+    <w-radio name="group" value="two">Two</w-radio>
+  `);
+
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { checked: boolean; click: () => void; updateComplete: Promise<unknown> }
+  >;
+
+  await radios[0].updateComplete;
+  radios[0].click();
+  await radios[0].updateComplete;
+
+  expect(radios[0].checked).toBe(true);
+  expect(radios[1].checked).toBe(false);
+
+  radios[1].click();
+  await radios[1].updateComplete;
+
+  expect(radios[0].checked).toBe(false);
+  expect(radios[1].checked).toBe(true);
 });
 
 test('required radio reports validity based on checked state', async () => {

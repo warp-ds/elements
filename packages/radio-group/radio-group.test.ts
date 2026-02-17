@@ -24,6 +24,7 @@ test('selects radio on click and dispatches input/change', async () => {
   const group = document.querySelector('w-radio-group') as HTMLElement & {
     value: string | null;
     updateComplete: Promise<unknown>;
+    name: string | null;
   };
   const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
     HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; click: () => void }
@@ -100,6 +101,32 @@ test('associates selected value with form submission', async () => {
 
   data = new FormData(form);
   expect(data.get('choice')).toBe('alpha');
+});
+
+test('radio group does not submit its own value', async () => {
+  render(html`
+    <form>
+      <w-radio-group label="Choices" name="choice">
+        <w-radio value="alpha">Alpha</w-radio>
+        <w-radio value="beta">Beta</w-radio>
+      </w-radio-group>
+    </form>
+  `);
+
+  const form = document.querySelector('form') as HTMLFormElement;
+  const group = document.querySelector('w-radio-group') as HTMLElement & {
+    updateComplete: Promise<unknown>;
+  };
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { updateComplete: Promise<unknown>; click: () => void }
+  >;
+
+  await group.updateComplete;
+  radios[1].click();
+  await group.updateComplete;
+
+  const data = new FormData(form);
+  expect(data.get('choice')).toBe('beta');
 });
 
 test('does not submit a value when name is missing', async () => {
