@@ -70,6 +70,7 @@ test('reflects disabled state changes and updates tabIndex', async () => {
   const radio = document.querySelector('w-radio') as HTMLElement & {
     disabled: boolean;
     updateComplete: Promise<unknown>;
+    checked: boolean;
     tabIndex: number;
   };
 

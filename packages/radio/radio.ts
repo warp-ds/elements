@@ -15,11 +15,6 @@ export class WRadio extends FormControlMixin(LitElement) {
   /** @internal Used by radio group to force disable radios while preserving their original disabled state. */
   @property({ type: Boolean }) forceDisabled = false;
 
-  /**
-   * The string pointing to a form's id.
-   */
-  @property({ reflect: true }) form: string | null = null;
-
   /** The name of the radio, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
 
@@ -116,7 +111,7 @@ export class WRadio extends FormControlMixin(LitElement) {
       }
     }
 
-    if (changedProperties.has('name') || changedProperties.has('form')) {
+    if (changedProperties.has('name')) {
       if (this.checked && !this.isInGroup()) {
         this.uncheckOtherRadios();
       }
@@ -144,15 +139,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   };
 
   private handleKeyDown = (event: KeyboardEvent) => {
-    if (this.isInGroup()) {
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
-        event.preventDefault();
-        event.stopPropagation();
-        const group = this.closest('w-radio-group') as { handleKeyDown?: (event: KeyboardEvent) => void } | null;
-        group?.handleKeyDown?.(event);
-      }
-      return;
-    }
+    if (this.isInGroup()) return;
     if (this.disabled || this.forceDisabled) return;
     if (event.defaultPrevented) return;
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
@@ -198,13 +185,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private getFormOwner(): HTMLFormElement | null {
-    if (this.form) {
-      const owner = document.getElementById(this.form);
-      if (owner && owner.tagName.toLowerCase() === 'form') {
-        return owner as HTMLFormElement;
-      }
-    }
-    return this.closest('form');
+    return this.internals.form ?? this.closest('form');
   }
 
   private getRadioScope(): ParentNode {
