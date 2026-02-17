@@ -212,16 +212,6 @@ export const RadioGroupWithInvalid: StoryObj = {
 };
 
 export const RadioGroupRequired: StoryObj = {
-  render: () => html`
-    <w-radio-group label="Preferences" required help-text="Help text" name="group">
-      <w-radio value="foo">Foo</w-radio>
-      <w-radio value="bar">Bar</w-radio>
-      <w-radio value="baz">Baz</w-radio>
-    </w-radio-group>
-  `,
-};
-
-export const RadioGroupFormAssociated: StoryObj = {
   render: () => {
     const handleSubmit = (event: Event) => {
       event.preventDefault();
@@ -247,6 +237,36 @@ export const RadioGroupFormAssociated: StoryObj = {
           @invalid=${handleInvalid}
         >
           <w-radio value="foo">Foo</w-radio>
+          <w-radio value="bar">Bar</w-radio>
+          <w-radio value="baz">Baz</w-radio>
+        </w-radio-group>
+        <button type="submit">Submit</button>
+        <div data-status aria-live="polite"></div>
+      </form>
+    `;
+  },
+};
+
+export const RadioGroupFormAssociated: StoryObj = {
+  render: () => {
+    const handleSubmit = (event: Event) => {
+      event.preventDefault();
+      const form = event.currentTarget as HTMLFormElement;
+      const status = form.querySelector('[data-status]') as HTMLElement | null;
+      if (status) status.textContent = 'Submitted.';
+    };
+
+    const handleInvalid = (event: Event) => {
+      const target = event.currentTarget as HTMLElement;
+      const form = target.closest('form');
+      const status = form?.querySelector('[data-status]') as HTMLElement | null;
+      if (status) status.textContent = 'Invalid: select an option.';
+    };
+
+    return html`
+      <form @submit=${handleSubmit} style="display: grid; gap: 12px;">
+        <w-radio-group label="Preferences" name="group" help-text="Choose an option" @invalid=${handleInvalid}>
+          <w-radio value="foo" checked>Foo</w-radio>
           <w-radio value="bar">Bar</w-radio>
           <w-radio value="baz">Baz</w-radio>
         </w-radio-group>
