@@ -69,6 +69,13 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
   }
 
+  protected willUpdate(changedProperties: PropertyValues<this>) {
+    if (this.shouldSyncFormState(changedProperties)) {
+      this.syncFormValue();
+      this.updateValidity();
+    }
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
@@ -97,10 +104,6 @@ export class WRadio extends FormControlMixin(LitElement) {
       }
     }
 
-    if (this.shouldSyncFormState(changedProperties)) {
-      this.syncFormValue();
-      this.updateValidity();
-    }
   }
 
   private handleClick = () => {
