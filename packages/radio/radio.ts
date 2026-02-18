@@ -10,9 +10,6 @@ import { styles as radioStyles } from './radio-styles';
 export class WRadio extends FormControlMixin(LitElement) {
   static styles = [hostStyles, reset, radioStyles];
 
-  /** @internal Used by radio group to force disable radios while preserving their original disabled state. */
-  @property({ type: Boolean }) forceDisabled = false;
-
   /** The name of the radio, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name = '';
 
@@ -58,22 +55,14 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
     this.setAttribute('role', 'radio');
-    if (!this.hasAttribute('tabindex')) {
-      this.#autoTabIndex = true;
-      this.tabIndex = 0;
-    }
     this.syncAriaDisabled();
     this.syncTabIndex();
     this.syncFormValue();
     this.updateValidity();
   }
 
-  private get isEffectivelyDisabled(): boolean {
-    return this.disabled || this.forceDisabled;
-  }
-
   private syncAriaDisabled() {
-    this.setAttribute('aria-disabled', this.isEffectivelyDisabled ? 'true' : 'false');
+    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -88,8 +77,8 @@ export class WRadio extends FormControlMixin(LitElement) {
       this.syncTabIndex();
     }
 
-    if (changedProperties.has('disabled') || changedProperties.has('forceDisabled')) {
-      this[this.isEffectivelyDisabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
+    if (changedProperties.has('disabled')) {
+      this[this.disabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.syncAriaDisabled();
       this.syncTabIndex();
     }
@@ -112,7 +101,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   private handleClick = () => {
     if (this.isInGroup()) return;
-    if (this.isEffectivelyDisabled) return;
+    if (this.disabled) return;
     this.#hasInteracted = true;
     this.checked = true;
     this.updateComplete.then(() => {
@@ -127,7 +116,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     if (this.isInGroup()) return;
-    if (this.isEffectivelyDisabled) return;
+    if (this.disabled) return;
     if (event.defaultPrevented) return;
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
     event.preventDefault();
@@ -185,7 +174,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private updateValidity(): void {
-    if (this.isEffectivelyDisabled || this.isInGroup()) {
+    if (this.disabled || this.isInGroup()) {
       this.internals.setValidity({});
       return;
     }
@@ -216,7 +205,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private syncFormValue(): void {
-    if (this.isEffectivelyDisabled) {
+    if (this.disabled) {
       this.setValue(null);
       return;
     }
@@ -225,15 +214,22 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private syncTabIndex(): void {
+    if (!this.hasAttribute('tabindex') && !this.#autoTabIndex) {
+      this.#autoTabIndex = true;
+      this.tabIndex = 0;
+    }
+
     if (this.isInGroup()) {
-      if (this.isEffectivelyDisabled) {
+      if (this.disabled) {
         this.tabIndex = -1;
       }
       return;
     }
+
     const hasTabIndexAttr = this.hasAttribute('tabindex');
     if (hasTabIndexAttr && !this.#autoTabIndex) return;
-    this.tabIndex = this.isEffectivelyDisabled ? -1 : 0;
+
+    this.tabIndex = this.disabled ? -1 : 0;
     this.#autoTabIndex = true;
   }
 
@@ -243,8 +239,7 @@ export class WRadio extends FormControlMixin(LitElement) {
       changedProperties.has('value') ||
       changedProperties.has('disabled') ||
       changedProperties.has('required') ||
-      changedProperties.has('invalid') ||
-      changedProperties.has('forceDisabled')
+      changedProperties.has('invalid')
     );
   }
 

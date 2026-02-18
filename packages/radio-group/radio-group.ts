@@ -67,6 +67,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   private defaultCheckedValue: string | null | undefined = undefined;
   private slottedHelpText: string | null = null;
   private readonly nameManagedRadios = new WeakSet<WRadio>();
+  private readonly disabledManagedRadios = new WeakSet<WRadio>();
   private unsubscribeI18n?: () => void;
 
   //
@@ -135,7 +136,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private handleRadioClick = (e: Event) => {
     const clickedRadio = (e.target as HTMLElement).closest<WRadio>('w-radio');
-    if (!clickedRadio || clickedRadio.disabled || clickedRadio.forceDisabled || this.disabled) {
+    if (!clickedRadio || clickedRadio.disabled || this.disabled) {
       return;
     }
 
@@ -199,8 +200,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       radio.toggleAttribute('data-w-radio-inner', index !== 0 && index !== radios.length - 1);
       radio.toggleAttribute('data-w-radio-last', index === radios.length - 1);
 
-      // Set forceDisabled state based on radio group's disabled state
-      (radio as WRadio).forceDisabled = this.disabled;
+      this.syncRadioDisabledState(radio);
 
       if (this.name) {
         if (!radio.getAttribute('name') || this.nameManagedRadios.has(radio)) {
@@ -216,6 +216,21 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     await Promise.all(radios.map(async (radio) => radio.updateComplete));
     this.normalizeCheckedRadios(radios);
     this.syncTabOrder(radios);
+  }
+
+  private syncRadioDisabledState(radio: WRadio): void {
+    if (this.disabled) {
+      if (!radio.disabled) {
+        radio.disabled = true;
+        this.disabledManagedRadios.add(radio);
+      }
+      return;
+    }
+
+    if (this.disabledManagedRadios.has(radio)) {
+      radio.disabled = false;
+      this.disabledManagedRadios.delete(radio);
+    }
   }
 
   private syncTabOrder(radios: WRadio[]) {
