@@ -37,8 +37,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
 
   @state() hasInteracted = false;
-  @state() hasWarnedMissingName = false;
-  @state() autoTabIndex = false;
+  private hasWarnedMissingName = false;
+  private autoTabIndex = false;
 
   /**
    * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
