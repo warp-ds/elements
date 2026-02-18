@@ -65,12 +65,16 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
   }
 
+  private syncAriaChecked() {
+    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
     if (changedProperties.has('checked')) {
       this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
-      this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+      this.syncAriaChecked();
       if (this.checked && !this.isInGroup()) {
         this.uncheckOtherRadios();
       }
@@ -103,6 +107,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (this.isInGroup()) return;
     if (this.disabled) return;
     this.#hasInteracted = true;
+    if (this.checked) return;
     this.checked = true;
     this.updateComplete.then(() => {
       this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
@@ -110,6 +115,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   };
 
   private handleInvalid = () => {
+    // invalid fires for failed validation attempts (submit/reportValidity), so treat it as interaction.
     this.#hasInteracted = true;
     this.updateValidity();
   };
@@ -147,6 +153,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   /** Checks validity and shows the browser's validation message if invalid */
   reportValidity(): boolean {
+    // reportValidity is an explicit request to surface validation feedback.
     this.#hasInteracted = true;
     this.updateValidity();
     return this.internals.checkValidity();
@@ -156,6 +163,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     return Boolean(this.closest('w-radio-group'));
   }
 
+  // The scope for radios is their containing form, or the document if they're not in a form. This is where we look for other radios with the same name to uncheck when this radio is checked.
   private getRadioScope(): ParentNode {
     return this.internals.form ?? this.closest('form') ?? document;
   }
@@ -216,6 +224,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   private syncTabIndex(): void {
     if (!this.hasAttribute('tabindex') && !this.#autoTabIndex) {
       this.#autoTabIndex = true;
+      // Default to tabbable; group roving tabindex logic may override this later.
       this.tabIndex = 0;
     }
 
@@ -226,6 +235,7 @@ export class WRadio extends FormControlMixin(LitElement) {
       return;
     }
 
+    // Standalone radios manage their own tabindex. Grouped radios are managed by the parent radio-group.
     const hasTabIndexAttr = this.hasAttribute('tabindex');
     if (hasTabIndexAttr && !this.#autoTabIndex) return;
 
