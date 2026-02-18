@@ -101,6 +101,7 @@ export const StandaloneRadioGroupByName: Story = {
 
 export const Disabled: Story = {
   args: {
+    name: 'disabled',
     label: 'Disabled',
     disabled: true,
   },
@@ -111,7 +112,7 @@ export const Required: Story = {
   render() {
     return html`
       <form>
-        <w-radio-group required>
+        <w-radio-group required name="required">
           <w-radio value="foo">foo</w-radio>
           <w-radio value="bar">bar</w-radio>
         </w-radio-group>
@@ -123,6 +124,7 @@ export const Required: Story = {
 
 export const DisabledGroup: Story = {
   args: {
+    name: 'disabled group',
     disabled: true,
     helpText: 'This group is disabled',
   },
@@ -132,7 +134,7 @@ export const DisabledRadio: Story = {
   args: {},
   render() {
     return html`
-      <w-radio-group>
+      <w-radio-group name="disabled radio">
         <w-radio value="foo" disabled>disabled</w-radio>
         <w-radio value="bar">not disabled</w-radio>
       </w-radio-group>
@@ -265,7 +267,7 @@ export const RadioGroupFormAssociated: StoryObj = {
 
     return html`
       <form @submit=${handleSubmit} style="display: grid; gap: 12px;">
-        <w-radio-group label="Preferences" name="group" help-text="Choose an option" @invalid=${handleInvalid}>
+        <w-radio-group name="radio group form associated" label="Preferences" name="group" help-text="Choose an option" @invalid=${handleInvalid}>
           <w-radio value="foo" checked>Foo</w-radio>
           <w-radio value="bar">Bar</w-radio>
           <w-radio value="baz">Baz</w-radio>
@@ -281,7 +283,7 @@ export const InvalidWithMessage: Story = {
   args: {},
   render() {
     return html`
-      <w-radio-group label="Invalid group" invalid>
+      <w-radio-group name="invalid group" label="Invalid group" invalid>
         <w-radio value="foo">foo</w-radio>
         <w-radio value="bar">bar</w-radio>
       </w-radio-group>
@@ -293,7 +295,7 @@ export const SlottedLabelAndHint: Story = {
   args: {},
   render() {
     return html`
-      <w-radio-group>
+      <w-radio-group name="slotted label and hint">
         <span slot="label">Slotted label</span>
         <span slot="help-text">Slotted hint text</span>
         <w-radio value="foo">foo</w-radio>
