@@ -127,6 +127,30 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (this.isInGroup()) return;
     if (this.disabled) return;
     if (event.defaultPrevented) return;
+
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      const radios = this.getStandaloneNamedRadios().filter((radio) => !radio.disabled);
+      if (radios.length <= 1) return;
+
+      event.preventDefault();
+
+      const current = radios.find((radio) => radio.checked) ?? radios.find((radio) => radio === this) ?? radios[0];
+      const direction = event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? -1 : 1;
+      const currentIndex = radios.indexOf(current);
+      const nextIndex = (currentIndex + direction + radios.length) % radios.length;
+      const nextRadio = radios[nextIndex];
+
+      nextRadio.#hasInteracted = true;
+      if (!nextRadio.checked) {
+        nextRadio.checked = true;
+        nextRadio.updateComplete.then(() => {
+          nextRadio.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+        });
+      }
+      nextRadio.focus();
+      return;
+    }
+
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
     event.preventDefault();
     this.click();
@@ -169,6 +193,34 @@ export class WRadio extends FormControlMixin(LitElement) {
   // The scope for radios is their containing form, or the document if they're not in a form. This is where we look for other radios with the same name to uncheck when this radio is checked.
   private getRadioScope(): ParentNode {
     return this.internals.form ?? this.closest('form') ?? document;
+  }
+
+  private getStandaloneNamedRadios(): WRadio[] {
+    if (!this.name) return [this];
+    const scope = this.getRadioScope();
+    return Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`)).filter(
+      (radio) => !radio.closest('w-radio-group')
+    );
+  }
+
+  private syncStandaloneTabOrder(): void {
+    const radios = this.getStandaloneNamedRadios();
+    const enabledRadios = radios.filter((radio) => !radio.disabled);
+    const checkedRadio = enabledRadios.find((radio) => radio.checked);
+    const activeRadio = checkedRadio ?? enabledRadios[0] ?? null;
+
+    radios.forEach((radio) => {
+      if (radio.disabled) {
+        radio.tabIndex = -1;
+        return;
+      }
+
+      const hasTabIndexAttr = radio.hasAttribute('tabindex');
+      if (hasTabIndexAttr && !radio.#autoTabIndex) return;
+
+      radio.tabIndex = radio === activeRadio ? 0 : -1;
+      radio.#autoTabIndex = true;
+    });
   }
 
   private uncheckOtherRadios(): void {
@@ -242,8 +294,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     const hasTabIndexAttr = this.hasAttribute('tabindex');
     if (hasTabIndexAttr && !this.#autoTabIndex) return;
 
-    this.tabIndex = this.disabled ? -1 : 0;
-    this.#autoTabIndex = true;
+    this.syncStandaloneTabOrder();
   }
 
   private shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {

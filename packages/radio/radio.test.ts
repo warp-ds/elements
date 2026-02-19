@@ -221,6 +221,53 @@ test('standalone radios with same name are mutually exclusive', async () => {
   expect(radios[1].checked).toBe(true);
 });
 
+test('standalone radios with same name use roving tab order', async () => {
+  render(html`
+    <w-radio name="group" value="one">One</w-radio>
+    <w-radio name="group" value="two">Two</w-radio>
+    <w-radio name="group" value="three">Three</w-radio>
+  `);
+
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { checked: boolean; click: () => void; updateComplete: Promise<unknown>; tabIndex: number }
+  >;
+
+  await Promise.all(radios.map((radio) => radio.updateComplete));
+  expect(radios[0].tabIndex).toBe(0);
+  expect(radios[1].tabIndex).toBe(-1);
+  expect(radios[2].tabIndex).toBe(-1);
+
+  radios[2].click();
+  await Promise.all(radios.map((radio) => radio.updateComplete));
+
+  expect(radios[0].tabIndex).toBe(-1);
+  expect(radios[1].tabIndex).toBe(-1);
+  expect(radios[2].tabIndex).toBe(0);
+});
+
+test('arrow keys move selection between standalone radios with same name', async () => {
+  render(html`
+    <w-radio name="group" value="one">One</w-radio>
+    <w-radio name="group" value="two">Two</w-radio>
+    <w-radio name="group" value="three">Three</w-radio>
+  `);
+
+  const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
+    HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; focus: () => void; tabIndex: number }
+  >;
+
+  await Promise.all(radios.map((radio) => radio.updateComplete));
+
+  radios[0].focus();
+  radios[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+  await Promise.all(radios.map((radio) => radio.updateComplete));
+
+  expect(radios[0].checked).toBe(false);
+  expect(radios[1].checked).toBe(true);
+  expect(radios[1].tabIndex).toBe(0);
+  await expect.poll(() => document.activeElement).toBe(radios[1]);
+});
+
 test('required radio reports validity based on checked state', async () => {
   render(html`<w-radio name="choice" value="alpha" required>Alpha</w-radio>`);
 
