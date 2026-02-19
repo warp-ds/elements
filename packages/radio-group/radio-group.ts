@@ -267,6 +267,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.hasInteracted = true;
     this.syncFormValue();
     this.updateValidity();
+    // Re-render derived UI (help text/error styles) that depends on current checked radio.
+    this.requestUpdate();
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
