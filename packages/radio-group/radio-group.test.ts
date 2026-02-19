@@ -15,7 +15,7 @@ i18n.activate('en');
 
 test('selects radio on click and dispatches input/change', async () => {
   render(html`
-    <w-radio-group label="Choices">
+    <w-radio-group label="Choices" name="choice">
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -51,7 +51,7 @@ test('selects radio on click and dispatches input/change', async () => {
 
 test('renders help text when provided', async () => {
   const page = render(html`
-    <w-radio-group label="Choices" help-text="Select one">
+    <w-radio-group name="choices" label="Choices" help-text="Select one">
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -62,7 +62,7 @@ test('renders help text when provided', async () => {
 
 test('disabled group renders help text in disabled color', async () => {
   render(html`
-    <w-radio-group label="Choices" help-text="Select one" disabled>
+    <w-radio-group name="choices" label="Choices" help-text="Select one" disabled>
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -89,7 +89,7 @@ test('disabled group renders help text in disabled color', async () => {
 
 test('renders optional text when optional is true', async () => {
   const page = render(html`
-    <w-radio-group label="Choices" optional>
+    <w-radio-group name="choices" label="Choices" optional>
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -156,7 +156,7 @@ test('radio group does not submit its own value', async () => {
 test('does not submit a value when name is missing', async () => {
   render(html`
     <form>
-      <w-radio-group label="Choices">
+      <w-radio-group name="choices" label="Choices">
         <w-radio value="alpha">Alpha</w-radio>
         <w-radio value="beta">Beta</w-radio>
       </w-radio-group>
@@ -312,7 +312,7 @@ test('resets to default selection on form reset', async () => {
 
 test('disabled group prevents selection and disables child radios', async () => {
   render(html`
-    <w-radio-group label="Choices" disabled>
+    <w-radio-group name="choices" label="Choices" disabled>
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -373,7 +373,7 @@ test('name changes after render affect form submission', async () => {
 
 test('re-enabling a disabled group restores tabbable radio', async () => {
   render(html`
-    <w-radio-group label="Choices" disabled>
+    <w-radio-group name="choices" label="Choices" disabled>
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta" checked>Beta</w-radio>
     </w-radio-group>
@@ -401,7 +401,7 @@ test('re-enabling a disabled group restores tabbable radio', async () => {
 
 test('only one radio is tabbable at a time', async () => {
   render(html`
-    <w-radio-group label="Choices">
+    <w-radio-group name="choices" label="Choices">
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -502,7 +502,7 @@ test('updates optional text when locale changes', async () => {
   });
 
   const page = render(html`
-    <w-radio-group label="Choices" optional>
+    <w-radio-group name="choices" label="Choices" optional>
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
@@ -521,7 +521,7 @@ test('updates optional text when locale changes', async () => {
 
 test('does not set aria-labelledby when label is missing', async () => {
   render(html`
-    <w-radio-group>
+    <w-radio-group name="choices">
       <w-radio value="alpha">Alpha</w-radio>
       <w-radio value="beta">Beta</w-radio>
     </w-radio-group>
