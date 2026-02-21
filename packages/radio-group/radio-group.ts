@@ -176,7 +176,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private handleInvalid = (event: Event) => {
-    // Prevent native validation popover. We'll surface errors via help text.
+    // Prevent native validation popover. We surface errors via help text.
     event.preventDefault();
     this.hasInteracted = true;
     this.updateValidity();
@@ -426,15 +426,20 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private syncHostTabIndex(shouldBeFocusable: boolean) {
     const hasTabIndexAttr = this.hasAttribute('tabindex');
+    // If the host already has a tabindex attribute, we won't override it with autoTabIndex logic.
+    // This allows users to set tabindex="-1" on the host to remove the radio group's presence from the tab order if they want.
     if (hasTabIndexAttr && !this.autoTabIndex) return;
 
+    // If the radio group is invalid, it should be focusable to show the validation error. If it's valid, it should not be focusable to avoid confusion with the radios inside.
     if (shouldBeFocusable) {
       this.tabIndex = 0;
       this.autoTabIndex = true;
       return;
     }
 
+    // Only remove the tabindex if we added it. If the user set a tabindex attribute, we should leave it alone.
     if (this.autoTabIndex) {
+      // We use removeAttribute here instead of setting tabIndex to undefined or null because the latter will not remove the tabindex from the DOM, it will just set it to "null" or "undefined" which is still focusable.
       this.removeAttribute('tabindex');
       this.autoTabIndex = false;
     }
@@ -459,6 +464,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const isInvalid = showInvalidError;
     const helpText = showInvalidError ? REQUIRED_MESSAGE() : this.helpText;
     const shouldShowHelpText = showInvalidError || hasHelpText;
+    const labelledBy = hasLabel ? 'label' : undefined;
     const describedBy = shouldShowHelpText ? 'help-text' : undefined;
     const helpTextAriaLabel = this.slottedHelpText || undefined;
 
@@ -472,7 +478,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
           'radio-group-required': this.required,
         })}
         role="radiogroup"
-        aria-labelledby=${ifDefined(hasLabel ? 'label' : undefined)}
+        aria-labelledby=${ifDefined(labelledBy)}
         aria-describedby=${ifDefined(describedBy)}
         aria-errormessage="error-message"
         aria-invalid=${isInvalid ? 'true' : undefined}>
