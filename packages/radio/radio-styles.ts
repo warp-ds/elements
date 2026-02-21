@@ -84,6 +84,10 @@ export const styles = css`
     border-color: var(--_border-color-invalid);
   }
 
+  :host(:focus-visible) {
+    outline: none;
+  }
+
   :host(:focus-visible) [part='control'] {
     outline: var(--_outline-width) solid var(--_outline-color);
     outline-offset: var(--_outline-offset);
