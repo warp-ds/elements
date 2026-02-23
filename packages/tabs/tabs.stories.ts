@@ -12,7 +12,7 @@ const meta = {
 export default meta;
 
 export const Default = () => html`
-  <w-tabs active="tab1">
+  <w-tabs active="tab2">
 
     <w-tab for="tab1">First Tab</w-tab>
     <w-tab-panel id="tab1">

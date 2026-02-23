@@ -51,7 +51,7 @@ export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
   @property({ reflect: true })
-  active = '';
+  active: string;
 
   @query('[role="tablist"]')
   private tabList!: HTMLElement;
@@ -81,6 +81,11 @@ export class WarpTabs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    // Ensure we show the correct tab on first render if active is set by the user
+    if (this.active) {
+      this._activeTabFor = this.active;
+    }
 
     this._assignSlots();
 
