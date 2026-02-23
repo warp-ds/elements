@@ -1,3 +1,10 @@
+# [2.8.0-next.3](https://github.com/warp-ds/elements/compare/v2.8.0-next.2...v2.8.0-next.3) (2026-02-23)
+
+
+### Features
+
+* add radio button and group ([#525](https://github.com/warp-ds/elements/issues/525)) ([3f1402b](https://github.com/warp-ds/elements/commit/3f1402bf581ec85f14877f1dba0a4482176394e9))
+
 # [2.8.0-next.2](https://github.com/warp-ds/elements/compare/v2.8.0-next.1...v2.8.0-next.2) (2026-02-17)
 
 
