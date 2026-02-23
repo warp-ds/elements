@@ -1,3 +1,10 @@
+# [2.8.0-next.4](https://github.com/warp-ds/elements/compare/v2.8.0-next.3...v2.8.0-next.4) (2026-02-23)
+
+
+### Bug Fixes
+
+* **combobox:** a11y results renamed to suggestions and number of suggestions now read on open ([#530](https://github.com/warp-ds/elements/issues/530)) ([66dca50](https://github.com/warp-ds/elements/commit/66dca50e0bee7610b9161cb3ee088f630cb591df))
+
 # [2.8.0-next.3](https://github.com/warp-ds/elements/compare/v2.8.0-next.2...v2.8.0-next.3) (2026-02-23)
 
 
