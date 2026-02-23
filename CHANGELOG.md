@@ -1,3 +1,10 @@
+# [2.8.0-next.5](https://github.com/warp-ds/elements/compare/v2.8.0-next.4...v2.8.0-next.5) (2026-02-23)
+
+
+### Bug Fixes
+
+* tabs accessibility bugs ([#531](https://github.com/warp-ds/elements/issues/531)) ([194a971](https://github.com/warp-ds/elements/commit/194a9718b44b675b6158a30fc374c190b5fad39d))
+
 # [2.8.0-next.4](https://github.com/warp-ds/elements/compare/v2.8.0-next.3...v2.8.0-next.4) (2026-02-23)
 
 
