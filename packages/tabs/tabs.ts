@@ -207,10 +207,10 @@ export class WarpTabs extends LitElement {
     const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
     tabs.forEach((tab) => {
       if (tab.for === this._activeTabFor) {
-        tab.active = true;
+        tab.ariaSelected = "true";
         tab.tabIndex = 0;
       } else {
-        tab.active = false;
+        tab.ariaSelected = "false";
         tab.tabIndex = -1;
       }
     });
