@@ -84,6 +84,32 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       expect(page.getByRole('tab').all()).toHaveLength(3);
       expect(page.getByRole('tabpanel', { includeHidden: true }).all()).toHaveLength(3);
     });
+
+    test('w-tab and w-tab-panel has a defined relationship through aria-controls, aria-labelledby', async () => {
+      const page = render(
+        html`<w-tabs active="fellowship">
+          <w-tab for="fellowship">Fellowship</w-tab>
+          <w-tab-panel id="fellowship">
+            <p>And my axe!</p>
+          </w-tab-panel>
+
+          <w-tab for="towers">Towers</w-tab>
+          <w-tab-panel id="towers">
+            <p>
+              I am on nobody's side, because nobody is on my side, little orc.
+            </p>
+          </w-tab-panel>
+
+          <w-tab for="return">Return</w-tab>
+          <w-tab-panel id="return">
+            <p>I am no man.</p>
+          </w-tab-panel>
+        </w-tabs>`,
+      );
+      await page.container.querySelector('w-tabs').updateComplete;
+      expect(page.getByRole('tab').first()).toHaveAccessibleName("Fellowship");
+      expect(page.getByRole('tabpanel').first()).toHaveAccessibleName("Fellowship");
+    });
   });
 
   describe('WCAG 4.1.2 - Name, Role, Value', () => {

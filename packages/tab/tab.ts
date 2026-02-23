@@ -25,6 +25,9 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
 export class WarpTab extends LitElement {
   static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
+  @property({ attribute: 'id', reflect: true })
+  id = '';
+
   @property({ attribute: 'for', reflect: true })
   for = '';
 
