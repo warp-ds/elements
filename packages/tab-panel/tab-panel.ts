@@ -20,21 +20,7 @@ export class WarpTabPanel extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('tabindex', '-1');
     this.setAttribute('role', 'tabpanel');
-
-    this._syncA11yAttributes();
-  }
-
-  updated() {
-    this._syncA11yAttributes();
-  }
-
-  private _syncA11yAttributes() {
-    // Panel identity comes from its own id attribute.
-    if (!this.id) return;
-
-    this.setAttribute('aria-labelledby', `warp-tab-${this.id}`);
   }
 
   render() {

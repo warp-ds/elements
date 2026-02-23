@@ -1,5 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -25,21 +25,56 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
 export class WarpTab extends LitElement {
   static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
+  @property({ attribute: 'id', reflect: true })
+  id = '';
+
   @property({ attribute: 'for', reflect: true })
   for = '';
 
+  @property({ attribute: 'aria-selected', reflect: true })
+  ariaSelected: 'true' | 'false';
+
+  @property({ attribute: 'tabindex', type: Number, reflect: true })
+  tabIndex: number;
+
+  /**
+   * @deprecated Use `aria-selected="true"` instead
+   */
   @property({ type: Boolean, reflect: true })
-  active = false;
+  active: boolean;
 
   @property({ type: Boolean, reflect: true })
   over = false;
 
   private get _classes() {
-    return classNames([ccButtonReset, ccTab.base, this.active ? ccTab.active : ccTab.inactive]);
+    return classNames([
+      ccButtonReset,
+      ccTab.base,
+      this.active || this.ariaSelected === 'true' ? ccTab.active : ccTab.inactive,
+    ]);
   }
 
   private get _hasIcon() {
     return this.querySelector('[slot="icon"]') !== null;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    // ensure the role and aria-controls is reflected in light DOM for the accessibility tree
+    this.setAttribute('role', 'tab');
+    this.setAttribute('aria-controls', this.for);
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    super.updated(changedProperties);
+
+    // ensure the state is reflected also in light DOM for the accessibility tree
+    if (changedProperties.has('active')) {
+      this.setAttribute('aria-selected', this.active ? 'true' : 'false');
+    }
+    if (changedProperties.has('for')) {
+      this.setAttribute('aria-controls', this.for);
+    }
   }
 
   render() {
@@ -48,9 +83,6 @@ export class WarpTab extends LitElement {
     return html`
       <button
         type="button"
-        role="tab"
-        aria-selected="${this.active ? 'true' : 'false'}"
-        aria-controls="${this.for}"
         id="warp-tab-${this.for}"
         class="${this._classes}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
