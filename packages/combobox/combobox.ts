@@ -193,20 +193,20 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       (option.label || option.value).toLowerCase().includes(value.toLowerCase()),
     );
 
-    const pluralResults = i18n._({
-      id: 'combobox.aria.pluralResults',
-      message: '{numResults, plural, one {# result} other {# results}}',
-      comment: 'Aria text for combobox when one or more results',
-      values: { numResults: filteredOptionsByInputValue.length },
+    const pluralSuggestions = i18n._({
+      id: 'combobox.aria.pluralSuggestions',
+      message: '{numSuggestions, plural, one {# suggestion} other {# suggestions}}',
+      comment: 'Aria text for combobox when there are one or more suggestions',
+      values: { numSuggestions: filteredOptionsByInputValue.length },
     });
 
-    const noResults = i18n._({
-      id: 'combobox.aria.noResults',
-      message: 'No results',
-      comment: 'Aria text for combobox when no results',
+    const noSuggestions = i18n._({
+      id: 'combobox.aria.noSuggestions',
+      message: 'No suggestions',
+      comment: 'Aria text for combobox when no suggestions',
     });
 
-    return filteredOptionsByInputValue.length ? pluralResults : noResults;
+    return filteredOptionsByInputValue.length ? pluralSuggestions : noSuggestions;
   }
 
   /** Get option classes */
