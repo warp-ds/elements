@@ -69,6 +69,10 @@ const config: LinguiConfig = {
       include: ['packages/checkbox-group/'],
       path: 'packages/checkbox-group/locales/{locale}/messages',
     },
+    {
+      include: ['packages/radio-group/'],
+      path: 'packages/radio-group/locales/{locale}/messages',
+    },
   ],
   compileNamespace: 'es',
   sourceLocale: 'en',

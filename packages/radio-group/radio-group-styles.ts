@@ -20,9 +20,15 @@ export const styles = css`
     -moz-osx-font-smoothing: grayscale;
     font-smoothing: grayscale;
     cursor: pointer;
-    padding-bottom: 0.4rem;
+    padding-bottom: 16px;
     color: var(--w-s-color-text);
     display: block;
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--w-s-color-text-subtle);
+    margin-inline-start: 0.5rem;
   }
 
   .radio-group-required .label::after {
@@ -30,31 +36,27 @@ export const styles = css`
     margin-inline-start: var(--wa-form-control-required-content-offset);
   }
 
-  .button-group {
-    display: flex;
-  }
-
   [part~='form-control-input'] {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-  }
-
-  /* Horizontal */
-  :host([orientation='horizontal']) [part~='form-control-input'] {
-    flex-direction: row;
-    gap: 1em;
+    gap: 16px;
   }
 
   /* Help text */
-  [part~='hint'] {
-    margin-block-start: 0.5em;
+  [part~='help-text'] {
+    margin-block-start: 16px;
+    font-size: var(--w-font-size-xs);
+    line-height: var(--w-line-height-xs);
+    color: var(--w-s-color-text-subtle);
   }
 
-  /* Radios have the "button" appearance */
-  :host fieldset.has-radio-buttons {
-    [part~='form-control-input'] {
-      gap: 0;
-    }
+  :host([disabled]) [part~='help-text'] {
+    color: var(--w-s-color-text-disabled);
   }
+
+  [part~='help-text'].error {
+    color: var(--w-s-color-text-negative);
+  }
+
 `;

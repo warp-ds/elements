@@ -8,6 +8,8 @@
     "packages/breadcrumbs",
     "packages/button",
     "packages/card",
+    "packages/checkbox",
+    "packages/checkbox-group",
     "packages/combobox",
     "packages/datepicker",
     "packages/expandable",
@@ -19,7 +21,11 @@
     "packages/page-indicator",
     "packages/pagination",
     "packages/pill",
+    "packages/radio",
+    "packages/radio-group",
     "packages/select",
+    "packages/slider",
+    "packages/slider-thumb",
     "packages/step",
     "packages/step-indicator",
     "packages/switch",
@@ -30,16 +36,10 @@
     "packages/textfield",
     "packages/toast",
     "packages/toast-container",
+    "setup-tests.ts"
 
     // unreleased components
-    "packages/checkbox",
-    "packages/checkbox-group",
     // "packages/dead-toggle",
-    // "packages/radio",
-    // "packages/radio-group",
-    "packages/slider",
-    "packages/slider-thumb",
-    "setup-tests.ts"
   ],
   "compilerOptions": {
     "target": "ES2022",
