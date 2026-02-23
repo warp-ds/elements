@@ -306,7 +306,7 @@
     "@biomejs/biome": "2.2.6",
     "@chbphone55/classnames": "2.0.0",
     "@custom-elements-manifest/analyzer": "^0.10.5",
-    "@eik/cli": "2.0.38",
+    "@eik/cli": "3.1.38",
     "@eik/esbuild-plugin": "1.1.47",
     "@itsy/animate": "0.0.9",
     "@lingui/cli": "5.2.0",
