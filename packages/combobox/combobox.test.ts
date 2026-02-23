@@ -149,3 +149,32 @@ test('displays option label in textfield but stores option value', async () => {
   // Verify the combobox value is "no", not "Norway"
   expect(el.value).toBe('no');
 });
+
+test('announces suggestion count when opened on focus with empty input', async () => {
+  const options = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'orange', label: 'Orange' },
+  ];
+
+  const component = html`<w-combobox
+    data-testid="combobox"
+    open-on-focus
+    .options="${options}"
+  ></w-combobox>`;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement;
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input');
+
+  input?.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const statusText = el.shadowRoot?.querySelector('[role="status"]')?.textContent?.trim();
+  expect(statusText).toBe('3 suggestions');
+});

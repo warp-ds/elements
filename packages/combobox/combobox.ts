@@ -186,8 +186,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   /** Get ARIA text for screen readers */
-  private _getAriaText(options: OptionWithIdAndMatch[], value: string) {
-    if (!options || !value) return '';
+  private _getAriaText(options: OptionWithIdAndMatch[], value: string, isOpen: boolean) {
+    if (!options || !isOpen) return '';
 
     const filteredOptionsByInputValue = options.filter((option) =>
       (option.label || option.value).toLowerCase().includes(value.toLowerCase()),
@@ -515,7 +515,9 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           @blur=${this._handleBlur}
           @keydown=${this._handleKeyDown}></w-textfield>
 
-        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this._displayValue)} </span>
+        <span class="${ccCombobox.a11y}" role="status">
+          ${this._getAriaText(this._currentOptions, this._displayValue, this._isOpen)}
+        </span>
 
         <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
           <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">
