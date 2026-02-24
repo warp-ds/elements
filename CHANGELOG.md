@@ -1,3 +1,19 @@
+# [2.8.0](https://github.com/warp-ds/elements/compare/v2.7.0...v2.8.0) (2026-02-24)
+
+
+### Bug Fixes
+
+* add .js extension to window-exists import in toast/api.ts ([#526](https://github.com/warp-ds/elements/issues/526)) ([49d6ef9](https://github.com/warp-ds/elements/commit/49d6ef9d12c8fba6cd9745cd48a19fc784e630a8))
+* **combobox:** a11y results renamed to suggestions and number of suggestions now read on open ([#530](https://github.com/warp-ds/elements/issues/530)) ([66dca50](https://github.com/warp-ds/elements/commit/66dca50e0bee7610b9161cb3ee088f630cb591df))
+* don't use the textfield mask when showing the placeholder ([0db0656](https://github.com/warp-ds/elements/commit/0db065676fa9b6173b51fb5d9cb565dab958cb99))
+* tabs accessibility bugs ([#531](https://github.com/warp-ds/elements/issues/531)) ([194a971](https://github.com/warp-ds/elements/commit/194a9718b44b675b6158a30fc374c190b5fad39d))
+
+
+### Features
+
+* add radio button and group ([#525](https://github.com/warp-ds/elements/issues/525)) ([3f1402b](https://github.com/warp-ds/elements/commit/3f1402bf581ec85f14877f1dba0a4482176394e9))
+* add tooltipFormatter to cater for different result on max/min ([0e9bcca](https://github.com/warp-ds/elements/commit/0e9bccadc28a05920ce8d2065ffa9527b5606447))
+
 # [2.8.0-next.5](https://github.com/warp-ds/elements/compare/v2.8.0-next.4...v2.8.0-next.5) (2026-02-23)
 
 
