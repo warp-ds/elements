@@ -34,6 +34,38 @@ for config in tsconfig.*.json; do
   echo ""
 done
 
+# Test runtime Node ESM imports for all package exports.
+# Reads exports from package.json and verifies each one resolves
+# correctly under Node's strict ESM module resolution.
+echo "Testing runtime Node ESM imports"
+
+# Extract importable export keys from package.json (skip JSON/wildcard exports)
+IMPORTS=$(node -e "
+  const pkg = require('../../package.json');
+  for (const key of Object.keys(pkg.exports)) {
+    if (key === '.' || key.includes('*') || key.endsWith('.json')) continue;
+    const spec = '@warp-ds/elements' + key.replace(/^\./, '');
+    console.log(spec);
+  }
+")
+
+while IFS= read -r imp; do
+  RUNTIME_OUTPUT=$(node --input-type=module -e "
+    import '$imp';
+    process.exit(0);
+  " 2>&1) && RUNTIME_EXIT=0 || RUNTIME_EXIT=$?
+
+  if [ $RUNTIME_EXIT -eq 0 ]; then
+    echo -e "${GREEN}✓${NC} import $imp: PASSED"
+  else
+    echo -e "${RED}✗${NC} import $imp: FAILED"
+    echo "$RUNTIME_OUTPUT"
+    FAILED=1
+  fi
+done <<< "$IMPORTS"
+
+echo ""
+
 if [ $FAILED -eq 0 ]; then
   echo -e "${GREEN}All module resolution tests passed!${NC}"
   exit 0

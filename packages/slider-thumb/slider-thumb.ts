@@ -82,6 +82,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
+  /** @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`. */
+  @property({ attribute: false })
+  tooltipFormatter: (value: string, slot: SliderSlot) => string;
+
   /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`. */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
@@ -468,7 +472,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   /** Value to display in the tooltip */
   get tooltipDisplayValue(): string | number {
     let value: string | number = 0;
-    if (this.valueFormatter) {
+    if (this.tooltipFormatter) {
+      value = this.tooltipFormatter(this.value, this.slot as SliderSlot);
+    } else if (this.valueFormatter) {
       value = this.valueFormatter(this.value, this.slot as SliderSlot);
     } else if (this.value === '') {
       value = this.range?.value ?? this.boundaryValue;
@@ -528,6 +534,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   render() {
+    const showPlaceholder = this.placeholder && !this.value;
     return html`
       <div class="w-slider-thumb">
         ${
@@ -606,7 +613,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           tabindex="${this._hiddenTextfield ? -1 : nothing}"
           placeholder="${this.placeholder}"
           .value="${this.textFieldDisplayValue}"
-          .formatter=${this.valueFormatter ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
+          .formatter=${this.valueFormatter && !showPlaceholder ? (value: string) => this.valueFormatter(value, this.slot as SliderSlot) : nothing}
           min="${this.openEnded ? nothing : this.min}"
           max="${this.openEnded ? nothing : this.max}"
           step="${ifDefined(this.step)}"

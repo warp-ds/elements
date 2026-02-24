@@ -1,12 +1,14 @@
 # @warp-ds/elements
 
-The home of the web component, or custom elements, implementation of Warp.
+The home of Warp components for web. Can be used in plain HTML pages or your framework of choice.
 
 ## Usage
 
 ### Install
 
-Install by using npm/pnpm or by adding a script link:
+Warp Elements are published to and delivered by our CDN server, Eik. You do not need to install `@warp-ds/elements` to use the components, and you should not bundle the components into your client-side application code.
+
+If you want better DX (types, intellisense, and docs in editors), you can install `@warp-ds/elements` locally and use it alongside the Web Components Language Server extension for VS Code.
 
 _npm_:
 
@@ -19,28 +21,45 @@ _pnpm_:
 pnpm add @warp-ds/elements
 ```
 
-#### Using a direct link to Eik
+#### Using @borealis
 
-You can also add this `script` tag to your document if you want to get all available elements (replace finn.no with your brand's domain):
+If you are on a recent version of `@borealis`, you already have the latest version of Warp loaded optimally on your pages. No extra setup is required.
+
+#### Without @borealis (load from Eik)
+
+Add the Warp script and stylesheet to the document head so it loads early:
 
 ```html
-<script type="module" src="https://assets.finn.no/pkg/@warp-ds/elements/v2/index.js" crossorigin></script>
+<link rel="stylesheet" href="https://assets.finn.no/pkg/@warp-ds/elements/~2/styles.css" crossorigin />
+<script type="module" src="https://assets.finn.no/pkg/@warp-ds/elements/~2/index.js" crossorigin></script>
 ```
 
-For performance you may want to import just the elements you use. Check the list of available files on [https://assets.finn.no/pkg/@warp-ds/elements/v2/](https://assets.finn.no/pkg/@warp-ds/elements/v2/).
+### Avoid FOUC with Warp cloaking
 
-### Import components
+To avoid flash-of-unstyled-content and cumulative layout shift issues, wrap your page content in a `warp-cloak` container. The cloak is removed automatically once Warp is ready.
 
-Importing individual components is recommended for performance reasons:
-
-```js
-import '@warp-ds/elements/components/toast';
+```html
+<div class="warp-cloak">
+  <main>
+    <!-- Your app -->
+  </main>
+</div>
 ```
 
-In a prototyping phase you may want to import all available components:
+### Toast API (the only bundling exception)
 
-```js
-import '@warp-ds/elements';
+Warp components should never be bundled into client-side application code. The only exception is the toast APIs, which are not included automatically on pages.
+
+You can either bundle them:
+
+```ts
+import { toast, removeToast, updateToast } from '@warp-ds/elements/packages/toast';
+```
+
+Or load them directly from Eik:
+
+```ts
+import { toast, removeToast, updateToast } from "https://assets.finn.no/pkg/@warp-ds/elements/~2/packages/toast/index.js";
 ```
 
 ### Use the components in your markup
@@ -57,6 +76,29 @@ Once the components have been imported you can use them in your HTML.
 
 Check the sidebar to see available components in interactive demos. The demos include code examples (click Show code).
 
+### React (v19+)
+
+React 19+ supports custom elements directly. Make sure the Warp assets are loaded in the document head as described above, then use the elements in JSX.
+
+```tsx
+export function Example() {
+  const handleClick = () => {
+    toast({ title: 'Saved', description: 'Your changes are live.' });
+  };
+
+  return (
+    <section>
+      <w-badge variant="neutral">New</w-badge>
+      <w-button variant="primary" onClick={handleClick}>
+        Continue
+      </w-button>
+    </section>
+  );
+}
+```
+
+Any event that the component emits, can be used in React by prefixing it with "on". 
+
 ## Editor integration
 
 ### Visual Studio Code
@@ -65,6 +107,8 @@ Check the sidebar to see available components in interactive demos. The demos in
 Install the [Web Components Language Server](https://wc-toolkit.com/integrations/web-components-language-server/) extension.
 
 The extension automatically picks up the [Custom Element Manifest](https://wc-toolkit.com/getting-started/) that we ship with `@warp-ds/elements`.
+
+When starting a new app using Borealis starter templates, Vscode will suggest you install this extension.
 
 ### JetBrains products
 

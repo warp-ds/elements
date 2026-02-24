@@ -89,6 +89,10 @@ class WarpSlider extends LitElement {
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
+  /** Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. */
+  @property({ attribute: false })
+  tooltipFormatter: (value: string, slot: SliderSlot) => string;
+
   /** Formatter for the min and max labels below the range. */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
@@ -122,6 +126,7 @@ class WarpSlider extends LitElement {
       thumb.required = this.required;
       thumb.labelFormatter = this.labelFormatter;
       thumb.valueFormatter = this.valueFormatter;
+      thumb.tooltipFormatter = this.tooltipFormatter;
       thumb.openEnded = this.openEnded;
       thumb._hiddenTextfield = this.hiddenTextfield;
 

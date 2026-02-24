@@ -7,6 +7,7 @@ import { property, query } from 'lit/decorators.js';
 import { reset } from '../styles.js';
 import { WarpTab } from '../tab/tab.js';
 import { WarpTabPanel } from '../tab-panel/tab-panel.js';
+import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
 
 const ccTabs = {
@@ -51,7 +52,7 @@ export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
   @property({ reflect: true })
-  active = '';
+  active: string;
 
   @query('[role="tablist"]')
   private tabList!: HTMLElement;
@@ -59,6 +60,7 @@ export class WarpTabs extends LitElement {
   @query('.selection-indicator')
   private selectionIndicator!: HTMLElement;
 
+  private _uniqueId = uniqueId();
   private _activeTabFor = '';
   private _resizeObserver?: ResizeObserver;
   private _updateSelectionIndicatorDebounced = debounce(this.updateSelectionIndicator.bind(this), 100);
@@ -81,6 +83,11 @@ export class WarpTabs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    // Ensure we show the correct tab on first render if active is set by the user
+    if (this.active) {
+      this._activeTabFor = this.active;
+    }
 
     this._assignSlots();
 
@@ -142,7 +149,7 @@ export class WarpTabs extends LitElement {
       this._activeTabFor = this.tabs[0].getAttribute('for') || '';
     }
 
-    if (this._activeTabFor) {
+    if (this._activeTabFor && this._activeTabFor !== this.active) {
       this.active = this._activeTabFor;
     }
   }
@@ -187,26 +194,32 @@ export class WarpTabs extends LitElement {
   }
 
   private updatePanels() {
+    // Update tab active states
+    const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
+    tabs.forEach((tab, index) => {
+      if (!tab.id) {
+        tab.id = `w-tab-${this._uniqueId}-${index}`;
+      }
+      if (tab.for === this._activeTabFor) {
+        tab.ariaSelected = "true";
+        tab.tabIndex = 0;
+      } else {
+        tab.ariaSelected = "false";
+        tab.tabIndex = -1;
+      }
+    });
+
     // Update tab panels visibility
     const panels: WarpTabPanel[] = Array.from(this.querySelectorAll('w-tab-panel'));
-
     panels.forEach((panel) => {
+      if (!panel.hasAttribute("aria-labelledby")) {
+        const controller = tabs.find((tab) => tab.for === panel.id);
+        if (controller) panel.setAttribute("aria-labelledby", controller.id);
+      }
       if (panel.id === this._activeTabFor) {
         panel.hidden = false;
       } else {
         panel.hidden = true;
-      }
-    });
-
-    // Update tab active states
-    const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
-    tabs.forEach((tab) => {
-      if (tab.for === this._activeTabFor) {
-        tab.active = true;
-        tab.tabIndex = 0;
-      } else {
-        tab.active = false;
-        tab.tabIndex = -1;
       }
     });
   }

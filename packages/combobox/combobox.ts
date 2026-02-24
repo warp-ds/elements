@@ -186,27 +186,27 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   /** Get ARIA text for screen readers */
-  private _getAriaText(options: OptionWithIdAndMatch[], value: string) {
-    if (!options || !value) return '';
+  private _getAriaText(options: OptionWithIdAndMatch[], value: string, isOpen: boolean) {
+    if (!options || !isOpen) return '';
 
     const filteredOptionsByInputValue = options.filter((option) =>
       (option.label || option.value).toLowerCase().includes(value.toLowerCase()),
     );
 
-    const pluralResults = i18n._({
-      id: 'combobox.aria.pluralResults',
-      message: '{numResults, plural, one {# result} other {# results}}',
-      comment: 'Aria text for combobox when one or more results',
-      values: { numResults: filteredOptionsByInputValue.length },
+    const pluralSuggestions = i18n._({
+      id: 'combobox.aria.pluralSuggestions',
+      message: '{numSuggestions, plural, one {# suggestion} other {# suggestions}}',
+      comment: 'Aria text for combobox when there are one or more suggestions',
+      values: { numSuggestions: filteredOptionsByInputValue.length },
     });
 
-    const noResults = i18n._({
-      id: 'combobox.aria.noResults',
-      message: 'No results',
-      comment: 'Aria text for combobox when no results',
+    const noSuggestions = i18n._({
+      id: 'combobox.aria.noSuggestions',
+      message: 'No suggestions',
+      comment: 'Aria text for combobox when no suggestions',
     });
 
-    return filteredOptionsByInputValue.length ? pluralResults : noResults;
+    return filteredOptionsByInputValue.length ? pluralSuggestions : noSuggestions;
   }
 
   /** Get option classes */
@@ -515,7 +515,9 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           @blur=${this._handleBlur}
           @keydown=${this._handleKeyDown}></w-textfield>
 
-        <span class="${ccCombobox.a11y}" role="status"> ${this._getAriaText(this._currentOptions, this._displayValue)} </span>
+        <span class="${ccCombobox.a11y}" role="status">
+          ${this._getAriaText(this._currentOptions, this._displayValue, this._isOpen)}
+        </span>
 
         <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
           <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">
