@@ -58,19 +58,13 @@ export const wDatepickerStyles = css`
 
   /* custom calendar button */
   .w-datepicker-button {
+    --padding-x: 14px;
+    --padding-y: 14px;
+    --border-radius: 2px; /* override to better fit inside the input field */
     position: absolute;
     right: 2px;
     top: 2px;
-    height: 44px;
-    width: 44px !important;
-    border-radius: 2px !important;
-    border: none;
-    cursor: pointer;
     pointer-events: auto; /* override parent’s none */
-  }
-
-  .w-datepicker-button:not(:hover) {
-    background-color: var(--w-s-color-background) !important;
   }
 
   input[type='date']::-webkit-inner-spin-button,
