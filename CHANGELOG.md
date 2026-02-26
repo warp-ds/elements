@@ -1,3 +1,10 @@
+## [2.8.1-next.2](https://github.com/warp-ds/elements/compare/v2.8.1-next.1...v2.8.1-next.2) (2026-02-26)
+
+
+### Bug Fixes
+
+* add role=navigation to w-breadcrumb ([#538](https://github.com/warp-ds/elements/issues/538)) ([0d5971d](https://github.com/warp-ds/elements/commit/0d5971dbd04e8446a70a5503ec074583e763cbfc))
+
 ## [2.8.1-next.1](https://github.com/warp-ds/elements/compare/v2.8.0...v2.8.1-next.1) (2026-02-26)
 
 
