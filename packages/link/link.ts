@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -104,13 +104,17 @@ class WarpLink extends LitElement {
       'w-button--full-width': this.fullWidth,
       'w-button--disabled': this.disabled,
     };
-    return html`<a
-      href=${this.href}
-      target=${this.target}
-      rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
-      class=${classMap(classes)}>
-      <slot></slot>
-    </a>`;
+    return html`
+      <a
+        href="${this.href}"
+        target="${this.target}"
+        rel="${this.target === '_blank' ? this.rel || 'noopener' : nothing}"
+        class="${classMap(classes)}"
+        tabindex="0"
+      >
+        <slot></slot>
+      </a>
+    `;
   }
 }
 
