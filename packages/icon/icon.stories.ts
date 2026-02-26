@@ -3,7 +3,7 @@ import './icon.ts';
 
 export default {
   component: 'w-icon',
-  title: 'Icons',
+  title: 'Icons/Icons',
   render: ({ name, size, locale }) => html`
       <w-icon name=${name} size=${size} locale=${locale} />
   `,
