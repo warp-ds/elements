@@ -135,6 +135,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
         overflow: hidden;
         position: relative;
         background-color: var(--w-s-color-background);
+        color: var(--w-s-color-text);
         box-shadow: var(--w-shadow-m);
         height: var(--w-modal-height);
         max-height: var(--w-modal-max-height);
