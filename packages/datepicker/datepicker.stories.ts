@@ -35,15 +35,13 @@ type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
   args: {
-    label: 'Dato',
-    lang: 'nb',
+    label: 'Date',
   },
 };
 
 export const DisableCalendarDates: Story = {
   args: {
-    label: 'Dato',
-    lang: 'nb',
+    label: 'Date',
   },
   render(args) {
     return html`
