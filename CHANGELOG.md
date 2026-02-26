@@ -1,3 +1,10 @@
+# [2.8.0-next.6](https://github.com/warp-ds/elements/compare/v2.8.0-next.5...v2.8.0-next.6) (2026-02-26)
+
+
+### Bug Fixes
+
+* prefix slot changes to make it visible ([76e7dea](https://github.com/warp-ds/elements/commit/76e7deaa3fae99594d77e14cf3c4b40cc5555285))
+
 # [2.8.0-next.5](https://github.com/warp-ds/elements/compare/v2.8.0-next.4...v2.8.0-next.5) (2026-02-23)
 
 
