@@ -242,7 +242,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
           'w-textfield--has-prefix': this._hasPrefix,
           'w-textfield--has-suffix': this._hasSuffix,
         })}">
-        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <div class="w-textfield__input-wrapper">
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
@@ -271,6 +270,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
             @input="${this.handler}"
             @focus="${this.handler}" />
         </div>
+        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
