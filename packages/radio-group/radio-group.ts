@@ -4,7 +4,6 @@ import { html, LitElement } from 'lit';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { property, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '../radio/radio.js';
@@ -35,33 +34,22 @@ const REQUIRED_MESSAGE = () =>
  */
 export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
+  static get observedAttributes() {
+    const observed = super.observedAttributes ?? [];
+    return observed.includes('invalid') ? observed : [...observed, 'invalid'];
+  }
 
   @state() hasInteracted = false;
   private hasWarnedMissingName = false;
   private autoTabIndex = false;
 
-  /**
-   * The radio group's label. Required for proper accessibility. If you need to display HTML, use the `label` slot
-   * instead.
-   */
   @property() label = '';
-
-  /** The radio group's help text. If you need to display HTML, use the `help-text` slot instead. */
   @property({ attribute: 'help-text' }) helpText = '';
 
-  /** Optional indicator for the label. */
   @property({ type: Boolean, reflect: true }) optional = false;
-
-  /** Marks the radio group as invalid. */
   @property({ type: Boolean, reflect: true }) invalid = false;
-
-  /** The name of the radio group */
   @property({ reflect: true }) name: string | null = null;
-
-  /** Disables the radio group and all child radios. */
   @property({ type: Boolean, reflect: true }) disabled = false;
-
-  /** Ensures a child radio is checked before allowing the containing form to submit. */
   @property({ type: Boolean, reflect: true }) required = false;
 
   private defaultCheckedValue: string | null | undefined = undefined;
@@ -70,10 +58,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   private readonly disabledManagedRadios = new WeakSet<WRadio>();
   private unsubscribeI18n?: () => void;
 
-  //
-  // We need this because if we don't have it, FormValidation yells at us that it's "not focusable".
-  //   If we use `this.tabIndex = -1` we can't focus the radio inside.
-  //
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
   constructor() {
@@ -83,29 +67,16 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.addEventListener('invalid', this.handleInvalid);
   }
 
-  /**
-   * We use the first available radio as the validationTarget similar to native HTML that shows the validation popup on
-   * the first radio element.
-   */
-  get validationTarget() {
-    const radio = this.querySelector<WRadio>(':is(w-radio):not([disabled])');
-    if (!radio) return undefined;
-
-    return radio;
-  }
-
-  updated(changedProperties: PropertyValues<this>) {
-    if (
-      changedProperties.has('disabled') ||
-      changedProperties.has('name') ||
-      changedProperties.has('required') ||
-      changedProperties.has('invalid') ||
-      changedProperties.has('helpText')
-    ) {
-      this.syncRadioElements();
-      this.syncFormValue();
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    super.attributeChangedCallback?.(name, oldValue, newValue);
+    if (name === 'invalid' && oldValue !== newValue) {
       this.updateValidity();
     }
+  }
+
+  get validationTarget() {
+    const radio = this.querySelector<WRadio>(':is(w-radio):not([disabled])');
+    return radio ?? undefined;
   }
 
   connectedCallback() {
@@ -124,21 +95,35 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     super.disconnectedCallback();
   }
 
+  async updated(changedProperties: PropertyValues<this>) {
+    if (
+      changedProperties.has('disabled') ||
+      changedProperties.has('name') ||
+      changedProperties.has('required') ||
+      changedProperties.has('invalid') ||
+      changedProperties.has('helpText')
+    ) {
+      await this.syncRadioElements();
+      this.syncFormValue();
+      this.updateValidity();
+      return;
+    }
+  }
+
   resetFormControl() {
     const defaultValue = this.defaultCheckedValue ?? null;
     this.getAllRadios().forEach((radio) => {
       radio.checked = defaultValue ? radio.value === defaultValue : false;
     });
-    this.syncRadioElements();
-    this.syncFormValue();
-    this.updateValidity();
+    void this.syncRadioElements().then(() => {
+      this.syncFormValue();
+      this.updateValidity();
+    });
   }
 
   private handleRadioClick = (e: Event) => {
     const clickedRadio = (e.target as HTMLElement).closest<WRadio>('w-radio');
-    if (!clickedRadio || clickedRadio.disabled || this.disabled) {
-      return;
-    }
+    if (!clickedRadio || clickedRadio.disabled || this.disabled) return;
 
     const oldValue = this.getCheckedValue();
     const radios = this.getAllRadios();
@@ -176,7 +161,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private handleInvalid = (event: Event) => {
-    // Prevent native validation popover. We surface errors via help text.
     event.preventDefault();
     this.hasInteracted = true;
     this.updateValidity();
@@ -194,7 +178,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   private async syncRadioElements() {
     const radios = this.getAllRadios();
 
-    // Add data attributes to support styling
     radios.forEach((radio, index) => {
       radio.toggleAttribute('data-w-radio-first', index === 0);
       radio.toggleAttribute('data-w-radio-inner', index !== 0 && index !== radios.length - 1);
@@ -235,9 +218,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private syncTabOrder(radios: WRadio[]) {
     if (this.disabled) {
-      radios.forEach((radio) => {
-        radio.tabIndex = -1;
-      });
+      radios.forEach((radio) => (radio.tabIndex = -1));
       return;
     }
 
@@ -246,60 +227,40 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     if (enabledRadios.length > 0) {
       if (checkedRadio) {
-        enabledRadios.forEach((radio) => {
-          radio.tabIndex = radio.checked ? 0 : -1;
-        });
+        enabledRadios.forEach((radio) => (radio.tabIndex = radio.checked ? 0 : -1));
       } else {
-        enabledRadios.forEach((radio, index) => {
-          radio.tabIndex = index === 0 ? 0 : -1;
-        });
+        enabledRadios.forEach((radio, index) => (radio.tabIndex = index === 0 ? 0 : -1));
       }
     }
 
-    radios
-      .filter((radio) => radio.disabled)
-      .forEach((radio) => {
-        radio.tabIndex = -1;
-      });
+    radios.filter((radio) => radio.disabled).forEach((radio) => (radio.tabIndex = -1));
   }
 
   private emitSelectionChange = () => {
     this.hasInteracted = true;
     this.syncFormValue();
     this.updateValidity();
-    // Re-render derived UI (help text/error styles) that depends on current checked radio.
     this.requestUpdate();
     this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-  }
+  };
 
   private handleKeyDown(event: KeyboardEvent) {
-    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key) || this.disabled) {
-      return;
-    }
+    if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key) || this.disabled) return;
 
     const allRadios = this.getAllRadios();
     const radios = this.getEnabledRadios(allRadios);
-
-    if (radios.length <= 0) {
-      return;
-    }
+    if (radios.length <= 0) return;
 
     event.preventDefault();
 
     const oldValue = this.getCheckedValue();
-
     const checkedRadio = radios.find((radio) => radio.checked) ?? radios[0];
     const incr = event.key === ' ' ? 0 : ['ArrowUp', 'ArrowLeft'].includes(event.key) ? -1 : 1;
     let index = radios.indexOf(checkedRadio) + incr;
 
-    if (index < 0) {
-      index = radios.length - 1;
-    }
-
-    if (index >= radios.length) {
-      index = 0;
-    }
+    if (index < 0) index = radios.length - 1;
+    if (index >= radios.length) index = 0;
 
     this.selectSingleRadio(radios[index], allRadios);
     radios[index].focus();
@@ -310,7 +271,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
   }
 
-  /** Sets focus on the radio group. */
   public focus(options?: FocusOptions) {
     if (this.disabled) return;
 
@@ -319,7 +279,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const firstEnabledRadio = radios.find((radio) => !radio.disabled);
     const radioToFocus = checked || firstEnabledRadio;
 
-    // Call focus for the checked radio. If no radio is checked, focus the first one that isn't disabled.
     if (radioToFocus) {
       radioToFocus.focus(options);
     }
@@ -337,9 +296,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private hasSlottedContent(name: 'label' | 'help-text') {
-    if (this.querySelector(`[slot="${name}"]`)) {
-      return true;
-    }
+    if (this.querySelector(`[slot="${name}"]`)) return true;
     const slot = this.shadowRoot?.querySelector(`slot[name="${name}"]`) as HTMLSlotElement | null;
     if (!slot) return false;
     return slot.assignedNodes({ flatten: true }).some((node) => {
@@ -350,22 +307,23 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private syncFormValue() {
-    // Radio groups should not contribute values to form data. Radios submit their own values.
     this.setValue(null);
   }
 
   private syncSlottedHelpText() {
     const slottedHelpText = this.querySelector<HTMLElement>('[slot="help-text"]');
-    if (!slottedHelpText) {
-      this.slottedHelpText = null;
-      return;
-    }
-
-    this.slottedHelpText = slottedHelpText.textContent?.trim() || null;
+    this.slottedHelpText = slottedHelpText?.textContent?.trim() || null;
   }
 
   private updateValidity() {
     this.warnIfMissingName();
+
+    const isRequiredInvalid = this.required && !this.getCheckedValue();
+    const showRequiredError = isRequiredInvalid && this.hasInteracted;
+    const externalInvalid = this.invalid || this.hasAttribute('invalid');
+    const showInvalidUi = externalInvalid || showRequiredError;
+
+    this.toggleAttribute('data-show-error', showInvalidUi);
 
     if (this.disabled) {
       this.internals.setValidity({});
@@ -374,14 +332,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       return;
     }
 
-    const requiredInvalid = this.required && !this.getCheckedValue();
-    const externalInvalid = this.invalid;
-    const showRequiredError = requiredInvalid && this.hasInteracted;
-    const showInvalidUi = externalInvalid || showRequiredError;
-
     this.syncHostTabIndex(showInvalidUi);
 
-    if (requiredInvalid) {
+    if (isRequiredInvalid) {
       this.setValidityState({ valueMissing: true });
       this.syncChildInvalid(showInvalidUi);
       return;
@@ -401,9 +354,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const checkedRadio = radios.find((radio) => radio.checked);
     if (!checkedRadio) return;
     radios.forEach((radio) => {
-      if (radio !== checkedRadio) {
-        radio.checked = false;
-      }
+      if (radio !== checkedRadio) radio.checked = false;
     });
   }
 
@@ -426,20 +377,15 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
   private syncHostTabIndex(shouldBeFocusable: boolean) {
     const hasTabIndexAttr = this.hasAttribute('tabindex');
-    // If the host already has a tabindex attribute, we won't override it with autoTabIndex logic.
-    // This allows users to set tabindex="-1" on the host to remove the radio group's presence from the tab order if they want.
     if (hasTabIndexAttr && !this.autoTabIndex) return;
 
-    // If the radio group is invalid, it should be focusable to show the validation error. If it's valid, it should not be focusable to avoid confusion with the radios inside.
     if (shouldBeFocusable) {
-      this.tabIndex = 0;
+      this.setAttribute('tabindex', '0');
       this.autoTabIndex = true;
       return;
     }
 
-    // Only remove the tabindex if we added it. If the user set a tabindex attribute, we should leave it alone.
     if (this.autoTabIndex) {
-      // We use removeAttribute here instead of setting tabIndex to undefined or null because the latter will not remove the tabindex from the DOM, it will just set it to "null" or "undefined" which is still focusable.
       this.removeAttribute('tabindex');
       this.autoTabIndex = false;
     }
@@ -458,12 +404,15 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const hasHelpTextSlot = this.hasSlottedContent('help-text');
     const hasLabel = this.label ? true : !!hasLabelSlot;
     const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+
     const isRequiredInvalid = this.required && !this.getCheckedValue();
     const showRequiredError = isRequiredInvalid && this.hasInteracted;
-    const showInvalidError = this.invalid || showRequiredError;
-    const isInvalid = showInvalidError;
+    const externalInvalid = this.invalid || this.hasAttribute('invalid');
+    const showInvalidError = externalInvalid || showRequiredError;
+
     const helpText = showInvalidError ? REQUIRED_MESSAGE() : this.helpText;
     const shouldShowHelpText = showInvalidError || hasHelpText;
+
     const labelledBy = hasLabel ? 'label' : undefined;
     const describedBy = shouldShowHelpText ? 'help-text' : undefined;
     const helpTextAriaLabel = this.slottedHelpText || undefined;
@@ -471,48 +420,33 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     return html`
       <fieldset
         part="form-control"
-        class=${classMap({
-          'form-control': true,
-          'form-control-radio-group': true,
-          'form-control-has-label': hasLabel,
-          'radio-group-required': this.required,
-        })}
         role="radiogroup"
         aria-labelledby=${ifDefined(labelledBy)}
         aria-describedby=${ifDefined(describedBy)}
         aria-errormessage="error-message"
-        aria-invalid=${isInvalid ? 'true' : undefined}>
-        <label
-          part="form-control-label"
-          id="label"
-          class="label"
-          aria-hidden=${hasLabel ? 'false' : 'true'}
-          @click=${this.handleLabelClick}>
-          <slot name="label">${this.label}</slot>
-          ${this.optional
-            ? html` <span class="optional">
-                ${i18n._({
-                  id: 'radio-group.label.optional',
-                  message: 'Optional',
-                  comment: 'Shown behind label when marked as optional',
-                })}
-              </span>`
-            : null}
-        </label>
+        aria-invalid=${showInvalidError ? 'true' : undefined}>
+        ${hasLabel
+          ? html`
+              <label part="form-control-label" id="label" @click=${this.handleLabelClick}>
+                <slot name="label">${this.label}</slot>
+                ${this.optional
+                  ? html`<span class="optional">
+                      ${i18n._({
+                        id: 'radio-group.label.optional',
+                        message: 'Optional',
+                        comment: 'Shown behind label when marked as optional',
+                      })}
+                    </span>`
+                  : null}
+              </label>
+            `
+          : null}
 
         <slot part="form-control-input" @slotchange=${this.syncRadioElements}></slot>
 
         ${shouldShowHelpText
           ? html`
-              <div
-                id="help-text"
-                part="help-text"
-                class=${classMap({
-                  'has-slotted': hasHelpText,
-                  error: isInvalid,
-                })}
-                aria-hidden=${shouldShowHelpText ? 'false' : 'true'}
-                aria-label=${helpTextAriaLabel}>
+              <div id="help-text" part="help-text" aria-label=${ifDefined(helpTextAriaLabel)}>
                 <slot name="help-text" @slotchange=${this.handleHelpTextSlotChange}>${helpText}</slot>
               </div>
             `

@@ -41,6 +41,7 @@ export const styles = css`
     );
   }
 
+  :host([disabled]),
   :host([disabled-ui]) {
     --w-c-radio-border-color: var(--w-c-radio-border-color-disabled, var(--w-s-color-border-disabled));
     --w-c-radio-bg: var(--w-c-radio-bg-disabled, var(--w-s-color-background-disabled-subtle));
@@ -73,6 +74,7 @@ export const styles = css`
     transition: var(--_transition);
   }
 
+  :host([checked]) [part='control'],
   :host([checked-ui]) [part='control'],
   :host([role='radio'][checked-ui]) [part='control'],
   :host([role='radio']:state(checked)) [part='control'] {
@@ -93,6 +95,7 @@ export const styles = css`
     outline-offset: var(--_outline-offset);
   }
 
+  :host([disabled]) [part='control'],
   :host([disabled-ui]) [part='control'],
   :host([role='radio']:state(disabled)) [part='control'] {
     border-color: var(--_border-color-disabled);
@@ -100,6 +103,14 @@ export const styles = css`
     cursor: var(--_cursor-disabled);
   }
 
+  :host([disabled]) [part='label'],
+  :host([disabled-ui]) [part='label'] {
+    color: var(--_label-color-disabled);
+    cursor: var(--_cursor-disabled);
+  }
+
+  :host([disabled][checked]),
+  :host([disabled][checked-ui]),
   :host([disabled-ui][checked-ui]) [part='control'] {
     border-color: var(--_border-color-disabled);
   }
@@ -134,12 +145,15 @@ export const styles = css`
       forced-color-adjust: none;
     }
 
+    :host([checked]) [part='control'],
     :host([checked-ui]) [part='control'],
     :host([role='radio']:state(checked)) [part='control'] {
       background-color: var(--_border-color-checked);
       border-color: var(--_border-color-checked);
     }
 
+    :host([disabled][checked]),
+    :host([disabled][checked-ui]),
     :host([disabled-ui][checked-ui]) [part='control'],
     :host([role='radio']:state(disabled):state(checked)) [part='control'] {
       background-color: var(--_border-color-disabled);
