@@ -34,6 +34,10 @@ const REQUIRED_MESSAGE = () =>
  */
 export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
+  static get observedAttributes() {
+    const observed = super.observedAttributes ?? [];
+    return observed.includes('invalid') ? observed : [...observed, 'invalid'];
+  }
 
   @state() hasInteracted = false;
   private hasWarnedMissingName = false;
@@ -61,6 +65,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.addEventListener('keydown', this.handleKeyDown);
     this.addEventListener('click', this.handleRadioClick);
     this.addEventListener('invalid', this.handleInvalid);
+  }
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    super.attributeChangedCallback?.(name, oldValue, newValue);
+    if (name === 'invalid' && oldValue !== newValue) {
+      this.updateValidity();
+    }
   }
 
   get validationTarget() {
@@ -309,7 +320,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     const isRequiredInvalid = this.required && !this.getCheckedValue();
     const showRequiredError = isRequiredInvalid && this.hasInteracted;
-    const showInvalidUi = this.invalid || showRequiredError;
+    const externalInvalid = this.invalid || this.hasAttribute('invalid');
+    const showInvalidUi = externalInvalid || showRequiredError;
 
     this.toggleAttribute('data-show-error', showInvalidUi);
 
@@ -328,7 +340,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
       return;
     }
 
-    if (this.invalid) {
+    if (externalInvalid) {
       this.setValidityState({ customError: true });
       this.syncChildInvalid(true);
       return;
@@ -368,7 +380,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     if (hasTabIndexAttr && !this.autoTabIndex) return;
 
     if (shouldBeFocusable) {
-      this.tabIndex = 0;
+      this.setAttribute('tabindex', '0');
       this.autoTabIndex = true;
       return;
     }
@@ -395,7 +407,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     const isRequiredInvalid = this.required && !this.getCheckedValue();
     const showRequiredError = isRequiredInvalid && this.hasInteracted;
-    const showInvalidError = this.invalid || showRequiredError;
+    const externalInvalid = this.invalid || this.hasAttribute('invalid');
+    const showInvalidError = externalInvalid || showRequiredError;
 
     const helpText = showInvalidError ? REQUIRED_MESSAGE() : this.helpText;
     const shouldShowHelpText = showInvalidError || hasHelpText;
