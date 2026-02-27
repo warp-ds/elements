@@ -456,8 +456,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             class="w-datepicker-button"
             data-testid="${toggleButtonId}"
             id="${toggleButtonId}"
-            variant="utility"
-            quiet
+            variant="utilityQuiet"
             type="button"
             @click="${this.#toggleCalendarOpen}">
             <w-icon name="Calendar" size="small" locale="${detectLocale()}" class="flex"></w-icon>
