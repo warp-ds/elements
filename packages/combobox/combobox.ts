@@ -9,6 +9,7 @@ import { repeat } from 'lit/directives/repeat.js';
 
 import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
+import '../option/option.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -118,6 +119,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   @state()
   private _currentOptions: OptionWithIdAndMatch[] = [];
 
+  /** @internal Parsed light-DOM options from child <w-option> nodes */
+  @state()
+  private _childOptions: ComboboxOption[] = [];
+
   /** @internal Unique identifier counter for options */
   @state()
   private _optionIdCounter = 0;
@@ -135,6 +140,28 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   // capture the initial value using firstUpdated and #initialValue
   #initialValue: string | null = null;
+  #lightDomObserver?: MutationObserver;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._syncChildOptions();
+
+    this.#lightDomObserver = new MutationObserver(() => {
+      this._syncChildOptions();
+    });
+    this.#lightDomObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['value', 'label', 'key'],
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#lightDomObserver?.disconnect();
+  }
 
   firstUpdated(changedProps: Map<string, unknown>) {
     this.#initialValue = this.value;
@@ -160,6 +187,31 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   private get _helpId() {
     return this.helpText ? `${this._id}__hint` : undefined;
+  }
+
+  /**
+   * Backward compatibility:
+   * keep `.options` as the primary API and only use child options when `.options` is empty.
+   */
+  private get _effectiveOptions() {
+    return this.options.length ? this.options : this._childOptions;
+  }
+
+  private _syncChildOptions() {
+    const optionNodes = Array.from(this.children).filter((child) => child.tagName.toLowerCase() === 'w-option');
+
+    this._childOptions = optionNodes.map((child: Element) => {
+      const value = child.getAttribute('value') ?? '';
+      const labelAttr = child.getAttribute('label');
+      const labelText = child.textContent?.trim() || undefined;
+      const key = child.getAttribute('key') || undefined;
+
+      return {
+        value,
+        label: labelAttr || labelText,
+        key,
+      };
+    });
   }
 
   /** Get the display text for the navigation option or current display value */
@@ -450,8 +502,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
     // Sync _displayValue when value or options change externally (before filtering)
-    if (changedProperties.has('value') || changedProperties.has('options')) {
-      const matchingOption = this.options.find((o) => o.value === this.value);
+    if (
+      changedProperties.has('value') ||
+      changedProperties.has('options') ||
+      (changedProperties as Map<string, unknown>).has('_childOptions')
+    ) {
+      const matchingOption = this._effectiveOptions.find((o) => o.value === this.value);
       // Only sync if this is an external value change (not from user typing)
       // We detect this by checking if _displayValue doesn't match the expected label
       const expectedDisplay = matchingOption ? matchingOption.label || matchingOption.value : this.value;
@@ -466,13 +522,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
     if (
       changedProperties.has('options') ||
+      (changedProperties as Map<string, unknown>).has('_childOptions') ||
       changedProperties.has('value') ||
       changedProperties.has('disableStaticFiltering') ||
       (changedProperties as Map<string, unknown>).has('_displayValue')
     ) {
-      this._optionIdCounter += this.options.length;
+      this._optionIdCounter += this._effectiveOptions.length;
 
-      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this._displayValue).filter((option) =>
+      this._currentOptions = this._createOptionsWithIdAndMatch(this._effectiveOptions, this._displayValue).filter((option) =>
         !this.disableStaticFiltering
           ? (option.label || option.value).toLowerCase().includes(this._displayValue.toLowerCase())
           : true,

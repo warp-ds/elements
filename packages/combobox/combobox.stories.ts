@@ -134,6 +134,22 @@ export const DisableStaticFiltering: Story = {
   `,
 };
 
+export const WithWOptionDataNodes: Story = {
+  render: () => html`
+    <p>
+      Child <code>w-option</code> data nodes can be used as an alternative to passing <code>.options</code>.
+    </p>
+    <w-combobox
+      label="Select a fruit (child options API)"
+      placeholder="Type to search...">
+      <w-option value="apple">Apple</w-option>
+      <w-option value="banana">Banana</w-option>
+      <w-option value="orange">Orange</w-option>
+      <w-option value="grape">Grape</w-option>
+    </w-combobox>
+  `,
+};
+
 export const FormSubmission: Story = {
   render: () => html`
     <p>Resetting the form should return values to the initial values</p>

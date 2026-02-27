@@ -21,6 +21,7 @@
     "packages/page-indicator",
     "packages/pagination",
     "packages/pill",
+    "packages/option",
     "packages/radio",
     "packages/radio-group",
     "packages/select",

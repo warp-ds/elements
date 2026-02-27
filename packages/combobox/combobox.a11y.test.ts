@@ -58,5 +58,27 @@ describe('w-combobox accessibility (WCAG 2.2)', () => {
       const page = render(html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`);
       await expect(page).toHaveNoAxeViolations();
     });
+
+    test('supports accessible suggestions when using child w-option data nodes', async () => {
+      const page = render(html`
+        <w-combobox label="Select a country" open-on-focus>
+          <w-option value="no">Norway</w-option>
+          <w-option value="se">Sweden</w-option>
+          <w-option value="dk">Denmark</w-option>
+        </w-combobox>
+      `);
+
+      const wCombobox = page.container.querySelector('w-combobox') as HTMLElement & { updateComplete: Promise<unknown> };
+      await wCombobox.updateComplete;
+      const textfield = wCombobox.shadowRoot?.querySelector('w-textfield');
+      const input = textfield?.shadowRoot?.querySelector('input');
+
+      input?.focus();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      const statusText = wCombobox.shadowRoot?.querySelector('[role="status"]')?.textContent?.trim();
+      expect(statusText).toBe('3 suggestions');
+      await expect(page).toHaveNoAxeViolations();
+    });
   });
 });

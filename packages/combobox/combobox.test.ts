@@ -178,3 +178,74 @@ test('announces suggestion count when opened on focus with empty input', async (
   const statusText = el.shadowRoot?.querySelector('[role="status"]')?.textContent?.trim();
   expect(statusText).toBe('3 suggestions');
 });
+
+test('supports child w-option data nodes as options', async () => {
+  const component = html`
+    <w-combobox
+      data-testid="combobox"
+      open-on-focus
+      label="Select a country">
+      <w-option value="no">Norway</w-option>
+      <w-option value="se">Sweden</w-option>
+      <w-option value="dk">Denmark</w-option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement;
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input');
+
+  input?.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+  const visibleOptions = listbox?.querySelectorAll('[role="option"]');
+
+  expect(visibleOptions?.length).toBe(3);
+
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+  expect(optionTexts).toContain('Norway');
+  expect(optionTexts).toContain('Sweden');
+  expect(optionTexts).toContain('Denmark');
+});
+
+test('selecting a child w-option stores value and displays label', async () => {
+  const component = html`
+    <w-combobox
+      data-testid="combobox"
+      open-on-focus
+      label="Select a country">
+      <w-option value="no">Norway</w-option>
+      <w-option value="se">Sweden</w-option>
+      <w-option value="dk">Denmark</w-option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+
+  await expect.element(locator).toBeVisible();
+
+  const el = (await locator.element()) as HTMLElement & { value: string };
+  const textfield = el.shadowRoot?.querySelector('w-textfield');
+  const input = textfield?.shadowRoot?.querySelector('input');
+
+  input?.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+  const options = listbox?.querySelectorAll('[role="option"]');
+  const swedenOption = Array.from(options || []).find((opt) => opt.textContent?.trim() === 'Sweden');
+
+  expect(swedenOption).toBeDefined();
+  swedenOption?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  expect(input?.value).toBe('Sweden');
+  expect(el.value).toBe('se');
+});
