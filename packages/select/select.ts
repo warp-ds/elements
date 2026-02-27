@@ -3,7 +3,7 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { css, html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, PropertyValues, TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { when } from 'lit/directives/when.js';
@@ -122,6 +122,8 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
+  #onPageShow = () => this.#syncFromNativeSelect();
+  #lightDomObserver?: MutationObserver;
 
   static styles = [
     reset,
@@ -151,6 +153,76 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this.setValue(value);
   };
 
+  #getOptionNodes() {
+    return Array.from(this.children).filter(
+      (child) => child.tagName.toLowerCase() === 'option' || child.tagName.toLowerCase() === 'w-option',
+    ) as HTMLElement[];
+  }
+
+  #getNativeSelect() {
+    return this.shadowRoot?.querySelector('select') as HTMLSelectElement | null;
+  }
+
+  #hasExplicitlySelectedOption() {
+    return this.#getOptionNodes().some((option) => option.hasAttribute('selected'));
+  }
+
+  #syncNativeOptionSelection(nextValue: string) {
+    const nativeSelect = this.#getNativeSelect();
+    if (!nativeSelect) return;
+
+    let selectedFound = false;
+    for (const option of Array.from(nativeSelect.options)) {
+      const selected = !selectedFound && option.value === nextValue;
+      option.selected = selected;
+      option.toggleAttribute('selected', selected);
+      if (selected) selectedFound = true;
+    }
+  }
+
+  #syncFromNativeSelect({ allowDefaultFirstOption = false }: { allowDefaultFirstOption?: boolean } = {}) {
+    const nativeSelect = this.#getNativeSelect();
+    if (!nativeSelect) return;
+
+    const nativeValue = nativeSelect.value;
+    if (!nativeValue || nativeValue === this.value) return;
+
+    // Browser default selection of first option should not become component value.
+    const isLikelyBrowserDefaultSelection =
+      !allowDefaultFirstOption &&
+      !this.value &&
+      !this.#hasExplicitlySelectedOption() &&
+      nativeSelect.selectedIndex === 0;
+
+    if (isLikelyBrowserDefaultSelection) return;
+
+    this._setValue(nativeValue);
+    this.#syncNativeOptionSelection(nativeValue);
+  }
+
+  #syncShadowOptionsFromLightDom({ syncValueFromSelected = false }: { syncValueFromSelected?: boolean } = {}) {
+    const optionNodes = this.#getOptionNodes();
+    let selectedValueFromLightDom: string | undefined;
+    const options = optionNodes.map((child: HTMLElement) => {
+      const value = child.getAttribute('value') ?? '';
+      const label = child.textContent ?? '';
+      const selected = child.hasAttribute('selected');
+      const disabled = child.hasAttribute('disabled');
+
+      if (syncValueFromSelected && selectedValueFromLightDom === undefined && selected) {
+        selectedValueFromLightDom = value;
+      }
+
+      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+    });
+
+    this._options = options;
+
+    if (syncValueFromSelected && selectedValueFromLightDom !== undefined && selectedValueFromLightDom !== this.value) {
+      this._setValue(selectedValueFromLightDom);
+    }
+  }
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -159,26 +231,57 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
     if (this.autofocus || this.autoFocus) this.shadowRoot.querySelector('select').focus();
 
-    // Gather both <option> and <w-option> children
-    const optionNodes = Array.from(this.children).filter(
-      (child) => child.tagName.toLowerCase() === 'option' || child.tagName.toLowerCase() === 'w-option',
-    );
+    this.#syncShadowOptionsFromLightDom({ syncValueFromSelected: true });
+    this.ownerDocument?.defaultView?.addEventListener('pageshow', this.#onPageShow);
 
-    // Convert them into HTML strings for the template
-    const options = optionNodes.map((child: HTMLElement) => {
-      const value = child.getAttribute('value') ?? '';
-      const label = child.textContent ?? '';
-      const selected = child.hasAttribute('selected');
-      const disabled = child.hasAttribute('disabled');
-
-      if (selected) {
-        this._setValue(value);
-      }
-
-      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
+    // Keep mirrored shadow options in sync with dynamic light-DOM option changes.
+    this.#lightDomObserver = new MutationObserver(() => {
+      this.#syncShadowOptionsFromLightDom({ syncValueFromSelected: true });
     });
+    this.#lightDomObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['selected', 'disabled', 'value'],
+    });
+  }
 
-    this._options = options;
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.ownerDocument?.defaultView?.removeEventListener('pageshow', this.#onPageShow);
+    this.#lightDomObserver?.disconnect();
+  }
+
+  firstUpdated() {
+    // Reconcile once after initial render for restored/autofilled values.
+    this.#syncFromNativeSelect();
+  }
+
+  formStateRestoreCallback(state: string | File | FormData | null, _reason: 'autocomplete' | 'restore') {
+    if (typeof state === 'string' && state) {
+      this._setValue(state);
+      this.#syncNativeOptionSelection(state);
+      return;
+    }
+
+    this.#syncFromNativeSelect({ allowDefaultFirstOption: true });
+  }
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('value')) {
+      this.setValue(this.value);
+    }
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('value')) {
+      const nativeSelect = this.#getNativeSelect();
+      if (nativeSelect && nativeSelect.value !== this.value) {
+        nativeSelect.value = this.value ?? '';
+      }
+      this.#syncNativeOptionSelection(this.value ?? '');
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -213,31 +316,21 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   get #helpId() {
-    return this.hint ? `${this.#id}__hint` : undefined;
+    return this.helpText || this.hint ? `${this.#id}__hint` : undefined;
   }
 
   // // Fire a custom 'change' event, used when the dropdown changes state.
-  onChange({ target }) {
-    this._setValue(target.value);
-    const event = new CustomEvent('change', { detail: target.value });
+  onChange(event: Event) {
+    const target = event.currentTarget as HTMLSelectElement;
+    const nextValue = target.value;
 
-    // Gather both <option> and <w-option> children to update the selected attribute
-    const optionNodes = Array.from(this.children).filter(
-      (child) => child.tagName.toLowerCase() === 'option' || child.tagName.toLowerCase() === 'w-option',
-    );
+    // Avoid forwarding the internal native change event and emitting two host events.
+    event.stopPropagation();
 
-    // Convert them into HTML strings for the template
-    const options = optionNodes.map((child: HTMLElement) => {
-      const value = child.getAttribute('value') ?? '';
-      const selected = value === target.value;
+    this._setValue(nextValue);
+    this.#syncNativeOptionSelection(nextValue);
 
-      const label = child.textContent ?? '';
-      const disabled = child.hasAttribute('disabled');
-      return html`<option value="${value}" ?selected=${selected} ?disabled=${disabled}>${label}</option>`;
-    });
-    this._options = options;
-
-    this.dispatchEvent(event);
+    this.dispatchEvent(new CustomEvent('change', { detail: nextValue }));
   }
 
   render() {
