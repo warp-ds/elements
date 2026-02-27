@@ -316,7 +316,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   get #helpId() {
-    return this.hint ? `${this.#id}__hint` : undefined;
+    return this.helpText || this.hint ? `${this.#id}__hint` : undefined;
   }
 
   // // Fire a custom 'change' event, used when the dropdown changes state.
