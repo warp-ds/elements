@@ -231,8 +231,8 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.10.15)(@vitest/browser@3.2.4)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0)
       vitest-browser-lit:
-        specifier: ^0.1.0
-        version: 0.1.0(@vitest/browser@3.2.4)(lit@3.3.2)(vitest@3.2.4)
+        specifier: ^1.0.0
+        version: 1.0.1(lit@3.3.2)(vitest@3.2.4)
       vitest-browser-react:
         specifier: ^1.0.1
         version: 1.0.1(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(@vitest/browser@3.2.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(vitest@3.2.4)
@@ -4749,13 +4749,12 @@ packages:
       yaml:
         optional: true
 
-  vitest-browser-lit@0.1.0:
-    resolution: {integrity: sha512-jQVD2QESSVfdvf0Ou3BMK2RTk/DLNDaP77QRYqgAQq1cz95759tc1qveOf9rYmTxBMVa/wVc9xt77saHaqF8rw==}
+  vitest-browser-lit@1.0.1:
+    resolution: {integrity: sha512-gwstjT/pwWqk1TIk6KgcZCEPyDp69mxOPFXtyZs0wuGt7FPkLh+ihMrlvYKyT6o8S21ee6BpZsONwPAcC2ImQg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
-      '@vitest/browser': '>=2.1.0'
       lit: '>3.0.0'
-      vitest: '>=2.1.0'
+      vitest: '>=4.0.0'
 
   vitest-browser-react@1.0.1:
     resolution: {integrity: sha512-LqiGFCdknrbMoSDWXTCTrPsED3SvdIXIgYOOZyYUNj2dkJusW2eF6NENOlBlxwq+FBQqzNK1X59b+b03pXFpAQ==}
@@ -9564,9 +9563,8 @@ snapshots:
       terser: 5.46.0
       tsx: 4.21.0
 
-  vitest-browser-lit@0.1.0(@vitest/browser@3.2.4)(lit@3.3.2)(vitest@3.2.4):
+  vitest-browser-lit@1.0.1(lit@3.3.2)(vitest@3.2.4):
     dependencies:
-      '@vitest/browser': 3.2.4(playwright@1.57.0)(vite@6.4.1(@types/node@24.10.15)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0))(vitest@3.2.4)
       lit: 3.3.2
       vitest: 3.2.4(@types/node@24.10.15)(@vitest/browser@3.2.4)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.46.0)(tsx@4.21.0)
 

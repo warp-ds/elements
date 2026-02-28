@@ -372,7 +372,7 @@
     "unocss": "0.x",
     "vite": "^6.0.0",
     "vitest": "^3.2.4",
-    "vitest-browser-lit": "^0.1.0",
+    "vitest-browser-lit": "^1.0.0",
     "vitest-browser-react": "^1.0.1"
   },
   "dependencies": {
