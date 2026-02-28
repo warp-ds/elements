@@ -174,8 +174,8 @@ importers:
         specifier: 11.0.0
         version: 11.0.0
       globals:
-        specifier: 15.13.0
-        version: 15.13.0
+        specifier: 17.3.0
+        version: 17.3.0
       html-format:
         specifier: 1.1.7
         version: 1.1.7
@@ -2900,12 +2900,12 @@ packages:
     resolution: {integrity: sha512-5lsx1NUDHtSjfg0eHlmYvZKv8/nVqX4ckFbM+FrGcQ+04KWcWFo9P5MxPZYSzUvyzmdTbI7Eix8Q4IbELDqzKg==}
     engines: {node: '>=0.10.0'}
 
-  globals@15.13.0:
-    resolution: {integrity: sha512-49TewVEz0UxZjr1WYYsWpPrhyC/B/pA8Bq0fUmet2n+eR7yn0IvNzNaoBwnK6mdkzcN+se7Ez9zUgULTz2QH4g==}
-    engines: {node: '>=18'}
-
   globals@15.15.0:
     resolution: {integrity: sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==}
+    engines: {node: '>=18'}
+
+  globals@17.3.0:
+    resolution: {integrity: sha512-yMqGUQVVCkD4tqjOJf3TnrvaaHDMYp4VlUSObbkIiuCPe/ofdMBFIAcBbCSRFWOnos6qRiTVStDwqPLUclaxIw==}
     engines: {node: '>=18'}
 
   globby@11.0.4:
@@ -7830,9 +7830,9 @@ snapshots:
       is-windows: 1.0.2
       which: 1.3.1
 
-  globals@15.13.0: {}
-
   globals@15.15.0: {}
+
+  globals@17.3.0: {}
 
   globby@11.0.4:
     dependencies:
