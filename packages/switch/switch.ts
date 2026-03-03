@@ -102,12 +102,53 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
+  _handleHostClick = (event: MouseEvent) => {
+    if (this.disabled) return;
+    if (event.composedPath()[0] === this) {
+      this._handleClick();
+    }
+  };
+
+  /** @internal */
+  _handleKeyDown = (event: KeyboardEvent) => {
+    if (this.disabled) return;
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      this._handleClick();
+    }
+  };
+
+  /** @internal */
+  _syncA11yState() {
+    this.setAttribute('aria-checked', String(this.checked));
+    this.tabIndex = this.disabled ? -1 : 0;
+    if (this.disabled) {
+      this.setAttribute('aria-disabled', 'true');
+      return;
+    }
+    this.removeAttribute('aria-disabled');
+  }
+
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
+    this.setAttribute('role', 'switch');
     if (!this.disabled) {
       this.setValue(this.checked && this.value ? this.value : null);
     }
+
+    this._syncA11yState();
+    this.addEventListener('click', this._handleHostClick);
+    this.addEventListener('keydown', this._handleKeyDown);
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('click', this._handleHostClick);
+    this.removeEventListener('keydown', this._handleKeyDown);
+    super.disconnectedCallback();
   }
 
   willUpdate(changedProperties) {
@@ -115,6 +156,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
       if (!this.disabled) {
         this.setValue(this.checked && this.value ? this.value : null);
       }
+    }
+    if (changedProperties.has('checked') || changedProperties.has('disabled')) {
+      this._syncA11yState();
     }
   }
 
@@ -127,10 +171,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
       <div>
         <button
           type="button"
-          role="switch"
-          aria-checked=${this.checked}
+          role="none"
+          tabindex="-1"
           class=${this._baseClasses}
-          aria-disabled=${this.disabled}
           ?disabled=${this.disabled}
           @click=${this._handleClick}
         >
