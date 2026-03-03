@@ -1,3 +1,10 @@
+## [2.8.1-next.4](https://github.com/warp-ds/elements/compare/v2.8.1-next.3...v2.8.1-next.4) (2026-03-03)
+
+
+### Bug Fixes
+
+* **tabs:** resolve  nested interactive element a11y issue ([#556](https://github.com/warp-ds/elements/issues/556)) ([80fc540](https://github.com/warp-ds/elements/commit/80fc540e6d2f1484894e2f5998e235374c92419a))
+
 ## [2.8.1-next.3](https://github.com/warp-ds/elements/compare/v2.8.1-next.2...v2.8.1-next.3) (2026-03-03)
 
 
