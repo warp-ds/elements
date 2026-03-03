@@ -157,7 +157,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   type: ButtonType = 'button';
 
   @property({ type: Boolean, reflect: true })
-  autofocus: boolean;
+  autofocus = false;
 
   @property({ reflect: true })
   variant: ButtonVariant;
@@ -166,13 +166,13 @@ class WarpButton extends FormControlMixin(LitElement) {
    * @type {boolean}
    */
   @property({ type: Boolean, reflect: true })
-  quiet: boolean;
+  quiet = false;
 
   @property({ type: Boolean, reflect: true })
-  small: boolean;
+  small = false;
 
   @property({ type: Boolean, reflect: true })
-  loading: boolean;
+  loading = false;
 
   @property({ reflect: true })
   href: string;
@@ -184,7 +184,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   rel: string;
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth: boolean;
+  fullWidth = false;
 
   @property({ attribute: 'button-class', reflect: true })
   buttonClass: string;

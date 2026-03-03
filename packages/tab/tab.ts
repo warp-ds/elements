@@ -41,7 +41,7 @@ export class WarpTab extends LitElement {
    * @deprecated Use `aria-selected="true"` instead
    */
   @property({ type: Boolean, reflect: true })
-  active: boolean;
+  active = false;
 
   @property({ type: Boolean, reflect: true })
   over = false;

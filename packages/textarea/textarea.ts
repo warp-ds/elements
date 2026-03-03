@@ -49,10 +49,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   };
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   @property({ type: String, reflect: true })
   label: string;
@@ -74,19 +74,19 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`. */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly: boolean;
+  readOnly = false;
 
   @property({ type: Boolean, reflect: true })
-  readonly: boolean;
+  readonly = false;
 
   @property({ type: Boolean, reflect: true })
-  required: boolean;
+  required = false;
 
   @property({ type: String, reflect: true })
   value: string;
 
   @property({ type: Boolean, reflect: true })
-  optional: boolean;
+  optional = false;
 
   @state()
   minHeight = Number.NEGATIVE_INFINITY;

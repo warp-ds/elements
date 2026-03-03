@@ -46,19 +46,19 @@ class WarpLink extends LitElement {
   };
 
   @property({ type: Boolean, reflect: true })
-  autofocus: boolean;
+  autofocus = false;
 
   @property({ reflect: true })
   variant: ButtonVariant = 'secondary';
 
   @property({ type: Boolean, reflect: true })
-  small: boolean;
+  small = false;
 
   @property({ reflect: true })
   href: string;
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   @property({ reflect: true })
   target: string;
@@ -67,7 +67,7 @@ class WarpLink extends LitElement {
   rel: string;
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth: boolean;
+  fullWidth = false;
 
   static styles = [reset, styles];
 
