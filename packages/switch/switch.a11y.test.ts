@@ -74,7 +74,8 @@ describe('w-switch accessibility (WCAG 2.2)', () => {
       const beforeButton = page.getByRole('button', { name: 'Before' });
 
       await wSwitch.updateComplete;
-      beforeButton.element().focus();
+      const beforeButtonEl = beforeButton.element() as HTMLButtonElement;
+      beforeButtonEl.focus();
       await expect.element(beforeButton).toHaveFocus();
 
       await userEvent.tab();
