@@ -69,7 +69,8 @@ export class WarpTab extends LitElement {
     super.updated(changedProperties);
 
     // ensure the state is reflected also in light DOM for the accessibility tree
-    if (changedProperties.has('active')) {
+    // Only let deprecated `active` drive aria-selected when explicitly set by consumers.
+    if (changedProperties.has('active') && this.hasAttribute('active')) {
       this.setAttribute('aria-selected', this.active ? 'true' : 'false');
     }
     if (changedProperties.has('for')) {
