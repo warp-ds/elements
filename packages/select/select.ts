@@ -57,11 +57,11 @@ export class WarpSelect extends FormControlMixin(LitElement) {
    * @deprecated Use the native `autofocus` attribute instead.
    */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
-  autoFocus: boolean;
+  autoFocus = false;
 
   /** Whether the element should receive focus on render */
   @property({ type: Boolean, reflect: true })
-  autofocus: boolean;
+  autofocus = false;
 
   /**
    * The content displayed as the help text. Paired with `invalid` to show the text as a validation error.
@@ -71,14 +71,14 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   /** Renders the field in an invalid state. Paired with `help-text` to provide feedback about the error. */
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   /**
    * Whether to always show a hint.
    * @deprecated Use `help-text` instead and only set it if you want to display the help text.
    */
   @property({ type: Boolean, reflect: true })
-  always: boolean;
+  always = false;
 
   /**
    * The content displayed as the help text.
@@ -93,22 +93,22 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   /** Whether to show optional text */
   @property({ type: Boolean, reflect: true })
-  optional: boolean;
+  optional = false;
 
   /** Renders the field in a disabled state. */
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   /**
    * Renders the field in a readonly state.
    * @deprecated Use the native readonly attribute instead.
    */
   @property({ attribute: 'read-only', type: Boolean, reflect: true })
-  readOnly: boolean;
+  readOnly = false;
 
   /** Renders the field in a readonly state. */
   @property({ type: Boolean, reflect: true })
-  readonly: boolean;
+  readonly = false;
 
   /** @internal */
   @property({ attribute: false, state: true })

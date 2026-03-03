@@ -50,10 +50,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   };
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   @property({ type: String, reflect: true })
   id: string;
@@ -87,13 +87,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   /** @deprecated Use the native readonly attribute instead. */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly: boolean;
+  readOnly = false;
 
   @property({ type: Boolean, reflect: true })
-  readonly: boolean;
+  readonly = false;
 
   @property({ type: Boolean, reflect: true })
-  required: boolean;
+  required = false;
 
   @property({ type: String, reflect: true })
   type = 'text';

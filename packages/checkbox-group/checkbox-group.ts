@@ -30,18 +30,18 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
   /** Whether to show optional text next to the label. */
   @property({ type: Boolean, reflect: true })
-  optional: boolean;
+  optional = false;
 
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
   /** Makes the checkbox group required. */
   @property({ type: Boolean, reflect: true })
-  required: boolean;
+  required = false;
 
   /** Marks the checkbox group as invalid. */
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   // Track whether the user has interacted with the group.
   #hasInteracted = false;
