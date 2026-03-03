@@ -1,3 +1,12 @@
+## [2.8.1-next.3](https://github.com/warp-ds/elements/compare/v2.8.1-next.2...v2.8.1-next.3) (2026-03-03)
+
+
+### Bug Fixes
+
+* **select:** ensure native select, host and options are always in sync ([#544](https://github.com/warp-ds/elements/issues/544)) ([9877e47](https://github.com/warp-ds/elements/commit/9877e476c54c37f8abd516ed4257512b9bd9014d))
+* set default boolean property values ([#555](https://github.com/warp-ds/elements/issues/555)) ([28936f3](https://github.com/warp-ds/elements/commit/28936f35794ab7aacc8c7d6cd12b0bf4f9957263))
+* update modal text color ([#542](https://github.com/warp-ds/elements/issues/542)) ([78b2365](https://github.com/warp-ds/elements/commit/78b2365f84b7e8d51818691cac234d18b81d59bf))
+
 ## [2.8.1-next.2](https://github.com/warp-ds/elements/compare/v2.8.1-next.1...v2.8.1-next.2) (2026-02-26)
 
 
