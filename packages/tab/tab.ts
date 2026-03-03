@@ -25,6 +25,12 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
 export class WarpTab extends LitElement {
   static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
+  private _handleClick = (event: Event & { tab?: WarpTab }) => {
+    if (!event.tab) {
+      event.tab = this;
+    }
+  };
+
   @property({ attribute: 'id', reflect: true })
   id = '';
 
@@ -63,6 +69,12 @@ export class WarpTab extends LitElement {
     // ensure the role and aria-controls is reflected in light DOM for the accessibility tree
     this.setAttribute('role', 'tab');
     this.setAttribute('aria-controls', this.for);
+    this.addEventListener('click', this._handleClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this._handleClick);
   }
 
   updated(changedProperties: PropertyValues<this>) {
@@ -84,6 +96,7 @@ export class WarpTab extends LitElement {
     return html`
       <button
         type="button"
+        role="none"
         id="warp-tab-${this.for}"
         class="${this._classes}"
         tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
