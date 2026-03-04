@@ -34,10 +34,6 @@ const REQUIRED_MESSAGE = () =>
  */
 export class WRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
-  static get observedAttributes() {
-    const observed = super.observedAttributes ?? [];
-    return observed.includes('invalid') ? observed : [...observed, 'invalid'];
-  }
 
   @state() hasInteracted = false;
   private hasWarnedMissingName = false;
@@ -67,13 +63,6 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.addEventListener('invalid', this.handleInvalid);
   }
 
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-    super.attributeChangedCallback?.(name, oldValue, newValue);
-    if (name === 'invalid' && oldValue !== newValue) {
-      this.updateValidity();
-    }
-  }
-
   get validationTarget() {
     const radio = this.querySelector<WRadio>(':is(w-radio):not([disabled])');
     return radio ?? undefined;
@@ -96,17 +85,20 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   async updated(changedProperties: PropertyValues<this>) {
-    if (
+    const shouldResync =
       changedProperties.has('disabled') ||
       changedProperties.has('name') ||
       changedProperties.has('required') ||
       changedProperties.has('invalid') ||
-      changedProperties.has('helpText')
-    ) {
-      await this.syncRadioElements();
+      changedProperties.has('helpText');
+
+    if (shouldResync) {
+      // Keep host validity/UI in sync in the same update cycle, before async child sync.
       this.syncFormValue();
       this.updateValidity();
-      return;
+      this.syncRadioElements();
+      this.syncFormValue();
+      this.updateValidity();
     }
   }
 
