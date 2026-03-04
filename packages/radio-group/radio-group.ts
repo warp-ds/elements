@@ -115,10 +115,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.getAllRadios().forEach((radio) => {
       radio.checked = defaultValue ? radio.value === defaultValue : false;
     });
-    void this.syncRadioElements().then(() => {
-      this.syncFormValue();
-      this.updateValidity();
-    });
+    this.syncRadioElements();
+    this.syncFormValue();
+    this.updateValidity();
   }
 
   private handleRadioClick = (e: Event) => {
