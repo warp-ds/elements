@@ -1,3 +1,10 @@
+## [2.8.1-next.5](https://github.com/warp-ds/elements/compare/v2.8.1-next.4...v2.8.1-next.5) (2026-03-05)
+
+
+### Bug Fixes
+
+* **switch:** properly enable keyboard navigation and labelling ([#557](https://github.com/warp-ds/elements/issues/557)) ([cdc31f4](https://github.com/warp-ds/elements/commit/cdc31f4a4e3ccd1e8cd6fa2cc95c7cc58357f847))
+
 ## [2.8.1-next.4](https://github.com/warp-ds/elements/compare/v2.8.1-next.3...v2.8.1-next.4) (2026-03-03)
 
 
