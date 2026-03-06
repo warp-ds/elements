@@ -20,7 +20,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Disables the radio. */
-  @property({ type: Boolean }) disabled = false;
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
   /** Makes the radio a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
@@ -103,7 +103,6 @@ export class WRadio extends FormControlMixin(LitElement) {
         this.uncheckOtherRadios();
       }
     }
-
   }
 
   private handleClick = () => {
@@ -190,7 +189,8 @@ export class WRadio extends FormControlMixin(LitElement) {
     return Boolean(this.closest('w-radio-group'));
   }
 
-  // The scope for radios is their containing form, or the document if they're not in a form. This is where we look for other radios with the same name to uncheck when this radio is checked.
+  // The scope for radios is their containing form, or the document if they're not in a form. This is where we look for
+  // other radios with the same name to uncheck when this radio is checked.
   private getRadioScope(): ParentNode {
     return this.internals.form ?? this.closest('form') ?? document;
   }

@@ -34,20 +34,7 @@ export const themes = {
   'Neutral dark': 'neutral-com-dark',
 };
 
-export const themeToLocale: Record<string, string> = {
-  'finn-no': 'nb',
-  'finn-no-dark': 'nb',
-  'tori-fi': 'fi',
-  'tori-fi-dark': 'fi',
-  'dba-dk': 'da',
-  'dba-dk-dark': 'da',
-  'blocket-se': 'sv',
-  'blocket-se-dark': 'sv',
-  'vend-com': 'en',
-  'vend-com-dark': 'en',
-  'neutral-com': 'en',
-  'neutral-com-dark': 'en',
-};
+export const locales = { English: 'en', /* Finnish: 'fi', Norwegian: 'nb', Danish: 'da', Swedish: 'sv' */ };
 
 export const rewriteStylesheets = (theme: string) => {
   const roots = [
@@ -71,11 +58,22 @@ export const globalTypes = {
     description: 'Select a design system brand',
     defaultValue: 'finn-no', // fallback if no localStorage
     toolbar: {
-      icon: 'globe',
+      icon: 'box',
       items: Object.entries(themes).map(([label, value]) => ({
         value,
         title: label,
         right: value.includes('dark') ? '🌙' : '☀️',
+      })),
+    },
+  },
+  locale: {
+    name: 'Locale',
+    defaultValue: 'en', // fallback if no localStorage
+    toolbar: {
+      icon: 'globe',
+      items: Object.entries(locales).map(([label, value]) => ({
+        value,
+        title: label,
       })),
     },
   },
@@ -85,15 +83,16 @@ export const decorators = [
   // @ts-expect-error Explict any for Story and context
   (Story, context) => {
     const theme = context.globals.brand;
+    const locale = context.globals.locale;
 
-    // Persist theme
+    // Persist values
     localStorage.setItem('warpTheme', theme);
+    localStorage.setItem('locale', locale);
 
     // Swap stylesheet
     rewriteStylesheets(theme);
 
     // Set lang attribute for i18n detection and activate locale
-    const locale = themeToLocale[theme] || 'en';
     document.documentElement.lang = locale;
     i18n.activate(locale);
 
@@ -104,9 +103,11 @@ export const decorators = [
 const defaultTheme = typeof window !== 'undefined' && localStorage.getItem('warpTheme');
 if (defaultTheme) {
   rewriteStylesheets(defaultTheme);
-  // Set initial lang attribute for i18n detection
-  const locale = themeToLocale[defaultTheme] || 'en';
-  document.documentElement.lang = locale;
+}
+const defaultLocale = typeof window !== 'undefined' && localStorage.getItem('locale');
+if (defaultLocale) {
+  document.documentElement.lang = defaultLocale;
+  i18n.activate(defaultLocale);
 }
 
 const preview: Preview = {

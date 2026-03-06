@@ -219,9 +219,9 @@ export const OpenEnded: Story = {
   args: {},
   render() {
     return html`
-      <form id="openended" style="margin-bottom: 16px" lang="nb">
+      <form id="openended" style="margin-bottom: 16px">
         <w-slider
-          label="Produksjonsår"
+          label="Model year"
           min="1950"
           max="2025"
           data-testid="openended"
@@ -229,12 +229,12 @@ export const OpenEnded: Story = {
         >
           <w-slider-thumb
             slot="from"
-            aria-label="Fra år"
+            aria-label="From year"
             name="from-year"
           ></w-slider-thumb>
           <w-slider-thumb
             slot="to"
-            aria-label="Til år"
+            aria-label="To year"
             name="to-year"
           ></w-slider-thumb>
         </w-slider>
@@ -258,9 +258,9 @@ export const OpenEnded: Story = {
         );
         overunderSlider.labelFormatter = function (slot) {
           if (slot === 'from') {
-            return 'Før 1950';
+            return 'Before 1950';
           }
-          return '2025 +';
+          return '2025+';
         };
         overunderSlider.valueFormatter = function (value, slot) {
           if (slot === 'from' && value === '') {
@@ -286,9 +286,6 @@ export const OpenEnded: Story = {
 };
 
 export const SingleError: Story = {
-  args: {
-    locale: 'nb',
-  },
   render() {
     return html`
       <w-slider label="Single" min="0" max="100">
@@ -304,7 +301,7 @@ export const RangeError: Story = {
   render() {
     return html`
       <form id="rangeerror" style="margin-bottom: 16px">
-        <w-slider label="Production year" min="1950" max="2025" over under>
+        <w-slider label="Model year" min="1950" max="2025">
           <p slot="description">
             Try typing a from value higher than a to value
           </p>
@@ -340,18 +337,15 @@ export const RangeError: Story = {
 
 export const CustomError: Story = {
   args: {
-    locale: 'nb',
     error: "I'm an external error telling you something is wrong",
     invalid: true,
   },
   render(args) {
     return html`
       <w-slider
-        label="Production year"
+        label="Model year"
         min="1950"
         max="2025"
-        over
-        under
         error="${args.error}"
         ?invalid="${args.invalid}"
       >
@@ -363,18 +357,13 @@ export const CustomError: Story = {
 };
 
 export const Description: Story = {
-  args: {
-    locale: 'nb',
-  },
   render() {
     return html`
       <w-slider
-        label="Production year"
+        label="Model year"
         min="1950"
         max="2025"
-        over
-        under
-        help-text="Production year of the car"
+        help-text="Model year of the car"
       >
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
@@ -384,17 +373,14 @@ export const Description: Story = {
 };
 
 export const VisuallyHiddenLabel: Story = {
-  args: {
-    locale: 'nb',
-  },
   render() {
     return html`
       <w-slider
         min="1950"
         max="2025"
-        help-text="Production year of the car"
+        help-text="Model year of the car"
       >
-        <legend class="sr-only" slot="label">Production year</legend>
+        <legend class="sr-only" slot="label">Model year</legend>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
@@ -403,20 +389,15 @@ export const VisuallyHiddenLabel: Story = {
 };
 
 export const HiddenMinimumMaximumLabels: Story = {
-  args: {
-    locale: 'nb',
-  },
   render() {
     return html`
       <w-slider
         min="1950"
         max="2025"
-        over
-        under
-        help-text="Production year of the car"
+        help-text="Model year of the car"
         data-testid="hidden-minmax-label"
       >
-        <legend class="sr-only" slot="label">Production year</legend>
+        <legend class="sr-only" slot="label">Model year</legend>
         <w-slider-thumb slot="from" name="from"></w-slider-thumb>
         <w-slider-thumb slot="to" name="to"></w-slider-thumb>
       </w-slider>
@@ -431,9 +412,6 @@ export const HiddenMinimumMaximumLabels: Story = {
 };
 
 export const VisuallyHiddenTextfield: Story = {
-  args: {
-    locale: 'nb',
-  },
   render({ locale }) {
     return html`
       <output class="text-xs">

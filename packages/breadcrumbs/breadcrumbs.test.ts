@@ -20,3 +20,12 @@ test('renders an aria-label if set', async () => {
   const page = render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
   await expect.element(page.getByLabelText('You are here', { hasText: 'w-breadcrumb' })).toBeDefined();
 });
+
+test('sets role navigation', async () => {
+  const page = render(html` <w-breadcrumb>
+      <a href="/foo">Foo</a>
+      <a href="/bar">Bar</a>
+  </w-breadcrumb>`);
+
+  await expect.poll(() => page.getByRole('navigation')).toBeDefined();
+});

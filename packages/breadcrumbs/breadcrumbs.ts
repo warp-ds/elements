@@ -52,6 +52,8 @@ class WarpBreadcrumbs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.setAttribute('role', 'navigation');
+
     // Grab existing children at the point that the component is added to the page
     const flattenedChildren = Array.from(this.children)
       .flat(Number.POSITIVE_INFINITY)

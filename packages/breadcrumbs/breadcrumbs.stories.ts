@@ -17,12 +17,13 @@ const meta: Meta<typeof args> = {
       <w-breadcrumbs ${spread(prespread(args))}>
         <a href="#/home">Home</a>
         <a href="#/category">Category</a>
-        <a href="#/subcategory">Subcategory</a>
-        <span aria-current="page">Current Page</span>
+        <span aria-current="page">Current page</span>
       </w-breadcrumbs>
     `;
   },
-  args,
+  args: {
+    'aria-label': 'You are here',
+  },
   argTypes,
   parameters: {
     actions: {
@@ -34,37 +35,27 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Default: Story = {
-  args: {
-    'aria-label': 'You are here',
-  },
-};
+export const Default: Story = {};
 
 export const WithLinks: Story = {
-  args: {
-    'aria-label': 'Navigation breadcrumb',
-  },
   render(args) {
     return html`
       <w-breadcrumbs ${spread(prespread(args))}>
-        <a href="#/eiendom">Eiendom</a>
-        <a href="#/bolig-til-salgs">Bolig til salgs</a>
-        <a href="#/oslo" aria-current="page">Oslo</a>
+        <a href="#/home">Home</a>
+        <a href="#/category">Category</a>
+        <a href="#/subcategory" aria-current="page">Current page</a>
       </w-breadcrumbs>
     `;
   },
 };
 
 export const WithSpanForCurrentPage: Story = {
-  args: {
-    'aria-label': 'You are here',
-  },
   render(args) {
     return html`
       <w-breadcrumbs ${spread(prespread(args))}>
-        <a href="#/eiendom">Eiendom</a>
-        <a href="#/bolig-til-salgs">Bolig til salgs</a>
-        <span aria-current="page">Oslo</span>
+        <a href="#/home">Home</a>
+        <a href="#/category">Category</a>
+        <span aria-current="page">Current page</span>
       </w-breadcrumbs>
     `;
   },

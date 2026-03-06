@@ -37,8 +37,8 @@ const pillStyles = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-pill--docs)
  */
 class WarpPill extends LitElement {
-  @property({ attribute: 'can-close', type: Boolean }) canClose: boolean;
-  @property({ attribute: 'suggestion', type: Boolean }) suggestion: boolean;
+  @property({ attribute: 'can-close', type: Boolean }) canClose = false;
+  @property({ attribute: 'suggestion', type: Boolean }) suggestion = false;
   /**
    * @deprecated Used "open-arial-label" instead.
    */

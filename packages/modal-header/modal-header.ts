@@ -22,8 +22,8 @@ import { reset } from '../styles.js';
  */
 export class ModalHeader extends CanCloseMixin(LitElement) {
   @property({ type: String }) title: string;
-  @property({ type: Boolean }) back: boolean;
-  @property({ type: Boolean, attribute: 'no-close' }) noClose: boolean;
+  @property({ type: Boolean }) back = false;
+  @property({ type: Boolean, attribute: 'no-close' }) noClose = false;
   /** @internal */
   @state() private _hasTopContent = false;
 

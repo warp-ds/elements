@@ -7,6 +7,7 @@ import { prespread } from '../../.storybook/utilities.js';
 
 import type { WarpTextField } from './textfield.js';
 import './textfield.js';
+import '../affix/affix.js';
 
 const { events, args, argTypes } = getStorybookHelpers<WarpTextField>('w-textfield');
 
@@ -86,7 +87,7 @@ export const Required: Story = {
   },
 };
 
-export const WithAffix: Story = {
+export const WithSuffix: Story = {
   args: {
     label: 'Price',
     placeholder: '1 000 000',
@@ -96,6 +97,21 @@ export const WithAffix: Story = {
     return html`
       <w-textfield ${spread(prespread(args))}>
         <w-affix slot="suffix" label="kr"></w-affix>
+      </w-textfield>
+    `;
+  },
+};
+
+export const WithPrefix: Story = {
+  args: {
+    label: 'Price',
+    placeholder: '1 000 000',
+    type: 'text',
+  },
+  render(args) {
+    return html`
+      <w-textfield ${spread(prespread(args))}>
+        <w-affix slot="prefix" label="kr"></w-affix>
       </w-textfield>
     `;
   },

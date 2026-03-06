@@ -41,7 +41,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   /** @internal Set by `<w-slider>` */
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   /** @internal Set by `<w-slider>` */
   @property({ type: Boolean, reflect: true })

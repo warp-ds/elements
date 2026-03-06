@@ -3,7 +3,7 @@ import { Icon } from './react.js';
 
 export default {
   component: Icon,
-  title: 'Icons',
+  title: 'Icons/Icons',
   argTypes: {
     name: {
       control: { type: 'select' },

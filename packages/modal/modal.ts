@@ -17,9 +17,9 @@ import { ProvidesCanCloseToSlotsMixin } from './util.js';
  * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.
  */
 export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
-  @property({ type: Boolean }) show: boolean;
+  @property({ type: Boolean }) show = false;
   @property({ type: String, attribute: 'content-id' }) contentId: string;
-  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks: boolean;
+  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks = false;
 
   @query('.dialog-el') dialogEl: HTMLDialogElement;
   @query('.dialog-inner-el') dialogInnerEl: HTMLElement;
@@ -135,6 +135,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
         overflow: hidden;
         position: relative;
         background-color: var(--w-s-color-background);
+        color: var(--w-s-color-text);
         box-shadow: var(--w-shadow-m);
         height: var(--w-modal-height);
         max-height: var(--w-modal-max-height);

@@ -1,8 +1,46 @@
+## [2.8.1-next.5](https://github.com/warp-ds/elements/compare/v2.8.1-next.4...v2.8.1-next.5) (2026-03-05)
+
+
+### Bug Fixes
+
+* **switch:** properly enable keyboard navigation and labelling ([#557](https://github.com/warp-ds/elements/issues/557)) ([cdc31f4](https://github.com/warp-ds/elements/commit/cdc31f4a4e3ccd1e8cd6fa2cc95c7cc58357f847))
+
+## [2.8.1-next.4](https://github.com/warp-ds/elements/compare/v2.8.1-next.3...v2.8.1-next.4) (2026-03-03)
+
+
+### Bug Fixes
+
+* **tabs:** resolve  nested interactive element a11y issue ([#556](https://github.com/warp-ds/elements/issues/556)) ([80fc540](https://github.com/warp-ds/elements/commit/80fc540e6d2f1484894e2f5998e235374c92419a))
+
+## [2.8.1-next.3](https://github.com/warp-ds/elements/compare/v2.8.1-next.2...v2.8.1-next.3) (2026-03-03)
+
+
+### Bug Fixes
+
+* **select:** ensure native select, host and options are always in sync ([#544](https://github.com/warp-ds/elements/issues/544)) ([9877e47](https://github.com/warp-ds/elements/commit/9877e476c54c37f8abd516ed4257512b9bd9014d))
+* set default boolean property values ([#555](https://github.com/warp-ds/elements/issues/555)) ([28936f3](https://github.com/warp-ds/elements/commit/28936f35794ab7aacc8c7d6cd12b0bf4f9957263))
+* update modal text color ([#542](https://github.com/warp-ds/elements/issues/542)) ([78b2365](https://github.com/warp-ds/elements/commit/78b2365f84b7e8d51818691cac234d18b81d59bf))
+
+## [2.8.1-next.2](https://github.com/warp-ds/elements/compare/v2.8.1-next.1...v2.8.1-next.2) (2026-02-26)
+
+
+### Bug Fixes
+
+* add role=navigation to w-breadcrumb ([#538](https://github.com/warp-ds/elements/issues/538)) ([0d5971d](https://github.com/warp-ds/elements/commit/0d5971dbd04e8446a70a5503ec074583e763cbfc))
+
+## [2.8.1-next.1](https://github.com/warp-ds/elements/compare/v2.8.0...v2.8.1-next.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* prefix slot changes to make it visible ([76e7dea](https://github.com/warp-ds/elements/commit/76e7deaa3fae99594d77e14cf3c4b40cc5555285))
+
 # [2.8.0](https://github.com/warp-ds/elements/compare/v2.7.0...v2.8.0) (2026-02-24)
 
 
 ### Bug Fixes
 
+* prefix slot changes to make it visible ([76e7dea](https://github.com/warp-ds/elements/commit/76e7deaa3fae99594d77e14cf3c4b40cc5555285))
 * add .js extension to window-exists import in toast/api.ts ([#526](https://github.com/warp-ds/elements/issues/526)) ([49d6ef9](https://github.com/warp-ds/elements/commit/49d6ef9d12c8fba6cd9745cd48a19fc784e630a8))
 * **combobox:** a11y results renamed to suggestions and number of suggestions now read on open ([#530](https://github.com/warp-ds/elements/issues/530)) ([66dca50](https://github.com/warp-ds/elements/commit/66dca50e0bee7610b9161cb3ee088f630cb591df))
 * don't use the textfield mask when showing the placeholder ([0db0656](https://github.com/warp-ds/elements/commit/0db065676fa9b6173b51fb5d9cb565dab958cb99))

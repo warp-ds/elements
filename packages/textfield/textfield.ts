@@ -50,10 +50,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
   };
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   @property({ type: Boolean, reflect: true })
-  invalid: boolean;
+  invalid = false;
 
   @property({ type: String, reflect: true })
   id: string;
@@ -87,13 +87,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   /** @deprecated Use the native readonly attribute instead. */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly: boolean;
+  readOnly = false;
 
   @property({ type: Boolean, reflect: true })
-  readonly: boolean;
+  readonly = false;
 
   @property({ type: Boolean, reflect: true })
-  required: boolean;
+  required = false;
 
   @property({ type: String, reflect: true })
   type = 'text';
@@ -242,7 +242,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
           'w-textfield--has-prefix': this._hasPrefix,
           'w-textfield--has-suffix': this._hasSuffix,
         })}">
-        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <div class="w-textfield__input-wrapper">
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
@@ -271,6 +270,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
             @input="${this.handler}"
             @focus="${this.handler}" />
         </div>
+        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
