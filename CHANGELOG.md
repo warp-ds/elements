@@ -1,3 +1,16 @@
+## [2.8.1](https://github.com/warp-ds/elements/compare/v2.8.0...v2.8.1) (2026-03-06)
+
+
+### Bug Fixes
+
+* add role=navigation to w-breadcrumb ([#538](https://github.com/warp-ds/elements/issues/538)) ([0d5971d](https://github.com/warp-ds/elements/commit/0d5971dbd04e8446a70a5503ec074583e763cbfc))
+* prefix slot changes to make it visible ([76e7dea](https://github.com/warp-ds/elements/commit/76e7deaa3fae99594d77e14cf3c4b40cc5555285))
+* **select:** ensure native select, host and options are always in sync ([#544](https://github.com/warp-ds/elements/issues/544)) ([9877e47](https://github.com/warp-ds/elements/commit/9877e476c54c37f8abd516ed4257512b9bd9014d))
+* set default boolean property values ([#555](https://github.com/warp-ds/elements/issues/555)) ([28936f3](https://github.com/warp-ds/elements/commit/28936f35794ab7aacc8c7d6cd12b0bf4f9957263))
+* **switch:** properly enable keyboard navigation and labelling ([#557](https://github.com/warp-ds/elements/issues/557)) ([cdc31f4](https://github.com/warp-ds/elements/commit/cdc31f4a4e3ccd1e8cd6fa2cc95c7cc58357f847))
+* **tabs:** resolve  nested interactive element a11y issue ([#556](https://github.com/warp-ds/elements/issues/556)) ([80fc540](https://github.com/warp-ds/elements/commit/80fc540e6d2f1484894e2f5998e235374c92419a))
+* update modal text color ([#542](https://github.com/warp-ds/elements/issues/542)) ([78b2365](https://github.com/warp-ds/elements/commit/78b2365f84b7e8d51818691cac234d18b81d59bf))
+
 ## [2.8.1-next.5](https://github.com/warp-ds/elements/compare/v2.8.1-next.4...v2.8.1-next.5) (2026-03-05)
 
 
