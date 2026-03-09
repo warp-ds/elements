@@ -330,7 +330,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this._setValue(nextValue);
     this.#syncNativeOptionSelection(nextValue);
 
-    this.dispatchEvent(new CustomEvent('change', { detail: nextValue }));
+    this.dispatchEvent(new CustomEvent('change', { detail: nextValue, bubbles: true, composed: true }));
   }
 
   render() {
