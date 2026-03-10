@@ -1,3 +1,10 @@
+## [2.8.2-next.1](https://github.com/warp-ds/elements/compare/v2.8.1...v2.8.2-next.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* **select:** add bubbles and composed to change CustomEvent ([#562](https://github.com/warp-ds/elements/issues/562)) ([3a533ce](https://github.com/warp-ds/elements/commit/3a533ce8f8e6c1e010e72d54c87a3fc3d8ab8100))
+
 ## [2.8.1](https://github.com/warp-ds/elements/compare/v2.8.0...v2.8.1) (2026-03-06)
 
 
