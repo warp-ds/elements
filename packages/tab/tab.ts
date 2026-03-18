@@ -25,11 +25,18 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
 export class WarpTab extends LitElement {
   static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
 
+  private _internals: ElementInternals;
+
   private _handleClick = (event: Event & { tab?: WarpTab }) => {
     if (!event.tab) {
       event.tab = this;
     }
   };
+
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
 
   @property({ attribute: 'id', reflect: true })
   id = '';
@@ -66,8 +73,9 @@ export class WarpTab extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    // ensure the role and aria-controls is reflected in light DOM for the accessibility tree
-    this.setAttribute('role', 'tab');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'tab';
+    // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
     this.setAttribute('aria-controls', this.for);
     this.addEventListener('click', this._handleClick);
   }
@@ -80,11 +88,12 @@ export class WarpTab extends LitElement {
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
-    // ensure the state is reflected also in light DOM for the accessibility tree
+    // Use ElementInternals for ARIA to avoid hydration mismatches
     // Only let deprecated `active` drive aria-selected when explicitly set by consumers.
     if (changedProperties.has('active') && this.hasAttribute('active')) {
-      this.setAttribute('aria-selected', this.active ? 'true' : 'false');
+      this._internals.ariaSelected = this.active ? 'true' : 'false';
     }
+    // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
     if (changedProperties.has('for')) {
       this.setAttribute('aria-controls', this.for);
     }

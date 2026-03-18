@@ -146,19 +146,26 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   /** @internal */
   _syncA11yState() {
-    this.setAttribute('aria-checked', String(this.checked));
+    this.internals.ariaChecked = this.checked ? 'true' : 'false';
     this.tabIndex = this.disabled ? -1 : 0;
     if (this.disabled) {
-      this.setAttribute('aria-disabled', 'true');
+      this.internals.ariaDisabled = 'true';
       return;
     }
-    this.removeAttribute('aria-disabled');
+    this.internals.ariaDisabled = null;
   }
 
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
-    this.setAttribute('role', 'switch');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this.internals.role = 'switch';
+    // Sync any existing aria-label to internals
+    const ariaLabel = this.getAttribute('aria-label');
+    if (ariaLabel) {
+      this.internals.ariaLabel = ariaLabel;
+      this.removeAttribute('aria-label');
+    }
     if (!this.disabled) {
       this.setValue(this.checked && this.value ? this.value : null);
     }

@@ -31,16 +31,17 @@ const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-breadcrumbs--docs)
  */
 class WarpBreadcrumbs extends LitElement {
-  @property({ attribute: 'aria-label', type: String })
-  ariaLabel: string;
+  private _internals: ElementInternals;
 
   static styles = [reset, styles];
 
   constructor() {
     super();
+    this._internals = this.attachInternals();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-    this.ariaLabel = i18n._({
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.ariaLabel = i18n._({
       id: 'breadcrumbs.ariaLabel',
       message: 'You are here',
       comment: 'Default screen reader message for the breadcrumb component',
@@ -52,7 +53,8 @@ class WarpBreadcrumbs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'navigation');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'navigation';
 
     // Grab existing children at the point that the component is added to the page
     const flattenedChildren = Array.from(this.children)

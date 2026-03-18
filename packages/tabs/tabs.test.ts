@@ -77,7 +77,9 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
 
   const page = render(component);
 
-  await userEvent.click(page.getByRole('tab').last());
+  // Query tabs by element tag name since role is set via ElementInternals
+  const tabs = page.container.querySelectorAll('w-tab');
+  await userEvent.click(tabs[2]);
 
   await page.container.querySelector('w-tabs').updateComplete;
   await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;

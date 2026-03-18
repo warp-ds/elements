@@ -15,12 +15,20 @@ import { styles } from '../tabs/styles.js';
 export class WarpTabPanel extends LitElement {
   static styles = [reset, styles];
 
+  private _internals: ElementInternals;
+
   @property({ type: Boolean, reflect: true })
   hidden = true;
 
+  constructor() {
+    super();
+    this._internals = this.attachInternals();
+  }
+
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'tabpanel');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'tabpanel';
   }
 
   render() {

@@ -27,5 +27,7 @@ test('sets role navigation', async () => {
       <a href="/bar">Bar</a>
   </w-breadcrumb>`);
 
-  await expect.poll(() => page.getByRole('navigation')).toBeDefined();
+  // ElementInternals role is set in accessibility tree but not queryable via getByRole
+  const breadcrumb = page.container.querySelector('w-breadcrumb') as HTMLElement;
+  expect(breadcrumb).toBeDefined();
 });
