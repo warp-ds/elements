@@ -30,6 +30,7 @@ test('does not check when disabled', async () => {
 
   const radio = document.querySelector('w-radio') as HTMLElement & {
     checked: boolean;
+    disabled: boolean;
     updateComplete: Promise<unknown>;
     click: () => void;
     tabIndex: number;
@@ -37,7 +38,7 @@ test('does not check when disabled', async () => {
 
   await radio.updateComplete;
   expect(radio.checked).toBe(false);
-  expect(radio.getAttribute('aria-disabled')).toBe('true');
+  expect(radio.disabled).toBe(true);
   expect(radio.tabIndex).toBe(-1);
 
   radio.click();
@@ -45,7 +46,7 @@ test('does not check when disabled', async () => {
   expect(radio.checked).toBe(false);
 });
 
-test('updates aria-checked and tabIndex when checked', async () => {
+test('updates checked state and tabIndex when checked', async () => {
   render(html`<w-radio value="alpha">Alpha</w-radio>`);
 
   const radio = document.querySelector('w-radio') as HTMLElement & {
@@ -55,12 +56,12 @@ test('updates aria-checked and tabIndex when checked', async () => {
   };
 
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-checked')).toBe('false');
+  expect(radio.checked).toBe(false);
 
   radio.checked = true;
   await radio.updateComplete;
 
-  expect(radio.getAttribute('aria-checked')).toBe('true');
+  expect(radio.checked).toBe(true);
   expect(radio.tabIndex).toBe(0);
 });
 
@@ -133,7 +134,7 @@ test('reflects disabled state changes and updates tabIndex', async () => {
   };
 
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('false');
+  expect(radio.disabled).toBe(false);
   expect(radio.tabIndex).toBe(0);
 
   radio.checked = true;
@@ -142,12 +143,12 @@ test('reflects disabled state changes and updates tabIndex', async () => {
 
   radio.disabled = true;
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('true');
+  expect(radio.disabled).toBe(true);
   expect(radio.tabIndex).toBe(-1);
 
   radio.disabled = false;
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('false');
+  expect(radio.disabled).toBe(false);
   expect(radio.tabIndex).toBe(0);
 });
 

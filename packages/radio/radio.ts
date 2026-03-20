@@ -54,7 +54,8 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.value = this.getAttribute('value') ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
-    this.setAttribute('role', 'radio');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this.internals.role = 'radio';
     this.syncAriaDisabled();
     this.syncTabIndex();
     this.syncFormValue();
@@ -62,11 +63,11 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 
   private syncAriaDisabled() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.internals.ariaDisabled = this.disabled ? 'true' : 'false';
   }
 
   private syncAriaChecked() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.internals.ariaChecked = this.checked ? 'true' : 'false';
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
@@ -95,7 +96,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     }
 
     if (changedProperties.has('invalid')) {
-      this.toggleAttribute('aria-invalid', this.invalid);
+      this.internals.ariaInvalid = this.invalid ? 'true' : null;
     }
 
     if (changedProperties.has('name')) {

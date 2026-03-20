@@ -43,19 +43,23 @@ const alertVariants = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/feedback-alert--docs)
  */
 class WarpAlert extends LitElement {
+  private _internals: ElementInternals;
+
   @property({ reflect: true })
   variant: AlertVariants = 'info';
 
   @property({ type: Boolean, reflect: true })
   show = true;
 
-  @property({ reflect: true })
+  @property()
   role = 'alert';
 
   constructor() {
     super();
+    this._internals = this.attachInternals();
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'alert';
     this.show = false;
-    this.role = 'alert';
   }
 
   connectedCallback() {
