@@ -255,7 +255,13 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   firstUpdated() {
     // Reconcile once after initial render for restored/autofilled values.
-    this.#syncFromNativeSelect();
+    // First, ensure the native <select> reflects the current value property
+    // (which may have been set by a framework like React before first render).
+    if (this.value) {
+      this.#syncNativeOptionSelection(this.value);
+    }
+    // Then reconcile for any browser-restored or autofilled values.
+    this.#syncFromNativeSelect({ allowDefaultFirstOption: false });
   }
 
   formStateRestoreCallback(state: string | File | FormData | null, _reason: 'autocomplete' | 'restore') {
