@@ -114,7 +114,7 @@ test('tab-panel hidden attribute is controlled by tabs component', async () => {
   await expect.element(page.getByText('Content 2')).not.toBeVisible();
 });
 
-test('aria-selected is not reflected by default (to avoid hydration mismatch)', async () => {
+test('aria-selected uses ElementInternals (no DOM attribute) to avoid hydration mismatch', async () => {
   const component = html`<w-tabs>
     <w-tab for="panel1">Tab 1</w-tab>
     <w-tab-panel id="panel1"><p>Content 1</p></w-tab-panel>
@@ -129,8 +129,12 @@ test('aria-selected is not reflected by default (to avoid hydration mismatch)', 
 
   const tabs = page.container.querySelectorAll('w-tab');
 
-  // After tabs component initializes, aria-selected should be set by the parent
-  expect(tabs[0].getAttribute('aria-selected')).toBe('true');
-  expect(tabs[1].getAttribute('aria-selected')).toBe('false');
+  // aria-selected is set via ElementInternals, not as a DOM attribute (to avoid hydration mismatch)
+  expect(tabs[0].hasAttribute('aria-selected')).toBe(false);
+  expect(tabs[1].hasAttribute('aria-selected')).toBe(false);
+
+  // But the property should be set correctly by the parent
+  expect((tabs[0] as any).ariaSelected).toBe('true');
+  expect((tabs[1] as any).ariaSelected).toBe('false');
 });
 
