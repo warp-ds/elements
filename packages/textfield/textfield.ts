@@ -208,12 +208,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   handler(e: Event) {
     const { name, value } = e.currentTarget as HTMLInputElement;
-    const sanitizedValue = this.type === 'email' ? value.trim() : value;
-    this.value = sanitizedValue;
+    this.value = value;
     const event = new CustomEvent(e.type, {
       detail: {
         name,
-        value: sanitizedValue,
+        value,
         target: e.target,
       },
     });
