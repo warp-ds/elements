@@ -114,3 +114,23 @@ test('tab-panel hidden attribute is controlled by tabs component', async () => {
   await expect.element(page.getByText('Content 2')).not.toBeVisible();
 });
 
+test('aria-selected is not reflected by default (to avoid hydration mismatch)', async () => {
+  const component = html`<w-tabs>
+    <w-tab for="panel1">Tab 1</w-tab>
+    <w-tab-panel id="panel1"><p>Content 1</p></w-tab-panel>
+
+    <w-tab for="panel2">Tab 2</w-tab>
+    <w-tab-panel id="panel2"><p>Content 2</p></w-tab-panel>
+  </w-tabs>`;
+
+  const page = render(component);
+  const tabsEl = page.container.querySelector('w-tabs');
+  await tabsEl.updateComplete;
+
+  const tabs = page.container.querySelectorAll('w-tab');
+
+  // After tabs component initializes, aria-selected should be set by the parent
+  expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+  expect(tabs[1].getAttribute('aria-selected')).toBe('false');
+});
+

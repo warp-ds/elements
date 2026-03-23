@@ -44,7 +44,7 @@ export class WarpTab extends LitElement {
   @property({ attribute: 'for', reflect: true })
   for = '';
 
-  @property({ attribute: 'aria-selected', reflect: true })
+  @property({ attribute: 'aria-selected' })
   ariaSelected: 'true' | 'false';
 
   @property({ attribute: 'tabindex', type: Number, reflect: true })
@@ -88,7 +88,12 @@ export class WarpTab extends LitElement {
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
 
-    // Use ElementInternals for ARIA to avoid hydration mismatches
+    // Manually sync aria-selected to DOM attribute for accessibility and CSS selectors,
+    // but only when the property changes (not during initial definition to avoid hydration mismatch)
+    if (changedProperties.has('ariaSelected') && this.ariaSelected !== undefined) {
+      this.setAttribute('aria-selected', this.ariaSelected);
+      this._internals.ariaSelected = this.ariaSelected;
+    }
     // Only let deprecated `active` drive aria-selected when explicitly set by consumers.
     if (changedProperties.has('active') && this.hasAttribute('active')) {
       this._internals.ariaSelected = this.active ? 'true' : 'false';
