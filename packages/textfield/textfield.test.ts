@@ -103,3 +103,36 @@ test('renders with no autocomplete attribute when none provided', async () => {
 
   expect(el.shadowRoot.querySelector('input').hasAttribute('autocomplete')).toBe(false);
 });
+
+test('defaults to text type when no type attribute is set', async () => {
+  const component = html`<w-textfield data-testid="textfield" label="Test"></w-textfield>`;
+
+  const page = render(component);
+  const el = page.getByTestId('textfield').element() as HTMLElement;
+
+  // The type attribute should not be reflected on the host (to avoid hydration mismatch)
+  expect(el.hasAttribute('type')).toBe(false);
+
+  // But the inner input should have type="text" as the default
+  await expect
+    .poll(() => {
+      const input = el.shadowRoot?.querySelector('input');
+      return input?.getAttribute('type');
+    })
+    .toBe('text');
+});
+
+test('uses specified type when type attribute is set', async () => {
+  const component = html`<w-textfield data-testid="textfield" label="Email" type="email"></w-textfield>`;
+
+  const page = render(component);
+  const el = page.getByTestId('textfield').element() as HTMLElement;
+
+  // The inner input should have the specified type
+  await expect
+    .poll(() => {
+      const input = el.shadowRoot?.querySelector('input');
+      return input?.getAttribute('type');
+    })
+    .toBe('email');
+});

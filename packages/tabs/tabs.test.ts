@@ -89,3 +89,28 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
 });
 
+test('tab-panel hidden attribute is controlled by tabs component', async () => {
+  const component = html`<w-tabs>
+    <w-tab for="panel1">Tab 1</w-tab>
+    <w-tab-panel id="panel1">
+      <p>Content 1</p>
+    </w-tab-panel>
+
+    <w-tab for="panel2">Tab 2</w-tab>
+    <w-tab-panel id="panel2" hidden>
+      <p>Content 2</p>
+    </w-tab-panel>
+  </w-tabs>`;
+
+  const page = render(component);
+
+  // Wait for tabs component to initialize and set hidden attributes
+  await page.container.querySelector('w-tabs').updateComplete;
+
+  // The first panel should be visible (content visible)
+  await expect.element(page.getByText('Content 1')).toBeVisible();
+
+  // The second panel should be hidden (content not visible)
+  await expect.element(page.getByText('Content 2')).not.toBeVisible();
+});
+

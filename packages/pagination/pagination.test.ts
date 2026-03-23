@@ -102,3 +102,29 @@ test('is able to get the correct data-page-number attribute from the element on 
 
   expect(clickedPage).toEqual('14');
 });
+
+test('defaults to current-page=1 when no current-page attribute is set', async () => {
+  const component = html`<w-pagination pages="10" base-url="/page/" data-testid="pagination"></w-pagination>`;
+  const page = render(component);
+
+  const el = page.getByTestId('pagination').element() as HTMLElement;
+
+  // The current-page attribute should not be reflected (to avoid hydration mismatch)
+  expect(el.hasAttribute('current-page')).toBe(false);
+
+  // But page 1 should be the active page
+  await expect.element(page.getByLabelText('Page 1')).toHaveAttribute('aria-current', 'page');
+});
+
+test('defaults to visible-pages=7 when no visible-pages attribute is set', async () => {
+  const component = html`<w-pagination current-page="5" pages="20" base-url="/page/" data-testid="pagination"></w-pagination>`;
+  const page = render(component);
+
+  const el = page.getByTestId('pagination').element() as HTMLElement;
+
+  // The visible-pages attribute should not be reflected (to avoid hydration mismatch)
+  expect(el.hasAttribute('visible-pages')).toBe(false);
+
+  // But 7 pages should be visible (the default)
+  await expect.poll(() => page.getByRole('link').and(page.getByLabelText('Page ')).all()).toHaveLength(7);
+});

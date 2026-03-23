@@ -168,3 +168,30 @@ test('updates when selected-page changes', async () => {
   // Cleanup
   document.body.removeChild(container);
 });
+
+test('defaults to page-count=1 and selected-page=1 when no attributes are set', async () => {
+  const component = html`<w-page-indicator></w-page-indicator>`;
+  const page = render(component);
+
+  // Should render a single dot (default page-count=1)
+  await expect
+    .poll(() => {
+      const element = page.container.querySelector('w-page-indicator');
+      return element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot').length;
+    })
+    .toBe(1);
+
+  // The single dot should be selected (default selected-page=1)
+  await expect
+    .poll(() => {
+      const element = page.container.querySelector('w-page-indicator');
+      const dots = element?.shadowRoot?.querySelectorAll('.w-page-indicator--dot');
+      return dots?.[0]?.classList.contains('w-page-indicator--selecteddot');
+    })
+    .toBe(true);
+
+  // Verify no attributes are reflected (to avoid hydration mismatch)
+  const element = page.container.querySelector('w-page-indicator') as HTMLElement;
+  expect(element.hasAttribute('page-count')).toBe(false);
+  expect(element.hasAttribute('selected-page')).toBe(false);
+});
