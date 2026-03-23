@@ -18,7 +18,7 @@ export class WarpTabPanel extends LitElement {
   private _internals: ElementInternals;
 
   @property({ type: Boolean, reflect: true })
-  hidden = true;
+  hidden: boolean;
 
   constructor() {
     super();

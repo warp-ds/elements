@@ -154,7 +154,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   };
 
   @property({ reflect: true })
-  type: ButtonType = 'button';
+  type: ButtonType;
 
   @property({ type: Boolean, reflect: true })
   autofocus = false;

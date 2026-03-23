@@ -47,6 +47,12 @@ export const toggleStyles = css`
   :host([type='checkbox']) .control {
     border-radius: 4px;
   }
+  /* Default to radio styles when no type attribute is set */
+  :host(:not([type])) .control,
+  :host([type='radio']) .control,
+  :host([role='radio']) .control {
+    border-radius: 50%;
+  }
   .checkbox:has(:checked, :indeterminate),
   :host([type='checkbox'][checked]) .control,
   :host([type='checkbox'][indeterminate]) .control {
@@ -58,10 +64,7 @@ export const toggleStyles = css`
     background-image: var(--w-icon-toggle-checked);
     background-position: center;
   }
-  :host([type='radio']) .control,
-  :host([role='radio']) .control {
-    border-radius: 50%;
-  }
+  :host(:not([type])[checked]) .control,
   :host([type='radio'][checked]) .control,
   /* :state is newly available, so we set an attribute in radio for compat */
   :host([role='radio'][checked-ui]) .control,
@@ -91,6 +94,7 @@ export const toggleStyles = css`
     outline-offset: var(--w-outline-offset, 1px);
   }
 
+  :host(:not([type])[disabled]) .control,
   :host([type='radio'][disabled]) .control,
   /* :state is newly available, so we set an attribute in radio for compat */
   :host([role='radio'][disabled-ui]) .control,

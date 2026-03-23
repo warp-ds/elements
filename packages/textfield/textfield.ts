@@ -96,7 +96,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   required = false;
 
   @property({ type: String, reflect: true })
-  type = 'text';
+  type: string;
 
   @property({ type: String, reflect: true })
   value: string;
@@ -246,7 +246,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
             class="${this._inputstyles}"
-            type="${this.type}"
+            type="${this.type || 'text'}"
             min="${ifDefined(this.min)}"
             max="${ifDefined(this.max)}"
             size="${ifDefined(this.size)}"
