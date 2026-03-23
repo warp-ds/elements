@@ -89,7 +89,7 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
 });
 
-test('tab-panel hidden attribute is controlled by tabs component', async () => {
+test('tab-panel visibility is controlled by active attribute (not hidden) to avoid hydration mismatch', async () => {
   const component = html`<w-tabs>
     <w-tab for="panel1">Tab 1</w-tab>
     <w-tab-panel id="panel1">
@@ -97,20 +97,24 @@ test('tab-panel hidden attribute is controlled by tabs component', async () => {
     </w-tab-panel>
 
     <w-tab for="panel2">Tab 2</w-tab>
-    <w-tab-panel id="panel2" hidden>
+    <w-tab-panel id="panel2">
       <p>Content 2</p>
     </w-tab-panel>
   </w-tabs>`;
 
   const page = render(component);
 
-  // Wait for tabs component to initialize and set hidden attributes
+  // Wait for tabs component to initialize
   await page.container.querySelector('w-tabs').updateComplete;
 
-  // The first panel should be visible (content visible)
-  await expect.element(page.getByText('Content 1')).toBeVisible();
+  const panels = page.container.querySelectorAll('w-tab-panel');
 
-  // The second panel should be hidden (content not visible)
+  // Active panel gets 'active' attribute, not 'hidden' (avoids hydration mismatch)
+  expect(panels[0].hasAttribute('active')).toBe(true);
+  expect(panels[1].hasAttribute('active')).toBe(false);
+
+  // Verify visibility works correctly
+  await expect.element(page.getByText('Content 1')).toBeVisible();
   await expect.element(page.getByText('Content 2')).not.toBeVisible();
 });
 

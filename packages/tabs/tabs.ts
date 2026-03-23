@@ -209,18 +209,15 @@ export class WarpTabs extends LitElement {
       }
     });
 
-    // Update tab panels visibility
+    // Update tab panels visibility using 'active' attribute to avoid hydration mismatch
+    // (native 'hidden' always reflects, causing SSR issues)
     const panels: WarpTabPanel[] = Array.from(this.querySelectorAll('w-tab-panel'));
     panels.forEach((panel) => {
       if (!panel.hasAttribute("aria-labelledby")) {
         const controller = tabs.find((tab) => tab.for === panel.id);
         if (controller) panel.setAttribute("aria-labelledby", controller.id);
       }
-      if (panel.id === this._activeTabFor) {
-        panel.hidden = false;
-      } else {
-        panel.hidden = true;
-      }
+      panel.toggleAttribute('active', panel.id === this._activeTabFor);
     });
   }
 
