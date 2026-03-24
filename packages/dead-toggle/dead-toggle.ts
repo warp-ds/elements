@@ -12,7 +12,7 @@ import { toggleStyles } from '../toggle-styles';
  */
 export class WarpDeadToggle extends LitElement {
   @property({ type: String, reflect: true })
-  type: 'radio' | 'checkbox' = 'radio';
+  type: 'radio' | 'checkbox';
 
   @property({ type: Boolean, reflect: true })
   checked = false;

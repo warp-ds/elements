@@ -27,10 +27,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   static styles = [reset, unoStyles, wSliderThumbStyles];
 
-  @property({ attribute: 'aria-label', reflect: true })
+  @property({ attribute: 'aria-label' })
   ariaLabel: string;
 
-  @property({ attribute: 'aria-description', reflect: true })
+  @property({ attribute: 'aria-description' })
   ariaDescription: string;
 
   @property({ reflect: true })
@@ -509,6 +509,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
+    // ariaLabel and ariaDescription are used internally on the input element,
+    // not as host attributes. No setAttribute needed - avoids hydration mismatch.
+
     if (changedProperties.has('openEnded')) {
       if (this.openEnded && !this.placeholder) {
         if (this.slot === 'to' || this.slot === '') {

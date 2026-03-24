@@ -6,7 +6,7 @@ import { render } from 'vitest-browser-lit';
 import '../textfield/textfield.js';
 import './combobox.js';
 
-test('renders with autocomplete="off" when attribute not provided', async () => {
+test('renders with autocomplete="off" on inner textfield when attribute not provided', async () => {
   const component = html`<w-combobox data-testid="combobox"></w-combobox>`;
 
   const page = render(component);
@@ -15,7 +15,10 @@ test('renders with autocomplete="off" when attribute not provided', async () => 
   await expect.element(locator).toBeVisible();
 
   const el = (await locator.element()) as HTMLElement;
-  expect(el.getAttribute('autocomplete')).toBe('off');
+  // The autocomplete attribute is not reflected on the outer element to avoid hydration mismatches
+  // Instead, check that the inner textfield receives the correct default value
+  const textfield = el.shadowRoot?.querySelector('w-textfield') as HTMLElement & { autocomplete: string };
+  expect(textfield?.autocomplete).toBe('off');
 });
 
 test('renders with autocomplete attribute when provided', async () => {

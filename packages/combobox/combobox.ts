@@ -104,7 +104,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   /** Autocomplete attribute for the input field */
   @property({ type: String, reflect: true })
-  autocomplete?: string = 'off';
+  autocomplete?: string;
 
   /** @internal Options list open boolean */
   @state()
@@ -504,7 +504,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           .required=${this.required}
           .optional=${this.optional}
           .name=${this.name}
-          .autocomplete="${this.autocomplete}"
+          .autocomplete="${this.autocomplete || 'off'}"
           role="combobox"
           aria-autocomplete="list"
           aria-expanded=${this._isOpen && this._currentOptions.length !== 0}

@@ -19,3 +19,31 @@ test('does not render when "show" is not set / or not true', async () => {
   const page = render(component);
   await expect.element(page.container.querySelector('w-alert')).not.toHaveAttribute('show');
 });
+
+test('defaults to info variant when no variant attribute is set', async () => {
+  const component = html`<w-alert show data-testid="alert">Default alert</w-alert>`;
+  const page = render(component);
+
+  const el = page.getByTestId('alert').element() as HTMLElement;
+
+  // The variant attribute should not be reflected (to avoid hydration mismatch)
+  expect(el.hasAttribute('variant')).toBe(false);
+
+  // But the info icon should be rendered (default behavior)
+  await expect
+    .poll(() => {
+      const icon = el.shadowRoot?.querySelector('w-icon');
+      return icon?.getAttribute('name');
+    })
+    .toBe('Info');
+});
+
+test('defaults to hidden (show=false) when show attribute is not set', async () => {
+  const component = html`<w-alert data-testid="alert">Hidden alert</w-alert>`;
+  const page = render(component);
+
+  const el = page.getByTestId('alert').element() as HTMLElement;
+
+  // The show attribute should not be present (to avoid hydration mismatch)
+  expect(el.hasAttribute('show')).toBe(false);
+});

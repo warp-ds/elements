@@ -1,6 +1,4 @@
-import { html, LitElement, PropertyValues } from 'lit';
-
-import { property } from 'lit/decorators.js';
+import { css, html, LitElement } from 'lit';
 
 import { reset } from '../styles.js';
 
@@ -13,12 +11,17 @@ import { styles } from '../tabs/styles.js';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTabPanel extends LitElement {
-  static styles = [reset, styles];
+  static styles = [
+    reset,
+    styles,
+    css`
+      :host(:not([active])) {
+        display: none;
+      }
+    `,
+  ];
 
   private _internals: ElementInternals;
-
-  @property({ type: Boolean, reflect: true })
-  hidden = true;
 
   constructor() {
     super();

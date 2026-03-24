@@ -46,10 +46,10 @@ class WarpAlert extends LitElement {
   private _internals: ElementInternals;
 
   @property({ reflect: true })
-  variant: AlertVariants = 'info';
+  variant: AlertVariants;
 
   @property({ type: Boolean, reflect: true })
-  show = true;
+  show: boolean;
 
   @property()
   role = 'alert';
@@ -59,12 +59,14 @@ class WarpAlert extends LitElement {
     this._internals = this.attachInternals();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'alert';
-    this.show = false;
+    // Don't set this.show here - let the attribute or explicit property set control it
+    // Alerts default to hidden and are shown via the show attribute
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.variant || !alertVariants[this.variant]) {
+    // Validate variant if explicitly set
+    if (this.variant && !alertVariants[this.variant]) {
       throw new Error(
         `Invalid 'variant' attribute. Set its value to one of the following:\nnegative, positive, warning, info.`,
       );
@@ -73,12 +75,14 @@ class WarpAlert extends LitElement {
 
   /** @internal */
   get _wrapperClasses() {
-    return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
+    const variant = this.variant || 'info';
+    return classNames([ccAlert.wrapper, ccAlert[variant]]);
   }
 
   /** @internal */
   get _iconClasses() {
-    const activeIconClassNames = ccAlert[`${this.variant}Icon`];
+    const variant = this.variant || 'info';
+    const activeIconClassNames = ccAlert[`${variant}Icon`];
 
     return classNames([ccAlert.icon, activeIconClassNames]);
   }
@@ -108,16 +112,17 @@ class WarpAlert extends LitElement {
   /** @internal */
   get _icon() {
     const locale = detectLocale();
-    if (this.variant === alertVariants.info) {
+    const variant = this.variant || 'info';
+    if (variant === alertVariants.info) {
       return html`<w-icon name="Info" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.warning) {
+    if (variant === alertVariants.warning) {
       return html`<w-icon name="Warning" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.negative) {
+    if (variant === alertVariants.negative) {
       return html`<w-icon name="Error" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.positive) {
+    if (variant === alertVariants.positive) {
       return html`<w-icon name="Success" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     return '';
