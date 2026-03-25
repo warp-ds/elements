@@ -5,16 +5,19 @@ on:
       - main
       - beta
       - next
+
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  id-token: write
+  contents: read # for checkout
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for trusted publishing and npm provenance
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,6 +28,8 @@ jobs:
           cache: "pnpm"
           node-version: lts/*
       - run: pnpm i
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
 
       - name: Build
         run: pnpm build
