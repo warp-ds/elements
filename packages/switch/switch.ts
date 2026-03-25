@@ -51,6 +51,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   // capture the initial state using connectedCallback and #initialState
   #initialState: boolean | null = null;
 
+  // Track if first update has completed to avoid hydration mismatches
+  #hasInitialized = false;
+
   static styles = [
     reset,
     styles,
@@ -147,7 +150,10 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   /** @internal */
   _syncA11yState() {
     this.internals.ariaChecked = this.checked ? 'true' : 'false';
-    this.tabIndex = this.disabled ? -1 : 0;
+    // Only set tabIndex after first update to avoid React hydration mismatches
+    if (this.#hasInitialized) {
+      this.tabIndex = this.disabled ? -1 : 0;
+    }
     if (this.disabled) {
       this.internals.ariaDisabled = 'true';
       return;
@@ -190,6 +196,12 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     if (changedProperties.has('checked') || changedProperties.has('disabled')) {
       this._syncA11yState();
     }
+  }
+
+  firstUpdated() {
+    // Set tabIndex after first render to avoid React hydration mismatches
+    this.#hasInitialized = true;
+    this.tabIndex = this.disabled ? -1 : 0;
   }
 
   resetFormControl(): void {
