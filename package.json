@@ -381,7 +381,8 @@
     "lit": "3.x"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "eik": {
     "files": "eik",
