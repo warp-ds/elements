@@ -1,3 +1,18 @@
+## [2.8.2-next.2](https://github.com/warp-ds/elements/compare/v2.8.2-next.1...v2.8.2-next.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* prevent hydration mismatch errors by using element internals ([#567](https://github.com/warp-ds/elements/issues/567)) ([ecf4ead](https://github.com/warp-ds/elements/commit/ecf4ead7f534ebceaca3de6ddbdd8c4715fecfb7))
+* prevent hydration mismatches in React caused by client side DOM changes ([#571](https://github.com/warp-ds/elements/issues/571)) ([4e03272](https://github.com/warp-ds/elements/commit/4e0327278fb3967acf9a0dec6d2aba916592765e))
+* **select:** preserve framework-set value in firstUpdated ([#568](https://github.com/warp-ds/elements/issues/568)) ([4d090f8](https://github.com/warp-ds/elements/commit/4d090f8324f9ac5d40774c3084b4e382ee584afb)), closes [#syncFromNativeSelect](https://github.com/warp-ds/elements/issues/syncFromNativeSelect)
+* **textfield:** trim whitespace for type="email" inputs ([#569](https://github.com/warp-ds/elements/issues/569)) ([bda47d6](https://github.com/warp-ds/elements/commit/bda47d6207012d8f9f0d9bbf4713acbeb1926707))
+
+
+### Reverts
+
+* **textfield:** remove redundant .trim() for email inputs ([#570](https://github.com/warp-ds/elements/issues/570)) ([7a2ba8f](https://github.com/warp-ds/elements/commit/7a2ba8f87d46bc88fb343828f96b285edd2e7ff0))
+
 ## [2.8.2-next.1](https://github.com/warp-ds/elements/compare/v2.8.1...v2.8.2-next.1) (2026-03-10)
 
 
