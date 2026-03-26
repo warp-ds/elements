@@ -9,6 +9,11 @@ describe('w-affix React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-affix', {});
+    expect(warnings).toEqual([]);
+  });
+
   test('with label hydrates without warnings', async () => {
     const warnings = await testHydration('w-affix', {
       label: 'kr',

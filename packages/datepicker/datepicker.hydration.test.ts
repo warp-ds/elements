@@ -9,7 +9,12 @@ describe('w-datepicker React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default datepicker hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-datepicker', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with label hydrates without warnings', async () => {
     const warnings = await testHydration('w-datepicker', {
       label: 'Date',
     });

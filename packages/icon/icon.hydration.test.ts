@@ -9,7 +9,13 @@ describe('w-icon React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default icon hydrates without warnings', async () => {
+  // Fails because component sets default size/locale attributes
+  test.fails('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-icon', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with name hydrates without warnings', async () => {
     const warnings = await testHydration('w-icon', {
       name: 'Check',
     });

@@ -13,7 +13,12 @@ describe('w-checkbox-group React SSR hydration', () => {
   // Note: w-checkbox-group requires w-checkbox children to function properly.
   // Testing the parent element alone to verify its own attributes don't cause mismatch.
 
-  test('empty checkbox-group hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-checkbox-group', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with label hydrates without warnings', async () => {
     const warnings = await testHydration('w-checkbox-group', { label: 'Options' });
     expect(warnings).toEqual([]);
   });

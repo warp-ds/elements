@@ -13,7 +13,12 @@ describe('w-switch React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test.fails('default state hydrates without warnings', async () => {
+  test.fails('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-switch', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test.fails('with aria-label hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       'aria-label': 'Toggle notifications',
     });

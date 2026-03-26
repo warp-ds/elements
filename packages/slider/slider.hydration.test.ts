@@ -13,7 +13,12 @@ describe('w-slider React SSR hydration', () => {
   // w-slider sets default reflected attributes (error="", suffix="") and
   // inline styles in connectedCallback, causing hydration mismatches.
 
-  test.fails('empty slider hydrates without warnings', async () => {
+  test.fails('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-slider', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test.fails('with label and range hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100' });
     expect(warnings).toEqual([]);
   });

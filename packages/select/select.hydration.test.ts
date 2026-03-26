@@ -9,7 +9,7 @@ describe('w-select React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default select hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-select', {});
     expect(warnings).toEqual([]);
   });

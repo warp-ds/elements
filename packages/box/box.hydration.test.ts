@@ -9,7 +9,7 @@ describe('w-box React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default box hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-box', {});
     expect(warnings).toEqual([]);
   });

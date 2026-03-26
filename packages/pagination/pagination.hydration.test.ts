@@ -9,7 +9,12 @@ describe('w-pagination React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default pagination hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-pagination', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with base-url and pages hydrates without warnings', async () => {
     const warnings = await testHydration('w-pagination', {
       'base-url': '/page/',
       pages: 10,

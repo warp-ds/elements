@@ -9,7 +9,12 @@ describe('w-page-indicator React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default page-indicator hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-page-indicator', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with page-count and selected-page hydrates without warnings', async () => {
     const warnings = await testHydration('w-page-indicator', {
       'page-count': 5,
       'selected-page': 1,

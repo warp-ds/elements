@@ -9,7 +9,7 @@ describe('w-pill React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default filter pill hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-pill', {});
     expect(warnings).toEqual([]);
   });

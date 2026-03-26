@@ -9,7 +9,7 @@ describe('w-combobox React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default combobox hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-combobox', {});
     expect(warnings).toEqual([]);
   });

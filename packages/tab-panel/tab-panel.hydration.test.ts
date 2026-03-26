@@ -9,7 +9,12 @@ describe('w-tab-panel React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default tab-panel hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-tab-panel', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with id hydrates without warnings', async () => {
     const warnings = await testHydration('w-tab-panel', { id: 'panel1' });
     expect(warnings).toEqual([]);
   });

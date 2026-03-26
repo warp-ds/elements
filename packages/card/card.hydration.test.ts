@@ -9,7 +9,7 @@ describe('w-card React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default card hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-card', {});
     expect(warnings).toEqual([]);
   });

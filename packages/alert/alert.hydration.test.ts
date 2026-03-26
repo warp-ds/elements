@@ -9,6 +9,11 @@ describe('w-alert React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-alert', {});
+    expect(warnings).toEqual([]);
+  });
+
   test('info alert hydrates without warnings', async () => {
     const warnings = await testHydration('w-alert', {
       variant: 'info',

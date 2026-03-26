@@ -9,7 +9,12 @@ describe('w-expandable React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default expandable hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-expandable', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with title hydrates without warnings', async () => {
     const warnings = await testHydration('w-expandable', {
       title: 'Show more',
     });

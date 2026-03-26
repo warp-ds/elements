@@ -9,6 +9,11 @@ describe('w-dead-toggle React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-dead-toggle', {});
+    expect(warnings).toEqual([]);
+  });
+
   test('checkbox type hydrates without warnings', async () => {
     const warnings = await testHydration('w-dead-toggle', {
       type: 'checkbox',

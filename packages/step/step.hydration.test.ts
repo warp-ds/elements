@@ -9,7 +9,7 @@ describe('w-step React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default step hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-step', {});
     expect(warnings).toEqual([]);
   });

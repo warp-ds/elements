@@ -9,7 +9,7 @@ describe('w-modal React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default modal hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-modal', {});
     expect(warnings).toEqual([]);
   });

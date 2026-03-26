@@ -10,7 +10,7 @@ describe('w-button React SSR hydration', () => {
   });
 
   // Fails because component sets variant="secondary" by default
-  test.fails('default button hydrates without warnings', async () => {
+  test.fails('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-button', {});
     expect(warnings).toEqual([]);
   });

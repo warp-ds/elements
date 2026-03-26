@@ -10,7 +10,13 @@ describe('w-checkbox React SSR hydration', () => {
   });
 
   // Fails because component sets type="checkbox" and tabindex="0" in connectedCallback
-  test.fails('default checkbox hydrates without warnings', async () => {
+  test.fails('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-checkbox', {});
+    expect(warnings).toEqual([]);
+  });
+
+  // Fails because component sets type="checkbox" and tabindex="0" in connectedCallback
+  test.fails('with name hydrates without warnings', async () => {
     const warnings = await testHydration('w-checkbox', {
       name: 'agree',
     });

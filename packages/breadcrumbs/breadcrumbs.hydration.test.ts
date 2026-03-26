@@ -9,7 +9,7 @@ describe('w-breadcrumbs React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default breadcrumbs hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-breadcrumbs', {});
     expect(warnings).toEqual([]);
   });

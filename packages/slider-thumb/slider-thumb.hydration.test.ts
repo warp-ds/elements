@@ -17,7 +17,12 @@ describe('w-slider-thumb React SSR hydration', () => {
   // Note: w-slider-thumb is typically used within w-slider, which syncs properties.
   // Testing the element alone to verify its own attributes don't cause mismatch.
 
-  test('default slider-thumb hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-slider-thumb', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with value hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider-thumb', { value: '50' });
     expect(warnings).toEqual([]);
   });

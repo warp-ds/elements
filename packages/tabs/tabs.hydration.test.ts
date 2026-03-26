@@ -13,7 +13,7 @@ describe('w-tabs React SSR hydration', () => {
   // Testing the parent element alone to verify its own attributes don't cause mismatch.
   // Full parent/child hydration requires React component wrappers or framework integration.
 
-  test('empty tabs element hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-tabs', {});
     expect(warnings).toEqual([]);
   });

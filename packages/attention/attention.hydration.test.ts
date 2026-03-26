@@ -10,6 +10,12 @@ describe('w-attention React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
+  // Fails because component sets default attributes when no placement is specified
+  test.fails('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-attention');
+    expect(warnings).toEqual([]);
+  });
+
   test('tooltip hydrates without warnings', async () => {
     const warnings = await testHydration('w-attention', {
       tooltip: true,

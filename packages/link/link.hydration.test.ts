@@ -9,7 +9,12 @@ describe('w-link React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test('default link hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
+    const warnings = await testHydration('w-link', {});
+    expect(warnings).toEqual([]);
+  });
+
+  test('with href hydrates without warnings', async () => {
     const warnings = await testHydration('w-link', {
       href: 'https://example.com',
     });
