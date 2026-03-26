@@ -93,7 +93,7 @@ class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
   show = false;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: false })
   placement: Directions;
 
   @property({ type: Boolean, reflect: true })
