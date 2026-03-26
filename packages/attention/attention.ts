@@ -338,6 +338,9 @@ class WarpAttention extends LitElement {
   }
 
   updated() {
+    // Guard against updates after element is disconnected
+    if (!this._attentionEl) return;
+
     if (!this.callout) {
       this._attentionEl.style.setProperty('--attention-visibility', this.show ? '' : 'hidden');
     }

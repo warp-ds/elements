@@ -36,12 +36,14 @@ const ccSwitch = {
 };
 
 export class WarpSwitch extends FormControlMixin(LitElement) {
+  // String properties without defaults to avoid reflecting empty attributes
   @property({ type: String, reflect: true })
-  name = '';
+  name: string;
 
   @property({ type: String, reflect: true })
-  value = '';
+  value: string;
 
+  // Boolean properties can have defaults - Lit doesn't reflect false values
   @property({ type: Boolean, reflect: true })
   checked = false;
 
@@ -50,9 +52,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   // capture the initial state using connectedCallback and #initialState
   #initialState: boolean | null = null;
-
-  // Track if first update has completed to avoid hydration mismatches
-  #hasInitialized = false;
 
   static styles = [
     reset,
@@ -149,10 +148,17 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   /** @internal */
   _syncA11yState() {
-    this.internals.ariaChecked = this.checked ? 'true' : 'false';
-    // Only set tabIndex after first update to avoid React hydration mismatches
-    if (this.#hasInitialized) {
-      this.tabIndex = this.disabled ? -1 : 0;
+    const ariaCheckedValue = this.checked ? 'true' : 'false';
+    // Set aria-checked as attribute for axe-core and ElementInternals for AT
+    if (this.getAttribute('aria-checked') !== ariaCheckedValue) {
+      this.setAttribute('aria-checked', ariaCheckedValue);
+    }
+    this.internals.ariaChecked = ariaCheckedValue;
+    // Update tabIndex based on disabled state
+    // Only set if different to minimize DOM changes for hydration
+    const expectedTabIndex = this.disabled ? -1 : 0;
+    if (this.tabIndex !== expectedTabIndex) {
+      this.tabIndex = expectedTabIndex;
     }
     if (this.disabled) {
       this.internals.ariaDisabled = 'true';
@@ -164,13 +170,15 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
-    // Use ElementInternals for ARIA to avoid hydration mismatches
+    // Set role as attribute for axe-core visibility and ElementInternals for AT
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'switch');
+    }
     this.internals.role = 'switch';
-    // Sync any existing aria-label to internals
+    // Sync aria-label to internals (keep attribute for hydration compatibility)
     const ariaLabel = this.getAttribute('aria-label');
     if (ariaLabel) {
       this.internals.ariaLabel = ariaLabel;
-      this.removeAttribute('aria-label');
     }
     if (!this.disabled) {
       this.setValue(this.checked && this.value ? this.value : null);
@@ -196,12 +204,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     if (changedProperties.has('checked') || changedProperties.has('disabled')) {
       this._syncA11yState();
     }
-  }
-
-  firstUpdated() {
-    // Set tabIndex after first render to avoid React hydration mismatches
-    this.#hasInitialized = true;
-    this.tabIndex = this.disabled ? -1 : 0;
   }
 
   resetFormControl(): void {

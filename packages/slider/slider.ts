@@ -195,7 +195,7 @@ class WarpSlider extends LitElement {
       this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
       this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
       this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot.querySelector('w-textfield');
-    } else {
+    } else if (sliderThumbs.length === 1) {
       const sliderThumbsArr = Array.from(sliderThumbs);
       this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
       this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
