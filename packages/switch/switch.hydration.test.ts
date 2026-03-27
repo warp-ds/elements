@@ -4,6 +4,9 @@ import { setupHydrationWarningCapture, testHydration } from '../../tests/react-h
 // Import the custom element definition
 import './switch.js';
 
+// Switch uses ElementInternals for role/aria-checked/aria-disabled and
+// delegatesFocus for keyboard accessibility. No host attributes needed.
+
 describe('w-switch React SSR hydration', () => {
   beforeEach(() => {
     setupHydrationWarningCapture();
@@ -13,19 +16,19 @@ describe('w-switch React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  test.fails('default (no attributes) hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {});
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with aria-label hydrates without warnings', async () => {
+  test('with aria-label hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       'aria-label': 'Toggle notifications',
     });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('checked state hydrates without warnings', async () => {
+  test('checked state hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       checked: true,
       'aria-label': 'Toggle notifications',
@@ -33,7 +36,7 @@ describe('w-switch React SSR hydration', () => {
     expect(warnings).toEqual([]);
   });
 
-  test.fails('disabled state hydrates without warnings', async () => {
+  test('disabled state hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       disabled: true,
       'aria-label': 'Toggle notifications',
@@ -41,7 +44,7 @@ describe('w-switch React SSR hydration', () => {
     expect(warnings).toEqual([]);
   });
 
-  test.fails('checked and disabled state hydrates without warnings', async () => {
+  test('checked and disabled state hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       checked: true,
       disabled: true,
@@ -50,7 +53,7 @@ describe('w-switch React SSR hydration', () => {
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with name and value hydrates without warnings', async () => {
+  test('with name and value hydrates without warnings', async () => {
     const warnings = await testHydration('w-switch', {
       name: 'notifications',
       value: 'enabled',
