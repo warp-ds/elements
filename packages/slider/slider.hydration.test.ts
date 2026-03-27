@@ -9,36 +9,32 @@ describe('w-slider React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  // Note: w-slider requires w-slider-thumb children to function properly.
-  // w-slider sets default reflected attributes (error="", suffix="") and
-  // inline styles in connectedCallback, causing hydration mismatches.
-
-  test.fails('default (no attributes) hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', {});
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with label and range hydrates without warnings', async () => {
+  test('with label and range hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100' });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with step hydrates without warnings', async () => {
+  test('with step hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100', step: 10 });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('disabled slider hydrates without warnings', async () => {
+  test('disabled slider hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100', disabled: true });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with suffix hydrates without warnings', async () => {
+  test('with suffix hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100', suffix: '%' });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with help-text hydrates without warnings', async () => {
+  test('with help-text hydrates without warnings', async () => {
     const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100', 'help-text': 'Select a value' });
     expect(warnings).toEqual([]);
   });

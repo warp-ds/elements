@@ -39,10 +39,13 @@ export class WarpTab extends LitElement {
   }
 
   @property({ attribute: 'id', reflect: true })
-  id = '';
+  id: string;
 
   @property({ attribute: 'for', reflect: true })
-  for = '';
+  for: string;
+
+  // Track whether hydration is complete (for avoiding hydration mismatch)
+  #hydrationComplete = false;
 
   @property({ attribute: 'aria-selected' })
   ariaSelected: 'true' | 'false';
@@ -75,9 +78,24 @@ export class WarpTab extends LitElement {
     super.connectedCallback();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'tab';
-    // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
-    this.setAttribute('aria-controls', this.for);
     this.addEventListener('click', this._handleClick);
+  }
+
+  protected firstUpdated(): void {
+    // Delay DOM changes to after React hydration completes
+    // Using double RAF ensures we're past React's commit phase for Safari/Chrome
+    // Plus setTimeout as a fallback for Firefox timing quirks
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          this.#hydrationComplete = true;
+          // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
+          if (this.for) {
+            this.setAttribute('aria-controls', this.for);
+          }
+        }, 0);
+      });
+    });
   }
 
   disconnectedCallback() {
@@ -98,7 +116,8 @@ export class WarpTab extends LitElement {
       this._internals.ariaSelected = this.active ? 'true' : 'false';
     }
     // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
-    if (changedProperties.has('for')) {
+    // Only set after hydration to avoid mismatch
+    if (changedProperties.has('for') && this.#hydrationComplete && this.for) {
       this.setAttribute('aria-controls', this.for);
     }
   }

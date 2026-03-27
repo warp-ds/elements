@@ -9,23 +9,22 @@ describe('w-tab React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  // w-tab sets aria-controls in connectedCallback, causing hydration mismatch
-  test.fails('default (no attributes) hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-tab', {});
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with for hydrates without warnings', async () => {
+  test('with for hydrates without warnings', async () => {
     const warnings = await testHydration('w-tab', { for: 'panel1' });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('active tab hydrates without warnings', async () => {
+  test('active tab hydrates without warnings', async () => {
     const warnings = await testHydration('w-tab', { for: 'panel1', active: true });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with id hydrates without warnings', async () => {
+  test('with id hydrates without warnings', async () => {
     const warnings = await testHydration('w-tab', { for: 'panel1', id: 'tab1' });
     expect(warnings).toEqual([]);
   });

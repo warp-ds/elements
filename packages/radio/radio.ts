@@ -11,7 +11,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   static styles = [hostStyles, reset, radioStyles];
 
   /** The name of the radio, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name: string;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property({ reflect: true }) value: string | null = null;
@@ -37,8 +37,8 @@ export class WRadio extends FormControlMixin(LitElement) {
   // Track whether the user has interacted with the radio.
   #hasInteracted = false;
 
-  // Track whether tabindex was set automatically.
-  #autoTabIndex = false;
+  // Track whether hydration is complete (for avoiding hydration mismatch)
+  #hydrationComplete = false;
 
   constructor() {
     super();
@@ -49,15 +49,12 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    // kept for compat with old shared styling approach
-    this.setAttribute('type', 'radio');
     this.value = this.getAttribute('value') ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this.internals.role = 'radio';
     this.syncAriaDisabled();
-    this.syncTabIndex();
     this.syncFormValue();
     this.updateValidity();
   }
@@ -81,18 +78,29 @@ export class WRadio extends FormControlMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('checked')) {
-      this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
       this.syncAriaChecked();
+      // Uncheck other radios immediately (functional behavior)
       if (this.checked && !this.isInGroup()) {
         this.uncheckOtherRadios();
       }
-      this.syncTabIndex();
+      // Delay UI attributes and tabindex until after hydration
+      if (this.#hydrationComplete) {
+        this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
+        if (this.checked && !this.isInGroup()) {
+          this.syncStandaloneTabOrder();
+        }
+      }
     }
 
     if (changedProperties.has('disabled')) {
-      this[this.disabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.syncAriaDisabled();
-      this.syncTabIndex();
+      // Delay UI attributes and tabindex until after hydration
+      if (this.#hydrationComplete) {
+        this[this.disabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
+        if (!this.isInGroup()) {
+          this.syncStandaloneTabOrder();
+        }
+      }
     }
 
     if (changedProperties.has('invalid')) {
@@ -211,16 +219,32 @@ export class WRadio extends FormControlMixin(LitElement) {
     const activeRadio = checkedRadio ?? enabledRadios[0] ?? null;
 
     radios.forEach((radio) => {
-      if (radio.disabled) {
-        radio.tabIndex = -1;
-        return;
-      }
-
-      const hasTabIndexAttr = radio.hasAttribute('tabindex');
-      if (hasTabIndexAttr && !radio.#autoTabIndex) return;
-
       radio.tabIndex = radio === activeRadio ? 0 : -1;
-      radio.#autoTabIndex = true;
+    });
+  }
+
+  protected firstUpdated(): void {
+    // Delay DOM changes to after React hydration completes
+    // Using double RAF + setTimeout which is more reliable across browsers
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          this.#hydrationComplete = true;
+          // Set UI attributes that were skipped during hydration
+          if (this.checked) {
+            this.setAttribute('checked-ui', '');
+          }
+          if (this.disabled) {
+            this.setAttribute('disabled-ui', '');
+          }
+          // Set initial tabindex
+          if (!this.isInGroup()) {
+            this.syncStandaloneTabOrder();
+          } else if (this.disabled) {
+            this.tabIndex = -1;
+          }
+        }, 0);
+      });
     });
   }
 
@@ -275,27 +299,6 @@ export class WRadio extends FormControlMixin(LitElement) {
     }
 
     this.setValue(this.checked ? this.value : null);
-  }
-
-  private syncTabIndex(): void {
-    if (!this.hasAttribute('tabindex') && !this.#autoTabIndex) {
-      this.#autoTabIndex = true;
-      // Default to tabbable; group roving tabindex logic may override this later.
-      this.tabIndex = 0;
-    }
-
-    if (this.isInGroup()) {
-      if (this.disabled) {
-        this.tabIndex = -1;
-      }
-      return;
-    }
-
-    // Standalone radios manage their own tabindex. Grouped radios are managed by the parent radio-group.
-    const hasTabIndexAttr = this.hasAttribute('tabindex');
-    if (hasTabIndexAttr && !this.#autoTabIndex) return;
-
-    this.syncStandaloneTabOrder();
   }
 
   private shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {

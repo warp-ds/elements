@@ -15,7 +15,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name: string;
 
   /** The value of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) value: string | null = null;
@@ -44,18 +44,12 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   // Track whether the user has interacted with the checkbox.
   #hasInteracted = false;
 
-  // Track whether tabindex was set automatically.
-  #autoTabIndex = false;
-
   connectedCallback() {
     super.connectedCallback();
-    // kept for compat with old shared styling approach
-    this.setAttribute('type', 'checkbox');
     const attrValue = this.getAttribute('value');
     this.value = attrValue ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
-    this.#syncTabIndex();
     this.addEventListener('invalid', this.#handleInvalid);
     this.addEventListener('keydown', this.#handleKeyDown);
     this.#syncFormValue();
@@ -98,10 +92,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     if (this.#shouldSyncFormState(changedProperties)) {
       this.#syncFormValue();
       this.#updateValidity();
-    }
-
-    if (changedProperties.has('disabled')) {
-      this.#syncTabIndex();
     }
   }
 
@@ -221,14 +211,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 
   /** @internal */
-  #syncTabIndex(): void {
-    const hasTabIndexAttr = this.hasAttribute('tabindex');
-    if (hasTabIndexAttr && !this.#autoTabIndex) return;
-    this.tabIndex = this.disabled ? -1 : 0;
-    this.#autoTabIndex = true;
-  }
-
-  /** @internal */
   #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
     return (
       changedProperties.has('checked') ||
@@ -250,7 +232,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             part="input"
             class="input hide-toggle"
             type="checkbox"
-            name=${this.name}
+            name=${ifDefined(this.name)}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}

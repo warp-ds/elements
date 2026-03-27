@@ -110,8 +110,9 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       );
       await page.container.querySelector('w-tabs').updateComplete;
       // Check aria-controls is set correctly on tabs
+      // aria-controls is set after a delay to avoid hydration mismatch, so poll for it
       const firstTab = page.container.querySelector('w-tab') as WarpTab;
-      expect(firstTab.getAttribute('aria-controls')).toBe('fellowship');
+      await expect.poll(() => firstTab.getAttribute('aria-controls')).toBe('fellowship');
       expect(firstTab.textContent?.trim()).toBe('Fellowship');
     });
   });

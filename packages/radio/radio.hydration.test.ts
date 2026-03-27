@@ -9,28 +9,27 @@ describe('w-radio React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  // w-radio sets type attribute and tabindex in connectedCallback
-  test.fails('default (no attributes) hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-radio', {});
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with value hydrates without warnings', async () => {
+  test('with value hydrates without warnings', async () => {
     const warnings = await testHydration('w-radio', { value: 'option1' });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('with name hydrates without warnings', async () => {
+  test('with name hydrates without warnings', async () => {
     const warnings = await testHydration('w-radio', { value: 'option1', name: 'options' });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('checked radio hydrates without warnings', async () => {
+  test('checked radio hydrates without warnings', async () => {
     const warnings = await testHydration('w-radio', { value: 'option1', checked: true });
     expect(warnings).toEqual([]);
   });
 
-  test.fails('disabled radio hydrates without warnings', async () => {
+  test('disabled radio hydrates without warnings', async () => {
     const warnings = await testHydration('w-radio', { value: 'option1', disabled: true });
     expect(warnings).toEqual([]);
   });
