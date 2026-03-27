@@ -1,4 +1,5 @@
 import { css, html, LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
 
@@ -15,8 +16,14 @@ export class WarpTabPanel extends LitElement {
     reset,
     styles,
     css`
-      :host(:not([active])) {
+      :host {
+        display: block;
+      }
+      .panel-content {
         display: none;
+      }
+      .panel-content[data-active] {
+        display: block;
       }
     `,
   ];
@@ -28,14 +35,52 @@ export class WarpTabPanel extends LitElement {
     this._internals = this.attachInternals();
   }
 
+  /**
+   * Whether this panel is active (visible).
+   * Set by parent w-tabs via the _parentActive property.
+   */
+  @property({ type: Boolean })
+  set active(value: boolean) {
+    this._ownActive = value;
+  }
+  get active(): boolean {
+    return this._parentActive ?? this._ownActive ?? false;
+  }
+  private _ownActive: boolean | undefined;
+
+  /**
+   * Internal active state managed by parent w-tabs.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _parentActive: boolean | undefined;
+
+  /**
+   * Internal aria-labelledby managed by parent w-tabs.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _parentAriaLabelledBy: string | undefined;
+
   connectedCallback() {
     super.connectedCallback();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'tabpanel';
   }
 
+  updated() {
+    // Sync aria-labelledby to ElementInternals (no DOM attribute needed)
+    // Use type assertion as TypeScript DOM types may not include this property
+    if (this._parentAriaLabelledBy) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this._internals as any).ariaLabelledBy = this._parentAriaLabelledBy;
+    }
+  }
+
   render() {
-    return html`<slot></slot>`;
+    return html`<div class="panel-content" ?data-active=${this.active}><slot></slot></div>`;
   }
 }
 

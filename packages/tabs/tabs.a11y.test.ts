@@ -109,10 +109,10 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
         </w-tabs>`,
       );
       await page.container.querySelector('w-tabs').updateComplete;
-      // Check aria-controls is set correctly on tabs
-      // aria-controls is set after a delay to avoid hydration mismatch, so poll for it
+      // Check aria-controls is set correctly on tabs (on internal button with delegatesFocus)
       const firstTab = page.container.querySelector('w-tab') as WarpTab;
-      await expect.poll(() => firstTab.getAttribute('aria-controls')).toBe('fellowship');
+      const internalButton = firstTab.shadowRoot?.querySelector('button');
+      expect(internalButton?.getAttribute('aria-controls')).toBe('fellowship');
       expect(firstTab.textContent?.trim()).toBe('Fellowship');
     });
   });
@@ -213,8 +213,9 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
         (tab: WarpTab) => tab.ariaSelected === 'false'
       ) as WarpTab[];
       expect(inactiveTabs).toHaveLength(2);
+      // Check tabIndex property (not attribute) since delegatesFocus is used
       for (const tab of inactiveTabs) {
-        await expect.element(tab).toHaveAttribute("tabindex", "-1");
+        expect(tab.tabIndex).toBe(-1);
       }
     });
   });

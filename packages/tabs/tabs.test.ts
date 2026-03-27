@@ -5,6 +5,7 @@ import { render } from 'vitest-browser-lit';
 import '../tab/tab.js';
 import '../tab-panel/tab-panel.js';
 import './tabs.js';
+import type { WarpTabPanel } from '../tab-panel/tab-panel.js';
 
 test('renders the different tab components', async () => {
   const component = html`<w-tabs>
@@ -89,7 +90,7 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
 });
 
-test('tab-panel visibility is controlled by active attribute (not hidden) to avoid hydration mismatch', async () => {
+test('tab-panel visibility is controlled via internal shadow DOM (no host attribute changes) to avoid hydration mismatch', async () => {
   const component = html`<w-tabs>
     <w-tab for="panel1">Tab 1</w-tab>
     <w-tab-panel id="panel1">
@@ -107,11 +108,18 @@ test('tab-panel visibility is controlled by active attribute (not hidden) to avo
   // Wait for tabs component to initialize
   await page.container.querySelector('w-tabs').updateComplete;
 
-  const panels = page.container.querySelectorAll('w-tab-panel');
+  const panels = page.container.querySelectorAll('w-tab-panel') as NodeListOf<WarpTabPanel>;
 
-  // Active panel gets 'active' attribute, not 'hidden' (avoids hydration mismatch)
-  expect(panels[0].hasAttribute('active')).toBe(true);
-  expect(panels[1].hasAttribute('active')).toBe(false);
+  // Visibility is controlled via internal shadow DOM elements, not host attributes
+  // This avoids hydration mismatches when parent sets _parentActive
+  expect(panels[0].active).toBe(true);
+  expect(panels[1].active).toBe(false);
+
+  // Internal shadow DOM wrapper has data-active attribute for CSS visibility
+  const activeWrapper = panels[0].shadowRoot?.querySelector('.panel-content');
+  const inactiveWrapper = panels[1].shadowRoot?.querySelector('.panel-content');
+  expect(activeWrapper?.hasAttribute('data-active')).toBe(true);
+  expect(inactiveWrapper?.hasAttribute('data-active')).toBe(false);
 
   // Verify visibility works correctly
   await expect.element(page.getByText('Content 1')).toBeVisible();
