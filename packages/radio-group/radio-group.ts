@@ -143,7 +143,8 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     radios.forEach((radio) => {
       const isSelected = radio === selected;
       radio.checked = isSelected;
-      radio.setAttribute('tabindex', isSelected ? '0' : '-1');
+      // Use non-reflecting property to avoid DOM changes during hydration
+      radio._groupTabIndex = isSelected ? 0 : -1;
     });
   }
 
@@ -208,8 +209,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private syncTabOrder(radios: WRadio[]) {
+    // Use non-reflecting _groupTabIndex property to avoid DOM changes during hydration
     if (this.disabled) {
-      radios.forEach((radio) => (radio.tabIndex = -1));
+      radios.forEach((radio) => (radio._groupTabIndex = -1));
       return;
     }
 
@@ -218,13 +220,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
 
     if (enabledRadios.length > 0) {
       if (checkedRadio) {
-        enabledRadios.forEach((radio) => (radio.tabIndex = radio.checked ? 0 : -1));
+        enabledRadios.forEach((radio) => (radio._groupTabIndex = radio.checked ? 0 : -1));
       } else {
-        enabledRadios.forEach((radio, index) => (radio.tabIndex = index === 0 ? 0 : -1));
+        enabledRadios.forEach((radio, index) => (radio._groupTabIndex = index === 0 ? 0 : -1));
       }
     }
 
-    radios.filter((radio) => radio.disabled).forEach((radio) => (radio.tabIndex = -1));
+    radios.filter((radio) => radio.disabled).forEach((radio) => (radio._groupTabIndex = -1));
   }
 
   private emitSelectionChange = () => {

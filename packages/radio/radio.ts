@@ -10,6 +10,12 @@ import { styles as radioStyles } from './radio-styles';
 export class WRadio extends FormControlMixin(LitElement) {
   static styles = [hostStyles, reset, radioStyles];
 
+  // Use delegatesFocus so focus delegates to the internal wrapper element
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   /** The name of the radio, submitted as a name/value pair with form data. */
   @property({ reflect: true }) name: string;
 
@@ -28,6 +34,30 @@ export class WRadio extends FormControlMixin(LitElement) {
   /** Draws the radio in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /**
+   * Internal tabindex managed by parent radio-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupTabIndex: number | undefined;
+
+  /**
+   * Override tabIndex getter to return the computed internal tabIndex.
+   * This allows external code to check if the radio is focusable.
+   */
+  override get tabIndex(): number {
+    return this._internalTabIndex;
+  }
+
+  /**
+   * Override tabIndex setter to set _groupTabIndex (for backwards compatibility).
+   * Radio-group should use _groupTabIndex directly for clarity.
+   */
+  override set tabIndex(value: number) {
+    this._groupTabIndex = value;
+  }
+
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
 
@@ -36,9 +66,6 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   // Track whether the user has interacted with the radio.
   #hasInteracted = false;
-
-  // Track whether hydration is complete (for avoiding hydration mismatch)
-  #hydrationComplete = false;
 
   constructor() {
     super();
@@ -82,24 +109,14 @@ export class WRadio extends FormControlMixin(LitElement) {
       // Uncheck other radios immediately (functional behavior)
       if (this.checked && !this.isInGroup()) {
         this.uncheckOtherRadios();
-      }
-      // Delay UI attributes and tabindex until after hydration
-      if (this.#hydrationComplete) {
-        this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
-        if (this.checked && !this.isInGroup()) {
-          this.syncStandaloneTabOrder();
-        }
+        this.syncStandaloneTabOrder();
       }
     }
 
     if (changedProperties.has('disabled')) {
       this.syncAriaDisabled();
-      // Delay UI attributes and tabindex until after hydration
-      if (this.#hydrationComplete) {
-        this[this.disabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
-        if (!this.isInGroup()) {
-          this.syncStandaloneTabOrder();
-        }
+      if (!this.isInGroup()) {
+        this.syncStandaloneTabOrder();
       }
     }
 
@@ -219,33 +236,34 @@ export class WRadio extends FormControlMixin(LitElement) {
     const activeRadio = checkedRadio ?? enabledRadios[0] ?? null;
 
     radios.forEach((radio) => {
-      radio.tabIndex = radio === activeRadio ? 0 : -1;
+      radio._standaloneTabIndex = radio === activeRadio ? 0 : -1;
     });
   }
 
+  /**
+   * Computed tabindex for the internal focusable element.
+   * Priority: group-managed > standalone-managed > default
+   */
+  private get _internalTabIndex(): number {
+    if (this.disabled) return -1;
+    if (this._groupTabIndex !== undefined) return this._groupTabIndex;
+    if (this._standaloneTabIndex !== undefined) return this._standaloneTabIndex;
+    // Default: first radio in standalone group is focusable
+    return 0;
+  }
+
+  /**
+   * Internal tabindex for standalone radios (not in a group).
+   * Non-reflecting to avoid DOM changes during hydration.
+   */
+  @property({ attribute: false })
+  _standaloneTabIndex: number | undefined;
+
   protected firstUpdated(): void {
-    // Delay DOM changes to after React hydration completes
-    // Using double RAF + setTimeout which is more reliable across browsers
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          this.#hydrationComplete = true;
-          // Set UI attributes that were skipped during hydration
-          if (this.checked) {
-            this.setAttribute('checked-ui', '');
-          }
-          if (this.disabled) {
-            this.setAttribute('disabled-ui', '');
-          }
-          // Set initial tabindex
-          if (!this.isInGroup()) {
-            this.syncStandaloneTabOrder();
-          } else if (this.disabled) {
-            this.tabIndex = -1;
-          }
-        }, 0);
-      });
-    });
+    // Initialize standalone tab order if not in a group
+    if (!this.isInGroup()) {
+      this.syncStandaloneTabOrder();
+    }
   }
 
   private uncheckOtherRadios(): void {
@@ -313,7 +331,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div class="wrapper">
+      <div class="wrapper" tabindex="${this._internalTabIndex}">
         <div part="control" class="control"></div>
         <slot part="label" class="label"></slot>
       </div>
