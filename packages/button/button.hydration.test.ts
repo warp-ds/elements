@@ -9,8 +9,7 @@ describe('w-button React SSR hydration', () => {
     window.__HYDRATION_WARNINGS__ = [];
   });
 
-  // Fails because component sets variant="secondary" by default
-  test.fails('default (no attributes) hydrates without warnings', async () => {
+  test('default (no attributes) hydrates without warnings', async () => {
     const warnings = await testHydration('w-button', {});
     expect(warnings).toEqual([]);
   });
@@ -29,24 +28,21 @@ describe('w-button React SSR hydration', () => {
     expect(warnings).toEqual([]);
   });
 
-  // Fails because component sets variant="secondary" by default
-  test.fails('with loading state hydrates without warnings', async () => {
+  test('with loading state hydrates without warnings', async () => {
     const warnings = await testHydration('w-button', {
       loading: true,
     });
     expect(warnings).toEqual([]);
   });
 
-  // Fails because component sets variant="secondary" by default
-  test.fails('with disabled state hydrates without warnings', async () => {
+  test('with disabled state hydrates without warnings', async () => {
     const warnings = await testHydration('w-button', {
       disabled: true,
     });
     expect(warnings).toEqual([]);
   });
 
-  // Fails because component sets variant="secondary" by default
-  test.fails('with href hydrates without warnings', async () => {
+  test('with href hydrates without warnings', async () => {
     const warnings = await testHydration('w-button', {
       href: 'https://example.com',
     });

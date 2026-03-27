@@ -218,7 +218,6 @@ class WarpButton extends FormControlMixin(LitElement) {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-    this.variant = 'secondary';
     this.ariaValueTextLoading = i18n._({
       id: 'button.aria.loading',
       message: 'Loading...',
@@ -229,7 +228,8 @@ class WarpButton extends FormControlMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!variants.includes(this.variant)) {
+    const effectiveVariant = this.variant || 'secondary';
+    if (!variants.includes(effectiveVariant)) {
       throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(', ')}.`);
     }
 
@@ -304,13 +304,14 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
   /** @internal */
   get _classes() {
+    const variant = this.variant || 'secondary';
     return classNames(this.buttonClass, [
-      this.variant === 'primary' && this._primaryClasses,
-      this.variant === 'secondary' && this._secondaryClasses,
-      this.variant === 'utility' && this._utilityClasses,
-      this.variant === 'negative' && this._negativeClasses,
-      this.variant === 'pill' && this._pillClasses,
-      this.variant === 'link' && this._linkClasses,
+      variant === 'primary' && this._primaryClasses,
+      variant === 'secondary' && this._secondaryClasses,
+      variant === 'utility' && this._utilityClasses,
+      variant === 'negative' && this._negativeClasses,
+      variant === 'pill' && this._pillClasses,
+      variant === 'link' && this._linkClasses,
       this.href && ccButton.linkAsButton,
       this.fullWidth ? ccButton.fullWidth : ccButton.contentWidth,
     ]);
@@ -327,12 +328,13 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
 
   render() {
+    const variant = this.variant || 'secondary';
     return html` ${
       this.href
         ? html`<w-link
           href=${this.href}
           target=${this.target}
-          variant=${this.variant}
+          variant=${variant}
           ?small=${this.small}
           ?quiet=${this.quiet}
           ?loading=${this.loading}
