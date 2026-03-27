@@ -15,7 +15,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name: string;
+  @property({ reflect: true })
+  set name(value: string | undefined) {
+    this._ownName = value;
+  }
+  get name(): string | undefined {
+    return this._ownName || this._groupName;
+  }
+  private _ownName: string | undefined;
 
   /** The value of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) value: string | null = null;
@@ -35,6 +42,22 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   /** Draws the checkbox in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /**
+   * Internal invalid state managed by parent checkbox-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupInvalid: boolean | undefined;
+
+  /**
+   * Internal name managed by parent checkbox-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupName: string | undefined;
+
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
 
@@ -43,6 +66,11 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   // Track whether the user has interacted with the checkbox.
   #hasInteracted = false;
+
+  /** Computed invalid state: combines own invalid with group invalid */
+  get _computedInvalid(): boolean {
+    return this.invalid || this._groupInvalid === true;
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -232,14 +260,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             part="input"
             class="input hide-toggle"
             type="checkbox"
-            name=${ifDefined(this.name)}
+            name=${ifDefined(this.name || undefined)}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
             aria-checked=${ariaChecked}
-            aria-invalid=${ifDefined(this.invalid ? 'true' : undefined)}
+            aria-invalid=${ifDefined(this._computedInvalid ? 'true' : undefined)}
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>

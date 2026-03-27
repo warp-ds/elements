@@ -37,4 +37,14 @@ describe('w-checkbox-group React SSR hydration', () => {
     const warnings = await testHydration('w-checkbox-group', { label: 'Options', 'help-text': 'Select one or more' });
     expect(warnings).toEqual([]);
   });
+
+  test('invalid checkbox-group hydrates without warnings', async () => {
+    const warnings = await testHydration('w-checkbox-group', { label: 'Options', invalid: true });
+    expect(warnings).toEqual([]);
+  });
+
+  test('required checkbox-group hydrates without warnings', async () => {
+    const warnings = await testHydration('w-checkbox-group', { label: 'Options', required: true });
+    expect(warnings).toEqual([]);
+  });
 });
