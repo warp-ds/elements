@@ -68,16 +68,23 @@ export class WarpTabPanel extends LitElement {
     super.connectedCallback();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'tabpanel';
+    this.syncA11yState();
   }
 
   updated() {
     // Sync aria-labelledby to ElementInternals (no DOM attribute needed)
     // Property name is ariaLabelledBy (camelCase per ARIA IDL spec)
     // Type assertion needed as TypeScript DOM types may not include this on ElementInternals
-    if (this._parentAriaLabelledBy) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (this._internals as any).ariaLabelledBy = this._parentAriaLabelledBy;
-    }
+    this.syncA11yState();
+  }
+
+  private syncA11yState() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const internals = this._internals as any;
+
+    internals.ariaLabelledBy = this._parentAriaLabelledBy || null;
+    // Keep inactive panels out of the accessibility tree without mutating host attributes.
+    internals.ariaHidden = this.active ? 'false' : 'true';
   }
 
   render() {
