@@ -36,12 +36,19 @@ const ccSwitch = {
 };
 
 export class WarpSwitch extends FormControlMixin(LitElement) {
+  // Use delegatesFocus so focus is delegated to the button inside shadow DOM
+  // This avoids needing tabindex on the host element (prevents hydration mismatch)
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   // String properties without defaults to avoid reflecting empty attributes
   @property({ type: String, reflect: true })
-  name: string;
+  name!: string;
 
   @property({ type: String, reflect: true })
-  value: string;
+  value!: string;
 
   // Boolean properties can have defaults - Lit doesn't reflect false values
   @property({ type: Boolean, reflect: true })
@@ -52,12 +59,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   // capture the initial state using connectedCallback and #initialState
   #initialState: boolean | null = null;
-
-  // Use delegatesFocus so focus is delegated to the button inside shadow DOM
-  // This avoids needing tabindex on the host element (prevents hydration mismatch)
-  protected override createRenderRoot() {
-    return this.attachShadow({ mode: 'open', delegatesFocus: true });
-  }
 
   static styles = [
     reset,

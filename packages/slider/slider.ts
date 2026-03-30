@@ -53,10 +53,10 @@ class WarpSlider extends LitElement {
   openEnded = false;
 
   @property({ type: String, reflect: true })
-  error: string;
+  error!: string;
 
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText!: string;
 
   @property({ type: Boolean, reflect: true })
   invalid = false;
@@ -80,7 +80,7 @@ class WarpSlider extends LitElement {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix: string;
+  suffix!: string;
 
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;

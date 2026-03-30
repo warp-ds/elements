@@ -45,10 +45,10 @@ export class WarpTab extends LitElement {
   }
 
   @property({ attribute: 'id', reflect: true })
-  id: string;
+  id!: string;
 
   @property({ attribute: 'for', reflect: true })
-  for: string;
+  for!: string;
 
   /**
    * Internal tabindex managed by parent w-tabs.

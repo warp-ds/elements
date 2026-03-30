@@ -17,7 +17,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   };
 
   /** The name of the radio, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name: string;
+  @property({ reflect: true }) name!: string;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property({ reflect: true }) value: string | null = null;

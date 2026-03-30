@@ -78,6 +78,13 @@ export async function testHydration(
  * Note: For custom elements with slotted children, we set innerHTML directly
  * rather than through React props, since React sees slotted content as light DOM
  * that the custom element manages.
+ *
+ * LIMITATION: This helper restores children AFTER hydration completes, so any
+ * DOM manipulation by the component (e.g., adding classes to children, moving
+ * children to shadow DOM) happens outside React's hydration window. This means
+ * components that modify light DOM children may pass these tests but still cause
+ * hydration mismatches in real SSR scenarios. Use separate DOM stability tests
+ * (like in breadcrumbs.hydration.test.ts) to verify child element handling.
  */
 export async function testHydrationWithChildren(
   tagName: string,

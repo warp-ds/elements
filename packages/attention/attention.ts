@@ -445,12 +445,11 @@ class WarpAttention extends LitElement {
   }
   setAriaLabels() {
     // Only modify light DOM after initialization to avoid React hydration mismatches
-    if (this._targetEl && !this._targetEl.getAttribute('aria-details')) {
-      const attentionMessageId = this._messageEl?.id || (this._messageEl ? (this._messageEl.id = generateRandomId()) : '');
-      if (attentionMessageId) {
-        this._targetEl.setAttribute('aria-details', attentionMessageId);
-      }
-    }
+    if (!this._targetEl || !this._messageEl) return;
+    if (this._targetEl.getAttribute('aria-details')) return;
+
+    const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
+    this._targetEl.setAttribute('aria-details', attentionMessageId);
   }
 
   firstUpdated() {

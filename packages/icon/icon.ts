@@ -33,7 +33,7 @@ export class WIcon extends LitElement {
 
   /** Icon filename (without .svg) */
   @property({ type: String, reflect: true })
-  name: string;
+  name!: string;
 
   /** Size: small, medium, large or pixel value (e.g. "32px") */
   @property({ type: String, reflect: true })

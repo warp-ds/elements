@@ -72,7 +72,8 @@ export class WarpTabPanel extends LitElement {
 
   updated() {
     // Sync aria-labelledby to ElementInternals (no DOM attribute needed)
-    // Use type assertion as TypeScript DOM types may not include this property
+    // Property name is ariaLabelledBy (camelCase per ARIA IDL spec)
+    // Type assertion needed as TypeScript DOM types may not include this on ElementInternals
     if (this._parentAriaLabelledBy) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (this._internals as any).ariaLabelledBy = this._parentAriaLabelledBy;
