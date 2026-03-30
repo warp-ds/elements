@@ -15,7 +15,7 @@ const ccTab = {
   contentUnderlined: 'content-underlined', // content-underlined is a no-op that prevents a quirk in how Vue handles class bindings
 };
 
-const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 p-0 inline-block';
+const ccButtonReset = 'focusable appearance-none cursor-pointer bg-transparent border-0 m-0 p-0 inline-block';
 
 /**
  * Individual tab component used within w-tabs container.
@@ -23,7 +23,20 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTab extends LitElement {
-  static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
+  static styles = [
+    reset,
+    styles,
+    css`
+      ::slotted([slot='icon']) {
+        display: flex;
+      }
+
+      button.focusable:focus-visible {
+        outline: 2px solid var(--w-s-color-border-focus, #1a73e8);
+        outline-offset: var(--w-outline-offset, 1px);
+      }
+    `,
+  ];
 
   // Use delegatesFocus so focus delegates to the internal button
   static shadowRootOptions = {

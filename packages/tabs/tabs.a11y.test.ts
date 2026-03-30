@@ -235,5 +235,40 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
         expect(tab.tabIndex).toBe(-1);
       }
     });
+
+    test('active tab shows visible focus indicator on keyboard focus', async () => {
+      const page = render(
+        html`<button type="button">Before</button>
+          <w-tabs active="towers">
+            <w-tab for="fellowship">Fellowship</w-tab>
+            <w-tab-panel id="fellowship"><p>And my axe!</p></w-tab-panel>
+
+            <w-tab for="towers">Towers</w-tab>
+            <w-tab-panel id="towers"><p>I am on nobody's side.</p></w-tab-panel>
+          </w-tabs>`,
+      );
+
+      await page.container.querySelector('w-tabs').updateComplete;
+
+      const beforeButton = page.getByRole('button', { name: 'Before' }).element() as HTMLButtonElement;
+      beforeButton.focus();
+      await expect.element(page.getByRole('button', { name: 'Before' })).toHaveFocus();
+
+      await userEvent.tab();
+
+      const selectedTab = [...page.container.querySelectorAll('w-tab')].find(
+        (tab: WarpTab) => tab.ariaSelected === 'true'
+      ) as WarpTab;
+      const internalButton = selectedTab.shadowRoot?.querySelector('button') as HTMLButtonElement | null;
+      expect(internalButton).not.toBeNull();
+      const activeEl = document.activeElement as HTMLElement;
+      expect(activeEl === selectedTab || activeEl === internalButton).toBe(true);
+
+      const hostStyle = getComputedStyle(selectedTab);
+      const buttonStyle = getComputedStyle(internalButton!);
+      const hostHasRing = hostStyle.outlineStyle === 'solid' && hostStyle.outlineWidth !== '0px';
+      const buttonHasRing = buttonStyle.outlineStyle === 'solid' && buttonStyle.outlineWidth !== '0px';
+      expect(hostHasRing || buttonHasRing).toBe(true);
+    });
   });
 });
