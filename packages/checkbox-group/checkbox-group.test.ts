@@ -74,17 +74,30 @@ test('required group toggles invalid state for group and children after submit a
   const submit = page.getByRole('button', { name: 'Submit' });
   const group = page.getByRole('group', { name: 'Preferences' });
   const firstCheckbox = page.getByRole('checkbox', { name: 'Foo' });
-  const firstCheckboxEl = document.querySelector('w-checkbox') as { click: () => void };
+  const firstCheckboxEl = document.querySelector('w-checkbox') as HTMLElement & {
+    click: () => void;
+    updateComplete?: Promise<unknown>;
+  };
+  await firstCheckboxEl.updateComplete;
+  const internalInput = firstCheckboxEl.shadowRoot?.querySelector('[part="input"]') as HTMLInputElement | null;
+  if (!internalInput) {
+    throw new Error('Expected checkbox input element to exist');
+  }
 
   await submit.click();
   await expect.poll(() => form.checkValidity()).toBe(false);
   await expect.element(group).toHaveAttribute('aria-invalid', 'true');
   await expect.element(firstCheckbox).toHaveAttribute('aria-invalid', 'true');
+  // Group invalid state should flow via aria-invalid on the internal input,
+  // while host invalid remains untouched (no host attribute mutation).
+  expect(firstCheckboxEl.hasAttribute('invalid')).toBe(false);
+  expect(internalInput.getAttribute('aria-invalid')).toBe('true');
 
   firstCheckboxEl.click();
   await expect.poll(() => form.checkValidity()).toBe(true);
   await expect.element(group).not.toHaveAttribute('aria-invalid', 'true');
   await expect.element(firstCheckbox).not.toHaveAttribute('aria-invalid', 'true');
+  expect(internalInput.getAttribute('aria-invalid')).toBeNull();
 });
 
 test('submits checked checkbox values via form data', async () => {
