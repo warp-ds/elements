@@ -41,6 +41,41 @@ function propsToHtml(props: Record<string, unknown>): string {
 }
 
 /**
+ * Converts a DOM node to a React element.
+ * Used to include children in the React tree for proper hydration testing.
+ */
+function nodeToReact(node: Node): React.ReactNode {
+  if (node.nodeType === Node.TEXT_NODE) {
+    return node.textContent;
+  }
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    const el = node as Element;
+    const props: Record<string, unknown> = {};
+    for (const attr of el.attributes) {
+      // Convert HTML attributes to React props
+      let name = attr.name;
+      if (name === 'class') name = 'className';
+      if (name === 'for') name = 'htmlFor';
+      props[name] = attr.value;
+    }
+    const children = Array.from(el.childNodes).map(nodeToReact).filter(Boolean);
+    return React.createElement(el.tagName.toLowerCase(), props, ...children);
+  }
+  return null;
+}
+
+/**
+ * Converts an HTML string to an array of React elements.
+ */
+function htmlToReactElements(html: string): React.ReactNode[] {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return Array.from(template.content.childNodes)
+    .map(nodeToReact)
+    .filter((node) => node !== null && (typeof node !== 'string' || node.trim()));
+}
+
+/**
  * Tests that a component hydrates without warnings.
  * Takes tag name and props, generates both SSR HTML and React element from them.
  */
@@ -59,8 +94,16 @@ export async function testHydration(
     container.innerHTML = ssrHtml;
 
     // Create React element from same props and hydrate
+    // Use onRecoverableError to capture hydration errors (React 19+)
     const element = React.createElement(tagName, props);
-    hydrateRoot(container, element);
+    hydrateRoot(container, element, {
+      onRecoverableError: (error: unknown) => {
+        const msg = error instanceof Error ? error.message : String(error);
+        if (msg.includes('Hydration') || msg.includes('hydrat') || msg.includes('did not match')) {
+          window.__HYDRATION_WARNINGS__.push(msg);
+        }
+      },
+    });
 
     // Wait for hydration, custom element upgrade, and async callbacks
     await new Promise((resolve) => setTimeout(resolve, 200));
@@ -75,16 +118,9 @@ export async function testHydration(
  * Tests hydration for parent/child component structures.
  * Takes parent tag, props, and children HTML string.
  *
- * Note: For custom elements with slotted children, we set innerHTML directly
- * rather than through React props, since React sees slotted content as light DOM
- * that the custom element manages.
- *
- * LIMITATION: This helper restores children AFTER hydration completes, so any
- * DOM manipulation by the component (e.g., adding classes to children, moving
- * children to shadow DOM) happens outside React's hydration window. This means
- * components that modify light DOM children may pass these tests but still cause
- * hydration mismatches in real SSR scenarios. Use separate DOM stability tests
- * (like in breadcrumbs.hydration.test.ts) to verify child element handling.
+ * This properly includes children in the React tree so that React can detect
+ * hydration mismatches when components modify their light DOM children
+ * (e.g., adding classes, moving children to shadow DOM).
  */
 export async function testHydrationWithChildren(
   tagName: string,
@@ -101,19 +137,20 @@ export async function testHydrationWithChildren(
     const ssrHtml = `<${tagName}${attrs ? ` ${attrs}` : ''}>${childrenHtml}</${tagName}>`;
     container.innerHTML = ssrHtml;
 
-    // For custom elements with children, hydrate just the parent element props.
-    // The children are slotted content that lives in light DOM and is managed
-    // by the custom element, not React.
-    const element = React.createElement(tagName, props);
-    hydrateRoot(container, element);
+    // Convert children HTML to React elements so they're part of React's tree.
+    // This allows React to detect mismatches when components modify children.
+    const reactChildren = htmlToReactElements(childrenHtml);
+    const element = React.createElement(tagName, props, ...reactChildren);
 
-    // After hydration, restore the children to the element
-    // (React will have cleared them since they weren't in the React tree)
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    const el = container.querySelector(tagName);
-    if (el && el.innerHTML !== childrenHtml.trim()) {
-      el.innerHTML = childrenHtml;
-    }
+    // Use onRecoverableError to capture hydration errors (React 19+)
+    hydrateRoot(container, element, {
+      onRecoverableError: (error: unknown) => {
+        const msg = error instanceof Error ? error.message : String(error);
+        if (msg.includes('Hydration') || msg.includes('hydrat') || msg.includes('did not match')) {
+          window.__HYDRATION_WARNINGS__.push(msg);
+        }
+      },
+    });
 
     // Wait for hydration, custom element upgrade, and async callbacks
     await new Promise((resolve) => setTimeout(resolve, 200));
