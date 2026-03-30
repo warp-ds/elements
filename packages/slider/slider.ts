@@ -122,7 +122,7 @@ class WarpSlider extends LitElement {
       thumb.min = this.edgeMin;
       thumb.max = this.edgeMax;
       thumb.step = this.step;
-      thumb.suffix = this.suffix;
+      thumb.suffix = this.suffix ?? '';
       thumb.required = this.required;
       thumb.labelFormatter = this.labelFormatter;
       thumb.valueFormatter = this.valueFormatter;

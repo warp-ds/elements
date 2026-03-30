@@ -80,6 +80,23 @@ test('can set slider value via the number input', async () => {
   expect(formData.get('value')).toBe('50');
 });
 
+test('slider without suffix syncs empty suffix to thumb', async () => {
+  render(html`
+    <w-slider label="Single" min="0" max="100">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `);
+
+  const slider = document.querySelector('w-slider') as WarpSlider & { updateComplete: Promise<unknown>; suffix?: string };
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & { updateComplete: Promise<unknown>; suffix?: string };
+
+  await slider.updateComplete;
+  await thumb.updateComplete;
+
+  expect(slider.suffix).toBeUndefined();
+  expect(thumb.suffix).toBe('');
+});
+
 test('deleting from number input works as expected', async () => {
   const component = html`
     <form data-testid="form">
