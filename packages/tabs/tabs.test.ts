@@ -150,3 +150,19 @@ test('aria-selected uses ElementInternals (no DOM attribute) to avoid hydration 
   expect((tabs[1] as any).ariaSelected).toBe('false');
 });
 
+test('w-tab does not mutate host aria-controls by default', async () => {
+  const component = html`<w-tabs>
+    <w-tab for="panel1">Tab 1</w-tab>
+    <w-tab-panel id="panel1"><p>Content 1</p></w-tab-panel>
+  </w-tabs>`;
+
+  const page = render(component);
+  const tabsEl = page.container.querySelector('w-tabs');
+  await tabsEl.updateComplete;
+
+  const tab = page.container.querySelector('w-tab') as HTMLElement;
+  const internalButton = tab.shadowRoot?.querySelector('button');
+
+  expect(tab.hasAttribute('aria-controls')).toBe(false);
+  expect(internalButton?.getAttribute('aria-controls')).toBe('panel1');
+});

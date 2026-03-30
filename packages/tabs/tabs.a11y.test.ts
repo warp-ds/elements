@@ -115,6 +115,23 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       expect(internalButton?.getAttribute('aria-controls')).toBe('fellowship');
       expect(firstTab.textContent?.trim()).toBe('Fellowship');
     });
+
+    test('consumer-provided aria-controls is preserved and used', async () => {
+      const page = render(
+        html`<w-tabs active="fellowship">
+          <w-tab for="fellowship" aria-controls="fellowship-panel">Fellowship</w-tab>
+          <w-tab-panel id="fellowship-panel">
+            <p>And my axe!</p>
+          </w-tab-panel>
+        </w-tabs>`,
+      );
+      await page.container.querySelector('w-tabs').updateComplete;
+
+      const firstTab = page.container.querySelector('w-tab') as WarpTab;
+      const internalButton = firstTab.shadowRoot?.querySelector('button');
+      expect(firstTab.getAttribute('aria-controls')).toBe('fellowship-panel');
+      expect(internalButton?.getAttribute('aria-controls')).toBe('fellowship-panel');
+    });
   });
 
   describe('WCAG 4.1.2 - Name, Role, Value', () => {

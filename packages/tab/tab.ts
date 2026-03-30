@@ -50,6 +50,9 @@ export class WarpTab extends LitElement {
   @property({ attribute: 'for', reflect: true })
   for!: string;
 
+  @property({ attribute: 'aria-controls' })
+  private _ariaControlsAttr?: string;
+
   /**
    * Internal tabindex managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
@@ -86,6 +89,10 @@ export class WarpTab extends LitElement {
    */
   get _computedAriaSelected(): 'true' | 'false' | undefined {
     return this._parentAriaSelected ?? this._ownAriaSelected;
+  }
+
+  private get _effectiveAriaControls(): string {
+    return this._ariaControlsAttr || this.for || '';
   }
 
   @property({ attribute: 'aria-selected' })
@@ -126,6 +133,7 @@ export class WarpTab extends LitElement {
     super.connectedCallback();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'tab';
+    this.syncAriaControls();
     this.addEventListener('click', this._handleClick);
   }
 
@@ -141,9 +149,35 @@ export class WarpTab extends LitElement {
     if (changedProperties.has('_parentAriaSelected')) {
       this._internals.ariaSelected = this._computedAriaSelected ?? null;
     }
+    if (changedProperties.has('_ariaControlsAttr')) {
+      this.syncAriaControls();
+    }
+    if (changedProperties.has('for')) {
+      this.syncAriaControls();
+    }
     // Only let deprecated `active` drive aria-selected when explicitly set by consumers.
     if (changedProperties.has('active') && this.hasAttribute('active')) {
       this._internals.ariaSelected = this.active ? 'true' : 'false';
+    }
+  }
+
+  private syncAriaControls() {
+    const controlsId = this._effectiveAriaControls;
+    const tabsHost = this.closest('w-tabs');
+    const panel =
+      (tabsHost?.querySelector(`w-tab-panel#${CSS.escape(controlsId)}`) as Element | null) ??
+      this.ownerDocument?.getElementById(controlsId) ??
+      null;
+
+    // Prefer element relationships on ElementInternals; fall back to string if needed.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const internals = this._internals as any;
+    if ('ariaControlsElements' in internals) {
+      internals.ariaControlsElements = panel ? [panel] : [];
+      return;
+    }
+    if ('ariaControls' in internals) {
+      internals.ariaControls = controlsId || null;
     }
   }
 
@@ -157,7 +191,7 @@ export class WarpTab extends LitElement {
         id="warp-tab-${this.for}"
         class="${this._classes}"
         tabindex="${this._parentTabIndex ?? 0}"
-        aria-controls="${this.for || ''}"
+        aria-controls="${this._effectiveAriaControls}"
         @click="${(e) => {
           e.tab = this;
         }}"
