@@ -90,6 +90,41 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
 });
 
+test('switches panel content when panels are initialized with hidden attribute', async () => {
+  const component = html`<w-tabs active="tab2">
+    <w-tab for="tab1">First Tab</w-tab>
+    <w-tab-panel id="tab1">
+      <p>Content for the first tab.</p>
+    </w-tab-panel>
+
+    <w-tab for="tab2">Second Tab</w-tab>
+    <w-tab-panel id="tab2" hidden>
+      <p>Content for the second tab.</p>
+    </w-tab-panel>
+
+    <w-tab for="tab3">Third Tab</w-tab>
+    <w-tab-panel id="tab3" hidden>
+      <p>Content for the third tab.</p>
+    </w-tab-panel>
+  </w-tabs>`;
+
+  const page = render(component);
+  await page.container.querySelector('w-tabs').updateComplete;
+
+  await expect.element(page.getByText('Content for the second tab.')).toBeVisible();
+  await expect.element(page.getByText('Content for the first tab.')).not.toBeVisible();
+  await expect.element(page.getByText('Content for the third tab.')).not.toBeVisible();
+
+  const tabs = page.container.querySelectorAll('w-tab');
+  await userEvent.click(tabs[2]);
+
+  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;
+
+  await expect.element(page.getByText('Content for the third tab.')).toBeVisible();
+  await expect.element(page.getByText('Content for the second tab.')).not.toBeVisible();
+});
+
 test('tab-panel visibility is controlled via internal shadow DOM (no host attribute changes) to avoid hydration mismatch', async () => {
   const component = html`<w-tabs>
     <w-tab for="panel1">Tab 1</w-tab>

@@ -19,6 +19,11 @@ export class WarpTabPanel extends LitElement {
       :host {
         display: block;
       }
+      /* Stories and legacy markup may set [hidden] on inactive panels.
+       * Visibility is now controlled internally via active state, so neutralize it. */
+      :host([hidden]) {
+        display: block !important;
+      }
       .panel-content {
         display: none;
       }
