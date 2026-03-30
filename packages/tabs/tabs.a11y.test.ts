@@ -260,12 +260,14 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
         (tab: WarpTab) => tab.ariaSelected === 'true'
       ) as WarpTab;
       const internalButton = selectedTab.shadowRoot?.querySelector('button') as HTMLButtonElement | null;
-      expect(internalButton).not.toBeNull();
+      if (!internalButton) {
+        throw new Error('Expected selected tab to have an internal button');
+      }
       const activeEl = document.activeElement as HTMLElement;
       expect(activeEl === selectedTab || activeEl === internalButton).toBe(true);
 
       const hostStyle = getComputedStyle(selectedTab);
-      const buttonStyle = getComputedStyle(internalButton!);
+      const buttonStyle = getComputedStyle(internalButton);
       const hostHasRing = hostStyle.outlineStyle === 'solid' && hostStyle.outlineWidth !== '0px';
       const buttonHasRing = buttonStyle.outlineStyle === 'solid' && buttonStyle.outlineWidth !== '0px';
       expect(hostHasRing || buttonHasRing).toBe(true);
