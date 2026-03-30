@@ -157,12 +157,13 @@ export class WarpTab extends LitElement {
 
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
+    const changedKeys = changedProperties as Map<PropertyKey, unknown>;
 
     // Sync aria-selected to ElementInternals (no DOM attribute needed - AT reads from ElementInternals)
     if (changedProperties.has('_parentAriaSelected')) {
       this._internals.ariaSelected = this._computedAriaSelected ?? null;
     }
-    if (changedProperties.has('_ariaControlsAttr')) {
+    if (changedKeys.has('_ariaControlsAttr')) {
       this.syncAriaControls();
     }
     if (changedProperties.has('for')) {
