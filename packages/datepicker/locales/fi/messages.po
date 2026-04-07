@@ -15,30 +15,30 @@ msgstr ""
 
 #. Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date
 #. js-lingui-explicit-id
-#: packages/datepicker/datepicker.ts:443
+#: packages/datepicker/datepicker.ts:441
 msgid "datepicker.toggle.changeDate"
 msgstr ""
 
 #. Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date
 #. js-lingui-explicit-id
-#: packages/datepicker/datepicker.ts:450
+#: packages/datepicker/datepicker.ts:448
 msgid "datepicker.toggle.chooseDate"
 msgstr ""
 
 #. Used by screen readers to announce that the calendar element is a date picker.
 #. js-lingui-explicit-id
-#: packages/datepicker/datepicker.ts:471
+#: packages/datepicker/datepicker.ts:469
 msgid "datepicker.calendar.roleDescription"
 msgstr ""
 
 #. Screen reader label for the next month button.
 #. js-lingui-explicit-id
-#: packages/datepicker/datepicker.ts:502
+#: packages/datepicker/datepicker.ts:500
 msgid "datepicker.calendar.nextMonth"
 msgstr ""
 
 #. Screen reader label for the previous month button.
 #. js-lingui-explicit-id
-#: packages/datepicker/datepicker.ts:484
+#: packages/datepicker/datepicker.ts:482
 msgid "datepicker.calendar.previousMonth"
 msgstr ""
