@@ -1,3 +1,10 @@
+## [2.8.2-next.4](https://github.com/warp-ds/elements/compare/v2.8.2-next.3...v2.8.2-next.4) (2026-04-07)
+
+
+### Bug Fixes
+
+* update language files ([#575](https://github.com/warp-ds/elements/issues/575)) ([81eee91](https://github.com/warp-ds/elements/commit/81eee910590b366a88911ffa2749f73b888a670e))
+
 ## [2.8.2-next.3](https://github.com/warp-ds/elements/compare/v2.8.2-next.2...v2.8.2-next.3) (2026-04-07)
 
 
