@@ -162,6 +162,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     value: string,
     isFromTextInput: boolean,
   ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+    const suffix = this.suffix ?? '';
     let valueNum = Number.parseInt(value);
 
     if (this.openEnded && !isFromTextInput && this.step) {
@@ -186,8 +187,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           id: 'slider.error.out_of_bounds',
           message: 'Value must be between {min} and {max}',
           values: {
-            min: `${this.min} ${this.suffix}`.trim(),
-            max: `${this.max} ${this.suffix}`.trim(),
+            min: `${this.min} ${suffix}`.trim(),
+            max: `${this.max} ${suffix}`.trim(),
           },
         }),
       );
@@ -624,7 +625,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @input="${this.#onInput}"
           ?disabled="${this.disabled}"
         >
-          ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
+          ${(this.suffix ?? '') ? html`<w-affix slot="suffix" label="${this.suffix ?? ''}"></w-affix>` : nothing}
         </w-textfield>
         <w-attention
           tooltip
@@ -639,7 +640,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             slot="target"
           ></output>
           <span slot="message">
-            ${this.tooltipDisplayValue}${this.suffix ? html`&nbsp;${this.suffix}` : nothing}
+            ${this.tooltipDisplayValue}${(this.suffix ?? '') ? html`&nbsp;${this.suffix ?? ''}` : nothing}
           </span>
         </w-attention>
 

@@ -53,10 +53,10 @@ class WarpSlider extends LitElement {
   openEnded = false;
 
   @property({ type: String, reflect: true })
-  error = '';
+  error!: string;
 
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText = '';
+  helpText!: string;
 
   @property({ type: Boolean, reflect: true })
   invalid = false;
@@ -80,7 +80,7 @@ class WarpSlider extends LitElement {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix = '';
+  suffix!: string;
 
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;
@@ -122,7 +122,7 @@ class WarpSlider extends LitElement {
       thumb.min = this.edgeMin;
       thumb.max = this.edgeMax;
       thumb.step = this.step;
-      thumb.suffix = this.suffix;
+      thumb.suffix = this.suffix ?? '';
       thumb.required = this.required;
       thumb.labelFormatter = this.labelFormatter;
       thumb.valueFormatter = this.valueFormatter;
@@ -172,30 +172,46 @@ class WarpSlider extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
     await this.updateComplete;
-    if (this.step) {
-      this.style.setProperty('--step', String(this.step));
-    }
-    this.style.setProperty('--min', this.edgeMin);
-    this.style.setProperty('--max', this.max);
-    if (this.markers) {
-      this.style.setProperty('--markers', String(this.markers));
-    }
 
-    if (this.openEnded) {
-      this.style.setProperty('--over-under-offset', '1');
-    }
+    // Delay inline style changes to after hydration completes
+    // Using double RAF + setTimeout which is more reliable across browsers
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (this.step) {
+            this.style.setProperty('--step', String(this.step));
+          }
+          if (this.min !== undefined) {
+            this.style.setProperty('--min', this.edgeMin);
+          }
+          if (this.max !== undefined) {
+            this.style.setProperty('--max', this.max);
+          }
+          if (this.markers) {
+            this.style.setProperty('--markers', String(this.markers));
+          }
+          if (this.openEnded) {
+            this.style.setProperty('--over-under-offset', '1');
+          }
+
+          const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
+          const isRangeSlider = sliderThumbs.length === 2;
+          if (isRangeSlider) {
+            this.style.setProperty('--range-slider-magic-pixel', '1px');
+          }
+        }, 0);
+      });
+    });
 
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     const isRangeSlider = sliderThumbs.length === 2;
     if (isRangeSlider) {
-      this.style.setProperty('--range-slider-magic-pixel', '1px');
-
       const sliderThumbsArr = Array.from(sliderThumbs);
       this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
       this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
       this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
       this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot.querySelector('w-textfield');
-    } else {
+    } else if (sliderThumbs.length === 1) {
       const sliderThumbsArr = Array.from(sliderThumbs);
       this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
       this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');

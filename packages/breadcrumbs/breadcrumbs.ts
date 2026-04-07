@@ -3,7 +3,6 @@
 import { i18n } from '@lingui/core';
 import { interleave } from '@warp-ds/core/breadcrumbs';
 import { html, LitElement, TemplateResult } from 'lit';
-import { property } from 'lit/decorators.js';
 
 import { activateI18n } from '../i18n';
 import { reset } from '../styles.js';

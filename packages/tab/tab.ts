@@ -15,7 +15,7 @@ const ccTab = {
   contentUnderlined: 'content-underlined', // content-underlined is a no-op that prevents a quirk in how Vue handles class bindings
 };
 
-const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 p-0 inline-block';
+const ccButtonReset = 'focusable appearance-none cursor-pointer bg-transparent border-0 m-0 p-0 inline-block';
 
 /**
  * Individual tab component used within w-tabs container.
@@ -23,7 +23,26 @@ const ccButtonReset = 'focus:outline-none appearance-none cursor-pointer bg-tran
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
  */
 export class WarpTab extends LitElement {
-  static styles = [reset, styles, css`::slotted([slot="icon"]){display:flex}`];
+  static styles = [
+    reset,
+    styles,
+    css`
+      ::slotted([slot='icon']) {
+        display: flex;
+      }
+
+      button.focusable:focus-visible {
+        outline: 2px solid var(--w-s-color-border-focus, #1a73e8);
+        outline-offset: var(--w-outline-offset, 1px);
+      }
+    `,
+  ];
+
+  // Use delegatesFocus so focus delegates to the internal button
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   private _internals: ElementInternals;
 
@@ -39,16 +58,68 @@ export class WarpTab extends LitElement {
   }
 
   @property({ attribute: 'id', reflect: true })
-  id = '';
+  id!: string;
 
   @property({ attribute: 'for', reflect: true })
-  for = '';
+  for!: string;
+
+  @property({ attribute: 'aria-controls' })
+  private _ariaControlsAttr?: string;
+
+  /**
+   * Internal tabindex managed by parent w-tabs.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _parentTabIndex: number | undefined;
+
+  /**
+   * Internal aria-selected managed by parent w-tabs.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _parentAriaSelected: 'true' | 'false' | undefined;
+
+  /**
+   * Override tabIndex getter to return the computed internal tabIndex.
+   * This allows external code to check if the tab is focusable.
+   */
+  override get tabIndex(): number {
+    return this._parentTabIndex ?? 0;
+  }
+
+  /**
+   * Override tabIndex setter to set _parentTabIndex (for backwards compatibility).
+   */
+  override set tabIndex(value: number) {
+    this._parentTabIndex = value;
+  }
+
+  /**
+   * Computed aria-selected: prefers parent-managed, falls back to own property
+   */
+  get _computedAriaSelected(): 'true' | 'false' | undefined {
+    return this._parentAriaSelected ?? this._ownAriaSelected;
+  }
+
+  private get _effectiveAriaControls(): string {
+    return this._ariaControlsAttr || this.for || '';
+  }
 
   @property({ attribute: 'aria-selected' })
-  ariaSelected: 'true' | 'false';
-
-  @property({ attribute: 'tabindex', type: Number, reflect: true })
-  tabIndex: number;
+  set ariaSelected(value: 'true' | 'false') {
+    const oldValue = this._ownAriaSelected;
+    this._ownAriaSelected = value;
+    // Sync to ElementInternals immediately
+    this._internals.ariaSelected = this._computedAriaSelected ?? null;
+    this.requestUpdate('ariaSelected', oldValue);
+  }
+  get ariaSelected(): 'true' | 'false' {
+    return this._computedAriaSelected ?? 'false';
+  }
+  private _ownAriaSelected: 'true' | 'false' | undefined;
 
   /**
    * @deprecated Use `aria-selected="true"` instead
@@ -75,8 +146,7 @@ export class WarpTab extends LitElement {
     super.connectedCallback();
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'tab';
-    // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
-    this.setAttribute('aria-controls', this.for);
+    this.syncAriaControls();
     this.addEventListener('click', this._handleClick);
   }
 
@@ -87,19 +157,41 @@ export class WarpTab extends LitElement {
 
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
+    const changedKeys = changedProperties as Map<PropertyKey, unknown>;
 
-    // Use ElementInternals for aria-selected to avoid hydration mismatches
-    // (no DOM attribute needed - AT reads from ElementInternals)
-    if (changedProperties.has('ariaSelected')) {
-      this._internals.ariaSelected = this.ariaSelected;
+    // Sync aria-selected to ElementInternals (no DOM attribute needed - AT reads from ElementInternals)
+    if (changedProperties.has('_parentAriaSelected')) {
+      this._internals.ariaSelected = this._computedAriaSelected ?? null;
+    }
+    if (changedKeys.has('_ariaControlsAttr')) {
+      this.syncAriaControls();
+    }
+    if (changedProperties.has('for')) {
+      this.syncAriaControls();
     }
     // Only let deprecated `active` drive aria-selected when explicitly set by consumers.
     if (changedProperties.has('active') && this.hasAttribute('active')) {
       this._internals.ariaSelected = this.active ? 'true' : 'false';
     }
-    // aria-controls is a relationship attribute that needs to be in the DOM for AT to follow
-    if (changedProperties.has('for')) {
-      this.setAttribute('aria-controls', this.for);
+  }
+
+  private syncAriaControls() {
+    const controlsId = this._effectiveAriaControls;
+    const tabsHost = this.closest('w-tabs');
+    const panel =
+      (tabsHost?.querySelector(`w-tab-panel#${CSS.escape(controlsId)}`) as Element | null) ??
+      this.ownerDocument?.getElementById(controlsId) ??
+      null;
+
+    // Prefer element relationships on ElementInternals; fall back to string if needed.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const internals = this._internals as any;
+    if ('ariaControlsElements' in internals) {
+      internals.ariaControlsElements = panel ? [panel] : [];
+      return;
+    }
+    if ('ariaControls' in internals) {
+      internals.ariaControls = controlsId || null;
     }
   }
 
@@ -112,7 +204,8 @@ export class WarpTab extends LitElement {
         role="none"
         id="warp-tab-${this.for}"
         class="${this._classes}"
-        tabindex="${/* This needs to be -1 to prevent the auto-focus on buttons, messing up tab order */ -1}"
+        tabindex="${this._parentTabIndex ?? 0}"
+        aria-controls="${this._effectiveAriaControls}"
         @click="${(e) => {
           e.tab = this;
         }}"

@@ -33,7 +33,7 @@ export class WIcon extends LitElement {
 
   /** Icon filename (without .svg) */
   @property({ type: String, reflect: true })
-  name = '';
+  name!: string;
 
   /** Size: small, medium, large or pixel value (e.g. "32px") */
   @property({ type: String, reflect: true })
@@ -90,6 +90,7 @@ export class WIcon extends LitElement {
 
   render(): TemplateResult {
     const size = this.size || 'medium';
+    const name = this.name || '';
     const classes = {
       'w-icon': true,
       'w-icon--s': size === 'small',
@@ -97,7 +98,7 @@ export class WIcon extends LitElement {
       'w-icon--l': size === 'large',
     };
     const customStyle = typeof size === 'string' && size.endsWith('px') ? `--w-icon-size: ${size};` : '';
-    return html`<div class="${classMap(classes)}" style="${customStyle}" part="w-${this.name.toLowerCase()}">${this.svg}</div>`;
+    return html`<div class="${classMap(classes)}" style="${customStyle}" part="w-${name.toLowerCase()}">${this.svg}</div>`;
   }
 }
 
