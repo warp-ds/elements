@@ -42,6 +42,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   }
 
   close() {
+    if (!this.dialogEl?.open) return;
     this.handleListeners('removeEventListener');
     this.dialogEl.classList.add('close');
     this.dialogEl.addEventListener(
