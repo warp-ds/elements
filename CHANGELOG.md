@@ -1,3 +1,10 @@
+## [2.8.2-next.3](https://github.com/warp-ds/elements/compare/v2.8.2-next.2...v2.8.2-next.3) (2026-04-07)
+
+
+### Bug Fixes
+
+* refactor components to avoid React hydration mismatch errors ([#574](https://github.com/warp-ds/elements/issues/574)) ([960d89f](https://github.com/warp-ds/elements/commit/960d89f8b19d514cf3ada304680c551be7d984b7))
+
 ## [2.8.2-next.2](https://github.com/warp-ds/elements/compare/v2.8.2-next.1...v2.8.2-next.2) (2026-03-25)
 
 
