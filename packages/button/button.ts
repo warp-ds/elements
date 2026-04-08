@@ -1,6 +1,6 @@
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, nothing, PropertyValues } from 'lit';
+import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
@@ -54,7 +54,12 @@ type ButtonType = 'button' | 'submit' | 'reset';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-button--docs)
  */
 class WarpButton extends FormControlMixin(LitElement) {
-  static styles = [reset, wButtonStyles];
+  static styles = [
+    reset,
+    wButtonStyles,
+    css`:host([full-width]) { width: 100%; }`,
+    css`.rounded-radius-default{border-radius:var(--w-button-radius-default,8px);}.rounded-radius-utility{border-radius:var(--w-button-radius-utility,4px);}`,
+  ];
 
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
