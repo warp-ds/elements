@@ -65,25 +65,25 @@ class WarpButton extends FormControlMixin(LitElement) {
   type: ButtonType;
 
   @property({ type: Boolean, reflect: true })
-  autofocus = false;
+  autofocus: boolean;
 
   @property({ reflect: true })
-  variant: ButtonVariant = 'secondary';
+  variant: ButtonVariant;
 
   /**
    * @deprecated Use `variant="quiet"` instead
    */
   @property({ type: Boolean, reflect: true })
-  quiet = false;
+  quiet: boolean;
 
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
   iconOnly: boolean;
 
   @property({ type: Boolean, reflect: true })
-  small = false;
+  small: boolean;
 
   @property({ type: Boolean, reflect: true })
-  loading = false;
+  loading: boolean;
 
   @property({ reflect: true })
   href: string;
@@ -98,7 +98,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   rel: string;
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth = false;
+  fullWidth: boolean;
 
   /**
    * @deprecated This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the appearance of the button.
@@ -170,7 +170,7 @@ class WarpButton extends FormControlMixin(LitElement) {
           <w-link
             href=${this.href}
             target=${this.target}
-            variant=${this.quiet ? 'quiet' : this.variant}
+            variant=${this.quiet ? 'quiet' : variant}
             ?small=${this.small}
             ?loading=${this.loading}
             ?autofocus=${this.autofocus}
@@ -192,24 +192,24 @@ class WarpButton extends FormControlMixin(LitElement) {
                * `w-button--negative-quiet`, not `w-button--quiet` and `w-button--negative`.
                */
               'w-button': true,
-              'w-button--primary': this.variant === 'primary',
-              'w-button--secondary': this.variant === 'secondary',
-              'w-button--negative': !this.quiet && this.variant === 'negative',
-              'w-button--utility': !this.quiet && this.variant === 'utility',
-              'w-button--pill': this.variant === 'pill',
+              'w-button--primary': variant === 'primary',
+              'w-button--secondary': variant === 'secondary',
+              'w-button--negative': !this.quiet && variant === 'negative',
+              'w-button--utility': !this.quiet && variant === 'utility',
+              'w-button--pill': variant === 'pill',
               'w-button--quiet':
                 // only include `quiet` with the backwards compat if the variant does not have its own -quiet modifier.
-                (this.quiet && !['negative', 'utility', 'overlay', 'overlayInverted'].includes(this.variant)) ||
-                this.variant === 'quiet',
+                (this.quiet && !['negative', 'utility', 'overlay', 'overlayInverted'].includes(variant)) ||
+                variant === 'quiet',
               'w-button--negative-quiet':
-                (this.quiet && this.variant === 'negative') || this.variant === 'negativeQuiet',
-              'w-button--utility-quiet': (this.quiet && this.variant === 'utility') || this.variant === 'utilityQuiet',
-              'w-button--overlay': !this.quiet && this.variant === 'overlay',
-              'w-button--overlay-inverted': !this.quiet && this.variant === 'overlayInverted',
-              'w-button--overlay-quiet': (this.quiet && this.variant === 'overlay') || this.variant === 'overlayQuiet',
+                (this.quiet && variant === 'negative') || variant === 'negativeQuiet',
+              'w-button--utility-quiet': (this.quiet && variant === 'utility') || variant === 'utilityQuiet',
+              'w-button--overlay': !this.quiet && variant === 'overlay',
+              'w-button--overlay-inverted': !this.quiet && variant === 'overlayInverted',
+              'w-button--overlay-quiet': (this.quiet && variant === 'overlay') || variant === 'overlayQuiet',
               'w-button--overlay-inverted-quiet':
-                (this.quiet && this.variant === 'overlayInverted') || this.variant === 'overlayInvertedQuiet',
-              'w-button--link': this.variant === 'link',
+                (this.quiet && variant === 'overlayInverted') || variant === 'overlayInvertedQuiet',
+              'w-button--link': variant === 'link',
               'w-button--small': this.small,
               'w-button--full-width': this.fullWidth,
               'w-button--has-icon-only': this.iconOnly,
