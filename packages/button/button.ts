@@ -220,6 +220,7 @@ class WarpButton extends FormControlMixin(LitElement) {
               'w-button--has-icon-only': this.iconOnly,
               'w-button--loading': this.loading,
               'w-button--disabled': this.disabled,
+              [this.buttonClass]: this.buttonClass,
             })}
             @click="${this._handleButtonClick}"
           >
