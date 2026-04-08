@@ -51,31 +51,31 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   options: ComboboxOption[] = [];
 
   /** Label above input */
-  @property({ type: String, reflect: true })
-  label?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  label?: string = '';
 
   /** Input placeholder */
-  @property({ type: String, reflect: true })
-  placeholder?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  placeholder?: string = '';
 
   /** The input value */
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: true, useDefault: true })
   value = '';
 
   /** Whether the popover opens when focus is on the text field */
-  @property({ type: Boolean, attribute: 'open-on-focus' })
+  @property({ type: Boolean, attribute: 'open-on-focus', reflect: true })
   openOnFocus = false;
 
   /** Select active option on blur */
-  @property({ type: Boolean, attribute: 'select-on-blur' })
+  @property({ type: Boolean, attribute: 'select-on-blur', reflect: true, useDefault: true })
   selectOnBlur = true;
 
   /** Whether the matching text segments in the options should be highlighted */
-  @property({ type: Boolean, attribute: 'match-text-segments' })
+  @property({ type: Boolean, attribute: 'match-text-segments', reflect: true })
   matchTextSegments = false;
 
   /** Disable client-side static filtering */
-  @property({ type: Boolean, attribute: 'disable-static-filtering' })
+  @property({ type: Boolean, attribute: 'disable-static-filtering', reflect: true })
   disableStaticFiltering = false;
 
   /** Renders the input field in an invalid state */
@@ -83,8 +83,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   invalid = false;
 
   /** The content to display as the help text */
-  @property({ type: String, attribute: 'help-text', reflect: true })
-  helpText?: string;
+  @property({ type: String, attribute: 'help-text', reflect: true, useDefault: true })
+  helpText?: string = '';
 
   /** Whether the element is disabled */
   @property({ type: Boolean, reflect: true })
@@ -99,12 +99,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   optional = false;
 
   /** Name attribute for form submission */
-  @property({ type: String, reflect: true })
-  name?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  name?: string = '';
 
   /** Autocomplete attribute for the input field */
-  @property({ type: String, reflect: true })
-  autocomplete?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  autocomplete?: string = 'off';
 
   /** @internal Options list open boolean */
   @state()

@@ -74,7 +74,7 @@ describe('w-combobox React SSR hydration', () => {
     }
   });
 
-  test.fails('dangerouslySetInnerHTML wrapper hydrates without attribute mismatch warnings', async () => {
+  test('dangerouslySetInnerHTML wrapper hydrates without attribute mismatch warnings', async () => {
     const container = document.createElement('div');
     container.id = 'hydration-innerhtml-root';
     document.body.appendChild(container);
