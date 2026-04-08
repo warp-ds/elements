@@ -1,3 +1,10 @@
+## [2.8.2-next.6](https://github.com/warp-ds/elements/compare/v2.8.2-next.5...v2.8.2-next.6) (2026-04-08)
+
+
+### Bug Fixes
+
+* **combobox:** hydration error fixes ([#577](https://github.com/warp-ds/elements/issues/577)) ([86afe4a](https://github.com/warp-ds/elements/commit/86afe4aa3ab05707ee686f34db66e67648e98549))
+
 ## [2.8.2-next.5](https://github.com/warp-ds/elements/compare/v2.8.2-next.4...v2.8.2-next.5) (2026-04-08)
 
 
