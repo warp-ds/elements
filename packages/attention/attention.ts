@@ -91,41 +91,41 @@ const ccAttention = {
 
 class WarpAttention extends LitElement {
   @property({ type: Boolean, reflect: true })
-  show: boolean;
+  show = false;
 
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: false })
   placement: Directions;
 
   @property({ type: Boolean, reflect: true })
-  tooltip: boolean;
+  tooltip = false;
 
   @property({ type: Boolean, reflect: true })
-  callout: boolean;
+  callout = false;
 
   @property({ type: Boolean, reflect: true })
   // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
   @property({ type: Boolean, reflect: true })
-  highlight: boolean;
+  highlight = false;
 
   @property({ attribute: 'can-close', type: Boolean, reflect: true })
-  canClose: boolean;
+  canClose = false;
 
   @property({ attribute: 'no-arrow', type: Boolean, reflect: true })
-  noArrow: boolean;
+  noArrow = false;
 
-  @property({ type: Number, reflect: true })
+  @property({ type: Number })
   distance: number;
 
-  @property({ type: Number, reflect: true })
+  @property({ type: Number })
   skidding: number;
 
   @property({ type: Boolean, reflect: true })
-  flip: boolean;
+  flip = false;
 
   @property({ attribute: 'cross-axis', type: Boolean, reflect: true })
-  crossAxis: boolean;
+  crossAxis = false;
 
   @property({ attribute: 'fallback-placements', type: Array, reflect: true })
   fallbackPlacements: Directions[];
@@ -338,6 +338,9 @@ class WarpAttention extends LitElement {
   }
 
   updated() {
+    // Guard against updates after element is disconnected
+    if (!this._attentionEl) return;
+
     if (!this.callout) {
       this._attentionEl.style.setProperty('--attention-visibility', this.show ? '' : 'hidden');
     }
@@ -441,10 +444,12 @@ class WarpAttention extends LitElement {
     return `${this.activeAttentionType()} ${!this.noArrow ? this.pointingAtDirection() : ''}`;
   }
   setAriaLabels() {
-    if (this._targetEl && !this._targetEl.getAttribute('aria-details')) {
-      const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
-      this._targetEl.setAttribute('aria-details', attentionMessageId);
-    }
+    // Only modify light DOM after initialization to avoid React hydration mismatches
+    if (!this._targetEl || !this._messageEl) return;
+    if (this._targetEl.getAttribute('aria-details')) return;
+
+    const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
+    this._targetEl.setAttribute('aria-details', attentionMessageId);
   }
 
   firstUpdated() {

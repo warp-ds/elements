@@ -62,10 +62,10 @@ class WarpButton extends FormControlMixin(LitElement) {
   };
 
   @property({ reflect: true })
-  type: ButtonType = 'button';
+  type: ButtonType;
 
   @property({ type: Boolean, reflect: true })
-  autofocus: boolean;
+  autofocus = false;
 
   @property({ reflect: true })
   variant: ButtonVariant = 'secondary';
@@ -74,16 +74,16 @@ class WarpButton extends FormControlMixin(LitElement) {
    * @deprecated Use `variant="quiet"` instead
    */
   @property({ type: Boolean, reflect: true })
-  quiet: boolean;
+  quiet = false;
 
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
   iconOnly: boolean;
 
   @property({ type: Boolean, reflect: true })
-  small: boolean;
+  small = false;
 
   @property({ type: Boolean, reflect: true })
-  loading: boolean;
+  loading = false;
 
   @property({ reflect: true })
   href: string;
@@ -98,7 +98,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   rel: string;
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth: boolean;
+  fullWidth = false;
 
   /**
    * @deprecated This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the appearance of the button.
@@ -138,7 +138,8 @@ class WarpButton extends FormControlMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    if (!variants.includes(this.variant)) {
+    const effectiveVariant = this.variant || 'secondary';
+    if (!variants.includes(effectiveVariant)) {
       throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(', ')}.`);
     }
 
@@ -162,6 +163,7 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
 
   render() {
+    const variant = this.variant || 'secondary';
     return html` ${
       this.href
         ? html`

@@ -15,16 +15,16 @@ import { styles } from './styles';
  */
 class WarpBox extends LitElement {
   @property({ type: Boolean, reflect: true })
-  bleed: boolean;
+  bleed = false;
 
   @property({ type: Boolean, reflect: true })
-  bordered: boolean;
+  bordered = false;
 
   @property({ type: Boolean, reflect: true })
-  info: boolean;
+  info = false;
 
   @property({ type: Boolean, reflect: true })
-  neutral: boolean;
+  neutral = false;
 
   @property({ type: String, reflect: true })
   role: string;

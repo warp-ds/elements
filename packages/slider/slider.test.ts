@@ -80,6 +80,23 @@ test('can set slider value via the number input', async () => {
   expect(formData.get('value')).toBe('50');
 });
 
+test('slider without suffix syncs empty suffix to thumb', async () => {
+  render(html`
+    <w-slider label="Single" min="0" max="100">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `);
+
+  const slider = document.querySelector('w-slider') as WarpSlider & { updateComplete: Promise<unknown>; suffix?: string };
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & { updateComplete: Promise<unknown>; suffix?: string };
+
+  await slider.updateComplete;
+  await thumb.updateComplete;
+
+  expect(slider.suffix).toBeUndefined();
+  expect(thumb.suffix).toBe('');
+});
+
 test('deleting from number input works as expected', async () => {
   const component = html`
     <form data-testid="form">
@@ -540,4 +557,59 @@ test('required slider passes required state to thumb', async () => {
 
   // Verify the slider has required attribute in HTML
   expect(slider.hasAttribute('required')).toBe(true);
+});
+
+// Hydration mismatch prevention tests
+test('aria-label is not set as host attribute (to avoid hydration mismatch)', async () => {
+  const component = html`
+    <w-slider label="Slider label" min="0" max="100">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  await slider.updateComplete;
+
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
+  await thumb.updateComplete;
+
+  // aria-label should NOT be a host attribute (to avoid hydration mismatch)
+  expect(thumb.hasAttribute('aria-label')).toBe(false);
+
+  // But the property should be set by the parent
+  expect(thumb.ariaLabel).toBe('Slider label');
+
+  // And the internal input should have the aria-label
+  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  expect(rangeInput.getAttribute('aria-label')).toBe('Slider label');
+});
+
+test('aria-description is not set as host attribute (to avoid hydration mismatch)', async () => {
+  const component = html`
+    <w-slider label="Range" min="0" max="100">
+      <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+      <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  await slider.updateComplete;
+
+  const fromThumb = document.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
+  const toThumb = document.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
+
+  await fromThumb.updateComplete;
+  await toThumb.updateComplete;
+
+  // aria-description should NOT be a host attribute (to avoid hydration mismatch)
+  expect(fromThumb.hasAttribute('aria-description')).toBe(false);
+  expect(toThumb.hasAttribute('aria-description')).toBe(false);
+
+  // But the properties should be set
+  expect(fromThumb.ariaDescription).toBeTruthy();
+  expect(toThumb.ariaDescription).toBeTruthy();
 });

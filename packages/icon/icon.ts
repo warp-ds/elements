@@ -33,15 +33,15 @@ export class WIcon extends LitElement {
 
   /** Icon filename (without .svg) */
   @property({ type: String, reflect: true })
-  name = '';
+  name!: string;
 
   /** Size: small, medium, large or pixel value (e.g. "32px") */
   @property({ type: String, reflect: true })
-  size: 'small' | 'medium' | 'large' | string = 'medium';
+  size: 'small' | 'medium' | 'large' | string;
 
   /** Locale used in CDN URL */
   @property({ type: String, reflect: true })
-  locale = 'en';
+  locale: string;
 
   /** Parsed SVG element (not reflected as attribute) */
   @state()
@@ -53,7 +53,8 @@ export class WIcon extends LitElement {
    * @returns SVGElement or null on failure
    */
   private async fetchIcon(iconName: string): Promise<SVGElement | null> {
-    const uri = `https://assets.finn.no/pkg/eikons/v1/${this.locale}/${iconName}.svg`;
+    const locale = this.locale || 'en';
+    const uri = `https://assets.finn.no/pkg/eikons/v1/${locale}/${iconName}.svg`;
     try {
       const svgText = await cacheFetch<string>(uri);
       const doc = new DOMParser().parseFromString(svgText, 'text/html');
@@ -88,14 +89,16 @@ export class WIcon extends LitElement {
   }
 
   render(): TemplateResult {
+    const size = this.size || 'medium';
+    const name = this.name || '';
     const classes = {
       'w-icon': true,
-      'w-icon--s': this.size === 'small',
-      'w-icon--m': this.size === 'medium',
-      'w-icon--l': this.size === 'large',
+      'w-icon--s': size === 'small',
+      'w-icon--m': size === 'medium',
+      'w-icon--l': size === 'large',
     };
-    const customStyle = typeof this.size === 'string' && this.size.endsWith('px') ? `--w-icon-size: ${this.size};` : '';
-    return html`<div class="${classMap(classes)}" style="${customStyle}" part="w-${this.name.toLowerCase()}">${this.svg}</div>`;
+    const customStyle = typeof size === 'string' && size.endsWith('px') ? `--w-icon-size: ${size};` : '';
+    return html`<div class="${classMap(classes)}" style="${customStyle}" part="w-${name.toLowerCase()}">${this.svg}</div>`;
   }
 }
 

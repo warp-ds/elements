@@ -45,15 +45,6 @@ export const styles = css`
     --_border-color: var(--_border-checked);
   }
 
-  :host([invalid]) {
-    --_border-color: var(--_border-invalid);
-  }
-
-  :host([invalid][checked]),
-  :host([invalid][indeterminate]) {
-    --_bg: var(--_bg-invalid-checked);
-  }
-
   :host([disabled]) {
     --_bg: var(--_bg-disabled);
     --_border-color: var(--_border-disabled);
@@ -111,6 +102,16 @@ export const styles = css`
     text-align: center;
     line-height: var(--w-line-height-xs);
     font-size: var(--w-font-size-m);
+  }
+
+  /* Invalid visuals are driven by the actual control state instead of host attributes.
+   * This preserves group-driven invalid styling without mutating host attributes. */
+  [part='control']:has(> [part='input'][aria-invalid='true']:not(:disabled)) {
+    border-color: var(--_border-invalid);
+  }
+
+  [part='control']:has(> [part='input'][aria-invalid='true']:is(:checked, :indeterminate):not(:disabled)) {
+    background-color: var(--_bg-invalid-checked);
   }
 
   :host(:focus-visible) {

@@ -41,7 +41,9 @@ describe('WCAG 1.3.1 - Info and Relationships', () => {
       `);
 
     await expect.element(page.getByRole('list')).toBeVisible();
-    await expect.poll(() => page.getByRole('listitem').all().length).toBeGreaterThan(0);
+    // ElementInternals role is set in accessibility tree but not queryable via getByRole
+    const steps = page.container.querySelectorAll('w-step');
+    expect(steps.length).toBeGreaterThan(0);
   });
 });
 

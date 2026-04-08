@@ -15,7 +15,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
   /** The name of the checkbox, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true })
+  set name(value: string | undefined) {
+    this._ownName = value;
+  }
+  get name(): string | undefined {
+    return this._ownName || this._groupName;
+  }
+  private _ownName: string | undefined;
 
   /** The value of the checkbox, submitted as a name/value pair with form data. */
   @property({ reflect: true }) value: string | null = null;
@@ -35,6 +42,22 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   /** Draws the checkbox in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /**
+   * Internal invalid state managed by parent checkbox-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupInvalid: boolean | undefined;
+
+  /**
+   * Internal name managed by parent checkbox-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupName: string | undefined;
+
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
 
@@ -44,18 +67,17 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   // Track whether the user has interacted with the checkbox.
   #hasInteracted = false;
 
-  // Track whether tabindex was set automatically.
-  #autoTabIndex = false;
+  /** Computed invalid state: combines own invalid with group invalid */
+  get _computedInvalid(): boolean {
+    return this.invalid || this._groupInvalid === true;
+  }
 
   connectedCallback() {
     super.connectedCallback();
-    // kept for compat with old shared styling approach
-    this.setAttribute('type', 'checkbox');
     const attrValue = this.getAttribute('value');
     this.value = attrValue ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
-    this.#syncTabIndex();
     this.addEventListener('invalid', this.#handleInvalid);
     this.addEventListener('keydown', this.#handleKeyDown);
     this.#syncFormValue();
@@ -98,10 +120,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     if (this.#shouldSyncFormState(changedProperties)) {
       this.#syncFormValue();
       this.#updateValidity();
-    }
-
-    if (changedProperties.has('disabled')) {
-      this.#syncTabIndex();
     }
   }
 
@@ -221,14 +239,6 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 
   /** @internal */
-  #syncTabIndex(): void {
-    const hasTabIndexAttr = this.hasAttribute('tabindex');
-    if (hasTabIndexAttr && !this.#autoTabIndex) return;
-    this.tabIndex = this.disabled ? -1 : 0;
-    this.#autoTabIndex = true;
-  }
-
-  /** @internal */
   #shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
     return (
       changedProperties.has('checked') ||
@@ -250,14 +260,14 @@ export class WCheckbox extends FormControlMixin(LitElement) {
             part="input"
             class="input hide-toggle"
             type="checkbox"
-            name=${this.name}
+            name=${ifDefined(this.name || undefined)}
             value=${ifDefined(this.value)}
             .indeterminate=${live(this.indeterminate)}
             .checked=${live(this.checked)}
             .disabled=${this.disabled}
             .required=${this.required}
             aria-checked=${ariaChecked}
-            aria-invalid=${ifDefined(this.invalid ? 'true' : undefined)}
+            aria-invalid=${ifDefined(this._computedInvalid ? 'true' : undefined)}
             @click=${this.handleClick} />
           ${isIndeterminate ? '–' : ''}
         </span>

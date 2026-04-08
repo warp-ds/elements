@@ -2,7 +2,7 @@
 
 import { classNames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles';
@@ -36,12 +36,21 @@ const ccSwitch = {
 };
 
 export class WarpSwitch extends FormControlMixin(LitElement) {
+  // Use delegatesFocus so focus is delegated to the button inside shadow DOM
+  // This avoids needing tabindex on the host element (prevents hydration mismatch)
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
+  // String properties without defaults to avoid reflecting empty attributes
   @property({ type: String, reflect: true })
-  name = '';
+  name!: string;
 
   @property({ type: String, reflect: true })
-  value = '';
+  value!: string;
 
+  // Boolean properties can have defaults - Lit doesn't reflect false values
   @property({ type: Boolean, reflect: true })
   checked = false;
 
@@ -51,7 +60,24 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   // capture the initial state using connectedCallback and #initialState
   #initialState: boolean | null = null;
 
-  static styles = [reset, styles];
+  static styles = [
+    reset,
+    styles,
+    css`
+      :host {
+        display: inline-block;
+      }
+
+      button:focus {
+        outline: none;
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--w-s-color-border-focus);
+        outline-offset: var(--w-outline-offset, 1px);
+      }
+    `,
+  ];
 
   /** @internal */
   get _baseClasses() {
@@ -102,12 +128,57 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
+  _handleHostClick = (event: MouseEvent) => {
+    if (this.disabled) return;
+    if (event.composedPath()[0] === this) {
+      this._handleClick();
+    }
+  };
+
+  /** @internal */
+  _handleKeyDown = (event: KeyboardEvent) => {
+    if (this.disabled) return;
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      this._handleClick();
+    }
+  };
+
+  /** @internal */
+  _syncA11yState() {
+    // Use ElementInternals for ARIA state - works with real AT,
+    // avoids hydration mismatches from client-side attribute changes
+    this.internals.ariaChecked = this.checked ? 'true' : 'false';
+    this.internals.ariaDisabled = this.disabled ? 'true' : null;
+  }
+
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
+    // Use ElementInternals for role - works with real AT,
+    // avoids hydration mismatches from client-side attribute changes
+    this.internals.role = 'switch';
+    // Sync aria-label to internals (keep attribute for hydration compatibility)
+    const ariaLabel = this.getAttribute('aria-label');
+    if (ariaLabel) {
+      this.internals.ariaLabel = ariaLabel;
+    }
     if (!this.disabled) {
       this.setValue(this.checked && this.value ? this.value : null);
     }
+
+    this._syncA11yState();
+    this.addEventListener('click', this._handleHostClick);
+    this.addEventListener('keydown', this._handleKeyDown);
+  }
+
+  disconnectedCallback(): void {
+    this.removeEventListener('click', this._handleHostClick);
+    this.removeEventListener('keydown', this._handleKeyDown);
+    super.disconnectedCallback();
   }
 
   willUpdate(changedProperties) {
@@ -115,6 +186,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
       if (!this.disabled) {
         this.setValue(this.checked && this.value ? this.value : null);
       }
+    }
+    if (changedProperties.has('checked') || changedProperties.has('disabled')) {
+      this._syncA11yState();
     }
   }
 
@@ -127,10 +201,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
       <div>
         <button
           type="button"
-          role="switch"
-          aria-checked=${this.checked}
+          role="none"
+          tabindex=${this.disabled ? -1 : 0}
           class=${this._baseClasses}
-          aria-disabled=${this.disabled}
           ?disabled=${this.disabled}
           @click=${this._handleClick}
         >

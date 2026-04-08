@@ -322,12 +322,13 @@ test('disabled group prevents selection and disables child radios', async () => 
     updateComplete: Promise<unknown>;
   };
   const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
-    HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; click: () => void; tabIndex: number }
+    HTMLElement & { checked: boolean; disabled: boolean; updateComplete: Promise<unknown>; click: () => void; tabIndex: number }
   >;
 
   await group.updateComplete;
-  expect(radios[0].getAttribute('aria-disabled')).toBe('true');
-  expect(radios[1].getAttribute('aria-disabled')).toBe('true');
+  // Check the disabled property - aria-disabled is set via ElementInternals
+  expect(radios[0].disabled).toBe(true);
+  expect(radios[1].disabled).toBe(true);
   expect(radios[0].tabIndex).toBe(-1);
   expect(radios[1].tabIndex).toBe(-1);
 

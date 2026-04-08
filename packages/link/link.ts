@@ -46,19 +46,19 @@ class WarpLink extends LitElement {
   };
 
   @property({ type: Boolean, reflect: true })
-  autofocus: boolean;
+  autofocus = false;
 
   @property({ reflect: true })
-  variant: ButtonVariant = 'secondary';
+  variant: ButtonVariant;
 
   @property({ type: Boolean, reflect: true })
-  small: boolean;
+  small = false;
 
   @property({ reflect: true })
   href: string;
 
   @property({ type: Boolean, reflect: true })
-  disabled: boolean;
+  disabled = false;
 
   @property({ reflect: true })
   target: string;
@@ -67,14 +67,15 @@ class WarpLink extends LitElement {
   rel: string;
 
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth: boolean;
+  fullWidth = false;
 
   static styles = [reset, styles];
 
   connectedCallback() {
     super.connectedCallback();
 
-    if (!variants.includes(this.variant)) {
+    // Validate variant if explicitly set
+    if (this.variant && !variants.includes(this.variant)) {
       throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(', ')}.`);
     }
   }
@@ -86,20 +87,21 @@ class WarpLink extends LitElement {
   }
 
   render() {
+    const variant = this.variant || 'secondary';
     const classes = {
       // @ts-expect-error link should be removed so we hide it from types until we can do so
-      'w-button': this.variant !== 'link',
-      'w-button--primary': this.variant === 'primary',
-      'w-button--secondary': this.variant === 'secondary',
-      'w-button--negative': this.variant === 'negative',
-      'w-button--utility': this.variant === 'utility',
-      'w-button--quiet': this.variant === 'quiet',
-      'w-button--negative-quiet': this.variant === 'negativeQuiet',
-      'w-button--utility-quiet': this.variant === 'utilityQuiet',
-      'w-button--overlay': this.variant === 'overlay',
-      'w-button--overlay-inverted': this.variant === 'overlayInverted',
-      'w-button--overlay-quiet': this.variant === 'overlayQuiet',
-      'w-button--overlay-inverted-quiet': this.variant === 'overlayInvertedQuiet',
+      'w-button': variant !== 'link',
+      'w-button--primary': variant === 'primary',
+      'w-button--secondary': variant === 'secondary' || !this.variant,
+      'w-button--negative': variant === 'negative',
+      'w-button--utility': variant === 'utility',
+      'w-button--quiet': variant === 'quiet',
+      'w-button--negative-quiet': variant === 'negativeQuiet',
+      'w-button--utility-quiet': variant === 'utilityQuiet',
+      'w-button--overlay': variant === 'overlay',
+      'w-button--overlay-inverted': variant === 'overlayInverted',
+      'w-button--overlay-quiet': variant === 'overlayQuiet',
+      'w-button--overlay-inverted-quiet': variant === 'overlayInvertedQuiet',
       'w-button--small': this.small,
       'w-button--full-width': this.fullWidth,
       'w-button--disabled': this.disabled,
