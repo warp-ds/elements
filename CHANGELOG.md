@@ -1,3 +1,10 @@
+## [2.8.2-next.5](https://github.com/warp-ds/elements/compare/v2.8.2-next.4...v2.8.2-next.5) (2026-04-08)
+
+
+### Bug Fixes
+
+* **modal:** prevent early closure during open ([#576](https://github.com/warp-ds/elements/issues/576)) ([a190dc9](https://github.com/warp-ds/elements/commit/a190dc93b27b2698437fe59c33fa7a3c371dadd9))
+
 ## [2.8.2-next.4](https://github.com/warp-ds/elements/compare/v2.8.2-next.3...v2.8.2-next.4) (2026-04-07)
 
 
