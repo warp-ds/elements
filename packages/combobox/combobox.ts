@@ -51,31 +51,31 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   options: ComboboxOption[] = [];
 
   /** Label above input */
-  @property({ type: String, reflect: true })
-  label?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  label?: string = '';
 
   /** Input placeholder */
-  @property({ type: String, reflect: true })
-  placeholder?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  placeholder?: string = '';
 
   /** The input value */
-  @property({ type: String, reflect: true })
+  @property({ type: String, reflect: true, useDefault: true })
   value = '';
 
   /** Whether the popover opens when focus is on the text field */
-  @property({ type: Boolean, attribute: 'open-on-focus' })
+  @property({ type: Boolean, attribute: 'open-on-focus', reflect: true })
   openOnFocus = false;
 
   /** Select active option on blur */
-  @property({ type: Boolean, attribute: 'select-on-blur' })
+  @property({ type: Boolean, attribute: 'select-on-blur', reflect: true, useDefault: true })
   selectOnBlur = true;
 
   /** Whether the matching text segments in the options should be highlighted */
-  @property({ type: Boolean, attribute: 'match-text-segments' })
+  @property({ type: Boolean, attribute: 'match-text-segments', reflect: true })
   matchTextSegments = false;
 
   /** Disable client-side static filtering */
-  @property({ type: Boolean, attribute: 'disable-static-filtering' })
+  @property({ type: Boolean, attribute: 'disable-static-filtering', reflect: true })
   disableStaticFiltering = false;
 
   /** Renders the input field in an invalid state */
@@ -83,8 +83,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   invalid = false;
 
   /** The content to display as the help text */
-  @property({ type: String, attribute: 'help-text', reflect: true })
-  helpText?: string;
+  @property({ type: String, attribute: 'help-text', reflect: true, useDefault: true })
+  helpText?: string = '';
 
   /** Whether the element is disabled */
   @property({ type: Boolean, reflect: true })
@@ -99,12 +99,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   optional = false;
 
   /** Name attribute for form submission */
-  @property({ type: String, reflect: true })
-  name?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  name?: string = '';
 
   /** Autocomplete attribute for the input field */
-  @property({ type: String, reflect: true })
-  autocomplete?: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  autocomplete?: string = 'off';
 
   /** @internal Options list open boolean */
   @state()
@@ -441,7 +441,9 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
     if (startIdx !== -1) {
       const endIdx = startIdx + option.currentInputValue.length;
-      return html`${display.substring(0, startIdx)}<span class="${ccCombobox.textMatch}">${display.substring(startIdx, endIdx)}</span
+      return html`${display.substring(0, startIdx)}<span
+          class="${ccCombobox.textMatch}"
+          >${display.substring(startIdx, endIdx)}</span
         >${display.substring(endIdx)}`;
     }
 
@@ -449,9 +451,11 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
+    const options = Array.isArray(this.options) ? this.options : [];
+
     // Sync _displayValue when value or options change externally (before filtering)
     if (changedProperties.has('value') || changedProperties.has('options')) {
-      const matchingOption = this.options.find((o) => o.value === this.value);
+      const matchingOption = options.find((o) => o.value === this.value);
       // Only sync if this is an external value change (not from user typing)
       // We detect this by checking if _displayValue doesn't match the expected label
       const expectedDisplay = matchingOption ? matchingOption.label || matchingOption.value : this.value;
@@ -470,9 +474,9 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       changedProperties.has('disableStaticFiltering') ||
       (changedProperties as Map<string, unknown>).has('_displayValue')
     ) {
-      this._optionIdCounter += this.options.length;
+      this._optionIdCounter += options.length;
 
-      this._currentOptions = this._createOptionsWithIdAndMatch(this.options, this._displayValue).filter((option) =>
+      this._currentOptions = this._createOptionsWithIdAndMatch(options, this._displayValue).filter((option) =>
         !this.disableStaticFiltering
           ? (option.label || option.value).toLowerCase().includes(this._displayValue.toLowerCase())
           : true,
@@ -492,7 +496,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div class=${classNames(ccCombobox.wrapper)} @blur=${this._handleContainerBlur}>
+      <div
+        class=${classNames(ccCombobox.wrapper)}
+        @blur=${this._handleContainerBlur}
+      >
         <w-textfield
           class="w-combobox-textfield"
           .value=${this._navigationLabelOrDisplayValue}
@@ -513,14 +520,22 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           @input=${(e: CustomEvent) => this._handleChange(e?.detail?.value)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
-          @keydown=${this._handleKeyDown}></w-textfield>
+          @keydown=${this._handleKeyDown}
+        ></w-textfield>
 
         <span class="${ccCombobox.a11y}" role="status">
           ${this._getAriaText(this._currentOptions, this._displayValue, this._isOpen)}
         </span>
 
-        <div ?hidden=${!this._isOpen || !this._currentOptions.length} class=${classNames(ccCombobox.base)}>
-          <ul id=${this._listboxId} role="listbox" class="${ccCombobox.listbox}">
+        <div
+          ?hidden=${!this._isOpen || !this._currentOptions.length}
+          class=${classNames(ccCombobox.base)}
+        >
+          <ul
+            id=${this._listboxId}
+            role="listbox"
+            class="${ccCombobox.listbox}"
+          >
             ${repeat(
               this._currentOptions,
               (option) => option.key,
@@ -533,7 +548,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
                     aria-selected=${this._navigationOption?.id === option.id}
                     tabindex="-1"
                     class=${this._getOptionClasses(option)}
-                    @mousedown=${(e: MouseEvent) => this._handleOptionClick(e, option)}>
+                    @mousedown=${(e: MouseEvent) => this._handleOptionClick(e, option)}
+                  >
                     ${this._renderTextMatch(display, option)}
                   </li>
                 `;
