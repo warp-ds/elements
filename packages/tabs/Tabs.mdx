@@ -17,3 +17,26 @@ import * as TabsStories from './tabs.stories';
 ## ManyTabs
 
 <Canvas of={TabsStories.ManyTabs} />
+
+## Accessibility
+w-tab elements will automatically generate id attributes for accessibility but this can cause hydration mismatch errors when using tabs in a React SSR + hydration application.
+To avoid this, set ids on the w-tab elements manually like so:
+
+```js
+<w-tabs active="towers">
+    <w-tab for="fellowship" id="fellowship-tab">Fellowship</w-tab>
+    <w-tab-panel id="fellowship">
+        <p>And my axe!</p>
+    </w-tab-panel>
+
+    <w-tab for="towers" id="towers-tab">Towers</w-tab>
+    <w-tab-panel id="towers">
+        <p>I am on nobody's side, because nobody is on my side, little orc.</p>
+    </w-tab-panel>
+
+    <w-tab for="return" id="return-tab">Return</w-tab>
+    <w-tab-panel id="return">
+        <p>I am no man.</p>
+    </w-tab-panel>
+</w-tabs>
+```
