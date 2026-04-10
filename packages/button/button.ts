@@ -54,12 +54,7 @@ type ButtonType = 'button' | 'submit' | 'reset';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-button--docs)
  */
 class WarpButton extends FormControlMixin(LitElement) {
-  static styles = [
-    reset,
-    wButtonStyles,
-    css`:host([full-width]) { width: 100%; }`,
-    css`.rounded-radius-default{border-radius:var(--w-button-radius-default,8px);}.rounded-radius-utility{border-radius:var(--w-button-radius-utility,4px);}`,
-  ];
+  static styles = [reset, wButtonStyles];
 
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
