@@ -52,19 +52,19 @@ export const styles = css`
     font-weight: var(--_font-weight);
   }
 
-  :host(:not([variant="link"]):hover) a {
+  :host(:not([variant="link"])) a:hover {
     background-color: var(--_background-hover);
     border-color: var(--_border-hover);
     color: var(--_text-color-hover);
   }
 
-  :host(:not([variant="link"]):active) a {
+  :host(:not([variant="link"])) a:active {
     background-color: var(--_background-active);
     border-color: var(--_border-active);
     color: var(--_text-color-active);
   }
 
-  :host(:not([variant="link"]):focus-visible) a {
+  :host(:not([variant="link"])) a:focus-visible {
     outline: 2px solid var(--w-s-color-border-focus);
     outline-offset: var(--w-outline-offset, 1px);
   }

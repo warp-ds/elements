@@ -53,19 +53,19 @@ export const wButtonStyles = css`
     font-weight: var(--_font-weight);
   }
 
-  :host(:hover) button {
+  button:hover {
     background-color: var(--_background-hover);
     border-color: var(--_border-hover);
     color: var(--_text-color-hover);
   }
 
-  :host(:active) button {
+  button:active {
     background-color: var(--_background-active);
     border-color: var(--_border-active);
     color: var(--_text-color-active);
   }
 
-  :host(:focus-visible)  button {
+  button:focus-visible {
     outline: 2px solid var(--w-s-color-border-focus);
     outline-offset: var(--w-outline-offset, 1px);
   }
