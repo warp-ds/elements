@@ -14,6 +14,7 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wButtonStyles } from './styles/w-button.styles';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 type ButtonVariant =
   | 'primary'
@@ -184,39 +185,7 @@ class WarpButton extends FormControlMixin(LitElement) {
         : html`
           <button
             type=${this.type || 'button'}
-            class=${classMap({
-              /**
-               * The map gets a bit messy because of backwards compatibility.
-               * The gist of it is we want to avoid applying conflicting modifiers.
-               * F. ex. if `variant="negative" quiet`, then we should only include
-               * `w-button--negative-quiet`, not `w-button--quiet` and `w-button--negative`.
-               */
-              'w-button': true,
-              'w-button--primary': variant === 'primary',
-              'w-button--secondary': variant === 'secondary',
-              'w-button--negative': !this.quiet && variant === 'negative',
-              'w-button--utility': !this.quiet && variant === 'utility',
-              'w-button--pill': variant === 'pill',
-              'w-button--quiet':
-                // only include `quiet` with the backwards compat if the variant does not have its own -quiet modifier.
-                (this.quiet && !['negative', 'utility', 'overlay', 'overlayInverted'].includes(variant)) ||
-                variant === 'quiet',
-              'w-button--negative-quiet':
-                (this.quiet && variant === 'negative') || variant === 'negativeQuiet',
-              'w-button--utility-quiet': (this.quiet && variant === 'utility') || variant === 'utilityQuiet',
-              'w-button--overlay': !this.quiet && variant === 'overlay',
-              'w-button--overlay-inverted': !this.quiet && variant === 'overlayInverted',
-              'w-button--overlay-quiet': (this.quiet && variant === 'overlay') || variant === 'overlayQuiet',
-              'w-button--overlay-inverted-quiet':
-                (this.quiet && variant === 'overlayInverted') || variant === 'overlayInvertedQuiet',
-              'w-button--link': variant === 'link',
-              'w-button--small': this.small,
-              'w-button--full-width': this.fullWidth,
-              'w-button--has-icon-only': this.iconOnly,
-              'w-button--loading': this.loading,
-              'w-button--disabled': this.disabled,
-              [this.buttonClass]: this.buttonClass,
-            })}
+            class=${ifDefined(this.buttonClass)}
             @click="${this._handleButtonClick}"
           >
             <slot></slot>

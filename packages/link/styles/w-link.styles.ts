@@ -1,8 +1,8 @@
 import { css } from "lit";
 
-export const wButtonStyles = css`
-  :host {
-    /* Local scoped variables, given the default button (the secondary variant) as a default */
+export const styles = css`
+  /* If not a link variant this should look like a button */
+  :host(:not([variant="link"])) {
     --_background: var(--background, var(--w-s-color-background));
     --_background-hover: var(
       --background-hover,
@@ -27,12 +27,12 @@ export const wButtonStyles = css`
     --_padding-y: var(--padding-y, 13px);
   }
 
-  button {
-    /* Base setup for all buttons */
+  :host(:not([variant="link"])) a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition:
       color 150ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -41,7 +41,6 @@ export const wButtonStyles = css`
       fill 150ms cubic-bezier(0.4, 0, 0.2, 1),
       stroke 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Hook the local vars up to the button stuff  */
     background-color: var(--_background);
     color: var(--_text-color);
     border: var(--_border-width) solid var(--_border);
@@ -53,19 +52,19 @@ export const wButtonStyles = css`
     font-weight: var(--_font-weight);
   }
 
-  :host(:hover) button {
+  :host(:not([variant="link"]):hover) a {
     background-color: var(--_background-hover);
     border-color: var(--_border-hover);
     color: var(--_text-color-hover);
   }
 
-  :host(:active) button {
+  :host(:not([variant="link"]):active) a {
     background-color: var(--_background-active);
     border-color: var(--_border-active);
     color: var(--_text-color-active);
   }
 
-  :host(:focus-visible)  button {
+  :host(:not([variant="link"]):focus-visible) a {
     outline: 2px solid var(--w-s-color-border-focus);
     outline-offset: var(--w-outline-offset, 1px);
   }
@@ -177,19 +176,6 @@ export const wButtonStyles = css`
     display: inline;
   }
 
-  :host([variant="pill"]) {
-    --background: transparent;
-    --background-hover: var(--w-color-button-pill-background-hover); /** TODO: this should use a semantic token */
-    --background-active: var(--w-color-button-pill-background-active); /** TODO: this should use a semantic token */
-    --border-radius: 50%;
-    --border-width: 0px;
-    --color: var(--w-s-color-icon);
-    --color-hover: var(--w-s-color-icon-hover);
-    --color-active: var(--w-s-color-icon-active);
-    --padding-x: 14px; /* get a total height and width of 44px, matching atomic CSS variant */
-    --padding-y: 14px;
-  }
-
   /* States config,  selects --loading as well since loading is always supposed to be disabled */
   :host(:disabled),
   :host([disabled]) {
@@ -202,28 +188,13 @@ export const wButtonStyles = css`
     --border-width: 0px;
   }
 
-  :host(:disabled) button,
-  :host([disabled]) button {
+  :host(:disabled) a,
+  :host([disabled]) a {
     cursor: not-allowed;
     pointer-events: none;
   }
 
-  :host([loading]) {
-    --background: var(--w-s-color-background-subtle);
-    --background-hover: var(--w-s-color-background-subtle);
-    --background-active: var(--w-s-color-background-subtle);
-    --color: var(--w-s-color-text);
-    --color-hover: var(--w-s-color-text);
-    --color-active: var(--w-s-color-text);
-    --border-width: 0px;
-  }
-
-  :host([loading]) button {
-    cursor: wait;
-    pointer-events: none;
-  }
-
-  :host([variant="link"]):hover {
+  :host([variant="link"]):hover a {
     text-decoration: underline;
   }
 
@@ -235,49 +206,9 @@ export const wButtonStyles = css`
     --line-height: var(--w-line-height-xs);
   }
 
-  :host([small][variant="pill"]) {
-    --padding-x: 8px; /* get a total height and width of 32px, matching atomic CSS variant */
-    --padding-y: 8px;
-  }
-
   /* Width config */
-  :host([full-width]) button {
+  :host([full-width]) a {
     width: 100%;
     max-width: 100%;
-  }
-
-  :host([has-icon-only]) {
-    --_padding-x: var(--_padding-y);
-  }
-
-  :host([has-icon-only]) button {
-    width: auto;
-    max-width: none;
-    aspect-ratio: 1 / 1;
-  }
-
-  /* Copy of loading animation from warp  */
-  :host([loading]) button {
-    background-image: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.05) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0.05) 75%,
-      transparent 75%,
-      transparent
-    );
-    background-size: 30px 30px;
-    animation: animate-inprogress 3s linear infinite;
-  }
-
-  @keyframes animate-inprogress {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 60px 0;
-    }
   }
 `;
