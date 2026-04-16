@@ -109,6 +109,8 @@ class WarpSlider extends LitElement {
   @state()
   _tabbableElements: Array<HTMLElement> = [];
 
+  #valueHaveChangesSinceExternalError = false;
+
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
@@ -217,10 +219,6 @@ class WarpSlider extends LitElement {
       this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
     }
 
-    if (this.invalid && this.error) {
-      this._showError = true;
-    }
-
     this.#syncSliderThumbs();
   }
 
@@ -241,9 +239,8 @@ class WarpSlider extends LitElement {
     }
 
     if (changedProperties.has('error') || changedProperties.has('invalid')) {
-      if (this.error && this.invalid) {
-        this._showError = true;
-      } else {
+      this.#valueHaveChangesSinceExternalError = false;
+      if (!this.error || !this.invalid) {
         this._showError = false;
       }
       this.#syncSliderThumbs();
@@ -251,6 +248,8 @@ class WarpSlider extends LitElement {
   }
 
   #onInput(e: InputEvent) {
+    this.#valueHaveChangesSinceExternalError = true;
+
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
 
@@ -261,7 +260,7 @@ class WarpSlider extends LitElement {
   }
 
   #onBlur() {
-    if (this.componentHasError) {
+    if (this._hasInternalError || (this.invalid && !this.#valueHaveChangesSinceExternalError)) {
       this._showError = true;
     } else {
       this._showError = false;
@@ -318,11 +317,11 @@ class WarpSlider extends LitElement {
   #onSliderValidity(e: CustomEvent) {
     e.stopPropagation();
 
-    const didHaveInternalError = this._hasInternalError || this.invalid;
+    const didHaveInternalError = this._hasInternalError;
 
     const triggeredThumb = e.target as WarpSliderThumb;
 
-    this._hasInternalError = Boolean(e.detail.invalid) || this.invalid;
+    this._hasInternalError = Boolean(e.detail.invalid);
     this._invalidMessage = e.detail.invalid;
 
     if (didHaveInternalError === true && this._hasInternalError === false) {
@@ -362,16 +361,20 @@ class WarpSlider extends LitElement {
     }
   }
 
-  get componentHasError(): boolean {
-    return this.invalid || this._hasInternalError;
-  }
-
   get errorText(): string {
     if (!this._showError) {
       return '';
     }
 
-    return this.error || this._invalidMessage;
+    if (this._invalidMessage) {
+      return this._invalidMessage;
+    }
+
+    if (this.error && !this.#valueHaveChangesSinceExternalError) {
+      return this.error;
+    }
+
+    return '';
   }
 
   render() {

@@ -449,7 +449,7 @@ test('disabled fieldset communicates disabled state', async () => {
 });
 
 // Error state accessibility (WCAG 3.3.1 Error Identification)
-test('invalid slider sets aria-invalid on fieldset', async () => {
+test('invalid slider does not set aria-invalid on fieldset before interaction', async () => {
   const component = html`
     <w-slider label="Invalid slider" min="0" max="100" invalid error="Please select a value">
       <w-slider-thumb name="value"></w-slider-thumb>
@@ -460,7 +460,30 @@ test('invalid slider sets aria-invalid on fieldset', async () => {
 
   const slider = document.querySelector('w-slider') as WarpSlider;
   await slider.updateComplete;
-  // Wait for the state update triggered in connectedCallback
+
+  const fieldset = slider.shadowRoot.querySelector('fieldset');
+
+  // Error should not show before interaction
+  expect(fieldset.getAttribute('aria-invalid')).toBeNull();
+});
+
+test('invalid slider sets aria-invalid on fieldset after blur', async () => {
+  const component = html`
+    <w-slider label="Invalid slider" min="0" max="100" invalid error="Please select a value">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
+  await slider.updateComplete;
+
+  // Focus and blur to trigger error display
+  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  rangeInput.focus();
+  rangeInput.blur();
   await slider.updateComplete;
 
   const fieldset = slider.shadowRoot.querySelector('fieldset');
@@ -468,7 +491,7 @@ test('invalid slider sets aria-invalid on fieldset', async () => {
   expect(fieldset.getAttribute('aria-invalid')).toBe('true');
 });
 
-test('error message is visible when slider is invalid', async () => {
+test('error message is not visible before interaction', async () => {
   const component = html`
     <w-slider label="Error slider" min="0" max="100" invalid error="Value is required">
       <w-slider-thumb name="value"></w-slider-thumb>
@@ -479,13 +502,69 @@ test('error message is visible when slider is invalid', async () => {
 
   const slider = document.querySelector('w-slider') as WarpSlider;
   await slider.updateComplete;
-  // Wait for the state update triggered in connectedCallback
+
+  const errorMessage = slider.shadowRoot.querySelector('.w-slider__error');
+
+  expect(errorMessage).toBeNull();
+});
+
+test('error message is visible after blur when slider is invalid', async () => {
+  const component = html`
+    <w-slider label="Error slider" min="0" max="100" invalid error="Value is required">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
+  await slider.updateComplete;
+
+  // Focus and blur to trigger error display
+  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  rangeInput.focus();
+  rangeInput.blur();
   await slider.updateComplete;
 
   const errorMessage = slider.shadowRoot.querySelector('.w-slider__error');
 
   expect(errorMessage).not.toBeNull();
   expect(errorMessage.textContent.trim()).toBe('Value is required');
+});
+
+test('external error is dismissed after user changes value to valid', async () => {
+  const component = html`
+    <w-slider label="Year" min="1950" max="2025" invalid error="External error">
+      <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+      <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  const thumb = document.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
+  await slider.updateComplete;
+
+  // Blur to trigger external error display
+  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  rangeInput.focus();
+  rangeInput.blur();
+  await slider.updateComplete;
+
+  expect(slider.shadowRoot.querySelector('.w-slider__error')).not.toBeNull();
+
+  // Type a valid value — external error should be dismissed
+  const textfield = thumb.shadowRoot.querySelector('w-textfield') as HTMLElement;
+  const numberInput = textfield.shadowRoot.querySelector('input[type="number"]') as HTMLInputElement;
+  numberInput.focus();
+  numberInput.value = '1960';
+  numberInput.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+  numberInput.blur();
+  await slider.updateComplete;
+
+  expect(slider.shadowRoot.querySelector('.w-slider__error')).toBeNull();
 });
 
 // Screen reader min/max range announcement
