@@ -14,3 +14,4 @@ packages/*/locales/*/*.mjs
 /entrypoint.js
 .DS_Store
 .tmp
+.vitest-attachments/
