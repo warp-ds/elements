@@ -1,10 +1,10 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import { reset } from '../styles.js';
 
-import { styles } from './styles.js';
+import { styles } from './styles/w-link.styles.js';
 
 type ButtonVariant =
   | 'primary'
@@ -87,32 +87,16 @@ class WarpLink extends LitElement {
   }
 
   render() {
-    const variant = this.variant || 'secondary';
-    const classes = {
-      // @ts-expect-error link should be removed so we hide it from types until we can do so
-      'w-button': variant !== 'link',
-      'w-button--primary': variant === 'primary',
-      'w-button--secondary': variant === 'secondary' || !this.variant,
-      'w-button--negative': variant === 'negative',
-      'w-button--utility': variant === 'utility',
-      'w-button--quiet': variant === 'quiet',
-      'w-button--negative-quiet': variant === 'negativeQuiet',
-      'w-button--utility-quiet': variant === 'utilityQuiet',
-      'w-button--overlay': variant === 'overlay',
-      'w-button--overlay-inverted': variant === 'overlayInverted',
-      'w-button--overlay-quiet': variant === 'overlayQuiet',
-      'w-button--overlay-inverted-quiet': variant === 'overlayInvertedQuiet',
-      'w-button--small': this.small,
-      'w-button--full-width': this.fullWidth,
-      'w-button--disabled': this.disabled,
-    };
-    return html`<a
-      href=${this.href}
-      target=${this.target}
-      rel=${this.target === '_blank' ? this.rel || 'noopener' : undefined}
-      class=${classMap(classes)}>
-      <slot></slot>
-    </a>`;
+    return html`
+      <a
+        href="${this.href}"
+        target="${this.target}"
+        rel="${this.target === '_blank' ? this.rel || 'noopener' : nothing}"
+        tabindex="0"
+      >
+        <slot></slot>
+      </a>
+    `;
   }
 }
 
