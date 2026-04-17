@@ -53,18 +53,24 @@ export const SingleDisabled: Story = {
 export const Range: Story = {
   render() {
     return html`
-      <w-slider label="Range" min="0" max="100">
-        <w-slider-thumb
-          slot="from"
-          aria-label="From value"
-          name="from"
-        ></w-slider-thumb>
-        <w-slider-thumb
-          slot="to"
-          aria-label="To value"
-          name="to"
-        ></w-slider-thumb>
-      </w-slider>
+      <form>
+        <w-slider label="Range" min="0" max="100">
+          <w-slider-thumb
+            slot="from"
+            aria-label="From value"
+            name="from"
+          ></w-slider-thumb>
+          <w-slider-thumb
+            slot="to"
+            aria-label="To value"
+            name="to"
+          ></w-slider-thumb>
+        </w-slider>
+        <div class="py-8">
+          <w-button type="reset">Reset</w-button>
+          <w-button type="submit">Submit</w-button>
+        </div>
+      </form>
     `;
   },
 };

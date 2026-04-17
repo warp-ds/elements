@@ -250,6 +250,11 @@ class WarpSlider extends LitElement {
     }
   }
 
+  #onThumbReset(e: CustomEvent) {
+    const input = e.target as WarpSliderThumb;
+    this.#updateActiveTrack(input);
+  }
+
   #onInput(e: InputEvent) {
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
@@ -382,6 +387,7 @@ class WarpSlider extends LitElement {
         @input="${this.#onInput}"
         @focusout="${this.#onBlur}"
         @slidervalidity="${this.#onSliderValidity}"
+        @thumbreset="${this.#onThumbReset}"
         @keydown="${this.#handleKeyDown}"
         aria-invalid="${this.errorText ? 'true' : nothing}"
         ?disabled="${this.disabled}"

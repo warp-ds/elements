@@ -176,9 +176,18 @@ export const OpenEnded: Story = {
               return value;
             }}
           >
-            <SliderThumb slot="from" aria-label="Fra år" name="from" />
-            <SliderThumb slot="to" aria-label="Til år" name="to" />
+            <SliderThumb slot="from" aria-label="Fra år" name="from" value={openEndedFrom} />
+            <SliderThumb slot="to" aria-label="Til år" name="to" value={openEndedTo} />
           </Slider>
+          <button 
+            type="button"
+            onClick={() => {
+              setOpenEndedFrom("");
+              setOpenEndedTo("");
+            }}
+          >
+            What's button type reset lol
+          </button>
         </form>
         <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
         <output>
