@@ -1,3 +1,15 @@
+# [2.9.0-next.1](https://github.com/warp-ds/elements/compare/v2.8.2-next.6...v2.9.0-next.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* use correct initial value and update active track on reset ([#586](https://github.com/warp-ds/elements/issues/586)) ([ed47ef0](https://github.com/warp-ds/elements/commit/ed47ef044a2cf0811f7fff13dc2533d61671eb0b))
+
+
+### Features
+
+* update w-button to parity with warp-ds/components implementation ([b67d470](https://github.com/warp-ds/elements/commit/b67d470634c473a20776f04fc1112e0403960c36)), closes [#537](https://github.com/warp-ds/elements/issues/537) [#541](https://github.com/warp-ds/elements/issues/541)
+
 ## [2.8.2-next.6](https://github.com/warp-ds/elements/compare/v2.8.2-next.5...v2.8.2-next.6) (2026-04-08)
 
 
