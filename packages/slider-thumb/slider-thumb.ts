@@ -116,6 +116,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   resetFormControl(): void {
     this.value = this.#initialValue;
+    this.dispatchEvent(
+      new CustomEvent('thumbreset', {
+        bubbles: true,
+      }),
+    );
   }
 
   /**
@@ -532,6 +537,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
 
     if (changedProperties.has('value')) {
+      if (typeof this.#initialValue === "undefined" && typeof this.value !== "undefined") {
+        // If w-slider sets our initial value based on the min and max attributes then
+        // this.value will be undefined in connectedCallback. We need this check here
+        // in order for form resets to work correctly.
+        this.#initialValue = this.value;
+      }
       this.setValue(this.value);
       this.#syncRangeValue();
     }
