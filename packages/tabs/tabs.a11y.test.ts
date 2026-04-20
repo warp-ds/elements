@@ -162,7 +162,7 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       const selectedTab = [...page.container.querySelectorAll('w-tab')].find(
         (tab: WarpTab) => tab.ariaSelected === 'true'
       );
-      await expect.element(selectedTab).toHaveTextContent("Towers");
+      await expect.element(selectedTab as HTMLElement).toHaveTextContent("Towers");
     });
   });
 

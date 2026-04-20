@@ -9,7 +9,7 @@ test('renders an info', async () => {
   const page = render(html`<w-alert variant="info" show data-testid="infoMessage">This is information</w-alert>`);
 
   // Verify the icon correct icon is rendered
-  await expect.poll(() => page.getByTestId('infoMessage').element().shadowRoot.querySelector('w-icon')).toBeVisible();
+  await expect.poll(() => page.getByTestId('infoMessage').element().shadowRoot?.querySelector('w-icon')).toBeVisible();
   await expect.element(page.getByTestId('infoMessage')).toBeVisible();
   await expect.element(page.getByText('This is information')).toBeVisible();
 });
@@ -17,7 +17,7 @@ test('renders an info', async () => {
 test('does not render when "show" is not set / or not true', async () => {
   const component = html`<w-alert variant="warning" data-testid="warningMessage">This is a warning</w-alert>`;
   const page = render(component);
-  await expect.element(page.container.querySelector('w-alert')).not.toHaveAttribute('show');
+  await expect.element(page.container.querySelector('w-alert') as HTMLElement).not.toHaveAttribute('show');
 });
 
 test('defaults to info variant when no variant attribute is set', async () => {
