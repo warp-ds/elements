@@ -101,7 +101,12 @@ function cacheFetch(uri: string): Promise<string> {
     );
   }
 
-  return _fetchMap.get(uri)!;
+  const cachedRequest = _fetchMap.get(uri);
+  if (!cachedRequest) {
+    throw new Error(`Missing cached icon request for URI: ${uri}`);
+  }
+
+  return cachedRequest;
 }
 
 function cloneTemplateSvg(uri: string): SVGElement | null {
