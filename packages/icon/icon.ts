@@ -3,29 +3,144 @@ import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styles } from './style.js';
 
-// Generic parser for fetch responses
-type ResponseParser<T> = (response: Response) => Promise<T>;
-
-interface CacheFetchOptions<T> {
-  responseParser?: ResponseParser<T>;
-}
-
-const _fetchMap = new Map<string, Promise<any>>();
+// Deduplicate in-flight fetches by URI.
+const _fetchMap = new Map<string, Promise<string>>();
+// Keep raw SVG text and parsed template nodes in memory for fast warm reads.
+const _svgTextMap = new Map<string, string>();
+const _svgTemplateMap = new Map<string, SVGElement>();
+const LOCAL_STORAGE_PREFIX = 'w-icon:v1:';
+const LOCAL_STORAGE_MAX_ENTRIES = 200;
 const ERROR_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"></svg>';
 
-/**
- * A minimal in-memory map to de-duplicate Fetch API media requests.
- *
- * @param uri - Resource URL
- * @param options - Optional parser for the response
- * @returns Promise of parsed response
- */
-function cacheFetch<T = string>(uri: string, options: CacheFetchOptions<T> = {}): Promise<T> {
-  const parser = options.responseParser ?? ((res: Response) => res.text() as Promise<any>);
-  if (!_fetchMap.has(uri)) {
-    _fetchMap.set(uri, fetch(uri).then(parser));
+interface ResolvedIconDescriptor {
+  locale: string;
+  name: string;
+  uri: string;
+}
+
+function buildIconUri(name: string, locale: string): string {
+  return `https://assets.finn.no/pkg/eikons/v1/${locale}/${name}.svg`;
+}
+
+function getStorageKey(uri: string): string {
+  return `${LOCAL_STORAGE_PREFIX}${uri}`;
+}
+
+function getStorage(): Storage | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
   }
-  return _fetchMap.get(uri) as Promise<T>;
+}
+
+function parseSvg(svgText: string): SVGElement | null {
+  const doc = new DOMParser().parseFromString(svgText, 'text/html');
+  return doc.body.querySelector('svg');
+}
+
+function getErrorSvg(): SVGElement {
+  const doc = new DOMParser().parseFromString(ERROR_SVG, 'text/html');
+  return doc.body.firstElementChild as SVGElement;
+}
+
+function persistSvgText(uri: string, svgText: string): void {
+  const storage = getStorage();
+  if (!storage) return;
+
+  try {
+    storage.setItem(getStorageKey(uri), svgText);
+  } catch {
+    return;
+  }
+
+  // Clean up old entries if we exceed the max limit
+  try {
+    const keys: string[] = [];
+    for (let index = 0; index < storage.length; index += 1) {
+      const key = storage.key(index);
+      if (key?.startsWith(LOCAL_STORAGE_PREFIX)) keys.push(key);
+    }
+
+    if (keys.length <= LOCAL_STORAGE_MAX_ENTRIES) return;
+    const entriesToRemove = keys.length - LOCAL_STORAGE_MAX_ENTRIES;
+    for (let index = 0; index < entriesToRemove; index += 1) {
+      const keyToRemove = keys[index];
+      if (keyToRemove) storage.removeItem(keyToRemove);
+    }
+  } catch {
+    // Ignore storage cleanup errors
+  }
+}
+
+function getStoredSvgText(uri: string): string | null {
+  const storage = getStorage();
+  if (!storage) return null;
+
+  try {
+    return storage.getItem(getStorageKey(uri));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * A minimal in-memory map to de-duplicate icon text fetches.
+ */
+function cacheFetch(uri: string): Promise<string> {
+  if (!_fetchMap.has(uri)) {
+    _fetchMap.set(
+      uri,
+      fetch(uri)
+        .then((response) => response.text())
+        .catch((error) => {
+          _fetchMap.delete(uri);
+          throw error;
+        }),
+    );
+  }
+
+  return _fetchMap.get(uri)!;
+}
+
+function cloneTemplateSvg(uri: string): SVGElement | null {
+  const template = _svgTemplateMap.get(uri);
+  return template ? (template.cloneNode(true) as SVGElement) : null;
+}
+
+function getCachedSvgSync(uri: string): SVGElement | null {
+  // Fast path: pre-parsed template in memory.
+  const templateClone = cloneTemplateSvg(uri);
+  if (templateClone) return templateClone;
+
+  // Slow sync path: hydrate memory cache from localStorage once.
+  const cachedText = _svgTextMap.get(uri) ?? getStoredSvgText(uri);
+  if (!cachedText) return null;
+
+  _svgTextMap.set(uri, cachedText);
+  const parsedSvg = parseSvg(cachedText);
+  if (!parsedSvg) return null;
+
+  _svgTemplateMap.set(uri, parsedSvg);
+  return parsedSvg.cloneNode(true) as SVGElement;
+}
+
+async function fetchAndCacheSvg(uri: string): Promise<SVGElement | null> {
+  try {
+    // Always refresh memory + persisted text when fetch succeeds.
+    const svgText = await cacheFetch(uri);
+    _svgTextMap.set(uri, svgText);
+    persistSvgText(uri, svgText);
+
+    const parsedSvg = parseSvg(svgText);
+    if (!parsedSvg) return null;
+
+    _svgTemplateMap.set(uri, parsedSvg);
+    return parsedSvg.cloneNode(true) as SVGElement;
+  } catch {
+    return null;
+  }
 }
 
 export class WIcon extends LitElement {
@@ -47,45 +162,56 @@ export class WIcon extends LitElement {
   @state()
   private svg: SVGElement | null = null;
 
-  /**
-   * Fetch an icon SVG from the CDN, with caching
-   * @param iconName - Name of the icon file
-   * @returns SVGElement or null on failure
-   */
-  private async fetchIcon(iconName: string): Promise<SVGElement | null> {
+  // Monotonic guard to prevent stale async responses from winning.
+  private loadSequence = 0;
+
+  private resolveIconDescriptor(): ResolvedIconDescriptor | null {
+    if (!this.name) return null;
+
     const locale = this.locale || 'en';
-    const uri = `https://assets.finn.no/pkg/eikons/v1/${locale}/${iconName}.svg`;
-    try {
-      const svgText = await cacheFetch<string>(uri);
-      const doc = new DOMParser().parseFromString(svgText, 'text/html');
-      return doc.body.querySelector('svg');
-    } catch {
-      return null;
-    }
+    return {
+      locale,
+      name: this.name,
+      uri: buildIconUri(this.name, locale),
+    };
   }
 
-  protected firstUpdated(): void {
-    this.loadIcon();
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.primeAndLoadIcon();
   }
 
-  protected updated(changedProps: Map<string, unknown>): void {
+  protected willUpdate(changedProps: Map<string, unknown>): void {
     if (changedProps.has('name') || changedProps.has('locale')) {
-      this.loadIcon();
+      this.primeAndLoadIcon();
     }
   }
 
-  private async loadIcon(): Promise<void> {
-    if (!this.name) {
+  private primeAndLoadIcon(): void {
+    const descriptor = this.resolveIconDescriptor();
+    if (!descriptor) {
       this.svg = null;
       return;
     }
 
-    let iconEl = await this.fetchIcon(this.name);
-    if (!iconEl) {
-      const doc = new DOMParser().parseFromString(ERROR_SVG, 'text/html');
-      iconEl = doc.body.firstElementChild as SVGElement;
+    const cachedIcon = getCachedSvgSync(descriptor.uri);
+    // Paint immediately when data is already warm.
+    if (cachedIcon) this.svg = cachedIcon;
+
+    // Then revalidate/fetch asynchronously.
+    void this.loadIcon(descriptor.uri);
+  }
+
+  private async loadIcon(uri: string): Promise<void> {
+    const loadSequence = ++this.loadSequence;
+
+    let iconEl = await fetchAndCacheSvg(uri);
+    if (!iconEl) iconEl = getErrorSvg();
+
+    // Ignore out-of-order completions from earlier requests.
+    if (loadSequence === this.loadSequence) {
+      this.svg = iconEl;
     }
-    this.svg = iconEl;
   }
 
   render(): TemplateResult {
