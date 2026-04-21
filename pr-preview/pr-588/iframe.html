@@ -45,10 +45,10 @@
       window.LOGLEVEL = 'info';
       window.FRAMEWORK_OPTIONS = {};
       window.CHANNEL_OPTIONS = {};
-      window.FEATURES = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true,"viewport":true,"highlight":true,"controls":true,"interactions":true,"actions":true,"backgrounds":true,"outline":true,"measure":true};
+      window.FEATURES = {"argTypeTargetsV7":true,"legacyDecoratorFileOrder":false,"disallowImplicitActionsInRenderV8":true,"viewport":true,"highlight":true,"controls":true,"interactions":true,"actions":true,"backgrounds":true,"outline":true,"measure":true,"sidebarOnboardingChecklist":true,"componentsManifest":false};
       window.STORIES = [{"titlePrefix":"","directory":"./docs","files":"**/*.mdx","importPathMatcher":"^\\.[\\\\/](?:docs(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.mdx)$"},{"titlePrefix":"","directory":"./packages","files":"**/*.mdx","importPathMatcher":"^\\.[\\\\/](?:packages(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.mdx)$"},{"titlePrefix":"","directory":"./packages","files":"**/*.stories.ts","importPathMatcher":"^\\.[\\\\/](?:packages(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.ts)$"}];
       window.DOCS_OPTIONS = {"defaultName":"Docs"};
-      window.TAGS_OPTIONS = {"dev-only":{"excludeFromDocsStories":true},"docs-only":{"excludeFromSidebar":true},"test-only":{"excludeFromSidebar":true,"excludeFromDocsStories":true}};
+      window.TAGS_OPTIONS = {};
 
       
 
@@ -169,7 +169,13 @@
     margin: auto;
     padding: 30px;
     border-radius: 10px;
-    background: rgba(0, 0, 0, 0.03);
+    background: rgb(247, 247, 247);
+    color: rgb(46, 52, 56);
+
+    & * {
+      background: rgb(247, 247, 247);
+      color: rgb(46, 52, 56);
+    }
   }
 
   .sb-nopreview_heading {
@@ -183,10 +189,33 @@
     width: 100vw;
     min-height: 100vh;
     box-sizing: border-box;
+  }
+
+  .sb-errordisplay_main {
+    margin: auto;
+    padding: 24px;
+    display: flex;
+    box-sizing: border-box;
+
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    background: white;
+    color: black;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
+    gap: 24px;
 
     & ol {
       padding-left: 18px;
       margin: 0;
+    }
+
+    /* Redefine colors to ensure readability regardless of user-provided * selectors. */
+    * {
+      background: white;
+      color: black;
     }
 
     & h1 {
@@ -226,46 +255,35 @@
     & a {
       color: currentColor;
     }
-  }
 
-  .sb-errordisplay_main {
-    margin: auto;
-    padding: 24px;
-    display: flex;
-    box-sizing: border-box;
+    & .sb-errordisplay_code {
+      padding: 10px;
+      flex: 1;
+      background: #242424;
+      color: #c6c6c6;
+      box-sizing: border-box;
 
-    flex-direction: column;
-    min-height: 100%;
-    width: 100%;
-    border-radius: 6px;
-    background: white;
-    border: 1px solid #ff0000;
-    box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
-    gap: 24px;
-  }
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 19px;
+      border-radius: 4px;
 
-  .sb-errordisplay_code {
-    padding: 10px;
-    flex: 1;
-    background: #242424;
-    color: #c6c6c6;
-    box-sizing: border-box;
+      font-family:
+        'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
+        'Lucida Console', Consolas, Monaco, monospace;
+      margin: 0;
+      overflow: auto;
 
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 19px;
-    border-radius: 4px;
+      & code {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
 
-    font-family:
-      'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
-      'Lucida Console', Consolas, Monaco, monospace;
-    margin: 0;
-    overflow: auto;
-  }
-
-  .sb-errordisplay pre {
-    white-space: pre-wrap;
-    white-space: revert;
+    & .sb-errordisplay pre {
+      white-space: pre-wrap;
+      white-space: revert;
+    }
   }
 
   @-webkit-keyframes sb-rotate360 {
@@ -538,9 +556,30 @@
 <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/components.css" rel="stylesheet" crossorigin />
 <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" rel="stylesheet" crossorigin />
 
-    <script type="module" crossorigin src="./assets/iframe-BHyA5CQh.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/preload-helper-Ct5FWWRu.js">
-    <link rel="stylesheet" crossorigin href="./assets/iframe-C2IWxBoF.css">
+    <script type="module" crossorigin src="./assets/iframe-Bu1FC5xr.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/chunk-BneVvdWh.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-CV6hqhE5.js">
+    <link rel="modulepreload" crossorigin href="./assets/__uno-Cy9G7Sgf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B1PfYo3w.js">
+    <link rel="modulepreload" crossorigin href="./assets/lit-C07f_Bua.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-4BE7D4DS-C96Uj-1-.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-SL3VIQZ3-4CiRMKgq.js">
+    <link rel="modulepreload" crossorigin href="./assets/directive-DywvkYa7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-WJrQKcXy.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-3LY4VQVK-B9ZMmlUs.js">
+    <link rel="modulepreload" crossorigin href="./assets/csf-CP5pRabF.js">
+    <link rel="modulepreload" crossorigin href="./assets/docs-tools-CVk-AppB.js">
+    <link rel="modulepreload" crossorigin href="./assets/i18n-CXAEKYxp.js">
+    <link rel="modulepreload" crossorigin href="./assets/decorate-BZxMavXy.js">
+    <link rel="modulepreload" crossorigin href="./assets/index.m-wj1BHO_P.js">
+    <link rel="modulepreload" crossorigin href="./assets/element-collapse-Csl0KseK.js">
+    <link rel="modulepreload" crossorigin href="./assets/repeat-DqtVKfjW.js">
+    <link rel="modulepreload" crossorigin href="./assets/when-CotQgSvb.js">
+    <link rel="modulepreload" crossorigin href="./assets/class-map-DFBsEYAd.js">
+    <link rel="modulepreload" crossorigin href="./assets/icon-COFNrQcy.js">
+    <link rel="modulepreload" crossorigin href="./assets/styles-BM5RxtAH.js">
+    <link rel="modulepreload" crossorigin href="./assets/toast-container-CarDk-7p.js">
+    <link rel="stylesheet" crossorigin href="./assets/__uno-2CXfCf7t.css">
   </head>
 
   <body>
@@ -672,10 +711,10 @@
         if (hostname !== 'localhost' && globalThis.CONFIG_TYPE === 'DEVELOPMENT') {
           const message = `Failed to load the Storybook preview file 'vite-app.js':
 
-It looks like you're visiting the Storybook development server on another hostname than localhost: '${hostname}', but you haven't configured the necessary security features to support this.
-Please re-run your Storybook development server with the '--host ${hostname}' flag, or manually configure your Vite allowedHosts configuration with viteFinal.
+      It looks like you're visiting the Storybook development server on another hostname than localhost: '${hostname}', but you haven't configured the necessary security features to support this.
+      Please re-run your Storybook development server with the '--host ${hostname}' flag, or manually configure your Vite allowedHosts configuration with viteFinal.
 
-See:`;
+      See:`;
           const docs = [
             'https://storybook.js.org/docs/api/cli-options#dev',
             'https://storybook.js.org/docs/api/main-config/main-config-vite-final',
@@ -687,7 +726,7 @@ See:`;
             `<p style="color: red; max-width: 70ch">${message.replaceAll(
               '\n',
               '<br/>'
-            )}<ul>${docs.map((doc) => `<li><a href='${doc}' target='_blank'>${doc}</a></li>`).join('')}<ul></p>`;
+            )}<ul>${docs.map((doc) => `<li><a href='${doc}' target='_blank'>${doc}</a></li>`).join('')}</ul></p>`;
           return;
         }
       }
