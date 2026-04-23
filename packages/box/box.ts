@@ -14,15 +14,22 @@ import { styles } from './styles';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
  */
 class WarpBox extends LitElement {
+  @property({ type: String, reflect: true })
+  variant: 'neutral' | 'info' | 'bordered';
+
+  /** @deprecated No replacement */
   @property({ type: Boolean, reflect: true })
   bleed = false;
 
+  /** @deprecated Use variant="bordered" */
   @property({ type: Boolean, reflect: true })
   bordered = false;
 
+  /** @deprecated Use variant="info" */
   @property({ type: Boolean, reflect: true })
   info = false;
 
+  /** @deprecated Use variant="neutral" */
   @property({ type: Boolean, reflect: true })
   neutral = false;
 
@@ -51,9 +58,9 @@ class WarpBox extends LitElement {
     return classNames([
       'group block relative break-words last-child:mb-0 p-16 rounded-8',
       this.bleed && '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8',
-      this.info && 's-bg-info-subtle',
-      this.neutral && 's-surface-sunken',
-      this.bordered && 'border-2 s-border s-bg',
+      (this.info || this.variant === "info") && 's-bg-info-subtle',
+      (this.neutral || this.variant === "neutral") && 's-surface-sunken',
+      (this.bordered || this.variant === "bordered") && 'border-2 s-border s-bg',
     ]);
   }
 
