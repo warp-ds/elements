@@ -8,14 +8,18 @@ import { reset } from '../styles';
 
 import { styles } from './styles';
 
+type BoxVariant =  'neutral' | 'info' | 'bordered';
+
 /**
  * Box is a layout component used for separating content areas on a page.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
  */
 class WarpBox extends LitElement {
+  private _internals: ElementInternals;
+
   @property({ type: String, reflect: true })
-  variant: 'neutral' | 'info' | 'bordered';
+  variant: BoxVariant;
 
   /** @deprecated No replacement */
   @property({ type: Boolean, reflect: true })
@@ -33,8 +37,8 @@ class WarpBox extends LitElement {
   @property({ type: Boolean, reflect: true })
   neutral = false;
 
-  @property({ type: String, reflect: true })
-  role: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  role = 'region';
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
@@ -52,6 +56,13 @@ class WarpBox extends LitElement {
       }
     `,
   ];
+
+  constructor() {
+      super();
+      this._internals = this.attachInternals();
+      // useDefault and ElementInternals for ARIA to avoid hydration mismatches
+      this._internals.role = this.role;
+    }
 
   /** @internal */
   get _class() {
@@ -71,7 +82,7 @@ class WarpBox extends LitElement {
 
   render() {
     return html`
-      <div role="${this._optOutRoleWithDefault}" class="${this._class}">
+      <div class="${this._class}">
         <slot></slot>
       </div>
     `;

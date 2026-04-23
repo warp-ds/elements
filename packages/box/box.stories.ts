@@ -32,41 +32,23 @@ const meta: Meta<typeof args> = {
 export default meta;
 type Story = StoryObj<typeof args>;
 
-export const Default: Story = {
-  args: {
-    bleed: false,
-    bordered: false,
-    info: false,
-    neutral: false,
-    role: 'region',
-  },
-};
-
-export const Info: Story = {
-  args: {
-    info: true,
-    role: 'region',
-  },
-};
-
 export const Neutral: Story = {
   args: {
-    neutral: true,
+    variant: 'neutral',
     role: 'region',
   },
 };
 
 export const Bordered: Story = {
   args: {
-    bordered: true,
+    variant: 'bordered',
     role: 'region',
   },
 };
 
-export const Bleed: Story = {
+export const Info: Story = {
   args: {
-    bleed: true,
-    neutral: true,
+    variant: 'info',
     role: 'region',
   },
 };
