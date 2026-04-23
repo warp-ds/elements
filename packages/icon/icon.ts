@@ -40,8 +40,8 @@ export class WIcon extends LitElement {
   size: 'small' | 'medium' | 'large' | string;
 
   /** Locale used in CDN URL */
-  @property({ type: String, reflect: true })
-  locale: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  locale: string = document.documentElement.lang || 'en';
 
   /** Parsed SVG element (not reflected as attribute) */
   @state()
@@ -53,8 +53,7 @@ export class WIcon extends LitElement {
    * @returns SVGElement or null on failure
    */
   private async fetchIcon(iconName: string): Promise<SVGElement | null> {
-    const locale = this.locale || 'en';
-    const uri = `https://assets.finn.no/pkg/eikons/v1/${locale}/${iconName}.svg`;
+    const uri = `https://assets.finn.no/pkg/eikons/v1/${this.locale}/${iconName}.svg`;
     try {
       const svgText = await cacheFetch<string>(uri);
       const doc = new DOMParser().parseFromString(svgText, 'text/html');
