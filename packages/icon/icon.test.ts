@@ -67,3 +67,20 @@ test('uses specified locale when locale attribute is set', async () => {
   // The locale attribute should be reflected
   expect(el.getAttribute('locale')).toBe('nb');
 });
+
+test('uses html lang attribute when no locale attribute is set', async () => {
+  const originalLang = document.documentElement.lang;
+
+  try {
+    document.documentElement.lang = 'fi';
+
+    const component = html`<w-icon name="Plus" data-testid="icon"></w-icon>`;
+    const page = render(component);
+    const el = page.getByTestId('icon').element() as HTMLElement;
+
+    // The component should use the html lang value as its locale
+    expect((el as any).locale).toBe('fi');
+  } finally {
+    document.documentElement.lang = originalLang;
+  }
+});
