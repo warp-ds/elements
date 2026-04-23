@@ -1,5 +1,5 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
 import type { WarpSliderThumb, SliderSlot} from '../slider-thumb/slider-thumb.js';
 import { reset } from '../styles.js';
@@ -53,10 +53,10 @@ class WarpSlider extends LitElement {
   openEnded = false;
 
   @property({ type: String, reflect: true })
-  error!: string;
+  error: string;
 
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText!: string;
+  helpText: string;
 
   @property({ type: Boolean, reflect: true })
   invalid = false;
@@ -80,7 +80,7 @@ class WarpSlider extends LitElement {
 
   /** Suffix used in text input fields and for the min and max values of the slider. */
   @property({ reflect: true })
-  suffix!: string;
+  suffix: string;
 
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;
@@ -96,6 +96,10 @@ class WarpSlider extends LitElement {
   /** Formatter for the min and max labels below the range. */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
+
+  @query('fieldset')
+  fieldset: HTMLFieldSetElement;
+  
 
   @state()
   _invalidMessage = '';
@@ -153,12 +157,11 @@ class WarpSlider extends LitElement {
     }
 
     // Missing a CSS-only way to detect if something is slotted in the named slots
-    const fieldset = this.shadowRoot.querySelector('fieldset');
     if (usedNamedSlots) {
-      fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size, 28px)');
-      fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size, 28px)');
+      this.fieldset.style.setProperty('--active-range-inline-start-padding', 'var(--w-slider-thumb-size, 28px)');
+      this.fieldset.style.setProperty('--active-range-inline-end-padding', 'var(--w-slider-thumb-size, 28px)');
     } else {
-      fieldset.style.setProperty('--active-range-border-radius', '4px');
+      this.fieldset.style.setProperty('--active-range-border-radius', '4px');
     }
   }
 
@@ -173,39 +176,27 @@ class WarpSlider extends LitElement {
     super.connectedCallback();
     await this.updateComplete;
 
-    // Delay inline style changes to after hydration completes
-    // Using double RAF + setTimeout which is more reliable across browsers
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          if (this.step) {
-            this.style.setProperty('--step', String(this.step));
-          }
-          if (this.min !== undefined) {
-            this.style.setProperty('--min', this.edgeMin);
-          }
-          if (this.max !== undefined) {
-            this.style.setProperty('--max', this.max);
-          }
-          if (this.markers) {
-            this.style.setProperty('--markers', String(this.markers));
-          }
-          if (this.openEnded) {
-            this.style.setProperty('--over-under-offset', '1');
-          }
-
-          const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
-          const isRangeSlider = sliderThumbs.length === 2;
-          if (isRangeSlider) {
-            this.style.setProperty('--range-slider-magic-pixel', '1px');
-          }
-        }, 0);
-      });
-    });
+    if (this.step) {
+      this.fieldset.style.setProperty('--step', String(this.step));
+    }
+    if (this.min !== undefined) {
+      this.fieldset.style.setProperty('--min', this.edgeMin);
+    }
+    if (this.max !== undefined) {
+      this.fieldset.style.setProperty('--max', this.max);
+    }
+    if (this.markers) {
+      this.fieldset.style.setProperty('--markers', String(this.markers));
+    }
+    if (this.openEnded) {
+      this.fieldset.style.setProperty('--over-under-offset', '1');
+    }
 
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     const isRangeSlider = sliderThumbs.length === 2;
+          
     if (isRangeSlider) {
+      this.fieldset.style.setProperty('--range-slider-magic-pixel', '1px');
       const sliderThumbsArr = Array.from(sliderThumbs);
       this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
       this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
@@ -355,15 +346,15 @@ class WarpSlider extends LitElement {
     const slotName = input.slot;
 
     if (!slotName) {
-      this.style.setProperty('--from', '0');
+      this.fieldset.style.setProperty('--from', '0');
     }
 
     if (slotName === 'from') {
-      this.style.setProperty('--from', this.#getEdgeValue(this.edgeMin, input));
+      this.fieldset.style.setProperty('--from', this.#getEdgeValue(this.edgeMin, input));
     }
 
     if (!slotName || slotName === 'to') {
-      this.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
+      this.fieldset.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
     }
   }
 
