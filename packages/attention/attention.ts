@@ -15,7 +15,6 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles';
-import { generateRandomId } from '../utils/index.js';
 
 import { styles as layoutStyles } from './layout-styles';
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -443,18 +442,9 @@ class WarpAttention extends LitElement {
   defaultAriaLabel() {
     return `${this.activeAttentionType()} ${!this.noArrow ? this.pointingAtDirection() : ''}`;
   }
-  setAriaLabels() {
-    // Only modify light DOM after initialization to avoid React hydration mismatches
-    if (!this._targetEl || !this._messageEl) return;
-    if (this._targetEl.getAttribute('aria-details')) return;
-
-    const attentionMessageId = this._messageEl.id || (this._messageEl.id = generateRandomId());
-    this._targetEl.setAttribute('aria-details', attentionMessageId);
-  }
 
   firstUpdated() {
     this._initialPlacement = this.placement;
-    this.setAriaLabels();
 
     // Attention of "callout" type should always be used inline
     if (this.callout) {
@@ -481,7 +471,7 @@ class WarpAttention extends LitElement {
   render() {
     if (!this.callout && this._targetEl === undefined) return html``;
     return html`
-      <div class=${ifDefined(this.className ? this.className : undefined)}>
+      <section class=${ifDefined(this.className ? this.className : undefined)}>
         ${
           this.placement === 'right-start' ||
           this.placement === 'right' ||
@@ -507,7 +497,7 @@ class WarpAttention extends LitElement {
               <slot name="target"></slot>
             `
         }
-      </div>
+      </section>
     `;
   }
 }
