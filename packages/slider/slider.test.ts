@@ -80,6 +80,48 @@ test('can set slider value via the number input', async () => {
   expect(formData.get('value')).toBe('50');
 });
 
+test('can increment and decrement the slider values with arrow keys in the number input', async () => {
+  const component = html`
+    <form data-testid="form">
+      <w-slider
+        label="Model year"
+        min="1950"
+        max="2025"
+        open-ended
+      >
+        <w-slider-thumb
+          slot="from"
+          aria-label="From year"
+          name="from-year"
+        ></w-slider-thumb>
+        <w-slider-thumb
+          slot="to"
+          aria-label="To year"
+          name="to-year"
+        ></w-slider-thumb>
+      </w-slider>
+    </form>
+  `;
+
+  const page = render(component);
+
+  await userEvent.type(page.getByRole('spinbutton').first(), '{ArrowUp}');
+
+  await expect.element(page.getByRole('spinbutton').first()).toHaveValue('1951');
+  await expect.element(page.getByLabelText('From year').first()).toHaveValue(1951); // keeps value in sync between inputs
+  
+  await userEvent.type(page.getByRole('spinbutton').last(), '{ArrowDown}');
+
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue('2024');
+  await expect.element(page.getByLabelText('To year').first()).toHaveValue(2024); // keeps value in sync between inputs
+
+
+
+  const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
+  expect(formData.get('from-year')).toBe('1951');
+  expect(formData.get('to-year')).toBe('2024');
+});
+
 test('slider without suffix syncs empty suffix to thumb', async () => {
   render(html`
     <w-slider label="Single" min="0" max="100">
