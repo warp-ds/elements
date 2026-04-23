@@ -107,19 +107,59 @@ test('can increment and decrement the slider values with arrow keys in the numbe
 
   await userEvent.type(page.getByRole('spinbutton').first(), '{ArrowUp}');
 
-  await expect.element(page.getByRole('spinbutton').first()).toHaveValue('1951');
-  await expect.element(page.getByLabelText('From year').first()).toHaveValue(1951); // keeps value in sync between inputs
+  // Go from Min "beyond" 1950 to 1950
+  await expect.element(page.getByRole('spinbutton').first()).toHaveValue(1950);
+  await expect.element(page.getByLabelText('From year').first()).toHaveValue('1950'); // keeps value in sync between inputs
   
   await userEvent.type(page.getByRole('spinbutton').last(), '{ArrowDown}');
 
-  await expect.element(page.getByRole('spinbutton').last()).toHaveValue('2024');
-  await expect.element(page.getByLabelText('To year').first()).toHaveValue(2024); // keeps value in sync between inputs
-
-
+  // Go from Max "beyond" 2025 to 2025
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2025);
+  await expect.element(page.getByLabelText('To year').first()).toHaveValue('2025'); // keeps value in sync between inputs
 
   const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
-  expect(formData.get('from-year')).toBe('1951');
-  expect(formData.get('to-year')).toBe('2024');
+  expect(formData.get('from-year')).toBe('1950');
+  expect(formData.get('to-year')).toBe('2025');
+});
+
+test('going down from Min and up from Max sets value to min - 1 and max + a respectively', async () => {
+  const component = html`
+    <form data-testid="form">
+      <w-slider
+        label="Model year"
+        min="1950"
+        max="2025"
+        open-ended
+      >
+        <w-slider-thumb
+          slot="from"
+          aria-label="From year"
+          name="from-year"
+        ></w-slider-thumb>
+        <w-slider-thumb
+          slot="to"
+          aria-label="To year"
+          name="to-year"
+        ></w-slider-thumb>
+      </w-slider>
+    </form>
+  `;
+
+  const page = render(component);
+
+  await userEvent.type(page.getByRole('spinbutton').first(), '{ArrowDown}');
+
+  await expect.element(page.getByRole('spinbutton').first()).toHaveValue(1949);
+  await expect.element(page.getByLabelText('From year').first()).toHaveValue('1949'); // keeps value in sync between inputs
+  
+  await userEvent.type(page.getByRole('spinbutton').last(), '{ArrowUp}');
+
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2026);
+  await expect.element(page.getByLabelText('To year').first()).toHaveValue('2026'); // keeps value in sync between inputs
+
+  const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
+  expect(formData.get('from-year')).toBe('1949');
+  expect(formData.get('to-year')).toBe('2026');
 });
 
 test('slider without suffix syncs empty suffix to thumb', async () => {
