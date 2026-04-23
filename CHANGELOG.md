@@ -1,3 +1,10 @@
+# [2.9.0-next.2](https://github.com/warp-ds/elements/compare/v2.9.0-next.1...v2.9.0-next.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **attention:** a11y improvements ([#609](https://github.com/warp-ds/elements/issues/609)) ([5cddb80](https://github.com/warp-ds/elements/commit/5cddb803c4a9a9d4e708c238337d229a97cd2ba4))
+
 # [2.9.0-next.1](https://github.com/warp-ds/elements/compare/v2.8.2-next.6...v2.9.0-next.1) (2026-04-17)
 
 
