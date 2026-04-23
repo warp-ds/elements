@@ -45,13 +45,22 @@ const alertVariants = {
 class WarpAlert extends LitElement {
   private _internals: ElementInternals;
 
-  @property({ reflect: true })
-  variant: AlertVariants;
+  /**
+   * The variant of the alert, which determines its color and icon.
+   */
+  @property({ reflect: true, useDefault: true })
+  variant: AlertVariants = 'info';
 
-  @property({ type: Boolean, reflect: true })
-  show: boolean;
+  /**
+   * Whether the alert is shown or hidden. By default, alerts are hidden and should be shown by setting this attribute to true.
+   */
+  @property({ type: Boolean, reflect: true, useDefault: true })
+  show: boolean = false;
 
-  @property()
+  /**
+   * The ARIA role of the alert. By default, this is set to "alert" for accessibility reasons, but it can be overridden if necessary.
+   */
+  @property({ reflect: true, useDefault: true })
   role = 'alert';
 
   constructor() {
@@ -75,13 +84,13 @@ class WarpAlert extends LitElement {
 
   /** @internal */
   get _wrapperClasses() {
-    const variant = this.variant || 'info';
+    const variant = this.variant;
     return classNames([ccAlert.wrapper, ccAlert[variant]]);
   }
 
   /** @internal */
   get _iconClasses() {
-    const variant = this.variant || 'info';
+    const variant = this.variant;
     const activeIconClassNames = ccAlert[`${variant}Icon`];
 
     return classNames([ccAlert.icon, activeIconClassNames]);
