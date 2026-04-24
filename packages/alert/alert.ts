@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import '../icon/icon.js';
@@ -49,7 +49,7 @@ class WarpAlert extends LitElement {
   variant: AlertVariants;
 
   @property({ type: Boolean, reflect: true })
-  show: boolean;
+  show = false;
 
   @property()
   role = 'alert';

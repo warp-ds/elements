@@ -1,0 +1,21 @@
+*,
+:before,
+:after {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
+  border-color: var(--w-s-color-border);
+}
+
+html {
+  font-size: 62.5% !important;
+}
+
+.component {
+  padding: 16px;
+  border: 2px solid var(--vp-c-gray-1);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: var(--w-s-color-background);
+}
+
