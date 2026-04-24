@@ -1,4 +1,4 @@
-# Accessibility
+## Accessibility
 
 For accessibility reasons, an alert should appear close to the element that triggered it.
 

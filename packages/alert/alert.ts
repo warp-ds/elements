@@ -46,19 +46,25 @@ class WarpAlert extends LitElement {
   private _internals: ElementInternals;
 
   /**
-   * The variant of the alert, which determines its color and icon.
+   * @summary Visual style of the alert.
+   *
+   * @description Controls both the color treatment and icon used by the component. Accepted values are `info`, `warning`, `positive`, and `negative`. Use the variant that matches the message severity so users can quickly distinguish informative messages from warnings, errors, and confirmations.
    */
   @property({ reflect: true, useDefault: true })
   variant: AlertVariants = 'info';
 
   /**
-   * Whether the alert is shown or hidden. By default, alerts are hidden and should be shown by setting this attribute to true.
+   * @summary Whether the alert is visible.
+   *
+   * @description Alerts are hidden by default (`false`). Set this to `true` to render and expand the content. This is reflected as an attribute, so visibility can be controlled from markup (`show`) or from JavaScript (`element.show = true`).
    */
   @property({ type: Boolean, reflect: true, useDefault: true })
-  show: boolean = false;
+  show = false;
 
   /**
-   * The ARIA role of the alert. By default, this is set to "alert" for accessibility reasons, but it can be overridden if necessary.
+   * @summary ARIA role announced to assistive technology.
+   *
+   * @description Defaults to `alert` so urgent changes are announced by screen readers. Override this only when your use case requires a different announcement behavior, for example a less assertive live region strategy.
    */
   @property({ reflect: true, useDefault: true })
   role = 'alert';

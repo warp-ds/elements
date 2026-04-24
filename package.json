@@ -140,6 +140,9 @@
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
     },
+    "./docs/*": {
+      "default": "./dist/docs/*"
+    },
     "./*": {
       "types": "./dist/packages/*/*.d.ts",
       "import": "./dist/packages/*/*.js"
@@ -270,6 +273,7 @@
     "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
     "build:cloak": "node ./build/cloak.js",
     "build:components": "node ./build/components.js",
+    "build:docs": "node ./build/docs.js",
     "build:eik-components-backwards-compat": "node ./build/components-eik.js",
     "build:editor": "node ./build/editor.js",
     "build:entrypoint": "node ./build/entrypoint.js",
@@ -340,6 +344,7 @@
     "@warp-ds/css": "2.1.1",
     "@warp-ds/uno": "2.1.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
+    "@wc-toolkit/jsdoc-tags": "^1.2.0",
     "@wc-toolkit/jsx-types": "^1.4.2",
     "@wc-toolkit/storybook-helpers": "^10.0.0",
     "@wc-toolkit/type-parser": "^1.2.0",
