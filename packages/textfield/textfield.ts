@@ -8,6 +8,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { reset } from '../styles.js';
+import '../label/label.js';
+import '../help-text/help-text.js';
 
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
@@ -25,17 +27,6 @@ const ccinput = {
   prefix: 'pl-[var(--w-prefix-width,_40px)]',
   // textarea classes
   textArea: 'min-h-[42] sm:min-h-[45]',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -270,14 +261,9 @@ class WarpTextField extends FormControlMixin(LitElement) {
   }
 
   /** @internal */
-  get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
-  }
-
-  /** @internal */
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
+      return html`<w-label for="${this._id}">${this.label}</w-label>`;
     }
     return undefined;
   }
@@ -368,7 +354,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
       </div>
       <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
-      ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
+      ${this.helpText && html`<w-help-text ?invalid="${this.invalid}" id="${this._helpId}">${this.helpText}</w-help-text>`}
     `;
   }
 }

@@ -10,6 +10,8 @@ import { when } from 'lit/directives/when.js';
 
 import { activateI18n, detectLocale } from '../i18n.js';
 import { reset } from '../styles.js';
+import '../label/label.js';
+import '../help-text/help-text.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -33,17 +35,6 @@ const ccSelect = {
     'relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none ',
   chevron: 'block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer',
   chevronDisabled: 'opacity-25',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -340,10 +331,6 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     ]);
   }
 
-  get #helpTextClasses() {
-    return classNames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
-  }
-
   get #chevronClasses() {
     return classNames([ccSelect.chevron, this.disabled && ccSelect.chevronDisabled]);
   }
@@ -376,20 +363,20 @@ export class WarpSelect extends FormControlMixin(LitElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="${ccLabel.base}" for="${this.#id}">
-            ${this.label}
-            ${when(
-              this.optional,
-              () =>
-                html`<span class="${ccLabel.optional}"
-                  >${i18n._({
+          html`<w-label
+            for="${this.#id}"
+            ?optional="${this.optional}"
+            optional-text="${
+              this.optional
+                ? i18n._({
                     id: 'select.label.optional',
                     message: '(optional)',
                     comment: 'Shown behind label when marked as optional',
-                  })}</span
-                >`,
-            )}</label
-          >`,
+                  })
+                : ''
+            }">
+            ${this.label}
+          </w-label>`,
       )}
       <div class="${ccSelect.selectWrapper}">
         <select
@@ -413,7 +400,8 @@ export class WarpSelect extends FormControlMixin(LitElement) {
         // A help text should always be visible.
         when(
           this.helpText || this.always || this.invalid,
-          () => html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">${this.helpText || this.hint}</div>`,
+          () =>
+            html`<w-help-text ?invalid="${this.invalid}" id="${this.#helpId}">${this.helpText || this.hint}</w-help-text>`,
         )
       }
     </div>`;

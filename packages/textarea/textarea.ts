@@ -8,6 +8,8 @@ import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 import { uniqueId } from '../utils.js';
+import '../label/label.js';
+import '../help-text/help-text.js';
 import { styles } from './styles.js';
 
 const ccInput = {
@@ -24,17 +26,6 @@ const ccInput = {
   // textarea classes
   textArea: 'min-h-[42] sm:min-h-[45]',
   fixed: 'resize-none',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text flex',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -286,11 +277,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   }
 
   /** @internal */
-  get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
-  }
-
-  /** @internal */
   get _helpId() {
     if (this.helpText) return `${this._id}__hint`;
     return undefined;
@@ -386,22 +372,21 @@ class WarpTextarea extends FormControlMixin(LitElement) {
         ${
           this.label
             ? html`
-                <label for="${this._id}" class=${ccLabel.base}>
-                  ${this.label}
-                  ${
+                <w-label
+                  for="${this._id}"
+                  style="display: flex"
+                  ?optional="${this.optional}"
+                  optional-text="${
                     this.optional
-                      ? html`
-                          <span class="${ccLabel.optional}">
-                            ${i18n._({
-                              id: 'textarea.label.optional',
-                              message: '(optional)',
-                              comment: 'Shown behind label when marked as optional',
-                            })}
-                          </span>
-                    `
-                      : nothing
-                  }
-                </label>`
+                      ? i18n._({
+                          id: 'textarea.label.optional',
+                          message: '(optional)',
+                          comment: 'Shown behind label when marked as optional',
+                        })
+                      : ''
+                  }">
+                  ${this.label}
+                </w-label>`
             : nothing
         }
         <textarea
@@ -419,7 +404,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
           @input="${this.handler}"
           @blur="${this.#handleBlur}">
         </textarea>
-        ${this.helpText ? html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>` : nothing}
+        ${this.helpText ? html`<w-help-text ?invalid="${this.invalid}" id="${this._helpId}">${this.helpText}</w-help-text>` : nothing}
     `;
   }
 }
