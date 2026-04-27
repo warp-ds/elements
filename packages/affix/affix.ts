@@ -38,7 +38,7 @@ class WarpAffix extends LitElement {
    * @summary Accessible label for icon-button variants.
    * @description Used as the `aria-label` for the internal button when `search` or `clear` is enabled. Provide a descriptive action label like "Search" or "Clear input".
    */
-  @property({ attribute: 'aria-label' }) ariaLabel: string;
+  @property({ attribute: 'aria-label', reflect: true, useDefault: true }) ariaLabel: string | null = null;
 
   /**
    * Add this property to render a clickable Warp close icon.
@@ -64,7 +64,7 @@ class WarpAffix extends LitElement {
    * @summary Text label shown as prefix/suffix content.
    * @description Displays plain text such as a currency or unit label (for example `kr` or `%`) instead of an icon button.
    */
-  @property() label: string;
+  @property({ reflect: true, useDefault: true }) label = '';
 
   static styles = [reset, styles];
 
