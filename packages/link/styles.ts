@@ -1,11 +1,10 @@
-/* packages/button/styles.ts */
 import { css } from 'lit';
 
-export const wButtonStyles = css`
+export const styles = css`
   :host {
     display: inline-block;
 
-    /* Internal resolved vars (defaults) */
+    /* Same resolved vars as w-button */
     --_bg: var(--w-c-button-bg, var(--w-s-color-background));
     --_bg-hover: var(--w-c-button-bg-hover, var(--w-s-color-background-hover));
     --_bg-active: var(--w-c-button-bg-active, var(--w-s-color-background-active));
@@ -34,25 +33,22 @@ export const wButtonStyles = css`
 
     --_transition: var(
       --w-c-button-transition,
-      color 150ms cubic-bezier(0.4, 0, 0.2, 1),
-      background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)
+      color 150ms cubic-bezier(0.4,0,0.2,1),
+      background-color 150ms cubic-bezier(0.4,0,0.2,1),
+      border-color 150ms cubic-bezier(0.4,0,0.2,1)
     );
 
-    /* Icon color for pill/icon-only variants (semantic; default dark grey icon) */
     --w-c-button-icon-color: var(--w-s-color-icon);
   }
 
-  /* ============================================================
-   * Base element (NATIVE button mode ONLY)
-   * ============================================================ */
-  button[part='base'] {
+  a[part='base'] {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
 
     cursor: pointer;
+    text-decoration: none;
 
     background-color: var(--_bg);
     color: var(--_color);
@@ -61,7 +57,7 @@ export const wButtonStyles = css`
     border-radius: var(--_radius);
 
     padding: calc(var(--_pad-y) - var(--_border-width))
-      calc(var(--_pad-x) - var(--_border-width));
+             calc(var(--_pad-x) - var(--_border-width));
 
     font-size: var(--_font-size);
     line-height: var(--_line-height);
@@ -70,49 +66,25 @@ export const wButtonStyles = css`
     transition: var(--_transition);
   }
 
-  /* Optional: helps avoid "grew a bit" from slot typography differences */
-  button[part='base'] ::slotted(*) {
-    line-height: inherit;
-  }
-
-  /* ============================================================
-   * Link mode wrapper (w-link host carries part="base" in button.ts)
-   * Keep it layout-only to avoid double chrome.
-   * ============================================================ */
-  :host > w-link[part='base'] {
-    display: inline-block;
-    padding: 0;
-    border: 0;
-    background: transparent;
-  }
-
-  /* Hover / active (native button mode only) */
-  :host(:not([disabled]):not([loading])) button[part='base']:hover {
+  :host(:not([disabled])) a[part='base']:hover {
     background-color: var(--_bg-hover);
     border-color: var(--_border-color-hover);
     color: var(--_color-hover);
   }
 
-  :host(:not([disabled]):not([loading])) button[part='base']:active {
+  :host(:not([disabled])) a[part='base']:active {
     background-color: var(--_bg-active);
     border-color: var(--_border-color-active);
     color: var(--_color-active);
   }
 
-  /* Focus */
-  :host(:focus-visible) {
-    outline: none;
-  }
-
-  :host(:focus-visible) button[part='base'] {
+  :host(:focus-visible) { outline: none; }
+  :host(:focus-visible) a[part='base'] {
     outline: var(--_outline-width) solid var(--_outline-color);
     outline-offset: var(--_outline-offset);
   }
 
-  /* ============================================================
-   * Variants (tokens consumed by native button mode)
-   * ============================================================ */
-
+  /* ===== Variants ===== */
   :host([variant='primary']) {
     --w-c-button-bg: var(--w-s-color-background-primary);
     --w-c-button-bg-hover: var(--w-s-color-background-primary-hover);
@@ -121,7 +93,7 @@ export const wButtonStyles = css`
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='negative']:not([quiet])) {
+  :host([variant='negative']) {
     --w-c-button-bg: var(--w-s-color-background-negative);
     --w-c-button-bg-hover: var(--w-s-color-background-negative-hover);
     --w-c-button-bg-active: var(--w-s-color-background-negative-active);
@@ -129,7 +101,6 @@ export const wButtonStyles = css`
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='negative'][quiet]),
   :host([variant='negativeQuiet']) {
     --w-c-button-bg: transparent;
     --w-c-button-bg-hover: var(--w-s-color-background-negative-subtle-hover);
@@ -138,17 +109,21 @@ export const wButtonStyles = css`
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='utility']:not([quiet])) {
+  :host([variant='utility']) {
     --w-c-button-bg: var(--w-s-color-background);
     --w-c-button-color: var(--w-s-color-text);
     --w-c-button-radius: 4px;
     --w-c-button-border-width: 1px;
   }
 
-  :host([variant='utility'][quiet]),
   :host([variant='utilityQuiet']) {
     --w-c-button-bg: transparent;
     --w-c-button-color: var(--w-s-color-text);
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='quiet']) {
+    --w-c-button-bg: transparent;
     --w-c-button-border-width: 0px;
   }
 
@@ -163,8 +138,6 @@ export const wButtonStyles = css`
 
   :host([variant='overlayInverted']) {
     --w-c-button-bg: var(--w-s-color-background-inverted);
-    --w-c-button-bg-hover: var(--w-s-color-background-inverted-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-inverted-active);
     --w-c-button-color: var(--w-s-color-text-inverted);
     --w-c-button-radius: 9999px;
     --w-c-button-border-width: 0px;
@@ -174,7 +147,6 @@ export const wButtonStyles = css`
     --w-c-button-bg: transparent;
     --w-c-button-bg-hover: var(--w-s-color-background-hover);
     --w-c-button-bg-active: var(--w-s-color-background-active);
-    --w-c-button-color: var(--w-s-color-text);
     --w-c-button-radius: 9999px;
     --w-c-button-border-width: 0px;
   }
@@ -188,18 +160,7 @@ export const wButtonStyles = css`
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='pill']) {
-    --w-c-button-bg: transparent;
-    --w-c-button-radius: 50%;
-    --w-c-button-border-width: 0px;
-    --w-c-button-padding-x: 14px;
-    --w-c-button-padding-y: 14px;
-
-    /* pill uses semantic icon color (dark grey by default) */
-    --w-c-button-color: var(--w-c-button-icon-color, var(--w-s-color-icon));
-  }
-
-  /* Link variant: button that looks like a link (native button mode only) */
+  /* Optional compat: "link" variant if it still exists in stories */
   :host([variant='link']) {
     --w-c-button-bg: transparent;
     --w-c-button-border-width: 0px;
@@ -215,20 +176,18 @@ export const wButtonStyles = css`
     --w-c-button-color-active: var(--w-s-color-text-link-active, var(--w-c-button-color));
   }
 
-  :host([variant='link']) button[part='base'] {
+  :host([variant='link']) a[part='base'] {
     display: inline;
     padding: 0;
   }
 
-  :host([variant='link']:not([disabled]):not([loading])) button[part='base']:hover {
+  :host([variant='link']:not([disabled])) a[part='base']:hover {
     text-decoration: underline;
     background-color: transparent;
     border-color: transparent;
-    color: var(--w-c-button-color-hover);
   }
 
-  /* ===== Size ===== */
-
+  /* Sizes */
   :host([small]) {
     --w-c-button-padding-x: 12px;
     --w-c-button-padding-y: 8px;
@@ -236,37 +195,11 @@ export const wButtonStyles = css`
     --w-c-button-line-height: var(--w-line-height-xs);
   }
 
-  :host([small][variant='pill']) {
-    --w-c-button-padding-x: 8px;
-    --w-c-button-padding-y: 8px;
-  }
+  /* Layout */
+  :host([full-width]) a[part='base'] { width: 100%; }
 
-  /* ===== Layout ===== */
-
-  :host([full-width]) button[part='base'],
-  :host([full-width]) > w-link[part='base'] {
-    width: 100%;
-  }
-
-  :host([icon-only]) button[part='base'] {
-    aspect-ratio: 1 / 1;
-    padding-left: calc(var(--w-c-button-padding-y) - var(--w-c-button-border-width, 0px));
-    padding-right: calc(var(--w-c-button-padding-y) - var(--w-c-button-border-width, 0px));
-  }
-
-  /* ============================================================
-   * STATE OVERRIDES (must be last so they win over variants)
-   * Disabled first, Loading last (loading is disabled-like + visuals)
-   *
-   * IMPORTANT:
-   * Some variant selectors are more specific (e.g. [variant='negative']:not([quiet])).
-   * To ensure states always win, we match similar specificity via extra attribute selectors.
-   * ============================================================ */
-
-  /* ===== Disabled ===== */
-  :host([disabled]),
-  :host([disabled][variant]),
-  :host([disabled][quiet]) {
+  /* Disabled */
+  :host([disabled]) {
     pointer-events: none;
 
     --w-c-button-bg: var(--w-s-color-background-disabled);
@@ -274,65 +207,6 @@ export const wButtonStyles = css`
     --w-c-button-bg-active: var(--w-s-color-background-disabled);
 
     --w-c-button-color: var(--w-s-color-text-inverted);
-
     --w-c-button-border-width: 0px;
-    --w-c-button-border-color: transparent;
-    --w-c-button-border-color-hover: transparent;
-    --w-c-button-border-color-active: transparent;
-
-    --w-c-button-color-hover: var(--w-s-color-text-inverted);
-    --w-c-button-color-active: var(--w-s-color-text-inverted);
-  }
-
-  /* ===== Loading (wins over everything) ===== */
-  :host([loading]),
-  :host([loading][variant]),
-  :host([loading][quiet]) {
-    pointer-events: none;
-
-    /* Strong overrides so variants can’t leak through */
-    --w-c-button-bg: var(--w-s-color-background-subtle);
-    --w-c-button-bg-hover: var(--w-s-color-background-subtle);
-    --w-c-button-bg-active: var(--w-s-color-background-subtle);
-
-    --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-color-hover: var(--w-s-color-text);
-    --w-c-button-color-active: var(--w-s-color-text);
-
-    --w-c-button-border-width: 0px;
-    --w-c-button-border-color: transparent;
-    --w-c-button-border-color-hover: transparent;
-    --w-c-button-border-color-active: transparent;
-  }
-
-  /* Loading stripes (native button mode only) */
-  :host([loading]) button[part='base'] {
-    background-image: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.05) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(0, 0, 0, 0.05) 50%,
-      rgba(0, 0, 0, 0.05) 75%,
-      transparent 75%,
-      transparent
-    );
-    background-size: 30px 30px;
-    animation: animate-inprogress 3s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    :host([loading]) button[part='base'] {
-      animation: none;
-    }
-  }
-
-  @keyframes animate-inprogress {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 60px 0;
-    }
   }
 `;
