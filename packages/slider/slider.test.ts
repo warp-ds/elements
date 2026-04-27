@@ -87,8 +87,14 @@ test('slider without suffix syncs empty suffix to thumb', async () => {
     </w-slider>
   `);
 
-  const slider = document.querySelector('w-slider') as WarpSlider & { updateComplete: Promise<unknown>; suffix?: string };
-  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & { updateComplete: Promise<unknown>; suffix?: string };
+  const slider = document.querySelector('w-slider') as WarpSlider & {
+    updateComplete: Promise<unknown>;
+    suffix?: string;
+  };
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & {
+    updateComplete: Promise<unknown>;
+    suffix?: string;
+  };
 
   await slider.updateComplete;
   await thumb.updateComplete;

@@ -29,7 +29,7 @@ test('renders the different tab components', async () => {
 
   // defaults to the first tab if the active property is not set
   await expect.element(page.getByText('And my axe!')).toBeVisible();
-  await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).not.toBeVisible();
   await expect.element(page.getByText('I am no man')).not.toBeVisible();
 });
 
@@ -53,7 +53,7 @@ test('can control the visible tab with the active attribute', async () => {
 
   const page = render(component);
 
-  await expect.element(page.getByText('I am on nobody\'s side')).toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).toBeVisible();
   await expect.element(page.getByText('And my axe!')).not.toBeVisible();
   await expect.element(page.getByText('I am no man')).not.toBeVisible();
 });
@@ -87,7 +87,7 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
 
   await expect.element(page.getByText('I am no man')).toBeVisible();
   await expect.element(page.getByText('And my axe!')).not.toBeVisible();
-  await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).not.toBeVisible();
 });
 
 test('switches panel content when panels are initialized with hidden attribute', async () => {

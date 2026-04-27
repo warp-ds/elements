@@ -58,7 +58,7 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
     });
   });
 
-   describe('WCAG 1.3.1 - Info and Relationships', () => {
+  describe('WCAG 1.3.1 - Info and Relationships', () => {
     test('w-tab has role tab, w-tab-panel has role tabpanel', async () => {
       const page = render(
         html`<w-tabs active="towers">
@@ -160,9 +160,9 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
 
       // Query by property since aria-selected is set via ElementInternals (no DOM attribute)
       const selectedTab = [...page.container.querySelectorAll('w-tab')].find(
-        (tab: WarpTab) => tab.ariaSelected === 'true'
+        (tab: WarpTab) => tab.ariaSelected === 'true',
       );
-      await expect.element(selectedTab as HTMLElement).toHaveTextContent("Towers");
+      await expect.element(selectedTab as HTMLElement).toHaveTextContent('Towers');
     });
   });
 
@@ -192,7 +192,7 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
 
       // Query by property since aria-selected is set via ElementInternals (no DOM attribute)
       const selectedTab = [...page.container.querySelectorAll('w-tab')].find(
-        (tab: WarpTab) => tab.ariaSelected === 'true'
+        (tab: WarpTab) => tab.ariaSelected === 'true',
       ) as WarpTab;
       selectedTab.focus();
       await userEvent.keyboard('{ArrowLeft}');
@@ -227,7 +227,7 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       await page.container.querySelector('w-tabs').updateComplete;
       // Query by property since aria-selected is set via ElementInternals (no DOM attribute)
       const inactiveTabs = [...page.container.querySelectorAll('w-tab')].filter(
-        (tab: WarpTab) => tab.ariaSelected === 'false'
+        (tab: WarpTab) => tab.ariaSelected === 'false',
       ) as WarpTab[];
       expect(inactiveTabs).toHaveLength(2);
       // Check tabIndex property (not attribute) since delegatesFocus is used
@@ -257,7 +257,7 @@ describe('w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)', () => {
       await userEvent.tab();
 
       const selectedTab = [...page.container.querySelectorAll('w-tab')].find(
-        (tab: WarpTab) => tab.ariaSelected === 'true'
+        (tab: WarpTab) => tab.ariaSelected === 'true',
       ) as WarpTab;
       const internalButton = selectedTab.shadowRoot?.querySelector('button') as HTMLButtonElement | null;
       if (!internalButton) {

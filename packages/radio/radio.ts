@@ -225,7 +225,7 @@ export class WRadio extends FormControlMixin(LitElement) {
     if (!this.name) return [this];
     const scope = this.getRadioScope();
     return Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`)).filter(
-      (radio) => !radio.closest('w-radio-group')
+      (radio) => !radio.closest('w-radio-group'),
     );
   }
 

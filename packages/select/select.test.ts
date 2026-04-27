@@ -320,8 +320,10 @@ test('reflects dynamic light-DOM option selected changes into native select', as
   const lightOptions = Array.from(wSelect.querySelectorAll('option'));
   lightOptions[1].setAttribute('selected', '');
 
-  await expect.poll(() => {
-    const nativeSelect = wSelect.shadowRoot.querySelector('select') as HTMLSelectElement;
-    return nativeSelect.value;
-  }).toBe('beta');
+  await expect
+    .poll(() => {
+      const nativeSelect = wSelect.shadowRoot.querySelector('select') as HTMLSelectElement;
+      return nativeSelect.value;
+    })
+    .toBe('beta');
 });

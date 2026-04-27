@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { setupHydrationWarningCapture, testHydration } from '../../tests/react-hydration';
 
 import './textfield.js';

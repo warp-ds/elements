@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { setupHydrationWarningCapture, testHydration } from '../../tests/react-hydration';
 
 import './slider.js';
@@ -35,7 +35,12 @@ describe('w-slider React SSR hydration', () => {
   });
 
   test('with help-text hydrates without warnings', async () => {
-    const warnings = await testHydration('w-slider', { label: 'Value', min: '0', max: '100', 'help-text': 'Select a value' });
+    const warnings = await testHydration('w-slider', {
+      label: 'Value',
+      min: '0',
+      max: '100',
+      'help-text': 'Select a value',
+    });
     expect(warnings).toEqual([]);
   });
 });

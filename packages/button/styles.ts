@@ -1,7 +1,11 @@
 /* packages/button/styles.ts */
 import { css } from 'lit';
 
-export const wButtonStyles = css`
+/**
+ * Shared base tokens used by both w-button and w-link.
+ * These define the internal CSS variables that map component tokens to semantic tokens.
+ */
+export const buttonSharedBase = css`
   :host {
     display: inline-block;
 
@@ -42,6 +46,144 @@ export const wButtonStyles = css`
     /* Icon color for pill/icon-only variants (semantic; default dark grey icon) */
     --w-c-button-icon-color: var(--w-s-color-icon);
   }
+
+  :host(:focus-visible) {
+    outline: none;
+  }
+`;
+
+/**
+ * Shared variant styles used by both w-button and w-link.
+ * These set component tokens for different visual styles.
+ */
+export const buttonSharedVariants = css`
+  :host([variant='primary']) {
+    --w-c-button-bg: var(--w-s-color-background-primary);
+    --w-c-button-bg-hover: var(--w-s-color-background-primary-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-primary-active);
+    --w-c-button-color: var(--w-s-color-text-inverted);
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='negative']) {
+    --w-c-button-bg: var(--w-s-color-background-negative);
+    --w-c-button-bg-hover: var(--w-s-color-background-negative-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-negative-active);
+    --w-c-button-color: var(--w-s-color-text-inverted);
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='negativeQuiet']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-bg-hover: var(--w-s-color-background-negative-subtle-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-negative-subtle-active);
+    --w-c-button-color: var(--w-s-color-text-negative);
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='utility']) {
+    --w-c-button-bg: var(--w-s-color-background);
+    --w-c-button-color: var(--w-s-color-text);
+    --w-c-button-radius: 4px;
+    --w-c-button-border-width: 1px;
+  }
+
+  :host([variant='utilityQuiet']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-color: var(--w-s-color-text);
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='quiet']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='overlay']) {
+    --w-c-button-bg: var(--w-s-color-background);
+    --w-c-button-bg-hover: var(--w-s-color-background-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-active);
+    --w-c-button-color: var(--w-s-color-text);
+    --w-c-button-radius: 9999px;
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='overlayInverted']) {
+    --w-c-button-bg: var(--w-s-color-background-inverted);
+    --w-c-button-bg-hover: var(--w-s-color-background-inverted-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-inverted-active);
+    --w-c-button-color: var(--w-s-color-text-inverted);
+    --w-c-button-radius: 9999px;
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='overlayQuiet']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-bg-hover: var(--w-s-color-background-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-active);
+    --w-c-button-color: var(--w-s-color-text);
+    --w-c-button-radius: 9999px;
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='overlayInvertedQuiet']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-bg-hover: var(--w-s-color-background-inverted-hover);
+    --w-c-button-bg-active: var(--w-s-color-background-inverted-active);
+    --w-c-button-color: var(--w-s-color-text-inverted);
+    --w-c-button-radius: 9999px;
+    --w-c-button-border-width: 0px;
+  }
+
+  :host([variant='link']) {
+    --w-c-button-bg: transparent;
+    --w-c-button-border-width: 0px;
+    --w-c-button-padding-x: 0px;
+    --w-c-button-padding-y: 0px;
+    --w-c-button-font-weight: 400;
+
+    --w-c-button-bg-hover: transparent;
+    --w-c-button-bg-active: transparent;
+
+    --w-c-button-color: var(--w-s-color-text-link);
+    --w-c-button-color-hover: var(--w-s-color-text-link-hover, var(--w-c-button-color));
+    --w-c-button-color-active: var(--w-s-color-text-link-active, var(--w-c-button-color));
+  }
+`;
+
+/**
+ * Shared sizing styles used by both w-button and w-link.
+ */
+export const buttonSharedSizing = css`
+  :host([small]) {
+    --w-c-button-padding-x: 12px;
+    --w-c-button-padding-y: 8px;
+    --w-c-button-font-size: var(--w-font-size-xs);
+    --w-c-button-line-height: var(--w-line-height-xs);
+  }
+`;
+
+/**
+ * Shared disabled state used by both w-button and w-link.
+ */
+export const buttonSharedDisabled = css`
+  :host([disabled]) {
+    pointer-events: none;
+
+    --w-c-button-bg: var(--w-s-color-background-disabled);
+    --w-c-button-bg-hover: var(--w-s-color-background-disabled);
+    --w-c-button-bg-active: var(--w-s-color-background-disabled);
+
+    --w-c-button-color: var(--w-s-color-text-inverted);
+    --w-c-button-border-width: 0px;
+  }
+`;
+
+/**
+ * Complete w-button styles (shared + button-specific).
+ */
+export const wButtonStyles = css`
+  ${buttonSharedBase}
 
   /* ============================================================
    * Base element (NATIVE button mode ONLY)
@@ -99,38 +241,18 @@ export const wButtonStyles = css`
     color: var(--_color-active);
   }
 
-  /* Focus */
-  :host(:focus-visible) {
-    outline: none;
-  }
-
   :host(:focus-visible) button[part='base'] {
     outline: var(--_outline-width) solid var(--_outline-color);
     outline-offset: var(--_outline-offset);
   }
 
   /* ============================================================
-   * Variants (tokens consumed by native button mode)
+   * Variants (shared + button-specific quiet mappings)
    * ============================================================ */
+  ${buttonSharedVariants}
 
-  :host([variant='primary']) {
-    --w-c-button-bg: var(--w-s-color-background-primary);
-    --w-c-button-bg-hover: var(--w-s-color-background-primary-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-primary-active);
-    --w-c-button-color: var(--w-s-color-text-inverted);
-    --w-c-button-border-width: 0px;
-  }
-
-  :host([variant='negative']:not([quiet])) {
-    --w-c-button-bg: var(--w-s-color-background-negative);
-    --w-c-button-bg-hover: var(--w-s-color-background-negative-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-negative-active);
-    --w-c-button-color: var(--w-s-color-text-inverted);
-    --w-c-button-border-width: 0px;
-  }
-
-  :host([variant='negative'][quiet]),
-  :host([variant='negativeQuiet']) {
+  /* Button-specific: quiet attribute backwards compatibility */
+  :host([variant='negative'][quiet]) {
     --w-c-button-bg: transparent;
     --w-c-button-bg-hover: var(--w-s-color-background-negative-subtle-hover);
     --w-c-button-bg-active: var(--w-s-color-background-negative-subtle-active);
@@ -138,56 +260,13 @@ export const wButtonStyles = css`
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='utility']:not([quiet])) {
-    --w-c-button-bg: var(--w-s-color-background);
-    --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-radius: 4px;
-    --w-c-button-border-width: 1px;
-  }
-
-  :host([variant='utility'][quiet]),
-  :host([variant='utilityQuiet']) {
+  :host([variant='utility'][quiet]) {
     --w-c-button-bg: transparent;
     --w-c-button-color: var(--w-s-color-text);
     --w-c-button-border-width: 0px;
   }
 
-  :host([variant='overlay']) {
-    --w-c-button-bg: var(--w-s-color-background);
-    --w-c-button-bg-hover: var(--w-s-color-background-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-active);
-    --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-radius: 9999px;
-    --w-c-button-border-width: 0px;
-  }
-
-  :host([variant='overlayInverted']) {
-    --w-c-button-bg: var(--w-s-color-background-inverted);
-    --w-c-button-bg-hover: var(--w-s-color-background-inverted-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-inverted-active);
-    --w-c-button-color: var(--w-s-color-text-inverted);
-    --w-c-button-radius: 9999px;
-    --w-c-button-border-width: 0px;
-  }
-
-  :host([variant='overlayQuiet']) {
-    --w-c-button-bg: transparent;
-    --w-c-button-bg-hover: var(--w-s-color-background-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-active);
-    --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-radius: 9999px;
-    --w-c-button-border-width: 0px;
-  }
-
-  :host([variant='overlayInvertedQuiet']) {
-    --w-c-button-bg: transparent;
-    --w-c-button-bg-hover: var(--w-s-color-background-inverted-hover);
-    --w-c-button-bg-active: var(--w-s-color-background-inverted-active);
-    --w-c-button-color: var(--w-s-color-text-inverted);
-    --w-c-button-radius: 9999px;
-    --w-c-button-border-width: 0px;
-  }
-
+  /* Button-specific: pill variant */
   :host([variant='pill']) {
     --w-c-button-bg: transparent;
     --w-c-button-radius: 50%;
@@ -199,22 +278,7 @@ export const wButtonStyles = css`
     --w-c-button-color: var(--w-c-button-icon-color, var(--w-s-color-icon));
   }
 
-  /* Link variant: button that looks like a link (native button mode only) */
-  :host([variant='link']) {
-    --w-c-button-bg: transparent;
-    --w-c-button-border-width: 0px;
-    --w-c-button-padding-x: 0px;
-    --w-c-button-padding-y: 0px;
-    --w-c-button-font-weight: 400;
-
-    --w-c-button-bg-hover: transparent;
-    --w-c-button-bg-active: transparent;
-
-    --w-c-button-color: var(--w-s-color-text-link);
-    --w-c-button-color-hover: var(--w-s-color-text-link-hover, var(--w-c-button-color));
-    --w-c-button-color-active: var(--w-s-color-text-link-active, var(--w-c-button-color));
-  }
-
+  /* Button-specific: link variant element styles */
   :host([variant='link']) button[part='base'] {
     display: inline;
     padding: 0;
@@ -228,13 +292,7 @@ export const wButtonStyles = css`
   }
 
   /* ===== Size ===== */
-
-  :host([small]) {
-    --w-c-button-padding-x: 12px;
-    --w-c-button-padding-y: 8px;
-    --w-c-button-font-size: var(--w-font-size-xs);
-    --w-c-button-line-height: var(--w-line-height-xs);
-  }
+  ${buttonSharedSizing}
 
   :host([small][variant='pill']) {
     --w-c-button-padding-x: 8px;
@@ -264,11 +322,11 @@ export const wButtonStyles = css`
    * ============================================================ */
 
   /* ===== Disabled ===== */
-  :host([disabled]),
+  ${buttonSharedDisabled}
+
+  /* Additional specificity for button to override quiet variants */
   :host([disabled][variant]),
   :host([disabled][quiet]) {
-    pointer-events: none;
-
     --w-c-button-bg: var(--w-s-color-background-disabled);
     --w-c-button-bg-hover: var(--w-s-color-background-disabled);
     --w-c-button-bg-active: var(--w-s-color-background-disabled);
@@ -290,7 +348,7 @@ export const wButtonStyles = css`
   :host([loading][quiet]) {
     pointer-events: none;
 
-    /* Strong overrides so variants can’t leak through */
+    /* Strong overrides so variants can't leak through */
     --w-c-button-bg: var(--w-s-color-background-subtle);
     --w-c-button-bg-hover: var(--w-s-color-background-subtle);
     --w-c-button-bg-active: var(--w-s-color-background-subtle);

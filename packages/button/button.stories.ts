@@ -236,8 +236,9 @@ export const AllVariantsGrid: Story = {
 
                 <w-button variant=${v} type="button">Label</w-button>
 
-                ${v === 'pill'
-                  ? html`
+                ${
+                  v === 'pill'
+                    ? html`
                       <w-button variant="pill" type="button" icon-only aria-label="Pill icon">
                         <w-icon
                           name="Heart"
@@ -248,7 +249,8 @@ export const AllVariantsGrid: Story = {
                         ></w-icon>
                       </w-button>
                     `
-                  : null}
+                    : null
+                }
               </div>
             `,
           )}
@@ -313,9 +315,7 @@ export const LoadingAcrossVariants: Story = {
         </div>
 
         <div style="display:flex; flex-wrap: wrap; gap: 12px;">
-          ${variants.map(
-            (v) => html`<w-button variant=${v} loading type="button">${v}</w-button>`,
-          )}
+          ${variants.map((v) => html`<w-button variant=${v} loading type="button">${v}</w-button>`)}
         </div>
       </div>
     `;

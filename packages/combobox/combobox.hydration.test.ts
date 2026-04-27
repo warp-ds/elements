@@ -1,6 +1,6 @@
-import { describe, expect, test, beforeEach, afterEach } from 'vitest';
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { setupHydrationWarningCapture, testHydration } from '../../tests/react-hydration';
 
 import './combobox.js';

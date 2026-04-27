@@ -1,14 +1,14 @@
-import type { PropertyValues } from 'lit';
-import { html, LitElement } from 'lit';
-
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '../radio/radio.js';
-import type { WRadio } from '../radio/radio.js';
 import { activateI18n } from '../i18n';
+import { styles as hostStyles } from '../radio/host-styles.js';
+import type { WRadio } from '../radio/radio.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
@@ -17,7 +17,6 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 // eslint-disable-next-line
 // @ts-ignore
 import { styles } from './radio-group-styles.js';
-import { styles as hostStyles } from '../radio/host-styles.js';
 
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
@@ -418,32 +417,38 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
         aria-describedby=${ifDefined(describedBy)}
         aria-errormessage="error-message"
         aria-invalid=${showInvalidError ? 'true' : undefined}>
-        ${hasLabel
-          ? html`
+        ${
+          hasLabel
+            ? html`
               <label part="form-control-label" id="label" @click=${this.handleLabelClick}>
                 <slot name="label">${this.label}</slot>
-                ${this.optional
-                  ? html`<span class="optional">
+                ${
+                  this.optional
+                    ? html`<span class="optional">
                       ${i18n._({
                         id: 'radio-group.label.optional',
                         message: 'Optional',
                         comment: 'Shown behind label when marked as optional',
                       })}
                     </span>`
-                  : null}
+                    : null
+                }
               </label>
             `
-          : null}
+            : null
+        }
 
         <slot part="form-control-input" @slotchange=${this.syncRadioElements}></slot>
 
-        ${shouldShowHelpText
-          ? html`
+        ${
+          shouldShowHelpText
+            ? html`
               <div id="help-text" part="help-text" aria-label=${ifDefined(helpTextAriaLabel)}>
                 <slot name="help-text" @slotchange=${this.handleHelpTextSlotChange}>${helpText}</slot>
               </div>
             `
-          : null}
+            : null
+        }
       </fieldset>
     `;
   }
