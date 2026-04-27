@@ -1,3 +1,10 @@
+# [2.9.0-next.3](https://github.com/warp-ds/elements/compare/v2.9.0-next.2...v2.9.0-next.3) (2026-04-27)
+
+
+### Features
+
+* **icon:** read from html lang attribute when locale attribute is not set ([#610](https://github.com/warp-ds/elements/issues/610)) ([0e04f39](https://github.com/warp-ds/elements/commit/0e04f39820ca5db8c723388f3ab6c940095bc482))
+
 # [2.9.0-next.2](https://github.com/warp-ds/elements/compare/v2.9.0-next.1...v2.9.0-next.2) (2026-04-23)
 
 
