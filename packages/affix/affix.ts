@@ -35,8 +35,8 @@ const ccPrefix = {
  */
 class WarpAffix extends LitElement {
   /**
-   * @summary
-   * @description
+   * @summary Accessible label for icon-button variants.
+   * @description Used as the `aria-label` for the internal button when `search` or `clear` is enabled. Provide a descriptive action label like "Search" or "Clear input".
    */
   @property({ attribute: 'aria-label' }) ariaLabel: string;
 
@@ -45,24 +45,24 @@ class WarpAffix extends LitElement {
    *
    * Set an `aria-label` that explains the action when using this.
    
-   * @summary
-   * @description
+   * @summary Renders a clear icon button.
+   * @description Shows a clickable close icon meant for reset/clear actions, typically in a suffix slot. When enabled, set `aria-label` so screen readers can announce the button purpose.
   */
   @property({ type: Boolean }) clear = false;
 
   /**
    * Add this property to render a clickable Warp search icon.
    *
-   * Set an `aria-label` that explains the action when using this.
+   * Be sure to set an `aria-label` that explains the action when using this property.
    
-   * @summary
-   * @description
+   * @summary Renders a search icon button.
+   * @description Shows a clickable search icon, typically in a prefix slot for search fields. When enabled, set `aria-label` so that assistive technology announces the action correctly.
   */
   @property({ type: Boolean }) search = false;
 
   /**
-   * @summary
-   * @description
+   * @summary Text label shown as prefix/suffix content.
+   * @description Displays plain text such as a currency or unit label (for example `kr` or `%`) instead of an icon button.
    */
   @property() label: string;
 
