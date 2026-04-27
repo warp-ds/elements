@@ -208,4 +208,34 @@ components.forEach(({ declaration, packageName }) => {
   writeFileSync(new URL(`./${packageName}.md`, docsDir), generatedDocument, { encoding: 'utf8' });
 });
 
+// toast gets some custom treatment what with its JS-only API,
+// custom element manifest isn't available
+(function buildToastDocs() {
+  const docsDir = new URL('../dist/docs/toast/', import.meta.url);
+  const docsDirPath = docsDir.pathname;
+  if (!existsSync(docsDirPath)) {
+    mkdirSync(docsDirPath, { recursive: true });
+  }
+  copyFileSync(new URL('../packages/toast/docs/accessibility.md', import.meta.url), new URL('./accessibility.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/usage.md', import.meta.url), new URL('./usage.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/examples.md', import.meta.url), new URL('./examples.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/api.md', import.meta.url), new URL('./api.md', docsDir));
+
+  const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
+  const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
+  const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const apiContent = readOptionalFile(new URL('./api.md', docsDir));
+
+
+  let generatedDocument = '# Toast\n\n';
+  generatedDocument += '## Description\n\nToasts are brief user feedback messages that overlay content.\n\n';
+
+  generatedDocument += `${usageContent}\n\n`;
+  generatedDocument += `${accessibilityContent}\n\n`;
+  generatedDocument += `${examplesContent}\n\n`;
+  generatedDocument += `${apiContent}\n\n`;
+
+  writeFileSync(new URL('./toast.md', docsDir), generatedDocument, { encoding: 'utf8' });
+})();
+
 console.log(`Generated docs for ${components.length} components.`);
