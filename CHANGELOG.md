@@ -1,3 +1,11 @@
+# [2.9.0-next.4](https://github.com/warp-ds/elements/compare/v2.9.0-next.3...v2.9.0-next.4) (2026-04-27)
+
+
+### Bug Fixes
+
+* handle edge case for open-ended sliders and arrow keys ([#611](https://github.com/warp-ds/elements/issues/611)) ([fa3f22f](https://github.com/warp-ds/elements/commit/fa3f22f64435461bfde346a163b408f46d10b8ef)), closes [#524](https://github.com/warp-ds/elements/issues/524)
+* move style attribute inside shadow root ([#612](https://github.com/warp-ds/elements/issues/612)) ([bd04c48](https://github.com/warp-ds/elements/commit/bd04c48ca5e149ef9485a52c5a0b802f12f74e88)), closes [#587](https://github.com/warp-ds/elements/issues/587) [#592](https://github.com/warp-ds/elements/issues/592)
+
 # [2.9.0-next.3](https://github.com/warp-ds/elements/compare/v2.9.0-next.2...v2.9.0-next.3) (2026-04-27)
 
 
