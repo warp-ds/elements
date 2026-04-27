@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-BneVvdWh.js";var t,n=e((()=>{t=`useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict`})),r,i=e((()=>{n(),r=(e=21)=>{let n=``,r=crypto.getRandomValues(new Uint8Array(e|=0));for(;e--;)n+=t[r[e]&63];return n}}));function a(e=``){return`${e}${r()}`}var o=e((()=>{i()}));export{a as n,o as t};
