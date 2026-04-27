@@ -1,7 +1,7 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
-import type { WarpSliderThumb, SliderSlot} from '../slider-thumb/slider-thumb.js';
+import type { WarpSliderThumb, SliderSlot } from '../slider-thumb/slider-thumb.js';
 import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -9,7 +9,6 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wSliderStyles } from './styles/w-slider.styles.js';
-
 
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
@@ -39,61 +38,117 @@ class WarpSlider extends LitElement {
    * The slider fieldset label. Required for proper accessibility.
    *
    * If you need to display HTML, use the `label` slot instead (f. ex. `<legend class="sr-only" slot="label">Production year</legend>`)
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ reflect: true })
   label: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
    * Whether or not to allow values outside the range such as "Before 1950" and "2025+".
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ type: Boolean, attribute: 'open-ended' })
   openEnded = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   error!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** Ensures a child slider thumb has a value before allowing the containing form to submit. */
+  /** Ensures a child slider thumb has a value before allowing the containing form to submit.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   min: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   max: string;
 
-  /** Pass a value similar to step to create visual markers at that interval */
+  /** Pass a value similar to step to create visual markers at that interval
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   markers: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   step: number;
 
-  /** Suffix used in text input fields and for the min and max values of the slider. */
+  /** Suffix used in text input fields and for the min and max values of the slider.
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   suffix!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;
 
-  /** Formatter for the tooltip and input mask values. */
+  /** Formatter for the tooltip and input mask values.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. */
+  /** Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   tooltipFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** Formatter for the min and max labels below the range. */
+  /** Formatter for the min and max labels below the range.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 

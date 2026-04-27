@@ -49,64 +49,143 @@ class WarpTextField extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   id: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   label: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   size: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   max: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   min: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'min-length' })
   minLength: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'max-length' })
   maxLength: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   pattern: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead. */
+  /** @deprecated Use the native readonly attribute instead.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   type: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   value: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   step: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   autocomplete?: string;
 
@@ -118,7 +197,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
    *
    * https://css-tricks.com/input-masking/
    * https://filamentgroup.github.io/politespace/demo/demo.html
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   formatter: (value: string) => string;
 
@@ -126,11 +208,17 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @query('.w-textfield__mask')
   mask: HTMLDivElement;
 
-  /** @internal */
+  /** @internal
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   _hasPrefix = false;
 
-  /** @internal */
+  /** @internal
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   _hasSuffix = false;
 

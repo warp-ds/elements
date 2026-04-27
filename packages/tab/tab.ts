@@ -57,12 +57,24 @@ export class WarpTab extends LitElement {
     this._internals = this.attachInternals();
   }
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'id', reflect: true })
   id!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'for', reflect: true })
   for!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'aria-controls' })
   private _ariaControlsAttr?: string;
 
@@ -70,7 +82,10 @@ export class WarpTab extends LitElement {
    * Internal tabindex managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   _parentTabIndex: number | undefined;
 
@@ -78,7 +93,10 @@ export class WarpTab extends LitElement {
    * Internal aria-selected managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   _parentAriaSelected: 'true' | 'false' | undefined;
 
@@ -123,10 +141,17 @@ export class WarpTab extends LitElement {
 
   /**
    * @deprecated Use `aria-selected="true"` instead
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ type: Boolean, reflect: true })
   active = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   over = false;
 

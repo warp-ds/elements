@@ -53,9 +53,17 @@ export interface StepsContext {
  * Individual step component that shows a single step in a process
  */
 export class WarpStep extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   active = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   completed = false;
 

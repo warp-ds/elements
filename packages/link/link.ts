@@ -45,27 +45,59 @@ class WarpLink extends LitElement {
     delegatesFocus: true,
   };
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   variant: ButtonVariant;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   small = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   href: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   target: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   rel: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth = false;
 

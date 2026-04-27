@@ -37,17 +37,39 @@ const pillStyles = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-pill--docs)
  */
 class WarpPill extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'can-close', type: Boolean }) canClose = false;
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'suggestion', type: Boolean }) suggestion = false;
   /**
    * @deprecated Used "open-arial-label" instead.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'open-sr-label', type: String }) openSrLabel: string;
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'open-aria-label', type: String }) openAriaLabel: string;
   /**
    * @deprecated Used "close-arial-label" instead.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'close-sr-label', type: String }) closeSrLabel: string;
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'close-aria-label', type: String }) closeAriaLabel: string;
 
   /** @internal */

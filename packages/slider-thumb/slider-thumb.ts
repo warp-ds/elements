@@ -27,30 +27,59 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   static styles = [reset, unoStyles, wSliderThumbStyles];
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'aria-label' })
   ariaLabel: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'aria-description' })
   ariaDescription: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   value: string;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ attribute: false, reflect: false })
   openEnded = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   placeholder: string;
 
@@ -78,15 +107,24 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix = '';
 
-  /** @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`. */
+  /** @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`. */
+  /** @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   tooltipFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`. */
+  /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 
@@ -537,7 +575,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
 
     if (changedProperties.has('value')) {
-      if (typeof this.#initialValue === "undefined" && typeof this.value !== "undefined") {
+      if (typeof this.#initialValue === 'undefined' && typeof this.value !== 'undefined') {
         // If w-slider sets our initial value based on the min and max attributes then
         // this.value will be undefined in connectedCallback. We need this check here
         // in order for form resets to work correctly.

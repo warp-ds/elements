@@ -89,43 +89,95 @@ const ccAttention = {
 };
 
 class WarpAttention extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   show = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: false })
   placement: Directions;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   tooltip = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   callout = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   highlight = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'can-close', type: Boolean, reflect: true })
   canClose = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'no-arrow', type: Boolean, reflect: true })
   noArrow = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number })
   distance: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number })
   skidding: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   flip = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'cross-axis', type: Boolean, reflect: true })
   crossAxis = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'fallback-placements', type: Array, reflect: true })
   fallbackPlacements: Directions[];
 

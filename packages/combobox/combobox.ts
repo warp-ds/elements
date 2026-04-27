@@ -46,63 +46,108 @@ interface OptionWithIdAndMatch extends ComboboxOption {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-combobox--docs)
  */
 export class WarpCombobox extends FormControlMixin(LitElement) {
-  /** The available options to select from */
+  /** The available options to select from
+   * @summary
+   * @description
+   */
   @property({ type: Array })
   options: ComboboxOption[] = [];
 
-  /** Label above input */
+  /** Label above input
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, useDefault: true })
   label?: string = '';
 
-  /** Input placeholder */
+  /** Input placeholder
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, useDefault: true })
   placeholder?: string = '';
 
-  /** The input value */
+  /** The input value
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, useDefault: true })
   value = '';
 
-  /** Whether the popover opens when focus is on the text field */
+  /** Whether the popover opens when focus is on the text field
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, attribute: 'open-on-focus', reflect: true })
   openOnFocus = false;
 
-  /** Select active option on blur */
+  /** Select active option on blur
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, attribute: 'select-on-blur', reflect: true, useDefault: true })
   selectOnBlur = true;
 
-  /** Whether the matching text segments in the options should be highlighted */
+  /** Whether the matching text segments in the options should be highlighted
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, attribute: 'match-text-segments', reflect: true })
   matchTextSegments = false;
 
-  /** Disable client-side static filtering */
+  /** Disable client-side static filtering
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, attribute: 'disable-static-filtering', reflect: true })
   disableStaticFiltering = false;
 
-  /** Renders the input field in an invalid state */
+  /** Renders the input field in an invalid state
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** The content to display as the help text */
+  /** The content to display as the help text
+   * @summary
+   * @description
+   */
   @property({ type: String, attribute: 'help-text', reflect: true, useDefault: true })
   helpText?: string = '';
 
-  /** Whether the element is disabled */
+  /** Whether the element is disabled
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** Whether the element is required */
+  /** Whether the element is required
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
-  /** Whether to show optional text */
+  /** Whether to show optional text
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
-  /** Name attribute for form submission */
+  /** Name attribute for form submission
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, useDefault: true })
   name?: string = '';
 
-  /** Autocomplete attribute for the input field */
+  /** Autocomplete attribute for the input field
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, useDefault: true })
   autocomplete?: string = 'off';
 

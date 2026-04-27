@@ -55,68 +55,112 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   /**
    * Whether the element should receive focus on render.
    * @deprecated Use the native `autofocus` attribute instead.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus = false;
 
-  /** Whether the element should receive focus on render */
+  /** Whether the element should receive focus on render
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
   /**
    * The content displayed as the help text. Paired with `invalid` to show the text as a validation error.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'help-text', reflect: true })
   helpText: string;
 
-  /** Renders the field in an invalid state. Paired with `help-text` to provide feedback about the error. */
+  /** Renders the field in an invalid state. Paired with `help-text` to provide feedback about the error.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
   /**
    * Whether to always show a hint.
    * @deprecated Use `help-text` instead and only set it if you want to display the help text.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ type: Boolean, reflect: true })
   always = false;
 
   /**
    * The content displayed as the help text.
    * @deprecated Use `help-text` instead.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ reflect: true })
   hint: string;
 
-  /** The content to disply as the label */
+  /** The content to disply as the label
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   label: string;
 
-  /** Whether to show optional text */
+  /** Whether to show optional text
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
-  /** Renders the field in a disabled state. */
+  /** Renders the field in a disabled state.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
    * Renders the field in a readonly state.
    * @deprecated Use the native readonly attribute instead.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'read-only', type: Boolean, reflect: true })
   readOnly = false;
 
-  /** Renders the field in a readonly state. */
+  /** Renders the field in a readonly state.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
-  /** @internal */
+  /** @internal
+   * @summary
+   * @description
+   */
   @property({ attribute: false, state: true })
   _options: Array<TemplateResult>;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   value: string;
 

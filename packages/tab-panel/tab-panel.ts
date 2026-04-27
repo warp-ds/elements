@@ -57,7 +57,10 @@ export class WarpTabPanel extends LitElement {
    * Internal active state managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   _parentActive: boolean | undefined;
 
@@ -65,7 +68,10 @@ export class WarpTabPanel extends LitElement {
    * Internal aria-labelledby managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   _parentAriaLabelledBy: string | undefined;
 
