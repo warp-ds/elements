@@ -6,9 +6,15 @@ import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '../radio/radio.js';
+<<<<<<< HEAD
 import type { WarpRadio } from '../radio/radio.js';
 import { activateI18n } from '../i18n';
 import { styles as hostStyles } from '../radio/host-styles.js';
+=======
+import { activateI18n } from '../i18n';
+import { styles as hostStyles } from '../radio/host-styles.js';
+import type { WRadio } from '../radio/radio.js';
+>>>>>>> ca887f8a (chore: update dependencies and apply auto-formatting)
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';

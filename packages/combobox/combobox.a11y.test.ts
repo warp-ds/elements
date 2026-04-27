@@ -58,6 +58,7 @@ describe('w-combobox accessibility (WCAG 2.2)', () => {
       const page = render(
         html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`,
       );
+<<<<<<< HEAD
       await expect(page).toHaveNoAxeViolations();
     });
 
@@ -86,6 +87,8 @@ describe('w-combobox accessibility (WCAG 2.2)', () => {
       input?.focus();
       await new Promise((resolve) => setTimeout(resolve, 100));
 
+=======
+>>>>>>> ca887f8a (chore: update dependencies and apply auto-formatting)
       await expect(page).toHaveNoAxeViolations();
     });
   });

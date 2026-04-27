@@ -13,7 +13,11 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
+<<<<<<< HEAD
 import { wButtonStyles } from './styles.js';
+=======
+import { wButtonStyles } from './styles/w-button.styles';
+>>>>>>> ca887f8a (chore: update dependencies and apply auto-formatting)
 
 export type ButtonVariant =
   | 'primary'

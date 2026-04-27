@@ -267,8 +267,13 @@ export class WarpRadio extends FormControlMixin(LitElement) {
   private getStandaloneNamedRadios(): WarpRadio[] {
     if (!this.name) return [this];
     const scope = this.getRadioScope();
+<<<<<<< HEAD
     return Array.from(scope.querySelectorAll<WarpRadio>(`w-radio[name="${this.name}"]`)).filter(
       (radio) => !radio.closest('w-radio-group')
+=======
+    return Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`)).filter(
+      (radio) => !radio.closest('w-radio-group'),
+>>>>>>> ca887f8a (chore: update dependencies and apply auto-formatting)
     );
   }
 
