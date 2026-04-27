@@ -7,7 +7,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./eik/index.js"
     },
     "./components/affix": "./dist/packages/affix/affix.js",
     "./components/alert": "./dist/packages/alert/alert.js",
