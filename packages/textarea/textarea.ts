@@ -48,43 +48,94 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   label: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'maximum-rows' })
   maxRows: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
   minRows: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`. */
+  /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`.
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   value: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   optional = false;
 

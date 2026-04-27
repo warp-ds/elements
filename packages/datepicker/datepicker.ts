@@ -81,16 +81,31 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   static styles = [reset, wDatepickerStyles, wDatepickerCalendarStyles, wDatepickerDayStyles, wDatepickerMonthStyles];
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   label: string;
 
-  /** Takes precedence over the `<html>` lang attribute. */
+  /** Takes precedence over the `<html>` lang attribute.
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   lang: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   value: string;
 
@@ -98,7 +113,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Decides the format of the date as shown in the calendar header.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'header-format' })
   headerFormat = 'MMMM yyyy';
 
@@ -106,7 +124,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Decides the format of the weekday as shown above the grid of dates in the calendar.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'weekday-format' })
   weekdayFormat = 'EEEEEE';
 
@@ -124,7 +145,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * const datePicker = document.querySelector('w-datepicker') as WarpDatepicker;
    * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
    * ```
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: false })
   isDayDisabled: (day: Date) => boolean;
 
@@ -132,7 +156,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Decides the format of the day in the calendar as read to screen readers.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'day-format' })
   dayFormat = 'PPPP';
 

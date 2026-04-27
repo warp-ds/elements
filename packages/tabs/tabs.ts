@@ -51,6 +51,10 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
 export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   active: string;
 

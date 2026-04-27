@@ -33,15 +33,31 @@ const baseItemStyles =
  * @fires {CustomEvent} page-click - Triggered when a link button in the pagination is clicked. Contains the page number in `string` form.
  */
 class WarpPagination extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true, attribute: 'base-url' })
   baseUrl: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true })
   pages: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'current-page' })
   currentPageNumber: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Number, reflect: true, attribute: 'visible-pages' })
   visiblePages: number;
 

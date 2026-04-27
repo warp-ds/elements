@@ -44,16 +44,32 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   };
 
   // String properties without defaults to avoid reflecting empty attributes
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   name!: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   value!: string;
 
   // Boolean properties can have defaults - Lit doesn't reflect false values
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   checked = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 

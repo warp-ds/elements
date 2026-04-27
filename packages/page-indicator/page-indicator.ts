@@ -31,11 +31,17 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 class WarpPageIndicator extends LitElement {
   static styles = [styles];
 
-  /** Currently selected page (1-based index) */
+  /** Currently selected page (1-based index)
+   * @summary
+   * @description
+   */
   @property({ type: Number, attribute: 'selected-page', reflect: true })
   selectedPage: number;
 
-  /** Total number of pages */
+  /** Total number of pages
+   * @summary
+   * @description
+   */
   @property({ type: Number, attribute: 'page-count', reflect: true })
   pageCount: number;
 

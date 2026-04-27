@@ -14,18 +14,38 @@ import { styles } from './styles';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
  */
 class WarpBox extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   bleed = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   bordered = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   info = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   neutral = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   role: string;
 

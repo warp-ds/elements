@@ -62,54 +62,112 @@ class WarpButton extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   type: ButtonType;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   variant: ButtonVariant;
 
   /**
    * @deprecated Use `variant="quiet"` instead
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ type: Boolean, reflect: true })
   quiet = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
   iconOnly = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   small = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   loading = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   href: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   target: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   rel: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth = false;
 
   /**
    * @deprecated This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the appearance of the button.
-   */
+   
+   * @summary
+   * @description
+  */
   @property({ attribute: 'button-class', reflect: true })
   buttonClass: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   value: string;
 

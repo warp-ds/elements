@@ -14,9 +14,17 @@ import { styles } from './styles';
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-badge--docs)
  */
 class WarpBadge extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored';
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
   position: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
 

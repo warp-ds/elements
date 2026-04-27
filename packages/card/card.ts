@@ -60,12 +60,24 @@ class WarpCard extends LitElement {
     `,
   ];
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   selected = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   flat = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   clickable = false;
 
