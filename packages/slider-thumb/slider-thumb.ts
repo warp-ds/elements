@@ -373,6 +373,36 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
   }
 
+  async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
+    // Handle the case where an open ended slider that has
+    // no current value (Min or Max) and the user presses
+    // the up or down arrow in the input field.
+    
+    if (this.textfield.value) {
+      // If the field has a value let the native browser behavior do its thing
+      return;
+    }
+
+    e.preventDefault();
+
+    let value = "";
+    if (this.slot === 'from') {
+      if (e.key === 'ArrowUp') {
+        value = String(Number(this.min) + 1) || "1";  
+      } else if(e.key === 'ArrowDown') {
+        value = String(Number(this.min)) || "0";
+      }
+    } else {
+      if (e.key === 'ArrowUp') {
+        value = String(Number(this.max)) || "100";  
+      } else if(e.key === 'ArrowDown') {
+        value = String(Number(this.max) - 1) || "99";
+      }
+    }
+
+    await this.#handleValueChange(value, true);
+  }
+
   async connectedCallback() {
     super.connectedCallback();
     this.#initialValue = this.value;
@@ -672,6 +702,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           step="${ifDefined(this.step)}"
           ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
+          @keydown="${this.#onInputFieldKeyDown}"
           ?disabled="${this.disabled}"
         >
           ${(this.suffix ?? '') ? html`<w-affix slot="suffix" label="${this.suffix ?? ''}"></w-affix>` : nothing}
