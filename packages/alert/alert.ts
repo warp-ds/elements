@@ -45,13 +45,28 @@ const alertVariants = {
 class WarpAlert extends LitElement {
   private _internals: ElementInternals;
 
-  @property({ reflect: true })
-  variant: AlertVariants;
+  /**
+   * @summary Visual style of the alert.
+   *
+   * @description Controls both the color treatment and icon used by the component. Accepted values are `info`, `warning`, `positive`, and `negative`. Use the variant that matches the message severity so users can quickly distinguish informative messages from warnings, errors, and confirmations.
+   */
+  @property({ reflect: true, useDefault: true })
+  variant: AlertVariants = 'info';
 
-  @property({ type: Boolean, reflect: true })
-  show: boolean;
+  /**
+   * @summary Whether the alert is visible.
+   *
+   * @description Alerts are hidden by default (`false`). Set this to `true` to render and expand the content. This is reflected as an attribute, so visibility can be controlled from markup (`show`) or from JavaScript (`element.show = true`).
+   */
+  @property({ type: Boolean, reflect: true, useDefault: true })
+  show = false;
 
-  @property()
+  /**
+   * @summary ARIA role announced to assistive technology.
+   *
+   * @description Defaults to `alert` so urgent changes are announced by screen readers. Override this only when your use case requires a different announcement behavior, for example a less assertive live region strategy.
+   */
+  @property({ reflect: true, useDefault: true })
   role = 'alert';
 
   constructor() {
@@ -75,13 +90,13 @@ class WarpAlert extends LitElement {
 
   /** @internal */
   get _wrapperClasses() {
-    const variant = this.variant || 'info';
+    const variant = this.variant;
     return classNames([ccAlert.wrapper, ccAlert[variant]]);
   }
 
   /** @internal */
   get _iconClasses() {
-    const variant = this.variant || 'info';
+    const variant = this.variant;
     const activeIconClassNames = ccAlert[`${variant}Icon`];
 
     return classNames([ccAlert.icon, activeIconClassNames]);

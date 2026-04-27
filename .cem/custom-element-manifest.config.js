@@ -1,4 +1,5 @@
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
+import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
@@ -89,6 +90,11 @@ export default {
     So we use this hook to rewrite incorrect modulePath to correct ones */
       componentTypePath(name, tag, modulePath) {
         return modulePath.replace('packages', './packages');
+      },
+    }),
+    jsDocTagsPlugin({
+      tags: {
+        description: {},
       },
     }),
   ],
