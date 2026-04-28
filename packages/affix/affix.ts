@@ -4,12 +4,14 @@ import { classNames } from '@chbphone55/classnames';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { FormControlMixin } from '@open-wc/form-control';
 
 import { reset } from '../styles.js';
 
 import { styles } from './styles.js';
 import '../icon/icon.js';
 import { detectLocale } from '../i18n.js';
+import { WarpTextField } from '../textfield/textfield.js';
 
 const prefixSuffixWrapper =
   'absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ';
@@ -33,7 +35,7 @@ const ccPrefix = {
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-affix--docs)
  */
-class WarpAffix extends LitElement {
+class WarpAffix extends FormControlMixin(LitElement) {
   /**
    * @summary Accessible label for icon-button variants.
    * @description Used as the `aria-label` for the internal button when `search` or `clear` is enabled. Provide a descriptive action label like "Search" or "Clear input".
@@ -82,9 +84,28 @@ class WarpAffix extends LitElement {
   }
 
   /** @internal */
+  resetContainingTextField(e: Event) {
+    const textfield: WarpTextField | null = this.closest('w-textfield');
+    if (textfield) {
+      textfield.resetFormControl();
+    }
+    e.stopPropagation();
+  }
+
+  /** @internal */
+  submitContainingForm(e: Event) {
+    const form = this.internals.form;
+    if (form) {
+      form.submit();
+    }
+    e.stopPropagation();
+  }
+
+  /** @internal */
   get _searchButton() {
+    const label = this.ariaLabel || 'Search';
     return html`
-      <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="submit">
+      <button aria-label="${label}" class="${this._classes}" type="submit" @click="${this.submitContainingForm.bind(this)}">
         <w-icon name="Search" size="small" locale="${detectLocale()}" class="flex"></w-icon>
       </button>
     `;
@@ -92,8 +113,9 @@ class WarpAffix extends LitElement {
 
   /** @internal */
   get _clearButton() {
+    const label = this.ariaLabel || 'Clear input';
     return html`
-      <button aria-label="${ifDefined(this.ariaLabel)}" class="${this._classes}" type="reset">
+      <button aria-label="${label}" class="${this._classes}" type="reset" @click="${this.resetContainingTextField.bind(this)}">
         <w-icon name="Close" size="small" locale="${detectLocale()}" class="flex"></w-icon>
       </button>
     `;

@@ -32,3 +32,17 @@ export const Default: Story = {
     label: 'kr',
   },
 };
+
+export const Search: Story = {
+  args: {
+    search: true,
+    ariaLabel: 'Search',
+  },
+};
+
+export const Clear: Story = {
+  args: {
+    clear: true,
+    ariaLabel: 'Clear',
+  },
+};
