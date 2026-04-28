@@ -133,7 +133,8 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead.
+  /** 
+   * @deprecated Use the native readonly attribute instead.
    * @summary
    * @description
    */
