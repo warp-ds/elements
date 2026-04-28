@@ -1,3 +1,10 @@
+# [2.9.0-next.5](https://github.com/warp-ds/elements/compare/v2.9.0-next.4...v2.9.0-next.5) (2026-04-28)
+
+
+### Features
+
+* **affix:** add icon attribute, automatic aria labels for search and clear, textfield reset and form submit ([#619](https://github.com/warp-ds/elements/issues/619)) ([f131fdc](https://github.com/warp-ds/elements/commit/f131fdcca4e51930bcf7c9a01576412fbef176ae))
+
 # [2.9.0-next.4](https://github.com/warp-ds/elements/compare/v2.9.0-next.3...v2.9.0-next.4) (2026-04-27)
 
 
