@@ -39,7 +39,7 @@ const ccPrefix = {
 class WarpAffix extends FormControlMixin(LitElement) {
   /**
    * @summary Accessible label for icon-button variants.
-   * @description Used as the `aria-label` for the internal button when `search` or `clear` is enabled. Provide a descriptive action label like "Search" or "Clear input".
+   * @description Used to override the default `aria-label`s for the internal button when `search` or `clear` is enabled.
    */
   @property({ attribute: 'aria-label', reflect: true, useDefault: true }) ariaLabel: string | null = null;
 
@@ -47,19 +47,17 @@ class WarpAffix extends FormControlMixin(LitElement) {
    * Add this property to render a clickable Warp close icon.
    *
    * Set an `aria-label` that explains the action when using this.
-   
+   *
    * @summary Renders a clear icon button.
-   * @description Shows a clickable close icon meant for reset/clear actions, typically in a suffix slot. When enabled, set `aria-label` so screen readers can announce the button purpose.
+   * @description Shows a clickable close icon meant for reset/clear actions, typically in a suffix slot.
   */
   @property({ type: Boolean }) clear = false;
 
   /**
    * Add this property to render a clickable Warp search icon.
    *
-   * Be sure to set an `aria-label` that explains the action when using this property.
-   
    * @summary Renders a search icon button.
-   * @description Shows a clickable search icon, typically in a prefix slot for search fields. When enabled, set `aria-label` so that assistive technology announces the action correctly.
+   * @description Shows a clickable search icon, typically in a prefix slot for search fields.
   */
   @property({ type: Boolean }) search = false;
 
