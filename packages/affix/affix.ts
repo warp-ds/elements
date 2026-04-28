@@ -69,6 +69,12 @@ class WarpAffix extends FormControlMixin(LitElement) {
    */
   @property({ reflect: true, useDefault: true }) label = '';
 
+  /**
+   * @summary Icon name rendered as prefix/suffix content.
+   * @description Displays a non-interactive `w-icon` in the affix area using the provided icon name (for example `Search` or `Close`) instead of text.
+   */
+  @property({ reflect: true, useDefault: true }) icon: string | null = null;
+
   static styles = [reset, styles];
 
   /** @internal */
@@ -134,6 +140,17 @@ class WarpAffix extends FormControlMixin(LitElement) {
     `;
   }
 
+  get _icon() {
+    if (this.icon) {
+      return html`
+        <div class="${this._classes}">
+          <w-icon name="${this.icon}" size="small" locale="${detectLocale()}" class="flex"></w-icon>
+        </div>
+      `;
+    }
+    return '';
+  }
+
   /** @internal */
   get _text() {
     return html`
@@ -147,6 +164,9 @@ class WarpAffix extends FormControlMixin(LitElement) {
   get _markup() {
     if (this.label) {
       return this._text;
+    }
+    if (this.icon) {
+      return this._icon;
     }
     if (this.search) {
       return this._searchButton;

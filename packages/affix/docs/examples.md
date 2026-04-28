@@ -77,3 +77,17 @@ Clicking the clear button will reset the textfield
   <w-affix slot="suffix" clear></w-affix>
 </w-textfield>
 ```
+
+### Icons
+
+<style-isolate>
+  <w-textfield label="Award">
+    <w-affix slot="prefix" icon="AwardMedal"></w-affix>
+  </w-textfield>
+</style-isolate>
+
+```html
+<w-textfield label="Award">
+  <w-affix slot="prefix" icon="AwardMedal"></w-affix>
+</w-textfield>
+```

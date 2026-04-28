@@ -32,11 +32,17 @@ Use `clear` to render a clickable clear/reset icon button.
 When the clear attribute is used inside a w-textfield, clicking the clear button will automatically reset the textfield.
 
 ```html
-<w-textfield label="Search">
-  <w-affix slot="prefix" search aria-label="Search"></w-affix>
-</w-textfield>
-
 <w-textfield label="Price">
   <w-affix slot="suffix" label="kr"></w-affix>
+</w-textfield>
+```
+
+### Icons
+
+`w-affix` can also render any icon supported by `w-icon` using the attribute `icon`.
+
+```html
+<w-textfield label="Award">
+  <w-affix slot="prefix" icon="AwardMedal"></w-affix>
 </w-textfield>
 ```

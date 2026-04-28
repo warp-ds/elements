@@ -117,7 +117,7 @@ export const WithPrefix: Story = {
   },
 };
 
-export const WithIconAffixResetTextfield: Story = {
+export const WithClearAffixResetTextfield: Story = {
   args: {
     placeholder: '1 000 000',
     type: 'text',
@@ -131,7 +131,7 @@ export const WithIconAffixResetTextfield: Story = {
   },
 };
 
-export const WithIconAffixForm: Story = {
+export const WithSearchAndClearAffixForm: Story = {
   args: {
     label: 'Price',
     placeholder: '1 000 000',
@@ -145,6 +145,22 @@ export const WithIconAffixForm: Story = {
           <w-affix slot="suffix" clear aria-label="Clear"></w-affix>
         </w-textfield>
       </form>
+    `;
+  },
+};
+
+export const WithIconAffix: Story = {
+  args: {
+    label: 'Price',
+    placeholder: '1 000 000',
+    type: 'text',
+  },
+  render(args) {
+    return html`
+      <w-textfield ${spread(prespread(args))}>
+        <w-affix slot="prefix" icon="AwardMedal" aria-label="Search"></w-affix>
+        <w-affix slot="suffix" icon="Search" aria-label="Clear"></w-affix>
+      </w-textfield>
     `;
   },
 };
