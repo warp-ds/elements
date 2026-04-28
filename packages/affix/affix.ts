@@ -12,7 +12,7 @@ import { reset } from '../styles.js';
 import { styles } from './styles.js';
 import '../icon/icon.js';
 import { detectLocale } from '../i18n.js';
-import { WarpTextField } from '../textfield/textfield.js';
+import type { WarpTextField } from '../textfield/textfield.js';
 
 const prefixSuffixWrapper =
   'absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ';
