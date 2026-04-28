@@ -47,7 +47,7 @@ const normalizeText = (value, fallback = '') => {
     return fallback;
   }
 
-  return String(value);
+  return String(value).replaceAll("|", "\\|");
 };
 
 const readOptionalFile = (path) => {
@@ -87,7 +87,18 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
       table += `| ${normalizeText(item.name, '-')}`;
       table += ` | ${renderType(item.type?.text, typesMap)}`;
       table += ` | \`${normalizeText(item.default, '-')}\``;
-      table += ` | ${normalizeText(item.summary, '-')} |\n`;
+
+      let summary = "";
+      if (item.deprecated && !item.summary) {
+        summary = `**Deprecated**: ${item.deprecated}`;
+      } else if (item.deprecated && item.summary) {
+        summary = `${item.summary}. **Deprecated**: ${item.deprecated}`;
+      } else if (item.summary) {
+        summary = item.summary;
+      } else {
+        summary = "-";
+      }
+      table += ` | ${summary} |\n`;
     }
   });
 
@@ -100,6 +111,9 @@ const buildPropertyDetails = (members = [], typesMap = new Map()) => {
   members.forEach((item) => {
     if (item.kind === 'field' && item.privacy !== 'private') {
       details += `#### ${normalizeText(item.name, '-')}\n\n`;
+      if (item.deprecated) {
+        details += `**Deprecated**: ${item.deprecated}\n\n`;
+      }
       details += `${normalizeText(item.description, '')}\n\n`;
       details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
       details += `- Default: \`${normalizeText(item.default, '-')}\`\n\n`;
