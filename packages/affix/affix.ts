@@ -1,6 +1,7 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -103,7 +104,13 @@ class WarpAffix extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _searchButton() {
-    const label = this.ariaLabel || 'Search';
+    const label =
+      this.ariaLabel ||
+      i18n._({
+        id: 'affix.aria.search',
+        message: 'Search',
+        comment: 'Aria label for the search button in affix',
+      });
     return html`
       <button aria-label="${label}" class="${this._classes}" type="submit" @click="${this.submitContainingForm.bind(this)}">
         <w-icon name="Search" size="small" locale="${detectLocale()}" class="flex"></w-icon>
@@ -113,7 +120,13 @@ class WarpAffix extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _clearButton() {
-    const label = this.ariaLabel || 'Clear input';
+    const label =
+      this.ariaLabel ||
+      i18n._({
+        id: 'affix.aria.clearInput',
+        message: 'Clear input',
+        comment: 'Aria label for the clear input button in affix',
+      });
     return html`
       <button aria-label="${label}" class="${this._classes}" type="reset" @click="${this.resetContainingTextField.bind(this)}">
         <w-icon name="Close" size="small" locale="${detectLocale()}" class="flex"></w-icon>

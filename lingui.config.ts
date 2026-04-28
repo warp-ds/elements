@@ -6,6 +6,10 @@ const config: LinguiConfig = {
   locales: supportedLocales as unknown as string[],
   catalogs: [
     {
+      include: ['packages/affix/'],
+      path: 'packages/affix/locales/{locale}/messages',
+    },
+    {
       include: ['packages/breadcrumbs/'],
       path: 'packages/breadcrumbs/locales/{locale}/messages',
     },
