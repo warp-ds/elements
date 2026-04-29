@@ -386,12 +386,14 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
         this.value = isoDate;
+        this.shadowRoot.querySelector('input').value = this.value;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
       this.value = isoDate;
+      this.shadowRoot.querySelector('input').value = this.value;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
