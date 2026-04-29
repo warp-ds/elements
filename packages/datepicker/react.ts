@@ -14,5 +14,9 @@ export const DatePicker = createComponent({
   events: {
     onChange: 'change',
     onchange: 'change',
+    onBlur: 'blur',
+    onblur: 'blur',
+    onInput: 'input',
+    oninput: 'input',
   },
 });
