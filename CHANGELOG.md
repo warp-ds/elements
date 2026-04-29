@@ -1,3 +1,10 @@
+# [2.9.0-next.6](https://github.com/warp-ds/elements/compare/v2.9.0-next.5...v2.9.0-next.6) (2026-04-29)
+
+
+### Bug Fixes
+
+* **datepicker:** ensure correct input value on date select and improve React event support ([#627](https://github.com/warp-ds/elements/issues/627)) ([16b721d](https://github.com/warp-ds/elements/commit/16b721db008d8e31a9d50bea78a0f6e3d13efdfb))
+
 # [2.9.0-next.5](https://github.com/warp-ds/elements/compare/v2.9.0-next.4...v2.9.0-next.5) (2026-04-28)
 
 
