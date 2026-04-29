@@ -38,11 +38,16 @@ const ccHelpText = {
 };
 
 /**
- * A single line text input element.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-textfield--docs)
+ * A multi-line text input with built-in form validation, auto-resizing, and styling support.
+ * 
+ * The component automatically handles:
+ *  - Form integration
+ *  - Auto-resizing based on content and row constraints
+ *  - Built-in validation with customizable error messages
+ *  - Accessibility attributes and labeling
  */
 class WarpTextarea extends FormControlMixin(LitElement) {
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
