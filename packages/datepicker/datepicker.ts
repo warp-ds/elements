@@ -457,7 +457,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             id="${inputId}"
             type="${inputType}"
             name="${ifDefined(this.name)}"
-            value="${ifDefined(this.value)}"
+            .value="${this.value ?? ''}"
             class="w-datepicker-input"
             @click="${this.#onInputClick}"
             @input="${this.#onInput}"
