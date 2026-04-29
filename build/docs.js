@@ -50,6 +50,16 @@ const normalizeText = (value, fallback = '') => {
   return String(value).replaceAll("|", "\\|");
 };
 
+const getSummary = (item, fallback = '') => {
+  if (item.summary) return item.summary;
+  if (item.description) {
+    return item.description
+      .split("\n")
+      .at(0);
+  }
+  return fallback;
+}
+
 const readOptionalFile = (path) => {
   if (!existsSync(path)) {
     return '';
@@ -82,25 +92,29 @@ const buildTypesMap = (members = []) => {
 const buildPropertyTable = (members = [], typesMap = new Map()) => {
   let table = '| Name | Type | Default | Summary |\n|-|-|-|-|\n';
 
-  members.forEach((item) => {
-    if (item.kind === 'field' && item.privacy !== 'private') {
-      table += `| ${normalizeText(item.name, '-')}`;
-      table += ` | ${renderType(item.type?.text, typesMap)}`;
-      table += ` | \`${normalizeText(item.default, '-')}\``;
+  members
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      if (item.kind === 'field' && item.privacy !== 'private') {
+        table += `| ${normalizeText(item.name, '-')}`;
+        table += ` | ${renderType(item.type?.text, typesMap)}`;
+        table += ` | \`${normalizeText(item.default, '-')}\``;
 
-      let summary = "";
-      if (item.deprecated && !item.summary) {
-        summary = `**Deprecated**: ${item.deprecated}`;
-      } else if (item.deprecated && item.summary) {
-        summary = `${item.summary}. **Deprecated**: ${item.deprecated}`;
-      } else if (item.summary) {
-        summary = item.summary;
-      } else {
-        summary = "-";
+        let summary = getSummary(item);
+        if (item.deprecated && !summary) {
+          summary = `**Deprecated**: ${item.deprecated}`;
+        } else if (item.deprecated && summary) {
+          summary = `${summary}. **Deprecated**: ${item.deprecated}`;
+        } else if (!summary) {
+          summary = "-";
+        }
+        table += ` | ${summary} |\n`;
       }
-      table += ` | ${summary} |\n`;
-    }
-  });
+    });
 
   return table;
 };
@@ -108,17 +122,23 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
 const buildPropertyDetails = (members = [], typesMap = new Map()) => {
   let details = '';
 
-  members.forEach((item) => {
-    if (item.kind === 'field' && item.privacy !== 'private') {
-      details += `#### ${normalizeText(item.name, '-')}\n\n`;
-      if (item.deprecated) {
-        details += `**Deprecated**: ${item.deprecated}\n\n`;
+  members
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      if (item.kind === 'field' && item.privacy !== 'private') {
+        details += `#### ${normalizeText(item.name, '-')}\n\n`;
+        if (item.deprecated) {
+          details += `**Deprecated**: ${item.deprecated}\n\n`;
+        }
+        details += `${normalizeText(item.description, '')}\n\n`;
+        details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
+        details += `- Default: \`${normalizeText(item.default, '-')}\`\n\n`;
       }
-      details += `${normalizeText(item.description, '')}\n\n`;
-      details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
-      details += `- Default: \`${normalizeText(item.default, '-')}\`\n\n`;
-    }
-  });
+    });
 
   return details;
 };
