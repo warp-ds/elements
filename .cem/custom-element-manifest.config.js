@@ -1,5 +1,4 @@
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
-import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
@@ -92,6 +91,5 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
-    jsDocTagsPlugin(),
   ],
 };

@@ -3,7 +3,6 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import {
-  arrowDirectionClassname,
   Directions,
   directions,
   opposites,
@@ -26,6 +25,9 @@ import { styles } from './styles';
 
 import '../icon/icon.js';
 import '../button/button.js';
+
+import type { AttentionState } from '@warp-ds/core/attention';
+import type { TemplateResult } from 'lit';
 
 const buttonTextSizes = {
   medium: 'text-m leading-[24]',
@@ -88,101 +90,123 @@ const ccAttention = {
   notCallout: 'absolute z-50',
 };
 
+const arrowDirectionClassByDirection: Record<Directions, string> = {
+  'top-start': ccAttention.arrowDirectionTopStart,
+  top: ccAttention.arrowDirectionTop,
+  'top-end': ccAttention.arrowDirectionTopEnd,
+  'right-start': ccAttention.arrowDirectionRightStart,
+  right: ccAttention.arrowDirectionRight,
+  'right-end': ccAttention.arrowDirectionRightEnd,
+  'bottom-start': ccAttention.arrowDirectionBottomStart,
+  bottom: ccAttention.arrowDirectionBottom,
+  'bottom-end': ccAttention.arrowDirectionBottomEnd,
+  'left-start': ccAttention.arrowDirectionLeftStart,
+  left: ccAttention.arrowDirectionLeft,
+  'left-end': ccAttention.arrowDirectionLeftEnd,
+};
+
+/**
+ * Attention is a versatile component for displaying contextual information and messages. It can be used for a wide range of purposes, such as tooltips, callouts, popovers, and highlights.
+ *
+ * The component is designed to be anchored to a trigger element, providing contextual information related to that element. It supports various placements and styling options to accommodate different use cases and design needs.
+ *
+ * Note: attention will soon be split into multiple components (tooltip, callout, popover, highlight) at which time this component will be deprecated. For now, use the `tooltip`, `callout`, `popover`, and `highlight` boolean properties to achieve the desired style and behavior.
+ */
 class WarpAttention extends LitElement {
   /**
-   * @summary
-   * @description
+   * Controls whether the attention panel is visible.
+   * Set to `true` to show the attention content and `false` to hide it.
    */
   @property({ type: Boolean, reflect: true })
   show = false;
 
   /**
-   * @summary
-   * @description
+   * Preferred placement relative to the trigger element.
+   * Sets the initial direction for positioning, for example `top`, `right`, `bottom`, or `left` variants.
    */
   @property({ type: String, reflect: false })
   placement: Directions;
 
   /**
-   * @summary
-   * @description
+   * Renders the component with tooltip styling and behavior.
+   * Use for compact, non-modal contextual hints anchored to another element.
    */
   @property({ type: Boolean, reflect: true })
   tooltip = false;
 
   /**
-   * @summary
-   * @description
+   * Renders the component as an inline callout.
+   * Callout mode is used for always-in-flow informational content instead of floating overlay behavior.
    */
   @property({ type: Boolean, reflect: true })
   callout = false;
 
   /**
-   * @summary
-   * @description
+   * Enables native popover behavior for the attention element.
+   * When enabled, the component uses popover semantics and styling suitable for floating surface UI.
    */
   @property({ type: Boolean, reflect: true })
   // @ts-expect-error This was introduced before native HTML popover
   popover: boolean;
 
   /**
-   * @summary
-   * @description
+   * Renders the component with highlight styling.
+   * Use highlight mode to visually emphasize important contextual information.
    */
   @property({ type: Boolean, reflect: true })
   highlight = false;
 
   /**
-   * @summary
-   * @description
+   * Shows a close button inside the attention component.
+   * Adds an internal dismiss action that lets users close the attention panel.
    */
   @property({ attribute: 'can-close', type: Boolean, reflect: true })
   canClose = false;
 
   /**
-   * @summary
-   * @description
+   * Hides the directional arrow of the attention component.
+   * Disable the arrow when the visual connection to the trigger should not be shown.
    */
   @property({ attribute: 'no-arrow', type: Boolean, reflect: true })
   noArrow = false;
 
   /**
-   * @summary
-   * @description
+   * Distance offset between trigger and attention panel.
+   * Defines the main-axis spacing in pixels from the anchor element.
    */
   @property({ type: Number })
   distance: number;
 
   /**
-   * @summary
-   * @description
+   * Cross-axis offset for fine-grained positioning.
+   * Moves the panel along the cross axis in pixels to adjust alignment with the trigger.
    */
   @property({ type: Number })
   skidding: number;
 
   /**
-   * @summary
-   * @description
+   * Enables automatic flipping when placement has no space.
+   * Allows the component to choose an alternative side if the preferred placement would overflow.
    */
   @property({ type: Boolean, reflect: true })
   flip = false;
 
   /**
-   * @summary
-   * @description
+   * Allows overflow checks on the cross axis when flipping.
+   * Use with `flip` to improve collision handling when space is constrained horizontally or vertically.
    */
   @property({ attribute: 'cross-axis', type: Boolean, reflect: true })
   crossAxis = false;
 
   /**
-   * @summary
-   * @description
+   * Ordered list of fallback placements.
+   * Provides explicit alternative placements to try when `flip` is enabled and the preferred placement does not fit.
    */
-  @property({ attribute: 'fallback-placements', type: Array, reflect: true })
-  fallbackPlacements: Directions[];
+  @property({ attribute: 'fallback-placements', type: Array, reflect: true, useDefault: true })
+  fallbackPlacements: Directions[] = [];
 
   /** @internal */
-  attentionState;
+  attentionState: AttentionState | null = null;
 
   // To store the initial placement value for reference when computing the actual direction
   /** @internal */
@@ -276,9 +300,9 @@ class WarpAttention extends LitElement {
 
   handleDone() {
     window.requestAnimationFrame(() => {
-      if (this.show && this._targetEl && this._attentionEl) {
+      if (this.show && this._targetEl && this._attentionEl && this.attentionState) {
         recompute(this.attentionState).then((state) => {
-          this._actualDirection = state?.actualDirection;
+          this._actualDirection = state?.actualDirection as Directions;
         });
       } else {
         this._actualDirection = this._initialPlacement;
@@ -292,13 +316,13 @@ class WarpAttention extends LitElement {
   }
 
   /** @internal */
-  set _actualDirection(v) {
+  set _actualDirection(v: Directions) {
     this.placement = v;
   }
 
   /** @internal */
-  get _arrowEl() {
-    return this.renderRoot.querySelector('#arrow');
+  get _arrowEl(): HTMLElement | null {
+    return this.renderRoot.querySelector<HTMLElement>('#arrow');
   }
 
   /** @internal */
@@ -308,50 +332,45 @@ class WarpAttention extends LitElement {
 
   /** @internal */
   get _arrowClasses() {
+    const directionClass = arrowDirectionClassByDirection[this._arrowDirection];
     return classNames([
       ccAttention.arrowBase,
       this._activeVariantClasses.arrow,
-      ccAttention[`arrowDirection${arrowDirectionClassname(this._arrowDirection)}`],
+      directionClass,
     ]);
   }
 
   /** @internal */
-  get _arrowHtml() {
-    return this.noArrow ? '' : html`<div id="arrow" class="${this._arrowClasses}"></div>`;
+  get _arrowHtml(): TemplateResult | typeof nothing {
+    return this.noArrow ? nothing : html`<div id="arrow" class="${this._arrowClasses}"></div>`;
   }
 
   /** @internal */
-  get _activeVariantClasses() {
-    const variantProps = {
-      callout: this.callout,
-      popover: this.popover,
-      tooltip: this.tooltip,
-      highlight: this.highlight,
-    };
-
-    const activeVariant = Object.keys(variantProps).find((b) => !!variantProps[b]) || '';
-
-    return {
-      wrapper: ccAttention[activeVariant],
-      arrow: ccAttention[`arrow${activeVariant.charAt(0).toUpperCase() + activeVariant.slice(1)}`],
-    };
+  get _activeVariantClasses(): { wrapper: string; arrow: string } {
+    if (this.callout) return { wrapper: ccAttention.callout, arrow: ccAttention.arrowCallout };
+    if (this.popover) return { wrapper: ccAttention.popover, arrow: ccAttention.arrowPopover };
+    if (this.tooltip) return { wrapper: ccAttention.tooltip, arrow: ccAttention.arrowTooltip };
+    if (this.highlight) return { wrapper: ccAttention.highlight, arrow: ccAttention.arrowHighlight };
+    return { wrapper: '', arrow: '' };
   }
 
   /** @internal */
-  get _attentionEl(): HTMLDivElement {
-    return this.renderRoot.querySelector('#attention');
+  get _attentionEl(): HTMLDivElement | null {
+    return this.renderRoot.querySelector<HTMLDivElement>('#attention');
   }
 
   /** @internal */
-  get _targetEl(): Element | null {
-    const targetSlot: HTMLSlotElement = this.renderRoot?.querySelector("slot[name='target']");
-    return targetSlot ? targetSlot.assignedElements()[0] : null;
+  get _targetEl(): HTMLElement | null {
+    const targetSlot: HTMLSlotElement | null = this.renderRoot?.querySelector("slot[name='target']");
+    const target = targetSlot?.assignedElements()[0];
+    return target instanceof HTMLElement ? target : null;
   }
 
   /** @internal */
-  get _messageEl(): Element | null {
-    const messageSlot: HTMLSlotElement = this.renderRoot.querySelector("slot[name='message']");
-    return messageSlot ? messageSlot.assignedElements()[0] : null;
+  get _messageEl(): HTMLElement | null {
+    const messageSlot: HTMLSlotElement | null = this.renderRoot.querySelector("slot[name='message']");
+    const message = messageSlot?.assignedElements()[0];
+    return message instanceof HTMLElement ? message : null;
   }
 
   /** @internal */
@@ -499,7 +518,7 @@ class WarpAttention extends LitElement {
     this._initialPlacement = this.placement;
 
     // Attention of "callout" type should always be used inline
-    if (this.callout) {
+    if (this.callout && this._attentionEl) {
       this._attentionEl.style.position = 'relative';
     }
   }

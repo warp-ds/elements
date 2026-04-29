@@ -134,9 +134,6 @@ importers:
       '@wc-toolkit/cem-validator':
         specifier: ^1.0.3
         version: 1.0.4
-      '@wc-toolkit/jsdoc-tags':
-        specifier: ^1.2.0
-        version: 1.2.0
       '@wc-toolkit/jsx-types':
         specifier: ^1.4.2
         version: 1.5.2(prettier@3.3.2)
@@ -1955,9 +1952,6 @@ packages:
 
   '@wc-toolkit/cem-validator@1.0.4':
     resolution: {integrity: sha512-OSSdDAY64e+okVGOjpX71jPTPJ1dOhX4OP6ZhQWkDY790f46t53p9VwfwouogcejgYzrhG3jBvFBq3iXUPGKyg==}
-
-  '@wc-toolkit/jsdoc-tags@1.2.0':
-    resolution: {integrity: sha512-GEWmv4UVqJXDTxHgR+qwgJdjouXYupIM0mVa62BLeSQQ9++ga9DtmJrbd/w7KAxKgrzUDUJ6TfNkBCqe5hnOCA==}
 
   '@wc-toolkit/jsx-types@1.5.2':
     resolution: {integrity: sha512-nqxhS9dwOx/+4GbAiFs4wdRzcVTDm1QP2DH7IYWlGpmB7gcc4YW/fkNmjbfHxj9Pv/0ym+CJKtw3fFoNlieFPw==}
@@ -6829,8 +6823,6 @@ snapshots:
       unocss: 66.6.8(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(vite@8.0.8(@types/node@24.10.15)(esbuild@0.25.10)(jiti@2.6.1)(terser@5.46.0)(tsx@4.21.0))
 
   '@wc-toolkit/cem-validator@1.0.4': {}
-
-  '@wc-toolkit/jsdoc-tags@1.2.0': {}
 
   '@wc-toolkit/jsx-types@1.5.2(prettier@3.3.2)':
     dependencies:
