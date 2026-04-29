@@ -183,8 +183,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     return startOfMonth(this.navigationDate);
   }
 
-  // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
+  #lastDispatchedValue: string | null = null;
 
   @state()
   get weeks() {
@@ -269,10 +269,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   async #dispatchChangeEvent() {
-    // Let Lit finish rendering the updated value for the input field so
-    // the `event.target.value` is correct.
     await this.updateComplete;
-    this.input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    this.#lastDispatchedValue = this.value;
+    this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   /**
@@ -298,7 +297,22 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   #onInput(e: InputEvent) {
-    this.value = (e.target as HTMLInputElement).value;
+    const newValue = (e.target as HTMLInputElement).value;
+    if (newValue) {
+      this.value = newValue;
+    }
+  }
+
+  #suppressInputChange(e: Event) {
+    e.stopPropagation();
+  }
+
+  #onBlur() {
+    this.value = this.input.value;
+    if (this.value !== this.#lastDispatchedValue) {
+      this.#lastDispatchedValue = this.value;
+      this.dispatchEvent(new Event('change', { bubbles: true }));
+    }
   }
 
   #onInputClick(e: PointerEvent) {
@@ -414,6 +428,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
     super.connectedCallback();
 
     this.#initialValue = this.value;
+    this.#lastDispatchedValue = this.value;
 
     // Local lang attribute takes precedence
     const lang = this.lang;
@@ -461,6 +476,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             class="w-datepicker-input"
             @click="${this.#onInputClick}"
             @input="${this.#onInput}"
+            @change="${this.#suppressInputChange}"
+            @blur="${this.#onBlur}"
             @keydown="${this.#onInputKeyDown}" />
           <w-button
             aria-label="${
