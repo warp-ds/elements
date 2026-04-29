@@ -92,10 +92,6 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
-    jsDocTagsPlugin({
-      tags: {
-        description: {},
-      },
-    }),
+    jsDocTagsPlugin(),
   ],
 };
