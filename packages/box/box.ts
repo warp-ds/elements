@@ -15,36 +15,51 @@ import { styles } from './styles';
  */
 class WarpBox extends LitElement {
   /**
-   * @summary
-   * @description
+   * Extends the box into the horizontal gutter on narrow screens.
+   *
+   * @summary Makes the box bleed to the container edge.
+   *
+   * @description Adds negative horizontal margins and square side corners below the small breakpoint, then restores the normal margins and rounded corners from the small breakpoint and up.
    */
   @property({ type: Boolean, reflect: true })
   bleed = false;
 
   /**
-   * @summary
-   * @description
+   * Adds a border and default background to the box.
+   *
+   * @summary Shows the box as a bordered surface.
+   *
+   * @description Use this when the content needs a clear visual boundary from the surrounding page.
    */
   @property({ type: Boolean, reflect: true })
   bordered = false;
 
   /**
-   * @summary
-   * @description
+   * Applies the subtle information background.
+   *
+   * @summary Shows the box with information styling.
+   *
+   * @description Use this for supporting informational content that should be visually separated from the surrounding page.
    */
   @property({ type: Boolean, reflect: true })
   info = false;
 
   /**
-   * @summary
-   * @description
+   * Applies the neutral sunken surface background.
+   *
+   * @summary Shows the box with neutral styling.
+   *
+   * @description Use this for quiet grouped content that needs a background without strong emphasis.
    */
   @property({ type: Boolean, reflect: true })
   neutral = false;
 
   /**
-   * @summary
-   * @description
+   * Controls the ARIA role on the internal content wrapper.
+   *
+   * @summary ARIA role for the box wrapper.
+   *
+   * @description Defaults to `region` when omitted. Set `role=""` to remove the role for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
    */
   @property({ type: String, reflect: true })
   role: string;
