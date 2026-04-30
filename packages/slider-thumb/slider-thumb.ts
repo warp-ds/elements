@@ -128,12 +128,15 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 
+  /** @internal */
   @query('input[type="range"]')
   range: HTMLInputElement;
-
+  
+  /** @internal */
   @query('.w-slider-thumb__tooltip-target')
   tooltipTarget: HTMLOutputElement;
 
+  /** @internal */
   @query('w-textfield')
   textfield: WarpTextField;
 

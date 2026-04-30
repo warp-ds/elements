@@ -26,7 +26,7 @@ const ccAlert = {
   infoIcon: 's-icon-info',
 };
 
-type AlertVariants = 'negative' | 'positive' | 'warning' | 'info';
+export type AlertVariants = 'negative' | 'positive' | 'warning' | 'info';
 
 const alertVariants = {
   negative: 'negative',
