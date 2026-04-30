@@ -7,21 +7,17 @@ Placeholder text can be used to describe the expected value or formatting for th
 Placeholder text will only appear when the textfield is empty, and must not be used as a
 substitute for labeling the element with a visible label.
 
-<style-isolate>
-    <w-textfield label="Email" placeholder="ola.nordmann@finn.no"></w-textfield>
-</style-isolate>
-
+<elements-example>
+    
 ```html
 <w-textfield label="Email" placeholder="ola.nordmann@finn.no"></w-textfield>
 ```
 
+<&elements-example>
+
 ### Prefix label
 
-<style-isolate>
-  <w-textfield label="Price">
-    <w-affix slot="prefix" label="kr"></w-affix>
-  </w-textfield>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-textfield label="Price">
@@ -29,45 +25,37 @@ substitute for labeling the element with a visible label.
 </w-textfield>
 ```
 
+</elements-example>
+
 ### Suffix Label
 
-<style-isolate>
-  <w-textfield label="Price">
-    <w-affix slot="suffix" label="kr"></w-affix>
-  </w-textfield>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-textfield label="Price">
   <w-affix slot="suffix" label="kr"></w-affix>
 </w-textfield>
 ```
 
+</elements-example>
+
 ### Prefix Search Icon
 
-<style-isolate>
-  <w-textfield label="Search">
-    <w-affix slot="prefix" search></w-affix>
-  </w-textfield>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-textfield label="Search">
   <w-affix slot="prefix" search></w-affix>
 </w-textfield>
 ```
 
+</elements-example>
+
 ### Suffix Search Icon
 
 If you wrap the textfield with affix in a form element, clicking the search button will automatically submit the form
 
-<style-isolate>
-  <form>
-    <w-textfield label="Search">
-      <w-affix slot="suffix" search></w-affix>
-    </w-textfield>
-  </form>
-</style-isolate>
+<elements-example>
 
 ```html
 <form>
@@ -77,15 +65,13 @@ If you wrap the textfield with affix in a form element, clicking the search butt
 </form>
 ```
 
+</elements-example>
+
 ### Suffix Clear Icon
 
 Clicking the clear button will reset the textfield
 
-<style-isolate>
-  <w-textfield label="Search input">
-    <w-affix slot="suffix" clear></w-affix>
-  </w-textfield>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-textfield label="Search input">
@@ -93,19 +79,19 @@ Clicking the clear button will reset the textfield
 </w-textfield>
 ```
 
+</elements-example>
+
 ### Affix with arbitrary icon
 
-<style-isolate>
-  <w-textfield label="Award">
-    <w-affix slot="prefix" icon="AwardMedal"></w-affix>
-  </w-textfield>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-textfield label="Award">
   <w-affix slot="prefix" icon="AwardMedal"></w-affix>
 </w-textfield>
 ```
+
+</elements-example>
 
 ### Disabled
 
@@ -116,13 +102,8 @@ it is disabled because of poor lighting conditions or other reasons.
 
 Please consider more informative alternatives before choosing to use disabled on an element.
 
-<style-isolate>
-    <div class="flex flex-col space-y-32">
-        <w-textfield label="Email" disabled value="ola.nordmann@finn.no"></w-textfield>
-        <w-textfield label="Email" disabled></w-textfield>
-    </div>
-</style-isolate>
-
+<elements-example>
+    
 ```html
 <div class="flex flex-col space-y-32">
   <w-textfield label="Email" disabled value="ola.nordmann@finn.no"></w-textfield>
@@ -130,13 +111,13 @@ Please consider more informative alternatives before choosing to use disabled on
 </div>
 ```
 
+</elements-example>
+
 ### Read only
 
 The readonly boolean attribute makes the w-textfield's text content immutable. Unlike disabled the w-textfield remains focusable and the contents can still be copied. See [MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/readOnly) for more information.
 
-<style-isolate>
-  <w-textfield label="Email" type="email" value="ola.nordmann@finn.no" readonly></w-textfield>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-textfield 
@@ -146,3 +127,5 @@ The readonly boolean attribute makes the w-textfield's text content immutable. U
   readonly
 ></w-textfield>
 ```
+
+</elements-example>
