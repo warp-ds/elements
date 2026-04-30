@@ -309,8 +309,11 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   #onInputKeyDown(e: KeyboardEvent) {
     if (e.key === ' ') return this.#toggleCalendarOpen(e);
-    if (e.key === ',' || e.key === 'Enter') {
+    if (e.key === ',') {
       e.preventDefault();
+    }
+    if (e.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
     }
   }
 

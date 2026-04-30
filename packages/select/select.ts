@@ -341,6 +341,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     ) {
       event.preventDefault();
     }
+    if (event.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+      return;
+    }
   }
 
   get #classes() {
