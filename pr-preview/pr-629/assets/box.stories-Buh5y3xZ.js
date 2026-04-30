@@ -9,38 +9,50 @@ import{n as e,r as t}from"./chunk-BneVvdWh.js";import{m as n,n as r,s as i,t as 
       <div class="${this._class}">
         <slot></slot>
       </div>
-    `}},p([d({type:Boolean,reflect:!0})],w.prototype,`bleed`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`bordered`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`info`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`neutral`,void 0),p([d({type:String,reflect:!0,useDefault:!0})],w.prototype,`role`,void 0),customElements.get(`w-box`)||customElements.define(`w-box`,w)})),E=t({Bleed:()=>F,Bordered:()=>P,Default:()=>j,Info:()=>M,Neutral:()=>N,__namedExportsOrder:()=>I,default:()=>A}),D,O,k,A,j,M,N,P,F,I,L=e((()=>{v(),o(),a(),y(),T(),{events:D,args:O,argTypes:k}=s(`w-box`),A={title:`Layout/Box`,render:e=>i`
+    `}},p([d({type:Boolean,reflect:!0})],w.prototype,`bleed`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`bordered`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`info`,void 0),p([d({type:Boolean,reflect:!0})],w.prototype,`neutral`,void 0),p([d({type:String,reflect:!0,useDefault:!0})],w.prototype,`role`,void 0),customElements.get(`w-box`)||customElements.define(`w-box`,w)})),E=t({AccessibleRegion:()=>I,Bleed:()=>F,Bordered:()=>P,Default:()=>j,Info:()=>M,Neutral:()=>N,__namedExportsOrder:()=>L,default:()=>A}),D,O,k,A,j,M,N,P,F,I,L,R=e((()=>{v(),o(),a(),y(),T(),{events:D,args:O,argTypes:k}=s(`w-box`),A={title:`Layout/Box`,render:e=>i`
       <w-box ${g(_(e))}>
         <h3>Box Content</h3>
         <p>This is content inside a box component.</p>
       </w-box>
-    `,args:O,argTypes:k,parameters:{actions:{handles:D}}},j={args:{bleed:!1,bordered:!1,info:!1,neutral:!1,role:`region`}},M={args:{info:!0,role:`region`}},N={args:{neutral:!0,role:`region`}},P={args:{bordered:!0,role:`region`}},F={args:{bleed:!0,neutral:!0,role:`region`}},j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`{
+    `,args:O,argTypes:k,parameters:{actions:{handles:D}}},j={args:{bleed:!1,bordered:!1,info:!1,neutral:!1}},M={args:{info:!0}},N={args:{neutral:!0}},P={args:{bordered:!0}},F={args:{bleed:!0,neutral:!0}},I={args:{},render:e=>i`
+      <w-box aria-labelledby="box-content">
+        <h3 id="box-content">Box Content</h3>
+        <p>Inspect this box in the accessibility tree to see that it is treated as a region.</p>
+        <p>If aria-labelled by is not used, the box will not be treated as a region.</p>
+      </w-box>
+    `},j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`{
   args: {
     bleed: false,
     bordered: false,
     info: false,
-    neutral: false,
-    role: 'region'
+    neutral: false
   }
 }`,...j.parameters?.docs?.source}}},M.parameters={...M.parameters,docs:{...M.parameters?.docs,source:{originalSource:`{
   args: {
-    info: true,
-    role: 'region'
+    info: true
   }
 }`,...M.parameters?.docs?.source}}},N.parameters={...N.parameters,docs:{...N.parameters?.docs,source:{originalSource:`{
   args: {
-    neutral: true,
-    role: 'region'
+    neutral: true
   }
 }`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
   args: {
-    bordered: true,
-    role: 'region'
+    bordered: true
   }
 }`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
   args: {
     bleed: true,
-    neutral: true,
-    role: 'region'
+    neutral: true
   }
-}`,...F.parameters?.docs?.source}}},I=[`Default`,`Info`,`Neutral`,`Bordered`,`Bleed`]}));L();export{F as Bleed,P as Bordered,j as Default,M as Info,N as Neutral,I as __namedExportsOrder,A as default,L as n,E as t};
+}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
+  args: {},
+  render: args => {
+    return html\`
+      <w-box aria-labelledby="box-content">
+        <h3 id="box-content">Box Content</h3>
+        <p>Inspect this box in the accessibility tree to see that it is treated as a region.</p>
+        <p>If aria-labelled by is not used, the box will not be treated as a region.</p>
+      </w-box>
+    \`;
+  }
+}`,...I.parameters?.docs?.source}}},L=[`Default`,`Info`,`Neutral`,`Bordered`,`Bleed`,`AccessibleRegion`]}));R();export{I as AccessibleRegion,F as Bleed,P as Bordered,j as Default,M as Info,N as Neutral,L as __namedExportsOrder,A as default,R as n,E as t};
