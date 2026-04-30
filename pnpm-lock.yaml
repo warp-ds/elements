@@ -137,9 +137,6 @@ importers:
       '@wc-toolkit/jsx-types':
         specifier: ^1.4.2
         version: 1.5.2(prettier@3.8.3)
-      '@wc-toolkit/module-path-resolver':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@wc-toolkit/storybook-helpers':
         specifier: ^10.0.0
         version: 10.3.0(lit@3.3.2)(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))
@@ -2109,9 +2106,6 @@ packages:
 
   '@wc-toolkit/jsx-types@1.5.2':
     resolution: {integrity: sha512-nqxhS9dwOx/+4GbAiFs4wdRzcVTDm1QP2DH7IYWlGpmB7gcc4YW/fkNmjbfHxj9Pv/0ym+CJKtw3fFoNlieFPw==}
-
-  '@wc-toolkit/module-path-resolver@1.0.0':
-    resolution: {integrity: sha512-J8wFceraqTGiJTX+od+e3UkSk2zeklwcaNOwxCHfkzpPMV4TC7332jc9TNA2GNt5eDTy4pNUr3egXtM3HFpu0g==}
 
   '@wc-toolkit/storybook-helpers@10.3.0':
     resolution: {integrity: sha512-eMZfFVRFcgZREgt37/yQpHOEV7Vdoi2//akT65cdat0jk9yT4f2/AL8696BnRDkJvr3wup6irZSawarg+8bpXg==}
@@ -7035,8 +7029,6 @@ snapshots:
       '@prettier/sync': 0.6.1(prettier@3.8.3)
     transitivePeerDependencies:
       - prettier
-
-  '@wc-toolkit/module-path-resolver@1.0.0': {}
 
   '@wc-toolkit/storybook-helpers@10.3.0(lit@3.3.2)(storybook@10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.3)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))':
     dependencies:
