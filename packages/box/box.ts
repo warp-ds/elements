@@ -59,10 +59,10 @@ class WarpBox extends LitElement {
    *
    * @summary ARIA role for the box wrapper.
    *
-   * @description Defaults to `region` when omitted. Set `role=""` to remove the role for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
+   * @description Defaults to not set when omitted but due to the box using a section element, it will behave as if it had a role of `region`. Set `role="none"` to override this behaviour for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
    */
-  @property({ type: String, reflect: true })
-  role: string;
+  @property({ type: String, reflect: true, useDefault: true })
+  role: string | null = null;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
@@ -92,16 +92,11 @@ class WarpBox extends LitElement {
     ]);
   }
 
-  /** @internal */
-  get _optOutRoleWithDefault() {
-    return this.role === '' ? nothing : (this.role ?? 'region');
-  }
-
   render() {
     return html`
-      <div role="${this._optOutRoleWithDefault}" class="${this._class}">
+      <section role="${this.role ?? nothing}" class="${this._class}">
         <slot></slot>
-      </div>
+      </section>
     `;
   }
 }

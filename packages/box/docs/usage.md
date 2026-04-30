@@ -2,13 +2,13 @@
 
 Box is a layout component for visually separating a section of content from the surrounding page.
 
-Use `w-box` for grouped content that needs padding, a background, or a border. The component does not add heading structure, spacing between children, or interactive behavior.
+Use `w-box` for grouped content that needs padding, a background, or a border. The component does not add heading structure, spacing between children, or interactive behavior. Those you must provide yourself.
 
 ### Basic Box
 
 ```html
-<w-box role="">
-  <h2>Delivery</h2>
+<w-box aria-labelledby="delivery-heading">
+  <h2 id="deliver-heading">Delivery</h2>
   <p>Choose how you want the item delivered.</p>
 </w-box>
 ```
@@ -22,15 +22,15 @@ Use one visual treatment at a time:
 - `bordered`: a bordered surface with the default background
 
 ```html
-<w-box neutral role="">
+<w-box neutral role="none">
   <p>Neutral content area</p>
 </w-box>
 
-<w-box info role="">
+<w-box info role="none">
   <p>Informational content area</p>
 </w-box>
 
-<w-box bordered role="">
+<w-box bordered role="none">
   <p>Bordered content area</p>
 </w-box>
 ```
@@ -40,23 +40,9 @@ Use one visual treatment at a time:
 Use `bleed` when a box sits inside a page gutter but should extend to the container edge on narrow screens. `bleed` is commonly combined with a visual treatment such as `neutral` or `info`.
 
 ```html
-<w-box neutral bleed role="">
-  <h2>Summary</h2>
+<w-box neutral bleed aria-labelledby="summary-heading">
+  <h2 id="summary-heading">Summary</h2>
   <p>This box extends into the horizontal gutter on narrow screens.</p>
 </w-box>
 ```
 
-### Role
-
-The box content wrapper uses `role="region"` by default. For most visual grouping, set `role=""` to remove the default role.
-
-If the box represents a named section of the page, prefer a native landmark around the box and opt out of the box role.
-
-```html
-<section aria-labelledby="delivery-heading">
-  <w-box role="">
-    <h2 id="delivery-heading">Delivery</h2>
-    <p>Choose how you want the item delivered.</p>
-  </w-box>
-</section>
-```

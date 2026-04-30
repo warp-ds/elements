@@ -1,30 +1,28 @@
 ## Accessibility
 
-Box wraps its slotted content in an internal container with `role="region"` by default.
+Box wraps its slotted content in a section tag by default which is equivalant to role="region" for the purposes of screen readers.
 
-### Use Region Only For Meaningful Sections
+### Landmark Behaviour For Meaningful Sections
 
-`region` is a landmark role. Use it only when the box represents a section of the page that users may want to navigate to directly.
+By default, w-box behaves as a landmark for screen readers. This means it represents a section of the page that users may want to navigate to directly.
 
-For purely visual grouping, remove the default role:
+For purely visual grouping, set role none:
 
 ```html
-<w-box role="">
+<w-box role="none">
   <p>This box is only a visual container.</p>
 </w-box>
 ```
 
-### Prefer Native Landmarks For Named Sections
+### Landmarks For Named Sections
 
-If the section needs a heading and an accessible landmark name, use a native landmark element around the box and opt out of the box role.
+If a box is not purely visual, it needs a heading and an accessible landmark name for screen readers to treat it as a landmark.
 
 ```html
-<section aria-labelledby="delivery-heading">
-  <w-box role="">
+  <w-box aria-labelledby="delivery-heading">
     <h2 id="delivery-heading">Delivery</h2>
     <p>Choose how you want the item delivered.</p>
   </w-box>
-</section>
 ```
 
 ### Do Not Rely On Visual Treatment Alone
