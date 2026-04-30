@@ -1,3 +1,10 @@
+## [2.9.1-next.2](https://github.com/warp-ds/elements/compare/v2.9.1-next.1...v2.9.1-next.2) (2026-04-30)
+
+
+### Bug Fixes
+
+* submit the associated form on Enter like native form elements ([#630](https://github.com/warp-ds/elements/issues/630)) ([e0fdb79](https://github.com/warp-ds/elements/commit/e0fdb79d5881a2e98621332b3b0037af76fec1f8))
+
 ## [2.9.1-next.1](https://github.com/warp-ds/elements/compare/v2.9.0...v2.9.1-next.1) (2026-04-30)
 
 
