@@ -1,8 +1,9 @@
 // @warp-css;
 
 import { classNames } from '@chbphone55/classnames';
-import { css, html, LitElement, nothing } from 'lit';
+import { css, html, LitElement, nothing, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
+import { FormControlMixin } from '@open-wc/form-control';
 
 import { reset } from '../styles';
 
@@ -13,7 +14,7 @@ import { styles } from './styles';
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
  */
-class WarpBox extends LitElement {
+class WarpBox extends FormControlMixin(LitElement) {
   /**
    * Makes the box bleed to the container edge.
    * Extends the box into the horizontal gutter on narrow screens. Adds negative horizontal margins and square side corners below the small breakpoint, then restores the normal margins and rounded corners from the small breakpoint and up.
@@ -44,10 +45,10 @@ class WarpBox extends LitElement {
 
   /**
    * ARIA role for the box wrapper.
-   * Defaults to not set when omitted but due to the box using a section element, it will behave as if it had a role of `region`. Set `role="none"` to override this behaviour for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
+   * Defaults to a role of `region`. Set `role="none"` to override this behaviour for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
    */
   @property({ type: String, reflect: true, useDefault: true })
-  role: string | null = null;
+  role = 'region';
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
@@ -66,6 +67,18 @@ class WarpBox extends LitElement {
     `,
   ];
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.internals.role = this.role;
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    super.updated(_changedProperties);
+    if (_changedProperties.has('role')) {
+      this.internals.role = this.role;
+    }
+  }
+
   /** @internal */
   get _class() {
     return classNames([
@@ -79,9 +92,9 @@ class WarpBox extends LitElement {
 
   render() {
     return html`
-      <section role="${this.role ?? nothing}" class="${this._class}">
+      <div class="${this._class}">
         <slot></slot>
-      </section>
+      </div>
     `;
   }
 }
