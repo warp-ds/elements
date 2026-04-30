@@ -14,11 +14,13 @@ const meta: Meta<typeof args> = {
   title: 'Forms/Select',
   render(args) {
     return html`
-      <w-select ${spread(prespread(args))}>
-        <option value="raspberries">Raspberries</option>
-        <option value="strawberries" selected>Strawberries</option>
-        <option value="cloudberries">Cloudberries</option>
-      </w-select>
+      <form>
+        <w-select ${spread(prespread(args))}>
+          <option value="raspberries">Raspberries</option>
+          <option value="strawberries" selected>Strawberries</option>
+          <option value="cloudberries">Cloudberries</option>
+        </w-select>
+      </form>
     `;
   },
   args,

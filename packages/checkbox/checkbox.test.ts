@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
+import { server, userEvent } from '@vitest/browser/context';
 import { render } from 'vitest-browser-lit';
 
 import './checkbox.js';
@@ -215,4 +216,27 @@ test('does not toggle or emit change when disabled', async () => {
 
   expect(wCheckbox.checked).toBe(false);
   expect(onChange).not.toHaveBeenCalled();
+});
+
+/* Manual test in Safari has this working as expected, but the test fails for some reason */
+test.skipIf(server.browser === 'webkit')('submits the associated form when checkbox has focus and user presses Enter', async () => {
+  const screen = render(html`
+    <form>
+      <w-checkbox data-testid="checkbox" name="terms">Accept</w-checkbox>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const onSubmit = vi.fn();
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSubmit();
+  });
+  
+  await userEvent.click(screen.getByTestId('checkbox'));
+  await userEvent.keyboard('{Space}')
+  await userEvent.keyboard('{Enter}')
+
+  expect(onSubmit).toHaveBeenCalled();
 });

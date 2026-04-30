@@ -353,6 +353,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
+    if (e.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+      return;
+    }
+
+    if (!this.openEnded) return;
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
 
     const currentValue = Number(this.range.value);
@@ -374,15 +380,19 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
-    // Handle the case where an open ended slider that has
-    // no current value (Min or Max) and the user presses
-    // the up or down arrow in the input field.
-    
+    if (e.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+      return;
+    }
+        
     if (this.textfield.value) {
       // If the field has a value let the native browser behavior do its thing
       return;
     }
 
+    // Handle the case where an open ended slider that has
+    // no current value (Min or Max) and the user presses
+    // the up or down arrow in the input field.
     e.preventDefault();
 
     let value = "";
@@ -645,7 +655,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           @focus="${this.#showTooltip}"
           @blur="${this.#hideTooltip}"
           @input="${this.#onInput}"
-          @keydown="${this.openEnded ? this.#onRangeSliderKeyDown : nothing}"
+          @keydown="${this.#onRangeSliderKeyDown}"
         />
 
         ${

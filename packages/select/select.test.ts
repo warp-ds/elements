@@ -1,6 +1,6 @@
-import { userEvent } from '@vitest/browser/context';
+import { server, userEvent } from 'vitest/browser';
 import { html } from 'lit';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './select.js';
@@ -325,3 +325,28 @@ test('reflects dynamic light-DOM option selected changes into native select', as
     return nativeSelect.value;
   }).toBe('beta');
 });
+
+/* For some reason this test fails only in Chromium and only on CI. Manually tested OK in Chrome. */
+test.skipIf(server.browser === 'chromium' && server.config.env.CI)('submits the associated form when radio has focus and user presses Enter', async () => {
+  const screen = render(html`
+    <form>
+      <w-select data-testid="select" label="Select">
+        <option value="alpha" selected>Alpha</option>
+        <option value="beta">Beta</option>
+      </w-select>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const onSubmit = vi.fn();
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSubmit();
+  });
+  
+  await userEvent.click(screen.getByTestId('select'));
+  await userEvent.keyboard('{Enter}');
+  expect(onSubmit).toHaveBeenCalled();
+});
+

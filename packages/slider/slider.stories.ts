@@ -33,9 +33,12 @@ type Story = StoryObj;
 export const Single: Story = {
   render() {
     return html`
-      <w-slider label="Single" min="0" max="100">
-        <w-slider-thumb name="value"></w-slider-thumb>
-      </w-slider>
+      <form>
+        <w-slider label="Single" min="0" max="100">
+          <w-slider-thumb name="value"></w-slider-thumb>
+        </w-slider>
+        <input type="submit" hidden> 
+      </form>
     `;
   },
 };

@@ -177,6 +177,12 @@ export class WRadio extends FormControlMixin(LitElement) {
     }
 
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
+
+    if (event.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+      return;
+    }
+
     event.preventDefault();
     this.click();
   };
