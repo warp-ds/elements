@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { setupHydrationWarningCapture, testHydration } from '../../tests/react-hydration';
 
 import '../radio/radio.js';
@@ -29,7 +29,11 @@ describe('w-radio-group React SSR hydration', () => {
   });
 
   test('with help-text hydrates without warnings', async () => {
-    const warnings = await testHydration('w-radio-group', { label: 'Options', name: 'options', 'help-text': 'Select one' });
+    const warnings = await testHydration('w-radio-group', {
+      label: 'Options',
+      name: 'options',
+      'help-text': 'Select one',
+    });
     expect(warnings).toEqual([]);
   });
 

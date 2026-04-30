@@ -322,7 +322,13 @@ test('disabled group prevents selection and disables child radios', async () => 
     updateComplete: Promise<unknown>;
   };
   const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
-    HTMLElement & { checked: boolean; disabled: boolean; updateComplete: Promise<unknown>; click: () => void; tabIndex: number }
+    HTMLElement & {
+      checked: boolean;
+      disabled: boolean;
+      updateComplete: Promise<unknown>;
+      click: () => void;
+      tabIndex: number;
+    }
   >;
 
   await group.updateComplete;

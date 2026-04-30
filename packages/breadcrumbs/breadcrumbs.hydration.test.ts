@@ -1,4 +1,4 @@
-import { describe, expect, test, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import { setupHydrationWarningCapture, testHydration, testHydrationWithChildren } from '../../tests/react-hydration';
 
 import './breadcrumbs.js';
@@ -45,7 +45,8 @@ describe('w-breadcrumbs React SSR hydration', () => {
 
   test.fails('with links and span (current page) hydrates without warnings', async () => {
     // Common pattern: links for navigation, span for current page
-    const childrenHtml = '<a href="#/home">Home</a><a href="#/category">Category</a><span aria-current="page">Current page</span>';
+    const childrenHtml =
+      '<a href="#/home">Home</a><a href="#/category">Category</a><span aria-current="page">Current page</span>';
     const warnings = await testHydrationWithChildren('w-breadcrumbs', {}, childrenHtml);
     expect(warnings).toEqual([]);
   });
@@ -66,7 +67,11 @@ describe('w-breadcrumbs React SSR hydration', () => {
 
   test.fails('with aria-label and children hydrates without warnings', async () => {
     const childrenHtml = '<a href="#/home">Home</a><a href="#/category">Category</a>';
-    const warnings = await testHydrationWithChildren('w-breadcrumbs', { 'aria-label': 'Breadcrumb navigation' }, childrenHtml);
+    const warnings = await testHydrationWithChildren(
+      'w-breadcrumbs',
+      { 'aria-label': 'Breadcrumb navigation' },
+      childrenHtml,
+    );
     expect(warnings).toEqual([]);
   });
 });
@@ -153,7 +158,8 @@ describe('w-breadcrumbs child element DOM stability', () => {
 
   test.fails('should preserve original child element attributes in light DOM', async () => {
     const container = document.createElement('div');
-    container.innerHTML = '<w-breadcrumbs><a href="#/home" data-test="home">Home</a><span aria-current="page">Current</span></w-breadcrumbs>';
+    container.innerHTML =
+      '<w-breadcrumbs><a href="#/home" data-test="home">Home</a><span aria-current="page">Current</span></w-breadcrumbs>';
     document.body.appendChild(container);
 
     await new Promise((resolve) => setTimeout(resolve, 100));

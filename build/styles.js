@@ -7,11 +7,10 @@
 import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
-
-import { createGenerator } from 'unocss';
 import { presetWarp } from '@warp-ds/uno';
 import esbuild from 'esbuild';
 import * as lightning from 'lightningcss';
+import { createGenerator } from 'unocss';
 
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
 

@@ -79,10 +79,7 @@ function htmlToReactElements(html: string): React.ReactNode[] {
  * Tests that a component hydrates without warnings.
  * Takes tag name and props, generates both SSR HTML and React element from them.
  */
-export async function testHydration(
-  tagName: string,
-  props: Record<string, unknown> = {},
-): Promise<string[]> {
+export async function testHydration(tagName: string, props: Record<string, unknown> = {}): Promise<string[]> {
   const container = document.createElement('div');
   container.id = 'hydration-test-root';
   document.body.appendChild(container);

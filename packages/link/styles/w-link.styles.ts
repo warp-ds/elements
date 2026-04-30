@@ -1,4 +1,4 @@
-import { css } from "lit";
+import { css } from 'lit';
 
 export const styles = css`
   /* If not a link variant this should look like a button */

@@ -55,7 +55,9 @@ describe('w-combobox accessibility (WCAG 2.2)', () => {
     });
 
     test('open on focus state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`);
+      const page = render(
+        html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`,
+      );
       await expect(page).toHaveNoAxeViolations();
     });
   });
