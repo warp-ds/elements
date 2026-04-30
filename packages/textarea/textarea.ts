@@ -38,59 +38,119 @@ const ccHelpText = {
 };
 
 /**
- * A single line text input element.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-textfield--docs)
+ * A multi-line text input with built-in form validation, auto-resizing, and styling support.
+ * 
+ * The component automatically handles:
+ *  - Form integration
+ *  - Auto-resizing based on content and row constraints
+ *  - Built-in validation with customizable error messages
+ *  - Accessibility attributes and labeling
  */
 class WarpTextarea extends FormControlMixin(LitElement) {
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
+  /**
+   * Keep in mind that using disabled in its current form is an anti-pattern.
+   * 
+   * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+   * 
+   * Please consider more informative alternatives before choosing to use disabled on an element.
+   * 
+   * @summary Makes the element not focusable and hides it from form submits
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * Mark the form field as invalid.
+   * 
+   * Make sure to also set a `help-text` to help users fix the validation problem.
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
+  /**
+   * Either a `label` or an `aria-label` must be provided.
+   */
   @property({ type: String, reflect: true })
   label: string;
 
+  /**
+   * Use in combination with `invalid` to show as a validation error message,
+   * or on its own to show a help text.
+   * 
+   * @summary Description shown below the input field
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
+  /**
+   * Sets the maximum number of text rows before the content starts scrolling.
+   */
   @property({ type: Number, reflect: true, attribute: 'maximum-rows' })
   maxRows: number;
 
+  /**
+   * Sets the minimum number of text rows the textarea should display
+   */
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
   minRows: number;
 
+  /**
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
+   */
   @property({ type: String, reflect: true })
   name: string;
 
+  /**
+   * Set a text that is shown in the textarea when it doesn't have a value.
+   * 
+   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+   * 
+   * @summary Shown in the textarea when it doesn't have a value
+   */
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`. */
+  /** 
+   * @deprecated Use the native `readonly` attribute instead
+   */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly = false;
 
+  /**
+   * Whether the input can be selected but not changed by the user
+   */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
+  /**
+   * Whether user input is required on the input before form submission
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  /**
+   * Lets you set the current value
+   */
   @property({ type: String, reflect: true })
   value: string;
 
+  /**
+   * Show an icon behind the label indicating the field is optional
+   */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
+  /** @internal */
   @state()
   minHeight = Number.NEGATIVE_INFINITY;
 
+  /** @internal */
   @state()
   maxHeight = Number.POSITIVE_INFINITY;
 

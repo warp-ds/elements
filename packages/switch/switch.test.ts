@@ -67,13 +67,11 @@ test('mouse click toggles switch once', async () => {
   const button = wSwitch.shadowRoot.querySelector('button') as HTMLButtonElement;
 
   expect(wSwitch.checked).toBe(false);
-  expect(wSwitch.getAttribute('aria-checked')).toBe('false');
 
   button.click();
   await wSwitch.updateComplete;
 
   expect(wSwitch.checked).toBe(true);
-  expect(wSwitch.getAttribute('aria-checked')).toBe('true');
 });
 
 test('native label click toggles switch', async () => {
@@ -94,15 +92,12 @@ test('native label click toggles switch', async () => {
 
   await wSwitch.updateComplete;
   expect(wSwitch.checked).toBe(false);
-  expect(wSwitch.getAttribute('aria-checked')).toBe('false');
 
   label.click();
   await wSwitch.updateComplete;
   expect(wSwitch.checked).toBe(true);
-  expect(wSwitch.getAttribute('aria-checked')).toBe('true');
 
   label.click();
   await wSwitch.updateComplete;
   expect(wSwitch.checked).toBe(false);
-  expect(wSwitch.getAttribute('aria-checked')).toBe('false');
 });

@@ -58,37 +58,81 @@ const ccExpandable = {
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
  */
 class WarpExpandable extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   expanded = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String })
   title: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   box = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   bleed = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'button-class', type: String })
   buttonClass: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'content-class', type: String })
   contentClass: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'no-chevron', type: Boolean })
   noChevron = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean })
   animated = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ attribute: 'heading-level', type: Number })
   headingLevel: number;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, state: true })
   /** @internal */
   _hasTitle = true;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, state: true })
   /** @internal */
   _showChevronUp = false;

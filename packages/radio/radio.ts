@@ -10,8 +10,14 @@ import { styles as radioStyles } from './radio-styles';
 export class WRadio extends FormControlMixin(LitElement) {
   static styles = [hostStyles, reset, radioStyles];
 
+  // Use delegatesFocus so focus delegates to the internal wrapper element
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   /** The name of the radio, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name = '';
+  @property({ reflect: true }) name!: string;
 
   /** The radio's value. When selected, the radio group will receive this value. */
   @property({ reflect: true }) value: string | null = null;
@@ -28,6 +34,30 @@ export class WRadio extends FormControlMixin(LitElement) {
   /** Draws the radio in an invalid state. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /**
+   * Internal tabindex managed by parent radio-group.
+   * Non-reflecting to avoid DOM changes during hydration.
+   * @internal
+   */
+  @property({ attribute: false })
+  _groupTabIndex: number | undefined;
+
+  /**
+   * Override tabIndex getter to return the computed internal tabIndex.
+   * This allows external code to check if the radio is focusable.
+   */
+  override get tabIndex(): number {
+    return this._internalTabIndex;
+  }
+
+  /**
+   * Override tabIndex setter to set _groupTabIndex (for backwards compatibility).
+   * Radio-group should use _groupTabIndex directly for clarity.
+   */
+  override set tabIndex(value: number) {
+    this._groupTabIndex = value;
+  }
+
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
 
@@ -36,9 +66,6 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   // Track whether the user has interacted with the radio.
   #hasInteracted = false;
-
-  // Track whether tabindex was set automatically.
-  #autoTabIndex = false;
 
   constructor() {
     super();
@@ -49,24 +76,22 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    // kept for compat with old shared styling approach
-    this.setAttribute('type', 'radio');
     this.value = this.getAttribute('value') ?? 'on';
     this.#defaultChecked = this.hasAttribute('checked');
     this.checked = this.#defaultChecked;
-    this.setAttribute('role', 'radio');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this.internals.role = 'radio';
     this.syncAriaDisabled();
-    this.syncTabIndex();
     this.syncFormValue();
     this.updateValidity();
   }
 
   private syncAriaDisabled() {
-    this.setAttribute('aria-disabled', this.disabled ? 'true' : 'false');
+    this.internals.ariaDisabled = this.disabled ? 'true' : 'false';
   }
 
   private syncAriaChecked() {
-    this.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.internals.ariaChecked = this.checked ? 'true' : 'false';
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
@@ -80,22 +105,23 @@ export class WRadio extends FormControlMixin(LitElement) {
     super.updated(changedProperties);
 
     if (changedProperties.has('checked')) {
-      this[this.checked ? 'setAttribute' : 'removeAttribute']('checked-ui', '');
       this.syncAriaChecked();
+      // Uncheck other radios immediately (functional behavior)
       if (this.checked && !this.isInGroup()) {
         this.uncheckOtherRadios();
+        this.syncStandaloneTabOrder();
       }
-      this.syncTabIndex();
     }
 
     if (changedProperties.has('disabled')) {
-      this[this.disabled ? 'setAttribute' : 'removeAttribute']('disabled-ui', '');
       this.syncAriaDisabled();
-      this.syncTabIndex();
+      if (!this.isInGroup()) {
+        this.syncStandaloneTabOrder();
+      }
     }
 
     if (changedProperties.has('invalid')) {
-      this.toggleAttribute('aria-invalid', this.invalid);
+      this.internals.ariaInvalid = this.invalid ? 'true' : null;
     }
 
     if (changedProperties.has('name')) {
@@ -210,17 +236,34 @@ export class WRadio extends FormControlMixin(LitElement) {
     const activeRadio = checkedRadio ?? enabledRadios[0] ?? null;
 
     radios.forEach((radio) => {
-      if (radio.disabled) {
-        radio.tabIndex = -1;
-        return;
-      }
-
-      const hasTabIndexAttr = radio.hasAttribute('tabindex');
-      if (hasTabIndexAttr && !radio.#autoTabIndex) return;
-
-      radio.tabIndex = radio === activeRadio ? 0 : -1;
-      radio.#autoTabIndex = true;
+      radio._standaloneTabIndex = radio === activeRadio ? 0 : -1;
     });
+  }
+
+  /**
+   * Computed tabindex for the internal focusable element.
+   * Priority: group-managed > standalone-managed > default
+   */
+  private get _internalTabIndex(): number {
+    if (this.disabled) return -1;
+    if (this._groupTabIndex !== undefined) return this._groupTabIndex;
+    if (this._standaloneTabIndex !== undefined) return this._standaloneTabIndex;
+    // Default: first radio in standalone group is focusable
+    return 0;
+  }
+
+  /**
+   * Internal tabindex for standalone radios (not in a group).
+   * Non-reflecting to avoid DOM changes during hydration.
+   */
+  @property({ attribute: false })
+  _standaloneTabIndex: number | undefined;
+
+  protected firstUpdated(): void {
+    // Initialize standalone tab order if not in a group
+    if (!this.isInGroup()) {
+      this.syncStandaloneTabOrder();
+    }
   }
 
   private uncheckOtherRadios(): void {
@@ -276,27 +319,6 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.setValue(this.checked ? this.value : null);
   }
 
-  private syncTabIndex(): void {
-    if (!this.hasAttribute('tabindex') && !this.#autoTabIndex) {
-      this.#autoTabIndex = true;
-      // Default to tabbable; group roving tabindex logic may override this later.
-      this.tabIndex = 0;
-    }
-
-    if (this.isInGroup()) {
-      if (this.disabled) {
-        this.tabIndex = -1;
-      }
-      return;
-    }
-
-    // Standalone radios manage their own tabindex. Grouped radios are managed by the parent radio-group.
-    const hasTabIndexAttr = this.hasAttribute('tabindex');
-    if (hasTabIndexAttr && !this.#autoTabIndex) return;
-
-    this.syncStandaloneTabOrder();
-  }
-
   private shouldSyncFormState(changedProperties: PropertyValues<this>): boolean {
     return (
       changedProperties.has('checked') ||
@@ -309,7 +331,7 @@ export class WRadio extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div class="wrapper">
+      <div class="wrapper" tabindex="${this._internalTabIndex}">
         <div part="control" class="control"></div>
         <slot part="label" class="label"></slot>
       </div>

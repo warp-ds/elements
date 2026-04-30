@@ -1,4 +1,5 @@
 /// <reference types="@vitest/browser/matchers" />
+import { playwright } from "@vitest/browser-playwright";
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
@@ -8,6 +9,8 @@ export default defineConfig({
   },
   plugins: [react()],
   test: {
+    include: ['packages/**/*.test.ts', 'packages/**/*.test.tsx'],
+    silent: false,
     expect: {
       poll: {
         timeout: 200,
@@ -20,7 +23,7 @@ export default defineConfig({
     },
     setupFiles: ['./setup-tests.ts'],
     browser: {
-      provider: 'playwright',
+      provider: playwright(),
       enabled: true,
       headless: true,
       instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }],
@@ -29,8 +32,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['@oddbird/css-anchor-positioning/fn'],
-    esbuildOptions: {
-      target: 'esnext',
-    },
   },
 });

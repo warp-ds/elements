@@ -8,7 +8,7 @@ import './datepicker.js';
 import { DatePicker } from './react.js';
 
 test('renders the date picker component', async () => {
-  const page = render(
+  const page = await render(
     <form>
       <DatePicker label="From date" />
     </form>,
@@ -18,7 +18,7 @@ test('renders the date picker component', async () => {
 });
 
 test('can pick a date using a pointer', async () => {
-  const page = render(
+  const page = await render(
     <form data-testid="flight">
       <DatePicker label="From date" name="from" />
     </form>,
@@ -37,7 +37,7 @@ test('can pick a date using a pointer', async () => {
 });
 
 test.skipIf(server.browser === 'firefox')('can pick a date using keyboard', async () => {
-  const page = render(
+  const page = await render(
     <form data-testid="flight">
       <DatePicker label="From date" name="from" />
     </form>,
@@ -67,7 +67,7 @@ test.skipIf(server.browser === 'firefox')('can pick a date using keyboard', asyn
 });
 
 test('can pick a date by typing in the input field', async () => {
-  const page = render(
+  const page = await render(
     <form data-testid="flight">
       <DatePicker label="From date" name="from" />
     </form>,
@@ -104,7 +104,7 @@ test('allows for the controlled component pattern', async () => {
       </form>
     );
   };
-  const page = render(<TestComponent />);
+  const page = await render(<TestComponent />);
 
   await page.getByRole('button').click({ force: true });
   await page.getByRole('gridcell').nth(15).click();

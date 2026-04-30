@@ -62,10 +62,10 @@ export class WarpToast extends LitElement {
   ];
 
   @property({ type: String, attribute: true, reflect: true })
-  id: string = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+  id: string;
 
   @property({ type: String, attribute: true, reflect: true })
-  type: ToastType = 'success';
+  type: ToastType;
 
   @property({ type: String, attribute: true, reflect: true })
   text = '';
@@ -79,6 +79,10 @@ export class WarpToast extends LitElement {
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+    // Generate unique ID in constructor to avoid hydration mismatch from reflected property default
+    if (!this.id) {
+      this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+    }
   }
 
   connectedCallback() {
@@ -94,20 +98,22 @@ export class WarpToast extends LitElement {
   }
 
   get #primaryClasses() {
+    const type = this.type || 'success';
     return classNames([
       ccToast.base,
-      this.type === 'success' && ccToast.positive,
-      this.type === 'warning' && ccToast.warning,
-      this.type === 'error' && ccToast.negative,
+      type === 'success' && ccToast.positive,
+      type === 'warning' && ccToast.warning,
+      type === 'error' && ccToast.negative,
     ]);
   }
 
   get #iconClasses() {
+    const type = this.type || 'success';
     return classNames([
       ccToast.iconBase,
-      this.type === 'success' && ccToast.iconPositive,
-      this.type === 'warning' && ccToast.iconWarning,
-      this.type === 'error' && ccToast.iconNegative,
+      type === 'success' && ccToast.iconPositive,
+      type === 'warning' && ccToast.iconWarning,
+      type === 'error' && ccToast.iconNegative,
     ]);
   }
 
@@ -118,12 +124,12 @@ export class WarpToast extends LitElement {
 
   /** @internal */
   get _warning() {
-    return this.type === 'warning';
+    return (this.type || 'success') === 'warning';
   }
 
   /** @internal */
   get _error() {
-    return this.type === 'error';
+    return (this.type || 'success') === 'error';
   }
 
   /** @internal */

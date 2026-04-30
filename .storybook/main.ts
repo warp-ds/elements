@@ -12,6 +12,7 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
   core: {
     builder: '@storybook/builder-vite',
+    disableTelemetry: true,
   },
   viteFinal(config, { configType }) {
     return mergeConfig(config, {
@@ -31,11 +32,6 @@ const config: StorybookConfig = {
             safelist: classes,
           }),
       ],
-      optimizeDeps: {
-        esbuildOptions: {
-          target: 'esnext',
-        },
-      },
     });
   },
 };

@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { activateI18n } from '../i18n';
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -20,6 +20,12 @@ const REQUIRED_MESSAGE = () =>
   });
 
 export class WCheckboxGroup extends FormControlMixin(LitElement) {
+  // Use delegatesFocus so focus delegates to an internal focusable element
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+
   /** The group label displayed above the checkboxes. */
   @property({ type: String, reflect: true })
   label: string;
@@ -49,8 +55,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   // Track whether we've warned about missing name in a form.
   #hasWarnedMissingName = false;
 
-  // Track whether we set tabindex automatically for invalid focusability.
-  #autoTabIndex = false;
+  // Internal tabindex for the focusable wrapper element (reactive)
+  @state()
+  private _internalTabIndex = -1;
 
   #unsubscribeI18n?: () => void;
 
@@ -104,7 +111,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const ariaInvalid = isInvalid ? 'true' : undefined;
 
     return html`
-      <div class="wrapper">
+      <div class="wrapper" tabindex="${this._internalTabIndex}">
         ${this.label
           ? html`
               <div class="label" id="${labelId}">
@@ -211,17 +218,19 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   #applyGroupName(): void {
     if (!this.name) return;
     for (const el of this.#getAssignedElements()) {
-      const checkbox = el as { name?: string };
+      // Use non-reflecting _groupName to avoid DOM changes during hydration
+      const checkbox = el as { _groupName?: string; name?: string };
       if (checkbox && typeof checkbox === 'object' && !checkbox.name) {
-        checkbox.name = this.name;
+        checkbox._groupName = this.name;
       }
     }
   }
 
   #syncChildInvalid(isInvalid: boolean): void {
     for (const el of this.#getAssignedElements()) {
-      if ('invalid' in el) {
-        (el as { invalid: boolean }).invalid = isInvalid;
+      // Use non-reflecting _groupInvalid to avoid DOM changes during hydration
+      if ('_groupInvalid' in el) {
+        (el as { _groupInvalid: boolean })._groupInvalid = isInvalid;
       }
     }
   }
@@ -265,20 +274,9 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     this.internals.setValidity(state, ' ', anchor ?? undefined);
   }
 
-  #syncHostTabIndex(shouldBeFocusable: boolean): void {
-    const hasTabIndexAttr = this.hasAttribute('tabindex');
-    if (hasTabIndexAttr && !this.#autoTabIndex) return;
-
-    if (shouldBeFocusable) {
-      this.tabIndex = 0;
-      this.#autoTabIndex = true;
-      return;
-    }
-
-    if (this.#autoTabIndex) {
-      this.removeAttribute('tabindex');
-      this.#autoTabIndex = false;
-    }
+  #syncInternalTabIndex(shouldBeFocusable: boolean): void {
+    // Use internal tabindex to avoid DOM changes on host during hydration
+    this._internalTabIndex = shouldBeFocusable ? 0 : -1;
   }
 
   #updateValidity(): void {
@@ -289,7 +287,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     const showRequiredError = requiredInvalid && this.#hasInteracted;
     const showInvalidUi = externalInvalid || showRequiredError;
 
-    this.#syncHostTabIndex(showInvalidUi);
+    this.#syncInternalTabIndex(showInvalidUi);
 
     if (requiredInvalid) {
       this.#setValidityState({ valueMissing: true });

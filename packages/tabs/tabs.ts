@@ -51,6 +51,10 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
 export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   active: string;
 
@@ -194,33 +198,28 @@ export class WarpTabs extends LitElement {
   }
 
   private updatePanels() {
-    // Update tab active states
+    // Update tab active states using non-reflecting properties to avoid hydration mismatch
     const tabs: WarpTab[] = Array.from(this.querySelectorAll('w-tab'));
     tabs.forEach((tab, index) => {
       if (!tab.id) {
         tab.id = `w-tab-${this._uniqueId}-${index}`;
       }
-      if (tab.for === this._activeTabFor) {
-        tab.ariaSelected = "true";
-        tab.tabIndex = 0;
-      } else {
-        tab.ariaSelected = "false";
-        tab.tabIndex = -1;
-      }
+      const isActive = tab.for === this._activeTabFor;
+      // Use non-reflecting properties to avoid DOM changes during hydration
+      tab._parentAriaSelected = isActive ? 'true' : 'false';
+      tab._parentTabIndex = isActive ? 0 : -1;
     });
 
-    // Update tab panels visibility
+    // Update tab panels visibility using non-reflecting properties to avoid hydration mismatch
     const panels: WarpTabPanel[] = Array.from(this.querySelectorAll('w-tab-panel'));
     panels.forEach((panel) => {
-      if (!panel.hasAttribute("aria-labelledby")) {
-        const controller = tabs.find((tab) => tab.for === panel.id);
-        if (controller) panel.setAttribute("aria-labelledby", controller.id);
+      const controller = tabs.find((tab) => tab.for === panel.id);
+      if (controller) {
+        // Use non-reflecting property to avoid DOM changes during hydration
+        panel._parentAriaLabelledBy = controller.id;
       }
-      if (panel.id === this._activeTabFor) {
-        panel.hidden = false;
-      } else {
-        panel.hidden = true;
-      }
+      // Use non-reflecting property to control visibility
+      panel._parentActive = panel.id === this._activeTabFor;
     });
   }
 
@@ -268,13 +267,8 @@ export class WarpTabs extends LitElement {
         this.updatePanels();
         this._notifyTabChange();
 
-        // Focus the next tab
-        const el = nextTab;
-        el.tabIndex = 0; // All tabs are initially -1
-        el.focus();
-        tabs.forEach((t) => {
-          t.tabIndex = t === el ? 0 : -1;
-        });
+        // Focus the next tab (updatePanels already set the tabIndex)
+        nextTab.focus();
       }
     }
   };

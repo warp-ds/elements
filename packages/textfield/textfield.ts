@@ -39,74 +39,161 @@ const ccHelpText = {
 };
 
 /**
- * A single line text input element.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-textfield--docs)
+ * A single-line input component used for entering and editing textual or numeric data.
+ * 
+ * @slot suffix - Use with `<w-affix>` to include a suffix, for example the unit for a number (e. g. km or sek).
+ * @slot prefix - Use with `<w-affix>` to include a prefix, for example a search icon.
  */
 class WarpTextField extends FormControlMixin(LitElement) {
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
+  /**
+   * Keep in mind that using disabled in its current form is an anti-pattern.
+   * 
+   * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+   * 
+   * Please consider more informative alternatives before choosing to use disabled on an element.
+   * 
+   * @summary Makes the element not focusable and hides it from form submits
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /**
+   * Mark the form field as invalid. Make sure to also set a `help-text` to help users fix the validation problem.
+   * 
+   * @summary Mark the form field as invalid.
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  @property({ type: String, reflect: true })
-  id: string;
-
+  /**
+   * Either a `label` or an `aria-label` must be provided.
+   */
   @property({ type: String, reflect: true })
   label: string;
 
+  /**
+   * Use in combination with `invalid` to show as a validation error message,
+   * or on its own to show a help text.
+   * 
+   * @summary Description shown below the input field
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
+  /**
+   * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
+   */
   @property({ type: String, reflect: true })
   size: string;
 
+  /**
+   * Use with `type="number"` to set the [maximum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength).
+   */
   @property({ type: Number, reflect: true })
   max: number;
 
+  /**
+   * Use with `type="number"` to set the [minimum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength).
+   */
   @property({ type: Number, reflect: true })
   min: number;
 
+  /**
+   * @deprecated Use the native `minlength` attribute
+   */
   @property({ type: Number, reflect: true, attribute: 'min-length' })
   minLength: number;
-
+  
+  /**
+   * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [minimum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength) required.
+   */
+  @property({ type: Number, reflect: true })
+  minlength: number;
+  
+  /**
+   * @deprecated Use the native `maxlength` attribute
+   */
   @property({ type: Number, reflect: true, attribute: 'max-length' })
   maxLength: number;
 
+  /**
+   * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [maximum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength) allowed.
+   */
+  @property({ type: Number, reflect: true })
+  maxlength: number;
+
+  /**
+   * Sets a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that the input's value must [match to pass validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#pattern)
+   */
   @property({ type: String, reflect: true })
   pattern: string;
 
+  /**
+   * Set a text that is shown in the textfield when it doesn't have a value.
+   * 
+   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+   * 
+   * @summary Shown in the textfield when it doesn't have a value
+   */
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead. */
+  /** 
+   * @deprecated Use the native readonly attribute instead.
+   */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly = false;
 
+  /**
+   * Whether the input can be selected but not changed by the user.
+   */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
+  /**
+   * Whether user input is required on the input before form submission.
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  /**
+   * The [type of input](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types).
+   */
   @property({ type: String, reflect: true })
-  type = 'text';
+  type: string;
 
+  /**
+   * Lets you set the current value.
+   */
   @property({ type: String, reflect: true })
   value: string;
 
+  /**
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form.
+   */
   @property({ type: String, reflect: true })
   name: string;
 
+  /**
+   * When used with `number` this attribute forces inputs to be a whole number of `step`.
+   * 
+   * For example with a `step="5"` only values that divide evenly on 5 are allowed.
+   * Using arrow up and down in the input field increments and decrements by 5.
+   * 
+   * @summary Forces `number` inputs to be a whole number of `step`
+   */
   @property({ type: Number, reflect: true })
   step: number;
 
+  /**
+   * A space-separated string that hints to browsers [what type of content it can suggest](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#value) to autofill.
+   */
   @property({ type: String, reflect: true })
   autocomplete?: string;
 
@@ -114,11 +201,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * Function to format value when the input field.
    *
    * Only active when the input field does not have focus,
-   * similar to the accessible input masking example from Filament Group
+   * similar to the accessible input [masking example from Filament Group](https://filamentgroup.github.io/politespace/demo/demo.html).
    *
-   * https://css-tricks.com/input-masking/
-   * https://filamentgroup.github.io/politespace/demo/demo.html
-   */
+   * @summary Function to format value when the input field
+   * @link https://css-tricks.com/input-masking/
+  */
   @property({ attribute: false })
   formatter: (value: string) => string;
 
@@ -246,12 +333,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
             class="${this._inputstyles}"
-            type="${this.type}"
+            type="${this.type || 'text'}"
             min="${ifDefined(this.min)}"
             max="${ifDefined(this.max)}"
             size="${ifDefined(this.size)}"
-            minlength="${ifDefined(this.minLength)}"
-            maxlength="${ifDefined(this.maxLength)}"
+            minlength="${ifDefined(this.minLength || this.minlength)}"
+            maxlength="${ifDefined(this.maxLength || this.maxlength)}"
             name="${ifDefined(this.name)}"
             pattern="${ifDefined(this.pattern)}"
             placeholder="${ifDefined(this.placeholder)}"

@@ -1,3 +1,101 @@
+# [2.9.0-next.6](https://github.com/warp-ds/elements/compare/v2.9.0-next.5...v2.9.0-next.6) (2026-04-29)
+
+
+### Bug Fixes
+
+* **datepicker:** ensure correct input value on date select and improve React event support ([#627](https://github.com/warp-ds/elements/issues/627)) ([16b721d](https://github.com/warp-ds/elements/commit/16b721db008d8e31a9d50bea78a0f6e3d13efdfb))
+
+# [2.9.0-next.5](https://github.com/warp-ds/elements/compare/v2.9.0-next.4...v2.9.0-next.5) (2026-04-28)
+
+
+### Features
+
+* **affix:** add icon attribute, automatic aria labels for search and clear, textfield reset and form submit ([#619](https://github.com/warp-ds/elements/issues/619)) ([f131fdc](https://github.com/warp-ds/elements/commit/f131fdcca4e51930bcf7c9a01576412fbef176ae))
+
+# [2.9.0-next.4](https://github.com/warp-ds/elements/compare/v2.9.0-next.3...v2.9.0-next.4) (2026-04-27)
+
+
+### Bug Fixes
+
+* handle edge case for open-ended sliders and arrow keys ([#611](https://github.com/warp-ds/elements/issues/611)) ([fa3f22f](https://github.com/warp-ds/elements/commit/fa3f22f64435461bfde346a163b408f46d10b8ef)), closes [#524](https://github.com/warp-ds/elements/issues/524)
+* move style attribute inside shadow root ([#612](https://github.com/warp-ds/elements/issues/612)) ([bd04c48](https://github.com/warp-ds/elements/commit/bd04c48ca5e149ef9485a52c5a0b802f12f74e88)), closes [#587](https://github.com/warp-ds/elements/issues/587) [#592](https://github.com/warp-ds/elements/issues/592)
+
+# [2.9.0-next.3](https://github.com/warp-ds/elements/compare/v2.9.0-next.2...v2.9.0-next.3) (2026-04-27)
+
+
+### Features
+
+* **icon:** read from html lang attribute when locale attribute is not set ([#610](https://github.com/warp-ds/elements/issues/610)) ([0e04f39](https://github.com/warp-ds/elements/commit/0e04f39820ca5db8c723388f3ab6c940095bc482))
+
+# [2.9.0-next.2](https://github.com/warp-ds/elements/compare/v2.9.0-next.1...v2.9.0-next.2) (2026-04-23)
+
+
+### Bug Fixes
+
+* **attention:** a11y improvements ([#609](https://github.com/warp-ds/elements/issues/609)) ([5cddb80](https://github.com/warp-ds/elements/commit/5cddb803c4a9a9d4e708c238337d229a97cd2ba4))
+
+# [2.9.0-next.1](https://github.com/warp-ds/elements/compare/v2.8.2-next.6...v2.9.0-next.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* use correct initial value and update active track on reset ([#586](https://github.com/warp-ds/elements/issues/586)) ([ed47ef0](https://github.com/warp-ds/elements/commit/ed47ef044a2cf0811f7fff13dc2533d61671eb0b))
+
+
+### Features
+
+* update w-button to parity with warp-ds/components implementation ([b67d470](https://github.com/warp-ds/elements/commit/b67d470634c473a20776f04fc1112e0403960c36)), closes [#537](https://github.com/warp-ds/elements/issues/537) [#541](https://github.com/warp-ds/elements/issues/541)
+
+## [2.8.2-next.6](https://github.com/warp-ds/elements/compare/v2.8.2-next.5...v2.8.2-next.6) (2026-04-08)
+
+
+### Bug Fixes
+
+* **combobox:** hydration error fixes ([#577](https://github.com/warp-ds/elements/issues/577)) ([86afe4a](https://github.com/warp-ds/elements/commit/86afe4aa3ab05707ee686f34db66e67648e98549))
+
+## [2.8.2-next.5](https://github.com/warp-ds/elements/compare/v2.8.2-next.4...v2.8.2-next.5) (2026-04-08)
+
+
+### Bug Fixes
+
+* **modal:** prevent early closure during open ([#576](https://github.com/warp-ds/elements/issues/576)) ([a190dc9](https://github.com/warp-ds/elements/commit/a190dc93b27b2698437fe59c33fa7a3c371dadd9))
+
+## [2.8.2-next.4](https://github.com/warp-ds/elements/compare/v2.8.2-next.3...v2.8.2-next.4) (2026-04-07)
+
+
+### Bug Fixes
+
+* update language files ([#575](https://github.com/warp-ds/elements/issues/575)) ([81eee91](https://github.com/warp-ds/elements/commit/81eee910590b366a88911ffa2749f73b888a670e))
+
+## [2.8.2-next.3](https://github.com/warp-ds/elements/compare/v2.8.2-next.2...v2.8.2-next.3) (2026-04-07)
+
+
+### Bug Fixes
+
+* refactor components to avoid React hydration mismatch errors ([#574](https://github.com/warp-ds/elements/issues/574)) ([960d89f](https://github.com/warp-ds/elements/commit/960d89f8b19d514cf3ada304680c551be7d984b7))
+
+## [2.8.2-next.2](https://github.com/warp-ds/elements/compare/v2.8.2-next.1...v2.8.2-next.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* prevent hydration mismatch errors by using element internals ([#567](https://github.com/warp-ds/elements/issues/567)) ([ecf4ead](https://github.com/warp-ds/elements/commit/ecf4ead7f534ebceaca3de6ddbdd8c4715fecfb7))
+* prevent hydration mismatches in React caused by client side DOM changes ([#571](https://github.com/warp-ds/elements/issues/571)) ([4e03272](https://github.com/warp-ds/elements/commit/4e0327278fb3967acf9a0dec6d2aba916592765e))
+* **select:** preserve framework-set value in firstUpdated ([#568](https://github.com/warp-ds/elements/issues/568)) ([4d090f8](https://github.com/warp-ds/elements/commit/4d090f8324f9ac5d40774c3084b4e382ee584afb)), closes [#syncFromNativeSelect](https://github.com/warp-ds/elements/issues/syncFromNativeSelect)
+* **textfield:** trim whitespace for type="email" inputs ([#569](https://github.com/warp-ds/elements/issues/569)) ([bda47d6](https://github.com/warp-ds/elements/commit/bda47d6207012d8f9f0d9bbf4713acbeb1926707))
+
+
+### Reverts
+
+* **textfield:** remove redundant .trim() for email inputs ([#570](https://github.com/warp-ds/elements/issues/570)) ([7a2ba8f](https://github.com/warp-ds/elements/commit/7a2ba8f87d46bc88fb343828f96b285edd2e7ff0))
+
+## [2.8.2-next.1](https://github.com/warp-ds/elements/compare/v2.8.1...v2.8.2-next.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* **select:** add bubbles and composed to change CustomEvent ([#562](https://github.com/warp-ds/elements/issues/562)) ([3a533ce](https://github.com/warp-ds/elements/commit/3a533ce8f8e6c1e010e72d54c87a3fc3d8ab8100))
+
 ## [2.8.1](https://github.com/warp-ds/elements/compare/v2.8.0...v2.8.1) (2026-03-06)
 
 

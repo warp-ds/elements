@@ -107,6 +107,8 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
       >;
 
       await radios[0].updateComplete;
+      // Wait for radio-group to set tabIndex (async via slotchange)
+      await expect.poll(() => radios[0].tabIndex).toBe(0);
       radios[0].focus();
       await expect.poll(() => document.activeElement).toBe(radios[0]);
 
@@ -129,10 +131,12 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
       `);
 
       const radios = Array.from(document.querySelectorAll('w-radio')) as Array<
-        HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; focus: () => void }
+        HTMLElement & { checked: boolean; updateComplete: Promise<unknown>; focus: () => void; tabIndex: number }
       >;
 
       await radios[0].updateComplete;
+      // Wait for radio-group to set tabIndex (async via slotchange)
+      await expect.poll(() => radios[0].tabIndex).toBe(0);
       radios[0].focus();
       await expect.poll(() => document.activeElement).toBe(radios[0]);
 

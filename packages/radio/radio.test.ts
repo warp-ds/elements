@@ -30,6 +30,7 @@ test('does not check when disabled', async () => {
 
   const radio = document.querySelector('w-radio') as HTMLElement & {
     checked: boolean;
+    disabled: boolean;
     updateComplete: Promise<unknown>;
     click: () => void;
     tabIndex: number;
@@ -37,7 +38,7 @@ test('does not check when disabled', async () => {
 
   await radio.updateComplete;
   expect(radio.checked).toBe(false);
-  expect(radio.getAttribute('aria-disabled')).toBe('true');
+  expect(radio.disabled).toBe(true);
   expect(radio.tabIndex).toBe(-1);
 
   radio.click();
@@ -45,7 +46,7 @@ test('does not check when disabled', async () => {
   expect(radio.checked).toBe(false);
 });
 
-test('updates aria-checked and tabIndex when checked', async () => {
+test('updates checked state and tabIndex when checked', async () => {
   render(html`<w-radio value="alpha">Alpha</w-radio>`);
 
   const radio = document.querySelector('w-radio') as HTMLElement & {
@@ -55,13 +56,14 @@ test('updates aria-checked and tabIndex when checked', async () => {
   };
 
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-checked')).toBe('false');
+  expect(radio.checked).toBe(false);
 
   radio.checked = true;
   await radio.updateComplete;
 
-  expect(radio.getAttribute('aria-checked')).toBe('true');
-  expect(radio.tabIndex).toBe(0);
+  expect(radio.checked).toBe(true);
+  // tabIndex is set after RAF for hydration compatibility
+  await expect.poll(() => radio.tabIndex).toBe(0);
 });
 
 test('checked state uses selected border color', async () => {
@@ -133,22 +135,23 @@ test('reflects disabled state changes and updates tabIndex', async () => {
   };
 
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('false');
-  expect(radio.tabIndex).toBe(0);
+  expect(radio.disabled).toBe(false);
+  // tabIndex is set after RAF for hydration compatibility
+  await expect.poll(() => radio.tabIndex).toBe(0);
 
   radio.checked = true;
   await radio.updateComplete;
-  expect(radio.tabIndex).toBe(0);
+  await expect.poll(() => radio.tabIndex).toBe(0);
 
   radio.disabled = true;
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('true');
-  expect(radio.tabIndex).toBe(-1);
+  expect(radio.disabled).toBe(true);
+  await expect.poll(() => radio.tabIndex).toBe(-1);
 
   radio.disabled = false;
   await radio.updateComplete;
-  expect(radio.getAttribute('aria-disabled')).toBe('false');
-  expect(radio.tabIndex).toBe(0);
+  expect(radio.disabled).toBe(false);
+  await expect.poll(() => radio.tabIndex).toBe(0);
 });
 
 test('focuses the host element', async () => {
@@ -157,9 +160,12 @@ test('focuses the host element', async () => {
   const radio = document.querySelector('w-radio') as HTMLElement & {
     updateComplete: Promise<unknown>;
     focus: () => void;
+    tabIndex: number;
   };
 
   await radio.updateComplete;
+  // Wait for tabindex to be set (delayed for hydration compatibility)
+  await expect.poll(() => radio.tabIndex).toBe(0);
   radio.focus();
   await expect.poll(() => document.activeElement).toBe(radio);
 });
@@ -233,16 +239,17 @@ test('standalone radios with same name use roving tab order', async () => {
   >;
 
   await Promise.all(radios.map((radio) => radio.updateComplete));
-  expect(radios[0].tabIndex).toBe(0);
+  // tabIndex is set after RAF to avoid hydration mismatch, so poll for it
+  await expect.poll(() => radios[0].tabIndex).toBe(0);
   expect(radios[1].tabIndex).toBe(-1);
   expect(radios[2].tabIndex).toBe(-1);
 
   radios[2].click();
   await Promise.all(radios.map((radio) => radio.updateComplete));
 
+  await expect.poll(() => radios[2].tabIndex).toBe(0);
   expect(radios[0].tabIndex).toBe(-1);
   expect(radios[1].tabIndex).toBe(-1);
-  expect(radios[2].tabIndex).toBe(0);
 });
 
 test('arrow keys move selection between standalone radios with same name', async () => {
@@ -257,6 +264,8 @@ test('arrow keys move selection between standalone radios with same name', async
   >;
 
   await Promise.all(radios.map((radio) => radio.updateComplete));
+  // Wait for initial tabIndex to be set (delayed for hydration compatibility)
+  await expect.poll(() => radios[0].tabIndex).toBe(0);
 
   radios[0].focus();
   radios[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
@@ -264,7 +273,7 @@ test('arrow keys move selection between standalone radios with same name', async
 
   expect(radios[0].checked).toBe(false);
   expect(radios[1].checked).toBe(true);
-  expect(radios[1].tabIndex).toBe(0);
+  await expect.poll(() => radios[1].tabIndex).toBe(0);
   await expect.poll(() => document.activeElement).toBe(radios[1]);
 });
 

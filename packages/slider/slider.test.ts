@@ -80,6 +80,105 @@ test('can set slider value via the number input', async () => {
   expect(formData.get('value')).toBe('50');
 });
 
+test('can increment and decrement the slider values with arrow keys in the number input', async () => {
+  const component = html`
+    <form data-testid="form">
+      <w-slider
+        label="Model year"
+        min="1950"
+        max="2025"
+        open-ended
+      >
+        <w-slider-thumb
+          slot="from"
+          aria-label="From year"
+          name="from-year"
+        ></w-slider-thumb>
+        <w-slider-thumb
+          slot="to"
+          aria-label="To year"
+          name="to-year"
+        ></w-slider-thumb>
+      </w-slider>
+    </form>
+  `;
+
+  const page = render(component);
+
+  await userEvent.type(page.getByRole('spinbutton').first(), '{ArrowUp}');
+
+  // Go from Min "beyond" 1950 to 1950
+  await expect.element(page.getByRole('spinbutton').first()).toHaveValue(1950);
+  await expect.element(page.getByLabelText('From year').first()).toHaveValue('1950'); // keeps value in sync between inputs
+  
+  await userEvent.type(page.getByRole('spinbutton').last(), '{ArrowDown}');
+
+  // Go from Max "beyond" 2025 to 2025
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2025);
+  await expect.element(page.getByLabelText('To year').first()).toHaveValue('2025'); // keeps value in sync between inputs
+
+  const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
+  expect(formData.get('from-year')).toBe('1950');
+  expect(formData.get('to-year')).toBe('2025');
+});
+
+test('going down from Min and up from Max sets value to min - 1 and max + a respectively', async () => {
+  const component = html`
+    <form data-testid="form">
+      <w-slider
+        label="Model year"
+        min="1950"
+        max="2025"
+        open-ended
+      >
+        <w-slider-thumb
+          slot="from"
+          aria-label="From year"
+          name="from-year"
+        ></w-slider-thumb>
+        <w-slider-thumb
+          slot="to"
+          aria-label="To year"
+          name="to-year"
+        ></w-slider-thumb>
+      </w-slider>
+    </form>
+  `;
+
+  const page = render(component);
+
+  await userEvent.type(page.getByRole('spinbutton').first(), '{ArrowDown}');
+
+  await expect.element(page.getByRole('spinbutton').first()).toHaveValue(1949);
+  await expect.element(page.getByLabelText('From year').first()).toHaveValue('1949'); // keeps value in sync between inputs
+  
+  await userEvent.type(page.getByRole('spinbutton').last(), '{ArrowUp}');
+
+  await expect.element(page.getByRole('spinbutton').last()).toHaveValue(2026);
+  await expect.element(page.getByLabelText('To year').first()).toHaveValue('2026'); // keeps value in sync between inputs
+
+  const formData = new FormData(page.getByTestId('form').element() as HTMLFormElement);
+  expect(formData.get('from-year')).toBe('1949');
+  expect(formData.get('to-year')).toBe('2026');
+});
+
+test('slider without suffix syncs empty suffix to thumb', async () => {
+  render(html`
+    <w-slider label="Single" min="0" max="100">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `);
+
+  const slider = document.querySelector('w-slider') as WarpSlider & { updateComplete: Promise<unknown>; suffix?: string };
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & { updateComplete: Promise<unknown>; suffix?: string };
+
+  await slider.updateComplete;
+  await thumb.updateComplete;
+
+  expect(slider.suffix).toBeUndefined();
+  expect(thumb.suffix).toBe('');
+});
+
 test('deleting from number input works as expected', async () => {
   const component = html`
     <form data-testid="form">
@@ -540,4 +639,59 @@ test('required slider passes required state to thumb', async () => {
 
   // Verify the slider has required attribute in HTML
   expect(slider.hasAttribute('required')).toBe(true);
+});
+
+// Hydration mismatch prevention tests
+test('aria-label is not set as host attribute (to avoid hydration mismatch)', async () => {
+  const component = html`
+    <w-slider label="Slider label" min="0" max="100">
+      <w-slider-thumb name="value"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  await slider.updateComplete;
+
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
+  await thumb.updateComplete;
+
+  // aria-label should NOT be a host attribute (to avoid hydration mismatch)
+  expect(thumb.hasAttribute('aria-label')).toBe(false);
+
+  // But the property should be set by the parent
+  expect(thumb.ariaLabel).toBe('Slider label');
+
+  // And the internal input should have the aria-label
+  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  expect(rangeInput.getAttribute('aria-label')).toBe('Slider label');
+});
+
+test('aria-description is not set as host attribute (to avoid hydration mismatch)', async () => {
+  const component = html`
+    <w-slider label="Range" min="0" max="100">
+      <w-slider-thumb slot="from" name="from"></w-slider-thumb>
+      <w-slider-thumb slot="to" name="to"></w-slider-thumb>
+    </w-slider>
+  `;
+
+  render(component);
+
+  const slider = document.querySelector('w-slider') as WarpSlider;
+  await slider.updateComplete;
+
+  const fromThumb = document.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
+  const toThumb = document.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
+
+  await fromThumb.updateComplete;
+  await toThumb.updateComplete;
+
+  // aria-description should NOT be a host attribute (to avoid hydration mismatch)
+  expect(fromThumb.hasAttribute('aria-description')).toBe(false);
+  expect(toThumb.hasAttribute('aria-description')).toBe(false);
+
+  // But the properties should be set
+  expect(fromThumb.ariaDescription).toBeTruthy();
+  expect(toThumb.ariaDescription).toBeTruthy();
 });

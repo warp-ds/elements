@@ -36,15 +36,40 @@ const ccSwitch = {
 };
 
 export class WarpSwitch extends FormControlMixin(LitElement) {
-  @property({ type: String, reflect: true })
-  name = '';
+  // Use delegatesFocus so focus is delegated to the button inside shadow DOM
+  // This avoids needing tabindex on the host element (prevents hydration mismatch)
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
+  // String properties without defaults to avoid reflecting empty attributes
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: String, reflect: true })
-  value = '';
+  name!: string;
 
+  /**
+   * @summary
+   * @description
+   */
+  @property({ type: String, reflect: true })
+  value!: string;
+
+  // Boolean properties can have defaults - Lit doesn't reflect false values
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   checked = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
@@ -59,19 +84,13 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
         display: inline-block;
       }
 
-      :host(:focus),
-      :host(:focus-visible) {
+      button:focus {
         outline: none;
       }
 
-      :host(:focus) button,
-      :host(:focus-visible) button {
+      button:focus-visible {
         outline: 2px solid var(--w-s-color-border-focus);
         outline-offset: var(--w-outline-offset, 1px);
-      }
-
-      :host(:focus:not(:focus-visible)) button {
-        outline: none;
       }
     `,
   ];
@@ -146,19 +165,23 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   /** @internal */
   _syncA11yState() {
-    this.setAttribute('aria-checked', String(this.checked));
-    this.tabIndex = this.disabled ? -1 : 0;
-    if (this.disabled) {
-      this.setAttribute('aria-disabled', 'true');
-      return;
-    }
-    this.removeAttribute('aria-disabled');
+    // Use ElementInternals for ARIA state - works with real AT,
+    // avoids hydration mismatches from client-side attribute changes
+    this.internals.ariaChecked = this.checked ? 'true' : 'false';
+    this.internals.ariaDisabled = this.disabled ? 'true' : null;
   }
 
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
-    this.setAttribute('role', 'switch');
+    // Use ElementInternals for role - works with real AT,
+    // avoids hydration mismatches from client-side attribute changes
+    this.internals.role = 'switch';
+    // Sync aria-label to internals (keep attribute for hydration compatibility)
+    const ariaLabel = this.getAttribute('aria-label');
+    if (ariaLabel) {
+      this.internals.ariaLabel = ariaLabel;
+    }
     if (!this.disabled) {
       this.setValue(this.checked && this.value ? this.value : null);
     }
@@ -195,7 +218,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
         <button
           type="button"
           role="none"
-          tabindex="-1"
+          tabindex=${this.disabled ? -1 : 0}
           class=${this._baseClasses}
           ?disabled=${this.disabled}
           @click=${this._handleClick}

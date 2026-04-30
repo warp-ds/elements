@@ -19,9 +19,17 @@ const ccSteps = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/components-steps--docs)
  */
 export class WarpStepIndicator extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   horizontal = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   right = false;
 

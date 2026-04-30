@@ -1,11 +1,11 @@
 import 'vitest-browser-lit';
-import type { AxeResults, Result } from 'axe-core';
+import type { AxeResults, Result, RunOptions } from 'axe-core';
 import axe from 'axe-core';
 import { expect } from 'vitest';
 import type { RenderResult } from 'vitest-browser-lit';
 
 interface AxeMatchers {
-  toHaveNoAxeViolations(): Promise<void>;
+  toHaveNoAxeViolations(options?: RunOptions): Promise<void>;
 }
 
 declare module 'vitest' {
@@ -32,12 +32,13 @@ function formatViolations(violations: Result[]): string {
     .join('\n\n');
 }
 
-async function runAxe(container: Element = document.body): Promise<AxeResults> {
+async function runAxe(container: Element = document.body, options: RunOptions = {}): Promise<AxeResults> {
   return axe.run(container, {
     runOnly: {
       type: 'tag',
       values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'],
     },
+    ...options,
   });
 }
 
@@ -77,9 +78,9 @@ function toHaveNoViolations(results: AxeResults) {
 }
 
 expect.extend({
-  async toHaveNoAxeViolations(received: unknown) {
+  async toHaveNoAxeViolations(received: unknown, options?: RunOptions) {
     const container = resolveAxeContainer(received);
-    const results = await runAxe(container);
+    const results = await runAxe(container, options);
 
     return toHaveNoViolations(results);
   },

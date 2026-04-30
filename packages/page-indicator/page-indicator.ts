@@ -31,22 +31,28 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 class WarpPageIndicator extends LitElement {
   static styles = [styles];
 
-  /** Currently selected page (1-based index) */
+  /** Currently selected page (1-based index)
+   * @summary
+   * @description
+   */
   @property({ type: Number, attribute: 'selected-page', reflect: true })
-  selectedPage = 1;
+  selectedPage: number;
 
-  /** Total number of pages */
+  /** Total number of pages
+   * @summary
+   * @description
+   */
   @property({ type: Number, attribute: 'page-count', reflect: true })
-  pageCount = 1;
+  pageCount: number;
 
   /** Validated page count (minimum 1) */
   private get _validPageCount(): number {
-    return Math.max(1, Math.floor(this.pageCount));
+    return Math.max(1, Math.floor(this.pageCount ?? 1));
   }
 
   /** Validated selected page (clamped to valid range) */
   private get _validSelectedPage(): number {
-    const page = Math.floor(this.selectedPage);
+    const page = Math.floor(this.selectedPage ?? 1);
     return Math.max(1, Math.min(page, this._validPageCount));
   }
 

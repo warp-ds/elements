@@ -53,25 +53,37 @@ export interface StepsContext {
  * Individual step component that shows a single step in a process
  */
 export class WarpStep extends LitElement {
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   active = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   completed = false;
 
   @state()
   private _context: StepsContext = { horizontal: false, right: false, isLast: false, isFirst: false };
 
+  private _internals: ElementInternals;
+
   static styles = [reset, styles];
 
   constructor() {
     super();
+    this._internals = this.attachInternals();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute('role', 'listitem');
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'listitem';
   }
 
   setContext(context: StepsContext) {

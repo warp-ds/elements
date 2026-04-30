@@ -27,30 +27,59 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   static styles = [reset, unoStyles, wSliderThumbStyles];
 
-  @property({ attribute: 'aria-label', reflect: true })
+  /**
+   * @summary
+   * @description
+   */
+  @property({ attribute: 'aria-label' })
   ariaLabel: string;
 
-  @property({ attribute: 'aria-description', reflect: true })
+  /**
+   * @summary
+   * @description
+   */
+  @property({ attribute: 'aria-description' })
   ariaDescription: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   name: string;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   value: string;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** @internal Set by `<w-slider>` */
+  /** @internal Set by `<w-slider>`
+   * @summary
+   * @description
+   */
   @property({ attribute: false, reflect: false })
   openEnded = false;
 
+  /**
+   * @summary
+   * @description
+   */
   @property({ reflect: true })
   placeholder: string;
 
@@ -78,15 +107,24 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   @state()
   suffix = '';
 
-  /** @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`. */
+  /** @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`. */
+  /** @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   tooltipFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`. */
+  /** @internal Formatter for the min and max labels below the range. Set by `<w-slider>`.
+   * @summary
+   * @description
+   */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 
@@ -116,6 +154,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
   resetFormControl(): void {
     this.value = this.#initialValue;
+    this.dispatchEvent(
+      new CustomEvent('thumbreset', {
+        bubbles: true,
+      }),
+    );
   }
 
   /**
@@ -162,6 +205,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     value: string,
     isFromTextInput: boolean,
   ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+    const suffix = this.suffix ?? '';
     let valueNum = Number.parseInt(value);
 
     if (this.openEnded && !isFromTextInput && this.step) {
@@ -186,8 +230,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           id: 'slider.error.out_of_bounds',
           message: 'Value must be between {min} and {max}',
           values: {
-            min: `${this.min} ${this.suffix}`.trim(),
-            max: `${this.max} ${this.suffix}`.trim(),
+            min: `${this.min} ${suffix}`.trim(),
+            max: `${this.max} ${suffix}`.trim(),
           },
         }),
       );
@@ -327,6 +371,36 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     if (result.shouldCancel) {
       e.preventDefault();
     }
+  }
+
+  async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
+    // Handle the case where an open ended slider that has
+    // no current value (Min or Max) and the user presses
+    // the up or down arrow in the input field.
+    
+    if (this.textfield.value) {
+      // If the field has a value let the native browser behavior do its thing
+      return;
+    }
+
+    e.preventDefault();
+
+    let value = "";
+    if (this.slot === 'from') {
+      if (e.key === 'ArrowUp') {
+        value = String(Number(this.min) + 1) || "1";  
+      } else if(e.key === 'ArrowDown') {
+        value = String(Number(this.min)) || "0";
+      }
+    } else {
+      if (e.key === 'ArrowUp') {
+        value = String(Number(this.max)) || "100";  
+      } else if(e.key === 'ArrowDown') {
+        value = String(Number(this.max) - 1) || "99";
+      }
+    }
+
+    await this.#handleValueChange(value, true);
   }
 
   async connectedCallback() {
@@ -509,6 +583,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
+    // ariaLabel and ariaDescription are used internally on the input element,
+    // not as host attributes. No setAttribute needed - avoids hydration mismatch.
+
     if (changedProperties.has('openEnded')) {
       if (this.openEnded && !this.placeholder) {
         if (this.slot === 'to' || this.slot === '') {
@@ -528,6 +605,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     }
 
     if (changedProperties.has('value')) {
+      if (typeof this.#initialValue === 'undefined' && typeof this.value !== 'undefined') {
+        // If w-slider sets our initial value based on the min and max attributes then
+        // this.value will be undefined in connectedCallback. We need this check here
+        // in order for form resets to work correctly.
+        this.#initialValue = this.value;
+      }
       this.setValue(this.value);
       this.#syncRangeValue();
     }
@@ -619,9 +702,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
           step="${ifDefined(this.step)}"
           ?invalid="${Boolean(this.invalid)}"
           @input="${this.#onInput}"
+          @keydown="${this.#onInputFieldKeyDown}"
           ?disabled="${this.disabled}"
         >
-          ${this.suffix ? html`<w-affix slot="suffix" label="${this.suffix}"></w-affix>` : nothing}
+          ${(this.suffix ?? '') ? html`<w-affix slot="suffix" label="${this.suffix ?? ''}"></w-affix>` : nothing}
         </w-textfield>
         <w-attention
           tooltip
@@ -636,7 +720,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
             slot="target"
           ></output>
           <span slot="message">
-            ${this.tooltipDisplayValue}${this.suffix ? html`&nbsp;${this.suffix}` : nothing}
+            ${this.tooltipDisplayValue}${(this.suffix ?? '') ? html`&nbsp;${this.suffix ?? ''}` : nothing}
           </span>
         </w-attention>
 

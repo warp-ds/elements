@@ -18,6 +18,19 @@ import * as AttentionStories from './attention.stories';
 ## Dismissible Highlight
 <Canvas of={AttentionStories.DismissibleHighlight} />
 
+## Hydration Warnings In React
+
+These can occur because the parent w-attention component will set a generated id attribute on the slotted message element and then set a aria-details on the slotted target element with the value of the generated id.
+
+To avoid this issue, you can manually set the id and aria-details attributes on the elements yourself to avoid them being auto generated like so:
+
+```
+<w-attention>
+  <w-button aria-details="123g12d3gf23f" variant="secondary" slot="target">Click me</w-button>
+  <span id="123g12d3gf23f" slot="message">I'm a message</span>
+</w-attention>
+```
+
 ## Accessibility
 If the Attention element has "left" or "top" position, it should be placed before the target element in the DOM.
 

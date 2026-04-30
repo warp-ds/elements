@@ -43,24 +43,45 @@ const alertVariants = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/feedback-alert--docs)
  */
 class WarpAlert extends LitElement {
-  @property({ reflect: true })
+  private _internals: ElementInternals;
+
+  /**
+   * @summary Visual style of the alert.
+   *
+   * @description Controls both the color treatment and icon used by the component. Accepted values are `info`, `warning`, `positive`, and `negative`. Use the variant that matches the message severity so users can quickly distinguish informative messages from warnings, errors, and confirmations.
+   */
+  @property({ reflect: true, useDefault: true })
   variant: AlertVariants = 'info';
 
-  @property({ type: Boolean, reflect: true })
-  show = true;
+  /**
+   * @summary Whether the alert is visible.
+   *
+   * @description Alerts are hidden by default (`false`). Set this to `true` to render and expand the content. This is reflected as an attribute, so visibility can be controlled from markup (`show`) or from JavaScript (`element.show = true`).
+   */
+  @property({ type: Boolean, reflect: true, useDefault: true })
+  show = false;
 
-  @property({ reflect: true })
+  /**
+   * @summary ARIA role announced to assistive technology.
+   *
+   * @description Defaults to `alert` so urgent changes are announced by screen readers. Override this only when your use case requires a different announcement behavior, for example a less assertive live region strategy.
+   */
+  @property({ reflect: true, useDefault: true })
   role = 'alert';
 
   constructor() {
     super();
-    this.show = false;
-    this.role = 'alert';
+    this._internals = this.attachInternals();
+    // Use ElementInternals for ARIA to avoid hydration mismatches
+    this._internals.role = 'alert';
+    // Don't set this.show here - let the attribute or explicit property set control it
+    // Alerts default to hidden and are shown via the show attribute
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.variant || !alertVariants[this.variant]) {
+    // Validate variant if explicitly set
+    if (this.variant && !alertVariants[this.variant]) {
       throw new Error(
         `Invalid 'variant' attribute. Set its value to one of the following:\nnegative, positive, warning, info.`,
       );
@@ -69,12 +90,14 @@ class WarpAlert extends LitElement {
 
   /** @internal */
   get _wrapperClasses() {
-    return classNames([ccAlert.wrapper, ccAlert[this.variant]]);
+    const variant = this.variant;
+    return classNames([ccAlert.wrapper, ccAlert[variant]]);
   }
 
   /** @internal */
   get _iconClasses() {
-    const activeIconClassNames = ccAlert[`${this.variant}Icon`];
+    const variant = this.variant;
+    const activeIconClassNames = ccAlert[`${variant}Icon`];
 
     return classNames([ccAlert.icon, activeIconClassNames]);
   }
@@ -104,16 +127,17 @@ class WarpAlert extends LitElement {
   /** @internal */
   get _icon() {
     const locale = detectLocale();
-    if (this.variant === alertVariants.info) {
+    const variant = this.variant || 'info';
+    if (variant === alertVariants.info) {
       return html`<w-icon name="Info" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.warning) {
+    if (variant === alertVariants.warning) {
       return html`<w-icon name="Warning" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.negative) {
+    if (variant === alertVariants.negative) {
       return html`<w-icon name="Error" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
-    if (this.variant === alertVariants.positive) {
+    if (variant === alertVariants.positive) {
       return html`<w-icon name="Success" size="small" locale="${locale}" class="flex"></w-icon>`;
     }
     return '';

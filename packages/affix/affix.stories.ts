@@ -32,3 +32,22 @@ export const Default: Story = {
     label: 'kr',
   },
 };
+
+export const Search: Story = {
+  args: {
+    search: true,
+  },
+};
+
+export const Clear: Story = {
+  args: {
+    clear: true,
+  },
+};
+
+export const Icon: Story = {
+  args: {
+    icon: 'AwardMedal',
+    ariaLabel: 'Award Medal',
+  },
+};

@@ -8,7 +8,7 @@ import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { createGenerator } from '@unocss/core';
+import { createGenerator } from 'unocss';
 import { presetWarp } from '@warp-ds/uno';
 import esbuild from 'esbuild';
 import * as lightning from 'lightningcss';
