@@ -15,51 +15,36 @@ import { styles } from './styles';
  */
 class WarpBox extends LitElement {
   /**
-   * Extends the box into the horizontal gutter on narrow screens.
-   *
-   * @summary Makes the box bleed to the container edge.
-   *
-   * @description Adds negative horizontal margins and square side corners below the small breakpoint, then restores the normal margins and rounded corners from the small breakpoint and up.
+   * Makes the box bleed to the container edge.
+   * Extends the box into the horizontal gutter on narrow screens. Adds negative horizontal margins and square side corners below the small breakpoint, then restores the normal margins and rounded corners from the small breakpoint and up.
    */
   @property({ type: Boolean, reflect: true })
   bleed = false;
 
   /**
-   * Adds a border and default background to the box.
-   *
-   * @summary Shows the box as a bordered surface.
-   *
-   * @description Use this when the content needs a clear visual boundary from the surrounding page.
+   * Shows the box as a bordered surface.
+   * Use this when the content needs a clear visual boundary from the surrounding page.
    */
   @property({ type: Boolean, reflect: true })
   bordered = false;
 
   /**
-   * Applies the subtle information background.
-   *
-   * @summary Shows the box with information styling.
-   *
-   * @description Use this for supporting informational content that should be visually separated from the surrounding page.
+   * Shows the box with information styling.
+   * Use this for supporting informational content that should be visually separated from the surrounding page.
    */
   @property({ type: Boolean, reflect: true })
   info = false;
 
   /**
-   * Applies the neutral sunken surface background.
-   *
-   * @summary Shows the box with neutral styling.
-   *
-   * @description Use this for quiet grouped content that needs a background without strong emphasis.
+   * Shows the box with neutral styling.
+   * Use this for quiet grouped content that needs a background without strong emphasis.
    */
   @property({ type: Boolean, reflect: true })
   neutral = false;
 
   /**
-   * Controls the ARIA role on the internal content wrapper.
-   *
-   * @summary ARIA role for the box wrapper.
-   *
-   * @description Defaults to not set when omitted but due to the box using a section element, it will behave as if it had a role of `region`. Set `role="none"` to override this behaviour for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
+   * ARIA role for the box wrapper.
+   * Defaults to not set when omitted but due to the box using a section element, it will behave as if it had a role of `region`. Set `role="none"` to override this behaviour for purely visual grouping, or set a specific role when the box has a clearer semantic purpose.
    */
   @property({ type: String, reflect: true, useDefault: true })
   role: string | null = null;
