@@ -54,99 +54,103 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   };
 
   /**
-   * @summary
-   * @description
+   * Keep in mind that using disabled in its current form is an anti-pattern.
+   * 
+   * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+   * 
+   * Please consider more informative alternatives before choosing to use disabled on an element.
+   * 
+   * @summary Makes the element not focusable and hides it from form submits
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
-   * @summary
-   * @description
+   * Mark the form field as invalid.
+   * 
+   * Make sure to also set a `help-text` to help users fix the validation problem.
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
   /**
-   * @summary
-   * @description
+   * Either a `label` or an `aria-label` must be provided.
    */
   @property({ type: String, reflect: true })
   label: string;
 
   /**
-   * @summary
-   * @description
+   * Use in combination with `invalid` to show as a validation error message,
+   * or on its own to show a help text.
+   * 
+   * @summary Description shown below the input field
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
   /**
-   * @summary
-   * @description
+   * Sets the maximum number of text rows before the content starts scrolling.
    */
   @property({ type: Number, reflect: true, attribute: 'maximum-rows' })
   maxRows: number;
 
   /**
-   * @summary
-   * @description
+   * Sets the minimum number of text rows the textarea should display
    */
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
   minRows: number;
 
   /**
-   * @summary
-   * @description
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
    */
   @property({ type: String, reflect: true })
   name: string;
 
   /**
-   * @summary
-   * @description
+   * Set a text that is shown in the textarea when it doesn't have a value.
+   * 
+   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+   * 
+   * @summary Shown in the textarea when it doesn't have a value
    */
   @property({ type: String, reflect: true })
   placeholder: string;
 
-  /** @deprecated Use the native readonly attribute instead. Here for API consistency with `w-textfield`.
-   * @summary
-   * @description
+  /** 
+   * @deprecated Use the native `readonly` attribute instead
    */
   @property({ type: Boolean, reflect: true, attribute: 'read-only' })
   readOnly = false;
 
   /**
-   * @summary
-   * @description
+   * Whether the input can be selected but not changed by the user
    */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
   /**
-   * @summary
-   * @description
+   * Whether user input is required on the input before form submission
    */
   @property({ type: Boolean, reflect: true })
   required = false;
 
   /**
-   * @summary
-   * @description
+   * Lets you set the current value
    */
   @property({ type: String, reflect: true })
   value: string;
 
   /**
-   * @summary
-   * @description
+   * Show an icon behind the label indicating the field is optional
    */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
+  /** @internal */
   @state()
   minHeight = Number.NEGATIVE_INFINITY;
 
+  /** @internal */
   @state()
   maxHeight = Number.POSITIVE_INFINITY;
 

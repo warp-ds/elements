@@ -13,7 +13,7 @@ substitute for labeling the element with a visible label.
 <w-textfield label="Email" placeholder="ola.nordmann@finn.no"></w-textfield>
 ```
 
-<&elements-example>
+</elements-example>
 
 ### Prefix label
 
