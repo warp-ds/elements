@@ -38,28 +38,24 @@ export const Default: Story = {
     bordered: false,
     info: false,
     neutral: false,
-    role: 'region',
   },
 };
 
 export const Info: Story = {
   args: {
     info: true,
-    role: 'region',
   },
 };
 
 export const Neutral: Story = {
   args: {
     neutral: true,
-    role: 'region',
   },
 };
 
 export const Bordered: Story = {
   args: {
     bordered: true,
-    role: 'region',
   },
 };
 
@@ -67,6 +63,18 @@ export const Bleed: Story = {
   args: {
     bleed: true,
     neutral: true,
-    role: 'region',
+  },
+};
+
+export const AccessibleRegion: Story = {
+  args: {},
+  render: (args) => {
+    return html`
+      <w-box aria-labelledby="box-content">
+        <h3 id="box-content">Box Content</h3>
+        <p>Inspect this box in the accessibility tree to see that it is treated as a region.</p>
+        <p>If aria-labelled by is not used, the box will not be treated as a region.</p>
+      </w-box>
+    `;
   },
 };
