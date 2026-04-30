@@ -1,3 +1,10 @@
+## [2.9.1-next.1](https://github.com/warp-ds/elements/compare/v2.9.0...v2.9.1-next.1) (2026-04-30)
+
+
+### Bug Fixes
+
+* **box:** accessibility improvements and documentation ([#629](https://github.com/warp-ds/elements/issues/629)) ([ec52e36](https://github.com/warp-ds/elements/commit/ec52e365b74eca6ecac609de22044eb66f2665ed))
+
 # [2.9.0](https://github.com/warp-ds/elements/compare/v2.8.1...v2.9.0) (2026-04-30)
 
 
