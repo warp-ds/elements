@@ -171,11 +171,11 @@
     border-radius: 10px;
     background: rgb(247, 247, 247);
     color: rgb(46, 52, 56);
+  }
 
-    & * {
-      background: rgb(247, 247, 247);
-      color: rgb(46, 52, 56);
-    }
+  .sb-nopreview_main * {
+    background: rgb(247, 247, 247);
+    color: rgb(46, 52, 56);
   }
 
   .sb-nopreview_heading {
@@ -206,84 +206,89 @@
     border: 1px solid #ff0000;
     box-shadow: 0 0 64px rgba(0, 0, 0, 0.1);
     gap: 24px;
+  }
 
-    & ol {
-      padding-left: 18px;
-      margin: 0;
-    }
+  .sb-errordisplay_main ol {
+    padding-left: 18px;
+    margin: 0;
+  }
 
-    /* Redefine colors to ensure readability regardless of user-provided * selectors. */
-    * {
-      background: white;
-      color: black;
-    }
+  /* Redefine colors to ensure readability regardless of user-provided * selectors. */
+  .sb-errordisplay_main * {
+    background: white;
+    color: black;
+  }
 
-    & h1 {
-      font-family: Nunito Sans;
-      font-size: 22px;
-      font-weight: 400;
-      line-height: 30px;
-      font-weight: normal;
-      margin: 0;
+  /* Exclude error code block from the universal reset to preserve ANSI colors and dark theme */
+  .sb-errordisplay_main .sb-errordisplay_code,
+  .sb-errordisplay_main .sb-errordisplay_code * {
+    background: #242424;
+    color: #c6c6c6;
+  }
 
-      &::before {
-        content: '';
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        background: #ff4400;
-        border-radius: 50%;
-        margin-right: 8px;
-      }
-    }
+  .sb-errordisplay_main h1 {
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 0;
+  }
 
-    & p,
-    & ol {
-      font-family: Nunito Sans;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      margin: 0;
-    }
+  .sb-errordisplay_main h1::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ff4400;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 
-    & li + li {
-      margin: 0;
-      padding: 0;
-      padding-top: 12px;
-    }
+  .sb-errordisplay_main p,
+  .sb-errordisplay_main ol {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0;
+  }
 
-    & a {
-      color: currentColor;
-    }
+  .sb-errordisplay_main li + li {
+    margin: 0;
+    padding: 0;
+    padding-top: 12px;
+  }
 
-    & .sb-errordisplay_code {
-      padding: 10px;
-      flex: 1;
-      background: #242424;
-      color: #c6c6c6;
-      box-sizing: border-box;
+  .sb-errordisplay_main a {
+    color: currentColor;
+  }
 
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 19px;
-      border-radius: 4px;
+  .sb-errordisplay_main .sb-errordisplay_code {
+    padding: 10px;
+    flex: 1;
+    background: #242424;
+    color: #c6c6c6;
+    box-sizing: border-box;
 
-      font-family:
-        'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
-        'Lucida Console', Consolas, Monaco, monospace;
-      margin: 0;
-      overflow: auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    border-radius: 4px;
 
-      & code {
-        background-color: inherit;
-        color: inherit;
-      }
-    }
+    font-family:
+      'Operator Mono', 'Fira Code Retina', 'Fira Code', 'FiraCode-Retina', 'Andale Mono',
+      'Lucida Console', Consolas, Monaco, monospace;
+    margin: 0;
+    overflow: auto;
+  }
 
-    & .sb-errordisplay pre {
-      white-space: pre-wrap;
-      white-space: revert;
-    }
+  .sb-errordisplay_main .sb-errordisplay_code code {
+    background-color: inherit;
+    color: inherit;
+  }
+
+  .sb-errordisplay_main .sb-errordisplay_code {
+    white-space: pre-wrap;
   }
 
   @-webkit-keyframes sb-rotate360 {
@@ -556,30 +561,10 @@
 <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/components.css" rel="stylesheet" crossorigin />
 <link href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" rel="stylesheet" crossorigin />
 
-    <script type="module" crossorigin src="/elements/assets/iframe-DbvUtVmI.js"></script>
-    <link rel="modulepreload" crossorigin href="/elements/assets/chunk-BneVvdWh.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/preload-helper-C16NUi7J.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/__uno-Cy9G7Sgf.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/dist-B1PfYo3w.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/lit-C07f_Bua.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/chunk-4BE7D4DS-C96Uj-1-.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/chunk-SL3VIQZ3-4CiRMKgq.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/directive-DywvkYa7.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/dist-WJrQKcXy.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/chunk-3LY4VQVK-B9ZMmlUs.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/csf-CP5pRabF.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/docs-tools-CVk-AppB.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/i18n-CXAEKYxp.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/decorate-BZxMavXy.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/index.m-wj1BHO_P.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/element-collapse-Csl0KseK.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/repeat-DqtVKfjW.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/when-CotQgSvb.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/class-map-DFBsEYAd.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/icon-3mo7c0p-.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/styles-BM5RxtAH.js">
-    <link rel="modulepreload" crossorigin href="/elements/assets/toast-container-1S-hyKVB.js">
-    <link rel="stylesheet" crossorigin href="/elements/assets/__uno-2CXfCf7t.css">
+    <script type="module" crossorigin src="/elements/assets/iframe-B7qTZjAE.js"></script>
+    <link rel="modulepreload" crossorigin href="/elements/assets/chunk-DnJy8xQt.js">
+    <link rel="modulepreload" crossorigin href="/elements/assets/preload-helper-BhjHWU1L.js">
+    <link rel="stylesheet" crossorigin href="/elements/assets/iframe-wWCUkcfn.css">
   </head>
 
   <body>
