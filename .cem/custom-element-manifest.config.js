@@ -1,4 +1,5 @@
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
+import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
@@ -78,6 +79,11 @@ export default {
 
   plugins: [
     typeParserPlugin(),
+    jsDocTagsPlugin({
+      tags: {
+        parent: {},
+      },
+    }),
     jsxTypesPlugin({
       outdir: 'dist/',
       fileName: 'index.d.ts',
