@@ -35,7 +35,7 @@ msgstr "Nästa sida"
 #. js-lingui-explicit-id
 #: packages/pagination/pagination.ts:209
 msgid "pagination.label.current-page"
-msgstr ""
+msgstr "Sida {currentPage}"
 
 #. Default screenreader message for page link in the pagination component
 #. js-lingui-explicit-id
