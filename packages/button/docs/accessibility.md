@@ -50,6 +50,6 @@ Prefer keeping the button available and showing validation or explanatory feedba
 
 ### Button Or Link
 
-Use a button for actions on the current page. Use a link for navigation.
+Use a w-button for actions on the current page. Use a w-link for navigation.
 
-If `href` is set, `w-button` renders a link with button styling. The accessible behavior is link behavior, even though the component looks like a button.
+For backwards compatibility, if `href` is set, `w-button` renders a link with button styling. The accessible behavior is link behavior, even though the component looks like a button. This is deprecated behaviour and you should instead use the w-link component if you need to render a link that looks like a button.

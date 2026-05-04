@@ -2,7 +2,7 @@
 
 Button is used for actions. Use it when the user can submit, save, confirm, cancel, open, close, or trigger something on the current page.
 
-Use a link instead when the user is navigating to another page. If the control must look like a button but navigate like a link, set `href` on `w-button`.
+Use a link instead when the user is navigating to another page. If the control should look like a button but navigate like a link, use `w-link`.
 
 ### Basic Button
 
@@ -77,17 +77,7 @@ Use `type="submit"` to submit the containing form and `type="reset"` to reset it
 
 ### Link Styled As Button
 
-Set `href` when the control navigates to another URL. This renders a link with button styling.
-
-```html
-<w-button href="/messages/new" variant="primary">New message</w-button>
-```
-
-For links that open a new browsing context, set `target`. When `target="_blank"` is used and `rel` is omitted, the component applies `rel="noopener"`.
-
-```html
-<w-button href="https://example.com" target="_blank">Visit example</w-button>
-```
+Use `w-link` if you need a link that looks like a button.
 
 ### Disabled Actions
 
