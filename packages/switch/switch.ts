@@ -35,45 +35,54 @@ const ccSwitch = {
   a11y: 'sr-only',
 };
 
+export type WarpSwitchChangeEvent = CustomEvent<{
+  checked: boolean;
+  value: string | null;
+}>;
+
+/**
+ * The Switch component allows users to toggle between two states.
+ * 
+ * @event {WarpSwitchChangeEvent} change - Dispatched when the switch toggles. Includes boolean `checked` and string/null `value` on `details`.
+ */
 export class WarpSwitch extends FormControlMixin(LitElement) {
-  // Use delegatesFocus so focus is delegated to the button inside shadow DOM
-  // This avoids needing tabindex on the host element (prevents hydration mismatch)
+  /** 
+   * Use delegatesFocus so focus is delegated to the button inside shadow DOM.
+   * 
+   * This avoids needing tabindex on the host element (prevents hydration mismatch).
+   * @internal
+   */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
-  // String properties without defaults to avoid reflecting empty attributes
   /**
-   * @summary
-   * @description
+   * Name used when submitting an HTML form.
    */
   @property({ type: String, reflect: true })
   name!: string;
 
   /**
-   * @summary
-   * @description
+   * Value submitted when the switch is checked.
+   * 
+   * The component reports `null` as the value in the `change` event when `value` is an empty string.
    */
   @property({ type: String, reflect: true })
   value!: string;
 
-  // Boolean properties can have defaults - Lit doesn't reflect false values
   /**
-   * @summary
-   * @description
+   * Whether the switch is on (checked).
    */
   @property({ type: Boolean, reflect: true })
   checked = false;
 
   /**
-   * @summary
-   * @description
+   * Whether the switch is disabled.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  // capture the initial state using connectedCallback and #initialState
   #initialState: boolean | null = null;
 
   static styles = [
