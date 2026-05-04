@@ -1,8 +1,8 @@
-import { createComponent } from '@lit/react';
+import { createComponent, EventName } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { WarpTabs } from './tabs.js';
+import { WarpTabs, WarpTabsChangeEvent } from './tabs.js';
 
 // Re-export from split packages
 export { Tab } from '../tab/react.js';
@@ -16,7 +16,7 @@ export const Tabs = createComponent({
   elementClass: Component as unknown as typeof WarpTabs,
   react: React,
   events: {
-    onChange: 'change',
-    onchange: 'change',
+    onChange: 'change' as EventName<WarpTabsChangeEvent>,
+    onchange: 'change' as EventName<WarpTabsChangeEvent>,
   },
 });
