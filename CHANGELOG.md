@@ -1,3 +1,10 @@
+## [2.9.1-next.3](https://github.com/warp-ds/elements/compare/v2.9.1-next.2...v2.9.1-next.3) (2026-05-04)
+
+
+### Bug Fixes
+
+* **pagination:** add missing pagination.label.current-page ([#634](https://github.com/warp-ds/elements/issues/634)) ([d7b612a](https://github.com/warp-ds/elements/commit/d7b612a48fa0892b5b6b3a0ad358c36b9643637a))
+
 ## [2.9.1-next.2](https://github.com/warp-ds/elements/compare/v2.9.1-next.1...v2.9.1-next.2) (2026-04-30)
 
 
