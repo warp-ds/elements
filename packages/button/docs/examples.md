@@ -2,62 +2,57 @@
 
 ### Primary
 
-<style-isolate>
-  <w-button variant="primary">Publish</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="primary">Publish</w-button>
 ```
 
+</elements-example>
+
 ### Secondary
 
-<style-isolate>
-  <w-button variant="secondary">Cancel</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="secondary">Cancel</w-button>
 ```
 
+</elements-example>
+
 ### Negative
 
-<style-isolate>
-  <w-button variant="negative">Delete</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="negative">Delete</w-button>
 ```
 
+</elements-example>
+
 ### Utility
 
-<style-isolate>
-  <w-button variant="utility">Filter</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="utility">Filter</w-button>
 ```
 
+</elements-example>
+
 ### Quiet
 
-<style-isolate>
-  <w-button variant="quiet">Skip</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="quiet">Skip</w-button>
 ```
 
+</elements-example>
+
 ### Icon Only
 
-<style-isolate>
-  <w-button variant="pill" icon-only>
-    <w-icon name="Close"></w-icon>
-    <span class="sr-only">Close</span>
-  </w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="pill" icon-only>
@@ -66,66 +61,61 @@
 </w-button>
 ```
 
+</elements-example>
+
 ### Small
 
-<style-isolate>
-  <w-button variant="primary" small>Save</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="primary" small>Save</w-button>
 ```
 
+</elements-example>
+
 ### Full Width
 
-<style-isolate>
-  <div style="max-width: 320px;">
-    <w-button variant="primary" full-width>Continue</w-button>
-  </div>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="primary" full-width>Continue</w-button>
 ```
 
+</elements-example>
+
 ### Loading
 
-<style-isolate>
-  <w-button variant="primary" loading>Saving</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button variant="primary" loading>Saving</w-button>
 ```
 
+</elements-example>
+
 ### Link Styled As Button
 
-<style-isolate>
-  <w-button href="/messages/new" variant="primary">New message</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button href="/messages/new" variant="primary">New message</w-button>
 ```
 
+</elements-example>
+
 ### External Link
 
-<style-isolate>
-  <w-button href="https://example.com" target="_blank">Visit example</w-button>
-</style-isolate>
+<elements-example>
 
 ```html
 <w-button href="https://example.com" target="_blank">Visit example</w-button>
 ```
 
+</elements-example>
+
 ### Form Actions
 
-<style-isolate>
-  <form>
-    <w-button type="submit" name="intent" value="save">Save</w-button>
-    <w-button type="reset">Reset</w-button>
-  </form>
-</style-isolate>
+<elements-example>
 
 ```html
 <form>
@@ -133,3 +123,5 @@
   <w-button type="reset">Reset</w-button>
 </form>
 ```
+
+</elements-example>
