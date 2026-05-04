@@ -1,1 +1,55 @@
 ## Accessibility
+
+Buttons must have a clear accessible name and should describe the action they perform.
+
+### Use Descriptive Text
+
+Prefer visible text that names the action.
+
+```html
+<w-button>Save changes</w-button>
+```
+
+Avoid vague labels when the action is not obvious from context.
+
+```html
+<!-- Avoid -->
+<w-button>OK</w-button>
+```
+
+### Icon-Only Buttons
+
+If a button does not have visible text, include text for assistive technologies in the slotted content.
+
+```html
+<w-button variant="pill">
+  <w-icon name="Close"></w-icon>
+  <span class="sr-only">Close</span>
+</w-button>
+```
+
+The accessible text should describe the action, not the icon shape.
+
+### Loading State
+
+When `loading` is set, the component exposes a screen-reader-only progress indicator with localized loading text.
+
+Keep the visible button text meaningful while the action is in progress:
+
+```html
+<w-button variant="primary" loading>Saving</w-button>
+```
+
+Do not use loading for long-running status updates unless the result is also communicated elsewhere on the page.
+
+### Disabled Buttons
+
+Avoid disabled buttons. A disabled control can prevent keyboard users from reaching it and often does not explain what must happen before the action becomes available.
+
+Prefer keeping the button available and showing validation or explanatory feedback when the user tries to continue.
+
+### Button Or Link
+
+Use a button for actions on the current page. Use a link for navigation.
+
+If `href` is set, `w-button` renders a link with button styling. The accessible behavior is link behavior, even though the component looks like a button.

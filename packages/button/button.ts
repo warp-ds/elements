@@ -50,129 +50,133 @@ const variants: ButtonVariant[] = [
 export type ButtonType = 'button' | 'submit' | 'reset';
 
 /**
- * Buttons are used to perform actions, widh different visuals for different needs.
+ * Performs an action or renders a link with button styling.
+ * Use button variants to match action priority, risk, and context.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-button--docs)
  */
 class WarpButton extends FormControlMixin(LitElement) {
   static styles = [reset, wButtonStyles];
 
+  /**
+   * Shadow root configuration.
+   * Delegates focus from the host to the internal control.
+   */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
   /**
-   * @summary
-   * @description
+   * Native button type.
+   * Controls whether the internal button behaves as a regular button, submits a form, or resets a form. Defaults to `button`.
    */
   @property({ reflect: true })
   type: ButtonType;
 
   /**
-   * @summary
-   * @description
+   * Focuses the button when it is first rendered.
+   * Applies only when the component renders a native button. Link buttons with `href` do not autofocus through this component.
    */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
   /**
-   * @summary
-   * @description
+   * Visual style of the button.
+   * Defaults to `secondary`. Use the variant that matches the action priority, risk, and placement.
    */
   @property({ reflect: true })
   variant: ButtonVariant;
 
   /**
+   * Deprecated quiet visual treatment flag
+   * Use `variant="quiet"` instead.
+   *
    * @deprecated Use `variant="quiet"` instead
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ type: Boolean, reflect: true })
   quiet = false;
 
   /**
-   * @summary
-   * @description
+   * Marks the button as icon-only.
+   * Use this when the button has no visible text. Include accessible text in the slotted content so the internal button has a name.
    */
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
   iconOnly = false;
 
   /**
-   * @summary
-   * @description
+   * Renders the compact button size.
+   * Use this in dense layouts where the default button size is too large.
    */
   @property({ type: Boolean, reflect: true })
   small = false;
 
   /**
-   * @summary
-   * @description
+   * Shows the loading state.
+   * Use after the user has triggered an action and the action is in progress.
    */
   @property({ type: Boolean, reflect: true })
   loading = false;
 
   /**
-   * @summary
-   * @description
+   * URL for rendering the button as a link.
+   * When set, the component renders `w-link` instead of a native `button`.
    */
   @property({ reflect: true })
   href: string;
 
   /**
-   * @summary
-   * @description
+   * Link browsing context.
+   * Passed to the rendered link when `href` is set.
    */
   @property({ reflect: true })
   target: string;
 
   /**
-   * @summary
-   * @description
+   * Visually disables the button.
+   * Disabled buttons are discouraged because they can hide the reason an action is unavailable.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
-   * @summary
-   * @description
+   * Link relationship.
+   * Passed to the rendered link when `href` is set. If `target="_blank"` is set and `rel` is omitted, `noopener` is used.
    */
   @property({ reflect: true })
   rel: string;
 
   /**
-   * @summary
-   * @description
+   * Makes the button fill its parent width.
+   * Useful in narrow layouts where the button should span the available inline space.
    */
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth = false;
 
   /**
+   * Deprecated class applied to the internal control
+   * This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the button appearance.
+   *
    * @deprecated This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the appearance of the button.
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'button-class', reflect: true })
   buttonClass: string;
 
   /**
-   * @summary
-   * @description
+   * Form control name.
+   * Used when the button participates in form handling.
    */
   @property({ reflect: true })
   name: string;
 
   /**
-   * @summary
-   * @description
+   * Form control value.
+   * Used with `name` when the button participates in form handling. Resets to its initial value when the form is reset.
    */
   @property({ reflect: true })
   value: string;
 
-  /** @internal */
-  ariaValueTextLoading: string;
+  private ariaValueTextLoading: string;
 
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | null = null;
