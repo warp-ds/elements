@@ -3,20 +3,10 @@
 ### Basic
 
 <elements-example>
-  <w-breadcrumbs aria-label="You are here">
+  <w-breadcrumbs>
     <a href="#/real-estate">Real estate</a>
     <a href="#/real-estate/homes">Homes for sale</a>
     <span aria-current="page">Oslo</span>
-  </w-breadcrumbs>
-</elements-example>
-
-### All Segments Linkable
-
-<elements-example>
-  <w-breadcrumbs aria-label="You are here">
-    <a href="#/real-estate">Real estate</a>
-    <a href="#/real-estate/homes">Homes for sale</a>
-    <a href="#/real-estate/homes/oslo" aria-current="page">Oslo</a>
   </w-breadcrumbs>
 </elements-example>
 
@@ -33,7 +23,7 @@
 ### Short Path
 
 <elements-example>
-  <w-breadcrumbs aria-label="You are here">
+  <w-breadcrumbs>
     <a href="#/help">Help</a>
     <span aria-current="page">Contact us</span>
   </w-breadcrumbs>
