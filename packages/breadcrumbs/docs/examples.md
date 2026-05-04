@@ -2,6 +2,7 @@
 
 ### Basic
 
+```html
 <elements-example>
   <w-breadcrumbs>
     <a href="#/real-estate">Real estate</a>
@@ -9,9 +10,11 @@
     <span aria-current="page">Oslo</span>
   </w-breadcrumbs>
 </elements-example>
+```
 
 ### Custom Accessible Label
 
+```html
 <elements-example>
   <w-breadcrumbs aria-label="Product category path">
     <a href="#/marketplace">Marketplace</a>
@@ -19,12 +22,15 @@
     <span aria-current="page">Sofas</span>
   </w-breadcrumbs>
 </elements-example>
+```
 
 ### Short Path
 
+```html
 <elements-example>
   <w-breadcrumbs>
     <a href="#/help">Help</a>
     <span aria-current="page">Contact us</span>
   </w-breadcrumbs>
 </elements-example>
+```
