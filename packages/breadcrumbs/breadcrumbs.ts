@@ -25,12 +25,19 @@ const ccBreadcrumbs = {
 const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 /**
- * Breadcrumbs show the navigation structure for the current location.
+ * Shows the navigation structure for the current page.
+ * Renders direct child links and non-link elements as a breadcrumb trail, inserts separators between items, and exposes the trail as navigation.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-breadcrumbs--docs)
  */
 class WarpBreadcrumbs extends LitElement {
   private _internals: ElementInternals;
+
+  /**
+   * Accessible label for the breadcrumb navigation.
+   * Defaults to the localized "You are here" label. Set `aria-label` when the default label is not specific enough for the page.
+   */
+  declare ariaLabel: string | null;
 
   static styles = [reset, styles];
 
