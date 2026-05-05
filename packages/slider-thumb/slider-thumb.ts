@@ -396,7 +396,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
     // Handle the case where an open ended slider that has
     // no current value (Min or Max) and the user presses
     // the up or down arrow in the input field.
-    e.preventDefault();
 
     let value = "";
     if (this.slot === 'from') {
@@ -411,6 +410,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       } else if(e.key === 'ArrowDown') {
         value = String(Number(this.max) - 1) || "99";
       }
+    }
+
+    if (value !== "") {
+        e.preventDefault();
     }
 
     await this.#handleValueChange(value, true);
