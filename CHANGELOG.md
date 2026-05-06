@@ -1,3 +1,11 @@
+## [2.9.1-next.4](https://github.com/warp-ds/elements/compare/v2.9.1-next.3...v2.9.1-next.4) (2026-05-06)
+
+
+### Bug Fixes
+
+* don't prevent default unless there's something to prevent ([97ba77a](https://github.com/warp-ds/elements/commit/97ba77a8199257e010410e0ae6bdd74aaf589818)), closes [#641](https://github.com/warp-ds/elements/issues/641)
+* fix a bug where all input would be stopped ([#644](https://github.com/warp-ds/elements/issues/644)) ([1468a03](https://github.com/warp-ds/elements/commit/1468a034b58fd5574af95a156117e20d21da09de))
+
 ## [2.9.1-next.3](https://github.com/warp-ds/elements/compare/v2.9.1-next.2...v2.9.1-next.3) (2026-05-04)
 
 
