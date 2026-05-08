@@ -5,19 +5,7 @@ import React from 'react';
 import { WarpButton } from './button.js';
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {
-  get fullWidth(): boolean {
-    return false;
-  }
-
-  set fullWidth(_value: boolean) {}
-
-  get iconOnly(): boolean {
-    return false;
-  }
-
-  set iconOnly(_value: boolean) {}
-}
+class Component extends LitElement {}
 
 const BaseButton = createComponent({
   tagName: 'w-button',
@@ -35,8 +23,6 @@ type ButtonProps = Omit<BaseButtonProps, 'full-width' | 'icon-only'> & {
 export const Button = React.forwardRef<WarpButton, ButtonProps>(({ fullWidth, iconOnly, ...props }, ref) =>
   React.createElement(BaseButton, {
     ...props,
-    ...(fullWidth !== undefined ? { fullWidth } : {}),
-    ...(iconOnly !== undefined ? { iconOnly } : {}),
     ...(fullWidth ? { 'full-width': true } : {}),
     ...(iconOnly ? { 'icon-only': true } : {}),
     ref,
