@@ -51,18 +51,22 @@ export interface StepsContext {
 
 /**
  * Individual step component that shows a single step in a process
+ * 
+ * @parent w-step-indicator
  */
 export class WarpStep extends LitElement {
   /**
-   * @summary
-   * @description
+   * Whether this step is active.
+   * 
+   * The active step displays a filled indicator.
    */
   @property({ type: Boolean, reflect: true })
   active = false;
 
   /**
-   * @summary
-   * @description
+   * Whether this step is completed.
+   * 
+   * Completed steps display a checkmark icon and a filled indicator.
    */
   @property({ type: Boolean, reflect: true })
   completed = false;
