@@ -1,3 +1,10 @@
+## [2.9.1-next.5](https://github.com/warp-ds/elements/compare/v2.9.1-next.4...v2.9.1-next.5) (2026-05-08)
+
+
+### Bug Fixes
+
+* **button:** wrap react button wrapper and map camel case to snake case ([#646](https://github.com/warp-ds/elements/issues/646)) ([600a59c](https://github.com/warp-ds/elements/commit/600a59cca3f764a0743e6a58fe4d0a14125d53ba))
+
 ## [2.9.1-next.4](https://github.com/warp-ds/elements/compare/v2.9.1-next.3...v2.9.1-next.4) (2026-05-06)
 
 
