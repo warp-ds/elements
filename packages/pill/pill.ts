@@ -34,48 +34,48 @@ const pillStyles = {
 /**
  * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-pill--docs)
+ * @event {CustomEvent} w-pill-click - Fires when the pill itself is clicked.
+ * @event {CustomEvent} w-pill-close - Fires when the pill's close button is clicked.
  */
 class WarpPill extends LitElement {
   /**
-   * @summary
-   * @description
+   * Whether the pill should be removable via a close button.
    */
-  @property({ attribute: 'can-close', type: Boolean }) canClose = false;
+  @property({ attribute: 'can-close', type: Boolean })
+  canClose = false;
+
   /**
-   * @summary
-   * @description
+   * Whether the pill should be rendered as a suggestion.
    */
-  @property({ attribute: 'suggestion', type: Boolean }) suggestion = false;
+  @property({ attribute: 'suggestion', type: Boolean })
+  suggestion = false;
+  
   /**
    * @deprecated Used "open-arial-label" instead.
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: 'open-sr-label', type: String }) openSrLabel: string;
-  /**
-   * @summary
-   * @description
    */
-  @property({ attribute: 'open-aria-label', type: String }) openAriaLabel: string;
+  @property({ attribute: 'open-sr-label', type: String })
+  openSrLabel: string;
+  
   /**
-   * @deprecated Used "close-arial-label" instead.
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: 'close-sr-label', type: String }) closeSrLabel: string;
-  /**
-   * @summary
-   * @description
+   * Label read by screen readers when targeting the pill.
    */
-  @property({ attribute: 'close-aria-label', type: String }) closeAriaLabel: string;
+  @property({ attribute: 'open-aria-label', type: String })
+  openAriaLabel: string;
+  
+  /**
+   * @deprecated Used "close-arial-label" instead. 
+   */
+  @property({ attribute: 'close-sr-label', type: String })
+  closeSrLabel: string;
+  
+  /**
+   * Label read by screen readers when targeting the close button.
+   */
+  @property({ attribute: 'close-aria-label', type: String })
+  closeAriaLabel: string;
 
-  /** @internal */
-  openFilterSrText: string;
-  /** @internal */
-  removeFilterSrText: string;
+  private openFilterSrText: string;
+  private removeFilterSrText: string;
 
   static styles = [reset, styles];
 
@@ -98,8 +98,7 @@ class WarpPill extends LitElement {
     });
   }
 
-  /** @internal */
-  get _labelClasses() {
+  private get _labelClasses() {
     return classNames([
       pillStyles.button,
       pillStyles.label,
@@ -108,8 +107,7 @@ class WarpPill extends LitElement {
     ]);
   }
 
-  /** @internal */
-  get _closeClasses() {
+  private get _closeClasses() {
     return classNames([
       pillStyles.button,
       pillStyles.close,
@@ -117,13 +115,11 @@ class WarpPill extends LitElement {
     ]);
   }
 
-  /** @internal */
-  _onClick() {
+  private _onClick() {
     this.dispatchEvent(new CustomEvent('w-pill-click', { bubbles: true, composed: true }));
   }
 
-  /** @internal */
-  _onClose() {
+  private _onClose() {
     this.dispatchEvent(new CustomEvent('w-pill-close', { bubbles: true, composed: true }));
   }
 
