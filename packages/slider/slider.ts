@@ -18,8 +18,6 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
 /**
  * Parent component for sliders (both single and range sliders). Used in combination with a `<w-slider-thumb>`.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-slider-and-range-slider--docs)
- *
  * @slot - For single sliders place a `<w-slider-thumb>` in the default slot.
  * @slot label - Label for the slider or range slider as a whole.
  * @slot description - Optional description between the label and slider.
@@ -27,6 +25,7 @@ import { wSliderStyles } from './styles/w-slider.styles.js';
  * @slot to - Range sliders need to place a `<w-slider-thumb>` in the from and to slots.
  */
 class WarpSlider extends LitElement {
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -38,133 +37,118 @@ class WarpSlider extends LitElement {
    * The slider fieldset label. Required for proper accessibility.
    *
    * If you need to display HTML, use the `label` slot instead (f. ex. `<legend class="sr-only" slot="label">Production year</legend>`)
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ reflect: true })
   label: string;
 
-  /**
-   * @summary
-   * @description
-   */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
    * Whether or not to allow values outside the range such as "Before 1950" and "2025+".
-   
-   * @summary
-   * @description
   */
   @property({ type: Boolean, attribute: 'open-ended' })
   openEnded = false;
 
   /**
-   * @summary
-   * @description
+   * Validation error text, if any
    */
   @property({ type: String, reflect: true })
   error: string;
 
   /**
-   * @summary
-   * @description
+   * Additional description to show below the fieldset
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
   /**
-   * @summary
-   * @description
+   * Sets the form fields and fieldset in an invalid state
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** Ensures a child slider thumb has a value before allowing the containing form to submit.
-   * @summary
-   * @description
+  /** 
+   * Ensures a child slider thumb has a value before allowing the containing form to submit
    */
   @property({ type: Boolean, reflect: true })
   required = false;
 
   /**
-   * @summary
-   * @description
+   * The minimum allowed value in the range inputs
+   * @default 0
    */
   @property({ reflect: true })
   min: string;
 
   /**
-   * @summary
-   * @description
+   * The maximum allowed value in the range inputs
+   * @default 100
    */
   @property({ reflect: true })
   max: string;
 
-  /** Pass a value similar to step to create visual markers at that interval
-   * @summary
-   * @description
+  /** 
+   * Pass a value similar to step to create visual markers at that interval
    */
   @property({ type: Number, reflect: true })
   markers: number;
 
   /**
-   * @summary
-   * @description
+   * ets step on the range input to jump between values when dragging
    */
   @property({ type: Number, reflect: true })
   step: number;
 
-  /** Suffix used in text input fields and for the min and max values of the slider.
-   * @summary
-   * @description
+  /** 
+   * Suffix used in text input fields and for the min and max values of the slider
    */
   @property({ reflect: true })
   suffix: string;
 
   /**
-   * @summary
-   * @description
+   * Should only be used in special cases
    */
   @property({ type: Boolean, reflect: true, attribute: 'hidden-textfield' })
   hiddenTextfield = false;
 
-  /** Formatter for the tooltip and input mask values.
-   * @summary
-   * @description
+  /** 
+   * Formatter for the tooltip and input mask values
    */
   @property({ attribute: false })
   valueFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip.
-   * @summary
-   * @description
+  /**
+   * Overrides {@link valueFormatter} for the tooltip.
+   * 
+   * Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip.
    */
   @property({ attribute: false })
   tooltipFormatter: (value: string, slot: SliderSlot) => string;
 
-  /** Formatter for the min and max labels below the range.
-   * @summary
-   * @description
+  /** 
+   * Formatter for the min and max labels below the range.
    */
   @property({ attribute: false })
   labelFormatter: (slot: SliderSlot) => string;
 
+  /** @internal */
   @query('fieldset')
   fieldset: HTMLFieldSetElement;
   
-
+  /** @internal */
   @state()
   _invalidMessage = '';
 
+  /** @internal */
   @state()
   _hasInternalError = false;
 
+  /** @internal */
   @state()
   _showError = false;
 
+  /** @internal */
   @state()
   _tabbableElements: Array<HTMLElement> = [];
 
@@ -220,9 +204,12 @@ class WarpSlider extends LitElement {
     }
   }
 
+  /** @internal */
   get edgeMin() {
     return this.openEnded ? (Number(this.min) - 1).toString() : this.min;
   }
+  
+  /** @internal */
   get edgeMax() {
     return this.openEnded ? (Number(this.max) + 1).toString() : this.max;
   }
@@ -297,6 +284,7 @@ class WarpSlider extends LitElement {
   }
 
   #onThumbReset(e: CustomEvent) {
+    e.stopPropagation();
     const input = e.target as WarpSliderThumb;
     this.#updateActiveTrack(input);
   }
@@ -413,10 +401,12 @@ class WarpSlider extends LitElement {
     }
   }
 
+  /** @internal */
   get componentHasError(): boolean {
     return this.invalid || this._hasInternalError;
   }
 
+  /** @internal */
   get errorText(): string {
     if (!this._showError) {
       return '';

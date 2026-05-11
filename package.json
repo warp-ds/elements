@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.9.1-next.3",
+  "version": "2.9.1-next.5",
   "packageManager": "pnpm@10.33.2",
   "description": "Custom elements for Warp",
   "exports": {
@@ -344,6 +344,7 @@
     "@warp-ds/css": "2.4.1",
     "@warp-ds/uno": "2.2.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
+    "@wc-toolkit/jsdoc-tags": "^1.2.0",
     "@wc-toolkit/jsx-types": "^1.4.2",
     "@wc-toolkit/storybook-helpers": "^10.0.0",
     "@wc-toolkit/type-parser": "^1.2.0",

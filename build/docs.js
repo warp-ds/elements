@@ -47,7 +47,7 @@ const normalizeText = (value, fallback = '') => {
     return fallback;
   }
 
-  return String(value).replaceAll("|", "\\|");
+  return String(value);
 };
 
 const getSummary = (item, fallback = '') => {
@@ -100,8 +100,8 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
     })
     .forEach((item) => {
       if (item.kind === 'field' && item.privacy !== 'private') {
-        table += `| ${normalizeText(item.name, '-')}`;
-        table += ` | ${renderType(item.type?.text, typesMap)}`;
+        table += `| ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}`;
+        table += ` | ${renderType(item.type?.text, typesMap).replaceAll("|", "\\|")}`;
         table += ` | \`${normalizeText(item.default, '-')}\``;
 
         let summary = getSummary(item);
@@ -119,7 +119,7 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
   return table;
 };
 
-const buildPropertyDetails = (members = [], typesMap = new Map()) => {
+const buildPropertyDetails = (members = [], typesMap = new Map(), hasParent = false) => {
   let details = '';
 
   members
@@ -130,7 +130,7 @@ const buildPropertyDetails = (members = [], typesMap = new Map()) => {
     })
     .forEach((item) => {
       if (item.kind === 'field' && item.privacy !== 'private') {
-        details += `#### ${normalizeText(item.name, '-')}\n\n`;
+        details += `####${hasParent ? '#' : ''} ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}\n\n`;
         if (item.deprecated) {
           details += `**Deprecated**: ${item.deprecated}\n\n`;
         }
@@ -143,7 +143,25 @@ const buildPropertyDetails = (members = [], typesMap = new Map()) => {
   return details;
 };
 
-const buildTypes = (typesMap = new Map()) => {
+const buildEventsDetails = (events = [], typesMap = new Map(), hasParent = false) => {
+  let details = '';
+
+  events
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      details += `####${hasParent ? '#' : ''} ${normalizeText(item.name, '-')}\n\n`;
+      details += `${normalizeText(item.description, '')}\n\n`;
+      details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
+    });
+
+  return details;
+};
+
+const buildTypes = (typesMap = new Map(), hasParent = false) => {
   if (!typesMap.size) {
     return 'No types documented.\n';
   }
@@ -152,7 +170,7 @@ const buildTypes = (typesMap = new Map()) => {
   Array.from(typesMap.entries())
     .sort(([left], [right]) => left.localeCompare(right))
     .forEach(([typeName, parsedType]) => {
-      types += `#### ${typeName}\n\n`;
+      types += `####${hasParent ? '#' : ''} ${typeName}\n\n`;
       types += `\`${normalizeText(parsedType, 'unknown')}\`\n\n`;
     });
 
@@ -187,21 +205,30 @@ components.forEach(({ declaration, packageName }) => {
     mkdirSync(docsDirPath, { recursive: true });
   }
 
+  const hasParent = Boolean(declaration.parent);
+
   try {
     copyFileSync(new URL(`../packages/${packageName}/docs/usage.md`, import.meta.url), new URL('./usage.md', docsDir));
   } catch (error) {
-    console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    if (!hasParent) {
+      // We assume the parent's docs cover usage, a11y and examples
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
   try {
     copyFileSync(new URL(`../packages/${packageName}/docs/accessibility.md`, import.meta.url), new URL('./accessibility.md', docsDir));
 
   } catch (error) {
-    console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    if (!hasParent) {
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
   try {
     copyFileSync(new URL(`../packages/${packageName}/docs/examples.md`, import.meta.url), new URL('./examples.md', docsDir));
   } catch (error) {
-    console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    if (!hasParent) {
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
 
   const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
@@ -211,15 +238,28 @@ components.forEach(({ declaration, packageName }) => {
   const componentName = declaration.name.replace(COMPONENT_CLASS_PREFIX, '');
   const description = normalizeText(declaration.description, 'No description available.');
 
-  const typesMap = buildTypesMap(declaration.members);
+  const typesMap = buildTypesMap([...declaration.members, ...(declaration.events || [])]);
   const propertyTable = buildPropertyTable(declaration.members, typesMap);
-  const propertyDetails = buildPropertyDetails(declaration.members, typesMap);
-  const types = buildTypes(typesMap);
+  const propertyDetails = buildPropertyDetails(declaration.members, typesMap, hasParent);
+  const types = buildTypes(typesMap, hasParent);
 
-  let apiDocs = '## API Documentation\n\n';
-  apiDocs += `### Properties\n\n${propertyTable}\n`;
-  apiDocs += `### Property Details\n\n${propertyDetails || 'No public fields documented.\n\n'}`;
-  apiDocs += `### Types\n\n${types}`;
+  let apiDocs = `##${hasParent ? '#' : ''} \`<${declaration.tagName}>\` API\n\n`;
+  if (!hasParent) {
+    // don't repeat the message for child components
+    apiDocs += 'Unless otherwise noted all properties are HTML attributes (as opposed to JavaScript object properties).\n\n';
+  }
+  apiDocs += `###${hasParent ? '#' : ''} Properties\n\n${propertyTable}\n`;
+  apiDocs += `###${hasParent ? '#' : ''} Property Details\n\n${propertyDetails || 'No public fields documented.\n\n'}`;
+
+  if (declaration.events) {
+    const eventsDetails = buildEventsDetails(declaration.events, typesMap, hasParent);
+    apiDocs += `###${hasParent ? '#' : ''} Events\n\n`;
+    apiDocs += `${eventsDetails}\n\n`;
+  }
+
+  if (typesMap.size) {
+    apiDocs += `###${hasParent ? '#' : ''} Types\n\n${types}`;
+  }
 
   let generatedDocument = `# ${componentName} (${declaration.tagName})\n\n`;
   generatedDocument += `## Description\n\n${description}\n\n`;

@@ -9,7 +9,7 @@ import { styles } from '../tabs/styles.js';
  * Tab panel component that holds content for individual tabs.
  * Each tab panel should have a name that matches a corresponding tab.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
+ * @parent w-tabs
  */
 export class WarpTabPanel extends LitElement {
   static styles = [
@@ -41,13 +41,22 @@ export class WarpTabPanel extends LitElement {
   }
 
   /**
+   * Required so `<w-tab>` has something to target.
+   */
+  @property({ attribute: 'id', reflect: true })
+  id!: string;
+
+  /**
    * Whether this panel is active (visible).
    * Set by parent w-tabs via the _parentActive property.
+   * 
+   * @internal
    */
   @property({ type: Boolean })
   set active(value: boolean) {
     this._ownActive = value;
   }
+  /** @internal */
   get active(): boolean {
     return this._parentActive ?? this._ownActive ?? false;
   }
@@ -57,10 +66,7 @@ export class WarpTabPanel extends LitElement {
    * Internal active state managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: false })
   _parentActive: boolean | undefined;
 
@@ -68,9 +74,6 @@ export class WarpTabPanel extends LitElement {
    * Internal aria-labelledby managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
    * @internal
-   
-   * @summary
-   * @description
   */
   @property({ attribute: false })
   _parentAriaLabelledBy: string | undefined;
