@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { css, html, LitElement, nothing, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
 import { activateI18n } from '../i18n';
@@ -176,6 +176,21 @@ class WarpButton extends FormControlMixin(LitElement) {
   @property({ reflect: true })
   value: string;
 
+  /**
+   * The [commandfor HTML attribute](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#html_attributes) for Invoker Commands.
+   */
+  @property()
+  commandfor: string;
+  
+  /**
+   * The [command HTML attribute](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#html_attributes) for Invoker Commands.
+   */
+  @property()
+  command: string;
+
+  @query('button')
+  private buttonEl: HTMLButtonElement | null;
+
   private ariaValueTextLoading: string;
 
   // capture the initial value using connectedCallback and #initialValue
@@ -209,9 +224,30 @@ class WarpButton extends FormControlMixin(LitElement) {
     this.#initialValue = this.value;
   }
 
+  /**
+   * Traverse up the shadow roots looking for the ID to support use inside other Lit components.
+   */
+  private closestWithId(id: string): HTMLElement | null {
+    let root: ShadowRoot | null = this.shadowRoot;
+    let el: HTMLElement | null = null;
+    try {
+      while (root) {
+        el = root.getElementById(id);
+        if (el) return el;
+        
+        root = (root.getRootNode() as ShadowRoot).host?.getRootNode() as ShadowRoot | null;
+      }
+    } catch {}
+    return document.getElementById(id);
+  }
+
   firstUpdated() {
     if (this.autofocus && !this.href) {
       setTimeout(() => this.focus(), 0);
+    }
+    if (this.buttonEl && this.commandfor) {
+      // @ts-ignore It does exist in newer DOM
+      this.buttonEl.commandForElement = this.closestWithId(this.commandfor);
     }
   }
 
@@ -249,6 +285,8 @@ class WarpButton extends FormControlMixin(LitElement) {
             type=${this.type || 'button'}
             class=${ifDefined(this.buttonClass)}
             @click="${this._handleButtonClick}"
+            commandfor=${ifDefined(this.commandfor)}
+            command=${ifDefined(this.command)}
           >
             <slot></slot>
           </button>
