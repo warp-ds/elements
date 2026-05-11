@@ -108,7 +108,7 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
         if (item.deprecated && !summary) {
           summary = `**Deprecated**: ${item.deprecated}`;
         } else if (item.deprecated && summary) {
-          summary = `${summary}. **Deprecated**: ${item.deprecated}`;
+          summary = `${summary}${summary.endsWith('.') ? '' : '.'} **Deprecated**: ${item.deprecated}`;
         } else if (!summary) {
           summary = "-";
         }
