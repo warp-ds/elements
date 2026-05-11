@@ -266,3 +266,50 @@ export const TestCase: Story = {
     );
   },
 };
+
+export const TestCase12: Story = {
+  render() {
+    const [fromValue, setFromValue] = useState("");
+    const [toValue, setToValue] = useState("");
+        const handleReset = () => {
+            setFromValue("")
+            setToValue("")
+        }
+    return (
+      <>
+                <button onClick={handleReset} >Reset</button>
+        <form
+          id="overunder"
+          style={{ marginBottom: 16 }}
+          lang="nb"
+          onInput={(val) => {
+            const formData = new FormData(val.currentTarget);
+            setFromValue(formData.get('from') as unknown as string);
+            setToValue(formData.get('to') as unknown as string);
+          }}
+        >
+          <Slider label="Pris" min="0" max="700000">
+            <SliderThumb slot="from" aria-label="Fra pris" name="from" value={fromValue} />
+            <SliderThumb
+              slot="to"
+              aria-label="Til pris"
+              aria-description="700000 inkluderer prisen derfra og opp"
+              name="to"
+              value={toValue}
+            />
+          </Slider>
+        </form>
+        <p>Drag the slider to show the value below. See the Code tab for how to format the labels.</p>
+        <output>
+          <dl>
+            <dt>From:</dt>
+            <dd>{fromValue}</dd>
+            <dt>To:</dt>
+            <dd>{toValue}</dd>
+          </dl>
+        </output>
+      </>
+    );
+  },
+};
+
