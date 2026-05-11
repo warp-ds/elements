@@ -1,0 +1,5 @@
+import{n as e}from"./chunk-DnJy8xQt.js";import{C as t,Mt as n,Ot as r,Pt as i,S as a,kt as o,x as s}from"./iframe-DVGjv2S6.js";import{n as c,t as l}from"./if-defined-Dv8n1asE.js";var u,d=e((()=>{t(),r(),l(),u=class extends o{static properties={show:{type:Boolean,reflect:!0},_removeElement:{type:Boolean,state:!0}};constructor(){super(),this.show=!1,this._mounted=!1,this._removeElement=!1}willUpdate(){this._mounted||(this._removeElement=!this.show),this.show&&this._removeElement&&(this._removeElement=!1)}updated(){if(this._wrapper){if(!this._mounted){this._mounted=!0;return}this.show&&a(this._wrapper),!this.show&&!this._removeElement&&s(this._wrapper,()=>this._removeElement=!0)}}get _wrapper(){return this??null}static styles=[i`
+      :host {
+        display: block;
+      }
+    `];render(){return n`<div aria-hidden=${c(this.show?void 0:`true`)}>${this._removeElement?n``:n`<slot></slot>`}</div>`}},customElements.get(`w-expand-transition`)||customElements.define(`w-expand-transition`,u)}));export{d as t};
