@@ -231,9 +231,19 @@ components.forEach(({ declaration, packageName }) => {
     }
   }
 
+  try {
+    copyFileSync(new URL(`../packages/${packageName}/docs/styling.md`, import.meta.url), new URL('./styling.md', docsDir));
+  } catch (error) {
+    if (!hasParent) {
+      // We assume the parent's docs cover usage, a11y, styling and examples
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, styling.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
+  }
+
   const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
   const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
   const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const stylingContent = readOptionalFile(new URL('./styling.md', docsDir));
 
   const componentName = declaration.name.replace(COMPONENT_CLASS_PREFIX, '');
   const description = normalizeText(declaration.description, 'No description available.');
@@ -274,6 +284,10 @@ components.forEach(({ declaration, packageName }) => {
 
   if (examplesContent) {
     generatedDocument += `${examplesContent}\n\n`;
+  }
+  
+  if (stylingContent) {
+    generatedDocument += `${stylingContent}\n\n`;
   }
 
   generatedDocument += apiDocs;

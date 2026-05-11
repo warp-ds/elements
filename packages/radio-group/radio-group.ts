@@ -7,7 +7,7 @@ import { property, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 import '../radio/radio.js';
-import type { WRadio } from '../radio/radio.js';
+import type { WarpRadio } from '../radio/radio.js';
 import { activateI18n } from '../i18n';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -29,31 +29,74 @@ const REQUIRED_MESSAGE = () =>
   });
 
 /**
+ * Radios allow users to select a single option from a list of choices.
+ * 
+ * Use with `w-radio`.
+ * 
  * @slot label - Alternative to the `label` attribute should you need custom HTML.
  * @slot help-text - Alternative to the `help-text` attribute should you need custom HTML.
  */
-export class WRadioGroup extends FormControlMixin(LitElement) {
+export class WarpRadioGroup extends FormControlMixin(LitElement) {
   static styles = [hostStyles, styles];
 
-  @state() hasInteracted = false;
+  /** @internal */
+  @state()
+  hasInteracted = false;
+
   private hasWarnedMissingName = false;
   private autoTabIndex = false;
 
-  @property() label = '';
-  @property({ attribute: 'help-text' }) helpText = '';
+  /**
+   * Label for the radio group.
+   */
+  @property()
+  label = '';
+  
+  /**
+   * Help text for the radio group.
+   * 
+   * If you set `required` and `invalid` the group gets a default error message, but you can override it with this attribute.
+   */
+  @property({ attribute: 'help-text' })
+  helpText = '';
 
-  @property({ type: Boolean, reflect: true }) optional = false;
-  @property({ type: Boolean, reflect: true }) invalid = false;
-  @property({ reflect: true }) name: string | null = null;
-  @property({ type: Boolean, reflect: true }) disabled = false;
-  @property({ type: Boolean, reflect: true }) required = false;
+  /**
+   * Whether to show optional text next to the label. 
+   */
+  @property({ type: Boolean, reflect: true })
+  optional = false;
+  
+  /**
+   * Marks the radio group as invalid.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
+  
+  /**
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the select when submitting the form.
+   */
+  @property({ reflect: true })
+  name: string | null = null;
+  
+  /**
+   * Disables the radio group and all child radios.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+  
+  /**
+   * Makes selecting a radio in the the group required.
+   */
+  @property({ type: Boolean, reflect: true })
+  required = false;
 
   private defaultCheckedValue: string | null | undefined = undefined;
   private slottedHelpText: string | null = null;
-  private readonly nameManagedRadios = new WeakSet<WRadio>();
-  private readonly disabledManagedRadios = new WeakSet<WRadio>();
+  private readonly nameManagedRadios = new WeakSet<WarpRadio>();
+  private readonly disabledManagedRadios = new WeakSet<WarpRadio>();
   private unsubscribeI18n?: () => void;
 
+  /** @internal */
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
   constructor() {
@@ -63,8 +106,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.addEventListener('invalid', this.handleInvalid);
   }
 
+  /** @internal */
   get validationTarget() {
-    const radio = this.querySelector<WRadio>(':is(w-radio):not([disabled])');
+    const radio = this.querySelector<WarpRadio>(':is(w-radio):not([disabled])');
     return radio ?? undefined;
   }
 
@@ -102,6 +146,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
   resetFormControl() {
     const defaultValue = this.defaultCheckedValue ?? null;
     this.getAllRadios().forEach((radio) => {
@@ -113,7 +158,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 
   private handleRadioClick = (e: Event) => {
-    const clickedRadio = (e.target as HTMLElement).closest<WRadio>('w-radio');
+    const clickedRadio = (e.target as HTMLElement).closest<WarpRadio>('w-radio');
     if (!clickedRadio || clickedRadio.disabled || this.disabled) return;
 
     const oldValue = this.getCheckedValue();
@@ -127,7 +172,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   };
 
   private getAllRadios() {
-    return [...this.querySelectorAll<WRadio>('w-radio')];
+    return [...this.querySelectorAll<WarpRadio>('w-radio')];
   }
 
   private getCheckedValue(): string | null {
@@ -135,11 +180,11 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     return checked?.value ?? null;
   }
 
-  private getEnabledRadios(radios = this.getAllRadios()): WRadio[] {
+  private getEnabledRadios(radios = this.getAllRadios()): WarpRadio[] {
     return radios.filter((radio) => !radio.disabled);
   }
 
-  private selectSingleRadio(selected: WRadio, radios = this.getAllRadios()): void {
+  private selectSingleRadio(selected: WarpRadio, radios = this.getAllRadios()): void {
     radios.forEach((radio) => {
       const isSelected = radio === selected;
       radio.checked = isSelected;
@@ -193,7 +238,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.syncTabOrder(radios);
   }
 
-  private syncRadioDisabledState(radio: WRadio): void {
+  private syncRadioDisabledState(radio: WarpRadio): void {
     if (this.disabled) {
       if (!radio.disabled) {
         radio.disabled = true;
@@ -208,7 +253,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
   }
 
-  private syncTabOrder(radios: WRadio[]) {
+  private syncTabOrder(radios: WarpRadio[]) {
     // Use non-reflecting _groupTabIndex property to avoid DOM changes during hydration
     if (this.disabled) {
       radios.forEach((radio) => (radio._groupTabIndex = -1));
@@ -264,6 +309,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
   public focus(options?: FocusOptions) {
     if (this.disabled) return;
 
@@ -277,11 +323,13 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     }
   }
 
+  /** @internal */
   checkValidity() {
     this.updateValidity();
     return this.internals.checkValidity();
   }
 
+  /** @internal */
   reportValidity() {
     this.hasInteracted = true;
     this.updateValidity();
@@ -343,7 +391,7 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     this.syncChildInvalid(false);
   }
 
-  private normalizeCheckedRadios(radios: WRadio[]) {
+  private normalizeCheckedRadios(radios: WarpRadio[]) {
     const checkedRadio = radios.find((radio) => radio.checked);
     if (!checkedRadio) return;
     radios.forEach((radio) => {
@@ -451,12 +499,18 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
   }
 }
 
+/**
+ * @deprecated Exported for backwards compatibility only, use `WarpRadioGroup`
+ */
+export const WRadioGroup = WarpRadioGroup;
+
+
 if (!customElements.get('w-radio-group')) {
-  customElements.define('w-radio-group', WRadioGroup);
+  customElements.define('w-radio-group', WarpRadioGroup);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'w-radio-group': WRadioGroup;
+    'w-radio-group': WarpRadioGroup;
   }
 }
