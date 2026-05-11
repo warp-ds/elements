@@ -64,16 +64,15 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   }
 
   get backButton() {
-    const backLabel = i18n._({
-      id: 'modal.aria.back',
-      message: 'Back',
-      comment: 'Aria label for the back button in modal',
-    });
     return this.back && !this._hasTopContent // Not showing back button when there is a top image
       ? html`<button
           type="button"
-          title="${backLabel}"
-          aria-label="${backLabel}"
+          title=""
+          aria-label="${i18n._({
+            id: 'modal.aria.back',
+            message: 'Back',
+            comment: 'Aria label for the back button in modal',
+          })}"
           class="header-button header-button-left"
           @click="${this.emitBack}">
           <w-icon name="ArrowLeft" size="small" locale="${detectLocale()}" style="display: flex;" class="flex"></w-icon>
@@ -82,16 +81,15 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   }
   get closeButton() {
     if (this.noClose) return nothing;
-    const closeLabel = i18n._({
-      id: 'modal.aria.close',
-      message: 'Close',
-      comment: 'Aria label for the close button in modal',
-    });
     return html`<div class="header-close-button-container">
         <w-button
             type="button"
-            title="${closeLabel}"
-            aria-label="${closeLabel}"
+            title=""
+            aria-label="${i18n._({
+              id: 'modal.aria.close',
+              message: 'Close',
+              comment: 'Aria label for the close button in modal',
+            })}"
             variant="pill"
             small=""
             @click="${this.close}">
