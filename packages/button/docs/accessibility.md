@@ -30,18 +30,6 @@ If a button does not have visible text, include text for assistive technologies 
 
 The accessible text should describe the action, not the icon shape.
 
-### Loading State
-
-When `loading` is set, the component exposes a screen-reader-only progress indicator with localized loading text.
-
-Keep the visible button text meaningful while the action is in progress:
-
-```html
-<w-button variant="primary" loading>Saving</w-button>
-```
-
-Do not use loading for long-running status updates unless the result is also communicated elsewhere on the page.
-
 ### Disabled Buttons
 
 Avoid disabled buttons. A disabled control can prevent keyboard users from reaching it and often does not explain what must happen before the action becomes available.

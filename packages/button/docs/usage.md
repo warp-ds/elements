@@ -23,7 +23,7 @@ Choose the variant based on the action's priority and context:
 - `utility`: compact utility actions
 - `utilityQuiet`: low-emphasis utility actions
 - `quiet`: low-emphasis actions, often near other buttons
-- `link`: action styled like an inline link
+- `link`: (@deprecated) action styled like an inline link
 - `pill`: circular icon-style controls
 - `overlay`, `overlayQuiet`, `overlayInverted`, `overlayInvertedQuiet`: controls placed on top of media or elevated surfaces
 
@@ -74,6 +74,10 @@ Use `type="submit"` to submit the containing form and `type="reset"` to reset it
   <w-button type="reset">Reset</w-button>
 </form>
 ```
+
+### Link Styled As Button
+
+Use an `a` tag if you need a link that looks and behaves like a link, do not use `w-button`.
 
 ### Link Styled As Button
 
