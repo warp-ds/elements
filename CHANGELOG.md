@@ -1,3 +1,10 @@
+## [2.9.1-next.6](https://github.com/warp-ds/elements/compare/v2.9.1-next.5...v2.9.1-next.6) (2026-05-11)
+
+
+### Bug Fixes
+
+* **react wrappers:** ensure correct mapping from camel case to kebab case in wrappers ([#647](https://github.com/warp-ds/elements/issues/647)) ([1b129e0](https://github.com/warp-ds/elements/commit/1b129e019f99a9181a83f4e74b377318b577f0f9))
+
 ## [2.9.1-next.5](https://github.com/warp-ds/elements/compare/v2.9.1-next.4...v2.9.1-next.5) (2026-05-08)
 
 
