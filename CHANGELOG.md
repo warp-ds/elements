@@ -1,3 +1,16 @@
+## [2.9.1](https://github.com/warp-ds/elements/compare/v2.9.0...v2.9.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* **box:** accessibility improvements and documentation ([#629](https://github.com/warp-ds/elements/issues/629)) ([ec52e36](https://github.com/warp-ds/elements/commit/ec52e365b74eca6ecac609de22044eb66f2665ed))
+* **button:** wrap react button wrapper and map camel case to snake case ([#646](https://github.com/warp-ds/elements/issues/646)) ([600a59c](https://github.com/warp-ds/elements/commit/600a59cca3f764a0743e6a58fe4d0a14125d53ba))
+* don't prevent default unless there's something to prevent ([97ba77a](https://github.com/warp-ds/elements/commit/97ba77a8199257e010410e0ae6bdd74aaf589818)), closes [#641](https://github.com/warp-ds/elements/issues/641)
+* fix a bug where all input would be stopped ([#644](https://github.com/warp-ds/elements/issues/644)) ([1468a03](https://github.com/warp-ds/elements/commit/1468a034b58fd5574af95a156117e20d21da09de))
+* **pagination:** add missing pagination.label.current-page ([#634](https://github.com/warp-ds/elements/issues/634)) ([d7b612a](https://github.com/warp-ds/elements/commit/d7b612a48fa0892b5b6b3a0ad358c36b9643637a))
+* **react wrappers:** ensure correct mapping from camel case to kebab case in wrappers ([#647](https://github.com/warp-ds/elements/issues/647)) ([1b129e0](https://github.com/warp-ds/elements/commit/1b129e019f99a9181a83f4e74b377318b577f0f9))
+* submit the associated form on Enter like native form elements ([#630](https://github.com/warp-ds/elements/issues/630)) ([e0fdb79](https://github.com/warp-ds/elements/commit/e0fdb79d5881a2e98621332b3b0037af76fec1f8))
+
 ## [2.9.1-next.6](https://github.com/warp-ds/elements/compare/v2.9.1-next.5...v2.9.1-next.6) (2026-05-11)
 
 
