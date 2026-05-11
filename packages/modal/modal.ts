@@ -10,20 +10,36 @@ import { ProvidesCanCloseToSlotsMixin } from './util.js';
 /**
  * Modals (or dialogs) display important information that users need to acknowledge.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-modal--docs)
- *
  * @slot header - Typically where you would use the `w-modal-header` component.
  * @slot content - The main content of the modal.
  * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.
  */
-export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
-  @property({ type: Boolean }) show = false;
-  @property({ type: String, attribute: 'content-id' }) contentId: string;
-  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' }) ignoreBackdropClicks = false;
+export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
+  /**
+   * Controls if the modal should show or hide.
+   * 
+   * You can also call the `open()` and `close()` methods.
+   */
+  @property({ type: Boolean })
+  show = false;
 
-  @query('.dialog-el') dialogEl: HTMLDialogElement;
-  @query('.dialog-inner-el') dialogInnerEl: HTMLElement;
-  @query('.content-el') contentEl: HTMLElement;
+  @property({ type: String, attribute: 'content-id' })
+  contentId: string;
+
+  /**
+   * Ignores clicks to the backdrop when set
+   */
+  @property({ type: Boolean, attribute: 'ignore-backdrop-clicks' })
+  ignoreBackdropClicks = false;
+
+  @query('.dialog-el')
+  private dialogEl: HTMLDialogElement;
+
+  @query('.dialog-inner-el')
+  private dialogInnerEl: HTMLElement;
+
+  @query('.content-el')
+  private contentEl: HTMLElement;
 
   constructor() {
     super();
@@ -31,6 +47,20 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
     this.closeOnBackdropClick = this.closeOnBackdropClick.bind(this);
     this.eventPreventer = this.eventPreventer.bind(this);
     this.modifyBorderRadius = this.modifyBorderRadius.bind(this);
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    this.addEventListener('command', (event: Event) => {
+      const command = (event as unknown as { command: string }).command;
+      if (command === '--show-modal') {
+        this.open();
+      } else if (command === '--close' || command === '--confirm') {
+        // No difference for us, but the user can listen for the same event and treat it differently
+        this.close();
+      }
+    });
   }
 
   async open() {
@@ -83,7 +113,7 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
     this[this.show ? 'open' : 'close']();
   }
 
-  handleListeners(verb = 'addEventListener') {
+  private handleListeners(verb = 'addEventListener') {
     // HACK: escape normally fires 'cancel' but 'cancel' can only be intercepted once (browser bug/quirk)
     document[verb]('keydown', this.interceptEscape);
     // Using 'mousedown' instead of 'click' because mouse-up events on the backdrop also trigger 'click'
@@ -96,22 +126,22 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
     this.dialogInnerEl[verb]('transitionend', this.modifyBorderRadius);
   }
 
-  eventPreventer(evt: Event) {
+ private eventPreventer(evt: Event) {
     evt.preventDefault();
   }
 
-  closeOnBackdropClick(evt: MouseEvent) {
+  private closeOnBackdropClick(evt: MouseEvent) {
     if (this.dialogEl === evt.target) this.close();
   }
 
-  interceptEscape(evt: KeyboardEvent) {
+  private interceptEscape(evt: KeyboardEvent) {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       this.close();
     }
   }
 
-  modifyBorderRadius() {
+  private modifyBorderRadius() {
     if (this.dialogInnerEl.scrollHeight * 1.02 > innerHeight) this.dialogInnerEl.style.borderRadius = '0px';
     else this.dialogInnerEl.style.borderRadius = null;
   }
@@ -244,6 +274,9 @@ export class ModalMain extends ProvidesCanCloseToSlotsMixin(LitElement) {
   ];
 }
 
+/** @deprecated Exported for backwards compatibility. Use WarpModal. */
+export const ModalMain = WarpModal;
+
 if (!customElements.get('w-modal')) {
-  customElements.define('w-modal', ModalMain);
+  customElements.define('w-modal', WarpModal);
 }

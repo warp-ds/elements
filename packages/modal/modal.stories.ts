@@ -4,9 +4,8 @@ import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 
 import { prespread } from '../../.storybook/utilities.js';
-import type { ModalHeader as ModalHeaderType } from '../modal-header/modal-header.js';
+import type { WarpModalHeader as ModalHeaderType } from '../modal-header/modal-header.js';
 import type { WarpModal, WarpModalFooter, WarpModalHeader } from './index.js';
-import type { ModalMain } from './modal.js';
 import './modal.js';
 import '../modal-header/modal-header.js';
 import '../modal-footer/modal-footer.js';
@@ -33,9 +32,7 @@ export const Default: StoryObj = {
   args: {},
   render() {
     return html`
-      <w-button id="modal-open-button-one" aria-haspopup="dialog"
-        >Open a modal</w-button
-      >
+      <w-button id="modal-open-button-one" aria-haspopup="dialog">Open a modal</w-button>
       <w-modal id="example-modal-one">
         <w-modal-header
           id="modal-header-one"
@@ -128,7 +125,7 @@ export const Default: StoryObj = {
     const closeButton = canvasElement.querySelector('#modal-close-button-one');
     const toggleBackButton = canvasElement.querySelector('#modal-toggle-back-one');
     const cancelButton = canvasElement.querySelector('#modal-close-button-cancel');
-    const modal: ModalMain = canvasElement.querySelector('#example-modal-one');
+    const modal: WarpModal = canvasElement.querySelector('#example-modal-one');
     const modalHeader: ModalHeaderType = canvasElement.querySelector('#modal-header-one');
 
     if (openButton && modal) {
@@ -154,6 +151,92 @@ export const Default: StoryObj = {
     },
   },
 };
+
+export const InvokerCommands: StoryObj = {
+  args: {},
+  render() {
+    return html`
+      <w-button commandfor="invoker-modal" command="--show-modal" aria-haspopup="dialog">Open a modal</w-button>
+      <w-modal id="invoker-modal">
+        <w-modal-header
+          id="modal-header-one"
+          slot="header"
+          title="An example modal"
+        ></w-modal-header>
+        <div slot="content">
+          <h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
+          <p>
+            I bomb atomically, Socrates' philosophies and hypotheses Can't
+            define how I be droppin' these mockeries Lyrically perform armed
+            robbery Flee with the lottery, possibly they spotted me
+            Battle-scarred Shogun, explosion when my pen hits tremendous
+            Ultra-violet shine blind forensics I inspect view through the future
+            see millennium Killa Beez sold fifty gold, sixty platinum Shackling
+            the masses with drastic rap tactics Graphic displays melt the steel
+            like blacksmiths Black Wu jackets, Queen Beez ease the guns in
+            Rumble with patrolmen, tear gas laced the function Heads by the
+            score take flight, incite a war Chicks hit the floor, diehard fans
+            demand more Behold the bold soldier, control the globe slowly
+            Proceeds to blow, swingin' swords like Shinobi Stomp grounds and
+            pound footprints in solid rock Wu got it locked, performin' live on
+            your hottest block
+          </p>
+          <p>
+            First I'm gonna getcha, once I gotcha, I gat-cha, You could never
+            capture the Method Man's stature. So uhh, tic toc and keep ticking,
+            while I get you flipping off what I'm kicking. Yes, the rhythm, the
+            rebel, alone in my level heat it up past the boiling point of metal.
+            Shackling the masses with drastic rap tactics, graphic displays melt
+            the steel like blacksmiths. My beats travel like a vortex through
+            your spine, to the top of your cerebral cortex. Yes, the rhythm, the
+            rebel, alone in my level heat it up past the boiling point of metal.
+            Small change, they putting shame in the game. Murderous material,
+            made by a madman, it's the mic wrecker, Inspector, bad man.
+          </p>
+          <p>
+            My beats travel like a vortex through your spine, to the top of your
+            cerebral cortex. The rebel, I make more noise than heavy metal. Now,
+            lo and behold, another deadly episode, bound to catch another charge
+            when I explode Perpendicular to the square we stay in gold like
+            Flair, escape from your dragon's lair in particular. Handcuffed in
+            the back of a bus, forty of us. Slammin a hype verse til ya head
+            burst. Handcuffed in the back of a bus, forty of us. I bomb
+            atomically Socrates' philosophies and hypothesis can't define how I
+            be dropping these mockeries. I be that insane one from the psycho
+            ward, I'm on the trigger, plus I got the Wu-Tang sword. Step through
+            your section with the Force like Luke Skywalker, rhyme author,
+            orchestrate mind torture.
+          </p>
+          <p>
+            It was the night before New Year's all through the projects, not a
+            handgun was silent, not even a Tec. I smoke on the mic like smoking
+            Joe Frazier, the hell raiser, raising hell with the flavor. The Wu
+            is comin thru, the outcome is critical, Muckin wit my style, is sort
+            of like a Miracle. We got stick-up kids, corrupt cops, and pop
+            rocks. Step through your section with the Force like Luke Skywalker,
+            rhyme author, orchestrate mind torture. Rae got it going on pal,
+            call me the rap assassinator, rhymes rugged and built like
+            Schwarzenegger.
+          </p>
+        </div>
+        <w-modal-footer slot="footer">
+          <div class="flex gap-16">
+            <w-button variant="secondary" commandfor="invoker-modal" command="--close">Cancel</w-button>
+            <w-button variant="primary" id="invoker-confirm">Confirm</w-button>
+          </div>
+        </w-modal-footer>
+      </w-modal>
+    `;
+  },
+  parameters: {
+    docs: {
+      story: {
+        autoplay: true,
+      },
+    },
+  },
+};
+
 
 export const WithImage: StoryObj = {
   args: {},
@@ -205,7 +288,7 @@ export const WithImage: StoryObj = {
 
     const openButton = canvasElement.querySelector('#modal-open-button-two');
     const closeButton = canvasElement.querySelector('#modal-close-button-two');
-    const modal: ModalMain = canvasElement.querySelector('#example-modal-two');
+    const modal: WarpModal = canvasElement.querySelector('#example-modal-two');
 
     if (openButton && modal) {
       openButton.addEventListener('click', () => modal.open());
@@ -279,3 +362,4 @@ export const ModalFooter: StoryObj<typeof modalFooterArgs> = {
     },
   },
 };
+

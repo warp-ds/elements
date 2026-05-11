@@ -1,6 +1,7 @@
 ## Examples
 
 
+
 ### With a titlebar
 
 <elements-example>
@@ -42,27 +43,25 @@
 <elements-example>
 
 ```html
-<div>
-  <w-button aria-haspopup="dialog">
+<w-button aria-haspopup="dialog" commandfor="my-modal" command="show-modal">
     Open a modal
-  </w-button>
-  <w-modal>
+</w-button>
+<w-modal id="my-modal">
     <w-modal-header slot="header" title="Look a doggo!">
-      <img
+        <img
         slot="top"
         class="h-[256] w-full object-cover"
         src="/pages/public/unocssmusical.jpeg"
         alt="AI-generated picture of a band in colourful setup"
-      >
+        >
     </w-modal-header>
     <div slot="content">
-      <p>I bomb atomically, Socrates' philosophies and hypotheses...</p>
+        <p>I bomb atomically, Socrates' philosophies and hypotheses...</p>
     </div>
     <w-modal-footer slot="footer">
-      <w-button variant="primary" id="modal-close-button-two">OK</w-button>
+        <w-button variant="primary" id="modal-close-button-two">OK</w-button>
     </w-modal-footer>
-  </w-modal>
-</div>
+</w-modal>
 ```
 
 </elements-example>
