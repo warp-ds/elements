@@ -1,3 +1,10 @@
+## [2.9.2-next.1](https://github.com/warp-ds/elements/compare/v2.9.1...v2.9.2-next.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* **radio-group:** give precedence to help-text if invalid + required ([#652](https://github.com/warp-ds/elements/issues/652)) ([68373cd](https://github.com/warp-ds/elements/commit/68373cd036e85204d07c97f3480f5128b14f1d97))
+
 ## [2.9.1](https://github.com/warp-ds/elements/compare/v2.9.0...v2.9.1) (2026-05-11)
 
 
