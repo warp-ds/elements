@@ -97,7 +97,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   hint: string;
 
   /** 
-   * The content to disply as the label.
+   * The content to display as the label.
    */
   @property({ reflect: true })
   label: string;
