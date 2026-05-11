@@ -403,7 +403,9 @@ export class WRadioGroup extends FormControlMixin(LitElement) {
     const externalInvalid = this.invalid || this.hasAttribute('invalid');
     const showInvalidError = externalInvalid || showRequiredError;
 
-    const helpText = showInvalidError ? REQUIRED_MESSAGE() : this.helpText;
+    const helpText = showInvalidError
+      ? externalInvalid && this.helpText ? this.helpText : REQUIRED_MESSAGE()
+      : this.helpText;
     const shouldShowHelpText = showInvalidError || hasHelpText;
 
     const labelledBy = hasLabel ? 'label' : undefined;
