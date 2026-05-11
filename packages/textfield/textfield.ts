@@ -221,6 +221,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
   @property({ type: Boolean })
   _hasSuffix = false;
 
+  #onKeyDownHandler(e: KeyboardEvent) {
+    if (e.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+    }
+  }
+
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
       this.setValue(this.value);
@@ -355,7 +361,8 @@ class WarpTextField extends FormControlMixin(LitElement) {
             @blur="${this.handler}"
             @change="${this.handler}"
             @input="${this.handler}"
-            @focus="${this.handler}" />
+            @focus="${this.handler}"
+            @keydown="${this.#onKeyDownHandler}" />
         </div>
         <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
         <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>

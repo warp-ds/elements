@@ -105,7 +105,11 @@ export class WCheckbox extends FormControlMixin(LitElement) {
     if (this.disabled) return;
     if (event.defaultPrevented) return;
     if (event.key !== ' ' && event.key !== 'Spacebar' && event.key !== 'Enter') return;
-    if (event.composedPath()[0] === this.input) return;
+    if (event.key === 'Enter' && this.internals.form) {
+      (this.internals.form as HTMLFormElement).requestSubmit();
+      return;
+    }
+        if (event.composedPath()[0] === this.input) return;
     event.preventDefault();
     this.click();
   };

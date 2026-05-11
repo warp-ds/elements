@@ -29,6 +29,9 @@ export default defineConfig({
       instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }],
       viewport: { width: 1024, height: 768 },
     },
+    env: {
+      CI: process.env.CI,
+    },
   },
   optimizeDeps: {
     include: ['@oddbird/css-anchor-positioning/fn'],

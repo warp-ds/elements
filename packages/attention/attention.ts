@@ -3,7 +3,7 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
 import {
-  Directions,
+  Directions as CoreDirections,
   directions,
   opposites,
   useRecompute as recompute,
@@ -28,6 +28,8 @@ import '../button/button.js';
 
 import type { AttentionState } from '@warp-ds/core/attention';
 import type { TemplateResult } from 'lit';
+
+export type Directions = CoreDirections;
 
 const buttonTextSizes = {
   medium: 'text-m leading-[24]',

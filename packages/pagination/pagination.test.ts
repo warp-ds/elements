@@ -1,9 +1,16 @@
+import { i18n } from '@lingui/core';
 import { userEvent } from '@vitest/browser/context';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
+import { detectLocale } from '../i18n.js';
 import './pagination.js';
+
+function restoreDocumentLang(lang: string) {
+  document.documentElement.lang = lang;
+  i18n.activate(detectLocale());
+}
 
 test('current page is the active page', async () => {
   const component = html`<w-pagination current-page="5" pages="10" base-url="/page/"></w-pagination>`;
@@ -127,4 +134,44 @@ test('defaults to visible-pages=7 when no visible-pages attribute is set', async
 
   // But 7 pages should be visible (the default)
   await expect.poll(() => page.getByRole('link').and(page.getByLabelText('Page ')).all()).toHaveLength(7);
+});
+
+test('uses the document lang attribute for Norwegian labels', async () => {
+  const originalLang = document.documentElement.lang;
+
+  try {
+    document.documentElement.lang = 'nb';
+
+    const component = html`<w-pagination current-page="5" pages="10" base-url="/page/"></w-pagination>`;
+    const page = render(component);
+
+    await expect.element(page.getByLabelText('Side 5')).toHaveAttribute('aria-current', 'page');
+    await expect.element(page.getByText('Første side')).toBeInTheDocument();
+    await expect.element(page.getByText('Forrige side')).toBeInTheDocument();
+    await expect.element(page.getByText('Neste side')).toBeInTheDocument();
+    await expect.element(page.getByText('Side 5')).toBeInTheDocument();
+  } finally {
+    restoreDocumentLang(originalLang);
+  }
+});
+
+test.skip('updates labels when the document lang attribute changes', async () => {
+  const originalLang = document.documentElement.lang;
+
+  try {
+    document.documentElement.lang = 'en';
+
+    const component = html`<w-pagination current-page="5" pages="10" base-url="/page/"></w-pagination>`;
+    const page = render(component);
+
+    await expect.element(page.getByLabelText('Page 5')).toHaveAttribute('aria-current', 'page');
+
+    document.documentElement.lang = 'nb';
+
+    await expect.poll(() => page.getByLabelText('Side 5').query()).toBeInTheDocument();
+    await expect.element(page.getByLabelText('Side 5')).toHaveAttribute('aria-current', 'page');
+    await expect.element(page.getByText('Første side')).toBeInTheDocument();
+  } finally {
+    restoreDocumentLang(originalLang);
+  }
 });

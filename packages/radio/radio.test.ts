@@ -1,8 +1,9 @@
 import { html } from 'lit';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './radio.js';
+import { userEvent } from '@vitest/browser/context';
 
 test('checks on click and remains checked on subsequent clicks', async () => {
   render(html`<w-radio value="alpha">Alpha</w-radio>`);
@@ -299,3 +300,27 @@ test('required radio reports validity based on checked state', async () => {
   await expect.poll(() => radio.reportValidity()).toBe(true);
   expect(radio.invalid).toBe(false);
 });
+
+test('submits the associated form when radio has focus and user presses Enter', async () => {
+  const screen = render(html`
+    <form>
+      <w-radio name="group" value="one">One</w-radio>
+      <w-radio name="group" value="two">Two</w-radio>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const onSubmit = vi.fn();
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSubmit();
+  });
+  
+  await userEvent.click(screen.getByText('One'));
+  await userEvent.keyboard('{Space}')
+  await userEvent.keyboard('{Enter}')
+
+  expect(onSubmit).toHaveBeenCalled();
+});
+

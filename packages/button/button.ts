@@ -16,7 +16,7 @@ import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wButtonStyles } from './styles/w-button.styles';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
-type ButtonVariant =
+export type ButtonVariant =
   | 'primary'
   | 'secondary'
   | 'negative'
@@ -47,7 +47,7 @@ const variants: ButtonVariant[] = [
   'overlayInvertedQuiet',
 ];
 
-type ButtonType = 'button' | 'submit' | 'reset';
+export type ButtonType = 'button' | 'submit' | 'reset';
 
 /**
  * Buttons are used to perform actions, widh different visuals for different needs.
