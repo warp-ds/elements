@@ -60,7 +60,7 @@ cancelButton.addEventListener('click', () => modal.close());
 
 In [supported browsers](https://caniuse.com/?search=commandfor) (or [if you include the polyfill](https://github.com/keithamus/invokers-polyfill)) you can use the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) to potentially skip JavaScript alltogether.
 
-The commands you need for `<w-modal>` are:
+The available commands for `<w-modal>` are:
 
 - `--show-modal`
 - `--close`
