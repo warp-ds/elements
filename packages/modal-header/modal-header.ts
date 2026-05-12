@@ -85,6 +85,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
     return this.back && !this._hasTopContent // Not showing back button when there is a top image
       ? html`<button
           type="button"
+          title=""
           aria-label="${i18n._({
             id: 'modal.aria.back',
             message: 'Back',
@@ -102,6 +103,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
     return html`<div class="header-close-button-container">
         <w-button
             type="button"
+            title=""
             aria-label="${i18n._({
               id: 'modal.aria.close',
               message: 'Close',
