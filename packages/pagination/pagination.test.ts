@@ -1,5 +1,5 @@
 import { i18n } from '@lingui/core';
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';

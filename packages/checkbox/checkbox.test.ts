@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
-import { server, userEvent } from '@vitest/browser/context';
+import { server, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-lit';
 
 import './checkbox.js';

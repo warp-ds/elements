@@ -3,7 +3,7 @@ import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import './radio.js';
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 
 test('checks on click and remains checked on subsequent clicks', async () => {
   render(html`<w-radio value="alpha">Alpha</w-radio>`);
