@@ -15,7 +15,11 @@ const meta: Meta<typeof args> = {
   title: 'Forms/Combobox',
   component: 'w-combobox',
   render(args) {
-    return html` <w-combobox ${spread(prespread(args))} .options="${sampleOptions}"></w-combobox> `;
+    return html`
+      <w-combobox ${spread(prespread(args))}>
+        ${sampleOptionElements}
+      </w-combobox>
+    `;
   },
   parameters: {
     docs: {
@@ -44,24 +48,36 @@ const sampleOptions = [
   { value: 'mango', label: 'Mango' },
 ];
 
+const sampleOptionElements = html`
+  <option value="apple">Apple</option>
+  <option value="banana">Banana</option>
+  <option value="orange">Orange</option>
+  <option value="grape">Grape</option>
+  <option value="strawberry">Strawberry</option>
+  <option value="pineapple">Pineapple</option>
+  <option value="mango">Mango</option>
+`;
+
 export const Default: Story = {
   args: {},
   render: () =>
-    html` <w-combobox label="Select a fruit" placeholder="Type to search..." .options="${sampleOptions}"></w-combobox> `,
+    html`
+      <w-combobox label="Select a fruit" placeholder="Type to search...">
+        ${sampleOptionElements}
+      </w-combobox>
+    `,
 };
 
 export const WithValue: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
-    value: 'Apple',
+    value: 'apple',
   },
 };
 
 export const OpenOnFocus: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
     openOnFocus: true,
@@ -70,7 +86,6 @@ export const OpenOnFocus: Story = {
 
 export const WithTextMatching: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
     matchTextSegments: true,
@@ -79,7 +94,6 @@ export const WithTextMatching: Story = {
 
 export const Invalid: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
     value: 'Invalid fruit',
@@ -90,17 +104,15 @@ export const Invalid: Story = {
 
 export const Disabled: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
-    value: 'Apple',
+    value: 'apple',
     disabled: true,
   },
 };
 
 export const Optional: Story = {
   args: {
-    options: sampleOptions,
     label: 'Select a fruit',
     placeholder: 'Type to search...',
     optional: true,
@@ -144,17 +156,19 @@ export const FormSubmission: Story = {
         name="warp-combo-1"
         label="Select a fruit (dynamic)"
         placeholder="Type to search..."
-        .options="${sampleOptions}"
-      ></w-combobox>
+      >
+        ${sampleOptionElements}
+      </w-combobox>
       <br>
       <w-combobox
         id="form-submission"
         name="warp-combo-2"
         label="Select a fruit (dynamic)"
-        value="Banana"
+        value="banana"
         placeholder="Type to search..."
-        .options="${sampleOptions}"
-      ></w-combobox>
+      >
+        ${sampleOptionElements}
+      </w-combobox>
         <button type="reset">Reset</button>
         <button type="submit">Submit</button>
     </form>
