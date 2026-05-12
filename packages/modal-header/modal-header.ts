@@ -16,23 +16,40 @@ import { reset } from '../styles.js';
 /**
  * The header section of a modal, typically where you place the title and a close button.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-modal--docs)
+ * @parent w-modal
  *
  * @slot top - Customize the title bar, for example to have a header image that reaches the modal's edges. See the With Image story for an example.
  */
-export class ModalHeader extends CanCloseMixin(LitElement) {
-  @property({ type: String }) title: string;
-  @property({ type: Boolean }) back = false;
-  @property({ type: Boolean, attribute: 'no-close' }) noClose = false;
-  /** @internal */
-  @state() private _hasTopContent = false;
+export class WarpModalHeader extends CanCloseMixin(LitElement) {
+  /**
+   * A short but descriptive title for the modal
+   */
+  @property({ type: String })
+  title: string;
+  
+  /**
+   * Whether the modal header should have a back button
+   */
+  @property({ type: Boolean })
+  back = false;
+  
+  /**
+   * Lets you hide the close button in the header
+   */
+  @property({ type: Boolean, attribute: 'no-close' })
+  noClose = false;
+  
+  @state()
+  private _hasTopContent = false;
 
-  @query('.title-el') titleEl: HTMLElement;
+  @query('.title-el') 
+  private titleEl: HTMLElement;
 
   constructor() {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
+
   render() {
     return html`
       <div class="header">
@@ -55,7 +72,8 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
       });
     }
   }
-  get titleClasses() {
+
+  private get titleClasses() {
     return [
       'header-title',
       this.back ? 'header-title-with-back-button' : 'header-title-without-back-button',
@@ -63,7 +81,7 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
     ].join(' ');
   }
 
-  get backButton() {
+  private get backButton() {
     return this.back && !this._hasTopContent // Not showing back button when there is a top image
       ? html`<button
           type="button"
@@ -78,7 +96,8 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         </button>`
       : nothing;
   }
-  get closeButton() {
+
+  private get closeButton() {
     if (this.noClose) return nothing;
     return html`<div class="header-close-button-container">
         <w-button
@@ -95,13 +114,16 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
         </w-button>
     </div>`;
   }
-  emitBack() {
+  
+  private emitBack() {
     this.dispatchEvent(new CustomEvent('backClicked', { bubbles: true, composed: true }));
   }
-  handleTopSlotChange(slotEvent) {
-    const topContent = slotEvent.target.assignedElements({ flatten: true });
+
+  private handleTopSlotChange(slotEvent: Event) {
+    const topContent = (slotEvent.target as HTMLSlotElement).assignedElements({ flatten: true });
     this._hasTopContent = !!topContent.length;
   }
+  
   static styles = [
     reset,
     css`
@@ -201,6 +223,9 @@ export class ModalHeader extends CanCloseMixin(LitElement) {
   ];
 }
 
+/** @deprecated Exported for backwards compatibility. Use WarpModalHeader. */
+export const ModalHeader = WarpModalHeader;
+
 if (!customElements.get('w-modal-header')) {
-  customElements.define('w-modal-header', ModalHeader);
+  customElements.define('w-modal-header', WarpModalHeader);
 }
