@@ -163,6 +163,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   @state()
   private _currentOptions: OptionWithIdAndMatch[] = [];
 
+  /** @internal Options parsed from light-DOM <option> children */
+  @state()
+  private _lightDomOptions: ComboboxOption[] = [];
+
   /** @internal Unique identifier counter for options */
   @state()
   private _optionIdCounter = 0;
@@ -180,6 +184,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   // capture the initial value using firstUpdated and #initialValue
   #initialValue: string | null = null;
+  #lightDomObserver?: MutationObserver;
 
   firstUpdated(changedProps: Map<string, unknown>) {
     this.#initialValue = this.value;
@@ -195,6 +200,28 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     this.value = this.#initialValue;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.#syncOptionsFromLightDom();
+
+    this.#lightDomObserver = new MutationObserver(() => {
+      this.#syncOptionsFromLightDom();
+    });
+    this.#lightDomObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['label', 'value'],
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#lightDomObserver?.disconnect();
+  }
+
   private get _listboxId() {
     return `${this._id}-listbox`;
   }
@@ -205,6 +232,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   private get _helpId() {
     return this.helpText ? `${this._id}__hint` : undefined;
+  }
+
+  private get _sourceOptions() {
+    return Array.isArray(this.options) && this.options.length ? this.options : this._lightDomOptions;
   }
 
   /** Get the display text for the navigation option or current display value */
@@ -228,6 +259,23 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       key: option.key || option.value,
       currentInputValue,
     }));
+  }
+
+  #getOptionNodes() {
+    return Array.from(this.children).filter((child) => child.tagName.toLowerCase() === 'option') as HTMLOptionElement[];
+  }
+
+  #syncOptionsFromLightDom() {
+    this._lightDomOptions = this.#getOptionNodes().map((option) => {
+      const value = option.getAttribute('value') ?? '';
+      const label = option.hasAttribute('label') ? (option.getAttribute('label') ?? '') : (option.textContent ?? '');
+
+      return {
+        value,
+        label,
+        key: value,
+      };
+    });
   }
 
   /** Get ARIA text for screen readers */
@@ -496,10 +544,11 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
-    const options = Array.isArray(this.options) ? this.options : [];
+    const options = this._sourceOptions;
+    const lightDomOptionsChanged = (changedProperties as Map<string, unknown>).has('_lightDomOptions');
 
     // Sync _displayValue when value or options change externally (before filtering)
-    if (changedProperties.has('value') || changedProperties.has('options')) {
+    if (changedProperties.has('value') || changedProperties.has('options') || lightDomOptionsChanged) {
       const matchingOption = options.find((o) => o.value === this.value);
       // Only sync if this is an external value change (not from user typing)
       // We detect this by checking if _displayValue doesn't match the expected label
@@ -515,6 +564,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
     if (
       changedProperties.has('options') ||
+      lightDomOptionsChanged ||
       changedProperties.has('value') ||
       changedProperties.has('disableStaticFiltering') ||
       (changedProperties as Map<string, unknown>).has('_displayValue')

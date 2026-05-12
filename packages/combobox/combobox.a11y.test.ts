@@ -55,7 +55,37 @@ describe('w-combobox accessibility (WCAG 2.2)', () => {
     });
 
     test('open on focus state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`);
+      const page = render(
+        html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`,
+      );
+      await expect(page).toHaveNoAxeViolations();
+    });
+
+    test('with light-DOM option children has no violations', async () => {
+      const page = render(html`
+        <w-combobox label="Select a fruit">
+          <option value="apple">Apple</option>
+          <option value="banana">Banana</option>
+          <option value="orange">Orange</option>
+        </w-combobox>
+      `);
+      await expect(page).toHaveNoAxeViolations();
+    });
+
+    test('open with light-DOM option children has no violations', async () => {
+      const page = render(html`
+        <w-combobox data-testid="combobox" label="Select a fruit" open-on-focus>
+          <option value="apple">Apple</option>
+          <option value="banana">Banana</option>
+          <option value="orange">Orange</option>
+        </w-combobox>
+      `);
+      const el = (await page.getByTestId('combobox').element()) as HTMLElement;
+      const input = el?.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input');
+
+      input?.focus();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
       await expect(page).toHaveNoAxeViolations();
     });
   });
