@@ -61,22 +61,25 @@ class WarpCard extends LitElement {
   ];
 
   /**
-   * @summary
-   * @description
+   * Whether the card is visually selected.
+   *
+   * Use this when the card represents a selected item or choice. This only controls the visual selected state; update it from your application state when the selection changes.
    */
   @property({ type: Boolean, reflect: true })
   selected = false;
 
   /**
-   * @summary
-   * @description
+   * Whether the card uses the flat visual treatment.
+   *
+   * Flat cards use a bordered surface instead of the default elevated surface. Use this for denser layouts or when the card sits inside another surface.
    */
   @property({ type: Boolean })
   flat = false;
 
   /**
-   * @summary
-   * @description
+   * Whether the whole card is interactive.
+   *
+   * When set, the card becomes keyboard focusable and Enter or Space triggers a click on the card. Use this only when the whole card has one action or represents one selectable choice.
    */
   @property({ type: Boolean })
   clickable = false;
