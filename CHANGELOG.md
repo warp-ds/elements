@@ -1,3 +1,10 @@
+# [2.10.0-next.2](https://github.com/warp-ds/elements/compare/v2.10.0-next.1...v2.10.0-next.2) (2026-05-12)
+
+
+### Bug Fixes
+
+* **modal-header:** prevent close and back buttons from inheriting modal title tooltip ([#657](https://github.com/warp-ds/elements/issues/657)) ([a291e45](https://github.com/warp-ds/elements/commit/a291e455514e037d5a8823a1d239da33719455bc))
+
 # [2.10.0-next.1](https://github.com/warp-ds/elements/compare/v2.9.2-next.1...v2.10.0-next.1) (2026-05-12)
 
 
