@@ -14,7 +14,11 @@ export class WCheckbox extends FormControlMixin(LitElement) {
 
   @query('input[type="checkbox"]') input: HTMLInputElement | null;
 
-  /** The name of the checkbox, submitted as a name/value pair with form data. */
+  /**
+   * The name of the checkbox.
+   *
+   * When the checkbox is checked and belongs to a form, this name is submitted with the checkbox value. If the checkbox is inside a `w-checkbox-group` with a name, the group name is used when the checkbox does not have its own name.
+   */
   @property({ reflect: true })
   set name(value: string | undefined) {
     this._ownName = value;
@@ -24,39 +28,61 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
   private _ownName: string | undefined;
 
-  /** The value of the checkbox, submitted as a name/value pair with form data. */
+  /**
+   * The value submitted when the checkbox is checked.
+   *
+   * If no value attribute is set, the checkbox defaults to `on`. Unchecked and disabled checkboxes do not submit a value.
+   */
   @property({ reflect: true }) value: string | null = null;
 
-  /** Draws the checkbox in an indeterminate state. */
+  /**
+   * Whether the checkbox is visually indeterminate.
+   *
+   * Use this for parent options that represent a mixed set of child selections. Clicking the checkbox clears the indeterminate state and sets the checkbox to checked.
+   */
   @property({ type: Boolean, reflect: true }) indeterminate = false;
 
-  /** Draws the checkbox in a checked state (reflected to attribute). */
+  /**
+   * Whether the checkbox is checked.
+   *
+   * Checked checkboxes submit their value with form data. The property is reflected to the `checked` attribute.
+   */
   @property({ type: Boolean, reflect: true }) checked = false;
 
-  /** Disables the checkbox. */
+  /**
+   * Whether the checkbox is disabled.
+   *
+   * Disabled checkboxes cannot be focused, changed, or submitted with form data.
+   */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
-  /** Makes the checkbox a required field. */
+  /**
+   * Whether the checkbox must be checked before form submission.
+   *
+   * A required checkbox is invalid until it is checked. For requiring at least one option in a set, use `required` on `w-checkbox-group`.
+   */
   @property({ type: Boolean, reflect: true }) required = false;
 
-  /** Draws the checkbox in an invalid state. */
+  /**
+   * Whether the checkbox is visually invalid.
+   *
+   * Use this to show an externally managed validation error. Required validation also sets the invalid state after the user interacts with the checkbox or tries to submit the form.
+   */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
   /**
    * Internal invalid state managed by parent checkbox-group.
    * Non-reflecting to avoid DOM changes during hydration.
-   * @internal
    */
   @property({ attribute: false })
-  _groupInvalid: boolean | undefined;
+  private _groupInvalid: boolean | undefined;
 
   /**
    * Internal name managed by parent checkbox-group.
    * Non-reflecting to avoid DOM changes during hydration.
-   * @internal
    */
   @property({ attribute: false })
-  _groupName: string | undefined;
+  private _groupName: string | undefined;
 
   /** The default value of the form control. Used for resetting. */
   #defaultChecked = false;
@@ -109,7 +135,7 @@ export class WCheckbox extends FormControlMixin(LitElement) {
       (this.internals.form as HTMLFormElement).requestSubmit();
       return;
     }
-        if (event.composedPath()[0] === this.input) return;
+    if (event.composedPath()[0] === this.input) return;
     event.preventDefault();
     this.click();
   };
