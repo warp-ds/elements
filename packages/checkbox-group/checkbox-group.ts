@@ -26,26 +26,51 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
     delegatesFocus: true,
   };
 
-  /** The group label displayed above the checkboxes. */
+  /**
+   * The group label displayed above the checkboxes.
+   *
+   * Use this to describe the shared question or topic for the checkbox options. The label is connected to the internal group for assistive technologies.
+   */
   @property({ type: String, reflect: true })
   label: string;
 
-  /** The name applied to child checkboxes when they do not provide one. */
+  /**
+   * The name applied to child checkboxes when they do not provide one.
+   *
+   * Use this when the grouped checkboxes should submit values under the same form field name. Individual checkboxes can still override the group name with their own `name`.
+   */
   @property({ type: String, reflect: true })
   name: string;
 
-  /** Whether to show optional text next to the label. */
+  /**
+   * Whether to show optional text next to the label.
+   *
+   * Use this to indicate that selecting an option from the group is not required.
+   */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
+  /**
+   * Help text displayed below the checkbox group.
+   *
+   * Use this for supporting guidance or validation feedback. When required validation fails, the group replaces this text with the localized required message.
+   */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
 
-  /** Makes the checkbox group required. */
+  /**
+   * Whether at least one checkbox in the group must be selected.
+   *
+   * Required validation is managed by the group. The individual checkboxes provide the submitted form values.
+   */
   @property({ type: Boolean, reflect: true })
   required = false;
 
-  /** Marks the checkbox group as invalid. */
+  /**
+   * Whether the checkbox group is visually invalid.
+   *
+   * Use this to show an externally managed validation error for the group. The invalid state is also shared with child checkboxes for consistent styling and accessibility state.
+   */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 

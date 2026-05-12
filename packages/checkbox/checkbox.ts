@@ -7,6 +7,9 @@ import { live } from 'lit/directives/live.js';
 import { reset } from '../styles';
 import { styles } from './styles';
 
+/**
+ * @parent w-checkbox-group
+ */
 export class WCheckbox extends FormControlMixin(LitElement) {
   static styles = [reset, styles];
 
