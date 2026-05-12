@@ -1,6 +1,5 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 
 import { reset } from '../styles.js';
 
@@ -40,63 +39,62 @@ const variants = [
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-link--docs)
  */
 class WarpLink extends LitElement {
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
   /**
-   * @summary
-   * @description
+   * Focus the link after it is rendered
    */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
   /**
-   * @summary
-   * @description
+   * Visual style for the link/button.
+   * 
+   * @throws {Error} Throws an error if an unsupported value is provided.
    */
   @property({ reflect: true })
   variant: ButtonVariant;
 
   /**
-   * @summary
-   * @description
+   * Render a smaller version
    */
   @property({ type: Boolean, reflect: true })
   small = false;
 
   /**
-   * @summary
-   * @description
+   * The URL the link points to
    */
   @property({ reflect: true })
   href: string;
 
   /**
-   * @summary
-   * @description
+   * Applies disabled styling, but you need to disable clicks on your own.
+   * 
+   * The component renders an `<a>` element; `disabled` affects styling, but does not inherently prevent navigation. If you need to fully disable interaction, omit `href` and/or prevent default click behavior.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
-   * @summary
-   * @description
+   * Where to display the linked URL (e.g. `_blank`)
    */
   @property({ reflect: true })
   target: string;
 
   /**
-   * @summary
-   * @description
+   * Relationship of the linked URL.
+   *
+   * If `target="_blank"` and `rel` is not provided, the component uses `noopener`.
    */
   @property({ reflect: true })
   rel: string;
 
   /**
-   * @summary
-   * @description
+   * Makes the link take up the full width of its parent
    */
   @property({ attribute: 'full-width', type: Boolean, reflect: true })
   fullWidth = false;
