@@ -1,4 +1,4 @@
-import { server, userEvent } from '@vitest/browser/context';
+import { server, userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
