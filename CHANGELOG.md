@@ -1,3 +1,11 @@
+# [2.10.0-next.1](https://github.com/warp-ds/elements/compare/v2.9.2-next.1...v2.10.0-next.1) (2026-05-12)
+
+
+### Features
+
+* **button:** support using w-button for Invoker Commands ([e91dc37](https://github.com/warp-ds/elements/commit/e91dc37d596945e73abc4ad3d2fb4f80b80c5965))
+* **modal:** support use via Invoker Commands ([55e5a96](https://github.com/warp-ds/elements/commit/55e5a966c974ac650ce2b7ed0d3983c522778bf3))
+
 ## [2.9.2-next.1](https://github.com/warp-ds/elements/compare/v2.9.1...v2.9.2-next.1) (2026-05-11)
 
 
