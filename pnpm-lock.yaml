@@ -5,9 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@vitest/pretty-format':
-    hash: f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
-    path: patches/@vitest__pretty-format.patch
+  '@vitest/pretty-format': f255b6ad22ed32129b96a748965e13cce9cbe219d61869183cc291e4cb5f036e
 
 importers:
 
