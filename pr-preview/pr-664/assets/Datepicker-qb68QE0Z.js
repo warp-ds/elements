@@ -1,0 +1,4 @@
+import{n as e}from"./chunk-DnJy8xQt.js";import{t}from"./jsx-runtime-BG42LmKs.js";import{r as n}from"./react-DShTf-Dy.js";import{t as r}from"./mdx-react-shim-np44v9yQ.js";import{n as i,o as a,s as o}from"./blocks-Cil2r3uG.js";import{Default as s,n as c,t as l}from"./datepicker.stories-CyWFd3XT.js";function u(e){let t={h1:`h1`,p:`p`,...n(),...e.components};return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(a,{of:l,name:`Docs`}),`
+`,(0,f.jsx)(t.h1,{id:`datepicker`,children:`Datepicker`}),`
+`,(0,f.jsx)(t.p,{children:`A date picker allows the user to select a specific calendar date.`}),`
+`,(0,f.jsx)(i,{of:s})]})}function d(e={}){let{wrapper:t}={...n(),...e.components};return t?(0,f.jsx)(t,{...e,children:(0,f.jsx)(u,{...e})}):u(e)}var f;e((()=>{f=t(),r(),o(),c()}))();export{d as default};
