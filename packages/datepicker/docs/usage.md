@@ -72,3 +72,14 @@ This property must be set on the element instance in JavaScript.
 ```
 
 Disabled dates cannot be selected from the calendar.
+
+### About change events
+
+With events the datepicker works much like the native `<input type="date">`:
+
+- When the user types in the input field the component fires [`input` events](https://developer.mozilla.org/en-US/docs/Web/API/Element/input_event).
+- When the user clicks a date in the calendar the component fires [`change` events](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event).
+
+Note that the component does not fire a `change` event when typing in the input field. This is intentional.
+
+You can listen to the [`blur` event](https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event) if you only care about getting a value, no matter if it was typed or chosen via the calendar. Note that the `blur` event might not fire if the user types and submits the form without leaving the input field. If you use the `blur` event to update JavaScript state you should read the value from the datepicker in your `submit` handler as well.
