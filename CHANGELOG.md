@@ -1,3 +1,10 @@
+# [2.10.0-next.4](https://github.com/warp-ds/elements/compare/v2.10.0-next.3...v2.10.0-next.4) (2026-05-13)
+
+
+### Bug Fixes
+
+* **modal:** Modal dispatches spurious `hidden` event ([#664](https://github.com/warp-ds/elements/issues/664)) ([7cc5566](https://github.com/warp-ds/elements/commit/7cc55660f3f4abf8199839a23012e0b2fef3e257))
+
 # [2.10.0-next.3](https://github.com/warp-ds/elements/compare/v2.10.0-next.2...v2.10.0-next.3) (2026-05-13)
 
 
