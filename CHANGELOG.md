@@ -1,3 +1,10 @@
+# [2.10.0-next.3](https://github.com/warp-ds/elements/compare/v2.10.0-next.2...v2.10.0-next.3) (2026-05-13)
+
+
+### Features
+
+* **combobox:** add support for option element children ([#663](https://github.com/warp-ds/elements/issues/663)) ([d74b4bb](https://github.com/warp-ds/elements/commit/d74b4bb33f3fd84437fffaef833d235c5111906b))
+
 # [2.10.0-next.2](https://github.com/warp-ds/elements/compare/v2.10.0-next.1...v2.10.0-next.2) (2026-05-12)
 
 
