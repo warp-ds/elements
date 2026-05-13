@@ -30,3 +30,12 @@ export function fromISOToDate(isoString: string): Date | null {
 
   return new Date(timestamp);
 }
+
+export function getDateInputType(
+  userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '',
+): 'date' | 'text' {
+  const isIOS = /iP(hone|od|ad)/.test(userAgent);
+  const isSafari = /Safari/.test(userAgent) && !/(Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android)/.test(userAgent);
+
+  return isIOS || isSafari ? 'text' : 'date';
+}

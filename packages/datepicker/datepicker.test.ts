@@ -1,6 +1,6 @@
-import { server, userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
+import { server, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-lit';
 
 import '../button/button.js';
@@ -87,6 +87,12 @@ test('can pick a date by typing in the input field', async () => {
   expect(formData.get('from')).toBeTruthy();
 });
 
+test('forwards placeholder text to the input field', async () => {
+  const page = render(html`<w-datepicker label="From date" placeholder="dd/mm/yyyy"></w-datepicker>`);
+
+  await expect.element(page.getByLabelText('From date')).toHaveAttribute('placeholder', 'dd/mm/yyyy');
+});
+
 test('can reset datepicker by resetting surrounding form', async () => {
   const label = 'Test label';
 
@@ -122,7 +128,6 @@ test('can reset datepicker by resetting surrounding form', async () => {
   expect(wDatepicker.value).toBe('2025-01-01');
 });
 
-
 test('submits the associated form when datepicker input field has focus and user presses Enter', async () => {
   const screen = render(html`
     <form>
@@ -136,7 +141,6 @@ test('submits the associated form when datepicker input field has focus and user
     </form>
   `);
 
-
   const onSubmit = vi.fn();
   const form = document.querySelector('form') as HTMLFormElement;
   form.addEventListener('submit', (event) => {
@@ -145,8 +149,7 @@ test('submits the associated form when datepicker input field has focus and user
   });
 
   await userEvent.click(screen.getByTestId('datepicker'));
-  await userEvent.keyboard('[Enter]')
+  await userEvent.keyboard('[Enter]');
 
   await vi.waitFor(() => expect(onSubmit).toHaveBeenCalled());
 });
-
