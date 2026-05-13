@@ -39,6 +39,8 @@ export default {
     'packages/select/select.ts',
     'packages/slider/slider.ts',
     'packages/slider-thumb/slider-thumb.ts',
+    'packages/snackbar/snackbar.ts',
+    'packages/snackbar-item/snackbar-item.ts',
     'packages/step/step.ts',
     'packages/step-indicator/step-indicator.ts',
     'packages/switch/switch.ts',
