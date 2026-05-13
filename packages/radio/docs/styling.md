@@ -1,4 +1,4 @@
-# Styling API
+## Styling API
 
 This page lists the **supported styling hooks** for:
 
@@ -7,11 +7,9 @@ This page lists the **supported styling hooks** for:
 
 Only use **component tokens** and **parts** shown below. Anything else should be considered internal and may change.
 
----
+### `<w-radio>`
 
-## `<w-radio>`
-
-### Parts
+#### Parts
 
 | Part | What it targets |
 | --- | --- |
@@ -25,7 +23,7 @@ w-radio::part(label) { font-weight: 600; }
 w-radio::part(control) { margin-block-start: 1px; }
 ```
 
-### Component tokens
+#### Component tokens
 
 Set these on the `<w-radio>` element (or any ancestor) to theme the component:
 
@@ -65,11 +63,9 @@ w-radio {
 }
 ```
 
----
+### `<w-radio-group>`
 
-## `<w-radio-group>`
-
-### Parts
+#### Parts
 
 | Part | What it targets |
 | --- | --- |
@@ -85,7 +81,7 @@ w-radio-group::part(form-control-input) { gap: 8px; }
 w-radio-group::part(help-text) { margin-block-start: 8px; }
 ```
 
-### Component tokens
+#### Component tokens
 
 Set these on the `<w-radio-group>` element (or any ancestor):
 
