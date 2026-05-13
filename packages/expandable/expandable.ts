@@ -53,89 +53,68 @@ const ccExpandable = {
 /**
  * Expandable is a layout component used for creating expandable content areas on a page.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-expandable--docs)
- *
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
  */
 class WarpExpandable extends LitElement {
   /**
-   * @summary
-   * @description
+   * Controls component's expanded state
    */
   @property({ type: Boolean, reflect: true })
   expanded = false;
 
   /**
-   * @summary
-   * @description
+   * Component title. Used to display the title value which is always present regardless of whether the component is open or closed.
    */
   @property({ type: String })
   title: string;
 
   /**
-   * @summary
-   * @description
+   * Will make the expandable a Box
    */
   @property({ type: Boolean })
   box = false;
 
   /**
-   * @summary
-   * @description
+   * Will make the expandable full-width on the sm breakpoint size
    */
   @property({ type: Boolean })
   bleed = false;
 
   /**
-   * @summary
-   * @description
+   * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
    */
   @property({ attribute: 'button-class', type: String })
   buttonClass: string;
 
   /**
-   * @summary
-   * @description
+   * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
    */
   @property({ attribute: 'content-class', type: String })
   contentClass: string;
 
   /**
-   * @summary
-   * @description
+   * Controls chevron visibility
    */
   @property({ attribute: 'no-chevron', type: Boolean })
   noChevron = false;
 
   /**
-   * @summary
-   * @description
+   * Will animate the expansion/collapse
    */
   @property({ type: Boolean })
   animated = false;
 
   /**
-   * @summary
-   * @description
+   * Wrap the toggle button in a heading element with the specified level. If headingLevel is not specified, the button will not be wrapped by a heading element.
    */
   @property({ attribute: 'heading-level', type: Number })
   headingLevel: number;
 
-  /**
-   * @summary
-   * @description
-   */
   @property({ type: Boolean, state: true })
-  /** @internal */
-  _hasTitle = true;
+  private _hasTitle = true;
 
-  /**
-   * @summary
-   * @description
-   */
   @property({ type: Boolean, state: true })
-  /** @internal */
-  _showChevronUp = false;
+  private _showChevronUp = false;
 
   // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
