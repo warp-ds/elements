@@ -23,7 +23,7 @@ const item: WarpSnackbarItem = create('Snackbar message');
 The `create` function in `@warp-ds/elements/snackbar` is a convenience wrapper around the `create` function on `<w-snackbar>` itself. In other words you can create snackbar items without importing anything.
 
 ```js
-let snacbkar = document.querySelector("w-snackbar");
+let snackbar = document.querySelector("w-snackbar");
 
 if (!snackbar) {
     // You should include <w-snackbar></w-snackbar> in your page <body>,
@@ -40,7 +40,7 @@ const item = snackbar.create('Snackbar message');
 If you have advanced cases not covered by the `create` API you can create a `<w-snackbar-item>` element manually and call [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend) on `<w-snackbar>`.
 
 ```ts
-const snacbkar = document.querySelector("w-snackbar");
+const snackbar = document.querySelector("w-snackbar");
 const item = document.createElement("w-snackbar-item");
 item.variant = "info";
 item.innerHTML = /* html */ `
