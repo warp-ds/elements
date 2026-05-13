@@ -10,7 +10,7 @@ import { styles } from './styles';
 /**
  * @parent w-checkbox-group
  */
-export class WCheckbox extends FormControlMixin(LitElement) {
+export class WarpCheckbox extends FormControlMixin(LitElement) {
   static styles = [reset, styles];
 
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
@@ -311,12 +311,15 @@ export class WCheckbox extends FormControlMixin(LitElement) {
   }
 }
 
+/** @deprecated Use WarpCheckbox */
+export const WCheckbox = WarpCheckbox;
+
 if (!customElements.get('w-checkbox')) {
-  customElements.define('w-checkbox', WCheckbox);
+  customElements.define('w-checkbox', WarpCheckbox);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'w-checkbox': WCheckbox;
+    'w-checkbox': WarpCheckbox;
   }
 }
