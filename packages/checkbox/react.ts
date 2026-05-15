@@ -2,14 +2,14 @@ import { createComponent } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { WCheckbox } from './checkbox.js';
+import { WarpCheckbox } from './checkbox.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
 
 export const Checkbox = createComponent({
   tagName: 'w-checkbox',
-  elementClass: Component as unknown as typeof WCheckbox,
+  elementClass: Component as unknown as typeof WarpCheckbox,
   react: React,
   events: {
     onChange: 'change',

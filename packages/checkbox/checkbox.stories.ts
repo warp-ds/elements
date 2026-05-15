@@ -7,9 +7,9 @@ import { prespread } from '../../.storybook/utilities.js';
 
 import './checkbox.js';
 import '../checkbox-group/checkbox-group.js';
-import type { WCheckbox } from './checkbox.js';
+import type { WarpCheckbox } from './checkbox.js';
 
-const { events, args, argTypes } = getStorybookHelpers<WCheckbox>('w-checkbox');
+const { events, args, argTypes } = getStorybookHelpers<WarpCheckbox>('w-checkbox');
 
 const meta: Meta<typeof args> = {
   title: 'Forms/Checkbox',

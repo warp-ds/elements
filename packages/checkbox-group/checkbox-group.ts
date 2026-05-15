@@ -19,7 +19,7 @@ const REQUIRED_MESSAGE = () =>
     comment: 'Shown when required checkbox group has no selections',
   });
 
-export class WCheckboxGroup extends FormControlMixin(LitElement) {
+export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
   // Use delegatesFocus so focus delegates to an internal focusable element
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
@@ -339,12 +339,15 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 }
 
+/** @deprecated Use WarpCheckboxGroup */
+export const WCheckboxGroup = WarpCheckboxGroup;
+
 if (!customElements.get('w-checkbox-group')) {
-  customElements.define('w-checkbox-group', WCheckboxGroup);
+  customElements.define('w-checkbox-group', WarpCheckboxGroup);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'w-checkbox-group': WCheckboxGroup;
+    'w-checkbox-group': WarpCheckboxGroup;
   }
 }
