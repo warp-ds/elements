@@ -1,6 +1,6 @@
-import '@warp-ds/components/icon';
 import { html } from 'lit';
 
+import '../icon/icon.js';
 import '../tab-panel/tab-panel.js';
 import '../tab/tab.js';
 import './tabs.js';

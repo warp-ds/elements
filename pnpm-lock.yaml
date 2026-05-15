@@ -11,9 +11,6 @@ importers:
       '@lit/react':
         specifier: ^1.0.8
         version: 1.0.8(@types/react@19.2.14)
-      '@warp-ds/components':
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2(@lingui/core@5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@5.9.3)))(@lit/react@1.0.8(@types/react@19.2.14))(lit@3.3.2)
       lit:
         specifier: 3.x
         version: 3.3.2
@@ -2076,13 +2073,6 @@ packages:
 
   '@vitest/utils@4.1.5':
     resolution: {integrity: sha512-76wdkrmfXfqGjueGgnb45ITPyUi1ycZ4IHgC2bhPDUfWHklY/q3MdLOAB+TF1e6xfl8NxNY0ZYaPCFNWSsw3Ug==}
-
-  '@warp-ds/components@1.0.0-beta.2':
-    resolution: {integrity: sha512-xZ3YJ0TB0FT2O0S7WlU3YMEAD7j5pqu+Dn7COodR4ogJ0OrF3VYu8IOBrshfxi4VRDYB3uOZB0HayZ4NshyNvA==}
-    peerDependencies:
-      '@lingui/core': 5.x
-      '@lit/react': ^1.0.3
-      lit: ^3.1.2
 
   '@warp-ds/core@1.1.8':
     resolution: {integrity: sha512-sQNhqtwug5ZvnQ/b5ENHM10eGxoFplLWPp8/ICECxzBfkDfwQHfu3Z71CRiuf3VQYEYvvGQ21uQHNfC4YTQAxg==}
@@ -6962,12 +6952,6 @@ snapshots:
       '@vitest/pretty-format': 4.1.5
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.0
-
-  '@warp-ds/components@1.0.0-beta.2(@lingui/core@5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@5.9.3)))(@lit/react@1.0.8(@types/react@19.2.14))(lit@3.3.2)':
-    dependencies:
-      '@lingui/core': 5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@5.9.3))
-      '@lit/react': 1.0.8(@types/react@19.2.14)
-      lit: 3.3.2
 
   '@warp-ds/core@1.1.8(@floating-ui/dom@1.7.6)':
     dependencies:
