@@ -41,6 +41,8 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
   @query('.content-el')
   private contentEl: HTMLElement;
 
+  private _isClosing = false;
+
   constructor() {
     super();
     this.interceptEscape = this.interceptEscape.bind(this);
@@ -64,6 +66,10 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
   }
 
   async open() {
+    // Cancel any pending close animation/state to prevent spurious 'hidden' events
+    this._isClosing = false;
+    this.dialogEl.classList.remove('close');
+
     this.dialogEl.showModal();
     this.handleListeners();
     setupScrollLock(this.contentEl);
@@ -73,13 +79,19 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
   close() {
     if (!this.dialogEl?.open) return;
+    this._isClosing = true;
     this.handleListeners('removeEventListener');
     this.dialogEl.classList.add('close');
     this.dialogEl.addEventListener(
       'animationend',
-      async () => {
+      async (event: AnimationEvent) => {
+        // Only handle our modal's close animation, ignore backdrop animations
+        if (event.animationName !== 'w-modal-out') return;
+        // If close was cancelled (e.g. modal was reopened), don't proceed
+        if (!this._isClosing) return;
         this.dialogEl.classList.remove('close');
         this.dialogEl.close();
+        this._isClosing = false;
         teardownScrollLock();
         await this.updateComplete;
         this.dispatchEvent(new CustomEvent('hidden', { bubbles: true, composed: true }));

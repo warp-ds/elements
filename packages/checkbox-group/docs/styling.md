@@ -1,12 +1,10 @@
-# Styling API
+## Styling API
 
 This section documents the supported styling hooks for `<w-checkbox>`.
 
 Use these hooks to customize appearance without relying on internal structure or selectors.
 
----
-
-## Parts
+### Parts
 
 The checkbox exposes a small set of parts that can be targeted for last‑mile layout or typography tweaks.
 
@@ -32,9 +30,7 @@ w-checkbox::part(control) {
 Parts are intended as an **escape hatch**.  
 Prefer component tokens for anything state‑ or size‑related.
 
----
-
-## Component tokens (`--w-c-checkbox-*`)
+### Component tokens (`--w-c-checkbox-*`)
 
 Component tokens act as inputs to the checkbox styling.  
 They can be set directly on the component or inherited from a parent container.
@@ -47,9 +43,8 @@ They can be set directly on the component or inherited from a parent container.
 
 Defaults are defined internally; setting a token is always optional.
 
----
 
-### Layout & size
+#### Layout & size
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -58,9 +53,8 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-radius` | border radius of the control | `4px` |
 | `--w-c-checkbox-border-width` | border width | `1px` |
 
----
 
-### Colors
+#### Colors
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -70,18 +64,16 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-border-color-checked` | border when checked | theme default |
 | `--w-c-checkbox-icon-color` | icon color | theme default |
 
----
 
-### Invalid state
+#### Invalid state
 
 | Token | Purpose | Default |
 |---|---|---|
 | `--w-c-checkbox-border-color-invalid` | border color when invalid | theme default |
 | `--w-c-checkbox-bg-invalid-checked` | background when invalid and checked | theme default |
 
----
 
-### Disabled state
+#### Disabled state
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -89,9 +81,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-border-color-disabled` | border when disabled | theme default |
 | `--w-c-checkbox-bg-disabled-checked` | background when disabled and checked | theme default |
 
----
-
-### Focus
+#### Focus
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -99,9 +89,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-outline-color` | focus outline color | theme default |
 | `--w-c-checkbox-outline-offset` | focus outline offset | theme default |
 
----
-
-### Motion
+#### Motion
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -109,11 +97,9 @@ Defaults are defined internally; setting a token is always optional.
 
 Transitions are automatically disabled when `prefers-reduced-motion: reduce` is active.
 
----
+### Examples
 
-## Examples
-
-### Compact checkbox
+#### Compact checkbox
 
 ```css
 .filters w-checkbox {
@@ -122,7 +108,7 @@ Transitions are automatically disabled when `prefers-reduced-motion: reduce` is 
 }
 ```
 
-### Rounded checkbox
+#### Rounded checkbox
 
 ```css
 w-checkbox {
@@ -130,7 +116,7 @@ w-checkbox {
 }
 ```
 
-### Contextual color override (advanced)
+#### Contextual color override (advanced)
 
 ```css
 .danger-zone w-checkbox {
@@ -138,9 +124,7 @@ w-checkbox {
 }
 ```
 
----
-
-## Guidelines
+### Guidelines
 
 - Prefer **component tokens** for size, spacing, and state styling
 - Use **parts** only for small, local tweaks
