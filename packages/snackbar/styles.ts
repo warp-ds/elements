@@ -5,11 +5,12 @@ export const styles = css`
         position: fixed;
         pointer-events: none;
         
-        --_position-top: var(--w-c-snackbar-position-top, initial);
-        --_position-right: var(--w-c-snackbar-position-right, 0);
-        --_position-bottom: var(--w-c-snackbar-position-bottom, 16px);
-        --_position-left: var(--w-c-snackbar-position-left, 0);
-        --_z-index: var(--w-c-snackbar-z-index, 50);
+        --_snackbar-gap: var(--w-c-snackbar-container-gap, 8px);
+        --_snackbar-position-top: var(--w-c-snackbar-position-top, initial);
+        --_snackbar-position-right: var(--w-c-snackbar-position-right, 0);
+        --_snackbar-position-bottom: var(--w-c-snackbar-position-bottom, 16px);
+        --_snackbar-position-left: var(--w-c-snackbar-position-left, 0);
+        --_snackbar-z-index: var(--w-c-snackbar-z-index, 50);
 
         bottom: var(--_position-bottom);
         left: var(--_position-left);
@@ -21,6 +22,7 @@ export const styles = css`
 
     [part='container'] {
         display: grid;
+        gap: var(--_snackbar-gap);
         grid-template-rows: auto;
         justify-content: center;
         justify-items: center;
