@@ -43,11 +43,9 @@ import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { wDatepickerCalendarStyles } from './styles/w-datepicker-calendar.styles.js';
 import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
-import { fromISOToDate } from './utils.js';
+import { fromISOToDate, getDateInputType } from './utils.js';
 
-const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-const isIOS = /iP(hone|od|ad)/.test(ua);
-const inputType = isIOS ? 'text' : 'date';
+const inputType = getDateInputType();
 
 const calendarId = 'calendar';
 const inputId = 'input';
@@ -104,6 +102,14 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    */
   @property({ reflect: true })
   name: string;
+
+  /**
+   * Set a text that is shown in the date field when it doesn't have a value.
+   *
+   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+   */
+  @property({ reflect: true })
+  placeholder: string;
 
   /**
    * The selected date value.
@@ -454,6 +460,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             id="${inputId}"
             type="${inputType}"
             name="${ifDefined(this.name)}"
+            placeholder="${ifDefined(this.placeholder)}"
             value="${ifDefined(this.value)}"
             class="w-datepicker-input"
             @click="${this.#onInputClick}"
