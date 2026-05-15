@@ -30,6 +30,8 @@ const defaultCreateOptions: CreateSnackbarOptions = {
 
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
+const spaceRe = /\s/;
+
 /**
  * A Snackbar shows brief user feedback messages that overlay content, with an optional action such as Undo.
  * 
@@ -37,9 +39,6 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
  */
 export class WarpSnackbar extends LitElement {
     private internals: ElementInternals;
-
-    @query('aside')
-    private container: HTMLElement | null = null;
 
     static styles = [reset, styles];
 
@@ -85,22 +84,31 @@ export class WarpSnackbar extends LitElement {
 
         if (mergedOptions.action) {
             const actionButton = document.createElement('w-button');
-            actionButton.slot = 'action';
+            actionButton.variant = 'utilityQuiet';
+
+            const { label, onclick } = mergedOptions.action;
+
+            const isLongLabel = spaceRe.test(label);
+            if (isLongLabel) {
+                actionButton.slot = 'block-action';
+            } else {
+                actionButton.slot = 'inline-action';
+            }
             
-            actionButton.innerText = mergedOptions.action.label;
-            actionButton.onclick = mergedOptions.action.onclick;
+            actionButton.innerText = label;
+            actionButton.onclick = onclick;
             
             snackbarItem.append(actionButton);
         }
 
-        this.container?.prepend(snackbarItem);
+        this.prepend(snackbarItem);
 
         return snackbarItem;
     }
 
     render() {
         return html`
-            <aside>
+            <aside part="container">
                 <slot></slot>
             </aside>
         `;
