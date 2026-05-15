@@ -26,6 +26,8 @@
     "packages/select",
     "packages/slider",
     "packages/slider-thumb",
+    "packages/snackbar",
+    "packages/snackbar-item",
     "packages/step",
     "packages/step-indicator",
     "packages/switch",

@@ -305,6 +305,12 @@ class WarpButton extends FormControlMixin(LitElement) {
   }
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-button': WarpButton;
+  }
+}
+
 if (!customElements.get('w-button')) {
   customElements.define('w-button', WarpButton);
 }

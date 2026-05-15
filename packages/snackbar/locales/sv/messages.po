@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-05-15 11:48+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: sv\n"
+
+#. Accessibility label for the button that closes the snackbar/toast popup
+#. js-lingui-explicit-id
+#: packages/snackbar-item/snackbar-item.ts:62
+msgid "snackbar.aria.close"
+msgstr ""

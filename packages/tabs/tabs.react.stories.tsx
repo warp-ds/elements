@@ -1,7 +1,7 @@
-import '@warp-ds/components/icon';
 import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import '../icon/icon.js';
 import { Tab, TabPanel, Tabs } from './react';
 
 declare module 'react' {
