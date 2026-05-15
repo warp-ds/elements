@@ -10,6 +10,7 @@ export type SnackbarVariant = 'positive' | 'warning' | 'negative' | 'info' | 'ne
 export enum SnackbarDuration {
     Short = 5_000,
     Long = 20_000,
+    // biome-ignore lint: false positive
     Infinite = Number.POSITIVE_INFINITY,
 }
 
