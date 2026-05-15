@@ -28,6 +28,9 @@ export class WarpSnackbarItem extends LitElement {
     
     @property({ type: Boolean, attribute: 'can-close' })
     canClose = false;
+    
+    @property({ type: Boolean, attribute: 'action-as-block' })
+    actionAsBlock = false;
 
     @property({ type: Number, reflect: true, useDefault: true })
     duration: number = SnackbarDuration.Short;
@@ -56,11 +59,8 @@ export class WarpSnackbarItem extends LitElement {
                 <div part="message">
                     <slot></slot>
                 </div>
-                <div part="inline-action">
-                    <slot name="inline-action"></slot>
-                </div>
-                <div part="block-action">
-                    <slot name="block-action"></slot>
+                <div part="action">
+                    <slot name="action"></slot>
                 </div>
                 ${this.canClose ? html`
                     <div part="close">

@@ -84,20 +84,18 @@ export class WarpSnackbar extends LitElement {
 
         if (mergedOptions.action) {
             const actionButton = document.createElement('w-button');
+            actionButton.slot = 'action';
             actionButton.variant = 'utilityQuiet';
 
             const { label, onclick } = mergedOptions.action;
-
-            const isLongLabel = spaceRe.test(label);
-            if (isLongLabel) {
-                actionButton.slot = 'block-action';
-            } else {
-                actionButton.slot = 'inline-action';
-            }
-            
             actionButton.innerText = label;
             actionButton.onclick = onclick;
-            
+        
+            const isLongLabel = spaceRe.test(label);
+            if (isLongLabel) {
+                snackbarItem.actionAsBlock = true;
+            }
+    
             snackbarItem.append(actionButton);
         }
 
