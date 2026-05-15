@@ -112,6 +112,12 @@ export class WarpIcon extends LitElement {
 /** @deprecated Exported for backwards compatibility. Use WarpIcon. */
 export const WIcon = WarpIcon;
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-icon': WarpIcon;
+  }
+}
+
 if (!customElements.get('w-icon')) {
   customElements.define('w-icon', WarpIcon);
 }
