@@ -33,6 +33,8 @@ export class WarpSnackbarItem extends LitElement {
     duration: number = SnackbarDuration.Short;
 
     private timer: number | null = null;
+
+    // TODO when focused, save what element previously had focus so we can go back there in close
     
     connectedCallback(): void {
         super.connectedCallback();
@@ -42,6 +44,7 @@ export class WarpSnackbarItem extends LitElement {
     close(): void {
         // TODO animate exit, then remove
         this.remove();
+        // TODO move focus to last known focused element
     }
 
     render() {
@@ -53,21 +56,20 @@ export class WarpSnackbarItem extends LitElement {
                 <div part="message">
                     <slot></slot>
                 </div>
-                <div part="action">
-                    <slot name="action"></slot>
+                <div part="inline-action">
+                    <slot name="inline-action"></slot>
+                </div>
+                <div part="block-action">
+                    <slot name="block-action"></slot>
                 </div>
                 ${this.canClose ? html`
                     <div part="close">
-                        <w-button
-                            variant="utility" 
-                            aria-label="${i18n.t({
+                        <w-button variant="utilityQuiet" @click=${this.close}>
+                            <w-icon name="Close" aria-label="${i18n.t({
                                 id: 'snackbar.aria.close',
                                 message: 'Dismiss message',
                                 comment: 'Accessibility label for the button that closes the snackbar/toast popup',
-                            })}"
-                            @click=${this.close}
-                        >
-                            <w-icon name="Close"></w-icon>
+                            })}"></w-icon>
                         </w-button>
                     </div>
                     ` : nothing}

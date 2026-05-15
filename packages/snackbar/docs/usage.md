@@ -1,6 +1,6 @@
 ## Usage
 
-Add `<w-snackbar>` anywhere in `<body>` (note to self: should we add this to `html-template`?). This sets up an ARIA live region that's ready for snackbar messages. We set this up ahead of time since some browsers and screen reader combinations have known issues when it comes to adding a live region and content at the same time.
+Add `<w-snackbar>` as a direct child of `<body>` (note to self: should we add this to `html-template`?). This sets up an ARIA live region that's ready for snackbar messages. We set this up ahead of time since some browsers and screen reader combinations have known issues when it comes to adding a live region and content at the same time.
 
 ```html
 <body>
