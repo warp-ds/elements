@@ -316,7 +316,7 @@
     "@lingui/cli": "5.9.5",
     "@lingui/conf": "5.9.5",
     "@lingui/core": "5.9.5",
-    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.2.0",
     "@oddbird/css-anchor-positioning": "^0.9.0",
     "@open-wc/form-control": "^1.0.0",
     "@open-wc/lit-helpers": "^0.7.0",
