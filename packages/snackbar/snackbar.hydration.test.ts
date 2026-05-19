@@ -1,10 +1,16 @@
-import { html } from 'lit';
+import { afterEach, beforeEach, describe, expect, test } from 'vitest';
+import { setupHydrationWarningCapture, testHydration } from '../../tests/react-hydration';
 
-import { expect, test } from 'vitest';
-import { render } from 'vitest-browser-lit';
-
-import '../button/button.js';
-import '../icon/icon.js';
-import '../snackbar-item/snackbar-item.js';
 import './snackbar.js';
 
+describe('w-snackbar React SSR hydration', () => {
+    beforeEach(() => setupHydrationWarningCapture());
+    afterEach(() => {
+        window.__HYDRATION_WARNINGS__ = [];
+    });
+
+    test('default (no attributes) hydrates without warnings', async () => {
+        const warnings = await testHydration('w-slider', {});
+        expect(warnings).toEqual([]);
+    });
+});
