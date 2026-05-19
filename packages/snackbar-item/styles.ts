@@ -4,19 +4,21 @@ export const styles = css`
     :host {
         display: block;
 
-        --_snackbar-item-background-color: var(--w-c-snackbar-item-background-color, var(--w-color-tooltip-background-static));
-        --_snackbar-item-background-color-hover: var(--w-c-snackbar-item-background-color-hover, var(--w-color-tooltip-background-static));
-        --_snackbar-item-background-color-active: var(--w-c-snackbar-item-background-color-active, var(--w-color-tooltip-background-static));
-        --_snackbar-item-border-radius: var(--w-c-snackbar-item-border-radius, 8px);
+        --_snackbar-item-bg: var(--w-c-snackbar-item-bg, var(--w-color-tooltip-background-static));
+        --_snackbar-item-action-bg-hover: var(--w-c-snackbar-item-action-bg-hover, var(--w-color-tooltip-background-static));
+        --_snackbar-item-action-bg-active: var(--w-c-snackbar-item-action-bg-active, var(--w-color-tooltip-background-static));
+        --_snackbar-item-border-radius: var(--w-c-snackbar-item-radius, 8px);
         --_snackbar-item-box-shadow: var(--w-c-snackbar-item-box-shadow, var(--w-shadow-l));
         --_snackbar-item-color: var(--w-c-snackbar-item-color, var(--w-s-color-text-inverted-static));
+        --_snackbar-item-action-color-hover: var(--w-c-snackbar-item-action-color-hover, var(--w-s-color-text-inverted-static));
+        --_snackbar-item-action-color-active: var(--w-c-snackbar-item-action-color-active, var(--w-s-color-text-inverted-static));
         --_snackbar-item-max-width: var(--w-c-snackbar-item-max-width, 420px);
         --_snackbar-item-min-width: var(--w-c-snackbar-item-min-width, 280px);
         --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px);
     }
 
-    [part='snackbar-item'] {
-        background-color: var(--_snackbar-item-background-color);
+    [part='item'] {
+        background-color: var(--_snackbar-item-bg);
         border-radius: var(--_snackbar-item-border-radius);
         box-shadow: var(--_snackbar-item-box-shadow);
         color: var(--_snackbar-item-color);
@@ -29,19 +31,21 @@ export const styles = css`
         grid-template:
             "icon message inline-action"
             "block-action block-action block-action";
-        grid-template-columns: 24px auto auto;
+        grid-template-columns: auto 1fr auto;
     }
 
-    :host([action-as-block]) [part='snackbar-item'] {
+    :host([action-as-block]) [part='item'] {
         row-gap: 4px;
     }
 
-    [part='snackbar-item'] w-button,
-    [part='snackbar-item'] ::slotted(w-button) {
-        --w-c-button-bg: var(--_snackbar-item-background-color);
-        --w-c-button-bg-hover: var(--_snackbar-item-background-color);
-        --w-c-button-bg-active: var(--_snackbar-item-background-color);
+    [part='item'] w-button,
+    [part='item'] ::slotted(w-button) {
+        --w-c-button-bg: var(--_snackbar-item-bg);
+        --w-c-button-bg-active: var(--_snackbar-item-action-bg-active);
+        --w-c-button-bg-hover: var(--_snackbar-item-action-bg-hover);
         --w-c-button-color: var(--_snackbar-item-color);
+        --w-c-button-color-active: var(--_snackbar-item-action-color-active);
+        --w-c-button-color-hover: var(--_snackbar-item-action-color-hover);
     }
 
     [part='icon'] {
@@ -50,7 +54,6 @@ export const styles = css`
         color: var(--_snackbar-item-color);
         padding-block: 4px;
         min-width: 4px; /* To give a total of 16px "padding" to message if no icon (8 padding + 4 width + 4 gap) */
-        max-width: 24px;
     }
 
     [part='icon'] ::slotted(w-icon) {

@@ -49,7 +49,7 @@ export class WarpSnackbarItem extends LitElement {
 
     render() {
         return html`
-            <div part="snackbar-item">
+            <div part="item">
                 <div part="icon">
                     <slot name="icon"></slot>
                 </div>
