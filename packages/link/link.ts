@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
 
-import { styles } from './styles/w-link.styles.js';
+import { styles } from './styles.js';
 
 type ButtonVariant =
   | 'primary'
@@ -120,6 +120,7 @@ class WarpLink extends LitElement {
     return html`
       <a
         href="${this.href}"
+        part="base"
         target="${this.target}"
         rel="${this.target === '_blank' ? this.rel || 'noopener' : nothing}"
         tabindex="0"
