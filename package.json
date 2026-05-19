@@ -148,8 +148,8 @@
       "import": "./dist/packages/*/*.js"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./eik/index.js",
+  "module": "./eik/index.js",
   "customElements": "./dist/custom-elements.json",
   "web-types": "./dist/web-types.json",
   "types": "./dist/index.d.ts",
@@ -267,7 +267,8 @@
   },
   "files": [
     "./dist/",
-    "./dist/custom-elements.json"
+    "./dist/custom-elements.json",
+    "./eik/index.js"
   ],
   "scripts": {
     "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
@@ -291,6 +292,7 @@
     "format": "pnpm biome format --write .",
     "lint:check": "pnpm biome lint .",
     "lint": "pnpm biome lint --write .",
+    "lint:package": "publint",
     "messages:compile": "lingui compile",
     "messages:extract": "lingui extract",
     "prepare": "husky",
@@ -363,6 +365,7 @@
     "nanoid": "^5.1.5",
     "playwright": "^1.55.0",
     "prettier": "3.8.3",
+    "publint": "^0.3.21",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rimraf": "6.1.3",
