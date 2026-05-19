@@ -10,6 +10,13 @@ import { styles } from '../toast/styles.js';
 import type { WarpToast } from '../toast/toast.js';
 import type { ToastInternal, ToastOptions } from '../toast/types.js';
 
+// all class objects have to be in this file when generating
+const ccToastContainer = {
+  wrapper: 'fixed transform translate-z-0 bottom-16 left-0 right-0 mx-8 sm:mx-16 z-50 pointer-events-none',
+  base: 'grid auto-rows-auto justify-items-center justify-center mx-auto pointer-events-none',
+  content: 'w-full',
+};
+
 /**
  * You should probably not include this component in HTML markup.
  *
@@ -24,14 +31,6 @@ import type { ToastInternal, ToastOptions } from '../toast/types.js';
  *
  * @internal
  */
-
-// all class objects have to be in this file when generating
-const ccToastContainer = {
-  wrapper: 'fixed transform translate-z-0 bottom-16 left-0 right-0 mx-8 sm:mx-16 z-50 pointer-events-none',
-  base: 'grid auto-rows-auto justify-items-center justify-center mx-auto pointer-events-none',
-  content: 'w-full',
-};
-
 export class WarpToastContainer extends LitElement {
   static styles = [
     reset,

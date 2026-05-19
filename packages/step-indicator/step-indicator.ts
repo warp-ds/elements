@@ -15,20 +15,16 @@ const ccSteps = {
 
 /**
  * Steps are used to show progress through a process or to guide users through a multi-step task.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/components-steps--docs)
  */
 export class WarpStepIndicator extends LitElement {
   /**
-   * @summary
-   * @description
+   * Display steps horizontally instead of vertically
    */
   @property({ type: Boolean, reflect: true })
   horizontal = false;
 
   /**
-   * @summary
-   * @description
+   * Align steps to the right (vertical layout only)
    */
   @property({ type: Boolean, reflect: true })
   right = false;
@@ -39,6 +35,9 @@ export class WarpStepIndicator extends LitElement {
     this.updateStepsContext();
   }
 
+  /**
+   * @internal
+   */
   updateStepsContext() {
     // Provide context to child step elements
     const steps = this.querySelectorAll('w-step');

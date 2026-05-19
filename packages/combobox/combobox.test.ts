@@ -181,3 +181,143 @@ test('announces suggestion count when opened on focus with empty input', async (
   const statusText = el.shadowRoot?.querySelector('[role="status"]')?.textContent?.trim();
   expect(statusText).toBe('3 suggestions');
 });
+
+test('renders light-DOM option children in the generated popup', async () => {
+  const component = html`
+    <w-combobox data-testid="combobox" open-on-focus>
+      <option value="no">Norway</option>
+      <option value="se">Sweden</option>
+      <option value="dk">Denmark</option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+  await expect.element(locator).toBeVisible();
+  const el = (await locator.element()) as HTMLElement;
+  const input = el.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input');
+
+  input?.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const visibleOptions = el.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+
+  expect(optionTexts).toEqual(['Norway', 'Sweden', 'Denmark']);
+});
+
+test('filters light-DOM options by label attribute and stores option value on select', async () => {
+  const component = html`
+    <w-combobox data-testid="combobox" open-on-focus>
+      <option value="us" label="United States">US</option>
+      <option value="uk" label="United Kingdom">UK</option>
+      <option value="no">Norway</option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+  await expect.element(locator).toBeVisible();
+  const el = (await locator.element()) as HTMLElement & { value: string };
+  const input = el.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input') as HTMLInputElement;
+  const selectEvents: CustomEvent[] = [];
+
+  el.addEventListener('select', (event) => selectEvents.push(event as CustomEvent));
+
+  input.focus();
+  input.value = 'United';
+  input.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true }));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const visibleOptions = el.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+
+  expect(optionTexts).toEqual(['United States', 'United Kingdom']);
+
+  visibleOptions?.[1]?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  expect(input.value).toBe('United Kingdom');
+  expect(el.value).toBe('uk');
+  expect(selectEvents.at(-1)?.detail).toEqual({ value: 'uk' });
+});
+
+test('uses light-DOM options to display an initial value label', async () => {
+  const component = html`
+    <w-combobox data-testid="combobox" value="no">
+      <option value="se">Sweden</option>
+      <option value="no">Norway</option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+  await expect.element(locator).toBeVisible();
+  const el = (await locator.element()) as HTMLElement & { value: string };
+  const input = el.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+  expect(input.value).toBe('Norway');
+  expect(el.value).toBe('no');
+});
+
+test('syncs dynamic light-DOM option child changes', async () => {
+  const component = html`
+    <w-combobox data-testid="combobox" open-on-focus>
+      <option value="no">Norway</option>
+      <option value="se">Sweden</option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+  await expect.element(locator).toBeVisible();
+  const el = (await locator.element()) as HTMLElement;
+  const input = el.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+  const denmark = document.createElement('option');
+  denmark.value = 'dk';
+  denmark.textContent = 'Denmark';
+  el.appendChild(denmark);
+
+  const sweden = el.querySelector('option[value="se"]');
+  sweden?.remove();
+
+  const norway = el.querySelector('option[value="no"]');
+  norway?.setAttribute('value', 'nor');
+  if (norway) {
+    norway.textContent = 'Norge';
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  input.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const visibleOptions = el.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+
+  expect(optionTexts).toEqual(['Norge', 'Denmark']);
+});
+
+test('non-empty options property takes precedence over light-DOM option children', async () => {
+  const options = [{ value: 'apple', label: 'Apple' }];
+  const component = html`
+    <w-combobox data-testid="combobox" open-on-focus .options="${options}">
+      <option value="banana">Banana</option>
+    </w-combobox>
+  `;
+
+  const page = render(component);
+  const locator = page.getByTestId('combobox');
+  await expect.element(locator).toBeVisible();
+  const el = (await locator.element()) as HTMLElement;
+  const input = el.shadowRoot?.querySelector('w-textfield')?.shadowRoot?.querySelector('input') as HTMLInputElement;
+
+  input.focus();
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  const visibleOptions = el.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
+  const optionTexts = Array.from(visibleOptions || []).map((opt) => opt.textContent?.trim());
+
+  expect(optionTexts).toEqual(['Apple']);
+});

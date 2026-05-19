@@ -54,6 +54,16 @@ const normalizeText = (value, fallback = '') => {
   return String(value);
 };
 
+const getSummary = (item, fallback = '') => {
+  if (item.summary) return item.summary;
+  if (item.description) {
+    return item.description
+      .split("\n")
+      .at(0);
+  }
+  return fallback;
+}
+
 const readOptionalFile = (path) => {
   if (!existsSync(path)) {
     return '';
@@ -86,34 +96,76 @@ const buildTypesMap = (members = []) => {
 const buildPropertyTable = (members = [], typesMap = new Map()) => {
   let table = '| Name | Type | Default | Summary |\n|-|-|-|-|\n';
 
-  members.forEach((item) => {
-    if (item.kind === 'field' && item.privacy !== 'private') {
-      table += `| ${normalizeText(item.name, '-')}`;
-      table += ` | ${renderType(item.type?.text, typesMap)}`;
-      table += ` | \`${normalizeText(item.default, '-')}\``;
-      table += ` | ${normalizeText(item.summary, '-')} |\n`;
-    }
-  });
+  members
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      if (item.kind === 'field' && item.privacy !== 'private') {
+        table += `| ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}`;
+        table += ` | ${renderType(item.type?.text, typesMap).replaceAll("|", "\\|")}`;
+        table += ` | \`${normalizeText(item.default, '-')}\``;
+
+        let summary = getSummary(item);
+        if (item.deprecated && !summary) {
+          summary = `**Deprecated**: ${item.deprecated}`;
+        } else if (item.deprecated && summary) {
+          summary = `${summary}${summary.endsWith('.') ? '' : '.'} **Deprecated**: ${item.deprecated}`;
+        } else if (!summary) {
+          summary = "-";
+        }
+        table += ` | ${summary} |\n`;
+      }
+    });
 
   return table;
 };
 
-const buildPropertyDetails = (members = [], typesMap = new Map()) => {
+const buildPropertyDetails = (members = [], typesMap = new Map(), hasParent = false) => {
   let details = '';
 
-  members.forEach((item) => {
-    if (item.kind === 'field' && item.privacy !== 'private') {
-      details += `#### ${normalizeText(item.name, '-')}\n\n`;
-      details += `${normalizeText(item.description, '')}\n\n`;
-      details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
-      details += `- Default: \`${normalizeText(item.default, '-')}\`\n\n`;
-    }
-  });
+  members
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      if (item.kind === 'field' && item.privacy !== 'private') {
+        details += `####${hasParent ? '#' : ''} ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}\n\n`;
+        if (item.deprecated) {
+          details += `**Deprecated**: ${item.deprecated}\n\n`;
+        }
+        details += `${normalizeText(item.description, '')}\n\n`;
+        details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
+        details += `- Default: \`${normalizeText(item.default, '-')}\`\n\n`;
+      }
+    });
 
   return details;
 };
 
-const buildTypes = (typesMap = new Map()) => {
+const buildEventsDetails = (events = [], typesMap = new Map(), hasParent = false) => {
+  let details = '';
+
+  events
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+    .forEach((item) => {
+      details += `####${hasParent ? '#' : ''} ${normalizeText(item.name, '-')}\n\n`;
+      details += `${normalizeText(item.description, '')}\n\n`;
+      details += `- Type: ${renderType(item.type?.text, typesMap)}\n`;
+    });
+
+  return details;
+};
+
+const buildTypes = (typesMap = new Map(), hasParent = false) => {
   if (!typesMap.size) {
     return 'No types documented.\n';
   }
@@ -122,7 +174,7 @@ const buildTypes = (typesMap = new Map()) => {
   Array.from(typesMap.entries())
     .sort(([left], [right]) => left.localeCompare(right))
     .forEach(([typeName, parsedType]) => {
-      types += `#### ${typeName}\n\n`;
+      types += `####${hasParent ? '#' : ''} ${typeName}\n\n`;
       types += `\`${normalizeText(parsedType, 'unknown')}\`\n\n`;
     });
 
@@ -157,12 +209,15 @@ components.forEach(({ declaration, packageName }) => {
     mkdirSync(docsDirPath, { recursive: true });
   }
 
+  const hasParent = Boolean(declaration.parent);
+
   try {
     copyFileSync(new URL(`../packages/${packageName}/docs/usage.md`, import.meta.url), new URL('./usage.md', docsDir));
   } catch (error) {
-    console.warn(
-      `Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`,
-    );
+    if (!hasParent) {
+      // We assume the parent's docs cover usage, a11y and examples
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
   try {
     copyFileSync(
@@ -170,9 +225,9 @@ components.forEach(({ declaration, packageName }) => {
       new URL('./accessibility.md', docsDir),
     );
   } catch (error) {
-    console.warn(
-      `Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`,
-    );
+    if (!hasParent) {
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
   try {
     copyFileSync(
@@ -180,27 +235,50 @@ components.forEach(({ declaration, packageName }) => {
       new URL('./examples.md', docsDir),
     );
   } catch (error) {
-    console.warn(
-      `Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`,
-    );
+    if (!hasParent) {
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
+  }
+
+  try {
+    copyFileSync(new URL(`../packages/${packageName}/docs/styling.md`, import.meta.url), new URL('./styling.md', docsDir));
+  } catch (error) {
+    if (!hasParent) {
+      // We assume the parent's docs cover usage, a11y, styling and examples
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, styling.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
   }
 
   const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
   const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
   const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const stylingContent = readOptionalFile(new URL('./styling.md', docsDir));
 
   const componentName = declaration.name.replace(COMPONENT_CLASS_PREFIX, '');
   const description = normalizeText(declaration.description, 'No description available.');
 
-  const typesMap = buildTypesMap(declaration.members);
+  const typesMap = buildTypesMap([...declaration.members, ...(declaration.events || [])]);
   const propertyTable = buildPropertyTable(declaration.members, typesMap);
-  const propertyDetails = buildPropertyDetails(declaration.members, typesMap);
-  const types = buildTypes(typesMap);
+  const propertyDetails = buildPropertyDetails(declaration.members, typesMap, hasParent);
+  const types = buildTypes(typesMap, hasParent);
 
-  let apiDocs = '## API Documentation\n\n';
-  apiDocs += `### Properties\n\n${propertyTable}\n`;
-  apiDocs += `### Property Details\n\n${propertyDetails || 'No public fields documented.\n\n'}`;
-  apiDocs += `### Types\n\n${types}`;
+  let apiDocs = `##${hasParent ? '#' : ''} \`<${declaration.tagName}>\` API\n\n`;
+  if (!hasParent) {
+    // don't repeat the message for child components
+    apiDocs += 'Unless otherwise noted all properties are HTML attributes (as opposed to JavaScript object properties).\n\n';
+  }
+  apiDocs += `###${hasParent ? '#' : ''} Properties\n\n${propertyTable}\n`;
+  apiDocs += `###${hasParent ? '#' : ''} Property Details\n\n${propertyDetails || 'No public fields documented.\n\n'}`;
+
+  if (declaration.events) {
+    const eventsDetails = buildEventsDetails(declaration.events, typesMap, hasParent);
+    apiDocs += `###${hasParent ? '#' : ''} Events\n\n`;
+    apiDocs += `${eventsDetails}\n\n`;
+  }
+
+  if (typesMap.size) {
+    apiDocs += `###${hasParent ? '#' : ''} Types\n\n${types}`;
+  }
 
   let generatedDocument = `# ${componentName} (${declaration.tagName})\n\n`;
   generatedDocument += `## Description\n\n${description}\n\n`;
@@ -216,11 +294,45 @@ components.forEach(({ declaration, packageName }) => {
   if (examplesContent) {
     generatedDocument += `${examplesContent}\n\n`;
   }
+  
+  if (stylingContent) {
+    generatedDocument += `${stylingContent}\n\n`;
+  }
 
   generatedDocument += apiDocs;
 
   writeFileSync(new URL('./api.md', docsDir), apiDocs, { encoding: 'utf8' });
   writeFileSync(new URL(`./${packageName}.md`, docsDir), generatedDocument, { encoding: 'utf8' });
 });
+
+// toast gets some custom treatment what with its JS-only API,
+// custom element manifest isn't available
+(function buildToastDocs() {
+  const docsDir = new URL('../dist/docs/toast/', import.meta.url);
+  const docsDirPath = docsDir.pathname;
+  if (!existsSync(docsDirPath)) {
+    mkdirSync(docsDirPath, { recursive: true });
+  }
+  copyFileSync(new URL('../packages/toast/docs/accessibility.md', import.meta.url), new URL('./accessibility.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/usage.md', import.meta.url), new URL('./usage.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/examples.md', import.meta.url), new URL('./examples.md', docsDir));
+  copyFileSync(new URL('../packages/toast/docs/api.md', import.meta.url), new URL('./api.md', docsDir));
+
+  const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
+  const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
+  const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const apiContent = readOptionalFile(new URL('./api.md', docsDir));
+
+
+  let generatedDocument = '# Toast\n\n';
+  generatedDocument += '## Description\n\nToasts are brief user feedback messages that overlay content.\n\n';
+
+  generatedDocument += `${usageContent}\n\n`;
+  generatedDocument += `${accessibilityContent}\n\n`;
+  generatedDocument += `${examplesContent}\n\n`;
+  generatedDocument += `${apiContent}\n\n`;
+
+  writeFileSync(new URL('./toast.md', docsDir), generatedDocument, { encoding: 'utf8' });
+})();
 
 console.log(`Generated docs for ${components.length} components.`);

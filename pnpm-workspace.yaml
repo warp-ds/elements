@@ -1,8 +1,6 @@
 packages:
   - packages/*
 
-ignoredBuiltDependencies:
-  - esbuild
-
-patchedDependencies:
-  '@vitest/pretty-format': patches/@vitest__pretty-format.patch
+allowBuilds:
+  esbuild: false
+  rs-module-lexer: false

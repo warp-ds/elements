@@ -11,3 +11,12 @@ test('renders the affix', async () => {
   const page = render(component);
   await expect.element(page.getByText('kr')).toBeVisible();
 });
+
+test('renders an icon when icon prop is set', async () => {
+  const page = render(html`<w-affix data-testid="affix" icon="AwardMedal"></w-affix>`);
+  const affix = (await page.getByTestId('affix').element()) as HTMLElement;
+  const icon = affix.shadowRoot?.querySelector('w-icon');
+
+  expect(icon).toBeTruthy();
+  expect(icon?.getAttribute('name')).toBe('AwardMedal');
+});

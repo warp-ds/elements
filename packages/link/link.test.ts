@@ -1,4 +1,4 @@
-import { page } from '@vitest/browser/context';
+import { page } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test } from 'vitest';
 import './link.js';

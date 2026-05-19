@@ -17,7 +17,14 @@ const meta: Meta<typeof args> = {
     return html`
       <!-- Workaround for Storybook's overflow hidden -->
       <div style="min-height: 400px">
-        <w-datepicker ${spread(prespread(args))}></w-datepicker>
+        <form method="get">
+          <w-datepicker ${spread(prespread(args))}></w-datepicker>
+          <script type="module">
+            const picker = document.querySelector('w-datepicker');
+            picker.addEventListener('blur', console.log);
+          </script>
+          <input type="submit" hidden>
+        </form>
       </div>
     `;
   },

@@ -2,73 +2,63 @@
 
 ### Basic
 
-<style-isolate>
-  <w-alert show>
-    <p>We have updated your preferences.</p>
-  </w-alert>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-alert show>
   <p>We have updated your preferences.</p>
 </w-alert>
 ```
 
+</elements-example>
+
 ### Info
 
-<style-isolate>
-  <w-alert variant="info" show>
-    <p>This is an informational alert.</p>
-  </w-alert>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-alert variant="info" show>
   <p>This is an informational alert.</p>
 </w-alert>
 ```
 
+</elements-example>
+
 ### Warning
 
-<style-isolate>
-  <w-alert variant="warning" show>
-    <p>Please double-check this value before continuing.</p>
-  </w-alert>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-alert variant="warning" show>
   <p>Please double-check this value before continuing.</p>
 </w-alert>
 ```
 
+</elements-example>
+
 ### Negative
 
-<style-isolate>
-  <w-alert variant="negative" show>
-    <p>Something went wrong. Try again.</p>
-  </w-alert>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-alert variant="negative" show>
   <p>Something went wrong. Try again.</p>
 </w-alert>
 ```
 
+</elements-example>
+
 ### Positive
 
-<style-isolate>
-  <w-alert variant="positive" show>
-    <p>Your changes were saved successfully.</p>
-  </w-alert>
-</style-isolate>
-
+<elements-example>
+  
 ```html
 <w-alert variant="positive" show>
   <p>Your changes were saved successfully.</p>
 </w-alert>
 ```
+
+</elements-example>
 
 ### Programmatic Visibility
 

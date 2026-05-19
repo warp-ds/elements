@@ -1,4 +1,4 @@
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -136,3 +136,25 @@ test('uses specified type when type attribute is set', async () => {
     })
     .toBe('email');
 });
+
+test('submits the associated form when input has focus and user presses Enter', async () => {
+  const screen = render(html`
+    <form>
+      <w-textfield data-testid="textfield" name="test" value="Submit this!"></w-textfield>
+      <button type="submit">Submit</button>
+    </form>
+  `);
+
+  const onSubmit = vi.fn();
+  const form = document.querySelector('form') as HTMLFormElement;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    onSubmit();
+  });
+  
+  await userEvent.click(screen.getByTestId('textfield'));
+  await userEvent.keyboard('{Enter}')
+
+  expect(onSubmit).toHaveBeenCalled();
+});
+

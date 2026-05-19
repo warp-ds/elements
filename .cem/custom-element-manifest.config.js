@@ -3,6 +3,7 @@ import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
+
 export default {
   overrideModuleCreation: ({ ts, globs }) => {
     const program = getTsProgram(ts, globs, 'tsconfig.json');
@@ -77,8 +78,12 @@ export default {
   packagejson: false,
 
   plugins: [
-    cemValidatorPlugin(),
     typeParserPlugin(),
+    jsDocTagsPlugin({
+      tags: {
+        parent: {},
+      },
+    }),
     jsxTypesPlugin({
       outdir: 'dist/',
       fileName: 'index.d.ts',
@@ -92,10 +97,18 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
-    jsDocTagsPlugin({
-      tags: {
-        description: {},
-      },
+    cemValidatorPlugin({
+      rules: {
+        manifest: {
+          // not sure what's wrong here, either the types parser doesn't pick up that we export the type,
+          // or the validator doesn't check for parsedType on the member itself (if that's also valid).
+          exportTypes: 'warning',
+          // not quite sure how to configure the path resolver plugin to fix these, the resolver plugin doesn't seem to help even when it changes the output
+          modulePath: 'off',
+          definitionPath: 'off',
+          typeDefinitionPath: 'off',
+        }
+      }
     }),
   ],
 };

@@ -43,17 +43,22 @@ function debounce<T extends (...args: unknown[]) => unknown>(func: T, wait = 200
   }) as T;
 }
 
+export type WarpTabsChangeEvent = CustomEvent<{
+  panelId: string;
+}>;
+
 /**
  * Tabs are used to organize content by grouping similar information on the same page.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
+ * 
+ * @event {WarpTabsChangeEvent} change - Includes `details.panelId` with the now active tab's ID
  */
 export class WarpTabs extends LitElement {
   static styles = [reset, styles];
 
   /**
-   * @summary
-   * @description
+   * The `id` of the panel that should be active.
+   * 
+   * @default "" (Shows the first tab)
    */
   @property({ reflect: true })
   active: string;
@@ -133,6 +138,7 @@ export class WarpTabs extends LitElement {
     }
   }
 
+  /** @internal */
   get tabs() {
     const slot = this.shadowRoot?.querySelector('slot[name="tabs"]') as HTMLSlotElement | null;
     if (!slot) return [];
@@ -141,6 +147,7 @@ export class WarpTabs extends LitElement {
     return slottedElements.filter((el) => el.tagName.toLowerCase() === 'w-tab');
   }
 
+  /** @internal */
   get activeTab() {
     const activeTabs = this.tabs.filter((tab: HTMLElement & { for: string }) => tab.for === this._activeTabFor);
     return activeTabs[0];

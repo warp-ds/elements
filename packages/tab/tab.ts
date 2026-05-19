@@ -20,7 +20,7 @@ const ccButtonReset = 'focusable appearance-none cursor-pointer bg-transparent b
 /**
  * Individual tab component used within w-tabs container.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/tabs--docs)
+ * @parent w-tabs
  */
 export class WarpTab extends LitElement {
   static styles = [
@@ -38,7 +38,11 @@ export class WarpTab extends LitElement {
     `,
   ];
 
-  // Use delegatesFocus so focus delegates to the internal button
+  /**
+   * Use delegatesFocus so focus delegates to the internal button
+   * 
+   * @internal
+   */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
@@ -58,22 +62,13 @@ export class WarpTab extends LitElement {
   }
 
   /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'id', reflect: true })
-  id!: string;
-
-  /**
-   * @summary
-   * @description
+   * The `id` of the `<w-tab-panel>` this tab controls.
    */
   @property({ attribute: 'for', reflect: true })
   for!: string;
 
   /**
-   * @summary
-   * @description
+   * @internal
    */
   @property({ attribute: 'aria-controls' })
   private _ariaControlsAttr?: string;
@@ -81,28 +76,27 @@ export class WarpTab extends LitElement {
   /**
    * Internal tabindex managed by parent w-tabs.
    * Non-reflecting to avoid DOM changes during hydration.
+   * 
    * @internal
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: false })
   _parentTabIndex: number | undefined;
 
   /**
    * Internal aria-selected managed by parent w-tabs.
+   * 
    * Non-reflecting to avoid DOM changes during hydration.
+   * 
    * @internal
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: false })
   _parentAriaSelected: 'true' | 'false' | undefined;
 
   /**
    * Override tabIndex getter to return the computed internal tabIndex.
    * This allows external code to check if the tab is focusable.
+   * 
+   * @internal
    */
   override get tabIndex(): number {
     return this._parentTabIndex ?? 0;
@@ -110,6 +104,8 @@ export class WarpTab extends LitElement {
 
   /**
    * Override tabIndex setter to set _parentTabIndex (for backwards compatibility).
+   * 
+   * @internal
    */
   override set tabIndex(value: number) {
     this._parentTabIndex = value;
@@ -117,6 +113,8 @@ export class WarpTab extends LitElement {
 
   /**
    * Computed aria-selected: prefers parent-managed, falls back to own property
+   * 
+   * @internal
    */
   get _computedAriaSelected(): 'true' | 'false' | undefined {
     return this._parentAriaSelected ?? this._ownAriaSelected;
@@ -126,6 +124,11 @@ export class WarpTab extends LitElement {
     return this._ariaControlsAttr || this.for || '';
   }
 
+  /**
+   * Indicate that this is the currently active tab.
+   * 
+   * @internal Set by w-tabs
+   */
   @property({ attribute: 'aria-selected' })
   set ariaSelected(value: 'true' | 'false') {
     const oldValue = this._ownAriaSelected;
@@ -134,6 +137,7 @@ export class WarpTab extends LitElement {
     this._internals.ariaSelected = this._computedAriaSelected ?? null;
     this.requestUpdate('ariaSelected', oldValue);
   }
+  /** @internal */
   get ariaSelected(): 'true' | 'false' {
     return this._computedAriaSelected ?? 'false';
   }
@@ -141,16 +145,14 @@ export class WarpTab extends LitElement {
 
   /**
    * @deprecated Use `aria-selected="true"` instead
-   
-   * @summary
-   * @description
-  */
+   * 
+   * @internal Set by w-tabs
+   */
   @property({ type: Boolean, reflect: true })
   active = false;
 
   /**
-   * @summary
-   * @description
+   * Whether to show the `icon` slot over the tab title instead of inline.
    */
   @property({ type: Boolean, reflect: true })
   over = false;

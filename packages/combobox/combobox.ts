@@ -46,107 +46,122 @@ interface OptionWithIdAndMatch extends ComboboxOption {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-combobox--docs)
  */
 export class WarpCombobox extends FormControlMixin(LitElement) {
-  /** The available options to select from
-   * @summary
-   * @description
+  /**
+   * The available options to select from.
+   *
+   * Use this for framework usage, application state, or remote search results. When `options` contains entries, it is used instead of child `<option>` elements.
    */
   @property({ type: Array })
   options: ComboboxOption[] = [];
 
-  /** Label above input
-   * @summary
-   * @description
+  /**
+   * The label displayed above the input.
+   *
+   * Use this to give the combobox a visible and accessible name.
    */
   @property({ type: String, reflect: true, useDefault: true })
   label?: string = '';
 
-  /** Input placeholder
-   * @summary
-   * @description
+  /**
+   * Placeholder text displayed when the input is empty.
+   *
+   * Use this as a short hint for the expected input. Do not use placeholder text as a replacement for a label.
    */
   @property({ type: String, reflect: true, useDefault: true })
   placeholder?: string = '';
 
-  /** The input value
-   * @summary
-   * @description
+  /**
+   * The selected or typed value.
+   *
+   * When an option is selected, this is set to the option value. The displayed text may differ when the option has a separate label.
    */
   @property({ type: String, reflect: true, useDefault: true })
   value = '';
 
-  /** Whether the popover opens when focus is on the text field
-   * @summary
-   * @description
+  /**
+   * Whether the option list opens when the input receives focus.
+   *
+   * Use this when users should see available options before they start typing.
    */
   @property({ type: Boolean, attribute: 'open-on-focus', reflect: true })
   openOnFocus = false;
 
-  /** Select active option on blur
-   * @summary
-   * @description
+  /**
+   * Whether the active option is selected when the input loses focus.
+   *
+   * When enabled, the combobox selects the keyboard-highlighted option, or an option whose value exactly matches the current input value, on blur.
    */
   @property({ type: Boolean, attribute: 'select-on-blur', reflect: true, useDefault: true })
   selectOnBlur = true;
 
-  /** Whether the matching text segments in the options should be highlighted
-   * @summary
-   * @description
+  /**
+   * Whether matching text segments in options are highlighted.
+   *
+   * Use this to visually emphasize the part of each option that matches the current input value.
    */
   @property({ type: Boolean, attribute: 'match-text-segments', reflect: true })
   matchTextSegments = false;
 
-  /** Disable client-side static filtering
-   * @summary
-   * @description
+  /**
+   * Whether built-in client-side filtering is disabled.
+   *
+   * Use this for remote search or externally filtered results. When disabled, all entries in `options` are rendered as provided.
    */
   @property({ type: Boolean, attribute: 'disable-static-filtering', reflect: true })
   disableStaticFiltering = false;
 
-  /** Renders the input field in an invalid state
-   * @summary
-   * @description
+  /**
+   * Whether the combobox is visually invalid.
+   *
+   * Use this to show an externally managed validation error. Pair it with `help-text` to explain how to fix the error.
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
-  /** The content to display as the help text
-   * @summary
-   * @description
+  /**
+   * Help text displayed below the input.
+   *
+   * Use this for supporting guidance or validation feedback.
    */
   @property({ type: String, attribute: 'help-text', reflect: true, useDefault: true })
   helpText?: string = '';
 
-  /** Whether the element is disabled
-   * @summary
-   * @description
+  /**
+   * Whether the combobox is disabled.
+   *
+   * Disabled comboboxes cannot be focused, changed, or submitted with form data.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** Whether the element is required
-   * @summary
-   * @description
+  /**
+   * Whether the combobox is required before form submission.
+   *
+   * Use this when the user must provide a value before submitting the form.
    */
   @property({ type: Boolean, reflect: true })
   required = false;
 
-  /** Whether to show optional text
-   * @summary
-   * @description
+  /**
+   * Whether to show optional text next to the label.
+   *
+   * Use this to indicate that the combobox is not required.
    */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
-  /** Name attribute for form submission
-   * @summary
-   * @description
+  /**
+   * The name submitted with the combobox value.
+   *
+   * Use this when the combobox belongs to a form and its value should be included in form data.
    */
   @property({ type: String, reflect: true, useDefault: true })
   name?: string = '';
 
-  /** Autocomplete attribute for the input field
-   * @summary
-   * @description
+  /**
+   * The autocomplete attribute passed to the internal input.
+   *
+   * Defaults to `off`. Set this when browser autocomplete should be enabled or scoped to a specific autocomplete token.
    */
   @property({ type: String, reflect: true, useDefault: true })
   autocomplete?: string = 'off';
@@ -162,6 +177,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   /** @internal Available options based on user's input value */
   @state()
   private _currentOptions: OptionWithIdAndMatch[] = [];
+
+  /** @internal Options parsed from light-DOM <option> children */
+  @state()
+  private _lightDomOptions: ComboboxOption[] = [];
 
   /** @internal Unique identifier counter for options */
   @state()
@@ -180,6 +199,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   // capture the initial value using firstUpdated and #initialValue
   #initialValue: string | null = null;
+  #lightDomObserver?: MutationObserver;
 
   firstUpdated(changedProps: Map<string, unknown>) {
     this.#initialValue = this.value;
@@ -195,6 +215,28 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
     this.value = this.#initialValue;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    this.#syncOptionsFromLightDom();
+
+    this.#lightDomObserver = new MutationObserver(() => {
+      this.#syncOptionsFromLightDom();
+    });
+    this.#lightDomObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['label', 'value'],
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#lightDomObserver?.disconnect();
+  }
+
   private get _listboxId() {
     return `${this._id}-listbox`;
   }
@@ -205,6 +247,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
   private get _helpId() {
     return this.helpText ? `${this._id}__hint` : undefined;
+  }
+
+  private get _sourceOptions() {
+    return Array.isArray(this.options) && this.options.length ? this.options : this._lightDomOptions;
   }
 
   /** Get the display text for the navigation option or current display value */
@@ -228,6 +274,23 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
       key: option.key || option.value,
       currentInputValue,
     }));
+  }
+
+  #getOptionNodes() {
+    return Array.from(this.children).filter((child) => child.tagName.toLowerCase() === 'option') as HTMLOptionElement[];
+  }
+
+  #syncOptionsFromLightDom() {
+    this._lightDomOptions = this.#getOptionNodes().map((option) => {
+      const value = option.getAttribute('value') ?? '';
+      const label = option.hasAttribute('label') ? (option.getAttribute('label') ?? '') : (option.textContent ?? '');
+
+      return {
+        value,
+        label,
+        key: value,
+      };
+    });
   }
 
   /** Get ARIA text for screen readers */
@@ -496,10 +559,11 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   protected willUpdate(changedProperties: PropertyValues<this>) {
-    const options = Array.isArray(this.options) ? this.options : [];
+    const options = this._sourceOptions;
+    const lightDomOptionsChanged = (changedProperties as Map<string, unknown>).has('_lightDomOptions');
 
     // Sync _displayValue when value or options change externally (before filtering)
-    if (changedProperties.has('value') || changedProperties.has('options')) {
+    if (changedProperties.has('value') || changedProperties.has('options') || lightDomOptionsChanged) {
       const matchingOption = options.find((o) => o.value === this.value);
       // Only sync if this is an external value change (not from user typing)
       // We detect this by checking if _displayValue doesn't match the expected label
@@ -515,6 +579,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
     if (
       changedProperties.has('options') ||
+      lightDomOptionsChanged ||
       changedProperties.has('value') ||
       changedProperties.has('disableStaticFiltering') ||
       (changedProperties as Map<string, unknown>).has('_displayValue')

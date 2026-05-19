@@ -50,6 +50,7 @@
     "jsx": "react",
     "skipLibCheck": true,
     "allowJs": true,
+    "rootDir": ".",
     "declaration": true,
     "outDir": "dist",
     "moduleResolution": "bundler"
