@@ -35,27 +35,27 @@ export const Default: Story = {
         <div class="flex gap-8">
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message can be as long as you want, but don\t go overboard. People need time to read and react to the contents before the message disappears.', { variant: 'positive' });
+              snackbar.create('The message should be short', { variant: 'positive' });
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message', { variant: 'warning' });
+              snackbar.create('The message should be short', { variant: 'warning' });
           }}">Warning variant</w-button>
 
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message', { variant: 'negative' });
+              snackbar.create('The message should be short', { variant: 'negative' });
           }}">Negative variant</w-button>
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message', { variant: 'info' });
+              snackbar.create('The message should be short', { variant: 'info' });
           }}">Info variant</w-button>
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message');
+              snackbar.create('The message should be short');
           }}">Neutral variant</w-button>
         </div>
     `;
@@ -69,7 +69,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'positive',
                   action: {
@@ -85,7 +85,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'warning',
                   action: {
@@ -101,7 +101,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'negative',
                   action: {
@@ -117,7 +117,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'info',
                   action: {
@@ -133,7 +133,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   action: {
                     label: 'Action',
@@ -158,7 +158,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'positive',
                   action: {
@@ -174,7 +174,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'warning',
                   action: {
@@ -190,7 +190,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'negative',
                   action: {
@@ -206,7 +206,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   variant: 'info',
                   action: {
@@ -222,7 +222,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'Snackbar message',
+                'The message should be short',
                 {
                   action: {
                     label: 'Long action label',

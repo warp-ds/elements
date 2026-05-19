@@ -26,10 +26,7 @@ export enum SnackbarDuration {
 export class WarpSnackbarItem extends LitElement {
     static styles = [reset, styles];
     
-    @property({ type: Boolean, attribute: 'can-close' })
-    canClose = false;
-    
-    @property({ type: Boolean, attribute: 'action-as-block' })
+    @property({ type: Boolean, attribute: 'action-as-block', reflect: true })
     actionAsBlock = false;
 
     @property({ type: Number, reflect: true, useDefault: true })
@@ -61,18 +58,8 @@ export class WarpSnackbarItem extends LitElement {
                 </div>
                 <div part="action">
                     <slot name="action"></slot>
+                    <slot name="close"></slot>
                 </div>
-                ${this.canClose ? html`
-                    <div part="close">
-                        <w-button variant="utilityQuiet" @click=${this.close} icon-only small>
-                            <w-icon name="Close" size="small" aria-label="${i18n.t({
-                                id: 'snackbar.aria.close',
-                                message: 'Dismiss message',
-                                comment: 'Accessibility label for the button that closes the snackbar/toast popup',
-                            })}"></w-icon>
-                        </w-button>
-                    </div>
-                    ` : nothing}
             </div>
         `;
     }

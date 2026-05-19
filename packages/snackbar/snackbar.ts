@@ -1,5 +1,5 @@
+import { i18n } from '@lingui/core';
 import { html, LitElement } from 'lit';
-import { property, query } from 'lit/decorators.js';
 
 import { SnackbarDuration, type WarpSnackbarItem, type SnackbarVariant } from '../snackbar-item/snackbar-item.js';
 import { activateI18n } from '../i18n.js';
@@ -55,7 +55,6 @@ export class WarpSnackbar extends LitElement {
         const mergedOptions = { ...defaultCreateOptions, ...options };
 
         const snackbarItem = document.createElement('w-snackbar-item');
-        snackbarItem.canClose = mergedOptions.canClose;
         snackbarItem.duration = mergedOptions.duration;
 
         snackbarItem.innerText = message;
@@ -63,7 +62,6 @@ export class WarpSnackbar extends LitElement {
         if (mergedOptions.variant !== 'neutral') {
             const icon = document.createElement('w-icon');
             icon.slot = 'icon';
-            icon.size = 'large';
 
             switch (mergedOptions.variant) {
                 case 'positive':
@@ -83,21 +81,45 @@ export class WarpSnackbar extends LitElement {
             snackbarItem.prepend(icon);
         }
 
+        
         if (mergedOptions.action) {
             const actionButton = document.createElement('w-button');
             actionButton.slot = 'action';
             actionButton.variant = 'utilityQuiet';
-
+            actionButton.small = true;
+            
             const { label, onclick } = mergedOptions.action;
             actionButton.innerText = label;
             actionButton.onclick = onclick;
-        
+            
             const isLongLabel = spaceRe.test(label);
             if (isLongLabel) {
                 snackbarItem.actionAsBlock = true;
             }
-    
+            
             snackbarItem.append(actionButton);
+        }
+        
+        if (mergedOptions.canClose) {
+            const closeButton = document.createElement('w-button');
+            closeButton.slot = 'action';
+            closeButton.variant = 'utilityQuiet';
+            closeButton.small = true;
+            closeButton.iconOnly = true;
+
+            closeButton.onclick = snackbarItem.close.bind(snackbarItem);
+
+            const closeIcon = document.createElement('w-icon');
+            closeIcon.name = 'Close';
+            closeIcon.size = 'small';
+            closeIcon.ariaLabel = i18n.t({
+                id: 'snackbar.aria.close',
+                message: 'Dismiss message',
+                comment: 'Accessibility label for the button that closes the snackbar/toast popup',
+            });
+
+            closeButton.append(closeIcon);
+            snackbarItem.append(closeButton)
         }
 
         this.prepend(snackbarItem);
