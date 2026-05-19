@@ -18,9 +18,12 @@ jobs:
 
       - name: Lint
         run: pnpm lint:check
-
+    
       - name: Build
         run: pnpm build
+
+      - name: Publint
+        run: pnpm lint:package
 
       # test after build so we have compiled Lingui files to import
       - name: Install Playwright
