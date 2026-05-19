@@ -19,7 +19,11 @@ const PRIMITIVE_TYPES = new Set([
   'bigint',
 ]);
 
-const toTypeAnchorSlug = (typeName) => typeName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const toTypeAnchorSlug = (typeName) =>
+  typeName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 const shouldLinkType = (normalizedTypeName, typesMap) => {
   if (!normalizedTypeName) {
@@ -216,15 +220,20 @@ components.forEach(({ declaration, packageName }) => {
     }
   }
   try {
-    copyFileSync(new URL(`../packages/${packageName}/docs/accessibility.md`, import.meta.url), new URL('./accessibility.md', docsDir));
-
+    copyFileSync(
+      new URL(`../packages/${packageName}/docs/accessibility.md`, import.meta.url),
+      new URL('./accessibility.md', docsDir),
+    );
   } catch (error) {
     if (!hasParent) {
       console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
     }
   }
   try {
-    copyFileSync(new URL(`../packages/${packageName}/docs/examples.md`, import.meta.url), new URL('./examples.md', docsDir));
+    copyFileSync(
+      new URL(`../packages/${packageName}/docs/examples.md`, import.meta.url),
+      new URL('./examples.md', docsDir),
+    );
   } catch (error) {
     if (!hasParent) {
       console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);

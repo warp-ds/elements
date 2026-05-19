@@ -1,7 +1,7 @@
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { activateI18n } from '../i18n.js';
-import type { WarpSliderThumb, SliderSlot } from '../slider-thumb/slider-thumb.js';
+import type { SliderSlot, WarpSliderThumb } from '../slider-thumb/slider-thumb.js';
 import { reset } from '../styles.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';

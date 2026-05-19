@@ -137,12 +137,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 
     return html`
       <div class="wrapper" tabindex="${this._internalTabIndex}">
-        ${this.label
-          ? html`
+        ${
+          this.label
+            ? html`
               <div class="label" id="${labelId}">
                 <span>${this.label}</span>
-                ${this.optional
-                  ? html`
+                ${
+                  this.optional
+                    ? html`
                       <span class="optional">
                         ${i18n._({
                           id: 'checkbox-group.label.optional',
@@ -151,10 +153,12 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
                         })}
                       </span>
                     `
-                  : nothing}
+                    : nothing
+                }
               </div>
             `
-          : nothing}
+            : nothing
+        }
         <div
           class="checkbox-group"
           role="group"
@@ -164,9 +168,11 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
         >
           <slot></slot>
         </div>
-        ${helpText
-          ? html`<div class="${isInvalid ? 'help-text error' : 'help-text'}" id="${helpId}">${helpText}</div>`
-          : nothing}
+        ${
+          helpText
+            ? html`<div class="${isInvalid ? 'help-text error' : 'help-text'}" id="${helpId}">${helpText}</div>`
+            : nothing
+        }
       </div>
     `;
   }
@@ -237,7 +243,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
   };
 
   #getCheckedCount(): number {
-    return this.#getAssignedElements().filter(el => (el as { checked?: boolean }).checked).length;
+    return this.#getAssignedElements().filter((el) => (el as { checked?: boolean }).checked).length;
   }
 
   #applyGroupName(): void {

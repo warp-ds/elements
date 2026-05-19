@@ -72,9 +72,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
         </w-radio-group>
       `);
 
-      await expect.element(page.getByRole('radiogroup', { name: 'Preferences' })).toHaveAccessibleDescription(
-        'Select one',
-      );
+      await expect
+        .element(page.getByRole('radiogroup', { name: 'Preferences' }))
+        .toHaveAccessibleDescription('Select one');
     });
 
     test('slotted label and help text are associated', async () => {
@@ -86,9 +86,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
         </w-radio-group>
       `);
 
-      await expect.element(page.getByRole('radiogroup', { name: 'Slotted label' })).toHaveAccessibleDescription(
-        'Slotted help text',
-      );
+      await expect
+        .element(page.getByRole('radiogroup', { name: 'Slotted label' }))
+        .toHaveAccessibleDescription('Slotted help text');
     });
   });
 
