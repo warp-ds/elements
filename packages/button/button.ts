@@ -13,7 +13,7 @@ import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
-import { wButtonStyles } from './styles/w-button.styles';
+import { wButtonStyles } from './styles.js';
 
 export type ButtonVariant =
   | 'primary'
@@ -282,6 +282,7 @@ class WarpButton extends FormControlMixin(LitElement) {
         : html`
           <button
             type=${this.type || 'button'}
+            part="base"
             class=${ifDefined(this.buttonClass)}
             @click="${this._handleButtonClick}"
             commandfor=${ifDefined(this.commandfor)}
