@@ -1,3 +1,10 @@
+# [2.10.0-next.5](https://github.com/warp-ds/elements/compare/v2.10.0-next.4...v2.10.0-next.5) (2026-05-19)
+
+
+### Bug Fixes
+
+* include eik/index.js in the package ([#673](https://github.com/warp-ds/elements/issues/673)) ([54aeb72](https://github.com/warp-ds/elements/commit/54aeb72f5ca783a43b0922515d1b735c37fd73b0))
+
 # [2.10.0-next.4](https://github.com/warp-ds/elements/compare/v2.10.0-next.3...v2.10.0-next.4) (2026-05-13)
 
 
