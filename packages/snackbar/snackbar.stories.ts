@@ -35,7 +35,7 @@ export const Default: Story = {
         <div class="flex gap-8">
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('Snackbar message', { variant: 'positive' });
+              snackbar.create('Snackbar message can be as long as you want, but don\t go overboard. People need time to read and react to the contents before the message disappears.', { variant: 'positive' });
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {

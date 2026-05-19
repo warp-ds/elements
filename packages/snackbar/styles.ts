@@ -12,12 +12,12 @@ export const styles = css`
         --_snackbar-position-left: var(--w-c-snackbar-position-left, 0);
         --_snackbar-z-index: var(--w-c-snackbar-z-index, 50);
 
-        bottom: var(--_position-bottom);
-        left: var(--_position-left);
-        right: var(--_position-right);
-        top: var(--_position-top);
+        bottom: var(--_snackbar-position-bottom);
+        left: var(--_snackbar-position-left);
+        right: var(--_snackbar-position-right);
+        top: var(--_snackbar-position-top);
         
-        z-index: var(--_z-index);
+        z-index: var(--_snackbar-z-index);
     }
 
     [part='container'] {

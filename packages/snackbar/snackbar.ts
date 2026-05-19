@@ -63,6 +63,7 @@ export class WarpSnackbar extends LitElement {
         if (mergedOptions.variant !== 'neutral') {
             const icon = document.createElement('w-icon');
             icon.slot = 'icon';
+            icon.size = 'large';
 
             switch (mergedOptions.variant) {
                 case 'positive':

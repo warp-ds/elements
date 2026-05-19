@@ -61,7 +61,7 @@ export class WarpIcon extends LitElement {
    * @returns SVGElement or null on failure
    */
   private async fetchIcon(iconName: string): Promise<SVGElement | null> {
-    const uri = `https://assets.finn.no/pkg/eikons/v1/${this.locale}/${iconName}.svg`;
+    const uri = `https://assets.finn.no/pkg/eikons/~1/${this.locale}/${iconName}.svg`;
     try {
       const svgText = await cacheFetch<string>(uri);
       const doc = new DOMParser().parseFromString(svgText, 'text/html');
