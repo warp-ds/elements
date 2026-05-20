@@ -32,24 +32,86 @@ export class WarpSnackbarItem extends LitElement {
     @property({ type: Number, reflect: true, useDefault: true })
     duration: number = SnackbarDuration.Short;
 
-    private timer: number | null = null;
+    #durationLeft: number = SnackbarDuration.Short;
 
-    // TODO when focused, save what element previously had focus so we can go back there in close
-    
+    #lastFocused: HTMLElement | null = null;
+
+    // TODO How to expose the timer in an accessible maner, both visually and to assistive technologies? https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/timer_role + a progress bar style thing?
+    #timer: ReturnType<typeof setTimeout> | null = null;
+
     connectedCallback(): void {
         super.connectedCallback();
-        // TODO Countdown logic, with pause on focus, this.close() on end
+
+        if (this.duration !== Number.POSITIVE_INFINITY) {
+            const updateFrequencyMs = 1000;
+            
+            // Subtract one updateFrequencyMs, otherwise the full
+            // duration would be duration + updateFrequencyMs.
+            this.#durationLeft = this.duration - updateFrequencyMs;
+
+            this.#timer = setInterval(() => {
+                const itemHasFocus = this.#lastFocused !== null;
+                if (itemHasFocus) return;
+        
+                this.#durationLeft -= updateFrequencyMs;
+
+                if (this.#durationLeft <= 0) {
+                    this.close();
+                }
+            }, updateFrequencyMs);
+        }
+    }
+
+    disconnectedCallback(): void {
+        if (this.#timer) {
+            clearInterval(this.#timer);
+        }
     }
 
     close(): void {
-        // TODO animate exit, then remove
         this.remove();
-        // TODO move focus to last known focused element
+
+        if (this.#lastFocused) {
+            this.#lastFocused.focus();
+        }
+    }
+
+    /** 
+     * Listen to focusin, not focus, as focus does not bubble.
+     * 
+     * We're interested in running code when an action button gets focus,
+     * such as pausing the countdown and storing the last focused element
+     * outside of the snackbar so we can return there when it closes.
+     * 
+     * Only save the first instance of `relatedTarget` so we don't overwrite
+     * it when focus moves from an action button to the close button.
+     */
+    #onFocusIn(e: FocusEvent) {
+        if (!this.#lastFocused) {
+            if (e.relatedTarget && (e.relatedTarget as HTMLElement).focus) {
+                this.#lastFocused = e.relatedTarget as HTMLElement;
+            }
+        }
+    }
+
+    /**
+     * Listen to focusout, not blur, as blur does not bubble.
+     * 
+     * Unpause the countdown by clearing this.#lastFocused
+     * if the focus is moving outside of the snackbar item.
+     */
+    #onFocusOut(e: FocusEvent) {
+        const snackbarItemLostFocus =
+            !e.relatedTarget || 
+            !this.shadowRoot?.host.contains(e.relatedTarget as HTMLElement);
+        if (snackbarItemLostFocus) {
+            this.#lastFocused = null;
+        }
     }
 
     render() {
         return html`
-            <div part="item">
+            <div part="item" @focusin=${this.#onFocusIn} @focusout=${this.#onFocusOut}>
                 <div part="icon">
                     <slot name="icon"></slot>
                 </div>
