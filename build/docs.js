@@ -103,7 +103,7 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
       return 0;
     })
     .forEach((item) => {
-      if (item.kind === 'field' && item.privacy !== 'private') {
+      if (item.privacy !== 'private') {
         table += `| ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}`;
         table += ` | ${renderType(item.type?.text, typesMap).replaceAll("|", "\\|")}`;
         table += ` | \`${normalizeText(item.default, '-')}\``;
@@ -133,7 +133,7 @@ const buildPropertyDetails = (members = [], typesMap = new Map(), hasParent = fa
       return 0;
     })
     .forEach((item) => {
-      if (item.kind === 'field' && item.privacy !== 'private') {
+      if (item.privacy !== 'private') {
         details += `####${hasParent ? '#' : ''} ${normalizeText(item.attribute ?? item.name, '-')}${!item.attribute ? ' (JS only)' : ''}\n\n`;
         if (item.deprecated) {
           details += `**Deprecated**: ${item.deprecated}\n\n`;
