@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { WarpSnackbarItem } from './snackbar-item.js';
+import { SnackbarActionPlacement, WarpSnackbarItem } from './snackbar-item.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -15,14 +15,14 @@ const BaseSnackbarItem = createComponent({
 
 type BaseSnackbarItemProps = React.ComponentPropsWithoutRef<typeof BaseSnackbarItem>;
 
-type SnackbarItemProps = Omit<BaseSnackbarItemProps, 'action-as-block'> & {
-  actionAsBlock?: boolean;
+type SnackbarItemProps = Omit<BaseSnackbarItemProps, 'action-placement'> & {
+  actionPlacement?: SnackbarActionPlacement;
 };
 
 export const SnackbarItem = React.forwardRef<WarpSnackbarItem, SnackbarItemProps>(
-  ({ actionAsBlock, ...props }, ref) => 
+  ({ actionPlacement, ...props }, ref) => 
     React.createElement(BaseSnackbarItem, {
       ...props,
-      ...(actionAsBlock ? { 'action-as-block': true } : {}),
+      ...(actionPlacement ? { 'action-placement': actionPlacement } : {}),
     }),
 ); 

@@ -2,5 +2,5 @@ import { describeReactSsrAttributeMapping } from '../../tests/react-ssr-attribut
 import { SnackbarItem } from './react.js';
 
 describeReactSsrAttributeMapping('SnackbarItem', SnackbarItem, [
-  { propName: 'actionAsBlock', attrName: 'action-as-block', value: true },
+  { propName: 'actionPlacement', attrName: 'action-placement', value: 'block' },
 ]);
