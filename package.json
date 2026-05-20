@@ -140,9 +140,6 @@
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
     },
-    "./docs/*": {
-      "default": "./dist/docs/*"
-    },
     "./*": {
       "types": "./dist/packages/*/*.d.ts",
       "import": "./dist/packages/*/*.js"
