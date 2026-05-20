@@ -1,3 +1,10 @@
+# [2.10.0-next.6](https://github.com/warp-ds/elements/compare/v2.10.0-next.5...v2.10.0-next.6) (2026-05-20)
+
+
+### Bug Fixes
+
+* **docs:** add built documentation index ([#675](https://github.com/warp-ds/elements/issues/675)) ([dcd20e7](https://github.com/warp-ds/elements/commit/dcd20e747d7bc9d77348383284526532742d404e))
+
 # [2.10.0-next.5](https://github.com/warp-ds/elements/compare/v2.10.0-next.4...v2.10.0-next.5) (2026-05-19)
 
 
