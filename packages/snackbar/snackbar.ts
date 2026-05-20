@@ -47,7 +47,6 @@ export class WarpSnackbar extends LitElement {
         /** Set on internals to avoid hydration mismatches in React */
         this.internals = this.attachInternals();
         this.internals.ariaLive = "polite";
-        this.internals.ariaRelevant = "additions";
         this.internals.role = "log";
     }
 
@@ -122,7 +121,7 @@ export class WarpSnackbar extends LitElement {
             snackbarItem.append(closeButton)
         }
 
-        this.prepend(snackbarItem);
+        this.shadowRoot?.host.prepend(snackbarItem);
 
         return snackbarItem;
     }
