@@ -34,7 +34,7 @@ export const styles = css`
         grid-template-columns: auto 1fr auto;
     }
 
-    :host([action-as-block]) [part='item'] {
+    :host([action-placement='block']) [part='item'] {
         row-gap: 4px;
     }
 
@@ -94,7 +94,7 @@ export const styles = css`
         padding-inline-start: 8px;
     }
     
-    :host([action-as-block]) [part='action'] {
+    :host([action-placement='block']) [part='action'] {
         grid-area: block-action;
 
     }

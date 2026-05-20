@@ -7,15 +7,18 @@ import { styles } from './styles.js';
 
 export type SnackbarVariant = 'positive' | 'warning' | 'negative' | 'info' | 'neutral';
 
+export type SnackbarActionPlacement = 'inline' | 'block';
+
 export enum SnackbarDuration {
     Short = 5_000,
     Long = 20_000,
-    // biome-ignore lint: false positive
-    Infinite = Number.POSITIVE_INFINITY,
+    Infinite = 120_000_000,
 }
 
 /**
  * An item to show in a `w-snackbar`.
+ * 
+ * See the `create` function on `w-snackbar` for a convenience API which helps you make snackbar items.
  * 
  * @parent w-snackbar
  * 
@@ -26,9 +29,15 @@ export enum SnackbarDuration {
 export class WarpSnackbarItem extends LitElement {
     static styles = [reset, styles];
     
-    @property({ type: Boolean, attribute: 'action-as-block', reflect: true })
-    actionAsBlock = false;
+    /**
+     * The placement of the action and close buttons.
+     */
+    @property({ attribute: 'action-placement', reflect: true, useDefault: true })
+    actionPlacement: SnackbarActionPlacement = 'inline';
 
+    /**
+     * How long the message should stay in the document before removing itself.
+     */
     @property({ type: Number, reflect: true, useDefault: true })
     duration: number = SnackbarDuration.Short;
 
@@ -42,7 +51,7 @@ export class WarpSnackbarItem extends LitElement {
     connectedCallback(): void {
         super.connectedCallback();
 
-        if (this.duration !== Number.POSITIVE_INFINITY) {
+        if (this.duration !== SnackbarDuration.Infinite) {
             const updateFrequencyMs = 1000;
             
             // Subtract one updateFrequencyMs, otherwise the full
@@ -68,6 +77,11 @@ export class WarpSnackbarItem extends LitElement {
         }
     }
 
+    /**
+     * Remove the snackbar item from the document.
+     * 
+     * Moves focus to the last focused element outside of the snackbar item, if available.
+     */
     close(): void {
         this.remove();
 

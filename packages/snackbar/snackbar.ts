@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core';
 import { html, LitElement } from 'lit';
 
-import { SnackbarDuration, type WarpSnackbarItem, type SnackbarVariant } from '../snackbar-item/snackbar-item.js';
+import { SnackbarDuration, type WarpSnackbarItem, type SnackbarVariant, type SnackbarActionPlacement } from '../snackbar-item/snackbar-item.js';
 import { activateI18n } from '../i18n.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
@@ -13,12 +13,53 @@ import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
 export type CreateSnackbarOptions = {
-    canClose: boolean;
-    duration: SnackbarDuration;
-    variant: SnackbarVariant;
+    /** 
+     * Show a close button so users can dismiss the message early.
+     * 
+     * Can not be turned off if duration is Long or more.
+     * 
+     * Pass a click event handler if you need to react to clicks on the close button somehow.
+     * You can stop the message from closing by calling `event.preventDefault()`.
+     * 
+     * @default true
+     */
+    canClose?: boolean | ((this: GlobalEventHandlers, ev: PointerEvent) => any);
+    /**
+     * Duration until the message hides automatically.
+     * 
+     * If the message has an action the default `duration` is `SnackbarDuration.Long`.
+     * 
+     * @default SnackbarDuration.Short
+     */
+    duration?: SnackbarDuration;
+    /**
+     * @default 'neutral'
+     */
+    variant?: SnackbarVariant;
+    /**
+     * Shows an action before the close button.
+     * 
+     * Use this action as a convenience only. Ensure the result of any action in the snackbar,
+     * such as Undo, is possible to achieve elsewhere in your application.
+     */
     action?: {
+        /**
+         * Keep action labels short.
+         * 
+         * If the label includes a space the `placement` is set to `block` by default.
+         */
         label: string;
+        /**
+         * The action button's `onclick` property.
+         */
         onclick: (this: GlobalEventHandlers, ev: PointerEvent) => any;
+        /** 
+         * Overrides the default placement of the action button.
+         * 
+         * By default labels that are only one word are `inline` and labels with multiple words are `block`.
+         * If you have a particularly long word as a label you can set `placement: 'block'`.
+         */
+        placement?: SnackbarActionPlacement;
     };
 };
 
@@ -35,7 +76,41 @@ const spaceRe = /\s/;
 /**
  * A Snackbar shows brief user feedback messages that overlay content, with an optional action such as Undo.
  * 
+ * Include one `<w-snackbar></w-snackbar>` in the document `<body>`. Use the `create` function to create messages.
+ * 
  * @slot default - `w-snackbar-item` gets placed inside the default slot by the `create` function.
+ * 
+ * @example
+ * 
+ * ```html
+ * <body>
+ * 	<w-snackbar></w-snackbar>
+ * </body>
+ * ```
+ * 
+ * @example 
+ * 
+ * ```ts
+ * // Short message indicating an operation succeeded
+ * const snackbar = document.querySelector("w-snackbar");
+ * const snackbarItem = snackbar.create("Settings saved", { variant: "success" });
+ * ```
+ * 
+ * @example
+ * 
+ * ```ts
+ * // An action to undo what was just done
+ * const snackbar = document.querySelector("w-snackbar");
+ * const snackbarItem = snackbar.create("Settings saved", {
+ * 	variant: "success",
+ * 	action: {
+ * 		label: "Undo",
+ * 		onclick: () => {
+ * 			// undoSave();
+ * 		},
+ * 	},
+ * });
+ * ```
  */
 export class WarpSnackbar extends LitElement {
     private internals: ElementInternals;
@@ -48,13 +123,56 @@ export class WarpSnackbar extends LitElement {
         this.internals = this.attachInternals();
         this.internals.ariaLive = "polite";
         this.internals.role = "log";
+
+        this._onKeydown = this._onKeydown.bind(this);
     }
 
+    connectedCallback(): void {
+        super.connectedCallback();
+        document.addEventListener('keydown', this._onKeydown);
+    }
+
+    disconnectedCallback(): void {
+        super.disconnectedCallback();
+        document.removeEventListener('keydown', this._onKeydown);
+    }
+
+    /** @internal */
+    _onKeydown(e: KeyboardEvent) {
+        if (e.key === 'Escape') {
+            // Close only the oldest with each keypress.
+            // Since we prepend when we create new items
+            // the last of type is the oldest.
+            const snackbarItem = this.shadowRoot?.host.querySelector<WarpSnackbarItem>('w-snackbar-item:last-of-type');
+            if (snackbarItem) {
+                snackbarItem.close();
+            }
+        }
+    }
+
+    /**
+     * Creates a snackbar item and immediately adds it to the snackbar.
+     * 
+     * By default the snackbar item automatically closes after 5 seconds (`SnackbarDuration.Short`).
+     * 
+     * If you include an `action` in the options the default `duration` is
+     * set to 20 seconds (`SnackbarDuration.Long`) and can not be made shorter. 
+     * 
+     * A `duration` of 20 seconds or longer forces the close button to be visible.
+     * 
+     * The default `variant` is `neutral` which does not have an icon.
+     * 
+     * Set `duration` to `SnackbarDuration.Infinite` if you want a persistent message.
+     * 
+     * @returns The instance of `w-snackbar-item` added to the snackbar.
+     */
     create(message: string, options: Partial<CreateSnackbarOptions> = {}): WarpSnackbarItem {
         const mergedOptions = { ...defaultCreateOptions, ...options };
 
         const snackbarItem = document.createElement('w-snackbar-item');
-        snackbarItem.duration = mergedOptions.duration;
+        if (mergedOptions.duration) {
+            snackbarItem.duration = mergedOptions.duration;
+        }
 
         snackbarItem.innerText = message;
         
@@ -82,23 +200,37 @@ export class WarpSnackbar extends LitElement {
 
         
         if (mergedOptions.action) {
+            // Force a minimum duration of Long when there's an action.
+            if (snackbarItem.duration < SnackbarDuration.Long) {
+                snackbarItem.duration = SnackbarDuration.Long;
+            }
+
             const actionButton = document.createElement('w-button');
             actionButton.slot = 'action';
             actionButton.variant = 'utilityQuiet';
             actionButton.small = true;
             
-            const { label, onclick } = mergedOptions.action;
+            const { label, onclick, placement } = mergedOptions.action;
             actionButton.innerText = label;
             actionButton.onclick = onclick;
-            
-            const isLongLabel = spaceRe.test(label);
-            if (isLongLabel) {
-                snackbarItem.actionAsBlock = true;
+
+            if (placement) {
+                snackbarItem.actionPlacement = placement;
+            } else {
+                const isLongLabel = spaceRe.test(label);
+                if (isLongLabel) {
+                    snackbarItem.actionPlacement = 'block';
+                }
             }
             
             snackbarItem.append(actionButton);
         }
         
+        // Force close button visibility if duration is Long or more
+        if (snackbarItem.duration >= SnackbarDuration.Long) {
+            mergedOptions.canClose = true;
+        }
+
         if (mergedOptions.canClose) {
             const closeButton = document.createElement('w-button');
             closeButton.slot = 'action';
@@ -106,7 +238,16 @@ export class WarpSnackbar extends LitElement {
             closeButton.small = true;
             closeButton.iconOnly = true;
 
-            closeButton.onclick = snackbarItem.close.bind(snackbarItem);
+            if (typeof mergedOptions.canClose === 'function') {
+                // Let users add an onclick for example for analytics purposes
+                closeButton.onclick = (e) => {
+                    (mergedOptions.canClose as (this: GlobalEventHandlers, ev: PointerEvent) => any).call(closeButton, e);
+                    if (e.defaultPrevented) return;
+                    snackbarItem.close.call(snackbarItem);
+                };
+            } else {
+                closeButton.onclick = snackbarItem.close.bind(snackbarItem);
+            }
 
             const closeIcon = document.createElement('w-icon');
             closeIcon.name = 'Close';

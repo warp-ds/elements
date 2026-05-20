@@ -14,5 +14,5 @@ The `<w-snackbar>` element includes a [create function](#create) which you can u
 
 ```js
 const snackbar = document.querySelector("w-snackbar");
-const item = snackbar.create('Snackbar message');
+const snackbarItem = snackbar.create("Snackbar message");
 ```
