@@ -78,8 +78,6 @@ const spaceRe = /\s/;
  * 
  * Include one `<w-snackbar></w-snackbar>` in the document `<body>`. Use the `create` function to create messages.
  * 
- * @slot default - `w-snackbar-item` gets placed inside the default slot by the `create` function.
- * 
  * @example
  * 
  * ```html
@@ -111,6 +109,17 @@ const spaceRe = /\s/;
  * 	},
  * });
  * ```
+ * 
+ * @slot default - `w-snackbar-item` gets placed inside the default slot by the `create` function.
+ * 
+ * @csspart container - the live region that positions messages on the screen.
+ * 
+ * @cssprop --w-c-snackbar-container-gap
+ * @cssprop --w-c-snackbar-position-bottom
+ * @cssprop --w-c-snackbar-position-left
+ * @cssprop --w-c-snackbar-position-right
+ * @cssprop --w-c-snackbar-position-top
+ * @cssprop --w-c-snackbar-z-index
  */
 export class WarpSnackbar extends LitElement {
     private internals: ElementInternals;
@@ -119,9 +128,14 @@ export class WarpSnackbar extends LitElement {
 
     constructor() {
         super();
-        /** Set on internals to avoid hydration mismatches in React */
+        /** 
+         * Set on internals to avoid hydration mismatches in React
+         * @internal
+         */
         this.internals = this.attachInternals();
+        /** @internal */
         this.internals.ariaLive = "polite";
+        /** @internal */
         this.internals.role = "log";
 
         this._onKeydown = this._onKeydown.bind(this);
@@ -166,7 +180,7 @@ export class WarpSnackbar extends LitElement {
      * 
      * @returns The instance of `w-snackbar-item` added to the snackbar.
      */
-    create(message: string, options: Partial<CreateSnackbarOptions> = {}): WarpSnackbarItem {
+    create(message: string, options: CreateSnackbarOptions = {}): WarpSnackbarItem {
         const mergedOptions = { ...defaultCreateOptions, ...options };
 
         const snackbarItem = document.createElement('w-snackbar-item');

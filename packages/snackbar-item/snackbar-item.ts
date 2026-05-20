@@ -22,9 +22,29 @@ export enum SnackbarDuration {
  * 
  * @parent w-snackbar
  * 
- * @slot default - The snackbar message.
- * @slot icon - Icon preceeding the message.
- * @slot action - Action following the message.
+ * @slot default - the snackbar message.
+ * @slot icon - icon preceeding the message.
+ * @slot action - action following the message.
+ * 
+ * @csspart item - the container wrapping the message, icon and actions.
+ * @csspart icon - the icon for the variant.
+ * @csspart message - the default slot, body of the snackbar item.
+ * @csspart action - close and action button.
+ * 
+ * @cssprop --w-c-snackbar-item-radius
+ * @cssprop --w-c-snackbar-item-max-width
+ * @cssprop --w-c-snackbar-item-min-width
+ * @cssprop --w-c-snackbar-item-padding
+ * 
+ * @cssprop --w-c-snackbar-item-bg
+ * @cssprop --w-c-snackbar-item-action-bg-active
+ * @cssprop --w-c-snackbar-item-action-bg-hover
+ * 
+ * @cssprop --w-c-snackbar-item-color
+ * @cssprop --w-c-snackbar-item-action-color-active
+ * @cssprop --w-c-snackbar-item-action-color-hover
+ * 
+ * @cssprop --w-c-snackbar-item-box-shadow
  */
 export class WarpSnackbarItem extends LitElement {
     static styles = [reset, styles];

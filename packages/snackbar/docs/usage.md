@@ -1,6 +1,16 @@
 ## Usage
 
-Add `<w-snackbar>` as a direct child of `<body>` (note to self: should we add this to `html-template`?). This sets up an ARIA live region that's ready for snackbar messages. We set this up ahead of time since some browsers and screen reader combinations have known issues when it comes to adding a live region and content at the same time.
+Add `<w-snackbar>` as a direct child of `<body>`.
+
+If you use a shared HTML template this may already have been done for you. You can check to see by running a query in your browser console:
+
+```js
+ // this should find an element,
+ // if not you should add <w-snackbar></w-snackbar> to <body>
+document.querySelector("w-snackbar");
+```
+
+`<w-snackbar>` sets up an ARIA live region that's ready for snackbar messages. We set this up ahead of time since some browsers and screen reader combinations have known issues when it comes to adding a live region and content at the same time.
 
 ```html
 <body>
