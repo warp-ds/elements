@@ -26,3 +26,33 @@ The `<w-snackbar>` element includes a [create function](#create) which you can u
 const snackbar = document.querySelector("w-snackbar");
 const snackbarItem = snackbar.create("Snackbar message");
 ```
+
+### Snackbar item lifecycle
+
+A snackbar item animates in from and out of the bottom of the screen unless the user has indicated a preference for reduced motion, in which case it appears and disappears without animation.
+
+If more than one snackbar item is active at a time they will stack, with the new messages appearing above existing ones.
+
+#### Duration
+
+Snackbar items automatically close after either:
+
+- 4 seconds (short) 
+- 10 seconds (long)
+
+You can also have a snackbar item last indefinitely, forcing users to dismiss it. We strongly encourage you to reconsider whether a snackbar is the right choice for you if you feel you need an indefinite snackbar item though, for the accessibility reasons outlined above.
+
+##### Pausing the countdown
+
+To give people a better chance to read the snackbar message and consider taking action the duration countdown timer pauses when:
+
+- A pointer hovers over the snackbar item.
+- Either the action or close buttons have keyboard focus.
+
+#### Closing
+
+Users can close a snackbar item ahead of its configured duration by:
+
+- Pressing the close button (present by default).
+- Pressing the action button (if present).
+- Pressing <kbd>Escape</kbd> on a keyboard.

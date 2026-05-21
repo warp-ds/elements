@@ -12,3 +12,9 @@ A snackbar must never be the backbone of your user experience, it should only ev
 - Ensure any information and action in the snackbar, such as Undo, is possible to do elsewhere.
 
 `<w-snackbar>` creates an ARIA live region so messages you add to the snackbar get announced to assistive technologies.
+
+### Keyboard behavior
+
+`<w-snackbar>` is problematic from a keyboard user perspective. We do not override the default <kbd>Tab</kbd> behavior, with the result that the focusable buttons in a snackbar item probably come first or last in the focus order, depending on what end of `<body>` you put `<w-snackbar>`. We're investigating ways to provide keyboard shortcuts for moving focus to the snackbar item, but have yet to conclude on a design.
+
+`<w-snackbar>` sets up a keyboard event listener on `document`. Pressing <kbd>Escape</kbd> while a snackbar item is open will close it. If more than one item is open the oldest one will close.
