@@ -62,10 +62,10 @@ export class WarpToast extends LitElement {
   ];
 
   @property({ type: String, attribute: true, reflect: true })
-  id: string;
+  id!: string;
 
-  @property({ type: String, attribute: true, reflect: true })
-  type: ToastType;
+  @property({ type: String, attribute: true, reflect: true, useDefault: true })
+  type: ToastType = 'success';
 
   @property({ type: String, attribute: true, reflect: true })
   text = '';
@@ -80,7 +80,7 @@ export class WarpToast extends LitElement {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
     // Generate unique ID in constructor to avoid hydration mismatch from reflected property default
-    if (!this.id) {
+    if (this.id) {
       this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
     }
   }
@@ -98,7 +98,7 @@ export class WarpToast extends LitElement {
   }
 
   get #primaryClasses() {
-    const type = this.type || 'success';
+    const type = this.type;
     return classNames([
       ccToast.base,
       type === 'success' && ccToast.positive,
@@ -108,7 +108,7 @@ export class WarpToast extends LitElement {
   }
 
   get #iconClasses() {
-    const type = this.type || 'success';
+    const type = this.type;
     return classNames([
       ccToast.iconBase,
       type === 'success' && ccToast.iconPositive,
@@ -124,7 +124,7 @@ export class WarpToast extends LitElement {
 
   /** @internal */
   get _warning() {
-    return (this.type || 'success') === 'warning';
+    return (this.type) === 'warning';
   }
 
   /** @internal */

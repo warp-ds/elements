@@ -233,7 +233,7 @@ export class WarpTab extends LitElement {
         class="${this._classes}"
         tabindex="${this._parentTabIndex ?? 0}"
         aria-controls="${this._effectiveAriaControls}"
-        @click="${(e) => {
+        @click="${(e: PointerEvent & { tab?: WarpTab }) => {
           e.tab = this;
         }}"
         style="height: 100%">

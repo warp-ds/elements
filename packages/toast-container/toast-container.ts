@@ -53,7 +53,7 @@ export class WarpToastContainer extends LitElement {
     // regularly check if any toasts have expired
     this._interval = setInterval(() => {
       // sort toasts into keep and remove
-      const keep = [];
+      const keep: Array<[string | number, ToastInternal]> = [];
       const remove = [];
       for (const toast of this._toasts) {
         if (Date.now() <= toast[1].duration) keep.push(toast);
@@ -64,7 +64,7 @@ export class WarpToastContainer extends LitElement {
       const collapseTasks = [];
       for (const [id] of remove) {
         const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
-        collapseTasks.push(el.collapse());
+        if (el) collapseTasks.push(el.collapse());
       }
 
       // once all toasts that should be removed have been collapsed, remove them from the map
@@ -139,8 +139,8 @@ export class WarpToastContainer extends LitElement {
     }
 
     const el = this.renderRoot.querySelector(`#${id}`) as unknown as WarpToast | null;
-
-    if (!this._toasts.has(id)) {
+    
+    if (!this._toasts.has(id) || !el) {
       return false;
     }
 
