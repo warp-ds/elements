@@ -31,7 +31,7 @@ const snackbarItem = snackbar.create("Snackbar message");
 
 A snackbar item animates in from and out of the bottom of the screen unless the user has indicated a preference for reduced motion, in which case it appears and disappears without animation.
 
-If more than one snackbar item is active at a time they will stack, with the new messages appearing above existing ones.
+If more than one snackbar item is active at a time they will stack, with the new messages animating in above existing ones with the topmost item as the starting point of the animation.
 
 #### Duration
 

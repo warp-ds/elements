@@ -354,7 +354,6 @@
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",
-    "element-collapse": "1.1.0",
     "esbuild": "0.28.0",
     "express": "4.22.2",
     "glob": "13.0.6",

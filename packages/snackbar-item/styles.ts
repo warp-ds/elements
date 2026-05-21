@@ -17,6 +17,11 @@ export const styles = css`
         --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px);
     }
 
+    /* Using a padding-less div as target so we get animation to and from zero height */
+    .animation-wrapper {
+        border-radius: var(--_snackbar-item-border-radius); /* Avoid sharp bottom corners during the transitino */
+    }
+
     [part='item'] {
         background-color: var(--_snackbar-item-bg);
         border-radius: var(--_snackbar-item-border-radius);

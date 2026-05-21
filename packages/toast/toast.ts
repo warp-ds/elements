@@ -1,6 +1,5 @@
 import { classNames } from '@chbphone55/classnames';
 import { i18n } from '@lingui/core';
-import { collapse, expand } from 'element-collapse';
 import { css, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
@@ -9,6 +8,7 @@ import '../icon/icon.js';
 
 import { activateI18n, detectLocale } from '../i18n';
 import { reset } from '../styles';
+import { collapse, expand } from '../utils/element-collapse.js';
 
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';

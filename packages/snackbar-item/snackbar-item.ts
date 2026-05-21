@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 
+import { collapse, expand } from '../utils/element-collapse.js';
 import { reset } from '../styles.js';
 import { styles } from './styles.js';
 
@@ -60,6 +61,11 @@ export class WarpSnackbarItem extends LitElement {
     @property({ type: Number, reflect: true, useDefault: true })
     duration: number = SnackbarDuration.Short;
 
+    @query('.animation-wrapper')
+    private root!: HTMLDivElement | null;
+
+    #expanded = false;
+
     #durationLeft: number = SnackbarDuration.Short;
 
     #lastFocused: HTMLElement | null = null;
@@ -97,17 +103,34 @@ export class WarpSnackbarItem extends LitElement {
         }
     }
 
+    updated(): void {
+        if (!this.root) return; // should never happen
+        
+        // Once widely available, replace with https://developer.chrome.com/docs/css-ui/animate-to-height-auto
+        if (!this.#expanded) {
+            expand(this.root, () => {
+                this.#expanded = true;
+            });
+        }
+    }
+
     /**
      * Remove the snackbar item from the document.
      * 
      * Moves focus to the last focused element outside of the snackbar item, if available.
      */
     close(): void {
-        this.remove();
-
         if (this.#lastFocused) {
             this.#lastFocused.focus();
         }
+        if (this.#expanded && this.root) {
+            collapse(this.root, () => {
+                this.remove();
+            });
+        } else {
+            this.remove();
+        }
+
     }
 
     /** 
@@ -158,21 +181,23 @@ export class WarpSnackbarItem extends LitElement {
 
     render() {
         return html`
-            <div part="item"
-                @mouseenter=${this.#onMouseEnter}
-                @mouseleave=${this.#onMouseLeave}
-                @focusin=${this.#onFocusIn}
-                @focusout=${this.#onFocusOut}
-            >
-                <div part="icon">
-                    <slot name="icon"></slot>
-                </div>
-                <div part="message">
-                    <slot></slot>
-                </div>
-                <div part="action">
-                    <slot name="action"></slot>
-                    <slot name="close"></slot>
+            <div class="animation-wrapper">
+                <div part="item"
+                    @mouseenter=${this.#onMouseEnter}
+                    @mouseleave=${this.#onMouseLeave}
+                    @focusin=${this.#onFocusIn}
+                    @focusout=${this.#onFocusOut}
+                >
+                    <div part="icon">
+                        <slot name="icon"></slot>
+                    </div>
+                    <div part="message">
+                        <slot></slot>
+                    </div>
+                    <div part="action">
+                        <slot name="action"></slot>
+                        <slot name="close"></slot>
+                    </div>
                 </div>
             </div>
         `;
