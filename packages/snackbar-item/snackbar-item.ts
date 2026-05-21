@@ -1,5 +1,4 @@
-import { i18n } from '@lingui/core';
-import { html, LitElement, nothing } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles.js';
@@ -10,8 +9,8 @@ export type SnackbarVariant = 'positive' | 'warning' | 'negative' | 'info' | 'ne
 export type SnackbarActionPlacement = 'inline' | 'block';
 
 export enum SnackbarDuration {
-    Short = 5_000,
-    Long = 20_000,
+    Short = 4_000,
+    Long = 10_000,
     Infinite = 120_000_000,
 }
 
@@ -68,6 +67,8 @@ export class WarpSnackbarItem extends LitElement {
     // TODO How to expose the timer in an accessible maner, both visually and to assistive technologies? https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/timer_role + a progress bar style thing?
     #timer: ReturnType<typeof setTimeout> | null = null;
 
+    #timerPaused = false;
+
     connectedCallback(): void {
         super.connectedCallback();
 
@@ -79,8 +80,7 @@ export class WarpSnackbarItem extends LitElement {
             this.#durationLeft = this.duration - updateFrequencyMs;
 
             this.#timer = setInterval(() => {
-                const itemHasFocus = this.#lastFocused !== null;
-                if (itemHasFocus) return;
+                if (this.#timerPaused) return;
         
                 this.#durationLeft -= updateFrequencyMs;
 
@@ -122,6 +122,7 @@ export class WarpSnackbarItem extends LitElement {
      */
     #onFocusIn(e: FocusEvent) {
         if (!this.#lastFocused) {
+            this.#timerPaused = true;
             if (e.relatedTarget && (e.relatedTarget as HTMLElement).focus) {
                 this.#lastFocused = e.relatedTarget as HTMLElement;
             }
@@ -139,13 +140,30 @@ export class WarpSnackbarItem extends LitElement {
             !e.relatedTarget || 
             !this.shadowRoot?.host.contains(e.relatedTarget as HTMLElement);
         if (snackbarItemLostFocus) {
+            this.#timerPaused = false;
             this.#lastFocused = null;
+        }
+    }
+
+    #onMouseEnter() {
+        this.#timerPaused = true;
+    }
+
+    #onMouseLeave() {
+        // Unpause unless we still have keyboard focus
+        if (!this.#lastFocused) {
+            this.#timerPaused = false;
         }
     }
 
     render() {
         return html`
-            <div part="item" @focusin=${this.#onFocusIn} @focusout=${this.#onFocusOut}>
+            <div part="item"
+                @mouseenter=${this.#onMouseEnter}
+                @mouseleave=${this.#onMouseLeave}
+                @focusin=${this.#onFocusIn}
+                @focusout=${this.#onFocusOut}
+            >
                 <div part="icon">
                     <slot name="icon"></slot>
                 </div>

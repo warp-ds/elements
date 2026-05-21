@@ -167,12 +167,12 @@ export class WarpSnackbar extends LitElement {
     /**
      * Creates a snackbar item and immediately adds it to the snackbar.
      * 
-     * By default the snackbar item automatically closes after 5 seconds (`SnackbarDuration.Short`).
+     * By default the snackbar item automatically closes after 4 seconds (`SnackbarDuration.Short`).
      * 
      * If you include an `action` in the options the default `duration` is
-     * set to 20 seconds (`SnackbarDuration.Long`) and can not be made shorter. 
+     * set to 10 seconds (`SnackbarDuration.Long`) and can not be made shorter. 
      * 
-     * A `duration` of 20 seconds or longer forces the close button to be visible.
+     * A `duration` of 10 seconds or longer forces the close button to be visible.
      * 
      * The default `variant` is `neutral` which does not have an icon.
      * 
@@ -226,7 +226,13 @@ export class WarpSnackbar extends LitElement {
             
             const { label, onclick, placement } = mergedOptions.action;
             actionButton.innerText = label;
-            actionButton.onclick = onclick;
+            actionButton.onclick = (e) => {
+                const result = onclick.call(actionButton, e);
+                if (!e.defaultPrevented) {
+                    snackbarItem.close();
+                }
+                return result;
+            }
 
             if (placement) {
                 snackbarItem.actionPlacement = placement;
@@ -255,9 +261,11 @@ export class WarpSnackbar extends LitElement {
             if (typeof mergedOptions.canClose === 'function') {
                 // Let users add an onclick for example for analytics purposes
                 closeButton.onclick = (e) => {
-                    (mergedOptions.canClose as (this: GlobalEventHandlers, ev: PointerEvent) => any).call(closeButton, e);
-                    if (e.defaultPrevented) return;
-                    snackbarItem.close.call(snackbarItem);
+                    const result = (mergedOptions.canClose as (this: GlobalEventHandlers, ev: PointerEvent) => any).call(closeButton, e);
+                    if (!e.defaultPrevented) {
+                        snackbarItem.close();
+                    }
+                    return result;
                 };
             } else {
                 closeButton.onclick = snackbarItem.close.bind(snackbarItem);
