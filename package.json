@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.10.0-next.7",
+  "version": "2.10.0-next.8",
   "packageManager": "pnpm@11.1.0",
   "browserslist": [
     "supports es6-module and > 0.25% in FI or > 0.25% in NO or > 0.25% in SE or > 0.25% in DK and not dead and not Safari < 15 and not iOS < 15",
@@ -319,7 +319,7 @@
     "@lingui/cli": "5.9.5",
     "@lingui/conf": "5.9.5",
     "@lingui/core": "5.9.5",
-    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.2.0",
     "@oddbird/css-anchor-positioning": "^0.9.0",
     "@open-wc/form-control": "^1.0.0",
     "@open-wc/lit-helpers": "^0.7.0",

@@ -46,8 +46,8 @@ importers:
         specifier: 5.9.5
         version: 5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@5.9.3))
       '@lit-labs/rollup-plugin-minify-html-literals':
-        specifier: ^0.1.0
-        version: 0.1.1(rollup@4.60.3)
+        specifier: ^0.2.0
+        version: 0.2.0(rollup@4.60.3)
       '@oddbird/css-anchor-positioning':
         specifier: ^0.9.0
         version: 0.9.0
@@ -1049,8 +1049,8 @@ packages:
     resolution: {integrity: sha512-t3dNbjb1dWkvcpXGMXIEyBDO3l4B8J2ColZXi0NTG1ioAj+sDfFxFB8fepVgd3JAk+AwARlOLvF14oS0mAdgpw==}
     engines: {node: '>=20.0.0'}
 
-  '@lit-labs/rollup-plugin-minify-html-literals@0.1.1':
-    resolution: {integrity: sha512-yc4TQEaJTcRsfrN0WlQ6JZzr4EP0pFHh0ayrUEUx0e+H9Ka9+RGqegYFrgeI2oACJK7GpJNcSEsH4JSQxD1P0Q==}
+  '@lit-labs/rollup-plugin-minify-html-literals@0.2.0':
+    resolution: {integrity: sha512-2cg0svfII28aOQCohwuz6tcSlE/SvmJhZMmroF9842g4CaXwRJGm6JCAmnRLhh9zAAIcAem30Z3euJveJ7IVhg==}
     peerDependencies:
       rollup: ^0.65.2 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
 
@@ -2594,10 +2594,6 @@ packages:
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
-
-  clean-css@4.2.4:
-    resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
-    engines: {node: '>= 4.0'}
 
   clean-css@5.3.3:
     resolution: {integrity: sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==}
@@ -6066,10 +6062,10 @@ snapshots:
       '@messageformat/parser': 5.1.1
       js-sha256: 0.10.1
 
-  '@lit-labs/rollup-plugin-minify-html-literals@0.1.1(rollup@4.60.3)':
+  '@lit-labs/rollup-plugin-minify-html-literals@0.2.0(rollup@4.60.3)':
     dependencies:
-      clean-css: 4.2.4
       html-minifier-next: 2.1.8
+      lightningcss: 1.32.0
       magic-string: 0.30.21
       rollup: 4.60.3
       rollup-pluginutils: 2.8.2
@@ -7546,10 +7542,6 @@ snapshots:
       readdirp: 5.0.0
 
   chownr@2.0.0: {}
-
-  clean-css@4.2.4:
-    dependencies:
-      source-map: 0.6.1
 
   clean-css@5.3.3:
     dependencies:
