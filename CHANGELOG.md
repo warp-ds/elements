@@ -1,3 +1,11 @@
+# [2.10.0-next.7](https://github.com/warp-ds/elements/compare/v2.10.0-next.6...v2.10.0-next.7) (2026-05-22)
+
+
+### Bug Fixes
+
+* reset active slider range when value is set to empty string ([46942e2](https://github.com/warp-ds/elements/commit/46942e24092f573a098fe8dfc406be7c37619057))
+* reset active slider range when value is set to empty string ([2222940](https://github.com/warp-ds/elements/commit/222294062b0c6c534094f29afbec7b1381ed786f))
+
 # [2.10.0-next.6](https://github.com/warp-ds/elements/compare/v2.10.0-next.5...v2.10.0-next.6) (2026-05-20)
 
 
