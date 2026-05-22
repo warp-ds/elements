@@ -6,6 +6,8 @@ import { styles } from './style.js';
 // Generic parser for fetch responses
 type ResponseParser<T> = (response: Response) => Promise<T>;
 
+type PixelValue = `${number}px`;
+
 interface CacheFetchOptions<T> {
   responseParser?: ResponseParser<T>;
 }
@@ -41,7 +43,7 @@ export class WarpIcon extends LitElement {
    * @default "medium"
    */
   @property({ type: String, reflect: true })
-  size: 'small' | 'medium' | 'large' | string | undefined;
+  size: 'small' | 'medium' | 'large' | PixelValue | undefined;
 
   /** 
    * Locale used for `<title>` text.
