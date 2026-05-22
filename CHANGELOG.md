@@ -1,3 +1,10 @@
+# [2.10.0-next.9](https://github.com/warp-ds/elements/compare/v2.10.0-next.8...v2.10.0-next.9) (2026-05-22)
+
+
+### Bug Fixes
+
+* compile using browserslist when bundling ([#682](https://github.com/warp-ds/elements/issues/682)) ([9d48c24](https://github.com/warp-ds/elements/commit/9d48c24b87ff34a98e4012eed87af6d3840e84a0))
+
 # [2.10.0-next.8](https://github.com/warp-ds/elements/compare/v2.10.0-next.7...v2.10.0-next.8) (2026-05-22)
 
 
