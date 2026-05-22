@@ -155,7 +155,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   maxHeight = Number.POSITIVE_INFINITY;
 
   @query('textarea')
-  private _textarea: HTMLTextAreaElement | null = null;
+  private _textarea!: HTMLTextAreaElement;
 
   // capture the initial value using connectedCallback and #initialValue
   #initialValue: string | undefined = undefined;

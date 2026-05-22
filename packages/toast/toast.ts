@@ -80,7 +80,7 @@ export class WarpToast extends LitElement {
     super();
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
     // Generate unique ID in constructor to avoid hydration mismatch from reflected property default
-    if (this.id) {
+    if (!this.id) {
       this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
     }
   }
