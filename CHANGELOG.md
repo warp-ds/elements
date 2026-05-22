@@ -1,3 +1,10 @@
+# [2.10.0-next.8](https://github.com/warp-ds/elements/compare/v2.10.0-next.7...v2.10.0-next.8) (2026-05-22)
+
+
+### Bug Fixes
+
+* **icon:** narrow type for icon size ([#677](https://github.com/warp-ds/elements/issues/677)) ([b656fa8](https://github.com/warp-ds/elements/commit/b656fa88ec9f158db12ed3a52135ee53ffab8ee5))
+
 # [2.10.0-next.7](https://github.com/warp-ds/elements/compare/v2.10.0-next.6...v2.10.0-next.7) (2026-05-22)
 
 
