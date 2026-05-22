@@ -199,7 +199,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   // capture the initial value using firstUpdated and #initialValue
-  #initialValue: string = '';
+  #initialValue = '';
   #lightDomObserver?: MutationObserver;
 
   firstUpdated(changedProps: Map<string, unknown>) {
