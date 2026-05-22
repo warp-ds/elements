@@ -632,6 +632,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
       }
       this.setValue(this.value);
       this.#syncRangeValue();
+
+      const previousValue = changedProperties.get('value');
+
+      if (this.value === '' && previousValue) {
+        this.dispatchEvent(
+          new CustomEvent('thumbreset', {
+            bubbles: true,
+          }),
+        );
+      }
     }
   }
 
