@@ -39,7 +39,7 @@ class WarpSlider extends LitElement {
    * If you need to display HTML, use the `label` slot instead (f. ex. `<legend class="sr-only" slot="label">Production year</legend>`)
    */
   @property({ reflect: true })
-  label: string;
+  label: string | undefined;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -54,13 +54,13 @@ class WarpSlider extends LitElement {
    * Validation error text, if any
    */
   @property({ type: String, reflect: true })
-  error: string;
+  error: string | undefined;
 
   /**
    * Additional description to show below the fieldset
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText: string | undefined;
 
   /**
    * Sets the form fields and fieldset in an invalid state
@@ -79,32 +79,32 @@ class WarpSlider extends LitElement {
    * @default 0
    */
   @property({ reflect: true })
-  min: string;
+  min: string | undefined;
 
   /**
    * The maximum allowed value in the range inputs
    * @default 100
    */
   @property({ reflect: true })
-  max: string;
+  max: string | undefined;
 
   /** 
    * Pass a value similar to step to create visual markers at that interval
    */
   @property({ type: Number, reflect: true })
-  markers: number;
+  markers: number | undefined;
 
   /**
    * ets step on the range input to jump between values when dragging
    */
   @property({ type: Number, reflect: true })
-  step: number;
+  step: number | undefined;
 
   /** 
    * Suffix used in text input fields and for the min and max values of the slider
    */
   @property({ reflect: true })
-  suffix: string;
+  suffix: string | undefined;
 
   /**
    * Should only be used in special cases
@@ -116,7 +116,7 @@ class WarpSlider extends LitElement {
    * Formatter for the tooltip and input mask values
    */
   @property({ attribute: false })
-  valueFormatter: (value: string, slot: SliderSlot) => string;
+  valueFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
 
   /**
    * Overrides {@link valueFormatter} for the tooltip.
@@ -124,17 +124,17 @@ class WarpSlider extends LitElement {
    * Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip.
    */
   @property({ attribute: false })
-  tooltipFormatter: (value: string, slot: SliderSlot) => string;
+  tooltipFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
 
   /** 
    * Formatter for the min and max labels below the range.
    */
   @property({ attribute: false })
-  labelFormatter: (slot: SliderSlot) => string;
+  labelFormatter: ((slot: SliderSlot) => string) | undefined;
 
   /** @internal */
   @query('fieldset')
-  fieldset: HTMLFieldSetElement;
+  fieldset!: HTMLFieldSetElement;
   
   /** @internal */
   @state()
@@ -175,7 +175,7 @@ class WarpSlider extends LitElement {
 
       if (!thumb.ariaLabel) {
         if (!thumb.slot) {
-          thumb.ariaLabel = this.label;
+          thumb.ariaLabel = this.label || null;
         }
         if (thumb.slot === 'from') {
           thumb.ariaLabel = `${this.label} min`;
@@ -222,7 +222,7 @@ class WarpSlider extends LitElement {
       this.fieldset.style.setProperty('--step', String(this.step));
     }
     if (this.min !== undefined) {
-      this.fieldset.style.setProperty('--min', this.edgeMin);
+      this.fieldset.style.setProperty('--min', this.edgeMin!);
     }
     if (this.max !== undefined) {
       this.fieldset.style.setProperty('--max', this.max);
@@ -240,14 +240,14 @@ class WarpSlider extends LitElement {
     if (isRangeSlider) {
       this.fieldset.style.setProperty('--range-slider-magic-pixel', '1px');
       const sliderThumbsArr = Array.from(sliderThumbs);
-      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
-      this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot.querySelector('input');
-      this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
-      this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot.querySelector('w-textfield');
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot!.querySelector('input') as HTMLElement;
+      this._tabbableElements[1] = sliderThumbsArr[1].shadowRoot!.querySelector('input') as HTMLElement;
+      this._tabbableElements[2] = sliderThumbsArr[0].shadowRoot!.querySelector('w-textfield') as HTMLElement;
+      this._tabbableElements[3] = sliderThumbsArr[1].shadowRoot!.querySelector('w-textfield') as HTMLElement;
     } else if (sliderThumbs.length === 1) {
       const sliderThumbsArr = Array.from(sliderThumbs);
-      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot.querySelector('input');
-      this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot.querySelector('w-textfield');
+      this._tabbableElements[0] = sliderThumbsArr[0].shadowRoot!.querySelector('input') as HTMLElement;
+      this._tabbableElements[1] = sliderThumbsArr[0].shadowRoot!.querySelector('w-textfield') as HTMLElement;
     }
 
     if (this.invalid && this.error) {
@@ -312,7 +312,7 @@ class WarpSlider extends LitElement {
   #handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Tab') {
       const knownFocusableElementIndex = this._tabbableElements.indexOf(
-        (e.target as WarpSliderThumb).shadowRoot.activeElement as HTMLElement,
+        (e.target as WarpSliderThumb).shadowRoot!.activeElement as HTMLElement,
       );
       if (knownFocusableElementIndex === -1) {
         return; // shouldn't really happen, but don't prevent anything
@@ -336,8 +336,8 @@ class WarpSlider extends LitElement {
     // the from or to values. Check to see if a field is invalid, but should be
     // valid based on those rules.
 
-    let from: WarpSliderThumb;
-    let to: WarpSliderThumb;
+    let from: WarpSliderThumb | null = null;
+    let to: WarpSliderThumb | null = null;
     const sliderThumbs = this.querySelectorAll<WarpSliderThumb>('w-slider-thumb');
     for (const thumb of sliderThumbs.values()) {
       if (thumb.slot === 'from') from = thumb;
@@ -393,11 +393,11 @@ class WarpSlider extends LitElement {
     }
 
     if (slotName === 'from') {
-      this.fieldset.style.setProperty('--from', this.#getEdgeValue(this.edgeMin, input));
+      this.fieldset.style.setProperty('--from', this.#getEdgeValue(this.edgeMin!, input));
     }
 
     if (!slotName || slotName === 'to') {
-      this.fieldset.style.setProperty('--to', this.#getEdgeValue(this.edgeMax, input));
+      this.fieldset.style.setProperty('--to', this.#getEdgeValue(this.edgeMax!, input));
     }
   }
 

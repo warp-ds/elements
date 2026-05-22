@@ -32,7 +32,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this to describe the shared question or topic for the checkbox options. The label is connected to the internal group for assistive technologies.
    */
   @property({ type: String, reflect: true })
-  label: string;
+  label: string | undefined;
 
   /**
    * The name applied to child checkboxes when they do not provide one.
@@ -40,7 +40,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this when the grouped checkboxes should submit values under the same form field name. Individual checkboxes can still override the group name with their own `name`.
    */
   @property({ type: String, reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * Whether to show optional text next to the label.
@@ -56,7 +56,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this for supporting guidance or validation feedback. When required validation fails, the group replaces this text with the localized required message.
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText: string | undefined;
 
   /**
    * Whether at least one checkbox in the group must be selected.
