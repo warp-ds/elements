@@ -3,6 +3,10 @@
   "type": "module",
   "version": "2.10.0-next.7",
   "packageManager": "pnpm@11.1.0",
+  "browserslist": [
+    "supports es6-module and > 0.25% in FI or > 0.25% in NO or > 0.25% in SE or > 0.25% in DK and not dead and not Safari < 15 and not iOS < 15",
+    "not chrome < 61"
+  ],
   "description": "Custom elements for Warp",
   "exports": {
     ".": {
@@ -322,6 +326,7 @@
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-swc": "^0.4.0",
     "@rollup/plugin-terser": "^1.0.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
@@ -348,6 +353,7 @@
     "@wc-toolkit/storybook-helpers": "^10.0.0",
     "@wc-toolkit/type-parser": "^1.2.0",
     "axe-core": "^4.11.1",
+    "browserslist-to-esbuild": "^2.1.1",
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",
