@@ -8,6 +8,7 @@ import { writeFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { presetWarp } from '@warp-ds/uno';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import esbuild from 'esbuild';
 import * as lightning from 'lightningcss';
 import { createGenerator } from 'unocss';
@@ -91,7 +92,7 @@ try {
     minify: true,
     format: 'esm',
     sourcemap: true,
-    target: 'es2018',
+    target: browserslistToEsbuild(),
     plugins: [plugin()],
   });
 } catch (err) {
