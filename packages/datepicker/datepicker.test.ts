@@ -87,12 +87,6 @@ test('can pick a date by typing in the input field', async () => {
   expect(formData.get('from')).toBeTruthy();
 });
 
-test('forwards placeholder text to the input field', async () => {
-  const page = render(html`<w-datepicker label="From date" placeholder="dd/mm/yyyy"></w-datepicker>`);
-
-  await expect.element(page.getByLabelText('From date')).toHaveAttribute('placeholder', 'dd/mm/yyyy');
-});
-
 test('can reset datepicker by resetting surrounding form', async () => {
   const label = 'Test label';
 

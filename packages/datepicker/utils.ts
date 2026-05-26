@@ -39,3 +39,22 @@ export function getDateInputType(
 
   return isIOS || isSafari ? 'text' : 'date';
 }
+
+export function getDateInputPlaceholder(locale: string): string {
+  const placeholderLocale = locale === 'en' ? 'en-GB' : locale;
+  const parts = new Intl.DateTimeFormat(placeholderLocale, {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).formatToParts(new Date(Date.UTC(2006, 0, 2)));
+
+  return parts
+    .map((part) => {
+      if (part.type === 'day') return 'dd';
+      if (part.type === 'month') return 'mm';
+      if (part.type === 'year') return 'yyyy';
+      return part.value;
+    })
+    .join('');
+}

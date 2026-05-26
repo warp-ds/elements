@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { getDateInputType } from './utils.js';
+import { getDateInputPlaceholder, getDateInputType } from './utils.js';
 
 describe('getDateInputType', () => {
-  test('uses text input for Safari to avoid native placeholder rendering', () => {
+  test('uses text input for Safari to avoid Safari showing a concrete empty-state date', () => {
     expect(
       getDateInputType(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15',
@@ -25,5 +25,13 @@ describe('getDateInputType', () => {
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       ),
     ).toBe('date');
+  });
+});
+
+describe('getDateInputPlaceholder', () => {
+  test('returns a locale-shaped date format hint', () => {
+    expect(getDateInputPlaceholder('en')).toBe('dd/mm/yyyy');
+    expect(getDateInputPlaceholder('en-GB')).toBe('dd/mm/yyyy');
+    expect(getDateInputPlaceholder('nb')).toBe('dd.mm.yyyy');
   });
 });
