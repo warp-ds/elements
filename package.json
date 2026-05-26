@@ -1,8 +1,8 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.10.0-next.9",
-  "packageManager": "pnpm@11.1.0",
+  "version": "2.10.0-next.10",
+  "packageManager": "pnpm@11.3.0",
   "browserslist": [
     "supports es6-module and > 0.25% in FI or > 0.25% in NO or > 0.25% in SE or > 0.25% in DK and not dead and not Safari < 15 and not iOS < 15",
     "not chrome < 61"

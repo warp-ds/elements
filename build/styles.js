@@ -49,7 +49,7 @@ const buildCSS = async (
   });
   output = code.toString();
 
-  return output.replace(/\\/g, '\\\\');
+  return output;
 };
 
 /**
@@ -71,7 +71,7 @@ const plugin = ({ filter = /\.ts$/, placeholder = '@warp-css;', minify = true } 
           const css = await buildCSS(contents, { minify });
           await writeFile(
             path.dirname(args.path) + '/styles.ts',
-            `import { css } from 'lit'; export const styles = css\`${css}\`;
+            `import { unsafeCSS } from 'lit'; export const styles = unsafeCSS(${JSON.stringify(css)});
 `,
           );
         }
