@@ -103,11 +103,15 @@ export class WarpSnackbarItem extends LitElement {
         }
     }
 
-    updated(): void {
+    async updated(): void {
         if (!this.root) return; // should never happen
         
         // Once widely available, replace with https://developer.chrome.com/docs/css-ui/animate-to-height-auto
         if (!this.#expanded) {
+            // we need to measure including the height of the child
+            // components which aren't ready yet and have 0x0 dimensions,
+            // wait for the update to finish
+            await this.updateComplete;
             expand(this.root, () => {
                 this.#expanded = true;
             });
@@ -130,7 +134,6 @@ export class WarpSnackbarItem extends LitElement {
         } else {
             this.remove();
         }
-
     }
 
     /** 
