@@ -1,3 +1,10 @@
+# [2.10.0-next.10](https://github.com/warp-ds/elements/compare/v2.10.0-next.9...v2.10.0-next.10) (2026-05-26)
+
+
+### Bug Fixes
+
+* use unsafeCSS in generated styles to prevent SWC escaping corruption ([#685](https://github.com/warp-ds/elements/issues/685)) ([c00d6aa](https://github.com/warp-ds/elements/commit/c00d6aa134a88d08cb976a5c1b8fe7aee8cf176c)), closes [#682](https://github.com/warp-ds/elements/issues/682)
+
 # [2.10.0-next.9](https://github.com/warp-ds/elements/compare/v2.10.0-next.8...v2.10.0-next.9) (2026-05-22)
 
 
