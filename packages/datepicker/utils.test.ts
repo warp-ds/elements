@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { getDateInputPlaceholder, getDateInputType } from './utils.js';
+import { getDateInputDisplayValue, getDateInputPlaceholder, getDateInputType } from './utils.js';
 
 describe('getDateInputType', () => {
   test('uses text input for Safari to avoid Safari showing a concrete empty-state date', () => {
@@ -33,5 +33,16 @@ describe('getDateInputPlaceholder', () => {
     expect(getDateInputPlaceholder('en')).toBe('dd/mm/yyyy');
     expect(getDateInputPlaceholder('en-GB')).toBe('dd/mm/yyyy');
     expect(getDateInputPlaceholder('nb')).toBe('dd.mm.yyyy');
+  });
+});
+
+describe('getDateInputDisplayValue', () => {
+  test('formats ISO dates using the locale-shaped date format hint', () => {
+    expect(getDateInputDisplayValue('2026-03-25', 'en')).toBe('25/03/2026');
+    expect(getDateInputDisplayValue('2026-03-25', 'nb')).toBe('25.03.2026');
+  });
+
+  test('keeps non-ISO values unchanged', () => {
+    expect(getDateInputDisplayValue('25/03/2026', 'en')).toBe('25/03/2026');
   });
 });

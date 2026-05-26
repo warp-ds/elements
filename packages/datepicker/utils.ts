@@ -58,3 +58,13 @@ export function getDateInputPlaceholder(locale: string): string {
     })
     .join('');
 }
+
+export function getDateInputDisplayValue(value: string, locale: string): string {
+  const match = dateOnlyRe.exec(value);
+  if (!match) {
+    return value;
+  }
+
+  const [year, month, day] = value.split('-');
+  return getDateInputPlaceholder(locale).replace('yyyy', year).replace('mm', month).replace('dd', day);
+}
