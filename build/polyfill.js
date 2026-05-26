@@ -1,7 +1,7 @@
 // Build polyfill for CSS anchor positioning for distribution on Eik.
 // This gets lazy loaded by components that need it in browsers that don't have native support.
 import { createRequire } from 'node:module';
-
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import esbuild from 'esbuild';
 
 const { resolve } = createRequire(import.meta.url);
@@ -17,6 +17,6 @@ await esbuild.build({
   bundle: true,
   format: 'esm',
   sourcemap: true,
-  target: 'es2018',
+  target: browserslistToEsbuild(),
   minify: true,
 });

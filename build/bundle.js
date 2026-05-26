@@ -9,7 +9,9 @@ import minifyHTML from '@lit-labs/rollup-plugin-minify-html-literals';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
+import swc from '@rollup/plugin-swc';
 import terser from '@rollup/plugin-terser';
+import packageConfig from '../package.json' with { type: 'json' };
 
 import { generateEntrypointFile } from './entrypoint.js';
 
@@ -35,6 +37,13 @@ export default {
       preferBuiltins: false, // don't use Node built-ins
     }),
     commonjs(),
+    swc({
+      swc: {
+        env: {
+          targets: packageConfig.browserslist,
+        },
+      },
+    }),
     minifyHTML(),
     terser(),
   ],

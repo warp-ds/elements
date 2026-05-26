@@ -1,3 +1,39 @@
+# [2.10.0-next.10](https://github.com/warp-ds/elements/compare/v2.10.0-next.9...v2.10.0-next.10) (2026-05-26)
+
+
+### Bug Fixes
+
+* use unsafeCSS in generated styles to prevent SWC escaping corruption ([#685](https://github.com/warp-ds/elements/issues/685)) ([c00d6aa](https://github.com/warp-ds/elements/commit/c00d6aa134a88d08cb976a5c1b8fe7aee8cf176c)), closes [#682](https://github.com/warp-ds/elements/issues/682)
+
+# [2.10.0-next.9](https://github.com/warp-ds/elements/compare/v2.10.0-next.8...v2.10.0-next.9) (2026-05-22)
+
+
+### Bug Fixes
+
+* compile using browserslist when bundling ([#682](https://github.com/warp-ds/elements/issues/682)) ([9d48c24](https://github.com/warp-ds/elements/commit/9d48c24b87ff34a98e4012eed87af6d3840e84a0))
+
+# [2.10.0-next.8](https://github.com/warp-ds/elements/compare/v2.10.0-next.7...v2.10.0-next.8) (2026-05-22)
+
+
+### Bug Fixes
+
+* **icon:** narrow type for icon size ([#677](https://github.com/warp-ds/elements/issues/677)) ([b656fa8](https://github.com/warp-ds/elements/commit/b656fa88ec9f158db12ed3a52135ee53ffab8ee5))
+
+# [2.10.0-next.7](https://github.com/warp-ds/elements/compare/v2.10.0-next.6...v2.10.0-next.7) (2026-05-22)
+
+
+### Bug Fixes
+
+* reset active slider range when value is set to empty string ([46942e2](https://github.com/warp-ds/elements/commit/46942e24092f573a098fe8dfc406be7c37619057))
+* reset active slider range when value is set to empty string ([2222940](https://github.com/warp-ds/elements/commit/222294062b0c6c534094f29afbec7b1381ed786f))
+
+# [2.10.0-next.6](https://github.com/warp-ds/elements/compare/v2.10.0-next.5...v2.10.0-next.6) (2026-05-20)
+
+
+### Bug Fixes
+
+* **docs:** add built documentation index ([#675](https://github.com/warp-ds/elements/issues/675)) ([dcd20e7](https://github.com/warp-ds/elements/commit/dcd20e747d7bc9d77348383284526532742d404e))
+
 # [2.10.0-next.5](https://github.com/warp-ds/elements/compare/v2.10.0-next.4...v2.10.0-next.5) (2026-05-19)
 
 
