@@ -10,5 +10,5 @@
     "noEmit": true,
     "baseUrl": "."
   },
-  "include": ["*.ts"]
+  "include": ["*.ts", "*.tsx"]
 }

@@ -1,8 +1,122 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
 import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
+const jsxTypesPath = fileURLToPath(new URL('../dist/index.d.ts', import.meta.url));
+
+function collisionSafeJsxIntrinsicPropsPlugin() {
+  return {
+    name: 'collision-safe-jsx-intrinsic-props',
+    packageLinkPhase() {
+      const source = readFileSync(jsxTypesPath, 'utf8');
+      const customElementsStart = source.indexOf('export type CustomElements = {');
+      const solidElementsStart = source.indexOf('export type CustomElementsSolidJs = {');
+
+      if (customElementsStart === -1 || solidElementsStart === -1) {
+        throw new Error('Unable to find generated CustomElements types in dist/index.d.ts');
+      }
+
+      const customElementsBlock = source.slice(customElementsStart, solidElementsStart);
+      const customElementPattern =
+        /"([^"]+)":\s*Partial<\s*([A-Za-z_$][\w$]*Props)\s*&\s*BaseProps<([^>]+)>\s*&\s*BaseEvents\s*>;/g;
+      const solidCustomElementPattern =
+        /"([^"]+)":\s*Partial<\s*([A-Za-z_$][\w$]*Props)\s*&\s*([A-Za-z_$][\w$]*SolidJsProps)\s*&\s*BaseProps<([^>]+)>\s*&\s*BaseEvents\s*>;/g;
+      const customElements = Array.from(
+        customElementsBlock.matchAll(customElementPattern),
+        ([, tagName, propsType, elementType]) => ({ tagName, propsType, elementType }),
+      );
+
+      if (customElements.length === 0) {
+        throw new Error('Unable to derive custom element types from dist/index.d.ts');
+      }
+
+      const customElementPropsTypes = `type CustomElementProps<Props, T extends HTMLElement> = Omit<BaseProps<T> & BaseEvents, keyof Props> &
+  Props;
+
+type SolidCustomElementProps<Props, SolidProps, T extends HTMLElement> = Omit<
+  BaseProps<T> & BaseEvents,
+  keyof Props | keyof SolidProps
+> &
+  Props &
+  SolidProps;
+
+`;
+
+      const reactCustomElementsTypes = `
+type ReactElementProps<T extends HTMLElement> = import("react").DOMAttributes<T> &
+  import("react").AriaAttributes &
+  import("react").RefAttributes<T> &
+  Pick<
+    import("react").HTMLAttributes<T>,
+    | "className"
+    | "style"
+    | "suppressContentEditableWarning"
+    | "suppressHydrationWarning"
+  >;
+
+type ReactCustomElementProps<T extends HTMLElement, Props> = Omit<
+  BaseProps<T> & BaseEvents,
+  keyof ReactElementProps<T> | keyof Props
+> &
+  Omit<ReactElementProps<T>, keyof Props> &
+  Props;
+
+type CustomElementInstances = {
+${customElements.map(({ tagName, elementType }) => `  "${tagName}": ${elementType};`).join('\n')}
+};
+
+type CustomElementComponentProps = {
+${customElements.map(({ tagName, propsType }) => `  "${tagName}": ${propsType};`).join('\n')}
+};
+
+export type ReactCustomElements = {
+  [Tag in keyof CustomElementComponentProps]: Tag extends keyof CustomElementInstances
+    ? Partial<ReactCustomElementProps<CustomElementInstances[Tag], CustomElementComponentProps[Tag]>>
+    : never;
+};
+
+`;
+
+      let updatedSource = `${source.slice(0, customElementsStart)}${customElementPropsTypes}${source.slice(
+        customElementsStart,
+      )}`;
+
+      updatedSource = updatedSource
+        .replace(
+          customElementPattern,
+          (_, tagName, propsType, elementType) =>
+            `"${tagName}": Partial<CustomElementProps<${propsType}, ${elementType}>>;`,
+        )
+        .replace(
+          solidCustomElementPattern,
+          (_, tagName, propsType, solidPropsType, elementType) =>
+            `"${tagName}": Partial<SolidCustomElementProps<${propsType}, ${solidPropsType}, ${elementType}>>;`,
+        );
+
+      const updatedSolidElementsStart = updatedSource.indexOf('export type CustomElementsSolidJs = {');
+      if (updatedSolidElementsStart === -1) {
+        throw new Error('Unable to find generated CustomElementsSolidJs types in dist/index.d.ts');
+      }
+
+      updatedSource = `${updatedSource.slice(0, updatedSolidElementsStart)}${reactCustomElementsTypes}${updatedSource.slice(
+        updatedSolidElementsStart,
+      )}`;
+      updatedSource = updatedSource.replace(
+        /(declare module ["']react["']\s*\{\s*namespace JSX\s*\{\s*interface IntrinsicElements extends )CustomElements(\s*\{\})/,
+        '$1ReactCustomElements$2',
+      );
+
+      if (!updatedSource.includes('interface IntrinsicElements extends ReactCustomElements')) {
+        throw new Error('Unable to update React JSX IntrinsicElements in dist/index.d.ts');
+      }
+
+      writeFileSync(jsxTypesPath, updatedSource);
+    },
+  };
+}
 
 export default {
   overrideModuleCreation: ({ ts, globs }) => {
@@ -97,6 +211,7 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
+    collisionSafeJsxIntrinsicPropsPlugin(),
     cemValidatorPlugin({
       rules: {
         manifest: {
@@ -107,8 +222,8 @@ export default {
           modulePath: 'off',
           definitionPath: 'off',
           typeDefinitionPath: 'off',
-        }
-      }
+        },
+      },
     }),
   ],
 };
