@@ -103,7 +103,7 @@ export class WarpSnackbarItem extends LitElement {
         }
     }
 
-    async updated(): void {
+    async updated(): Promise<void> {
         if (!this.root) return; // should never happen
         
         // Once widely available, replace with https://developer.chrome.com/docs/css-ui/animate-to-height-auto
