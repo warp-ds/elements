@@ -33,6 +33,8 @@ A snackbar item animates in from and out of the bottom of the screen unless the 
 
 If more than one snackbar item is active at a time they will stack, with the new messages animating in above existing ones with the topmost item as the starting point of the animation.
 
+However, only one snackbar item should be visible at a time. Be mindful of what triggers snackbars in your application to avoid creating a wall of snackbar items, for example in bulk editing operations.
+
 #### Duration
 
 Snackbar items automatically close after either:
