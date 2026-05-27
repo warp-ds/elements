@@ -179,11 +179,11 @@ export const OpenEnded: Story = {
             <SliderThumb slot="from" aria-label="Fra år" name="from" value={openEndedFrom} />
             <SliderThumb slot="to" aria-label="Til år" name="to" value={openEndedTo} />
           </Slider>
-          <button 
+          <button
             type="button"
             onClick={() => {
-              setOpenEndedFrom("");
-              setOpenEndedTo("");
+              setOpenEndedFrom('');
+              setOpenEndedTo('');
             }}
           >
             What's button type reset lol

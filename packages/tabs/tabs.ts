@@ -61,7 +61,7 @@ export class WarpTabs extends LitElement {
    * @default "" (Shows the first tab)
    */
   @property({ reflect: true })
-  active: string;
+  active: string | undefined;
 
   @query('[role="tablist"]')
   private tabList!: HTMLElement;
@@ -70,7 +70,7 @@ export class WarpTabs extends LitElement {
   private selectionIndicator!: HTMLElement;
 
   private _uniqueId = uniqueId();
-  private _activeTabFor = '';
+  private _activeTabFor: string | undefined = '';
   private _resizeObserver?: ResizeObserver;
   private _updateSelectionIndicatorDebounced = debounce(this.updateSelectionIndicator.bind(this), 100);
 
@@ -144,12 +144,12 @@ export class WarpTabs extends LitElement {
     if (!slot) return [];
 
     const slottedElements = slot.assignedElements({ flatten: true });
-    return slottedElements.filter((el) => el.tagName.toLowerCase() === 'w-tab');
+    return slottedElements.filter<WarpTab>((el): el is WarpTab => el.tagName.toLowerCase() === 'w-tab');
   }
 
   /** @internal */
   get activeTab() {
-    const activeTabs = this.tabs.filter((tab: HTMLElement & { for: string }) => tab.for === this._activeTabFor);
+    const activeTabs = this.tabs.filter((tab) => tab.for === this._activeTabFor);
     return activeTabs[0];
   }
 

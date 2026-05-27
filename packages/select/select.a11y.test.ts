@@ -77,9 +77,9 @@ describe('w-select accessibility (WCAG 2.2)', () => {
           <option value="raspberries">Raspberries</option>
         </w-select>
       `);
-      await expect.element(page.getByLabelText('Berry choice')).toHaveAccessibleDescription(
-        'This appears in your profile',
-      );
+      await expect
+        .element(page.getByLabelText('Berry choice'))
+        .toHaveAccessibleDescription('This appears in your profile');
     });
   });
 
@@ -121,9 +121,9 @@ describe('w-select accessibility (WCAG 2.2)', () => {
       lightOptions[0].removeAttribute('selected');
       lightOptions[1].setAttribute('selected', '');
 
-      await expect.poll(() => (page.getByLabelText('Berry choice').element() as HTMLSelectElement).value).toBe(
-        'raspberries',
-      );
+      await expect
+        .poll(() => (page.getByLabelText('Berry choice').element() as HTMLSelectElement).value)
+        .toBe('raspberries');
       await expect(page).toHaveNoAxeViolations();
     });
   });

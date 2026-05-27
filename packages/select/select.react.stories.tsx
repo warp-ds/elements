@@ -27,18 +27,23 @@ export const Default: Story = {
   },
 };
 
-export const ChangeEvent = (args) => {
-  const [selectedValue, setSelectedValue] = useState('');
-  return (
-    <>
-      <div>Selected Value: {selectedValue}</div>
-      <Select {...args} onChange={(e: CustomEvent) => setSelectedValue(e.detail)}>
-        <Option value="strawberries">Strawberries</Option>
-        <Option value="raspberries" selected>
-          Raspberries
-        </Option>
-        <Option value="cloudberries">Cloudberries</Option>
-      </Select>
-    </>
-  );
+export const ChangeEvent: Story = {
+  args: {
+    label: 'Berries',
+  },
+  render(args) {
+    const [selectedValue, setSelectedValue] = useState('');
+    return (
+      <>
+        <div>Selected Value: {selectedValue}</div>
+        <Select {...args} onChange={(e: CustomEvent) => setSelectedValue(e.detail)}>
+          <Option value="strawberries">Strawberries</Option>
+          <Option value="raspberries" selected>
+            Raspberries
+          </Option>
+          <Option value="cloudberries">Cloudberries</Option>
+        </Select>
+      </>
+    );
+  }
 };

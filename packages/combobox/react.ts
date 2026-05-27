@@ -1,4 +1,4 @@
-import { createComponent } from '@lit/react';
+import { createComponent, EventName } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
@@ -12,10 +12,10 @@ const BaseCombobox = createComponent({
   elementClass: Component as unknown as typeof WarpCombobox,
   react: React,
   events: {
-    onSelect: 'select',
-    onselect: 'select',
-    onChange: 'change',
-    onchange: 'change',
+    onSelect: 'select' as EventName<CustomEvent<{ value: string }>>,
+    onselect: 'select' as EventName<CustomEvent<{ value: string }>>,
+    onChange: 'change' as EventName<CustomEvent<{ value: string }>>,
+    onchange: 'change' as EventName<CustomEvent<{ value: string }>>,
   },
 });
 

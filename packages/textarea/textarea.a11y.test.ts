@@ -124,12 +124,12 @@ describe('w-textarea accessibility (WCAG 2.2)', () => {
       expect(beforeBtn).toBeDefined();
       expect(afterBtn).toBeDefined();
 
-      beforeBtn?.focus();
+      beforeBtn!.focus();
 
       // Attempt to move focus to the disabled textarea; focus should remain on "Before".
       const wTextarea = document.querySelector('w-textarea') as HTMLElement | null;
       wTextarea?.click();
-      await expect.element(beforeBtn).toHaveFocus();
+      await expect.element(beforeBtn!).toHaveFocus();
 
       // Verify disabled textarea doesn't receive focus
       expect(wTextarea?.shadowRoot?.activeElement).toBeNull();

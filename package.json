@@ -1,8 +1,12 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.10.0-next.4",
-  "packageManager": "pnpm@11.1.0",
+  "version": "2.10.0-next.11",
+  "packageManager": "pnpm@11.3.0",
+  "browserslist": [
+    "supports es6-module and > 0.25% in FI or > 0.25% in NO or > 0.25% in SE or > 0.25% in DK and not dead and not Safari < 15 and not iOS < 15",
+    "not chrome < 61"
+  ],
   "description": "Custom elements for Warp",
   "exports": {
     ".": {
@@ -140,16 +144,13 @@
       "types": "./dist/packages/*/react.d.ts",
       "import": "./dist/packages/*/react.js"
     },
-    "./docs/*": {
-      "default": "./dist/docs/*"
-    },
     "./*": {
       "types": "./dist/packages/*/*.d.ts",
       "import": "./dist/packages/*/*.js"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./eik/index.js",
+  "module": "./eik/index.js",
   "customElements": "./dist/custom-elements.json",
   "web-types": "./dist/web-types.json",
   "types": "./dist/index.d.ts",
@@ -267,7 +268,8 @@
   },
   "files": [
     "./dist/",
-    "./dist/custom-elements.json"
+    "./dist/custom-elements.json",
+    "./eik/index.js"
   ],
   "scripts": {
     "build:bundle": "tsc --project tsconfig.json --outDir .tmp --declaration false --sourceMap true && rollup -c ./build/bundle.js && rimraf .tmp",
@@ -283,7 +285,7 @@
     "build:styles": "node ./build/styles.js",
     "build": "rimraf dist && rimraf eik && pnpm messages:compile && tsc && pnpm build:manifest && pnpm build:editor && pnpm build:components && pnpm run build:cloak && pnpm build:bundle && pnpm build:eik-components-backwards-compat && pnpm run build:polyfill && pnpm run build:docs",
     "check": "pnpm biome check --write .",
-    "clean": "rimraf .pnpm-store node_modules dist eik storybook-static entrypoint.js",
+    "clean": "git clean -fdx",
     "commit": "cz",
     "dev": "pnpm run storybook",
     "storybook": "storybook dev --port 63900",
@@ -291,6 +293,7 @@
     "format": "pnpm biome format --write .",
     "lint:check": "pnpm biome lint .",
     "lint": "pnpm biome lint --write .",
+    "lint:package": "publint",
     "messages:compile": "lingui compile",
     "messages:extract": "lingui extract",
     "prepare": "husky",
@@ -316,13 +319,14 @@
     "@lingui/cli": "5.9.5",
     "@lingui/conf": "5.9.5",
     "@lingui/core": "5.9.5",
-    "@lit-labs/rollup-plugin-minify-html-literals": "^0.1.0",
+    "@lit-labs/rollup-plugin-minify-html-literals": "^0.2.0",
     "@oddbird/css-anchor-positioning": "^0.9.0",
     "@open-wc/form-control": "^1.0.0",
     "@open-wc/lit-helpers": "^0.7.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-swc": "^0.4.0",
     "@rollup/plugin-terser": "^1.0.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
@@ -349,6 +353,7 @@
     "@wc-toolkit/storybook-helpers": "^10.0.0",
     "@wc-toolkit/type-parser": "^1.2.0",
     "axe-core": "^4.11.1",
+    "browserslist-to-esbuild": "^2.1.1",
     "custom-element-jet-brains-integration": "^1.7.0",
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",
@@ -363,6 +368,7 @@
     "nanoid": "^5.1.5",
     "playwright": "^1.55.0",
     "prettier": "3.8.3",
+    "publint": "^0.3.21",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rimraf": "6.1.3",
@@ -371,7 +377,7 @@
     "semantic-release": "25.0.3",
     "storybook": "^10.3.5",
     "tslib": "^2.8.1",
-    "typescript": "5.9.3",
+    "typescript": "^6.0.3",
     "unocss": "^66.6.8",
     "vite": "^8.0.8",
     "vitest": "^4.1.4",

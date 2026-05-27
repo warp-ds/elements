@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "moduleResolution": "nodenext",
     "module": "nodenext",
     "target": "ES2022",
@@ -10,5 +11,5 @@
     "noEmit": true,
     "baseUrl": "."
   },
-  "include": ["*.ts"]
+  "include": ["*.ts", "*.tsx"]
 }

@@ -66,7 +66,7 @@ class WarpExpandable extends LitElement {
    * Component title. Used to display the title value which is always present regardless of whether the component is open or closed.
    */
   @property({ type: String })
-  title: string;
+  title!: string;
 
   /**
    * Will make the expandable a Box
@@ -84,13 +84,13 @@ class WarpExpandable extends LitElement {
    * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
    */
   @property({ attribute: 'button-class', type: String })
-  buttonClass: string;
+  buttonClass: string | undefined;
 
   /**
    * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
    */
   @property({ attribute: 'content-class', type: String })
-  contentClass: string;
+  contentClass: string | undefined;
 
   /**
    * Controls chevron visibility
@@ -108,7 +108,7 @@ class WarpExpandable extends LitElement {
    * Wrap the toggle button in a heading element with the specified level. If headingLevel is not specified, the button will not be wrapped by a heading element.
    */
   @property({ attribute: 'heading-level', type: Number })
-  headingLevel: number;
+  headingLevel: number | undefined;
 
   @property({ type: Boolean, state: true })
   private _hasTitle = true;
@@ -203,7 +203,7 @@ class WarpExpandable extends LitElement {
     return html` <div class="${this.#wrapperClasses}">
       ${
         this._hasTitle
-          ? html`<w-unstyled-heading level=${this.headingLevel}>
+          ? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
             <button
               type="button"
               aria-expanded="${this.expanded}"

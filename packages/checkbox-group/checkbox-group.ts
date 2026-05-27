@@ -19,7 +19,7 @@ const REQUIRED_MESSAGE = () =>
     comment: 'Shown when required checkbox group has no selections',
   });
 
-export class WCheckboxGroup extends FormControlMixin(LitElement) {
+export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
   // Use delegatesFocus so focus delegates to an internal focusable element
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
@@ -32,7 +32,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this to describe the shared question or topic for the checkbox options. The label is connected to the internal group for assistive technologies.
    */
   @property({ type: String, reflect: true })
-  label: string;
+  label: string | undefined;
 
   /**
    * The name applied to child checkboxes when they do not provide one.
@@ -40,7 +40,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this when the grouped checkboxes should submit values under the same form field name. Individual checkboxes can still override the group name with their own `name`.
    */
   @property({ type: String, reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * Whether to show optional text next to the label.
@@ -56,7 +56,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
    * Use this for supporting guidance or validation feedback. When required validation fails, the group replaces this text with the localized required message.
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText: string | undefined;
 
   /**
    * Whether at least one checkbox in the group must be selected.
@@ -137,12 +137,14 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
 
     return html`
       <div class="wrapper" tabindex="${this._internalTabIndex}">
-        ${this.label
-          ? html`
+        ${
+          this.label
+            ? html`
               <div class="label" id="${labelId}">
                 <span>${this.label}</span>
-                ${this.optional
-                  ? html`
+                ${
+                  this.optional
+                    ? html`
                       <span class="optional">
                         ${i18n._({
                           id: 'checkbox-group.label.optional',
@@ -151,10 +153,12 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
                         })}
                       </span>
                     `
-                  : nothing}
+                    : nothing
+                }
               </div>
             `
-          : nothing}
+            : nothing
+        }
         <div
           class="checkbox-group"
           role="group"
@@ -164,9 +168,11 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
         >
           <slot></slot>
         </div>
-        ${helpText
-          ? html`<div class="${isInvalid ? 'help-text error' : 'help-text'}" id="${helpId}">${helpText}</div>`
-          : nothing}
+        ${
+          helpText
+            ? html`<div class="${isInvalid ? 'help-text error' : 'help-text'}" id="${helpId}">${helpText}</div>`
+            : nothing
+        }
       </div>
     `;
   }
@@ -237,7 +243,7 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   };
 
   #getCheckedCount(): number {
-    return this.#getAssignedElements().filter(el => (el as { checked?: boolean }).checked).length;
+    return this.#getAssignedElements().filter((el) => (el as { checked?: boolean }).checked).length;
   }
 
   #applyGroupName(): void {
@@ -339,12 +345,15 @@ export class WCheckboxGroup extends FormControlMixin(LitElement) {
   }
 }
 
+/** @deprecated Use WarpCheckboxGroup */
+export const WCheckboxGroup = WarpCheckboxGroup;
+
 if (!customElements.get('w-checkbox-group')) {
-  customElements.define('w-checkbox-group', WCheckboxGroup);
+  customElements.define('w-checkbox-group', WarpCheckboxGroup);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'w-checkbox-group': WCheckboxGroup;
+    'w-checkbox-group': WarpCheckboxGroup;
   }
 }

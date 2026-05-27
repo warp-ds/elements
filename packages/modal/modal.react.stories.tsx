@@ -19,10 +19,11 @@ export const Default: StoryObj = {
     const [back, setBack] = useState(false);
     return (
       <>
+        <p>If you keep the <code>open</code> state, listen to <code>onHidden</code> so you can update the state when the user clicks the backdrop, close button, or presses <kbd>Escape</kbd>.</p>
         <Button variant="primary" onClick={() => setOpen(true)}>
           Open Modal
         </Button>
-        <Modal show={open} id="example-modal-one">
+        <Modal show={open} id="example-modal-one" onHidden={() => setOpen(false)} onShown={() => setOpen(true)}>
           <ModalHeader slot="header" title="An example modal" back={back} />
           <div slot="content">
             <div style={{ marginBottom: '12px' }}>

@@ -2,5 +2,6 @@ packages:
   - packages/*
 
 allowBuilds:
+  '@swc/core': true
   esbuild: false
   rs-module-lexer: false

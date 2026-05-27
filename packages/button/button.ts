@@ -6,15 +6,14 @@ import { classMap } from 'lit/directives/class-map.js';
 
 import { activateI18n } from '../i18n';
 import '../link/link.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
-
 import { messages as daMessages } from './locales/da/messages.mjs';
 import { messages as enMessages } from './locales/en/messages.mjs';
 import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
-import { wButtonStyles } from './styles/w-button.styles';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { wButtonStyles } from './styles.js';
 
 export type ButtonVariant =
   | 'primary'
@@ -72,7 +71,7 @@ class WarpButton extends FormControlMixin(LitElement) {
    * Controls whether the internal button behaves as a regular button, submits a form, or resets a form. Defaults to `button`.
    */
   @property({ reflect: true })
-  type: ButtonType;
+  type: ButtonType | undefined;
 
   /**
    * Focuses the button when it is first rendered.
@@ -86,7 +85,7 @@ class WarpButton extends FormControlMixin(LitElement) {
    * Defaults to `secondary`. Use the variant that matches the action priority, risk, and placement.
    */
   @property({ reflect: true })
-  variant: ButtonVariant;
+  variant: ButtonVariant | undefined;
 
   /**
    * Deprecated quiet visual treatment flag
@@ -123,14 +122,14 @@ class WarpButton extends FormControlMixin(LitElement) {
    * When set, the component renders `w-link` instead of a native `button`.
    */
   @property({ reflect: true })
-  href: string;
+  href: string | undefined;
 
   /**
    * Link browsing context.
    * Passed to the rendered link when `href` is set.
    */
   @property({ reflect: true })
-  target: string;
+  target: string | undefined;
 
   /**
    * Visually disables the button.
@@ -144,7 +143,7 @@ class WarpButton extends FormControlMixin(LitElement) {
    * Passed to the rendered link when `href` is set. If `target="_blank"` is set and `rel` is omitted, `noopener` is used.
    */
   @property({ reflect: true })
-  rel: string;
+  rel: string | undefined;
 
   /**
    * Makes the button fill its parent width.
@@ -160,45 +159,46 @@ class WarpButton extends FormControlMixin(LitElement) {
    * @deprecated This class is applied inside the shadow DOM and is unlikely to have the desired effect. Use attributes or CSS variables to customize the appearance of the button.
    */
   @property({ attribute: 'button-class', reflect: true })
-  buttonClass: string;
+  buttonClass: string | undefined;
 
   /**
    * Form control name.
    * Used when the button participates in form handling.
    */
   @property({ reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * Form control value.
    * Used with `name` when the button participates in form handling. Resets to its initial value when the form is reset.
    */
   @property({ reflect: true })
-  value: string;
+  value: string | undefined;
 
   /**
    * The [commandfor HTML attribute](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#html_attributes) for Invoker Commands.
    */
   @property()
-  commandfor: string;
+  commandfor: string | undefined;
   
   /**
    * The [command HTML attribute](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#html_attributes) for Invoker Commands.
    */
   @property()
-  command: string;
+  command: string | undefined;
 
   @query('button')
+  // @ts-ignore
   private buttonEl: HTMLButtonElement | null;
 
   private ariaValueTextLoading: string;
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
 
   updated(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
-      this.setValue(this.value);
+      this.setValue(this.value!);
     }
   }
 
@@ -283,6 +283,7 @@ class WarpButton extends FormControlMixin(LitElement) {
         : html`
           <button
             type=${this.type || 'button'}
+            part="base"
             class=${ifDefined(this.buttonClass)}
             @click="${this._handleButtonClick}"
             commandfor=${ifDefined(this.commandfor)}

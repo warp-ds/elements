@@ -291,9 +291,13 @@ export default {
     },
   },
 };
+
+// @ts-ignore
 const Template = (args) => <Icon {...args} />;
+
 export const Default = Template.bind({});
 
+// @ts-ignore
 Default.args = {
   name: 'Ads',
   size: 'medium',
