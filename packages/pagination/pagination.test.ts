@@ -5,6 +5,7 @@ import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
 import { detectLocale } from '../i18n.js';
+import type { WarpPagination } from './pagination.js';
 import './pagination.js';
 
 function restoreDocumentLang(lang: string) {
@@ -77,21 +78,19 @@ test('is able to get the correct data-page-number attribute from the element on 
 
   await expect.poll(() => page.getByText('14').query()).toBeInTheDocument();
 
-  let clickedPage = null;
+  let clickedPage: string | null = null;
 
-  page
+  const pagination = page
     .getByTestId('pagination')
-    .element()
-    .addEventListener('click', (e: PointerEvent) => {
-      e.preventDefault();
-    });
+    .element() as WarpPagination;
 
-  page
-    .getByTestId('pagination')
-    .element()
-    .addEventListener('page-click', (e: CustomEvent) => {
-      clickedPage = e.detail.clickedPage;
-    });
+  pagination.addEventListener('click', (e) => {
+    e.preventDefault();
+  });
+
+  pagination.addEventListener('page-click', (e) => {
+    clickedPage = e.detail.clickedPage;
+  });
 
   const element = page.getByLabelText('page 14');
   await userEvent.click(element);

@@ -1,25 +1,33 @@
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html, LitElement } from 'lit';
 import { state } from 'lit/decorators.js';
 
+import type { WarpPageIndicator } from './page-indicator.js';
 import './page-indicator.js';
 
-export default {
+const { events, args, argTypes } = getStorybookHelpers<WarpPageIndicator>('w-page-indicator');
+
+const meta: Meta<typeof args> = {
   component: 'w-page-indicator',
   title: 'Navigation/PageIndicator',
   render: ({ pageCount, selectedPage }) => html`
     <w-page-indicator page-count=${pageCount} selected-page=${selectedPage}></w-page-indicator>
   `,
-  argTypes: {
-    pageCount: {
-      control: { type: 'number' },
-    },
-    selectedPage: {
-      control: { type: 'number' },
+  args,
+  argTypes,
+  parameters: {
+    actions: {
+      handles: events,
     },
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof args>;
+
+export const Default: Story = {
   args: {
     pageCount: 5,
     selectedPage: 1,

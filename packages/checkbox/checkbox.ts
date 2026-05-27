@@ -15,7 +15,8 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 
   static shadowRootOptions = { ...LitElement.shadowRootOptions, delegatesFocus: true };
 
-  @query('input[type="checkbox"]') input: HTMLInputElement | null;
+  @query('input[type="checkbox"]')
+  input!: HTMLInputElement;
 
   /**
    * The name of the checkbox.

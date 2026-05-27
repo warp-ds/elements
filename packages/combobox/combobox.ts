@@ -6,6 +6,7 @@ import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
@@ -198,7 +199,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
   }
 
   // capture the initial value using firstUpdated and #initialValue
-  #initialValue: string | null = null;
+  #initialValue = '';
   #lightDomObserver?: MutationObserver;
 
   firstUpdated(changedProps: Map<string, unknown>) {
@@ -625,7 +626,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
           role="combobox"
           aria-autocomplete="list"
           aria-expanded=${this._isOpen && this._currentOptions.length !== 0}
-          aria-activedescendant=${this._isOpen ? this._navigationOption?.id : undefined}
+          aria-activedescendant=${ifDefined(this._isOpen ? this._navigationOption?.id : undefined)}
           aria-controls=${this._listboxId}
           @input=${(e: CustomEvent) => this._handleChange(e?.detail?.value)}
           @focus=${this._handleFocus}

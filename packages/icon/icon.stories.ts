@@ -1,12 +1,24 @@
+import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
+import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
-import './icon.ts';
 
-export default {
+import type { WarpIcon } from './icon.js';
+import './icon.js';
+
+const { events, args } = getStorybookHelpers<WarpIcon>('w-icon');
+
+const meta: Meta<typeof args> = {
   component: 'w-icon',
   title: 'Icons/Icons',
   render: ({ name, size, locale }) => html`
       <w-icon name=${name} size=${size} locale=${locale} />
   `,
+  args,
+  parameters: {
+    actions: {
+      handles: events,
+    },
+  },
   argTypes: {
     name: {
       control: { type: 'select' },
@@ -294,6 +306,9 @@ export default {
     },
   },
 };
+
+export default meta;
+
 export const Default = {
   args: {
     name: 'Ads',

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "moduleResolution": "bundler",
     "module": "esnext",
     "target": "ES2022",

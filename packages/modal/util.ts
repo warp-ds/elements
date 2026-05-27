@@ -8,6 +8,7 @@ export const CanCloseMixin: <TBase extends Constructor<HTMLElement>>(
     patchClose = true;
     _close = null;
     close() {
+      // @ts-expect-error This should blow up so users implement the mixin
       this._close();
     }
   };
@@ -17,9 +18,10 @@ export const ProvidesCanCloseToSlotsMixin: <TBase extends Constructor<HTMLElemen
 ) => Constructor<{ handleSlotChange: (evt: Event) => void }> & TBase = (superClass) =>
   class extends superClass {
     // HACK: slot-props don't seem to exist and neither does the context pattern for this
-    /** @param {Event} evt */
-    handleSlotChange(evt) {
+    handleSlotChange(evt: Event) {
+      // @ts-ignore
       const children = evt.target.assignedNodes({ flatten: true });
+      // @ts-ignore
       for (const child of children.filter((e) => e.patchClose)) {
         // @ts-expect-error users have to implement the close method
         child._close = () => this.close();

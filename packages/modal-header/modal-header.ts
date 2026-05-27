@@ -25,7 +25,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
    * A short but descriptive title for the modal
    */
   @property({ type: String })
-  title: string;
+  title!: string;
   
   /**
    * Whether the modal header should have a back button
@@ -43,7 +43,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
   private _hasTopContent = false;
 
   @query('.title-el') 
-  private titleEl: HTMLElement;
+  private titleEl!: HTMLElement;
 
   constructor() {
     super();
@@ -110,7 +110,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
               comment: 'Aria label for the close button in modal',
             })}"
             variant="pill"
-            small=""
+            small
             @click="${this.close}">
                 <w-icon name="Close" size="small" locale="${detectLocale()}" style="display: flex;" class="flex"></w-icon>
         </w-button>

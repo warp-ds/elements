@@ -82,7 +82,7 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   const tabs = page.container.querySelectorAll('w-tab');
   await userEvent.click(tabs[2]);
 
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
   await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;
 
   await expect.element(page.getByText('I am no man')).toBeVisible();
@@ -109,7 +109,7 @@ test('switches panel content when panels are initialized with hidden attribute',
   </w-tabs>`;
 
   const page = render(component);
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
 
   await expect.element(page.getByText('Content for the second tab.')).toBeVisible();
   await expect.element(page.getByText('Content for the first tab.')).not.toBeVisible();
@@ -118,7 +118,7 @@ test('switches panel content when panels are initialized with hidden attribute',
   const tabs = page.container.querySelectorAll('w-tab');
   await userEvent.click(tabs[2]);
 
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
   await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;
 
   await expect.element(page.getByText('Content for the third tab.')).toBeVisible();
@@ -141,7 +141,7 @@ test('tab-panel visibility is controlled via internal shadow DOM (no host attrib
   const page = render(component);
 
   // Wait for tabs component to initialize
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
 
   const panels = page.container.querySelectorAll('w-tab-panel') as NodeListOf<WarpTabPanel>;
 
@@ -172,7 +172,7 @@ test('aria-selected uses ElementInternals (no DOM attribute) to avoid hydration 
 
   const page = render(component);
   const tabsEl = page.container.querySelector('w-tabs');
-  await tabsEl.updateComplete;
+  await tabsEl!.updateComplete;
 
   const tabs = page.container.querySelectorAll('w-tab');
 
@@ -193,7 +193,7 @@ test('w-tab does not mutate host aria-controls by default', async () => {
 
   const page = render(component);
   const tabsEl = page.container.querySelector('w-tabs');
-  await tabsEl.updateComplete;
+  await tabsEl!.updateComplete;
 
   const tab = page.container.querySelector('w-tab') as HTMLElement;
   const internalButton = tab.shadowRoot?.querySelector('button');

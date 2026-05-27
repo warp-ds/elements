@@ -40,8 +40,8 @@ export class WarpStepIndicator extends LitElement {
    */
   updateStepsContext() {
     // Provide context to child step elements
-    const steps = this.querySelectorAll('w-step');
-    steps.forEach((step: WarpStep, index: number) => {
+    const steps = this.querySelectorAll<WarpStep>('w-step');
+    steps.forEach((step, index) => {
       step.setContext({
         horizontal: this.horizontal,
         right: this.right,

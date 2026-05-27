@@ -54,25 +54,25 @@ class WarpPill extends LitElement {
    * @deprecated Used "open-arial-label" instead.
    */
   @property({ attribute: 'open-sr-label', type: String })
-  openSrLabel: string;
+  openSrLabel: string | undefined;
   
   /**
    * Label read by screen readers when targeting the pill.
    */
   @property({ attribute: 'open-aria-label', type: String })
-  openAriaLabel: string;
+  openAriaLabel: string | undefined;
   
   /**
    * @deprecated Used "close-arial-label" instead. 
    */
   @property({ attribute: 'close-sr-label', type: String })
-  closeSrLabel: string;
+  closeSrLabel: string | undefined;
   
   /**
    * Label read by screen readers when targeting the close button.
    */
   @property({ attribute: 'close-aria-label', type: String })
-  closeAriaLabel: string;
+  closeAriaLabel: string | undefined;
 
   private openFilterSrText: string;
   private removeFilterSrText: string;

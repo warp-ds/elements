@@ -125,8 +125,8 @@ export const Default: StoryObj = {
     const closeButton = canvasElement.querySelector('#modal-close-button-one');
     const toggleBackButton = canvasElement.querySelector('#modal-toggle-back-one');
     const cancelButton = canvasElement.querySelector('#modal-close-button-cancel');
-    const modal: WarpModal = canvasElement.querySelector('#example-modal-one');
-    const modalHeader: ModalHeaderType = canvasElement.querySelector('#modal-header-one');
+    const modal  = canvasElement.querySelector('#example-modal-one') as WarpModal;
+    const modalHeader = canvasElement.querySelector('#modal-header-one') as ModalHeaderType;
 
     if (openButton && modal) {
       openButton.addEventListener('click', () => modal.open());
@@ -288,7 +288,7 @@ export const WithImage: StoryObj = {
 
     const openButton = canvasElement.querySelector('#modal-open-button-two');
     const closeButton = canvasElement.querySelector('#modal-close-button-two');
-    const modal: WarpModal = canvasElement.querySelector('#example-modal-two');
+    const modal = canvasElement.querySelector('#example-modal-two') as WarpModal;
 
     if (openButton && modal) {
       openButton.addEventListener('click', () => modal.open());
