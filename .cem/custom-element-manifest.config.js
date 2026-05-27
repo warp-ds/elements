@@ -7,9 +7,9 @@ import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
 const jsxTypesPath = fileURLToPath(new URL('../dist/index.d.ts', import.meta.url));
 
-function collisionSafeJsxIntrinsicPropsPlugin() {
+function reactJsxIntrinsicPropsPlugin() {
   return {
-    name: 'collision-safe-jsx-intrinsic-props',
+    name: 'react-jsx-intrinsic-props',
     packageLinkPhase() {
       const source = readFileSync(jsxTypesPath, 'utf8');
       const customElementsStart = source.indexOf('export type CustomElements = {');
@@ -22,8 +22,6 @@ function collisionSafeJsxIntrinsicPropsPlugin() {
       const customElementsBlock = source.slice(customElementsStart, solidElementsStart);
       const customElementPattern =
         /"([^"]+)":\s*Partial<\s*([A-Za-z_$][\w$]*Props)\s*&\s*BaseProps<([^>]+)>\s*&\s*BaseEvents\s*>;/g;
-      const solidCustomElementPattern =
-        /"([^"]+)":\s*Partial<\s*([A-Za-z_$][\w$]*Props)\s*&\s*([A-Za-z_$][\w$]*SolidJsProps)\s*&\s*BaseProps<([^>]+)>\s*&\s*BaseEvents\s*>;/g;
       const customElements = Array.from(
         customElementsBlock.matchAll(customElementPattern),
         ([, tagName, propsType, elementType]) => ({ tagName, propsType, elementType }),
@@ -33,20 +31,7 @@ function collisionSafeJsxIntrinsicPropsPlugin() {
         throw new Error('Unable to derive custom element types from dist/index.d.ts');
       }
 
-      const customElementPropsTypes = `type CustomElementProps<Props, T extends HTMLElement> = Omit<BaseProps<T> & BaseEvents, keyof Props> &
-  Props;
-
-type SolidCustomElementProps<Props, SolidProps, T extends HTMLElement> = Omit<
-  BaseProps<T> & BaseEvents,
-  keyof Props | keyof SolidProps
-> &
-  Props &
-  SolidProps;
-
-`;
-
-      const reactCustomElementsTypes = `
-type ReactElementProps<T extends HTMLElement> = import("react").DOMAttributes<T> &
+      const reactCustomElementsTypes = `type ReactElementProps<T extends HTMLElement> = import("react").DOMAttributes<T> &
   import("react").AriaAttributes &
   import("react").RefAttributes<T> &
   Pick<
@@ -80,31 +65,10 @@ export type ReactCustomElements = {
 
 `;
 
-      let updatedSource = `${source.slice(0, customElementsStart)}${customElementPropsTypes}${source.slice(
-        customElementsStart,
+      const withReactTypes = `${source.slice(0, solidElementsStart)}${reactCustomElementsTypes}${source.slice(
+        solidElementsStart,
       )}`;
-
-      updatedSource = updatedSource
-        .replace(
-          customElementPattern,
-          (_, tagName, propsType, elementType) =>
-            `"${tagName}": Partial<CustomElementProps<${propsType}, ${elementType}>>;`,
-        )
-        .replace(
-          solidCustomElementPattern,
-          (_, tagName, propsType, solidPropsType, elementType) =>
-            `"${tagName}": Partial<SolidCustomElementProps<${propsType}, ${solidPropsType}, ${elementType}>>;`,
-        );
-
-      const updatedSolidElementsStart = updatedSource.indexOf('export type CustomElementsSolidJs = {');
-      if (updatedSolidElementsStart === -1) {
-        throw new Error('Unable to find generated CustomElementsSolidJs types in dist/index.d.ts');
-      }
-
-      updatedSource = `${updatedSource.slice(0, updatedSolidElementsStart)}${reactCustomElementsTypes}${updatedSource.slice(
-        updatedSolidElementsStart,
-      )}`;
-      updatedSource = updatedSource.replace(
+      const updatedSource = withReactTypes.replace(
         /(declare module ["']react["']\s*\{\s*namespace JSX\s*\{\s*interface IntrinsicElements extends )CustomElements(\s*\{\})/,
         '$1ReactCustomElements$2',
       );
@@ -201,6 +165,9 @@ export default {
     jsxTypesPlugin({
       outdir: 'dist/',
       fileName: 'index.d.ts',
+      stronglyTypedEvents: true,
+      includeDefaultDOMEvents: true,
+      allowUnknownProps: false,
       /* @wc-toolkit/jsx-types uses the paths recorded in your Custom Elements Manifest to build the imports for JSX type generation.
     Specifically:
       •	It reads modulePath or declaration.module values from the CEM.
@@ -211,7 +178,7 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
-    collisionSafeJsxIntrinsicPropsPlugin(),
+    reactJsxIntrinsicPropsPlugin(),
     cemValidatorPlugin({
       rules: {
         manifest: {
