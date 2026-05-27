@@ -31,6 +31,8 @@ function reactJsxIntrinsicPropsPlugin() {
         throw new Error('Unable to derive custom element types from dist/index.d.ts');
       }
 
+      // Keep the generated CustomElements/Solid types intact and add a React-only
+      // intrinsic map where React props and component props are merged by precedence.
       const reactCustomElementsTypes = `type ReactElementProps<T extends HTMLElement> = import("react").DOMAttributes<T> &
   import("react").AriaAttributes &
   import("react").RefAttributes<T> &
@@ -42,6 +44,8 @@ function reactJsxIntrinsicPropsPlugin() {
     | "suppressHydrationWarning"
   >;
 
+// Merge order matters: component props must win over React/global/base props
+// when names collide, e.g. w-attention's boolean popover prop.
 type ReactCustomElementProps<T extends HTMLElement, Props> = Omit<
   BaseProps<T> & BaseEvents,
   keyof ReactElementProps<T> | keyof Props
