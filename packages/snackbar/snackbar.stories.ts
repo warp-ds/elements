@@ -77,7 +77,7 @@ export const Default: Story = {
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short');
+              snackbar.create('The message should be short', { duration: durationNum, canClose });
           }}">Neutral variant</w-button>
         </div>
     `;
