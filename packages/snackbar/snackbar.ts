@@ -246,8 +246,8 @@ export class WarpSnackbar extends LitElement {
             snackbarItem.append(actionButton);
         }
         
-        // Force close button visibility if duration is Long or more
-        if (snackbarItem.duration >= SnackbarDuration.Long) {
+        // Force close button visibility if duration is longer than Long (in practice, Infinite)
+        if (snackbarItem.duration > SnackbarDuration.Long) {
             mergedOptions.canClose = true;
         }
 
