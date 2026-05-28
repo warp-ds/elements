@@ -39,10 +39,6 @@ export const styles = css`
         grid-template-columns: auto 1fr auto;
     }
 
-    :host([action-placement='block']) [part='item'] {
-        row-gap: 4px;
-    }
-
     [part='item'] w-button,
     [part='item'] ::slotted(w-button) {
         --w-c-button-bg: var(--_snackbar-item-bg);
