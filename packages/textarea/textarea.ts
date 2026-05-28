@@ -77,7 +77,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
    * Either a `label` or an `aria-label` must be provided.
    */
   @property({ type: String, reflect: true })
-  label: string;
+  label: string | undefined;
 
   /**
    * Use in combination with `invalid` to show as a validation error message,
@@ -86,25 +86,25 @@ class WarpTextarea extends FormControlMixin(LitElement) {
    * @summary Description shown below the input field
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText: string | undefined;
 
   /**
    * Sets the maximum number of text rows before the content starts scrolling.
    */
   @property({ type: Number, reflect: true, attribute: 'maximum-rows' })
-  maxRows: number;
+  maxRows: number | undefined;
 
   /**
    * Sets the minimum number of text rows the textarea should display
    */
   @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
-  minRows: number;
+  minRows: number | undefined;
 
   /**
    * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
    */
   @property({ type: String, reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * Set a text that is shown in the textarea when it doesn't have a value.
@@ -114,7 +114,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
    * @summary Shown in the textarea when it doesn't have a value
    */
   @property({ type: String, reflect: true })
-  placeholder: string;
+  placeholder: string | undefined;
 
   /** 
    * @deprecated Use the native `readonly` attribute instead
@@ -138,7 +138,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
    * Lets you set the current value
    */
   @property({ type: String, reflect: true })
-  value: string;
+  value: string | undefined;
 
   /**
    * Show an icon behind the label indicating the field is optional
@@ -155,10 +155,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   maxHeight = Number.POSITIVE_INFINITY;
 
   @query('textarea')
-  private _textarea: HTMLTextAreaElement;
+  private _textarea!: HTMLTextAreaElement;
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
 
   // unique ID for this component instance
   #uniqueId = uniqueId('textarea-');
@@ -173,7 +173,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   #hasInteracted = false;
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('value')) {
+    if (changedProperties.has('value') && typeof this.value !== 'undefined') {
       this.setValue(this.value);
     }
     if (changedProperties.has('value') || changedProperties.has('required') || changedProperties.has('disabled')) {
@@ -310,7 +310,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
   async connectedCallback() {
     super.connectedCallback();
     this.#initialValue = this.value;
-    this.setValue(this.value);
+    if (typeof this.value !== 'undefined') {
+      this.setValue(this.value);
+    }
 
     // Listen for invalid event on the host element (fired by form validation)
     this.addEventListener('invalid', this.#handleInvalid);

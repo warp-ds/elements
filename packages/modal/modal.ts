@@ -24,7 +24,7 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
   show = false;
 
   @property({ type: String, attribute: 'content-id' })
-  contentId: string;
+  contentId: string | undefined;
 
   /**
    * Ignores clicks to the backdrop when set
@@ -33,13 +33,13 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
   ignoreBackdropClicks = false;
 
   @query('.dialog-el')
-  private dialogEl: HTMLDialogElement;
+  private dialogEl!: HTMLDialogElement;
 
   @query('.dialog-inner-el')
-  private dialogInnerEl: HTMLElement;
+  private dialogInnerEl!: HTMLElement;
 
   @query('.content-el')
-  private contentEl: HTMLElement;
+  private contentEl!: HTMLElement;
 
   private _isClosing = false;
 
@@ -127,14 +127,18 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
   private handleListeners(verb = 'addEventListener') {
     // HACK: escape normally fires 'cancel' but 'cancel' can only be intercepted once (browser bug/quirk)
+    // @ts-ignore
     document[verb]('keydown', this.interceptEscape);
     // Using 'mousedown' instead of 'click' because mouse-up events on the backdrop also trigger 'click'
+    // @ts-ignore
     if (!this.ignoreBackdropClicks) this.dialogEl[verb]('mousedown', this.closeOnBackdropClick);
     // HACK: 'close' fires once the dialog is closed, thus it's cannot animate
+    // @ts-ignore
     this.dialogEl[verb]('close', this.eventPreventer);
     // HACK: this might not be needed since escape is intercepted, but better to be safe
+    // @ts-ignore
     this.dialogEl[verb]('cancel', this.eventPreventer);
-
+    // @ts-ignore
     this.dialogInnerEl[verb]('transitionend', this.modifyBorderRadius);
   }
 
@@ -155,6 +159,7 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
   private modifyBorderRadius() {
     if (this.dialogInnerEl.scrollHeight * 1.02 > innerHeight) this.dialogInnerEl.style.borderRadius = '0px';
+    // @ts-ignore
     else this.dialogInnerEl.style.borderRadius = null;
   }
 

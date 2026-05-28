@@ -26,19 +26,15 @@ class WarpPageIndicator extends LitElement {
 
   /** 
    * Currently selected page (1-based index)
-   * 
-   * @default 1
    */
-  @property({ type: Number, attribute: 'selected-page', reflect: true })
-  selectedPage: number;
+  @property({ type: Number, attribute: 'selected-page', reflect: true, useDefault: true })
+  selectedPage = 1;
 
   /**
    * Total number of pages
-   * 
-   * @default 1
    */
-  @property({ type: Number, attribute: 'page-count', reflect: true })
-  pageCount: number;
+  @property({ type: Number, attribute: 'page-count', reflect: true, useDefault: true })
+  pageCount = 1;
 
   /** Validated page count (minimum 1) */
   private get _validPageCount(): number {

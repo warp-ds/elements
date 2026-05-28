@@ -1,4 +1,4 @@
-import { createComponent } from '@lit/react';
+import { createComponent, EventName } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
@@ -12,8 +12,8 @@ const BaseSelect = createComponent({
   elementClass: Component as unknown as typeof WarpSelect,
   react: React,
   events: {
-    onChange: 'change',
-    onchange: 'change',
+    onChange: 'change' as EventName<CustomEvent>,
+    onchange: 'change' as EventName<CustomEvent>,
   },
 });
 

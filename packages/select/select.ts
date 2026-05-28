@@ -70,7 +70,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
    * Paired with `invalid` to show the text as a validation error.
   */
   @property({ attribute: 'help-text', reflect: true })
-  helpText: string;
+  helpText: string | undefined;
 
   /** 
    * Renders the field in an invalid state.
@@ -94,13 +94,13 @@ export class WarpSelect extends FormControlMixin(LitElement) {
    * @deprecated Use `help-text` instead.
    */
   @property({ reflect: true })
-  hint: string;
+  hint: string | undefined;
 
   /** 
    * The content to display as the label.
    */
   @property({ reflect: true })
-  label: string;
+  label: string | undefined;
 
   /** 
    * Whether to show the optional indicator after the label.
@@ -128,24 +128,23 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
-  /**  @internal */
   @property({ attribute: false, state: true })
-  _options: Array<TemplateResult>;
+  private _options: Array<TemplateResult> = [];
 
   /**
    * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the select when submitting the form.
    */
   @property({ reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * Lets you set the current value.
    */
   @property({ reflect: true })
-  value: string;
+  value: string | undefined;
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
   #onPageShow = () => this.#syncFromNativeSelect();
   #lightDomObserver?: MutationObserver;
 
@@ -254,7 +253,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this.#initialValue = this.value;
 
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
-    if (this.autofocus || this.autoFocus) this.shadowRoot.querySelector('select').focus();
+    if (this.autofocus || this.autoFocus) this.shadowRoot!.querySelector('select')!.focus();
 
     this.#syncShadowOptionsFromLightDom({ syncValueFromSelected: true });
     this.ownerDocument?.defaultView?.addEventListener('pageshow', this.#onPageShow);
@@ -302,7 +301,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
-      this.setValue(this.value);
+      this.setValue(this.value!);
     }
   }
 

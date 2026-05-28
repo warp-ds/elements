@@ -100,7 +100,7 @@ export const DisableStaticFiltering: Story = {
         disableStaticFiltering
         value={val}
         options={options}
-        onChange={(e: CustomEvent) => {
+        onChange={(e) => {
           setVal(e.detail.value);
           // Simulate dynamic filtering
           const filteredOptions = sampleOptions.filter((option) =>
@@ -108,7 +108,7 @@ export const DisableStaticFiltering: Story = {
           );
           setOptions(filteredOptions);
         }}
-        onSelect={(e: CustomEvent) => {
+        onSelect={(e) => {
           setVal(e.detail.value);
         }}
       />

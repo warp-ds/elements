@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+// @ts-expect-error No types for this virtual file
 import 'virtual:uno.css';
 
 import type { WarpSlider } from './slider.js';

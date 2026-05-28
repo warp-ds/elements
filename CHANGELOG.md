@@ -1,3 +1,10 @@
+# [2.10.0-next.11](https://github.com/warp-ds/elements/compare/v2.10.0-next.10...v2.10.0-next.11) (2026-05-27)
+
+
+### Features
+
+* **types:** add improved React type support to types ([#687](https://github.com/warp-ds/elements/issues/687)) ([dea55a9](https://github.com/warp-ds/elements/commit/dea55a96501e5b14acd174d2d388dad82aa1c9fc))
+
 # [2.10.0-next.10](https://github.com/warp-ds/elements/compare/v2.10.0-next.9...v2.10.0-next.10) (2026-05-26)
 
 

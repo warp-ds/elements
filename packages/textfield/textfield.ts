@@ -75,7 +75,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * Either a `label` or an `aria-label` must be provided.
    */
   @property({ type: String, reflect: true })
-  label: string;
+  label: string | undefined;
 
   /**
    * Use in combination with `invalid` to show as a validation error message,
@@ -84,55 +84,55 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * @summary Description shown below the input field
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+  helpText: string | undefined;
 
   /**
    * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
    */
   @property({ type: String, reflect: true })
-  size: string;
+  size: string | undefined;
 
   /**
    * Use with `type="number"` to set the [maximum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength).
    */
   @property({ type: Number, reflect: true })
-  max: number;
+  max: number | undefined;
 
   /**
    * Use with `type="number"` to set the [minimum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength).
    */
   @property({ type: Number, reflect: true })
-  min: number;
+  min: number | undefined;
 
   /**
    * @deprecated Use the native `minlength` attribute
    */
   @property({ type: Number, reflect: true, attribute: 'min-length' })
-  minLength: number;
+  minLength: number | undefined;
   
   /**
    * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [minimum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength) required.
    */
   @property({ type: Number, reflect: true })
-  minlength: number;
+  minlength: number | undefined;
   
   /**
    * @deprecated Use the native `maxlength` attribute
    */
   @property({ type: Number, reflect: true, attribute: 'max-length' })
-  maxLength: number;
+  maxLength: number | undefined;
 
   /**
    * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [maximum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength) allowed.
    */
   @property({ type: Number, reflect: true })
-  maxlength: number;
+  maxlength: number | undefined;
 
   /**
    * Sets a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that the input's value must [match to pass validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#pattern)
    */
   @property({ type: String, reflect: true })
-  pattern: string;
+  pattern: string | undefined;
 
   /**
    * Set a text that is shown in the textfield when it doesn't have a value.
@@ -142,7 +142,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * @summary Shown in the textfield when it doesn't have a value
    */
   @property({ type: String, reflect: true })
-  placeholder: string;
+  placeholder: string | undefined;
 
   /** 
    * @deprecated Use the native readonly attribute instead.
@@ -166,19 +166,19 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * The [type of input](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types).
    */
   @property({ type: String, reflect: true })
-  type: string;
+  type: string | undefined;
 
   /**
    * Lets you set the current value.
    */
   @property({ type: String, reflect: true })
-  value: string;
+  value: string | undefined;
 
   /**
    * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form.
    */
   @property({ type: String, reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * When used with `number` this attribute forces inputs to be a whole number of `step`.
@@ -189,13 +189,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * @summary Forces `number` inputs to be a whole number of `step`
    */
   @property({ type: Number, reflect: true })
-  step: number;
+  step: number | undefined;
 
   /**
    * A space-separated string that hints to browsers [what type of content it can suggest](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#value) to autofill.
    */
   @property({ type: String, reflect: true })
-  autocomplete?: string;
+  autocomplete?: HTMLInputElement["autocomplete"];
 
   /**
    * Function to format value when the input field.
@@ -207,11 +207,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
    * @link https://css-tricks.com/input-masking/
   */
   @property({ attribute: false })
-  formatter: (value: string) => string;
+  formatter: ((value: string) => string) | undefined;
 
   /** @internal */
   @query('.w-textfield__mask')
-  mask: HTMLDivElement;
+  mask: HTMLDivElement | undefined;
 
   /** @internal */
   @property({ type: Boolean })
@@ -228,16 +228,16 @@ class WarpTextField extends FormControlMixin(LitElement) {
   }
 
   updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('value')) {
+    if (changedProperties.has('value') && typeof this.value !== 'undefined') {
       this.setValue(this.value);
-      if (this.formatter) {
+      if (this.formatter && this.mask) {
         this.mask.innerText = this.formatter(this.value);
       }
     }
   }
 
   // capture the initial value using firstUpdated and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
 
   firstUpdated(changedProps: Map<string, unknown>) {
     this.#initialValue = this.value;
@@ -313,13 +313,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
   }
 
   prefixSlotChange() {
-    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=prefix]');
+    const el = this.renderRoot.querySelector('slot[name=prefix]') as HTMLSlotElement;
     const affixes = el.assignedElements();
     if (affixes.length) this._hasPrefix = true;
   }
 
   suffixSlotChange() {
-    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=suffix]');
+    const el = this.renderRoot.querySelector('slot[name=suffix]') as HTMLSlotElement;
     const affixes = el.assignedElements();
     if (affixes.length) this._hasSuffix = true;
   }

@@ -66,5 +66,5 @@ test('calling focus on w-button focuses the button inside the shadow root', asyn
 
   page.container.querySelector('w-button').focus();
 
-  await vi.waitFor(() => page.container.querySelector(':focus').tagName === 'BUTTON');
+  await vi.waitFor(() => page.container.querySelector(':focus')!.tagName === 'BUTTON');
 });

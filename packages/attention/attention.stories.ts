@@ -51,8 +51,8 @@ export const Default: Story = {
           id="popoverTarget" 
           slot="target"
           variant="secondary"
-          @click=${(e) => {
-            const attention = e.currentTarget.closest('w-attention');
+          @click=${(e: PointerEvent) => {
+            const attention = (e.currentTarget as HTMLButtonElement).closest('w-attention') as WarpAttention;
             attention.show = !attention.show;
           }}>
             Click to toggle a popover
@@ -79,7 +79,7 @@ export const ToolTip: Story = {
         (() => {
           const button = document.getElementById('tooltip-target');
           const tooltip = document.getElementById('tooltip-element');
-          button.addEventListener('mouseenter', () => {
+          button.addEventListener('click', (e) => {
             tooltip.show = true;
           });
           button.addEventListener('mouseleave', () => {

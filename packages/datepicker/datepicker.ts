@@ -87,7 +87,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Use this to give the datepicker a visible and accessible name.
    */
   @property({ reflect: true })
-  label: string;
+  label: string | undefined;
 
   /**
    * The locale used for calendar labels and date formatting.
@@ -95,7 +95,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * This takes precedence over the `<html>` `lang` attribute. Supported built-in locales are `en`, `nb`, `sv`, `da`, and `fi`.
    */
   @property({ reflect: true })
-  lang: string;
+  lang!: string;
 
   /**
    * The name submitted with the date value.
@@ -103,7 +103,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Use this when the datepicker belongs to a form and its value should be included in form data.
    */
   @property({ reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
    * The selected date value.
@@ -111,7 +111,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * Use an ISO date string in `YYYY-MM-DD` format. The value is submitted with the form and is reset to its initial value when the form resets.
    */
   @property({ reflect: true })
-  value: string;
+  value: string | undefined;
 
   /**
    * The date format used in the calendar header.
@@ -145,7 +145,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * ```
    */
   @property({ attribute: false })
-  isDayDisabled: (day: Date) => boolean;
+  isDayDisabled: ((day: Date) => boolean) | undefined;
 
   /**
    * The date format used for calendar day accessible names.
@@ -167,6 +167,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   @state()
   get selectedDate(): Date | null {
+    if (!this.value) return null;
     return fromISOToDate(this.value) ?? null;
   }
 
@@ -176,7 +177,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
 
   @state()
   get weeks() {
@@ -210,16 +211,16 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   @query(`#${calendarId}`)
-  calendar: HTMLDivElement;
+  calendar!: HTMLDivElement;
 
   @query(`#${inputId}`, true)
-  input: HTMLInputElement;
+  input!: HTMLInputElement;
 
   @query(`#${toggleButtonId}`, true)
-  toggleButton: HTMLButtonElement;
+  toggleButton!: HTMLButtonElement;
 
   @query(`#${wrapperId}`, true)
-  wrapper: HTMLDivElement;
+  wrapper!: HTMLDivElement;
 
   /**
    * This is the first focusable element, needed for the modal focus trap.
@@ -229,13 +230,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * the query will point to an element that doesn't exist anymore.
    */
   @query(`#${previousMonthButtonId}`)
-  previousMonthButton: HTMLButtonElement;
+  previousMonthButton!: HTMLButtonElement;
 
   @query('[aria-current="date"]')
-  todayCell: HTMLTableCellElement;
+  todayCell!: HTMLTableCellElement;
 
   @query('[data-navigation="true"]')
-  selectedCell: HTMLTableCellElement;
+  selectedCell!: HTMLTableCellElement;
 
   resetFormControl(): void {
     this.value = this.#initialValue;
@@ -276,7 +277,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * of WarpDatepicker to control the calendar.
    * @internal
    */
-  private _onClickOutside(e: MouseEvent | FocusEvent) {
+  private _onClickOutside(e: MouseEvent | FocusEvent | TouchEvent) {
     if (!this.isCalendarOpen) {
       return;
     }
@@ -311,7 +312,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   async #onCalendarKeyDown(e: KeyboardEvent) {
     const navigationDate = this.navigationDate;
-    let newNavigationDate: Date;
+    let newNavigationDate: Date | null = null;
 
     switch (e.key) {
       case 'ArrowUp':
@@ -381,14 +382,14 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
         this.value = isoDate;
-        this.shadowRoot.querySelector('input').value = this.value;
+        this.shadowRoot!.querySelector('input')!.value = this.value!;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
       this.value = isoDate;
-      this.shadowRoot.querySelector('input').value = this.value;
+      this.shadowRoot!.querySelector('input')!.value = this.value!;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
@@ -414,7 +415,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
     // Local lang attribute takes precedence
     const lang = this.lang;
+    // @ts-ignore
     if (lang && datefnsLocale[lang]) {
+      // @ts-ignore
       this.locale = datefnsLocale[lang];
     }
 
@@ -441,7 +444,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   updated(changedProperties: Map<string, unknown>): void {
     if (changedProperties.has('value')) {
       // https://www.npmjs.com/package/@open-wc/form-control#setvalue
-      this.setValue(this.value);
+      this.setValue(this.value!);
     }
   }
 
@@ -554,7 +557,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                         }
 
                         const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
-                        const isSelected = isSameDay(day, this.selectedDate);
+                        const isSelected = Boolean(this.selectedDate) && isSameDay(day, this.selectedDate!);
                         const isNavigationDate = day === this.navigationDate;
 
                         return html`<td

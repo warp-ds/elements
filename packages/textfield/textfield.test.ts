@@ -101,7 +101,7 @@ test('renders with no autocomplete attribute when none provided', async () => {
   const el = (await locator.element()) as HTMLElement;
   expect(el.hasAttribute('autocomplete')).toBe(false);
 
-  expect(el.shadowRoot.querySelector('input').hasAttribute('autocomplete')).toBe(false);
+  expect(el.shadowRoot!.querySelector('input')!.hasAttribute('autocomplete')).toBe(false);
 });
 
 test('defaults to text type when no type attribute is set', async () => {

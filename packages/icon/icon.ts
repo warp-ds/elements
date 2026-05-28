@@ -43,7 +43,7 @@ export class WarpIcon extends LitElement {
    * @default "medium"
    */
   @property({ type: String, reflect: true })
-  size: 'small' | 'medium' | 'large' | PixelValue;
+  size: 'small' | 'medium' | 'large' | PixelValue | undefined;
 
   /** 
    * Locale used for `<title>` text.

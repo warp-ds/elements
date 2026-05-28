@@ -57,7 +57,7 @@ class WarpLink extends LitElement {
    * @throws {Error} Throws an error if an unsupported value is provided.
    */
   @property({ reflect: true })
-  variant: ButtonVariant;
+  variant: ButtonVariant | undefined;
 
   /**
    * Render a smaller version
@@ -69,7 +69,7 @@ class WarpLink extends LitElement {
    * The URL the link points to
    */
   @property({ reflect: true })
-  href: string;
+  href: string | undefined;
 
   /**
    * Applies disabled styling, but you need to disable clicks on your own.
@@ -83,7 +83,7 @@ class WarpLink extends LitElement {
    * Where to display the linked URL (e.g. `_blank`)
    */
   @property({ reflect: true })
-  target: string;
+  target: string | undefined;
 
   /**
    * Relationship of the linked URL.
@@ -91,7 +91,7 @@ class WarpLink extends LitElement {
    * If `target="_blank"` and `rel` is not provided, the component uses `noopener`.
    */
   @property({ reflect: true })
-  rel: string;
+  rel: string | undefined;
 
   /**
    * Makes the link take up the full width of its parent
