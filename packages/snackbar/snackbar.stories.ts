@@ -9,6 +9,7 @@ import '../button/button.js';
 import '../icon/icon.js';
 import './snackbar.js';
 import '../snackbar-item/snackbar-item.js';
+import { SnackbarDuration } from '../snackbar-item/snackbar-item.js';
 
 const {
   events: snackbarEvents,
@@ -18,8 +19,22 @@ const {
 
 const meta: Meta = {
   title: 'Overlays/Snackbar',
-  args: snackbarArgs,
-  argTypes: snackbarArgTypes,
+  args: {
+    ...snackbarArgs,
+    canClose: true,
+    duration: undefined,
+  },
+  argTypes: {
+    ...snackbarArgTypes,
+    duration: {
+      control: { type: 'select' },
+      options: [
+        '4 seconds',
+        '10 seconds',
+        'Infinite',
+      ],
+    },
+  },
   parameters: {
     actions: {
       handles: snackbarEvents,
@@ -28,30 +43,36 @@ const meta: Meta = {
 };
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof WarpSnackbar & { duration: string; canClose: boolean }>;
 
 export const Default: Story = {
-  render() {
+  render({ duration, canClose }) {
+    const durationNum = duration === 'Infinite' ?
+      SnackbarDuration.Infinite : 
+      duration === '10 seconds' ?
+        SnackbarDuration.Long :
+        SnackbarDuration.Short; 
+
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'positive' });
+              snackbar.create('The message should be short', { variant: 'positive', duration: durationNum, canClose });
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'warning' });
+              snackbar.create('The message should be short', { variant: 'warning', duration: durationNum, canClose });
           }}">Warning variant</w-button>
 
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'negative' });
+              snackbar.create('The message should be short', { variant: 'negative', duration: durationNum, canClose });
           }}">Negative variant</w-button>
           
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'info' });
+              snackbar.create('The message should be short', { variant: 'info', duration: durationNum, canClose });
           }}">Info variant</w-button>
           
           <w-button @click="${() => {
@@ -64,7 +85,13 @@ export const Default: Story = {
 };
 
 export const WithAction: Story = {
-  render() {
+  render({ duration, canClose }) {
+    const durationNum = duration === 'Infinite' ?
+      SnackbarDuration.Infinite : 
+      duration === '10 seconds' ?
+        SnackbarDuration.Long :
+        SnackbarDuration.Short; 
+
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
@@ -73,6 +100,8 @@ export const WithAction: Story = {
                 'The message should be short',
                 {
                   variant: 'positive',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Action',
                     onclick() {
@@ -89,6 +118,8 @@ export const WithAction: Story = {
                 'The message should be short',
                 {
                   variant: 'warning',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Action',
                     onclick() {
@@ -105,6 +136,8 @@ export const WithAction: Story = {
                 'The message should be short',
                 {
                   variant: 'negative',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Action',
                     onclick() {
@@ -121,6 +154,8 @@ export const WithAction: Story = {
                 'The message should be short',
                 {
                   variant: 'info',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Action',
                     onclick() {
@@ -136,6 +171,8 @@ export const WithAction: Story = {
               snackbar.create(
                 'The message should be short',
                 {
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Action',
                     onclick() {
@@ -153,7 +190,13 @@ export const WithAction: Story = {
 };
 
 export const WithLongActionLabel: Story = {
-  render() {
+  render({ duration, canClose }) {
+    const durationNum = duration === 'Infinite' ?
+      SnackbarDuration.Infinite : 
+      duration === '10 seconds' ?
+        SnackbarDuration.Long :
+        SnackbarDuration.Short; 
+
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
@@ -162,6 +205,8 @@ export const WithLongActionLabel: Story = {
                 'The message should be short',
                 {
                   variant: 'positive',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Long action label',
                     onclick() {
@@ -178,6 +223,8 @@ export const WithLongActionLabel: Story = {
                 'The message should be short',
                 {
                   variant: 'warning',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Long action label',
                     onclick() {
@@ -194,6 +241,8 @@ export const WithLongActionLabel: Story = {
                 'The message should be short',
                 {
                   variant: 'negative',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Long action label',
                     onclick() {
@@ -210,6 +259,8 @@ export const WithLongActionLabel: Story = {
                 'The message should be short',
                 {
                   variant: 'info',
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Long action label',
                     onclick() {
@@ -225,6 +276,8 @@ export const WithLongActionLabel: Story = {
               snackbar.create(
                 'The message should be short',
                 {
+                  duration: durationNum,
+                  canClose,
                   action: {
                     label: 'Long action label',
                     onclick() {
