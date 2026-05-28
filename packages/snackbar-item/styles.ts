@@ -32,7 +32,7 @@ export const styles = css`
         padding: var(--_snackbar-item-padding);
         
         display: grid;
-        column-gap: 4px;
+        column-gap: 8px;
         grid-template:
             "icon message inline-action"
             "block-action block-action block-action";
