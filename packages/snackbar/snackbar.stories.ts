@@ -57,7 +57,7 @@ export const Default: Story = {
         <div class="flex gap-8">
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'positive', duration: durationNum, canClose });
+              snackbar.create('The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically', { variant: 'positive', duration: durationNum, canClose });
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
@@ -97,7 +97,7 @@ export const WithAction: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'The message should be short',
+                'The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically',
                 {
                   variant: 'positive',
                   duration: durationNum,
@@ -202,7 +202,7 @@ export const WithLongActionLabel: Story = {
           <w-button @click="${() => {
               const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
               snackbar.create(
-                'The message should be short',
+                'The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically',
                 {
                   variant: 'positive',
                   duration: durationNum,

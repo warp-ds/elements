@@ -37,6 +37,7 @@ export const styles = css`
             "icon message inline-action"
             "block-action block-action block-action";
         grid-template-columns: auto 1fr auto;
+        align-items: center;
     }
 
     [part='item'] w-button,
