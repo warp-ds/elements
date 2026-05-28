@@ -14,7 +14,7 @@ export const styles = css`
         --_snackbar-item-action-color-active: var(--w-c-snackbar-item-action-color-active, var(--w-s-color-text-inverted-static));
         --_snackbar-item-max-width: var(--w-c-snackbar-item-max-width, 420px);
         --_snackbar-item-min-width: var(--w-c-snackbar-item-min-width, 328px);
-        --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px);
+        --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px 8px 8px 12px);
     }
 
     /* Using a padding-less div as target so we get animation to and from zero height */
