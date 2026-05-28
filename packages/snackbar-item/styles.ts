@@ -14,7 +14,7 @@ export const styles = css`
         --_snackbar-item-action-color-active: var(--w-c-snackbar-item-action-color-active, var(--w-s-color-text-inverted-static));
         --_snackbar-item-max-width: var(--w-c-snackbar-item-max-width, 480px);
         --_snackbar-item-min-width: var(--w-c-snackbar-item-min-width, 328px);
-        --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px 8px 8px 12px);
+        --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px);
     }
 
     /* Using a padding-less div as target so we get animation to and from zero height */
@@ -55,11 +55,11 @@ export const styles = css`
 
         color: var(--_snackbar-item-color);
         padding-block: 4px;
-        min-width: 4px; /* To give a total of 16px "padding" to message if no icon (8 padding + 4 width + 4 gap) */
     }
 
     [part='icon'] ::slotted(w-icon) {
         display: block; /* override default inline-block to avoid line-height */
+        margin-inline-start: 4px;
     }
 
     [part='icon'] ::slotted(w-icon[name="SuccessFilled"]) {
