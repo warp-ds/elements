@@ -12,7 +12,7 @@ export const styles = css`
         --_snackbar-item-color: var(--w-c-snackbar-item-color, var(--w-s-color-text-inverted-static));
         --_snackbar-item-action-color-hover: var(--w-c-snackbar-item-action-color-hover, var(--w-s-color-text-inverted-static));
         --_snackbar-item-action-color-active: var(--w-c-snackbar-item-action-color-active, var(--w-s-color-text-inverted-static));
-        --_snackbar-item-max-width: var(--w-c-snackbar-item-max-width, 420px);
+        --_snackbar-item-max-width: var(--w-c-snackbar-item-max-width, 480px);
         --_snackbar-item-min-width: var(--w-c-snackbar-item-min-width, 328px);
         --_snackbar-item-padding: var(--w-c-snackbar-item-padding, 8px 8px 8px 12px);
     }
