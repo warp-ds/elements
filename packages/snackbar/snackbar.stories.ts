@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
+// @ts-expect-error You'll find no types here, TypeScript the Grey
 import 'virtual:uno.css';
 
 import type { WarpSnackbar } from './snackbar.js';
