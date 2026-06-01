@@ -1,3 +1,10 @@
+# [2.10.0-next.12](https://github.com/warp-ds/elements/compare/v2.10.0-next.11...v2.10.0-next.12) (2026-06-01)
+
+
+### Bug Fixes
+
+* regenerate styles.ts with unsafeCSS after PR [#685](https://github.com/warp-ds/elements/issues/685) ([#689](https://github.com/warp-ds/elements/issues/689)) ([098369a](https://github.com/warp-ds/elements/commit/098369a14252aa07cec9ff002147fc8e20531218))
+
 # [2.10.0-next.11](https://github.com/warp-ds/elements/compare/v2.10.0-next.10...v2.10.0-next.11) (2026-05-27)
 
 
