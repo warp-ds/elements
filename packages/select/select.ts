@@ -17,8 +17,13 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
+import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
 
 import '../icon/icon.js';
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccSelect = {
   base: 'block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current',
@@ -33,17 +38,6 @@ const ccSelect = {
     'relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none ',
   chevron: 'block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer',
   chevronDisabled: 'opacity-25',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -172,6 +166,9 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   static styles = [
     reset,
     styles,
+    inputLabelStyles,
+    inputOptionalStyles,
+    inputHelpTextStyles,
     css`
     /* if there is an option with an empty value and it is selected */
     select:has(option[value=""][selected]),
@@ -358,7 +355,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   get #helpTextClasses() {
-    return classNames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
+    return classNames(['input-help-text', this.invalid && 'input-help-text--invalid']);
   }
 
   get #chevronClasses() {
@@ -392,12 +389,12 @@ export class WarpSelect extends FormControlMixin(LitElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="${ccLabel.base}" for="${this.#id}">
+          html`<label class="input-label" for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,
               () =>
-                html`<span class="${ccLabel.optional}"
+                html`<span class="input-label__optional"
                   >${i18n._({
                     id: 'select.label.optional',
                     message: '(optional)',

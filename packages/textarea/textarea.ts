@@ -9,6 +9,11 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
+import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccInput = {
   // input classes
@@ -24,17 +29,6 @@ const ccInput = {
   // textarea classes
   textArea: 'min-h-[42] sm:min-h-[45]',
   fixed: 'resize-none',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text flex',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -269,7 +263,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     this.#clearValidationState();
   }
 
-  static styles = [reset, styles];
+  static styles = [reset, styles, inputLabelStyles, inputOptionalStyles, inputHelpTextStyles];
 
   /** @internal */
   get _textareaStyles() {
@@ -287,7 +281,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
+    return classnames(['input-help-text', this.invalid && 'input-help-text--invalid']);
   }
 
   /** @internal */
@@ -386,12 +380,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
         ${
           this.label
             ? html`
-                <label for="${this._id}" class=${ccLabel.base}>
+                <label for="${this._id}" class="input-label">
                   ${this.label}
                   ${
                     this.optional
                       ? html`
-                          <span class="${ccLabel.optional}">
+                          <span class="input-label__optional">
                             ${i18n._({
                               id: 'textarea.label.optional',
                               message: '(optional)',

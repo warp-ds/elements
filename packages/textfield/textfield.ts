@@ -11,6 +11,11 @@ import { reset } from '../styles.js';
 
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
+import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccinput = {
   // input classes
@@ -25,17 +30,6 @@ const ccinput = {
   prefix: 'pl-[var(--w-prefix-width,_40px)]',
   // textarea classes
   textArea: 'min-h-[42] sm:min-h-[45]',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
 };
 
 /**
@@ -80,11 +74,17 @@ class WarpTextField extends FormControlMixin(LitElement) {
   /**
    * Use in combination with `invalid` to show as a validation error message,
    * or on its own to show a help text.
-   * 
+   *
    * @summary Description shown below the input field
    */
   @property({ type: String, reflect: true, attribute: 'help-text' })
   helpText: string;
+
+  /**
+   * Whether to show the optional indicator after the label.
+   */
+  @property({ type: Boolean, reflect: true })
+  optional = false;
 
   /**
    * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
@@ -254,7 +254,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [reset, styles, wTextfieldStyles];
+  static styles = [reset, styles, wTextfieldStyles, inputLabelStyles, inputOptionalStyles, inputHelpTextStyles];
 
   /** @internal */
   get _inputstyles() {
@@ -271,13 +271,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
+    return classnames(['input-help-text', this.invalid && 'input-help-text--invalid']);
   }
 
   /** @internal */
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
+      return html`<label for="${this._id}" class="input-label">${this.label}${this.optional ? html`<span class="input-label__optional">(optional)</span>` : nothing}</label>`;
     }
     return undefined;
   }
