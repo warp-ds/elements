@@ -11,7 +11,7 @@ import { reset } from '../styles.js';
 
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
-import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
+import { inputLabelStyles, inputHelpTextStyles } from './input-styles.js';
 
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
@@ -254,7 +254,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
   // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
   // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
   // https://stackoverflow.com/a/61631668
-  static styles = [reset, styles, wTextfieldStyles, inputLabelStyles, inputOptionalStyles, inputHelpTextStyles];
+  static styles = [reset, styles, wTextfieldStyles, inputLabelStyles, inputHelpTextStyles];
 
   /** @internal */
   get _inputstyles() {
@@ -271,13 +271,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _helptextstyles() {
-    return classnames(['input-help-text', this.invalid && 'input-help-text--invalid']);
+    return 'help-text';
   }
 
   /** @internal */
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}" class="input-label">${this.label}${this.optional ? html`<span class="input-label__optional">(optional)</span>` : nothing}</label>`;
+      return html`<label for="${this._id}">${this.label}${this.optional ? html`<span>(optional)</span>` : nothing}</label>`;
     }
     return undefined;
   }

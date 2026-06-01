@@ -9,7 +9,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { reset } from '../styles.js';
 import { uniqueId } from '../utils.js';
 import { styles } from './styles.js';
-import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
+import { inputLabelStyles, inputHelpTextStyles } from './input-styles.js';
 
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
@@ -263,7 +263,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
     this.#clearValidationState();
   }
 
-  static styles = [reset, styles, inputLabelStyles, inputOptionalStyles, inputHelpTextStyles];
+  static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
   /** @internal */
   get _textareaStyles() {
@@ -281,7 +281,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
   /** @internal */
   get _helptextstyles() {
-    return classnames(['input-help-text', this.invalid && 'input-help-text--invalid']);
+    return 'help-text';
   }
 
   /** @internal */
@@ -380,12 +380,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
         ${
           this.label
             ? html`
-                <label for="${this._id}" class="input-label">
+                <label for="${this._id}">
                   ${this.label}
                   ${
                     this.optional
                       ? html`
-                          <span class="input-label__optional">
+                          <span>
                             ${i18n._({
                               id: 'textarea.label.optional',
                               message: '(optional)',

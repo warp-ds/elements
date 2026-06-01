@@ -12,7 +12,7 @@ import { css } from 'lit';
 
 export const inputLabelStyles = css`
   /* Label component tokens with semantic fallbacks */
-  .input-label {
+  label {
     /* Internal tokens - not part of public API */
     --_color: var(--w-c-input-label-color, var(--w-s-color-text));
     --_font-size: var(--w-c-input-label-font-size, var(--w-font-size-s));
@@ -34,11 +34,9 @@ export const inputLabelStyles = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-`;
 
-export const inputOptionalStyles = css`
   /* Optional text styling */
-  .input-label__optional {
+  label span {
     --_padding-left: var(--w-c-input-optional-padding-left, 0.8rem);
     --_font-weight: var(--w-c-input-optional-font-weight, 400);
     --_font-size: var(--w-c-input-optional-font-size, var(--w-font-size-s));
@@ -55,22 +53,24 @@ export const inputOptionalStyles = css`
 
 export const inputHelpTextStyles = css`
   /* Help text component tokens with semantic fallbacks */
-  .input-help-text {
-    --_color: var(--w-c-input-help-text-color, var(--w-s-color-text-subtle));
-    --_font-size: var(--w-c-input-help-text-font-size, var(--w-font-size-xs));
-    --_line-height: var(--w-c-input-help-text-line-height, var(--w-line-height-xs));
-    --_margin-top: var(--w-c-input-help-text-margin-top, 0.4rem);
-    --_display: var(--w-c-input-help-text-display, block);
-
-    font-size: var(--_font-size);
-    line-height: var(--_line-height);
-    margin-top: var(--_margin-top);
-    display: var(--_display);
-    color: var(--_color);
+  :host {
+    --_help-text-color: var(--w-c-input-help-text-color, var(--w-s-color-text-subtle));
+    --_help-text-font-size: var(--w-c-input-help-text-font-size, var(--w-font-size-xs));
+    --_help-text-line-height: var(--w-c-input-help-text-line-height, var(--w-line-height-xs));
+    --_help-text-margin-top: var(--w-c-input-help-text-margin-top, 0.4rem);
+    --_help-text-display: var(--w-c-input-help-text-display, block);
   }
 
   /* Invalid state overrides color */
-  .input-help-text--invalid {
-    --_color: var(--w-c-input-help-text-color-invalid, var(--w-s-color-text-negative));
+  :host([invalid]) {
+    --_help-text-color: var(--w-c-input-help-text-color-invalid, var(--w-s-color-text-negative));
+  }
+
+  .help-text {
+    font-size: var(--_help-text-font-size);
+    line-height: var(--_help-text-line-height);
+    margin-top: var(--_help-text-margin-top);
+    display: var(--_help-text-display);
+    color: var(--_help-text-color);
   }
 `;

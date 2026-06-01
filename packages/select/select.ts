@@ -17,7 +17,7 @@ import { messages as fiMessages } from './locales/fi/messages.mjs';
 import { messages as nbMessages } from './locales/nb/messages.mjs';
 import { messages as svMessages } from './locales/sv/messages.mjs';
 import { styles } from './styles.js';
-import { inputLabelStyles, inputOptionalStyles, inputHelpTextStyles } from './input-styles.js';
+import { inputLabelStyles, inputHelpTextStyles } from './input-styles.js';
 
 import '../icon/icon.js';
 
@@ -167,7 +167,6 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     reset,
     styles,
     inputLabelStyles,
-    inputOptionalStyles,
     inputHelpTextStyles,
     css`
     /* if there is an option with an empty value and it is selected */
@@ -355,7 +354,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
   }
 
   get #helpTextClasses() {
-    return classNames(['input-help-text', this.invalid && 'input-help-text--invalid']);
+    return 'help-text';
   }
 
   get #chevronClasses() {
@@ -389,12 +388,12 @@ export class WarpSelect extends FormControlMixin(LitElement) {
       ${when(
         this.label,
         () =>
-          html`<label class="input-label" for="${this.#id}">
+          html`<label for="${this.#id}">
             ${this.label}
             ${when(
               this.optional,
               () =>
-                html`<span class="input-label__optional"
+                html`<span
                   >${i18n._({
                     id: 'select.label.optional',
                     message: '(optional)',
