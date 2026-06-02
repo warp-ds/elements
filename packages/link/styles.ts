@@ -72,6 +72,11 @@ export const styles = css`
   ${buttonSharedSizing}
 
   /* ===== Layout ===== */
+  :host([full-width]) {
+    display: block;
+    width: 100%;
+  }
+
   :host([full-width]) a[part='base'] {
     width: 100%;
   }

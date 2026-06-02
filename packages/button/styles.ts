@@ -169,6 +169,7 @@ export const buttonSharedSizing = css`
 export const buttonSharedDisabled = css`
   :host([disabled]) {
     pointer-events: none;
+    cursor: default;
 
     --w-c-button-bg: var(--w-s-color-background-disabled);
     --w-c-button-bg-hover: var(--w-s-color-background-disabled);
@@ -278,6 +279,16 @@ export const wButtonStyles = css`
     --w-c-button-color: var(--w-c-button-icon-color, var(--w-s-color-icon));
   }
 
+  :host([variant='pill']) button[part='base'] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  :host([small][variant='pill']) button[part='base'] {
+    min-height: 32px;
+    min-width: 32px;
+  }
+
   /* Button-specific: link variant element styles */
   :host([variant='link']) button[part='base'] {
     display: inline;
@@ -300,6 +311,11 @@ export const wButtonStyles = css`
   }
 
   /* ===== Layout ===== */
+
+  :host([full-width]) {
+    display: block;
+    width: 100%;
+  }
 
   :host([full-width]) button[part='base'],
   :host([full-width]) > w-link[part='base'] {
