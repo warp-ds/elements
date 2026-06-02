@@ -23,7 +23,7 @@ export const buttonSharedBase = css`
     --_border-color-hover: var(--w-c-button-border-color-hover, var(--w-s-color-border-hover));
     --_border-color-active: var(--w-c-button-border-color-active, var(--w-s-color-border-active));
 
-    --_radius: var(--w-c-button-radius, 8px);
+    --_radius: var(--w-c-button-radius, var(--w-button-radius-default, 8px));
 
     --_font-size: var(--w-c-button-font-size, var(--w-font-size-m));
     --_line-height: var(--w-c-button-line-height, var(--w-line-height-m));
@@ -84,7 +84,7 @@ export const buttonSharedVariants = css`
   :host([variant='utility']) {
     --w-c-button-bg: var(--w-s-color-background);
     --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-radius: 4px;
+    --w-c-button-radius: var(--w-button-radius-utility, 4px);
     --w-c-button-border-width: 1px;
   }
 
