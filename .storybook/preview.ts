@@ -7,6 +7,7 @@ import { withActions } from 'storybook/actions/decorator';
 
 import customElements from '../dist/custom-elements.json' with { type: 'json' };
 import { supportedLocales } from '../packages/i18n';
+import { addListener } from '../packages/interaction-type-detection.js';
 import { removeToast, toast, updateToast, WarpToastContainer } from '../packages/toast/index.js';
 
 setCustomElementsManifest(customElements);
@@ -143,6 +144,8 @@ if (typeof window !== 'undefined') {
   window.getNumberFormatter = (locale, opts = {}) => {
     return new Intl.NumberFormat(locale, { maximumFractionDigits: 0, ...opts });
   };
+
+  addListener();
 }
 
 export default preview;

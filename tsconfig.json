@@ -38,7 +38,8 @@
     "packages/textfield",
     "packages/toast",
     "packages/toast-container",
-    "setup-tests.ts"
+    "packages/global.ts",
+    "setup-tests.ts",
 
     // unreleased components
     // "packages/dead-toggle",
