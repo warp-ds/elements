@@ -23,7 +23,7 @@ export const buttonSharedBase = css`
     --_border-color-hover: var(--w-c-button-border-color-hover, var(--w-s-color-border-hover));
     --_border-color-active: var(--w-c-button-border-color-active, var(--w-s-color-border-active));
 
-    --_radius: var(--w-c-button-radius, 8px);
+    --_radius: var(--w-c-button-radius, var(--w-button-radius-default, 8px));
 
     --_font-size: var(--w-c-button-font-size, var(--w-font-size-m));
     --_line-height: var(--w-c-button-line-height, var(--w-line-height-m));
@@ -84,7 +84,7 @@ export const buttonSharedVariants = css`
   :host([variant='utility']) {
     --w-c-button-bg: var(--w-s-color-background);
     --w-c-button-color: var(--w-s-color-text);
-    --w-c-button-radius: 4px;
+    --w-c-button-radius: var(--w-button-radius-utility, 4px);
     --w-c-button-border-width: 1px;
   }
 
@@ -169,6 +169,7 @@ export const buttonSharedSizing = css`
 export const buttonSharedDisabled = css`
   :host([disabled]) {
     pointer-events: none;
+    cursor: default;
 
     --w-c-button-bg: var(--w-s-color-background-disabled);
     --w-c-button-bg-hover: var(--w-s-color-background-disabled);
@@ -278,6 +279,16 @@ export const wButtonStyles = css`
     --w-c-button-color: var(--w-c-button-icon-color, var(--w-s-color-icon));
   }
 
+  :host([variant='pill']) button[part='base'] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  :host([small][variant='pill']) button[part='base'] {
+    min-height: 32px;
+    min-width: 32px;
+  }
+
   /* Button-specific: link variant element styles */
   :host([variant='link']) button[part='base'] {
     display: inline;
@@ -300,6 +311,11 @@ export const wButtonStyles = css`
   }
 
   /* ===== Layout ===== */
+
+  :host([full-width]) {
+    display: block;
+    width: 100%;
+  }
 
   :host([full-width]) button[part='base'],
   :host([full-width]) > w-link[part='base'] {
