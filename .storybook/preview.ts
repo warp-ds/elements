@@ -6,8 +6,8 @@ import { setStorybookHelpersConfig } from '@wc-toolkit/storybook-helpers';
 import { withActions } from 'storybook/actions/decorator';
 
 import customElements from '../dist/custom-elements.json' with { type: 'json' };
-import { removeToast, toast, updateToast, WarpToastContainer } from '../packages/toast/index.js';
 import { supportedLocales } from '../packages/i18n';
+import { removeToast, toast, updateToast, WarpToastContainer } from '../packages/toast/index.js';
 
 setCustomElementsManifest(customElements);
 
@@ -34,7 +34,7 @@ export const themes = {
   'Neutral dark': 'neutral-com-dark',
 };
 
-export const locales = { English: 'en', /* Finnish: 'fi', Norwegian: 'nb', Danish: 'da', Swedish: 'sv' */ };
+export const locales = { English: 'en' /* Finnish: 'fi', Norwegian: 'nb', Danish: 'da', Swedish: 'sv' */ };
 
 export const rewriteStylesheets = (theme: string) => {
   const roots = [

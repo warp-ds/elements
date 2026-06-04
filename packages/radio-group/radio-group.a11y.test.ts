@@ -1,5 +1,5 @@
 import { i18n } from '@lingui/core';
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { describe, expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -72,9 +72,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
         </w-radio-group>
       `);
 
-      await expect.element(page.getByRole('radiogroup', { name: 'Preferences' })).toHaveAccessibleDescription(
-        'Select one',
-      );
+      await expect
+        .element(page.getByRole('radiogroup', { name: 'Preferences' }))
+        .toHaveAccessibleDescription('Select one');
     });
 
     test('slotted label and help text are associated', async () => {
@@ -86,9 +86,9 @@ describe('w-radio-group accessibility (WCAG 2.2)', () => {
         </w-radio-group>
       `);
 
-      await expect.element(page.getByRole('radiogroup', { name: 'Slotted label' })).toHaveAccessibleDescription(
-        'Slotted help text',
-      );
+      await expect
+        .element(page.getByRole('radiogroup', { name: 'Slotted label' }))
+        .toHaveAccessibleDescription('Slotted help text');
     });
   });
 

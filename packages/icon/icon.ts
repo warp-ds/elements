@@ -6,6 +6,8 @@ import { styles } from './style.js';
 // Generic parser for fetch responses
 type ResponseParser<T> = (response: Response) => Promise<T>;
 
+type PixelValue = `${number}px`;
+
 interface CacheFetchOptions<T> {
   responseParser?: ResponseParser<T>;
 }
@@ -28,18 +30,26 @@ function cacheFetch<T = string>(uri: string, options: CacheFetchOptions<T> = {})
   return _fetchMap.get(uri) as Promise<T>;
 }
 
-export class WIcon extends LitElement {
+export class WarpIcon extends LitElement {
   static styles = [styles];
 
   /** Icon filename (without .svg) */
   @property({ type: String, reflect: true })
   name!: string;
 
-  /** Size: small, medium, large or pixel value (e.g. "32px") */
+  /** 
+   * Size: small, medium, large or pixel value (e.g. "32px").
+   * 
+   * @default "medium"
+   */
   @property({ type: String, reflect: true })
-  size: 'small' | 'medium' | 'large' | string;
+  size: 'small' | 'medium' | 'large' | PixelValue | undefined;
 
-  /** Locale used in CDN URL */
+  /** 
+   * Locale used for `<title>` text.
+   * 
+   * Reads the `lang` attribute from `<html>`, falls back to 'en'. 
+   */
   @property({ type: String, reflect: true, useDefault: true })
   locale: string = document.documentElement.lang || 'en';
 
@@ -101,6 +111,9 @@ export class WIcon extends LitElement {
   }
 }
 
+/** @deprecated Exported for backwards compatibility. Use WarpIcon. */
+export const WIcon = WarpIcon;
+
 if (!customElements.get('w-icon')) {
-  customElements.define('w-icon', WIcon);
+  customElements.define('w-icon', WarpIcon);
 }

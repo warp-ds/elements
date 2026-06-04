@@ -1,4 +1,4 @@
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -101,7 +101,7 @@ test('renders with no autocomplete attribute when none provided', async () => {
   const el = (await locator.element()) as HTMLElement;
   expect(el.hasAttribute('autocomplete')).toBe(false);
 
-  expect(el.shadowRoot.querySelector('input').hasAttribute('autocomplete')).toBe(false);
+  expect(el.shadowRoot!.querySelector('input')!.hasAttribute('autocomplete')).toBe(false);
 });
 
 test('defaults to text type when no type attribute is set', async () => {

@@ -1,4 +1,4 @@
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -29,7 +29,7 @@ test('renders the different tab components', async () => {
 
   // defaults to the first tab if the active property is not set
   await expect.element(page.getByText('And my axe!')).toBeVisible();
-  await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).not.toBeVisible();
   await expect.element(page.getByText('I am no man')).not.toBeVisible();
 });
 
@@ -53,7 +53,7 @@ test('can control the visible tab with the active attribute', async () => {
 
   const page = render(component);
 
-  await expect.element(page.getByText('I am on nobody\'s side')).toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).toBeVisible();
   await expect.element(page.getByText('And my axe!')).not.toBeVisible();
   await expect.element(page.getByText('I am no man')).not.toBeVisible();
 });
@@ -82,12 +82,12 @@ test('clicking a tab changes the active attribute, visible tab panel', async () 
   const tabs = page.container.querySelectorAll('w-tab');
   await userEvent.click(tabs[2]);
 
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
   await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;
 
   await expect.element(page.getByText('I am no man')).toBeVisible();
   await expect.element(page.getByText('And my axe!')).not.toBeVisible();
-  await expect.element(page.getByText('I am on nobody\'s side')).not.toBeVisible();
+  await expect.element(page.getByText("I am on nobody's side")).not.toBeVisible();
 });
 
 test('switches panel content when panels are initialized with hidden attribute', async () => {
@@ -109,7 +109,7 @@ test('switches panel content when panels are initialized with hidden attribute',
   </w-tabs>`;
 
   const page = render(component);
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
 
   await expect.element(page.getByText('Content for the second tab.')).toBeVisible();
   await expect.element(page.getByText('Content for the first tab.')).not.toBeVisible();
@@ -118,7 +118,7 @@ test('switches panel content when panels are initialized with hidden attribute',
   const tabs = page.container.querySelectorAll('w-tab');
   await userEvent.click(tabs[2]);
 
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
   await page.container.querySelectorAll('w-tab-panel')[2].updateComplete;
 
   await expect.element(page.getByText('Content for the third tab.')).toBeVisible();
@@ -141,7 +141,7 @@ test('tab-panel visibility is controlled via internal shadow DOM (no host attrib
   const page = render(component);
 
   // Wait for tabs component to initialize
-  await page.container.querySelector('w-tabs').updateComplete;
+  await page.container.querySelector('w-tabs')!.updateComplete;
 
   const panels = page.container.querySelectorAll('w-tab-panel') as NodeListOf<WarpTabPanel>;
 
@@ -172,7 +172,7 @@ test('aria-selected uses ElementInternals (no DOM attribute) to avoid hydration 
 
   const page = render(component);
   const tabsEl = page.container.querySelector('w-tabs');
-  await tabsEl.updateComplete;
+  await tabsEl!.updateComplete;
 
   const tabs = page.container.querySelectorAll('w-tab');
 
@@ -193,7 +193,7 @@ test('w-tab does not mutate host aria-controls by default', async () => {
 
   const page = render(component);
   const tabsEl = page.container.querySelector('w-tabs');
-  await tabsEl.updateComplete;
+  await tabsEl!.updateComplete;
 
   const tab = page.container.querySelector('w-tab') as HTMLElement;
   const internalButton = tab.shadowRoot?.querySelector('button');

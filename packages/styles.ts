@@ -274,7 +274,10 @@ export const reset = css`
     pointer-events: none;
   }
 `;
-export const components = css`*, :before, :after {
+import { unsafeCSS } from 'lit';
+
+// prettier-ignore
+export const components = unsafeCSS(`*, :before, :after {
             --w-rotate: 0;
             --w-rotate-x: 0;
             --w-rotate-y: 0;
@@ -2440,4 +2443,4 @@ export const components = css`*, :before, :after {
                     display: none
                 }
             }
-        `;
+        `);

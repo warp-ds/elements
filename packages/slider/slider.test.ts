@@ -1,4 +1,4 @@
-import { userEvent } from '@vitest/browser/context';
+import { userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-lit';
@@ -169,8 +169,14 @@ test('slider without suffix syncs empty suffix to thumb', async () => {
     </w-slider>
   `);
 
-  const slider = document.querySelector('w-slider') as WarpSlider & { updateComplete: Promise<unknown>; suffix?: string };
-  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & { updateComplete: Promise<unknown>; suffix?: string };
+  const slider = document.querySelector('w-slider') as WarpSlider & {
+    updateComplete: Promise<unknown>;
+    suffix?: string;
+  };
+  const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb & {
+    updateComplete: Promise<unknown>;
+    suffix?: string;
+  };
 
   await slider.updateComplete;
   await thumb.updateComplete;
@@ -269,11 +275,11 @@ test('labelFormatter formats min and max labels', async () => {
   await toThumb.updateComplete;
 
   // Check the visible labels are formatted
-  const fromMarker = fromThumb.shadowRoot.querySelector('.w-slider-thumb__from-marker');
-  const toMarker = toThumb.shadowRoot.querySelector('.w-slider-thumb__to-marker');
+  const fromMarker = fromThumb.shadowRoot!.querySelector('.w-slider-thumb__from-marker');
+  const toMarker = toThumb.shadowRoot!.querySelector('.w-slider-thumb__to-marker');
 
-  expect(fromMarker.textContent.trim()).toBe('Before 1950');
-  expect(toMarker.textContent.trim()).toBe('2025+');
+  expect(fromMarker!.textContent.trim()).toBe('Before 1950');
+  expect(toMarker!.textContent.trim()).toBe('2025+');
 });
 
 test('labelFormatter can hide labels by returning empty string', async () => {
@@ -293,11 +299,11 @@ test('labelFormatter can hide labels by returning empty string', async () => {
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const fromMarker = thumb.shadowRoot.querySelector('.w-slider-thumb__from-marker');
-  const toMarker = thumb.shadowRoot.querySelector('.w-slider-thumb__to-marker');
+  const fromMarker = thumb.shadowRoot!.querySelector('.w-slider-thumb__from-marker');
+  const toMarker = thumb.shadowRoot!.querySelector('.w-slider-thumb__to-marker');
 
-  expect(fromMarker.textContent.trim()).toBe('');
-  expect(toMarker.textContent.trim()).toBe('');
+  expect(fromMarker!.textContent.trim()).toBe('');
+  expect(toMarker!.textContent.trim()).toBe('');
 });
 
 // valueFormatter tests
@@ -323,8 +329,8 @@ test('valueFormatter formats tooltip display value', async () => {
   await thumb.updateComplete;
 
   // Check the tooltip message content in w-attention
-  const tooltipMessage = thumb.shadowRoot.querySelector('w-attention span[slot="message"]');
-  expect(tooltipMessage.textContent.trim()).toBe('50000 formatted');
+  const tooltipMessage = thumb.shadowRoot!.querySelector('w-attention span[slot="message"]');
+  expect(tooltipMessage!.textContent.trim()).toBe('50000 formatted');
 });
 
 // tooltipFormatter tests
@@ -364,8 +370,8 @@ test('tooltipFormatter formats tooltip display value', async () => {
   await thumb.updateComplete;
 
   // Check the tooltip message content in w-attention
-  const tooltipMessage = thumb.shadowRoot.querySelector('w-attention span[slot="message"]');
-  expect(tooltipMessage.textContent.trim()).toBe('300+ hk');
+  const tooltipMessage = thumb.shadowRoot!.querySelector('w-attention span[slot="message"]');
+  expect(tooltipMessage!.textContent.trim()).toBe('300+ hk');
 });
 
 // WCAG 2.1 Accessibility Tests
@@ -383,12 +389,12 @@ test('slider uses fieldset with legend for proper grouping', async () => {
   const slider = document.querySelector('w-slider') as WarpSlider;
   await slider.updateComplete;
 
-  const fieldset = slider.shadowRoot.querySelector('fieldset');
-  const legend = fieldset.querySelector('legend');
+  const fieldset = slider.shadowRoot!.querySelector('fieldset');
+  const legend = fieldset!.querySelector('legend');
 
   expect(fieldset).not.toBeNull();
   expect(legend).not.toBeNull();
-  expect(legend.textContent.trim()).toBe('Volume control');
+  expect(legend!.textContent.trim()).toBe('Volume control');
 });
 
 test('range slider fieldset groups both thumbs together', async () => {
@@ -404,14 +410,14 @@ test('range slider fieldset groups both thumbs together', async () => {
   const slider = document.querySelector('w-slider') as WarpSlider;
   await slider.updateComplete;
 
-  const fieldset = slider.shadowRoot.querySelector('fieldset');
-  const legend = fieldset.querySelector('legend');
+  const fieldset = slider.shadowRoot!.querySelector('fieldset');
+  const legend = fieldset!.querySelector('legend');
 
   expect(fieldset).not.toBeNull();
-  expect(legend.textContent.trim()).toBe('Price range');
+  expect(legend!.textContent.trim()).toBe('Price range');
 
   // Both thumbs should be slotted within the fieldset
-  const slots = fieldset.querySelectorAll('slot');
+  const slots = fieldset!.querySelectorAll('slot');
   expect(slots.length).toBeGreaterThan(0);
 });
 
@@ -428,7 +434,7 @@ test('range input has proper aria-label', async () => {
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  const rangeInput = thumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
 
   expect(rangeInput.getAttribute('aria-label')).toBe('Brightness');
 });
@@ -445,7 +451,7 @@ test('range input uses explicit aria-label when provided', async () => {
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  const rangeInput = thumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
 
   expect(rangeInput.getAttribute('aria-label')).toBe('Custom volume control');
 });
@@ -467,8 +473,8 @@ test('range slider thumbs get appropriate aria-labels when not explicitly set', 
   await fromThumb.updateComplete;
   await toThumb.updateComplete;
 
-  const fromRange = fromThumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
-  const toRange = toThumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  const fromRange = fromThumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
+  const toRange = toThumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
 
   // Should append min/max to the parent label
   expect(fromRange.getAttribute('aria-label')).toBe('Year range min');
@@ -488,7 +494,7 @@ test('number input (textfield) has proper aria-label', async () => {
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const textfield = thumb.shadowRoot.querySelector('w-textfield') as HTMLElement;
+  const textfield = thumb.shadowRoot!.querySelector('w-textfield') as HTMLElement;
 
   expect(textfield.getAttribute('aria-label')).toBe('Quantity');
 });
@@ -506,8 +512,8 @@ test('disabled slider marks all inputs as disabled', async () => {
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
-  const textfield = thumb.shadowRoot.querySelector('w-textfield') as HTMLElement;
+  const rangeInput = thumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
+  const textfield = thumb.shadowRoot!.querySelector('w-textfield') as HTMLElement;
 
   expect(rangeInput.disabled).toBe(true);
   expect(textfield.hasAttribute('disabled')).toBe(true);
@@ -525,9 +531,9 @@ test('disabled fieldset communicates disabled state', async () => {
   const slider = document.querySelector('w-slider') as WarpSlider;
   await slider.updateComplete;
 
-  const fieldset = slider.shadowRoot.querySelector('fieldset');
+  const fieldset = slider.shadowRoot!.querySelector('fieldset');
 
-  expect(fieldset.disabled).toBe(true);
+  expect(fieldset!.disabled).toBe(true);
 });
 
 // Error state accessibility (WCAG 3.3.1 Error Identification)
@@ -545,9 +551,9 @@ test('invalid slider sets aria-invalid on fieldset', async () => {
   // Wait for the state update triggered in connectedCallback
   await slider.updateComplete;
 
-  const fieldset = slider.shadowRoot.querySelector('fieldset');
+  const fieldset = slider.shadowRoot!.querySelector('fieldset');
 
-  expect(fieldset.getAttribute('aria-invalid')).toBe('true');
+  expect(fieldset!.getAttribute('aria-invalid')).toBe('true');
 });
 
 test('error message is visible when slider is invalid', async () => {
@@ -564,10 +570,10 @@ test('error message is visible when slider is invalid', async () => {
   // Wait for the state update triggered in connectedCallback
   await slider.updateComplete;
 
-  const errorMessage = slider.shadowRoot.querySelector('.w-slider__error');
+  const errorMessage = slider.shadowRoot!.querySelector('.w-slider__error');
 
   expect(errorMessage).not.toBeNull();
-  expect(errorMessage.textContent.trim()).toBe('Value is required');
+  expect(errorMessage!.textContent.trim()).toBe('Value is required');
 });
 
 // Screen reader min/max range announcement
@@ -587,11 +593,11 @@ test('screen reader can access min and max range values', async () => {
   await thumb.updateComplete;
 
   // Screen reader only text should contain min and max info
-  const srOnlyText = thumb.shadowRoot.querySelector('.sr-only');
+  const srOnlyText = thumb.shadowRoot!.querySelector('.sr-only');
 
   expect(srOnlyText).not.toBeNull();
-  expect(srOnlyText.textContent).toContain('10');
-  expect(srOnlyText.textContent).toContain('90');
+  expect(srOnlyText!.textContent).toContain('10');
+  expect(srOnlyText!.textContent).toContain('90');
 });
 
 test('screen reader range announcement uses labelFormatter values', async () => {
@@ -614,10 +620,10 @@ test('screen reader range announcement uses labelFormatter values', async () => 
   const thumb = document.querySelector('w-slider-thumb') as WarpSliderThumb;
   await thumb.updateComplete;
 
-  const srOnlyText = thumb.shadowRoot.querySelector('.sr-only');
+  const srOnlyText = thumb.shadowRoot!.querySelector('.sr-only');
 
-  expect(srOnlyText.textContent).toContain('Zero');
-  expect(srOnlyText.textContent).toContain('One hundred');
+  expect(srOnlyText!.textContent).toContain('Zero');
+  expect(srOnlyText!.textContent).toContain('One hundred');
 });
 
 // Required field accessibility (WCAG 3.3.2 Labels or Instructions)
@@ -664,7 +670,7 @@ test('aria-label is not set as host attribute (to avoid hydration mismatch)', as
   expect(thumb.ariaLabel).toBe('Slider label');
 
   // And the internal input should have the aria-label
-  const rangeInput = thumb.shadowRoot.querySelector('input[type="range"]') as HTMLInputElement;
+  const rangeInput = thumb.shadowRoot!.querySelector('input[type="range"]') as HTMLInputElement;
   expect(rangeInput.getAttribute('aria-label')).toBe('Slider label');
 });
 

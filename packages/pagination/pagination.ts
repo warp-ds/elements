@@ -28,38 +28,34 @@ const baseItemStyles =
 /**
  * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-pagination--docs)
- *
- * @fires {CustomEvent} page-click - Triggered when a link button in the pagination is clicked. Contains the page number in `string` form.
+ * @fires {CustomEvent} page-click - Triggered when a link in the pagination is clicked. Contains the page number in `string` form.
  */
 class WarpPagination extends LitElement {
   /**
-   * @summary
-   * @description
+   * The base URL used to construct page links, for example `/search?page=`.
+   * 
+   * The page number is appended to this URL.
    */
   @property({ type: String, reflect: true, attribute: 'base-url' })
-  baseUrl: string;
+  baseUrl: string | undefined;
 
   /**
-   * @summary
-   * @description
+   * The total number of pages.
    */
-  @property({ type: Number, reflect: true })
-  pages: number;
+  @property({ type: Number, reflect: true, useDefault: true })
+  pages = 0;
 
   /**
-   * @summary
-   * @description
+   * The currently active page number.
    */
-  @property({ type: Number, reflect: true, attribute: 'current-page' })
-  currentPageNumber: number;
+  @property({ type: Number, reflect: true, attribute: 'current-page', useDefault: true })
+  currentPageNumber = 1;
 
   /**
-   * @summary
-   * @description
+   * The maximum number of page numbers visible.
    */
-  @property({ type: Number, reflect: true, attribute: 'visible-pages' })
-  visiblePages: number;
+  @property({ type: Number, reflect: true, attribute: 'visible-pages', useDefault: true })
+  visiblePages = 7;
 
   static styles = [
     reset,
@@ -77,49 +73,39 @@ class WarpPagination extends LitElement {
   }
 
   /** @internal */
-  get _currentPage() {
-    return this.currentPageNumber ?? 1;
-  }
-
-  /** @internal */
-  get _visiblePages() {
-    return this.visiblePages ?? 7;
-  }
-
-  /** @internal */
   get shouldShowShowFirstPageButton() {
-    return this._currentPage - 2 > 0;
+    return this.currentPageNumber - 2 > 0;
   }
 
   /** @internal */
   get shouldShowPreviousPageButton() {
-    return this._currentPage - 1 > 0;
+    return this.currentPageNumber - 1 > 0;
   }
 
   /** @internal */
   get shouldShowNextPageButton() {
-    return this._currentPage < this.pages;
+    return this.currentPageNumber < this.pages;
   }
 
   /** @internal */
   get currentPageIndex() {
-    return this._currentPage - 1;
+    return this.currentPageNumber - 1;
   }
 
   /** @internal */
   get visiblePageNumbers() {
-    if (this.pages <= this._visiblePages) {
+    if (this.pages <= this.visiblePages) {
       // Show all pages if total pages is less than or equal to visible pages
       return Array.from({ length: this.pages }, (_, i) => i + 1);
     }
 
-    const half = Math.floor(this._visiblePages / 2);
-    let start = Math.max(1, this._currentPage - half);
-    const end = Math.min(this.pages, start + this._visiblePages - 1);
+    const half = Math.floor(this.visiblePages / 2);
+    let start = Math.max(1, this.currentPageNumber - half);
+    const end = Math.min(this.pages, start + this.visiblePages - 1);
 
     // Adjust start if we're near the end
-    if (end - start + 1 < this._visiblePages) {
-      start = Math.max(1, end - this._visiblePages + 1);
+    if (end - start + 1 < this.visiblePages) {
+      start = Math.max(1, end - this.visiblePages + 1);
     }
 
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
@@ -173,8 +159,8 @@ class WarpPagination extends LitElement {
         ${
           this.shouldShowPreviousPageButton
             ? html`<a
-              data-page-number="${this._currentPage - 1}"
-              href="${this.baseUrl}${this._currentPage - 1}"
+              data-page-number="${this.currentPageNumber - 1}"
+              href="${this.baseUrl}${this.currentPageNumber - 1}"
               class="${
                 baseItemStyles +
                 ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'
@@ -193,7 +179,7 @@ class WarpPagination extends LitElement {
         }
         <div class="hidden md:block">
           ${visiblePages.map((pageNumber) => {
-            const isCurrentPage = pageNumber === this._currentPage;
+            const isCurrentPage = pageNumber === this.currentPageNumber;
             const url = `${this.baseUrl}${pageNumber}`;
 
             let styles = baseItemStyles;
@@ -225,14 +211,14 @@ class WarpPagination extends LitElement {
         <span class="block md:hidden p-8 font-bold">${i18n._({
           id: 'pagination.label.current-page',
           message: 'Page {currentPage}',
-          values: { currentPage: this._currentPage },
+          values: { currentPage: this.currentPageNumber },
           comment: 'Default message for current page label in the pagination component',
         })}</span>
         ${
           this.shouldShowNextPageButton
             ? html`<a
-              data-page-number="${this._currentPage + 1}"
-              href="${this.baseUrl}${this._currentPage + 1}"
+              data-page-number="${this.currentPageNumber + 1}"
+              href="${this.baseUrl}${this.currentPageNumber + 1}"
               class="${
                 baseItemStyles +
                 ' s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]'
@@ -251,6 +237,12 @@ class WarpPagination extends LitElement {
         }
       </div>
     </nav>`;
+  }
+}
+
+declare global {
+  interface GlobalEventHandlersEventMap {
+    'page-click': CustomEvent<{ clickedPage: string }>;
   }
 }
 

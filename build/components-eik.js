@@ -5,6 +5,7 @@
 
 import { existsSync, mkdirSync } from 'node:fs';
 import * as eik from '@eik/esbuild-plugin';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import esbuild from 'esbuild';
 
 await eik.load({ urls: ['https://assets.finn.no/map/lit/v3'] });
@@ -33,7 +34,7 @@ const esbuildDefaults = {
   bundle: true,
   format: 'esm',
   sourcemap: true,
-  target: 'es2018',
+  target: browserslistToEsbuild(),
   minify: true,
   plugins: [eik.plugin()],
 };

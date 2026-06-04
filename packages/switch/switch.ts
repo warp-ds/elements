@@ -2,7 +2,7 @@
 
 import { classNames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import { css, html, LitElement } from 'lit';
+import { css, html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles';
@@ -83,7 +83,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  #initialState: boolean | null = null;
+  #initialState = false;
 
   static styles = [
     reset,
@@ -206,7 +206,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     super.disconnectedCallback();
   }
 
-  willUpdate(changedProperties) {
+  willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('checked')) {
       if (!this.disabled) {
         this.setValue(this.checked && this.value ? this.value : null);

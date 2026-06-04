@@ -7,32 +7,53 @@ import { reset } from '../styles';
 import { styles as hostStyles } from './host-styles';
 import { styles as radioStyles } from './radio-styles';
 
-export class WRadio extends FormControlMixin(LitElement) {
+/**
+ * @parent w-radio-group
+ */
+export class WarpRadio extends FormControlMixin(LitElement) {
   static styles = [hostStyles, reset, radioStyles];
 
-  // Use delegatesFocus so focus delegates to the internal wrapper element
+  /** @internal */
   static shadowRootOptions = {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
 
-  /** The name of the radio, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name!: string;
+  /** 
+   * The name of the radio, submitted as a name/value pair with form data.
+   */
+  @property({ reflect: true })
+  name!: string;
 
-  /** The radio's value. When selected, the radio group will receive this value. */
-  @property({ reflect: true }) value: string | null = null;
+  /** 
+   * The radio's value. When selected, the radio group will receive this value.
+   */
+  @property({ reflect: true })
+  value: string | null = null;
 
-  /** Draws the radio in a checked state (reflected to attribute). */
-  @property({ type: Boolean, reflect: true }) checked = false;
+  /**
+   * Draws the radio in a checked state (reflected to attribute).
+   */
+  @property({ type: Boolean, reflect: true })
+  checked = false;
 
-  /** Disables the radio. */
-  @property({ type: Boolean, reflect: true }) disabled = false;
+  /**
+   * Disables the radio.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
-  /** Makes the radio a required field. */
-  @property({ type: Boolean, reflect: true }) required = false;
+  /** 
+   * Makes the radio a required field.
+   */
+  @property({ type: Boolean, reflect: true })
+  required = false;
 
-  /** Draws the radio in an invalid state. */
-  @property({ type: Boolean, reflect: true }) invalid = false;
+  /**
+   * Draws the radio in an invalid state.
+   */
+  @property({ type: Boolean, reflect: true })
+  invalid = false;
 
   /**
    * Internal tabindex managed by parent radio-group.
@@ -45,6 +66,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   /**
    * Override tabIndex getter to return the computed internal tabIndex.
    * This allows external code to check if the radio is focusable.
+   * @internal
    */
   override get tabIndex(): number {
     return this._internalTabIndex;
@@ -53,6 +75,8 @@ export class WRadio extends FormControlMixin(LitElement) {
   /**
    * Override tabIndex setter to set _groupTabIndex (for backwards compatibility).
    * Radio-group should use _groupTabIndex directly for clarity.
+   * 
+   * @internal
    */
   override set tabIndex(value: number) {
     this._groupTabIndex = value;
@@ -187,29 +211,42 @@ export class WRadio extends FormControlMixin(LitElement) {
     this.click();
   };
 
+  /** @internal */
   resetFormControl(): void {
     this.checked = this.#defaultChecked;
     this.syncFormValue();
     this.updateValidity();
   }
 
-  /** Returns the validation message if the radio is invalid, otherwise an empty string */
+  /** 
+   * Returns the validation message if the radio is invalid, otherwise an empty string
+   * @internal
+   */
   get validationMessage(): string {
     return this.internals.validationMessage;
   }
 
-  /** Returns the validity state of the radio */
+  /** 
+   * Returns the validity state of the radio
+   * @internal
+   */
   get validity(): ValidityState {
     return this.internals.validity;
   }
 
-  /** Checks whether the radio passes constraint validation */
+  /** 
+   * Checks whether the radio passes constraint validation 
+   * @internal
+   */
   checkValidity(): boolean {
     this.updateValidity();
     return this.internals.checkValidity();
   }
 
-  /** Checks validity and shows the browser's validation message if invalid */
+  /** 
+   * Checks validity and shows the browser's validation message if invalid
+   * @internal
+   */
   reportValidity(): boolean {
     // reportValidity is an explicit request to surface validation feedback.
     this.#hasInteracted = true;
@@ -227,10 +264,10 @@ export class WRadio extends FormControlMixin(LitElement) {
     return this.internals.form ?? this.closest('form') ?? document;
   }
 
-  private getStandaloneNamedRadios(): WRadio[] {
+  private getStandaloneNamedRadios(): WarpRadio[] {
     if (!this.name) return [this];
     const scope = this.getRadioScope();
-    return Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`)).filter(
+    return Array.from(scope.querySelectorAll<WarpRadio>(`w-radio[name="${this.name}"]`)).filter(
       (radio) => !radio.closest('w-radio-group')
     );
   }
@@ -261,6 +298,8 @@ export class WRadio extends FormControlMixin(LitElement) {
   /**
    * Internal tabindex for standalone radios (not in a group).
    * Non-reflecting to avoid DOM changes during hydration.
+   * 
+   * @internal
    */
   @property({ attribute: false })
   _standaloneTabIndex: number | undefined;
@@ -275,7 +314,7 @@ export class WRadio extends FormControlMixin(LitElement) {
   private uncheckOtherRadios(): void {
     if (!this.name) return;
     const scope = this.getRadioScope();
-    const radios = Array.from(scope.querySelectorAll<WRadio>(`w-radio[name="${this.name}"]`));
+    const radios = Array.from(scope.querySelectorAll<WarpRadio>(`w-radio[name="${this.name}"]`));
     radios.forEach((radio) => {
       if (radio === this) return;
       if (radio.closest('w-radio-group')) return;
@@ -345,12 +384,17 @@ export class WRadio extends FormControlMixin(LitElement) {
   }
 }
 
+/**
+ * @deprecated Exported for backwards compatibility only, use `WarpRadio`
+ */
+export const WRadio = WarpRadio;
+
 if (!customElements.get('w-radio')) {
-  customElements.define('w-radio', WRadio);
+  customElements.define('w-radio', WarpRadio);
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'w-radio': WRadio;
+    'w-radio': WarpRadio;
   }
 }

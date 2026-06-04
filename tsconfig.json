@@ -42,17 +42,19 @@
     // "packages/dead-toggle",
   ],
   "compilerOptions": {
+    "types": ["node", "react", "react-dom"],
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react",
-    "skipLibCheck": true,
-    "allowJs": true,
     "rootDir": ".",
-    "declaration": true,
     "outDir": "dist",
-    "moduleResolution": "bundler"
+    "strict": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "allowJs": true,
+    "declaration": true
   }
 }

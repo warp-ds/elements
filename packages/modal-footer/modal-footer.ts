@@ -5,9 +5,9 @@ import { reset } from '../styles.js';
 /**
  * The footer section of a modal, typically where you place actions.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/overlays-modal--docs)
+ * @parent w-modal
  */
-export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitElement)) {
+export class WarpModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitElement)) {
   render() {
     return html`
       <div class="footer">
@@ -36,6 +36,10 @@ export class ModalFooter extends CanCloseMixin(ProvidesCanCloseToSlotsMixin(LitE
   ];
 }
 
+/** @deprecated Exported for backwards compatibility. Use WarpModalFooter. */
+export const ModalFooter = WarpModalFooter;
+
+
 if (!customElements.get('w-modal-footer')) {
-  customElements.define('w-modal-footer', ModalFooter);
+  customElements.define('w-modal-footer', WarpModalFooter);
 }

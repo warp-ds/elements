@@ -1,3 +1,108 @@
+# [2.10.0-next.13](https://github.com/warp-ds/elements/compare/v2.10.0-next.12...v2.10.0-next.13) (2026-06-04)
+
+
+### Bug Fixes
+
+* complete unsafeCSS migration, restore full-width and radius token mapping ([#691](https://github.com/warp-ds/elements/issues/691)) ([217d56a](https://github.com/warp-ds/elements/commit/217d56a4333a4279e7dcee8aa79654f0f1bcd030)), closes [#682](https://github.com/warp-ds/elements/issues/682) [#543](https://github.com/warp-ds/elements/issues/543) [#615](https://github.com/warp-ds/elements/issues/615) [#615](https://github.com/warp-ds/elements/issues/615)
+
+
+### Features
+
+* add lint check for css`` with backslash selectors ([#692](https://github.com/warp-ds/elements/issues/692)) ([e06a75f](https://github.com/warp-ds/elements/commit/e06a75f05e07adf67fce3bd33e12fb9ccd8a9ca1))
+
+# [2.10.0-next.12](https://github.com/warp-ds/elements/compare/v2.10.0-next.11...v2.10.0-next.12) (2026-06-01)
+
+
+### Bug Fixes
+
+* regenerate styles.ts with unsafeCSS after PR [#685](https://github.com/warp-ds/elements/issues/685) ([#689](https://github.com/warp-ds/elements/issues/689)) ([098369a](https://github.com/warp-ds/elements/commit/098369a14252aa07cec9ff002147fc8e20531218))
+
+# [2.10.0-next.11](https://github.com/warp-ds/elements/compare/v2.10.0-next.10...v2.10.0-next.11) (2026-05-27)
+
+
+### Features
+
+* **types:** add improved React type support to types ([#687](https://github.com/warp-ds/elements/issues/687)) ([dea55a9](https://github.com/warp-ds/elements/commit/dea55a96501e5b14acd174d2d388dad82aa1c9fc))
+
+# [2.10.0-next.10](https://github.com/warp-ds/elements/compare/v2.10.0-next.9...v2.10.0-next.10) (2026-05-26)
+
+
+### Bug Fixes
+
+* use unsafeCSS in generated styles to prevent SWC escaping corruption ([#685](https://github.com/warp-ds/elements/issues/685)) ([c00d6aa](https://github.com/warp-ds/elements/commit/c00d6aa134a88d08cb976a5c1b8fe7aee8cf176c)), closes [#682](https://github.com/warp-ds/elements/issues/682)
+
+# [2.10.0-next.9](https://github.com/warp-ds/elements/compare/v2.10.0-next.8...v2.10.0-next.9) (2026-05-22)
+
+
+### Bug Fixes
+
+* compile using browserslist when bundling ([#682](https://github.com/warp-ds/elements/issues/682)) ([9d48c24](https://github.com/warp-ds/elements/commit/9d48c24b87ff34a98e4012eed87af6d3840e84a0))
+
+# [2.10.0-next.8](https://github.com/warp-ds/elements/compare/v2.10.0-next.7...v2.10.0-next.8) (2026-05-22)
+
+
+### Bug Fixes
+
+* **icon:** narrow type for icon size ([#677](https://github.com/warp-ds/elements/issues/677)) ([b656fa8](https://github.com/warp-ds/elements/commit/b656fa88ec9f158db12ed3a52135ee53ffab8ee5))
+
+# [2.10.0-next.7](https://github.com/warp-ds/elements/compare/v2.10.0-next.6...v2.10.0-next.7) (2026-05-22)
+
+
+### Bug Fixes
+
+* reset active slider range when value is set to empty string ([46942e2](https://github.com/warp-ds/elements/commit/46942e24092f573a098fe8dfc406be7c37619057))
+* reset active slider range when value is set to empty string ([2222940](https://github.com/warp-ds/elements/commit/222294062b0c6c534094f29afbec7b1381ed786f))
+
+# [2.10.0-next.6](https://github.com/warp-ds/elements/compare/v2.10.0-next.5...v2.10.0-next.6) (2026-05-20)
+
+
+### Bug Fixes
+
+* **docs:** add built documentation index ([#675](https://github.com/warp-ds/elements/issues/675)) ([dcd20e7](https://github.com/warp-ds/elements/commit/dcd20e747d7bc9d77348383284526532742d404e))
+
+# [2.10.0-next.5](https://github.com/warp-ds/elements/compare/v2.10.0-next.4...v2.10.0-next.5) (2026-05-19)
+
+
+### Bug Fixes
+
+* include eik/index.js in the package ([#673](https://github.com/warp-ds/elements/issues/673)) ([54aeb72](https://github.com/warp-ds/elements/commit/54aeb72f5ca783a43b0922515d1b735c37fd73b0))
+
+# [2.10.0-next.4](https://github.com/warp-ds/elements/compare/v2.10.0-next.3...v2.10.0-next.4) (2026-05-13)
+
+
+### Bug Fixes
+
+* **modal:** Modal dispatches spurious `hidden` event ([#664](https://github.com/warp-ds/elements/issues/664)) ([7cc5566](https://github.com/warp-ds/elements/commit/7cc55660f3f4abf8199839a23012e0b2fef3e257))
+
+# [2.10.0-next.3](https://github.com/warp-ds/elements/compare/v2.10.0-next.2...v2.10.0-next.3) (2026-05-13)
+
+
+### Features
+
+* **combobox:** add support for option element children ([#663](https://github.com/warp-ds/elements/issues/663)) ([d74b4bb](https://github.com/warp-ds/elements/commit/d74b4bb33f3fd84437fffaef833d235c5111906b))
+
+# [2.10.0-next.2](https://github.com/warp-ds/elements/compare/v2.10.0-next.1...v2.10.0-next.2) (2026-05-12)
+
+
+### Bug Fixes
+
+* **modal-header:** prevent close and back buttons from inheriting modal title tooltip ([#657](https://github.com/warp-ds/elements/issues/657)) ([a291e45](https://github.com/warp-ds/elements/commit/a291e455514e037d5a8823a1d239da33719455bc))
+
+# [2.10.0-next.1](https://github.com/warp-ds/elements/compare/v2.9.2-next.1...v2.10.0-next.1) (2026-05-12)
+
+
+### Features
+
+* **button:** support using w-button for Invoker Commands ([e91dc37](https://github.com/warp-ds/elements/commit/e91dc37d596945e73abc4ad3d2fb4f80b80c5965))
+* **modal:** support use via Invoker Commands ([55e5a96](https://github.com/warp-ds/elements/commit/55e5a966c974ac650ce2b7ed0d3983c522778bf3))
+
+## [2.9.2-next.1](https://github.com/warp-ds/elements/compare/v2.9.1...v2.9.2-next.1) (2026-05-11)
+
+
+### Bug Fixes
+
+* **radio-group:** give precedence to help-text if invalid + required ([#652](https://github.com/warp-ds/elements/issues/652)) ([68373cd](https://github.com/warp-ds/elements/commit/68373cd036e85204d07c97f3480f5128b14f1d97))
+
 ## [2.9.1](https://github.com/warp-ds/elements/compare/v2.9.0...v2.9.1) (2026-05-11)
 
 

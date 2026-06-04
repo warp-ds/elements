@@ -3,6 +3,8 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
 
 const COMPONENT_CLASS_PREFIX = 'Warp';
+const DOCS_OUTPUT_DIR = new URL('../dist/docs/', import.meta.url);
+const STORYBOOK_USAGE_LINK_PATTERN = /\s*\[See Storybook for usage examples\]\([^)]+\)\s*/gi;
 
 const PRIMITIVE_TYPES = new Set([
   'string',
@@ -19,7 +21,11 @@ const PRIMITIVE_TYPES = new Set([
   'bigint',
 ]);
 
-const toTypeAnchorSlug = (typeName) => typeName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const toTypeAnchorSlug = (typeName) =>
+  typeName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 const shouldLinkType = (normalizedTypeName, typesMap) => {
   if (!normalizedTypeName) {
@@ -50,6 +56,25 @@ const normalizeText = (value, fallback = '') => {
   return String(value);
 };
 
+const stripStorybookUsageLinks = (value) => normalizeText(value).replace(STORYBOOK_USAGE_LINK_PATTERN, '\n').trim();
+
+const stripMarkdownLinks = (value) => normalizeText(value).replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+const normalizeDescription = (value, fallback = 'No description available.') =>
+  stripStorybookUsageLinks(value) || fallback;
+
+const normalizeSummary = (value, fallback = 'No description available.') =>
+  stripMarkdownLinks(normalizeDescription(value, fallback)).replace(/\s+/g, ' ').trim() || fallback;
+
+const escapeTableCell = (value) => normalizeText(value).replaceAll('|', '\\|').replace(/\s+/g, ' ').trim();
+
+const toDisplayName = (packageName) =>
+  packageName
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ');
+
 const getSummary = (item, fallback = '') => {
   if (item.summary) return item.summary;
   if (item.description) {
@@ -66,6 +91,59 @@ const readOptionalFile = (path) => {
   }
 
   return readFileSync(path, { encoding: 'utf8' }).trim();
+};
+
+const getMarkdownParagraphs = (content) =>
+  normalizeText(content)
+    .replace(/```[\s\S]*?```/g, '\n')
+    .split(/\n\s*\n/)
+    .map((block) =>
+      block
+        .split('\n')
+        .map((line) => line.trim())
+        .filter(
+          (line) =>
+            line && !line.startsWith('#') && !line.startsWith('<') && !line.startsWith('|') && !line.startsWith('- '),
+        )
+        .join(' '),
+    )
+    .map((block) => stripMarkdownLinks(block).replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+
+const getDocsSummary = (content, identifiers = []) => {
+  const paragraphs = getMarkdownParagraphs(content);
+  const normalizedIdentifiers = identifiers.map((identifier) => identifier?.toLowerCase()).filter(Boolean);
+
+  return (
+    paragraphs.find((paragraph) => {
+      const normalizedParagraph = paragraph.toLowerCase();
+      return normalizedIdentifiers.some((identifier) => normalizedParagraph.includes(identifier));
+    }) ??
+    paragraphs[0] ??
+    ''
+  );
+};
+
+const getPackageNameFromTagName = (tagName = '') => tagName.replace(/^w-/, '');
+
+const getDescriptionFallback = ({ declaration, packageName, usageContent }) => {
+  const ownSummary = getDocsSummary(usageContent, [declaration.tagName, packageName.replaceAll('-', ' '), packageName]);
+  if (ownSummary) {
+    return ownSummary;
+  }
+
+  const parentPackageName = getPackageNameFromTagName(declaration.parent?.name);
+  if (!parentPackageName || parentPackageName === packageName) {
+    return 'No description available.';
+  }
+
+  const parentUsageContent = readOptionalFile(
+    new URL(`../packages/${parentPackageName}/docs/usage.md`, import.meta.url),
+  );
+  return (
+    getDocsSummary(parentUsageContent, [declaration.tagName, packageName.replaceAll('-', ' '), packageName]) ||
+    'No description available.'
+  );
 };
 
 const buildTypesMap = (members = []) => {
@@ -108,7 +186,7 @@ const buildPropertyTable = (members = [], typesMap = new Map()) => {
         if (item.deprecated && !summary) {
           summary = `**Deprecated**: ${item.deprecated}`;
         } else if (item.deprecated && summary) {
-          summary = `${summary}. **Deprecated**: ${item.deprecated}`;
+          summary = `${summary}${summary.endsWith('.') ? '' : '.'} **Deprecated**: ${item.deprecated}`;
         } else if (!summary) {
           summary = "-";
         }
@@ -178,6 +256,41 @@ const buildTypes = (typesMap = new Map(), hasParent = false) => {
 };
 
 const components = [];
+const docsIndexEntries = [];
+
+const addDocsIndexEntry = ({ description, exportPath, packageName, tagName }) => {
+  docsIndexEntries.push({
+    description: normalizeSummary(description),
+    docFile: `${packageName}.md`,
+    exportPath,
+    name: toDisplayName(packageName),
+    packageName,
+    tagName,
+  });
+};
+
+const buildDocsIndex = () => {
+  const rows = docsIndexEntries
+    .sort((a, b) => a.packageName.localeCompare(b.packageName))
+    .map((entry) => {
+      const api = entry.tagName ? `\`<${entry.tagName}>\`` : `\`${entry.exportPath}\``;
+      const docs = `[${entry.docFile}](./${entry.packageName}/${entry.docFile})`;
+      return `| ${escapeTableCell(entry.name)} | ${api} | \`${entry.packageName}\` | ${escapeTableCell(entry.description)} | ${docs} |`;
+    })
+    .join('\n');
+
+  let index = '# Warp Elements Component Documentation\n\n';
+  index +=
+    'Generated by `pnpm build:docs`. This file indexes the Markdown documentation shipped with `@warp-ds/elements`.\n\n';
+  index += '- Package export: `@warp-ds/elements/docs`\n';
+  index += '- Component docs export pattern: `@warp-ds/elements/docs/<component>/<component>.md`\n\n';
+  index += '## Components\n\n';
+  index += '| Component | Element / API | Package | Summary | Docs |\n';
+  index += '|-|-|-|-|-|\n';
+  index += `${rows}\n`;
+
+  writeFileSync(new URL('./index.md', DOCS_OUTPUT_DIR), index, { encoding: 'utf8' });
+};
 
 manifest.modules.forEach((module) => {
   module.declarations?.forEach((declaration) => {
@@ -198,7 +311,7 @@ manifest.modules.forEach((module) => {
 });
 
 components.forEach(({ declaration, packageName }) => {
-  const docsDir = new URL(`../dist/docs/${packageName}/`, import.meta.url);
+  const docsDir = new URL(`./${packageName}/`, DOCS_OUTPUT_DIR);
   const docsDirPath = docsDir.pathname;
 
   if (!existsSync(docsDirPath)) {
@@ -216,27 +329,45 @@ components.forEach(({ declaration, packageName }) => {
     }
   }
   try {
-    copyFileSync(new URL(`../packages/${packageName}/docs/accessibility.md`, import.meta.url), new URL('./accessibility.md', docsDir));
-
+    copyFileSync(
+      new URL(`../packages/${packageName}/docs/accessibility.md`, import.meta.url),
+      new URL('./accessibility.md', docsDir),
+    );
   } catch (error) {
     if (!hasParent) {
       console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
     }
   }
   try {
-    copyFileSync(new URL(`../packages/${packageName}/docs/examples.md`, import.meta.url), new URL('./examples.md', docsDir));
+    copyFileSync(
+      new URL(`../packages/${packageName}/docs/examples.md`, import.meta.url),
+      new URL('./examples.md', docsDir),
+    );
   } catch (error) {
     if (!hasParent) {
       console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, and examples.md exist in the ${packageName}/docs directory.`);
     }
   }
 
+  try {
+    copyFileSync(new URL(`../packages/${packageName}/docs/styling.md`, import.meta.url), new URL('./styling.md', docsDir));
+  } catch (error) {
+    if (!hasParent) {
+      // We assume the parent's docs cover usage, a11y, styling and examples
+      console.warn(`Warning: Could not copy some documentation files for ${packageName}. Please ensure that usage.md, accessibility.md, styling.md, and examples.md exist in the ${packageName}/docs directory.`);
+    }
+  }
+
   const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
   const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
   const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const stylingContent = readOptionalFile(new URL('./styling.md', docsDir));
 
   const componentName = declaration.name.replace(COMPONENT_CLASS_PREFIX, '');
-  const description = normalizeText(declaration.description, 'No description available.');
+  const description = normalizeDescription(
+    declaration.description,
+    getDescriptionFallback({ declaration, packageName, usageContent }),
+  );
 
   const typesMap = buildTypesMap([...declaration.members, ...(declaration.events || [])]);
   const propertyTable = buildPropertyTable(declaration.members, typesMap);
@@ -275,17 +406,28 @@ components.forEach(({ declaration, packageName }) => {
   if (examplesContent) {
     generatedDocument += `${examplesContent}\n\n`;
   }
+  
+  if (stylingContent) {
+    generatedDocument += `${stylingContent}\n\n`;
+  }
 
   generatedDocument += apiDocs;
 
   writeFileSync(new URL('./api.md', docsDir), apiDocs, { encoding: 'utf8' });
   writeFileSync(new URL(`./${packageName}.md`, docsDir), generatedDocument, { encoding: 'utf8' });
+
+  addDocsIndexEntry({
+    description,
+    exportPath: `@warp-ds/elements/components/${packageName}`,
+    packageName,
+    tagName: declaration.tagName,
+  });
 });
 
 // toast gets some custom treatment what with its JS-only API,
 // custom element manifest isn't available
 (function buildToastDocs() {
-  const docsDir = new URL('../dist/docs/toast/', import.meta.url);
+  const docsDir = new URL('./toast/', DOCS_OUTPUT_DIR);
   const docsDirPath = docsDir.pathname;
   if (!existsSync(docsDirPath)) {
     mkdirSync(docsDirPath, { recursive: true });
@@ -310,6 +452,14 @@ components.forEach(({ declaration, packageName }) => {
   generatedDocument += `${apiContent}\n\n`;
 
   writeFileSync(new URL('./toast.md', docsDir), generatedDocument, { encoding: 'utf8' });
+
+  addDocsIndexEntry({
+    description: 'Toasts are brief user feedback messages that overlay content.',
+    exportPath: '@warp-ds/elements/toast',
+    packageName: 'toast',
+  });
 })();
 
-console.log(`Generated docs for ${components.length} components.`);
+buildDocsIndex();
+
+console.log(`Generated docs for ${components.length} components and ${docsIndexEntries.length} index entries.`);

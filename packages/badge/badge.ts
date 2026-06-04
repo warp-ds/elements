@@ -20,7 +20,7 @@ class WarpBadge extends LitElement {
    * Accepted values are `neutral`, `info`, `positive`, `warning`, `negative`, `disabled`, `price`, and `sponsored`. If omitted, the badge uses neutral styling without reflecting a `variant` attribute.
    */
   @property({ type: String, reflect: true })
-  variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored';
+  variant: 'neutral' | 'info' | 'positive' | 'warning' | 'negative' | 'disabled' | 'price' | 'sponsored' | undefined;
 
   /**
    * Positions the badge in a corner of a parent element.
@@ -28,7 +28,7 @@ class WarpBadge extends LitElement {
    * Use this with a parent element that has `position: relative`. Accepted values are `top-left`, `top-right`, `bottom-right`, and `bottom-left`.
    */
   @property({ type: String, reflect: true })
-  position: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
+  position: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left' | undefined;
 
   static styles = [reset, styles];
 

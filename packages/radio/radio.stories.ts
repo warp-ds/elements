@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
 import { html } from 'lit';
 import { prespread } from '../../.storybook/utilities.js';
-import type { WRadioGroup } from '../radio-group/radio-group.js';
+import type { WarpRadioGroup } from '../radio-group/radio-group.js';
 
 import './radio.js';
 import '../radio-group/radio-group.js';
 
-const { args } = getStorybookHelpers<WRadioGroup>('w-radio-group');
+const { args } = getStorybookHelpers<WarpRadioGroup>('w-radio-group');
 
 const meta: Meta<typeof args> = {
   title: 'Forms/Radio',

@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react';
 import { LitElement } from 'lit';
 import React from 'react';
 
-import { ModalFooter as WarpModalFooter } from './modal-footer.js';
+import { WarpModalFooter } from './modal-footer.js';
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

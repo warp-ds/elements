@@ -82,59 +82,57 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   static styles = [reset, wDatepickerStyles, wDatepickerCalendarStyles, wDatepickerDayStyles, wDatepickerMonthStyles];
 
   /**
-   * @summary
-   * @description
+   * The label displayed above the date input.
+   *
+   * Use this to give the datepicker a visible and accessible name.
    */
   @property({ reflect: true })
-  label: string;
-
-  /** Takes precedence over the `<html>` lang attribute.
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  lang: string;
+  label: string | undefined;
 
   /**
-   * @summary
-   * @description
+   * The locale used for calendar labels and date formatting.
+   *
+   * This takes precedence over the `<html>` `lang` attribute. Supported built-in locales are `en`, `nb`, `sv`, `da`, and `fi`.
    */
   @property({ reflect: true })
-  name: string;
+  lang!: string;
 
   /**
-   * @summary
-   * @description
+   * The name submitted with the date value.
+   *
+   * Use this when the datepicker belongs to a form and its value should be included in form data.
    */
   @property({ reflect: true })
-  value: string;
+  name: string | undefined;
 
   /**
-   * Decides the format of the date as shown in the calendar header.
+   * The selected date value.
+   *
+   * Use an ISO date string in `YYYY-MM-DD` format. The value is submitted with the form and is reset to its initial value when the form resets.
+   */
+  @property({ reflect: true })
+  value: string | undefined;
+
+  /**
+   * The date format used in the calendar header.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'header-format' })
   headerFormat = 'MMMM yyyy';
 
   /**
-   * Decides the format of the weekday as shown above the grid of dates in the calendar.
+   * The weekday format shown above the calendar grid.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'weekday-format' })
   weekdayFormat = 'EEEEEE';
 
   /**
-   * Lets you control if a date in the calendar should be disabled.
+   * Function used to disable dates in the calendar.
    *
-   * This needs to be set on the element instance in JavaScript, not as an HTML attribute.
+   * Set this on the element instance in JavaScript, not as an HTML attribute. Disabled dates cannot be selected from the calendar.
    *
    * @example
    * ```ts
@@ -145,21 +143,15 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * const datePicker = document.querySelector('w-datepicker') as WarpDatepicker;
    * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
    * ```
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: false })
-  isDayDisabled: (day: Date) => boolean;
+  isDayDisabled: ((day: Date) => boolean) | undefined;
 
   /**
-   * Decides the format of the day in the calendar as read to screen readers.
+   * The date format used for calendar day accessible names.
    *
    * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'day-format' })
   dayFormat = 'PPPP';
 
@@ -175,6 +167,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   @state()
   get selectedDate(): Date | null {
+    if (!this.value) return null;
     return fromISOToDate(this.value) ?? null;
   }
 
@@ -184,7 +177,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
 
   @state()
   get weeks() {
@@ -218,16 +211,16 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   }
 
   @query(`#${calendarId}`)
-  calendar: HTMLDivElement;
+  calendar!: HTMLDivElement;
 
   @query(`#${inputId}`, true)
-  input: HTMLInputElement;
+  input!: HTMLInputElement;
 
   @query(`#${toggleButtonId}`, true)
-  toggleButton: HTMLButtonElement;
+  toggleButton!: HTMLButtonElement;
 
   @query(`#${wrapperId}`, true)
-  wrapper: HTMLDivElement;
+  wrapper!: HTMLDivElement;
 
   /**
    * This is the first focusable element, needed for the modal focus trap.
@@ -237,13 +230,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * the query will point to an element that doesn't exist anymore.
    */
   @query(`#${previousMonthButtonId}`)
-  previousMonthButton: HTMLButtonElement;
+  previousMonthButton!: HTMLButtonElement;
 
   @query('[aria-current="date"]')
-  todayCell: HTMLTableCellElement;
+  todayCell!: HTMLTableCellElement;
 
   @query('[data-navigation="true"]')
-  selectedCell: HTMLTableCellElement;
+  selectedCell!: HTMLTableCellElement;
 
   resetFormControl(): void {
     this.value = this.#initialValue;
@@ -284,7 +277,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
    * of WarpDatepicker to control the calendar.
    * @internal
    */
-  private _onClickOutside(e: MouseEvent | FocusEvent) {
+  private _onClickOutside(e: MouseEvent | FocusEvent | TouchEvent) {
     if (!this.isCalendarOpen) {
       return;
     }
@@ -319,7 +312,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
   async #onCalendarKeyDown(e: KeyboardEvent) {
     const navigationDate = this.navigationDate;
-    let newNavigationDate: Date;
+    let newNavigationDate: Date | null = null;
 
     switch (e.key) {
       case 'ArrowUp':
@@ -389,14 +382,14 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
         this.value = isoDate;
-        this.shadowRoot.querySelector('input').value = this.value;
+        this.shadowRoot!.querySelector('input')!.value = this.value!;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
       this.value = isoDate;
-      this.shadowRoot.querySelector('input').value = this.value;
+      this.shadowRoot!.querySelector('input')!.value = this.value!;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
@@ -422,7 +415,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
     // Local lang attribute takes precedence
     const lang = this.lang;
+    // @ts-ignore
     if (lang && datefnsLocale[lang]) {
+      // @ts-ignore
       this.locale = datefnsLocale[lang];
     }
 
@@ -449,7 +444,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   updated(changedProperties: Map<string, unknown>): void {
     if (changedProperties.has('value')) {
       // https://www.npmjs.com/package/@open-wc/form-control#setvalue
-      this.setValue(this.value);
+      this.setValue(this.value!);
     }
   }
 
@@ -562,7 +557,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
                         }
 
                         const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
-                        const isSelected = isSameDay(day, this.selectedDate);
+                        const isSelected = Boolean(this.selectedDate) && isSameDay(day, this.selectedDate!);
                         const isNavigationDate = day === this.navigationDate;
 
                         return html`<td

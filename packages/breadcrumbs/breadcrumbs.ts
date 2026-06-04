@@ -54,8 +54,7 @@ class WarpBreadcrumbs extends LitElement {
     });
   }
 
-  /** @internal */
-  _children: Array<Element | TemplateResult>;
+  private _children: Array<Element | TemplateResult> = [];
 
   connectedCallback() {
     super.connectedCallback();

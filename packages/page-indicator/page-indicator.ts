@@ -18,32 +18,23 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 /**
  * A page indicator component that displays a series of dots representing pages.
+ * 
  * One dot is highlighted to indicate the currently selected page.
- *
- * @example
- * ```html
- * <w-page-indicator page-count="5" selected-page="2"></w-page-indicator>
- * ```
- *
- * @property {number} pageCount - Total number of pages (minimum 1)
- * @property {number} selectedPage - Currently selected page (1-based index, clamped to valid range)
  */
 class WarpPageIndicator extends LitElement {
   static styles = [styles];
 
-  /** Currently selected page (1-based index)
-   * @summary
-   * @description
+  /** 
+   * Currently selected page (1-based index)
    */
-  @property({ type: Number, attribute: 'selected-page', reflect: true })
-  selectedPage: number;
+  @property({ type: Number, attribute: 'selected-page', reflect: true, useDefault: true })
+  selectedPage = 1;
 
-  /** Total number of pages
-   * @summary
-   * @description
+  /**
+   * Total number of pages
    */
-  @property({ type: Number, attribute: 'page-count', reflect: true })
-  pageCount: number;
+  @property({ type: Number, attribute: 'page-count', reflect: true, useDefault: true })
+  pageCount = 1;
 
   /** Validated page count (minimum 1) */
   private get _validPageCount(): number {

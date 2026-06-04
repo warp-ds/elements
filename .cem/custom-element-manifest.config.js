@@ -1,8 +1,90 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { cemValidatorPlugin } from '@wc-toolkit/cem-validator';
 import { jsDocTagsPlugin } from '@wc-toolkit/jsdoc-tags';
 import { jsxTypesPlugin } from '@wc-toolkit/jsx-types';
 import { getTsProgram, typeParserPlugin } from '@wc-toolkit/type-parser';
 
+const jsxTypesPath = fileURLToPath(new URL('../dist/index.d.ts', import.meta.url));
+
+function reactJsxIntrinsicPropsPlugin() {
+  return {
+    name: 'react-jsx-intrinsic-props',
+    packageLinkPhase() {
+      const source = readFileSync(jsxTypesPath, 'utf8');
+      const customElementsStart = source.indexOf('export type CustomElements = {');
+      const solidElementsStart = source.indexOf('export type CustomElementsSolidJs = {');
+
+      if (customElementsStart === -1 || solidElementsStart === -1) {
+        throw new Error('Unable to find generated CustomElements types in dist/index.d.ts');
+      }
+
+      const customElementsBlock = source.slice(customElementsStart, solidElementsStart);
+      const customElementPattern =
+        /"([^"]+)":\s*Partial<\s*([A-Za-z_$][\w$]*Props)\s*&\s*BaseProps<([^>]+)>\s*&\s*BaseEvents\s*>;/g;
+      const customElements = Array.from(
+        customElementsBlock.matchAll(customElementPattern),
+        ([, tagName, propsType, elementType]) => ({ tagName, propsType, elementType }),
+      );
+
+      if (customElements.length === 0) {
+        throw new Error('Unable to derive custom element types from dist/index.d.ts');
+      }
+
+      // Keep the generated CustomElements/Solid types intact and add a React-only
+      // intrinsic map where React props and component props are merged by precedence.
+      const reactCustomElementsTypes = `type ReactElementProps<T extends HTMLElement> = import("react").DOMAttributes<T> &
+  import("react").AriaAttributes &
+  import("react").RefAttributes<T> &
+  Pick<
+    import("react").HTMLAttributes<T>,
+    | "className"
+    | "style"
+    | "suppressContentEditableWarning"
+    | "suppressHydrationWarning"
+  >;
+
+// Merge order matters: component props must win over React/global/base props
+// when names collide, e.g. w-attention's boolean popover prop.
+type ReactCustomElementProps<T extends HTMLElement, Props> = Omit<
+  BaseProps<T> & BaseEvents,
+  keyof ReactElementProps<T> | keyof Props
+> &
+  Omit<ReactElementProps<T>, keyof Props> &
+  Props;
+
+type CustomElementInstances = {
+${customElements.map(({ tagName, elementType }) => `  "${tagName}": ${elementType};`).join('\n')}
+};
+
+type CustomElementComponentProps = {
+${customElements.map(({ tagName, propsType }) => `  "${tagName}": ${propsType};`).join('\n')}
+};
+
+export type ReactCustomElements = {
+  [Tag in keyof CustomElementComponentProps]: Tag extends keyof CustomElementInstances
+    ? Partial<ReactCustomElementProps<CustomElementInstances[Tag], CustomElementComponentProps[Tag]>>
+    : never;
+};
+
+`;
+
+      const withReactTypes = `${source.slice(0, solidElementsStart)}${reactCustomElementsTypes}${source.slice(
+        solidElementsStart,
+      )}`;
+      const updatedSource = withReactTypes.replace(
+        /(declare module ["']react["']\s*\{\s*namespace JSX\s*\{\s*interface IntrinsicElements extends )CustomElements(\s*\{\})/,
+        '$1ReactCustomElements$2',
+      );
+
+      if (!updatedSource.includes('interface IntrinsicElements extends ReactCustomElements')) {
+        throw new Error('Unable to update React JSX IntrinsicElements in dist/index.d.ts');
+      }
+
+      writeFileSync(jsxTypesPath, updatedSource);
+    },
+  };
+}
 
 export default {
   overrideModuleCreation: ({ ts, globs }) => {
@@ -87,6 +169,9 @@ export default {
     jsxTypesPlugin({
       outdir: 'dist/',
       fileName: 'index.d.ts',
+      stronglyTypedEvents: true,
+      includeDefaultDOMEvents: true,
+      allowUnknownProps: false,
       /* @wc-toolkit/jsx-types uses the paths recorded in your Custom Elements Manifest to build the imports for JSX type generation.
     Specifically:
       •	It reads modulePath or declaration.module values from the CEM.
@@ -97,6 +182,7 @@ export default {
         return modulePath.replace('packages', './packages');
       },
     }),
+    reactJsxIntrinsicPropsPlugin(),
     cemValidatorPlugin({
       rules: {
         manifest: {
@@ -107,8 +193,8 @@ export default {
           modulePath: 'off',
           definitionPath: 'off',
           typeDefinitionPath: 'off',
-        }
-      }
+        },
+      },
     }),
   ],
 };

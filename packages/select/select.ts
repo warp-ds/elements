@@ -42,124 +42,103 @@ const ccSelect = {
 
 /**
  * A dropdown component for selecting a single value.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-select--docs)
  */
 export class WarpSelect extends FormControlMixin(LitElement) {
   /**
    * Whether the element should receive focus on render.
+   * 
    * @deprecated Use the native `autofocus` attribute instead.
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'auto-focus', type: Boolean, reflect: true })
   autoFocus = false;
 
-  /** Whether the element should receive focus on render
-   * @summary
-   * @description
+  /** 
+   * Whether the element should receive focus on render
    */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
 
   /**
-   * The content displayed as the help text. Paired with `invalid` to show the text as a validation error.
-   
-   * @summary
-   * @description
+   * The content displayed as the help text.
+   * 
+   * Paired with `invalid` to show the text as a validation error.
   */
   @property({ attribute: 'help-text', reflect: true })
-  helpText: string;
+  helpText: string | undefined;
 
-  /** Renders the field in an invalid state. Paired with `help-text` to provide feedback about the error.
-   * @summary
-   * @description
+  /** 
+   * Renders the field in an invalid state.
+   * 
+   * Paired with `help-text` to provide feedback about the error.
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
 
   /**
    * Whether to always show a hint.
+   * 
    * @deprecated Use `help-text` instead and only set it if you want to display the help text.
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ type: Boolean, reflect: true })
   always = false;
 
   /**
    * The content displayed as the help text.
+   * 
    * @deprecated Use `help-text` instead.
-   
-   * @summary
-   * @description
-  */
-  @property({ reflect: true })
-  hint: string;
-
-  /** The content to disply as the label
-   * @summary
-   * @description
    */
   @property({ reflect: true })
-  label: string;
+  hint: string | undefined;
 
-  /** Whether to show optional text
-   * @summary
-   * @description
+  /** 
+   * The content to display as the label.
+   */
+  @property({ reflect: true })
+  label: string | undefined;
+
+  /** 
+   * Whether to show the optional indicator after the label.
    */
   @property({ type: Boolean, reflect: true })
   optional = false;
 
-  /** Renders the field in a disabled state.
-   * @summary
-   * @description
+  /** 
+   * Renders the field in a disabled state.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
   /**
    * Renders the field in a readonly state.
+   * 
    * @deprecated Use the native readonly attribute instead.
-   
-   * @summary
-   * @description
-  */
+   */
   @property({ attribute: 'read-only', type: Boolean, reflect: true })
   readOnly = false;
 
-  /** Renders the field in a readonly state.
-   * @summary
-   * @description
+  /**
+   * Renders the field in a readonly state.
    */
   @property({ type: Boolean, reflect: true })
   readonly = false;
 
-  /** @internal
-   * @summary
-   * @description
-   */
   @property({ attribute: false, state: true })
-  _options: Array<TemplateResult>;
+  private _options: Array<TemplateResult> = [];
 
   /**
-   * @summary
-   * @description
+   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the select when submitting the form.
    */
   @property({ reflect: true })
-  name: string;
+  name: string | undefined;
 
   /**
-   * @summary
-   * @description
+   * Lets you set the current value.
    */
   @property({ reflect: true })
-  value: string;
+  value: string | undefined;
 
   // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+  #initialValue: string | undefined = undefined;
   #onPageShow = () => this.#syncFromNativeSelect();
   #lightDomObserver?: MutationObserver;
 
@@ -183,6 +162,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
   }
 
+  /**  @internal */
   resetFormControl(): void {
     this.value = this.#initialValue;
   }
@@ -269,7 +249,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this.#initialValue = this.value;
 
     // autofocus doesn't seem to behave properly in Safari and FireFox, therefore we set the focus here:
-    if (this.autofocus || this.autoFocus) this.shadowRoot.querySelector('select').focus();
+    if (this.autofocus || this.autoFocus) this.shadowRoot!.querySelector('select')!.focus();
 
     this.#syncShadowOptionsFromLightDom({ syncValueFromSelected: true });
     this.ownerDocument?.defaultView?.addEventListener('pageshow', this.#onPageShow);
@@ -304,6 +284,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     this.#syncFromNativeSelect({ allowDefaultFirstOption: false });
   }
 
+  /**  @internal */
   formStateRestoreCallback(state: string | File | FormData | null, _reason: 'autocomplete' | 'restore') {
     if (typeof state === 'string' && state) {
       this._setValue(state);
@@ -316,7 +297,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
   willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('value')) {
-      this.setValue(this.value);
+      this.setValue(this.value!);
     }
   }
 
@@ -330,6 +311,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     }
   }
 
+  /**  @internal */
   handleKeyDown(event: KeyboardEvent) {
     if (
       (this.readonly || this.readOnly) &&
@@ -369,7 +351,8 @@ export class WarpSelect extends FormControlMixin(LitElement) {
     return this.helpText || this.hint ? `${this.#id}__hint` : undefined;
   }
 
-  // // Fire a custom 'change' event, used when the dropdown changes state.
+  // Fire a custom 'change' event, used when the dropdown changes state.
+  /**  @internal */
   onChange(event: Event) {
     const target = event.currentTarget as HTMLSelectElement;
     const nextValue = target.value;
