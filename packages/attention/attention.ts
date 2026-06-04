@@ -575,6 +575,12 @@ class WarpAttention extends LitElement {
   }
 }
 
+declare global {
+  interface HTMLElementTagNameMap {
+    'w-attention': WarpAttention;
+  }
+}
+
 if (!customElements.get('w-attention')) {
   // @ts-expect-error Overriding native HTML popover global attribute
   customElements.define('w-attention', WarpAttention);
