@@ -100,4 +100,13 @@ export const styles = css`
         grid-area: block-action;
 
     }
+
+    w-attention [slot='message'] {
+        font-size: var(--w-font-size-s);
+        line-height: var(--w-line-height-s);
+    }
+
+    kbd {
+        font-family: var(--w-font-family);
+    }
 `;

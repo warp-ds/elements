@@ -4,9 +4,14 @@ import { html } from 'lit';
 // @ts-expect-error You'll find no types here, TypeScript the Grey
 import 'virtual:uno.css';
 
+import type { WarpModal } from '../modal/modal.js';
 import type { WarpSnackbar } from './snackbar.js';
+import '../attention/attention.js';
 import '../button/button.js';
 import '../icon/icon.js';
+import '../modal/modal.js';
+import '../modal-header/modal-header.js';
+import '../modal-footer/modal-footer.js';
 import './snackbar.js';
 import '../snackbar-item/snackbar-item.js';
 import { SnackbarDuration } from '../snackbar-item/snackbar-item.js';
@@ -56,28 +61,28 @@ export const Default: Story = {
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically', { variant: 'positive', duration: durationNum, canClose });
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create('The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically', { variant: 'positive', duration: durationNum, canClose });
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'warning', duration: durationNum, canClose });
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create('The message should be short', { variant: 'warning', duration: durationNum, canClose });
           }}">Warning variant</w-button>
 
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'negative', duration: durationNum, canClose });
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create('The message should be short', { variant: 'negative', duration: durationNum, canClose });
           }}">Negative variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { variant: 'info', duration: durationNum, canClose });
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create('The message should be short', { variant: 'info', duration: durationNum, canClose });
           }}">Info variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create('The message should be short', { duration: durationNum, canClose });
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create('The message should be short', { duration: durationNum, canClose });
           }}">Neutral variant</w-button>
         </div>
     `;
@@ -95,8 +100,8 @@ export const WithAction: Story = {
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically',
                 {
                   variant: 'positive',
@@ -105,7 +110,8 @@ export const WithAction: Story = {
                   action: {
                     label: 'Action',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -113,8 +119,8 @@ export const WithAction: Story = {
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'warning',
@@ -123,7 +129,8 @@ export const WithAction: Story = {
                   action: {
                     label: 'Action',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -131,8 +138,8 @@ export const WithAction: Story = {
           }}">Warning variant</w-button>
 
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'negative',
@@ -141,7 +148,8 @@ export const WithAction: Story = {
                   action: {
                     label: 'Action',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -149,8 +157,8 @@ export const WithAction: Story = {
           }}">Negative variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'info',
@@ -159,7 +167,8 @@ export const WithAction: Story = {
                   action: {
                     label: 'Action',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -167,8 +176,8 @@ export const WithAction: Story = {
           }}">Info variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   duration: durationNum,
@@ -176,7 +185,8 @@ export const WithAction: Story = {
                   action: {
                     label: 'Action',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -184,7 +194,17 @@ export const WithAction: Story = {
           }}">Neutral variant</w-button>
         </div>
 
-        <w-snackbar></w-snackbar>
+        <w-modal id="with-action-modal">
+          <w-modal-header slot="header" no-close></w-modal-header>
+          <div slot="content">
+            <p>Action was triggered</p>
+          </div>
+          <w-modal-footer slot="footer">
+            <div class="flex gap-16">
+              <w-button variant="primary" commandfor="with-action-modal" command="--close">Close</w-button>
+            </div>
+          </w-modal-footer>
+        </w-modal>
     `;
   },
 };
@@ -200,8 +220,8 @@ export const WithLongActionLabel: Story = {
     return html`
         <div class="flex gap-8">
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically',
                 {
                   variant: 'positive',
@@ -210,7 +230,8 @@ export const WithLongActionLabel: Story = {
                   action: {
                     label: 'Long action label',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-long-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -218,8 +239,8 @@ export const WithLongActionLabel: Story = {
           }}">Positive variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'warning',
@@ -228,7 +249,8 @@ export const WithLongActionLabel: Story = {
                   action: {
                     label: 'Long action label',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-long-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -236,8 +258,8 @@ export const WithLongActionLabel: Story = {
           }}">Warning variant</w-button>
 
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'negative',
@@ -246,7 +268,8 @@ export const WithLongActionLabel: Story = {
                   action: {
                     label: 'Long action label',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-long-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -254,8 +277,8 @@ export const WithLongActionLabel: Story = {
           }}">Negative variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   variant: 'info',
@@ -264,7 +287,8 @@ export const WithLongActionLabel: Story = {
                   action: {
                     label: 'Long action label',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-long-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -272,8 +296,8 @@ export const WithLongActionLabel: Story = {
           }}">Info variant</w-button>
           
           <w-button @click="${() => {
-              const snackbar: WarpSnackbar = document.querySelector('w-snackbar') as WarpSnackbar;
-              snackbar.create(
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              snackbar!.create(
                 'The message should be short',
                 {
                   duration: durationNum,
@@ -281,7 +305,8 @@ export const WithLongActionLabel: Story = {
                   action: {
                     label: 'Long action label',
                     onclick() {
-                      alert('Do action');
+                      const modal = document.getElementById('with-long-action-modal') as WarpModal;
+                      modal.show = true;
                     },
                   }
                 }
@@ -289,7 +314,17 @@ export const WithLongActionLabel: Story = {
           }}">Neutral variant</w-button>
         </div>
 
-        <w-snackbar></w-snackbar>
+        <w-modal id="with-long-action-modal">
+          <w-modal-header slot="header" no-close></w-modal-header>
+          <div slot="content">
+            <p>Action was triggered</p>
+          </div>
+          <w-modal-footer slot="footer">
+            <div class="flex gap-16">
+              <w-button variant="primary" commandfor="with-long-action-modal" command="--close">Close</w-button>
+            </div>
+          </w-modal-footer>
+        </w-modal>
     `;
   },
 };

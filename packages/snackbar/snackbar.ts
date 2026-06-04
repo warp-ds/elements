@@ -1,6 +1,7 @@
 import { i18n } from '@lingui/core';
 import { html, LitElement } from 'lit';
 
+import type { WarpButton } from '../button/button.js';
 import { SnackbarDuration, type WarpSnackbarItem, type SnackbarVariant, type SnackbarActionPlacement } from '../snackbar-item/snackbar-item.js';
 import { activateI18n } from '../i18n.js';
 import { messages as daMessages } from './locales/da/messages.mjs';
@@ -161,6 +162,18 @@ export class WarpSnackbar extends LitElement {
             if (snackbarItem) {
                 snackbarItem.close();
             }
+        } else if (e.altKey && e.key === 'Enter') {
+            e.preventDefault();
+            const snackbarItem = this.shadowRoot?.host.querySelector<WarpSnackbarItem>('w-snackbar-item:last-of-type');
+            console.log('Found item!');
+            if (snackbarItem) {
+                const snackbarAction = snackbarItem.querySelector<WarpButton>('w-button[slot="action"]');
+                console.log('Found action!');
+                if (snackbarAction) {
+                    snackbarAction.click();
+                    console.log('Clicked!');
+                }
+            }
         }
     }
 
@@ -225,7 +238,15 @@ export class WarpSnackbar extends LitElement {
             actionButton.small = true;
             
             const { label, onclick, placement } = mergedOptions.action;
+
             actionButton.innerText = label;
+
+            const keyboardShortcut = document.createElement('span');
+            keyboardShortcut.classList.add('sr-only');
+            const modifier = window.navigator.userAgent.includes('Macintosh') ? 'Option' : 'Alt';
+            keyboardShortcut.innerHTML = `<kbd>${modifier}</kbd> + <kbd>Enter</kbd>`;
+            actionButton.append(keyboardShortcut);
+
             actionButton.onclick = (e) => {
                 const result = onclick.call(actionButton, e);
                 if (!e.defaultPrevented) {
@@ -253,7 +274,7 @@ export class WarpSnackbar extends LitElement {
 
         if (mergedOptions.canClose) {
             const closeButton = document.createElement('w-button');
-            closeButton.slot = 'action';
+            closeButton.slot = 'close';
             closeButton.variant = 'utilityQuiet';
             closeButton.small = true;
             closeButton.iconOnly = true;

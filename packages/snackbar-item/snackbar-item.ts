@@ -1,5 +1,5 @@
-import { html, LitElement } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { html, LitElement, PropertyValues } from 'lit';
+import { property, query, state } from 'lit/decorators.js';
 
 import { collapse, expand } from '../utils/element-collapse.js';
 import { reset } from '../styles.js';
@@ -63,6 +63,9 @@ export class WarpSnackbarItem extends LitElement {
 
     @query('.animation-wrapper')
     private root!: HTMLDivElement | null;
+
+    @state()
+    private hasAction = false;
 
     #expanded = false;
 
@@ -182,7 +185,54 @@ export class WarpSnackbarItem extends LitElement {
         }
     }
 
+    #hasAction() {
+        const actionSlot = this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name="action"]');
+        if (!actionSlot) return false;
+        const assignedElements = actionSlot.assignedElements();
+        return assignedElements.length > 0;
+    }
+
+    protected firstUpdated() {
+        // The slot must render before we can check its contents, hence the run on firstUpdated
+        this.hasAction = this.#hasAction(); 
+    }
+
     render() {
+        if (this.hasAction && document.documentElement.dataset['keyboardinteraction'] === 'true') {
+            const modifier = window.navigator.userAgent.includes('Macintosh') ? '⌥' : 'Alt';
+            return html`
+                <w-attention
+                    tooltip
+                    placement="top"
+                    distance="12"
+                    show
+                >
+                    <div class="animation-wrapper" slot="target">
+                        <div part="item"
+                            @mouseenter=${this.#onMouseEnter}
+                            @mouseleave=${this.#onMouseLeave}
+                            @focusin=${this.#onFocusIn}
+                            @focusout=${this.#onFocusOut}
+                        >
+                            <div part="icon">
+                                <slot name="icon"></slot>
+                            </div>
+                            <div part="message">
+                                <slot></slot>
+                            </div>
+                            <div part="action">
+                                <slot name="action"></slot>
+                                <slot name="close"></slot>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The keyboard shortcut is announced as part of the action button label -->
+                    <span slot="message" aria-hidden="true">
+                        <kbd>${modifier}</kbd> + <kbd>Enter</kbd>
+                    </span>
+                </w-attention>
+            `;
+        }
         return html`
             <div class="animation-wrapper">
                 <div part="item"
