@@ -155,9 +155,30 @@ document.querySelector('w-button[data-testid="info-noaction"]').onclick = () => 
 
 </elements-example>
 
+### Neutral with custom icon
+
+If you have cases not covered by the `create` API you can change the item returned by `create`.
+
+For example, here is how you can add a custom icon to the neutral variant.
+
+```ts
+const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+
+// the default neutral variant is without an icon
+const snackbarItem = snackbar!.create('The message should be short'); 
+
+const customIcon = document.createElement('w-icon');
+customIcon.name = 'Rocket';
+customIcon.size = 'small';
+customIcon.slot = 'icon';
+snackbarItem.prepend(customIcon);
+```
+
 ### Create `<w-snackbar-item>` manually
 
-If you have advanced cases not covered by the `create` API you can create a `<w-snackbar-item>` element manually and call [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend) on `<w-snackbar>`. The snackbar item handles its entire lifecycle on its own.
+Alternatively you can create a `w-snackbar-item` manually and call [prepend](https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend) on `<w-snackbar>`. The snackbar item handles its entire lifecycle on its own.
+
+Note that by not using `snackbar.create()` you have to create and wire up event handlers any close- and action button.
 
 ```ts
 const snackbar = document.querySelector("w-snackbar");

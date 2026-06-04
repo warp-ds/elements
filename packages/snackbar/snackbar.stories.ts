@@ -84,6 +84,18 @@ export const Default: Story = {
               const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
               snackbar!.create('The message should be short', { duration: durationNum, canClose });
           }}">Neutral variant</w-button>
+          
+          <w-button @click="${() => {
+              const snackbar = document.querySelector<WarpSnackbar>('w-snackbar');
+              const item = snackbar!.create('The message should be short', { duration: durationNum, canClose });
+              
+              const customIcon = document.createElement('w-icon');
+              customIcon.name = 'Rocket';
+              customIcon.size = 'small';
+              customIcon.slot = 'icon';
+              item.prepend(customIcon);
+
+          }}">Neutral w/ icon</w-button>
         </div>
     `;
   },
