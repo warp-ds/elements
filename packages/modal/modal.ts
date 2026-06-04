@@ -93,6 +93,7 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
         this.dialogEl.close();
         this._isClosing = false;
         teardownScrollLock();
+        this.show = false;
         await this.updateComplete;
         this.dispatchEvent(new CustomEvent('hidden', { bubbles: true, composed: true }));
       },
