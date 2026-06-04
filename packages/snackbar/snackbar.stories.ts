@@ -91,7 +91,6 @@ export const Default: Story = {
               
               const customIcon = document.createElement('w-icon');
               customIcon.name = 'Rocket';
-              customIcon.size = 'small';
               customIcon.slot = 'icon';
               item.prepend(customIcon);
 

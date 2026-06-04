@@ -169,7 +169,6 @@ const snackbarItem = snackbar!.create('The message should be short');
 
 const customIcon = document.createElement('w-icon');
 customIcon.name = 'Rocket';
-customIcon.size = 'small';
 customIcon.slot = 'icon';
 snackbarItem.prepend(customIcon);
 ```
