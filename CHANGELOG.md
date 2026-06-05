@@ -1,3 +1,10 @@
+# [2.10.0-next.14](https://github.com/warp-ds/elements/compare/v2.10.0-next.13...v2.10.0-next.14) (2026-06-05)
+
+
+### Bug Fixes
+
+* **datepicker:** use placeholder on safari instead of current date ([#668](https://github.com/warp-ds/elements/issues/668)) ([df7f43a](https://github.com/warp-ds/elements/commit/df7f43aba7f8cec73f3aeaadf91c876498c892a6))
+
 # [2.10.0-next.13](https://github.com/warp-ds/elements/compare/v2.10.0-next.12...v2.10.0-next.13) (2026-06-04)
 
 
