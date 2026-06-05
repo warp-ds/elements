@@ -43,11 +43,9 @@ import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
 import { wDatepickerCalendarStyles } from './styles/w-datepicker-calendar.styles.js';
 import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
 import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
-import { fromISOToDate } from './utils.js';
+import { fromISOToDate, getDateInputDisplayValue, getDateInputPlaceholder, getDateInputType } from './utils.js';
 
-const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-const isIOS = /iP(hone|od|ad)/.test(ua);
-const inputType = isIOS ? 'text' : 'date';
+const inputType = getDateInputType();
 
 const calendarId = 'calendar';
 const inputId = 'input';
@@ -238,6 +236,18 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
   @query('[data-navigation="true"]')
   selectedCell!: HTMLTableCellElement;
 
+  get #inputLocale() {
+    return this.lang || detectLocale() || 'en';
+  }
+
+  get #inputValue() {
+    if (inputType === 'text' && this.value) {
+      return getDateInputDisplayValue(this.value, this.#inputLocale);
+    }
+
+    return this.value || '';
+  }
+
   resetFormControl(): void {
     this.value = this.#initialValue;
   }
@@ -382,14 +392,14 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
         // Prevents whitespace from being added to the input field
         event.preventDefault();
         this.value = isoDate;
-        this.shadowRoot!.querySelector('input')!.value = this.value!;
+        this.input.value = this.#inputValue;
         this.isCalendarOpen = false;
         this.toggleButton.focus();
         this.#dispatchChangeEvent();
       }
     } else {
       this.value = isoDate;
-      this.shadowRoot!.querySelector('input')!.value = this.value!;
+      this.input.value = this.#inputValue;
       this.isCalendarOpen = false;
       this.#dispatchChangeEvent();
     }
@@ -457,7 +467,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
             id="${inputId}"
             type="${inputType}"
             name="${ifDefined(this.name)}"
-            value="${ifDefined(this.value)}"
+            placeholder="${ifDefined(inputType === 'text' ? getDateInputPlaceholder(this.#inputLocale) : undefined)}"
+            .value="${this.#inputValue}"
             class="w-datepicker-input"
             @click="${this.#onInputClick}"
             @input="${this.#onInput}"

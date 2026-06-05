@@ -1,6 +1,6 @@
-import { server, userEvent } from 'vitest/browser';
 import React, { useState } from 'react';
 import { expect, test, vi } from 'vitest';
+import { server, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
 
 import '../button/button.js';
@@ -111,6 +111,8 @@ test('allows for the controlled component pattern', async () => {
 
   await expect.element(page.getByLabelText('From date')).toHaveValue();
 
-  // Check that our controlled onChange handler got to set the value back on the element
-  expect(spy).toBeCalledWith((page.getByLabelText('From date').element() as HTMLInputElement).value);
+  // Controlled consumers should receive the ISO value, even when the visible input text is localized.
+  const selectedValue = spy.mock.calls.at(-1)?.[0];
+  expect(selectedValue).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  expect((document.querySelector('w-datepicker') as HTMLElement & { value: string }).value).toBe(selectedValue);
 });

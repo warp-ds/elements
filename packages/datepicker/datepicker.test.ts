@@ -1,6 +1,6 @@
-import { server, userEvent } from 'vitest/browser';
 import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
+import { server, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-lit';
 
 import '../button/button.js';
@@ -122,7 +122,6 @@ test('can reset datepicker by resetting surrounding form', async () => {
   expect(wDatepicker.value).toBe('2025-01-01');
 });
 
-
 test('submits the associated form when datepicker input field has focus and user presses Enter', async () => {
   const screen = render(html`
     <form>
@@ -136,7 +135,6 @@ test('submits the associated form when datepicker input field has focus and user
     </form>
   `);
 
-
   const onSubmit = vi.fn();
   const form = document.querySelector('form') as HTMLFormElement;
   form.addEventListener('submit', (event) => {
@@ -145,8 +143,7 @@ test('submits the associated form when datepicker input field has focus and user
   });
 
   await userEvent.click(screen.getByTestId('datepicker'));
-  await userEvent.keyboard('[Enter]')
+  await userEvent.keyboard('[Enter]');
 
   await vi.waitFor(() => expect(onSubmit).toHaveBeenCalled());
 });
-

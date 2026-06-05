@@ -30,3 +30,41 @@ export function fromISOToDate(isoString: string): Date | null {
 
   return new Date(timestamp);
 }
+
+export function getDateInputType(
+  userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : '',
+): 'date' | 'text' {
+  const isIOS = /iP(hone|od|ad)/.test(userAgent);
+  const isSafari = /Safari/.test(userAgent) && !/(Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android)/.test(userAgent);
+
+  return isIOS || isSafari ? 'text' : 'date';
+}
+
+export function getDateInputPlaceholder(locale: string): string {
+  const placeholderLocale = locale === 'en' ? 'en-GB' : locale;
+  const parts = new Intl.DateTimeFormat(placeholderLocale, {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).formatToParts(new Date(Date.UTC(2006, 0, 2)));
+
+  return parts
+    .map((part) => {
+      if (part.type === 'day') return 'dd';
+      if (part.type === 'month') return 'mm';
+      if (part.type === 'year') return 'yyyy';
+      return part.value;
+    })
+    .join('');
+}
+
+export function getDateInputDisplayValue(value: string, locale: string): string {
+  const match = dateOnlyRe.exec(value);
+  if (!match) {
+    return value;
+  }
+
+  const [year, month, day] = value.split('-');
+  return getDateInputPlaceholder(locale).replace('yyyy', year).replace('mm', month).replace('dd', day);
+}
