@@ -1,3 +1,10 @@
+# [2.10.0-next.15](https://github.com/warp-ds/elements/compare/v2.10.0-next.14...v2.10.0-next.15) (2026-06-08)
+
+
+### Features
+
+* **snackbar:** add the snackbar component for Elements ([#665](https://github.com/warp-ds/elements/issues/665)) ([7a43bfe](https://github.com/warp-ds/elements/commit/7a43bfe7f988c503c7723e07db9f6d974ec1baa3))
+
 # [2.10.0-next.14](https://github.com/warp-ds/elements/compare/v2.10.0-next.13...v2.10.0-next.14) (2026-06-05)
 
 
