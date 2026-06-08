@@ -401,6 +401,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
             : nothing
         }
         <textarea
+          part="input"
           id="${this._id}"
           class="${this._textareaStyles}"
           name="${ifDefined(this.name)}"

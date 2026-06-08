@@ -43,6 +43,19 @@ Customize the help text appearance:
 --w-c-input-help-text-color-invalid: var(--w-s-color-text-negative);
 ```
 
+## Parts
+
+For advanced styling needs beyond tokens, you can target internal elements using CSS parts:
+
+- `::part(input)` - The native `<textarea>` element
+
+```css
+w-textarea::part(input) {
+  /* Custom styling for the textarea element */
+  text-transform: uppercase;
+}
+```
+
 ## Example Usage
 
 ### Customizing Label Color

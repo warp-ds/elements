@@ -388,6 +388,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
       )}
       <div class="${ccSelect.selectWrapper}">
         <select
+          part="input"
           class="${this.#classes}"
           id="${this.#id}"
           ?disabled=${this.disabled}

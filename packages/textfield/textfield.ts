@@ -1,14 +1,21 @@
 // @warp-css;
 
 import { classNames as classnames } from '@chbphone55/classnames';
+import { i18n } from '@lingui/core';
 import { FormControlMixin } from '@open-wc/form-control';
 import { html, LitElement, nothing, PropertyValues } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
+import { activateI18n } from '../i18n.js';
 import { reset } from '../styles.js';
 
+import { messages as daMessages } from './locales/da/messages.mjs';
+import { messages as enMessages } from './locales/en/messages.mjs';
+import { messages as fiMessages } from './locales/fi/messages.mjs';
+import { messages as nbMessages } from './locales/nb/messages.mjs';
+import { messages as svMessages } from './locales/sv/messages.mjs';
 import { wTextfieldStyles } from './styles/w-textfield.styles.js';
 import { styles } from './styles.js';
 import { inputLabelStyles, inputHelpTextStyles } from './input-styles.js';
@@ -44,6 +51,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
     ...LitElement.shadowRootOptions,
     delegatesFocus: true,
   };
+
+  constructor() {
+    super();
+    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+  }
 
   /**
    * Keep in mind that using disabled in its current form is an anti-pattern.
@@ -277,7 +289,18 @@ class WarpTextField extends FormControlMixin(LitElement) {
   /** @internal */
   get _label() {
     if (this.label) {
-      return html`<label for="${this._id}">${this.label}${this.optional ? html`<span>(optional)</span>` : nothing}</label>`;
+      return html`<label for="${this._id}">${this.label}${
+        this.optional
+          ? html`
+              <span>
+                ${i18n._({
+                  id: 'textfield.label.optional',
+                  message: '(optional)',
+                  comment: 'Shown behind label when marked as optional',
+                })}
+              </span>`
+          : nothing
+      }</label>`;
     }
     return undefined;
   }
@@ -338,6 +361,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
         <div class="w-textfield__input-wrapper">
           ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
           <input
+            part="input"
             class="${this._inputstyles}"
             type="${this.type || 'text'}"
             min="${ifDefined(this.min)}"

@@ -43,6 +43,19 @@ Customize the help text appearance:
 --w-c-input-help-text-color-invalid: var(--w-s-color-text-negative);
 ```
 
+## Parts
+
+For advanced styling needs beyond tokens, you can target internal elements using CSS parts:
+
+- `::part(input)` - The native `<select>` element
+
+```css
+w-select::part(input) {
+  /* Custom styling for the select element */
+  text-transform: uppercase;
+}
+```
+
 ## Example Usage
 
 ### Customizing Label Color
