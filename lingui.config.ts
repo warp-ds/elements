@@ -62,6 +62,10 @@ const config: LinguiConfig = {
       path: 'packages/slider/locales/{locale}/messages',
     },
     {
+      include: ['packages/snackbar/', 'packages/snackbar-item/'],
+      path: 'packages/snackbar/locales/{locale}/messages',
+    },
+    {
       include: ['packages/textarea/'],
       path: 'packages/textarea/locales/{locale}/messages',
     },

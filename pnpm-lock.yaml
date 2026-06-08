@@ -11,9 +11,6 @@ importers:
       '@lit/react':
         specifier: ^1.0.8
         version: 1.0.8(@types/react@19.2.15)
-      '@warp-ds/components':
-        specifier: 1.0.0-beta.2
-        version: 1.0.0-beta.2(@lingui/core@5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@6.0.3)))(@lit/react@1.0.8(@types/react@19.2.15))(lit@3.3.3)
       lit:
         specifier: 3.x
         version: 3.3.3
@@ -159,9 +156,6 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.3.0
-      element-collapse:
-        specifier: 1.1.0
-        version: 1.1.0
       esbuild:
         specifier: 0.28.0
         version: 0.28.0
@@ -2341,13 +2335,6 @@ packages:
   '@vitest/utils@4.1.7':
     resolution: {integrity: sha512-T532WBu791cBxJlCl6SO+J14l81DQx6uQHm1bQbmCDY7nqlEIgkza/UFnSBNaUtSf41unldDFjdOBYEQC4b5Hw==}
 
-  '@warp-ds/components@1.0.0-beta.2':
-    resolution: {integrity: sha512-xZ3YJ0TB0FT2O0S7WlU3YMEAD7j5pqu+Dn7COodR4ogJ0OrF3VYu8IOBrshfxi4VRDYB3uOZB0HayZ4NshyNvA==}
-    peerDependencies:
-      '@lingui/core': 5.x
-      '@lit/react': ^1.0.3
-      lit: ^3.1.2
-
   '@warp-ds/core@1.1.8':
     resolution: {integrity: sha512-sQNhqtwug5ZvnQ/b5ENHM10eGxoFplLWPp8/ICECxzBfkDfwQHfu3Z71CRiuf3VQYEYvvGQ21uQHNfC4YTQAxg==}
     peerDependencies:
@@ -3102,9 +3089,6 @@ packages:
 
   electron-to-chromium@1.5.267:
     resolution: {integrity: sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==}
-
-  element-collapse@1.1.0:
-    resolution: {integrity: sha512-jgwpetB8NlM/Z7DI1y3/zw0rWEQqxKc3rzooBtzzCwaEVlUzPquoxvE3J2r6cJahYjMXUAm/KKBD6lpyzva4+Q==}
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
@@ -7419,12 +7403,6 @@ snapshots:
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.0
 
-  '@warp-ds/components@1.0.0-beta.2(@lingui/core@5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@6.0.3)))(@lit/react@1.0.8(@types/react@19.2.15))(lit@3.3.3)':
-    dependencies:
-      '@lingui/core': 5.9.5(@lingui/babel-plugin-lingui-macro@5.9.5(typescript@6.0.3))
-      '@lit/react': 1.0.8(@types/react@19.2.15)
-      lit: 3.3.3
-
   '@warp-ds/core@1.1.8(@floating-ui/dom@1.7.6)':
     dependencies:
       '@floating-ui/dom': 1.7.6
@@ -8132,8 +8110,6 @@ snapshots:
   ee-first@1.1.1: {}
 
   electron-to-chromium@1.5.267: {}
-
-  element-collapse@1.1.0: {}
 
   emoji-regex@10.6.0: {}
 
