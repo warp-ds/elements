@@ -55,3 +55,18 @@ test('separators display after items except the one with current-page', async ()
   // No separator after current-page item
   expect(thirdItemShadow?.textContent).not.toContain('/');
 });
+
+test('item with href exposes a navigable link with visible label as accessible name', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  // Should expose a link role with the visible label as accessible name
+  const link = page.getByRole('link', { name: 'Home' });
+  await expect.element(link).toBeVisible();
+
+  // Link should have the correct href
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+  expect(anchor?.getAttribute('href')).toBe('/home');
+});
