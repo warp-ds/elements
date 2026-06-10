@@ -370,3 +370,18 @@ test('non-linked item applies s-text class to the span', async () => {
   expect(span).not.toBeNull();
   expect(span?.classList.contains('s-text')).toBe(true);
 });
+
+test('separator applies select-none and s-icon classes', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+  expect(separator?.classList.contains('select-none')).toBe(true);
+  expect(separator?.classList.contains('s-icon')).toBe(true);
+});
