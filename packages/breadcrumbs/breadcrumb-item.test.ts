@@ -1,8 +1,9 @@
 import { html } from 'lit';
 
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
+import { setupHydrationWarningCapture, testHydrationWithChildren } from '../../tests/react-hydration';
 import './breadcrumbs.js';
 import './breadcrumb-item';
 
@@ -103,4 +104,102 @@ test('item with current-page exposes aria-current="page" semantics', async () =>
   const shadowRoot = item?.shadowRoot;
   const elementWithAriaCurrent = shadowRoot?.querySelector('[aria-current="page"]');
   expect(elementWithAriaCurrent).not.toBeNull();
+});
+
+test('w-breadcrumb-item children hydrate in React SSR without warnings', async () => {
+  setupHydrationWarningCapture();
+
+  const childrenHtml =
+    '<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>' +
+    '<w-breadcrumb-item href="/category">Category</w-breadcrumb-item>' +
+    '<w-breadcrumb-item current-page>Current page</w-breadcrumb-item>';
+
+  const warnings = await testHydrationWithChildren('w-breadcrumbs', { 'aria-label': 'You are here' }, childrenHtml);
+
+  window.__HYDRATION_WARNINGS__ = [];
+
+  expect(warnings).toEqual([]);
+});
+
+test('slotted nodes remain in item light DOM after custom element upgrade', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">
+      <span class="custom-icon">Icon</span>
+      Home
+    </w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+
+  // Slotted content should remain in light DOM, not moved to shadow DOM
+  const lightDomSpan = item?.querySelector('span.custom-icon');
+  expect(lightDomSpan).not.toBeNull();
+  expect(lightDomSpan?.textContent).toBe('Icon');
+
+  // Text node should also remain in light DOM
+  const textContent = item?.textContent;
+  expect(textContent).toContain('Home');
+});
+
+test('component does not add styling classes to slotted elements', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">
+      <span id="test-span">Home</span>
+    </w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const span = item?.querySelector('#test-span');
+
+  // Component should not add any classes to slotted elements
+  expect(span?.classList.length).toBe(0);
+  expect(span?.className).toBe('');
+});
+
+test('adding href attribute dynamically creates a link', async () => {
+  const page = render(html`
+    <w-breadcrumb-item>Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item') as HTMLElement;
+
+  // Initially no link
+  let anchor = item.shadowRoot?.querySelector('a');
+  expect(anchor).toBeNull();
+
+  // Add href dynamically
+  item.setAttribute('href', '/home');
+  await new Promise((resolve) => setTimeout(resolve, 50));
+
+  // Now should have a link
+  anchor = item.shadowRoot?.querySelector('a');
+  expect(anchor).not.toBeNull();
+  expect(anchor?.getAttribute('href')).toBe('/home');
+});
+
+test('warns when mixing Legacy API and Item API children', async () => {
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <a href="/home">Home</a>
+      <w-breadcrumb-item href="/category">Category</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  expect(warnSpy).toHaveBeenCalled();
+  const warningMessage = warnSpy.mock.calls.find((call) =>
+    call.some((arg) => typeof arg === 'string' && arg.toLowerCase().includes('mix'))
+  );
+  expect(warningMessage).toBeDefined();
+
+  warnSpy.mockRestore();
 });
