@@ -29,3 +29,29 @@ test('w-breadcrumbs with three w-breadcrumb-item children displays labels in sou
   expect(items?.[1].textContent?.trim()).toBe('Category');
   expect(items?.[2].textContent?.trim()).toBe('Current page');
 });
+
+test('separators display after items except the one with current-page', async () => {
+  const page = render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+      <w-breadcrumb-item href="/category">Category</w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const items = page.container.querySelectorAll('w-breadcrumb-item');
+
+  // First two items should have separators, last (current-page) should not
+  const firstItemShadow = items[0].shadowRoot;
+  const secondItemShadow = items[1].shadowRoot;
+  const thirdItemShadow = items[2].shadowRoot;
+
+  // Separators should be visible after first and second items
+  expect(firstItemShadow?.textContent).toContain('/');
+  expect(secondItemShadow?.textContent).toContain('/');
+
+  // No separator after current-page item
+  expect(thirdItemShadow?.textContent).not.toContain('/');
+});
