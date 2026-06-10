@@ -428,3 +428,24 @@ test('warns about multiple current-page with message mentioning "only one"', asy
 
   warnSpy.mockRestore();
 });
+
+test('slotted anchor inside w-breadcrumb-item does not trigger mixed API warning', async () => {
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item><a href="/home">Home</a></w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Current</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Should NOT warn about mixing APIs - anchor is inside item, not a direct child
+  const mixWarning = warnSpy.mock.calls.find((call) =>
+    call.some((arg) => typeof arg === 'string' && arg.toLowerCase().includes('mix'))
+  );
+  expect(mixWarning).toBeUndefined();
+
+  warnSpy.mockRestore();
+});
