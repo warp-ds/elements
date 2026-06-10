@@ -63,7 +63,11 @@ class WarpBreadcrumbs extends LitElement {
 
     // Grab existing children at the point that the component is added to the page
     const flattenedChildren = Array.from(this.children)
+      .filter((child) => {
+        return child && !(child.tagName === 'W-BREADCRUMB-ITEM')
+      })
       .flat(Number.POSITIVE_INFINITY)
+      // Filter out empty text nodes and also any w-breadcrumb-item elements
       .filter((child) => child);
     const styledChildren = flattenedChildren.map((child, index) => {
       if (typeof child === 'string') {
@@ -82,7 +86,7 @@ class WarpBreadcrumbs extends LitElement {
     return html`
       <nav aria-labelledby="breadCrumbLabel">
         <h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>${this.ariaLabel}</h2>
-        <div class=${ccBreadcrumbs.wrapper}>${this._children}</div>
+        <div class=${ccBreadcrumbs.wrapper}>${this._children}<slot></slot></div>
       </nav>
     `;
   }
