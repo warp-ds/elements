@@ -7,11 +7,12 @@ class WarpBreadcrumbItem extends LitElement {
 
   static styles = css`
     .s-text-link{color:var(--w-s-color-text-link)}
+    .s-text{color:var(--w-s-color-text)}
   `;
 
   render() {
     return html`
-      ${this.href ? html`<a class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>` : html`<span aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`}
+      ${this.href ? html`<a class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>` : html`<span class="s-text" aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`}
       ${!this.currentPage ? html`<span aria-hidden="true">/</span>` : nothing}
     `;
   }

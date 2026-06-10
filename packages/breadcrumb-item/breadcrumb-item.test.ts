@@ -356,3 +356,17 @@ test('linked item applies s-text-link class to the anchor', async () => {
   expect(anchor).not.toBeNull();
   expect(anchor?.classList.contains('s-text-link')).toBe(true);
 });
+
+test('non-linked item applies s-text class to the span', async () => {
+  const page = render(html`
+    <w-breadcrumb-item>Category</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Category')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const span = item?.shadowRoot?.querySelector('span:not([aria-hidden])');
+
+  expect(span).not.toBeNull();
+  expect(span?.classList.contains('s-text')).toBe(true);
+});
