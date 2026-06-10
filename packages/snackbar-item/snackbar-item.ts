@@ -198,7 +198,7 @@ export class WarpSnackbarItem extends LitElement {
     }
 
     render() {
-        if (this.hasAction && document.documentElement.dataset['keyboardinteraction'] === 'true') {
+        if (this.hasAction && document.documentElement.dataset.wKeyboardinteraction === 'true') {
             const modifier = window.navigator.userAgent.includes('Macintosh') ? '⌥' : 'Alt';
             return html`
                 <w-attention

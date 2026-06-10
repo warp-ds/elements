@@ -1,12 +1,12 @@
 function pointerListener(e: PointerEvent) {
-    if (document.documentElement.dataset['keyboardinteraction']) {
-        delete document.documentElement.dataset['keyboardinteraction'];
+    if (document.documentElement.dataset.wKeyboardinteraction) {
+        delete document.documentElement.dataset.wKeyboardinteraction;
     }
 }
 
 function keyboardListener(e: KeyboardEvent) {
     if (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ') {
-        document.documentElement.dataset['keyboardinteraction'] = 'true';
+        document.documentElement.dataset.wKeyboardinteraction = 'true';
     }
 }
 
