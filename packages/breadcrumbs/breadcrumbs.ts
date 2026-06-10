@@ -61,13 +61,13 @@ class WarpBreadcrumbs extends LitElement {
     // Use ElementInternals for ARIA to avoid hydration mismatches
     this._internals.role = 'navigation';
 
-    const anchors = this.querySelectorAll('a');
-    const spans = this.querySelectorAll('span');
+    const anchors = this.querySelectorAll(':scope > a');
+    const spans = this.querySelectorAll(':scope > span');
     const breadcrumbItems = this.querySelectorAll('w-breadcrumb-item');
 
     // Warn if using the Legacy API and Item API together.
     if (breadcrumbItems.length > 0 && (anchors.length > 0 || spans.length > 0)) {
-      console.warn('Mixing Legacy API and Item API children is not supported.');
+      console.warn('Mixing Legacy API and w-breadcrumb-item API children is not supported.');
     }
 
     let numCurrentPageAttrs = 0;

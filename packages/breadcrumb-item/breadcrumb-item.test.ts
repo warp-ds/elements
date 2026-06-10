@@ -385,3 +385,24 @@ test('separator applies select-none and s-icon classes', async () => {
   expect(separator?.classList.contains('select-none')).toBe(true);
   expect(separator?.classList.contains('s-icon')).toBe(true);
 });
+
+test('slotted span inside w-breadcrumb-item does not trigger mixed API warning', async () => {
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item href="/home"><span>Home</span></w-breadcrumb-item>
+      <w-breadcrumb-item current-page><span>Current</span></w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Should NOT warn about mixing APIs - spans are inside items, not direct children
+  const mixWarning = warnSpy.mock.calls.find((call) =>
+    call.some((arg) => typeof arg === 'string' && arg.toLowerCase().includes('mix'))
+  );
+  expect(mixWarning).toBeUndefined();
+
+  warnSpy.mockRestore();
+});
