@@ -76,9 +76,8 @@ class WarpBreadcrumbs extends LitElement {
        if (item.hasAttribute('current-page')) {
         if (index < breadcrumbItems.length - 1) {
           currentPageAttrOnNonFinalItem = true;
-        } else {
-          numCurrentPageAttrs++;
         }
+        numCurrentPageAttrs++;
       }
     });
 

@@ -406,3 +406,25 @@ test('slotted span inside w-breadcrumb-item does not trigger mixed API warning',
 
   warnSpy.mockRestore();
 });
+
+test('warns about multiple current-page with message mentioning "only one"', async () => {
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Category</w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Should warn specifically about multiple current-page items (not just non-final)
+  const multipleWarning = warnSpy.mock.calls.find((call) =>
+    call.some((arg) => typeof arg === 'string' && arg.toLowerCase().includes('only one'))
+  );
+  expect(multipleWarning).toBeDefined();
+
+  warnSpy.mockRestore();
+});
