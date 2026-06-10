@@ -71,14 +71,23 @@ class WarpBreadcrumbs extends LitElement {
     }
 
     let numCurrentPageAttrs = 0;
-    breadcrumbItems.forEach((item) => {
+    let currentPageAttrOnNonFinalItem = false;
+    breadcrumbItems.forEach((item, index) => {
        if (item.hasAttribute('current-page')) {
-         numCurrentPageAttrs++;
-       }
+        if (index < breadcrumbItems.length - 1) {
+          currentPageAttrOnNonFinalItem = true;
+        } else {
+          numCurrentPageAttrs++;
+        }
+      }
     });
 
     if (numCurrentPageAttrs > 1) {
       console.warn('Please ensure only one w-breadcrumb-item has the current-page attribute.');
+    }
+
+    if (currentPageAttrOnNonFinalItem) {
+      console.warn('The current-page attribute should only be used on the final breadcrumb item.');
     }
 
     // Grab existing children at the point that the component is added to the page
