@@ -70,3 +70,21 @@ test('item with href exposes a navigable link with visible label as accessible n
   const anchor = item?.shadowRoot?.querySelector('a');
   expect(anchor?.getAttribute('href')).toBe('/home');
 });
+
+test('item without href does not expose a keyboard-focusable element', async () => {
+  const page = render(html`
+    <w-breadcrumb-item>Category</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Category')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+
+  // Should not contain an anchor element
+  const anchor = item?.shadowRoot?.querySelector('a');
+  expect(anchor).toBeNull();
+
+  // Should not contain any focusable elements
+  const focusables = item?.shadowRoot?.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+  expect(focusables?.length).toBe(0);
+});

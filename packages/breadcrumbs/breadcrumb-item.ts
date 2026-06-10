@@ -3,11 +3,11 @@ import { property } from 'lit/decorators.js';
 
 class WarpBreadcrumbItem extends LitElement {
   @property({ type: Boolean, attribute: 'current-page' }) currentPage = false;
-  @property({ type: String }) href: string = '';
+  @property({ type: String }) href: string | null = null;
 
   render() {
     return html`
-      <a href=${this.href}><slot></slot></a>
+      ${this.href ? html`<a href=${this.href}><slot></slot></a>` : html`<slot></slot>`}
       ${!this.currentPage ? html`<span aria-hidden="true">/</span>` : nothing}
     `;
   }
