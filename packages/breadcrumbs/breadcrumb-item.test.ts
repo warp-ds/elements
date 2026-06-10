@@ -88,3 +88,19 @@ test('item without href does not expose a keyboard-focusable element', async () 
   const focusables = item?.shadowRoot?.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
   expect(focusables?.length).toBe(0);
 });
+
+test('item with current-page exposes aria-current="page" semantics', async () => {
+  const page = render(html`
+    <w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Current page')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+
+  // The item or its content should expose aria-current="page"
+  // Check shadow DOM for the semantic marker
+  const shadowRoot = item?.shadowRoot;
+  const elementWithAriaCurrent = shadowRoot?.querySelector('[aria-current="page"]');
+  expect(elementWithAriaCurrent).not.toBeNull();
+});

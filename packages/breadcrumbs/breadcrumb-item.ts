@@ -7,7 +7,7 @@ class WarpBreadcrumbItem extends LitElement {
 
   render() {
     return html`
-      ${this.href ? html`<a href=${this.href}><slot></slot></a>` : html`<slot></slot>`}
+      ${this.href ? html`<a href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>` : html`<span aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`}
       ${!this.currentPage ? html`<span aria-hidden="true">/</span>` : nothing}
     `;
   }
