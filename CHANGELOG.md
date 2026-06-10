@@ -1,3 +1,10 @@
+# [2.10.0-next.16](https://github.com/warp-ds/elements/compare/v2.10.0-next.15...v2.10.0-next.16) (2026-06-10)
+
+
+### Bug Fixes
+
+* add a w- prefix to the data attribute ([#696](https://github.com/warp-ds/elements/issues/696)) ([e9c51f1](https://github.com/warp-ds/elements/commit/e9c51f109731cb4c82d3e679551c9b635e90aa57))
+
 # [2.10.0-next.15](https://github.com/warp-ds/elements/compare/v2.10.0-next.14...v2.10.0-next.15) (2026-06-08)
 
 
