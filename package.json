@@ -56,6 +56,10 @@
       "types": "./dist/packages/breadcrumbs/react.d.ts",
       "import": "./dist/packages/breadcrumbs/react.js"
     },
+    "./react/breadcrumb-item": {
+      "types": "./dist/packages/breadcrumb-item/react.d.ts",
+      "import": "./dist/packages/breadcrumb-item/react.js"
+    },
     "./react/button": {
       "types": "./dist/packages/button/react.d.ts",
       "import": "./dist/packages/button/react.js"

@@ -101,6 +101,7 @@ export default {
     'packages/badge/badge.ts',
     'packages/box/box.ts',
     'packages/breadcrumbs/breadcrumbs.ts',
+    'packages/breadcrumbs/breadcrumb-item.ts',
     'packages/button/button.ts',
     'packages/card/card.ts',
     'packages/checkbox/checkbox.ts',

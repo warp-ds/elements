@@ -3,8 +3,8 @@ import { html } from 'lit';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-lit';
 
-import { setupHydrationWarningCapture, testHydrationWithChildren } from '../../tests/react-hydration';
-import './breadcrumbs.js';
+import { setupHydrationWarningCapture, testHydrationWithChildren } from '../../tests/react-hydration.js';
+import '../breadcrumbs/breadcrumbs';
 import './breadcrumb-item';
 
 test('w-breadcrumbs with three w-breadcrumb-item children displays labels in source order', async () => {
@@ -341,4 +341,18 @@ test('warns when more than one w-breadcrumb-item has current-page', async () => 
   expect(warningMessage).toBeDefined();
 
   warnSpy.mockRestore();
+});
+
+test('linked item applies s-text-link class to the anchor', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  expect(anchor?.classList.contains('s-text-link')).toBe(true);
 });
