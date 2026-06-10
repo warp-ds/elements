@@ -67,7 +67,18 @@ class WarpBreadcrumbs extends LitElement {
 
     // Warn if using the Legacy API and Item API together.
     if (breadcrumbItems.length > 0 && (anchors.length > 0 || spans.length > 0)) {
-      console.warn('Mixing Legacy API and Item API children is not recommended.');
+      console.warn('Mixing Legacy API and Item API children is not supported.');
+    }
+
+    let numCurrentPageAttrs = 0;
+    breadcrumbItems.forEach((item) => {
+       if (item.hasAttribute('current-page')) {
+         numCurrentPageAttrs++;
+       }
+    });
+
+    if (numCurrentPageAttrs > 1) {
+      console.warn('Please ensure only one w-breadcrumb-item has the current-page attribute.');
     }
 
     // Grab existing children at the point that the component is added to the page

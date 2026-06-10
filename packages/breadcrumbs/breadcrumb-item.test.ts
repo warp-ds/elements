@@ -203,3 +203,25 @@ test('warns when mixing Legacy API and Item API children', async () => {
 
   warnSpy.mockRestore();
 });
+
+test('warns when more than one w-breadcrumb-item has current-page', async () => {
+  const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+  render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Category</w-breadcrumb-item>
+      <w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  expect(warnSpy).toHaveBeenCalled();
+  const warningMessage = warnSpy.mock.calls.find((call) =>
+    call.some((arg) => typeof arg === 'string' && arg.toLowerCase().includes('current'))
+  );
+  expect(warningMessage).toBeDefined();
+
+  warnSpy.mockRestore();
+});
