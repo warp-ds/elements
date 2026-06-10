@@ -204,6 +204,101 @@ test('warns when mixing Legacy API and Item API children', async () => {
   warnSpy.mockRestore();
 });
 
+test('empty w-breadcrumbs does not throw and exposes navigation landmark', async () => {
+  const page = render(html`
+    <w-breadcrumbs aria-label="You are here"></w-breadcrumbs>
+  `);
+
+  // Wait for custom element to upgrade and render
+  await new Promise((resolve) => setTimeout(resolve, 50));
+
+  const breadcrumbs = page.container.querySelector('w-breadcrumbs');
+  expect(breadcrumbs).not.toBeNull();
+
+  // Should expose navigation landmark via ElementInternals
+  const nav = breadcrumbs?.shadowRoot?.querySelector('nav');
+  expect(nav).not.toBeNull();
+
+  // Accessible label should be rendered in the hidden h2
+  const label = breadcrumbs?.shadowRoot?.querySelector('#breadCrumbLabel');
+  expect(label?.textContent).toBe('You are here');
+});
+
+test('current-page item with href is still a focusable link', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/current" current-page>Current page</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Current page')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+
+  // Should have an anchor element since href is present
+  const anchor = item?.shadowRoot?.querySelector('a');
+  expect(anchor).not.toBeNull();
+  expect(anchor?.getAttribute('href')).toBe('/current');
+
+  // Should also have aria-current="page"
+  expect(anchor?.getAttribute('aria-current')).toBe('page');
+});
+
+test('removing href attribute dynamically removes the link', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item') as HTMLElement;
+
+  // Initially has a link
+  let anchor = item.shadowRoot?.querySelector('a');
+  expect(anchor).not.toBeNull();
+
+  // Remove href dynamically
+  item.removeAttribute('href');
+  await new Promise((resolve) => setTimeout(resolve, 50));
+
+  // Now should not have a link
+  anchor = item.shadowRoot?.querySelector('a');
+  expect(anchor).toBeNull();
+});
+
+test('separator is not keyboard-focusable', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+  // Separator should have aria-hidden and not be focusable
+  expect(separator?.getAttribute('aria-hidden')).toBe('true');
+  // Should not have tabindex that makes it focusable
+  expect(separator?.getAttribute('tabindex')).not.toBe('0');
+  // Should not be an interactive element
+  expect(separator?.tagName.toLowerCase()).not.toBe('a');
+  expect(separator?.tagName.toLowerCase()).not.toBe('button');
+});
+
+test('w-breadcrumb-item with empty content does not throw', async () => {
+  // This should not throw
+  const page = render(html`
+    <w-breadcrumbs aria-label="You are here">
+      <w-breadcrumb-item href="/home"></w-breadcrumb-item>
+      <w-breadcrumb-item></w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await new Promise((resolve) => setTimeout(resolve, 50));
+
+  const items = page.container.querySelectorAll('w-breadcrumb-item');
+  expect(items.length).toBe(2);
+});
+
 test('warns when current-page is not on the final item', async () => {
   const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
