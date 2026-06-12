@@ -284,19 +284,16 @@
     "build:storybook": "pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:entrypoint && storybook build && pnpm run build:polyfill && touch ./storybook-static/.nojekyll",
     "build:styles": "node ./build/styles.js",
     "build": "rimraf dist && rimraf eik && pnpm messages:compile && tsc && pnpm build:manifest && pnpm build:editor && pnpm build:components && pnpm run build:cloak && pnpm build:bundle && pnpm build:eik-components-backwards-compat && pnpm run build:polyfill && pnpm run build:docs",
-    "check": "pnpm biome check --write .",
     "clean": "git clean -fdx",
     "commit": "cz",
     "dev": "pnpm run storybook",
     "storybook": "storybook dev --port 63900",
     "storybook:react": "storybook dev -p 63901 -c .storybook-react",
-    "format": "pnpm biome format --write .",
-    "lint:check": "pnpm biome lint .",
-    "lint": "pnpm biome lint --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix  .",
     "lint:package": "publint",
     "messages:compile": "lingui compile",
     "messages:extract": "lingui extract",
-    "prepare": "husky",
     "semantic-release": "semantic-release",
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
@@ -309,8 +306,12 @@
     "url": "git+https://github.com/warp-ds/elements.git"
   },
   "license": "Apache-2.0",
+  "dependencies": {
+    "@lit/react": "^1.0.8",
+    "@warp-ds/eslint-config": "link:../eslint-config",
+    "lit": "3.x"
+  },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
     "@chbphone55/classnames": "2.0.0",
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@eik/cli": "2.0.39",
@@ -358,11 +359,11 @@
     "cz-conventional-changelog": "3.3.0",
     "date-fns": "^4.1.0",
     "esbuild": "0.28.0",
+    "eslint": "^10.4.1",
     "express": "4.22.2",
     "glob": "13.0.6",
     "globals": "17.6.0",
     "html-format": "1.1.7",
-    "husky": "^9.1.7",
     "lightningcss": "^1.30.1",
     "nanoid": "^5.1.5",
     "playwright": "^1.55.0",
@@ -382,10 +383,6 @@
     "vitest": "^4.1.4",
     "vitest-browser-lit": "^1.0.1",
     "vitest-browser-react": "^2.2.0"
-  },
-  "dependencies": {
-    "@lit/react": "^1.0.8",
-    "lit": "3.x"
   },
   "publishConfig": {
     "access": "public",

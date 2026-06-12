@@ -5,3 +5,6 @@ allowBuilds:
   '@swc/core': true
   esbuild: false
   rs-module-lexer: false
+
+overrides:
+  '@warp-ds/eslint-config': link:../eslint-config
