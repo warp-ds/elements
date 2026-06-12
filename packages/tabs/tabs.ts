@@ -225,7 +225,7 @@ export class WarpTabs extends LitElement {
 
 	private updatePanels() {
 		// Update tab active states using non-reflecting properties to avoid hydration mismatch
-		const tabs: WarpTab[] = [...this.querySelectorAll("w-tab")];
+		const tabs = [...this.querySelectorAll<WarpTab>("w-tab")];
 		tabs.forEach((tab, index) => {
 			if (!tab.id) {
 				tab.id = `w-tab-${this._uniqueId}-${index}`;
@@ -259,7 +259,7 @@ export class WarpTabs extends LitElement {
 			return;
 		}
 
-		const tabs: WarpTab[] = [...this.querySelectorAll("w-tab")];
+		const tabs = [...this.querySelectorAll<WarpTab>("w-tab")];
 		const currentIndex = tabs.findIndex(
 			(tab) => tab.for === this._activeTabFor,
 		);

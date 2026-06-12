@@ -455,7 +455,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			case "ArrowUp":
 				this._navigationOption =
 					prevIndex === -2
-						? this._currentOptions.at(-1)
+						? (this._currentOptions.at(-1) ?? null)
 						: prevIndex < 0
 							? null
 							: this._currentOptions[prevIndex];
@@ -469,14 +469,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			case "PageDown":
 				this._navigationOption =
 					currIndex + 10 > this._currentOptions.length - 1
-						? this._currentOptions.at(-1)
-						: this._currentOptions[currIndex + 10];
+						? (this._currentOptions.at(-1) ?? null)
+						: (this._currentOptions[currIndex + 10] ?? null);
 				break;
 			case "Home":
 				this._navigationOption = this._currentOptions[0];
 				break;
 			case "End":
-				this._navigationOption = this._currentOptions.at(-1);
+				this._navigationOption = this._currentOptions.at(-1) ?? null;
 				break;
 		}
 	}
