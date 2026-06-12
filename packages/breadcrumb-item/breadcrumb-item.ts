@@ -21,15 +21,20 @@ class WarpBreadcrumbItem extends LitElement {
       color: var(--w-s-color-icon);
       -webkit-user-select: none;
       user-select: none;
-      margin-left: 0.4rem; margin-right: 0.8rem;
+      margin-left: 0.8rem; margin-right: 0.8rem;
     }
   `;
 
+  get link() {
+    return this.href ? html`<a class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>` : html`<span class="s-text" aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`;
+  }
+
+  get separator() {
+    return !this.currentPage ? html`<span class="separator" aria-hidden="true">/</span>` : nothing;
+  }
+
   render() {
-    return html`
-      ${this.href ? html`<a class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>` : html`<span class="s-text" aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`}
-      ${!this.currentPage ? html`<span class="separator" aria-hidden="true">/</span>` : nothing}
-    `;
+    return html`${this.link}${this.separator}`;
   }
 }
 
