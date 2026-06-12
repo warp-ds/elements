@@ -463,6 +463,38 @@ test('item has horizontal spacing between content and separator', async () => {
 
   // Separator should have left margin for spacing (space-x-8 = 8px margin)
   const separatorStyles = getComputedStyle(separator!);
-  const marginLeft = parseFloat(separatorStyles.marginLeft);
+  const marginLeft = Number.parseFloat(separatorStyles.marginLeft);
   expect(marginLeft).toBeGreaterThan(0);
+});
+
+test('item has right margin after separator for spacing to next item', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+
+  // Separator should have right margin for spacing to next item
+  const separatorStyles = getComputedStyle(separator!);
+  const marginRight = Number.parseFloat(separatorStyles.marginRight);
+  expect(marginRight).toBeGreaterThan(0);
+});
+
+test('item displays inline to allow horizontal breadcrumb layout', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item') as HTMLElement;
+  const itemStyles = getComputedStyle(item);
+
+  // Host should display inline-block or inline to allow horizontal layout
+  expect(['inline', 'inline-block']).toContain(itemStyles.display);
 });
