@@ -371,7 +371,7 @@ test('non-linked item applies s-text class to the span', async () => {
   expect(span?.classList.contains('s-text')).toBe(true);
 });
 
-test('separator applies select-none and s-icon classes', async () => {
+test('separator applies separator class', async () => {
   const page = render(html`
     <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
   `);
@@ -382,8 +382,7 @@ test('separator applies select-none and s-icon classes', async () => {
   const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
 
   expect(separator).not.toBeNull();
-  expect(separator?.classList.contains('select-none')).toBe(true);
-  expect(separator?.classList.contains('s-icon')).toBe(true);
+  expect(separator?.classList.contains('separator')).toBe(true);
 });
 
 test('slotted span inside w-breadcrumb-item does not trigger mixed API warning', async () => {
@@ -448,4 +447,22 @@ test('slotted anchor inside w-breadcrumb-item does not trigger mixed API warning
   expect(mixWarning).toBeUndefined();
 
   warnSpy.mockRestore();
+});
+
+test('item has horizontal spacing between content and separator', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+
+  // Separator should have left margin for spacing (space-x-8 = 8px margin)
+  const separatorStyles = getComputedStyle(separator!);
+  const marginLeft = parseFloat(separatorStyles.marginLeft);
+  expect(marginLeft).toBeGreaterThan(0);
 });
