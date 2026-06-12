@@ -178,6 +178,9 @@
       "react/breadcrumbs": [
         "./dist/packages/breadcrumbs/react.d.ts"
       ],
+      "react/breadcrumb-item": [
+        "./dist/packages/breadcrumb-item/react.d.ts"
+      ],
       "react/button": [
         "./dist/packages/button/react.d.ts"
       ],
