@@ -8,6 +8,12 @@ export default [
 		},
 	},
 	{
-		ignores: ["dist", "eik", "storybook-static", ".vitest-attachments", "entrypoint.js"],
+		ignores: [
+			"dist",
+			"eik",
+			"storybook-static",
+			".vitest-attachments",
+			"entrypoint.js",
+		],
 	},
 ];

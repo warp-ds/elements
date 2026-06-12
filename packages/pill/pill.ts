@@ -1,34 +1,35 @@
 // @warp-css;
 
-import { html, LitElement } from 'lit';
-import '../icon/icon.js';
+import { html, LitElement } from "lit";
+import "../icon/icon.js";
 
-import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
-import { property } from 'lit/decorators.js';
+import { classNames } from "@chbphone55/classnames";
+import { i18n } from "@lingui/core";
+import { property } from "lit/decorators.js";
 
-import { activateI18n, detectLocale } from '../i18n';
-import { reset } from '../styles.js';
+import { activateI18n, detectLocale } from "../i18n";
+import { reset } from "../styles.js";
 
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
-import { styles } from './styles.js';
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
+import { styles } from "./styles.js";
 
 const pillStyles = {
-  wrapper: 'flex items-center',
-  button: 'inline-flex items-center focusable text-xs transition-all',
-  suggestion:
-    'bg-[--w-color-pill-suggestion-background] hover:bg-[--w-color-pill-suggestion-background-hover] active:bg-[--w-color-pill-suggestion-background-active] s-text font-bold',
-  filter: 's-bg-primary hover:s-bg-primary-hover active:s-bg-primary-active s-text-inverted',
-  label: 'pl-12 py-8 rounded-l-full',
-  labelWithoutClose: 'pr-12 rounded-r-full',
-  labelWithClose: 'pr-2',
-  close: 'pr-12 pl-4 py-8 rounded-r-full',
-  closeIcon: 'h-16',
-  a11y: 'sr-only',
+	wrapper: "flex items-center",
+	button: "inline-flex items-center focusable text-xs transition-all",
+	suggestion:
+		"bg-[--w-color-pill-suggestion-background] hover:bg-[--w-color-pill-suggestion-background-hover] active:bg-[--w-color-pill-suggestion-background-active] s-text font-bold",
+	filter:
+		"s-bg-primary hover:s-bg-primary-hover active:s-bg-primary-active s-text-inverted",
+	label: "pl-12 py-8 rounded-l-full",
+	labelWithoutClose: "pr-12 rounded-r-full",
+	labelWithClose: "pr-2",
+	close: "pr-12 pl-4 py-8 rounded-r-full",
+	closeIcon: "h-16",
+	a11y: "sr-only",
 };
 
 /**
@@ -38,123 +39,147 @@ const pillStyles = {
  * @event {CustomEvent} w-pill-close - Fires when the pill's close button is clicked.
  */
 class WarpPill extends LitElement {
-  /**
-   * Whether the pill should be removable via a close button.
-   */
-  @property({ attribute: 'can-close', type: Boolean })
-  canClose = false;
+	/**
+	 * Whether the pill should be removable via a close button.
+	 */
+	@property({ attribute: "can-close", type: Boolean })
+	canClose = false;
 
-  /**
-   * Whether the pill should be rendered as a suggestion.
-   */
-  @property({ attribute: 'suggestion', type: Boolean })
-  suggestion = false;
-  
-  /**
-   * @deprecated Used "open-arial-label" instead.
-   */
-  @property({ attribute: 'open-sr-label', type: String })
-  openSrLabel: string | undefined;
-  
-  /**
-   * Label read by screen readers when targeting the pill.
-   */
-  @property({ attribute: 'open-aria-label', type: String })
-  openAriaLabel: string | undefined;
-  
-  /**
-   * @deprecated Used "close-arial-label" instead. 
-   */
-  @property({ attribute: 'close-sr-label', type: String })
-  closeSrLabel: string | undefined;
-  
-  /**
-   * Label read by screen readers when targeting the close button.
-   */
-  @property({ attribute: 'close-aria-label', type: String })
-  closeAriaLabel: string | undefined;
+	/**
+	 * Whether the pill should be rendered as a suggestion.
+	 */
+	@property({ attribute: "suggestion", type: Boolean })
+	suggestion = false;
 
-  private openFilterSrText: string;
-  private removeFilterSrText: string;
+	/**
+	 * @deprecated Used "open-arial-label" instead.
+	 */
+	@property({ attribute: "open-sr-label", type: String })
+	openSrLabel: string | undefined;
 
-  static styles = [reset, styles];
+	/**
+	 * Label read by screen readers when targeting the pill.
+	 */
+	@property({ attribute: "open-aria-label", type: String })
+	openAriaLabel: string | undefined;
 
-  constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-    this.canClose = false;
-    this.suggestion = false;
+	/**
+	 * @deprecated Used "close-arial-label" instead.
+	 */
+	@property({ attribute: "close-sr-label", type: String })
+	closeSrLabel: string | undefined;
 
-    this.openFilterSrText = i18n._({
-      id: 'pill.aria.openFilter',
-      message: 'Open filter',
-      comment: 'Fallback screen reader message for open filter',
-    });
+	/**
+	 * Label read by screen readers when targeting the close button.
+	 */
+	@property({ attribute: "close-aria-label", type: String })
+	closeAriaLabel: string | undefined;
 
-    this.removeFilterSrText = i18n._({
-      id: 'pill.aria.removeFilter',
-      message: 'Remove filter {label}',
-      comment: 'Fallback screen reader message for removal of the filter',
-    });
-  }
+	private openFilterSrText: string;
+	private removeFilterSrText: string;
 
-  private get _labelClasses() {
-    return classNames([
-      pillStyles.button,
-      pillStyles.label,
-      this.suggestion ? pillStyles.suggestion : pillStyles.filter,
-      this.canClose ? pillStyles.labelWithClose : pillStyles.labelWithoutClose,
-    ]);
-  }
+	static styles = [reset, styles];
 
-  private get _closeClasses() {
-    return classNames([
-      pillStyles.button,
-      pillStyles.close,
-      this.suggestion ? pillStyles.suggestion : pillStyles.filter,
-    ]);
-  }
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+		this.canClose = false;
+		this.suggestion = false;
 
-  private _onClick() {
-    this.dispatchEvent(new CustomEvent('w-pill-click', { bubbles: true, composed: true }));
-  }
+		this.openFilterSrText = i18n._({
+			id: "pill.aria.openFilter",
+			message: "Open filter",
+			comment: "Fallback screen reader message for open filter",
+		});
 
-  private _onClose() {
-    this.dispatchEvent(new CustomEvent('w-pill-close', { bubbles: true, composed: true }));
-  }
+		this.removeFilterSrText = i18n._({
+			id: "pill.aria.removeFilter",
+			message: "Remove filter {label}",
+			comment: "Fallback screen reader message for removal of the filter",
+		});
+	}
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.openSrLabel) {
-      this.openAriaLabel = this.openSrLabel;
-    }
-    if (this.closeSrLabel) {
-      this.closeAriaLabel = this.closeSrLabel;
-    }
-  }
+	private get _labelClasses() {
+		return classNames([
+			pillStyles.button,
+			pillStyles.label,
+			this.suggestion ? pillStyles.suggestion : pillStyles.filter,
+			this.canClose ? pillStyles.labelWithClose : pillStyles.labelWithoutClose,
+		]);
+	}
 
-  render() {
-    return html`
-      <div class="${pillStyles.wrapper}">
-        <button type="button" class="${this._labelClasses}" @click="${this._onClick}">
-          <span class="${pillStyles.a11y}">${this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText}</span>
-          <slot></slot>
-        </button>
-        ${
-          this.canClose
-            ? html` <button type="button" class="${this._closeClasses}" @click="${this._onClose}">
-              <span class="${pillStyles.a11y}">${this.closeAriaLabel ? this.closeAriaLabel : this.removeFilterSrText}</span>
-              <w-icon name="Close" size="small" locale="${detectLocale()}" class="${pillStyles.closeIcon}" class="flex"></w-icon>
-            </button>`
-            : null
-        }
-      </div>
-    `;
-  }
+	private get _closeClasses() {
+		return classNames([
+			pillStyles.button,
+			pillStyles.close,
+			this.suggestion ? pillStyles.suggestion : pillStyles.filter,
+		]);
+	}
+
+	private _onClick() {
+		this.dispatchEvent(
+			new CustomEvent("w-pill-click", { bubbles: true, composed: true }),
+		);
+	}
+
+	private _onClose() {
+		this.dispatchEvent(
+			new CustomEvent("w-pill-close", { bubbles: true, composed: true }),
+		);
+	}
+
+	connectedCallback() {
+		super.connectedCallback();
+		if (this.openSrLabel) {
+			this.openAriaLabel = this.openSrLabel;
+		}
+		if (this.closeSrLabel) {
+			this.closeAriaLabel = this.closeSrLabel;
+		}
+	}
+
+	render() {
+		return html`
+			<div class="${pillStyles.wrapper}">
+				<button
+					type="button"
+					class="${this._labelClasses}"
+					@click="${this._onClick}"
+				>
+					<span class="${pillStyles.a11y}"
+						>${this.openAriaLabel
+							? this.openAriaLabel
+							: this.openFilterSrText}</span
+					>
+					<slot></slot>
+				</button>
+				${this.canClose
+					? html` <button
+							type="button"
+							class="${this._closeClasses}"
+							@click="${this._onClose}"
+						>
+							<span class="${pillStyles.a11y}"
+								>${this.closeAriaLabel
+									? this.closeAriaLabel
+									: this.removeFilterSrText}</span
+							>
+							<w-icon
+								name="Close"
+								size="small"
+								locale="${detectLocale()}"
+								class="${pillStyles.closeIcon}"
+								class="flex"
+							></w-icon>
+						</button>`
+					: null}
+			</div>
+		`;
+	}
 }
 
-if (!customElements.get('w-pill')) {
-  customElements.define('w-pill', WarpPill);
+if (!customElements.get("w-pill")) {
+	customElements.define("w-pill", WarpPill);
 }
 
 export { WarpPill };

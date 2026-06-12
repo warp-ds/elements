@@ -1,149 +1,160 @@
-import { html } from 'lit';
-import { expect, test, vi } from 'vitest';
-import { server, userEvent } from 'vitest/browser';
-import { render } from 'vitest-browser-lit';
+import { html } from "lit";
+import { expect, test, vi } from "vitest";
+import { server, userEvent } from "vitest/browser";
+import { render } from "vitest-browser-lit";
 
-import '../button/button.js';
-import './datepicker.js';
+import "../button/button.js";
+import "./datepicker.js";
 
-test('can pick a date using a pointer', async () => {
-  const component = html`
-    <form data-testid="flight">
-      <w-datepicker label="From date" name="from"></w-datepicker>
-    </form>
-  `;
+test("can pick a date using a pointer", async () => {
+	const component = html`
+		<form data-testid="flight">
+			<w-datepicker label="From date" name="from"></w-datepicker>
+		</form>
+	`;
 
-  const page = render(component);
+	const page = render(component);
 
-  await expect.element(page.getByLabelText('From date')).not.toHaveValue();
+	await expect.element(page.getByLabelText("From date")).not.toHaveValue();
 
-  await expect.element(page.getByTestId('calendar').query()).not.toBeVisible();
-  await page.getByRole('button').click({ force: true });
+	await expect.element(page.getByTestId("calendar").query()).not.toBeVisible();
+	await page.getByRole("button").click({ force: true });
 
-  await expect.element(page.getByTestId('calendar')).toBeVisible();
+	await expect.element(page.getByTestId("calendar")).toBeVisible();
 
-  await page.getByRole('gridcell').nth(15).click();
+	await page.getByRole("gridcell").nth(15).click();
 
-  await expect
-    .element(page.getByTestId('calendar').query(), { message: 'expected calendar to close after clicking a date' })
-    .not.toBeVisible();
+	await expect
+		.element(page.getByTestId("calendar").query(), {
+			message: "expected calendar to close after clicking a date",
+		})
+		.not.toBeVisible();
 
-  await expect.element(page.getByLabelText('From date')).toHaveValue();
+	await expect.element(page.getByLabelText("From date")).toHaveValue();
 
-  const formData = new FormData(page.getByTestId('flight').element() as HTMLFormElement);
-  expect(formData.get('from')).toBeTruthy();
+	const formData = new FormData(
+		page.getByTestId("flight").element() as HTMLFormElement,
+	);
+	expect(formData.get("from")).toBeTruthy();
 });
 
-test.skipIf(server.browser === 'firefox')('can pick a date using a keyboard', async () => {
-  const component = html`
-    <form data-testid="flight">
-      <w-datepicker label="From date" name="from"></w-datepicker>
-    </form>
-  `;
+test.skipIf(server.browser === "firefox")(
+	"can pick a date using a keyboard",
+	async () => {
+		const component = html`
+			<form data-testid="flight">
+				<w-datepicker label="From date" name="from"></w-datepicker>
+			</form>
+		`;
 
-  const page = render(component);
+		const page = render(component);
 
-  await expect.element(page.getByLabelText('From date')).not.toHaveValue();
+		await expect.element(page.getByLabelText("From date")).not.toHaveValue();
 
-  await expect.element(page.getByTestId('calendar').query()).not.toBeVisible();
+		await expect
+			.element(page.getByTestId("calendar").query())
+			.not.toBeVisible();
 
-  const toggle = page.getByRole('button').element() as HTMLButtonElement;
-  toggle.focus();
+		const toggle = page.getByRole("button").element() as HTMLButtonElement;
+		toggle.focus();
 
-  await userEvent.keyboard('[Enter]');
-  await expect.element(page.getByTestId('calendar')).toBeVisible();
+		await userEvent.keyboard("[Enter]");
+		await expect.element(page.getByTestId("calendar")).toBeVisible();
 
-  (page.getByRole('gridcell').nth(15).element() as HTMLTableCellElement).focus();
-  await userEvent.keyboard('[Enter]');
+		(
+			page.getByRole("gridcell").nth(15).element() as HTMLTableCellElement
+		).focus();
+		await userEvent.keyboard("[Enter]");
 
-  await expect
-    .element(page.getByTestId('calendar').query(), { message: 'expected calendar to close after clicking a date' })
-    .not.toBeVisible();
+		await expect
+			.element(page.getByTestId("calendar").query(), {
+				message: "expected calendar to close after clicking a date",
+			})
+			.not.toBeVisible();
 
-  await expect.element(page.getByLabelText('From date')).toHaveValue();
+		await expect.element(page.getByLabelText("From date")).toHaveValue();
 
-  const formData = new FormData(page.getByTestId('flight').element() as HTMLFormElement);
-  expect(formData.get('from')).toBeTruthy();
+		const formData = new FormData(
+			page.getByTestId("flight").element() as HTMLFormElement,
+		);
+		expect(formData.get("from")).toBeTruthy();
+	},
+);
+
+test("can pick a date by typing in the input field", async () => {
+	const component = html`
+		<form data-testid="flight">
+			<w-datepicker label="From date" name="from" lang="nb"></w-datepicker>
+		</form>
+	`;
+
+	const page = render(component);
+
+	await expect.element(page.getByLabelText("From date")).not.toHaveValue();
+
+	const toggle = page.getByLabelText("From date").element() as HTMLInputElement;
+	toggle.focus();
+
+	await page.getByLabelText("From date").fill("2025-01-01");
+	await expect.element(page.getByLabelText("From date")).toHaveValue();
+
+	const formData = new FormData(
+		page.getByTestId("flight").element() as HTMLFormElement,
+	);
+	expect(formData.get("from")).toBeTruthy();
 });
 
-test('can pick a date by typing in the input field', async () => {
-  const component = html`
-    <form data-testid="flight">
-      <w-datepicker label="From date" name="from" lang="nb"></w-datepicker>
-    </form>
-  `;
+test("can reset datepicker by resetting surrounding form", async () => {
+	const label = "Test label";
 
-  const page = render(component);
+	render(html`
+		<form>
+			<w-datepicker label=${label} name="test" value="2025-01-01">
+			</w-datepicker>
+		</form>
+	`);
 
-  await expect.element(page.getByLabelText('From date')).not.toHaveValue();
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wDatepicker = document.querySelector("w-datepicker") as HTMLElement & {
+		value: string;
+	};
 
-  const toggle = page.getByLabelText('From date').element() as HTMLInputElement;
-  toggle.focus();
+	// sanity
+	expect(form).not.toBeNull();
+	expect(wDatepicker).not.toBeNull();
 
-  await page.getByLabelText('From date').fill('2025-01-01');
-  await expect.element(page.getByLabelText('From date')).toHaveValue();
+	// Initial value is "2025-01-01"
+	expect(wDatepicker.value).toBe("2025-01-01");
 
-  const formData = new FormData(page.getByTestId('flight').element() as HTMLFormElement);
-  expect(formData.get('from')).toBeTruthy();
+	// Change the value to "definitely not 2025-01-01"
+	wDatepicker.value = "definitely not 2025-01-01";
+	expect(wDatepicker.value).toBe("definitely not 2025-01-01");
+
+	// Reset the form
+	form.reset();
+
+	// Value should be reset back to "2025-01-01"
+	expect(wDatepicker.value).toBe("2025-01-01");
 });
 
-test('can reset datepicker by resetting surrounding form', async () => {
-  const label = 'Test label';
+test("submits the associated form when datepicker input field has focus and user presses Enter", async () => {
+	const screen = render(html`
+		<form>
+			<w-datepicker label="Date" data-testid="datepicker" value="2025-01-01">
+			</w-datepicker>
+			<button type="submit">Submit</button>
+		</form>
+	`);
 
-  render(html`
-    <form>
-      <w-datepicker
-        label=${label}
-        name="test"
-        value="2025-01-01"
-      >
-      </w-datepicker>
-    </form>
-  `);
+	const onSubmit = vi.fn();
+	const form = document.querySelector("form") as HTMLFormElement;
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+		onSubmit();
+	});
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const wDatepicker = document.querySelector('w-datepicker') as HTMLElement & { value: string };
+	await userEvent.click(screen.getByTestId("datepicker"));
+	await userEvent.keyboard("[Enter]");
 
-  // sanity
-  expect(form).not.toBeNull();
-  expect(wDatepicker).not.toBeNull();
-
-  // Initial value is "2025-01-01"
-  expect(wDatepicker.value).toBe('2025-01-01');
-
-  // Change the value to "definitely not 2025-01-01"
-  wDatepicker.value = 'definitely not 2025-01-01';
-  expect(wDatepicker.value).toBe('definitely not 2025-01-01');
-
-  // Reset the form
-  form.reset();
-
-  // Value should be reset back to "2025-01-01"
-  expect(wDatepicker.value).toBe('2025-01-01');
-});
-
-test('submits the associated form when datepicker input field has focus and user presses Enter', async () => {
-  const screen = render(html`
-    <form>
-      <w-datepicker
-        label="Date"
-        data-testid="datepicker"
-        value="2025-01-01"
-      >
-      </w-datepicker>
-      <button type="submit">Submit</button>
-    </form>
-  `);
-
-  const onSubmit = vi.fn();
-  const form = document.querySelector('form') as HTMLFormElement;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    onSubmit();
-  });
-
-  await userEvent.click(screen.getByTestId('datepicker'));
-  await userEvent.keyboard('[Enter]');
-
-  await vi.waitFor(() => expect(onSubmit).toHaveBeenCalled());
+	await vi.waitFor(() => expect(onSubmit).toHaveBeenCalled());
 });

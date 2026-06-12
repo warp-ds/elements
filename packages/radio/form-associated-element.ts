@@ -1,391 +1,414 @@
-import { isServer, LitElement } from 'lit';
+import { isServer, LitElement } from "lit";
 
-import { property } from 'lit/decorators.js';
+import { property } from "lit/decorators.js";
 
-import BaseElement from './base-element.js';
-import { CustomErrorValidator } from './custom-error-validator.js';
-import { WInvalidEvent } from './invalid';
+import BaseElement from "./base-element.js";
+import { CustomErrorValidator } from "./custom-error-validator.js";
+import { WInvalidEvent } from "./invalid";
 
-export interface Validator<T extends BaseFormAssociatedElement = BaseFormAssociatedElement> {
-  observedAttributes?: string[];
-  checkValidity: (element: T) => {
-    message: string;
-    isValid: boolean;
-    invalidKeys: Exclude<keyof ValidityState, 'valid'>[];
-  };
-  message?: string | ((element: T) => string);
+export interface Validator<
+	T extends BaseFormAssociatedElement = BaseFormAssociatedElement,
+> {
+	observedAttributes?: string[];
+	checkValidity: (element: T) => {
+		message: string;
+		isValid: boolean;
+		invalidKeys: Exclude<keyof ValidityState, "valid">[];
+	};
+	message?: string | ((element: T) => string);
 }
 
 export interface BaseFormControl extends BaseElement {
-  // Form attributes
-  name: null | string;
-  disabled?: boolean;
-  defaultValue?: unknown;
-  defaultChecked?: boolean;
-  checked?: boolean;
-  defaultSelected?: boolean;
-  selected?: boolean;
-  form?: string | null;
+	// Form attributes
+	name: null | string;
+	disabled?: boolean;
+	defaultValue?: unknown;
+	defaultChecked?: boolean;
+	checked?: boolean;
+	defaultSelected?: boolean;
+	selected?: boolean;
+	form?: string | null;
 
-  value?: unknown;
+	value?: unknown;
 
-  // Constraint validation attributes
-  pattern?: string;
-  min?: number | string | Date;
-  max?: number | string | Date;
-  step?: number | 'any';
-  required?: boolean;
-  minlength?: number;
-  maxlength?: number;
+	// Constraint validation attributes
+	pattern?: string;
+	min?: number | string | Date;
+	max?: number | string | Date;
+	step?: number | "any";
+	required?: boolean;
+	minlength?: number;
+	maxlength?: number;
 
-  // Form validation properties
-  readonly validity: ValidityState;
-  readonly validationMessage: string;
+	// Form validation properties
+	readonly validity: ValidityState;
+	readonly validationMessage: string;
 
-  // Form validation methods
-  checkValidity: () => boolean;
-  getForm: () => HTMLFormElement | null;
-  reportValidity: () => boolean;
-  setCustomValidity: (message: string) => void;
+	// Form validation methods
+	checkValidity: () => boolean;
+	getForm: () => HTMLFormElement | null;
+	reportValidity: () => boolean;
+	setCustomValidity: (message: string) => void;
 
-  // Form properties
-  hasInteracted: boolean;
-  valueHasChanged?: boolean;
+	// Form properties
+	hasInteracted: boolean;
+	valueHasChanged?: boolean;
 
-  /** Convenience API for `setCustomValidity()` */
-  customError: null | string;
+	/** Convenience API for `setCustomValidity()` */
+	customError: null | string;
 }
 
 // setFormValue omitted so that we can use `setValue`
 export class BaseFormAssociatedElement
-  extends BaseElement
-  implements Omit<ElementInternals, 'form' | 'setFormValue'>, BaseFormControl
+	extends BaseElement
+	implements Omit<ElementInternals, "form" | "setFormValue">, BaseFormControl
 {
-  static formAssociated = true;
+	static formAssociated = true;
 
-  /**
-   * Validators are static because they have `observedAttributes`, essentially attributes to "watch"
-   * for changes. Whenever these attributes change, we want to be notified and update the validator.
-   */
-  static get validators(): Validator[] {
-    return [CustomErrorValidator()];
-  }
+	/**
+	 * Validators are static because they have `observedAttributes`, essentially attributes to "watch"
+	 * for changes. Whenever these attributes change, we want to be notified and update the validator.
+	 */
+	static get validators(): Validator[] {
+		return [CustomErrorValidator()];
+	}
 
-  // Append all Validator "observedAttributes" into the "observedAttributes" so they can run.
-  static get observedAttributes() {
-    const parentAttrs = new Set(super.observedAttributes || []);
+	// Append all Validator "observedAttributes" into the "observedAttributes" so they can run.
+	static get observedAttributes() {
+		const parentAttrs = new Set(super.observedAttributes || []);
 
-    for (const validator of this.validators) {
-      if (!validator.observedAttributes) {
-        continue;
-      }
+		for (const validator of this.validators) {
+			if (!validator.observedAttributes) {
+				continue;
+			}
 
-      for (const attr of validator.observedAttributes) {
-        parentAttrs.add(attr);
-      }
-    }
+			for (const attr of validator.observedAttributes) {
+				parentAttrs.add(attr);
+			}
+		}
 
-    return [...parentAttrs];
-  }
+		return [...parentAttrs];
+	}
 
-  // Form attributes
-  /** The name of the input, submitted as a name/value pair with form data. */
-  @property({ reflect: true }) name: string | null = null;
+	// Form attributes
+	/** The name of the input, submitted as a name/value pair with form data. */
+	@property({ reflect: true }) name: string | null = null;
 
-  /** Disables the form control. */
-  @property({ type: Boolean }) disabled = false;
+	/** Disables the form control. */
+	@property({ type: Boolean }) disabled = false;
 
-  required = false;
+	required = false;
 
-  assumeInteractionOn: string[] = ['input'];
+	assumeInteractionOn: string[] = ["input"];
 
-  // Additional
-  input?: (HTMLElement & { value: unknown }) | HTMLInputElement | HTMLTextAreaElement;
+	// Additional
+	input?:
+		| (HTMLElement & { value: unknown })
+		| HTMLInputElement
+		| HTMLTextAreaElement;
 
-  validators: Validator[] = [];
+	validators: Validator[] = [];
 
-  // Should these be private?
-  @property({ state: true, attribute: false }) valueHasChanged = false;
-  @property({ state: true, attribute: false }) hasInteracted = false;
+	// Should these be private?
+	@property({ state: true, attribute: false }) valueHasChanged = false;
+	@property({ state: true, attribute: false }) hasInteracted = false;
 
-  // This works around a limitation in Safari. It is a hacky way for us to preserve custom errors generated by the user.
-  @property({ attribute: 'custom-error', reflect: true }) customError: string | null = null;
+	// This works around a limitation in Safari. It is a hacky way for us to preserve custom errors generated by the user.
+	@property({ attribute: "custom-error", reflect: true }) customError:
+		| string
+		| null = null;
 
-  private emittedEvents: string[] = [];
+	private emittedEvents: string[] = [];
 
-  constructor() {
-    super();
+	constructor() {
+		super();
 
-    if (!isServer) {
-      this.addEventListener('invalid', this.emitInvalid);
-    }
-  }
-  // this bullshit makes no sense but tsc is angry about it
-  // this needs both 'private' and 'typeof' or it will be angry and we don't know why
-  // eslint-disable-next-line
+		if (!isServer) {
+			this.addEventListener("invalid", this.emitInvalid);
+		}
+	}
+	// this bullshit makes no sense but tsc is angry about it
+	// this needs both 'private' and 'typeof' or it will be angry and we don't know why
+	// eslint-disable-next-line
   // @ts-ignore
-  private states: typeof CustomStateSet;
+	private states: typeof CustomStateSet;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.updateValidity();
+	connectedCallback() {
+		super.connectedCallback();
+		this.updateValidity();
 
-    // Lazily evaluate after the constructor to allow people to override the `assumeInteractionOn`
-    this.assumeInteractionOn.forEach((event) => {
-      this.addEventListener(event, this.handleInteraction);
-    });
-  }
+		// Lazily evaluate after the constructor to allow people to override the `assumeInteractionOn`
+		this.assumeInteractionOn.forEach((event) => {
+			this.addEventListener(event, this.handleInteraction);
+		});
+	}
 
-  firstUpdated(...args: Parameters<LitElement['firstUpdated']>) {
-    super.firstUpdated(...args);
-    this.updateValidity();
-  }
+	firstUpdated(...args: Parameters<LitElement["firstUpdated"]>) {
+		super.firstUpdated(...args);
+		this.updateValidity();
+	}
 
-  emitInvalid = (e: Event) => {
-    if (e.target !== this) return;
+	emitInvalid = (e: Event) => {
+		if (e.target !== this) return;
 
-    // An "invalid" event counts as interacted, this is usually triggered by a button "submitting"
-    this.hasInteracted = true;
-    this.dispatchEvent(new WInvalidEvent());
-  };
+		// An "invalid" event counts as interacted, this is usually triggered by a button "submitting"
+		this.hasInteracted = true;
+		this.dispatchEvent(new WInvalidEvent());
+	};
 
-  protected willUpdate(changedProperties: Parameters<LitElement['willUpdate']>[0]) {
-    if (!isServer && changedProperties.has('customError')) {
-      // We use null because it we really don't want it to show up in the attributes because `custom-error` does reflect
-      if (!this.customError) {
-        this.customError = null;
-      }
-      this.setCustomValidity(this.customError || '');
-    }
+	protected willUpdate(
+		changedProperties: Parameters<LitElement["willUpdate"]>[0],
+	) {
+		if (!isServer && changedProperties.has("customError")) {
+			// We use null because it we really don't want it to show up in the attributes because `custom-error` does reflect
+			if (!this.customError) {
+				this.customError = null;
+			}
+			this.setCustomValidity(this.customError || "");
+		}
 
-    if (changedProperties.has('value') || changedProperties.has('disabled')) {
-      // @ts-expect-error Some components will use an accessors, other use a property, so we don't want to limit them.
-      const value = this.value as unknown;
+		if (changedProperties.has("value") || changedProperties.has("disabled")) {
+			// @ts-expect-error Some components will use an accessors, other use a property, so we don't want to limit them.
+			const value = this.value as unknown;
 
-      // Accounts for the snowflake case on `<wa-select>`
-      if (Array.isArray(value)) {
-        if (this.name) {
-          const formData = new FormData();
-          for (const val of value) {
-            formData.append(this.name, val as string);
-          }
-          this.setValue(formData, formData);
-        }
-      } else {
-        this.setValue(value as FormData | string | File | null, value as FormData | string | File | null);
-      }
-    }
+			// Accounts for the snowflake case on `<wa-select>`
+			if (Array.isArray(value)) {
+				if (this.name) {
+					const formData = new FormData();
+					for (const val of value) {
+						formData.append(this.name, val as string);
+					}
+					this.setValue(formData, formData);
+				}
+			} else {
+				this.setValue(
+					value as FormData | string | File | null,
+					value as FormData | string | File | null,
+				);
+			}
+		}
 
-    if (changedProperties.has('disabled')) {
-      this.customStates.set('disabled', this.disabled);
+		if (changedProperties.has("disabled")) {
+			this.customStates.set("disabled", this.disabled);
 
-      if (this.hasAttribute('disabled') || (!isServer && !this.matches(':disabled'))) {
-        this.toggleAttribute('disabled', this.disabled);
-      }
-    }
+			if (
+				this.hasAttribute("disabled") ||
+				(!isServer && !this.matches(":disabled"))
+			) {
+				this.toggleAttribute("disabled", this.disabled);
+			}
+		}
 
-    this.updateValidity();
-    super.willUpdate(changedProperties);
-  }
+		this.updateValidity();
+		super.willUpdate(changedProperties);
+	}
 
-  private handleInteraction = (event: Event) => {
-    const emittedEvents = this.emittedEvents;
-    if (!emittedEvents.includes(event.type)) {
-      emittedEvents.push(event.type);
-    }
+	private handleInteraction = (event: Event) => {
+		const emittedEvents = this.emittedEvents;
+		if (!emittedEvents.includes(event.type)) {
+			emittedEvents.push(event.type);
+		}
 
-    // Mark it as user-interacted as soon as all associated events have been emitted
-    if (emittedEvents.length === this.assumeInteractionOn?.length) {
-      this.hasInteracted = true;
-    }
-  };
+		// Mark it as user-interacted as soon as all associated events have been emitted
+		if (emittedEvents.length === this.assumeInteractionOn?.length) {
+			this.hasInteracted = true;
+		}
+	};
 
-  get labels() {
-    return this.internals.labels;
-  }
+	get labels() {
+		return this.internals.labels;
+	}
 
-  getForm() {
-    return this.internals.form;
-  }
+	getForm() {
+		return this.internals.form;
+	}
 
-  @property({ attribute: false, state: true, type: Object })
-  get validity() {
-    return this.internals.validity;
-  }
+	@property({ attribute: false, state: true, type: Object })
+	get validity() {
+		return this.internals.validity;
+	}
 
-  // Not sure if this supports `novalidate`. Will need to test.
-  get willValidate() {
-    return this.internals.willValidate;
-  }
+	// Not sure if this supports `novalidate`. Will need to test.
+	get willValidate() {
+		return this.internals.willValidate;
+	}
 
-  get validationMessage() {
-    return this.internals.validationMessage;
-  }
+	get validationMessage() {
+		return this.internals.validationMessage;
+	}
 
-  checkValidity() {
-    this.updateValidity();
-    return this.internals.checkValidity();
-  }
+	checkValidity() {
+		this.updateValidity();
+		return this.internals.checkValidity();
+	}
 
-  reportValidity() {
-    this.updateValidity();
-    // This seems reasonable. `reportValidity()` is kind of like "we expect you to have interacted"
-    this.hasInteracted = true;
-    return this.internals.reportValidity();
-  }
+	reportValidity() {
+		this.updateValidity();
+		// This seems reasonable. `reportValidity()` is kind of like "we expect you to have interacted"
+		this.hasInteracted = true;
+		return this.internals.reportValidity();
+	}
 
-  /**
-   * Override this to change where constraint validation popups are anchored.
-   */
-  get validationTarget(): undefined | HTMLElement {
-    return (this.input || undefined) as undefined | HTMLElement;
-  }
+	/**
+	 * Override this to change where constraint validation popups are anchored.
+	 */
+	get validationTarget(): undefined | HTMLElement {
+		return (this.input || undefined) as undefined | HTMLElement;
+	}
 
-  setValidity(...args: Parameters<typeof this.internals.setValidity>) {
-    const flags = args[0];
-    const message = args[1];
-    let anchor = args[2];
+	setValidity(...args: Parameters<typeof this.internals.setValidity>) {
+		const flags = args[0];
+		const message = args[1];
+		let anchor = args[2];
 
-    if (!anchor) {
-      anchor = this.validationTarget;
-    }
+		if (!anchor) {
+			anchor = this.validationTarget;
+		}
 
-    this.internals.setValidity(flags, message, anchor || undefined);
-    this.requestUpdate('validity');
-    this.setCustomStates();
-  }
+		this.internals.setValidity(flags, message, anchor || undefined);
+		this.requestUpdate("validity");
+		this.setCustomStates();
+	}
 
-  setCustomStates() {
-    const required = Boolean(this.required);
-    const isValid = this.internals.validity.valid;
-    const hasInteracted = this.hasInteracted;
+	setCustomStates() {
+		const required = Boolean(this.required);
+		const isValid = this.internals.validity.valid;
+		const hasInteracted = this.hasInteracted;
 
-    this.customStates.set('required', required);
-    this.customStates.set('optional', !required);
-    this.customStates.set('invalid', !isValid);
-    this.customStates.set('valid', isValid);
-    this.customStates.set('user-invalid', !isValid && hasInteracted);
-    this.customStates.set('user-valid', isValid && hasInteracted);
-  }
+		this.customStates.set("required", required);
+		this.customStates.set("optional", !required);
+		this.customStates.set("invalid", !isValid);
+		this.customStates.set("valid", isValid);
+		this.customStates.set("user-invalid", !isValid && hasInteracted);
+		this.customStates.set("user-valid", isValid && hasInteracted);
+	}
 
-  /**
-   * Do not use this when creating a "Validator". This is intended for end users of components.
-   * We track manually defined custom errors so we don't clear them on accident in our validators.
-   *
-   */
-  setCustomValidity(message: string) {
-    if (!message) {
-      // We use null because it we really don't want it to show up in the attributes because `custom-error` does reflect
-      this.customError = null;
-      this.setValidity({});
-      return;
-    }
+	/**
+	 * Do not use this when creating a "Validator". This is intended for end users of components.
+	 * We track manually defined custom errors so we don't clear them on accident in our validators.
+	 *
+	 */
+	setCustomValidity(message: string) {
+		if (!message) {
+			// We use null because it we really don't want it to show up in the attributes because `custom-error` does reflect
+			this.customError = null;
+			this.setValidity({});
+			return;
+		}
 
-    this.customError = message;
-    this.setValidity({ customError: true }, message, this.validationTarget);
-  }
+		this.customError = message;
+		this.setValidity({ customError: true }, message, this.validationTarget);
+	}
 
-  formResetCallback() {
-    this.resetValidity();
-    this.hasInteracted = false;
-    this.valueHasChanged = false;
-    this.emittedEvents = [];
-    this.updateValidity();
-  }
+	formResetCallback() {
+		this.resetValidity();
+		this.hasInteracted = false;
+		this.valueHasChanged = false;
+		this.emittedEvents = [];
+		this.updateValidity();
+	}
 
-  formDisabledCallback(isDisabled: boolean) {
-    this.disabled = isDisabled;
+	formDisabledCallback(isDisabled: boolean) {
+		this.disabled = isDisabled;
 
-    this.updateValidity();
-  }
+		this.updateValidity();
+	}
 
-  /**
-   * Called when the browser is trying to restore element’s state to state in which case reason is "restore", or when
-   * the browser is trying to fulfill autofill on behalf of user in which case reason is "autocomplete". In the case of
-   * "restore", state is a string, File, or FormData object previously set as the second argument to setFormValue.
-   */
-  formStateRestoreCallback(state: string | File | FormData | null, reason: 'autocomplete' | 'restore') {
-    // @ts-expect-error We purposely do not have a value property. It makes things hard to extend.
-    this.value = state;
+	/**
+	 * Called when the browser is trying to restore element’s state to state in which case reason is "restore", or when
+	 * the browser is trying to fulfill autofill on behalf of user in which case reason is "autocomplete". In the case of
+	 * "restore", state is a string, File, or FormData object previously set as the second argument to setFormValue.
+	 */
+	formStateRestoreCallback(
+		state: string | File | FormData | null,
+		reason: "autocomplete" | "restore",
+	) {
+		// @ts-expect-error We purposely do not have a value property. It makes things hard to extend.
+		this.value = state;
 
-    if (reason === 'restore') {
-      this.resetValidity();
-    }
+		if (reason === "restore") {
+			this.resetValidity();
+		}
 
-    this.updateValidity();
-  }
+		this.updateValidity();
+	}
 
-  setValue(...args: Parameters<typeof this.internals.setFormValue>) {
-    const [value, state] = args;
+	setValue(...args: Parameters<typeof this.internals.setFormValue>) {
+		const [value, state] = args;
 
-    this.internals.setFormValue(value, state);
-  }
+		this.internals.setFormValue(value, state);
+	}
 
-  get allValidators() {
-    const staticValidators = (this.constructor as typeof BaseFormAssociatedElement).validators || [];
+	get allValidators() {
+		const staticValidators =
+			(this.constructor as typeof BaseFormAssociatedElement).validators || [];
 
-    const validators = this.validators || [];
-    return [...staticValidators, ...validators];
-  }
+		const validators = this.validators || [];
+		return [...staticValidators, ...validators];
+	}
 
-  /**
-   * Reset validity is a way of removing manual custom errors and native validation.
-   */
-  resetValidity() {
-    this.setCustomValidity('');
-    this.setValidity({});
-  }
+	/**
+	 * Reset validity is a way of removing manual custom errors and native validation.
+	 */
+	resetValidity() {
+		this.setCustomValidity("");
+		this.setValidity({});
+	}
 
-  updateValidity() {
-    if (
-      this.disabled ||
-      this.hasAttribute('disabled') ||
-      !this.willValidate //
-    ) {
-      this.resetValidity();
+	updateValidity() {
+		if (
+			this.disabled ||
+			this.hasAttribute("disabled") ||
+			!this.willValidate //
+		) {
+			this.resetValidity();
 
-      return;
-    }
+			return;
+		}
 
-    const validators = this.allValidators;
+		const validators = this.allValidators;
 
-    if (!validators?.length) {
-      // If there's no validators, we do nothing. We also don't want to mess with custom errors, so we just stop here.
-      return;
-    }
+		if (!validators?.length) {
+			// If there's no validators, we do nothing. We also don't want to mess with custom errors, so we just stop here.
+			return;
+		}
 
-    type ValidityKey = { -readonly [P in keyof ValidityState]: ValidityState[P] };
+		type ValidityKey = {
+			-readonly [P in keyof ValidityState]: ValidityState[P];
+		};
 
-    const flags: Partial<ValidityKey> = {
-      // Don't trust custom errors from the Browser. Safari breaks the spec.
-      customError: Boolean(this.customError),
-    };
+		const flags: Partial<ValidityKey> = {
+			// Don't trust custom errors from the Browser. Safari breaks the spec.
+			customError: Boolean(this.customError),
+		};
 
-    const formControl = this.validationTarget || this.input || undefined;
+		const formControl = this.validationTarget || this.input || undefined;
 
-    let finalMessage = '';
+		let finalMessage = "";
 
-    for (const validator of validators) {
-      const { isValid, message, invalidKeys } = validator.checkValidity(this);
+		for (const validator of validators) {
+			const { isValid, message, invalidKeys } = validator.checkValidity(this);
 
-      if (isValid) {
-        continue;
-      }
+			if (isValid) {
+				continue;
+			}
 
-      if (!finalMessage) {
-        finalMessage = message;
-      }
+			if (!finalMessage) {
+				finalMessage = message;
+			}
 
-      if (invalidKeys?.length >= 0) {
-        (invalidKeys as (keyof ValidityState)[]).forEach((str) => (flags[str] = true));
-      }
-    }
+			if (invalidKeys?.length >= 0) {
+				(invalidKeys as (keyof ValidityState)[]).forEach(
+					(str) => (flags[str] = true),
+				);
+			}
+		}
 
-    // This is a workaround for preserving custom errors
-    if (!finalMessage) {
-      finalMessage = this.validationMessage;
-    }
+		// This is a workaround for preserving custom errors
+		if (!finalMessage) {
+			finalMessage = this.validationMessage;
+		}
 
-    this.setValidity(flags, finalMessage, formControl);
-  }
+		this.setValidity(flags, finalMessage, formControl);
+	}
 }
