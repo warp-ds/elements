@@ -346,7 +346,7 @@
     "@vitest/utils": "^4.1.4",
     "@warp-ds/core": "1.1.8",
     "@warp-ds/css": "2.4.1",
-    "@warp-ds/eslint-config": "link:../eslint-config",
+    "@warp-ds/eslint-config": "^2.0.0",
     "@warp-ds/uno": "2.2.0",
     "@wc-toolkit/cem-validator": "^1.0.3",
     "@wc-toolkit/jsdoc-tags": "^1.2.0",

@@ -6,5 +6,5 @@ allowBuilds:
   esbuild: false
   rs-module-lexer: false
 
-overrides:
-  '@warp-ds/eslint-config': link:../eslint-config
+minimumReleaseAgeExclude:
+  - '@warp-ds/eslint-config@2.0.0'
