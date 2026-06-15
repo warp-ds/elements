@@ -2,8 +2,11 @@ import { afterEach, beforeEach, describe, expect, test } from "vitest";
 import {
 	setupHydrationWarningCapture,
 	testHydration,
+	testHydrationWithChildren,
 } from "../../tests/react-hydration";
 
+import "../tab/tab.js";
+import "../tab-panel/tab-panel.js";
 import "./index.js";
 
 describe("w-tabs React SSR hydration", () => {
@@ -23,6 +26,18 @@ describe("w-tabs React SSR hydration", () => {
 
 	test("with active prop hydrates without warnings", async () => {
 		const warnings = await testHydration("w-tabs", { active: "panel1" });
+		expect(warnings).toEqual([]);
+	});
+
+	test("with w-tab and w-tab-panel hydrates without warnings", async () => {
+		const childrenHtml = /* html */ `<w-tab id="t1" slot="tabs" for="tab1"><span>First</span></w-tab><w-tab id="t2" slot="tabs" for="tab2"><span>Second</span></w-tab><w-tab id="t3" slot="tabs" for="tab3"><span>Third</span></w-tab><w-tab-panel id="tab1" slot="panels"><p>Content the first</p></w-tab-panel><w-tab-panel id="tab2" slot="panels"><p>Content the second</p></w-tab-panel><w-tab-panel id="tab3" slot="panels"><p>Content the third</p></w-tab-panel>`;
+		const warnings = await testHydrationWithChildren(
+			"w-tabs",
+			{
+				active: "tab1",
+			},
+			childrenHtml,
+		);
 		expect(warnings).toEqual([]);
 	});
 });
