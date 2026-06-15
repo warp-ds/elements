@@ -49,8 +49,7 @@ describe("w-tabs React SSR hydration", () => {
 
 			const warnings = await testHydrationWithChildren(
 				"w-tabs",
-				{
-				},
+				{},
 				childrenHtml,
 			);
 			expect(warnings).toEqual([]);

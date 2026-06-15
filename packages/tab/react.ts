@@ -28,6 +28,7 @@ type TabProps = Omit<BaseTabProps, "aria-selected"> & {
 export const Tab = React.forwardRef<WarpTab, TabProps>(
 	({ ariaSelected, ...props }, ref) =>
 		React.createElement(BaseTab, {
+			slot: "tabs",
 			...props,
 			...(ariaSelected !== undefined ? { "aria-selected": ariaSelected } : {}),
 			ref,
