@@ -21,7 +21,7 @@ export const TabPanel = React.forwardRef<WarpTabPanel, TabPanelProps>(
 			slot: "panels",
 			...props,
 			ref,
-		}),
+		} as React.ComponentProps<typeof BaseTabPanel>),
 );
 
 TabPanel.displayName = "TabPanel";

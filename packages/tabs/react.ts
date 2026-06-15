@@ -11,6 +11,23 @@ export { TabPanel } from "../tab-panel/react.js";
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
 
+const BaseTabs = createComponent({
+	tagName: "w-tabs",
+	elementClass: Component as unknown as typeof WarpTabs,
+	react: React,
+	events: {
+		onChange: "change" as EventName<WarpTabsChangeEvent>,
+		onchange: "change" as EventName<WarpTabsChangeEvent>,
+	},
+});
+
+type BaseTabsProps = React.ComponentPropsWithoutRef<typeof BaseTabs>;
+
+type TabProps = BaseTabsProps & {
+	/** The ID for the active tab is required to avoid hydration issues */
+	active: string;
+};
+
 /**
  * To avoid hydration errors always provide IDs to both the Tab and TabPanel components,
  * and set the active tab to the first tab ID on the Tabs component.
@@ -27,12 +44,11 @@ class Component extends LitElement {}
  * </Tabs>
  * ```
  */
-export const Tabs = createComponent({
-	tagName: "w-tabs",
-	elementClass: Component as unknown as typeof WarpTabs,
-	react: React,
-	events: {
-		onChange: "change" as EventName<WarpTabsChangeEvent>,
-		onchange: "change" as EventName<WarpTabsChangeEvent>,
-	},
-});
+export const Tabs = React.forwardRef<WarpTabs, TabProps>(({ ...props }, ref) =>
+	React.createElement(BaseTabs, {
+		...props,
+		ref,
+	} as React.ComponentProps<typeof BaseTabs>),
+);
+
+Tabs.displayName = "Tabs";
