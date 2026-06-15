@@ -54,10 +54,7 @@ function nodeToReact(node: Node): React.ReactNode {
 		const el = node as Element;
 		const props: Record<string, unknown> = {};
 		for (const attr of el.attributes) {
-			// Convert HTML attributes to React props
-			let name = attr.name;
-			if (name === "class") name = "className";
-			if (name === "for") name = "htmlFor";
+			const name = attr.name;
 			props[name] = attr.value;
 		}
 		const children = Array.from(el.childNodes, nodeToReact).filter(Boolean);
