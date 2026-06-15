@@ -1,10 +1,12 @@
+// @warp-css;
+
 import { classNames } from "@chbphone55/classnames";
 import { css, html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
 import { reset } from "../styles.js";
 
-import { styles } from "../tabs/styles.js";
+import { styles } from "./styles.js";
 
 const ccTab = {
 	base: "grid w-full items-center font-bold gap-8 antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary",
