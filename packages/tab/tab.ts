@@ -67,7 +67,7 @@ export class WarpTab extends LitElement {
 	/**
 	 * The `id` of the `<w-tab-panel>` this tab controls.
 	 */
-	@property({ attribute: "for", reflect: true })
+	@property({ reflect: true })
 	for!: string;
 
 	/**
