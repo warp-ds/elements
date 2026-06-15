@@ -498,3 +498,65 @@ test('item displays inline to allow horizontal breadcrumb layout', async () => {
   // Host should display inline-block or inline to allow horizontal layout
   expect(['inline', 'inline-block']).toContain(itemStyles.display);
 });
+
+test('linked item exposes "link" part on the anchor element', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  expect(anchor?.getAttribute('part')).toBe('link');
+});
+
+test('item exposes "separator" part on the separator element', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+  expect(separator?.getAttribute('part')).toBe('separator');
+});
+
+test('non-linked item exposes "text" part on the span element', async () => {
+  const page = render(html`
+    <w-breadcrumb-item>Category</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Category')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const span = item?.shadowRoot?.querySelector('span:not([aria-hidden])');
+
+  expect(span).not.toBeNull();
+  expect(span?.getAttribute('part')).toBe('text');
+});
+
+test('::part(link) selector can style the anchor element', async () => {
+  const page = render(html`
+    <style>
+      w-breadcrumb-item::part(link) {
+        font-size: 32px;
+      }
+    </style>
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.fontSize).toBe('32px');
+});

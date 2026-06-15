@@ -24,7 +24,9 @@ class WarpBreadcrumbItem extends LitElement {
   @property({ type: String }) href: string | null = null;
 
   static styles = css`
-    :host {display: inline-block;}
+    :host {
+      display: inline-block;
+    }
     .s-text{
       color: var(--w-s-color-text)
     }
@@ -46,13 +48,13 @@ class WarpBreadcrumbItem extends LitElement {
   /** @internal */
   get link() {
     return this.href
-      ? html`<a class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>`
-      : html`<span class="s-text" aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`;
+      ? html`<a part="link" class="s-text-link" href=${this.href} aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></a>`
+      : html`<span part="text" class="s-text" aria-current=${this.currentPage ? 'page' : nothing}><slot></slot></span>`;
   }
 
   /** @internal */
   get separator() {
-    return !this.currentPage ? html`<span class="separator" aria-hidden="true">/</span>` : nothing;
+    return !this.currentPage ? html`<span part="separator" class="separator" aria-hidden="true">/</span>` : nothing;
   }
 
   render() {
