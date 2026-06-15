@@ -50,12 +50,6 @@ export const styles = css`
     --w-c-radio-cursor: var(--w-c-radio-cursor-disabled, not-allowed);
   }
 
-  .wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--_gap);
-  }
-
   [part='control'] {
     appearance: none;
     -webkit-appearance: none;
