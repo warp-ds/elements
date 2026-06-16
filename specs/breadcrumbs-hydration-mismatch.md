@@ -13,12 +13,14 @@ This causes hydration mismatches in SSR frameworks such as React because the fra
 - Preserve the existing direct-child API for backwards compatibility.
 - Preserve the existing visual appearance and accessible navigation behavior of `w-breadcrumbs`.
 - Provide a clear migration path from direct child anchors/spans to `w-breadcrumb-item`.
+- Add a CSS custom property API for `w-breadcrumb-item` customization.
 
 ## Non-Goals
 
 - Do not remove support for the existing direct-child API in this change.
 - Do not introduce runtime deprecation warnings for the existing API in this change.
 - Do not change the default breadcrumb separator character, spacing, or default accessible label.
+- Do not add button-style background or border customization to `w-breadcrumb-item` in this change.
 - Do not add analytics, logging, or telemetry.
 
 ## Definitions
@@ -54,6 +56,68 @@ When `current-page` is present:
 
 Authors should mark only one item as `current-page`, and that item should be the final breadcrumb item.
 
+## CSS Customization API
+
+`w-breadcrumb-item` supports styling through component tokens, using CSS custom properties with the `--w-c-` prefix.
+
+Tokens may be set directly on a `w-breadcrumb-item`. Because CSS custom properties inherit, consumers may also set them on an ancestor such as `w-breadcrumbs` to affect all items in a breadcrumb trail.
+
+```css
+w-breadcrumbs {
+  --w-c-breadcrumb-item-link-color: var(--w-s-color-text-link);
+  --w-c-breadcrumb-item-separator-color: var(--w-s-color-icon);
+}
+```
+
+### Layout & Typography
+
+- `--w-c-breadcrumb-item-font-size`
+- `--w-c-breadcrumb-item-line-height`
+- `--w-c-breadcrumb-item-font-weight`
+- `--w-c-breadcrumb-item-padding-x`
+- `--w-c-breadcrumb-item-padding-y`
+
+### Link Color
+
+- `--w-c-breadcrumb-item-link-color`
+- `--w-c-breadcrumb-item-link-color-hover`
+- `--w-c-breadcrumb-item-link-color-active`
+
+### Text Color
+
+- `--w-c-breadcrumb-item-text-color`
+
+### Separator
+
+- `--w-c-breadcrumb-item-separator-color`
+- `--w-c-breadcrumb-item-separator-spacing`
+
+`--w-c-breadcrumb-item-separator-spacing` controls the inline space between the item label and the separator, and between the separator and the following item.
+
+The separator uses `--w-c-breadcrumb-item-font-size`; it does not have a separate font-size token.
+
+The separator character itself is not customizable through CSS custom properties in this change.
+
+### Focus
+
+- `--w-c-breadcrumb-item-outline-width`
+- `--w-c-breadcrumb-item-outline-color`
+- `--w-c-breadcrumb-item-outline-offset`
+
+Focus tokens apply only to linked breadcrumb items. Non-linked breadcrumb items must not become keyboard-focusable because focus tokens are set.
+
+### Customization Requirements
+
+- Every documented `w-breadcrumb-item` token must have a default value that preserves the existing breadcrumb appearance.
+- Link color tokens must apply only when the item is linked.
+- Text color tokens must apply when the item is not linked.
+- A linked current page item must use the link color tokens.
+- A non-linked current page item must use `--w-c-breadcrumb-item-text-color`.
+- Separator tokens must apply only when the separator is rendered.
+- Focus tokens must apply to the linked item focus indicator.
+- Motion tokens must respect user or platform reduced-motion preferences when the component already supports reduced-motion behavior.
+- Setting a `w-breadcrumb-item` token must not require consumers to target internal elements with selectors.
+
 ## Requirements
 
 ### `w-breadcrumbs`
@@ -76,6 +140,7 @@ Authors should mark only one item as `current-page`, and that item should be the
 - `w-breadcrumb-item` must create a navigable link when `href` is present.
 - `w-breadcrumb-item` must preserve the accessible name of the visible breadcrumb label.
 - `w-breadcrumb-item` must not throw when attributes change after initial render.
+- `w-breadcrumb-item` must expose the CSS custom properties listed in the CSS Customization API.
 
 ### Backwards Compatibility
 
@@ -130,6 +195,16 @@ Invalid authoring does not need additional automatic correction in this change.
 
 12. Given `href` or `current-page` changes on an existing `w-breadcrumb-item`, when the component updates, then link, current-page, and separator behavior reflect the latest attributes.
 
+13. Given a `w-breadcrumb-item` with documented CSS custom properties set directly on it, when rendered, then the corresponding link, text, separator, focus, and motion styles use those custom property values.
+
+14. Given documented CSS custom properties set on `w-breadcrumbs`, when child `w-breadcrumb-item` elements render, then those item elements inherit the configured values unless the same property is overridden on the item.
+
+15. Given `--w-c-breadcrumb-item-text-color` is set and a non-linked item has `current-page`, when rendered, then the current page item uses the configured text color.
+
+16. Given separator CSS custom properties are set on an item with `current-page`, when rendered, then no separator is rendered and separator-specific properties do not create visible separator output.
+
+17. Given focus CSS custom properties are set on a `w-breadcrumb-item` without `href`, when rendered, then the item still does not become keyboard-focusable.
+
 ## Test Notes
 
 - Hydration tests should assert that React hydration warnings are absent for the Item API.
@@ -137,3 +212,4 @@ Invalid authoring does not need additional automatic correction in this change.
 - DOM mutation tests should assert that consumer-provided slotted elements are not given component styling classes.
 - Accessibility tests should cover navigation landmark behavior, custom `aria-label`, linked item focusability, non-linked item non-focusability, and current-page semantics.
 - Compatibility tests should cover the existing Legacy API examples documented for `w-breadcrumbs`.
+- Styling tests should verify each documented CSS custom property through computed styles, including inherited values from `w-breadcrumbs` and per-item overrides.

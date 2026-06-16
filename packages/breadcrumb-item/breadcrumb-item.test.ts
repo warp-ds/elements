@@ -560,3 +560,341 @@ test('::part(link) selector can style the anchor element', async () => {
   const anchorStyles = getComputedStyle(anchor!);
   expect(anchorStyles.fontSize).toBe('32px');
 });
+
+test('--w-c-breadcrumb-item-link-color sets the link color', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-link-color: rgb(255, 0, 0);">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.color).toBe('rgb(255, 0, 0)');
+});
+
+test('--w-c-breadcrumb-item-text-color sets the non-linked item color', async () => {
+  const page = render(html`
+    <w-breadcrumb-item style="--w-c-breadcrumb-item-text-color: rgb(0, 128, 0);">Category</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Category')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const span = item?.shadowRoot?.querySelector('span:not([aria-hidden])');
+
+  expect(span).not.toBeNull();
+  const spanStyles = getComputedStyle(span!);
+  expect(spanStyles.color).toBe('rgb(0, 128, 0)');
+});
+
+test('--w-c-breadcrumb-item-separator-color sets the separator color', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-separator-color: rgb(0, 0, 255);">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+  const separatorStyles = getComputedStyle(separator!);
+  expect(separatorStyles.color).toBe('rgb(0, 0, 255)');
+});
+
+test('--w-c-breadcrumb-item-separator-spacing sets the separator margin', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-separator-spacing: 20px;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(separator).not.toBeNull();
+  const separatorStyles = getComputedStyle(separator!);
+  expect(separatorStyles.marginLeft).toBe('20px');
+  expect(separatorStyles.marginRight).toBe('20px');
+});
+
+test('--w-c-breadcrumb-item-font-size sets the font size for link and separator', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-font-size: 24px;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+  const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
+
+  expect(anchor).not.toBeNull();
+  expect(separator).not.toBeNull();
+
+  const anchorStyles = getComputedStyle(anchor!);
+  const separatorStyles = getComputedStyle(separator!);
+
+  expect(anchorStyles.fontSize).toBe('24px');
+  expect(separatorStyles.fontSize).toBe('24px');
+});
+
+test('--w-c-breadcrumb-item-line-height sets the line height', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-line-height: 2;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.lineHeight).toBe('32px'); // 16px default font * 2 line-height = 32px
+});
+
+test('--w-c-breadcrumb-item-font-weight sets the font weight', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-font-weight: 700;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.fontWeight).toBe('700');
+});
+
+test('--w-c-breadcrumb-item-padding-x sets horizontal padding on the link', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-padding-x: 12px;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.paddingLeft).toBe('12px');
+  expect(anchorStyles.paddingRight).toBe('12px');
+});
+
+test('--w-c-breadcrumb-item-padding-y sets vertical padding on the link', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home" style="--w-c-breadcrumb-item-padding-y: 8px;">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a');
+
+  expect(anchor).not.toBeNull();
+  const anchorStyles = getComputedStyle(anchor!);
+  expect(anchorStyles.paddingTop).toBe('8px');
+  expect(anchorStyles.paddingBottom).toBe('8px');
+});
+
+test('--w-c-breadcrumb-item-link-color-hover sets the link hover color', async () => {
+  const page = render(html`
+    <style>
+      .test-item {
+        --w-c-breadcrumb-item-link-color-hover: rgb(255, 128, 0);
+      }
+    </style>
+    <w-breadcrumb-item class="test-item" href="/home">Home</w-breadcrumb-item>
+  `);
+
+  const link = page.getByRole('link', { name: 'Home' });
+  await expect.element(link).toBeVisible();
+
+  // Use real browser hover interaction
+  await link.hover();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a') as HTMLElement;
+
+  const anchorStyles = getComputedStyle(anchor);
+  expect(anchorStyles.color).toBe('rgb(255, 128, 0)');
+});
+
+test('link has :active style rule using --w-c-breadcrumb-item-link-color-active', async () => {
+  const page = render(html`
+    <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const shadowRoot = item?.shadowRoot;
+
+  // Check that the shadow root's stylesheets include an :active rule
+  let hasActiveRule = false;
+
+  // Check adoptedStyleSheets
+  for (const sheet of shadowRoot?.adoptedStyleSheets ?? []) {
+    try {
+      for (const rule of sheet.cssRules) {
+        if (rule.cssText.includes(':active') && rule.cssText.includes('link-color-active')) {
+          hasActiveRule = true;
+          break;
+        }
+      }
+    } catch {
+      // CORS may prevent access
+    }
+  }
+
+  // Also check inline style elements in shadow DOM
+  if (!hasActiveRule) {
+    const styleEl = shadowRoot?.querySelector('style');
+    if (styleEl?.textContent?.includes(':active') && styleEl?.textContent?.includes('link-color-active')) {
+      hasActiveRule = true;
+    }
+  }
+
+  expect(hasActiveRule).toBe(true);
+});
+
+test('--w-c-breadcrumb-item-outline-color sets the focus outline color', async () => {
+  const page = render(html`
+    <style>
+      .test-item {
+        --w-c-breadcrumb-item-outline-color: rgb(255, 0, 255);
+      }
+    </style>
+    <w-breadcrumb-item class="test-item" href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a') as HTMLElement;
+
+  // Focus the anchor element directly
+  await anchor.focus();
+
+  const anchorStyles = getComputedStyle(anchor);
+  expect(anchorStyles.outlineColor).toBe('rgb(255, 0, 255)');
+});
+
+test('--w-c-breadcrumb-item-outline-width sets the focus outline width', async () => {
+  const page = render(html`
+    <style>
+      .test-item {
+        --w-c-breadcrumb-item-outline-width: 4px;
+      }
+    </style>
+    <w-breadcrumb-item class="test-item" href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a') as HTMLElement;
+
+  // Focus the anchor element
+  await anchor.focus();
+
+  const anchorStyles = getComputedStyle(anchor);
+  expect(anchorStyles.outlineWidth).toBe('4px');
+});
+
+test('--w-c-breadcrumb-item-outline-offset sets the focus outline offset', async () => {
+  const page = render(html`
+    <style>
+      .test-item {
+        --w-c-breadcrumb-item-outline-offset: 6px;
+      }
+    </style>
+    <w-breadcrumb-item class="test-item" href="/home">Home</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const anchor = item?.shadowRoot?.querySelector('a') as HTMLElement;
+
+  // Focus the anchor element
+  await anchor.focus();
+
+  const anchorStyles = getComputedStyle(anchor);
+  expect(anchorStyles.outlineOffset).toBe('6px');
+});
+
+test('CSS custom properties inherit from w-breadcrumbs to child items', async () => {
+  const page = render(html`
+    <style>
+      .test-breadcrumbs {
+        --w-c-breadcrumb-item-link-color: rgb(100, 150, 200);
+        --w-c-breadcrumb-item-separator-color: rgb(50, 75, 100);
+      }
+    </style>
+    <w-breadcrumbs class="test-breadcrumbs" aria-label="You are here">
+      <w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
+      <w-breadcrumb-item href="/category">Category</w-breadcrumb-item>
+    </w-breadcrumbs>
+  `);
+
+  await expect.element(page.getByText('Home')).toBeVisible();
+
+  const items = page.container.querySelectorAll('w-breadcrumb-item');
+  const firstAnchor = items[0]?.shadowRoot?.querySelector('a') as HTMLElement;
+  const firstSeparator = items[0]?.shadowRoot?.querySelector('[aria-hidden="true"]') as HTMLElement;
+
+  // Link color should inherit from parent
+  const anchorStyles = getComputedStyle(firstAnchor);
+  expect(anchorStyles.color).toBe('rgb(100, 150, 200)');
+
+  // Separator color should inherit from parent
+  const separatorStyles = getComputedStyle(firstSeparator);
+  expect(separatorStyles.color).toBe('rgb(50, 75, 100)');
+});
+
+test('non-linked current-page item uses --w-c-breadcrumb-item-text-color', async () => {
+  const page = render(html`
+    <w-breadcrumb-item
+      current-page
+      style="--w-c-breadcrumb-item-text-color: rgb(200, 100, 50);"
+    >Current page</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Current page')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+  const span = item?.shadowRoot?.querySelector('span:not([aria-hidden])') as HTMLElement;
+
+  expect(span).not.toBeNull();
+  const spanStyles = getComputedStyle(span);
+  expect(spanStyles.color).toBe('rgb(200, 100, 50)');
+});
+
+test('focus tokens do not make non-linked items focusable', async () => {
+  const page = render(html`
+    <w-breadcrumb-item
+      style="--w-c-breadcrumb-item-outline-color: rgb(255, 0, 0); --w-c-breadcrumb-item-outline-width: 4px;"
+    >Category</w-breadcrumb-item>
+  `);
+
+  await expect.element(page.getByText('Category')).toBeVisible();
+
+  const item = page.container.querySelector('w-breadcrumb-item');
+
+  // Should still not have any focusable elements
+  const focusables = item?.shadowRoot?.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+  expect(focusables?.length).toBe(0);
+
+  // The span should not be focusable
+  const span = item?.shadowRoot?.querySelector('span:not([aria-hidden])') as HTMLElement;
+  expect(span?.getAttribute('tabindex')).not.toBe('0');
+});
