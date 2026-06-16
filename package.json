@@ -282,7 +282,7 @@
     "build:manifest": "custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js",
     "build:polyfill": "node ./build/polyfill.js",
     "build:storybook": "pnpm run messages:compile && tsc && pnpm run build:manifest && pnpm run build:entrypoint && storybook build && pnpm run build:polyfill && touch ./storybook-static/.nojekyll",
-    "build:styles": "node ./build/styles.js",
+    "build:styles": "node ./build/styles.js && pnpm run lint:fix",
     "build": "rimraf dist && rimraf eik && pnpm messages:compile && tsc && pnpm build:manifest && pnpm build:editor && pnpm build:components && pnpm run build:cloak && pnpm build:bundle && pnpm build:eik-components-backwards-compat && pnpm run build:polyfill && pnpm run build:docs",
     "clean": "git clean -fdx",
     "commit": "cz",

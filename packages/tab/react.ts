@@ -22,12 +22,15 @@ const BaseTab = createComponent({
 type BaseTabProps = React.ComponentPropsWithoutRef<typeof BaseTab>;
 
 type TabProps = Omit<BaseTabProps, "aria-selected"> & {
+	/** An ID is required to avoid hydration issues */
+	id: string;
 	ariaSelected?: "true" | "false";
 };
 
 export const Tab = React.forwardRef<WarpTab, TabProps>(
 	({ ariaSelected, ...props }, ref) =>
 		React.createElement(BaseTab, {
+			slot: "tabs",
 			...props,
 			...(ariaSelected !== undefined ? { "aria-selected": ariaSelected } : {}),
 			ref,
