@@ -1,3 +1,10 @@
+# [2.10.0-next.17](https://github.com/warp-ds/elements/compare/v2.10.0-next.16...v2.10.0-next.17) (2026-06-17)
+
+
+### Bug Fixes
+
+* **tabs:** make it easier to do React hydration correctly ([#702](https://github.com/warp-ds/elements/issues/702)) ([9ea5272](https://github.com/warp-ds/elements/commit/9ea527251ea2b9c2ce80139edbe576d563b6ed3a))
+
 # [2.10.0-next.16](https://github.com/warp-ds/elements/compare/v2.10.0-next.15...v2.10.0-next.16) (2026-06-10)
 
 
