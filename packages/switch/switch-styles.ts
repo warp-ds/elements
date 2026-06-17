@@ -176,25 +176,4 @@ export const switchStyles = css`
       --w-c-switch-transition: none;
     }
   }
-
-  @media (forced-colors: active) {
-    :host {
-      --w-c-switch-track-bg-active: Highlight;
-      --w-c-switch-track-bg-inactive: Canvas;
-      --w-c-switch-track-border-inactive: ButtonText;
-      --w-c-switch-handle-bg-active: HighlightText;
-      --w-c-switch-handle-bg-inactive: ButtonText;
-      --w-c-switch-track-bg-disabled-on: GrayText;
-      --w-c-switch-track-bg-disabled-off: Canvas;
-      --w-c-switch-track-border-disabled: GrayText;
-      --w-c-switch-handle-bg-disabled-on: Canvas;
-      --w-c-switch-handle-bg-disabled-off: GrayText;
-      --w-c-switch-outline-color: Highlight;
-    }
-
-    [part='track'],
-    [part='handle'] {
-      forced-color-adjust: none;
-    }
-  }
 `;
