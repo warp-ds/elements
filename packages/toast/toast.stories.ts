@@ -19,7 +19,7 @@ export const Default: StoryObj = {
 		return html`
 			<w-button
 				small
-				onclick="window.toast('message goes here', { type: 'error', canclose: true, duration: 120000 })"
+				onclick="window.toast('message goes here', { type: 'error', canclose: true })"
 			>
 				See Error Example
 			</w-button>
