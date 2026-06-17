@@ -60,7 +60,7 @@ export const switchStyles = css`
     --_cursor-disabled: var(--w-c-switch-cursor-disabled, not-allowed);
   }
 
-  button {
+  [part='base'] {
     display: block;
     position: relative;
     height: var(--_height);
@@ -72,22 +72,22 @@ export const switchStyles = css`
     border-radius: 9999px;
   }
 
-  button:disabled {
+  [part='base']:disabled {
     cursor: var(--_cursor-disabled);
     pointer-events: none;
   }
 
-  button:focus {
+  [part='base']:focus {
     outline: none;
   }
 
-  button:focus-visible {
+  [part='base']:focus-visible {
     outline: var(--_outline-width) solid var(--_outline-color);
     outline-offset: var(--_outline-offset);
   }
 
   /* Track */
-  .track {
+  [part='track'] {
     position: absolute;
     top: 0;
     left: 0;
@@ -98,40 +98,40 @@ export const switchStyles = css`
   }
 
   /* Track - enabled + checked */
-  button:not(:disabled)[aria-checked="true"] .track {
+  [part='base']:not(:disabled)[aria-checked="true"] [part='track'] {
     background-color: var(--_track-bg-active);
     border: none;
   }
 
-  button:not(:disabled)[aria-checked="true"]:hover .track {
+  [part='base']:not(:disabled)[aria-checked="true"]:hover [part='track'] {
     background-color: var(--_track-bg-active-hover);
   }
 
   /* Track - enabled + unchecked */
-  button:not(:disabled)[aria-checked="false"] .track {
+  [part='base']:not(:disabled)[aria-checked="false"] [part='track'] {
     background-color: var(--_track-bg-inactive);
     border: 1px solid var(--_track-border-inactive);
   }
 
-  button:not(:disabled)[aria-checked="false"]:hover .track {
+  [part='base']:not(:disabled)[aria-checked="false"]:hover [part='track'] {
     background-color: var(--_track-bg-inactive-hover);
     border-color: var(--_track-border-inactive-hover);
   }
 
   /* Track - disabled + checked */
-  button:disabled[aria-checked="true"] .track {
+  [part='base']:disabled[aria-checked="true"] [part='track'] {
     background-color: var(--_track-bg-disabled-on);
     border: none;
   }
 
   /* Track - disabled + unchecked */
-  button:disabled[aria-checked="false"] .track {
+  [part='base']:disabled[aria-checked="false"] [part='track'] {
     background-color: var(--_track-bg-disabled-off);
     border: 1px solid var(--_track-border-disabled);
   }
 
   /* Handle */
-  .handle {
+  [part='handle'] {
     position: absolute;
     height: var(--_handle-size);
     width: var(--_handle-size);
@@ -143,31 +143,31 @@ export const switchStyles = css`
   }
 
   /* Handle position - checked */
-  button[aria-checked="true"] .handle {
+  [part='base'][aria-checked="true"] [part='handle'] {
     transform: translateX(var(--_handle-translate));
   }
 
   /* Handle color - enabled + checked */
-  button:not(:disabled)[aria-checked="true"] .handle {
+  [part='base']:not(:disabled)[aria-checked="true"] [part='handle'] {
     background-color: var(--_handle-bg-active);
   }
 
   /* Handle color - enabled + unchecked */
-  button:not(:disabled)[aria-checked="false"] .handle {
+  [part='base']:not(:disabled)[aria-checked="false"] [part='handle'] {
     background-color: var(--_handle-bg-inactive);
   }
 
-  button:not(:disabled)[aria-checked="false"]:hover .handle {
+  [part='base']:not(:disabled)[aria-checked="false"]:hover [part='handle'] {
     background-color: var(--_handle-bg-inactive-hover);
   }
 
   /* Handle color - disabled + checked */
-  button:disabled[aria-checked="true"] .handle {
+  [part='base']:disabled[aria-checked="true"] [part='handle'] {
     background-color: var(--_handle-bg-disabled-on);
   }
 
   /* Handle color - disabled + unchecked */
-  button:disabled[aria-checked="false"] .handle {
+  [part='base']:disabled[aria-checked="false"] [part='handle'] {
     background-color: var(--_handle-bg-disabled-off);
   }
 
@@ -192,8 +192,8 @@ export const switchStyles = css`
       --w-c-switch-outline-color: Highlight;
     }
 
-    button .track,
-    button .handle {
+    [part='track'],
+    [part='handle'] {
       forced-color-adjust: none;
     }
   }

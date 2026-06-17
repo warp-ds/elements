@@ -138,8 +138,8 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
         ?disabled=${this.disabled}
         @click=${this._handleClick}
       >
-        <span part="track" class="track"></span>
-        <span part="handle" class="handle"></span>
+        <span part="track"></span>
+        <span part="handle"></span>
       </button>
     `;
   }
