@@ -19,6 +19,20 @@ const REQUIRED_MESSAGE = () =>
 		comment: "Shown when required checkbox group has no selections",
 	});
 
+/**
+ * Checkboxes allow users to select multiple options from a list of choices.
+ *
+ * Use with `w-checkbox`.
+ *
+ * ## Architecture Note
+ * This component uses a <div> wrapper instead of the more semantic <fieldset> element.
+ * Note that w-radio-group uses <fieldset>, which provides better accessibility and follows
+ * HTML best practices. This inconsistency exists for historical reasons and may be addressed
+ * in a future major version to align both on the more semantic approach.
+ *
+ * TODO: Align w-checkbox-group to use <fieldset> in a future major version after assessing
+ * backwards compatibility implications (CSS selectors, etc.).
+ */
 export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	// Use delegatesFocus so focus delegates to an internal focusable element
 	static shadowRootOptions = {

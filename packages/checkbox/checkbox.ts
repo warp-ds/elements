@@ -305,11 +305,10 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 				: "false";
 
 		return html`
-			<label part="base" class="wrapper">
-				<span part="control" class="checkbox control">
+			<label part="base">
+				<span part="control">
 					<input
 						part="input"
-						class="input hide-toggle"
 						type="checkbox"
 						name=${ifDefined(this.name || undefined)}
 						value=${ifDefined(this.value)}
