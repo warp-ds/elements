@@ -1,4 +1,6 @@
-import { describeReactSsrAttributeMapping } from '../../tests/react-ssr-attributes';
-import { ModalHeader } from './react.js';
+import { describeReactSsrAttributeMapping } from "../../tests/react-ssr-attributes";
+import { ModalHeader } from "./react.js";
 
-describeReactSsrAttributeMapping('ModalHeader', ModalHeader, [{ propName: 'noClose', attrName: 'no-close' }]);
+describeReactSsrAttributeMapping("ModalHeader", ModalHeader, [
+	{ propName: "noClose", attrName: "no-close" },
+]);
