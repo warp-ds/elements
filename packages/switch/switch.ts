@@ -1,39 +1,9 @@
-// @warp-css;
-
-import { classNames } from '@chbphone55/classnames';
 import { FormControlMixin } from '@open-wc/form-control';
-import { css, html, LitElement, PropertyValues } from 'lit';
+import { html, LitElement, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { reset } from '../styles';
-
-import { styles } from './styles.js';
-
-const ccSwitch = {
-  base: 'block relative h-24 w-44 cursor-pointer group focusable rounded-full',
-  disabled: 'pointer-events-none',
-
-  track: 'absolute top-0 left-0 h-full w-full rounded-full transition-colors',
-  trackActive: 's-bg-primary group-hover:s-bg-primary-hover',
-  trackInactive: 's-bg border s-border-strong group-hover:s-bg-hover group-hover:s-border-strong-hover',
-
-  trackDisabledOn: 's-bg-disabled',
-  trackDisabledOff: 's-bg-disabled-subtle border s-border-disabled',
-
-  handle: 'absolute transform-gpu h-16 w-16 top-4 left-4 rounded-full transition-transform',
-  handleSelected: 'translate-x-20',
-
-  // ON + enabled
-  handleActive: 's-bg',
-
-  // OFF + enabled
-  handleNotDisabled: 'bg-[--w-s-color-border-strong] group-hover:bg-[--w-s-color-border-strong-hover]',
-
-  handleDisabledOn: 's-bg-disabled-subtle',
-  handleDisabledOff: 's-bg-disabled',
-
-  a11y: 'sr-only',
-};
+import { switchStyles } from './switch-styles.js';
 
 export type WarpSwitchChangeEvent = CustomEvent<{
   checked: boolean;
@@ -42,8 +12,10 @@ export type WarpSwitchChangeEvent = CustomEvent<{
 
 /**
  * The Switch component allows users to toggle between two states.
- * 
+ *
  * @event {WarpSwitchChangeEvent} change - Dispatched when the switch toggles. Includes boolean `checked` and string/null `value` on `details`.
+ *
+ * @slot - Label content for the switch (external - not slotted into shadow DOM)
  */
 export class WarpSwitch extends FormControlMixin(LitElement) {
   /** 
@@ -85,59 +57,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   #initialState = false;
 
-  static styles = [
-    reset,
-    styles,
-    css`
-      :host {
-        display: inline-block;
-      }
-
-      button:focus {
-        outline: none;
-      }
-
-      button:focus-visible {
-        outline: 2px solid var(--w-s-color-border-focus);
-        outline-offset: var(--w-outline-offset, 1px);
-      }
-    `,
-  ];
-
-  /** @internal */
-  get _baseClasses() {
-    return classNames([ccSwitch.base, this.disabled && ccSwitch.disabled]);
-  }
-
-  /** @internal */
-  get _trackClasses() {
-    return classNames([
-      ccSwitch.track,
-      this.disabled
-        ? this.checked
-          ? ccSwitch.trackDisabledOn // disabled + ON
-          : ccSwitch.trackDisabledOff // disabled + OFF
-        : this.checked
-          ? ccSwitch.trackActive // enabled + ON
-          : ccSwitch.trackInactive, // enabled + OFF
-    ]);
-  }
-
-  /** @internal */
-  get _handleClasses() {
-    return classNames([
-      ccSwitch.handle,
-      this.checked && ccSwitch.handleSelected, // position (ON → translated)
-
-      this.disabled
-        ? this.checked
-          ? ccSwitch.handleDisabledOn // disabled + ON
-          : ccSwitch.handleDisabledOff // disabled + OFF
-        : this.checked
-          ? ccSwitch.handleActive // enabled + ON
-          : ccSwitch.handleNotDisabled, // enabled + OFF
-    ]);
-  }
+  static styles = [reset, switchStyles];
 
   /** @internal */
   _handleClick() {
@@ -172,20 +92,10 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
     }
   };
 
-  /** @internal */
-  _syncA11yState() {
-    // Use ElementInternals for ARIA state - works with real AT,
-    // avoids hydration mismatches from client-side attribute changes
-    this.internals.ariaChecked = this.checked ? 'true' : 'false';
-    this.internals.ariaDisabled = this.disabled ? 'true' : null;
-  }
 
   connectedCallback(): void {
     this.#initialState = this.checked;
     super.connectedCallback();
-    // Use ElementInternals for role - works with real AT,
-    // avoids hydration mismatches from client-side attribute changes
-    this.internals.role = 'switch';
     // Sync aria-label to internals (keep attribute for hydration compatibility)
     const ariaLabel = this.getAttribute('aria-label');
     if (ariaLabel) {
@@ -195,7 +105,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
       this.setValue(this.checked && this.value ? this.value : null);
     }
 
-    this._syncA11yState();
     this.addEventListener('click', this._handleHostClick);
     this.addEventListener('keydown', this._handleKeyDown);
   }
@@ -212,9 +121,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
         this.setValue(this.checked && this.value ? this.value : null);
       }
     }
-    if (changedProperties.has('checked') || changedProperties.has('disabled')) {
-      this._syncA11yState();
-    }
   }
 
   resetFormControl(): void {
@@ -223,19 +129,18 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
   render() {
     return html`
-      <div>
-        <button
-          type="button"
-          role="none"
-          tabindex=${this.disabled ? -1 : 0}
-          class=${this._baseClasses}
-          ?disabled=${this.disabled}
-          @click=${this._handleClick}
-        >
-          <span data-testid="track" class=${this._trackClasses}></span>
-          <span data-testid="handle" class=${this._handleClasses}></span>
-        </button>
-      </div>
+      <button
+        part="base"
+        type="button"
+        role="switch"
+        tabindex=${this.disabled ? -1 : 0}
+        aria-checked="${this.checked}"
+        ?disabled=${this.disabled}
+        @click=${this._handleClick}
+      >
+        <span part="track" class="track"></span>
+        <span part="handle" class="handle"></span>
+      </button>
     `;
   }
 }
