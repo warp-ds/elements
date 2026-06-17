@@ -6,7 +6,7 @@ import { repeat } from "lit/directives/repeat.js";
 
 import { reset } from "../styles";
 
-import { styles } from "../toast/styles.js";
+import { styles } from "./styles.js";
 import type { WarpToast } from "../toast/toast.js";
 import type { ToastInternal, ToastOptions } from "../toast/types.js";
 
