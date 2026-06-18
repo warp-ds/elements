@@ -32,6 +32,7 @@ const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
  */
 class WarpBreadcrumbs extends LitElement {
 	private _internals: ElementInternals;
+	private _defaultLabel: string;
 
 	/**
 	 * Accessible label for the breadcrumb navigation.
@@ -46,12 +47,18 @@ class WarpBreadcrumbs extends LitElement {
 		this._internals = this.attachInternals();
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-		// Use ElementInternals for ARIA to avoid hydration mismatches
-		this._internals.ariaLabel = i18n._({
+		// Store default label for use in render
+		this._defaultLabel = i18n._({
 			id: "breadcrumbs.ariaLabel",
 			message: "You are here",
 			comment: "Default screen reader message for the breadcrumb component",
 		});
+		// Use ElementInternals for ARIA to avoid hydration mismatches
+		this._internals.ariaLabel = this._defaultLabel;
+	}
+
+	private get _label(): string {
+		return this.ariaLabel ?? this._defaultLabel;
 	}
 
 	private _children: Array<Element | TemplateResult> = [];
@@ -61,9 +68,50 @@ class WarpBreadcrumbs extends LitElement {
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this._internals.role = "navigation";
 
+		const anchors = this.querySelectorAll(":scope > a");
+		const spans = this.querySelectorAll(":scope > span");
+		const breadcrumbItems = this.querySelectorAll("w-breadcrumb-item");
+
+		// Warn if using the Legacy API and Item API together.
+		if (
+			breadcrumbItems.length > 0 &&
+			(anchors.length > 0 || spans.length > 0)
+		) {
+			console.warn(
+				"Mixing Legacy API and w-breadcrumb-item API children is not supported.",
+			);
+		}
+
+		let numCurrentPageAttrs = 0;
+		let currentPageAttrOnNonFinalItem = false;
+		breadcrumbItems.forEach((item, index) => {
+			if (item.hasAttribute("current-page")) {
+				if (index < breadcrumbItems.length - 1) {
+					currentPageAttrOnNonFinalItem = true;
+				}
+				numCurrentPageAttrs++;
+			}
+		});
+
+		if (numCurrentPageAttrs > 1) {
+			console.warn(
+				"Please ensure only one w-breadcrumb-item has the current-page attribute.",
+			);
+		}
+
+		if (currentPageAttrOnNonFinalItem) {
+			console.warn(
+				"The current-page attribute should only be used on the final breadcrumb item.",
+			);
+		}
+
 		// Grab existing children at the point that the component is added to the page
 		const flattenedChildren = [...this.children]
+			.filter((child) => {
+				return child && !(child.tagName === "W-BREADCRUMB-ITEM");
+			})
 			.flat(Number.POSITIVE_INFINITY)
+			// Filter out empty text nodes and also any w-breadcrumb-item elements
 			.filter((child) => child);
 		const styledChildren = flattenedChildren.map((child, index) => {
 			if (typeof child === "string") {
@@ -87,10 +135,8 @@ class WarpBreadcrumbs extends LitElement {
 	render() {
 		return html`
 			<nav aria-labelledby="breadCrumbLabel">
-				<h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>
-					${this.ariaLabel}
-				</h2>
-				<div class=${ccBreadcrumbs.wrapper}>${this._children}</div>
+				<h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>${this._label}</h2>
+				<div class=${ccBreadcrumbs.wrapper}>${this._children}<slot></slot></div>
 			</nav>
 		`;
 	}

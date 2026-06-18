@@ -2,16 +2,17 @@ import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 
 import { Breadcrumbs } from "./react";
+import { BreadcrumbItem } from "../breadcrumb-item/react";
 
 export default {
 	title: "Navigation/Breadcrumbs",
 	render(args) {
 		return (
 			<Breadcrumbs {...args}>
-				<a href="#/home">Home</a>
-				<a href="#/category">Category</a>
-				<a href="#/subcategory">Subcategory</a>
-				<span aria-current="page">Current Page</span>
+				<BreadcrumbItem href="#/home">Home</BreadcrumbItem>
+				<BreadcrumbItem href="#/category">Category</BreadcrumbItem>
+				<BreadcrumbItem href="#/subcategory">Subcategory</BreadcrumbItem>
+				<BreadcrumbItem current-page>Current Page</BreadcrumbItem>
 			</Breadcrumbs>
 		);
 	},
@@ -33,11 +34,13 @@ export const WithLinks: Story = {
 	render(args) {
 		return (
 			<Breadcrumbs {...args}>
-				<a href="#/eiendom">Eiendom</a>
-				<a href="#/bolig-til-salgs">Bolig til salgs</a>
-				<a href="#/oslo" aria-current="page">
+				<BreadcrumbItem href="#/eiendom">Eiendom</BreadcrumbItem>
+				<BreadcrumbItem href="#/bolig-til-salgs">
+					Bolig til salgs
+				</BreadcrumbItem>
+				<BreadcrumbItem href="#/oslo" current-page>
 					Oslo
-				</a>
+				</BreadcrumbItem>
 			</Breadcrumbs>
 		);
 	},
@@ -50,9 +53,11 @@ export const WithSpanForCurrentPage: Story = {
 	render(args) {
 		return (
 			<Breadcrumbs {...args}>
-				<a href="#/eiendom">Eiendom</a>
-				<a href="#/bolig-til-salgs">Bolig til salgs</a>
-				<span aria-current="page">Oslo</span>
+				<BreadcrumbItem href="#/eiendom">Eiendom</BreadcrumbItem>
+				<BreadcrumbItem href="#/bolig-til-salgs">
+					Bolig til salgs
+				</BreadcrumbItem>
+				<BreadcrumbItem current-page>Oslo</BreadcrumbItem>
 			</Breadcrumbs>
 		);
 	},

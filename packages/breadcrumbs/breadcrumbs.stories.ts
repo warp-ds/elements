@@ -7,24 +7,24 @@ import { prespread } from "../../.storybook/utilities.js";
 
 import type { WarpBreadcrumbs } from "./breadcrumbs.js";
 import "./breadcrumbs.js";
+import "../breadcrumb-item/breadcrumb-item.js";
 
-const { events, args, argTypes } =
-	getStorybookHelpers<WarpBreadcrumbs>("w-breadcrumbs");
+const storybookHelpers = getStorybookHelpers<WarpBreadcrumbs>("w-breadcrumbs");
+const { events, argTypes } = storybookHelpers;
 
-const meta: Meta<typeof args> = {
+const meta: Meta<typeof storybookHelpers.args> = {
 	title: "Navigation/Breadcrumbs",
 	render(args) {
 		return html`
 			<w-breadcrumbs ${spread(prespread(args))}>
-				<a href="#/home">Home</a>
-				<a href="#/category">Category</a>
-				<span aria-current="page">Current page</span>
+				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+				<w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
 			</w-breadcrumbs>
 		`;
 	},
 	args: {
 		"aria-label": "You are here",
-		...args,
 	},
 	argTypes,
 	parameters: {
@@ -35,7 +35,7 @@ const meta: Meta<typeof args> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof args>;
+type Story = StoryObj<typeof storybookHelpers.args>;
 
 export const Default: Story = {};
 
@@ -43,9 +43,11 @@ export const WithLinks: Story = {
 	render(args) {
 		return html`
 			<w-breadcrumbs ${spread(prespread(args))}>
-				<a href="#/home">Home</a>
-				<a href="#/category">Category</a>
-				<a href="#/subcategory" aria-current="page">Current page</a>
+				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+				<w-breadcrumb-item href="#" current-page
+					>Current page</w-breadcrumb-item
+				>
 			</w-breadcrumbs>
 		`;
 	},
@@ -55,9 +57,9 @@ export const WithSpanForCurrentPage: Story = {
 	render(args) {
 		return html`
 			<w-breadcrumbs ${spread(prespread(args))}>
-				<a href="#/home">Home</a>
-				<a href="#/category">Category</a>
-				<span aria-current="page">Current page</span>
+				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+				<w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
 			</w-breadcrumbs>
 		`;
 	},

@@ -6,13 +6,13 @@ Use `w-breadcrumbs` near the top of a page or section, before the main page head
 
 ### Basic Breadcrumbs
 
-Use links for parent pages and mark the current page with `aria-current="page"`.
+Use w-breadcrumb-item components with an href for parent pages and mark the current page with the current-page attribute.
 
 ```html
 <w-breadcrumbs aria-label="You are here">
-  <a href="/real-estate">Real estate</a>
-  <a href="/real-estate/homes">Homes for sale</a>
-  <span aria-current="page">Oslo</span>
+  <w-breadcrumb-item href="/real-estate">Real estate</w-breadcrumb-item>
+  <w-breadcrumb-item href="/real-estate/homes">Homes for sale</w-breadcrumb-item>
+  <w-breadcrumb-item current-page>Oslo</w-breadcrumb-item>
 </w-breadcrumbs>
 ```
 
@@ -20,13 +20,13 @@ Use links for parent pages and mark the current page with `aria-current="page"`.
 
 The current page should be the last breadcrumb item.
 
-Use a `span` when the current page should not be clickable:
+By default the current-page will not be presented as a link, setting href will change it to a link.
 
 ```html
 <w-breadcrumbs aria-label="You are here">
-  <a href="/real-estate">Real estate</a>
-  <a href="/real-estate/homes">Homes for sale</a>
-  <span aria-current="page">Oslo</span>
+  <w-breadcrumb-item href="/real-estate">Real estate</w-breadcrumb-item>
+  <w-breadcrumb-item href="/real-estate/homes">Homes for sale</w-breadcrumb-item>
+  <w-breadcrumb-item href="/real-estate/homes/12345612" current-page>Oslo</w-breadcrumb-item>
 </w-breadcrumbs>
 ```
 
