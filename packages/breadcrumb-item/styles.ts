@@ -24,11 +24,11 @@ export const styles = css`
 		--_font-weight: var(--w-c-breadcrumb-item-font-weight, 400);
 		--_padding-x: var(--w-c-breadcrumb-item-padding-x, 0);
 		--_padding-y: var(--w-c-breadcrumb-item-padding-y, 0);
-		--_link-color-hover: var(--w-c-breadcrumb-item-link-color-hover);
-		--_link-color-active: var(--w-c-breadcrumb-item-link-color-active);
-		--_outline-color: var(--w-c-breadcrumb-item-outline-color);
-		--_outline-width: var(--w-c-breadcrumb-item-outline-width);
-		--_outline-offset: var(--w-c-breadcrumb-item-outline-offset);
+		--_link-color-hover: var(--w-c-breadcrumb-item-link-color-hover, var(--w-s-color-text-link));
+		--_link-color-active: var(--w-c-breadcrumb-item-link-color-active, var(--w-s-color-text-link));
+		--_outline-color: var(--w-c-breadcrumb-item-outline-color, var(--w-s-color-border-focus));
+		--_outline-width: var(--w-c-breadcrumb-item-outline-width, 2px);
+		--_outline-offset: var(--w-c-breadcrumb-item-outline-offset, 1px);
 	}
 
 	.s-text {
