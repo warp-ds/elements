@@ -32,6 +32,7 @@ const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
  */
 class WarpBreadcrumbs extends LitElement {
 	private _internals: ElementInternals;
+	private _defaultLabel: string;
 
 	/**
 	 * Accessible label for the breadcrumb navigation.
@@ -46,12 +47,18 @@ class WarpBreadcrumbs extends LitElement {
 		this._internals = this.attachInternals();
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-		// Use ElementInternals for ARIA to avoid hydration mismatches
-		this._internals.ariaLabel = i18n._({
+		// Store default label for use in render
+		this._defaultLabel = i18n._({
 			id: "breadcrumbs.ariaLabel",
 			message: "You are here",
 			comment: "Default screen reader message for the breadcrumb component",
 		});
+		// Use ElementInternals for ARIA to avoid hydration mismatches
+		this._internals.ariaLabel = this._defaultLabel;
+	}
+
+	private get _label(): string {
+		return this.ariaLabel ?? this._defaultLabel;
 	}
 
 	private _children: Array<Element | TemplateResult> = [];
@@ -128,9 +135,7 @@ class WarpBreadcrumbs extends LitElement {
 	render() {
 		return html`
 			<nav aria-labelledby="breadCrumbLabel">
-				<h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>
-					${this.ariaLabel}
-				</h2>
+				<h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>${this._label}</h2>
 				<div class=${ccBreadcrumbs.wrapper}>${this._children}<slot></slot></div>
 			</nav>
 		`;
