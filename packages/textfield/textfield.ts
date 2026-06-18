@@ -319,7 +319,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 					? html` <span>
 							${i18n._({
 								id: "textfield.label.optional",
-								message: "(optional)",
+								message: "Optional",
 								comment: "Shown behind label when marked as optional",
 							})}
 						</span>`

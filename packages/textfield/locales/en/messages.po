@@ -16,4 +16,4 @@ msgstr ""
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
 msgid "textfield.label.optional"
-msgstr "(optional)"
+msgstr "Optional"
