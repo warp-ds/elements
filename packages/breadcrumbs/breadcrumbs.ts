@@ -106,7 +106,7 @@ class WarpBreadcrumbs extends LitElement {
 		}
 
 		// Grab existing children at the point that the component is added to the page
-		const flattenedChildren = Array.from(this.children)
+		const flattenedChildren = [...this.children]
 			.filter((child) => {
 				return child && !(child.tagName === "W-BREADCRUMB-ITEM");
 			})

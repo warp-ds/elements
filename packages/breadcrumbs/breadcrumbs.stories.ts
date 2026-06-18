@@ -45,7 +45,9 @@ export const WithLinks: Story = {
 			<w-breadcrumbs ${spread(prespread(args))}>
 				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
 				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
-				<w-breadcrumb-item href="#" current-page>Current page</w-breadcrumb-item>
+				<w-breadcrumb-item href="#" current-page
+					>Current page</w-breadcrumb-item
+				>
 			</w-breadcrumbs>
 		`;
 	},
