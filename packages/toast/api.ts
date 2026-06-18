@@ -1,49 +1,52 @@
-import { WarpToastContainer } from '../toast-container/toast-container.js';
-import { windowExists } from '../utils/window-exists.js';
-import type { ToastInternal, ToastOptions } from './types';
+import { WarpToastContainer } from "../toast-container/toast-container.js";
+import { windowExists } from "../utils/window-exists.js";
+import type { ToastInternal, ToastOptions } from "./types";
 
 function getToastContainer() {
-  const container = customElements.get('w-toast-container');
-  return container as typeof WarpToastContainer;
+	const container = customElements.get("w-toast-container");
+	return container as typeof WarpToastContainer;
 }
 
 /**
  * Creates a new toast
  */
 export function toast(message: string, options?: ToastOptions) {
-  if (!windowExists) return;
+	if (!windowExists) return;
 
-  const toast = getToastContainer().init() as WarpToastContainer;
+	const toast = getToastContainer().init() as WarpToastContainer;
 
-  const data: ToastOptions = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
-    text: message,
-    duration: 5000,
-    type: 'success',
-    ...options,
-  };
+	const data: ToastOptions = {
+		id: Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
+		text: message,
+		duration: 5000,
+		type: "success",
+		...options,
+	};
 
-  toast.set(data);
-  return data;
+	toast.set(data);
+	return data;
 }
 
 /**
  * Remove an existing toast
  */
 export function removeToast(id: string | number): Promise<boolean> | undefined {
-  if (!windowExists) return;
+	if (!windowExists) return;
 
-  const toast = getToastContainer().init() as WarpToastContainer;
-  return toast.del(id);
+	const toast = getToastContainer().init() as WarpToastContainer;
+	return toast.del(id);
 }
 
 /**
  * Update an existing toast
  */
-export function updateToast(id: string | number, options?: ToastOptions): ToastInternal | undefined {
-  if (!windowExists) return;
+export function updateToast(
+	id: string | number,
+	options?: ToastOptions,
+): ToastInternal | undefined {
+	if (!windowExists) return;
 
-  const toast = getToastContainer().init() as WarpToastContainer;
-  toast.set({ ...toast.get(id), ...options });
-  return toast.get(id);
+	const toast = getToastContainer().init() as WarpToastContainer;
+	toast.set({ ...toast.get(id), ...options });
+	return toast.get(id);
 }

@@ -3,7 +3,7 @@
  * @example camelToKebab('openOnFocus') // 'open-on-focus'
  */
 function camelToKebab(str: string): string {
-  return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+	return str.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 /**
@@ -34,35 +34,37 @@ function camelToKebab(str: string): string {
  * };
  * ```
  */
-export function prespread(args: Record<string, unknown>): Record<string, unknown> {
-  const newArgs: Record<string, unknown> = {};
+export function prespread(
+	args: Record<string, unknown>,
+): Record<string, unknown> {
+	const newArgs: Record<string, unknown> = {};
 
-  for (const field of Object.keys(args)) {
-    const value = args[field];
+	for (const field of Object.keys(args)) {
+		const value = args[field];
 
-    // Skip empty strings
-    if (value === '') {
-      continue;
-    }
+		// Skip empty strings
+		if (value === "") {
+			continue;
+		}
 
-    // Convert camelCase to kebab-case for attribute names
-    const attrName = camelToKebab(field);
+		// Convert camelCase to kebab-case for attribute names
+		const attrName = camelToKebab(field);
 
-    // Add Lit syntax for boolean attributes
-    if (typeof value === 'boolean') {
-      newArgs[`?${attrName}`] = value;
-      continue;
-    }
+		// Add Lit syntax for boolean attributes
+		if (typeof value === "boolean") {
+			newArgs[`?${attrName}`] = value;
+			continue;
+		}
 
-    // Add Lit syntax for complex properties (keep camelCase for properties)
-    if (typeof value === 'object') {
-      newArgs[`.${field}`] = value;
-      continue;
-    }
+		// Add Lit syntax for complex properties (keep camelCase for properties)
+		if (typeof value === "object") {
+			newArgs[`.${field}`] = value;
+			continue;
+		}
 
-    // String and number values use kebab-case attribute names
-    newArgs[attrName] = value;
-  }
+		// String and number values use kebab-case attribute names
+		newArgs[attrName] = value;
+	}
 
-  return newArgs;
+	return newArgs;
 }
