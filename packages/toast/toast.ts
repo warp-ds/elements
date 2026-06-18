@@ -1,38 +1,40 @@
-import { classNames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
-import { collapse, expand } from 'element-collapse';
-import { css, html, LitElement } from 'lit';
-import { property, state } from 'lit/decorators.js';
-import { when } from 'lit/directives/when.js';
+// @warp-css;
+import { classNames } from "@chbphone55/classnames";
+import { i18n } from "@lingui/core";
+import { css, html, LitElement } from "lit";
+import { property, state } from "lit/decorators.js";
+import { when } from "lit/directives/when.js";
 
-import '../icon/icon.js';
+import "../icon/icon.js";
 
-import { activateI18n, detectLocale } from '../i18n';
-import { reset } from '../styles';
+import { activateI18n, detectLocale } from "../i18n";
+import { reset } from "../styles";
+import { collapse, expand } from "../utils/element-collapse.js";
 
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
-import { styles } from './styles';
-import type { ToastType } from './types';
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
+import { styles } from "./styles";
+import type { ToastType } from "./types";
 
-export { removeToast, toast, updateToast } from './api.js';
+export { removeToast, toast, updateToast } from "./api.js";
 
 const ccToast = {
-  wrapper: 'relative overflow-hidden w-full',
-  base: 'flex group p-8 mt-16 rounded-8 border-2 pointer-events-auto transition-all',
-  positive: 's-bg-positive-subtle s-border-positive-subtle s-text',
-  warning: 's-bg-warning-subtle s-border-warning-subtle s-text',
-  negative: 's-bg-negative-subtle s-border-negative-subtle s-text',
-  iconBase: 'shrink-0 rounded-full w-[16px] h-[16px] m-[8px]',
-  iconPositive: 's-icon-positive',
-  iconWarning: 's-icon-warning',
-  iconNegative: 's-icon-negative',
-  iconLoading: 'animate-bounce',
-  content: 'self-center mr-8 py-4 last-child:mb-0',
-  close: 'bg-transparent ml-auto p-[8px] s-icon hover:s-icon-hover active:s-icon-active',
+	wrapper: "relative overflow-hidden w-full",
+	base: "flex group p-8 mt-16 rounded-8 border-2 pointer-events-auto transition-all",
+	positive: "s-bg-positive-subtle s-border-positive-subtle s-text",
+	warning: "s-bg-warning-subtle s-border-warning-subtle s-text",
+	negative: "s-bg-negative-subtle s-border-negative-subtle s-text",
+	iconBase: "shrink-0 rounded-full w-[16px] h-[16px] m-[8px]",
+	iconPositive: "s-icon-positive",
+	iconWarning: "s-icon-warning",
+	iconNegative: "s-icon-negative",
+	iconLoading: "animate-bounce",
+	content: "self-center mr-8 py-4 last-child:mb-0",
+	close:
+		"bg-transparent ml-auto p-[8px] s-icon hover:s-icon-hover active:s-icon-active",
 };
 
 /**
@@ -51,164 +53,192 @@ const ccToast = {
  */
 
 export class WarpToast extends LitElement {
-  static styles = [
-    reset,
-    styles,
-    css`
-      :host {
-        display: block;
-      }
-    `,
-  ];
+	static styles = [
+		reset,
+		styles,
+		css`
+			:host {
+				display: block;
+			}
+		`,
+	];
 
-  @property({ type: String, attribute: true, reflect: true })
-  id!: string;
+	@property({ type: String, attribute: true, reflect: true })
+	id!: string;
 
-  @property({ type: String, attribute: true, reflect: true, useDefault: true })
-  type: ToastType = 'success';
+	@property({ type: String, attribute: true, reflect: true, useDefault: true })
+	type: ToastType = "success";
 
-  @property({ type: String, attribute: true, reflect: true })
-  text = '';
+	@property({ type: String, attribute: true, reflect: true })
+	text = "";
 
-  @property({ type: Boolean, attribute: true, reflect: true })
-  canclose = false;
+	@property({ type: Boolean, attribute: true, reflect: true })
+	canclose = false;
 
-  @state()
-  private _expanded = false;
+	@state()
+	private _expanded = false;
 
-  constructor() {
-    super();
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-    // Generate unique ID in constructor to avoid hydration mismatch from reflected property default
-    if (!this.id) {
-      this.id = Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    }
-  }
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+		// Generate unique ID in constructor to avoid hydration mismatch from reflected property default
+		if (!this.id) {
+			this.id =
+				Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+		}
+	}
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
+	connectedCallback() {
+		super.connectedCallback();
+	}
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
+	disconnectedCallback() {
+		super.disconnectedCallback();
+	}
 
-  updated() {
-    if (!this._expanded && this._wrapper) expand(this._wrapper, () => (this._expanded = true));
-  }
+	updated() {
+		if (!this._expanded && this._wrapper)
+			expand(this._wrapper, () => (this._expanded = true));
+	}
 
-  get #primaryClasses() {
-    const type = this.type;
-    return classNames([
-      ccToast.base,
-      type === 'success' && ccToast.positive,
-      type === 'warning' && ccToast.warning,
-      type === 'error' && ccToast.negative,
-    ]);
-  }
+	get #primaryClasses() {
+		const type = this.type;
+		return classNames([
+			ccToast.base,
+			type === "success" && ccToast.positive,
+			type === "warning" && ccToast.warning,
+			type === "error" && ccToast.negative,
+		]);
+	}
 
-  get #iconClasses() {
-    const type = this.type;
-    return classNames([
-      ccToast.iconBase,
-      type === 'success' && ccToast.iconPositive,
-      type === 'warning' && ccToast.iconWarning,
-      type === 'error' && ccToast.iconNegative,
-    ]);
-  }
+	get #iconClasses() {
+		const type = this.type;
+		return classNames([
+			ccToast.iconBase,
+			type === "success" && ccToast.iconPositive,
+			type === "warning" && ccToast.iconWarning,
+			type === "error" && ccToast.iconNegative,
+		]);
+	}
 
-  /** @internal */
-  get _wrapper() {
-    return this.renderRoot?.querySelector('section') ?? null;
-  }
+	/** @internal */
+	get _wrapper() {
+		return this.renderRoot?.querySelector("section") ?? null;
+	}
 
-  /** @internal */
-  get _warning() {
-    return (this.type) === 'warning';
-  }
+	/** @internal */
+	get _warning() {
+		return this.type === "warning";
+	}
 
-  /** @internal */
-  get _error() {
-    return (this.type || 'success') === 'error';
-  }
+	/** @internal */
+	get _error() {
+		return (this.type || "success") === "error";
+	}
 
-  /** @internal */
-  get _role() {
-    return this._error || this._warning ? 'alert' : 'status';
-  }
+	/** @internal */
+	get _role() {
+		return this._error || this._warning ? "alert" : "status";
+	}
 
-  /** @internal */
-  get _typeLabel() {
-    if (this._warning) {
-      return i18n._({
-        id: 'toast.aria.warning',
-        message: 'Warning',
-        comment: 'Default screenreader message for warning in toast component',
-      });
-    }
-    if (this._error) {
-      return i18n._({
-        id: 'toast.aria.error',
-        message: 'Error',
-        comment: 'Default screenreader message for error in toast component',
-      });
-    }
-    return i18n._({
-      id: 'toast.aria.successful',
-      message: 'Successful',
-      comment: 'Default screenreader message for successful in toast component',
-    });
-  }
+	/** @internal */
+	get _typeLabel() {
+		if (this._warning) {
+			return i18n._({
+				id: "toast.aria.warning",
+				message: "Warning",
+				comment: "Default screenreader message for warning in toast component",
+			});
+		}
+		if (this._error) {
+			return i18n._({
+				id: "toast.aria.error",
+				message: "Error",
+				comment: "Default screenreader message for error in toast component",
+			});
+		}
+		return i18n._({
+			id: "toast.aria.successful",
+			message: "Successful",
+			comment: "Default screenreader message for successful in toast component",
+		});
+	}
 
-  /** @internal */
-  get _iconMarkup() {
-    const locale = detectLocale();
-    if (this._warning) return html`<w-icon name="Warning" size="small" locale="${locale}" class="flex"></w-icon>`;
-    if (this._error) return html`<w-icon name="Error" size="small" locale="${locale}" class="flex"></w-icon>`;
-    return html`<w-icon name="Success" size="small" locale="${locale}" class="flex"></w-icon>`;
-  }
+	/** @internal */
+	get _iconMarkup() {
+		const locale = detectLocale();
+		if (this._warning)
+			return html`<w-icon
+				name="Warning"
+				size="small"
+				locale="${locale}"
+				class="flex"
+			></w-icon>`;
+		if (this._error)
+			return html`<w-icon
+				name="Error"
+				size="small"
+				locale="${locale}"
+				class="flex"
+			></w-icon>`;
+		return html`<w-icon
+			name="Success"
+			size="small"
+			locale="${locale}"
+			class="flex"
+		></w-icon>`;
+	}
 
-  async collapse() {
-    return new Promise<void>((resolve) => {
-      if (this._expanded && this._wrapper) {
-        collapse(this._wrapper, resolve);
-      } else {
-        resolve();
-      }
-    });
-  }
+	async collapse() {
+		return new Promise<void>((resolve) => {
+			if (this._expanded && this._wrapper) {
+				collapse(this._wrapper, resolve);
+			} else {
+				resolve();
+			}
+		});
+	}
 
-  close() {
-    const event = new CustomEvent('close', {
-      detail: { id: this.id },
-      bubbles: true,
-      composed: true,
-    });
-    this.updateComplete.then(() => this.dispatchEvent(event));
-  }
+	close() {
+		const event = new CustomEvent("close", {
+			detail: { id: this.id },
+			bubbles: true,
+			composed: true,
+		});
+		this.updateComplete.then(() => this.dispatchEvent(event));
+	}
 
-  render() {
-    if (!this.text) return html``;
+	render() {
+		if (!this.text) return html``;
 
-    return html` <section class="${ccToast.wrapper}" aria-label="${this._typeLabel}">
-      <div class="${this.#primaryClasses}">
-        <div class="${this.#iconClasses}">${this._iconMarkup}</div>
-        <div role="${this._role}" class="${ccToast.content}">
-          <p>${this.text}</p>
-        </div>
-        ${when(
-          this.canclose === true,
-          () => html`
-            <w-button variant="pill" small="" @click="${this.close}">
-              <w-icon name="Close" size="small" locale="${detectLocale()}" style="display: flex" class="flex"></w-icon>
-            </w-button>
-          `,
-        )}
-      </div>
-    </section>`;
-  }
+		return html` <section
+			class="${ccToast.wrapper}"
+			aria-label="${this._typeLabel}"
+		>
+			<div class="${this.#primaryClasses}">
+				<div class="${this.#iconClasses}">${this._iconMarkup}</div>
+				<div role="${this._role}" class="${ccToast.content}">
+					<p>${this.text}</p>
+				</div>
+				${when(
+					this.canclose === true,
+					() => html`
+						<w-button variant="pill" small="" @click="${this.close}">
+							<w-icon
+								name="Close"
+								size="small"
+								locale="${detectLocale()}"
+								style="display: flex"
+								class="flex"
+							></w-icon>
+						</w-button>
+					`,
+				)}
+			</div>
+		</section>`;
+	}
 }
 
-if (!customElements.get('w-toast')) {
-  customElements.define('w-toast', WarpToast);
+if (!customElements.get("w-toast")) {
+	customElements.define("w-toast", WarpToast);
 }

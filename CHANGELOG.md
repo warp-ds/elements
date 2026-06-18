@@ -1,3 +1,39 @@
+# [2.10.0-next.18](https://github.com/warp-ds/elements/compare/v2.10.0-next.17...v2.10.0-next.18) (2026-06-18)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** avoid hydration mismatch in breadcrumbs by adding a w-breadcrumb-item component ([#698](https://github.com/warp-ds/elements/issues/698)) ([949c221](https://github.com/warp-ds/elements/commit/949c221acb42060f389994b5956a44d426cd49e7))
+* CSS regressions in Toast ([#706](https://github.com/warp-ds/elements/issues/706)) ([479b0d7](https://github.com/warp-ds/elements/commit/479b0d7536692cedfecebd90829c3c56fed87841))
+
+# [2.10.0-next.17](https://github.com/warp-ds/elements/compare/v2.10.0-next.16...v2.10.0-next.17) (2026-06-17)
+
+
+### Bug Fixes
+
+* **tabs:** make it easier to do React hydration correctly ([#702](https://github.com/warp-ds/elements/issues/702)) ([9ea5272](https://github.com/warp-ds/elements/commit/9ea527251ea2b9c2ce80139edbe576d563b6ed3a))
+
+# [2.10.0-next.16](https://github.com/warp-ds/elements/compare/v2.10.0-next.15...v2.10.0-next.16) (2026-06-10)
+
+
+### Bug Fixes
+
+* add a w- prefix to the data attribute ([#696](https://github.com/warp-ds/elements/issues/696)) ([e9c51f1](https://github.com/warp-ds/elements/commit/e9c51f109731cb4c82d3e679551c9b635e90aa57))
+
+# [2.10.0-next.15](https://github.com/warp-ds/elements/compare/v2.10.0-next.14...v2.10.0-next.15) (2026-06-08)
+
+
+### Features
+
+* **snackbar:** add the snackbar component for Elements ([#665](https://github.com/warp-ds/elements/issues/665)) ([7a43bfe](https://github.com/warp-ds/elements/commit/7a43bfe7f988c503c7723e07db9f6d974ec1baa3))
+
+# [2.10.0-next.14](https://github.com/warp-ds/elements/compare/v2.10.0-next.13...v2.10.0-next.14) (2026-06-05)
+
+
+### Bug Fixes
+
+* **datepicker:** use placeholder on safari instead of current date ([#668](https://github.com/warp-ds/elements/issues/668)) ([df7f43a](https://github.com/warp-ds/elements/commit/df7f43aba7f8cec73f3aeaadf91c876498c892a6))
+
 # [2.10.0-next.13](https://github.com/warp-ds/elements/compare/v2.10.0-next.12...v2.10.0-next.13) (2026-06-04)
 
 

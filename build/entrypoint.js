@@ -20,6 +20,8 @@ Promise.all([${whenDefinedStatements.join(',')}]).then(() => {
     performance.mark('vend/pc-design-system/warp-elements-loaded');
 });`;
 
-  const entrypointFile = `${exportStatements}${whenAllDefinedCode}`;
+  const entrypointFile = `${exportStatements}${whenAllDefinedCode}
+import './packages/global.js';
+`;
   writeFileSync(new URL('../.tmp/entrypoint.js', import.meta.url), entrypointFile, { encoding: 'utf8' });
 }

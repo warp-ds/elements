@@ -1,5 +1,5 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from "nanoid";
 
-export function uniqueId(prefix = '') {
-  return `${prefix}${nanoid()}`;
+export function uniqueId(prefix = "") {
+	return `${prefix}${nanoid()}`;
 }

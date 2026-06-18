@@ -1,19 +1,19 @@
 // eslint-disable-next-line
 // @ts-nocheck
-import type { CSSResult, CSSResultGroup } from 'lit';
-import { LitElement, unsafeCSS } from 'lit';
+import type { CSSResult, CSSResultGroup } from "lit";
+import { LitElement, unsafeCSS } from "lit";
 
-import { property } from 'lit/decorators.js';
+import { property } from "lit/decorators.js";
 
-import { styles as hostStyles } from './host-styles';
+import { styles as hostStyles } from "./host-styles";
 
 // Augment Lit's module
-declare module 'lit' {
-  interface PropertyDeclaration {
-    /**
-     * Specifies the property’s default value
-     */
-    /* eslint-disable */
+declare module "lit" {
+	interface PropertyDeclaration {
+		/**
+		 * Specifies the property’s default value
+		 */
+		/* eslint-disable */
     default?: any;
     /* eslint-disable */
     initial?: any;

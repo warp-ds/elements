@@ -1,58 +1,59 @@
-import { spread } from '@open-wc/lit-helpers';
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
-import { html } from 'lit';
+import { spread } from "@open-wc/lit-helpers";
+import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
+import { html } from "lit";
 
-import { prespread } from '../../.storybook/utilities.js';
+import { prespread } from "../../.storybook/utilities.js";
 
-import type { WarpDeadToggle } from './dead-toggle.js';
-import './dead-toggle.js';
+import type { WarpDeadToggle } from "./dead-toggle.js";
+import "./dead-toggle.js";
 
-const { events, args, argTypes } = getStorybookHelpers<WarpDeadToggle>('w-dead-toggle');
+const { events, args, argTypes } =
+	getStorybookHelpers<WarpDeadToggle>("w-dead-toggle");
 
 const meta: Meta<typeof args> = {
-  title: 'Forms/Dead toggle',
-  render(args) {
-    return html`<w-dead-toggle ${spread(prespread(args))}></w-dead-toggle>`;
-  },
-  args,
-  argTypes,
-  parameters: {
-    actions: {
-      handles: events,
-    },
-  },
+	title: "Forms/Dead toggle",
+	render(args) {
+		return html`<w-dead-toggle ${spread(prespread(args))}></w-dead-toggle>`;
+	},
+	args,
+	argTypes,
+	parameters: {
+		actions: {
+			handles: events,
+		},
+	},
 };
 
 export default meta;
 type Story = StoryObj<typeof args>;
 
 export const Radio: Story = {
-  args: {
-    type: 'radio',
-  },
+	args: {
+		type: "radio",
+	},
 };
 
 export const Checkbox: Story = {
-  args: {
-    type: 'checkbox',
-  },
+	args: {
+		type: "checkbox",
+	},
 };
 
 export const Indeterminate: Story = {
-  args: {
-    indeterminate: true,
-  },
+	args: {
+		indeterminate: true,
+	},
 };
 
 export const Checked: Story = {
-  args: {
-    checked: true,
-  },
+	args: {
+		checked: true,
+	},
 };
 
 export const Invalid: Story = {
-  args: {
-    invalid: true,
-  },
+	args: {
+		invalid: true,
+	},
 };
