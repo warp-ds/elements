@@ -9,10 +9,10 @@ import type { WarpBreadcrumbs } from "./breadcrumbs.js";
 import "./breadcrumbs.js";
 import "../breadcrumb-item/breadcrumb-item.js";
 
-const { events, args, argTypes } =
-	getStorybookHelpers<WarpBreadcrumbs>("w-breadcrumbs");
+const storybookHelpers = getStorybookHelpers<WarpBreadcrumbs>("w-breadcrumbs");
+const { events, argTypes } = storybookHelpers;
 
-const meta: Meta<typeof args> = {
+const meta: Meta<typeof storybookHelpers.args> = {
 	title: "Navigation/Breadcrumbs",
 	render(args) {
 		return html`
@@ -35,7 +35,7 @@ const meta: Meta<typeof args> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof args>;
+type Story = StoryObj<typeof storybookHelpers.args>;
 
 export const Default: Story = {};
 
