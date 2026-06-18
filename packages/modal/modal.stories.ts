@@ -6,6 +6,7 @@ import { html } from "lit";
 import { prespread } from "../../.storybook/utilities.js";
 import type { WarpModalHeader as ModalHeaderType } from "../modal-header/modal-header.js";
 import type { WarpModal, WarpModalFooter, WarpModalHeader } from "./index.js";
+import "../button/button.js";
 import "./modal.js";
 import "../modal-header/modal-header.js";
 import "../modal-footer/modal-footer.js";
