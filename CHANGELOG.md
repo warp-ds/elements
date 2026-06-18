@@ -1,3 +1,10 @@
+# [2.10.0-next.19](https://github.com/warp-ds/elements/compare/v2.10.0-next.18...v2.10.0-next.19) (2026-06-18)
+
+
+### Bug Fixes
+
+* **breadcrumb-item:** add missing default css values ([#708](https://github.com/warp-ds/elements/issues/708)) ([e3f9107](https://github.com/warp-ds/elements/commit/e3f9107acfa913f91c00ada0fcd535f6bd7c2451))
+
 # [2.10.0-next.18](https://github.com/warp-ds/elements/compare/v2.10.0-next.17...v2.10.0-next.18) (2026-06-18)
 
 
