@@ -34,10 +34,8 @@ To open and close the modal using JavaScript, get a reference to the `<w-modal>`
         </p>
     </div>
     <w-modal-footer slot="footer">
-        <div class="flex gap-16">
-            <w-button variant="secondary" data-testid="js-example-cancel">Cancel</w-button>
-            <w-button variant="primary" data-testid="js-example-confirm">Confirm</w-button>
-        </div>
+        <w-button variant="secondary" data-testid="js-example-cancel">Cancel</w-button>
+        <w-button variant="primary" data-testid="js-example-confirm">Confirm</w-button>
     </w-modal-footer>
 </w-modal>
 
@@ -87,10 +85,8 @@ The available commands for `<w-modal>` are:
         </p>
     </div>
     <w-modal-footer slot="footer">
-        <div class="flex gap-16">
-            <w-button variant="secondary" commandfor="invoker-modal" command="--close">Dope</w-button>
-            <w-button variant="primary" commandfor="invoker-modal" command="--confirm">Dope</w-button>
-        </div>
+        <w-button variant="secondary" commandfor="invoker-modal" command="--close">Dope</w-button>
+        <w-button variant="primary" commandfor="invoker-modal" command="--confirm">Dope</w-button>
     </w-modal-footer>
 </w-modal>
 ```

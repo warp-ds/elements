@@ -108,6 +108,13 @@ export const decorators = [
 
 		// Set lang attribute for i18n detection and activate locale
 		document.documentElement.lang = locale;
+
+		if (theme.includes("dark")) {
+			document.documentElement.style.colorScheme = "dark";
+		} else {
+			document.documentElement.style.colorScheme = "light";
+		}
+
 		i18n.activate(locale);
 
 		return Story();

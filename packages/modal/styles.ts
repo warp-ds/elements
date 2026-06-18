@@ -2,7 +2,10 @@ import { css } from "lit";
 
 export const styles = css`
 	:host {
-		--_backdrop-bg: var(--w-c-modal-backdrop-bg, rgba(0, 0, 0, 0.3));
+		--_backdrop-bg: var(
+			--w-c-modal-backdrop-color,
+			light-dark(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.75))
+		);
 		--_background-color: var(--w-c-modal-bg, var(--w-s-color-background));
 		--_box-shadow: var(--w-c-modal-box-shadow, var(--w-shadow-l));
 		--_color: var(--w-c-modal-color, var(--w-s-color-text));

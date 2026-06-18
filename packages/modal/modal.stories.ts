@@ -4,7 +4,6 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { html } from "lit";
 
 import { prespread } from "../../.storybook/utilities.js";
-import type { WarpModalHeader as ModalHeaderType } from "../modal-header/modal-header.js";
 import type { WarpModal, WarpModalFooter, WarpModalHeader } from "./index.js";
 import "../button/button.js";
 import "./modal.js";
@@ -33,26 +32,29 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default: StoryObj = {
-	args: {},
-	render() {
+type Story = StoryObj<typeof modalArgs>;
+
+export const Default: Story = {
+	args: {
+		show: false,
+		back: false,
+		noClose: false,
+	},
+	render({ show, back, noClose }) {
 		return html`
-			<w-button id="modal-open-button-one" aria-haspopup="dialog"
-				>Open a modal</w-button
-			>
-			<w-modal id="example-modal-one">
+			<w-button id="modal-open-button-one" aria-haspopup="dialog">
+				Open a modal
+			</w-button>
+			<w-modal id="example-modal-one" ?show="${show}">
 				<w-modal-header
 					id="modal-header-one"
 					slot="header"
 					title="An example modal"
+					?back="${back}"
+					?no-close="${noClose}"
 				></w-modal-header>
 				<div slot="content">
-					<h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
-					<div style="margin-bottom: 12px">
-						<w-button id="modal-toggle-back-one" variant="utility" small
-							>Toggle back button</w-button
-						>
-					</div>
+					<p class="t4">Triumph by Wu Tang Clan</p>
 					<p>
 						I bomb atomically, Socrates' philosophies and hypotheses Can't
 						define how I be droppin' these mockeries Lyrically perform armed
@@ -108,14 +110,12 @@ export const Default: StoryObj = {
 					</p>
 				</div>
 				<w-modal-footer slot="footer">
-					<div class="flex gap-16">
-						<w-button variant="secondary" id="modal-close-button-cancel"
-							>Cancel</w-button
-						>
-						<w-button variant="primary" id="modal-close-button-one"
-							>Confirm</w-button
-						>
-					</div>
+					<w-button variant="secondary" id="modal-close-button-cancel">
+						Cancel
+					</w-button>
+					<w-button variant="primary" id="modal-close-button-one">
+						Confirm
+					</w-button>
 				</w-modal-footer>
 			</w-modal>
 		`;
@@ -130,19 +130,12 @@ export const Default: StoryObj = {
 
 		const openButton = canvasElement.querySelector("#modal-open-button-one");
 		const closeButton = canvasElement.querySelector("#modal-close-button-one");
-		const toggleBackButton = canvasElement.querySelector(
-			"#modal-toggle-back-one",
-		);
 		const cancelButton = canvasElement.querySelector(
 			"#modal-close-button-cancel",
 		);
 		const modal = canvasElement.querySelector(
 			"#example-modal-one",
 		) as WarpModal;
-		const modalHeader = canvasElement.querySelector(
-			"#modal-header-one",
-		) as ModalHeaderType;
-
 		if (openButton && modal) {
 			openButton.addEventListener("click", () => modal.open());
 		}
@@ -151,11 +144,6 @@ export const Default: StoryObj = {
 		}
 		if (cancelButton && modal) {
 			cancelButton.addEventListener("click", () => modal.close());
-		}
-		if (toggleBackButton && modalHeader) {
-			toggleBackButton.addEventListener("click", () => {
-				modalHeader.back = !modalHeader.back;
-			});
 		}
 	},
 	parameters: {
@@ -168,8 +156,12 @@ export const Default: StoryObj = {
 };
 
 export const InvokerCommands: StoryObj = {
-	args: {},
-	render() {
+	args: {
+		show: false,
+		back: false,
+		noClose: false,
+	},
+	render({ show, back, noClose }) {
 		return html`
 			<w-button
 				commandfor="invoker-modal"
@@ -177,14 +169,16 @@ export const InvokerCommands: StoryObj = {
 				aria-haspopup="dialog"
 				>Open a modal</w-button
 			>
-			<w-modal id="invoker-modal">
+			<w-modal id="invoker-modal" ?show="${show}">
 				<w-modal-header
 					id="modal-header-one"
 					slot="header"
 					title="An example modal"
+					?back="${back}"
+					?no-close="${noClose}"
 				></w-modal-header>
 				<div slot="content">
-					<h2 class="h4 mb-16">Triumph by Wu Tang Clan</h2>
+					<p class="t4">Triumph by Wu Tang Clan</p>
 					<p>
 						I bomb atomically, Socrates' philosophies and hypotheses Can't
 						define how I be droppin' these mockeries Lyrically perform armed
@@ -263,17 +257,21 @@ export const InvokerCommands: StoryObj = {
 };
 
 export const WithImage: StoryObj = {
-	args: {},
-	render() {
+	args: {
+		show: false,
+		noClose: false,
+	},
+	render({ show, noClose }) {
 		return html`
 			<w-button id="modal-open-button-two" aria-haspopup="dialog"
 				>Open a modal</w-button
 			>
-			<w-modal
-				id="example-modal-two"
-				style="--w-s-color-icon: var(--w-s-color-icon-inverted)"
-			>
-				<w-modal-header slot="header" title="Look a doggo!">
+			<w-modal id="example-modal-two" ?show="${show}">
+				<w-modal-header
+					slot="header"
+					title="Look a doggo!"
+					?no-close="${noClose}"
+				>
 					<img
 						slot="top"
 						style="height: 256px; width: 100%; object-fit: cover;"
