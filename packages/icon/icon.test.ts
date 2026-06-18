@@ -3,6 +3,7 @@ import { html } from "lit";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-lit";
 
+import type { WarpIcon } from "./icon.js";
 import "./icon.js";
 
 test("renders the icon", async () => {
@@ -87,7 +88,7 @@ test("uses html lang attribute when no locale attribute is set", async () => {
 		const el = page.getByTestId("icon").element() as HTMLElement;
 
 		// The component should use the html lang value as its locale
-		expect((el as any).locale).toBe("fi");
+		expect((el as WarpIcon).locale).toBe("fi");
 	} finally {
 		document.documentElement.lang = originalLang;
 	}

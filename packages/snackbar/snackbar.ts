@@ -29,7 +29,7 @@ export type CreateSnackbarOptions = {
 	 *
 	 * @default true
 	 */
-	canClose?: boolean | ((this: GlobalEventHandlers, ev: PointerEvent) => any);
+	canClose?: boolean | ((this: GlobalEventHandlers, ev: PointerEvent) => void);
 	/**
 	 * Duration until the message hides automatically.
 	 *
@@ -58,7 +58,7 @@ export type CreateSnackbarOptions = {
 		/**
 		 * The action button's `onclick` property.
 		 */
-		onclick: (this: GlobalEventHandlers, ev: PointerEvent) => any;
+		onclick: (this: GlobalEventHandlers, ev: PointerEvent) => void;
 		/**
 		 * Overrides the default placement of the action button.
 		 *
@@ -299,16 +299,15 @@ export class WarpSnackbar extends LitElement {
 			if (typeof mergedOptions.canClose === "function") {
 				// Let users add an onclick for example for analytics purposes
 				closeButton.onclick = (e) => {
-					const result = (
+					(
 						mergedOptions.canClose as (
 							this: GlobalEventHandlers,
 							ev: PointerEvent,
-						) => any
+						) => void
 					).call(closeButton, e);
 					if (!e.defaultPrevented) {
 						snackbarItem.close();
 					}
-					return result;
 				};
 			} else {
 				closeButton.onclick = snackbarItem.close.bind(snackbarItem);

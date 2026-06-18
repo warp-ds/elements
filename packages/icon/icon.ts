@@ -12,7 +12,7 @@ interface CacheFetchOptions<T> {
 	responseParser?: ResponseParser<T>;
 }
 
-const _fetchMap = new Map<string, Promise<any>>();
+const _fetchMap = new Map<string, Promise<unknown>>();
 const ERROR_SVG =
 	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"></svg>';
 
@@ -28,7 +28,7 @@ function cacheFetch<T = string>(
 	options: CacheFetchOptions<T> = {},
 ): Promise<T> {
 	const parser =
-		options.responseParser ?? ((res: Response) => res.text() as Promise<any>);
+		options.responseParser ?? ((res: Response) => res.text() as Promise<T>);
 	if (!_fetchMap.has(uri)) {
 		_fetchMap.set(uri, fetch(uri).then(parser));
 	}
