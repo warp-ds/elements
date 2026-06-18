@@ -1,3 +1,11 @@
+# [2.10.0-next.18](https://github.com/warp-ds/elements/compare/v2.10.0-next.17...v2.10.0-next.18) (2026-06-18)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** avoid hydration mismatch in breadcrumbs by adding a w-breadcrumb-item component ([#698](https://github.com/warp-ds/elements/issues/698)) ([949c221](https://github.com/warp-ds/elements/commit/949c221acb42060f389994b5956a44d426cd49e7))
+* CSS regressions in Toast ([#706](https://github.com/warp-ds/elements/issues/706)) ([479b0d7](https://github.com/warp-ds/elements/commit/479b0d7536692cedfecebd90829c3c56fed87841))
+
 # [2.10.0-next.17](https://github.com/warp-ds/elements/compare/v2.10.0-next.16...v2.10.0-next.17) (2026-06-17)
 
 
