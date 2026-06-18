@@ -292,7 +292,9 @@ export default {
 	},
 };
 
-const Template = (args: any) => <Icon {...args} />;
+const Template = (args: React.ComponentProps<typeof Icon>) => (
+	<Icon {...args} />
+);
 
 export const Default = Template.bind({});
 

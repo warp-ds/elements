@@ -70,6 +70,10 @@ const config: LinguiConfig = {
 			path: "packages/textarea/locales/{locale}/messages",
 		},
 		{
+			include: ["packages/textfield/"],
+			path: "packages/textfield/locales/{locale}/messages",
+		},
+		{
 			include: ["packages/page-indicator/"],
 			path: "packages/page-indicator/locales/{locale}/messages",
 		},

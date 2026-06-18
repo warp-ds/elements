@@ -1,16 +1,28 @@
 // @warp-css;
 
 import { classNames as classnames } from "@chbphone55/classnames";
+import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { activateI18n } from "../i18n.js";
 import { reset } from "../styles.js";
 
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { wTextfieldStyles } from "./styles/w-textfield.styles.js";
 import { styles } from "./styles.js";
+import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccinput = {
 	// input classes
@@ -29,22 +41,16 @@ const ccinput = {
 	textArea: "min-h-[42] sm:min-h-[45]",
 };
 
-const ccLabel = {
-	base: "antialiased block relative text-s font-bold pb-4 cursor-pointer s-text",
-	optional: "pl-8 font-normal text-s s-text-subtle",
-};
-
-const ccHelpText = {
-	base: "text-xs mt-4 block",
-	color: "s-text-subtle",
-	colorInvalid: "s-text-negative",
-};
-
 /**
  * A single-line input component used for entering and editing textual or numeric data.
  *
  * @slot suffix - Use with `<w-affix>` to include a suffix, for example the unit for a number (e. g. km or sek).
  * @slot prefix - Use with `<w-affix>` to include a prefix, for example a search icon.
+ *
+ * ## Accessibility Note for Affixes
+ * Due to shadow DOM boundaries, affix content cannot be connected to the input via ARIA references.
+ * For non-interactive affixes (text labels like currency symbols), consider including that information
+ * in the main label or placeholder text instead for better screen reader support.
  */
 class WarpTextField extends FormControlMixin(LitElement) {
 	/** @internal */
@@ -52,6 +58,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 		...LitElement.shadowRootOptions,
 		delegatesFocus: true,
 	};
+
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	}
 
 	/**
 	 * Keep in mind that using disabled in its current form is an anti-pattern.
@@ -87,6 +98,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: String, reflect: true, attribute: "help-text" })
 	helpText: string | undefined;
+
+	/**
+	 * Whether to show the optional indicator after the label.
+	 */
+	@property({ type: Boolean, reflect: true })
+	optional = false;
 
 	/**
 	 * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
@@ -241,14 +258,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	// capture the initial value using firstUpdated and #initialValue
 	#initialValue: string | undefined = undefined;
 
-	firstUpdated() {
-		this.#initialValue = this.value;
-	}
-
-	resetFormControl(): void {
-		this.value = this.#initialValue;
-	}
-
 	// Note about styling slotted elements:
 	// https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
 	// https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#styling_slotted_elements
@@ -256,7 +265,21 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
 	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
 	// https://stackoverflow.com/a/61631668
-	static styles = [reset, styles, wTextfieldStyles];
+	static styles = [
+		reset,
+		styles,
+		wTextfieldStyles,
+		inputLabelStyles,
+		inputHelpTextStyles,
+	];
+
+	firstUpdated() {
+		this.#initialValue = this.value;
+	}
+
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+	}
 
 	/** @internal */
 	get _inputstyles() {
@@ -285,17 +308,22 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	get _helptextstyles() {
-		return classnames([
-			ccHelpText.base,
-			this.invalid ? ccHelpText.colorInvalid : ccHelpText.color,
-		]);
+		return "help-text";
 	}
 
 	/** @internal */
 	get _label() {
 		if (this.label) {
-			return html`<label for="${this._id}" class=${ccLabel.base}
-				>${this.label}</label
+			return html`<label for="${this._id}"
+				>${this.label}${this.optional
+					? html` <span>
+							${i18n._({
+								id: "textfield.label.optional",
+								message: "(optional)",
+								comment: "Shown behind label when marked as optional",
+							})}
+						</span>`
+					: nothing}</label
 			>`;
 		}
 		return undefined;
@@ -364,6 +392,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 						? html`<div class="w-textfield__mask"></div>`
 						: nothing}
 					<input
+						part="input"
 						class="${this._inputstyles}"
 						type="${this.type || "text"}"
 						min="${ifDefined(this.min)}"

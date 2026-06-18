@@ -1,39 +1,32 @@
 // @warp-css;
 
 import { classNames } from "@chbphone55/classnames";
+import { FormControlMixin } from "@open-wc/form-control";
 import { i18n } from "@lingui/core";
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
-import { FormControlMixin } from "@open-wc/form-control";
 
-import { reset } from "../styles.js";
-
-import { styles } from "./styles.js";
-import "../icon/icon.js";
 import { detectLocale } from "../i18n.js";
+import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
 
-const prefixSuffixWrapper =
-	"absolute top-0 bottom-0 flex justify-center items-center focusable rounded-4 focus:[--w-outline-offset:-2px] bg-transparent ";
+import { affixStyles } from "./affix-styles.js";
+import { styles } from "./styles.js";
 
-const ccSuffix = {
-	wrapper: prefixSuffixWrapper + "right-0",
-	wrapperWithLabel: "w-max pr-12",
-	wrapperWithIcon: "w-40",
-	label:
-		"antialiased block relative cursor-default pb-0 font-bold text-xs s-text",
-};
-
-const ccPrefix = {
-	wrapper: prefixSuffixWrapper + "left-0",
-	wrapperWithLabel: "w-max pl-12",
-	wrapperWithIcon: "w-40",
-	label:
-		"antialiased block relative cursor-default pb-0 font-bold text-xs s-text",
-};
+import "../icon/icon.js";
 
 /**
  * This component is usually used in other components like form elements to show a prefix or suffix. See for example `w-textfield`.
+ *
+ * ## Accessibility Note
+ * Due to shadow DOM encapsulation, ARIA attributes (like `aria-describedby`, `aria-labelledby`)
+ * cannot reference elements across shadow boundaries. This means:
+ * - Non-interactive affixes (text labels, icons) cannot be connected to the parent input via ARIA
+ * - Interactive affixes (buttons) must have their own `aria-label` (already implemented)
+ * - Do NOT attempt to reference affix content from parent components via ARIA ID references - it won't work
+ *
+ * For non-interactive labels (e.g., currency symbols), consider including the information in the
+ * main label or placeholder instead of relying on ARIA to announce affix content.
  *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-affix--docs)
  */
@@ -75,21 +68,11 @@ class WarpAffix extends FormControlMixin(LitElement) {
 	 */
 	@property({ reflect: true, useDefault: true }) icon: string | null = null;
 
-	static styles = [reset, styles];
+	static styles = [reset, styles, affixStyles];
 
 	/** @internal */
-	get _classBase() {
-		return this.slot === "suffix" ? ccSuffix : ccPrefix;
-	}
-
-	/** @internal */
-	get _classes() {
-		return classNames([
-			this._classBase.wrapper,
-			this.label
-				? this._classBase.wrapperWithLabel
-				: this._classBase.wrapperWithIcon,
-		]);
+	get _wrapperClasses() {
+		return classNames([this.label ? "has-label" : "has-icon"]);
 	}
 
 	/** @internal */
@@ -121,8 +104,9 @@ class WarpAffix extends FormControlMixin(LitElement) {
 			});
 		return html`
 			<button
+				part="wrapper"
 				aria-label="${label}"
-				class="${this._classes}"
+				class="${this._wrapperClasses}"
 				type="submit"
 				@click="${this.submitContainingForm.bind(this)}"
 			>
@@ -147,8 +131,9 @@ class WarpAffix extends FormControlMixin(LitElement) {
 			});
 		return html`
 			<button
+				part="wrapper"
 				aria-label="${label}"
-				class="${this._classes}"
+				class="${this._wrapperClasses}"
 				type="reset"
 				@click="${this.resetContainingTextField.bind(this)}"
 			>
@@ -165,7 +150,7 @@ class WarpAffix extends FormControlMixin(LitElement) {
 	get _icon() {
 		if (this.icon) {
 			return html`
-				<div class="${this._classes}">
+				<div part="wrapper" class="${this._wrapperClasses}">
 					<w-icon
 						name="${this.icon}"
 						size="small"
@@ -181,8 +166,8 @@ class WarpAffix extends FormControlMixin(LitElement) {
 	/** @internal */
 	get _text() {
 		return html`
-			<div class="${this._classes}">
-				<span class="${this._classBase.label}">${this.label}</span>
+			<div part="wrapper" class="${this._wrapperClasses}">
+				<span part="label">${this.label}</span>
 			</div>
 		`;
 	}

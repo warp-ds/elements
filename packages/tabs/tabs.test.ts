@@ -2,6 +2,7 @@ import { userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test } from "vitest";
 import { render } from "vitest-browser-lit";
+import type { WarpTab } from "../tab/tab.js";
 import "../tab/tab.js";
 import "../tab-panel/tab-panel.js";
 import "./tabs.js";
@@ -197,8 +198,8 @@ test("aria-selected uses ElementInternals (no DOM attribute) to avoid hydration 
 	expect(tabs[1].hasAttribute("aria-selected")).toBe(false);
 
 	// But the property should be set correctly by the parent
-	expect((tabs[0] as any).ariaSelected).toBe("true");
-	expect((tabs[1] as any).ariaSelected).toBe("false");
+	expect((tabs[0] as WarpTab).ariaSelected).toBe("true");
+	expect((tabs[1] as WarpTab).ariaSelected).toBe("false");
 });
 
 test("w-tab does not mutate host aria-controls by default", async () => {

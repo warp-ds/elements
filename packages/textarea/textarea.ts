@@ -9,6 +9,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { reset } from "../styles.js";
 import { uniqueId } from "../utils.js";
 import { styles } from "./styles.js";
+import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccInput = {
 	// input classes
@@ -26,17 +31,6 @@ const ccInput = {
 	// textarea classes
 	textArea: "min-h-[42] sm:min-h-[45]",
 	fixed: "resize-none",
-};
-
-const ccLabel = {
-	base: "antialiased block relative text-s font-bold pb-4 cursor-pointer s-text flex",
-	optional: "pl-8 font-normal text-s s-text-subtle",
-};
-
-const ccHelpText = {
-	base: "text-xs mt-4 block",
-	color: "s-text-subtle",
-	colorInvalid: "s-text-negative",
 };
 
 /**
@@ -283,7 +277,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		this.#clearValidationState();
 	}
 
-	static styles = [reset, styles];
+	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
 	/** @internal */
 	get _textareaStyles() {
@@ -313,10 +307,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	get _helptextstyles() {
-		return classnames([
-			ccHelpText.base,
-			this.invalid ? ccHelpText.colorInvalid : ccHelpText.color,
-		]);
+		return "help-text";
 	}
 
 	/** @internal */
@@ -426,22 +417,25 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	render() {
 		return html`
 			${this.label
-				? html` <label for="${this._id}" class=${ccLabel.base}>
-						${this.label}
-						${this.optional
-							? html`
-									<span class="${ccLabel.optional}">
-										${i18n._({
-											id: "textarea.label.optional",
-											message: "(optional)",
-											comment: "Shown behind label when marked as optional",
-										})}
-									</span>
-								`
-							: nothing}
-					</label>`
+				? html`
+						<label for="${this._id}">
+							${this.label}
+							${this.optional
+								? html`
+										<span>
+											${i18n._({
+												id: "textarea.label.optional",
+												message: "(optional)",
+												comment: "Shown behind label when marked as optional",
+											})}
+										</span>
+									`
+								: nothing}
+						</label>
+					`
 				: nothing}
 			<textarea
+				part="input"
 				id="${this._id}"
 				class="${this._textareaStyles}"
 				name="${ifDefined(this.name)}"
