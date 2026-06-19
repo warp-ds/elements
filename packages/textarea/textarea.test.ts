@@ -296,9 +296,7 @@ test("restores original help text when validation passes", async () => {
 });
 
 test("renders optional indicator as 'Optional' without parentheses", async () => {
-	const page = render(
-		html`<w-textarea label="Message" optional></w-textarea>`,
-	);
+	const page = render(html`<w-textarea label="Message" optional></w-textarea>`);
 
 	await expect.element(page.getByText("Optional")).toBeVisible();
 	expect(page.getByText("(optional)").query()).toBeNull();
@@ -314,9 +312,7 @@ test("does not render optional indicator when both required and optional are set
 });
 
 test("includes optional indicator in the accessible name", async () => {
-	const page = render(
-		html`<w-textarea label="Message" optional></w-textarea>`,
-	);
+	const page = render(html`<w-textarea label="Message" optional></w-textarea>`);
 
 	await expect
 		.element(page.getByRole("textbox", { name: /Message.*Optional/ }))
@@ -325,7 +321,11 @@ test("includes optional indicator in the accessible name", async () => {
 
 test("removes optional indicator when required is added dynamically", async () => {
 	const page = render(
-		html`<w-textarea label="Message" optional data-testid="field"></w-textarea>`,
+		html`<w-textarea
+			label="Message"
+			optional
+			data-testid="field"
+		></w-textarea>`,
 	);
 
 	await expect.element(page.getByText("Optional")).toBeVisible();
@@ -388,7 +388,11 @@ test("renders localized optional text based on active locale", async () => {
 	document.documentElement.lang = "nb";
 
 	const page = render(
-		html`<w-textarea label="Message" optional data-testid="field"></w-textarea>`,
+		html`<w-textarea
+			label="Message"
+			optional
+			data-testid="field"
+		></w-textarea>`,
 	);
 
 	const el = page.getByTestId("field").element() as HTMLElement & {

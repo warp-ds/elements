@@ -35,25 +35,38 @@ class WarpSlider extends LitElement {
 		delegatesFocus: true,
 	};
 
-	static styles = [reset, wSliderStyles, css`
-		:host {
-			/* Added style API for optional only just to mirror other optional implementations */
-			/* The rest of the styling API still needs to be implemented */
-			--_padding-left: var(--w-c-slider-optional-padding-left, 0.8rem);
-			--_font-weight: var(--w-c-slider-optional-font-weight, 400);
-			--_font-size: var(--w-c-slider-optional-font-size, var(--w-font-size-s));
-			--_line-height: var(--w-c-slider-optional-line-height, var(--w-line-height-s));
-			--_color: var(--w-c-slider-optional-color, var(--w-s-color-text-subtle));
-		}
-		
-		.w-slider__optional {
-			padding-left: var(--_padding-left);
-			font-weight: var(--_font-weight);
-			font-size: var(--_font-size);
-			line-height: var(--_line-height);
-			color: var(--_color);
-		}
-	`];
+	static styles = [
+		reset,
+		wSliderStyles,
+		css`
+			:host {
+				/* Added style API for optional only just to mirror other optional implementations */
+				/* The rest of the styling API still needs to be implemented */
+				--_padding-left: var(--w-c-slider-optional-padding-left, 0.8rem);
+				--_font-weight: var(--w-c-slider-optional-font-weight, 400);
+				--_font-size: var(
+					--w-c-slider-optional-font-size,
+					var(--w-font-size-s)
+				);
+				--_line-height: var(
+					--w-c-slider-optional-line-height,
+					var(--w-line-height-s)
+				);
+				--_color: var(
+					--w-c-slider-optional-color,
+					var(--w-s-color-text-subtle)
+				);
+			}
+
+			.w-slider__optional {
+				padding-left: var(--_padding-left);
+				font-weight: var(--_font-weight);
+				font-size: var(--_font-size);
+				line-height: var(--_line-height);
+				color: var(--_color);
+			}
+		`,
+	];
 
 	/**
 	 * The slider fieldset label. Required for proper accessibility.
@@ -488,17 +501,32 @@ class WarpSlider extends LitElement {
 	}
 
 	get _label() {
-		const optional = this._hasLabel && this.optional && !this.required ? html`<span class="w-slider__optional">${i18n._({
-			id: "select.label.optional",
-			message: "Optional",
-			comment: "Shown behind label when marked as optional",
-		})}</span>` : nothing;
+		const optional =
+			this._hasLabel && this.optional && !this.required
+				? html`<span class="w-slider__optional"
+						>${i18n._({
+							id: "select.label.optional",
+							message: "Optional",
+							comment: "Shown behind label when marked as optional",
+						})}</span
+					>`
+				: nothing;
 
 		return this.label
 			? html`<legend class="w-slider__label">
-					<slot id="label" name="label" @slotchange=${this._handleLabelSlotChange}>${this.label}</slot>${optional}
+					<slot
+						id="label"
+						name="label"
+						@slotchange=${this._handleLabelSlotChange}
+						>${this.label}</slot
+					>${optional}
 				</legend>`
-			: html`<slot id="label" name="label" @slotchange=${this._handleLabelSlotChange}></slot>${optional}`;
+			: html`<slot
+						id="label"
+						name="label"
+						@slotchange=${this._handleLabelSlotChange}
+					></slot
+					>${optional}`;
 	}
 
 	render() {

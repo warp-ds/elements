@@ -203,9 +203,7 @@ test("submits the associated form when input has focus and user presses Enter", 
 });
 
 test("renders optional indicator as 'Optional' without parentheses", async () => {
-	const page = render(
-		html`<w-textfield label="Email" optional></w-textfield>`,
-	);
+	const page = render(html`<w-textfield label="Email" optional></w-textfield>`);
 
 	await expect.element(page.getByText("Optional")).toBeVisible();
 	expect(page.getByText("(optional)").query()).toBeNull();
@@ -221,9 +219,7 @@ test("does not render optional indicator when both required and optional are set
 });
 
 test("includes optional indicator in the accessible name", async () => {
-	const page = render(
-		html`<w-textfield label="Email" optional></w-textfield>`,
-	);
+	const page = render(html`<w-textfield label="Email" optional></w-textfield>`);
 
 	await expect
 		.element(page.getByRole("textbox", { name: /Email.*Optional/ }))
@@ -232,7 +228,11 @@ test("includes optional indicator in the accessible name", async () => {
 
 test("removes optional indicator when required is added dynamically", async () => {
 	const page = render(
-		html`<w-textfield label="Email" optional data-testid="field"></w-textfield>`,
+		html`<w-textfield
+			label="Email"
+			optional
+			data-testid="field"
+		></w-textfield>`,
 	);
 
 	await expect.element(page.getByText("Optional")).toBeVisible();
@@ -295,7 +295,11 @@ test("renders localized optional text based on document lang", async () => {
 	document.documentElement.lang = "nb";
 
 	const page = render(
-		html`<w-textfield label="Email" optional data-testid="field"></w-textfield>`,
+		html`<w-textfield
+			label="Email"
+			optional
+			data-testid="field"
+		></w-textfield>`,
 	);
 
 	const el = page.getByTestId("field").element() as HTMLElement & {

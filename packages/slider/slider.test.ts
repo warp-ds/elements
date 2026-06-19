@@ -864,7 +864,14 @@ test("removes optional indicator when required is added dynamically", async () =
 
 test("shows optional indicator when required is removed dynamically", async () => {
 	const page = render(html`
-		<w-slider label="Price" min="0" max="100" required optional data-testid="slider">
+		<w-slider
+			label="Price"
+			min="0"
+			max="100"
+			required
+			optional
+			data-testid="slider"
+		>
 			<w-slider-thumb name="price"></w-slider-thumb>
 		</w-slider>
 	`);
