@@ -1,9 +1,15 @@
+import { i18n } from "@lingui/core";
 import { server, userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
 
 import "./select.js";
+import { messages } from "./locales/en/messages.mjs";
+
+// Initialize i18n with English locale for tests
+i18n.load("en", messages);
+i18n.activate("en");
 
 test("works in a form", async () => {
 	const component = html`
@@ -386,3 +392,28 @@ test.skipIf(server.browser === "chromium" && server.config.env.CI)(
 		expect(onSubmit).toHaveBeenCalled();
 	},
 );
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`
+		<w-select label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-select label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect
+		.element(page.getByRole("combobox", { name: /Country.*Optional/ }))
+		.toBeVisible();
+});

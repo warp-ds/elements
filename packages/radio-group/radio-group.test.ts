@@ -5,12 +5,10 @@ import { render } from "vitest-browser-lit";
 
 import "./radio-group.js";
 import "../radio/radio.js";
+import { messages } from "./locales/en/messages.mjs";
 
 // Initialize i18n with English locale for tests
-i18n.load("en", {
-	"radio-group.label.optional": ["(optional)"],
-	"radio-group.validation.required": ["Please select an option."],
-});
+i18n.load("en", messages);
 i18n.activate("en");
 
 test("selects radio on click and dispatches input/change", async () => {
@@ -100,7 +98,7 @@ test("disabled group renders help text in disabled color", async () => {
 	expect(getComputedStyle(helpText).color).toBe(disabledColor);
 });
 
-test("renders optional text when optional is true", async () => {
+test("renders optional indicator as 'Optional' without parentheses", async () => {
 	const page = render(html`
 		<w-radio-group name="choices" label="Choices" optional>
 			<w-radio value="alpha">Alpha</w-radio>
@@ -108,7 +106,20 @@ test("renders optional text when optional is true", async () => {
 		</w-radio-group>
 	`);
 
-	await expect.element(page.getByText("(optional)")).toBeVisible();
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" label="Choices" required optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	await expect.element(page.getByText("Choices")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
 });
 
 test("associates selected value with form submission", async () => {
@@ -551,7 +562,7 @@ test("adds and removes tabindex on the host when invalid", async () => {
 
 test("updates optional text when locale changes", async () => {
 	i18n.load("fr", {
-		"radio-group.label.optional": ["(optionnel)"],
+		"radio-group.label.optional": ["Facultatif"],
 		"radio-group.validation.required": ["Please select an option."],
 	});
 
@@ -566,11 +577,11 @@ test("updates optional text when locale changes", async () => {
 		updateComplete: Promise<unknown>;
 	};
 	await group.updateComplete;
-	await expect.element(page.getByText("(optional)")).toBeVisible();
+	await expect.element(page.getByText("Optional")).toBeVisible();
 
 	i18n.activate("fr");
 	await group.updateComplete;
-	await expect.element(page.getByText("(optionnel)")).toBeVisible();
+	await expect.element(page.getByText("Facultatif")).toBeVisible();
 
 	i18n.activate("en");
 });

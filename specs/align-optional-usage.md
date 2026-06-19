@@ -134,15 +134,15 @@ When both `required` and `optional` are set:
 
 4. Given any supported component with `required optional`, when rendered, then the optional indicator is not visible.
 
-5. Given any supported component with `required optional`, when submitted empty or invalid according to its existing required behavior, then the component behaves as required.
+5. Given any supported component with `required optional`, when submitted empty or invalid according to its existing required behavior, then the component behaves as required. Note. `w-select` does not have a `required` attribute.
 
 6. Given any supported component initially rendered with `optional`, when `required` is added dynamically, then the optional indicator is removed.
 
-7. Given any supported component initially rendered with `required optional`, when `required` is removed dynamically, then the optional indicator is shown.
+7. Given any supported component initially rendered with `required optional`, when `required` is removed dynamically, then the optional indicator is shown. Note. `w-select` does not have a `required` attribute.
 
 8. Given any supported component with `optional`, when queried by accessible label/name, then the accessible label/name includes both the label text and the optional indicator.
 
-9. Given any supported component with `required optional`, when queried by accessible label/name, then the accessible label/name does not include the optional indicator.
+9. Given any supported component with `required optional`, when queried by accessible label/name, then the accessible label/name does not include the optional indicator. Note. `w-select` does not have a `required` attribute.
 
 10. Given `w-slider label="Price" optional`, when rendered in English, then the slider legend includes `Price Optional`.
 
@@ -169,6 +169,7 @@ When both `required` and `optional` are set:
 - `w-slider` with a label attribute.
 - `w-slider` with a slotted label.
 - `w-slider` with single-thumb and range-thumb configurations.
+- Note. `w-select` does not have a `required` attribute.
 
 ## Test Notes
 

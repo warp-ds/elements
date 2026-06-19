@@ -5,12 +5,10 @@ import { render } from "vitest-browser-lit";
 
 import "./checkbox-group.js";
 import "../checkbox/checkbox.js";
+import { messages } from "./locales/en/messages.mjs";
 
 // Initialize i18n with English locale for tests
-i18n.load("en", {
-	"checkbox-group.label.optional": ["(optional)"],
-	"checkbox-group.validation.required": ["At least one selection is required."],
-});
+i18n.load("en", messages);
 i18n.activate("en");
 
 test("renders help text when provided", async () => {
@@ -50,7 +48,7 @@ test("renders label above the group and associates it", async () => {
 		.toBeVisible();
 });
 
-test("renders optional text when optional is true", async () => {
+test("renders optional indicator as 'Optional' without parentheses", async () => {
 	const page = render(html`
 		<w-checkbox-group label="Preferences" optional>
 			<w-checkbox>One</w-checkbox>
@@ -58,7 +56,20 @@ test("renders optional text when optional is true", async () => {
 		</w-checkbox-group>
 	`);
 
-	await expect.element(page.getByText("(optional)")).toBeVisible();
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	await expect.element(page.getByText("Preferences")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
 });
 
 test("required group toggles invalid state for group and children after submit and selection", async () => {

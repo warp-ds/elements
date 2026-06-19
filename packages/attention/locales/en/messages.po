@@ -16,54 +16,54 @@ msgstr ""
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:421
+#: packages/attention/attention.ts:543
 msgid "attention.aria.callout"
 msgstr "A green speech bubble introducing something new"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:313
+#: packages/attention/attention.ts:423
 msgid "attention.aria.close"
 msgstr "Close"
 
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:433
+#: packages/attention/attention.ts:557
 msgid "attention.aria.highlight"
 msgstr "An attention speech bubble with important information"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:394
+#: packages/attention/attention.ts:513
 msgid "attention.aria.pointingDown"
 msgstr "pointing down"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:402
+#: packages/attention/attention.ts:522
 msgid "attention.aria.pointingLeft"
 msgstr "pointing left"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:386
+#: packages/attention/attention.ts:504
 msgid "attention.aria.pointingRight"
 msgstr "pointing right"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:378
+#: packages/attention/attention.ts:495
 msgid "attention.aria.pointingUp"
 msgstr "pointing up"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:427
+#: packages/attention/attention.ts:550
 msgid "attention.aria.popover"
 msgstr "A white speech bubble providing additional information"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:415
+#: packages/attention/attention.ts:536
 msgid "attention.aria.tooltip"
 msgstr "A black speech bubble providing complementary information"

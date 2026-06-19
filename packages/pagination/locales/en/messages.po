@@ -15,7 +15,7 @@ msgstr ""
 
 #. Default screenreader message for first page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:146
+#: packages/pagination/pagination.ts:161
 msgid "pagination.aria.first-page"
 msgstr "First page"
 
@@ -27,30 +27,30 @@ msgstr "icon"
 
 #. Default screenreader message for next page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:225
+#: packages/pagination/pagination.ts:252
 msgid "pagination.aria.next-page"
 msgstr "Next page"
 
-#. Default message for current page label in the pagination component
-#. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:209
-msgid "pagination.label.current-page"
-msgstr "Page {currentPage}"
-
 #. Default screenreader message for page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:192
+#: packages/pagination/pagination.ts:217
 msgid "pagination.aria.page"
+msgstr "Page {currentPage}"
+
+#. Default message for current page label in the pagination component
+#. js-lingui-explicit-id
+#: packages/pagination/pagination.ts:236
+msgid "pagination.label.current-page"
 msgstr "Page {currentPage}"
 
 #. Default screenreader message for pagination container in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:129
+#: packages/pagination/pagination.ts:145
 msgid "pagination.aria.pagination"
 msgstr "Pages"
 
 #. Default screenreader message for previous page link in the pagination component
 #. js-lingui-explicit-id
-#: packages/pagination/pagination.ts:167
+#: packages/pagination/pagination.ts:186
 msgid "pagination.aria.prev-page"
 msgstr "Previous page"

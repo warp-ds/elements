@@ -31,12 +31,12 @@ msgstr ""
 
 #. Aria text for combobox when there are one or more suggestions
 #. js-lingui-explicit-id
-#: packages/combobox/combobox.ts:196
+#: packages/combobox/combobox.ts:334
 msgid "combobox.aria.pluralSuggestions"
 msgstr "{numSuggestions, plural, one {# förslag} other {# förslag}}"
 
 #. Aria text for combobox when no suggestions
 #. js-lingui-explicit-id
-#: packages/combobox/combobox.ts:203
+#: packages/combobox/combobox.ts:342
 msgid "combobox.aria.noSuggestions"
 msgstr "Inga förslag"

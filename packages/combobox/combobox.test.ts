@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { html } from "lit";
 
 import { expect, test } from "vitest";
@@ -5,6 +6,11 @@ import { render } from "vitest-browser-lit";
 
 import "../textfield/textfield.js";
 import "./combobox.js";
+import { messages as textfieldMessages } from "../textfield/locales/en/messages.mjs";
+
+// Initialize i18n with English locale for tests (combobox uses textfield's messages)
+i18n.load("en", textfieldMessages);
+i18n.activate("en");
 
 test('renders with autocomplete="off" on inner textfield when attribute not provided', async () => {
 	const component = html`<w-combobox data-testid="combobox"></w-combobox>`;
@@ -367,4 +373,28 @@ test("non-empty options property takes precedence over light-DOM option children
 	);
 
 	expect(optionTexts).toEqual(["Apple"]);
+});
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
 });

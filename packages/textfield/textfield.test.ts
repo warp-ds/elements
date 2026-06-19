@@ -210,3 +210,70 @@ test("renders optional indicator as 'Optional' without parentheses", async () =>
 	await expect.element(page.getByText("Optional")).toBeVisible();
 	expect(page.getByText("(optional)").query()).toBeNull();
 });
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(
+		html`<w-textfield label="Email" required optional></w-textfield>`,
+	);
+
+	await expect.element(page.getByText("Email")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(
+		html`<w-textfield label="Email" optional></w-textfield>`,
+	);
+
+	await expect
+		.element(page.getByRole("textbox", { name: /Email.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(
+		html`<w-textfield label="Email" optional data-testid="field"></w-textfield>`,
+	);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = true;
+	await el.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(
+		html`<w-textfield
+			label="Email"
+			required
+			optional
+			data-testid="field"
+		></w-textfield>`,
+	);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = false;
+	await el.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(
+		html`<w-textfield aria-label="Email" optional></w-textfield>`,
+	);
+
+	await expect.element(page.getByLabelText("Email")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});

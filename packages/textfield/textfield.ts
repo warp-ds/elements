@@ -315,7 +315,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	get _label() {
 		if (this.label) {
 			return html`<label for="${this._id}"
-				>${this.label}${this.optional
+				>${this.label}${this.label.length && this.optional && !this.required
 					? html` <span>
 							${i18n._({
 								id: "textfield.label.optional",
