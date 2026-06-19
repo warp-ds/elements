@@ -1,3 +1,11 @@
+# [2.10.0-next.20](https://github.com/warp-ds/elements/compare/v2.10.0-next.19...v2.10.0-next.20) (2026-06-19)
+
+
+### Bug Fixes
+
+* include sr-only in the warp elements CSS ([#713](https://github.com/warp-ds/elements/issues/713)) ([03309e2](https://github.com/warp-ds/elements/commit/03309e20e14097afee79cfe657ec997b966b9ced))
+* list open-wc/form-control as a dependency ([#714](https://github.com/warp-ds/elements/issues/714)) ([d968d83](https://github.com/warp-ds/elements/commit/d968d8357bbec12e5cb37942210623b5e49b9a65)), closes [#711](https://github.com/warp-ds/elements/issues/711)
+
 # [2.10.0-next.19](https://github.com/warp-ds/elements/compare/v2.10.0-next.18...v2.10.0-next.19) (2026-06-18)
 
 
