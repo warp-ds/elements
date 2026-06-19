@@ -74,7 +74,7 @@ export const alertStyles = css`
 
   [part='icon'] {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-shrink: 0;
     width: var(--_icon-size);
     min-width: var(--_icon-size);
@@ -84,6 +84,15 @@ export const alertStyles = css`
   [part='content'] {
     flex: 1;
     min-width: 0;
+    align-self: center;
+  }
+
+  [part='content'] ::slotted(p) {
+    margin: 0;
+  }
+
+  [part='content'] ::slotted(*:first-child) {
+    margin-top: 0;
   }
 
   [part='content'] ::slotted(*:last-child) {
