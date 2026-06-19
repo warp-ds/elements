@@ -277,3 +277,32 @@ test("does not render optional indicator when there is no label", async () => {
 	await expect.element(page.getByLabelText("Email")).toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
 });
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(
+		html`<w-textfield label="Email" required optional></w-textfield>`,
+	);
+
+	const input = page.getByRole("textbox", { name: "Email" });
+	await expect.element(input).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(
+		html`<w-textfield label="Email" optional data-testid="field"></w-textfield>`,
+	);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
+});

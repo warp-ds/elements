@@ -12,9 +12,11 @@ import "./slider.js";
 import type { WarpSliderThumb } from "../slider-thumb/slider-thumb.js";
 import "../slider-thumb/slider-thumb.js";
 import { messages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
 
 // Initialize i18n with English locale for tests
 i18n.load("en", messages);
+i18n.load("nb", nbMessages);
 i18n.activate("en");
 
 test("single slider starts with a default value equal to max", async () => {
@@ -833,9 +835,93 @@ test("includes optional indicator in the slider legend", async () => {
 
 	const slider = document.querySelector("w-slider") as WarpSlider;
 	await slider.updateComplete;
+	await new Promise((resolve) => setTimeout(resolve, 0)); // Wait for the next microtask to ensure the legend is rendered
+
+	const legend = slider.shadowRoot!.querySelector("legend");
+	expect(legend).not.toBeNull();
+	console.log("Legend text content:", legend!.textContent);
+	expect(legend!.textContent).toContain("Price");
+	expect(legend!.textContent).toContain("Optional");
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-slider label="Price" min="0" max="100" optional data-testid="slider">
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const slider = document.querySelector("w-slider") as WarpSlider & {
+		required: boolean;
+	};
+	slider.required = true;
+	await slider.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-slider label="Price" min="0" max="100" required optional data-testid="slider">
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const slider = document.querySelector("w-slider") as WarpSlider & {
+		required: boolean;
+	};
+	slider.required = false;
+	await slider.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-slider aria-label="Price" min="0" max="100" optional>
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	const slider = document.querySelector("w-slider") as WarpSlider;
+	await slider.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from legend when required suppresses it", async () => {
+	render(html`
+		<w-slider label="Price" min="0" max="100" required optional>
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	const slider = document.querySelector("w-slider") as WarpSlider;
+	await slider.updateComplete;
 
 	const legend = slider.shadowRoot!.querySelector("legend");
 	expect(legend).not.toBeNull();
 	expect(legend!.textContent).toContain("Price");
-	expect(legend!.textContent).toContain("Optional");
+	expect(legend!.textContent).not.toContain("Optional");
+});
+
+test("renders localized optional text based on active locale", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(html`
+		<w-slider label="Price" min="0" max="100" optional>
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	const slider = document.querySelector("w-slider") as WarpSlider;
+	await slider.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });

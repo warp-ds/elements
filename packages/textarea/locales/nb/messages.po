@@ -17,4 +17,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/textarea/textarea.ts:426
 msgid "textarea.label.optional"
-msgstr "(valgfritt)"
+msgstr "Valgfri"

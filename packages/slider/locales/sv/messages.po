@@ -38,7 +38,7 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/slider/slider.ts:474
 msgid "select.label.optional"
-msgstr ""
+msgstr "Valfritt"
 
 #. js-lingui-explicit-id
 #: packages/slider-thumb/slider-thumb.ts:275

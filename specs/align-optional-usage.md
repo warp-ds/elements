@@ -81,7 +81,7 @@ When both `required` and `optional` are set:
 - The English optional indicator must be `Optional`.
 - The English optional indicator must not be rendered as `(optional)`.
 - Localized optional strings must be translated as plain localized text without a product requirement to add parentheses.
-- Existing translations that already use plain localized text, such as `Valgfritt`, are valid.
+- Existing translations that already use plain localized text, such as `Valgfri`, are valid.
 - Optional text must be provided through the existing localization system for each supported component.
 
 ### Component API

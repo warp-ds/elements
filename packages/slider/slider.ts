@@ -180,6 +180,10 @@ class WarpSlider extends LitElement {
 	@state()
 	_tabbableElements: Array<HTMLElement> = [];
 
+	/** @internal */
+	@state()
+	_hasLabel = false;
+
 	constructor() {
 		super();
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
@@ -267,6 +271,9 @@ class WarpSlider extends LitElement {
 		}
 		if (this.openEnded) {
 			this.fieldset.style.setProperty("--over-under-offset", "1");
+		}
+		if (this.label) {
+			this._hasLabel = true;
 		}
 
 		const sliderThumbs =
@@ -470,8 +477,18 @@ class WarpSlider extends LitElement {
 		return this.error || this._invalidMessage;
 	}
 
+	private _handleLabelSlotChange(e: Event) {
+		const slot = e.target as HTMLSlotElement;
+
+		// assignedElements() ignores empty text/whitespaces, making it highly reliable
+		const slotContent = slot.assignedElements().length > 0;
+
+		this._hasLabel = slotContent || !!this.label;
+		console.log("Label content changed, has label:", this._hasLabel);
+	}
+
 	get _label() {
-		const optional = this.optional && !this.required ? html`<span class="w-slider__optional">${i18n._({
+		const optional = this._hasLabel && this.optional && !this.required ? html`<span class="w-slider__optional">${i18n._({
 			id: "select.label.optional",
 			message: "Optional",
 			comment: "Shown behind label when marked as optional",
@@ -479,9 +496,9 @@ class WarpSlider extends LitElement {
 
 		return this.label
 			? html`<legend class="w-slider__label">
-					<slot id="label" name="label">${this.label}</slot>${optional}
+					<slot id="label" name="label" @slotchange=${this._handleLabelSlotChange}>${this.label}</slot>${optional}
 				</legend>`
-			: html`<slot id="label" name="label"></slot>${optional}`;
+			: html`<slot id="label" name="label" @slotchange=${this._handleLabelSlotChange}></slot>${optional}`;
 	}
 
 	render() {

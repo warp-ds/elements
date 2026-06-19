@@ -21,4 +21,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/select/select.ts:430
 msgid "select.label.optional"
-msgstr "(valgfritt)"
+msgstr "Valgfri"

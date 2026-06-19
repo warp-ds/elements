@@ -72,6 +72,115 @@ test("does not render optional indicator when both required and optional are set
 	expect(page.getByText("Optional").query()).toBeNull();
 });
 
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	await expect
+		.element(page.getByRole("group", { name: /Preferences.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = true;
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = false;
+	await group.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-checkbox-group aria-label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = page.getByRole("group", { name: "Preferences" });
+	await expect.element(group).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("group", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("updates optional text when locale changes", async () => {
+	i18n.load("nb", {
+		"checkbox-group.label.optional": ["Valgfri"],
+	});
+
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await group.updateComplete;
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	i18n.activate("nb");
+	await group.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	i18n.activate("en");
+});
+
 test("required group toggles invalid state for group and children after submit and selection", async () => {
 	const page = render(html`
 		<form>

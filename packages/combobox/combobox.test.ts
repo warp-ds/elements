@@ -398,3 +398,69 @@ test("does not render optional indicator when both required and optional are set
 	await expect.element(page.getByText("Country")).toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
 });
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	// The inner textfield with role="combobox" should have accessible name including Optional
+	await expect
+		.element(page.getByRole("textbox", { name: /Country.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = true;
+	await el.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = false;
+	await el.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-combobox aria-label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByLabelText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});

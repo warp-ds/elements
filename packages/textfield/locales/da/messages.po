@@ -17,4 +17,4 @@ msgstr ""
 #. js-lingui-explicit-id
 #: packages/textfield/textfield.ts:320
 msgid "textfield.label.optional"
-msgstr "(valgfri)"
+msgstr "Valgfri"

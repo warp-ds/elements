@@ -122,6 +122,90 @@ test("does not render optional indicator when both required and optional are set
 	expect(page.getByText("Optional").query()).toBeNull();
 });
 
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" label="Choices" optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	await expect
+		.element(page.getByRole("radiogroup", { name: /Choices.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" label="Choices" optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const group = document.querySelector("w-radio-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = true;
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" label="Choices" required optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const group = document.querySelector("w-radio-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = false;
+	await group.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" aria-label="Choices" optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	const group = document.querySelector("w-radio-group") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(html`
+		<w-radio-group name="choices" label="Choices" required optional>
+			<w-radio value="alpha">Alpha</w-radio>
+			<w-radio value="beta">Beta</w-radio>
+		</w-radio-group>
+	`);
+
+	const group = page.getByRole("radiogroup", { name: "Choices" });
+	await expect.element(group).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("radiogroup", { name: /Optional/ }).query()).toBeNull();
+});
+
 test("associates selected value with form submission", async () => {
 	render(html`
 		<form>

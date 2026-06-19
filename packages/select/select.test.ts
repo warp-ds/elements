@@ -417,3 +417,15 @@ test("includes optional indicator in the accessible name", async () => {
 		.element(page.getByRole("combobox", { name: /Country.*Optional/ }))
 		.toBeVisible();
 });
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-select aria-label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect.element(page.getByLabelText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
