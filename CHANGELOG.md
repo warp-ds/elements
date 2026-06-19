@@ -1,3 +1,10 @@
+# [2.10.0-next.21](https://github.com/warp-ds/elements/compare/v2.10.0-next.20...v2.10.0-next.21) (2026-06-19)
+
+
+### Bug Fixes
+
+* inconsistent use of optional in form elements ([#715](https://github.com/warp-ds/elements/issues/715)) ([ada92fa](https://github.com/warp-ds/elements/commit/ada92faa3b4a0d2eab8dbbfc0e7e9e56643d964f))
+
 # [2.10.0-next.20](https://github.com/warp-ds/elements/compare/v2.10.0-next.19...v2.10.0-next.20) (2026-06-19)
 
 
