@@ -20,6 +20,16 @@ import { styles } from "./styles.js";
  * @parent w-modal
  *
  * @slot top - Customize the title bar, for example to have a header image that reaches the modal's edges. See the With Image story for an example.
+ *
+ * @csspart header - the root element inside the component.
+ * @csspart top - the container for the image (`top` slot).
+ * @csspart back - the back button, if visible.
+ * @csspart title - the title element.
+ * @csspart close - the close button, if visible.
+ *
+ * @cssprop --w-c-modal-header-font-size
+ * @cssprop --w-c-modal-header-line-height
+ * @cssprop --w-c-modal-header-margin-bottom
  */
 export class WarpModalHeader extends CanCloseMixin(LitElement) {
 	static styles = [reset, styles];

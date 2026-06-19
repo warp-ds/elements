@@ -7,6 +7,10 @@ import { styles } from "./styles.js";
  * The footer section of a modal, typically where you place actions.
  *
  * @parent w-modal
+ *
+ * @csspart footer - the container for slotted items (children).
+ *
+ * @cssprop --w-c-modal-footer-gap -  adjusts the flex gap between actions in the footer.
  */
 export class WarpModalFooter extends CanCloseMixin(
 	ProvidesCanCloseToSlotsMixin(LitElement),

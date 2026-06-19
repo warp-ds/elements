@@ -15,6 +15,20 @@ import { ProvidesCanCloseToSlotsMixin } from "./util.js";
  * @slot header - Typically where you would use the `w-modal-header` component.
  * @slot content - The main content of the modal.
  * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.
+ *
+ * @csspart dialog - the root element inside the component (`<dialog>` element).
+ * @csspart wrapper - container for all elements, direct child of `<dialog>`.
+ * @csspart content - the container for the `content` slot items (children).
+ *
+ * @cssprop --w-c-modal-backdrop-color
+ * @cssprop --w-c-modal-bg
+ * @cssprop --w-c-modal-box-shadow
+ * @cssprop --w-c-modal-color
+ * @cssprop --w-c-modal-height
+ * @cssprop --w-c-modal-max-height
+ * @cssprop --w-c-modal-min-height
+ * @cssprop --w-c-modal-translate-distance
+ * @cssprop --w-c-modal-width
  */
 export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 	static styles = [reset, styles];
