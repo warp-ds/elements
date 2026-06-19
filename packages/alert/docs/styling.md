@@ -147,6 +147,15 @@ Example with custom icon:
 </w-alert>
 ```
 
+Example with title (use text utility classes for proper sizing):
+
+```html
+<w-alert variant="info" show>
+  <h3 class="t5">Alert Title</h3>
+  <p>This is a more detailed alert message with additional description.</p>
+</w-alert>
+```
+
 ## Implementation notes
 
 ### Variants
