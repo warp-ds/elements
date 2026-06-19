@@ -85,8 +85,22 @@ export const alertStyles = css`
     min-width: 0;
   }
 
-  [part='content'] ::slotted(*) {
-    margin-bottom: 0;
+  [part='content'] ::slotted(p) {
+    margin: 0;
+  }
+
+  [part='content'] ::slotted(h1),
+  [part='content'] ::slotted(h2),
+  [part='content'] ::slotted(h3),
+  [part='content'] ::slotted(h4),
+  [part='content'] ::slotted(h5),
+  [part='content'] ::slotted(h6) {
+    margin: 0;
+  }
+
+  [part='content'] ::slotted(ul),
+  [part='content'] ::slotted(ol) {
+    margin: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
