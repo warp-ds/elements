@@ -20,6 +20,9 @@ const alertVariants = {
  *
  * For accessibility reasons, alert should appear close to the element that triggered it.
  *
+ * @slot - Alert message content
+ * @slot icon - Custom icon (defaults to variant-specific icon)
+ *
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/feedback-alert--docs)
  */
 class WarpAlert extends LitElement {
@@ -93,7 +96,9 @@ class WarpAlert extends LitElement {
     return html`
       <w-expand-transition ?show=${this.show}>
         <div part="base" role=${this.role}>
-          <div part="icon">${this._icon}</div>
+          <div part="icon">
+            <slot name="icon">${this._icon}</slot>
+          </div>
           <div part="content">
             <slot></slot>
           </div>

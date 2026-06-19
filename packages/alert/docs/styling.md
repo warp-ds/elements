@@ -131,6 +131,22 @@ w-alert[variant="negative"] {
 }
 ```
 
+## Slots
+
+| Slot | Purpose |
+|---|---|
+| (default) | Alert message content - supports rich HTML |
+| `icon` | Custom icon (defaults to variant-specific icon if not provided) |
+
+Example with custom icon:
+
+```html
+<w-alert variant="info">
+  <w-icon slot="icon" name="CustomIcon"></w-icon>
+  Custom alert with your own icon
+</w-alert>
+```
+
 ## Implementation notes
 
 ### Variants
@@ -141,7 +157,7 @@ Alert provides four semantic variants controlled by the `variant` attribute:
 - `warning` - warning messages
 - `negative` - error messages
 
-Each variant automatically selects the appropriate icon and applies variant-specific color tokens.
+Each variant automatically selects the appropriate icon (unless overridden via the `icon` slot) and applies variant-specific color tokens.
 
 ### Behavior
 

@@ -85,6 +85,10 @@ export const alertStyles = css`
     min-width: 0;
   }
 
+  [part='content'] ::slotted(*) {
+    margin-bottom: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     :host {
       --w-c-alert-transition: none;
