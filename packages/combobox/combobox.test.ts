@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { html } from "lit";
 
 import { expect, test } from "vitest";
@@ -5,6 +6,13 @@ import { render } from "vitest-browser-lit";
 
 import "../textfield/textfield.js";
 import "./combobox.js";
+import { messages as textfieldMessages } from "../textfield/locales/en/messages.mjs";
+import { messages as textfieldNbMessages } from "../textfield/locales/nb/messages.mjs";
+
+// Initialize i18n with English locale for tests (combobox uses textfield's messages)
+i18n.load("en", textfieldMessages);
+i18n.load("nb", textfieldNbMessages);
+i18n.activate("en");
 
 test('renders with autocomplete="off" on inner textfield when attribute not provided', async () => {
 	const component = html`<w-combobox data-testid="combobox"></w-combobox>`;
@@ -367,4 +375,129 @@ test("non-empty options property takes precedence over light-DOM option children
 	);
 
 	expect(optionTexts).toEqual(["Apple"]);
+});
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	// The inner textfield with role="combobox" should have accessible name including Optional
+	await expect
+		.element(page.getByRole("textbox", { name: /Country.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-combobox label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = true;
+	await el.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = false;
+	await el.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-combobox aria-label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	await expect.element(page.getByLabelText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	const input = page.getByRole("textbox", { name: "Country" });
+	await expect.element(input).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(html`
+		<w-combobox label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });

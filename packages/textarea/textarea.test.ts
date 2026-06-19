@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
@@ -5,6 +6,13 @@ import { render } from "vitest-browser-lit";
 
 import "./textarea.js";
 import { WarpTextarea } from "./textarea.js";
+import { messages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+
+// Initialize i18n with English locale for tests
+i18n.load("en", messages);
+i18n.load("nb", nbMessages);
+i18n.activate("en");
 
 test("renders the textarea", async () => {
 	const component = html`<w-textarea label="Test label"></w-textarea>`;
@@ -285,4 +293,113 @@ test("restores original help text when validation passes", async () => {
 	await expect.poll(() => wTextArea.checkValidity()).toBe(true);
 	await expect.poll(() => wTextArea.invalid).toBe(false);
 	await expect.poll(() => wTextArea.helpText).toBe("Enter your message");
+});
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`<w-textarea label="Message" optional></w-textarea>`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(
+		html`<w-textarea label="Message" required optional></w-textarea>`,
+	);
+
+	await expect.element(page.getByText("Message")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`<w-textarea label="Message" optional></w-textarea>`);
+
+	await expect
+		.element(page.getByRole("textbox", { name: /Message.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(
+		html`<w-textarea
+			label="Message"
+			optional
+			data-testid="field"
+		></w-textarea>`,
+	);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = true;
+	await el.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(
+		html`<w-textarea
+			label="Message"
+			required
+			optional
+			data-testid="field"
+		></w-textarea>`,
+	);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = false;
+	await el.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(
+		html`<w-textarea aria-label="Message" optional></w-textarea>`,
+	);
+
+	await expect.element(page.getByLabelText("Message")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(
+		html`<w-textarea label="Message" required optional></w-textarea>`,
+	);
+
+	const textarea = page.getByRole("textbox", { name: "Message" });
+	await expect.element(textarea).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("renders localized optional text based on active locale", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(
+		html`<w-textarea
+			label="Message"
+			optional
+			data-testid="field"
+		></w-textarea>`,
+	);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });

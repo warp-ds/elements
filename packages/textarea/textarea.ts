@@ -10,6 +10,12 @@ import { reset } from "../styles.js";
 import { uniqueId } from "../utils.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
+import { activateI18n } from "../i18n.js";
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
 
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
@@ -167,6 +173,11 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	// Track whether the user has interacted with the field
 	#hasInteracted = false;
+
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	}
 
 	updated(changedProperties: PropertyValues<this>) {
 		if (changedProperties.has("value") && typeof this.value !== "undefined") {
@@ -420,12 +431,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 				? html`
 						<label for="${this._id}">
 							${this.label}
-							${this.optional
+							${this.optional && !this.required
 								? html`
 										<span>
 											${i18n._({
 												id: "textarea.label.optional",
-												message: "(optional)",
+												message: "Optional",
 												comment: "Shown behind label when marked as optional",
 											})}
 										</span>

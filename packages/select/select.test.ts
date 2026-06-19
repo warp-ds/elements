@@ -1,9 +1,17 @@
+import { i18n } from "@lingui/core";
 import { server, userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
 
 import "./select.js";
+import { messages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+
+// Initialize i18n with English locale for tests
+i18n.load("en", messages);
+i18n.load("nb", nbMessages);
+i18n.activate("en");
 
 test("works in a form", async () => {
 	const component = html`
@@ -386,3 +394,60 @@ test.skipIf(server.browser === "chromium" && server.config.env.CI)(
 		expect(onSubmit).toHaveBeenCalled();
 	},
 );
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`
+		<w-select label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-select label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect
+		.element(page.getByRole("combobox", { name: /Country.*Optional/ }))
+		.toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-select aria-label="Country" optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	await expect.element(page.getByLabelText("Country")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(html`
+		<w-select label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
+});

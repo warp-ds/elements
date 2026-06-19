@@ -1,5 +1,6 @@
-import { html, LitElement, nothing, PropertyValues } from "lit";
+import { css, html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
+import { i18n } from "@lingui/core";
 import { activateI18n } from "../i18n.js";
 import type {
 	SliderSlot,
@@ -34,7 +35,38 @@ class WarpSlider extends LitElement {
 		delegatesFocus: true,
 	};
 
-	static styles = [reset, wSliderStyles];
+	static styles = [
+		reset,
+		wSliderStyles,
+		css`
+			:host {
+				/* Added style API for optional only just to mirror other optional implementations */
+				/* The rest of the styling API still needs to be implemented */
+				--_padding-left: var(--w-c-slider-optional-padding-left, 0.8rem);
+				--_font-weight: var(--w-c-slider-optional-font-weight, 400);
+				--_font-size: var(
+					--w-c-slider-optional-font-size,
+					var(--w-font-size-s)
+				);
+				--_line-height: var(
+					--w-c-slider-optional-line-height,
+					var(--w-line-height-s)
+				);
+				--_color: var(
+					--w-c-slider-optional-color,
+					var(--w-s-color-text-subtle)
+				);
+			}
+
+			.w-slider__optional {
+				padding-left: var(--_padding-left);
+				font-weight: var(--_font-weight);
+				font-size: var(--_font-size);
+				line-height: var(--_line-height);
+				color: var(--_color);
+			}
+		`,
+	];
 
 	/**
 	 * The slider fieldset label. Required for proper accessibility.
@@ -76,6 +108,12 @@ class WarpSlider extends LitElement {
 	 */
 	@property({ type: Boolean, reflect: true })
 	required = false;
+
+	/**
+	 * Whether to show the optional indicator after the label.
+	 */
+	@property({ type: Boolean, reflect: true })
+	optional = false;
 
 	/**
 	 * The minimum allowed value in the range inputs
@@ -154,6 +192,10 @@ class WarpSlider extends LitElement {
 	/** @internal */
 	@state()
 	_tabbableElements: Array<HTMLElement> = [];
+
+	/** @internal */
+	@state()
+	_hasLabel = false;
 
 	constructor() {
 		super();
@@ -242,6 +284,9 @@ class WarpSlider extends LitElement {
 		}
 		if (this.openEnded) {
 			this.fieldset.style.setProperty("--over-under-offset", "1");
+		}
+		if (this.label) {
+			this._hasLabel = true;
 		}
 
 		const sliderThumbs =
@@ -445,6 +490,45 @@ class WarpSlider extends LitElement {
 		return this.error || this._invalidMessage;
 	}
 
+	private _handleLabelSlotChange(e: Event) {
+		const slot = e.target as HTMLSlotElement;
+
+		// assignedElements() ignores empty text/whitespaces, making it highly reliable
+		const slotContent = slot.assignedElements().length > 0;
+
+		this._hasLabel = slotContent || !!this.label;
+		console.log("Label content changed, has label:", this._hasLabel);
+	}
+
+	get _label() {
+		const optional =
+			this._hasLabel && this.optional && !this.required
+				? html`<span class="w-slider__optional"
+						>${i18n._({
+							id: "select.label.optional",
+							message: "Optional",
+							comment: "Shown behind label when marked as optional",
+						})}</span
+					>`
+				: nothing;
+
+		return this.label
+			? html`<legend class="w-slider__label">
+					<slot
+						id="label"
+						name="label"
+						@slotchange=${this._handleLabelSlotChange}
+						>${this.label}</slot
+					>${optional}
+				</legend>`
+			: html`<slot
+						id="label"
+						name="label"
+						@slotchange=${this._handleLabelSlotChange}
+					></slot
+					>${optional}`;
+	}
+
 	render() {
 		return html`
 			<fieldset
@@ -458,11 +542,7 @@ class WarpSlider extends LitElement {
 				aria-invalid="${this.errorText ? "true" : nothing}"
 				?disabled="${this.disabled}"
 			>
-				${this.label
-					? html`<legend class="w-slider__label">
-							<slot id="label" name="label">${this.label}</slot>
-						</legend>`
-					: html`<slot id="label" name="label"></slot>`}
+				${this._label}
 				<slot class="w-slider__description" name="description"></slot>
 				${this.markers ? html`<div class="w-slider__markers"></div>` : nothing}
 				<div class="w-slider__range">

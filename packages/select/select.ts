@@ -429,7 +429,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 								html`<span
 									>${i18n._({
 										id: "select.label.optional",
-										message: "(optional)",
+										message: "Optional",
 										comment: "Shown behind label when marked as optional",
 									})}</span
 								>`,

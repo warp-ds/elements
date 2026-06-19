@@ -521,7 +521,7 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 								@click=${this.handleLabelClick}
 							>
 								<slot name="label">${this.label}</slot>
-								${this.optional
+								${this.optional && !this.required
 									? html`<span class="optional">
 											${i18n._({
 												id: "radio-group.label.optional",

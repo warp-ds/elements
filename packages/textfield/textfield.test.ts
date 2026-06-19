@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
@@ -5,6 +6,11 @@ import { render } from "vitest-browser-lit";
 
 import "../affix/affix.js";
 import "./textfield.js";
+import { messages } from "./locales/en/messages.mjs";
+
+// Initialize i18n with English locale for tests
+i18n.load("en", messages);
+i18n.activate("en");
 
 test("renders the textfield", async () => {
 	const component = html`<w-textfield label="Test label"></w-textfield>`;
@@ -194,4 +200,113 @@ test("submits the associated form when input has focus and user presses Enter", 
 	await userEvent.keyboard("{Enter}");
 
 	expect(onSubmit).toHaveBeenCalled();
+});
+
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`<w-textfield label="Email" optional></w-textfield>`);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
+});
+
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(
+		html`<w-textfield label="Email" required optional></w-textfield>`,
+	);
+
+	await expect.element(page.getByText("Email")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`<w-textfield label="Email" optional></w-textfield>`);
+
+	await expect
+		.element(page.getByRole("textbox", { name: /Email.*Optional/ }))
+		.toBeVisible();
+});
+
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(
+		html`<w-textfield
+			label="Email"
+			optional
+			data-testid="field"
+		></w-textfield>`,
+	);
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = true;
+	await el.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(
+		html`<w-textfield
+			label="Email"
+			required
+			optional
+			data-testid="field"
+		></w-textfield>`,
+	);
+
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	el.required = false;
+	await el.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(
+		html`<w-textfield aria-label="Email" optional></w-textfield>`,
+	);
+
+	await expect.element(page.getByLabelText("Email")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(
+		html`<w-textfield label="Email" required optional></w-textfield>`,
+	);
+
+	const input = page.getByRole("textbox", { name: "Email" });
+	await expect.element(input).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(
+		html`<w-textfield
+			label="Email"
+			optional
+			data-testid="field"
+		></w-textfield>`,
+	);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });

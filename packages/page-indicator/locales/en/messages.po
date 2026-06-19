@@ -15,6 +15,6 @@ msgstr ""
 
 #. Default screenreader message for page indicator group
 #. js-lingui-explicit-id
-#: packages/page-indicator/page-indicator.ts:57
+#: packages/page-indicator/page-indicator.ts:64
 msgid "page-indicator.aria.label"
 msgstr "Dot {selectedPage} is highlighted in a row of {pageCount} dots"

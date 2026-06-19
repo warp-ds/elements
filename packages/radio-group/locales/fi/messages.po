@@ -15,12 +15,12 @@ msgstr ""
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/radio-group/radio-group.ts:427
+#: packages/radio-group/radio-group.ts:526
 msgid "radio-group.label.optional"
 msgstr "Valinnainen"
 
 #. Shown when required radio group has no selections
 #. js-lingui-explicit-id
-#: packages/radio-group/radio-group.ts:25
+#: packages/radio-group/radio-group.ts:24
 msgid "radio-group.validation.required"
 msgstr "Valitse vaihtoehto."
