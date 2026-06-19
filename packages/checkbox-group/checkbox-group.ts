@@ -155,7 +155,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 					? html`
 							<div class="label" id="${labelId}">
 								<span>${this.label}</span>
-								${this.optional
+								${this.optional && !this.required
 									? html`
 											<span class="optional">
 												${i18n._({
