@@ -7,9 +7,11 @@ import { render } from "vitest-browser-lit";
 import "../textfield/textfield.js";
 import "./combobox.js";
 import { messages as textfieldMessages } from "../textfield/locales/en/messages.mjs";
+import { messages as textfieldNbMessages } from "../textfield/locales/nb/messages.mjs";
 
 // Initialize i18n with English locale for tests (combobox uses textfield's messages)
 i18n.load("en", textfieldMessages);
+i18n.load("nb", textfieldNbMessages);
 i18n.activate("en");
 
 test('renders with autocomplete="off" on inner textfield when attribute not provided', async () => {
@@ -463,4 +465,39 @@ test("does not render optional indicator when there is no label", async () => {
 
 	await expect.element(page.getByLabelText("Country")).toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(html`
+		<w-combobox label="Country" required optional>
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	const input = page.getByRole("textbox", { name: "Country" });
+	await expect.element(input).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(html`
+		<w-combobox label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });

@@ -6,9 +6,11 @@ import { render } from "vitest-browser-lit";
 
 import "./select.js";
 import { messages } from "./locales/en/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
 
 // Initialize i18n with English locale for tests
 i18n.load("en", messages);
+i18n.load("nb", nbMessages);
 i18n.activate("en");
 
 test("works in a form", async () => {
@@ -428,4 +430,24 @@ test("does not render optional indicator when there is no label", async () => {
 
 	await expect.element(page.getByLabelText("Country")).toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("renders localized optional text based on document lang", async () => {
+	const originalLang = document.documentElement.lang;
+	document.documentElement.lang = "nb";
+
+	const page = render(html`
+		<w-select label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	const el = page.getByTestId("field").element() as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await el.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	document.documentElement.lang = originalLang;
 });
