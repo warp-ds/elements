@@ -1,4 +1,4 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from "../modal/util.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
@@ -12,7 +12,7 @@ export class WarpModalFooter extends CanCloseMixin(
 	ProvidesCanCloseToSlotsMixin(LitElement),
 ) {
 	static styles = [reset, styles];
-	
+
 	render() {
 		return html`
 			<slot part="footer" @slotchange="${this.handleSlotChange}"></slot>
