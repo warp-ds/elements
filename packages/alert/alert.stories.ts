@@ -73,7 +73,7 @@ export const WithDescription: Story = {
   render(args) {
     return html`
       <w-alert ${spread(prespread(args))}>
-        <h3>Alert Title</h3>
+        <h3 class="t5">Alert Title</h3>
         <p>This is a more detailed alert message with additional description.</p>
       </w-alert>
     `;
