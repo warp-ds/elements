@@ -1,3 +1,10 @@
+# [2.10.0-next.24](https://github.com/warp-ds/elements/compare/v2.10.0-next.23...v2.10.0-next.24) (2026-06-22)
+
+
+### Bug Fixes
+
+* **modal:** sync with Figma, improve dark mode backdrop ([#712](https://github.com/warp-ds/elements/issues/712)) ([4e2a756](https://github.com/warp-ds/elements/commit/4e2a75630a4013bf2eb8b5258d42fbe1c82dffc5))
+
 # [2.10.0-next.23](https://github.com/warp-ds/elements/compare/v2.10.0-next.22...v2.10.0-next.23) (2026-06-22)
 
 
