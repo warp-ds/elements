@@ -5,7 +5,7 @@
 // custom-elements-manifest analyze --config .cem/custom-element-manifest.config.js
 
 import { existsSync, mkdirSync } from 'node:fs';
-
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import esbuild from 'esbuild';
 
 import manifest from '../dist/custom-elements.json' with { type: 'json' };
@@ -17,7 +17,7 @@ const esbuildDefaults = {
   bundle: true,
   format: 'esm',
   sourcemap: true,
-  target: 'es2018',
+  target: browserslistToEsbuild(),
   minify: true,
   external: ['lit', 'lit-html', 'lit-element'],
 };

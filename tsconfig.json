@@ -26,6 +26,8 @@
     "packages/select",
     "packages/slider",
     "packages/slider-thumb",
+    "packages/snackbar",
+    "packages/snackbar-item",
     "packages/step",
     "packages/step-indicator",
     "packages/switch",
@@ -36,23 +38,26 @@
     "packages/textfield",
     "packages/toast",
     "packages/toast-container",
-    "setup-tests.ts"
+    "packages/global.ts",
+    "setup-tests.ts",
 
     // unreleased components
     // "packages/dead-toggle",
   ],
   "compilerOptions": {
+    "types": ["node", "react", "react-dom"],
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react",
-    "skipLibCheck": true,
-    "allowJs": true,
     "rootDir": ".",
-    "declaration": true,
     "outDir": "dist",
-    "moduleResolution": "bundler"
+    "strict": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "allowJs": true,
+    "declaration": true
   }
 }

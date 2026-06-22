@@ -236,6 +236,10 @@ To use the Warp cloaking device to avoid CLS and FOUCE, simply add the warp-cloa
 
 That's it, your components should render just 1x, fully ready with no CLS and FOUCE.
 
+## AI Agents
+
+The `@warp-ds/elements` package ships with agent friendly markdown documentation. Point your agent at `@warp-ds/elements/dist/docs/index.md` and it should be able to take it from there.
+
 ## Releases
 
 This project is continuously published to [NPM](https://www.npmjs.com/package/@warp-ds/elements) and [Eik](https://assets.finn.no/pkg/@warp-ds/elements) using a `next` tag (e.g. `2.2.0-next.13`).

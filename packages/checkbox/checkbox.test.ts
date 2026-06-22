@@ -1,242 +1,252 @@
-import { html } from 'lit';
-import { expect, test, vi } from 'vitest';
-import { server, userEvent } from '@vitest/browser/context';
-import { render } from 'vitest-browser-lit';
+import { html } from "lit";
+import { expect, test, vi } from "vitest";
+import { server, userEvent } from "vitest/browser";
+import { render } from "vitest-browser-lit";
 
-import './checkbox.js';
+import "./checkbox.js";
 
-const getInput = (el: HTMLElement) => el.shadowRoot?.querySelector('input[type="checkbox"]') as HTMLInputElement | null;
+const getInput = (el: HTMLElement) =>
+	el.shadowRoot?.querySelector(
+		'input[type="checkbox"]',
+	) as HTMLInputElement | null;
 
-test('toggles checked on click and dispatches change', async () => {
-  render(html`<w-checkbox>Check me</w-checkbox>`);
+test("toggles checked on click and dispatches change", async () => {
+	render(html`<w-checkbox>Check me</w-checkbox>`);
 
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
 
-  const onChange = vi.fn();
-  wCheckbox.addEventListener('change', onChange);
+	const onChange = vi.fn();
+	wCheckbox.addEventListener("change", onChange);
 
-  await wCheckbox.updateComplete;
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.checked).toBe(true);
-  expect(onChange).toHaveBeenCalledTimes(1);
+	await wCheckbox.updateComplete;
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.checked).toBe(true);
+	expect(onChange).toHaveBeenCalledTimes(1);
 });
 
-test('associates value with form when checked', async () => {
-  render(html`
-    <form data-testid="form">
-      <w-checkbox name="newsletter" value="yes" checked>Sign up</w-checkbox>
-    </form>
-  `);
+test("associates value with form when checked", async () => {
+	render(html`
+		<form data-testid="form">
+			<w-checkbox name="newsletter" value="yes" checked>Sign up</w-checkbox>
+		</form>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    updateComplete: Promise<unknown>;
-  };
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		updateComplete: Promise<unknown>;
+	};
 
-  await wCheckbox.updateComplete;
-  let data = new FormData(form);
-  expect(data.get('newsletter')).toBe('yes');
+	await wCheckbox.updateComplete;
+	let data = new FormData(form);
+	expect(data.get("newsletter")).toBe("yes");
 
-  wCheckbox.checked = false;
-  await wCheckbox.updateComplete;
+	wCheckbox.checked = false;
+	await wCheckbox.updateComplete;
 
-  data = new FormData(form);
-  expect(data.get('newsletter')).toBeNull();
+	data = new FormData(form);
+	expect(data.get("newsletter")).toBeNull();
 });
 
-test('resets to defaultChecked on form reset', async () => {
-  render(html`
-    <form>
-      <w-checkbox name="updates" value="yes" checked>Updates</w-checkbox>
-    </form>
-  `);
+test("resets to defaultChecked on form reset", async () => {
+	render(html`
+		<form>
+			<w-checkbox name="updates" value="yes" checked>Updates</w-checkbox>
+		</form>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
 
-  await wCheckbox.updateComplete;
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.checked).toBe(false);
+	await wCheckbox.updateComplete;
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.checked).toBe(false);
 
-  form.reset();
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.checked).toBe(true);
+	form.reset();
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.checked).toBe(true);
 });
 
-test('required checkbox reports validity based on checked state', async () => {
-  render(html`<w-checkbox name="terms" required>Accept</w-checkbox>`);
+test("required checkbox reports validity based on checked state", async () => {
+	render(html`<w-checkbox name="terms" required>Accept</w-checkbox>`);
 
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    updateComplete: Promise<unknown>;
-    checkValidity: () => boolean;
-    validity: ValidityState;
-    validationMessage: string;
-  };
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		updateComplete: Promise<unknown>;
+		checkValidity: () => boolean;
+		validity: ValidityState;
+		validationMessage: string;
+	};
 
-  await expect.poll(() => wCheckbox.checkValidity()).toBe(false);
-  expect(wCheckbox.validity.valueMissing).toBe(true);
-  expect(wCheckbox.validationMessage).not.toBe('');
+	await expect.poll(() => wCheckbox.checkValidity()).toBe(false);
+	expect(wCheckbox.validity.valueMissing).toBe(true);
+	expect(wCheckbox.validationMessage).not.toBe("");
 
-  wCheckbox.checked = true;
-  await wCheckbox.updateComplete;
+	wCheckbox.checked = true;
+	await wCheckbox.updateComplete;
 
-  await expect.poll(() => wCheckbox.checkValidity()).toBe(true);
-  expect(wCheckbox.validity.valid).toBe(true);
+	await expect.poll(() => wCheckbox.checkValidity()).toBe(true);
+	expect(wCheckbox.validity.valid).toBe(true);
 });
 
-test('required checkbox shows invalid state after submit and clears after selection', async () => {
-  render(html`
-    <form>
-      <w-checkbox name="terms" required>Accept</w-checkbox>
-      <button type="submit">Submit</button>
-    </form>
-  `);
+test("required checkbox shows invalid state after submit and clears after selection", async () => {
+	render(html`
+		<form>
+			<w-checkbox name="terms" required>Accept</w-checkbox>
+			<button type="submit">Submit</button>
+		</form>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
-  const submit = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
+	const submit = document.querySelector(
+		'button[type="submit"]',
+	) as HTMLButtonElement;
 
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.hasAttribute('invalid')).toBe(false);
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.hasAttribute("invalid")).toBe(false);
 
-  submit.click();
-  await wCheckbox.updateComplete;
-  await expect.poll(() => form.checkValidity()).toBe(false);
-  expect(wCheckbox.hasAttribute('invalid')).toBe(true);
+	submit.click();
+	await wCheckbox.updateComplete;
+	await expect.poll(() => form.checkValidity()).toBe(false);
+	expect(wCheckbox.hasAttribute("invalid")).toBe(true);
 
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
-  await expect.poll(() => form.checkValidity()).toBe(true);
-  expect(wCheckbox.hasAttribute('invalid')).toBe(false);
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
+	await expect.poll(() => form.checkValidity()).toBe(true);
+	expect(wCheckbox.hasAttribute("invalid")).toBe(false);
 });
 
-test('participates in form submission and blocks submit when required', async () => {
-  render(html`
-    <form>
-      <w-checkbox name="newsletter" value="yes" required>Sign up</w-checkbox>
-      <button type="submit">Submit</button>
-    </form>
-  `);
+test("participates in form submission and blocks submit when required", async () => {
+	render(html`
+		<form>
+			<w-checkbox name="newsletter" value="yes" required>Sign up</w-checkbox>
+			<button type="submit">Submit</button>
+		</form>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
-  const submit = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
+	const submit = document.querySelector(
+		'button[type="submit"]',
+	) as HTMLButtonElement;
 
-  const onSubmit = vi.fn(() => {
-    const data = new FormData(form);
-    expect(data.get('newsletter')).toBe('yes');
-  });
+	const onSubmit = vi.fn(() => {
+		const data = new FormData(form);
+		expect(data.get("newsletter")).toBe("yes");
+	});
 
-  form.addEventListener('submit', (event) => {
-    if (!form.checkValidity()) {
-      event.preventDefault();
-      return;
-    }
-    event.preventDefault();
-    onSubmit();
-  });
+	form.addEventListener("submit", (event) => {
+		if (!form.checkValidity()) {
+			event.preventDefault();
+			return;
+		}
+		event.preventDefault();
+		onSubmit();
+	});
 
-  await wCheckbox.updateComplete;
-  await expect.poll(() => form.checkValidity()).toBe(false);
-  submit.click();
-  await expect.poll(() => form.checkValidity()).toBe(false);
-  expect(onSubmit).not.toHaveBeenCalled();
+	await wCheckbox.updateComplete;
+	await expect.poll(() => form.checkValidity()).toBe(false);
+	submit.click();
+	await expect.poll(() => form.checkValidity()).toBe(false);
+	expect(onSubmit).not.toHaveBeenCalled();
 
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
 
-  submit.click();
-  await wCheckbox.updateComplete;
-  await expect.poll(() => form.checkValidity()).toBe(true);
-  expect(onSubmit).toHaveBeenCalledTimes(1);
+	submit.click();
+	await wCheckbox.updateComplete;
+	await expect.poll(() => form.checkValidity()).toBe(true);
+	expect(onSubmit).toHaveBeenCalledTimes(1);
 });
 
-test('clears indeterminate on click', async () => {
-  render(html`<w-checkbox indeterminate>Partial</w-checkbox>`);
+test("clears indeterminate on click", async () => {
+	render(html`<w-checkbox indeterminate>Partial</w-checkbox>`);
 
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    indeterminate: boolean;
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		indeterminate: boolean;
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
 
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.indeterminate).toBe(true);
-  const input = getInput(wCheckbox);
-  expect(input).not.toBeNull();
-  expect(input?.indeterminate).toBe(true);
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.indeterminate).toBe(true);
+	const input = getInput(wCheckbox);
+	expect(input).not.toBeNull();
+	expect(input?.indeterminate).toBe(true);
 
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
 
-  expect(wCheckbox.indeterminate).toBe(false);
-  expect(wCheckbox.checked).toBe(true);
+	expect(wCheckbox.indeterminate).toBe(false);
+	expect(wCheckbox.checked).toBe(true);
 });
 
-test('does not toggle or emit change when disabled', async () => {
-  render(html`<w-checkbox disabled>Disabled</w-checkbox>`);
+test("does not toggle or emit change when disabled", async () => {
+	render(html`<w-checkbox disabled>Disabled</w-checkbox>`);
 
-  const wCheckbox = document.querySelector('w-checkbox') as HTMLElement & {
-    checked: boolean;
-    updateComplete: Promise<unknown>;
-    click: () => void;
-  };
+	const wCheckbox = document.querySelector("w-checkbox") as HTMLElement & {
+		checked: boolean;
+		updateComplete: Promise<unknown>;
+		click: () => void;
+	};
 
-  const onChange = vi.fn();
-  wCheckbox.addEventListener('change', onChange);
+	const onChange = vi.fn();
+	wCheckbox.addEventListener("change", onChange);
 
-  await wCheckbox.updateComplete;
-  expect(wCheckbox.checked).toBe(false);
+	await wCheckbox.updateComplete;
+	expect(wCheckbox.checked).toBe(false);
 
-  const input = getInput(wCheckbox);
-  expect(input).not.toBeNull();
-  expect(input?.disabled).toBe(true);
+	const input = getInput(wCheckbox);
+	expect(input).not.toBeNull();
+	expect(input?.disabled).toBe(true);
 
-  wCheckbox.click();
-  await wCheckbox.updateComplete;
+	wCheckbox.click();
+	await wCheckbox.updateComplete;
 
-  expect(wCheckbox.checked).toBe(false);
-  expect(onChange).not.toHaveBeenCalled();
+	expect(wCheckbox.checked).toBe(false);
+	expect(onChange).not.toHaveBeenCalled();
 });
 
 /* Manual test in Safari has this working as expected, but the test fails for some reason */
-test.skipIf(server.browser === 'webkit')('submits the associated form when checkbox has focus and user presses Enter', async () => {
-  const screen = render(html`
-    <form>
-      <w-checkbox data-testid="checkbox" name="terms">Accept</w-checkbox>
-      <button type="submit">Submit</button>
-    </form>
-  `);
+test.skipIf(server.browser === "webkit")(
+	"submits the associated form when checkbox has focus and user presses Enter",
+	async () => {
+		const screen = render(html`
+			<form>
+				<w-checkbox data-testid="checkbox" name="terms">Accept</w-checkbox>
+				<button type="submit">Submit</button>
+			</form>
+		`);
 
-  const onSubmit = vi.fn();
-  const form = document.querySelector('form') as HTMLFormElement;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    onSubmit();
-  });
-  
-  await userEvent.click(screen.getByTestId('checkbox'));
-  await userEvent.keyboard('{Space}')
-  await userEvent.keyboard('{Enter}')
+		const onSubmit = vi.fn();
+		const form = document.querySelector("form") as HTMLFormElement;
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			onSubmit();
+		});
 
-  expect(onSubmit).toHaveBeenCalled();
-});
+		await userEvent.click(screen.getByTestId("checkbox"));
+		await userEvent.keyboard("{Space}");
+		await userEvent.keyboard("{Enter}");
+
+		expect(onSubmit).toHaveBeenCalled();
+	},
+);

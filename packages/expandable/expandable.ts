@@ -1,256 +1,274 @@
 // @warp-css;
 
-import { classNames } from '@chbphone55/classnames';
-import { css, html, LitElement, PropertyValues } from 'lit';
-import { property } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import '../icon/icon.js';
-import '../utils/expand-transition';
-import { detectLocale } from '../i18n.js';
-import '../utils/unstyled-heading';
+import { classNames } from "@chbphone55/classnames";
+import { css, html, LitElement, PropertyValues } from "lit";
+import { property } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import "../icon/icon.js";
+import "../utils/expand-transition";
+import { detectLocale } from "../i18n.js";
+import "../utils/unstyled-heading";
 
-import { reset } from '../styles.js';
+import { reset } from "../styles.js";
 
-import { styles } from './styles.js';
+import { styles } from "./styles.js";
 
 const ccBox = {
-  base: 'group block relative break-words last-child:mb-0 px-16 rounded-8', // Relative here enables w-clickable
-  bleed: '-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8', // We target L and R to override the default rounded-8
-  info: 's-bg-info-subtle',
-  neutral: 's-surface-sunken',
-  bordered: 'border-2 s-border s-bg',
+	base: "group block relative break-words last-child:mb-0 px-16 rounded-8", // Relative here enables w-clickable
+	bleed: "-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8", // We target L and R to override the default rounded-8
+	info: "s-bg-info-subtle",
+	neutral: "s-surface-sunken",
+	bordered: "border-2 s-border s-bg",
 };
 
 const ccExpandable = {
-  wrapper: 'will-change-height s-text py-16',
-  box: 's-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8',
-  bleed: '-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8',
-  chevron: 'inline-block align-middle s-icon',
-  chevronNonBox: 'ml-8',
-  chevronTransform: 'transform transition-transform transform-gpu ease-in-out',
-  chevronExpand: '-rotate-180',
-  chevronCollapse: 'rotate-180',
+	wrapper: "will-change-height s-text py-16",
+	box: "s-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8",
+	bleed: "-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8",
+	chevron: "inline-block align-middle s-icon",
+	chevronNonBox: "ml-8",
+	chevronTransform: "transform transition-transform transform-gpu ease-in-out",
+	chevronExpand: "-rotate-180",
+	chevronCollapse: "rotate-180",
 
-  // These are web component specific classes, using the ::part-selector:
-  elementsChevronDownTransform:
-    'part-[w-chevrondown]:transform part-[w-chevrondown]:transition-transform part-[w-chevrondown]:transform-gpu part-[w-chevrondown]:ease-in-out',
-  elementsChevronUpTransform:
-    'part-[w-chevronup]:transform part-[w-chevronup]:transition-transform part-[w-chevronup]:transform-gpu part-[w-chevronup]:ease-in-out',
-  elementsChevronExpand: 'part-[w-chevrondown]:-rotate-180',
-  elementsChevronCollapse: 'part-[w-chevronup]:rotate-180',
+	// These are web component specific classes, using the ::part-selector:
+	elementsChevronDownTransform:
+		"part-[w-chevrondown]:transform part-[w-chevrondown]:transition-transform part-[w-chevrondown]:transform-gpu part-[w-chevrondown]:ease-in-out",
+	elementsChevronUpTransform:
+		"part-[w-chevronup]:transform part-[w-chevronup]:transition-transform part-[w-chevronup]:transform-gpu part-[w-chevronup]:ease-in-out",
+	elementsChevronExpand: "part-[w-chevrondown]:-rotate-180",
+	elementsChevronCollapse: "part-[w-chevronup]:rotate-180",
 
-  expansion: 'overflow-hidden',
-  expansionNotExpanded: 'h-0 invisible',
-  button:
-    'focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline',
-  buttonBox:
-    'w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 px-16 rounded-8',
-  contentWithTitle: 'pt-0',
-  title: 'flex w-full justify-between items-center',
-  titleType: 't4',
+	expansion: "overflow-hidden",
+	expansionNotExpanded: "h-0 invisible",
+	button:
+		"focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline",
+	buttonBox:
+		"w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 px-16 rounded-8",
+	contentWithTitle: "pt-0",
+	title: "flex w-full justify-between items-center",
+	titleType: "t4",
 };
 
 /**
  * Expandable is a layout component used for creating expandable content areas on a page.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-expandable--docs)
- *
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
  */
 class WarpExpandable extends LitElement {
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, reflect: true })
-  expanded = false;
+	/**
+	 * Controls component's expanded state
+	 */
+	@property({ type: Boolean, reflect: true })
+	expanded = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: String })
-  title: string;
+	/**
+	 * Component title. Used to display the title value which is always present regardless of whether the component is open or closed.
+	 */
+	@property({ type: String })
+	title!: string;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean })
-  box = false;
+	/**
+	 * Will make the expandable a Box
+	 */
+	@property({ type: Boolean })
+	box = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean })
-  bleed = false;
+	/**
+	 * Will make the expandable full-width on the sm breakpoint size
+	 */
+	@property({ type: Boolean })
+	bleed = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'button-class', type: String })
-  buttonClass: string;
+	/**
+	 * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
+	 */
+	@property({ attribute: "button-class", type: String })
+	buttonClass: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'content-class', type: String })
-  contentClass: string;
+	/**
+	 * @deprecated Probably does not work the way you expect. The class must exist inside the shadow DOM of the component.
+	 */
+	@property({ attribute: "content-class", type: String })
+	contentClass: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'no-chevron', type: Boolean })
-  noChevron = false;
+	/**
+	 * Controls chevron visibility
+	 */
+	@property({ attribute: "no-chevron", type: Boolean })
+	noChevron = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean })
-  animated = false;
+	/**
+	 * Will animate the expansion/collapse
+	 */
+	@property({ type: Boolean })
+	animated = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'heading-level', type: Number })
-  headingLevel: number;
+	/**
+	 * Wrap the toggle button in a heading element with the specified level. If headingLevel is not specified, the button will not be wrapped by a heading element.
+	 */
+	@property({ attribute: "heading-level", type: Number })
+	headingLevel: number | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, state: true })
-  /** @internal */
-  _hasTitle = true;
+	@property({ type: Boolean, state: true })
+	private _hasTitle = true;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, state: true })
-  /** @internal */
-  _showChevronUp = false;
+	@property({ type: Boolean, state: true })
+	private _showChevronUp = false;
 
-  // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
-  // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
-  // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
-  // https://stackoverflow.com/a/61631668
-  static styles = [
-    reset,
-    styles,
-    css`
-      :host {
-        display: block;
-      }
-      ::slotted(:last-child) {
-        margin-bottom: 0px !important;
-      }
-    `,
-  ];
+	// Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
+	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
+	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
+	// https://stackoverflow.com/a/61631668
+	static styles = [
+		reset,
+		styles,
+		css`
+			:host {
+				display: block;
+			}
+			::slotted(:last-child) {
+				margin-bottom: 0px !important;
+			}
+		`,
+	];
 
-  updated(changedProperties: PropertyValues<this>) {
-    // We need a slight delay for the animation since it has a transition-duration of 150ms:
-    if (changedProperties.has('expanded')) {
-      setTimeout(() => {
-        this._showChevronUp = this.expanded;
-      }, 200);
-    }
-  }
+	updated(changedProperties: PropertyValues<this>) {
+		// We need a slight delay for the animation since it has a transition-duration of 150ms:
+		if (changedProperties.has("expanded")) {
+			setTimeout(() => {
+				this._showChevronUp = this.expanded;
+			}, 200);
+		}
+	}
 
-  firstUpdated() {
-    const hasTitleProp = Boolean(this.title);
-    const hasTitleSlot =
-      (this.renderRoot.querySelector("slot[name='title']") as HTMLSlotElement)?.assignedNodes().length > 0;
+	firstUpdated() {
+		const hasTitleProp = Boolean(this.title);
+		const hasTitleSlot =
+			(
+				this.renderRoot.querySelector("slot[name='title']") as HTMLSlotElement
+			)?.assignedNodes().length > 0;
 
-    this._hasTitle = hasTitleProp || hasTitleSlot;
-  }
+		this._hasTitle = hasTitleProp || hasTitleSlot;
+	}
 
-  get #wrapperClasses() {
-    return classNames([ccExpandable.wrapper, this.box && ccExpandable.box, this.bleed && ccExpandable.bleed]);
-  }
+	get #wrapperClasses() {
+		return classNames([
+			ccExpandable.wrapper,
+			this.box && ccExpandable.box,
+			this.bleed && ccExpandable.bleed,
+		]);
+	}
 
-  get #buttonClasses() {
-    return classNames(this.buttonClass, [ccExpandable.button, this.box && ccExpandable.buttonBox]);
-  }
+	get #buttonClasses() {
+		return classNames(this.buttonClass, [
+			ccExpandable.button,
+			this.box && ccExpandable.buttonBox,
+		]);
+	}
 
-  get #chevronClasses() {
-    return classNames([ccExpandable.chevron, !this.box && ccExpandable.chevronNonBox]);
-  }
+	get #chevronClasses() {
+		return classNames([
+			ccExpandable.chevron,
+			!this.box && ccExpandable.chevronNonBox,
+		]);
+	}
 
-  get #chevronIcon() {
-    const upClasses = classNames([
-      ccExpandable.elementsChevronUpTransform,
-      'flex',
-      !this.expanded && this._showChevronUp && ccExpandable.elementsChevronCollapse,
-    ]);
-    const downClasses = classNames([
-      ccExpandable.elementsChevronDownTransform,
-      'flex',
-      this.expanded && !this._showChevronUp && ccExpandable.elementsChevronExpand,
-    ]);
+	get #chevronIcon() {
+		const upClasses = classNames([
+			ccExpandable.elementsChevronUpTransform,
+			"flex",
+			!this.expanded &&
+				this._showChevronUp &&
+				ccExpandable.elementsChevronCollapse,
+		]);
+		const downClasses = classNames([
+			ccExpandable.elementsChevronDownTransform,
+			"flex",
+			this.expanded &&
+				!this._showChevronUp &&
+				ccExpandable.elementsChevronExpand,
+		]);
 
-    const locale = detectLocale();
-    return this._showChevronUp
-      ? html`<w-icon name="ChevronUp" size="small" locale="${locale}" class="${upClasses}"></w-icon>`
-      : html`<w-icon name="ChevronDown" size="small" locale="${locale}" class="${downClasses}"></w-icon>`;
-  }
+		const locale = detectLocale();
+		return this._showChevronUp
+			? html`<w-icon
+					name="ChevronUp"
+					size="small"
+					locale="${locale}"
+					class="${upClasses}"
+				></w-icon>`
+			: html`<w-icon
+					name="ChevronDown"
+					size="small"
+					locale="${locale}"
+					class="${downClasses}"
+				></w-icon>`;
+	}
 
-  get #contentClasses() {
-    return classNames(this.contentClass, [
-      this.box ? 'pt-16' : 'pt-8',
-      this.box && ccBox.base,
-      this._hasTitle && this.box && ccExpandable.contentWithTitle,
-    ]);
-  }
+	get #contentClasses() {
+		return classNames(this.contentClass, [
+			this.box ? "pt-16" : "pt-8",
+			this.box && ccBox.base,
+			this._hasTitle && this.box && ccExpandable.contentWithTitle,
+		]);
+	}
 
-  get #expansionClasses() {
-    return classNames([ccExpandable.expansion, !this.expanded && ccExpandable.expansionNotExpanded]);
-  }
+	get #expansionClasses() {
+		return classNames([
+			ccExpandable.expansion,
+			!this.expanded && ccExpandable.expansionNotExpanded,
+		]);
+	}
 
-  /** @internal */
-  get _expandableSlot() {
-    return html`<div class="${this.#contentClasses}">
-      <slot></slot>
-    </div>`;
-  }
+	/** @internal */
+	get _expandableSlot() {
+		return html`<div class="${this.#contentClasses}">
+			<slot></slot>
+		</div>`;
+	}
 
-  render() {
-    return html` <div class="${this.#wrapperClasses}">
-      ${
-        this._hasTitle
-          ? html`<w-unstyled-heading level=${this.headingLevel}>
-            <button
-              type="button"
-              aria-expanded="${this.expanded}"
-              class="${this.#buttonClasses}"
-              @click=${() => (this.expanded = !this.expanded)}>
-              <div class="${ccExpandable.title}">
-                ${this.title ? html`<span class="${ccExpandable.titleType}">${this.title}</span>` : html`<slot name="title"></slot>`}
-                ${this.noChevron ? '' : html`<div class="${this.#chevronClasses}">${this.#chevronIcon}</div>`}
-              </div>
-            </button>
-          </w-unstyled-heading>`
-          : ''
-      }
-      ${
-        this.animated
-          ? html`<w-expand-transition ?show=${this.expanded}> ${this._expandableSlot} </w-expand-transition>`
-          : html`<div class="${this.#expansionClasses}" aria-hidden=${ifDefined(!this.expanded ? true : undefined)}>
-            ${this._expandableSlot}
-          </div>`
-      }
-    </div>`;
-  }
+	render() {
+		return html` <div class="${this.#wrapperClasses}">
+			${this._hasTitle
+				? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
+						<button
+							type="button"
+							aria-expanded="${this.expanded}"
+							class="${this.#buttonClasses}"
+							@click=${() => (this.expanded = !this.expanded)}
+						>
+							<div class="${ccExpandable.title}">
+								${this.title
+									? html`<span class="${ccExpandable.titleType}"
+											>${this.title}</span
+										>`
+									: html`<slot name="title"></slot>`}
+								${this.noChevron
+									? ""
+									: html`<div class="${this.#chevronClasses}">
+											${this.#chevronIcon}
+										</div>`}
+							</div>
+						</button>
+					</w-unstyled-heading>`
+				: ""}
+			${this.animated
+				? html`<w-expand-transition ?show=${this.expanded}>
+						${this._expandableSlot}
+					</w-expand-transition>`
+				: html`<div
+						class="${this.#expansionClasses}"
+						aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
+					>
+						${this._expandableSlot}
+					</div>`}
+		</div>`;
+	}
 }
 
-if (!customElements.get('w-expandable')) {
-  customElements.define('w-expandable', WarpExpandable);
+if (!customElements.get("w-expandable")) {
+	customElements.define("w-expandable", WarpExpandable);
 }
 
 export { WarpExpandable };

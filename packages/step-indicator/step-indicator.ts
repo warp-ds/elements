@@ -1,67 +1,75 @@
 // @warp-css;
 
-import { classNames } from '@chbphone55/classnames';
-import { html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { classNames } from "@chbphone55/classnames";
+import { html, LitElement } from "lit";
+import { property } from "lit/decorators.js";
 
-import type { WarpStep } from '../step/step.js';
-import { reset } from '../styles.js';
-import { styles } from './styles.js';
+import type { WarpStep } from "../step/step.js";
+import { reset } from "../styles.js";
+import { styles } from "./styles.js";
 
 const ccSteps = {
-  wrapper: 'w-full',
-  horizontal: 'flex',
+	wrapper: "w-full",
+	horizontal: "flex",
 };
 
 /**
  * Steps are used to show progress through a process or to guide users through a multi-step task.
  */
 export class WarpStepIndicator extends LitElement {
-  /**
-   * Display steps horizontally instead of vertically
-   */
-  @property({ type: Boolean, reflect: true })
-  horizontal = false;
+	/**
+	 * Display steps horizontally instead of vertically
+	 */
+	@property({ type: Boolean, reflect: true })
+	horizontal = false;
 
-  /**
-   * Align steps to the right (vertical layout only)
-   */
-  @property({ type: Boolean, reflect: true })
-  right = false;
+	/**
+	 * Align steps to the right (vertical layout only)
+	 */
+	@property({ type: Boolean, reflect: true })
+	right = false;
 
-  static styles = [reset, styles];
+	static styles = [reset, styles];
 
-  updated() {
-    this.updateStepsContext();
-  }
+	updated() {
+		this.updateStepsContext();
+	}
 
-  /**
-   * @internal
-   */
-  updateStepsContext() {
-    // Provide context to child step elements
-    const steps = this.querySelectorAll('w-step');
-    steps.forEach((step: WarpStep, index: number) => {
-      step.setContext({
-        horizontal: this.horizontal,
-        right: this.right,
-        isLast: index === steps.length - 1,
-        isFirst: index === 0,
-      });
-    });
-  }
+	/**
+	 * @internal
+	 */
+	updateStepsContext() {
+		// Provide context to child step elements
+		const steps = this.querySelectorAll<WarpStep>("w-step");
+		steps.forEach((step, index) => {
+			step.setContext({
+				horizontal: this.horizontal,
+				right: this.right,
+				isLast: index === steps.length - 1,
+				isFirst: index === 0,
+			});
+		});
+	}
 
-  render() {
-    const classes = classNames([ccSteps.wrapper, this.horizontal && ccSteps.horizontal]);
+	render() {
+		const classes = classNames([
+			ccSteps.wrapper,
+			this.horizontal && ccSteps.horizontal,
+		]);
 
-    return html`
-      <div role="list" class=${classes} ${this.horizontal && `style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}>
-        <slot></slot>
-      </div>
-    `;
-  }
+		return html`
+			<div
+				role="list"
+				class=${classes}
+				${this.horizontal &&
+				`style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`}
+			>
+				<slot></slot>
+			</div>
+		`;
+	}
 }
 
-if (!customElements.get('w-step-indicator')) {
-  customElements.define('w-step-indicator', WarpStepIndicator);
+if (!customElements.get("w-step-indicator")) {
+	customElements.define("w-step-indicator", WarpStepIndicator);
 }

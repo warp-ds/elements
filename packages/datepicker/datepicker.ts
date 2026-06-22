@@ -1,69 +1,72 @@
-import { i18n } from '@lingui/core';
-import { FormControlMixin } from '@open-wc/form-control';
+import { i18n } from "@lingui/core";
+import { FormControlMixin } from "@open-wc/form-control";
 import {
-  addDays,
-  addMonths,
-  differenceInCalendarDays,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  endOfWeek,
-  format,
-  formatISO,
-  getDate,
-  getWeekOfMonth,
-  isSameDay,
-  isSameMonth,
-  isToday,
-  Locale,
-  lastDayOfMonth,
-  startOfMonth,
-  startOfToday,
-  startOfWeek,
-  subDays,
-  subMonths,
-} from 'date-fns';
-import { da, enGB, fi, nb, sv } from 'date-fns/locale';
-import { html, LitElement } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { styleMap } from 'lit/directives/style-map.js';
+	addDays,
+	addMonths,
+	differenceInCalendarDays,
+	eachDayOfInterval,
+	eachWeekOfInterval,
+	endOfWeek,
+	format,
+	formatISO,
+	getDate,
+	getWeekOfMonth,
+	isSameDay,
+	isSameMonth,
+	isToday,
+	Locale,
+	lastDayOfMonth,
+	startOfMonth,
+	startOfToday,
+	startOfWeek,
+	subDays,
+	subMonths,
+} from "date-fns";
+import { da, enGB, fi, nb, sv } from "date-fns/locale";
+import { html, LitElement } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { styleMap } from "lit/directives/style-map.js";
 
-import '../icon/icon.js';
+import "../icon/icon.js";
 
-import { activateI18n, detectLocale } from '../i18n.js';
-import { reset } from '../styles.js';
+import { activateI18n, detectLocale } from "../i18n.js";
+import { reset } from "../styles.js";
 
-import { messages as daMessages } from './locales/da/messages.mjs';
-import { messages as enMessages } from './locales/en/messages.mjs';
-import { messages as fiMessages } from './locales/fi/messages.mjs';
-import { messages as nbMessages } from './locales/nb/messages.mjs';
-import { messages as svMessages } from './locales/sv/messages.mjs';
-import { wDatepickerStyles } from './styles/w-datepicker.styles.js';
-import { wDatepickerCalendarStyles } from './styles/w-datepicker-calendar.styles.js';
-import { wDatepickerDayStyles } from './styles/w-datepicker-day.styles.js';
-import { wDatepickerMonthStyles } from './styles/w-datepicker-month.styles.js';
-import { fromISOToDate } from './utils.js';
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
+import { wDatepickerStyles } from "./styles/w-datepicker.styles.js";
+import { wDatepickerCalendarStyles } from "./styles/w-datepicker-calendar.styles.js";
+import { wDatepickerDayStyles } from "./styles/w-datepicker-day.styles.js";
+import { wDatepickerMonthStyles } from "./styles/w-datepicker-month.styles.js";
+import {
+	fromISOToDate,
+	getDateInputDisplayValue,
+	getDateInputPlaceholder,
+	getDateInputType,
+} from "./utils.js";
 
-const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
-const isIOS = /iP(hone|od|ad)/.test(ua);
-const inputType = isIOS ? 'text' : 'date';
+const inputType = getDateInputType();
 
-const calendarId = 'calendar';
-const inputId = 'input';
-const toggleButtonId = 'toggle';
-const wrapperId = 'wrapper';
-const previousMonthButtonId = 'previous';
+const calendarId = "calendar";
+const inputId = "input";
+const toggleButtonId = "toggle";
+const wrapperId = "wrapper";
+const previousMonthButtonId = "previous";
 
 // Convenience to support the common locales of our users.
 // For other locales either add to this list or point users
 // to https://date-fns.org/v4.1.0/docs/setDefaultOptions
 const datefnsLocale = {
-  en: enGB,
-  nb,
-  sv,
-  da,
-  fi,
+	en: enGB,
+	nb,
+	sv,
+	da,
+	fi,
 };
 
 /**
@@ -74,531 +77,605 @@ const datefnsLocale = {
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-datepicker--docs)
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  };
+	static shadowRootOptions = {
+		...LitElement.shadowRootOptions,
+		delegatesFocus: true,
+	};
 
-  static styles = [reset, wDatepickerStyles, wDatepickerCalendarStyles, wDatepickerDayStyles, wDatepickerMonthStyles];
+	static styles = [
+		reset,
+		wDatepickerStyles,
+		wDatepickerCalendarStyles,
+		wDatepickerDayStyles,
+		wDatepickerMonthStyles,
+	];
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  label: string;
+	/**
+	 * The label displayed above the date input.
+	 *
+	 * Use this to give the datepicker a visible and accessible name.
+	 */
+	@property({ reflect: true })
+	label: string | undefined;
 
-  /** Takes precedence over the `<html>` lang attribute.
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  lang: string;
+	/**
+	 * The locale used for calendar labels and date formatting.
+	 *
+	 * This takes precedence over the `<html>` `lang` attribute. Supported built-in locales are `en`, `nb`, `sv`, `da`, and `fi`.
+	 */
+	@property({ reflect: true })
+	lang!: string;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  name: string;
+	/**
+	 * The name submitted with the date value.
+	 *
+	 * Use this when the datepicker belongs to a form and its value should be included in form data.
+	 */
+	@property({ reflect: true })
+	name: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  value: string;
+	/**
+	 * The selected date value.
+	 *
+	 * Use an ISO date string in `YYYY-MM-DD` format. The value is submitted with the form and is reset to its initial value when the form resets.
+	 */
+	@property({ reflect: true })
+	value: string | undefined;
 
-  /**
-   * Decides the format of the date as shown in the calendar header.
-   *
-   * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: 'header-format' })
-  headerFormat = 'MMMM yyyy';
+	/**
+	 * The date format used in the calendar header.
+	 *
+	 * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
+	 */
+	@property({ attribute: "header-format" })
+	headerFormat = "MMMM yyyy";
 
-  /**
-   * Decides the format of the weekday as shown above the grid of dates in the calendar.
-   *
-   * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: 'weekday-format' })
-  weekdayFormat = 'EEEEEE';
+	/**
+	 * The weekday format shown above the calendar grid.
+	 *
+	 * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
+	 */
+	@property({ attribute: "weekday-format" })
+	weekdayFormat = "EEEEEE";
 
-  /**
-   * Lets you control if a date in the calendar should be disabled.
-   *
-   * This needs to be set on the element instance in JavaScript, not as an HTML attribute.
-   *
-   * @example
-   * ```ts
-   * import type { WarpDatepicker } from "@warp-ds/elements";
-   * import { isBefore, startOfDay } from 'date-fns';
-   *
-   * const today = startOfDay(new Date());
-   * const datePicker = document.querySelector('w-datepicker') as WarpDatepicker;
-   * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
-   * ```
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: false })
-  isDayDisabled: (day: Date) => boolean;
+	/**
+	 * Function used to disable dates in the calendar.
+	 *
+	 * Set this on the element instance in JavaScript, not as an HTML attribute. Disabled dates cannot be selected from the calendar.
+	 *
+	 * @example
+	 * ```ts
+	 * import type { WarpDatepicker } from "@warp-ds/elements";
+	 * import { isBefore, startOfDay } from 'date-fns';
+	 *
+	 * const today = startOfDay(new Date());
+	 * const datePicker = document.querySelector('w-datepicker') as WarpDatepicker;
+	 * datePicker.isDayDisabled = (day: Date) => isBefore(startOfDay(day), today);
+	 * ```
+	 */
+	@property({ attribute: false })
+	isDayDisabled: ((day: Date) => boolean) | undefined;
 
-  /**
-   * Decides the format of the day in the calendar as read to screen readers.
-   *
-   * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
-   
-   * @summary
-   * @description
-  */
-  @property({ attribute: 'day-format' })
-  dayFormat = 'PPPP';
+	/**
+	 * The date format used for calendar day accessible names.
+	 *
+	 * The syntax is defined by [date-fns/format](https://date-fns.org/v4.1.0/docs/format).
+	 */
+	@property({ attribute: "day-format" })
+	dayFormat = "PPPP";
 
-  @state()
-  isCalendarOpen = false;
+	@state()
+	isCalendarOpen = false;
 
-  @state()
-  navigationDate: Date = startOfToday();
+	@state()
+	navigationDate: Date = startOfToday();
 
-  /** @internal This gets picked up by the custom element manifest analyzer as a property for some reason */
-  @state()
-  locale: Locale = enGB;
+	/** @internal This gets picked up by the custom element manifest analyzer as a property for some reason */
+	@state()
+	locale: Locale = enGB;
 
-  @state()
-  get selectedDate(): Date | null {
-    return fromISOToDate(this.value) ?? null;
-  }
+	@state()
+	get selectedDate(): Date | null {
+		if (!this.value) return null;
+		return fromISOToDate(this.value) ?? null;
+	}
 
-  @state()
-  get month() {
-    return startOfMonth(this.navigationDate);
-  }
+	@state()
+	get month() {
+		return startOfMonth(this.navigationDate);
+	}
 
-  // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+	// capture the initial value using connectedCallback and #initialValue
+	#initialValue: string | undefined = undefined;
 
-  @state()
-  get weeks() {
-    const month = this.month;
-    const navigationDate = this.navigationDate;
-    const weekStarts = eachWeekOfInterval(
-      {
-        start: startOfMonth(month),
-        end: lastDayOfMonth(month),
-      },
-      { locale: this.locale },
-    );
-    const weekIntervals = weekStarts
-      .map((weekStart) => ({
-        start: weekStart,
-        end: endOfWeek(weekStart, { locale: this.locale }),
-      }))
-      .map((week) => eachDayOfInterval(week));
+	@state()
+	get weeks() {
+		const month = this.month;
+		const navigationDate = this.navigationDate;
+		const weekStarts = eachWeekOfInterval(
+			{
+				start: startOfMonth(month),
+				end: lastDayOfMonth(month),
+			},
+			{ locale: this.locale },
+		);
+		const weekIntervals = weekStarts
+			.map((weekStart) => ({
+				start: weekStart,
+				end: endOfWeek(weekStart, { locale: this.locale }),
+			}))
+			.map((week) => eachDayOfInterval(week));
 
-    // Inserts the navigation date into the date matrix
-    if (isSameMonth(navigationDate, month)) {
-      const weekOfMonth = getWeekOfMonth(navigationDate, { locale: this.locale }) - 1;
+		// Inserts the navigation date into the date matrix
+		if (isSameMonth(navigationDate, month)) {
+			const weekOfMonth =
+				getWeekOfMonth(navigationDate, { locale: this.locale }) - 1;
 
-      // we need to get the day of the week to index into the correct day after we've gotten the week
-      // getDay() however isn't locale aware. This is a good replacement
-      const day = differenceInCalendarDays(navigationDate, startOfWeek(navigationDate, { locale: this.locale }));
+			// we need to get the day of the week to index into the correct day after we've gotten the week
+			// getDay() however isn't locale aware. This is a good replacement
+			const day = differenceInCalendarDays(
+				navigationDate,
+				startOfWeek(navigationDate, { locale: this.locale }),
+			);
 
-      weekIntervals[weekOfMonth][day] = navigationDate;
-    }
-    return weekIntervals;
-  }
+			weekIntervals[weekOfMonth][day] = navigationDate;
+		}
+		return weekIntervals;
+	}
 
-  @query(`#${calendarId}`)
-  calendar: HTMLDivElement;
+	@query(`#${calendarId}`)
+	calendar!: HTMLDivElement;
 
-  @query(`#${inputId}`, true)
-  input: HTMLInputElement;
+	@query(`#${inputId}`, true)
+	input!: HTMLInputElement;
 
-  @query(`#${toggleButtonId}`, true)
-  toggleButton: HTMLButtonElement;
+	@query(`#${toggleButtonId}`, true)
+	toggleButton!: HTMLButtonElement;
 
-  @query(`#${wrapperId}`, true)
-  wrapper: HTMLDivElement;
+	@query(`#${wrapperId}`, true)
+	wrapper!: HTMLDivElement;
 
-  /**
-   * This is the first focusable element, needed for the modal focus trap.
-   *
-   * Don't cache this and other `@query` fields from inside the calendar modal.
-   * They work the first time, but once the calendar is closed and reopened
-   * the query will point to an element that doesn't exist anymore.
-   */
-  @query(`#${previousMonthButtonId}`)
-  previousMonthButton: HTMLButtonElement;
+	/**
+	 * This is the first focusable element, needed for the modal focus trap.
+	 *
+	 * Don't cache this and other `@query` fields from inside the calendar modal.
+	 * They work the first time, but once the calendar is closed and reopened
+	 * the query will point to an element that doesn't exist anymore.
+	 */
+	@query(`#${previousMonthButtonId}`)
+	previousMonthButton!: HTMLButtonElement;
 
-  @query('[aria-current="date"]')
-  todayCell: HTMLTableCellElement;
+	@query('[aria-current="date"]')
+	todayCell!: HTMLTableCellElement;
 
-  @query('[data-navigation="true"]')
-  selectedCell: HTMLTableCellElement;
+	@query('[data-navigation="true"]')
+	selectedCell!: HTMLTableCellElement;
 
-  resetFormControl(): void {
-    this.value = this.#initialValue;
-  }
+	get #inputLocale() {
+		return this.lang || detectLocale() || "en";
+	}
 
-  async #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
-    e.preventDefault();
-    this.isCalendarOpen = !this.isCalendarOpen;
-    if (this.isCalendarOpen) {
-      // Move into the calendar and announce the availability
-      // of the calendar grid to screen reader users.
-      await this.updateComplete;
-      (this.selectedCell || this.todayCell).focus();
-    }
-  }
+	get #inputValue() {
+		if (inputType === "text" && this.value) {
+			return getDateInputDisplayValue(this.value, this.#inputLocale);
+		}
 
-  #nextMonth() {
-    this.navigationDate = addMonths(this.month, 1);
-  }
+		return this.value || "";
+	}
 
-  #previousMonth() {
-    this.navigationDate = subMonths(this.month, 1);
-  }
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+	}
 
-  async #dispatchChangeEvent() {
-    // Let Lit finish rendering the updated value for the input field so
-    // the `event.target.value` is correct.
-    await this.updateComplete;
-    this.input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-  }
+	async #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
+		e.preventDefault();
+		this.isCalendarOpen = !this.isCalendarOpen;
+		if (this.isCalendarOpen) {
+			// Move into the calendar and announce the availability
+			// of the calendar grid to screen reader users.
+			await this.updateComplete;
+			(this.selectedCell || this.todayCell).focus();
+		}
+	}
 
-  /**
-   * We can't use private fields (`#` prefix) for this method
-   * since we can't overwrite private field methods. We need
-   * to `.bind(this)` in the constructor because we need one
-   * stable method handler we can register and unregister on
-   * `document`, that has access to this specific instance
-   * of WarpDatepicker to control the calendar.
-   * @internal
-   */
-  private _onClickOutside(e: MouseEvent | FocusEvent) {
-    if (!this.isCalendarOpen) {
-      return;
-    }
+	#nextMonth() {
+		this.navigationDate = addMonths(this.month, 1);
+	}
 
-    const isInsideDatePicker = this.contains(e.target as Node);
-    if (isInsideDatePicker) {
-      return;
-    }
+	#previousMonth() {
+		this.navigationDate = subMonths(this.month, 1);
+	}
 
-    this.isCalendarOpen = false;
-  }
+	async #dispatchChangeEvent() {
+		// Let Lit finish rendering the updated value for the input field so
+		// the `event.target.value` is correct.
+		await this.updateComplete;
+		this.input.dispatchEvent(
+			new Event("change", { bubbles: true, composed: true }),
+		);
+	}
 
-  #onInput(e: InputEvent) {
-    this.value = (e.target as HTMLInputElement).value;
-  }
+	/**
+	 * We can't use private fields (`#` prefix) for this method
+	 * since we can't overwrite private field methods. We need
+	 * to `.bind(this)` in the constructor because we need one
+	 * stable method handler we can register and unregister on
+	 * `document`, that has access to this specific instance
+	 * of WarpDatepicker to control the calendar.
+	 * @internal
+	 */
+	private _onClickOutside(e: MouseEvent | FocusEvent | TouchEvent) {
+		if (!this.isCalendarOpen) {
+			return;
+		}
 
-  #onInputClick(e: PointerEvent) {
-    // stop Safari on macOS from showing the native calendar
-    e.preventDefault();
-    this.isCalendarOpen = true;
-  }
+		const isInsideDatePicker = this.contains(e.target as Node);
+		if (isInsideDatePicker) {
+			return;
+		}
 
-  #onInputKeyDown(e: KeyboardEvent) {
-    if (e.key === ' ') return this.#toggleCalendarOpen(e);
-    if (e.key === ',') {
-      e.preventDefault();
-    }
-    if (e.key === 'Enter' && this.internals.form) {
-      (this.internals.form as HTMLFormElement).requestSubmit();
-    }
-  }
+		this.isCalendarOpen = false;
+	}
 
-  async #onCalendarKeyDown(e: KeyboardEvent) {
-    const navigationDate = this.navigationDate;
-    let newNavigationDate: Date;
+	#onInput(e: InputEvent) {
+		this.value = (e.target as HTMLInputElement).value;
+	}
 
-    switch (e.key) {
-      case 'ArrowUp':
-        newNavigationDate = subDays(navigationDate, 7);
-        break;
-      case 'ArrowLeft':
-        newNavigationDate = subDays(navigationDate, 1);
-        break;
-      case 'Home':
-        newNavigationDate = startOfWeek(navigationDate, { locale: this.locale });
-        break;
-      case 'PageUp':
-        newNavigationDate = subMonths(navigationDate, 1);
-        break;
-      case 'ArrowDown':
-        newNavigationDate = addDays(navigationDate, 7);
-        break;
-      case 'ArrowRight':
-        newNavigationDate = addDays(navigationDate, 1);
-        break;
-      case 'End':
-        newNavigationDate = endOfWeek(navigationDate, { locale: this.locale });
-        break;
-      case 'PageDown':
-        newNavigationDate = addMonths(navigationDate, 1);
-        break;
-      case 'Escape':
-        this.isCalendarOpen = false;
-        break;
-      case 'Tab':
-        if ((e.target as HTMLElement).tagName === 'TD' && !e.shiftKey) {
-          // If Tab and no Shift we are about to leave the modal and should move focus
-          // to the Previous month button. If Shift is held, proceed as normal.
-          e.preventDefault();
-          this.previousMonthButton.focus();
-        } else if ((e.target as HTMLElement).id === previousMonthButtonId && e.shiftKey) {
-          // If we're holding Shift and pressing Tab we are moving back in the focus
-          // order. If we're about to leave the previous month button (the first focusable
-          // element in the modal), move the focus to the last focusable element, which
-          // is the current navigation date in the calendar grid.
-          e.preventDefault();
-          (this.selectedCell || this.todayCell).focus();
-        }
-        break;
-    }
+	#onInputClick(e: PointerEvent) {
+		// stop Safari on macOS from showing the native calendar
+		e.preventDefault();
+		this.isCalendarOpen = true;
+	}
 
-    if (newNavigationDate) {
-      // prevent scrolling the viewport
-      e.preventDefault();
-      this.navigationDate = newNavigationDate;
+	#onInputKeyDown(e: KeyboardEvent) {
+		if (e.key === " ") return this.#toggleCalendarOpen(e);
+		if (e.key === ",") {
+			e.preventDefault();
+		}
+		if (e.key === "Enter" && this.internals.form) {
+			(this.internals.form as HTMLFormElement).requestSubmit();
+		}
+	}
 
-      // move keyboard focus once Lit has rendered an updated `data-navigation`
-      // based on this.navigationDate
-      await this.updateComplete;
-      this.selectedCell.focus();
-    }
-  }
+	async #onCalendarKeyDown(e: KeyboardEvent) {
+		const navigationDate = this.navigationDate;
+		let newNavigationDate: Date | null = null;
 
-  #onCalendarSelect(event: MouseEvent | KeyboardEvent) {
-    // Clicks can hit the `<div>` inside the `<td>`, so look at
-    // currentTarget (where the listener is registered) to get
-    // the `<td>` consistently.
-    const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
+		switch (e.key) {
+			case "ArrowUp":
+				newNavigationDate = subDays(navigationDate, 7);
+				break;
+			case "ArrowLeft":
+				newNavigationDate = subDays(navigationDate, 1);
+				break;
+			case "Home":
+				newNavigationDate = startOfWeek(navigationDate, {
+					locale: this.locale,
+				});
+				break;
+			case "PageUp":
+				newNavigationDate = subMonths(navigationDate, 1);
+				break;
+			case "ArrowDown":
+				newNavigationDate = addDays(navigationDate, 7);
+				break;
+			case "ArrowRight":
+				newNavigationDate = addDays(navigationDate, 1);
+				break;
+			case "End":
+				newNavigationDate = endOfWeek(navigationDate, { locale: this.locale });
+				break;
+			case "PageDown":
+				newNavigationDate = addMonths(navigationDate, 1);
+				break;
+			case "Escape":
+				this.isCalendarOpen = false;
+				break;
+			case "Tab":
+				if ((e.target as HTMLElement).tagName === "TD" && !e.shiftKey) {
+					// If Tab and no Shift we are about to leave the modal and should move focus
+					// to the Previous month button. If Shift is held, proceed as normal.
+					e.preventDefault();
+					this.previousMonthButton.focus();
+				} else if (
+					(e.target as HTMLElement).id === previousMonthButtonId &&
+					e.shiftKey
+				) {
+					// If we're holding Shift and pressing Tab we are moving back in the focus
+					// order. If we're about to leave the previous month button (the first focusable
+					// element in the modal), move the focus to the last focusable element, which
+					// is the current navigation date in the calendar grid.
+					e.preventDefault();
+					(this.selectedCell || this.todayCell).focus();
+				}
+				break;
+		}
 
-    if ('key' in event) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        // Prevents whitespace from being added to the input field
-        event.preventDefault();
-        this.value = isoDate;
-        this.shadowRoot.querySelector('input').value = this.value;
-        this.isCalendarOpen = false;
-        this.toggleButton.focus();
-        this.#dispatchChangeEvent();
-      }
-    } else {
-      this.value = isoDate;
-      this.shadowRoot.querySelector('input').value = this.value;
-      this.isCalendarOpen = false;
-      this.#dispatchChangeEvent();
-    }
-  }
+		if (newNavigationDate) {
+			// prevent scrolling the viewport
+			e.preventDefault();
+			this.navigationDate = newNavigationDate;
 
-  constructor() {
-    super();
+			// move keyboard focus once Lit has rendered an updated `data-navigation`
+			// based on this.navigationDate
+			await this.updateComplete;
+			this.selectedCell.focus();
+		}
+	}
 
-    activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	#onCalendarSelect(event: MouseEvent | KeyboardEvent) {
+		// Clicks can hit the `<div>` inside the `<td>`, so look at
+		// currentTarget (where the listener is registered) to get
+		// the `<td>` consistently.
+		const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
 
-    const lang = detectLocale();
-    if (lang && datefnsLocale[lang]) {
-      this.locale = datefnsLocale[lang];
-    }
+		if ("key" in event) {
+			if (event.key === "Enter" || event.key === " ") {
+				// Prevents whitespace from being added to the input field
+				event.preventDefault();
+				this.value = isoDate;
+				this.input.value = this.#inputValue;
+				this.isCalendarOpen = false;
+				this.toggleButton.focus();
+				this.#dispatchChangeEvent();
+			}
+		} else {
+			this.value = isoDate;
+			this.input.value = this.#inputValue;
+			this.isCalendarOpen = false;
+			this.#dispatchChangeEvent();
+		}
+	}
 
-    this._onClickOutside = this._onClickOutside.bind(this);
-  }
+	constructor() {
+		super();
 
-  connectedCallback(): void {
-    super.connectedCallback();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
-    this.#initialValue = this.value;
+		const lang = detectLocale();
+		if (lang && datefnsLocale[lang]) {
+			this.locale = datefnsLocale[lang];
+		}
 
-    // Local lang attribute takes precedence
-    const lang = this.lang;
-    if (lang && datefnsLocale[lang]) {
-      this.locale = datefnsLocale[lang];
-    }
+		this._onClickOutside = this._onClickOutside.bind(this);
+	}
 
-    if (this.value) {
-      const iso = fromISOToDate(this.value);
-      if (iso) {
-        this.navigationDate = iso;
-      }
-    }
+	connectedCallback(): void {
+		super.connectedCallback();
 
-    document.addEventListener('mousedown', this._onClickOutside);
-    document.addEventListener('touchend', this._onClickOutside);
-    document.addEventListener('focusin', this._onClickOutside);
-  }
+		this.#initialValue = this.value;
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
+		// Local lang attribute takes precedence
+		const lang = this.lang;
+		// @ts-expect-error We're defensive here in the lookup
+		if (lang && datefnsLocale[lang]) {
+			// @ts-expect-error We're defensive here in the lookup
+			this.locale = datefnsLocale[lang];
+		}
 
-    document.removeEventListener('mousedown', this._onClickOutside);
-    document.removeEventListener('touchend', this._onClickOutside);
-    document.removeEventListener('focusin', this._onClickOutside);
-  }
+		if (this.value) {
+			const iso = fromISOToDate(this.value);
+			if (iso) {
+				this.navigationDate = iso;
+			}
+		}
 
-  updated(changedProperties: Map<string, unknown>): void {
-    if (changedProperties.has('value')) {
-      // https://www.npmjs.com/package/@open-wc/form-control#setvalue
-      this.setValue(this.value);
-    }
-  }
+		document.addEventListener("mousedown", this._onClickOutside);
+		document.addEventListener("touchend", this._onClickOutside);
+		document.addEventListener("focusin", this._onClickOutside);
+	}
 
-  render() {
-    return html`
-      <div class="w-datepicker-wrapper" id="${wrapperId}">
-        <label class="w-datepicker-input-label" for="${inputId}">${this.label}</label>
-        <div class="w-datepicker-input-wrapper">
-          <input
-            id="${inputId}"
-            type="${inputType}"
-            name="${ifDefined(this.name)}"
-            value="${ifDefined(this.value)}"
-            class="w-datepicker-input"
-            @click="${this.#onInputClick}"
-            @input="${this.#onInput}"
-            @keydown="${this.#onInputKeyDown}" />
-          <w-button
-            aria-label="${
-              this.value
-                ? i18n.t({
-                    id: 'datepicker.toggle.changeDate',
-                    values: { currentDate: format(this.value, this.dayFormat) },
-                    message: 'Change date, {currentDate}',
-                    comment:
-                      'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date',
-                  })
-                : i18n.t({
-                    id: 'datepicker.toggle.chooseDate',
-                    message: 'Choose date',
-                    comment:
-                      'Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date',
-                  })
-            }"
-            aria-controls="${calendarId}"
-            class="w-datepicker-button"
-            data-testid="${toggleButtonId}"
-            id="${toggleButtonId}"
-            variant="utilityQuiet"
-            type="button"
-            @click="${this.#toggleCalendarOpen}">
-            <w-icon name="Calendar" size="small" locale="${detectLocale()}" class="flex"></w-icon>
-          </w-button>
-        </div>
-      </div>
-      <div class="w-dropdown__popover w-dropdown__popover--open" style="${styleMap({ display: this.isCalendarOpen ? undefined : 'none' })}">
-        <div
-          aria-label="${i18n.t({
-            id: 'datepicker.calendar.roleDescription',
-            message: 'Date picker',
-            comment: 'Used by screen readers to announce that the calendar element is a date picker.',
-          })}"
-          aria-modal="true"
-          role="dialog"
-          class="w-datepicker__calendar"
-          data-testid="${calendarId}"
-          id="${calendarId}"
-          @keydown="${this.#onCalendarKeyDown}">
-          <div class="w-datepicker__month-nav">
-            <w-button
-              aria-label="${i18n.t({
-                id: 'datepicker.calendar.previousMonth',
-                message: 'Previous month',
-                comment: 'Screen reader label for the previous month button.',
-              })}"
-              class="w-datepicker__month__nav__button"
-              id="${previousMonthButtonId}"
-              data-testid="${previousMonthButtonId}"
-              variant="utility"
-              quiet
-              small
-              @click="${this.#previousMonth}">
-              <w-icon name="ChevronLeft" size="small" locale="${detectLocale()}" class="flex"></w-icon>
-            </w-button>
-            <div aria-live="polite" class="w-datepicker__month__nav__header">
-              ${format(this.month, this.headerFormat, { locale: this.locale })}
-            </div>
-            <w-button
-              aria-label="${i18n.t({
-                id: 'datepicker.calendar.nextMonth',
-                message: 'Next month',
-                comment: 'Screen reader label for the next month button.',
-              })}"
-              class="w-datepicker__month__nav__button"
-              data-testid="${calendarId}-next"
-              variant="utility"
-              quiet
-              small
-              @click="${this.#nextMonth}">
-              <w-icon name="ChevronRight" size="small" locale="${detectLocale()}" class="flex"></w-icon>
-            </w-button>
-          </div>
-          <div class="w-datepicker__month">
-            <table class="w-datepicker__table" role="grid">
-              <thead class="w-datepicker__weekdays">
-                <tr>
-                  ${this.weeks[0].map(
-                    (day) =>
-                      html`<th class="w-datepicker__weekday">${format(day, this.weekdayFormat, { locale: this.locale })}</th> `,
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                ${this.weeks.map(
-                  (week) =>
-                    html`<tr>
-                      ${week.map((day) => {
-                        if (!isSameMonth(this.month, day)) {
-                          return html`<td></td>`;
-                        }
+	disconnectedCallback(): void {
+		super.disconnectedCallback();
 
-                        const isDisabled = this.isDayDisabled ? this.isDayDisabled(day) : false;
-                        const isSelected = isSameDay(day, this.selectedDate);
-                        const isNavigationDate = day === this.navigationDate;
+		document.removeEventListener("mousedown", this._onClickOutside);
+		document.removeEventListener("touchend", this._onClickOutside);
+		document.removeEventListener("focusin", this._onClickOutside);
+	}
 
-                        return html`<td
-                          aria-current="${ifDefined(isToday(day) ? 'date' : undefined)}"
-                          aria-disabled="${isDisabled}"
-                          aria-label="${format(day, this.dayFormat, { locale: this.locale })}"
-                          aria-selected="${isSelected}"
-                          class="${classMap({
-                            'w-datepicker__day': true,
-                            'w-datepicker__day--today': isToday(day),
-                            'w-datepicker__day--selected': isSelected,
-                            'w-datepicker__day--disabled': isDisabled,
-                            'w-datepicker__day--navigation': isNavigationDate,
-                          })}"
-                          data-navigation="${isNavigationDate}"
-                          data-date="${formatISO(day, { representation: 'date' })}"
-                          role="gridcell"
-                          tabindex="${isNavigationDate ? 0 : -1}"
-                          @click="${isDisabled ? undefined : this.#onCalendarSelect}"
-                          @keydown="${isDisabled ? undefined : this.#onCalendarSelect}">
-                          <div>${getDate(day)}</div>
-                        </td>`;
-                      })}
-                    </tr>`,
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    `;
-  }
+	updated(changedProperties: Map<string, unknown>): void {
+		if (changedProperties.has("value")) {
+			// https://www.npmjs.com/package/@open-wc/form-control#setvalue
+			this.setValue(this.value!);
+		}
+	}
+
+	render() {
+		return html`
+			<div class="w-datepicker-wrapper" id="${wrapperId}">
+				<label class="w-datepicker-input-label" for="${inputId}"
+					>${this.label}</label
+				>
+				<div class="w-datepicker-input-wrapper">
+					<input
+						id="${inputId}"
+						type="${inputType}"
+						name="${ifDefined(this.name)}"
+						placeholder="${ifDefined(
+							inputType === "text"
+								? getDateInputPlaceholder(this.#inputLocale)
+								: undefined,
+						)}"
+						.value="${this.#inputValue}"
+						class="w-datepicker-input"
+						@click="${this.#onInputClick}"
+						@input="${this.#onInput}"
+						@keydown="${this.#onInputKeyDown}"
+					/>
+					<w-button
+						aria-label="${this.value
+							? i18n.t({
+									id: "datepicker.toggle.changeDate",
+									values: { currentDate: format(this.value, this.dayFormat) },
+									message: "Change date, {currentDate}",
+									comment:
+										"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date",
+								})
+							: i18n.t({
+									id: "datepicker.toggle.chooseDate",
+									message: "Choose date",
+									comment:
+										"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date",
+								})}"
+						aria-controls="${calendarId}"
+						class="w-datepicker-button"
+						data-testid="${toggleButtonId}"
+						id="${toggleButtonId}"
+						variant="utilityQuiet"
+						type="button"
+						@click="${this.#toggleCalendarOpen}"
+					>
+						<w-icon
+							name="Calendar"
+							size="small"
+							locale="${detectLocale()}"
+							class="flex"
+						></w-icon>
+					</w-button>
+				</div>
+			</div>
+			<div
+				class="w-dropdown__popover w-dropdown__popover--open"
+				style="${styleMap({
+					display: this.isCalendarOpen ? undefined : "none",
+				})}"
+			>
+				<div
+					aria-label="${i18n.t({
+						id: "datepicker.calendar.roleDescription",
+						message: "Date picker",
+						comment:
+							"Used by screen readers to announce that the calendar element is a date picker.",
+					})}"
+					aria-modal="true"
+					role="dialog"
+					class="w-datepicker__calendar"
+					data-testid="${calendarId}"
+					id="${calendarId}"
+					@keydown="${this.#onCalendarKeyDown}"
+				>
+					<div class="w-datepicker__month-nav">
+						<w-button
+							aria-label="${i18n.t({
+								id: "datepicker.calendar.previousMonth",
+								message: "Previous month",
+								comment: "Screen reader label for the previous month button.",
+							})}"
+							class="w-datepicker__month__nav__button"
+							id="${previousMonthButtonId}"
+							data-testid="${previousMonthButtonId}"
+							variant="utility"
+							quiet
+							small
+							@click="${this.#previousMonth}"
+						>
+							<w-icon
+								name="ChevronLeft"
+								size="small"
+								locale="${detectLocale()}"
+								class="flex"
+							></w-icon>
+						</w-button>
+						<div aria-live="polite" class="w-datepicker__month__nav__header">
+							${format(this.month, this.headerFormat, { locale: this.locale })}
+						</div>
+						<w-button
+							aria-label="${i18n.t({
+								id: "datepicker.calendar.nextMonth",
+								message: "Next month",
+								comment: "Screen reader label for the next month button.",
+							})}"
+							class="w-datepicker__month__nav__button"
+							data-testid="${calendarId}-next"
+							variant="utility"
+							quiet
+							small
+							@click="${this.#nextMonth}"
+						>
+							<w-icon
+								name="ChevronRight"
+								size="small"
+								locale="${detectLocale()}"
+								class="flex"
+							></w-icon>
+						</w-button>
+					</div>
+					<div class="w-datepicker__month">
+						<table class="w-datepicker__table" role="grid">
+							<thead class="w-datepicker__weekdays">
+								<tr>
+									${this.weeks[0].map(
+										(day) =>
+											html`<th class="w-datepicker__weekday">
+												${format(day, this.weekdayFormat, {
+													locale: this.locale,
+												})}
+											</th> `,
+									)}
+								</tr>
+							</thead>
+							<tbody>
+								${this.weeks.map(
+									(week) =>
+										html`<tr>
+											${week.map((day) => {
+												if (!isSameMonth(this.month, day)) {
+													return html`<td></td>`;
+												}
+
+												const isDisabled = this.isDayDisabled
+													? this.isDayDisabled(day)
+													: false;
+												const isSelected =
+													Boolean(this.selectedDate) &&
+													isSameDay(day, this.selectedDate!);
+												const isNavigationDate = day === this.navigationDate;
+
+												return html`<td
+													aria-current="${ifDefined(
+														isToday(day) ? "date" : undefined,
+													)}"
+													aria-disabled="${isDisabled}"
+													aria-label="${format(day, this.dayFormat, {
+														locale: this.locale,
+													})}"
+													aria-selected="${isSelected}"
+													class="${classMap({
+														"w-datepicker__day": true,
+														"w-datepicker__day--today": isToday(day),
+														"w-datepicker__day--selected": isSelected,
+														"w-datepicker__day--disabled": isDisabled,
+														"w-datepicker__day--navigation": isNavigationDate,
+													})}"
+													data-navigation="${isNavigationDate}"
+													data-date="${formatISO(day, {
+														representation: "date",
+													})}"
+													role="gridcell"
+													tabindex="${isNavigationDate ? 0 : -1}"
+													@click="${isDisabled
+														? undefined
+														: this.#onCalendarSelect}"
+													@keydown="${isDisabled
+														? undefined
+														: this.#onCalendarSelect}"
+												>
+													<div>${getDate(day)}</div>
+												</td>`;
+											})}
+										</tr>`,
+								)}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		`;
+	}
 }
 
-if (!customElements.get('w-datepicker')) {
-  customElements.define('w-datepicker', WarpDatepicker);
+if (!customElements.get("w-datepicker")) {
+	customElements.define("w-datepicker", WarpDatepicker);
 }
 
 export { WarpDatepicker };

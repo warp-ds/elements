@@ -1,85 +1,93 @@
-import type { LinguiConfig } from '@lingui/conf';
+import type { LinguiConfig } from "@lingui/conf";
 
-import { supportedLocales } from './packages/i18n';
+import { supportedLocales } from "./packages/i18n";
 
 const config: LinguiConfig = {
-  locales: supportedLocales as unknown as string[],
-  catalogs: [
-    {
-      include: ['packages/affix/'],
-      path: 'packages/affix/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/breadcrumbs/'],
-      path: 'packages/breadcrumbs/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/button/'],
-      path: 'packages/button/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/card/'],
-      path: 'packages/card/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/datepicker/'],
-      path: 'packages/datepicker/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/select/'],
-      path: 'packages/select/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/attention/'],
-      path: 'packages/attention/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/modal/', 'packages/modal-header/'],
-      path: 'packages/modal/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/toast/'],
-      path: 'packages/toast/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/pill/'],
-      path: 'packages/pill/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/pagination/'],
-      path: 'packages/pagination/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/step/'],
-      path: 'packages/step/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/combobox/'],
-      path: 'packages/combobox/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/slider/', 'packages/slider-thumb/'],
-      path: 'packages/slider/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/textarea/'],
-      path: 'packages/textarea/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/page-indicator/'],
-      path: 'packages/page-indicator/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/checkbox-group/'],
-      path: 'packages/checkbox-group/locales/{locale}/messages',
-    },
-    {
-      include: ['packages/radio-group/'],
-      path: 'packages/radio-group/locales/{locale}/messages',
-    },
-  ],
-  compileNamespace: 'es',
-  sourceLocale: 'en',
+	locales: supportedLocales as unknown as string[],
+	catalogs: [
+		{
+			include: ["packages/affix/"],
+			path: "packages/affix/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/breadcrumbs/"],
+			path: "packages/breadcrumbs/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/button/"],
+			path: "packages/button/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/card/"],
+			path: "packages/card/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/datepicker/"],
+			path: "packages/datepicker/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/select/"],
+			path: "packages/select/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/attention/"],
+			path: "packages/attention/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/modal/", "packages/modal-header/"],
+			path: "packages/modal/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/toast/"],
+			path: "packages/toast/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/pill/"],
+			path: "packages/pill/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/pagination/"],
+			path: "packages/pagination/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/step/"],
+			path: "packages/step/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/combobox/"],
+			path: "packages/combobox/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/slider/", "packages/slider-thumb/"],
+			path: "packages/slider/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/snackbar/", "packages/snackbar-item/"],
+			path: "packages/snackbar/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/textarea/"],
+			path: "packages/textarea/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/textfield/"],
+			path: "packages/textfield/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/page-indicator/"],
+			path: "packages/page-indicator/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/checkbox-group/"],
+			path: "packages/checkbox-group/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/radio-group/"],
+			path: "packages/radio-group/locales/{locale}/messages",
+		},
+	],
+	compileNamespace: "es",
+	sourceLocale: "en",
 };
 
 export default config;

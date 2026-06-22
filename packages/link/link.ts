@@ -1,37 +1,36 @@
-import { html, LitElement, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
+import { html, LitElement, nothing } from "lit";
+import { property } from "lit/decorators.js";
 
-import { reset } from '../styles.js';
+import { reset } from "../styles.js";
 
-import { styles } from './styles/w-link.styles.js';
+import { styles } from "./styles.js";
 
 type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'negative'
-  | 'negativeQuiet'
-  | 'utility'
-  | 'quiet'
-  | 'utilityQuiet'
-  | 'overlay'
-  | 'overlayInverted'
-  | 'overlayQuiet'
-  | 'overlayInvertedQuiet';
+	| "primary"
+	| "secondary"
+	| "negative"
+	| "negativeQuiet"
+	| "utility"
+	| "quiet"
+	| "utilityQuiet"
+	| "overlay"
+	| "overlayInverted"
+	| "overlayQuiet"
+	| "overlayInvertedQuiet";
 
 const variants = [
-  'primary',
-  'secondary',
-  'negative',
-  'negativeQuiet',
-  'utility',
-  'utilityQuiet',
-  'quiet',
-  'link',
-  'overlay',
-  'overlayInverted',
-  'overlayQuiet',
-  'overlayInvertedQuiet',
+	"primary",
+	"secondary",
+	"negative",
+	"negativeQuiet",
+	"utility",
+	"utilityQuiet",
+	"quiet",
+	"link",
+	"overlay",
+	"overlayInverted",
+	"overlayQuiet",
+	"overlayInvertedQuiet",
 ];
 
 /**
@@ -40,100 +39,102 @@ const variants = [
  * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-link--docs)
  */
 class WarpLink extends LitElement {
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  };
+	/** @internal */
+	static shadowRootOptions = {
+		...LitElement.shadowRootOptions,
+		delegatesFocus: true,
+	};
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, reflect: true })
-  autofocus = false;
+	/**
+	 * Focus the link after it is rendered
+	 */
+	@property({ type: Boolean, reflect: true })
+	autofocus = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  variant: ButtonVariant;
+	/**
+	 * Visual style for the link/button.
+	 *
+	 * @throws {Error} Throws an error if an unsupported value is provided.
+	 */
+	@property({ reflect: true })
+	variant: ButtonVariant | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, reflect: true })
-  small = false;
+	/**
+	 * Render a smaller version
+	 */
+	@property({ type: Boolean, reflect: true })
+	small = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  href: string;
+	/**
+	 * The URL the link points to
+	 */
+	@property({ reflect: true })
+	href: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+	/**
+	 * Applies disabled styling, but you need to disable clicks on your own.
+	 *
+	 * The component renders an `<a>` element; `disabled` affects styling, but does not inherently prevent navigation. If you need to fully disable interaction, omit `href` and/or prevent default click behavior.
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled = false;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  target: string;
+	/**
+	 * Where to display the linked URL (e.g. `_blank`)
+	 */
+	@property({ reflect: true })
+	target: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ reflect: true })
-  rel: string;
+	/**
+	 * Relationship of the linked URL.
+	 *
+	 * If `target="_blank"` and `rel` is not provided, the component uses `noopener`.
+	 */
+	@property({ reflect: true })
+	rel: string | undefined;
 
-  /**
-   * @summary
-   * @description
-   */
-  @property({ attribute: 'full-width', type: Boolean, reflect: true })
-  fullWidth = false;
+	/**
+	 * Makes the link take up the full width of its parent
+	 */
+	@property({ attribute: "full-width", type: Boolean, reflect: true })
+	fullWidth = false;
 
-  static styles = [reset, styles];
+	static styles = [reset, styles];
 
-  connectedCallback() {
-    super.connectedCallback();
+	connectedCallback() {
+		super.connectedCallback();
 
-    // Validate variant if explicitly set
-    if (this.variant && !variants.includes(this.variant)) {
-      throw new Error(`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(', ')}.`);
-    }
-  }
+		// Validate variant if explicitly set
+		if (this.variant && !variants.includes(this.variant)) {
+			throw new Error(
+				`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(", ")}.`,
+			);
+		}
+	}
 
-  firstUpdated() {
-    if (this.autofocus) {
-      setTimeout(() => this.focus(), 0);
-    }
-  }
+	firstUpdated() {
+		if (this.autofocus) {
+			setTimeout(() => this.focus(), 0);
+		}
+	}
 
-  render() {
-    return html`
-      <a
-        href="${this.href}"
-        target="${this.target}"
-        rel="${this.target === '_blank' ? this.rel || 'noopener' : nothing}"
-        tabindex="0"
-      >
-        <slot></slot>
-      </a>
-    `;
-  }
+	render() {
+		return html`
+			<a
+				href="${this.href}"
+				part="base"
+				target="${this.target}"
+				rel="${this.target === "_blank" ? this.rel || "noopener" : nothing}"
+				tabindex="0"
+			>
+				<slot></slot>
+			</a>
+		`;
+	}
 }
 
-if (!customElements.get('w-link')) {
-  customElements.define('w-link', WarpLink);
+if (!customElements.get("w-link")) {
+	customElements.define("w-link", WarpLink);
 }
 
 export { WarpLink };

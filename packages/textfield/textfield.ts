@@ -1,380 +1,442 @@
 // @warp-css;
 
-import { classNames as classnames } from '@chbphone55/classnames';
-import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, query } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { classNames as classnames } from "@chbphone55/classnames";
+import { i18n } from "@lingui/core";
+import { FormControlMixin } from "@open-wc/form-control";
+import { html, LitElement, nothing, PropertyValues } from "lit";
+import { property, query } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 
-import { reset } from '../styles.js';
+import { activateI18n } from "../i18n.js";
+import { reset } from "../styles.js";
 
-import { wTextfieldStyles } from './styles/w-textfield.styles.js';
-import { styles } from './styles.js';
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
+import { wTextfieldStyles } from "./styles/w-textfield.styles.js";
+import { styles } from "./styles.js";
+import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccinput = {
-  // input classes
-  base: 'block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current', // true
-  default: 'border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected', // !isInvalid && !isDisabled && !isReadOnly
-  disabled: 'border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none', // !isInvalid && isDisabled && !isReadOnly
-  invalid:
-    'border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!', // isInvalid && !isDisabled && !isReadOnly
-  readOnly: 'pl-0 bg-transparent pointer-events-none', // !isInvalid && !isDisabled && isReadOnly
-  placeholder: 'placeholder:s-text-placeholder',
-  suffix: 'pr-40',
-  prefix: 'pl-[var(--w-prefix-width,_40px)]',
-  // textarea classes
-  textArea: 'min-h-[42] sm:min-h-[45]',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
+	// input classes
+	base: "block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current", // true
+	default:
+		"border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected", // !isInvalid && !isDisabled && !isReadOnly
+	disabled:
+		"border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none", // !isInvalid && isDisabled && !isReadOnly
+	invalid:
+		"border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!", // isInvalid && !isDisabled && !isReadOnly
+	readOnly: "pl-0 bg-transparent pointer-events-none", // !isInvalid && !isDisabled && isReadOnly
+	placeholder: "placeholder:s-text-placeholder",
+	suffix: "pr-40",
+	prefix: "pl-[var(--w-prefix-width,_40px)]",
+	// textarea classes
+	textArea: "min-h-[42] sm:min-h-[45]",
 };
 
 /**
  * A single-line input component used for entering and editing textual or numeric data.
- * 
+ *
  * @slot suffix - Use with `<w-affix>` to include a suffix, for example the unit for a number (e. g. km or sek).
  * @slot prefix - Use with `<w-affix>` to include a prefix, for example a search icon.
+ *
+ * ## Accessibility Note for Affixes
+ * Due to shadow DOM boundaries, affix content cannot be connected to the input via ARIA references.
+ * For non-interactive affixes (text labels like currency symbols), consider including that information
+ * in the main label or placeholder text instead for better screen reader support.
  */
 class WarpTextField extends FormControlMixin(LitElement) {
-  /** @internal */
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  };
+	/** @internal */
+	static shadowRootOptions = {
+		...LitElement.shadowRootOptions,
+		delegatesFocus: true,
+	};
 
-  /**
-   * Keep in mind that using disabled in its current form is an anti-pattern.
-   * 
-   * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
-   * 
-   * Please consider more informative alternatives before choosing to use disabled on an element.
-   * 
-   * @summary Makes the element not focusable and hides it from form submits
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	}
 
-  /**
-   * Mark the form field as invalid. Make sure to also set a `help-text` to help users fix the validation problem.
-   * 
-   * @summary Mark the form field as invalid.
-   */
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
+	/**
+	 * Keep in mind that using disabled in its current form is an anti-pattern.
+	 *
+	 * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+	 *
+	 * Please consider more informative alternatives before choosing to use disabled on an element.
+	 *
+	 * @summary Makes the element not focusable and hides it from form submits
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled = false;
 
-  /**
-   * Either a `label` or an `aria-label` must be provided.
-   */
-  @property({ type: String, reflect: true })
-  label: string;
+	/**
+	 * Mark the form field as invalid. Make sure to also set a `help-text` to help users fix the validation problem.
+	 *
+	 * @summary Mark the form field as invalid.
+	 */
+	@property({ type: Boolean, reflect: true })
+	invalid = false;
 
-  /**
-   * Use in combination with `invalid` to show as a validation error message,
-   * or on its own to show a help text.
-   * 
-   * @summary Description shown below the input field
-   */
-  @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+	/**
+	 * Either a `label` or an `aria-label` must be provided.
+	 */
+	@property({ type: String, reflect: true })
+	label: string | undefined;
 
-  /**
-   * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
-   */
-  @property({ type: String, reflect: true })
-  size: string;
+	/**
+	 * Use in combination with `invalid` to show as a validation error message,
+	 * or on its own to show a help text.
+	 *
+	 * @summary Description shown below the input field
+	 */
+	@property({ type: String, reflect: true, attribute: "help-text" })
+	helpText: string | undefined;
 
-  /**
-   * Use with `type="number"` to set the [maximum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength).
-   */
-  @property({ type: Number, reflect: true })
-  max: number;
+	/**
+	 * Whether to show the optional indicator after the label.
+	 */
+	@property({ type: Boolean, reflect: true })
+	optional = false;
 
-  /**
-   * Use with `type="number"` to set the [minimum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength).
-   */
-  @property({ type: Number, reflect: true })
-  min: number;
+	/**
+	 * Sets the [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#size) (width) of the input field to fit the expected length of inputs.
+	 */
+	@property({ type: String, reflect: true })
+	size: string | undefined;
 
-  /**
-   * @deprecated Use the native `minlength` attribute
-   */
-  @property({ type: Number, reflect: true, attribute: 'min-length' })
-  minLength: number;
-  
-  /**
-   * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [minimum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength) required.
-   */
-  @property({ type: Number, reflect: true })
-  minlength: number;
-  
-  /**
-   * @deprecated Use the native `maxlength` attribute
-   */
-  @property({ type: Number, reflect: true, attribute: 'max-length' })
-  maxLength: number;
+	/**
+	 * Use with `type="number"` to set the [maximum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength).
+	 */
+	@property({ type: Number, reflect: true })
+	max: number | undefined;
 
-  /**
-   * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [maximum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength) allowed.
-   */
-  @property({ type: Number, reflect: true })
-  maxlength: number;
+	/**
+	 * Use with `type="number"` to set the [minimum allowed value](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength).
+	 */
+	@property({ type: Number, reflect: true })
+	min: number | undefined;
 
-  /**
-   * Sets a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that the input's value must [match to pass validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#pattern)
-   */
-  @property({ type: String, reflect: true })
-  pattern: string;
+	/**
+	 * @deprecated Use the native `minlength` attribute
+	 */
+	@property({ type: Number, reflect: true, attribute: "min-length" })
+	minLength: number | undefined;
 
-  /**
-   * Set a text that is shown in the textfield when it doesn't have a value.
-   * 
-   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
-   * 
-   * @summary Shown in the textfield when it doesn't have a value
-   */
-  @property({ type: String, reflect: true })
-  placeholder: string;
+	/**
+	 * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [minimum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#minlength) required.
+	 */
+	@property({ type: Number, reflect: true })
+	minlength: number | undefined;
 
-  /** 
-   * @deprecated Use the native readonly attribute instead.
-   */
-  @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly = false;
+	/**
+	 * @deprecated Use the native `maxlength` attribute
+	 */
+	@property({ type: Number, reflect: true, attribute: "max-length" })
+	maxLength: number | undefined;
 
-  /**
-   * Whether the input can be selected but not changed by the user.
-   */
-  @property({ type: Boolean, reflect: true })
-  readonly = false;
+	/**
+	 * For `text`, `search`, `url`, `tel`, `email` and `password` fields, sets the [maximum string length](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#maxlength) allowed.
+	 */
+	@property({ type: Number, reflect: true })
+	maxlength: number | undefined;
 
-  /**
-   * Whether user input is required on the input before form submission.
-   */
-  @property({ type: Boolean, reflect: true })
-  required = false;
+	/**
+	 * Sets a [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions) that the input's value must [match to pass validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#pattern)
+	 */
+	@property({ type: String, reflect: true })
+	pattern: string | undefined;
 
-  /**
-   * The [type of input](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types).
-   */
-  @property({ type: String, reflect: true })
-  type: string;
+	/**
+	 * Set a text that is shown in the textfield when it doesn't have a value.
+	 *
+	 * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+	 *
+	 * @summary Shown in the textfield when it doesn't have a value
+	 */
+	@property({ type: String, reflect: true })
+	placeholder: string | undefined;
 
-  /**
-   * Lets you set the current value.
-   */
-  @property({ type: String, reflect: true })
-  value: string;
+	/**
+	 * @deprecated Use the native readonly attribute instead.
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "read-only" })
+	readOnly = false;
 
-  /**
-   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form.
-   */
-  @property({ type: String, reflect: true })
-  name: string;
+	/**
+	 * Whether the input can be selected but not changed by the user.
+	 */
+	@property({ type: Boolean, reflect: true })
+	readonly = false;
 
-  /**
-   * When used with `number` this attribute forces inputs to be a whole number of `step`.
-   * 
-   * For example with a `step="5"` only values that divide evenly on 5 are allowed.
-   * Using arrow up and down in the input field increments and decrements by 5.
-   * 
-   * @summary Forces `number` inputs to be a whole number of `step`
-   */
-  @property({ type: Number, reflect: true })
-  step: number;
+	/**
+	 * Whether user input is required on the input before form submission.
+	 */
+	@property({ type: Boolean, reflect: true })
+	required = false;
 
-  /**
-   * A space-separated string that hints to browsers [what type of content it can suggest](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#value) to autofill.
-   */
-  @property({ type: String, reflect: true })
-  autocomplete?: string;
+	/**
+	 * The [type of input](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#input_types).
+	 */
+	@property({ type: String, reflect: true })
+	type: string | undefined;
 
-  /**
-   * Function to format value when the input field.
-   *
-   * Only active when the input field does not have focus,
-   * similar to the accessible input [masking example from Filament Group](https://filamentgroup.github.io/politespace/demo/demo.html).
-   *
-   * @summary Function to format value when the input field
-   * @link https://css-tricks.com/input-masking/
-  */
-  @property({ attribute: false })
-  formatter: (value: string) => string;
+	/**
+	 * Lets you set the current value.
+	 */
+	@property({ type: String, reflect: true })
+	value: string | undefined;
 
-  /** @internal */
-  @query('.w-textfield__mask')
-  mask: HTMLDivElement;
+	/**
+	 * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form.
+	 */
+	@property({ type: String, reflect: true })
+	name: string | undefined;
 
-  /** @internal */
-  @property({ type: Boolean })
-  _hasPrefix = false;
+	/**
+	 * When used with `number` this attribute forces inputs to be a whole number of `step`.
+	 *
+	 * For example with a `step="5"` only values that divide evenly on 5 are allowed.
+	 * Using arrow up and down in the input field increments and decrements by 5.
+	 *
+	 * @summary Forces `number` inputs to be a whole number of `step`
+	 */
+	@property({ type: Number, reflect: true })
+	step: number | undefined;
 
-  /** @internal */
-  @property({ type: Boolean })
-  _hasSuffix = false;
+	/**
+	 * A space-separated string that hints to browsers [what type of content it can suggest](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#value) to autofill.
+	 */
+	@property({ type: String, reflect: true })
+	autocomplete?: HTMLInputElement["autocomplete"];
 
-  #onKeyDownHandler(e: KeyboardEvent) {
-    if (e.key === 'Enter' && this.internals.form) {
-      (this.internals.form as HTMLFormElement).requestSubmit();
-    }
-  }
+	/**
+	 * Function to format value when the input field.
+	 *
+	 * Only active when the input field does not have focus,
+	 * similar to the accessible input [masking example from Filament Group](https://filamentgroup.github.io/politespace/demo/demo.html).
+	 *
+	 * @summary Function to format value when the input field
+	 * @link https://css-tricks.com/input-masking/
+	 */
+	@property({ attribute: false })
+	formatter: ((value: string) => string) | undefined;
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('value')) {
-      this.setValue(this.value);
-      if (this.formatter) {
-        this.mask.innerText = this.formatter(this.value);
-      }
-    }
-  }
+	/** @internal */
+	@query(".w-textfield__mask")
+	mask: HTMLDivElement | undefined;
 
-  // capture the initial value using firstUpdated and #initialValue
-  #initialValue: string | null = null;
+	/** @internal */
+	@property({ type: Boolean })
+	_hasPrefix = false;
 
-  firstUpdated(changedProps: Map<string, unknown>) {
-    this.#initialValue = this.value;
-  }
+	/** @internal */
+	@property({ type: Boolean })
+	_hasSuffix = false;
 
-  resetFormControl(): void {
-    this.value = this.#initialValue;
-  }
+	#onKeyDownHandler(e: KeyboardEvent) {
+		if (e.key === "Enter" && this.internals.form) {
+			(this.internals.form as HTMLFormElement).requestSubmit();
+		}
+	}
 
-  // Note about styling slotted elements:
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
-  // https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#styling_slotted_elements
-  // Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
-  // ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
-  // so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
-  // https://stackoverflow.com/a/61631668
-  static styles = [reset, styles, wTextfieldStyles];
+	updated(changedProperties: PropertyValues<this>) {
+		if (changedProperties.has("value") && typeof this.value !== "undefined") {
+			this.setValue(this.value);
+			if (this.formatter && this.mask) {
+				this.mask.innerText = this.formatter(this.value);
+			}
+		}
+	}
 
-  /** @internal */
-  get _inputstyles() {
-    return classnames([
-      ccinput.base,
-      this._hasSuffix && ccinput.suffix,
-      this._hasPrefix && ccinput.prefix,
-      !this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccinput.default,
-      this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccinput.invalid,
-      !this.invalid && this.disabled && !(this.readonly || this.readOnly) && ccinput.disabled,
-      !this.invalid && !this.disabled && (this.readonly || this.readOnly) && ccinput.readOnly,
-    ]);
-  }
+	// capture the initial value using firstUpdated and #initialValue
+	#initialValue: string | undefined = undefined;
 
-  /** @internal */
-  get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
-  }
+	// Note about styling slotted elements:
+	// https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted
+	// https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#styling_slotted_elements
+	// Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
+	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
+	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
+	// https://stackoverflow.com/a/61631668
+	static styles = [
+		reset,
+		styles,
+		wTextfieldStyles,
+		inputLabelStyles,
+		inputHelpTextStyles,
+	];
 
-  /** @internal */
-  get _label() {
-    if (this.label) {
-      return html`<label for="${this._id}" class=${ccLabel.base}>${this.label}</label>`;
-    }
-    return undefined;
-  }
+	firstUpdated() {
+		this.#initialValue = this.value;
+	}
 
-  /** @internal */
-  get _helpId() {
-    if (this.helpText) return `${this._id}__hint`;
-    return undefined;
-  }
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+	}
 
-  /** @internal */
-  get _id() {
-    return 'textfield';
-  }
+	/** @internal */
+	get _inputstyles() {
+		return classnames([
+			ccinput.base,
+			this._hasSuffix && ccinput.suffix,
+			this._hasPrefix && ccinput.prefix,
+			!this.invalid &&
+				!this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccinput.default,
+			this.invalid &&
+				!this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccinput.invalid,
+			!this.invalid &&
+				this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccinput.disabled,
+			!this.invalid &&
+				!this.disabled &&
+				(this.readonly || this.readOnly) &&
+				ccinput.readOnly,
+		]);
+	}
 
-  /** @internal */
-  get _error() {
-    if (this.invalid && this._helpId) return this._helpId;
-    return undefined;
-  }
+	/** @internal */
+	get _helptextstyles() {
+		return "help-text";
+	}
 
-  handler(e: Event) {
-    const { name, value } = e.currentTarget as HTMLInputElement;
-    this.value = value;
-    const event = new CustomEvent(e.type, {
-      detail: {
-        name,
-        value,
-        target: e.target,
-      },
-    });
-    this.dispatchEvent(event);
-  }
+	/** @internal */
+	get _label() {
+		if (this.label) {
+			return html`<label for="${this._id}"
+				>${this.label}${this.label.length && this.optional && !this.required
+					? html` <span>
+							${i18n._({
+								id: "textfield.label.optional",
+								message: "Optional",
+								comment: "Shown behind label when marked as optional",
+							})}
+						</span>`
+					: nothing}</label
+			>`;
+		}
+		return undefined;
+	}
 
-  prefixSlotChange() {
-    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=prefix]');
-    const affixes = el.assignedElements();
-    if (affixes.length) this._hasPrefix = true;
-  }
+	/** @internal */
+	get _helpId() {
+		if (this.helpText) return `${this._id}__hint`;
+		return undefined;
+	}
 
-  suffixSlotChange() {
-    const el: HTMLSlotElement = this.renderRoot.querySelector('slot[name=suffix]');
-    const affixes = el.assignedElements();
-    if (affixes.length) this._hasSuffix = true;
-  }
+	/** @internal */
+	get _id() {
+		return "textfield";
+	}
 
-  render() {
-    return html`
-      ${this._label}
-      <div
-        class="${classMap({
-          'w-textfield': true,
-          // This could likely be replaced in the future by
-          // https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
-          'w-textfield--has-prefix': this._hasPrefix,
-          'w-textfield--has-suffix': this._hasSuffix,
-        })}">
-        <div class="w-textfield__input-wrapper">
-          ${this.formatter ? html`<div class="w-textfield__mask"></div>` : nothing}
-          <input
-            class="${this._inputstyles}"
-            type="${this.type || 'text'}"
-            min="${ifDefined(this.min)}"
-            max="${ifDefined(this.max)}"
-            size="${ifDefined(this.size)}"
-            minlength="${ifDefined(this.minLength || this.minlength)}"
-            maxlength="${ifDefined(this.maxLength || this.maxlength)}"
-            name="${ifDefined(this.name)}"
-            pattern="${ifDefined(this.pattern)}"
-            placeholder="${ifDefined(this.placeholder)}"
-            .value="${this.value || ''}"
-            aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
-            aria-errormessage="${ifDefined(this._error)}"
-            aria-invalid="${ifDefined(this.invalid)}"
-            id="${this._id}"
-            ?disabled="${this.disabled}"
-            ?readonly="${this.readonly || this.readOnly}"
-            ?required="${this.required}"
-            autocomplete="${ifDefined(this.autocomplete)}"
-            step="${ifDefined(this.step)}"
-            @blur="${this.handler}"
-            @change="${this.handler}"
-            @input="${this.handler}"
-            @focus="${this.handler}"
-            @keydown="${this.#onKeyDownHandler}" />
-        </div>
-        <slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
-        <slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
-      </div>
-      <span class="sr-only" id="aria-description">${this.ariaDescription}</span>
-      ${this.helpText && html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>`}
-    `;
-  }
+	/** @internal */
+	get _error() {
+		if (this.invalid && this._helpId) return this._helpId;
+		return undefined;
+	}
+
+	handler(e: Event) {
+		const { name, value } = e.currentTarget as HTMLInputElement;
+		this.value = value;
+		const event = new CustomEvent(e.type, {
+			detail: {
+				name,
+				value,
+				target: e.target,
+			},
+		});
+		this.dispatchEvent(event);
+	}
+
+	prefixSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=prefix]",
+		) as HTMLSlotElement;
+		const affixes = el.assignedElements();
+		if (affixes.length) this._hasPrefix = true;
+	}
+
+	suffixSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=suffix]",
+		) as HTMLSlotElement;
+		const affixes = el.assignedElements();
+		if (affixes.length) this._hasSuffix = true;
+	}
+
+	render() {
+		return html`
+			${this._label}
+			<div
+				class="${classMap({
+					"w-textfield": true,
+					// This could likely be replaced in the future by
+					// https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
+					"w-textfield--has-prefix": this._hasPrefix,
+					"w-textfield--has-suffix": this._hasSuffix,
+				})}"
+			>
+				<div class="w-textfield__input-wrapper">
+					${this.formatter
+						? html`<div class="w-textfield__mask"></div>`
+						: nothing}
+					<input
+						part="input"
+						class="${this._inputstyles}"
+						type="${this.type || "text"}"
+						min="${ifDefined(this.min)}"
+						max="${ifDefined(this.max)}"
+						size="${ifDefined(this.size)}"
+						minlength="${ifDefined(this.minLength || this.minlength)}"
+						maxlength="${ifDefined(this.maxLength || this.maxlength)}"
+						name="${ifDefined(this.name)}"
+						pattern="${ifDefined(this.pattern)}"
+						placeholder="${ifDefined(this.placeholder)}"
+						.value="${this.value || ""}"
+						aria-describedby="${ifDefined(
+							this._helpId ||
+								(this.ariaDescription ? "aria-description" : undefined),
+						)}"
+						aria-errormessage="${ifDefined(this._error)}"
+						aria-invalid="${ifDefined(this.invalid)}"
+						id="${this._id}"
+						?disabled="${this.disabled}"
+						?readonly="${this.readonly || this.readOnly}"
+						?required="${this.required}"
+						autocomplete="${ifDefined(this.autocomplete)}"
+						step="${ifDefined(this.step)}"
+						@blur="${this.handler}"
+						@change="${this.handler}"
+						@input="${this.handler}"
+						@focus="${this.handler}"
+						@keydown="${this.#onKeyDownHandler}"
+					/>
+				</div>
+				<slot @slotchange="${this.prefixSlotChange}" name="prefix"></slot>
+				<slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
+			</div>
+			<span class="sr-only" id="aria-description">${this.ariaDescription}</span>
+			${this.helpText &&
+			html`<div class="${this._helptextstyles}" id="${this._helpId}">
+				${this.helpText}
+			</div>`}
+		`;
+	}
 }
 
-if (!customElements.get('w-textfield')) {
-  customElements.define('w-textfield', WarpTextField);
+if (!customElements.get("w-textfield")) {
+	customElements.define("w-textfield", WarpTextField);
 }
 
 export { WarpTextField };

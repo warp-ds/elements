@@ -1,62 +1,123 @@
-import { html } from 'lit';
-import { describe, expect, test } from 'vitest';
-import { render } from 'vitest-browser-lit';
+import { html } from "lit";
+import { describe, expect, test } from "vitest";
+import { render } from "vitest-browser-lit";
 
-import '../textfield/textfield.js';
-import './combobox.js';
+import "../textfield/textfield.js";
+import "./combobox.js";
 
-describe('w-combobox accessibility (WCAG 2.2)', () => {
-  describe('axe-core automated checks', () => {
-    const sampleOptions = [
-      { value: 'apple', label: 'Apple' },
-      { value: 'banana', label: 'Banana' },
-      { value: 'orange', label: 'Orange' },
-    ];
+describe("w-combobox accessibility (WCAG 2.2)", () => {
+	describe("axe-core automated checks", () => {
+		const sampleOptions = [
+			{ value: "apple", label: "Apple" },
+			{ value: "banana", label: "Banana" },
+			{ value: "orange", label: "Orange" },
+		];
 
-    test('default state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" .options="${sampleOptions}"></w-combobox>`);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("default state has no violations", async () => {
+			const page = render(
+				html`<w-combobox
+					label="Select a fruit"
+					.options="${sampleOptions}"
+				></w-combobox>`,
+			);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('with help text has no violations', async () => {
-      const page = render(html`
-        <w-combobox
-          label="Select a fruit"
-          help-text="Start typing to filter options"
-          .options="${sampleOptions}"></w-combobox>
-      `);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("with help text has no violations", async () => {
+			const page = render(html`
+				<w-combobox
+					label="Select a fruit"
+					help-text="Start typing to filter options"
+					.options="${sampleOptions}"
+				></w-combobox>
+			`);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('invalid state has no violations', async () => {
-      const page = render(html`
-        <w-combobox
-          label="Select a fruit"
-          invalid
-          help-text="Please select a valid option"
-          .options="${sampleOptions}"></w-combobox>
-      `);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("invalid state has no violations", async () => {
+			const page = render(html`
+				<w-combobox
+					label="Select a fruit"
+					invalid
+					help-text="Please select a valid option"
+					.options="${sampleOptions}"
+				></w-combobox>
+			`);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('disabled state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" disabled .options="${sampleOptions}"></w-combobox>`);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("disabled state has no violations", async () => {
+			const page = render(
+				html`<w-combobox
+					label="Select a fruit"
+					disabled
+					.options="${sampleOptions}"
+				></w-combobox>`,
+			);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('required state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" required .options="${sampleOptions}"></w-combobox>`);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("required state has no violations", async () => {
+			const page = render(
+				html`<w-combobox
+					label="Select a fruit"
+					required
+					.options="${sampleOptions}"
+				></w-combobox>`,
+			);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('optional state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" optional .options="${sampleOptions}"></w-combobox>`);
-      await expect(page).toHaveNoAxeViolations();
-    });
+		test("optional state has no violations", async () => {
+			const page = render(
+				html`<w-combobox
+					label="Select a fruit"
+					optional
+					.options="${sampleOptions}"
+				></w-combobox>`,
+			);
+			await expect(page).toHaveNoAxeViolations();
+		});
 
-    test('open on focus state has no violations', async () => {
-      const page = render(html`<w-combobox label="Select a fruit" open-on-focus .options="${sampleOptions}"></w-combobox>`);
-      await expect(page).toHaveNoAxeViolations();
-    });
-  });
+		test("open on focus state has no violations", async () => {
+			const page = render(
+				html`<w-combobox
+					label="Select a fruit"
+					open-on-focus
+					.options="${sampleOptions}"
+				></w-combobox>`,
+			);
+			await expect(page).toHaveNoAxeViolations();
+		});
+
+		test("with light-DOM option children has no violations", async () => {
+			const page = render(html`
+				<w-combobox label="Select a fruit">
+					<option value="apple">Apple</option>
+					<option value="banana">Banana</option>
+					<option value="orange">Orange</option>
+				</w-combobox>
+			`);
+			await expect(page).toHaveNoAxeViolations();
+		});
+
+		test("open with light-DOM option children has no violations", async () => {
+			const page = render(html`
+				<w-combobox data-testid="combobox" label="Select a fruit" open-on-focus>
+					<option value="apple">Apple</option>
+					<option value="banana">Banana</option>
+					<option value="orange">Orange</option>
+				</w-combobox>
+			`);
+			const el = (await page.getByTestId("combobox").element()) as HTMLElement;
+			const input = el?.shadowRoot
+				?.querySelector("w-textfield")
+				?.shadowRoot?.querySelector("input");
+
+			input?.focus();
+			await new Promise((resolve) => setTimeout(resolve, 100));
+
+			await expect(page).toHaveNoAxeViolations();
+		});
+	});
 });

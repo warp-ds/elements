@@ -1,45 +1,47 @@
 // @warp-css;
 
-import { classNames as classnames } from '@chbphone55/classnames';
-import { i18n } from '@lingui/core';
-import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { reset } from '../styles.js';
-import { uniqueId } from '../utils.js';
-import { styles } from './styles.js';
+import { classNames as classnames } from "@chbphone55/classnames";
+import { i18n } from "@lingui/core";
+import { FormControlMixin } from "@open-wc/form-control";
+import { html, LitElement, nothing, PropertyValues } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import { reset } from "../styles.js";
+import { uniqueId } from "../utils.js";
+import { styles } from "./styles.js";
+import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
+import { activateI18n } from "../i18n.js";
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
+
+// NOTE: Label and help-text are rendered inline using shared input styles.
+// In a future major version, we could extract these into separate w-label and w-help-text components
+// if we find significant reuse opportunities across non-input components.
 
 const ccInput = {
-  // input classes
-  base: 'block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current', // true
-  default: 'border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected', // !isInvalid && !isDisabled && !isReadOnly
-  disabled: 'border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none', // !isInvalid && isDisabled && !isReadOnly
-  invalid:
-    'border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!', // isInvalid && !isDisabled && !isReadOnly
-  readOnly: 'pl-0 bg-transparent pointer-events-none', // !isInvalid && !isDisabled && isReadOnly
-  placeholder: 'placeholder:s-text-placeholder',
-  suffix: 'pr-40',
-  prefix: 'pl-[var(--w-prefix-width,_40px)]',
-  // textarea classes
-  textArea: 'min-h-[42] sm:min-h-[45]',
-  fixed: 'resize-none',
-};
-
-const ccLabel = {
-  base: 'antialiased block relative text-s font-bold pb-4 cursor-pointer s-text flex',
-  optional: 'pl-8 font-normal text-s s-text-subtle',
-};
-
-const ccHelpText = {
-  base: 'text-xs mt-4 block',
-  color: 's-text-subtle',
-  colorInvalid: 's-text-negative',
+	// input classes
+	base: "block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current", // true
+	default:
+		"border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected", // !isInvalid && !isDisabled && !isReadOnly
+	disabled:
+		"border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none", // !isInvalid && isDisabled && !isReadOnly
+	invalid:
+		"border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!", // isInvalid && !isDisabled && !isReadOnly
+	readOnly: "pl-0 bg-transparent pointer-events-none", // !isInvalid && !isDisabled && isReadOnly
+	placeholder: "placeholder:s-text-placeholder",
+	suffix: "pr-40",
+	prefix: "pl-[var(--w-prefix-width,_40px)]",
+	// textarea classes
+	textArea: "min-h-[42] sm:min-h-[45]",
+	fixed: "resize-none",
 };
 
 /**
  * A multi-line text input with built-in form validation, auto-resizing, and styling support.
- * 
+ *
  * The component automatically handles:
  *  - Form integration
  *  - Auto-resizing based on content and row constraints
@@ -47,385 +49,431 @@ const ccHelpText = {
  *  - Accessibility attributes and labeling
  */
 class WarpTextarea extends FormControlMixin(LitElement) {
-  /** @internal */
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  };
+	/** @internal */
+	static shadowRootOptions = {
+		...LitElement.shadowRootOptions,
+		delegatesFocus: true,
+	};
 
-  /**
-   * Keep in mind that using disabled in its current form is an anti-pattern.
-   * 
-   * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
-   * 
-   * Please consider more informative alternatives before choosing to use disabled on an element.
-   * 
-   * @summary Makes the element not focusable and hides it from form submits
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
+	/**
+	 * Keep in mind that using disabled in its current form is an anti-pattern.
+	 *
+	 * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+	 *
+	 * Please consider more informative alternatives before choosing to use disabled on an element.
+	 *
+	 * @summary Makes the element not focusable and hides it from form submits
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled = false;
 
-  /**
-   * Mark the form field as invalid.
-   * 
-   * Make sure to also set a `help-text` to help users fix the validation problem.
-   */
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
+	/**
+	 * Mark the form field as invalid.
+	 *
+	 * Make sure to also set a `help-text` to help users fix the validation problem.
+	 */
+	@property({ type: Boolean, reflect: true })
+	invalid = false;
 
-  /**
-   * Either a `label` or an `aria-label` must be provided.
-   */
-  @property({ type: String, reflect: true })
-  label: string;
+	/**
+	 * Either a `label` or an `aria-label` must be provided.
+	 */
+	@property({ type: String, reflect: true })
+	label: string | undefined;
 
-  /**
-   * Use in combination with `invalid` to show as a validation error message,
-   * or on its own to show a help text.
-   * 
-   * @summary Description shown below the input field
-   */
-  @property({ type: String, reflect: true, attribute: 'help-text' })
-  helpText: string;
+	/**
+	 * Use in combination with `invalid` to show as a validation error message,
+	 * or on its own to show a help text.
+	 *
+	 * @summary Description shown below the input field
+	 */
+	@property({ type: String, reflect: true, attribute: "help-text" })
+	helpText: string | undefined;
 
-  /**
-   * Sets the maximum number of text rows before the content starts scrolling.
-   */
-  @property({ type: Number, reflect: true, attribute: 'maximum-rows' })
-  maxRows: number;
+	/**
+	 * Sets the maximum number of text rows before the content starts scrolling.
+	 */
+	@property({ type: Number, reflect: true, attribute: "maximum-rows" })
+	maxRows: number | undefined;
 
-  /**
-   * Sets the minimum number of text rows the textarea should display
-   */
-  @property({ type: Number, reflect: true, attribute: 'minimum-rows' })
-  minRows: number;
+	/**
+	 * Sets the minimum number of text rows the textarea should display
+	 */
+	@property({ type: Number, reflect: true, attribute: "minimum-rows" })
+	minRows: number | undefined;
 
-  /**
-   * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
-   */
-  @property({ type: String, reflect: true })
-  name: string;
+	/**
+	 * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
+	 */
+	@property({ type: String, reflect: true })
+	name: string | undefined;
 
-  /**
-   * Set a text that is shown in the textarea when it doesn't have a value.
-   * 
-   * Placeholder text should not be used as a substitute for labeling the element with a visible label.
-   * 
-   * @summary Shown in the textarea when it doesn't have a value
-   */
-  @property({ type: String, reflect: true })
-  placeholder: string;
+	/**
+	 * Set a text that is shown in the textarea when it doesn't have a value.
+	 *
+	 * Placeholder text should not be used as a substitute for labeling the element with a visible label.
+	 *
+	 * @summary Shown in the textarea when it doesn't have a value
+	 */
+	@property({ type: String, reflect: true })
+	placeholder: string | undefined;
 
-  /** 
-   * @deprecated Use the native `readonly` attribute instead
-   */
-  @property({ type: Boolean, reflect: true, attribute: 'read-only' })
-  readOnly = false;
+	/**
+	 * @deprecated Use the native `readonly` attribute instead
+	 */
+	@property({ type: Boolean, reflect: true, attribute: "read-only" })
+	readOnly = false;
 
-  /**
-   * Whether the input can be selected but not changed by the user
-   */
-  @property({ type: Boolean, reflect: true })
-  readonly = false;
+	/**
+	 * Whether the input can be selected but not changed by the user
+	 */
+	@property({ type: Boolean, reflect: true })
+	readonly = false;
 
-  /**
-   * Whether user input is required on the input before form submission
-   */
-  @property({ type: Boolean, reflect: true })
-  required = false;
+	/**
+	 * Whether user input is required on the input before form submission
+	 */
+	@property({ type: Boolean, reflect: true })
+	required = false;
 
-  /**
-   * Lets you set the current value
-   */
-  @property({ type: String, reflect: true })
-  value: string;
+	/**
+	 * Lets you set the current value
+	 */
+	@property({ type: String, reflect: true })
+	value: string | undefined;
 
-  /**
-   * Show an icon behind the label indicating the field is optional
-   */
-  @property({ type: Boolean, reflect: true })
-  optional = false;
+	/**
+	 * Show an icon behind the label indicating the field is optional
+	 */
+	@property({ type: Boolean, reflect: true })
+	optional = false;
 
-  /** @internal */
-  @state()
-  minHeight = Number.NEGATIVE_INFINITY;
+	@state()
+	private minHeight = Number.NEGATIVE_INFINITY;
 
-  /** @internal */
-  @state()
-  maxHeight = Number.POSITIVE_INFINITY;
+	@state()
+	private maxHeight = Number.POSITIVE_INFINITY;
 
-  @query('textarea')
-  private _textarea: HTMLTextAreaElement;
+	@query("textarea")
+	private _textarea!: HTMLTextAreaElement;
 
-  // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | null = null;
+	// capture the initial value using connectedCallback and #initialValue
+	#initialValue: string | undefined = undefined;
 
-  // unique ID for this component instance
-  #uniqueId = uniqueId('textarea-');
+	// unique ID for this component instance
+	#uniqueId = uniqueId("textarea-");
 
-  // Track whether the current invalid/helpText state was set by validation
-  #validationActive = false;
+	// Track whether the current invalid/helpText state was set by validation
+	#validationActive = false;
 
-  // Store the original helpText to restore when validation passes
-  #originalHelpText: string | undefined = undefined;
+	// Store the original helpText to restore when validation passes
+	#originalHelpText: string | undefined = undefined;
 
-  // Track whether the user has interacted with the field
-  #hasInteracted = false;
+	// Track whether the user has interacted with the field
+	#hasInteracted = false;
 
-  updated(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has('value')) {
-      this.setValue(this.value);
-    }
-    if (changedProperties.has('value') || changedProperties.has('required') || changedProperties.has('disabled')) {
-      this.#updateValidity();
-    }
-  }
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	}
 
-  resetFormControl(): void {
-    this.value = this.#initialValue;
-    this.#hasInteracted = false;
-    this.#clearValidationState();
-    this.#updateValidity();
-  }
+	updated(changedProperties: PropertyValues<this>) {
+		if (changedProperties.has("value") && typeof this.value !== "undefined") {
+			this.setValue(this.value);
+		}
+		if (
+			changedProperties.has("value") ||
+			changedProperties.has("required") ||
+			changedProperties.has("disabled")
+		) {
+			this.#updateValidity();
+		}
+	}
 
-  /** Returns the validation message if the textarea is invalid, otherwise an empty string */
-  get validationMessage(): string {
-    return this.internals.validationMessage;
-  }
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+		this.#hasInteracted = false;
+		this.#clearValidationState();
+		this.#updateValidity();
+	}
 
-  /** Returns the validity state of the textarea */
-  get validity(): ValidityState {
-    return this.internals.validity;
-  }
+	/** Returns the validation message if the textarea is invalid, otherwise an empty string */
+	get validationMessage(): string {
+		return this.internals.validationMessage;
+	}
 
-  /** Checks whether the textarea passes constraint validation */
-  checkValidity(): boolean {
-    this.#updateValidity();
-    return this.internals.checkValidity();
-  }
+	/** Returns the validity state of the textarea */
+	get validity(): ValidityState {
+		return this.internals.validity;
+	}
 
-  /** Checks validity and shows the browser's validation message if invalid */
-  reportValidity(): boolean {
-    this.#hasInteracted = true;
-    this.#updateValidity();
-    return this.internals.checkValidity();
-  }
+	/** Checks whether the textarea passes constraint validation */
+	checkValidity(): boolean {
+		this.#updateValidity();
+		return this.internals.checkValidity();
+	}
 
-  /** Sets a custom validation message. Pass an empty string to clear. */
-  setCustomValidity(message: string): void {
-    if (message) {
-      this.internals.setValidity({ customError: true }, message, this._textarea);
-      this.#setValidationState(message);
-    } else {
-      this.#clearValidationState();
-      this.#updateValidity();
-    }
-  }
+	/** Checks validity and shows the browser's validation message if invalid */
+	reportValidity(): boolean {
+		this.#hasInteracted = true;
+		this.#updateValidity();
+		return this.internals.checkValidity();
+	}
 
-  /** @internal */
-  #setValidationState(message: string): void {
-    if (!this.#validationActive) {
-      this.#originalHelpText = this.helpText;
-    }
-    this.#validationActive = true;
-    this.invalid = true;
-    this.helpText = message;
-  }
+	/** Sets a custom validation message. Pass an empty string to clear. */
+	setCustomValidity(message: string): void {
+		if (message) {
+			this.internals.setValidity(
+				{ customError: true },
+				message,
+				this._textarea,
+			);
+			this.#setValidationState(message);
+		} else {
+			this.#clearValidationState();
+			this.#updateValidity();
+		}
+	}
 
-  /** @internal */
-  #clearValidationState(): void {
-    if (this.#validationActive) {
-      this.invalid = false;
-      this.helpText = this.#originalHelpText;
-      this.#originalHelpText = undefined;
-      this.#validationActive = false;
-    }
-  }
+	/** @internal */
+	#setValidationState(message: string): void {
+		if (!this.#validationActive) {
+			this.#originalHelpText = this.helpText;
+		}
+		this.#validationActive = true;
+		this.invalid = true;
+		this.helpText = message;
+	}
 
-  /** @internal */
-  #updateValidity(): void {
-    // Skip validation if disabled
-    if (this.disabled) {
-      this.internals.setValidity({});
-      this.#clearValidationState();
-      return;
-    }
+	/** @internal */
+	#clearValidationState(): void {
+		if (this.#validationActive) {
+			this.invalid = false;
+			this.helpText = this.#originalHelpText;
+			this.#originalHelpText = undefined;
+			this.#validationActive = false;
+		}
+	}
 
-    // Check required validation
-    if (this.required && !this.value) {
-      // Get the browser's native validation message from the internal textarea
-      const message = this._textarea?.validationMessage || '';
-      this.internals.setValidity({ valueMissing: true }, message, this._textarea);
+	/** @internal */
+	#updateValidity(): void {
+		// Skip validation if disabled
+		if (this.disabled) {
+			this.internals.setValidity({});
+			this.#clearValidationState();
+			return;
+		}
 
-      // Only show visual validation state after user interaction
-      if (this.#hasInteracted) {
-        this.#setValidationState(message);
-      }
-      return;
-    }
+		// Check required validation
+		if (this.required && !this.value) {
+			// Get the browser's native validation message from the internal textarea
+			const message = this._textarea?.validationMessage || "";
+			this.internals.setValidity(
+				{ valueMissing: true },
+				message,
+				this._textarea,
+			);
 
-    // Valid state
-    this.internals.setValidity({});
-    this.#clearValidationState();
-  }
+			// Only show visual validation state after user interaction
+			if (this.#hasInteracted) {
+				this.#setValidationState(message);
+			}
+			return;
+		}
 
-  static styles = [reset, styles];
+		// Valid state
+		this.internals.setValidity({});
+		this.#clearValidationState();
+	}
 
-  /** @internal */
-  get _textareaStyles() {
-    return classnames([
-      ccInput.base,
-      ccInput.textArea,
-      !!this.placeholder && ccInput.placeholder,
-      !this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccInput.default,
-      this.invalid && !this.disabled && !(this.readonly || this.readOnly) && ccInput.invalid,
-      !this.invalid && this.disabled && !(this.readonly || this.readOnly) && ccInput.disabled,
-      !this.invalid && !this.disabled && (this.readonly || this.readOnly) && ccInput.readOnly,
-      this.maxRows && ccInput.fixed,
-    ]);
-  }
+	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
-  /** @internal */
-  get _helptextstyles() {
-    return classnames([ccHelpText.base, this.invalid ? ccHelpText.colorInvalid : ccHelpText.color]);
-  }
+	/** @internal */
+	get _textareaStyles() {
+		return classnames([
+			ccInput.base,
+			ccInput.textArea,
+			!!this.placeholder && ccInput.placeholder,
+			!this.invalid &&
+				!this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccInput.default,
+			this.invalid &&
+				!this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccInput.invalid,
+			!this.invalid &&
+				this.disabled &&
+				!(this.readonly || this.readOnly) &&
+				ccInput.disabled,
+			!this.invalid &&
+				!this.disabled &&
+				(this.readonly || this.readOnly) &&
+				ccInput.readOnly,
+			this.maxRows && ccInput.fixed,
+		]);
+	}
 
-  /** @internal */
-  get _helpId() {
-    if (this.helpText) return `${this._id}__hint`;
-    return undefined;
-  }
+	/** @internal */
+	get _helptextstyles() {
+		return "help-text";
+	}
 
-  /** @internal */
-  get _id() {
-    return this.#uniqueId;
-  }
+	/** @internal */
+	get _helpId() {
+		if (this.helpText) return `${this._id}__hint`;
+		return undefined;
+	}
 
-  /** @internal */
-  get _error() {
-    if (this.invalid && this._helpId) return this._helpId;
-    return undefined;
-  }
+	/** @internal */
+	get _id() {
+		return this.#uniqueId;
+	}
 
-  async connectedCallback() {
-    super.connectedCallback();
-    this.#initialValue = this.value;
-    this.setValue(this.value);
+	/** @internal */
+	get _error() {
+		if (this.invalid && this._helpId) return this._helpId;
+		return undefined;
+	}
 
-    // Listen for invalid event on the host element (fired by form validation)
-    this.addEventListener('invalid', this.#handleInvalid);
+	async connectedCallback() {
+		super.connectedCallback();
+		this.#initialValue = this.value;
+		if (typeof this.value !== "undefined") {
+			this.setValue(this.value);
+		}
 
-    await this.updateComplete;
-    if (this.value || this.minRows) {
-      // If the component starts with a value or minHeight,
-      // resize it automatically to show all the content, or maxHeight.
-      const textarea = this.shadowRoot?.querySelector('textarea');
-      if (textarea) {
-        this.#resize(textarea);
-      }
-    }
-  }
+		// Listen for invalid event on the host element (fired by form validation)
+		this.addEventListener("invalid", this.#handleInvalid);
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('invalid', this.#handleInvalid);
-  }
+		await this.updateComplete;
+		if (this.value || this.minRows) {
+			// If the component starts with a value or minHeight,
+			// resize it automatically to show all the content, or maxHeight.
+			const textarea = this.shadowRoot?.querySelector("textarea");
+			if (textarea) {
+				this.#resize(textarea);
+			}
+		}
+	}
 
-  firstUpdated(changedProperties: PropertyValues<this>) {
-    super.firstUpdated(changedProperties);
-    // Initialize validity after the shadow DOM is ready
-    this.#updateValidity();
-  }
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this.removeEventListener("invalid", this.#handleInvalid);
+	}
 
-  handler(e: InputEvent) {
-    const target = e.currentTarget as HTMLTextAreaElement;
-    this.value = target.value;
+	firstUpdated(changedProperties: PropertyValues<this>) {
+		super.firstUpdated(changedProperties);
+		// Initialize validity after the shadow DOM is ready
+		this.#updateValidity();
+	}
 
-    this.#resize(target);
-  }
+	handler(e: InputEvent) {
+		const target = e.currentTarget as HTMLTextAreaElement;
+		this.value = target.value;
 
-  /** @internal */
-  #handleBlur() {
-    this.#hasInteracted = true;
-    this.#updateValidity();
-  }
+		this.#resize(target);
+	}
 
-  /** @internal */
-  #handleInvalid = (e: Event) => {
-    // Prevent browser's native validation bubble
-    e.preventDefault();
-    // Mark as interacted and show validation state
-    this.#hasInteracted = true;
-    this.#updateValidity();
-  };
+	/** @internal */
+	#handleBlur() {
+		this.#hasInteracted = true;
+		this.#updateValidity();
+	}
 
-  /** Calculate the new height for the area on input */
-  #resize(target: HTMLTextAreaElement) {
-    const style = getComputedStyle(target);
-    const borderTopWidth = Number.parseFloat(style.getPropertyValue('border-top-width'));
-    const borderBottomWidth = Number.parseFloat(style.getPropertyValue('border-bottom-width'));
-    const lineHeight = Number.parseFloat(style.getPropertyValue('line-height'));
-    const topPadding = Number.parseFloat(style.getPropertyValue('padding-top'));
-    const bottomPadding = Number.parseFloat(style.getPropertyValue('padding-bottom'));
-    const offset = topPadding + bottomPadding + borderBottomWidth + borderTopWidth;
+	/** @internal */
+	#handleInvalid = (e: Event) => {
+		// Prevent browser's native validation bubble
+		e.preventDefault();
+		// Mark as interacted and show validation state
+		this.#hasInteracted = true;
+		this.#updateValidity();
+	};
 
-    if (this.minRows) {
-      this.minHeight = lineHeight * this.minRows + offset;
-    }
-    if (this.maxRows) {
-      this.maxHeight = lineHeight * this.maxRows + offset;
-    }
+	/** Calculate the new height for the area on input */
+	#resize(target: HTMLTextAreaElement) {
+		const style = getComputedStyle(target);
+		const borderTopWidth = Number.parseFloat(
+			style.getPropertyValue("border-top-width"),
+		);
+		const borderBottomWidth = Number.parseFloat(
+			style.getPropertyValue("border-bottom-width"),
+		);
+		const lineHeight = Number.parseFloat(style.getPropertyValue("line-height"));
+		const topPadding = Number.parseFloat(style.getPropertyValue("padding-top"));
+		const bottomPadding = Number.parseFloat(
+			style.getPropertyValue("padding-bottom"),
+		);
+		const offset =
+			topPadding + bottomPadding + borderBottomWidth + borderTopWidth;
 
-    const borderBoxHeight = target.scrollHeight + borderTopWidth + borderBottomWidth;
-    const height = Math.min(this.maxHeight, Math.max(this.minHeight, borderBoxHeight));
-    target.style.setProperty('height', height + 'px');
-  }
+		if (this.minRows) {
+			this.minHeight = lineHeight * this.minRows + offset;
+		}
+		if (this.maxRows) {
+			this.maxHeight = lineHeight * this.maxRows + offset;
+		}
 
-  render() {
-    return html`
-        ${
-          this.label
-            ? html`
-                <label for="${this._id}" class=${ccLabel.base}>
-                  ${this.label}
-                  ${
-                    this.optional
-                      ? html`
-                          <span class="${ccLabel.optional}">
-                            ${i18n._({
-                              id: 'textarea.label.optional',
-                              message: '(optional)',
-                              comment: 'Shown behind label when marked as optional',
-                            })}
-                          </span>
-                    `
-                      : nothing
-                  }
-                </label>`
-            : nothing
-        }
-        <textarea
-          id="${this._id}"
-          class="${this._textareaStyles}"
-          name="${ifDefined(this.name)}"
-          placeholder="${ifDefined(this.placeholder)}"
-          .value="${this.value || ''}"
-          aria-describedby="${ifDefined(this._helpId || (this.ariaDescription ? 'aria-description' : undefined))}"
-          aria-errormessage="${ifDefined(this._error)}"
-          aria-invalid=${this.invalid ? 'true' : nothing}
-          ?disabled="${this.disabled}"
-          ?readonly="${this.readonly || this.readOnly}"
-          ?required="${this.required}"
-          @input="${this.handler}"
-          @blur="${this.#handleBlur}">
-        </textarea>
-        ${this.helpText ? html`<div class="${this._helptextstyles}" id="${this._helpId}">${this.helpText}</div>` : nothing}
-    `;
-  }
+		const borderBoxHeight =
+			target.scrollHeight + borderTopWidth + borderBottomWidth;
+		const height = Math.min(
+			this.maxHeight,
+			Math.max(this.minHeight, borderBoxHeight),
+		);
+		target.style.setProperty("height", height + "px");
+	}
+
+	render() {
+		return html`
+			${this.label
+				? html`
+						<label for="${this._id}">
+							${this.label}
+							${this.optional && !this.required
+								? html`
+										<span>
+											${i18n._({
+												id: "textarea.label.optional",
+												message: "Optional",
+												comment: "Shown behind label when marked as optional",
+											})}
+										</span>
+									`
+								: nothing}
+						</label>
+					`
+				: nothing}
+			<textarea
+				part="input"
+				id="${this._id}"
+				class="${this._textareaStyles}"
+				name="${ifDefined(this.name)}"
+				placeholder="${ifDefined(this.placeholder)}"
+				.value="${this.value || ""}"
+				aria-describedby="${ifDefined(
+					this._helpId ||
+						(this.ariaDescription ? "aria-description" : undefined),
+				)}"
+				aria-errormessage="${ifDefined(this._error)}"
+				aria-invalid=${this.invalid ? "true" : nothing}
+				?disabled="${this.disabled}"
+				?readonly="${this.readonly || this.readOnly}"
+				?required="${this.required}"
+				@input="${this.handler}"
+				@blur="${this.#handleBlur}"
+			>
+			</textarea>
+			${this.helpText
+				? html`<div class="${this._helptextstyles}" id="${this._helpId}">
+						${this.helpText}
+					</div>`
+				: nothing}
+		`;
+	}
 }
 
-if (!customElements.get('w-textarea')) {
-  customElements.define('w-textarea', WarpTextarea);
+if (!customElements.get("w-textarea")) {
+	customElements.define("w-textarea", WarpTextarea);
 }
 
 export { WarpTextarea };

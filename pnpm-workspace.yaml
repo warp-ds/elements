@@ -1,8 +1,10 @@
 packages:
   - packages/*
 
-ignoredBuiltDependencies:
-  - esbuild
+allowBuilds:
+  '@swc/core': true
+  esbuild: false
+  rs-module-lexer: false
 
-patchedDependencies:
-  '@vitest/pretty-format': patches/@vitest__pretty-format.patch
+minimumReleaseAgeExclude:
+  - '@warp-ds/eslint-config@2.0.0'

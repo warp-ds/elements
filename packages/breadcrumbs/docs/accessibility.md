@@ -8,33 +8,23 @@ The component has a localized default accessible label. Use `aria-label` when th
 
 ```html
 <w-breadcrumbs aria-label="Product category path">
-  <a href="/marketplace">Marketplace</a>
-  <a href="/marketplace/furniture">Furniture</a>
-  <span aria-current="page">Sofas</span>
+  <w-breadcrumb-item href="/marketplace">Marketplace</w-breadcrumb-item>
+  <w-breadcrumb-item href="/marketplace/furniture">Furniture</w-breadcrumb-item>
+  <w-breadcrumb-item href="/marketplace/furniture/1234566" current-page>Sofas</w-breadcrumb-item>
 </w-breadcrumbs>
 ```
 
 ### Mark The Current Page
 
-The last breadcrumb item should represent the current page and include `aria-current="page"`.
+The last breadcrumb item should represent the current page and include the current-page attribute which in turn ensures correct accessibility semantics are used.
 
-Use a non-link element for the current page when it should not be clickable:
-
-```html
-<w-breadcrumbs aria-label="You are here">
-  <a href="/real-estate">Real estate</a>
-  <a href="/real-estate/homes">Homes for sale</a>
-  <span aria-current="page">Oslo</span>
-</w-breadcrumbs>
-```
-
-If the current page remains a link, keep `aria-current="page"` on that link:
+Omit an href attribute for the current page when it should not be clickable:
 
 ```html
 <w-breadcrumbs aria-label="You are here">
-  <a href="/real-estate">Real estate</a>
-  <a href="/real-estate/homes">Homes for sale</a>
-  <a href="/real-estate/homes/oslo" aria-current="page">Oslo</a>
+  <w-breadcrumb-item href="/real-estate">Real estate</w-breadcrumb-item>
+  <w-breadcrumb-item href="/real-estate/homes">Homes for sale</w-breadcrumb-item>
+  <w-breadcrumb-item current-page>Oslo</w-breadcrumb-item>
 </w-breadcrumbs>
 ```
 
