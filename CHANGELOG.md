@@ -1,3 +1,10 @@
+# [2.10.0-next.23](https://github.com/warp-ds/elements/compare/v2.10.0-next.22...v2.10.0-next.23) (2026-06-22)
+
+
+### Reverts
+
+* Revert "chore(deps): update dependency node to v24.17.0 ([#709](https://github.com/warp-ds/elements/issues/709))" ([3b5f592](https://github.com/warp-ds/elements/commit/3b5f5920c0140f2caeb9c5f15d4653cbabb0877b))
+
 # [2.10.0-next.22](https://github.com/warp-ds/elements/compare/v2.10.0-next.21...v2.10.0-next.22) (2026-06-22)
 
 
