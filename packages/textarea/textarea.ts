@@ -148,13 +148,11 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	optional = false;
 
-	/** @internal */
 	@state()
-	minHeight = Number.NEGATIVE_INFINITY;
+	private minHeight = Number.NEGATIVE_INFINITY;
 
-	/** @internal */
 	@state()
-	maxHeight = Number.POSITIVE_INFINITY;
+	private maxHeight = Number.POSITIVE_INFINITY;
 
 	@query("textarea")
 	private _textarea!: HTMLTextAreaElement;

@@ -20,6 +20,36 @@ export default {
 		return <TextField {...args} />;
 	},
 	component: TextField,
+	args: {
+		type: "text",
+		optional: false,
+		required: false,
+		disabled: false,
+		invalid: false,
+		size: undefined,
+		max: undefined,
+		maxLength: undefined,
+		min: undefined,
+		minLength: undefined,
+		readOnly: false,
+	},
+	argTypes: {
+		max: {
+			type: "number",
+		},
+		min: {
+			type: "number",
+		},
+		maxLength: {
+			type: "number",
+		},
+		minLength: {
+			type: "number",
+		},
+		size: {
+			type: "number",
+		},
+	},
 } satisfies Meta<typeof TextField>;
 
 export type Story = StoryObj<typeof TextField>;
@@ -28,6 +58,8 @@ export const Default: Story = {
 	args: {
 		label: "Email",
 		type: "email",
+		optional: false,
+		required: false,
 	},
 };
 
