@@ -1,5 +1,6 @@
 import { i18n } from "@lingui/core";
 import "virtual:uno.css";
+import "./preview.css";
 import { setCustomElementsManifest } from "@storybook/web-components";
 import type { Preview } from "@storybook/web-components-vite";
 import { setStorybookHelpersConfig } from "@wc-toolkit/storybook-helpers";
@@ -108,6 +109,13 @@ export const decorators = [
 
 		// Set lang attribute for i18n detection and activate locale
 		document.documentElement.lang = locale;
+
+		if (theme.includes("dark")) {
+			document.documentElement.dataset.wTheme = "dark";
+		} else {
+			document.documentElement.dataset.wTheme = "light";
+		}
+
 		i18n.activate(locale);
 
 		return Story();
