@@ -1,3 +1,10 @@
+# [2.10.0-next.22](https://github.com/warp-ds/elements/compare/v2.10.0-next.21...v2.10.0-next.22) (2026-06-22)
+
+
+### Bug Fixes
+
+* **step:** add styles back after regression ([#716](https://github.com/warp-ds/elements/issues/716)) ([a9e81fb](https://github.com/warp-ds/elements/commit/a9e81fb4f3e5f375a04e6a7cb51fc60e1a4be35c))
+
 # [2.10.0-next.21](https://github.com/warp-ds/elements/compare/v2.10.0-next.20...v2.10.0-next.21) (2026-06-19)
 
 
