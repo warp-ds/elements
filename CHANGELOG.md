@@ -1,3 +1,42 @@
+# [2.10.0](https://github.com/warp-ds/elements/compare/v2.9.1...v2.10.0) (2026-06-22)
+
+
+### Bug Fixes
+
+* add a w- prefix to the data attribute ([#696](https://github.com/warp-ds/elements/issues/696)) ([e9c51f1](https://github.com/warp-ds/elements/commit/e9c51f109731cb4c82d3e679551c9b635e90aa57))
+* **breadcrumb-item:** add missing default css values ([#708](https://github.com/warp-ds/elements/issues/708)) ([e3f9107](https://github.com/warp-ds/elements/commit/e3f9107acfa913f91c00ada0fcd535f6bd7c2451))
+* **breadcrumbs:** avoid hydration mismatch in breadcrumbs by adding a w-breadcrumb-item component ([#698](https://github.com/warp-ds/elements/issues/698)) ([949c221](https://github.com/warp-ds/elements/commit/949c221acb42060f389994b5956a44d426cd49e7))
+* compile using browserslist when bundling ([#682](https://github.com/warp-ds/elements/issues/682)) ([9d48c24](https://github.com/warp-ds/elements/commit/9d48c24b87ff34a98e4012eed87af6d3840e84a0))
+* complete unsafeCSS migration, restore full-width and radius token mapping ([#691](https://github.com/warp-ds/elements/issues/691)) ([217d56a](https://github.com/warp-ds/elements/commit/217d56a4333a4279e7dcee8aa79654f0f1bcd030)), closes [#682](https://github.com/warp-ds/elements/issues/682) [#543](https://github.com/warp-ds/elements/issues/543) [#615](https://github.com/warp-ds/elements/issues/615) [#615](https://github.com/warp-ds/elements/issues/615)
+* CSS regressions in Toast ([#706](https://github.com/warp-ds/elements/issues/706)) ([479b0d7](https://github.com/warp-ds/elements/commit/479b0d7536692cedfecebd90829c3c56fed87841))
+* **datepicker:** use placeholder on safari instead of current date ([#668](https://github.com/warp-ds/elements/issues/668)) ([df7f43a](https://github.com/warp-ds/elements/commit/df7f43aba7f8cec73f3aeaadf91c876498c892a6))
+* **docs:** add built documentation index ([#675](https://github.com/warp-ds/elements/issues/675)) ([dcd20e7](https://github.com/warp-ds/elements/commit/dcd20e747d7bc9d77348383284526532742d404e))
+* **icon:** narrow type for icon size ([#677](https://github.com/warp-ds/elements/issues/677)) ([b656fa8](https://github.com/warp-ds/elements/commit/b656fa88ec9f158db12ed3a52135ee53ffab8ee5))
+* include eik/index.js in the package ([#673](https://github.com/warp-ds/elements/issues/673)) ([54aeb72](https://github.com/warp-ds/elements/commit/54aeb72f5ca783a43b0922515d1b735c37fd73b0))
+* include sr-only in the warp elements CSS ([#713](https://github.com/warp-ds/elements/issues/713)) ([03309e2](https://github.com/warp-ds/elements/commit/03309e20e14097afee79cfe657ec997b966b9ced))
+* inconsistent use of optional in form elements ([#715](https://github.com/warp-ds/elements/issues/715)) ([ada92fa](https://github.com/warp-ds/elements/commit/ada92faa3b4a0d2eab8dbbfc0e7e9e56643d964f))
+* list open-wc/form-control as a dependency ([#714](https://github.com/warp-ds/elements/issues/714)) ([d968d83](https://github.com/warp-ds/elements/commit/d968d8357bbec12e5cb37942210623b5e49b9a65)), closes [#711](https://github.com/warp-ds/elements/issues/711)
+* **modal-header:** prevent close and back buttons from inheriting modal title tooltip ([#657](https://github.com/warp-ds/elements/issues/657)) ([a291e45](https://github.com/warp-ds/elements/commit/a291e455514e037d5a8823a1d239da33719455bc))
+* **modal:** Modal dispatches spurious `hidden` event ([#664](https://github.com/warp-ds/elements/issues/664)) ([7cc5566](https://github.com/warp-ds/elements/commit/7cc55660f3f4abf8199839a23012e0b2fef3e257))
+* **modal:** sync with Figma, improve dark mode backdrop ([#712](https://github.com/warp-ds/elements/issues/712)) ([4e2a756](https://github.com/warp-ds/elements/commit/4e2a75630a4013bf2eb8b5258d42fbe1c82dffc5))
+* **radio-group:** give precedence to help-text if invalid + required ([#652](https://github.com/warp-ds/elements/issues/652)) ([68373cd](https://github.com/warp-ds/elements/commit/68373cd036e85204d07c97f3480f5128b14f1d97))
+* regenerate styles.ts with unsafeCSS after PR [#685](https://github.com/warp-ds/elements/issues/685) ([#689](https://github.com/warp-ds/elements/issues/689)) ([098369a](https://github.com/warp-ds/elements/commit/098369a14252aa07cec9ff002147fc8e20531218))
+* reset active slider range when value is set to empty string ([46942e2](https://github.com/warp-ds/elements/commit/46942e24092f573a098fe8dfc406be7c37619057))
+* reset active slider range when value is set to empty string ([2222940](https://github.com/warp-ds/elements/commit/222294062b0c6c534094f29afbec7b1381ed786f))
+* **step:** add styles back after regression ([#716](https://github.com/warp-ds/elements/issues/716)) ([a9e81fb](https://github.com/warp-ds/elements/commit/a9e81fb4f3e5f375a04e6a7cb51fc60e1a4be35c))
+* **tabs:** make it easier to do React hydration correctly ([#702](https://github.com/warp-ds/elements/issues/702)) ([9ea5272](https://github.com/warp-ds/elements/commit/9ea527251ea2b9c2ce80139edbe576d563b6ed3a))
+* use unsafeCSS in generated styles to prevent SWC escaping corruption ([#685](https://github.com/warp-ds/elements/issues/685)) ([c00d6aa](https://github.com/warp-ds/elements/commit/c00d6aa134a88d08cb976a5c1b8fe7aee8cf176c)), closes [#682](https://github.com/warp-ds/elements/issues/682)
+
+
+### Features
+
+* add lint check for css`` with backslash selectors ([#692](https://github.com/warp-ds/elements/issues/692)) ([e06a75f](https://github.com/warp-ds/elements/commit/e06a75f05e07adf67fce3bd33e12fb9ccd8a9ca1))
+* **button:** support using w-button for Invoker Commands ([e91dc37](https://github.com/warp-ds/elements/commit/e91dc37d596945e73abc4ad3d2fb4f80b80c5965))
+* **combobox:** add support for option element children ([#663](https://github.com/warp-ds/elements/issues/663)) ([d74b4bb](https://github.com/warp-ds/elements/commit/d74b4bb33f3fd84437fffaef833d235c5111906b))
+* **modal:** support use via Invoker Commands ([55e5a96](https://github.com/warp-ds/elements/commit/55e5a966c974ac650ce2b7ed0d3983c522778bf3))
+* **snackbar:** add the snackbar component for Elements ([#665](https://github.com/warp-ds/elements/issues/665)) ([7a43bfe](https://github.com/warp-ds/elements/commit/7a43bfe7f988c503c7723e07db9f6d974ec1baa3))
+* **types:** add improved React type support to types ([#687](https://github.com/warp-ds/elements/issues/687)) ([dea55a9](https://github.com/warp-ds/elements/commit/dea55a96501e5b14acd174d2d388dad82aa1c9fc))
+
 # [2.10.0-next.24](https://github.com/warp-ds/elements/compare/v2.10.0-next.23...v2.10.0-next.24) (2026-06-22)
 
 
