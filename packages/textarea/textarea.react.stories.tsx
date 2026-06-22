@@ -9,6 +9,23 @@ export default {
 		return <Textarea {...args} />;
 	},
 	component: Textarea,
+	args: {
+		optional: false,
+		required: false,
+		disabled: false,
+		invalid: false,
+		readOnly: false,
+		maxRows: undefined,
+		minRows: undefined,
+	},
+	argTypes: {
+		maxRows: {
+			type: "number",
+		},
+		minRows: {
+			type: "number",
+		},
+	},
 } satisfies Meta<typeof Textarea>;
 
 export type Story = StoryObj<typeof Textarea>;
