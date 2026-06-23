@@ -1,3 +1,14 @@
+## [2.10.1-next.1](https://github.com/warp-ds/elements/compare/v2.10.0...v2.10.1-next.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* add a convenience entrypoint for all React wrappers ([5a1f708](https://github.com/warp-ds/elements/commit/5a1f70882c4d5453fbb8d6dc3ade7ac78b7110b3))
+* add all Warp elements to the global HTML tag list ([e1ea840](https://github.com/warp-ds/elements/commit/e1ea84001268967ab7b66c38f08fbb057f1d0493))
+* add top-level JSDoc to React wrappers, link to docs not storybook ([e1ac6e1](https://github.com/warp-ds/elements/commit/e1ac6e17520b9f9b4024b4d9ee3397e43819cb83))
+* import component class as type only ([ea8b50f](https://github.com/warp-ds/elements/commit/ea8b50fb9374c64c7b7c95c38a4fd06ea357dec3))
+* narrow the types for event handlers in React ([531dbb5](https://github.com/warp-ds/elements/commit/531dbb52156d6fcace1126186331ec0970331242))
+
 # [2.10.0](https://github.com/warp-ds/elements/compare/v2.9.1...v2.10.0) (2026-06-22)
 
 
