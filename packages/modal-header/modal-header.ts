@@ -158,6 +158,12 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
 /** @deprecated Exported for backwards compatibility. Use WarpModalHeader. */
 export const ModalHeader = WarpModalHeader;
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-modal-header": WarpModalHeader;
+	}
+}
+
 if (!customElements.get("w-modal-header")) {
 	customElements.define("w-modal-header", WarpModalHeader);
 }

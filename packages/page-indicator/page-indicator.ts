@@ -86,6 +86,12 @@ class WarpPageIndicator extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-page-indicator": WarpPageIndicator;
+	}
+}
+
 if (!customElements.get("w-page-indicator")) {
 	customElements.define("w-page-indicator", WarpPageIndicator);
 }

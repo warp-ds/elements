@@ -267,6 +267,12 @@ class WarpExpandable extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-expandable": WarpExpandable;
+	}
+}
+
 if (!customElements.get("w-expandable")) {
 	customElements.define("w-expandable", WarpExpandable);
 }

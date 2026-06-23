@@ -749,6 +749,12 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-combobox": WarpCombobox;
+	}
+}
+
 if (!customElements.get("w-combobox")) {
 	customElements.define("w-combobox", WarpCombobox);
 }

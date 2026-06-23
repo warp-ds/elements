@@ -99,6 +99,12 @@ class WarpBox extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-box": WarpBox;
+	}
+}
+
 if (!customElements.get("w-box")) {
 	customElements.define("w-box", WarpBox);
 }

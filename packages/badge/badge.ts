@@ -83,6 +83,12 @@ class WarpBadge extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-badge": WarpBadge;
+	}
+}
+
 if (!customElements.get("w-badge")) {
 	customElements.define("w-badge", WarpBadge);
 }

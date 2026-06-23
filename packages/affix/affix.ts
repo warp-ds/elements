@@ -194,6 +194,12 @@ class WarpAffix extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-affix": WarpAffix;
+	}
+}
+
 if (!customElements.get("w-affix")) {
 	customElements.define("w-affix", WarpAffix);
 }

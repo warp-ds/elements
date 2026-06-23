@@ -27,6 +27,12 @@ export class WarpModalFooter extends CanCloseMixin(
 /** @deprecated Exported for backwards compatibility. Use WarpModalFooter. */
 export const ModalFooter = WarpModalFooter;
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-modal-footer": WarpModalFooter;
+	}
+}
+
 if (!customElements.get("w-modal-footer")) {
 	customElements.define("w-modal-footer", WarpModalFooter);
 }

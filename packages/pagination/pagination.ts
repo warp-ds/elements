@@ -277,6 +277,12 @@ declare global {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-pagination": WarpPagination;
+	}
+}
+
 if (!customElements.get("w-pagination")) {
 	customElements.define("w-pagination", WarpPagination);
 }

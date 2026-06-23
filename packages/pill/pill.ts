@@ -178,6 +178,12 @@ class WarpPill extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-pill": WarpPill;
+	}
+}
+
 if (!customElements.get("w-pill")) {
 	customElements.define("w-pill", WarpPill);
 }

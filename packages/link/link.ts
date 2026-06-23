@@ -133,6 +133,12 @@ class WarpLink extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-link": WarpLink;
+	}
+}
+
 if (!customElements.get("w-link")) {
 	customElements.define("w-link", WarpLink);
 }

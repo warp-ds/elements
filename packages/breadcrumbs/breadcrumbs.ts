@@ -142,6 +142,12 @@ class WarpBreadcrumbs extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-breadcrumbs": WarpBreadcrumbs;
+	}
+}
+
 if (!customElements.get("w-breadcrumbs")) {
 	customElements.define("w-breadcrumbs", WarpBreadcrumbs);
 }

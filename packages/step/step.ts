@@ -205,6 +205,12 @@ export class WarpStep extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-step": WarpStep;
+	}
+}
+
 if (!customElements.get("w-step")) {
 	customElements.define("w-step", WarpStep);
 }

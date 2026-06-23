@@ -162,6 +162,12 @@ class WarpCard extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-card": WarpCard;
+	}
+}
+
 if (!customElements.get("w-card")) {
 	customElements.define("w-card", WarpCard);
 }

@@ -435,6 +435,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-textfield": WarpTextField;
+	}
+}
+
 if (!customElements.get("w-textfield")) {
 	customElements.define("w-textfield", WarpTextField);
 }

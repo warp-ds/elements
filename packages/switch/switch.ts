@@ -244,6 +244,12 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-switch": WarpSwitch;
+	}
+}
+
 if (!customElements.get("w-switch")) {
 	customElements.define("w-switch", WarpSwitch);
 }

@@ -70,6 +70,12 @@ export class WarpStepIndicator extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-step-indicator": WarpStepIndicator;
+	}
+}
+
 if (!customElements.get("w-step-indicator")) {
 	customElements.define("w-step-indicator", WarpStepIndicator);
 }

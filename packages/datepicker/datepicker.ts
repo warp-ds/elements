@@ -674,6 +674,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-datepicker": WarpDatepicker;
+	}
+}
+
 if (!customElements.get("w-datepicker")) {
 	customElements.define("w-datepicker", WarpDatepicker);
 }

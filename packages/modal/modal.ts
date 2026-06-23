@@ -193,6 +193,12 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 /** @deprecated Exported for backwards compatibility. Use WarpModal. */
 export const ModalMain = WarpModal;
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-modal": WarpModal;
+	}
+}
+
 if (!customElements.get("w-modal")) {
 	customElements.define("w-modal", WarpModal);
 }

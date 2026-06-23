@@ -475,6 +475,12 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-select": WarpSelect;
+	}
+}
+
 if (!customElements.get("w-select")) {
 	customElements.define("w-select", WarpSelect);
 }

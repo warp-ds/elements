@@ -14,12 +14,8 @@ test("can reset switch by resetting surrounding form", async () => {
 		</form>
 	`);
 
-	const form = document.querySelector("form") as HTMLFormElement;
-	const wSwitch = document.querySelector("w-switch") as HTMLElement & {
-		checked: boolean;
-		value: string;
-		updateComplete: Promise<undefined>;
-	};
+	const form = document.querySelector("form")!;
+	const wSwitch = document.querySelector("w-switch")!;
 
 	// sanity
 	expect(form).not.toBeNull();
@@ -52,14 +48,10 @@ test("can reset switch by resetting surrounding form", async () => {
 test("mouse click toggles switch once", async () => {
 	render(html`<w-switch aria-label="Enable notifications"></w-switch>`);
 
-	const wSwitch = document.querySelector("w-switch") as HTMLElement & {
-		checked: boolean;
-		updateComplete: Promise<undefined>;
-		shadowRoot: ShadowRoot;
-	};
+	const wSwitch = document.querySelector("w-switch")!;
 
 	await wSwitch.updateComplete;
-	const button = wSwitch.shadowRoot.querySelector(
+	const button = wSwitch.shadowRoot!.querySelector(
 		"button",
 	) as HTMLButtonElement;
 
@@ -81,11 +73,8 @@ test("native label click toggles switch", async () => {
 		></w-switch>
 	`);
 
-	const label = document.querySelector("label") as HTMLLabelElement;
-	const wSwitch = document.querySelector("w-switch") as HTMLElement & {
-		checked: boolean;
-		updateComplete: Promise<undefined>;
-	};
+	const label = document.querySelector("label")!;
+	const wSwitch = document.querySelector("w-switch")!;
 
 	await wSwitch.updateComplete;
 	expect(wSwitch.checked).toBe(false);

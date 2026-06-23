@@ -265,6 +265,12 @@ export class WarpTab extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-tab": WarpTab;
+	}
+}
+
 if (!customElements.get("w-tab")) {
 	customElements.define("w-tab", WarpTab);
 }

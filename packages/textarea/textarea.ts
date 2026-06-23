@@ -472,6 +472,12 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-textarea": WarpTextarea;
+	}
+}
+
 if (!customElements.get("w-textarea")) {
 	customElements.define("w-textarea", WarpTextarea);
 }

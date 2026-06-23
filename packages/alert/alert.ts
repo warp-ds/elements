@@ -177,6 +177,12 @@ class WarpAlert extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-alert": WarpAlert;
+	}
+}
+
 if (!customElements.get("w-alert")) {
 	customElements.define("w-alert", WarpAlert);
 }
