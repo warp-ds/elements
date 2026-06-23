@@ -1,6 +1,6 @@
 {
   "include": [
-    "react.ts",
+    "entrypoint-react.ts",
     "packages/affix",
     "packages/alert",
     "packages/attention",

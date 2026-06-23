@@ -33,8 +33,8 @@
     },
     "./custom-elements.json": "./dist/custom-elements.json",
      "./react": {
-      "types": "./dist/react.d.ts",
-      "import": "./dist/react.js"
+      "types": "./dist/entrypoint-react.d.ts",
+      "import": "./dist/entrypoint-react.js"
     },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",
