@@ -2,10 +2,6 @@ import { css } from 'lit';
 
 export const styles = css`
   :host {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--_gap);
-
     --_gap: var(--w-c-radio-gap, 8px);
 
     --_size: var(--w-c-radio-size, 2rem);
@@ -48,6 +44,12 @@ export const styles = css`
     --w-c-radio-border-color-checked: var(--w-c-radio-border-color-disabled, var(--w-s-color-border-disabled));
     --w-c-radio-label-color: var(--w-c-radio-label-color-disabled, var(--w-s-color-text-disabled));
     --w-c-radio-cursor: var(--w-c-radio-cursor-disabled, not-allowed);
+  }
+
+  [part='base'] {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--_gap);
   }
 
   [part='control'] {
