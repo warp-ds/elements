@@ -3,7 +3,7 @@ import { LitElement } from "lit";
 import React from "react";
 
 import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
-import { WarpTextField } from "./textfield.js";
+import type { WarpTextField } from "./textfield.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTabs, WarpTabsChangeEvent } from "./tabs.js";
+import type { WarpTabs, WarpTabsChangeEvent } from "./tabs.js";
 
 // Re-export from split packages
 export { Tab } from "../tab/react.js";

@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpAttention } from "./attention.js";
+import type { WarpAttention } from "./attention.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

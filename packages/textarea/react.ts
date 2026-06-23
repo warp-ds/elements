@@ -2,8 +2,8 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTextarea } from "./textarea.js";
-import { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
+import type { WarpTextarea } from "./textarea.js";
+import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

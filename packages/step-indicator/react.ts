@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpStepIndicator } from "./step-indicator.js";
+import type { WarpStepIndicator } from "./step-indicator.js";
 
 // Re-export from split packages
 export { Step } from "../step/react.js";

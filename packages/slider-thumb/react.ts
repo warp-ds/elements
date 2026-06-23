@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSliderThumb } from "./slider-thumb.js";
+import type { WarpSliderThumb } from "./slider-thumb.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

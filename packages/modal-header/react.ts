@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpModalHeader } from "./modal-header.js";
+import type { WarpModalHeader } from "./modal-header.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -2,8 +2,8 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpCheckbox } from "./checkbox.js";
-import { ChangeEventWithTarget } from "../types.js";
+import type { WarpCheckbox } from "./checkbox.js";
+import type { ChangeEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpDeadToggle } from "./dead-toggle.js";
+import type { WarpDeadToggle } from "./dead-toggle.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpCombobox } from "./combobox.js";
+import type { WarpCombobox } from "./combobox.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

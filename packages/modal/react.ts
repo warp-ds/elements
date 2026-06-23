@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpModal } from "./modal.js";
+import type { WarpModal } from "./modal.js";
 
 export { ModalFooter } from "../modal-footer/react.js";
 // Re-export from split packages

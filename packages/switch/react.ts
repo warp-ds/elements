@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSwitch, WarpSwitchChangeEvent } from "./switch.js";
+import type { WarpSwitch, WarpSwitchChangeEvent } from "./switch.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpRadioGroup } from "./radio-group.js";
+import type { WarpRadioGroup } from "./radio-group.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

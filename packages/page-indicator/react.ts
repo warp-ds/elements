@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpPageIndicator } from "./page-indicator.js";
+import type { WarpPageIndicator } from "./page-indicator.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

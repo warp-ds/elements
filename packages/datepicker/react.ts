@@ -2,8 +2,8 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpDatepicker } from "./datepicker.js";
-import { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
+import type { WarpDatepicker } from "./datepicker.js";
+import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

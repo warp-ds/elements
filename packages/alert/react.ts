@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpAlert } from "./alert.js";
+import type { WarpAlert } from "./alert.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

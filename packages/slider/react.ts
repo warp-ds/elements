@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSlider } from "./slider.js";
+import type { WarpSlider } from "./slider.js";
 
 // Re-export from split packages
 export { SliderThumb } from "../slider-thumb/react.js";

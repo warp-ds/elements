@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTabPanel } from "./tab-panel.js";
+import type { WarpTabPanel } from "./tab-panel.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}

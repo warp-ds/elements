@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSnackbar } from "./snackbar.js";
+import type { WarpSnackbar } from "./snackbar.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
