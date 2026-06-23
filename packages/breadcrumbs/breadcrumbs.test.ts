@@ -1,33 +1,41 @@
-import { html } from 'lit';
+import { html } from "lit";
 
-import { expect, test } from 'vitest';
-import { render } from 'vitest-browser-lit';
+import { expect, test } from "vitest";
+import { render } from "vitest-browser-lit";
 
-import './breadcrumbs.js';
+import "./breadcrumbs.js";
 
-test('renders a bread crumb', async () => {
-  const page = render(
-    html` <w-breadcrumb>
-      <a href="/foo">Foo</a>
-      <a href="/bar">Bar</a>
-    </w-breadcrumb>`,
-  );
-  await expect.element(page.getByText('Foo')).toBeVisible();
-  await expect.element(page.getByText('Bar')).toBeVisible();
+test("renders a bread crumb", async () => {
+	const page = render(
+		html` <w-breadcrumb>
+			<a href="/foo">Foo</a>
+			<a href="/bar">Bar</a>
+		</w-breadcrumb>`,
+	);
+	await expect.element(page.getByText("Foo")).toBeVisible();
+	await expect.element(page.getByText("Bar")).toBeVisible();
 });
 
-test('renders an aria-label if set', async () => {
-  const page = render(html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`);
-  await expect.element(page.getByLabelText('You are here', { hasText: 'w-breadcrumb' })).toBeDefined();
+test("renders an aria-label if set", async () => {
+	const page = render(
+		html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`,
+	);
+	await expect
+		.element(page.getByLabelText("You are here", { hasText: "w-breadcrumb" }))
+		.toBeDefined();
 });
 
-test('sets role navigation', async () => {
-  const page = render(html` <w-breadcrumb>
-      <a href="/foo">Foo</a>
-      <a href="/bar">Bar</a>
-  </w-breadcrumb>`);
+test("sets role navigation", async () => {
+	const page = render(
+		html` <w-breadcrumb>
+			<a href="/foo">Foo</a>
+			<a href="/bar">Bar</a>
+		</w-breadcrumb>`,
+	);
 
-  // ElementInternals role is set in accessibility tree but not queryable via getByRole
-  const breadcrumb = page.container.querySelector('w-breadcrumb') as HTMLElement;
-  expect(breadcrumb).toBeDefined();
+	// ElementInternals role is set in accessibility tree but not queryable via getByRole
+	const breadcrumb = page.container.querySelector(
+		"w-breadcrumb",
+	) as HTMLElement;
+	expect(breadcrumb).toBeDefined();
 });

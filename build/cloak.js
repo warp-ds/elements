@@ -20,8 +20,10 @@ const selectors = manifest.modules.filter(getTagName).map((item) => `${getTagNam
 // This does nothing if warp-clock is used but provides a better experience on any page where warp-clock is not used.
 const perComp = selectors.map((s) => `${s}{opacity:0;}`).join('');
 
+const srOnly = `.sr-only{clip:rect(0,0,0,0);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}`;
+
 // Cloak hides until *any* of them is not defined
 // 2s step-end is used to provide a CSS only fallback reveal in case of issues
 const cloak = `.warp-cloak:has(${selectors.join(',')}){animation:2s step-end warp-fouce-cloak;} @keyframes warp-fouce-cloak {from {opacity: 0;} to {opacity: 1;}}`;
 
-writeFileSync(new URL(`${outdir}/styles.css`, import.meta.url), perComp + cloak, { encoding: 'utf8' });
+writeFileSync(new URL(`${outdir}/styles.css`, import.meta.url), perComp + cloak + srOnly, { encoding: 'utf8' });

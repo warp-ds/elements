@@ -1,14 +1,14 @@
-import { createComponent } from '@lit/react';
-import { LitElement } from 'lit';
-import React from 'react';
+import { createComponent } from "@lit/react";
+import { LitElement } from "lit";
+import React from "react";
 
-import { WarpModalFooter } from './modal-footer.js';
+import { WarpModalFooter } from "./modal-footer.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
 
 export const ModalFooter = createComponent({
-  tagName: 'w-modal-footer',
-  elementClass: Component as unknown as typeof WarpModalFooter,
-  react: React,
+	tagName: "w-modal-footer",
+	elementClass: Component as unknown as typeof WarpModalFooter,
+	react: React,
 });

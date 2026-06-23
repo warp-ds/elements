@@ -1,19 +1,21 @@
 // @warp-css;
 
-import { i18n } from '@lingui/core';
-import { FormControlMixin } from '@open-wc/form-control';
-import { html, LitElement, nothing, PropertyValues } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
-import { ifDefined } from 'lit/directives/if-defined.js';
-import type { WarpAttention } from '../attention/attention.js';
-import { styles as unoStyles } from '../slider/styles.js';
-import { reset } from '../styles.js';
-import type { WarpTextField } from '../textfield/textfield.js';
-import { wSliderThumbStyles } from './styles/w-slider-thumb.styles.js';
+import { i18n } from "@lingui/core";
+import { FormControlMixin } from "@open-wc/form-control";
+import { html, LitElement, nothing, PropertyValues } from "lit";
+import { property, query, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
+import type { WarpAttention } from "../attention/attention.js";
+import { styles as unoStyles } from "../slider/styles.js";
+import { reset } from "../styles.js";
+import type { WarpTextField } from "../textfield/textfield.js";
+import { wSliderThumbStyles } from "./styles/w-slider-thumb.styles.js";
 
-export type SliderSlot = 'to' | 'from';
+export type SliderSlot = "to" | "from";
 
+const webkitRe = /WebKit/;
+const chromeRe = /Chrome/;
 /**
  * Component to place inside a `<w-slider>`.
  *
@@ -22,437 +24,460 @@ export type SliderSlot = 'to' | 'from';
  * @event {CustomEvent} thumbreset - Internal event used by (and stopped by) `w-slider`.
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
-  /** @internal */
-  static shadowRootOptions = {
-    ...LitElement.shadowRootOptions,
-    delegatesFocus: true,
-  };
-
-  static styles = [reset, unoStyles, wSliderThumbStyles];
-
-  /**
-   * Label for the range input.
-   * 
-   * @default `label` from `w-slider`
-   */
-  @property({ attribute: 'aria-label' })
-  ariaLabel: string | null = null;
-
-  /**
-   * Contextual information for assistive technology, should it be needed
-   */
-  @property({ attribute: 'aria-description' })
-  ariaDescription: string | null = null;
-
-  /**
-   * The name of this input field in the form. The canonical source of the value is the text field.
-   */
-  @property({ reflect: true })
-  name: string | undefined;
-
-  /**
-   * The initial value, if any
-   */
-  @property({ reflect: true })
-  value: string | undefined;
-
-  /** 
-   * @internal Set by `<w-slider>`
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
-
-  /** 
-   * @internal Set by `<w-slider>`
-   */
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
-
-  /** 
-   * @internal Set by `<w-slider>`
-   */
-  @property({ attribute: false, reflect: false })
-  openEnded = false;
-
-  /**
-   * Placeholder in empty text fields
-   */
-  @property({ reflect: true })
-  placeholder: string | undefined;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  markers: string | undefined;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  required = false;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  step: number | undefined;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  min: string | undefined;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  max: string | undefined;
-
-  /** @internal Set by `<w-slider>` */
-  @state()
-  suffix = '';
-
-  /** 
-   * @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`.
-   */
-  @property({ attribute: false })
-  valueFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
-
-  /** 
-   * @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`.
-   */
-  @property({ attribute: false })
-  tooltipFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
-
-  /** 
-   * @internal Formatter for the min and max labels below the range. Set by `<w-slider>`.
-   */
-  @property({ attribute: false })
-  labelFormatter: ((slot: SliderSlot) => string) | undefined;
-
-  /** @internal */
-  @query('input[type="range"]')
-  range!: HTMLInputElement;
-  
-  /** @internal */
-  @query('.w-slider-thumb__tooltip-target')
-  tooltipTarget!: HTMLOutputElement;
-
-  /** @internal */
-  @query('w-textfield')
-  textfield!: WarpTextField;
-
-  /** @internal */
-  @state()
-  _showTooltip = false;
-
-  /** @internal */
-  @state()
-  _inputHasFocus = false;
-
-  /** @internal */
-  @state()
-  _hiddenTextfield = false;
-
-  // capture the initial value using connectedCallback and #initialValue
-  #initialValue: string | undefined = undefined;
-
-  resetFormControl(): void {
-    this.value = this.#initialValue;
-    this.dispatchEvent(
-      new CustomEvent('thumbreset', {
-        bubbles: true,
-      }),
-    );
-  }
-
-  /**
-   * Reference to the anchor positioning style element used by the polyfill.
-   * @internal
-   */
-  anchorPositioningStyleElement: HTMLStyleElement | null = null;
-
-  #showTooltip(): void {
-    this._showTooltip = true;
-    (this.shadowRoot!.querySelector('w-attention') as WarpAttention).handleDone();
-  }
-
-  #hideTooltip(): void {
-    this._showTooltip = false;
-  }
-
-  // Synchronizes the range input's value with the form value
-  #syncRangeValue(): void {
-    if (!this.range) return;
-
-    if (this.value === '') {
-      this.range.value = this.boundaryValue;
-    } else if (this.value) {
-      this.range.value = this.value;
-    }
-  }
-
-  #handleValidity(error: string) {
-    this.dispatchEvent(
-      new CustomEvent('slidervalidity', {
-        bubbles: true,
-        detail: { invalid: error, slot: this.slot },
-      }),
-    );
-  }
-
-  async updateFieldAfterValidation() {
-    const input = this.shadowRoot!.querySelector('w-textfield') as HTMLInputElement;
-    await this.#handleValueChange(input.value, true);
-  }
-
-  async #handleValueChange(
-    value: string,
-    isFromTextInput: boolean,
-  ): Promise<{ shouldCancel: boolean; originalValue?: string }> {
-    const suffix = this.suffix ?? '';
-    let valueNum = Number.parseInt(value);
-
-    if (this.openEnded && !isFromTextInput && this.step) {
-      const valueIsCloseToSliderEdge =
-        (this.slot === 'to' && valueNum >= Number(this.max) - 1) ||
-        (this.slot === 'from' && valueNum <= Number(this.min) + 1);
-
-      if (!valueIsCloseToSliderEdge) {
-        const multiplier = 1 / this.step;
-        valueNum = Math.round(valueNum * multiplier) / multiplier;
-        value = valueNum.toString();
-      }
-    }
-
-    // Update validation state
-    // Check that the user hasn't typed in a value beyond max or min
-    const maxNum = Number.parseInt(this.max!);
-    const minNum = Number.parseInt(this.min!);
-    if (!this.openEnded && (valueNum > maxNum || valueNum < minNum)) {
-      this.#handleValidity(
-        i18n.t({
-          id: 'slider.error.out_of_bounds',
-          message: 'Value must be between {min} and {max}',
-          values: {
-            min: `${this.min} ${suffix}`.trim(),
-            max: `${this.max} ${suffix}`.trim(),
-          },
-        }),
-      );
-      return { shouldCancel: true };
-    }
-
-    if (value === '' && this.required) {
-      this.#handleValidity(
-        i18n.t({
-          id: 'slider.error.required',
-          message: 'This field is required',
-        }),
-      );
-    }
-
-    this.value = value;
-
-    const valueIsAtTheSliderEdge = value === this.max || value === this.min;
-
-    // Stop a range slider's from value from reaching past the to value and vice versa
-    // by updating the other component's min and max values.
-    // Skip this check when typing in textfield with openEnded enabled
-    let shouldCancel = false;
-    if (this.slot) {
-      const toThumb = this.parentElement!.querySelector('w-slider-thumb[slot="to"]') as WarpSliderThumb;
-      const fromThumb = this.parentElement!.querySelector('w-slider-thumb[slot="from"]') as WarpSliderThumb;
-
-      const toValue = toThumb.textfield.value || this.max;
-      const fromValue = fromThumb.textfield.value || this.min;
-
-      const numericToValue = Number.parseInt(toValue!);
-      const numericFromValue = Number.parseInt(fromValue!);
-
-      const numberOverLapError = i18n.t({
-        id: 'slider.error.overlap',
-        message: 'The maximum value cannot be less than the minimum',
-      });
-
-      if (this.slot === 'from') {
-        // Check that the from value is not about to be dragged past the --to value
-
-        const toBoundary =
-          this.openEnded && numericToValue > maxNum
-            ? numericToValue
-            : Math.min(numericToValue, this.openEnded ? maxNum - 1 : maxNum);
-
-        if (valueNum > toBoundary) {
-          shouldCancel = true;
-          // The user might have moved the slider so fast that this.value is far away from overlapping.
-          // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.openEnded && valueIsAtTheSliderEdge) {
-            this.value = String(toBoundary);
-          } else {
-            this.value = toValue;
-          }
-
-          if (isFromTextInput) {
-            this.#handleValidity(numberOverLapError);
-            // Don't override the user's input in the textfield
-            await this.updateComplete;
-            this.textfield.value = value;
-          }
-        }
-      } else {
-        // Check that the to value is not about to be dragged past the --from value
-        const fromBoundary =
-          this.openEnded && numericFromValue < minNum
-            ? numericFromValue
-            : Math.max(Number.parseInt(fromValue!), this.openEnded ? minNum + 1 : minNum);
-
-        if (valueNum < fromBoundary) {
-          shouldCancel = true;
-          // The user might have moved the slider so fast that this.value is far away from overlapping.
-          // Set it to be equal to the to/from value, depending on what slider the user's moving.
-          if (this.openEnded && valueIsAtTheSliderEdge) {
-            this.value = String(fromBoundary);
-          } else {
-            this.value = fromValue;
-          }
-
-          if (isFromTextInput) {
-            this.#handleValidity(numberOverLapError);
-            // Don't override the user's input in the textfield
-            await this.updateComplete;
-            this.textfield.value = value;
-          }
-        }
-      }
-    }
-
-    if (shouldCancel) {
-      return { shouldCancel: true };
-    }
-
-    this.#handleValidity('');
-
-    this.range.value = Math.min(Math.max(Number(value), Number(this.min)), Number(this.max)).toString();
-    this.value = this.openEnded && !isFromTextInput && valueIsAtTheSliderEdge ? '' : value;
-
-    (this.shadowRoot!.querySelector('w-attention') as WarpAttention).handleDone();
-
-    return { shouldCancel: false };
-  }
-
-  async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
-    const isFromTextInput = (e.currentTarget as HTMLElement).tagName === 'W-TEXTFIELD';
-    if (e instanceof CustomEvent) return false; // We rely on the InputEvent event that fires right after the CustomEvent
-
-    const value = (e.currentTarget as HTMLInputElement).value;
-    const result = await this.#handleValueChange(value, isFromTextInput);
-
-    if (result.shouldCancel) {
-      e.preventDefault();
-      // Needed to stop slider from moving independendtly of the value when we cancel the event
-      return false;
-    }
-
-    return true;
-  }
-
-  async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
-    if (e.key === 'Enter' && this.internals.form) {
-      (this.internals.form as HTMLFormElement).requestSubmit();
-      return;
-    }
-
-    if (!this.openEnded) return;
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-
-    const currentValue = Number(this.range.value);
-    const stepValue = this.step || 1;
-
-    let newValue: number;
-    if (e.key === 'ArrowLeft') {
-      newValue = currentValue - stepValue;
-    } else {
-      newValue = currentValue + stepValue;
-    }
-
-    newValue = Math.min(Math.max(newValue, Number(this.min)), Number(this.max));
-
-    const result = await this.#handleValueChange(newValue.toString(), false);
-    if (result.shouldCancel) {
-      e.preventDefault();
-    }
-  }
-
-  async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
-    if (e.key === 'Enter' && this.internals.form) {
-      (this.internals.form as HTMLFormElement).requestSubmit();
-      return;
-    }
-        
-    if (this.textfield.value) {
-      // If the field has a value let the native browser behavior do its thing
-      return;
-    }
-
-    // Handle the case where an open ended slider that has
-    // no current value (Min or Max) and the user presses
-    // the up or down arrow in the input field.
-
-    let value = "";
-    if (this.slot === 'from') {
-      if (e.key === 'ArrowUp') {
-        value = String(Number(this.min) + 1) || "1";  
-      } else if(e.key === 'ArrowDown') {
-        value = String(Number(this.min)) || "0";
-      }
-    } else {
-      if (e.key === 'ArrowUp') {
-        value = String(Number(this.max)) || "100";  
-      } else if(e.key === 'ArrowDown') {
-        value = String(Number(this.max) - 1) || "99";
-      }
-    }
-
-    if (value) {
-      e.preventDefault();
-      await this.#handleValueChange(value, true);
-    }
-  }
-
-  async connectedCallback() {
-    super.connectedCallback();
-    this.#initialValue = this.value;
-    this.setValue(this.value!);
-
-    if (this.slot && !this.ariaDescription) {
-      if (this.slot === 'from') {
-        this.ariaDescription = i18n.t({
-          id: 'slider.label.from',
-          comment: "Accessible label for the 'from value' input field in a range slider",
-          message: 'From',
-        });
-      } else if (this.slot === 'to') {
-        this.ariaDescription = i18n.t({
-          id: 'slider.label.to',
-          comment: "Accessible label for the 'to value' input field in a range slider",
-          message: 'To',
-        });
-      }
-    }
-
-    if (!('anchorName' in document.documentElement.style)) {
-      // Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
-      const dirname = import.meta.url.substring(0, import.meta.url.lastIndexOf('/'));
-      try {
-        const [{ default: polyfill }] = await Promise.all([
-          import(
-            /* @vite-ignore */
-            `${dirname}/oddbird-css-anchor-positioning.js`
-          ),
-          this.updateComplete,
-        ]);
-
-        // We need to work around a limitation in the polyfill. It doesn't support constructed stylesheets.
-        // This is based on the approach in Fluent UI: https://github.com/microsoft/fluentui/pull/32852/files#diff-7b316dca1b4391eae93d5edf48e9689e83d39f1c82cb3f8d61450dfad6f3c59eR73
-        if (!this.anchorPositioningStyleElement) {
-          this.anchorPositioningStyleElement = document.createElement('style');
-          this.shadowRoot!.prepend(this.anchorPositioningStyleElement);
-        }
-
-        this.anchorPositioningStyleElement.textContent = `
+	/** @internal */
+	static shadowRootOptions = {
+		...LitElement.shadowRootOptions,
+		delegatesFocus: true,
+	};
+
+	static styles = [reset, unoStyles, wSliderThumbStyles];
+
+	/**
+	 * Label for the range input.
+	 *
+	 * @default `label` from `w-slider`
+	 */
+	@property({ attribute: "aria-label" })
+	ariaLabel: string | null = null;
+
+	/**
+	 * Contextual information for assistive technology, should it be needed
+	 */
+	@property({ attribute: "aria-description" })
+	ariaDescription: string | null = null;
+
+	/**
+	 * The name of this input field in the form. The canonical source of the value is the text field.
+	 */
+	@property({ reflect: true })
+	name: string | undefined;
+
+	/**
+	 * The initial value, if any
+	 */
+	@property({ reflect: true })
+	value: string | undefined;
+
+	/**
+	 * @internal Set by `<w-slider>`
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled = false;
+
+	/**
+	 * @internal Set by `<w-slider>`
+	 */
+	@property({ type: Boolean, reflect: true })
+	invalid = false;
+
+	/**
+	 * @internal Set by `<w-slider>`
+	 */
+	@property({ attribute: false, reflect: false })
+	openEnded = false;
+
+	/**
+	 * Placeholder in empty text fields
+	 */
+	@property({ reflect: true })
+	placeholder: string | undefined;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	markers: string | undefined;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	required = false;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	step: number | undefined;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	min: string | undefined;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	max: string | undefined;
+
+	/** @internal Set by `<w-slider>` */
+	@state()
+	suffix = "";
+
+	/**
+	 * @internal Formatter for the tooltip and input mask values. Set by `<w-slider>`.
+	 */
+	@property({ attribute: false })
+	valueFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
+
+	/**
+	 * @internal Replaces {@link valueFormatter} for the tooltip. Use in open-ended sliders to show for example "300+ hk" instead of "Max" in the tooltip. Set by `<w-slider>`.
+	 */
+	@property({ attribute: false })
+	tooltipFormatter: ((value: string, slot: SliderSlot) => string) | undefined;
+
+	/**
+	 * @internal Formatter for the min and max labels below the range. Set by `<w-slider>`.
+	 */
+	@property({ attribute: false })
+	labelFormatter: ((slot: SliderSlot) => string) | undefined;
+
+	/** @internal */
+	@query('input[type="range"]')
+	range!: HTMLInputElement;
+
+	/** @internal */
+	@query(".w-slider-thumb__tooltip-target")
+	tooltipTarget!: HTMLOutputElement;
+
+	/** @internal */
+	@query("w-textfield")
+	textfield!: WarpTextField;
+
+	/** @internal */
+	@state()
+	_showTooltip = false;
+
+	/** @internal */
+	@state()
+	_inputHasFocus = false;
+
+	/** @internal */
+	@state()
+	_hiddenTextfield = false;
+
+	// capture the initial value using connectedCallback and #initialValue
+	#initialValue: string | undefined = undefined;
+
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+		this.dispatchEvent(
+			new CustomEvent("thumbreset", {
+				bubbles: true,
+			}),
+		);
+	}
+
+	/**
+	 * Reference to the anchor positioning style element used by the polyfill.
+	 * @internal
+	 */
+	anchorPositioningStyleElement: HTMLStyleElement | null = null;
+
+	#showTooltip(): void {
+		this._showTooltip = true;
+		(
+			this.shadowRoot!.querySelector("w-attention") as WarpAttention
+		).handleDone();
+	}
+
+	#hideTooltip(): void {
+		this._showTooltip = false;
+	}
+
+	// Synchronizes the range input's value with the form value
+	#syncRangeValue(): void {
+		if (!this.range) return;
+
+		if (this.value === "") {
+			this.range.value = this.boundaryValue;
+		} else if (this.value) {
+			this.range.value = this.value;
+		}
+	}
+
+	#handleValidity(error: string) {
+		this.dispatchEvent(
+			new CustomEvent("slidervalidity", {
+				bubbles: true,
+				detail: { invalid: error, slot: this.slot },
+			}),
+		);
+	}
+
+	async updateFieldAfterValidation() {
+		const input = this.shadowRoot!.querySelector(
+			"w-textfield",
+		) as HTMLInputElement;
+		await this.#handleValueChange(input.value, true);
+	}
+
+	async #handleValueChange(
+		value: string,
+		isFromTextInput: boolean,
+	): Promise<{ shouldCancel: boolean; originalValue?: string }> {
+		const suffix = this.suffix ?? "";
+		let valueNum = Number.parseInt(value);
+
+		if (this.openEnded && !isFromTextInput && this.step) {
+			const valueIsCloseToSliderEdge =
+				(this.slot === "to" && valueNum >= Number(this.max) - 1) ||
+				(this.slot === "from" && valueNum <= Number(this.min) + 1);
+
+			if (!valueIsCloseToSliderEdge) {
+				const multiplier = 1 / this.step;
+				valueNum = Math.round(valueNum * multiplier) / multiplier;
+				value = valueNum.toString();
+			}
+		}
+
+		// Update validation state
+		// Check that the user hasn't typed in a value beyond max or min
+		const maxNum = Number.parseInt(this.max!);
+		const minNum = Number.parseInt(this.min!);
+		if (!this.openEnded && (valueNum > maxNum || valueNum < minNum)) {
+			this.#handleValidity(
+				i18n.t({
+					id: "slider.error.out_of_bounds",
+					message: "Value must be between {min} and {max}",
+					values: {
+						min: `${this.min} ${suffix}`.trim(),
+						max: `${this.max} ${suffix}`.trim(),
+					},
+				}),
+			);
+			return { shouldCancel: true };
+		}
+
+		if (value === "" && this.required) {
+			this.#handleValidity(
+				i18n.t({
+					id: "slider.error.required",
+					message: "This field is required",
+				}),
+			);
+		}
+
+		this.value = value;
+
+		const valueIsAtTheSliderEdge = value === this.max || value === this.min;
+
+		// Stop a range slider's from value from reaching past the to value and vice versa
+		// by updating the other component's min and max values.
+		// Skip this check when typing in textfield with openEnded enabled
+		let shouldCancel = false;
+		if (this.slot) {
+			const toThumb = this.parentElement!.querySelector(
+				'w-slider-thumb[slot="to"]',
+			) as WarpSliderThumb;
+			const fromThumb = this.parentElement!.querySelector(
+				'w-slider-thumb[slot="from"]',
+			) as WarpSliderThumb;
+
+			const toValue = toThumb.textfield.value || this.max;
+			const fromValue = fromThumb.textfield.value || this.min;
+
+			const numericToValue = Number.parseInt(toValue!);
+			const numericFromValue = Number.parseInt(fromValue!);
+
+			const numberOverLapError = i18n.t({
+				id: "slider.error.overlap",
+				message: "The maximum value cannot be less than the minimum",
+			});
+
+			if (this.slot === "from") {
+				// Check that the from value is not about to be dragged past the --to value
+
+				const toBoundary =
+					this.openEnded && numericToValue > maxNum
+						? numericToValue
+						: Math.min(numericToValue, this.openEnded ? maxNum - 1 : maxNum);
+
+				if (valueNum > toBoundary) {
+					shouldCancel = true;
+					// The user might have moved the slider so fast that this.value is far away from overlapping.
+					// Set it to be equal to the to/from value, depending on what slider the user's moving.
+					if (this.openEnded && valueIsAtTheSliderEdge) {
+						this.value = String(toBoundary);
+					} else {
+						this.value = toValue;
+					}
+
+					if (isFromTextInput) {
+						this.#handleValidity(numberOverLapError);
+						// Don't override the user's input in the textfield
+						await this.updateComplete;
+						this.textfield.value = value;
+					}
+				}
+			} else {
+				// Check that the to value is not about to be dragged past the --from value
+				const fromBoundary =
+					this.openEnded && numericFromValue < minNum
+						? numericFromValue
+						: Math.max(
+								Number.parseInt(fromValue!),
+								this.openEnded ? minNum + 1 : minNum,
+							);
+
+				if (valueNum < fromBoundary) {
+					shouldCancel = true;
+					// The user might have moved the slider so fast that this.value is far away from overlapping.
+					// Set it to be equal to the to/from value, depending on what slider the user's moving.
+					if (this.openEnded && valueIsAtTheSliderEdge) {
+						this.value = String(fromBoundary);
+					} else {
+						this.value = fromValue;
+					}
+
+					if (isFromTextInput) {
+						this.#handleValidity(numberOverLapError);
+						// Don't override the user's input in the textfield
+						await this.updateComplete;
+						this.textfield.value = value;
+					}
+				}
+			}
+		}
+
+		if (shouldCancel) {
+			return { shouldCancel: true };
+		}
+
+		this.#handleValidity("");
+
+		this.range.value = Math.min(
+			Math.max(Number(value), Number(this.min)),
+			Number(this.max),
+		).toString();
+		this.value =
+			this.openEnded && !isFromTextInput && valueIsAtTheSliderEdge ? "" : value;
+
+		(
+			this.shadowRoot!.querySelector("w-attention") as WarpAttention
+		).handleDone();
+
+		return { shouldCancel: false };
+	}
+
+	async #onInput(e: InputEvent | CustomEvent): Promise<boolean> {
+		const isFromTextInput =
+			(e.currentTarget as HTMLElement).tagName === "W-TEXTFIELD";
+		if (e instanceof CustomEvent) return false; // We rely on the InputEvent event that fires right after the CustomEvent
+
+		const value = (e.currentTarget as HTMLInputElement).value;
+		const result = await this.#handleValueChange(value, isFromTextInput);
+
+		if (result.shouldCancel) {
+			e.preventDefault();
+			// Needed to stop slider from moving independendtly of the value when we cancel the event
+			return false;
+		}
+
+		return true;
+	}
+
+	async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
+		if (e.key === "Enter" && this.internals.form) {
+			(this.internals.form as HTMLFormElement).requestSubmit();
+			return;
+		}
+
+		if (!this.openEnded) return;
+		if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+
+		const currentValue = Number(this.range.value);
+		const stepValue = this.step || 1;
+
+		let newValue: number;
+		if (e.key === "ArrowLeft") {
+			newValue = currentValue - stepValue;
+		} else {
+			newValue = currentValue + stepValue;
+		}
+
+		newValue = Math.min(Math.max(newValue, Number(this.min)), Number(this.max));
+
+		const result = await this.#handleValueChange(newValue.toString(), false);
+		if (result.shouldCancel) {
+			e.preventDefault();
+		}
+	}
+
+	async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
+		if (e.key === "Enter" && this.internals.form) {
+			(this.internals.form as HTMLFormElement).requestSubmit();
+			return;
+		}
+
+		if (this.textfield.value) {
+			// If the field has a value let the native browser behavior do its thing
+			return;
+		}
+
+		// Handle the case where an open ended slider that has
+		// no current value (Min or Max) and the user presses
+		// the up or down arrow in the input field.
+
+		let value = "";
+		if (this.slot === "from") {
+			if (e.key === "ArrowUp") {
+				value = String(Number(this.min) + 1) || "1";
+			} else if (e.key === "ArrowDown") {
+				value = String(Number(this.min)) || "0";
+			}
+		} else {
+			if (e.key === "ArrowUp") {
+				value = String(Number(this.max)) || "100";
+			} else if (e.key === "ArrowDown") {
+				value = String(Number(this.max) - 1) || "99";
+			}
+		}
+
+		if (value) {
+			e.preventDefault();
+			await this.#handleValueChange(value, true);
+		}
+	}
+
+	async connectedCallback() {
+		super.connectedCallback();
+		this.#initialValue = this.value;
+		this.setValue(this.value!);
+
+		if (this.slot && !this.ariaDescription) {
+			if (this.slot === "from") {
+				this.ariaDescription = i18n.t({
+					id: "slider.label.from",
+					comment:
+						"Accessible label for the 'from value' input field in a range slider",
+					message: "From",
+				});
+			} else if (this.slot === "to") {
+				this.ariaDescription = i18n.t({
+					id: "slider.label.to",
+					comment:
+						"Accessible label for the 'to value' input field in a range slider",
+					message: "To",
+				});
+			}
+		}
+
+		if (!("anchorName" in document.documentElement.style)) {
+			// Load the polyfill for CSS anchor positioning by @oddbird for browsers without native support.
+			const dirname = import.meta.url.substring(
+				0,
+				import.meta.url.lastIndexOf("/"),
+			);
+			try {
+				const [{ default: polyfill }] = await Promise.all([
+					import(
+						/* @vite-ignore */
+						`${dirname}/oddbird-css-anchor-positioning.js`
+					),
+					this.updateComplete,
+				]);
+
+				// We need to work around a limitation in the polyfill. It doesn't support constructed stylesheets.
+				// This is based on the approach in Fluent UI: https://github.com/microsoft/fluentui/pull/32852/files#diff-7b316dca1b4391eae93d5edf48e9689e83d39f1c82cb3f8d61450dfad6f3c59eR73
+				if (!this.anchorPositioningStyleElement) {
+					this.anchorPositioningStyleElement = document.createElement("style");
+					this.shadowRoot!.prepend(this.anchorPositioningStyleElement);
+				}
+
+				this.anchorPositioningStyleElement.textContent = `
         /*
          * The polyfill can only anchor to ::before and ::after pseudo elements, not the pseudo element slider thumb.
          * We work around that by recreating a transparent version of the active range
@@ -503,267 +528,280 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
         }
       `;
 
-        await polyfill({
-          roots: [this.shadowRoot],
-          elements: [this.anchorPositioningStyleElement],
-        });
-      } catch (e) {
-        console.error(
-          new Error('Error registering the CSS anchor positioning polyfill. The UI will look broken.', { cause: e }),
-        );
-      }
-    } else {
-      await this.updateComplete;
-    }
+				await polyfill({
+					roots: [this.shadowRoot],
+					elements: [this.anchorPositioningStyleElement],
+				});
+			} catch (e) {
+				console.error(
+					new Error(
+						"Error registering the CSS anchor positioning polyfill. The UI will look broken.",
+						{ cause: e },
+					),
+				);
+			}
+		} else {
+			await this.updateComplete;
+		}
 
-    const UA = window.navigator.userAgent;
-    const needsSafariHack = /WebKit/.test(UA) && !/Chrome/.test(UA);
-    if (needsSafariHack && this.tooltipTarget) {
-      this.tooltipTarget.style.setProperty('--transform-offset', 'var(--w-slider-thumb-size, 28px)');
-    }
+		const UA = window.navigator.userAgent;
+		const needsSafariHack = webkitRe.test(UA) && !chromeRe.test(UA);
+		if (needsSafariHack && this.tooltipTarget) {
+			this.tooltipTarget.style.setProperty(
+				"--transform-offset",
+				"var(--w-slider-thumb-size, 28px)",
+			);
+		}
 
-    this.#syncRangeValue();
-  }
+		this.#syncRangeValue();
+	}
 
-  /**
-   * The boundary value for this thumb (min for 'from', max for 'to' or default) 
-   * @internal
-   */
-  get boundaryValue(): string {
-    return this.slot === 'from' ? this.min as string : this.max as string;
-  }
+	/**
+	 * The boundary value for this thumb (min for 'from', max for 'to' or default)
+	 * @internal
+	 */
+	get boundaryValue(): string {
+		return this.slot === "from" ? (this.min as string) : (this.max as string);
+	}
 
-  /**
-   * Value to display in the textfield (shows boundary when focused on empty value)
-   * @internal
-   */
-  get textFieldDisplayValue() {
-    if (this._inputHasFocus) {
-      // When focused, show the range's clamped value if the form value is empty (slider at boundary)
-      // This allows users to see and edit the actual min/max value
-      if (this.value !== '') {
-        return this.value;
-      }
+	/**
+	 * Value to display in the textfield (shows boundary when focused on empty value)
+	 * @internal
+	 */
+	get textFieldDisplayValue() {
+		if (this._inputHasFocus) {
+			// When focused, show the range's clamped value if the form value is empty (slider at boundary)
+			// This allows users to see and edit the actual min/max value
+			if (this.value !== "") {
+				return this.value;
+			}
 
-      if (!this.range?.value) {
-        return '';
-      }
+			if (!this.range?.value) {
+				return "";
+			}
 
-      return Math.min(Math.max(Number(this.range.value), Number(this.min) + 1), Number(this.max) - 1).toString();
-    }
+			return Math.min(
+				Math.max(Number(this.range.value), Number(this.min) + 1),
+				Number(this.max) - 1,
+			).toString();
+		}
 
-    // When not focused, display the value as-is:
-    // - Empty string if slider set it to empty (at boundary)
-    // - Actual value if user typed it (even if it equals min/max)
-    return this.value;
-  }
+		// When not focused, display the value as-is:
+		// - Empty string if slider set it to empty (at boundary)
+		// - Actual value if user typed it (even if it equals min/max)
+		return this.value;
+	}
 
-  /**
-   * Value to display in the tooltip
-   * @internal
-   */
-  get tooltipDisplayValue(): string | number {
-    let value: string | number = 0;
-    if (this.tooltipFormatter) {
-      value = this.tooltipFormatter(this.value!, this.slot as SliderSlot);
-    } else if (this.valueFormatter) {
-      value = this.valueFormatter(this.value!, this.slot as SliderSlot);
-    } else if (this.value === '') {
-      value = this.range?.value ?? this.boundaryValue;
-    } else {
-      value = this.value || 0;
-    }
-    return value;
-  }
+	/**
+	 * Value to display in the tooltip
+	 * @internal
+	 */
+	get tooltipDisplayValue(): string | number {
+		let value: string | number;
+		if (this.tooltipFormatter) {
+			value = this.tooltipFormatter(this.value!, this.slot as SliderSlot);
+		} else if (this.valueFormatter) {
+			value = this.valueFormatter(this.value!, this.slot as SliderSlot);
+		} else if (this.value === "") {
+			value = this.range?.value ?? this.boundaryValue;
+		} else {
+			value = this.value || 0;
+		}
+		return value;
+	}
 
-  /** @internal */
-  get ariaDescriptionText() {
-    let prefix = '';
-    const description = this.ariaDescription || '';
+	/** @internal */
+	get ariaDescriptionText() {
+		let prefix = "";
+		const description = this.ariaDescription || "";
 
-    const showPlaceholder = this.value === '';
-    if (this.openEnded && showPlaceholder) {
-      prefix =
-        this.slot === 'from'
-          ? i18n.t({
-              id: 'slider.placeholder.from',
-              message: 'Min',
-            })
-          : i18n.t({
-              id: 'slider.placeholder.to',
-              message: 'Max',
-            });
-    }
+		const showPlaceholder = this.value === "";
+		if (this.openEnded && showPlaceholder) {
+			prefix =
+				this.slot === "from"
+					? i18n.t({
+							id: "slider.placeholder.from",
+							message: "Min",
+						})
+					: i18n.t({
+							id: "slider.placeholder.to",
+							message: "Max",
+						});
+		}
 
-    if (prefix) {
-      return `${prefix}, ${description}`;
-    }
-    return description;
-  }
+		if (prefix) {
+			return `${prefix}, ${description}`;
+		}
+		return description;
+	}
 
-  updated(changedProperties: PropertyValues<this>) {
-    // ariaLabel and ariaDescription are used internally on the input element,
-    // not as host attributes. No setAttribute needed - avoids hydration mismatch.
+	updated(changedProperties: PropertyValues<this>) {
+		// ariaLabel and ariaDescription are used internally on the input element,
+		// not as host attributes. No setAttribute needed - avoids hydration mismatch.
 
-    if (changedProperties.has('openEnded')) {
-      if (this.openEnded && !this.placeholder) {
-        if (this.slot === 'to' || this.slot === '') {
-          this.placeholder = i18n.t({
-            id: 'slider.placeholder.to',
-            message: 'Max',
-            comment: 'Max as in short for Maximum',
-          });
-        } else if (this.slot === 'from') {
-          this.placeholder = i18n.t({
-            id: 'slider.placeholder.from',
-            message: 'Min',
-            comment: 'Min as in short for Minimum',
-          });
-        }
-      }
-    }
+		if (changedProperties.has("openEnded")) {
+			if (this.openEnded && !this.placeholder) {
+				if (this.slot === "to" || this.slot === "") {
+					this.placeholder = i18n.t({
+						id: "slider.placeholder.to",
+						message: "Max",
+						comment: "Max as in short for Maximum",
+					});
+				} else if (this.slot === "from") {
+					this.placeholder = i18n.t({
+						id: "slider.placeholder.from",
+						message: "Min",
+						comment: "Min as in short for Minimum",
+					});
+				}
+			}
+		}
 
-    if (changedProperties.has('value')) {
-      if (typeof this.#initialValue === 'undefined' && typeof this.value !== 'undefined') {
-        // If w-slider sets our initial value based on the min and max attributes then
-        // this.value will be undefined in connectedCallback. We need this check here
-        // in order for form resets to work correctly.
-        this.#initialValue = this.value;
-      }
-      this.setValue(this.value!);
-      this.#syncRangeValue();
+		if (changedProperties.has("value")) {
+			if (
+				typeof this.#initialValue === "undefined" &&
+				typeof this.value !== "undefined"
+			) {
+				// If w-slider sets our initial value based on the min and max attributes then
+				// this.value will be undefined in connectedCallback. We need this check here
+				// in order for form resets to work correctly.
+				this.#initialValue = this.value;
+			}
+			this.setValue(this.value!);
+			this.#syncRangeValue();
 
-      const previousValue = changedProperties.get('value');
+			const previousValue = changedProperties.get("value");
 
-      if (this.value === '' && previousValue) {
-        this.dispatchEvent(
-          new CustomEvent('thumbreset', {
-            bubbles: true,
-          }),
-        );
-      }
-    }
-  }
+			if (this.value === "" && previousValue) {
+				this.dispatchEvent(
+					new CustomEvent("thumbreset", {
+						bubbles: true,
+					}),
+				);
+			}
+		}
+	}
 
-  render() {
-    const showPlaceholder = this.placeholder && !this.value;
-    return html`
-      <div class="w-slider-thumb">
-        ${
-          !('anchorName' in document.documentElement.style)
-            ? html`<div class="polyfill-range">
-              <div class="polyfill-active-range"></div>
-            </div>`
-            : nothing
-        }
-        <input
-          id="range"
-          aria-label="${this.ariaLabel}"
-          aria-describedby="${ifDefined(this.ariaDescription ? 'aria-description' : undefined)}"
-          class="w-slider-thumb__range"
-          type="range"
-          .value="${this.value}"
-          min="${this.min}"
-          max="${this.max}"
-          step="${ifDefined(!this.openEnded && this.step ? this.step : undefined)}"
-          ?disabled="${this.disabled}"
-          @mousedown="${this.#showTooltip}"
-          @mouseup="${this.#hideTooltip}"
-          @touchstart="${this.#showTooltip}"
-          @touchend="${this.#hideTooltip}"
-          @focus="${this.#showTooltip}"
-          @blur="${this.#hideTooltip}"
-          @input="${this.#onInput}"
-          @keydown="${this.#onRangeSliderKeyDown}"
-        />
+	render() {
+		const showPlaceholder = this.placeholder && !this.value;
+		return html`
+			<div class="w-slider-thumb">
+				${!("anchorName" in document.documentElement.style)
+					? html`<div class="polyfill-range">
+							<div class="polyfill-active-range"></div>
+						</div>`
+					: nothing}
+				<input
+					id="range"
+					aria-label="${this.ariaLabel}"
+					aria-describedby="${ifDefined(
+						this.ariaDescription ? "aria-description" : undefined,
+					)}"
+					class="w-slider-thumb__range"
+					type="range"
+					.value="${this.value}"
+					min="${this.min}"
+					max="${this.max}"
+					step="${ifDefined(
+						!this.openEnded && this.step ? this.step : undefined,
+					)}"
+					?disabled="${this.disabled}"
+					@mousedown="${this.#showTooltip}"
+					@mouseup="${this.#hideTooltip}"
+					@touchstart="${this.#showTooltip}"
+					@touchend="${this.#hideTooltip}"
+					@focus="${this.#showTooltip}"
+					@blur="${this.#hideTooltip}"
+					@input="${this.#onInput}"
+					@keydown="${this.#onRangeSliderKeyDown}"
+				/>
 
-        ${
-          this.slot === 'from' || !this.slot
-            ? // avoid including these labels twice, for screen readers
-              html`
-              <span class="sr-only">
-                ${
-                  i18n.t({
-                    id: 'slider.label.from',
-                    message: 'From',
-                  }) +
-                  ' ' +
-                  (this.labelFormatter ? this.labelFormatter('from') : this.min) +
-                  ', ' +
-                  i18n.t({
-                    id: 'slider.label.to',
-                    message: 'To',
-                  }) +
-                  ' ' +
-                  (this.labelFormatter ? this.labelFormatter('to') : this.max)
-                }
-              </span>`
-            : nothing
-        }
+				${this.slot === "from" || !this.slot
+					? // avoid including these labels twice, for screen readers
+						html` <span class="sr-only">
+							${i18n.t({
+								id: "slider.label.from",
+								message: "From",
+							}) +
+							" " +
+							(this.labelFormatter ? this.labelFormatter("from") : this.min) +
+							", " +
+							i18n.t({
+								id: "slider.label.to",
+								message: "To",
+							}) +
+							" " +
+							(this.labelFormatter ? this.labelFormatter("to") : this.max)}
+						</span>`
+					: nothing}
 
-        <span
-          aria-hidden="true"
-          class="w-slider-thumb__from-marker"
-        >
-          ${this.labelFormatter ? this.labelFormatter('from') : this.min}
-        </span>
-        <span
-          aria-hidden="true"
-          class="w-slider-thumb__to-marker"
-        >
-          ${this.labelFormatter ? this.labelFormatter('to') : this.max}
-        </span>
+				<span aria-hidden="true" class="w-slider-thumb__from-marker">
+					${this.labelFormatter ? this.labelFormatter("from") : this.min}
+				</span>
+				<span aria-hidden="true" class="w-slider-thumb__to-marker">
+					${this.labelFormatter ? this.labelFormatter("to") : this.max}
+				</span>
 
-        <w-textfield
-          aria-label="${this.ariaLabel}"
-          aria-description="${ifDefined(this.ariaDescriptionText)}"
-          class="${classMap({
-            'w-slider-thumb__textfield': true,
-            'sr-only': this._hiddenTextfield,
-          })}"
-          type="number"
-          tabindex="${this._hiddenTextfield ? -1 : nothing}"
-          placeholder="${this.placeholder}"
-          .value="${this.textFieldDisplayValue}"
-          .formatter=${this.valueFormatter && !showPlaceholder ? (value: string) => this.valueFormatter!(value, this.slot as SliderSlot) : nothing}
-          min="${this.openEnded ? nothing : this.min}"
-          max="${this.openEnded ? nothing : this.max}"
-          step="${ifDefined(this.step)}"
-          ?invalid="${Boolean(this.invalid)}"
-          @input="${this.#onInput}"
-          @keydown="${this.#onInputFieldKeyDown}"
-          ?disabled="${this.disabled}"
-        >
-          ${(this.suffix ?? '') ? html`<w-affix slot="suffix" label="${this.suffix ?? ''}"></w-affix>` : nothing}
-        </w-textfield>
-        <w-attention
-          tooltip
-          placement="top"
-          flip
-          distance="24"
-          .show="${this._showTooltip}"
-        >
-          <output
-            id="target"
-            class="w-slider-thumb__tooltip-target"
-            slot="target"
-          ></output>
-          <span slot="message">
-            ${this.tooltipDisplayValue}${(this.suffix ?? '') ? html`&nbsp;${this.suffix ?? ''}` : nothing}
-          </span>
-        </w-attention>
+				<w-textfield
+					aria-label="${this.ariaLabel}"
+					aria-description="${ifDefined(this.ariaDescriptionText)}"
+					class="${classMap({
+						"w-slider-thumb__textfield": true,
+						"sr-only": this._hiddenTextfield,
+					})}"
+					type="number"
+					tabindex="${this._hiddenTextfield ? -1 : nothing}"
+					placeholder="${this.placeholder}"
+					.value="${this.textFieldDisplayValue}"
+					.formatter=${this.valueFormatter && !showPlaceholder
+						? (value: string) =>
+								this.valueFormatter!(value, this.slot as SliderSlot)
+						: nothing}
+					min="${this.openEnded ? nothing : this.min}"
+					max="${this.openEnded ? nothing : this.max}"
+					step="${ifDefined(this.step)}"
+					?invalid="${Boolean(this.invalid)}"
+					@input="${this.#onInput}"
+					@keydown="${this.#onInputFieldKeyDown}"
+					?disabled="${this.disabled}"
+				>
+					${(this.suffix ?? "")
+						? html`<w-affix
+								slot="suffix"
+								label="${this.suffix ?? ""}"
+							></w-affix>`
+						: nothing}
+				</w-textfield>
+				<w-attention
+					tooltip
+					placement="top"
+					flip
+					distance="24"
+					.show="${this._showTooltip}"
+				>
+					<output
+						id="target"
+						class="w-slider-thumb__tooltip-target"
+						slot="target"
+					></output>
+					<span slot="message">
+						${this.tooltipDisplayValue}${(this.suffix ?? "")
+							? html`&nbsp;${this.suffix ?? ""}`
+							: nothing}
+					</span>
+				</w-attention>
 
-        <!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
-        <span class="sr-only" id="aria-description">
-          ${this.ariaDescriptionText}
-        </span>
-      </div>
-    `;
-  }
+				<!-- aria-description is still not recommended for general use, so make a visually hidden element and refer to it with aria-describedby -->
+				<span class="sr-only" id="aria-description">
+					${this.ariaDescriptionText}
+				</span>
+			</div>
+		`;
+	}
 }
 
-if (!customElements.get('w-slider-thumb')) {
-  customElements.define('w-slider-thumb', WarpSliderThumb);
+if (!customElements.get("w-slider-thumb")) {
+	customElements.define("w-slider-thumb", WarpSliderThumb);
 }
 
 export { WarpSliderThumb };

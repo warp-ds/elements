@@ -1,39 +1,43 @@
-import type { StorybookConfig } from '@storybook/web-components-vite';
+import type { StorybookConfig } from "@storybook/web-components-vite";
 // @ts-expect-error No type defs for classes
-import { classes } from '@warp-ds/css/component-classes/classes';
+import { classes } from "@warp-ds/css/component-classes/classes";
 // @ts-expect-error No type defs for classes
-import { presetWarp } from '@warp-ds/uno';
-import uno from 'unocss/vite';
-import { mergeConfig } from 'vite';
+import { presetWarp } from "@warp-ds/uno";
+import uno from "unocss/vite";
+import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
-  framework: '@storybook/web-components-vite',
-  stories: ['../docs/**/*.mdx', '../packages/**/*.mdx', '../packages/**/*.stories.ts'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
-  core: {
-    builder: '@storybook/builder-vite',
-    disableTelemetry: true,
-  },
-  viteFinal(config, { configType }) {
-    return mergeConfig(config, {
-      base: process.env.STORYBOOK_BASE || '',
-      build: {
-        target: 'esnext',
-      },
-      plugins: [
-        uno({
-          presets: [presetWarp()],
-          safelist: classes,
-        }),
-        configType === 'DEVELOPMENT' &&
-          uno({
-            mode: 'shadow-dom',
-            presets: [presetWarp()],
-            safelist: classes,
-          }),
-      ],
-    });
-  },
+	framework: "@storybook/web-components-vite",
+	stories: [
+		"../docs/**/*.mdx",
+		"../packages/**/*.mdx",
+		"../packages/**/*.stories.ts",
+	],
+	addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
+	core: {
+		builder: "@storybook/builder-vite",
+		disableTelemetry: true,
+	},
+	viteFinal(config, { configType }) {
+		return mergeConfig(config, {
+			base: process.env.STORYBOOK_BASE || "",
+			build: {
+				target: "esnext",
+			},
+			plugins: [
+				uno({
+					presets: [presetWarp()],
+					safelist: classes,
+				}),
+				configType === "DEVELOPMENT" &&
+					uno({
+						mode: "shadow-dom",
+						presets: [presetWarp()],
+						safelist: classes,
+					}),
+			],
+		});
+	},
 };
 
 export default config;

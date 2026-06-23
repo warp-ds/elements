@@ -1,146 +1,276 @@
-import { i18n } from '@lingui/core';
-import { html } from 'lit';
-import { expect, test, vi } from 'vitest';
-import { render } from 'vitest-browser-lit';
+import { i18n } from "@lingui/core";
+import { html } from "lit";
+import { expect, test, vi } from "vitest";
+import { render } from "vitest-browser-lit";
 
-import './checkbox-group.js';
-import '../checkbox/checkbox.js';
+import "./checkbox-group.js";
+import "../checkbox/checkbox.js";
+import { messages } from "./locales/en/messages.mjs";
 
 // Initialize i18n with English locale for tests
-i18n.load('en', {
-  'checkbox-group.label.optional': ['(optional)'],
-  'checkbox-group.validation.required': ['At least one selection is required.'],
-});
-i18n.activate('en');
+i18n.load("en", messages);
+i18n.activate("en");
 
-test('renders help text when provided', async () => {
-  const page = render(html`
-    <w-checkbox-group help-text="Select all that apply">
-      <w-checkbox>One</w-checkbox>
-      <w-checkbox>Two</w-checkbox>
-    </w-checkbox-group>
-  `);
+test("renders help text when provided", async () => {
+	const page = render(html`
+		<w-checkbox-group help-text="Select all that apply">
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  await expect.element(page.getByText('Select all that apply')).toBeVisible();
+	await expect.element(page.getByText("Select all that apply")).toBeVisible();
 });
 
-test('associates help text with the group', async () => {
-  const page = render(html`
-    <w-checkbox-group help-text="Choose wisely">
-      <w-checkbox>One</w-checkbox>
-      <w-checkbox>Two</w-checkbox>
-    </w-checkbox-group>
-  `);
+test("associates help text with the group", async () => {
+	const page = render(html`
+		<w-checkbox-group help-text="Choose wisely">
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  const group = page.getByRole('group');
-  await expect.element(group).toHaveAccessibleDescription('Choose wisely');
+	const group = page.getByRole("group");
+	await expect.element(group).toHaveAccessibleDescription("Choose wisely");
 });
 
-test('renders label above the group and associates it', async () => {
-  const page = render(html`
-    <w-checkbox-group label="Preferences">
-      <w-checkbox>One</w-checkbox>
-      <w-checkbox>Two</w-checkbox>
-    </w-checkbox-group>
-  `);
+test("renders label above the group and associates it", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences">
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  await expect.element(page.getByText('Preferences')).toBeVisible();
-  await expect.element(page.getByRole('group', { name: 'Preferences' })).toBeVisible();
+	await expect.element(page.getByText("Preferences")).toBeVisible();
+	await expect
+		.element(page.getByRole("group", { name: "Preferences" }))
+		.toBeVisible();
 });
 
-test('renders optional text when optional is true', async () => {
-  const page = render(html`
-    <w-checkbox-group label="Preferences" optional>
-      <w-checkbox>One</w-checkbox>
-      <w-checkbox>Two</w-checkbox>
-    </w-checkbox-group>
-  `);
+test("renders optional indicator as 'Optional' without parentheses", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  await expect.element(page.getByText('(optional)')).toBeVisible();
+	await expect.element(page.getByText("Optional")).toBeVisible();
+	expect(page.getByText("(optional)").query()).toBeNull();
 });
 
-test('required group toggles invalid state for group and children after submit and selection', async () => {
-  const page = render(html`
-    <form>
-      <w-checkbox-group label="Preferences" required>
-        <w-checkbox name="group" value="foo">Foo</w-checkbox>
-        <w-checkbox name="group" value="bar">Bar</w-checkbox>
-      </w-checkbox-group>
-      <button type="submit">Submit</button>
-    </form>
-  `);
+test("does not render optional indicator when both required and optional are set", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const submit = page.getByRole('button', { name: 'Submit' });
-  const group = page.getByRole('group', { name: 'Preferences' });
-  const firstCheckbox = page.getByRole('checkbox', { name: 'Foo' });
-  const firstCheckboxEl = document.querySelector('w-checkbox') as HTMLElement & {
-    click: () => void;
-    updateComplete?: Promise<unknown>;
-  };
-  await firstCheckboxEl.updateComplete;
-  const internalInput = firstCheckboxEl.shadowRoot?.querySelector('[part="input"]') as HTMLInputElement | null;
-  if (!internalInput) {
-    throw new Error('Expected checkbox input element to exist');
-  }
-
-  await submit.click();
-  await expect.poll(() => form.checkValidity()).toBe(false);
-  await expect.element(group).toHaveAttribute('aria-invalid', 'true');
-  await expect.element(firstCheckbox).toHaveAttribute('aria-invalid', 'true');
-  // Group invalid state should flow via aria-invalid on the internal input,
-  // while host invalid remains untouched (no host attribute mutation).
-  expect(firstCheckboxEl.hasAttribute('invalid')).toBe(false);
-  expect(internalInput.getAttribute('aria-invalid')).toBe('true');
-
-  firstCheckboxEl.click();
-  await expect.poll(() => form.checkValidity()).toBe(true);
-  await expect.element(group).not.toHaveAttribute('aria-invalid', 'true');
-  await expect.element(firstCheckbox).not.toHaveAttribute('aria-invalid', 'true');
-  expect(internalInput.getAttribute('aria-invalid')).toBeNull();
+	await expect.element(page.getByText("Preferences")).toBeVisible();
+	expect(page.getByText("Optional").query()).toBeNull();
 });
 
-test('submits checked checkbox values via form data', async () => {
-  render(html`
-    <form>
-      <w-checkbox-group label="Preferences">
-        <w-checkbox name="prefs" value="alpha" checked>Alpha</w-checkbox>
-        <w-checkbox name="prefs" value="beta" checked>Beta</w-checkbox>
-        <w-checkbox name="prefs" value="gamma">Gamma</w-checkbox>
-      </w-checkbox-group>
-    </form>
-  `);
+test("includes optional indicator in the accessible name", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const data = new FormData(form);
-  expect(data.getAll('prefs')).toEqual(['alpha', 'beta']);
+	await expect
+		.element(page.getByRole("group", { name: /Preferences.*Optional/ }))
+		.toBeVisible();
 });
 
-test('applies group name to child checkboxes without a name', async () => {
-  render(html`
-    <w-checkbox-group name="prefs">
-      <w-checkbox value="alpha" checked>Alpha</w-checkbox>
-      <w-checkbox name="custom" value="beta" checked>Beta</w-checkbox>
-    </w-checkbox-group>
-  `);
+test("removes optional indicator when required is added dynamically", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  const [first, second] = Array.from(document.querySelectorAll('w-checkbox')) as Array<{ name?: string }>;
-  await (first as { updateComplete?: Promise<unknown> }).updateComplete;
+	await expect.element(page.getByText("Optional")).toBeVisible();
 
-  expect(first.name).toBe('prefs');
-  expect(second.name).toBe('custom');
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = true;
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
 });
 
-test('warns when used in a form without a name', async () => {
-  const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-  render(html`
-    <form>
-      <w-checkbox-group>
-        <w-checkbox value="alpha" checked>Alpha</w-checkbox>
-      </w-checkbox-group>
-    </form>
-  `);
+test("shows optional indicator when required is removed dynamically", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
 
-  await expect.poll(() => warn).toHaveBeenCalled();
-  warn.mockRestore();
+	expect(page.getByText("Optional").query()).toBeNull();
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		required: boolean;
+		updateComplete: Promise<unknown>;
+	};
+	group.required = false;
+	await group.updateComplete;
+
+	await expect.element(page.getByText("Optional")).toBeVisible();
+});
+
+test("does not render optional indicator when there is no label", async () => {
+	const page = render(html`
+		<w-checkbox-group aria-label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await group.updateComplete;
+
+	expect(page.getByText("Optional").query()).toBeNull();
+});
+
+test("excludes optional indicator from accessible name when required suppresses it", async () => {
+	const page = render(html`
+		<w-checkbox-group label="Preferences" required optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = page.getByRole("group", { name: "Preferences" });
+	await expect.element(group).toBeVisible();
+
+	// Verify "Optional" is not part of the accessible name
+	expect(page.getByRole("group", { name: /Optional/ }).query()).toBeNull();
+});
+
+test("updates optional text when locale changes", async () => {
+	i18n.load("nb", {
+		"checkbox-group.label.optional": ["Valgfri"],
+	});
+
+	const page = render(html`
+		<w-checkbox-group label="Preferences" optional>
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const group = document.querySelector("w-checkbox-group") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+	await group.updateComplete;
+	await expect.element(page.getByText("Optional")).toBeVisible();
+
+	i18n.activate("nb");
+	await group.updateComplete;
+	await expect.element(page.getByText("Valgfri")).toBeVisible();
+
+	i18n.activate("en");
+});
+
+test("required group toggles invalid state for group and children after submit and selection", async () => {
+	const page = render(html`
+		<form>
+			<w-checkbox-group label="Preferences" required>
+				<w-checkbox name="group" value="foo">Foo</w-checkbox>
+				<w-checkbox name="group" value="bar">Bar</w-checkbox>
+			</w-checkbox-group>
+			<button type="submit">Submit</button>
+		</form>
+	`);
+
+	const form = document.querySelector("form") as HTMLFormElement;
+	const submit = page.getByRole("button", { name: "Submit" });
+	const group = page.getByRole("group", { name: "Preferences" });
+	const firstCheckbox = page.getByRole("checkbox", { name: "Foo" });
+	const firstCheckboxEl = document.querySelector(
+		"w-checkbox",
+	) as HTMLElement & {
+		click: () => void;
+		updateComplete?: Promise<unknown>;
+	};
+	await firstCheckboxEl.updateComplete;
+	const internalInput = firstCheckboxEl.shadowRoot?.querySelector(
+		'[part="input"]',
+	) as HTMLInputElement | null;
+	if (!internalInput) {
+		throw new Error("Expected checkbox input element to exist");
+	}
+
+	await submit.click();
+	await expect.poll(() => form.checkValidity()).toBe(false);
+	await expect.element(group).toHaveAttribute("aria-invalid", "true");
+	await expect.element(firstCheckbox).toHaveAttribute("aria-invalid", "true");
+	// Group invalid state should flow via aria-invalid on the internal input,
+	// while host invalid remains untouched (no host attribute mutation).
+	expect(firstCheckboxEl.hasAttribute("invalid")).toBe(false);
+	expect(internalInput.getAttribute("aria-invalid")).toBe("true");
+
+	firstCheckboxEl.click();
+	await expect.poll(() => form.checkValidity()).toBe(true);
+	await expect.element(group).not.toHaveAttribute("aria-invalid", "true");
+	await expect
+		.element(firstCheckbox)
+		.not.toHaveAttribute("aria-invalid", "true");
+	expect(internalInput.getAttribute("aria-invalid")).toBeNull();
+});
+
+test("submits checked checkbox values via form data", async () => {
+	render(html`
+		<form>
+			<w-checkbox-group label="Preferences">
+				<w-checkbox name="prefs" value="alpha" checked>Alpha</w-checkbox>
+				<w-checkbox name="prefs" value="beta" checked>Beta</w-checkbox>
+				<w-checkbox name="prefs" value="gamma">Gamma</w-checkbox>
+			</w-checkbox-group>
+		</form>
+	`);
+
+	const form = document.querySelector("form") as HTMLFormElement;
+	const data = new FormData(form);
+	expect(data.getAll("prefs")).toEqual(["alpha", "beta"]);
+});
+
+test("applies group name to child checkboxes without a name", async () => {
+	render(html`
+		<w-checkbox-group name="prefs">
+			<w-checkbox value="alpha" checked>Alpha</w-checkbox>
+			<w-checkbox name="custom" value="beta" checked>Beta</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	const [first, second] = [
+		...document.querySelectorAll("w-checkbox"),
+	] as Array<{ name?: string }>;
+	await (first as { updateComplete?: Promise<unknown> }).updateComplete;
+
+	expect(first.name).toBe("prefs");
+	expect(second.name).toBe("custom");
+});
+
+test("warns when used in a form without a name", async () => {
+	const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+	render(html`
+		<form>
+			<w-checkbox-group>
+				<w-checkbox value="alpha" checked>Alpha</w-checkbox>
+			</w-checkbox-group>
+		</form>
+	`);
+
+	await expect.poll(() => warn).toHaveBeenCalled();
+	warn.mockRestore();
 });

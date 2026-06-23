@@ -1,479 +1,509 @@
-import type { Meta, StoryObj } from '@storybook/web-components-vite';
-import { getStorybookHelpers } from '@wc-toolkit/storybook-helpers';
-import { html } from 'lit';
+import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
+import { html } from "lit";
 // @ts-expect-error No types for this virtual file
-import 'virtual:uno.css';
+import "virtual:uno.css";
 
-import type { WarpSlider } from './slider.js';
-import '../affix/affix.js';
-import '../attention/attention.js';
-import '../textfield/textfield.js';
-import './slider.js';
-import '../slider-thumb/slider-thumb.js';
+import type { WarpSlider } from "./slider.js";
+import "../affix/affix.js";
+import "../attention/attention.js";
+import "../textfield/textfield.js";
+import "./slider.js";
+import "../slider-thumb/slider-thumb.js";
 
 const {
-  events: sliderEvents,
-  args: sliderArgs,
-  argTypes: sliderArgTypes,
-} = getStorybookHelpers<WarpSlider>('w-slider');
+	events: sliderEvents,
+	args: sliderArgs,
+	argTypes: sliderArgTypes,
+} = getStorybookHelpers<WarpSlider>("w-slider");
 
 const meta: Meta = {
-  title: 'Forms/Slider and Range Slider',
-  args: sliderArgs,
-  argTypes: sliderArgTypes,
-  parameters: {
-    actions: {
-      handles: sliderEvents,
-    },
-  },
+	title: "Forms/Slider and Range Slider",
+	args: sliderArgs,
+	argTypes: sliderArgTypes,
+	parameters: {
+		actions: {
+			handles: sliderEvents,
+		},
+	},
 };
 
 export default meta;
 type Story = StoryObj;
 
 export const Single: Story = {
-  render() {
-    return html`
-      <form>
-        <w-slider label="Single" min="0" max="100">
-          <w-slider-thumb name="value"></w-slider-thumb>
-        </w-slider>
-        <input type="submit" hidden> 
-      </form>
-    `;
-  },
+	render() {
+		return html`
+			<form>
+				<w-slider label="Single" min="0" max="100">
+					<w-slider-thumb name="value"></w-slider-thumb>
+				</w-slider>
+				<input type="submit" hidden />
+			</form>
+		`;
+	},
 };
 
 export const SingleDisabled: Story = {
-  render() {
-    return html`
-      <w-slider label="Single disabled" min="0" max="100" disabled>
-        <w-slider-thumb name="value"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	render() {
+		return html`
+			<w-slider label="Single disabled" min="0" max="100" disabled>
+				<w-slider-thumb name="value"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
+};
+
+export const SingleOptional: Story = {
+	render() {
+		return html`
+			<form>
+				<w-slider label="Single" min="0" max="100" optional>
+					<w-slider-thumb name="value"></w-slider-thumb>
+				</w-slider>
+				<input type="submit" hidden />
+			</form>
+		`;
+	},
 };
 
 export const Range: Story = {
-  render() {
-    return html`
-      <form>
-        <w-slider label="Range" min="0" max="100">
-          <w-slider-thumb
-            slot="from"
-            aria-label="From value"
-            name="from"
-          ></w-slider-thumb>
-          <w-slider-thumb
-            slot="to"
-            aria-label="To value"
-            name="to"
-          ></w-slider-thumb>
-        </w-slider>
-        <div class="py-8">
-          <w-button type="reset">Reset</w-button>
-          <w-button type="submit">Submit</w-button>
-        </div>
-      </form>
-    `;
-  },
+	render() {
+		return html`
+			<form>
+				<w-slider label="Range" min="0" max="100">
+					<w-slider-thumb
+						slot="from"
+						aria-label="From value"
+						name="from"
+					></w-slider-thumb>
+					<w-slider-thumb
+						slot="to"
+						aria-label="To value"
+						name="to"
+					></w-slider-thumb>
+				</w-slider>
+				<div class="py-8">
+					<w-button type="reset">Reset</w-button>
+					<w-button type="submit">Submit</w-button>
+				</div>
+			</form>
+		`;
+	},
+};
+
+export const RangeOptional: Story = {
+	render() {
+		return html`
+			<form>
+				<w-slider label="Range" min="0" max="100" optional>
+					<w-slider-thumb
+						slot="from"
+						aria-label="From value"
+						name="from"
+					></w-slider-thumb>
+					<w-slider-thumb
+						slot="to"
+						aria-label="To value"
+						name="to"
+					></w-slider-thumb>
+				</w-slider>
+				<div class="py-8">
+					<w-button type="reset">Reset</w-button>
+					<w-button type="submit">Submit</w-button>
+				</div>
+			</form>
+		`;
+	},
 };
 
 // Take a suffix attribute on `<w-slider>` I think, have `<w-slider-thumb>` get from that.
 export const SuffixSquareMeters: Story = {
-  args: {
-    locale: 'nb',
-    suffix: 'm²',
-  },
-  render({ locale, suffix }) {
-    return html`
-      <w-slider
-        label="Apartment size"
-        min="0"
-        max="250"
-        suffix="${suffix}"
-        data-testid="sqm"
-      >
-        <w-slider-thumb
-          slot="from"
-          aria-label="From size"
-          name="from"
-        ></w-slider-thumb>
-        <w-slider-thumb
-          slot="to"
-          aria-label="To size"
-          name="to"
-        ></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	args: {
+		locale: "nb",
+		suffix: "m²",
+	},
+	render({ suffix }) {
+		return html`
+			<w-slider
+				label="Apartment size"
+				min="0"
+				max="250"
+				suffix="${suffix}"
+				data-testid="sqm"
+			>
+				<w-slider-thumb
+					slot="from"
+					aria-label="From size"
+					name="from"
+				></w-slider-thumb>
+				<w-slider-thumb
+					slot="to"
+					aria-label="To size"
+					name="to"
+				></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const SuffixCurrency: Story = {
-  args: {
-    locale: 'nb',
-    suffix: 'kr',
-  },
-  render({ locale, suffix }) {
-    return html`
-      <w-slider
-        label="Price"
-        min="0"
-        max="250000"
-        suffix="${suffix}"
-        data-testid="currency"
-      >
-        <w-slider-thumb
-          slot="from"
-          aria-label="From price"
-          name="from"
-        ></w-slider-thumb>
-        <w-slider-thumb
-          slot="to"
-          aria-label="To price"
-          name="to"
-        ></w-slider-thumb>
-      </w-slider>
-      <script type="module">
-        const numberFormatter = window.getNumberFormatter(
-          "${locale}",
-        ).format;
-        const currencySlider = document.querySelector(
-          'w-slider[data-testid="currency"]',
-        );
-        currencySlider.labelFormatter = (slot) => {
-          if (slot === "from") return "0";
-          return numberFormatter("250000");
-        };
-        currencySlider.valueFormatter = numberFormatter;
-      </script>
-    `;
-  },
+	args: {
+		locale: "nb",
+		suffix: "kr",
+	},
+	render({ locale, suffix }) {
+		return html`
+			<w-slider
+				label="Price"
+				min="0"
+				max="250000"
+				suffix="${suffix}"
+				data-testid="currency"
+			>
+				<w-slider-thumb
+					slot="from"
+					aria-label="From price"
+					name="from"
+				></w-slider-thumb>
+				<w-slider-thumb
+					slot="to"
+					aria-label="To price"
+					name="to"
+				></w-slider-thumb>
+			</w-slider>
+			<script type="module">
+				const numberFormatter = window.getNumberFormatter("${locale}").format;
+				const currencySlider = document.querySelector(
+					'w-slider[data-testid="currency"]',
+				);
+				currencySlider.labelFormatter = (slot) => {
+					if (slot === "from") return "0";
+					return numberFormatter("250000");
+				};
+				currencySlider.valueFormatter = numberFormatter;
+			</script>
+		`;
+	},
 };
 
 export const SuffixKilometers: Story = {
-  args: {
-    locale: 'nb',
-    suffix: 'km',
-  },
-  render({ locale, suffix }) {
-    return html`
-      <w-slider
-        label="Distance"
-        min="0"
-        max="250000"
-        suffix="${suffix}"
-        data-testid="km"
-      >
-        <w-slider-thumb
-          slot="from"
-          aria-label="From distance"
-          name="from"
-        ></w-slider-thumb>
-        <w-slider-thumb
-          slot="to"
-          aria-label="To distance"
-          name="to"
-        ></w-slider-thumb>
-      </w-slider>
-      <script type="module">
-        const numberFormatter = window.getNumberFormatter(
-          "${locale}",
-        ).format;
-        const kmSlider = document.querySelector('w-slider[data-testid="km"]');
-        kmSlider.labelFormatter = (slot) => {
-          if (slot === "from") return "0";
-          return numberFormatter("250000");
-        };
-        kmSlider.valueFormatter = numberFormatter;
-      </script>
-    `;
-  },
+	args: {
+		locale: "nb",
+		suffix: "km",
+	},
+	render({ locale, suffix }) {
+		return html`
+			<w-slider
+				label="Distance"
+				min="0"
+				max="250000"
+				suffix="${suffix}"
+				data-testid="km"
+			>
+				<w-slider-thumb
+					slot="from"
+					aria-label="From distance"
+					name="from"
+				></w-slider-thumb>
+				<w-slider-thumb
+					slot="to"
+					aria-label="To distance"
+					name="to"
+				></w-slider-thumb>
+			</w-slider>
+			<script type="module">
+				const numberFormatter = window.getNumberFormatter("${locale}").format;
+				const kmSlider = document.querySelector('w-slider[data-testid="km"]');
+				kmSlider.labelFormatter = (slot) => {
+					if (slot === "from") return "0";
+					return numberFormatter("250000");
+				};
+				kmSlider.valueFormatter = numberFormatter;
+			</script>
+		`;
+	},
 };
 
 export const Marks: Story = {
-  args: {
-    locale: 'nb',
-    step: '5',
-    markers: '5',
-  },
-  render({ markers, step }) {
-    return html`
-      <w-slider
-        label="Single"
-        min="0"
-        max="100"
-        step="${step}"
-        markers="${markers}"
-      >
-        <w-slider-thumb name="value"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	args: {
+		locale: "nb",
+		step: "5",
+		markers: "5",
+	},
+	render({ markers, step }) {
+		return html`
+			<w-slider
+				label="Single"
+				min="0"
+				max="100"
+				step="${step}"
+				markers="${markers}"
+			>
+				<w-slider-thumb name="value"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const Step: Story = {
-  args: {
-    step: 5,
-  },
-  render({ step }) {
-    return html`
-      <w-slider label="Single" step="${step}" min="0" max="100">
-        <w-slider-thumb name="value"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	args: {
+		step: 5,
+	},
+	render({ step }) {
+		return html`
+			<w-slider label="Single" step="${step}" min="0" max="100">
+				<w-slider-thumb name="value"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const OpenEnded: Story = {
-  args: {},
-  render() {
-    return html`
-      <form id="openended" style="margin-bottom: 16px">
-        <w-slider
-          label="Model year"
-          min="1950"
-          max="2025"
-          data-testid="openended"
-          open-ended
-        >
-          <w-slider-thumb
-            slot="from"
-            aria-label="From year"
-            name="from-year"
-          ></w-slider-thumb>
-          <w-slider-thumb
-            slot="to"
-            aria-label="To year"
-            name="to-year"
-          ></w-slider-thumb>
-        </w-slider>
-      </form>
-      <p>
-        Drag the slider to show the value below. See the Code tab for how to
-        format the labels.
-      </p>
-      <output>
-        <dl>
-          <dt>From:</dt>
-          <dd id="openended-from"></dd>
-          <dt>To:</dt>
-          <dd id="openended-to"></dd>
-        </dl>
-      </output>
-      <script>
-        /** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
-        const overunderSlider = document.querySelector(
-          'w-slider[data-testid="openended"]',
-        );
-        overunderSlider.labelFormatter = function (slot) {
-          if (slot === 'from') {
-            return 'Before 1950';
-          }
-          return '2025+';
-        };
-        overunderSlider.valueFormatter = function (value, slot) {
-          if (slot === 'from' && value === '') {
-            return 'Min';
-          }
-          if (slot === 'to' && value === '') {
-            return 'Max';
-          }
-          return value;
-        };
+	args: {},
+	render() {
+		return html`
+			<form id="openended" style="margin-bottom: 16px">
+				<w-slider
+					label="Model year"
+					min="1950"
+					max="2025"
+					data-testid="openended"
+					open-ended
+				>
+					<w-slider-thumb
+						slot="from"
+						aria-label="From year"
+						name="from-year"
+					></w-slider-thumb>
+					<w-slider-thumb
+						slot="to"
+						aria-label="To year"
+						name="to-year"
+					></w-slider-thumb>
+				</w-slider>
+			</form>
+			<p>
+				Drag the slider to show the value below. See the Code tab for how to
+				format the labels.
+			</p>
+			<output>
+				<dl>
+					<dt>From:</dt>
+					<dd id="openended-from"></dd>
+					<dt>To:</dt>
+					<dd id="openended-to"></dd>
+				</dl>
+			</output>
+			<script>
+				/** Here is how you can show labels to indicate min and max values are "up to and including" and "this value and above". */
+				const overunderSlider = document.querySelector(
+					'w-slider[data-testid="openended"]',
+				);
+				overunderSlider.labelFormatter = function (slot) {
+					if (slot === "from") {
+						return "Before 1950";
+					}
+					return "2025+";
+				};
+				overunderSlider.valueFormatter = function (value, slot) {
+					if (slot === "from" && value === "") {
+						return "Min";
+					}
+					if (slot === "to" && value === "") {
+						return "Max";
+					}
+					return value;
+				};
 
-        /** Code to show the form values in output */
-        document.forms["openended"].addEventListener("input", function () {
-          const formData = new FormData(this);
-          const from = formData.get("from-year");
-          const to = formData.get("to-year");
-          document.getElementById("openended-from").innerText = from;
-          document.getElementById("openended-to").innerText = to;
-        });
-      </script>
-    `;
-  },
+				/** Code to show the form values in output */
+				document.forms["openended"].addEventListener("input", function () {
+					const formData = new FormData(this);
+					const from = formData.get("from-year");
+					const to = formData.get("to-year");
+					document.getElementById("openended-from").innerText = from;
+					document.getElementById("openended-to").innerText = to;
+				});
+			</script>
+		`;
+	},
 };
 
 export const SingleError: Story = {
-  render() {
-    return html`
-      <w-slider label="Single" min="0" max="100">
-        <p slot="description">Try typing a value over 100</p>
-        <w-slider-thumb></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	render() {
+		return html`
+			<w-slider label="Single" min="0" max="100">
+				<p slot="description">Try typing a value over 100</p>
+				<w-slider-thumb></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const RangeError: Story = {
-  args: {},
-  render() {
-    return html`
-      <form id="rangeerror" style="margin-bottom: 16px">
-        <w-slider label="Model year" min="1950" max="2025">
-          <p slot="description">
-            Try typing a from value higher than a to value
-          </p>
-          <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-          <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-        </w-slider>
-      </form>
-      <p>
-        Drag the slider to show the value below. See the Code tab for how to
-        format the labels.
-      </p>
-      <output>
-        <dl>
-          <dt>From:</dt>
-          <dd id="rangeerror-from"></dd>
-          <dt>To:</dt>
-          <dd id="rangeerror-to"></dd>
-        </dl>
-      </output>
-      <script>
-        /** Code to show the form values in output */
-        document.forms["rangeerror"].addEventListener("input", function () {
-          const formData = new FormData(this);
-          const from = formData.get("from");
-          const to = formData.get("to");
-          document.getElementById("rangeerror-from").innerText = from;
-          document.getElementById("rangeerror-to").innerText = to;
-        });
-      </script>
-    `;
-  },
+	args: {},
+	render() {
+		return html`
+			<form id="rangeerror" style="margin-bottom: 16px">
+				<w-slider label="Model year" min="1950" max="2025">
+					<p slot="description">
+						Try typing a from value higher than a to value
+					</p>
+					<w-slider-thumb slot="from" name="from"></w-slider-thumb>
+					<w-slider-thumb slot="to" name="to"></w-slider-thumb>
+				</w-slider>
+			</form>
+			<p>
+				Drag the slider to show the value below. See the Code tab for how to
+				format the labels.
+			</p>
+			<output>
+				<dl>
+					<dt>From:</dt>
+					<dd id="rangeerror-from"></dd>
+					<dt>To:</dt>
+					<dd id="rangeerror-to"></dd>
+				</dl>
+			</output>
+			<script>
+				/** Code to show the form values in output */
+				document.forms["rangeerror"].addEventListener("input", function () {
+					const formData = new FormData(this);
+					const from = formData.get("from");
+					const to = formData.get("to");
+					document.getElementById("rangeerror-from").innerText = from;
+					document.getElementById("rangeerror-to").innerText = to;
+				});
+			</script>
+		`;
+	},
 };
 
 export const CustomError: Story = {
-  args: {
-    error: "I'm an external error telling you something is wrong",
-    invalid: true,
-  },
-  render(args) {
-    return html`
-      <w-slider
-        label="Model year"
-        min="1950"
-        max="2025"
-        error="${args.error}"
-        ?invalid="${args.invalid}"
-      >
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	args: {
+		error: "I'm an external error telling you something is wrong",
+		invalid: true,
+	},
+	render(args) {
+		return html`
+			<w-slider
+				label="Model year"
+				min="1950"
+				max="2025"
+				error="${args.error}"
+				?invalid="${args.invalid}"
+			>
+				<w-slider-thumb slot="from" name="from"></w-slider-thumb>
+				<w-slider-thumb slot="to" name="to"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const Description: Story = {
-  render() {
-    return html`
-      <w-slider
-        label="Model year"
-        min="1950"
-        max="2025"
-        help-text="Model year of the car"
-      >
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	render() {
+		return html`
+			<w-slider
+				label="Model year"
+				min="1950"
+				max="2025"
+				help-text="Model year of the car"
+			>
+				<w-slider-thumb slot="from" name="from"></w-slider-thumb>
+				<w-slider-thumb slot="to" name="to"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const VisuallyHiddenLabel: Story = {
-  render() {
-    return html`
-      <w-slider
-        min="1950"
-        max="2025"
-        help-text="Model year of the car"
-      >
-        <legend class="sr-only" slot="label">Model year</legend>
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
-    `;
-  },
+	render() {
+		return html`
+			<w-slider min="1950" max="2025" help-text="Model year of the car">
+				<legend class="sr-only" slot="label">Model year</legend>
+				<w-slider-thumb slot="from" name="from"></w-slider-thumb>
+				<w-slider-thumb slot="to" name="to"></w-slider-thumb>
+			</w-slider>
+		`;
+	},
 };
 
 export const HiddenMinimumMaximumLabels: Story = {
-  render() {
-    return html`
-      <w-slider
-        min="1950"
-        max="2025"
-        help-text="Model year of the car"
-        data-testid="hidden-minmax-label"
-      >
-        <legend class="sr-only" slot="label">Model year</legend>
-        <w-slider-thumb slot="from" name="from"></w-slider-thumb>
-        <w-slider-thumb slot="to" name="to"></w-slider-thumb>
-      </w-slider>
-      <script>
-        const hiddenMinMaxSlider = document.querySelector(
-          'w-slider[data-testid="hidden-minmax-label"]',
-        );
-        hiddenMinMaxSlider.labelFormatter = () => "";
-      </script>
-    `;
-  },
+	render() {
+		return html`
+			<w-slider
+				min="1950"
+				max="2025"
+				help-text="Model year of the car"
+				data-testid="hidden-minmax-label"
+			>
+				<legend class="sr-only" slot="label">Model year</legend>
+				<w-slider-thumb slot="from" name="from"></w-slider-thumb>
+				<w-slider-thumb slot="to" name="to"></w-slider-thumb>
+			</w-slider>
+			<script>
+				const hiddenMinMaxSlider = document.querySelector(
+					'w-slider[data-testid="hidden-minmax-label"]',
+				);
+				hiddenMinMaxSlider.labelFormatter = () => "";
+			</script>
+		`;
+	},
 };
 
 export const VisuallyHiddenTextfield: Story = {
-  render({ locale }) {
-    return html`
-      <output class="text-xs">
-        <span class="font-bold">Distance:</span>
-        <span id="distance-value"></span>
-      </output>
-      <form name="map">
-        <w-slider min="0" max="20" hidden-textfield data-testid="map-radius">
-          <legend class="sr-only" slot="label">Location filter radius</legend>
-          <w-slider-thumb name="distance"></w-slider-thumb>
-        </w-slider>
-      </form>
-      <script>
-        const radiusSteps = [
-          200, 300, 400, 500, 700, 1000, 1500, 2000, 3000, 5000, 7000, 10000,
-          20000, 30000, 50000, 75000, 100000, 200000, 300000, 400000, 500000,
-        ];
-        const mapRadiusSlider = document.querySelector(
-          'w-slider[data-testid="map-radius"]',
-        );
-        const formatter = window.getNumberFormatter("${locale}");
-        function formatDistance(value) {
-          const index = Number.parseInt(value);
-          const numValue = radiusSteps[index];
+	render({ locale }) {
+		return html`
+			<output class="text-xs">
+				<span class="font-bold">Distance:</span>
+				<span id="distance-value"></span>
+			</output>
+			<form name="map">
+				<w-slider min="0" max="20" hidden-textfield data-testid="map-radius">
+					<legend class="sr-only" slot="label">Location filter radius</legend>
+					<w-slider-thumb name="distance"></w-slider-thumb>
+				</w-slider>
+			</form>
+			<script>
+				const radiusSteps = [
+					200, 300, 400, 500, 700, 1000, 1500, 2000, 3000, 5000, 7000, 10000,
+					20000, 30000, 50000, 75000, 100000, 200000, 300000, 400000, 500000,
+				];
+				const mapRadiusSlider = document.querySelector(
+					'w-slider[data-testid="map-radius"]',
+				);
+				const formatter = window.getNumberFormatter("${locale}");
+				function formatDistance(value) {
+					const index = Number.parseInt(value);
+					const numValue = radiusSteps[index];
 
-          let formattedValue = "";
+					let formattedValue = "";
 
-          if (numValue < 1000) {
-            // Use non-breaking space here
-            formattedValue = formatter.format(numValue) + " m";
-          } else {
-            formattedValue = formatter.format(numValue / 1000) + " km";
-          }
-          return formattedValue;
-        };
-        mapRadiusSlider.labelFormatter = (slot) => {
-          if (slot === "from") {
-            return formatDistance("0");
-          }
-          return formatDistance(String(radiusSteps.length - 1));
-        };
-        mapRadiusSlider.valueFormatter = (value) => {
-          const formattedValue = formatDistance(value);
-          document.getElementById("distance-value").innerText = formattedValue;
-          return formattedValue;
-        };
+					if (numValue < 1000) {
+						// Use non-breaking space here
+						formattedValue = formatter.format(numValue) + " m";
+					} else {
+						formattedValue = formatter.format(numValue / 1000) + " km";
+					}
+					return formattedValue;
+				}
+				mapRadiusSlider.labelFormatter = (slot) => {
+					if (slot === "from") {
+						return formatDistance("0");
+					}
+					return formatDistance(String(radiusSteps.length - 1));
+				};
+				mapRadiusSlider.valueFormatter = (value) => {
+					const formattedValue = formatDistance(value);
+					document.getElementById("distance-value").innerText = formattedValue;
+					return formattedValue;
+				};
 
-        document.forms["map"].addEventListener("input", function () {
-          const formData = new FormData(this);
-          const distance = formData.get("distance");
-        });
-      </script>
-    `;
-  },
+				document.forms["map"].addEventListener("input", function () {
+					const formData = new FormData(this);
+					const distance = formData.get("distance");
+				});
+			</script>
+		`;
+	},
 };

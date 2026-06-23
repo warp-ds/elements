@@ -21,6 +21,6 @@ msgstr "Minst ett val krävs."
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/checkbox-group/checkbox-group.ts:122
+#: packages/checkbox-group/checkbox-group.ts:161
 msgid "checkbox-group.label.optional"
 msgstr "Valfritt"

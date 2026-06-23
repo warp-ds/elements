@@ -1,6 +1,6 @@
-import { describeReactSsrAttributeMapping } from '../../tests/react-ssr-attributes';
-import { SnackbarItem } from './react.js';
+import { describeReactSsrAttributeMapping } from "../../tests/react-ssr-attributes";
+import { SnackbarItem } from "./react.js";
 
-describeReactSsrAttributeMapping('SnackbarItem', SnackbarItem, [
-  { propName: 'actionPlacement', attrName: 'action-placement', value: 'block' },
+describeReactSsrAttributeMapping("SnackbarItem", SnackbarItem, [
+	{ propName: "actionPlacement", attrName: "action-placement", value: "block" },
 ]);

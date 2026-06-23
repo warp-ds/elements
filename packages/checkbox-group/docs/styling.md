@@ -1,8 +1,16 @@
 ## Styling API
 
-This section documents the supported styling hooks for `<w-checkbox>`.
+This section documents the supported styling hooks for `<w-checkbox>` and `<w-checkbox-group>`.
 
 Use these hooks to customize appearance without relying on internal structure or selectors.
+
+Before changing the default styles, remember that doing so can result in less consistent experiences for users across the product. Prefer defaults.
+
+- Prefer **component tokens** for size, spacing, and state styling.
+- Use **parts** only for small, local tweaks.
+- Avoid relying on internal class names or selectors.
+
+## w-checkbox
 
 ### Parts
 
@@ -27,12 +35,12 @@ w-checkbox::part(control) {
 }
 ```
 
-Parts are intended as an **escape hatch**.  
+Parts are intended as an **escape hatch**.
 Prefer component tokens for anything state‑ or size‑related.
 
-### Component tokens (`--w-c-checkbox-*`)
+### Component tokens
 
-Component tokens act as inputs to the checkbox styling.  
+Component tokens (`--w-c-checkbox-*`) act as inputs to the checkbox styling.
 They can be set directly on the component or inherited from a parent container.
 
 ```css
@@ -97,36 +105,30 @@ Defaults are defined internally; setting a token is always optional.
 
 Transitions are automatically disabled when `prefers-reduced-motion: reduce` is active.
 
-### Examples
 
-#### Compact checkbox
+## w-checkbox-group
 
-```css
-.filters w-checkbox {
-  --w-c-checkbox-gap: 4px;
-  --w-c-checkbox-control-size: 1.6rem;
-}
-```
+The checkbox-group component uses direct CSS styling rather than component tokens. Customization is limited to ensure consistent form control patterns across the design system.
 
-#### Rounded checkbox
+### Styling
 
-```css
-w-checkbox {
-  --w-c-checkbox-radius: 9999px;
-}
-```
+The checkbox-group provides minimal styling hooks:
 
-#### Contextual color override (advanced)
+| Element | Current styling | Note |
+|---|---|---|
+| Label | `font-size: var(--w-font-size-s)`<br>`line-height: var(--w-line-height-s)`<br>`font-weight: 700`<br>`color: var(--w-s-color-text)` | Uses semantic tokens |
+| Optional indicator | `font-weight: 400`<br>`color: var(--w-s-color-text-subtle)` | Matches form control pattern |
+| Help text | `font-size: var(--w-font-size-xs)`<br>`line-height: var(--w-line-height-xs)`<br>`color: var(--w-s-color-text-subtle)` | Error state: `--w-s-color-text-negative` |
+| Checkbox spacing | `gap: 16px` | Spacing between checkboxes |
+| Wrapper spacing | `gap: 16px` | Spacing between label and group |
 
-```css
-.danger-zone w-checkbox {
-  --w-c-checkbox-border-color-checked: red;
-}
-```
 
-### Guidelines
+## Implementation notes
 
-- Prefer **component tokens** for size, spacing, and state styling
-- Use **parts** only for small, local tweaks
-- Avoid relying on internal class names or selectors
-- If multiple tokens are required to achieve a look, consider whether a new variant or design token is more appropriate
+### Architecture note
+
+This component uses a `<div>` wrapper instead of the more semantic `<fieldset>` element. Note that `w-radio-group` uses `<fieldset>`, which provides better accessibility and follows HTML best practices. This inconsistency exists for historical reasons and may be addressed in a future major version to align both on the more semantic approach.
+
+**Why this matters:** `<fieldset>` with `<legend>` provides automatic grouping semantics and better screen reader support. The current `<div>` + `role="group"` implementation works but requires manual ARIA wiring.
+
+**TODO:** Consider aligning w-checkbox-group to use `<fieldset>` in a future major version after assessing backwards compatibility implications (CSS selectors, etc.).
