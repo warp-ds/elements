@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,10 +12,8 @@ const BaseTab = createComponent({
 	elementClass: Component as unknown as typeof WarpTab,
 	react: React,
 	events: {
-		onTabClick: "tab-click",
-		"ontab-click": "tab-click",
-		onClick: "click",
-		onclick: "click",
+		onClick: "click" as EventName<PointerEvent>,
+		onclick: "click" as EventName<PointerEvent>,
 	},
 });
 

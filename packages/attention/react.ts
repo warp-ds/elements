@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,9 +12,9 @@ const BaseAttention = createComponent({
 	elementClass: Component,
 	react: React,
 	events: {
-		onClose: "close",
+		onClose: "close" as EventName<CustomEvent>,
 		// additionally support React v19 syntax for CE events
-		onclose: "close",
+		onclose: "close" as EventName<CustomEvent>,
 	},
 });
 

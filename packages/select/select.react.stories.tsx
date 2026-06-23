@@ -36,15 +36,25 @@ export const ChangeEvent: Story = {
 		return (
 			<>
 				<div>Selected Value: {selectedValue}</div>
-				<Select
-					{...args}
-					onChange={(e: CustomEvent) => setSelectedValue(e.detail)}
-				>
-					<Option value="strawberries">Strawberries</Option>
-					<Option value="raspberries" selected>
+				<Select {...args} onChange={(e) => setSelectedValue(e.target.value)}>
+					<Option
+						value="strawberries"
+						selected={selectedValue === "strawberries"}
+					>
+						Strawberries
+					</Option>
+					<Option
+						value="raspberries"
+						selected={selectedValue === "raspberries"}
+					>
 						Raspberries
 					</Option>
-					<Option value="cloudberries">Cloudberries</Option>
+					<Option
+						value="cloudberries"
+						selected={selectedValue === "cloudberries"}
+					>
+						Cloudberries
+					</Option>
 				</Select>
 			</>
 		);

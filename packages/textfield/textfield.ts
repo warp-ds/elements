@@ -349,12 +349,36 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	handler(e: Event) {
 		const { name, value } = e.currentTarget as HTMLInputElement;
 		this.value = value;
-		const event = new CustomEvent(e.type, {
-			detail: {
-				name,
-				value,
-				target: e.target,
+		// This CustomEvent should be deprecated and removed in the future,
+		// as we're essentially firing twice for events. We can't remove
+		// it outside of a SemVer major though in case users rely on this
+		// instead of the native events.
+		// If you're debugging why you get two calls to your event handlers,
+		// this is why.
+		// To avoid doing work twice check if the event is an instance of CustomEvent
+		// and ignore the event:
+		//   if (e instanceof CustomEvent) { return; }
+		const detail = {
+			name,
+			value,
+			target: e.target,
+		};
+		const deprecationProxy = new Proxy(detail, {
+			get(target, prop) {
+				if (typeof window !== "undefined") {
+					// be quiet in prod
+					if (!window.location.host.startsWith("www")) {
+						console.warn(
+							"w-textfield's CustomEvent is deprecated, please use the browser-native events instead (e.g. replace e.detail.value with e.target.value)",
+						);
+					}
+				}
+				// @ts-expect-error This is fine
+				return target[prop];
 			},
+		});
+		const event = new CustomEvent(e.type, {
+			detail: deprecationProxy as typeof detail,
 		});
 		this.dispatchEvent(event);
 	}

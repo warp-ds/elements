@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,8 +12,12 @@ const BasePagination = createComponent({
 	elementClass: Component as unknown as typeof WarpPagination,
 	react: React,
 	events: {
-		onPageClick: "page-click",
-		"onpage-click": "page-click",
+		onPageClick: "page-click" as EventName<
+			CustomEvent<{ clickedPage: string | null }>
+		>,
+		"onpage-click": "page-click" as EventName<
+			CustomEvent<{ clickedPage: string | null }>
+		>,
 	},
 });
 

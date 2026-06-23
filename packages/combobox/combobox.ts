@@ -17,6 +17,7 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
+import { InputEventWithTarget } from "../types.js";
 
 const ccCombobox = {
 	wrapper: "relative z-0",
@@ -699,7 +700,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 						this._isOpen ? this._navigationOption?.id : undefined,
 					)}
 					aria-controls=${this._listboxId}
-					@input=${(e: CustomEvent) => this._handleChange(e?.detail?.value)}
+					@input=${(e: InputEventWithTarget<HTMLInputElement>) =>
+						this._handleChange(e.target.value)}
 					@focus=${this._handleFocus}
 					@blur=${this._handleBlur}
 					@keydown=${this._handleKeyDown}

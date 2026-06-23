@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,10 +12,11 @@ const BaseRadioGroup = createComponent({
 	elementClass: Component as unknown as typeof WarpRadioGroup,
 	react: React,
 	events: {
-		onInput: "input",
-		oninput: "input",
-		onChange: "change",
-		onchange: "change",
+		/** These event handlers deliberately have no target, since they are dispatched at group level with no target element */
+		onInput: "input" as EventName<InputEvent>,
+		oninput: "input" as EventName<InputEvent>,
+		onChange: "change" as EventName<Event>,
+		onchange: "change" as EventName<Event>,
 	},
 });
 

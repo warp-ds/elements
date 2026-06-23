@@ -1,8 +1,9 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
 import { WarpDatepicker } from "./datepicker.js";
+import { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,12 +13,12 @@ const BaseDatePicker = createComponent({
 	elementClass: Component as unknown as typeof WarpDatepicker,
 	react: React,
 	events: {
-		onChange: "change",
-		onchange: "change",
-		onBlur: "blur",
-		onblur: "blur",
-		onInput: "input",
-		oninput: "input",
+		onChange: "change" as EventName<ChangeEventWithTarget<HTMLInputElement>>,
+		onchange: "change" as EventName<ChangeEventWithTarget<HTMLInputElement>>,
+		onBlur: "blur" as EventName<FocusEvent>,
+		onblur: "blur" as EventName<FocusEvent>,
+		onInput: "input" as EventName<InputEventWithTarget<HTMLInputElement>>,
+		oninput: "input" as EventName<InputEventWithTarget<HTMLInputElement>>,
 	},
 });
 

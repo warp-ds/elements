@@ -3,6 +3,7 @@ import { LitElement } from "lit";
 import React from "react";
 
 import { WarpSelect } from "./select.js";
+import { ChangeEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,8 +13,8 @@ const BaseSelect = createComponent({
 	elementClass: Component as unknown as typeof WarpSelect,
 	react: React,
 	events: {
-		onChange: "change" as EventName<CustomEvent>,
-		onchange: "change" as EventName<CustomEvent>,
+		onChange: "change" as EventName<ChangeEventWithTarget<HTMLSelectElement>>,
+		onchange: "change" as EventName<ChangeEventWithTarget<HTMLSelectElement>>,
 	},
 });
 

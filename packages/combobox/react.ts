@@ -16,6 +16,10 @@ const BaseCombobox = createComponent({
 		onselect: "select" as EventName<CustomEvent<{ value: string }>>,
 		onChange: "change" as EventName<CustomEvent<{ value: string }>>,
 		onchange: "change" as EventName<CustomEvent<{ value: string }>>,
+		onBlur: "blur" as EventName<CustomEvent<{ value: string }>>,
+		onblur: "blur" as EventName<CustomEvent<{ value: string }>>,
+		onFocus: "focus" as EventName<CustomEvent>,
+		onfocus: "focus" as EventName<CustomEvent>,
 	},
 });
 

@@ -396,17 +396,21 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	}
 
 	// Fire a custom 'change' event, used when the dropdown changes state.
-	/**  @internal */
-	onChange(event: Event) {
+	private onChange(event: Event) {
 		const target = event.currentTarget as HTMLSelectElement;
 		const nextValue = target.value;
-
-		// Avoid forwarding the internal native change event and emitting two host events.
-		event.stopPropagation();
 
 		this._setValue(nextValue);
 		this.#syncNativeOptionSelection(nextValue);
 
+		// This CustomEvent should be deprecated and removed in the future.
+		// We can't remove it outside of a SemVer major though in case users rely on this
+		// instead of the native events.
+		// If you're debugging why you get two calls to your event handlers,
+		// this is why.
+		// To avoid doing work twice check if the event is an instance of CustomEvent
+		// and ignore the event:
+		//   if (e instanceof CustomEvent) { return; }
 		this.dispatchEvent(
 			new CustomEvent("change", {
 				detail: nextValue,

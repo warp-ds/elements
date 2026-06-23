@@ -12,8 +12,12 @@ const BaseSliderThumb = createComponent({
 	elementClass: Component as unknown as typeof WarpSliderThumb,
 	react: React,
 	events: {
-		onSliderValidity: "slidervalidity" as EventName<CustomEvent>,
-		"onslider-validity": "slidervalidity" as EventName<CustomEvent>, // should be slider-validity
+		onSliderValidity: "slidervalidity" as EventName<
+			CustomEvent<{ invalid: string; slot: string }>
+		>,
+		"onslider-validity": "slidervalidity" as EventName<
+			CustomEvent<{ invalid: string; slot: string }>
+		>, // should be slider-validity
 	},
 });
 

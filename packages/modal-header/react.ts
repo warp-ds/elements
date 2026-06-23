@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,8 +12,8 @@ const BaseModalHeader = createComponent({
 	elementClass: Component as unknown as typeof WarpModalHeader,
 	react: React,
 	events: {
-		onBackClicked: "backClicked",
-		onbackClicked: "backClicked",
+		onBackClicked: "backClicked" as EventName<CustomEvent>,
+		onbackClicked: "backClicked" as EventName<CustomEvent>,
 	},
 });
 

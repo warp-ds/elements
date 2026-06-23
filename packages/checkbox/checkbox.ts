@@ -123,7 +123,7 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 		this.checked = !this.checked;
 		this.indeterminate = false;
 		this.updateComplete.then(() => {
-			this.dispatchEvent(
+			this.input.dispatchEvent(
 				new Event("change", { bubbles: true, composed: true }),
 			);
 		});

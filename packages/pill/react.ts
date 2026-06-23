@@ -1,4 +1,4 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
@@ -12,10 +12,10 @@ const BasePill = createComponent({
 	elementClass: Component as unknown as typeof WarpPill,
 	react: React,
 	events: {
-		onClick: "w-pill-click", // should be click
-		onclick: "w-pill-click",
-		onClose: "w-pill-close", // should be close
-		onclose: "w-pill-close",
+		onClick: "w-pill-click" as EventName<CustomEvent>,
+		onclick: "w-pill-click" as EventName<CustomEvent>,
+		onClose: "w-pill-close" as EventName<CustomEvent>,
+		onclose: "w-pill-close" as EventName<CustomEvent>,
 	},
 });
 

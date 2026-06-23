@@ -9,6 +9,10 @@ export default {
 		return <Pill {...args}>Lorem</Pill>;
 	},
 	component: Pill,
+	args: {
+		onClose: (e) => console.log(e),
+		onClick: (e) => console.log(e),
+	},
 } satisfies Meta<typeof Pill>;
 
 export type Story = StoryObj<typeof Pill>;
