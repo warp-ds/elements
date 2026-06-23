@@ -25,6 +25,13 @@ type PageIndicatorProps = Omit<
 	pageCount?: number;
 };
 
+/**
+ * A page indicator component that displays a series of dots representing pages.
+ *
+ * One dot is highlighted to indicate the currently selected page.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/page-indicator/frameworks/elements)
+ */
 export const PageIndicator = React.forwardRef<
 	WarpPageIndicator,
 	PageIndicatorProps

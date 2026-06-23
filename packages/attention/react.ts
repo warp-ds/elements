@@ -46,6 +46,15 @@ const ForwardedAttention = React.forwardRef<WarpAttention, AttentionProps>(
 		}),
 );
 
+/**
+ * Note: attention will soon be split into multiple components (tooltip, callout, popover, highlight) at which time this component will be deprecated. For now, use the `tooltip`, `callout`, `popover`, and `highlight` boolean properties to achieve the desired style and behavior.
+ *
+ * Attention is a versatile component for displaying contextual information and messages. It can be used for a wide range of purposes, such as tooltips, callouts, popovers, and highlights.
+ *
+ * The component is designed to be anchored to a trigger element, providing contextual information related to that element. It supports various placements and styling options to accommodate different use cases and design needs.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tooltip/frameworks/elements)
+ */
 export const Attention =
 	ForwardedAttention as unknown as React.FC<AttentionProps>;
 

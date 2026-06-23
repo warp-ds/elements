@@ -38,6 +38,8 @@ type ModalProps = Omit<
  *
  * If you keep the <code>open</code> state, listen to <code>onHidden</code> so you can update the state when the user clicks the backdrop, close button, or presses <kbd>Escape</kbd>.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @example
  * ```jsx
  * const [open, setOpen] = useState(false);

@@ -23,6 +23,8 @@ const ccButtonReset =
 /**
  * Individual tab component used within w-tabs container.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
+ *
  * @parent w-tabs
  */
 export class WarpTab extends LitElement {

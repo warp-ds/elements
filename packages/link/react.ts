@@ -19,6 +19,11 @@ type LinkProps = Omit<BaseLinkProps, "full-width"> & {
 	fullWidth?: boolean;
 };
 
+/**
+ * Link component to use when creating links that look like buttons.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/link/frameworks/elements)
+ */
 export const Link = React.forwardRef<WarpLink, LinkProps>(
 	({ fullWidth, ...props }, ref) =>
 		React.createElement(BaseLink, {

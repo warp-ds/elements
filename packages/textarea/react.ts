@@ -36,6 +36,11 @@ type TextareaProps = Omit<
 	readOnly?: boolean;
 };
 
+/**
+ * A multi-line text input with built-in form validation, auto-resizing, and styling support.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
+ */
 export const Textarea = React.forwardRef<WarpTextarea, TextareaProps>(
 	({ helpText, maxRows, minRows, readOnly, ...props }, ref) =>
 		React.createElement(BaseTextarea, {

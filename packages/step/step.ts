@@ -53,7 +53,9 @@ export interface StepsContext {
 }
 
 /**
- * Individual step component that shows a single step in a process
+ * Individual step component that shows a single step in a process.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/steps/frameworks/elements)
  *
  * @parent w-step-indicator
  */

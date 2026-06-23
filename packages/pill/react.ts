@@ -36,6 +36,11 @@ type PillProps = Omit<
 	closeAriaLabel?: string;
 };
 
+/**
+ * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/pill/frameworks/elements)
+ */
 export const Pill = React.forwardRef<WarpPill, PillProps>(
 	(
 		{

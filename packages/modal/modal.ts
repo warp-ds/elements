@@ -12,6 +12,8 @@ import { ProvidesCanCloseToSlotsMixin } from "./util.js";
 /**
  * Modals (or dialogs) display important information that users need to acknowledge.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @slot header - Typically where you would use the `w-modal-header` component.
  * @slot content - The main content of the modal.
  * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.

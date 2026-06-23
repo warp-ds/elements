@@ -27,6 +27,11 @@ type SliderProps = Omit<
 	hiddenTextfield?: boolean;
 };
 
+/**
+ * Parent component for sliders (both single and range sliders). Used in combination with a `<SliderThumb>`.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/slider/frameworks/elements)
+ */
 export const Slider = React.forwardRef<WarpSlider, SliderProps>(
 	({ openEnded, helpText, hiddenTextfield, ...props }, ref) =>
 		React.createElement(BaseSlider, {

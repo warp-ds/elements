@@ -33,6 +33,11 @@ type SliderThumbProps = Omit<
 	ariaDescription?: string;
 };
 
+/**
+ * Component to place inside a `<Slider>`.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/slider/frameworks/elements)
+ */
 export const SliderThumb = React.forwardRef<WarpSliderThumb, SliderThumbProps>(
 	({ ariaLabel, ariaDescription, ...props }, ref) =>
 		React.createElement(BaseSliderThumb, {

@@ -35,6 +35,11 @@ type DatePickerProps = Omit<
 	dayFormat?: string;
 };
 
+/**
+ * A date picker allows the user to select a specific calendar date.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
+ */
 export const DatePicker = React.forwardRef<WarpDatepicker, DatePickerProps>(
 	({ headerFormat, weekdayFormat, dayFormat, ...props }, ref) =>
 		React.createElement(BaseDatePicker, {

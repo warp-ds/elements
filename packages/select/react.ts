@@ -29,6 +29,11 @@ type SelectProps = Omit<
 	readOnly?: boolean;
 };
 
+/**
+ * A dropdown component for selecting a single value.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/select/frameworks/elements)
+ */
 export const Select = React.forwardRef<WarpSelect, SelectProps>(
 	({ autoFocus, helpText, readOnly, ...props }, ref) =>
 		React.createElement(BaseSelect, {

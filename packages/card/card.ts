@@ -42,7 +42,7 @@ const keys = {
 /**
  * Card is a layout component used for separating content areas on a page.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-card--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/card/frameworks/elements)
  */
 class WarpCard extends LitElement {
 	static styles = [

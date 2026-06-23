@@ -84,6 +84,8 @@ const spaceRe = /\s/;
  *
  * Include one `<w-snackbar></w-snackbar>` in the document `<body>`. Use the `create` function to create messages.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/snackbar/frameworks/elements)
+ *
  * @example
  *
  * ```html

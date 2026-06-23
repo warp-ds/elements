@@ -26,9 +26,10 @@ const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
 
 /**
  * Shows the navigation structure for the current page.
+ *
  * Renders direct child links and non-link elements as a breadcrumb trail, inserts separators between items, and exposes the trail as navigation.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-breadcrumbs--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/breadcrumbs/frameworks/elements)
  */
 class WarpBreadcrumbs extends LitElement {
 	private _internals: ElementInternals;

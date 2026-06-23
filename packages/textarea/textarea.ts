@@ -42,11 +42,7 @@ const ccInput = {
 /**
  * A multi-line text input with built-in form validation, auto-resizing, and styling support.
  *
- * The component automatically handles:
- *  - Form integration
- *  - Auto-resizing based on content and row constraints
- *  - Built-in validation with customizable error messages
- *  - Accessibility attributes and labeling
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
  */
 class WarpTextarea extends FormControlMixin(LitElement) {
 	/** @internal */

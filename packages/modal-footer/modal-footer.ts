@@ -6,6 +6,8 @@ import { styles } from "./styles.js";
 /**
  * The footer section of a modal, typically where you place actions.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @parent w-modal
  *
  * @csspart footer - the container for slotted items (children).

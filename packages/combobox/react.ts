@@ -40,6 +40,11 @@ type ComboboxProps = Omit<
 	helpText?: string;
 };
 
+/**
+ * A combobox element for text input with selectable options.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/combo-box/frameworks/elements)
+ */
 export const Combobox = React.forwardRef<WarpCombobox, ComboboxProps>(
 	(
 		{

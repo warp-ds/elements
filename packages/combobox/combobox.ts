@@ -45,7 +45,7 @@ interface OptionWithIdAndMatch extends ComboboxOption {
 /**
  * A combobox element for text input with selectable options.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-combobox--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/combo-box/frameworks/elements)
  */
 export class WarpCombobox extends FormControlMixin(LitElement) {
 	/**

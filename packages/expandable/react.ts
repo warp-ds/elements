@@ -27,6 +27,11 @@ type ExpandableProps = Omit<
 	headingLevel?: number;
 };
 
+/**
+ * Expandable is a layout component used for creating expandable content areas on a page.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/expandable/frameworks/elements)
+ */
 export const Expandable = React.forwardRef<WarpExpandable, ExpandableProps>(
 	({ buttonClass, contentClass, noChevron, headingLevel, ...props }, ref) =>
 		React.createElement(BaseExpandable, {

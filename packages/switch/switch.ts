@@ -46,6 +46,8 @@ export type WarpSwitchChangeEvent = CustomEvent<{
 /**
  * The Switch component allows users to toggle between two states.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/switch/frameworks/elements)
+ *
  * @event {WarpSwitchChangeEvent} change - Dispatched when the switch toggles. Includes boolean `checked` and string/null `value` on `details`.
  */
 export class WarpSwitch extends FormControlMixin(LitElement) {

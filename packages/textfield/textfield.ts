@@ -44,13 +44,10 @@ const ccinput = {
 /**
  * A single-line input component used for entering and editing textual or numeric data.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
+ *
  * @slot suffix - Use with `<w-affix>` to include a suffix, for example the unit for a number (e. g. km or sek).
  * @slot prefix - Use with `<w-affix>` to include a prefix, for example a search icon.
- *
- * ## Accessibility Note for Affixes
- * Due to shadow DOM boundaries, affix content cannot be connected to the input via ARIA references.
- * For non-interactive affixes (text labels like currency symbols), consider including that information
- * in the main label or placeholder text instead for better screen reader support.
  */
 class WarpTextField extends FormControlMixin(LitElement) {
 	/** @internal */

@@ -17,6 +17,8 @@ import { styles } from "./styles.js";
 /**
  * The header section of a modal, typically where you place the title and a close button.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @parent w-modal
  *
  * @slot top - Customize the title bar, for example to have a header image that reaches the modal's edges. See the With Image story for an example.

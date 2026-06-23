@@ -25,6 +25,11 @@ type TabProps = Omit<BaseTabProps, "aria-selected"> & {
 	ariaSelected?: "true" | "false";
 };
 
+/**
+ * Individual tab component used within a `<Tabs>` container.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
+ */
 export const Tab = React.forwardRef<WarpTab, TabProps>(
 	({ ariaSelected, ...props }, ref) =>
 		React.createElement(BaseTab, {

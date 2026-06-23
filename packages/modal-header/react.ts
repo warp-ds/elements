@@ -25,6 +25,11 @@ type ModalHeaderProps = Omit<BaseModalHeaderProps, "no-close"> & {
 	noClose?: boolean;
 };
 
+/**
+ * The header section of a modal, typically where you place the title and a close button.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ */
 export const ModalHeader = React.forwardRef<WarpModalHeader, ModalHeaderProps>(
 	({ noClose, ...props }, ref) =>
 		React.createElement(BaseModalHeader, {

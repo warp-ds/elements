@@ -70,11 +70,9 @@ const datefnsLocale = {
 };
 
 /**
- * An input for dates.
+ * A date picker allows the user to select a specific calendar date.
  *
- * Uses the `lang` attribute on either the element or on `<html>` to determine the locale options.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-datepicker--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
 	static shadowRootOptions = {

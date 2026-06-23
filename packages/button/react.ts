@@ -20,6 +20,13 @@ type ButtonProps = Omit<BaseButtonProps, "full-width" | "icon-only"> & {
 	iconOnly?: boolean;
 };
 
+/**
+ * Performs an action or renders a link with button styling.
+ *
+ * Use button variants to match action priority, risk, and context.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/button/frameworks/elements)
+ */
 export const Button = React.forwardRef<WarpButton, ButtonProps>(
 	({ fullWidth, iconOnly, ...props }, ref) =>
 		React.createElement(BaseButton, {

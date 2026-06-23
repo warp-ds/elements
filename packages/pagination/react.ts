@@ -34,6 +34,11 @@ type PaginationProps = Omit<
 	visiblePages?: number;
 };
 
+/**
+ * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/pagination/frameworks/elements)
+ */
 export const Pagination = React.forwardRef<WarpPagination, PaginationProps>(
 	({ baseUrl, currentPageNumber, visiblePages, ...props }, ref) =>
 		React.createElement(BasePagination, {

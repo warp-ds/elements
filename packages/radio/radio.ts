@@ -8,6 +8,12 @@ import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
 
 /**
+ * Radios allow users to select a single option from a list of choices.
+ *
+ * Wrap individual radio components in a radio group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
+ *
  * @parent w-radio-group
  */
 export class WarpRadio extends FormControlMixin(LitElement) {

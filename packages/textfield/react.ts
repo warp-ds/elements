@@ -36,6 +36,11 @@ type TextFieldProps = Omit<
 	readOnly?: boolean;
 };
 
+/**
+ * A single-line input component used for entering and editing textual or numeric data.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
+ */
 export const TextField = React.forwardRef<WarpTextField, TextFieldProps>(
 	({ helpText, minLength, maxLength, readOnly, ...props }, ref) =>
 		React.createElement(BaseTextField, {

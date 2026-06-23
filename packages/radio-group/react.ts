@@ -28,6 +28,13 @@ type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text"> & {
 	helpText?: string;
 };
 
+/**
+ * Radios allow users to select a single option from a list of choices.
+ *
+ * Wrap individual radio components in a radio group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
+ */
 export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 	({ helpText, ...props }, ref) =>
 		React.createElement(BaseRadioGroup, {
