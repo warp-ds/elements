@@ -1,5 +1,6 @@
 {
   "include": [
+    "react.ts",
     "packages/affix",
     "packages/alert",
     "packages/attention",
