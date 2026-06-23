@@ -8,6 +8,12 @@ import { reset } from "../styles";
 import { styles } from "./styles";
 
 /**
+ * Checkboxes allow users to select one or more options from a number of choices.
+ *
+ * Wrap individual checkboxes in a checkbox group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/checkbox/frameworks/elements)
+ *
  * @parent w-checkbox-group
  */
 export class WarpCheckbox extends FormControlMixin(LitElement) {
@@ -123,7 +129,7 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 		this.checked = !this.checked;
 		this.indeterminate = false;
 		this.updateComplete.then(() => {
-			this.dispatchEvent(
+			this.input.dispatchEvent(
 				new Event("change", { bubbles: true, composed: true }),
 			);
 		});

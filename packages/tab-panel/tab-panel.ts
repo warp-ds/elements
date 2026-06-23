@@ -7,7 +7,10 @@ import { styles } from "../tabs/styles.js";
 
 /**
  * Tab panel component that holds content for individual tabs.
+ *
  * Each tab panel should have a name that matches a corresponding tab.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
  *
  * @parent w-tabs
  */

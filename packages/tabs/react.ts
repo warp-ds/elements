@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTabs, WarpTabsChangeEvent } from "./tabs.js";
+import type { WarpTabs, WarpTabsChangeEvent } from "./tabs.js";
 
 // Re-export from split packages
 export { Tab } from "../tab/react.js";
@@ -29,12 +29,16 @@ type TabProps = BaseTabsProps & {
 };
 
 /**
+ * Tabs are used to organize content by grouping similar information on the same page.
+ *
  * To avoid hydration errors always provide IDs to both the Tab and TabPanel components,
- * and set the active tab to the first tab ID on the Tabs component.
+ * and set the active tab panel to the first tab panel ID on the Tabs component.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
  *
  * @example
  * ```tsx
- * <Tabs active="tab1">
+ * <Tabs active="panel1" onChange={(e) => e.detail.panelId}>
  * 	<Tab id="tab1" htmlFor="panel1">First</Tab>
  * 	<Tab id="tab2" htmlFor="panel2">Second</Tab>
  * 	<Tab id="tab3" htmlFor="panel3">Third</Tab>

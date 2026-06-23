@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSliderThumb } from "./slider-thumb.js";
+import type { WarpSliderThumb } from "./slider-thumb.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,8 +12,12 @@ const BaseSliderThumb = createComponent({
 	elementClass: Component as unknown as typeof WarpSliderThumb,
 	react: React,
 	events: {
-		onSliderValidity: "slidervalidity" as EventName<CustomEvent>,
-		"onslider-validity": "slidervalidity" as EventName<CustomEvent>, // should be slider-validity
+		onSliderValidity: "slidervalidity" as EventName<
+			CustomEvent<{ invalid: string; slot: string }>
+		>,
+		"onslider-validity": "slidervalidity" as EventName<
+			CustomEvent<{ invalid: string; slot: string }>
+		>, // should be slider-validity
 	},
 });
 
@@ -29,6 +33,11 @@ type SliderThumbProps = Omit<
 	ariaDescription?: string;
 };
 
+/**
+ * Component to place inside a `<Slider>`.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/slider/frameworks/elements)
+ */
 export const SliderThumb = React.forwardRef<WarpSliderThumb, SliderThumbProps>(
 	({ ariaLabel, ariaDescription, ...props }, ref) =>
 		React.createElement(BaseSliderThumb, {

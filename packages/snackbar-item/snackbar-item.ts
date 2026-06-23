@@ -25,6 +25,8 @@ export enum SnackbarDuration {
  *
  * See the `create` function on `w-snackbar` for a convenience API which helps you make snackbar items.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/snackbar/frameworks/elements)
+ *
  * @parent w-snackbar
  *
  * @slot default - the snackbar message.

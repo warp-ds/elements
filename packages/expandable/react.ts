@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpExpandable } from "./expandable.js";
+import type { WarpExpandable } from "./expandable.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -27,6 +27,11 @@ type ExpandableProps = Omit<
 	headingLevel?: number;
 };
 
+/**
+ * Expandable is a layout component used for creating expandable content areas on a page.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/expandable/frameworks/elements)
+ */
 export const Expandable = React.forwardRef<WarpExpandable, ExpandableProps>(
 	({ buttonClass, contentClass, noChevron, headingLevel, ...props }, ref) =>
 		React.createElement(BaseExpandable, {

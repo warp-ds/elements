@@ -1,8 +1,8 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpPill } from "./pill.js";
+import type { WarpPill } from "./pill.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,10 +12,10 @@ const BasePill = createComponent({
 	elementClass: Component as unknown as typeof WarpPill,
 	react: React,
 	events: {
-		onClick: "w-pill-click", // should be click
-		onclick: "w-pill-click",
-		onClose: "w-pill-close", // should be close
-		onclose: "w-pill-close",
+		onClick: "w-pill-click" as EventName<CustomEvent>,
+		onclick: "w-pill-click" as EventName<CustomEvent>,
+		onClose: "w-pill-close" as EventName<CustomEvent>,
+		onclose: "w-pill-close" as EventName<CustomEvent>,
 	},
 });
 
@@ -36,6 +36,11 @@ type PillProps = Omit<
 	closeAriaLabel?: string;
 };
 
+/**
+ * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/pill/frameworks/elements)
+ */
 export const Pill = React.forwardRef<WarpPill, PillProps>(
 	(
 		{

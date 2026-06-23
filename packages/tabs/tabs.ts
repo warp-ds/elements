@@ -55,7 +55,9 @@ export type WarpTabsChangeEvent = CustomEvent<{
 /**
  * Tabs are used to organize content by grouping similar information on the same page.
  *
- * @event {WarpTabsChangeEvent} change - Includes `details.panelId` with the now active tab's ID
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
+ *
+ * @event {WarpTabsChangeEvent} change - Includes `details.panelId` with the now active tab panel's ID
  */
 export class WarpTabs extends LitElement {
 	static styles = [reset, styles];

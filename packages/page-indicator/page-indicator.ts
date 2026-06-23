@@ -20,6 +20,8 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
  * A page indicator component that displays a series of dots representing pages.
  *
  * One dot is highlighted to indicate the currently selected page.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/page-indicator/frameworks/elements)
  */
 class WarpPageIndicator extends LitElement {
 	static styles = [styles];
@@ -83,6 +85,12 @@ class WarpPageIndicator extends LitElement {
 				</div>
 			</div>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-page-indicator": WarpPageIndicator;
 	}
 }
 

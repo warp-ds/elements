@@ -49,9 +49,10 @@ export type ButtonType = "button" | "submit" | "reset";
 
 /**
  * Performs an action or renders a link with button styling.
+ *
  * Use button variants to match action priority, risk, and context.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-button--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/button/frameworks/elements)
  */
 class WarpButton extends FormControlMixin(LitElement) {
 	static styles = [reset, wButtonStyles];

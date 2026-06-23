@@ -18,17 +18,7 @@ import "../icon/icon.js";
 /**
  * This component is usually used in other components like form elements to show a prefix or suffix. See for example `w-textfield`.
  *
- * ## Accessibility Note
- * Due to shadow DOM encapsulation, ARIA attributes (like `aria-describedby`, `aria-labelledby`)
- * cannot reference elements across shadow boundaries. This means:
- * - Non-interactive affixes (text labels, icons) cannot be connected to the parent input via ARIA
- * - Interactive affixes (buttons) must have their own `aria-label` (already implemented)
- * - Do NOT attempt to reference affix content from parent components via ARIA ID references - it won't work
- *
- * For non-interactive labels (e.g., currency symbols), consider including the information in the
- * main label or placeholder instead of relying on ARIA to announce affix content.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/forms-affix--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-field/frameworks/elements#prefix-label)
  */
 class WarpAffix extends FormControlMixin(LitElement) {
 	/**
@@ -191,6 +181,12 @@ class WarpAffix extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`${this._markup}`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-affix": WarpAffix;
 	}
 }
 

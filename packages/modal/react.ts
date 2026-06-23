@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpModal } from "./modal.js";
+import type { WarpModal } from "./modal.js";
 
 export { ModalFooter } from "../modal-footer/react.js";
 // Re-export from split packages
@@ -37,6 +37,8 @@ type ModalProps = Omit<
  * Modals (or dialogs) display important information that users need to acknowledge.
  *
  * If you keep the <code>open</code> state, listen to <code>onHidden</code> so you can update the state when the user clicks the backdrop, close button, or presses <kbd>Escape</kbd>.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
  *
  * @example
  * ```jsx

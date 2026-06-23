@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpAffix } from "./affix.js";
+import type { WarpAffix } from "./affix.js";
 
 // We do this in order to prevent users from bundling in the CE implementation when
 // they should be getting it from Eik.
@@ -23,6 +23,11 @@ type AffixProps = Omit<BaseAffixProps, "aria-label"> & {
 	ariaLabel?: string | null;
 };
 
+/**
+ * This component is usually used in other components like form elements to show a prefix or suffix. See for example `TextField`.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-field/frameworks/elements#prefix-label)
+ */
 export const Affix = React.forwardRef<WarpAffix, AffixProps>(
 	({ ariaLabel, ...props }, ref) =>
 		React.createElement(BaseAffix, {

@@ -1,8 +1,9 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpDatepicker } from "./datepicker.js";
+import type { WarpDatepicker } from "./datepicker.js";
+import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,12 +13,12 @@ const BaseDatePicker = createComponent({
 	elementClass: Component as unknown as typeof WarpDatepicker,
 	react: React,
 	events: {
-		onChange: "change",
-		onchange: "change",
-		onBlur: "blur",
-		onblur: "blur",
-		onInput: "input",
-		oninput: "input",
+		onChange: "change" as EventName<ChangeEventWithTarget<HTMLInputElement>>,
+		onchange: "change" as EventName<ChangeEventWithTarget<HTMLInputElement>>,
+		onBlur: "blur" as EventName<FocusEvent>,
+		onblur: "blur" as EventName<FocusEvent>,
+		onInput: "input" as EventName<InputEventWithTarget<HTMLInputElement>>,
+		oninput: "input" as EventName<InputEventWithTarget<HTMLInputElement>>,
 	},
 });
 
@@ -34,6 +35,11 @@ type DatePickerProps = Omit<
 	dayFormat?: string;
 };
 
+/**
+ * A date picker allows the user to select a specific calendar date.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
+ */
 export const DatePicker = React.forwardRef<WarpDatepicker, DatePickerProps>(
 	({ headerFormat, weekdayFormat, dayFormat, ...props }, ref) =>
 		React.createElement(BaseDatePicker, {

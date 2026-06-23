@@ -7,7 +7,7 @@ import { reset } from "../styles.js";
  * Represents one item in a `w-breadcrumbs` trail.
  * Renders the slotted label as a link when `href` is set, or as text when it is not, and adds a separator after non-current items.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-breadcrumbs--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/breadcrumbs/frameworks/elements)
  *
  * @parent w-breadcrumbs
  * @slot - The breadcrumb label content.
@@ -56,6 +56,12 @@ class WarpBreadcrumbItem extends LitElement {
 
 	render() {
 		return html`${this.link}${this.separator}`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-breadcrumb-item": WarpBreadcrumbItem;
 	}
 }
 

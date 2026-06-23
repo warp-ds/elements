@@ -27,7 +27,7 @@ const REQUIRED_MESSAGE = () =>
 		comment: "Shown when required radio group has no selections",
 	});
 
-/**
+/*
  * Radios allow users to select a single option from a list of choices.
  *
  * Use with `w-radio`.
@@ -43,6 +43,17 @@ const REQUIRED_MESSAGE = () =>
  *
  * TODO: Align w-checkbox-group to also use <fieldset> in a future major version after
  * assessing backwards compatibility implications (CSS selectors, etc.).
+ */
+
+/**
+ * Radios allow users to select a single option from a list of choices.
+ *
+ * Wrap individual radio components in a radio group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
+ *
+ * @slot label - Alternative to the `label` attribute should you need custom HTML.
+ * @slot help-text - Alternative to the `help-text` attribute should you need custom HTML.
  */
 export class WarpRadioGroup extends FormControlMixin(LitElement) {
 	static styles = [hostStyles, styles];

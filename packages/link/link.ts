@@ -34,9 +34,9 @@ const variants = [
 ];
 
 /**
- * Buttons are used to perform actions, with different visuals for different needs.
+ * Link component to use when creating links that look like buttons.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/buttons-link--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/link/frameworks/elements)
  */
 class WarpLink extends LitElement {
 	/** @internal */
@@ -130,6 +130,12 @@ class WarpLink extends LitElement {
 				<slot></slot>
 			</a>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-link": WarpLink;
 	}
 }
 

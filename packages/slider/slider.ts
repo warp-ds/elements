@@ -22,6 +22,8 @@ import { wSliderStyles } from "./styles/w-slider.styles.js";
 /**
  * Parent component for sliders (both single and range sliders). Used in combination with a `<w-slider-thumb>`.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/slider/frameworks/elements)
+ *
  * @slot - For single sliders place a `<w-slider-thumb>` in the default slot.
  * @slot label - Label for the slider or range slider as a whole.
  * @slot description - Optional description between the label and slider.
@@ -578,6 +580,12 @@ class WarpSlider extends LitElement {
 
 if (!customElements.get("w-slider")) {
 	customElements.define("w-slider", WarpSlider);
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-slider": WarpSlider;
+	}
 }
 
 export { WarpSlider };

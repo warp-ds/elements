@@ -12,6 +12,8 @@ import { ProvidesCanCloseToSlotsMixin } from "./util.js";
 /**
  * Modals (or dialogs) display important information that users need to acknowledge.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @slot header - Typically where you would use the `w-modal-header` component.
  * @slot content - The main content of the modal.
  * @slot footer - Typically where you would use the `w-modal-footer` component, for things like actions.
@@ -192,6 +194,12 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
 /** @deprecated Exported for backwards compatibility. Use WarpModal. */
 export const ModalMain = WarpModal;
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-modal": WarpModal;
+	}
+}
 
 if (!customElements.get("w-modal")) {
 	customElements.define("w-modal", WarpModal);

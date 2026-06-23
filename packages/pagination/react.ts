@@ -1,8 +1,8 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpPagination } from "./pagination.js";
+import type { WarpPagination } from "./pagination.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,8 +12,12 @@ const BasePagination = createComponent({
 	elementClass: Component as unknown as typeof WarpPagination,
 	react: React,
 	events: {
-		onPageClick: "page-click",
-		"onpage-click": "page-click",
+		onPageClick: "page-click" as EventName<
+			CustomEvent<{ clickedPage: string | null }>
+		>,
+		"onpage-click": "page-click" as EventName<
+			CustomEvent<{ clickedPage: string | null }>
+		>,
 	},
 });
 
@@ -30,6 +34,11 @@ type PaginationProps = Omit<
 	visiblePages?: number;
 };
 
+/**
+ * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/pagination/frameworks/elements)
+ */
 export const Pagination = React.forwardRef<WarpPagination, PaginationProps>(
 	({ baseUrl, currentPageNumber, visiblePages, ...props }, ref) =>
 		React.createElement(BasePagination, {
