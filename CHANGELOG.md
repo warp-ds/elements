@@ -1,3 +1,10 @@
+# [2.11.0-next.1](https://github.com/warp-ds/elements/compare/v2.10.1-next.1...v2.11.0-next.1) (2026-06-24)
+
+
+### Features
+
+* add styling API to card ([#719](https://github.com/warp-ds/elements/issues/719)) ([e0f01a5](https://github.com/warp-ds/elements/commit/e0f01a58fc3737cb939713a78504652e36d46e00))
+
 ## [2.10.1-next.1](https://github.com/warp-ds/elements/compare/v2.10.0...v2.10.1-next.1) (2026-06-23)
 
 
