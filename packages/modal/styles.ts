@@ -23,6 +23,10 @@ export const styles = css`
 			var(--w-modal-min-heigh)
 				/* --w-modal-min-height kept for backwards compat */
 		);
+		--_padding-bottom: var(
+			--w-c-modal-padding-bottom,
+			calc(32px + env(safe-area-inset-bottom, 0px))
+		);
 		--_translate-distance: var(
 			--w-c-modal-translate-distance,
 			var(--w-modal-translate-distance, 100%)
@@ -68,7 +72,7 @@ export const styles = css`
 		min-height: var(--_min-height);
 		width: var(--_width);
 		backface-visibility: hidden;
-		padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+		padding-bottom: var(--_padding-bottom);
 		transition-property: all;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 		transition-duration: 150ms;
