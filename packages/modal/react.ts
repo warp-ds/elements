@@ -49,13 +49,13 @@ type ModalProps = Omit<
  *       Open modal
  *     </Button>
  *     <Modal show={open} id="example-modal-one" onHidden={() => setOpen(false)} onShown={() => setOpen(true)}>
- *       <ModalHeader slot="header" title="An example modal" />
+ *       <ModalHeader title="An example modal" />
  *       <ModalContent>
  *         <p>
  *           <!-- modal content -->
  *         </p>
  *       </ModalContent>
- *       <ModalFooter slot="footer">
+ *       <ModalFooter>
  *         <Button variant="primary" id="modal-close-button-one" onClick={() => setOpen(false)}>
  *           OK
  *         </Button>
