@@ -41,6 +41,7 @@ w-modal {
 - `--w-c-modal-height`
 - `--w-c-modal-max-height`
 - `--w-c-modal-min-height`
+- `--w-c-modal-padding-bottom`
 - `--w-c-modal-translate-distance`
 - `--w-c-modal-width`
 

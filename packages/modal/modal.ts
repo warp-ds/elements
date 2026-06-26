@@ -30,6 +30,7 @@ import { ProvidesCanCloseToSlotsMixin } from "./util.js";
  * @cssprop --w-c-modal-max-height
  * @cssprop --w-c-modal-min-height
  * @cssprop --w-c-modal-translate-distance
+ * @cssprop --w-c-modal-padding-bottom
  * @cssprop --w-c-modal-width
  */
 export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {

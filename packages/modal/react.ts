@@ -49,13 +49,13 @@ type ModalProps = Omit<
  *       Open modal
  *     </Button>
  *     <Modal show={open} id="example-modal-one" onHidden={() => setOpen(false)} onShown={() => setOpen(true)}>
- *       <ModalHeader slot="header" title="An example modal" />
- *       <div slot="content">
+ *       <ModalHeader title="An example modal" />
+ *       <ModalContent>
  *         <p>
  *           <!-- modal content -->
  *         </p>
- *       </div>
- *       <ModalFooter slot="footer">
+ *       </ModalContent>
+ *       <ModalFooter>
  *         <Button variant="primary" id="modal-close-button-one" onClick={() => setOpen(false)}>
  *           OK
  *         </Button>
@@ -79,3 +79,10 @@ export const Modal = React.forwardRef<WarpModal, ModalProps>(
 );
 
 Modal.displayName = "Modal";
+
+/**
+ * Convenience component to get a root element in the content slot of the modal.
+ */
+export const ModalContent = ({ ...props }) => {
+	return React.createElement("div", { slot: "content", ...props });
+};

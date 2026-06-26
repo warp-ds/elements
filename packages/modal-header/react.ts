@@ -33,6 +33,7 @@ type ModalHeaderProps = Omit<BaseModalHeaderProps, "no-close"> & {
 export const ModalHeader = React.forwardRef<WarpModalHeader, ModalHeaderProps>(
 	({ noClose, ...props }, ref) =>
 		React.createElement(BaseModalHeader, {
+			slot: "header",
 			...props,
 			...(noClose ? { "no-close": true } : {}),
 			ref,
