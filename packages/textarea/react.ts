@@ -1,8 +1,9 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTextarea } from "./textarea.js";
+import type { WarpTextarea } from "./textarea.js";
+import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,14 +13,14 @@ const BaseTextarea = createComponent({
 	elementClass: Component as unknown as typeof WarpTextarea,
 	react: React,
 	events: {
-		onBlur: "blur",
-		onblur: "blur",
-		onChange: "change",
-		onchange: "change",
-		onInput: "input",
-		oninput: "input",
-		onFocus: "focus",
-		onfocus: "focus",
+		onBlur: "blur" as EventName<FocusEvent>,
+		onblur: "blur" as EventName<FocusEvent>,
+		onChange: "change" as EventName<ChangeEventWithTarget<HTMLTextAreaElement>>,
+		onchange: "change" as EventName<ChangeEventWithTarget<HTMLTextAreaElement>>,
+		onInput: "input" as EventName<InputEventWithTarget<HTMLTextAreaElement>>,
+		oninput: "input" as EventName<InputEventWithTarget<HTMLTextAreaElement>>,
+		onFocus: "focus" as EventName<FocusEvent>,
+		onfocus: "focus" as EventName<FocusEvent>,
 	},
 });
 
@@ -35,6 +36,11 @@ type TextareaProps = Omit<
 	readOnly?: boolean;
 };
 
+/**
+ * A multi-line text input with built-in form validation, auto-resizing, and styling support.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
+ */
 export const Textarea = React.forwardRef<WarpTextarea, TextareaProps>(
 	({ helpText, maxRows, minRows, readOnly, ...props }, ref) =>
 		React.createElement(BaseTextarea, {

@@ -2,7 +2,8 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSelect } from "./select.js";
+import type { WarpSelect } from "./select.js";
+import type { ChangeEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,8 +13,8 @@ const BaseSelect = createComponent({
 	elementClass: Component as unknown as typeof WarpSelect,
 	react: React,
 	events: {
-		onChange: "change" as EventName<CustomEvent>,
-		onchange: "change" as EventName<CustomEvent>,
+		onChange: "change" as EventName<ChangeEventWithTarget<HTMLSelectElement>>,
+		onchange: "change" as EventName<ChangeEventWithTarget<HTMLSelectElement>>,
 	},
 });
 
@@ -28,6 +29,11 @@ type SelectProps = Omit<
 	readOnly?: boolean;
 };
 
+/**
+ * A dropdown component for selecting a single value.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/select/frameworks/elements)
+ */
 export const Select = React.forwardRef<WarpSelect, SelectProps>(
 	({ autoFocus, helpText, readOnly, ...props }, ref) =>
 		React.createElement(BaseSelect, {

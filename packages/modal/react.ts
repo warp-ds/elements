@@ -2,7 +2,7 @@ import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpModal } from "./modal.js";
+import type { WarpModal } from "./modal.js";
 
 export { ModalFooter } from "../modal-footer/react.js";
 // Re-export from split packages
@@ -38,6 +38,8 @@ type ModalProps = Omit<
  *
  * If you keep the <code>open</code> state, listen to <code>onHidden</code> so you can update the state when the user clicks the backdrop, close button, or presses <kbd>Escape</kbd>.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @example
  * ```jsx
  * const [open, setOpen] = useState(false);
@@ -47,13 +49,13 @@ type ModalProps = Omit<
  *       Open modal
  *     </Button>
  *     <Modal show={open} id="example-modal-one" onHidden={() => setOpen(false)} onShown={() => setOpen(true)}>
- *       <ModalHeader slot="header" title="An example modal" />
- *       <div slot="content">
+ *       <ModalHeader title="An example modal" />
+ *       <ModalContent>
  *         <p>
  *           <!-- modal content -->
  *         </p>
- *       </div>
- *       <ModalFooter slot="footer">
+ *       </ModalContent>
+ *       <ModalFooter>
  *         <Button variant="primary" id="modal-close-button-one" onClick={() => setOpen(false)}>
  *           OK
  *         </Button>
@@ -77,3 +79,10 @@ export const Modal = React.forwardRef<WarpModal, ModalProps>(
 );
 
 Modal.displayName = "Modal";
+
+/**
+ * Convenience component to get a root element in the content slot of the modal.
+ */
+export const ModalContent = ({ ...props }) => {
+	return React.createElement("div", { slot: "content", ...props });
+};

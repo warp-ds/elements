@@ -1,8 +1,8 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTab } from "./tab.js";
+import type { WarpTab } from "./tab.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,10 +12,8 @@ const BaseTab = createComponent({
 	elementClass: Component as unknown as typeof WarpTab,
 	react: React,
 	events: {
-		onTabClick: "tab-click",
-		"ontab-click": "tab-click",
-		onClick: "click",
-		onclick: "click",
+		onClick: "click" as EventName<PointerEvent>,
+		onclick: "click" as EventName<PointerEvent>,
 	},
 });
 
@@ -27,6 +25,11 @@ type TabProps = Omit<BaseTabProps, "aria-selected"> & {
 	ariaSelected?: "true" | "false";
 };
 
+/**
+ * Individual tab component used within a `<Tabs>` container.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
+ */
 export const Tab = React.forwardRef<WarpTab, TabProps>(
 	({ ariaSelected, ...props }, ref) =>
 		React.createElement(BaseTab, {

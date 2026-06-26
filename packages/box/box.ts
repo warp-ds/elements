@@ -12,7 +12,7 @@ import { styles } from "./styles";
 /**
  * Box is a layout component used for separating content areas on a page.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/layout-box--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/box/frameworks/elements)
  */
 class WarpBox extends FormControlMixin(LitElement) {
 	/**
@@ -96,6 +96,12 @@ class WarpBox extends FormControlMixin(LitElement) {
 				<slot></slot>
 			</div>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-box": WarpBox;
 	}
 }
 

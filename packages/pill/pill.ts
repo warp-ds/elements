@@ -35,6 +35,8 @@ const pillStyles = {
 /**
  * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/pill/frameworks/elements)
+ *
  * @event {CustomEvent} w-pill-click - Fires when the pill itself is clicked.
  * @event {CustomEvent} w-pill-close - Fires when the pill's close button is clicked.
  */
@@ -175,6 +177,12 @@ class WarpPill extends LitElement {
 					: null}
 			</div>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-pill": WarpPill;
 	}
 }
 

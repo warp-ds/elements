@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpLink } from "./link.js";
+import type { WarpLink } from "./link.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -19,6 +19,11 @@ type LinkProps = Omit<BaseLinkProps, "full-width"> & {
 	fullWidth?: boolean;
 };
 
+/**
+ * Link component to use when creating links that look like buttons.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/link/frameworks/elements)
+ */
 export const Link = React.forwardRef<WarpLink, LinkProps>(
 	({ fullWidth, ...props }, ref) =>
 		React.createElement(BaseLink, {

@@ -1,8 +1,5 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -16,33 +13,15 @@ import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 
-const ccCard = {
-	base: "cursor-pointer overflow-hidden relative transition-all",
-	shadow:
-		"group rounded-8 s-surface-elevated-200 hover:s-surface-elevated-200-hover active:s-surface-elevated-200-active",
-	selected:
-		"!s-bg-selected !hover:s-bg-selected-hover !active:s-bg-selected-active",
-	outline: "absolute border-2 rounded-8 inset-0 transition-all",
-	outlineUnselected: "border-transparent group-active:s-border-active",
-	outlineSelected:
-		"s-border-selected group-hover:s-border-selected-hover group-active:s-border-selected-active",
-	flat: "border-2 rounded-4",
-	flatUnselected:
-		"s-bg hover:s-bg-hover active:s-bg-active s-border hover:s-border-hover active:s-border-active",
-	flatSelected:
-		"s-bg-selected hover:s-bg-selected-hover active:s-bg-selected-active s-border-selected hover:s-border-selected-hover active:s-border-selected-active",
-	a11y: "sr-only",
-};
-
 const keys = {
 	ENTER: "Enter",
 	SPACE: " ",
 };
 
 /**
- * Card is a layout component used for separating content areas on a page.
+ * Card is a layout component used for grouping interactive content areas on a page.
  *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/navigation-card--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/card/frameworks/elements)
  */
 class WarpCard extends LitElement {
 	static styles = [
@@ -87,8 +66,7 @@ class WarpCard extends LitElement {
 	@property({ type: Boolean })
 	clickable = false;
 
-	/** @internal */
-	buttonText: string;
+	private buttonText: string;
 
 	constructor() {
 		super();
@@ -99,44 +77,6 @@ class WarpCard extends LitElement {
 			message: "Select",
 			comment: "Screenreader message to indicate that the card is clickable",
 		});
-	}
-
-	/** @internal */
-	get _containerClasses() {
-		return classNames([
-			ccCard.base,
-			this.flat ? ccCard.flat : ccCard.shadow,
-			this.selected && !this.flat && ccCard.selected,
-			this.selected && this.flat ? ccCard.flatSelected : ccCard.flatUnselected,
-		]);
-	}
-
-	/** @internal */
-	get _outlineClasses() {
-		return classNames([
-			ccCard.outline,
-			this.selected ? ccCard.outlineSelected : ccCard.outlineUnselected,
-		]);
-	}
-
-	/** @internal */
-	get _interactiveElement() {
-		const renderButton = () =>
-			html`<button
-				class="${ccCard.a11y}"
-				aria-pressed="${this.selected}"
-				tabindex="-1"
-			>
-				${this.buttonText}
-			</button>`;
-		const renderSpan = () =>
-			html`<span
-				role="checkbox"
-				aria-checked="true"
-				aria-disabled="true"
-			></span>`;
-
-		return this.clickable ? renderButton() : this.selected ? renderSpan() : "";
 	}
 
 	keypressed(e: KeyboardEvent) {
@@ -150,15 +90,36 @@ class WarpCard extends LitElement {
 	render() {
 		return html`
 			<div
+				part="base"
 				tabindex=${ifDefined(this.clickable ? "0" : undefined)}
-				class="${this._containerClasses}"
 				@keydown=${this.keypressed}
 			>
-				${this._interactiveElement}
-				${this.flat ? "" : html`<div class="${this._outlineClasses}"></div>`}
+				<div part="border"></div>
+				${this.clickable
+					? html`<button
+							class="sr-only"
+							aria-pressed="${this.selected}"
+							tabindex="-1"
+						>
+							${this.buttonText}
+						</button>`
+					: this.selected
+						? html`<span
+								class="sr-only"
+								role="checkbox"
+								aria-checked="true"
+								aria-disabled="true"
+							></span>`
+						: nothing}
 				<slot></slot>
 			</div>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-card": WarpCard;
 	}
 }
 

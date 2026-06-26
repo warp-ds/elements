@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpSlider } from "./slider.js";
+import type { WarpSlider } from "./slider.js";
 
 // Re-export from split packages
 export { SliderThumb } from "../slider-thumb/react.js";
@@ -27,6 +27,11 @@ type SliderProps = Omit<
 	hiddenTextfield?: boolean;
 };
 
+/**
+ * Parent component for sliders (both single and range sliders). Used in combination with a `<SliderThumb>`.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/slider/frameworks/elements)
+ */
 export const Slider = React.forwardRef<WarpSlider, SliderProps>(
 	({ openEnded, helpText, hiddenTextfield, ...props }, ref) =>
 		React.createElement(BaseSlider, {

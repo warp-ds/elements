@@ -19,10 +19,7 @@ const REQUIRED_MESSAGE = () =>
 		comment: "Shown when required checkbox group has no selections",
 	});
 
-/**
- * Checkboxes allow users to select multiple options from a list of choices.
- *
- * Use with `w-checkbox`.
+/*
  *
  * ## Architecture Note
  * This component uses a <div> wrapper instead of the more semantic <fieldset> element.
@@ -32,6 +29,14 @@ const REQUIRED_MESSAGE = () =>
  *
  * TODO: Align w-checkbox-group to use <fieldset> in a future major version after assessing
  * backwards compatibility implications (CSS selectors, etc.).
+ */
+
+/**
+ * Checkboxes allow users to select one or more options from a number of choices.
+ *
+ * Wrap individual checkboxes in a checkbox group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/checkbox/frameworks/elements)
  */
 export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	// Use delegatesFocus so focus delegates to an internal focusable element

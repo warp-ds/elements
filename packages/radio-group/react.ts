@@ -1,8 +1,8 @@
-import { createComponent } from "@lit/react";
+import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpRadioGroup } from "./radio-group.js";
+import type { WarpRadioGroup } from "./radio-group.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -12,10 +12,11 @@ const BaseRadioGroup = createComponent({
 	elementClass: Component as unknown as typeof WarpRadioGroup,
 	react: React,
 	events: {
-		onInput: "input",
-		oninput: "input",
-		onChange: "change",
-		onchange: "change",
+		/** These event handlers deliberately have no target, since they are dispatched at group level with no target element */
+		onInput: "input" as EventName<InputEvent>,
+		oninput: "input" as EventName<InputEvent>,
+		onChange: "change" as EventName<Event>,
+		onchange: "change" as EventName<Event>,
 	},
 });
 
@@ -27,6 +28,13 @@ type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text"> & {
 	helpText?: string;
 };
 
+/**
+ * Radios allow users to select a single option from a list of choices.
+ *
+ * Wrap individual radio components in a radio group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
+ */
 export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 	({ helpText, ...props }, ref) =>
 		React.createElement(BaseRadioGroup, {

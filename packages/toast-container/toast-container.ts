@@ -184,6 +184,12 @@ export class WarpToastContainer extends LitElement {
 	}
 }
 
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-toast-container": WarpToastContainer;
+	}
+}
+
 if (!customElements.get("w-toast-container")) {
 	customElements.define("w-toast-container", WarpToastContainer);
 }

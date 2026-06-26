@@ -35,6 +35,9 @@ function cacheFetch<T = string>(
 	return _fetchMap.get(uri) as Promise<T>;
 }
 
+/**
+ * [Warp component reference](https://warp-ds.github.io/docs/components/icons/frameworks/elements)
+ */
 export class WarpIcon extends LitElement {
 	static styles = [styles];
 

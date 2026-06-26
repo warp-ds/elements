@@ -38,9 +38,7 @@ const alertVariants = {
 /**
  * Alert is an inline component used for displaying different types of messages.
  *
- * For accessibility reasons, alert should appear close to the element that triggered it.
- *
- * [See Storybook for usage examples](https://warp-ds.github.io/elements/?path=/docs/feedback-alert--docs)
+ * [Warp component reference](https://warp-ds.github.io/docs/components/alert/frameworks/elements)
  */
 class WarpAlert extends LitElement {
 	private _internals: ElementInternals;
@@ -174,6 +172,12 @@ class WarpAlert extends LitElement {
 				</div>
 			</w-expand-transition>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-alert": WarpAlert;
 	}
 }
 

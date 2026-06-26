@@ -15,6 +15,8 @@ const ccSteps = {
 
 /**
  * Steps are used to show progress through a process or to guide users through a multi-step task.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/steps/frameworks/elements)
  */
 export class WarpStepIndicator extends LitElement {
 	/**
@@ -67,6 +69,12 @@ export class WarpStepIndicator extends LitElement {
 				<slot></slot>
 			</div>
 		`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-step-indicator": WarpStepIndicator;
 	}
 }
 

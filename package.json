@@ -1,7 +1,7 @@
 {
   "name": "@warp-ds/elements",
   "type": "module",
-  "version": "2.10.0",
+  "version": "2.11.0-next.1",
   "packageManager": "pnpm@11.3.0",
   "browserslist": [
     "supports es6-module and > 0.25% in FI or > 0.25% in NO or > 0.25% in SE or > 0.25% in DK and not dead and not Safari < 15 and not iOS < 15",
@@ -32,117 +32,9 @@
       "import": "./dist/api.js"
     },
     "./custom-elements.json": "./dist/custom-elements.json",
-    "./react/affix": {
-      "types": "./dist/packages/affix/react.d.ts",
-      "import": "./dist/packages/affix/react.js"
-    },
-    "./react/alert": {
-      "types": "./dist/packages/alert/react.d.ts",
-      "import": "./dist/packages/alert/react.js"
-    },
-    "./react/attention": {
-      "types": "./dist/packages/attention/react.d.ts",
-      "import": "./dist/packages/attention/react.js"
-    },
-    "./react/badge": {
-      "types": "./dist/packages/badge/react.d.ts",
-      "import": "./dist/packages/badge/react.js"
-    },
-    "./react/box": {
-      "types": "./dist/packages/box/react.d.ts",
-      "import": "./dist/packages/box/react.js"
-    },
-    "./react/breadcrumbs": {
-      "types": "./dist/packages/breadcrumbs/react.d.ts",
-      "import": "./dist/packages/breadcrumbs/react.js"
-    },
-    "./react/breadcrumb-item": {
-      "types": "./dist/packages/breadcrumb-item/react.d.ts",
-      "import": "./dist/packages/breadcrumb-item/react.js"
-    },
-    "./react/button": {
-      "types": "./dist/packages/button/react.d.ts",
-      "import": "./dist/packages/button/react.js"
-    },
-    "./react/card": {
-      "types": "./dist/packages/card/react.d.ts",
-      "import": "./dist/packages/card/react.js"
-    },
-    "./react/combobox": {
-      "types": "./dist/packages/combobox/react.d.ts",
-      "import": "./dist/packages/combobox/react.js"
-    },
-    "./react/datepicker": {
-      "types": "./dist/packages/datepicker/react.d.ts",
-      "import": "./dist/packages/datepicker/react.js"
-    },
-    "./react/expandable": {
-      "types": "./dist/packages/expandable/react.d.ts",
-      "import": "./dist/packages/expandable/react.js"
-    },
-    "./react/link": {
-      "types": "./dist/packages/link/react.d.ts",
-      "import": "./dist/packages/link/react.js"
-    },
-    "./react/modal": {
-      "types": "./dist/packages/modal/react.d.ts",
-      "import": "./dist/packages/modal/react.js"
-    },
-    "./react/modal-header": {
-      "types": "./dist/packages/modal-header/react.d.ts",
-      "import": "./dist/packages/modal-header/react.js"
-    },
-    "./react/modal-footer": {
-      "types": "./dist/packages/modal-footer/react.d.ts",
-      "import": "./dist/packages/modal-footer/react.js"
-    },
-    "./react/pill": {
-      "types": "./dist/packages/pill/react.d.ts",
-      "import": "./dist/packages/pill/react.js"
-    },
-    "./react/select": {
-      "types": "./dist/packages/select/react.d.ts",
-      "import": "./dist/packages/select/react.js"
-    },
-    "./react/switch": {
-      "types": "./dist/packages/switch/react.d.ts",
-      "import": "./dist/packages/switch/react.js"
-    },
-    "./react/textfield": {
-      "types": "./dist/packages/textfield/react.d.ts",
-      "import": "./dist/packages/textfield/react.js"
-    },
-    "./react/tabs": {
-      "types": "./dist/packages/tabs/react.d.ts",
-      "import": "./dist/packages/tabs/react.js"
-    },
-    "./react/tab": {
-      "types": "./dist/packages/tab/react.d.ts",
-      "import": "./dist/packages/tab/react.js"
-    },
-    "./react/tab-panel": {
-      "types": "./dist/packages/tab-panel/react.d.ts",
-      "import": "./dist/packages/tab-panel/react.js"
-    },
-    "./react/page-indicator": {
-      "types": "./dist/packages/page-indicator/react.d.ts",
-      "import": "./dist/packages/page-indicator/react.js"
-    },
-    "./react/pagination": {
-      "types": "./dist/packages/pagination/react.d.ts",
-      "import": "./dist/packages/pagination/react.js"
-    },
-    "./react/textarea": {
-      "types": "./dist/packages/textarea/react.d.ts",
-      "import": "./dist/packages/textarea/react.js"
-    },
-    "./react/step": {
-      "types": "./dist/packages/step/react.d.ts",
-      "import": "./dist/packages/step/react.js"
-    },
-    "./react/step-indicator": {
-      "types": "./dist/packages/step-indicator/react.d.ts",
-      "import": "./dist/packages/step-indicator/react.js"
+    "./react": {
+      "types": "./dist/entrypoint-react.d.ts",
+      "import": "./dist/entrypoint-react.js"
     },
     "./react/*": {
       "types": "./dist/packages/*/react.d.ts",

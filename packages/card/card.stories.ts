@@ -82,7 +82,7 @@ export const PropertyExample: Story = {
 	},
 	render(args) {
 		return html`
-			<w-card ${spread(prespread(args))} style="max-width: 300px;">
+			<w-card ${spread(prespread(args))}>
 				<img
 					style="width: 100%; height: 200px; object-fit: cover;"
 					src="https://unsplash.it/300/200?random"
@@ -101,6 +101,50 @@ export const PropertyExample: Story = {
 					<p style="font-weight: bold; margin: 0;">
 						52 m² Totalpris: 4 869 039 kr
 					</p>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const StylingApi: Story = {
+	args: {
+		clickable: false,
+		selected: false,
+		flat: false,
+	},
+	render(args) {
+		return html`
+			<pre>
+<code>
+&lt;style&gt;
+w-card::part(base) {
+	padding: 48px;
+	background: rebeccapurple;
+	color: cyan;
+}
+w-card::part(border) {
+	border-color: magenta;
+	border-width: 8px;
+}
+&lt;/style&gt;
+</code>
+		</pre>
+			<style>
+				w-card::part(base) {
+					padding: 48px;
+					background: rebeccapurple;
+					color: cyan;
+				}
+				w-card::part(border) {
+					border-color: magenta;
+					border-width: 8px;
+				}
+			</style>
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px;">
+					<h3>Card Title</h3>
+					<p>This is card content with some example text.</p>
 				</div>
 			</w-card>
 		`;

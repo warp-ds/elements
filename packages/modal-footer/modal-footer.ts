@@ -6,6 +6,8 @@ import { styles } from "./styles.js";
 /**
  * The footer section of a modal, typically where you place actions.
  *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/modal/frameworks/elements)
+ *
  * @parent w-modal
  *
  * @csspart footer - the container for slotted items (children).
@@ -26,6 +28,12 @@ export class WarpModalFooter extends CanCloseMixin(
 
 /** @deprecated Exported for backwards compatibility. Use WarpModalFooter. */
 export const ModalFooter = WarpModalFooter;
+
+declare global {
+	interface HTMLElementTagNameMap {
+		"w-modal-footer": WarpModalFooter;
+	}
+}
 
 if (!customElements.get("w-modal-footer")) {
 	customElements.define("w-modal-footer", WarpModalFooter);

@@ -1,8 +1,10 @@
 ## Usage
 
-Card is a layout component for visually grouping related content as one item.
+Card is a layout component used for grouping interactive content areas on a page.
 
-Use `w-card` for listings, summaries, recommendations, or selectable choices where the grouped content should feel like a single object. The component does not add padding, headings, spacing between children, or semantic structure. Those must be provided by the content inside the card.
+Use `w-card` for listings, summaries, recommendations, or selectable choices where the grouped content should feel like a single object.
+
+The component does not add padding, headings, spacing between children, or semantic structure. Those must be provided by the content inside the card.
 
 ### Basic Card
 

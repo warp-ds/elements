@@ -1,4 +1,133 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.border-2{border-width:2px}.border-transparent{border-color:#0000}.rounded-4{border-radius:4px}.rounded-8{border-radius:8px}.block{display:block}.focusable:focus{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:focus-visible{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:not(:focus-visible){outline:none}.overflow-hidden{overflow:hidden}.outline{outline-style:solid}.inset-0{top:0;bottom:0;left:0;right:0}.absolute{position:absolute}.relative{position:relative}.static{position:static}.\\!s-bg-selected{background-color:var(--w-s-color-background-selected)!important}.s-bg{background-color:var(--w-s-color-background)}.s-bg-selected{background-color:var(--w-s-color-background-selected)}.\\!hover\\:s-bg-selected-hover:hover{background-color:var(--w-s-color-background-selected-hover)!important}.hover\\:s-bg-hover:hover{background-color:var(--w-s-color-background-hover)}.hover\\:s-bg-selected-hover:hover{background-color:var(--w-s-color-background-selected-hover)}.\\!active\\:s-bg-selected-active:active{background-color:var(--w-s-color-background-selected-active)!important}.active\\:s-bg-active:active{background-color:var(--w-s-color-background-active)}.active\\:s-bg-selected-active:active{background-color:var(--w-s-color-background-selected-active)}.s-border{border-color:var(--w-s-color-border)}.s-border-selected{border-color:var(--w-s-color-border-selected)}.group:hover .group-hover\\:s-border-selected-hover{border-color:var(--w-s-color-border-selected-hover)}.hover\\:s-border-hover:hover{border-color:var(--w-s-color-border-hover)}.hover\\:s-border-selected-hover:hover{border-color:var(--w-s-color-border-selected-hover)}.active\\:s-border-active:active{border-color:var(--w-s-color-border-active)}.active\\:s-border-selected-active:active{border-color:var(--w-s-color-border-selected-active)}.group:active .group-active\\:s-border-active{border-color:var(--w-s-color-border-active)}.group:active .group-active\\:s-border-selected-active{border-color:var(--w-s-color-border-selected-active)}.s-surface-elevated-200{background-color:var(--w-s-color-surface-elevated-200);box-shadow:var(--w-s-shadow-surface-elevated-200)}.hover\\:s-surface-elevated-200-hover:hover{background-color:var(--w-s-color-surface-elevated-200-hover);box-shadow:var(--w-s-shadow-surface-elevated-200-hover)}.active\\:s-surface-elevated-200-active:active{background-color:var(--w-s-color-surface-elevated-200-active);box-shadow:var(--w-s-shadow-surface-elevated-200-active)}.cursor-pointer{cursor:pointer}.sr-only{clip:rect(0,0,0,0);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}.transition-all{transition-property:all;transition-duration:.15s;transition-timing-function:cubic-bezier(.4,0,.2,1)}",
-);
+import { css } from "lit";
+
+export const styles = css`
+	:host {
+		--_background-color: var(
+			--w-c-card-bg,
+			var(--w-s-color-surface-elevated-200)
+		);
+		--_background-color-active: var(
+			--w-c-card-bg-active,
+			var(--w-s-color-background-active)
+		);
+		--_background-color-hover: var(
+			--w-c-card-bg-hover,
+			var(--w-s-color-background-hover)
+		);
+		--_border-color: var(--w-c-card-border-color, transparent);
+		--_border-color-active: var(
+			--w-c-card-border-color-active,
+			var(--w-s-color-border-active)
+		);
+		--_border-color-hover: var(
+			--w-c-card-border-color-hover,
+			var(--w-s-color-border-hover)
+		);
+		--_border-radius: var(--w-c-card-border-radius, 8px);
+		--_border-width: var(--w-c-card-border-width, 2px);
+		--_box-shadow: var(
+			--w-c-card-box-shadow,
+			var(--w-s-shadow-surface-elevated-200)
+		);
+		--_box-shadow-active: var(
+			--w-c-card-box-shadow-active,
+			var(--w-s-shadow-surface-elevated-200-active)
+		);
+		--_box-shadow-hover: var(
+			--w-c-card-box-shadow-hover,
+			var(--w-s-shadow-surface-elevated-200-hover)
+		);
+	}
+
+	:host([flat]) {
+		--_border-color: var(--w-c-card-border-color, var(--w-s-color-border));
+		--_border-width: var(--w-c-card-border-width, 2px);
+		--_border-radius: var(--w-c-card-border-radius, 4px);
+		--_box-shadow: none;
+		--_box-shadow-active: none;
+		--_box-shadow-hover: none;
+	}
+
+	:host([selected]) {
+		--_background-color: var(
+			--w-c-card-bg,
+			var(--w-s-color-background-selected)
+		);
+		--_background-color-active: var(
+			--w-c-card-bg-active,
+			var(--w-s-color-background-selected-active)
+		);
+		--_background-color-hover: var(
+			--w-c-card-bg-hover,
+			var(--w-s-color-background-selected-hover)
+		);
+		--_border-color: var(
+			--w-c-card-border-color,
+			var(--w-s-color-border-selected)
+		);
+		--_border-color-active: var(
+			--w-c-card-border-color-active,
+			var(--w-s-color-border-selected-active)
+		);
+		--_border-color-hover: var(
+			--w-c-card-border-color-hover,
+			var(--w-s-color-border-selected-hover)
+		);
+		--_border-width: var(--w-c-card-border-width, 2px);
+	}
+
+	[part="base"] {
+		background-color: var(--_background-color);
+		border-radius: var(--_border-radius);
+		box-shadow: var(--_box-shadow);
+		cursor: pointer;
+		display: block;
+		overflow: hidden;
+		position: relative;
+		transition-property: all;
+		transition-duration: 0.15s;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	[part="base"]:hover {
+		background-color: var(--_background-color-hover);
+		box-shadow: var(--_box-shadow-hover);
+	}
+
+	[part="base"]:active {
+		background-color: var(--_background-color-active);
+		box-shadow: var(--_box-shadow-active);
+	}
+
+	[part="border"] {
+		border-radius: var(--_border-radius);
+		border-color: var(--_border-color);
+		border-width: var(--_border-width);
+		position: absolute;
+		inset: 0px;
+		transition-property: all;
+		transition-duration: 0.15s;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	:host([flat]) [part="base"]:hover [part="border"],
+	:host([selected]) [part="base"]:hover [part="border"] {
+		border-color: var(--_border-color-hover);
+	}
+
+	[part="base"]:active [part="border"] {
+		border-color: var(--_border-color-active);
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+`;
