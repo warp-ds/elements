@@ -77,11 +77,9 @@ test("checked state uses selected border color", async () => {
 
 	await radio.updateComplete;
 
-	const control = radio.shadowRoot?.querySelector(
-		".control",
-	) as HTMLElement | null;
+	const control = radio.shadowRoot?.querySelector('[part="control"]') as HTMLElement | null;
 	if (!control) {
-		throw new Error("Expected radio control element to exist");
+		throw new Error('Expected radio control element to exist');
 	}
 
 	radio.click();
@@ -105,11 +103,9 @@ test("disabled control uses disabled background and border colors", async () => 
 
 	await radio.updateComplete;
 
-	const control = radio.shadowRoot?.querySelector(
-		".control",
-	) as HTMLElement | null;
+	const control = radio.shadowRoot?.querySelector('[part="control"]') as HTMLElement | null;
 	if (!control) {
-		throw new Error("Expected radio control element to exist");
+		throw new Error('Expected radio control element to exist');
 	}
 
 	const bgSwatch = document.createElement("div");
