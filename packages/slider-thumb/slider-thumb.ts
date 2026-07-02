@@ -682,6 +682,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
 	render() {
 		const showPlaceholder = this.placeholder && !this.value;
+		const showTooltipSuffix =
+			this.tooltipDisplayValue !== "Min" &&
+			this.tooltipDisplayValue !== "Max" &&
+			(this.suffix ?? "") !== "";
 		return html`
 			<div class="w-slider-thumb">
 				${!("anchorName" in document.documentElement.style)
@@ -783,7 +787,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 						slot="target"
 					></output>
 					<span slot="message">
-						${this.tooltipDisplayValue}${(this.suffix ?? "")
+						${this.tooltipDisplayValue}${showTooltipSuffix
 							? html`&nbsp;${this.suffix ?? ""}`
 							: nothing}
 					</span>
