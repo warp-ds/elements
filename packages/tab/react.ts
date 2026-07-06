@@ -20,6 +20,7 @@ const BaseTab = createComponent({
 type BaseTabProps = React.ComponentPropsWithoutRef<typeof BaseTab>;
 
 type TabProps = Omit<BaseTabProps, "aria-selected"> & {
+	htmlFor?: string;
 	/** An ID is required to avoid hydration issues */
 	id: string;
 	ariaSelected?: "true" | "false";
@@ -31,9 +32,10 @@ type TabProps = Omit<BaseTabProps, "aria-selected"> & {
  * [Warp component reference](https://warp-ds.github.io/docs/components/tabs/frameworks/elements)
  */
 export const Tab = React.forwardRef<WarpTab, TabProps>(
-	({ ariaSelected, ...props }, ref) =>
+	({ ariaSelected, htmlFor, ...props }, ref) =>
 		React.createElement(BaseTab, {
 			slot: "tabs",
+			for: htmlFor,
 			...props,
 			...(ariaSelected !== undefined ? { "aria-selected": ariaSelected } : {}),
 			ref,

@@ -28,14 +28,14 @@ export default {
 export type Story = StoryObj<typeof Tabs>;
 
 export const Default = () => (
-	<Tabs active="tab1">
-		<Tab id="tab1" for="panel1">
+	<Tabs active="panel1">
+		<Tab id="tab1" htmlFor="panel1">
 			First Tab
 		</Tab>
-		<Tab id="tab2" for="panel2">
+		<Tab id="tab2" htmlFor="panel2">
 			Second Tab
 		</Tab>
-		<Tab id="tab3" for="panel3">
+		<Tab id="tab3" htmlFor="panel3">
 			Third Tab
 		</Tab>
 
@@ -126,7 +126,7 @@ export const WithIconsOver = () => (
 
 export const ManyTabs = () => (
 	<>
-		<Tabs active="tab1" id="tabs-many">
+		<Tabs active="panel1" id="tabs-many">
 			<Tab id="tab1" for="panel1">
 				Tab 1
 			</Tab>

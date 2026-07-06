@@ -2,7 +2,7 @@
 
 import { classNames } from "@chbphone55/classnames";
 import { html, LitElement, PropertyValues } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 
 import { reset } from "../styles.js";
 import { WarpTab } from "../tab/tab.js";
@@ -77,7 +77,10 @@ export class WarpTabs extends LitElement {
 	private selectionIndicator!: HTMLElement;
 
 	private _uniqueId = uniqueId();
+
+	@state()
 	private _activeTabFor: string | undefined = "";
+
 	private _resizeObserver?: ResizeObserver;
 	private _updateSelectionIndicatorDebounced = debounce(
 		this.updateSelectionIndicator.bind(this),
