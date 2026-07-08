@@ -1,3 +1,17 @@
+# [2.12.0-next.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.12.0-next.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **tabs:** map htmlFor to for in the React wrapper ([fd49268](https://github.com/warp-ds/elements/commit/fd49268d7968209005b2fcdcead609d5f47735cd))
+* **tooltip:** accessible description ([d3fbb69](https://github.com/warp-ds/elements/commit/d3fbb691e56ebd1dbb07285e93ef7c1c8750f6e6))
+
+
+### Features
+
+* **textfield:** add tooltip prop ([2dbf34d](https://github.com/warp-ds/elements/commit/2dbf34dd10237eafce7f0063765feaa1e990739f))
+* **tooltip:** create a new tooltip component ([a219978](https://github.com/warp-ds/elements/commit/a2199784a73720b75826241c33568ea8f056423b))
+
 # [2.11.0](https://github.com/warp-ds/elements/compare/v2.10.0...v2.11.0) (2026-06-26)
 
 
