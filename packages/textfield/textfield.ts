@@ -347,7 +347,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 								>
 									<w-icon name="Info" size="small"></w-icon>
 								</button>
-								<w-tooltip for="tooltip-target" id="tooltip">
+								<w-tooltip
+									for="tooltip-target"
+									id="tooltip"
+									exportparts="tooltip, arrow, beak, hover-bridge"
+								>
 									${this.tooltip}
 								</w-tooltip>
 							`
