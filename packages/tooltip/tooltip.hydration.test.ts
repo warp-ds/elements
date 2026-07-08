@@ -6,7 +6,7 @@ import {
 
 import "./tooltip.js";
 
-describe("w-snackbar React SSR hydration", () => {
+describe("w-tooltip React SSR hydration", () => {
 	beforeEach(() => setupHydrationWarningCapture());
 	afterEach(() => {
 		window.__HYDRATION_WARNINGS__ = [];
