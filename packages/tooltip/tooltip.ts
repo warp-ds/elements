@@ -1,4 +1,5 @@
 import { html, LitElement, nothing, PropertyValues } from "lit";
+import { i18n } from "@lingui/core";
 import {
 	computePosition,
 	autoUpdate,
@@ -6,9 +7,17 @@ import {
 	shift,
 	offset,
 	arrow,
+	type Placement,
 } from "@floating-ui/dom";
 
+import { activateI18n } from "../i18n";
 import { reset } from "../styles.js";
+
+import { messages as daMessages } from "./locales/da/messages.mjs";
+import { messages as enMessages } from "./locales/en/messages.mjs";
+import { messages as fiMessages } from "./locales/fi/messages.mjs";
+import { messages as nbMessages } from "./locales/nb/messages.mjs";
+import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 import { property, query, state } from "lit/decorators.js";
 
@@ -56,6 +65,9 @@ export class WarpTooltip extends LitElement {
 	@property({ useDefault: true })
 	placement: TooltipPlacement = "top";
 
+	// The actual placement can differ if there's no room in the desired location
+	#actualPlacement: Placement = "top";
+
 	/**
 	 * Milliseconds to wait before showing the tooltip on hover.
 	 *
@@ -97,8 +109,71 @@ export class WarpTooltip extends LitElement {
 	@query('[part="beak"]')
 	private beak!: HTMLDivElement;
 
+	get #accessibleDescription() {
+		let description: string = i18n.t({
+			id: "tooltip.aria.description",
+			message: "tooltip",
+			comment:
+				"Default screenreader message for tooltip in the attention component",
+		});
+
+		if (!this.noArrow) {
+			description += " ";
+			switch (this.#actualPlacement) {
+				// The arrow points in the opposite direction from the placement
+				case "top-start":
+				case "top":
+				case "top-end":
+					description += i18n._({
+						id: "tooltip.aria.pointingDown",
+						message: "pointing down",
+						comment:
+							"Screenreader description for downwards arrow direction in the tooltip component",
+					});
+					break;
+				case "right-start":
+				case "right":
+				case "right-end":
+					description += i18n._({
+						id: "tooltip.aria.pointingLeft",
+						message: "pointing left",
+						comment:
+							"Screenreader description for left arrow direction in the tooltip component",
+					});
+					break;
+
+				case "bottom-start":
+				case "bottom":
+				case "bottom-end":
+					description += i18n._({
+						id: "tooltip.aria.pointingUp",
+						message: "pointing up",
+						comment:
+							"Screenreader description for upwards arrow direction in the tooltip component",
+					});
+					break;
+				case "left-start":
+				case "left":
+				case "left-end":
+					description += i18n._({
+						id: "tooltip.aria.pointingRight",
+						message: "pointing right",
+						comment:
+							"Screenreader description for right arrow direction in the tooltip component",
+					});
+					break;
+			}
+		}
+		return description;
+	}
+
 	#cleanup: ReturnType<typeof autoUpdate> | null = null;
 	#hoverTimeout: number | undefined;
+
+	constructor() {
+		super();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
+	}
 
 	connectedCallback(): void {
 		super.connectedCallback();
@@ -258,6 +333,7 @@ export class WarpTooltip extends LitElement {
 				middleware,
 			},
 		);
+		this.#actualPlacement = placement;
 		Object.assign(this.tooltip.style, {
 			left: `${x.toFixed(1)}px`,
 			top: `${y.toFixed(1)}px`,
@@ -415,7 +491,12 @@ export class WarpTooltip extends LitElement {
 	render() {
 		return html`
 			<div part="hover-bridge" hidden></div>
-			<div part="tooltip" role="tooltip" hidden>
+			<div
+				part="tooltip"
+				role="tooltip"
+				aria-description="${this.#accessibleDescription}"
+				hidden
+			>
 				${this.noArrow
 					? nothing
 					: html`
