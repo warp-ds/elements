@@ -39,6 +39,7 @@
     "packages/textfield",
     "packages/toast",
     "packages/toast-container",
+    "packages/tooltip",
     "packages/global.ts",
     "setup-tests.ts",
 

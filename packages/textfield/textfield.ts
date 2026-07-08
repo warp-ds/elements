@@ -214,6 +214,16 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	autocomplete?: HTMLInputElement["autocomplete"];
 
 	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * Use the `tooltip` slot if you need markup and not just text.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
+	/**
 	 * Function to format value when the input field.
 	 *
 	 * Only active when the input field does not have focus,
@@ -311,17 +321,39 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	/** @internal */
 	get _label() {
 		if (this.label) {
-			return html`<label for="${this._id}"
-				>${this.label}${this.label.length && this.optional && !this.required
-					? html` <span>
-							${i18n._({
-								id: "textfield.label.optional",
-								message: "Optional",
-								comment: "Shown behind label when marked as optional",
-							})}
-						</span>`
-					: nothing}</label
-			>`;
+			const showOptionalLabel =
+				this.label.length && this.optional && !this.required;
+			const hasTooltip = Boolean(this.tooltip);
+			return html`
+				<label for="${this._id}">
+					${this.label}${showOptionalLabel
+						? html`
+								<span>
+									${i18n._({
+										id: "textfield.label.optional",
+										message: "Optional",
+										comment: "Shown behind label when marked as optional",
+									})}
+								</span>
+							`
+						: nothing}
+					${hasTooltip
+						? html`
+								<button
+									id="tooltip-target"
+									class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
+									part="tooltip-target"
+									aria-details="tooltip"
+								>
+									<w-icon name="Info" size="small"></w-icon>
+								</button>
+								<w-tooltip for="tooltip-target" id="tooltip">
+									${this.tooltip}
+								</w-tooltip>
+							`
+						: nothing}
+				</label>
+			`;
 		}
 		return undefined;
 	}

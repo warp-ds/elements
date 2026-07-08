@@ -37,3 +37,4 @@ export * from "./packages/tab-panel/react.js";
 export * from "./packages/tabs/react.js";
 export * from "./packages/textarea/react.js";
 export * from "./packages/textfield/react.js";
+export * from "./packages/tooltip/react.js";
