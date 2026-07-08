@@ -118,3 +118,26 @@ export const Placeholder: Story = {
 		`;
 	},
 };
+
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<w-select
+				name="tooltip-demo"
+				label="Needs an explanation"
+				help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+				tooltip="This tooltip adds supplementary information"
+				?optional=${optional}
+				?required=${required}
+			>
+				<option value="raspberries">Raspberries</option>
+				<option value="strawberries" selected>Strawberries</option>
+				<option value="cloudberries">Cloudberries</option>
+			</w-select>
+		`;
+	},
+};

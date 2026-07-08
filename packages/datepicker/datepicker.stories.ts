@@ -47,6 +47,16 @@ export const Default: Story = {
 	},
 };
 
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+		helpText:
+			"Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+		tooltip: "This tooltip adds supplementary information",
+	},
+};
+
 export const DisableCalendarDates: Story = {
 	args: {
 		label: "Date",

@@ -137,3 +137,22 @@ export const FormParticipation: Story = {
 		},
 	},
 };
+
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<w-textarea
+				name="tooltip-demo"
+				label="Needs an explanation"
+				help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+				tooltip="This tooltip adds supplementary information"
+				?optional=${optional}
+				?required=${required}
+			></w-textarea>
+		`;
+	},
+};

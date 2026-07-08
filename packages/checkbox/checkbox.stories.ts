@@ -32,6 +32,32 @@ type Story = StoryObj<typeof args>;
 
 export const Default: Story = {};
 
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+		helpText:
+			"Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+		tooltip: "This tooltip adds supplementary information",
+	},
+	render({ optional, required }) {
+		return html`
+			<w-checkbox-group
+				name="tooltip-demo"
+				label="Needs an explanation"
+				help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+				tooltip="This tooltip adds supplementary information"
+				?optional=${optional}
+				?required=${required}
+			>
+				<w-checkbox value="foo">Foo</w-checkbox>
+				<w-checkbox value="bar">Bar</w-checkbox>
+				<w-checkbox value="baz">Baz</w-checkbox>
+			</w-checkbox-group>
+		`;
+	},
+};
+
 export const Invalid: Story = {
 	args: {
 		name: "invalidfoo",
