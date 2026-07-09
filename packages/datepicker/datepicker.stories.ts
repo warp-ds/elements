@@ -48,6 +48,23 @@ export const Default: Story = {
 	},
 };
 
+export const WithHelpText: Story = {
+	args: {
+		label: "Date",
+		optional: true,
+		required: false,
+		helpText: "Help text is available",
+	},
+};
+
+export const Invalid: Story = {
+	args: {
+		label: "Date",
+		invalid: true,
+		helpText: "Description of how to fix the problem",
+	},
+};
+
 export const WithTooltip: Story = {
 	args: {
 		label: "Date",

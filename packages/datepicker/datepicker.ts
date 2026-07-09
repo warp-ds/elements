@@ -23,7 +23,7 @@ import {
 	subMonths,
 } from "date-fns";
 import { da, enGB, fi, nb, sv } from "date-fns/locale";
-import { html, LitElement, nothing } from "lit";
+import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -377,6 +377,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	}
 
 	#onInputBlur() {
+		this.#hasInteracted = true;
 		this.#updateValidity();
 	}
 
@@ -577,6 +578,15 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	}
 
 	/** @internal */
+	#handleInvalid = (e: Event) => {
+		// Prevent browser's native validation bubble
+		e.preventDefault();
+		// Mark as interacted and show validation state
+		this.#hasInteracted = true;
+		this.#updateValidity();
+	};
+
+	/** @internal */
 	#updateValidity(): void {
 		// Skip validation if disabled
 		if (this.disabled) {
@@ -607,6 +617,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		super.connectedCallback();
 
 		this.#initialValue = this.value;
+		if (typeof this.value !== "undefined") {
+			this.setValue(this.value);
+		}
+
+		// Listen for invalid event on the host element (fired by form validation)
+		this.addEventListener("invalid", this.#handleInvalid);
 
 		// Local lang attribute takes precedence
 		const lang = this.lang;
@@ -631,6 +647,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	disconnectedCallback(): void {
 		super.disconnectedCallback();
 
+		this.removeEventListener("invalid", this.#handleInvalid);
 		document.removeEventListener("mousedown", this._onClickOutside);
 		document.removeEventListener("touchend", this._onClickOutside);
 		document.removeEventListener("focusin", this._onClickOutside);
@@ -647,6 +664,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		) {
 			this.#updateValidity();
 		}
+	}
+
+	firstUpdated(changedProperties: PropertyValues<this>) {
+		super.firstUpdated(changedProperties);
+		// Initialize validity after the shadow DOM is ready
+		this.#updateValidity();
 	}
 
 	render() {
@@ -706,7 +729,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 									? "aria-description"
 									: undefined,
 						)}"
-						aria-errormessage="${ifDefined(this._error)}"
+						aria-errormessage="${ifDefined(
+							this._error ? "help-text" : undefined,
+						)}"
 						aria-invalid=${ifDefined(this.invalid ? "true" : undefined)}
 						@click="${this.#onInputClick}"
 						@input="${this.#onInput}"
