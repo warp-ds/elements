@@ -57,7 +57,6 @@ export const inputLabelStyles = css`
 	}
 `;
 
-
 export const inputHelpTextStyles = css`
 	/* Help text component tokens with semantic fallbacks */
 	:host {
