@@ -65,6 +65,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	label?: string = "";
 
 	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
+	/**
 	 * Placeholder text displayed when the input is empty.
 	 *
 	 * Use this as a short hint for the expected input. Do not use placeholder text as a replacement for a label.
@@ -693,6 +701,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					.optional=${this.optional}
 					.name=${this.name}
 					.autocomplete="${this.autocomplete || "off"}"
+					.tooltip="${this.tooltip}"
 					role="combobox"
 					aria-autocomplete="list"
 					aria-expanded=${this._isOpen && this._currentOptions.length !== 0}
