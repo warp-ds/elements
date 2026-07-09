@@ -58,6 +58,14 @@ export const wSliderStyles = css`
 		color: var(--w-s-color-text);
 	}
 
+	[part="tooltip-target"] {
+		appearance: none;
+		background: transparent;
+		margin: 0 0 0 4px;
+		padding: 0;
+		vertical-align: text-top;
+	}
+
 	.w-slider__description {
 		grid-area: description;
 	}

@@ -8,6 +8,7 @@ import type { WarpSlider } from "./slider.js";
 import "../affix/affix.js";
 import "../attention/attention.js";
 import "../textfield/textfield.js";
+import "../tooltip/tooltip.js";
 import "./slider.js";
 import "../slider-thumb/slider-thumb.js";
 

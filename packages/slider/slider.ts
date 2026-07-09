@@ -78,6 +78,12 @@ class WarpSlider extends LitElement {
 	@property({ reflect: true })
 	label: string | undefined;
 
+	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
 	@property({ type: Boolean, reflect: true })
 	disabled = false;
 
@@ -503,32 +509,59 @@ class WarpSlider extends LitElement {
 	}
 
 	get _label() {
-		const optional =
+		const optionalLabel =
 			this._hasLabel && this.optional && !this.required
-				? html`<span class="w-slider__optional"
-						>${i18n._({
-							id: "select.label.optional",
-							message: "Optional",
-							comment: "Shown behind label when marked as optional",
-						})}</span
-					>`
+				? html`
+						<span class="w-slider__optional">
+							${i18n._({
+								id: "select.label.optional",
+								message: "Optional",
+								comment: "Shown behind label when marked as optional",
+							})}
+						</span>
+					`
 				: nothing;
+		const tooltipTarget = this.tooltip
+			? html`
+					<button
+						id="tooltip-target"
+						part="tooltip-target"
+						aria-labelledby="tooltip"
+					>
+						<w-icon name="Info" size="small"></w-icon>
+					</button>
+					<w-tooltip
+						for="tooltip-target"
+						id="tooltip"
+						exportparts="tooltip, arrow, beak, hover-bridge"
+					>
+						${this.tooltip}
+					</w-tooltip>
+				`
+			: nothing;
 
 		return this.label
-			? html`<legend class="w-slider__label">
+			? html`
+					<legend class="w-slider__label">
+						<slot
+							id="label"
+							name="label"
+							@slotchange=${this._handleLabelSlotChange}
+						>
+							${this.label}
+						</slot>
+						${optionalLabel} ${tooltipTarget}
+					</legend>
+				`
+			: html`
 					<slot
 						id="label"
 						name="label"
 						@slotchange=${this._handleLabelSlotChange}
-						>${this.label}</slot
-					>${optional}
-				</legend>`
-			: html`<slot
-						id="label"
-						name="label"
-						@slotchange=${this._handleLabelSlotChange}
-					></slot
-					>${optional}`;
+					>
+					</slot>
+					${optionalLabel} ${tooltipTarget}
+				`;
 	}
 
 	render() {
