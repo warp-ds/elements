@@ -116,6 +116,7 @@ export const styles = css`
 
 	[part="tooltip-target"] {
 		appearance: none;
+		border: none;
 		background: transparent;
 		margin: 0 0 0 4px;
 		padding: 0;
