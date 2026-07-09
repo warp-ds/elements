@@ -7,6 +7,7 @@ import { prespread } from "../../.storybook/utilities.js";
 
 import type { WarpSelect } from "./select.js";
 import "./select.js";
+import "../tooltip/tooltip.js";
 
 const { events, args, argTypes } = getStorybookHelpers<WarpSelect>("w-select");
 
