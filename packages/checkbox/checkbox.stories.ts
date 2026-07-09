@@ -7,6 +7,7 @@ import { prespread } from "../../.storybook/utilities.js";
 
 import "./checkbox.js";
 import "../checkbox-group/checkbox-group.js";
+import "../tooltip/tooltip.js";
 import type { WarpCheckbox } from "./checkbox.js";
 
 const { events, args, argTypes } =
