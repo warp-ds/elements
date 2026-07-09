@@ -216,8 +216,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	/**
 	 * Suplementary information that should show in a tooltip behind an information icon after the label.
 	 *
-	 * Use the `tooltip` slot if you need markup and not just text.
-	 *
 	 * You must provide a label to be able to show an info icon with a tooltip.
 	 */
 	@property({ type: String, reflect: true })
@@ -341,7 +339,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
 						? html`
 								<button
 									id="tooltip-target"
-									class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
 									part="tooltip-target"
 									aria-labelledby="tooltip"
 								>
