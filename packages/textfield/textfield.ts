@@ -340,7 +340,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 								<button
 									id="tooltip-target"
 									part="tooltip-target"
-									aria-labelledby="tooltip"
+									aria-describedby="tooltip"
 								>
 									<w-icon name="Info" size="small"></w-icon>
 								</button>

@@ -1,7 +1,7 @@
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import type { PropertyValues } from "lit";
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -84,6 +84,14 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: Boolean, reflect: true })
 	optional = false;
+
+	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * Marks the radio group as invalid.
@@ -522,7 +530,7 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 				aria-labelledby=${ifDefined(labelledBy)}
 				aria-describedby=${ifDefined(describedBy)}
 				aria-errormessage="error-message"
-				aria-invalid=${showInvalidError ? "true" : undefined}
+				aria-invalid=${ifDefined(showInvalidError ? "true" : undefined)}
 			>
 				${hasLabel
 					? html`
@@ -540,10 +548,28 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 												comment: "Shown behind label when marked as optional",
 											})}
 										</span>`
-									: null}
+									: nothing}
+								${this.tooltip
+									? html`
+											<button
+												id="tooltip-target"
+												part="tooltip-target"
+												aria-describedby="tooltip"
+											>
+												<w-icon name="Info" size="small"></w-icon>
+											</button>
+											<w-tooltip
+												for="tooltip-target"
+												id="tooltip"
+												exportparts="tooltip, arrow, beak, hover-bridge"
+											>
+												${this.tooltip}
+											</w-tooltip>
+										`
+									: nothing}
 							</label>
 						`
-					: null}
+					: nothing}
 
 				<slot
 					part="form-control-input"

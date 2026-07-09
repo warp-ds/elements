@@ -7,6 +7,7 @@ import type { WarpRadioGroup } from "../radio-group/radio-group.js";
 
 import "./radio.js";
 import "../radio-group/radio-group.js";
+import "../tooltip/tooltip.js";
 
 const { args } = getStorybookHelpers<WarpRadioGroup>("w-radio-group");
 
@@ -160,6 +161,7 @@ export const HelpText: Story = {
 
 export const WithTooltip: Story = {
 	args: {
+		label: "With tooltip",
 		optional: true,
 		required: false,
 		helpText:
