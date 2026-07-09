@@ -54,6 +54,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	label: string | undefined;
 
 	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
+	/**
 	 * The name applied to child checkboxes when they do not provide one.
 	 *
 	 * Use this when the grouped checkboxes should submit values under the same form field name. Individual checkboxes can still override the group name with their own `name`.
@@ -142,6 +150,20 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		.error {
 			color: var(--w-s-color-text-negative);
 		}
+
+		[part="tooltip-target"] {
+			appearance: none;
+			background: transparent;
+			border: none;
+			height: 16px;
+			margin: 0 0 0 4px;
+			padding: 0;
+			vertical-align: text-top;
+		}
+
+		w-tooltip {
+			display: inline-block;
+		}
 	`;
 
 	render() {
@@ -169,6 +191,24 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 													comment: "Shown behind label when marked as optional",
 												})}
 											</span>
+										`
+									: nothing}
+								${this.tooltip
+									? html`
+											<button
+												id="tooltip-target"
+												part="tooltip-target"
+												aria-describedby="tooltip"
+											>
+												<w-icon name="Info" size="small"></w-icon>
+											</button>
+											<w-tooltip
+												for="tooltip-target"
+												id="tooltip"
+												exportparts="tooltip, arrow, beak, hover-bridge"
+											>
+												${this.tooltip}
+											</w-tooltip>
 										`
 									: nothing}
 							</div>
