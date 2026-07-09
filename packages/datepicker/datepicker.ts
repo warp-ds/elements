@@ -23,7 +23,7 @@ import {
 	subMonths,
 } from "date-fns";
 import { da, enGB, fi, nb, sv } from "date-fns/locale";
-import { html, LitElement } from "lit";
+import { html, LitElement, nothing } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -39,7 +39,11 @@ import { messages as enMessages } from "./locales/en/messages.mjs";
 import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
-import { wDatepickerStyles } from "./styles/w-datepicker.styles.js";
+import {
+	inputHelpTextStyles,
+	inputLabelStyles,
+	wDatepickerStyles,
+} from "./styles/w-datepicker.styles.js";
 import { wDatepickerCalendarStyles } from "./styles/w-datepicker-calendar.styles.js";
 import { wDatepickerDayStyles } from "./styles/w-datepicker-day.styles.js";
 import { wDatepickerMonthStyles } from "./styles/w-datepicker-month.styles.js";
@@ -82,6 +86,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
 	static styles = [
 		reset,
+		inputLabelStyles,
+		inputHelpTextStyles,
 		wDatepickerStyles,
 		wDatepickerCalendarStyles,
 		wDatepickerDayStyles,
@@ -95,6 +101,43 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	 */
 	@property({ reflect: true })
 	label: string | undefined;
+
+	/**
+	 * Whether user input is required on the input before form submission
+	 */
+	@property({ type: Boolean, reflect: true })
+	required = false;
+
+	/**
+	 * Indicate visually that the field is optional
+	 */
+	@property({ type: Boolean, reflect: true })
+	optional = false;
+
+	/**
+	 * Use in combination with `invalid` to show as a validation error message,
+	 * or on its own to show a help text.
+	 *
+	 * @summary Description shown below the input field
+	 */
+	@property({ type: String, reflect: true, attribute: "help-text" })
+	helpText: string | undefined;
+
+	/**
+	 * Mark the form field as invalid.
+	 *
+	 * Make sure to also set a `help-text` to help users fix the validation problem.
+	 */
+	@property({ type: Boolean, reflect: true })
+	invalid = false;
+
+	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * The locale used for calendar labels and date formatting.
@@ -119,6 +162,24 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	 */
 	@property({ reflect: true })
 	value: string | undefined;
+
+	/**
+	 * Keep in mind that using disabled in its current form is an anti-pattern.
+	 *
+	 * There will always be users who don't understand why an element is disabled, or users who can't even see that it is disabled because of poor lighting conditions or other reasons.
+	 *
+	 * Please consider more informative alternatives before choosing to use disabled on an element.
+	 *
+	 * @summary Makes the element not focusable and hides it from form submits
+	 */
+	@property({ type: Boolean, reflect: true })
+	disabled = false;
+
+	/**
+	 * Whether the input can be selected but not changed by the user
+	 */
+	@property({ type: Boolean, reflect: true })
+	readonly = false;
 
 	/**
 	 * The date format used in the calendar header.
@@ -261,10 +322,6 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		return this.value || "";
 	}
 
-	resetFormControl(): void {
-		this.value = this.#initialValue;
-	}
-
 	async #toggleCalendarOpen(e: MouseEvent | KeyboardEvent) {
 		e.preventDefault();
 		this.isCalendarOpen = !this.isCalendarOpen;
@@ -317,6 +374,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
 	#onInput(e: InputEvent) {
 		this.value = (e.target as HTMLInputElement).value;
+	}
+
+	#onInputBlur() {
+		this.#updateValidity();
 	}
 
 	#onInputClick(e: PointerEvent) {
@@ -406,13 +467,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		// currentTarget (where the listener is registered) to get
 		// the `<td>` consistently.
 		const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
-
 		if ("key" in event) {
 			if (event.key === "Enter" || event.key === " ") {
 				// Prevents whitespace from being added to the input field
 				event.preventDefault();
 				this.value = isoDate;
 				this.input.value = this.#inputValue;
+				this.#updateValidity();
 				this.isCalendarOpen = false;
 				this.toggleButton.focus();
 				this.#dispatchChangeEvent();
@@ -420,10 +481,20 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		} else {
 			this.value = isoDate;
 			this.input.value = this.#inputValue;
+			this.#updateValidity();
 			this.isCalendarOpen = false;
 			this.#dispatchChangeEvent();
 		}
 	}
+
+	// Track whether the current invalid/helpText state was set by validation
+	#validationActive = false;
+
+	// Store the original helpText to restore when validation passes
+	#originalHelpText: string | undefined = undefined;
+
+	// Track whether the user has interacted with the field
+	#hasInteracted = false;
 
 	constructor() {
 		super();
@@ -436,6 +507,100 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		}
 
 		this._onClickOutside = this._onClickOutside.bind(this);
+	}
+
+	resetFormControl(): void {
+		this.value = this.#initialValue;
+		this.#hasInteracted = false;
+		this.#clearValidationState();
+		this.#updateValidity();
+	}
+
+	/** Returns the validation message if the textarea is invalid, otherwise an empty string */
+	get validationMessage(): string {
+		return this.internals.validationMessage;
+	}
+
+	/** Returns the validity state of the textarea */
+	get validity(): ValidityState {
+		return this.internals.validity;
+	}
+
+	/** @internal */
+	get _error() {
+		if (this.invalid && this.helpText) return this.helpText;
+		return undefined;
+	}
+
+	/** Checks whether the textarea passes constraint validation */
+	checkValidity(): boolean {
+		this.#updateValidity();
+		return this.internals.checkValidity();
+	}
+
+	/** Checks validity and shows the browser's validation message if invalid */
+	reportValidity(): boolean {
+		this.#hasInteracted = true;
+		this.#updateValidity();
+		return this.internals.checkValidity();
+	}
+
+	/** Sets a custom validation message. Pass an empty string to clear. */
+	setCustomValidity(message: string): void {
+		if (message) {
+			this.internals.setValidity({ customError: true }, message, this.input);
+			this.#setValidationState(message);
+		} else {
+			this.#clearValidationState();
+			this.#updateValidity();
+		}
+	}
+
+	/** @internal */
+	#setValidationState(message: string): void {
+		if (!this.#validationActive) {
+			this.#originalHelpText = this.helpText;
+		}
+		this.#validationActive = true;
+		this.invalid = true;
+		this.helpText = message;
+	}
+
+	/** @internal */
+	#clearValidationState(): void {
+		if (this.#validationActive) {
+			this.invalid = false;
+			this.helpText = this.#originalHelpText;
+			this.#originalHelpText = undefined;
+			this.#validationActive = false;
+		}
+	}
+
+	/** @internal */
+	#updateValidity(): void {
+		// Skip validation if disabled
+		if (this.disabled) {
+			this.internals.setValidity({});
+			this.#clearValidationState();
+			return;
+		}
+
+		// Check required validation
+		if (this.required && !this.value) {
+			// Get the browser's native validation message from the internal textarea
+			const message = this.input?.validationMessage || "";
+			this.internals.setValidity({ valueMissing: true }, message, this.input);
+
+			// Only show visual validation state after user interaction
+			if (this.#hasInteracted) {
+				this.#setValidationState(message);
+			}
+			return;
+		}
+
+		// Valid state
+		this.internals.setValidity({});
+		this.#clearValidationState();
 	}
 
 	connectedCallback(): void {
@@ -472,18 +637,53 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 	}
 
 	updated(changedProperties: Map<string, unknown>): void {
-		if (changedProperties.has("value")) {
-			// https://www.npmjs.com/package/@open-wc/form-control#setvalue
-			this.setValue(this.value!);
+		if (changedProperties.has("value") && typeof this.value !== "undefined") {
+			this.setValue(this.value);
+		}
+		if (
+			changedProperties.has("value") ||
+			changedProperties.has("required") ||
+			changedProperties.has("disabled")
+		) {
+			this.#updateValidity();
 		}
 	}
 
 	render() {
 		return html`
 			<div class="w-datepicker-wrapper" id="${wrapperId}">
-				<label class="w-datepicker-input-label" for="${inputId}"
-					>${this.label}</label
-				>
+				<label class="w-datepicker-input-label" for="${inputId}">
+					${this.label}
+					${this.optional && !this.required
+						? html`
+								<span>
+									${i18n._({
+										id: "datepicker.label.optional",
+										message: "Optional",
+										comment: "Shown behind label when marked as optional",
+									})}
+								</span>
+							`
+						: nothing}
+					${this.tooltip
+						? html`
+								<button
+									id="tooltip-target"
+									part="tooltip-target"
+									aria-describedby="tooltip"
+								>
+									<w-icon name="Info" size="small"></w-icon>
+								</button>
+								<w-tooltip
+									for="tooltip-target"
+									id="tooltip"
+									exportparts="tooltip, arrow, beak, hover-bridge"
+								>
+									${this.tooltip}
+								</w-tooltip>
+							`
+						: nothing}
+				</label>
 				<div class="w-datepicker-input-wrapper">
 					<input
 						id="${inputId}"
@@ -496,8 +696,21 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 						)}"
 						.value="${this.#inputValue}"
 						class="w-datepicker-input"
+						?required=${this.required}
+						?disabled=${this.disabled}
+						?readonly=${this.readonly}
+						aria-describedby="${ifDefined(
+							this.helpText
+								? "help-text"
+								: this.ariaDescription
+									? "aria-description"
+									: undefined,
+						)}"
+						aria-errormessage="${ifDefined(this._error)}"
+						aria-invalid=${ifDefined(this.invalid ? "true" : undefined)}
 						@click="${this.#onInputClick}"
 						@input="${this.#onInput}"
+						@blur="${this.#onInputBlur}"
 						@keydown="${this.#onInputKeyDown}"
 					/>
 					<w-button
@@ -520,6 +733,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 						data-testid="${toggleButtonId}"
 						id="${toggleButtonId}"
 						variant="utilityQuiet"
+						?disabled=${this.disabled || this.readonly}
 						type="button"
 						@click="${this.#toggleCalendarOpen}"
 					>
@@ -531,6 +745,9 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 						></w-icon>
 					</w-button>
 				</div>
+				${this.helpText
+					? html`<div id="help-text" class="help-text">${this.helpText}</div>`
+					: nothing}
 			</div>
 			<div
 				class="w-dropdown__popover w-dropdown__popover--open"

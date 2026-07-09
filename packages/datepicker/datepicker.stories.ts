@@ -6,6 +6,7 @@ import { html } from "lit";
 import { prespread } from "../../.storybook/utilities.js";
 
 import "../button/button.js";
+import "../tooltip/tooltip.js";
 import type { WarpDatepicker } from "./datepicker.js";
 import "./datepicker.js";
 
@@ -49,6 +50,7 @@ export const Default: Story = {
 
 export const WithTooltip: Story = {
 	args: {
+		label: "Date",
 		optional: true,
 		required: false,
 		helpText:

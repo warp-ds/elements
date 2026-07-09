@@ -56,9 +56,14 @@ export const inputLabelStyles = css`
 	[part="tooltip-target"] {
 		appearance: none;
 		background: transparent;
+		height: 16px;
 		margin: 0 0 0 4px;
 		padding: 0;
 		vertical-align: text-top;
+	}
+
+	w-tooltip {
+		display: inline-block;
 	}
 `;
 

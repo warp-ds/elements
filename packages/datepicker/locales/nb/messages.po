@@ -42,3 +42,8 @@ msgstr "Gå til neste måned"
 #: packages/datepicker/datepicker.ts:559
 msgid "datepicker.calendar.previousMonth"
 msgstr "Gå til forrige måned"
+
+#. Shown behind label when marked as optional
+#. js-lingui-explicit-id
+msgid "textarea.label.optional"
+msgstr "Valgfri"
