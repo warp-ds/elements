@@ -28,11 +28,18 @@ type BaseTextareaProps = React.ComponentPropsWithoutRef<typeof BaseTextarea>;
 
 type TextareaProps = Omit<
 	BaseTextareaProps,
-	"help-text" | "maximum-rows" | "minimum-rows" | "read-only"
+	| "help-text"
+	| "maximum-rows"
+	| "minimum-rows"
+	| "maxlength"
+	| "minlength"
+	| "read-only"
 > & {
 	helpText?: string;
 	maxRows?: number;
 	minRows?: number;
+	maxLength?: number;
+	minLength?: number;
 	readOnly?: boolean;
 };
 
@@ -42,12 +49,17 @@ type TextareaProps = Omit<
  * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
  */
 export const Textarea = React.forwardRef<WarpTextarea, TextareaProps>(
-	({ helpText, maxRows, minRows, readOnly, ...props }, ref) =>
+	(
+		{ helpText, maxRows, minRows, maxLength, minLength, readOnly, ...props },
+		ref,
+	) =>
 		React.createElement(BaseTextarea, {
 			...props,
 			...(helpText !== undefined ? { "help-text": helpText } : {}),
 			...(maxRows !== undefined ? { "maximum-rows": maxRows } : {}),
 			...(minRows !== undefined ? { "minimum-rows": minRows } : {}),
+			...(maxLength !== undefined ? { maxlength: maxLength } : {}),
+			...(minLength !== undefined ? { minlength: minLength } : {}),
 			...(readOnly ? { "read-only": true } : {}),
 			ref,
 		} as React.ComponentProps<typeof BaseTextarea> & {

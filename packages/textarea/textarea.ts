@@ -99,6 +99,18 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	minRows: number | undefined;
 
 	/**
+	 * Sets the maximum number of text rows before the content starts scrolling.
+	 */
+	@property({ type: Number, reflect: true, attribute: "maxlength" })
+	maxLength: number | undefined;
+
+	/**
+	 * Sets the minimum number of characters for the textarea to be valid
+	 */
+	@property({ type: Number, reflect: true, attribute: "minlength" })
+	minLength: number | undefined;
+
+	/**
 	 * The [name](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input#name) of the input field when submitting the form
 	 */
 	@property({ type: String, reflect: true })
@@ -463,7 +475,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 						(this.ariaDescription ? "aria-description" : undefined),
 				)}"
 				aria-errormessage="${ifDefined(this._error)}"
-				aria-invalid=${this.invalid ? "true" : nothing}
+				aria-invalid=${ifDefined(this.invalid ? "true" : undefined)}
+				maxlength="${ifDefined(this.maxLength)}"
+				minlength="${ifDefined(this.minLength)}"
 				?disabled="${this.disabled}"
 				?readonly="${this.readonly || this.readOnly}"
 				?required="${this.required}"
