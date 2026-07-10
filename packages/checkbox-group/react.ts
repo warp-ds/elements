@@ -17,8 +17,11 @@ type BaseCheckboxGroupProps = React.ComponentPropsWithoutRef<
 	typeof BaseCheckboxGroup
 >;
 
-type CheckboxGroupProps = Omit<BaseCheckboxGroupProps, "help-text"> & {
-	helpText?: string;
+type CheckboxGroupProps = Omit<
+	BaseCheckboxGroupProps,
+	"help-text" | "helpText"
+> & {
+	helpText?: string | React.ReactElement;
 };
 
 /**
@@ -32,13 +35,27 @@ export const CheckboxGroup = React.forwardRef<
 	WarpCheckboxGroup,
 	CheckboxGroupProps
 >(({ helpText, ...props }, ref) =>
-	React.createElement(BaseCheckboxGroup, {
-		...props,
-		...(helpText !== undefined ? { "help-text": helpText } : {}),
-		ref,
-	} as React.ComponentProps<typeof BaseCheckboxGroup> & {
-		"help-text"?: string;
-	}),
+	React.createElement(
+		BaseCheckboxGroup,
+		{
+			...props,
+			...(typeof helpText === "string" ? { "help-text": helpText } : {}),
+			ref,
+		} as React.ComponentProps<typeof BaseCheckboxGroup> & {
+			"help-text"?: string;
+		},
+		[
+			props.children,
+			// support taking in JSX in helpText and placing it in the correct slot on behalf of users
+			typeof helpText !== "undefined" && typeof helpText !== "string"
+				? React.createElement(
+						"div",
+						{ slot: "help-text" },
+						helpText as React.ReactElement,
+					)
+				: null,
+		],
+	),
 );
 
 CheckboxGroup.displayName = "CheckboxGroup";

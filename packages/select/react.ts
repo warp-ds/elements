@@ -22,10 +22,10 @@ type BaseSelectProps = React.ComponentPropsWithoutRef<typeof BaseSelect>;
 
 type SelectProps = Omit<
 	BaseSelectProps,
-	"auto-focus" | "help-text" | "read-only"
+	"auto-focus" | "help-text" | "helpText" | "read-only"
 > & {
 	autoFocus?: boolean;
-	helpText?: string;
+	helpText?: string | React.ReactElement;
 	readOnly?: boolean;
 };
 
@@ -36,17 +36,31 @@ type SelectProps = Omit<
  */
 export const Select = React.forwardRef<WarpSelect, SelectProps>(
 	({ autoFocus, helpText, readOnly, ...props }, ref) =>
-		React.createElement(BaseSelect, {
-			...props,
-			...(autoFocus ? { "auto-focus": true } : {}),
-			...(helpText !== undefined ? { "help-text": helpText } : {}),
-			...(readOnly ? { "read-only": true } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseSelect> & {
-			"auto-focus"?: boolean;
-			"help-text"?: string;
-			"read-only"?: boolean;
-		}),
+		React.createElement(
+			BaseSelect,
+			{
+				...props,
+				...(autoFocus ? { "auto-focus": true } : {}),
+				...(typeof helpText === "string" ? { "help-text": helpText } : {}),
+				...(readOnly ? { "read-only": true } : {}),
+				ref,
+			} as React.ComponentProps<typeof BaseSelect> & {
+				"auto-focus"?: boolean;
+				"help-text"?: string;
+				"read-only"?: boolean;
+			},
+			[
+				props.children,
+				// support taking in JSX in helpText and placing it in the correct slot on behalf of users
+				typeof helpText !== "undefined" && typeof helpText !== "string"
+					? React.createElement(
+							"div",
+							{ slot: "help-text" },
+							helpText as React.ReactElement,
+						)
+					: null,
+			],
+		),
 );
 
 Select.displayName = "Select";

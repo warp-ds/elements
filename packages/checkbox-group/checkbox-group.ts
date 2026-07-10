@@ -93,6 +93,9 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	invalid = false;
 
+	@state()
+	private _hasHelpTextSlot = false;
+
 	// Track whether the user has interacted with the group.
 	#hasInteracted = false;
 
@@ -144,12 +147,21 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		}
 	`;
 
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
+
 	render() {
 		const hasSelection = this.#getCheckedCount() > 0;
 		const requiredInvalid = this.required && !hasSelection;
 		const showRequiredError = requiredInvalid && this.#hasInteracted;
 		const isInvalid = this.invalid || showRequiredError;
 		const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
+		const hasHelpText = helpText || this._hasHelpTextSlot;
 		const helpId = helpText ? "checkbox-group__help" : undefined;
 		const labelId = this.label ? "checkbox-group__label" : undefined;
 		const ariaInvalid = isInvalid ? "true" : undefined;
@@ -158,7 +170,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
 				${this.label
 					? html`
-							<div class="label" id="${labelId}">
+							<div class="label" id="${ifDefined(labelId)}">
 								<span>${this.label}</span>
 								${this.optional && !this.required
 									? html`
@@ -183,14 +195,17 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 				>
 					<slot></slot>
 				</div>
-				${helpText
-					? html`<div
-							class="${isInvalid ? "help-text error" : "help-text"}"
-							id="${helpId}"
-						>
-							${helpText}
-						</div>`
-					: nothing}
+				<div
+					?hidden=${!hasHelpText}
+					class="${isInvalid ? "help-text error" : "help-text"}"
+					id="${ifDefined(helpId)}"
+				>
+					${helpText}
+					<slot
+						@slotchange="${this.helpTextSlotChange}"
+						name="help-text"
+					></slot>
+				</div>
 			</div>
 		`;
 	}

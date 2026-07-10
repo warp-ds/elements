@@ -20,10 +20,10 @@ type BaseSliderProps = React.ComponentPropsWithoutRef<typeof BaseSlider>;
 
 type SliderProps = Omit<
 	BaseSliderProps,
-	"open-ended" | "help-text" | "hidden-textfield"
+	"open-ended" | "help-text" | "helpText" | "hidden-textfield"
 > & {
 	openEnded?: boolean;
-	helpText?: string;
+	helpText?: string | React.ReactElement;
 	hiddenTextfield?: boolean;
 };
 
@@ -34,17 +34,31 @@ type SliderProps = Omit<
  */
 export const Slider = React.forwardRef<WarpSlider, SliderProps>(
 	({ openEnded, helpText, hiddenTextfield, ...props }, ref) =>
-		React.createElement(BaseSlider, {
-			...props,
-			...(openEnded ? { "open-ended": true } : {}),
-			...(helpText !== undefined ? { "help-text": helpText } : {}),
-			...(hiddenTextfield ? { "hidden-textfield": true } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseSlider> & {
-			"open-ended"?: boolean;
-			"help-text"?: string;
-			"hidden-textfield"?: boolean;
-		}),
+		React.createElement(
+			BaseSlider,
+			{
+				...props,
+				...(openEnded ? { "open-ended": true } : {}),
+				...(typeof helpText === "string" ? { "help-text": helpText } : {}),
+				...(hiddenTextfield ? { "hidden-textfield": true } : {}),
+				ref,
+			} as React.ComponentProps<typeof BaseSlider> & {
+				"open-ended"?: boolean;
+				"help-text"?: string;
+				"hidden-textfield"?: boolean;
+			},
+			[
+				props.children,
+				// support taking in JSX in helpText and placing it in the correct slot on behalf of users
+				typeof helpText !== "undefined" && typeof helpText !== "string"
+					? React.createElement(
+							"span",
+							{ slot: "help-text" },
+							helpText as React.ReactElement,
+						)
+					: null,
+			],
+		),
 );
 
 Slider.displayName = "Slider";

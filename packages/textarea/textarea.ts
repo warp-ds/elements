@@ -7,7 +7,6 @@ import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { reset } from "../styles.js";
-import { uniqueId } from "../utils.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 import { activateI18n } from "../i18n.js";
@@ -165,11 +164,15 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	@query("textarea")
 	private _textarea!: HTMLTextAreaElement;
 
+	@state()
+	private _hasHelpTextSlot = false;
+
+	get #hasHelpText() {
+		return typeof this.helpText !== "undefined" || this._hasHelpTextSlot;
+	}
+
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
-
-	// unique ID for this component instance
-	#uniqueId = uniqueId("textarea-");
 
 	// Track whether the current invalid/helpText state was set by validation
 	#validationActive = false;
@@ -335,7 +338,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	get _id() {
-		return this.#uniqueId;
+		return "textarea";
 	}
 
 	/** @internal */
@@ -443,6 +446,14 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		target.style.setProperty("height", height + "px");
 	}
 
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
+
 	render() {
 		return html`
 			${this.label
@@ -486,11 +497,14 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 				@change="${this.#redispatch}"
 			>
 			</textarea>
-			${this.helpText
-				? html`<div class="${this._helptextstyles}" id="${this._helpId}">
-						${this.helpText}
-					</div>`
-				: nothing}
+			<div
+				?hidden=${!this.#hasHelpText}
+				class="${this._helptextstyles}"
+				id="${ifDefined(this._helpId)}"
+			>
+				${this.helpText}
+				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
+			</div>
 		`;
 	}
 }

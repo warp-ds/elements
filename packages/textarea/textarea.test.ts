@@ -24,7 +24,7 @@ test("renders the textarea", async () => {
 test("works as expected in forms", async () => {
 	const changeHandler = vi.fn();
 	const inputHandler = vi.fn();
-	
+
 	const label = "Test label";
 	const component = html`
 		<form data-testid="form">
