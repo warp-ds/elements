@@ -14,27 +14,32 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Crowdin-SourceKey: msgstr\n"
 
-#. Default screenreader message for bottom direction in the attention component
+#. Screenreader description for downwards arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingDown"
 msgstr "pointing down"
 
-#. Default screenreader message for left direction in the attention component
+#. Screenreader description for left arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingLeft"
 msgstr "pointing left"
 
-#. Default screenreader message for right direction in the attention component
+#. Screenreader description for right arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingRight"
 msgstr "pointing right"
 
-#. Default screenreader message for top direction in the attention component
+#. Screenreader description for upwards arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingUp"
 msgstr "pointing up"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.description"
 msgstr "A black speech bubble providing complementary information"

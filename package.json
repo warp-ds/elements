@@ -192,7 +192,7 @@
     "lint:fix": "eslint --fix  .",
     "lint:package": "publint",
     "messages:compile": "lingui compile",
-    "messages:extract": "lingui extract",
+    "messages:extract": "lingui extract --clean",
     "semantic-release": "semantic-release",
     "test": "vitest",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",

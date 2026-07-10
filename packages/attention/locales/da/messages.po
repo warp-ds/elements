@@ -19,54 +19,54 @@ msgstr ""
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:543
+#: packages/attention/attention.ts
 msgid "attention.aria.callout"
 msgstr "En grøn taleboble der introducerer noget nyt"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:423
+#: packages/attention/attention.ts
 msgid "attention.aria.close"
 msgstr "Luk"
 
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:557
+#: packages/attention/attention.ts
 msgid "attention.aria.highlight"
 msgstr "En opmærksomhedsskabende taleboble med vigtig information"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:513
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingDown"
 msgstr "peger nedad"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:522
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingLeft"
 msgstr "peger til venstre"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:504
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingRight"
 msgstr "peger til højre"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:495
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingUp"
 msgstr "peger opad"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:550
+#: packages/attention/attention.ts
 msgid "attention.aria.popover"
 msgstr "En hvid taleboble med mere information"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:536
+#: packages/attention/attention.ts
 msgid "attention.aria.tooltip"
 msgstr "En sort taleboble med flere oplysninger"
