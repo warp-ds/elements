@@ -74,3 +74,89 @@ test("calling focus on w-button focuses the button inside the shadow root", asyn
 		() => page.container.querySelector(":focus")!.tagName === "BUTTON",
 	);
 });
+
+test("primary variant includes an accessible description of its semantics", async () => {
+	const component = html`
+		<w-button variant="primary">This is a button</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Highlighted");
+});
+
+test("link primary variant includes an accessible description of its semantics", async () => {
+	const component = html`
+		<w-button href="#" variant="primary">This is a link</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("link"))
+		.toHaveAccessibleDescription("Highlighted");
+});
+
+test("primary variant custom accessible description overrides built-in", async () => {
+	const component = html`
+		<w-button variant="primary" aria-description="Radical!">
+			This is a button
+		</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Radical!");
+});
+
+test("negative variant includes an accessible description of its semantics", async () => {
+	const component = html`
+		<w-button variant="negative">This is a button</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Attention");
+});
+
+test("negative variant custom accessible description overrides built-in", async () => {
+	const component = html`
+		<w-button variant="negative" aria-description="Danger danger!">
+			This is a button
+		</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Danger danger!");
+});
+
+test("negativeQuiet variant includes an accessible description of its semantics", async () => {
+	const component = html`
+		<w-button variant="negativeQuiet">This is a button</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Attention");
+});
+
+test("negativeQuiet variant custom accessible description overrides built-in", async () => {
+	const component = html`
+		<w-button variant="negativeQuiet" aria-description="Objection!">
+			This is a button
+		</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.toHaveAccessibleDescription("Objection!");
+});
+
+test("other variants don't have a semantic description", async () => {
+	const component = html`
+		<w-button variant="secondary">This is a button</w-button>
+	`;
+	const page = render(component);
+	await expect
+		.element(page.getByRole("button"))
+		.not.toHaveAccessibleDescription();
+});
