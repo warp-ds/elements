@@ -371,6 +371,18 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		this.#resize(target);
 	}
 
+	/**
+	 * See:
+	 *  - https://github.com/warp-ds/elements/issues/722
+	 *  - https://github.com/lit/lit-element/issues/922
+	 *  - https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
+	 *  - https://pm.dartus.fr/posts/2021/shadow-dom-and-event-propagation/
+	 */
+	#redispatch(e: Event) {
+		// @ts-expect-error The constructor is there and usable
+		this.dispatchEvent(new e.constructor(e.type, e));
+	}
+
 	/** @internal */
 	#handleBlur() {
 		this.#hasInteracted = true;
@@ -457,6 +469,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 				?required="${this.required}"
 				@input="${this.handler}"
 				@blur="${this.#handleBlur}"
+				@change="${this.#redispatch}"
 			>
 			</textarea>
 			${this.helpText

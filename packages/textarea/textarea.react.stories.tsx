@@ -6,7 +6,7 @@ import { Textarea } from "./react";
 export default {
 	title: "Forms/Textarea",
 	render(args) {
-		return <Textarea {...args} />;
+		return <Textarea {...args} onChange={console.log} onInput={console.log} onBlur={console.log} />;
 	},
 	component: Textarea,
 	args: {
