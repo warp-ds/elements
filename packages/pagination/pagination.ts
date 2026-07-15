@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { i18n } from "@lingui/core";
-import { css, html, LitElement, nothing } from "lit";
+import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import "../icon/icon.js";
@@ -23,8 +23,9 @@ const getIconSuffix = () =>
 			"Suffix added at the end of icon titles when img semantics are lost on an html element",
 	});
 
-const baseItemStyles =
-	"hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out min-h-[44px] min-w-[44px] p-4 rounded-full border-0 hover:bg-clip-padding";
+const placeholderStyles = "min-h-[44px] min-w-[44px] p-4";
+
+const baseItemStyles = `hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out ${placeholderStyles} rounded-full border-0 hover:bg-clip-padding`;
 
 /**
  * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
@@ -195,7 +196,7 @@ class WarpPagination extends LitElement {
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
-					: nothing}
+					: html`<span class="${placeholderStyles}"></span>`}
 				${this.shouldShowPreviousPageButton
 					? html`<a
 							data-page-number="${this.currentPageNumber - 1}"
@@ -219,7 +220,7 @@ class WarpPagination extends LitElement {
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
-					: nothing}
+					: html`<span class="${placeholderStyles}"></span>`}
 				<div class="hidden md:block font-bold">
 					${visiblePages.map((pageNumber) => {
 						const isCurrentPage = pageNumber === this.currentPageNumber;
@@ -284,7 +285,7 @@ class WarpPagination extends LitElement {
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
-					: nothing}
+					: html`<span class="${placeholderStyles}"></span>`}
 				${this.shouldShowLastPageButton
 					? html`<a
 							data-page-number="${this.pages}"
@@ -308,7 +309,7 @@ class WarpPagination extends LitElement {
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
-					: nothing}
+					: html`<span class="${placeholderStyles}"></span>`}
 			</div>
 		</nav>`;
 	}
