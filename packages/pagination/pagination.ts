@@ -134,7 +134,9 @@ class WarpPagination extends LitElement {
 
 		const result = this.dispatchEvent(
 			new CustomEvent("page-click", {
-				detail: { clickedPage },
+				detail: {
+					clickedPage: clickedPage ? Number.parseInt(clickedPage) : null,
+				},
 				bubbles: true,
 				composed: true,
 				cancelable: true,
@@ -307,7 +309,7 @@ class WarpPagination extends LitElement {
 
 declare global {
 	interface GlobalEventHandlersEventMap {
-		"page-click": CustomEvent<{ clickedPage: string }>;
+		"page-click": CustomEvent<{ clickedPage: number }>;
 	}
 }
 

@@ -18,11 +18,9 @@ const meta: Meta<typeof args> = {
 			<w-pagination ${spread(prespread(args))}></w-pagination>
 			<script type="module">
 				const pagination = document.querySelector("w-pagination");
-				console.log(pagination);
 
 				pagination.addEventListener("page-click", (event) => {
 					event.preventDefault();
-					console.log(event);
 					pagination.currentPageNumber = event.detail.clickedPage;
 				});
 			</script>

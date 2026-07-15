@@ -154,7 +154,7 @@ test("is able to get the correct data-page-number attribute from the element on 
 
 	await expect.poll(() => page.getByText("14").query()).toBeInTheDocument();
 
-	let clickedPage: string | null = null;
+	let clickedPage: number | null = null;
 
 	const pagination = page.getByTestId("pagination").element() as WarpPagination;
 
@@ -180,7 +180,7 @@ test("is able to get the correct data-page-number attribute from the element on 
 		},
 	);
 
-	expect(clickedPage).toEqual("14");
+	expect(clickedPage).toEqual(14);
 });
 
 test("defaults to current-page=1 when no current-page attribute is set", async () => {
