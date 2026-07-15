@@ -14,7 +14,19 @@ const { events, args, argTypes } =
 const meta: Meta<typeof args> = {
 	title: "Navigation/Pagination",
 	render(args) {
-		return html`<w-pagination ${spread(prespread(args))}></w-pagination>`;
+		return html`
+			<w-pagination ${spread(prespread(args))}></w-pagination>
+			<script type="module">
+				const pagination = document.querySelector("w-pagination");
+				console.log(pagination);
+
+				pagination.addEventListener("page-click", (event) => {
+					event.preventDefault();
+					console.log(event);
+					pagination.currentPageNumber = event.detail.clickedPage;
+				});
+			</script>
+		`;
 	},
 	args,
 	argTypes,

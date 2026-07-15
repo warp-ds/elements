@@ -132,13 +132,19 @@ class WarpPagination extends LitElement {
 	#dispatchClickPage(e: PointerEvent) {
 		const clickedPage = (e.target as Element).getAttribute("data-page-number");
 
-		this.dispatchEvent(
+		const result = this.dispatchEvent(
 			new CustomEvent("page-click", {
 				detail: { clickedPage },
 				bubbles: true,
 				composed: true,
+				cancelable: true,
 			}),
 		);
+
+		// Users cancelled the page-click event, we have to cancel the native click event as well
+		if (!result) {
+			e.preventDefault();
+		}
 	}
 
 	render() {
