@@ -74,6 +74,9 @@ class WarpPagination extends LitElement {
 		reset,
 		styles,
 		css`
+			:host {
+				display: block;
+			}
 			w-icon {
 				height: 16px;
 			}
