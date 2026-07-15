@@ -117,6 +117,32 @@ test("does not show link to next page if current page is the last page", async (
 		.not.toBeInTheDocument();
 });
 
+test("shows link to last page if current page is not last or second to last", async () => {
+	const component = html`<w-pagination
+		current-page="10"
+		pages="20"
+		base-url="/page/"
+	></w-pagination>`;
+	const page = render(component);
+
+	await expect.poll(() => page.getByText("Last page")).toBeInTheDocument();
+});
+
+test("does not show link to last page if current page is last or second to last", async () => {
+	for (let i = 19; i <= 20; i++) {
+		const component = html`<w-pagination
+			current-page="${i}"
+			pages="20"
+			base-url="/page/"
+		></w-pagination>`;
+		const page = render(component);
+
+		await expect
+			.poll(() => page.getByText("Last page").query())
+			.not.toBeInTheDocument();
+	}
+});
+
 test("is able to get the correct data-page-number attribute from the element on click", async () => {
 	const component = html`<w-pagination
 		current-page="15"

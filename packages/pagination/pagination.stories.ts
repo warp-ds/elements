@@ -38,7 +38,7 @@ export const BasicPagination: Story = {
 
 export const MiddlePageSelected: Story = {
 	args: {
-		"current-page": 3,
+		"current-page": 4,
 		pages: 7,
 		"base-url": "/search?page=",
 	},

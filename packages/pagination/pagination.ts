@@ -91,6 +91,11 @@ class WarpPagination extends LitElement {
 	}
 
 	/** @internal */
+	get shouldShowLastPageButton() {
+		return this.currentPageIndex < this.pages - 2;
+	}
+
+	/** @internal */
 	get shouldShowPreviousPageButton() {
 		return this.currentPageNumber - 1 > 0;
 	}
@@ -143,15 +148,15 @@ class WarpPagination extends LitElement {
 			class="flex items-center justify-center p-8"
 			@click="${this.#dispatchClickPage}"
 		>
-			<h1 class="sr-only">
+			<h2 class="sr-only">
 				${i18n._({
 					id: "pagination.aria.pagination",
 					message: "Pages",
 					comment:
 						"Default screenreader message for pagination container in the pagination component",
 				})}
-			</h1>
-			<div class="flex items-center s-text-link">
+			</h2>
+			<div class="flex items-center">
 				${this.shouldShowShowFirstPageButton
 					? html`<a
 							data-page-number="1"
@@ -159,20 +164,19 @@ class WarpPagination extends LitElement {
 							class="${baseItemStyles +
 							" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"}"
 						>
-							<span class="sr-only"
-								>${i18n._({
+							<span class="sr-only">
+								${i18n._({
 									id: "pagination.aria.first-page",
 									message: "First page",
 									comment:
 										"Default screenreader message for first page link in the pagination component",
-								})},</span
-							>
+								})},
+							</span>
 							<w-icon
 								name="ChevronDoubleLeft"
 								size="small"
 								locale="${detectLocale()}"
 								class="pointer-events-none flex items-center"
-								class="flex"
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
@@ -197,12 +201,11 @@ class WarpPagination extends LitElement {
 								size="small"
 								locale="${detectLocale()}"
 								class="pointer-events-none flex items-center"
-								class="flex"
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
 					: nothing}
-				<div class="hidden md:block">
+				<div class="hidden md:block font-bold">
 					${visiblePages.map((pageNumber) => {
 						const isCurrentPage = pageNumber === this.currentPageNumber;
 						const url = `${this.baseUrl}${pageNumber}`;
@@ -213,7 +216,7 @@ class WarpPagination extends LitElement {
 							styles += " s-bg-primary s-text-inverted";
 						} else {
 							styles +=
-								" hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]";
+								" s-text-link hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]";
 						}
 
 						const ariaLabel = i18n._({
@@ -229,20 +232,20 @@ class WarpPagination extends LitElement {
 							aria-label="${ariaLabel}"
 							href="${url}"
 							class="${styles}"
-							aria-current="${isCurrentPage ? "page" : ""}"
+							aria-current="${isCurrentPage ? "page" : "false"}"
 							>${pageNumber}</a
 						>`;
 					})}
 				</div>
-				<span class="block md:hidden p-8 font-bold"
-					>${i18n._({
+				<span class="block md:hidden p-8 font-bold ">
+					${i18n._({
 						id: "pagination.label.current-page",
 						message: "Page {currentPage}",
 						values: { currentPage: this.currentPageNumber },
 						comment:
 							"Default message for current page label in the pagination component",
-					})}</span
-				>
+					})}
+				</span>
 				${this.shouldShowNextPageButton
 					? html`<a
 							data-page-number="${this.currentPageNumber + 1}"
@@ -263,7 +266,30 @@ class WarpPagination extends LitElement {
 								size="small"
 								locale="${detectLocale()}"
 								class="pointer-events-none flex items-center"
-								class="flex"
+							></w-icon>
+							<span class="sr-only">${getIconSuffix()}</span>
+						</a>`
+					: nothing}
+				${this.shouldShowLastPageButton
+					? html`<a
+							data-page-number="${this.pages}"
+							href="${this.baseUrl}${this.pages}"
+							class="${baseItemStyles +
+							" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"}"
+						>
+							<span class="sr-only"
+								>${i18n._({
+									id: "pagination.aria.last-page",
+									message: "Last page",
+									comment:
+										"Default screenreader message for last page link in the pagination component",
+								})},</span
+							>
+							<w-icon
+								name="ChevronDoubleRight"
+								size="small"
+								locale="${detectLocale()}"
+								class="pointer-events-none flex items-center"
 							></w-icon>
 							<span class="sr-only">${getIconSuffix()}</span>
 						</a>`
