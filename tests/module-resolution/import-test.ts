@@ -31,9 +31,6 @@ import { Textarea } from "@warp-ds/elements/react/textarea";
 import { TextField } from "@warp-ds/elements/react/textfield";
 import { toast } from "@warp-ds/elements/toast";
 
-// unreleased
-// import { DeadToggle } from '@warp-ds/elements/react/dead-toggle';
-
 // Type assertions to ensure imports are working
 const _affix: typeof Affix = Affix;
 const _alert: typeof Alert = Alert;

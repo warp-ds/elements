@@ -85,9 +85,6 @@
       "react/datepicker": [
         "./dist/packages/datepicker/react.d.ts"
       ],
-      "react/dead-toggle": [
-        "./dist/packages/dead-toggle/react.d.ts"
-      ],
       "react/expandable": [
         "./dist/packages/expandable/react.d.ts"
       ],

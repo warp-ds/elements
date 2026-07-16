@@ -42,9 +42,6 @@
     "packages/tooltip",
     "packages/global.ts",
     "setup-tests.ts",
-
-    // unreleased components
-    // "packages/dead-toggle",
   ],
   "compilerOptions": {
     "types": ["node", "react", "react-dom"],
