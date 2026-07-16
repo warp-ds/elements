@@ -6,6 +6,7 @@
     "packages/attention",
     "packages/badge",
     "packages/box",
+    "packages/breadcrumb-item",
     "packages/breadcrumbs",
     "packages/button",
     "packages/card",
