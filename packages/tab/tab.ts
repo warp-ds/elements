@@ -33,29 +33,18 @@ export class WarpTab extends LitElement {
 				display: flex;
 			}
 
-			.focusable:focus-visible {
+			:host(:focus-visible) {
 				outline: 2px solid var(--w-s-color-border-focus, #1a73e8);
 				outline-offset: var(--w-outline-offset, 1px);
 			}
 		`,
 	];
 
-	/**
-	 * Use delegatesFocus so focus delegates to the internal button
-	 *
-	 * @internal
-	 */
-	static shadowRootOptions = {
-		...LitElement.shadowRootOptions,
-		delegatesFocus: true,
-	};
-
-	private _internals: ElementInternals;
+	/** @internal */
+	_internals: ElementInternals;
 
 	private _handleClick = (event: Event & { tab?: WarpTab }) => {
-		if (!event.tab) {
-			event.tab = this;
-		}
+		event.tab = this;
 	};
 
 	constructor() {
@@ -64,25 +53,22 @@ export class WarpTab extends LitElement {
 	}
 
 	/**
+	 * The host element (`<w-tab>`), the one with `role=tab`, must be the focusable element for assistive technology.
+	 */
+	@property({ type: Number })
+	tabindex: number = 0;
+
+	/**
 	 * The `id` of the `<w-tab-panel>` this tab controls.
 	 */
 	@property({ reflect: true })
-	for!: string;
+	for: string | undefined;
 
 	/**
 	 * @internal
 	 */
 	@property({ attribute: "aria-controls" })
 	private _ariaControlsAttr?: string;
-
-	/**
-	 * Internal tabindex managed by parent w-tabs.
-	 * Non-reflecting to avoid DOM changes during hydration.
-	 *
-	 * @internal
-	 */
-	@property({ attribute: false })
-	_parentTabIndex: number | undefined;
 
 	/**
 	 * Internal aria-selected managed by parent w-tabs.
@@ -93,25 +79,6 @@ export class WarpTab extends LitElement {
 	 */
 	@property({ attribute: false })
 	_parentAriaSelected: "true" | "false" | undefined;
-
-	/**
-	 * Override tabIndex getter to return the computed internal tabIndex.
-	 * This allows external code to check if the tab is focusable.
-	 *
-	 * @internal
-	 */
-	override get tabIndex(): number {
-		return this._parentTabIndex ?? 0;
-	}
-
-	/**
-	 * Override tabIndex setter to set _parentTabIndex (for backwards compatibility).
-	 *
-	 * @internal
-	 */
-	override set tabIndex(value: number) {
-		this._parentTabIndex = value;
-	}
 
 	/**
 	 * Computed aria-selected: prefers parent-managed, falls back to own property
@@ -216,14 +183,15 @@ export class WarpTab extends LitElement {
 			null;
 
 		// Prefer element relationships on ElementInternals; fall back to string if needed.
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const internals = this._internals as any;
+		const internals = this._internals;
 		if ("ariaControlsElements" in internals) {
 			internals.ariaControlsElements = panel ? [panel] : [];
 			return;
 		}
-		if ("ariaControls" in internals) {
-			internals.ariaControls = controlsId || null;
+		// ariaControlsElements is defined in the types so
+		// TS thinks this will never happen :sigh:
+		if ("ariaControls" in (internals as Record<string, unknown>)) {
+			(internals as Record<string, unknown>).ariaControls = controlsId || null;
 		}
 	}
 
@@ -231,16 +199,7 @@ export class WarpTab extends LitElement {
 		const hasIcon = this._hasIcon;
 
 		return html`
-			<div
-				id="warp-tab-${this.for}"
-				class="${this._classes}"
-				tabindex="${this._parentTabIndex ?? 0}"
-				aria-controls="${this._effectiveAriaControls}"
-				@click="${(e: PointerEvent & { tab?: WarpTab }) => {
-					e.tab = this;
-				}}"
-				style="height: 100%"
-			>
+			<div class="${this._classes}" style="height: 100%">
 				${
 					!hasIcon
 						? html`<span class="${ccTab.contentUnderlined}"
