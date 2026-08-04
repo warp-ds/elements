@@ -524,47 +524,54 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 				aria-errormessage="error-message"
 				aria-invalid=${showInvalidError ? "true" : undefined}
 			>
-				${hasLabel
-					? html`
-							<label
-								part="form-control-label"
-								id="label"
-								@click=${this.handleLabelClick}
-							>
-								<slot name="label">${this.label}</slot>
-								${this.optional && !this.required
-									? html`<span class="optional">
-											${i18n._({
-												id: "radio-group.label.optional",
-												message: "Optional",
-												comment: "Shown behind label when marked as optional",
-											})}
-										</span>`
-									: null}
-							</label>
-						`
-					: null}
+				${
+					hasLabel
+						? html`
+								<label
+									part="form-control-label"
+									id="label"
+									@click=${this.handleLabelClick}
+								>
+									<slot name="label">${this.label}</slot>
+									${
+										this.optional && !this.required
+											? html`<span class="optional">
+													${i18n._({
+														id: "radio-group.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>`
+											: null
+									}
+								</label>
+							`
+						: null
+				}
 
 				<slot
 					part="form-control-input"
 					@slotchange=${this.syncRadioElements}
 				></slot>
 
-				${shouldShowHelpText
-					? html`
-							<div
-								id="help-text"
-								part="help-text"
-								aria-label=${ifDefined(helpTextAriaLabel)}
-							>
-								<slot
-									name="help-text"
-									@slotchange=${this.handleHelpTextSlotChange}
-									>${helpText}</slot
+				${
+					shouldShowHelpText
+						? html`
+								<div
+									id="help-text"
+									part="help-text"
+									aria-label=${ifDefined(helpTextAriaLabel)}
 								>
-							</div>
-						`
-					: null}
+									<slot
+										name="help-text"
+										@slotchange=${this.handleHelpTextSlotChange}
+										>${helpText}</slot
+									>
+								</div>
+							`
+						: null
+				}
 			</fieldset>
 		`;
 	}

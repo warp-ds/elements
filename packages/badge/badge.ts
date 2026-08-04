@@ -38,11 +38,7 @@ class WarpBadge extends LitElement {
 	 */
 	@property({ type: String, reflect: true })
 	position:
-		| "top-left"
-		| "top-right"
-		| "bottom-right"
-		| "bottom-left"
-		| undefined;
+		"top-left" | "top-right" | "bottom-right" | "bottom-left" | undefined;
 
 	static styles = [reset, styles];
 

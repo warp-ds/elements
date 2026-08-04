@@ -105,53 +105,57 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
 					@slotchange=${this.handleTopSlotChange}
 				></slot>
 
-				${showBackButton
-					? html`<w-button
-							type="button"
-							part="back"
-							title=""
-							aria-label="${i18n._({
-								id: "modal.aria.back",
-								message: "Back",
-								comment: "Aria label for the back button in modal",
-							})}"
-							variant="pill"
-							icon-only
-							@click="${this.emitBack}"
-						>
-							<w-icon
-								name="ArrowLeft"
-								size="small"
-								locale="${detectLocale()}"
-							></w-icon>
-						</w-button>`
-					: nothing}
+				${
+					showBackButton
+						? html`<w-button
+								type="button"
+								part="back"
+								title=""
+								aria-label="${i18n._({
+									id: "modal.aria.back",
+									message: "Back",
+									comment: "Aria label for the back button in modal",
+								})}"
+								variant="pill"
+								icon-only
+								@click="${this.emitBack}"
+							>
+								<w-icon
+									name="ArrowLeft"
+									size="small"
+									locale="${detectLocale()}"
+								></w-icon>
+							</w-button>`
+						: nothing
+				}
 
 				<p part="title">${this.title}</p>
 
-				${showCloseButton
-					? html`<w-button
-							type="button"
-							part="close"
-							title=""
-							aria-label="${i18n._({
-								id: "modal.aria.close",
-								message: "Close",
-								comment: "Aria label for the close button in modal",
-							})}"
-							variant="pill"
-							icon-only
-							@click="${this.close}"
-						>
-							<w-icon
-								name="Close"
-								size="small"
-								locale="${detectLocale()}"
-								style="height: 16px;"
-								class="flex"
-							></w-icon>
-						</w-button>`
-					: nothing}
+				${
+					showCloseButton
+						? html`<w-button
+								type="button"
+								part="close"
+								title=""
+								aria-label="${i18n._({
+									id: "modal.aria.close",
+									message: "Close",
+									comment: "Aria label for the close button in modal",
+								})}"
+								variant="pill"
+								icon-only
+								@click="${this.close}"
+							>
+								<w-icon
+									name="Close"
+									size="small"
+									locale="${detectLocale()}"
+									style="height: 16px;"
+									class="flex"
+								></w-icon>
+							</w-button>`
+						: nothing
+				}
 			</div>
 		`;
 	}

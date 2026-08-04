@@ -200,21 +200,25 @@ export class WarpTab extends LitElement {
 
 		return html`
 			<div class="${this._classes}" style="height: 100%">
-				${!hasIcon
-					? html`<span class="${ccTab.contentUnderlined}"><slot></slot></span>`
-					: this.over
-						? html`
-								<span class="${ccTab.icon}">
-									<slot name="icon"></slot>
-								</span>
-								<span class="${ccTab.contentUnderlined}"><slot></slot></span>
-							`
-						: html`
-								<div class="${ccTab.content}">
-									<slot name="icon"></slot>
-									<slot></slot>
-								</div>
-							`}
+				${
+					!hasIcon
+						? html`<span class="${ccTab.contentUnderlined}"
+								><slot></slot
+							></span>`
+						: this.over
+							? html`
+									<span class="${ccTab.icon}">
+										<slot name="icon"></slot>
+									</span>
+									<span class="${ccTab.contentUnderlined}"><slot></slot></span>
+								`
+							: html`
+									<div class="${ccTab.content}">
+										<slot name="icon"></slot>
+										<slot></slot>
+									</div>
+								`
+				}
 			</div>
 		`;
 	}

@@ -300,24 +300,26 @@ export const AllVariantsGrid: Story = {
 
 								<w-button variant=${v} type="button">Label</w-button>
 
-								${v === "pill"
-									? html`
-											<w-button
-												variant="pill"
-												type="button"
-												icon-only
-												aria-label="Pill icon"
-											>
-												<w-icon
-													name="Heart"
-													size="small"
-													locale="${locale}"
-													style="height: 16px;"
-													class="flex"
-												></w-icon>
-											</w-button>
-										`
-									: null}
+								${
+									v === "pill"
+										? html`
+												<w-button
+													variant="pill"
+													type="button"
+													icon-only
+													aria-label="Pill icon"
+												>
+													<w-icon
+														name="Heart"
+														size="small"
+														locale="${locale}"
+														style="height: 16px;"
+														class="flex"
+													></w-icon>
+												</w-button>
+											`
+										: null
+								}
 							</div>
 						`,
 					)}
