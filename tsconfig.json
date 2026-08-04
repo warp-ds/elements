@@ -6,6 +6,7 @@
     "packages/attention",
     "packages/badge",
     "packages/box",
+    "packages/breadcrumb-item",
     "packages/breadcrumbs",
     "packages/button",
     "packages/card",
@@ -42,9 +43,6 @@
     "packages/tooltip",
     "packages/global.ts",
     "setup-tests.ts",
-
-    // unreleased components
-    // "packages/dead-toggle",
   ],
   "compilerOptions": {
     "types": ["node", "react", "react-dom"],

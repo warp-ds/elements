@@ -1,3 +1,10 @@
+# [2.12.0-next.2](https://github.com/warp-ds/elements/compare/v2.12.0-next.1...v2.12.0-next.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* **modal-header:** constrain close button column width to prevent title overflow ([#743](https://github.com/warp-ds/elements/issues/743)) ([b247735](https://github.com/warp-ds/elements/commit/b247735aec38e298fde07ba9b1311e4d4163d8a7)), closes [#742](https://github.com/warp-ds/elements/issues/742)
+
 # [2.12.0-next.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.12.0-next.1) (2026-07-08)
 
 

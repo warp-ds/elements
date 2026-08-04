@@ -161,9 +161,6 @@ export default {
 		"packages/toast/toast.ts",
 		"packages/toast-container/toast-container.ts",
 		"packages/tooltip/tooltip.ts",
-
-		// unreleased
-		// 'packages/dead-toggle/dead-toggle.ts',
 	],
 
 	// Globs to exclude
