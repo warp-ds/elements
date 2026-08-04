@@ -1,3 +1,10 @@
+# [2.12.0-next.4](https://github.com/warp-ds/elements/compare/v2.12.0-next.3...v2.12.0-next.4) (2026-08-04)
+
+
+### Bug Fixes
+
+* **pagination:** add missing last page button, visual fixes ([#735](https://github.com/warp-ds/elements/issues/735)) ([2911639](https://github.com/warp-ds/elements/commit/291163947f86cf58389abf0c78ad4ddfa8d24c51))
+
 # [2.12.0-next.3](https://github.com/warp-ds/elements/compare/v2.12.0-next.2...v2.12.0-next.3) (2026-08-04)
 
 
