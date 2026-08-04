@@ -29,8 +29,8 @@ describe("w-tabs React SSR hydration", () => {
 		expect(warnings).toEqual([]);
 	});
 
-	test("with w-tab and w-tab-panel hydrates without warnings as long as you provide slot, ID and active tab ahead of time", async () => {
-		const childrenHtml = /* html */ `<w-tab id="t1" slot="tabs" for="tab1"><span>First</span></w-tab><w-tab id="t2" slot="tabs" for="tab2"><span>Second</span></w-tab><w-tab id="t3" slot="tabs" for="tab3"><span>Third</span></w-tab><w-tab-panel id="tab1" slot="panels"><p>Content the first</p></w-tab-panel><w-tab-panel id="tab2" slot="panels"><p>Content the second</p></w-tab-panel><w-tab-panel id="tab3" slot="panels"><p>Content the third</p></w-tab-panel>`;
+	test("with w-tab and w-tab-panel hydrates without warnings as long as you provide slot, ID, tabindex and active tab ahead of time", async () => {
+		const childrenHtml = /* html */ `<w-tab id="t1" slot="tabs" for="tab1" tabindex="0"><span>First</span></w-tab><w-tab id="t2" slot="tabs" for="tab2" tabindex="-1"><span>Second</span></w-tab><w-tab id="t3" slot="tabs" for="tab3" tabindex="-1"><span>Third</span></w-tab><w-tab-panel id="tab1" slot="panels"><p>Content the first</p></w-tab-panel><w-tab-panel id="tab2" slot="panels"><p>Content the second</p></w-tab-panel><w-tab-panel id="tab3" slot="panels"><p>Content the third</p></w-tab-panel>`;
 
 		const warnings = await testHydrationWithChildren(
 			"w-tabs",

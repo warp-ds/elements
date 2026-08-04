@@ -1,3 +1,10 @@
+# [2.12.0-next.3](https://github.com/warp-ds/elements/compare/v2.12.0-next.2...v2.12.0-next.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* **tab:** remove button inside tab that confused screen readers ([#736](https://github.com/warp-ds/elements/issues/736)) ([04013f6](https://github.com/warp-ds/elements/commit/04013f6904dc555cca4ff304f7e9f2a77e469f76))
+
 # [2.12.0-next.2](https://github.com/warp-ds/elements/compare/v2.12.0-next.1...v2.12.0-next.2) (2026-08-04)
 
 
