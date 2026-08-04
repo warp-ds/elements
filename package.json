@@ -261,7 +261,7 @@
     "glob": "13.0.6",
     "globals": "17.9.0",
     "lightningcss": "^1.30.1",
-    "nanoid": "^5.1.11",
+    "nanoid": "^6.0.0",
     "playwright": "^1.55.0",
     "prettier": "3.9.6",
     "publint": "^0.3.21",
