@@ -501,22 +501,20 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 						@keydown="${this.#onInputKeyDown}"
 					/>
 					<w-button
-						aria-label="${
-							this.value
-								? i18n.t({
-										id: "datepicker.toggle.changeDate",
-										values: { currentDate: format(this.value, this.dayFormat) },
-										message: "Change date, {currentDate}",
-										comment:
-											"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date",
-									})
-								: i18n.t({
-										id: "datepicker.toggle.chooseDate",
-										message: "Choose date",
-										comment:
-											"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date",
-									})
-						}"
+						aria-label="${this.value
+							? i18n.t({
+									id: "datepicker.toggle.changeDate",
+									values: { currentDate: format(this.value, this.dayFormat) },
+									message: "Change date, {currentDate}",
+									comment:
+										"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is a selected date",
+								})
+							: i18n.t({
+									id: "datepicker.toggle.chooseDate",
+									message: "Choose date",
+									comment:
+										"Used by screen readers to describe the button that toggles open the calendar in a date picker when there is no selected date",
+								})}"
 						aria-controls="${calendarId}"
 						class="w-datepicker-button"
 						data-testid="${toggleButtonId}"
@@ -653,12 +651,12 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 													})}"
 													role="gridcell"
 													tabindex="${isNavigationDate ? 0 : -1}"
-													@click="${
-														isDisabled ? undefined : this.#onCalendarSelect
-													}"
-													@keydown="${
-														isDisabled ? undefined : this.#onCalendarSelect
-													}"
+													@click="${isDisabled
+														? undefined
+														: this.#onCalendarSelect}"
+													@keydown="${isDisabled
+														? undefined
+														: this.#onCalendarSelect}"
 												>
 													<div>${getDate(day)}</div>
 												</td>`;

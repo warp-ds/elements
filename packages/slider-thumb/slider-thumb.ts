@@ -684,13 +684,11 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 		const showPlaceholder = this.placeholder && !this.value;
 		return html`
 			<div class="w-slider-thumb">
-				${
-					!("anchorName" in document.documentElement.style)
-						? html`<div class="polyfill-range">
-								<div class="polyfill-active-range"></div>
-							</div>`
-						: nothing
-				}
+				${!("anchorName" in document.documentElement.style)
+					? html`<div class="polyfill-range">
+							<div class="polyfill-active-range"></div>
+						</div>`
+					: nothing}
 				<input
 					id="range"
 					aria-label="${this.ariaLabel}"
@@ -716,30 +714,24 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 					@keydown="${this.#onRangeSliderKeyDown}"
 				/>
 
-				${
-					this.slot === "from" || !this.slot
-						? // avoid including these labels twice, for screen readers
-							html` <span class="sr-only">
-								${
-									i18n.t({
-										id: "slider.label.from",
-										message: "From",
-									}) +
-									" " +
-									(this.labelFormatter
-										? this.labelFormatter("from")
-										: this.min) +
-									", " +
-									i18n.t({
-										id: "slider.label.to",
-										message: "To",
-									}) +
-									" " +
-									(this.labelFormatter ? this.labelFormatter("to") : this.max)
-								}
-							</span>`
-						: nothing
-				}
+				${this.slot === "from" || !this.slot
+					? // avoid including these labels twice, for screen readers
+						html` <span class="sr-only">
+							${i18n.t({
+								id: "slider.label.from",
+								message: "From",
+							}) +
+							" " +
+							(this.labelFormatter ? this.labelFormatter("from") : this.min) +
+							", " +
+							i18n.t({
+								id: "slider.label.to",
+								message: "To",
+							}) +
+							" " +
+							(this.labelFormatter ? this.labelFormatter("to") : this.max)}
+						</span>`
+					: nothing}
 
 				<span aria-hidden="true" class="w-slider-thumb__from-marker">
 					${this.labelFormatter ? this.labelFormatter("from") : this.min}
@@ -759,12 +751,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 					tabindex="${this._hiddenTextfield ? -1 : nothing}"
 					placeholder="${this.placeholder}"
 					.value="${this.textFieldDisplayValue}"
-					.formatter=${
-						this.valueFormatter && !showPlaceholder
-							? (value: string) =>
-									this.valueFormatter!(value, this.slot as SliderSlot)
-							: nothing
-					}
+					.formatter=${this.valueFormatter && !showPlaceholder
+						? (value: string) =>
+								this.valueFormatter!(value, this.slot as SliderSlot)
+						: nothing}
 					min="${this.openEnded ? nothing : this.min}"
 					max="${this.openEnded ? nothing : this.max}"
 					step="${ifDefined(this.step)}"
@@ -773,14 +763,12 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 					@keydown="${this.#onInputFieldKeyDown}"
 					?disabled="${this.disabled}"
 				>
-					${
-						(this.suffix ?? "")
-							? html`<w-affix
-									slot="suffix"
-									label="${this.suffix ?? ""}"
-								></w-affix>`
-							: nothing
-					}
+					${(this.suffix ?? "")
+						? html`<w-affix
+								slot="suffix"
+								label="${this.suffix ?? ""}"
+							></w-affix>`
+						: nothing}
 				</w-textfield>
 				<w-attention
 					tooltip
@@ -795,9 +783,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 						slot="target"
 					></output>
 					<span slot="message">
-						${this.tooltipDisplayValue}${
-							(this.suffix ?? "") ? html`&nbsp;${this.suffix ?? ""}` : nothing
-						}
+						${this.tooltipDisplayValue}${(this.suffix ?? "")
+							? html`&nbsp;${this.suffix ?? ""}`
+							: nothing}
 					</span>
 				</w-attention>
 

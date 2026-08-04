@@ -95,24 +95,22 @@ class WarpCard extends LitElement {
 				@keydown=${this.keypressed}
 			>
 				<div part="border"></div>
-				${
-					this.clickable
-						? html`<button
+				${this.clickable
+					? html`<button
+							class="sr-only"
+							aria-pressed="${this.selected}"
+							tabindex="-1"
+						>
+							${this.buttonText}
+						</button>`
+					: this.selected
+						? html`<span
 								class="sr-only"
-								aria-pressed="${this.selected}"
-								tabindex="-1"
-							>
-								${this.buttonText}
-							</button>`
-						: this.selected
-							? html`<span
-									class="sr-only"
-									role="checkbox"
-									aria-checked="true"
-									aria-disabled="true"
-								></span>`
-							: nothing
-				}
+								role="checkbox"
+								aria-checked="true"
+								aria-disabled="true"
+							></span>`
+						: nothing}
 				<slot></slot>
 			</div>
 		`;

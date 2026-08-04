@@ -600,41 +600,39 @@ class WarpAttention extends LitElement {
 		if (!this.callout && this._targetEl === undefined) return html``;
 		return html`
 			<section class=${ifDefined(this.className ? this.className : undefined)}>
-				${
-					this.placement === "right-start" ||
-					this.placement === "right" ||
-					this.placement === "right-end" ||
-					this.placement === "bottom-start" ||
-					this.placement === "bottom" ||
-					this.placement === "bottom-end" // Attention's and its arrow's visual position should be reflected in the DOM
-						? html`
-								<slot name="target"></slot>
+				${this.placement === "right-start" ||
+				this.placement === "right" ||
+				this.placement === "right-end" ||
+				this.placement === "bottom-start" ||
+				this.placement === "bottom" ||
+				this.placement === "bottom-end" // Attention's and its arrow's visual position should be reflected in the DOM
+					? html`
+							<slot name="target"></slot>
 
-								<div id="attention" class="${this._wrapperClasses}">
-									<div
-										role="${this.tooltip ? "tooltip" : "img"}"
-										aria-label="${this.defaultAriaLabel()}"
-									>
-										${this._arrowHtml}
-									</div>
-									<slot name="message"></slot>
-									${this.canClose ? this._closeBtnHtml : nothing}
+							<div id="attention" class="${this._wrapperClasses}">
+								<div
+									role="${this.tooltip ? "tooltip" : "img"}"
+									aria-label="${this.defaultAriaLabel()}"
+								>
+									${this._arrowHtml}
 								</div>
-							`
-						: html`
-								<div id="attention" class="${this._wrapperClasses}">
-									<slot name="message"></slot>
-									<div
-										role="${this.tooltip ? "tooltip" : "img"}"
-										aria-label="${this.defaultAriaLabel()}"
-									>
-										${this._arrowHtml}
-									</div>
-									${this.canClose ? this._closeBtnHtml : nothing}
+								<slot name="message"></slot>
+								${this.canClose ? this._closeBtnHtml : nothing}
+							</div>
+						`
+					: html`
+							<div id="attention" class="${this._wrapperClasses}">
+								<slot name="message"></slot>
+								<div
+									role="${this.tooltip ? "tooltip" : "img"}"
+									aria-label="${this.defaultAriaLabel()}"
+								>
+									${this._arrowHtml}
 								</div>
-								<slot name="target"></slot>
-							`
-				}
+								${this.canClose ? this._closeBtnHtml : nothing}
+							</div>
+							<slot name="target"></slot>
+						`}
 			</section>
 		`;
 	}

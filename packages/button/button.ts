@@ -268,46 +268,42 @@ class WarpButton extends FormControlMixin(LitElement) {
 
 	render() {
 		const variant = this.variant || "secondary";
-		return html` ${
-			this.href
-				? html`
-						<w-link
-							href=${this.href}
-							target=${this.target}
-							variant=${this.quiet ? "quiet" : variant}
-							?small=${this.small}
-							?loading=${this.loading}
-							?autofocus=${this.autofocus}
-							?full-width=${this.fullWidth}
-							class=${this.buttonClass}
-							rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
-						>
-							<slot></slot>
-						</w-link>
-					`
-				: html`
-						<button
-							type=${this.type || "button"}
-							part="base"
-							class=${ifDefined(this.buttonClass)}
-							@click="${this._handleButtonClick}"
-							commandfor=${ifDefined(this.commandfor)}
-							command=${ifDefined(this.command)}
-						>
-							<slot></slot>
-						</button>
-					`
-		}
-		${
-			this.loading
-				? html`<span
-						class="sr-only"
-						role="progressbar"
-						aria-valuenow="{0}"
-						aria-valuetext=${this.ariaValueTextLoading}
-					></span>`
-				: nothing
-		}`;
+		return html` ${this.href
+			? html`
+					<w-link
+						href=${this.href}
+						target=${this.target}
+						variant=${this.quiet ? "quiet" : variant}
+						?small=${this.small}
+						?loading=${this.loading}
+						?autofocus=${this.autofocus}
+						?full-width=${this.fullWidth}
+						class=${this.buttonClass}
+						rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
+					>
+						<slot></slot>
+					</w-link>
+				`
+			: html`
+					<button
+						type=${this.type || "button"}
+						part="base"
+						class=${ifDefined(this.buttonClass)}
+						@click="${this._handleButtonClick}"
+						commandfor=${ifDefined(this.commandfor)}
+						command=${ifDefined(this.command)}
+					>
+						<slot></slot>
+					</button>
+				`}
+		${this.loading
+			? html`<span
+					class="sr-only"
+					role="progressbar"
+					aria-valuenow="{0}"
+					aria-valuetext=${this.ariaValueTextLoading}
+				></span>`
+			: nothing}`;
 	}
 }
 

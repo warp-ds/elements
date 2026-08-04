@@ -149,36 +149,32 @@ class WarpPill extends LitElement {
 					@click="${this._onClick}"
 				>
 					<span class="${pillStyles.a11y}"
-						>${
-							this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText
-						}</span
+						>${this.openAriaLabel
+							? this.openAriaLabel
+							: this.openFilterSrText}</span
 					>
 					<slot></slot>
 				</button>
-				${
-					this.canClose
-						? html` <button
-								type="button"
-								class="${this._closeClasses}"
-								@click="${this._onClose}"
+				${this.canClose
+					? html` <button
+							type="button"
+							class="${this._closeClasses}"
+							@click="${this._onClose}"
+						>
+							<span class="${pillStyles.a11y}"
+								>${this.closeAriaLabel
+									? this.closeAriaLabel
+									: this.removeFilterSrText}</span
 							>
-								<span class="${pillStyles.a11y}"
-									>${
-										this.closeAriaLabel
-											? this.closeAriaLabel
-											: this.removeFilterSrText
-									}</span
-								>
-								<w-icon
-									name="Close"
-									size="small"
-									locale="${detectLocale()}"
-									class="${pillStyles.closeIcon}"
-									class="flex"
-								></w-icon>
-							</button>`
-						: null
-				}
+							<w-icon
+								name="Close"
+								size="small"
+								locale="${detectLocale()}"
+								class="${pillStyles.closeIcon}"
+								class="flex"
+							></w-icon>
+						</button>`
+					: null}
 			</div>
 		`;
 	}
