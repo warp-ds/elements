@@ -111,7 +111,7 @@ w-radio {
 
 ```css
 w-radio {
-  --w-c-radio-border-color-checked: var(--w-s-color-border-success);
+  --w-c-radio-border-color-checked: var(--w-s-color-border-positive);
 }
 ```
 
