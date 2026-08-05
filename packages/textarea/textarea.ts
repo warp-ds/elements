@@ -332,7 +332,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	get _helpId() {
-		if (this.helpText) return `${this._id}__hint`;
+		if (this.#hasHelpText) return `${this._id}__hint`;
 		return undefined;
 	}
 
@@ -450,8 +450,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		const el = this.renderRoot.querySelector(
 			"slot[name=help-text]",
 		) as HTMLSlotElement;
-		const helpText = el.assignedElements();
-		if (helpText.length) this._hasHelpTextSlot = true;
+		this._hasHelpTextSlot = el.assignedElements().length > 0;
 	}
 
 	render() {
