@@ -8,18 +8,19 @@ import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
 
 /**
+ * Radios allow users to select a single option from a list of choices.
+ *
+ * Wrap individual radio components in a radio group.
+ *
+ * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
+ *
  * @parent w-radio-group
- *
- * ## Implementation Note
- * This component uses a custom implementation with role="radio" via ElementInternals
- * rather than a native <input type="radio">. This provides full styling control while
- * maintaining proper ARIA semantics and form integration.
- *
- * TODO: Checkbox uses a hidden native <input type="checkbox"> for historical reasons,
- * but could be simplified to match this cleaner ElementInternals-only approach.
- * Consider aligning both components in a future major version after assessing
- * backwards compatibility implications.
  */
+// Implementation note: this component uses role="radio" via ElementInternals
+// rather than a native <input type="radio">.
+// TODO: Checkbox uses a hidden native <input type="checkbox"> for historical
+// reasons. Consider aligning both components in a future major version after
+// assessing backwards compatibility implications.
 export class WarpRadio extends FormControlMixin(LitElement) {
 	static styles = [hostStyles, reset, radioStyles];
 
