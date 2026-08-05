@@ -85,7 +85,7 @@ export const styles = css`
 		--w-c-radio-cursor: var(--w-c-radio-cursor-disabled, not-allowed);
 	}
 
-	[part='base'] {
+	[part="base"] {
 		display: inline-flex;
 		align-items: center;
 		gap: var(--_gap);
