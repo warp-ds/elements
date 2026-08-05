@@ -2,6 +2,10 @@ import { css } from "lit";
 
 export const styles = css`
 	:host {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--_gap);
+
 		--_gap: var(--w-c-radio-gap, 8px);
 
 		--_size: var(--w-c-radio-size, 2rem);

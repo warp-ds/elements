@@ -67,6 +67,18 @@ test("updates checked state and tabIndex when checked", async () => {
 	await expect.poll(() => radio.tabIndex).toBe(0);
 });
 
+test("keeps host element inline-flex for backwards compatibility", async () => {
+	render(html`<w-radio value="alpha">Alpha</w-radio>`);
+
+	const radio = document.querySelector("w-radio") as HTMLElement & {
+		updateComplete: Promise<unknown>;
+	};
+
+	await radio.updateComplete;
+
+	expect(getComputedStyle(radio).display).toBe("inline-flex");
+});
+
 test("checked state uses selected border color", async () => {
 	render(html`<w-radio value="alpha">Alpha</w-radio>`);
 
