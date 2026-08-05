@@ -10,6 +10,10 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 	}
 `})))()}var v;function ce(){return(ce=e((()=>{n(),v=c`
 	:host {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--_gap);
+
 		--_gap: var(--w-c-radio-gap, 8px);
 
 		--_size: var(--w-c-radio-size, 2rem);
