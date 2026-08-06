@@ -246,10 +246,10 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 								<div class="label" id="${m(c)}">
 									<span>${this.label}</span>
 									${this.optional&&!this.required?o`
-												<span class="optional">
-													${f._({id:`checkbox-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-												</span>
-											`:i}
+													<span class="optional">
+														${f._({id:`checkbox-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+													</span>
+												`:i}
 								</div>
 							`:i}
 				<div
