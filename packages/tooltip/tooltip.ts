@@ -497,13 +497,15 @@ export class WarpTooltip extends LitElement {
 				aria-description="${this.#accessibleDescription}"
 				hidden
 			>
-				${this.noArrow
-					? nothing
-					: html`
-							<div part="arrow">
-								<div part="beak"></div>
-							</div>
-						`}
+				${
+					this.noArrow
+						? nothing
+						: html`
+								<div part="arrow">
+									<div part="beak"></div>
+								</div>
+							`
+				}
 				<slot></slot>
 			</div>
 		`;

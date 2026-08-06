@@ -580,23 +580,25 @@ class WarpSlider extends LitElement {
 					name="to"
 					@slotchange=${this.#syncSliderThumbs}
 				></slot>
-				${this.errorText
-					? html`<p class="w-slider__error" aria-describes="fieldset">
-							${this.errorText}
-						</p>`
-					: html`
-							<p
-								?hidden=${!this.#hasHelpText}
-								class="w-slider__help-text"
-								aria-describes="fieldset"
-							>
-								${this.helpText}
-								<slot
-									@slotchange="${this.helpTextSlotChange}"
-									name="help-text"
-								></slot>
-							</p>
-						`}
+				${
+					this.errorText
+						? html`<p class="w-slider__error" aria-describes="fieldset">
+								${this.errorText}
+							</p>`
+						: html`
+								<p
+									?hidden=${!this.#hasHelpText}
+									class="w-slider__help-text"
+									aria-describes="fieldset"
+								>
+									${this.helpText}
+									<slot
+										@slotchange="${this.helpTextSlotChange}"
+										name="help-text"
+									></slot>
+								</p>
+							`
+				}
 			</fieldset>
 		`;
 	}

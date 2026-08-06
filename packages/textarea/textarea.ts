@@ -514,24 +514,29 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			${this.label
-				? html`
-						<label for="${this._id}">
-							${this.label}
-							${this.optional && !this.required
-								? html`
-										<span>
-											${i18n._({
-												id: "textarea.label.optional",
-												message: "Optional",
-												comment: "Shown behind label when marked as optional",
-											})}
-										</span>
-									`
-								: nothing}
-						</label>
-					`
-				: nothing}
+			${
+				this.label
+					? html`
+							<label for="${this._id}">
+								${this.label}
+								${
+									this.optional && !this.required
+										? html`
+												<span>
+													${i18n._({
+														id: "textarea.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>
+											`
+										: nothing
+								}
+							</label>
+						`
+					: nothing
+			}
 			<textarea
 				part="input"
 				id="${this._id}"

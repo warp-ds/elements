@@ -161,31 +161,35 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		const showRequiredError = requiredInvalid && this.#hasInteracted;
 		const isInvalid = this.invalid || showRequiredError;
 		const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
-		const hasHelpText = helpText || this._hasHelpTextSlot;
-		const helpId = helpText ? "checkbox-group__help" : undefined;
+		const hasHelpText = Boolean(helpText || this._hasHelpTextSlot);
+		const helpId = hasHelpText ? "checkbox-group__help" : undefined;
 		const labelId = this.label ? "checkbox-group__label" : undefined;
 		const ariaInvalid = isInvalid ? "true" : undefined;
 
 		return html`
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
-				${this.label
-					? html`
-							<div class="label" id="${ifDefined(labelId)}">
-								<span>${this.label}</span>
-								${this.optional && !this.required
-									? html`
-											<span class="optional">
-												${i18n._({
+				${
+					this.label
+						? html`
+								<div class="label" id="${ifDefined(labelId)}">
+									<span>${this.label}</span>
+									${
+									this.optional && !this.required
+										? html`
+												<span class="optional">
+													${i18n._({
 													id: "checkbox-group.label.optional",
 													message: "Optional",
 													comment: "Shown behind label when marked as optional",
 												})}
-											</span>
-										`
-									: nothing}
-							</div>
-						`
-					: nothing}
+												</span>
+											`
+										: nothing
+								}
+								</div>
+							`
+						: nothing
+				}
 				<div
 					class="checkbox-group"
 					role="group"

@@ -12,7 +12,6 @@ export * from "./packages/checkbox/react.js";
 export * from "./packages/checkbox-group/react.js";
 export * from "./packages/combobox/react.js";
 export * from "./packages/datepicker/react.js";
-// export * from "./packages/dead-toggle/react.js";
 export * from "./packages/expandable/react.js";
 export * from "./packages/icon/react.js";
 export * from "./packages/link/react.js";

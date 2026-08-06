@@ -1,3 +1,24 @@
+# [2.12.0-next.4](https://github.com/warp-ds/elements/compare/v2.12.0-next.3...v2.12.0-next.4) (2026-08-04)
+
+
+### Bug Fixes
+
+* **pagination:** add missing last page button, visual fixes ([#735](https://github.com/warp-ds/elements/issues/735)) ([2911639](https://github.com/warp-ds/elements/commit/291163947f86cf58389abf0c78ad4ddfa8d24c51))
+
+# [2.12.0-next.3](https://github.com/warp-ds/elements/compare/v2.12.0-next.2...v2.12.0-next.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* **tab:** remove button inside tab that confused screen readers ([#736](https://github.com/warp-ds/elements/issues/736)) ([04013f6](https://github.com/warp-ds/elements/commit/04013f6904dc555cca4ff304f7e9f2a77e469f76))
+
+# [2.12.0-next.2](https://github.com/warp-ds/elements/compare/v2.12.0-next.1...v2.12.0-next.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* **modal-header:** constrain close button column width to prevent title overflow ([#743](https://github.com/warp-ds/elements/issues/743)) ([b247735](https://github.com/warp-ds/elements/commit/b247735aec38e298fde07ba9b1311e4d4163d8a7)), closes [#742](https://github.com/warp-ds/elements/issues/742)
+
 # [2.12.0-next.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.12.0-next.1) (2026-07-08)
 
 

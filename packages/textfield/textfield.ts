@@ -333,32 +333,36 @@ class WarpTextField extends FormControlMixin(LitElement) {
 			const hasTooltip = Boolean(this.tooltip);
 			return html`
 				<label for="${this._id}">
-					${this.label}${showOptionalLabel
-						? html`
-								<span>
-									${i18n._({
-										id: "textfield.label.optional",
-										message: "Optional",
-										comment: "Shown behind label when marked as optional",
-									})}
-								</span>
-							`
-						: nothing}
-					${hasTooltip
-						? html`
-								<button
-									id="tooltip-target"
-									class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
-									part="tooltip-target"
-									aria-details="tooltip"
-								>
-									<w-icon name="Info" size="small"></w-icon>
-								</button>
-								<w-tooltip for="tooltip-target" id="tooltip">
-									${this.tooltip}
-								</w-tooltip>
-							`
-						: nothing}
+					${this.label}${
+						showOptionalLabel
+							? html`
+									<span>
+										${i18n._({
+											id: "textfield.label.optional",
+											message: "Optional",
+											comment: "Shown behind label when marked as optional",
+										})}
+									</span>
+								`
+							: nothing
+					}
+					${
+						hasTooltip
+							? html`
+									<button
+										id="tooltip-target"
+										class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
+										part="tooltip-target"
+										aria-details="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip for="tooltip-target" id="tooltip">
+										${this.tooltip}
+									</w-tooltip>
+								`
+							: nothing
+					}
 				</label>
 			`;
 		}
@@ -456,9 +460,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 				})}"
 			>
 				<div class="w-textfield__input-wrapper">
-					${this.formatter
-						? html`<div class="w-textfield__mask"></div>`
-						: nothing}
+					${
+						this.formatter
+							? html`<div class="w-textfield__mask"></div>`
+							: nothing
+					}
 					<input
 						part="input"
 						class="${this._inputstyles}"

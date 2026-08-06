@@ -232,39 +232,47 @@ class WarpExpandable extends LitElement {
 
 	render() {
 		return html` <div class="${this.#wrapperClasses}">
-			${this._hasTitle
-				? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
-						<button
-							type="button"
-							aria-expanded="${this.expanded}"
-							class="${this.#buttonClasses}"
-							@click=${() => (this.expanded = !this.expanded)}
+			${
+				this._hasTitle
+					? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
+							<button
+								type="button"
+								aria-expanded="${this.expanded}"
+								class="${this.#buttonClasses}"
+								@click=${() => (this.expanded = !this.expanded)}
+							>
+								<div class="${ccExpandable.title}">
+									${
+										this.title
+											? html`<span class="${ccExpandable.titleType}"
+													>${this.title}</span
+												>`
+											: html`<slot name="title"></slot>`
+									}
+									${
+										this.noChevron
+											? ""
+											: html`<div class="${this.#chevronClasses}">
+													${this.#chevronIcon}
+												</div>`
+									}
+								</div>
+							</button>
+						</w-unstyled-heading>`
+					: ""
+			}
+			${
+				this.animated
+					? html`<w-expand-transition ?show=${this.expanded}>
+							${this._expandableSlot}
+						</w-expand-transition>`
+					: html`<div
+							class="${this.#expansionClasses}"
+							aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
 						>
-							<div class="${ccExpandable.title}">
-								${this.title
-									? html`<span class="${ccExpandable.titleType}"
-											>${this.title}</span
-										>`
-									: html`<slot name="title"></slot>`}
-								${this.noChevron
-									? ""
-									: html`<div class="${this.#chevronClasses}">
-											${this.#chevronIcon}
-										</div>`}
-							</div>
-						</button>
-					</w-unstyled-heading>`
-				: ""}
-			${this.animated
-				? html`<w-expand-transition ?show=${this.expanded}>
-						${this._expandableSlot}
-					</w-expand-transition>`
-				: html`<div
-						class="${this.#expansionClasses}"
-						aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
-					>
-						${this._expandableSlot}
-					</div>`}
+							${this._expandableSlot}
+						</div>`
+			}
 		</div>`;
 	}
 }
