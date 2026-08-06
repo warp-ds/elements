@@ -174,18 +174,19 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 								<div class="label" id="${ifDefined(labelId)}">
 									<span>${this.label}</span>
 									${
-									this.optional && !this.required
-										? html`
-												<span class="optional">
-													${i18n._({
-													id: "checkbox-group.label.optional",
-													message: "Optional",
-													comment: "Shown behind label when marked as optional",
-												})}
-												</span>
-											`
-										: nothing
-								}
+										this.optional && !this.required
+											? html`
+													<span class="optional">
+														${i18n._({
+															id: "checkbox-group.label.optional",
+															message: "Optional",
+															comment:
+																"Shown behind label when marked as optional",
+														})}
+													</span>
+												`
+											: nothing
+									}
 								</div>
 							`
 						: nothing
