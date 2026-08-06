@@ -4,7 +4,7 @@ import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { css, html, LitElement, PropertyValues, TemplateResult } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { when } from "lit/directives/when.js";
 
@@ -141,6 +141,13 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	 */
 	@property({ reflect: true })
 	value: string | undefined;
+
+	@state()
+	private _hasHelpTextSlot = false;
+
+	get #hasHelpText() {
+		return typeof this.helpText !== "undefined" || this._hasHelpTextSlot;
+	}
 
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
@@ -422,6 +429,14 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 		);
 	}
 
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
+
 	render() {
 		return html`<div class="${ccSelect.wrapper}">
 			${when(
@@ -466,17 +481,14 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 					></w-icon>
 				</div>
 			</div>
-			${
-				// This when() can be removed in a future major when we drop `hint` and `always`.
-				// A help text should always be visible.
-				when(
-					this.helpText || this.always || this.invalid,
-					() =>
-						html`<div id="${this.#helpId}" class="${this.#helpTextClasses}">
-							${this.helpText || this.hint}
-						</div>`,
-				)
-			}
+			<div
+				?hidden=${!this.#hasHelpText && !this.always && !this.invalid}
+				class="${this.#helpTextClasses}"
+				id="${ifDefined(this.#helpId)}"
+			>
+				${this.helpText || this.hint}
+				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
+			</div>
 		</div>`;
 	}
 }

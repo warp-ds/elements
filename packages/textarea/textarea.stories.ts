@@ -14,7 +14,12 @@ const { events, args, argTypes } =
 const meta: Meta<typeof args> = {
 	title: "Forms/Textarea",
 	render(args) {
-		return html`<w-textarea ${spread(prespread(args))}></w-textarea>`;
+		return html`<w-textarea
+			${spread(prespread(args))}
+			@blur=${(e: Event) => console.log(e)}
+			@input=${(e: Event) => console.log(e)}
+			@change=${(e: Event) => console.log(e)}
+		></w-textarea>`;
 	},
 	args,
 	argTypes,
