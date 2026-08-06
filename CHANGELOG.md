@@ -1,3 +1,10 @@
+# [2.12.0-next.5](https://github.com/warp-ds/elements/compare/v2.12.0-next.4...v2.12.0-next.5) (2026-08-06)
+
+
+### Features
+
+* min/maxlength, JSX helpText, bugfix for onchange in textarea ([#731](https://github.com/warp-ds/elements/issues/731)) ([bc04a71](https://github.com/warp-ds/elements/commit/bc04a712ff5903f8e0e1547d87f735ad06013be9)), closes [#722](https://github.com/warp-ds/elements/issues/722) [#720](https://github.com/warp-ds/elements/issues/720) [#721](https://github.com/warp-ds/elements/issues/721)
+
 # [2.12.0-next.4](https://github.com/warp-ds/elements/compare/v2.12.0-next.3...v2.12.0-next.4) (2026-08-04)
 
 
