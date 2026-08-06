@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-DAIyXY5k.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./tabs.stories-CwnPvctU.js";function f(e){let r={code:`code`,h1:`h1`,h2:`h2`,p:`p`,pre:`pre`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-DAIyXY5k.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./tabs.stories-CK0vod8m.js";function f(e){let r={code:`code`,h1:`h1`,h2:`h2`,p:`p`,pre:`pre`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
 `,(0,m.jsx)(r.h1,{id:`tabs`,children:`Tabs`}),`
 `,(0,m.jsx)(r.h2,{id:`default`,children:`Default`}),`
 `,(0,m.jsx)(t,{of:d}),`
