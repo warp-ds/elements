@@ -183,6 +183,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	// Track whether the user has interacted with the field
 	#hasInteracted = false;
 
+	// Stores the explicit message set through setCustomValidity.
+	#customValidationMessage = "";
+
 	constructor() {
 		super();
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
@@ -195,7 +198,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		if (
 			changedProperties.has("value") ||
 			changedProperties.has("required") ||
-			changedProperties.has("disabled")
+			changedProperties.has("disabled") ||
+			changedProperties.has("minLength") ||
+			changedProperties.has("maxLength")
 		) {
 			this.#updateValidity();
 		}
@@ -224,7 +229,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 		return this.internals.checkValidity();
 	}
 
-	/** Checks validity and shows the browser's validation message if invalid */
+	/** Checks validity and shows the validation message if invalid */
 	reportValidity(): boolean {
 		this.#hasInteracted = true;
 		this.#updateValidity();
@@ -233,12 +238,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	/** Sets a custom validation message. Pass an empty string to clear. */
 	setCustomValidity(message: string): void {
+		this.#customValidationMessage = message;
+
 		if (message) {
-			this.internals.setValidity(
-				{ customError: true },
-				message,
-				this._textarea,
-			);
+			this.#updateValidity();
 			this.#setValidationState(message);
 		} else {
 			this.#clearValidationState();
@@ -268,6 +271,10 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	#updateValidity(): void {
+		if (!this._textarea) {
+			return;
+		}
+
 		// Skip validation if disabled
 		if (this.disabled) {
 			this.internals.setValidity({});
@@ -275,26 +282,78 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 			return;
 		}
 
-		// Check required validation
-		if (this.required && !this.value) {
-			// Get the browser's native validation message from the internal textarea
-			const message = this._textarea?.validationMessage || "";
-			this.internals.setValidity(
-				{ valueMissing: true },
-				message,
-				this._textarea,
-			);
+		const validity = this._textarea.validity;
+		const value = this.value ?? this._textarea.value ?? "";
+		const tooShort =
+			value.length > 0 &&
+			typeof this.minLength === "number" &&
+			value.length < this.minLength;
+		const tooLong =
+			typeof this.maxLength === "number" && value.length > this.maxLength;
+		const flags: ValidityStateFlags = {
+			valueMissing: validity.valueMissing,
+			tooShort: validity.tooShort || tooShort,
+			tooLong: validity.tooLong || tooLong,
+			customError: this.#customValidationMessage !== "",
+		};
 
-			// Only show visual validation state after user interaction
+		if (Object.values(flags).some(Boolean)) {
+			const message = this.#getValidationMessage(flags, value.length);
+
+			this.internals.setValidity(flags, message, this._textarea);
+
 			if (this.#hasInteracted) {
 				this.#setValidationState(message);
 			}
+
 			return;
 		}
 
-		// Valid state
 		this.internals.setValidity({});
 		this.#clearValidationState();
+	}
+
+	#getValidationMessage(
+		flags: ValidityStateFlags,
+		currentLength: number,
+	): string {
+		if (flags.customError && this.#customValidationMessage) {
+			return this.#customValidationMessage;
+		}
+
+		if (flags.valueMissing) {
+			return i18n._({
+				id: "textarea.validation.valueMissing",
+				message: "Please fill out this field.",
+				comment: "Validation message shown when textarea value is required",
+			});
+		}
+
+		if (flags.tooShort && typeof this.minLength === "number") {
+			return i18n._({
+				id: "textarea.validation.tooShort",
+				message:
+					"Please lengthen this text to {minLength} characters or more (you are currently using {currentLength} characters).",
+				comment: "Validation message shown when textarea value is too short",
+				values: { minLength: this.minLength, currentLength },
+			});
+		}
+
+		if (flags.tooLong && typeof this.maxLength === "number") {
+			return i18n._({
+				id: "textarea.validation.tooLong",
+				message:
+					"Please shorten this text to {maxLength} characters or less (you are currently using {currentLength} characters).",
+				comment: "Validation message shown when textarea value is too long",
+				values: { maxLength: this.maxLength, currentLength },
+			});
+		}
+
+		return i18n._({
+			id: "textarea.validation.invalid",
+			message: "Please enter a valid value.",
+			comment: "Fallback validation message for textarea",
+		});
 	}
 
 	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];

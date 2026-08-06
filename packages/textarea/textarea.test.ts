@@ -156,7 +156,7 @@ test("checkValidity returns false when required textarea is empty", async () => 
 	// Wait for component to be ready
 	await expect.poll(() => wTextArea.checkValidity()).toBe(false);
 	expect(wTextArea.validity.valueMissing).toBe(true);
-	expect(wTextArea.validationMessage).not.toBe("");
+	expect(wTextArea.validationMessage).toBe("Please fill out this field.");
 });
 
 test("checkValidity returns true when required textarea has a value", async () => {
@@ -174,6 +174,72 @@ test("checkValidity returns true when required textarea has a value", async () =
 	// Wait for component to be ready
 	await expect.poll(() => wTextArea.checkValidity()).toBe(true);
 	expect(wTextArea.validity.valid).toBe(true);
+});
+
+test("checkValidity returns false when textarea is shorter than minlength", async () => {
+	const page = render(
+		html`<w-textarea
+			label="Message"
+			name="message"
+			minlength="5"
+		></w-textarea>`,
+	);
+
+	const wTextArea = page.container.querySelector("w-textarea") as WarpTextarea;
+
+	await page.getByLabelText("Message").fill("abc");
+	await expect.poll(() => wTextArea.value).toBe("abc");
+
+	expect(wTextArea.checkValidity()).toBe(false);
+	expect(wTextArea.validity.tooShort).toBe(true);
+	expect(wTextArea.validationMessage).toBe(
+		"Please lengthen this text to 5 characters or more (you are currently using 3 characters).",
+	);
+});
+
+test("checkValidity returns false when textarea is longer than maxlength", async () => {
+	const page = render(
+		html`<w-textarea
+			label="Message"
+			name="message"
+			maxlength="5"
+		></w-textarea>`,
+	);
+
+	const wTextArea = page.container.querySelector("w-textarea") as WarpTextarea;
+
+	wTextArea.value = "abcdef";
+	await wTextArea.updateComplete;
+
+	expect(wTextArea.checkValidity()).toBe(false);
+	expect(wTextArea.validity.tooLong).toBe(true);
+	expect(wTextArea.validationMessage).toBe(
+		"Please shorten this text to 5 characters or less (you are currently using 6 characters).",
+	);
+});
+
+test("setCustomValidity uses the provided validation message", async () => {
+	render(html`<w-textarea label="Message" name="message"></w-textarea>`);
+
+	const wTextArea = document.querySelector("w-textarea") as WarpTextarea;
+	await wTextArea.updateComplete;
+
+	wTextArea.setCustomValidity("Use a different message");
+
+	expect(wTextArea.checkValidity()).toBe(false);
+	expect(wTextArea.validity.customError).toBe(true);
+	expect(wTextArea.validationMessage).toBe("Use a different message");
+
+	wTextArea.value = "Hello";
+	await wTextArea.updateComplete;
+
+	expect(wTextArea.checkValidity()).toBe(false);
+	expect(wTextArea.validationMessage).toBe("Use a different message");
+
+	wTextArea.setCustomValidity("");
+
+	expect(wTextArea.checkValidity()).toBe(true);
+	expect(wTextArea.validationMessage).toBe("");
 });
 
 test("form submission is blocked when required textarea is empty", async () => {
