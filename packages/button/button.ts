@@ -259,8 +259,10 @@ class WarpButton extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	_handleButtonClick() {
-		if (this.type === "submit") requestSubmit(this.internals.form, this);
-		else if (this.type === "reset") this.internals.form.reset();
+		if (this.type === "submit" && this.internals.form)
+			requestSubmit(this.internals.form, this);
+		else if (this.type === "reset" && this.internals.form)
+			this.internals.form.reset();
 	}
 
 	resetFormControl(): void {
