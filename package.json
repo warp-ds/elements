@@ -31,6 +31,10 @@
       "types": "./dist/packages/toast/api.d.ts",
       "import": "./dist/api.js"
     },
+    "./utils": {
+      "types": "./dist/packages/utils.d.ts",
+      "import": "./dist/packages/utils.js"
+    },
     "./custom-elements.json": "./dist/custom-elements.json",
     "./react": {
       "types": "./dist/entrypoint-react.d.ts",
@@ -52,6 +56,9 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
+      "utils": [
+        "./dist/packages/utils.d.ts"
+      ],
       "react/affix": [
         "./dist/packages/affix/react.d.ts"
       ],
