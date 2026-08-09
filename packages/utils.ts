@@ -6,9 +6,23 @@ export function uniqueId(prefix = "") {
 
 type NativeSubmitter = HTMLButtonElement | HTMLInputElement;
 
+/**
+ * Context attached to SubmitEvent when a Warp component triggers form submission.
+ * Access via `event.warpSubmitContext` in your submit handler.
+ */
 export type WarpSubmitContext = {
+	/** The Warp element that initiated the submission (e.g., w-textfield, w-button). */
 	initiator: HTMLElement;
+	/**
+	 * The native submitter passed to requestSubmit(), if any.
+	 * This is the element whose name/value will be included in FormData.
+	 */
 	nativeSubmitter: HTMLElement | null;
+	/**
+	 * The form's default submit button (first submit button in DOM order).
+	 * For implicit submissions (e.g., Enter in a textfield), this is what
+	 * would be used as the submitter per HTML spec.
+	 */
 	defaultSubmitter: HTMLElement | null;
 };
 
