@@ -348,9 +348,17 @@ test("submits the associated form when radio has focus and user presses Enter", 
 	`);
 
 	const onSubmit = vi.fn();
+	let submitter: HTMLElement | null = null;
+	let submitContext: SubmitEvent["warpSubmitContext"];
 	const form = document.querySelector("form") as HTMLFormElement;
+	const radio = document.querySelector("w-radio") as HTMLElement;
+	const submitButton = document.querySelector(
+		'button[type="submit"]',
+	) as HTMLButtonElement;
 	form.addEventListener("submit", (event) => {
 		event.preventDefault();
+		submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+		submitContext = (event as SubmitEvent).warpSubmitContext;
 		onSubmit();
 	});
 
@@ -359,4 +367,8 @@ test("submits the associated form when radio has focus and user presses Enter", 
 	await userEvent.keyboard("{Enter}");
 
 	expect(onSubmit).toHaveBeenCalled();
+	expect(submitter).toBe(submitButton);
+	expect(submitContext?.initiator).toBe(radio);
+	expect(submitContext?.nativeSubmitter).toBe(submitButton);
+	expect(submitContext?.defaultSubmitter).toBe(submitButton);
 });

@@ -186,9 +186,17 @@ test("submits the associated form when input has focus and user presses Enter", 
 	`);
 
 	const onSubmit = vi.fn();
+	let submitter: HTMLElement | null = null;
+	let submitContext: SubmitEvent["warpSubmitContext"];
 	const form = document.querySelector("form") as HTMLFormElement;
+	const textfield = document.querySelector("w-textfield") as HTMLElement;
+	const submitButton = document.querySelector(
+		'button[type="submit"]',
+	) as HTMLButtonElement;
 	form.addEventListener("submit", (event) => {
 		event.preventDefault();
+		submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+		submitContext = (event as SubmitEvent).warpSubmitContext;
 		onSubmit();
 	});
 
@@ -196,6 +204,10 @@ test("submits the associated form when input has focus and user presses Enter", 
 	await userEvent.keyboard("{Enter}");
 
 	expect(onSubmit).toHaveBeenCalled();
+	expect(submitter).toBe(submitButton);
+	expect(submitContext?.initiator).toBe(textfield);
+	expect(submitContext?.nativeSubmitter).toBe(submitButton);
+	expect(submitContext?.defaultSubmitter).toBe(submitButton);
 });
 
 test("renders optional indicator as 'Optional' without parentheses", async () => {

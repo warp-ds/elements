@@ -10,6 +10,7 @@ import { when } from "lit/directives/when.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
+import { requestSubmitWithDefaultSubmitter } from "../utils.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -367,7 +368,10 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 			event.preventDefault();
 		}
 		if (event.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 			return;
 		}
 	}

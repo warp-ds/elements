@@ -10,6 +10,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 import { activateI18n } from "../i18n.js";
 import { reset } from "../styles.js";
+import { requestSubmitWithDefaultSubmitter } from "../utils.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -256,7 +257,10 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
 	#onKeyDownHandler(e: KeyboardEvent) {
 		if (e.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 		}
 	}
 

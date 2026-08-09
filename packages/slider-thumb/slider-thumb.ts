@@ -10,6 +10,7 @@ import type { WarpAttention } from "../attention/attention.js";
 import { styles as unoStyles } from "../slider/styles.js";
 import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
+import { requestSubmitWithDefaultSubmitter } from "../utils.js";
 import { wSliderThumbStyles } from "./styles/w-slider-thumb.styles.js";
 
 export type SliderSlot = "to" | "from";
@@ -369,7 +370,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
 	async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
 		if (e.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 			return;
 		}
 
@@ -396,7 +400,10 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
 	async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
 		if (e.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 			return;
 		}
 

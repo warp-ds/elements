@@ -21,7 +21,40 @@ test("by default button type is button", async () => {
 		.toHaveAttribute("type", "button");
 });
 
-test.todo("works in a form as type submit");
+test("works in a form as type submit and passes the submitter", async () => {
+	const page = render(html`
+		<form>
+			<w-button name="intent" type="submit" value="save" variant="secondary">
+				Save
+			</w-button>
+		</form>
+	`);
+
+	const form = document.querySelector("form") as HTMLFormElement;
+	const wButton = document.querySelector("w-button") as HTMLElement;
+	const onSubmit = vi.fn();
+	let submitter: HTMLElement | null = null;
+	let submitContext: SubmitEvent["warpSubmitContext"];
+	let submittedIntents: FormDataEntryValue[] = [];
+
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+
+		submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+		submitContext = (event as SubmitEvent).warpSubmitContext;
+		submittedIntents = new FormData(form).getAll("intent");
+		onSubmit();
+	});
+
+	await page.getByRole("button", { name: "Save" }).click();
+
+	expect(onSubmit).toHaveBeenCalledTimes(1);
+	expect(submitter).toBeNull();
+	expect(submitContext?.initiator).toBe(wButton);
+	expect(submitContext?.nativeSubmitter).toBeNull();
+	expect(submitContext?.defaultSubmitter).toBeNull();
+	expect(submittedIntents).toEqual(["save"]);
+});
 
 test("Works in a form as type reset", async () => {
 	const label = "Test label";

@@ -7,6 +7,7 @@ import { activateI18n } from "../i18n";
 import "../link/link.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { reset } from "../styles.js";
+import { requestSubmit } from "../utils.js";
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
 import { messages as fiMessages } from "./locales/fi/messages.mjs";
@@ -258,7 +259,7 @@ class WarpButton extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	_handleButtonClick() {
-		if (this.type === "submit") this.internals.form.requestSubmit();
+		if (this.type === "submit") requestSubmit(this.internals.form, this);
 		else if (this.type === "reset") this.internals.form.reset();
 	}
 

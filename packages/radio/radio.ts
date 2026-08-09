@@ -4,6 +4,7 @@ import { html, LitElement } from "lit";
 
 import { property } from "lit/decorators.js";
 import { reset } from "../styles";
+import { requestSubmitWithDefaultSubmitter } from "../utils.js";
 import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
 
@@ -228,7 +229,10 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 			return;
 
 		if (event.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 			return;
 		}
 

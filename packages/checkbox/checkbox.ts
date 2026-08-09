@@ -5,6 +5,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 
 import { reset } from "../styles";
+import { requestSubmitWithDefaultSubmitter } from "../utils.js";
 import { styles } from "./styles";
 
 /**
@@ -148,7 +149,10 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 		if (event.key !== " " && event.key !== "Spacebar" && event.key !== "Enter")
 			return;
 		if (event.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+			requestSubmitWithDefaultSubmitter(
+				this.internals.form as HTMLFormElement,
+				this,
+			);
 			return;
 		}
 		if (event.composedPath()[0] === this.input) return;
