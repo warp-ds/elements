@@ -59,13 +59,21 @@ function isAssociatedWithForm(
 export function getDefaultSubmitter(
 	form: HTMLFormElement,
 ): HTMLElement | undefined {
-	return [
-		...form.ownerDocument.querySelectorAll<HTMLElement>(
-			"button,input,w-button",
-		),
-	].find(
-		(submitter) =>
-			isSubmitButton(submitter) && isAssociatedWithForm(submitter, form),
+	const formDescendants = form.querySelectorAll<HTMLElement>(
+		"button,input,w-button",
+	);
+	const descendantSubmitter = [...formDescendants].find(
+		(el) => isSubmitButton(el) && isAssociatedWithForm(el, form),
+	);
+	if (descendantSubmitter) return descendantSubmitter;
+
+	if (!form.id) return undefined;
+
+	const externalElements = form.ownerDocument.querySelectorAll<HTMLElement>(
+		`button[form="${form.id}"],input[form="${form.id}"],w-button[form="${form.id}"]`,
+	);
+	return [...externalElements].find(
+		(el) => isSubmitButton(el) && isAssociatedWithForm(el, form),
 	);
 }
 
