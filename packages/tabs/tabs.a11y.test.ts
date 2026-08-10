@@ -109,10 +109,10 @@ describe("w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)", () => {
 				</w-tabs>`,
 			);
 			await page.container.querySelector("w-tabs")!.updateComplete;
-			// Check aria-controls is set correctly on tabs (on internal button with delegatesFocus)
+			// Check aria-controls is set correctly on tabs (on internals)
+			const firstPanel = page.container.querySelector("w-tab-panel");
 			const firstTab = page.container.querySelector("w-tab") as WarpTab;
-			const internalButton = firstTab.shadowRoot?.querySelector("button");
-			expect(internalButton?.getAttribute("aria-controls")).toBe("fellowship");
+			expect(firstTab._internals.ariaControlsElements).toEqual([firstPanel]);
 			expect(firstTab.textContent?.trim()).toBe("Fellowship");
 		});
 
@@ -130,11 +130,9 @@ describe("w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)", () => {
 			await page.container.querySelector("w-tabs")!.updateComplete;
 
 			const firstTab = page.container.querySelector("w-tab") as WarpTab;
-			const internalButton = firstTab.shadowRoot?.querySelector("button");
+			const firstPanel = page.container.querySelector("w-tab-panel");
+			expect(firstTab._internals.ariaControlsElements).toEqual([firstPanel]);
 			expect(firstTab.getAttribute("aria-controls")).toBe("fellowship-panel");
-			expect(internalButton?.getAttribute("aria-controls")).toBe(
-				"fellowship-panel",
-			);
 		});
 	});
 
@@ -271,25 +269,13 @@ describe("w-tabs, w-tab-panel, w-tab accessibility (WCAG 2.2)", () => {
 			const selectedTab = [
 				...page.container.querySelectorAll<WarpTab>("w-tab"),
 			].find((tab: WarpTab) => tab.ariaSelected === "true") as WarpTab;
-			const internalButton = selectedTab.shadowRoot?.querySelector(
-				"button",
-			) as HTMLButtonElement | null;
-			if (!internalButton) {
-				throw new Error("Expected selected tab to have an internal button");
-			}
 			const activeEl = document.activeElement as HTMLElement;
-			expect(activeEl === selectedTab || activeEl === internalButton).toBe(
-				true,
-			);
+			expect(activeEl === selectedTab).toBe(true);
 
 			const hostStyle = getComputedStyle(selectedTab);
-			const buttonStyle = getComputedStyle(internalButton);
 			const hostHasRing =
 				hostStyle.outlineStyle === "solid" && hostStyle.outlineWidth !== "0px";
-			const buttonHasRing =
-				buttonStyle.outlineStyle === "solid" &&
-				buttonStyle.outlineWidth !== "0px";
-			expect(hostHasRing || buttonHasRing).toBe(true);
+			expect(hostHasRing).toBe(true);
 		});
 	});
 });

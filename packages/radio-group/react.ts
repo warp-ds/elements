@@ -24,8 +24,8 @@ type BaseRadioGroupProps = React.ComponentPropsWithoutRef<
 	typeof BaseRadioGroup
 >;
 
-type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text"> & {
-	helpText?: string;
+type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text" | "helpText"> & {
+	helpText?: string | React.ReactElement;
 };
 
 /**
@@ -37,13 +37,27 @@ type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text"> & {
  */
 export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 	({ helpText, ...props }, ref) =>
-		React.createElement(BaseRadioGroup, {
-			...props,
-			...(helpText !== undefined ? { "help-text": helpText } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseRadioGroup> & {
-			"help-text"?: string;
-		}),
+		React.createElement(
+			BaseRadioGroup,
+			{
+				...props,
+				...(typeof helpText === "string" ? { "help-text": helpText } : {}),
+				ref,
+			} as React.ComponentProps<typeof BaseRadioGroup> & {
+				"help-text"?: string;
+			},
+			[
+				props.children,
+				// support taking in JSX in helpText and placing it in the correct slot on behalf of users
+				typeof helpText !== "undefined" && typeof helpText !== "string"
+					? React.createElement(
+							"div",
+							{ slot: "help-text" },
+							helpText as React.ReactElement,
+						)
+					: null,
+			],
+		),
 );
 
 RadioGroup.displayName = "RadioGroup";

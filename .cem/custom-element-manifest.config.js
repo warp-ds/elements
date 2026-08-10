@@ -160,9 +160,7 @@ export default {
 		"packages/textfield/textfield.ts",
 		"packages/toast/toast.ts",
 		"packages/toast-container/toast-container.ts",
-
-		// unreleased
-		// 'packages/dead-toggle/dead-toggle.ts',
+		"packages/tooltip/tooltip.ts",
 	],
 
 	// Globs to exclude

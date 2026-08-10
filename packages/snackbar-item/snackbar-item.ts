@@ -6,11 +6,7 @@ import { reset } from "../styles.js";
 import { styles } from "./styles.js";
 
 export type SnackbarVariant =
-	| "positive"
-	| "warning"
-	| "negative"
-	| "info"
-	| "neutral";
+	"positive" | "warning" | "negative" | "info" | "neutral";
 
 export type SnackbarActionPlacement = "inline" | "block";
 

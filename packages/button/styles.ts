@@ -263,7 +263,7 @@ export const wButtonStyles = css`
 		color: var(--_color-active);
 	}
 
-	:host(:focus-visible) button[part="base"] {
+	:host button[part="base"]:focus-visible {
 		outline: var(--_outline-width) solid var(--_outline-color);
 		outline-offset: var(--_outline-offset);
 	}

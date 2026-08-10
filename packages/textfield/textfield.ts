@@ -4,7 +4,7 @@ import { classNames as classnames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -214,6 +214,16 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	autocomplete?: HTMLInputElement["autocomplete"];
 
 	/**
+	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * Use the `tooltip` slot if you need markup and not just text.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
+	/**
 	 * Function to format value when the input field.
 	 *
 	 * Only active when the input field does not have focus,
@@ -236,6 +246,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	/** @internal */
 	@property({ type: Boolean })
 	_hasSuffix = false;
+
+	@state()
+	private _hasHelpTextSlot = false;
+
+	get #hasHelpText() {
+		return typeof this.helpText !== "undefined" || this._hasHelpTextSlot;
+	}
 
 	#onKeyDownHandler(e: KeyboardEvent) {
 		if (e.key === "Enter" && this.internals.form) {
@@ -311,24 +328,50 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	/** @internal */
 	get _label() {
 		if (this.label) {
-			return html`<label for="${this._id}"
-				>${this.label}${this.label.length && this.optional && !this.required
-					? html` <span>
-							${i18n._({
-								id: "textfield.label.optional",
-								message: "Optional",
-								comment: "Shown behind label when marked as optional",
-							})}
-						</span>`
-					: nothing}</label
-			>`;
+			const showOptionalLabel =
+				this.label.length && this.optional && !this.required;
+			const hasTooltip = Boolean(this.tooltip);
+			return html`
+				<label for="${this._id}">
+					${this.label}${
+						showOptionalLabel
+							? html`
+									<span>
+										${i18n._({
+											id: "textfield.label.optional",
+											message: "Optional",
+											comment: "Shown behind label when marked as optional",
+										})}
+									</span>
+								`
+							: nothing
+					}
+					${
+						hasTooltip
+							? html`
+									<button
+										id="tooltip-target"
+										class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
+										part="tooltip-target"
+										aria-details="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip for="tooltip-target" id="tooltip">
+										${this.tooltip}
+									</w-tooltip>
+								`
+							: nothing
+					}
+				</label>
+			`;
 		}
 		return undefined;
 	}
 
 	/** @internal */
 	get _helpId() {
-		if (this.helpText) return `${this._id}__hint`;
+		if (this.#hasHelpText) return `${this._id}__hint`;
 		return undefined;
 	}
 
@@ -396,6 +439,14 @@ class WarpTextField extends FormControlMixin(LitElement) {
 		if (affixes.length) this._hasSuffix = true;
 	}
 
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
+
 	render() {
 		return html`
 			${this._label}
@@ -409,9 +460,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 				})}"
 			>
 				<div class="w-textfield__input-wrapper">
-					${this.formatter
-						? html`<div class="w-textfield__mask"></div>`
-						: nothing}
+					${
+						this.formatter
+							? html`<div class="w-textfield__mask"></div>`
+							: nothing
+					}
 					<input
 						part="input"
 						class="${this._inputstyles}"
@@ -448,10 +501,14 @@ class WarpTextField extends FormControlMixin(LitElement) {
 				<slot @slotchange="${this.suffixSlotChange}" name="suffix"></slot>
 			</div>
 			<span class="sr-only" id="aria-description">${this.ariaDescription}</span>
-			${this.helpText &&
-			html`<div class="${this._helptextstyles}" id="${this._helpId}">
+			<div
+				?hidden=${!this.#hasHelpText}
+				class="${this._helptextstyles}"
+				id="${ifDefined(this._helpId)}"
+			>
 				${this.helpText}
-			</div>`}
+				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
+			</div>
 		`;
 	}
 }

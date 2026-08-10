@@ -2,7 +2,7 @@
 
 import { classNames } from "@chbphone55/classnames";
 import { html, LitElement, PropertyValues } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 
 import { reset } from "../styles.js";
 import { WarpTab } from "../tab/tab.js";
@@ -77,7 +77,10 @@ export class WarpTabs extends LitElement {
 	private selectionIndicator!: HTMLElement;
 
 	private _uniqueId = uniqueId();
+
+	@state()
 	private _activeTabFor: string | undefined = "";
+
 	private _resizeObserver?: ResizeObserver;
 	private _updateSelectionIndicatorDebounced = debounce(
 		this.updateSelectionIndicator.bind(this),
@@ -226,24 +229,27 @@ export class WarpTabs extends LitElement {
 	}
 
 	private updatePanels() {
-		// Update tab active states using non-reflecting properties to avoid hydration mismatch
+		// Update tab active states using non-reflecting properties to reduce risk of hydration mismatch
 		const tabs = [...this.querySelectorAll<WarpTab>("w-tab")];
 		tabs.forEach((tab, index) => {
 			if (!tab.id) {
 				tab.id = `w-tab-${this._uniqueId}-${index}`;
 			}
 			const isActive = tab.for === this._activeTabFor;
-			// Use non-reflecting properties to avoid DOM changes during hydration
+
+			// Use reflecting properties so assitsive technologies have what they need in the light DOM
+			tab.tabIndex = isActive ? 0 : -1;
+
+			// Use non-reflecting property to reduce DOM changes during hydration
 			tab._parentAriaSelected = isActive ? "true" : "false";
-			tab._parentTabIndex = isActive ? 0 : -1;
 		});
 
-		// Update tab panels visibility using non-reflecting properties to avoid hydration mismatch
+		// Update tab panels visibility using non-reflecting properties to reduce risk of hydration mismatch
 		const panels: WarpTabPanel[] = [...this.querySelectorAll("w-tab-panel")];
 		panels.forEach((panel) => {
 			const controller = tabs.find((tab) => tab.for === panel.id);
 			if (controller) {
-				// Use non-reflecting property to avoid DOM changes during hydration
+				// Use non-reflecting property to reduce DOM changes during hydration
 				panel._parentAriaLabelledBy = controller.id;
 			}
 			// Use non-reflecting property to control visibility

@@ -28,14 +28,14 @@ export default {
 export type Story = StoryObj<typeof Tabs>;
 
 export const Default = () => (
-	<Tabs active="tab1">
-		<Tab id="tab1" for="panel1">
+	<Tabs active="panel1">
+		<Tab id="tab1" htmlFor="panel1" tabIndex={0}>
 			First Tab
 		</Tab>
-		<Tab id="tab2" for="panel2">
+		<Tab id="tab2" htmlFor="panel2" tabIndex={-1}>
 			Second Tab
 		</Tab>
-		<Tab id="tab3" for="panel3">
+		<Tab id="tab3" htmlFor="panel3" tabIndex={-1}>
 			Third Tab
 		</Tab>
 
@@ -65,15 +65,15 @@ export const Default = () => (
 export const WithIcons = () => (
 	<>
 		<Tabs active="info">
-			<Tab id="infotab" for="info">
+			<Tab id="infotab" for="info" tabIndex={0}>
 				<w-icon name="Info" slot="icon" />
 				Info
 			</Tab>
-			<Tab id="donetab" for="done">
+			<Tab id="donetab" for="done" tabIndex={-1}>
 				<w-icon name="Success" slot="icon" />
 				Done
 			</Tab>
-			<Tab id="errortab" for="error">
+			<Tab id="errortab" for="error" tabIndex={-1}>
 				<w-icon name="Error" slot="icon" />
 				Failures
 			</Tab>
@@ -96,15 +96,15 @@ export const WithIcons = () => (
 export const WithIconsOver = () => (
 	<>
 		<Tabs active="info">
-			<Tab id="infotab" for="info" over>
+			<Tab id="infotab" for="info" over tabIndex={0}>
 				<w-icon name="Info" slot="icon" />
 				Info
 			</Tab>
-			<Tab id="donetab" for="done" over>
+			<Tab id="donetab" for="done" over tabIndex={-1}>
 				<w-icon name="Success" slot="icon" />
 				Done
 			</Tab>
-			<Tab id="errortab" for="error" over>
+			<Tab id="errortab" for="error" over tabIndex={-1}>
 				<w-icon name="Error" slot="icon" />
 				Failures
 			</Tab>
@@ -126,23 +126,23 @@ export const WithIconsOver = () => (
 
 export const ManyTabs = () => (
 	<>
-		<Tabs active="tab1" id="tabs-many">
-			<Tab id="tab1" for="panel1">
+		<Tabs active="panel1" id="tabs-many">
+			<Tab id="tab1" for="panel1" tabIndex={0}>
 				Tab 1
 			</Tab>
-			<Tab id="tab2" for="panel2">
+			<Tab id="tab2" for="panel2" tabIndex={-1}>
 				Tab 2
 			</Tab>
-			<Tab id="tab3" for="panel3">
+			<Tab id="tab3" for="panel3" tabIndex={-1}>
 				Tab 3
 			</Tab>
-			<Tab id="tab4" for="panel4">
+			<Tab id="tab4" for="panel4" tabIndex={-1}>
 				Tab 4
 			</Tab>
-			<Tab id="tab5" for="panel5">
+			<Tab id="tab5" for="panel5" tabIndex={-1}>
 				Tab 5
 			</Tab>
-			<Tab id="tab6" for="panel6">
+			<Tab id="tab6" for="panel6" tabIndex={-1}>
 				Tab 6
 			</Tab>
 		</Tabs>
