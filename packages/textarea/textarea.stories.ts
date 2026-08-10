@@ -9,8 +9,7 @@ import type { WarpTextarea } from "./textarea.js";
 import "./textarea.js";
 import "../tooltip/tooltip.js";
 
-const { events, args, argTypes } =
-	getStorybookHelpers<WarpTextarea>("w-textarea");
+const { args, argTypes } = getStorybookHelpers<WarpTextarea>("w-textarea");
 
 const meta: Meta<typeof args> = {
 	title: "Forms/Textarea",
@@ -24,11 +23,6 @@ const meta: Meta<typeof args> = {
 	},
 	args,
 	argTypes,
-	parameters: {
-		actions: {
-			handles: events,
-		},
-	},
 };
 
 export default meta;
