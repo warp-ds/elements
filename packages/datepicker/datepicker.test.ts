@@ -263,6 +263,35 @@ test("when required checkValidity returns true if the field has a value", async 
 	expect(input.validity.valid).toBe(true);
 });
 
+test("setCustomValidity keeps datepicker invalid until explicitly cleared", async () => {
+	render(html`
+		<w-datepicker label="Test label" value="2026-07-09"></w-datepicker>
+	`);
+
+	const input = document.querySelector("w-datepicker") as WarpDatepicker;
+	const message = "Date is outside the allowed range.";
+
+	await input.updateComplete;
+
+	input.setCustomValidity(message);
+
+	expect(input.checkValidity()).toBe(false);
+	expect(input.validity.customError).toBe(true);
+	expect(input.validationMessage).toBe(message);
+
+	input.value = "2026-07-10";
+	await input.updateComplete;
+
+	expect(input.checkValidity()).toBe(false);
+	expect(input.validity.customError).toBe(true);
+	expect(input.validationMessage).toBe(message);
+
+	input.setCustomValidity("");
+
+	expect(input.checkValidity()).toBe(true);
+	expect(input.validity.valid).toBe(true);
+});
+
 test("form submission is blocked when required datepicker is empty", async () => {
 	const submitHandler = vi.fn((e: Event) => e.preventDefault());
 

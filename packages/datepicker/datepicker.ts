@@ -342,6 +342,8 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		this.navigationDate = subMonths(this.month, 1);
 	}
 
+	#customValidationMessage = "";
+
 	async #dispatchChangeEvent() {
 		// Let Lit finish rendering the updated value for the input field so
 		// the `event.target.value` is correct.
@@ -549,8 +551,10 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
 	/** Sets a custom validation message. Pass an empty string to clear. */
 	setCustomValidity(message: string): void {
+		this.#customValidationMessage = message;
+
 		if (message) {
-			this.internals.setValidity({ customError: true }, message, this.input);
+			this.#updateValidity();
 			this.#setValidationState(message);
 		} else {
 			this.#clearValidationState();
@@ -589,27 +593,31 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	#updateValidity(): void {
-		// Skip validation if disabled
 		if (this.disabled) {
 			this.internals.setValidity({});
 			this.#clearValidationState();
 			return;
 		}
 
-		// Check required validation
-		if (this.required && !this.value) {
-			// Get the browser's native validation message from the internal textarea
-			const message = this.input?.validationMessage || "";
-			this.internals.setValidity({ valueMissing: true }, message, this.input);
+		const flags: ValidityStateFlags = {
+			valueMissing: this.required && !this.value,
+			customError: this.#customValidationMessage !== "",
+		};
 
-			// Only show visual validation state after user interaction
+		if (Object.values(flags).some(Boolean)) {
+			const message = flags.customError
+				? this.#customValidationMessage
+				: this.input?.validationMessage || "";
+
+			this.internals.setValidity(flags, message, this.input);
+
 			if (this.#hasInteracted) {
 				this.#setValidationState(message);
 			}
+
 			return;
 		}
 
-		// Valid state
 		this.internals.setValidity({});
 		this.#clearValidationState();
 	}
