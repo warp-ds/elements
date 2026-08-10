@@ -214,7 +214,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	autocomplete?: HTMLInputElement["autocomplete"];
 
 	/**
-	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
 	 *
 	 * You must provide a label to be able to show an info icon with a tooltip.
 	 */

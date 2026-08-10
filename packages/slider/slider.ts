@@ -79,7 +79,7 @@ class WarpSlider extends LitElement {
 	label: string | undefined;
 
 	/**
-	 * Suplementary information that should show in a tooltip behind an information icon after the label.
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
 	 */
 	@property({ type: String, reflect: true })
 	tooltip?: string;
