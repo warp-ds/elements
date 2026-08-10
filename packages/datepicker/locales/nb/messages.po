@@ -45,5 +45,5 @@ msgstr "Gå til forrige måned"
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-msgid "textarea.label.optional"
+msgid "datepicker.label.optional"
 msgstr "Valgfri"
