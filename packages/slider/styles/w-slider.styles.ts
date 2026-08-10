@@ -61,6 +61,7 @@ export const wSliderStyles = css`
 	[part="tooltip-target"] {
 		appearance: none;
 		background: transparent;
+		border: none;
 		height: 16px;
 		margin: 0 0 0 4px;
 		padding: 0;
