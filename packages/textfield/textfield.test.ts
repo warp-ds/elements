@@ -21,6 +21,8 @@ test("renders the textfield", async () => {
 });
 
 test("works as expected in forms", async () => {
+	const inputHandler = vi.fn();
+	const changeHandler = vi.fn();
 	const label = "Test label";
 	const component = html`
 		<form data-testid="form">
@@ -28,6 +30,8 @@ test("works as expected in forms", async () => {
 				label="${label}"
 				name="message"
 				value="Hola el Mundo"
+				@input="${() => inputHandler()}"
+				@change="${() => changeHandler()}"
 			></w-textfield>
 		</form>
 	`;
@@ -40,14 +44,6 @@ test("works as expected in forms", async () => {
 		page.getByTestId("form").element() as HTMLFormElement,
 	);
 	expect(formData.get("message")).toBe("Hola el Mundo");
-
-	const inputHandler = vi.fn();
-	const changeHandler = vi.fn();
-	page.getByLabelText(label).element().addEventListener("input", inputHandler);
-	page
-		.getByLabelText(label)
-		.element()
-		.addEventListener("change", changeHandler);
 
 	await page.getByLabelText(label).fill("Hello, World");
 

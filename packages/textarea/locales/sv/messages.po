@@ -18,3 +18,27 @@ msgstr ""
 #: packages/textarea/textarea.ts:426
 msgid "textarea.label.optional"
 msgstr "Valfritt"
+
+#. Validation message shown when textarea value is required
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:321
+msgid "textarea.validation.valueMissing"
+msgstr "Fyll i det här fältet."
+
+#. Validation message shown when textarea value is too short
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:319
+msgid "textarea.validation.tooShort"
+msgstr "Gör texten längre till minst {minLength} tecken (du använder för närvarande {currentLength} tecken)."
+
+#. Validation message shown when textarea value is too long
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:330
+msgid "textarea.validation.tooLong"
+msgstr "Gör texten kortare till högst {maxLength} tecken (du använder för närvarande {currentLength} tecken)."
+
+#. Fallback validation message for textarea
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:342
+msgid "textarea.validation.invalid"
+msgstr "Ange ett giltigt värde."

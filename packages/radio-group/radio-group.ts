@@ -545,7 +545,8 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 											${i18n._({
 												id: "radio-group.label.optional",
 												message: "Optional",
-												comment: "Shown behind label when marked as optional",
+												comment:
+													"Shown behind label when marked as optional",
 											})}
 										</span>`
 									: nothing}
@@ -576,21 +577,23 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 					@slotchange=${this.syncRadioElements}
 				></slot>
 
-				${shouldShowHelpText
-					? html`
-							<div
-								id="help-text"
-								part="help-text"
-								aria-label=${ifDefined(helpTextAriaLabel)}
-							>
-								<slot
-									name="help-text"
-									@slotchange=${this.handleHelpTextSlotChange}
-									>${helpText}</slot
+				${
+					shouldShowHelpText
+						? html`
+								<div
+									id="help-text"
+									part="help-text"
+									aria-label=${ifDefined(helpTextAriaLabel)}
 								>
-							</div>
-						`
-					: null}
+									<slot
+										name="help-text"
+										@slotchange=${this.handleHelpTextSlotChange}
+										>${helpText}</slot
+									>
+								</div>
+							`
+						: null
+				}
 			</fieldset>
 		`;
 	}

@@ -13,6 +13,7 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { wSliderStyles } from "./styles/w-slider.styles.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
@@ -204,6 +205,13 @@ class WarpSlider extends LitElement {
 	/** @internal */
 	@state()
 	_hasLabel = false;
+
+	@state()
+	private _hasHelpTextSlot = false;
+
+	get #hasHelpText() {
+		return typeof this.helpText !== "undefined" || this._hasHelpTextSlot;
+	}
 
 	constructor() {
 		super();
@@ -564,6 +572,14 @@ class WarpSlider extends LitElement {
 				`;
 	}
 
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
+
 	render() {
 		return html`
 			<fieldset
@@ -574,7 +590,7 @@ class WarpSlider extends LitElement {
 				@slidervalidity="${this.#onSliderValidity}"
 				@thumbreset="${this.#onThumbReset}"
 				@keydown="${this.#handleKeyDown}"
-				aria-invalid="${this.errorText ? "true" : nothing}"
+				aria-invalid="${ifDefined(this.errorText ? "true" : undefined)}"
 				?disabled="${this.disabled}"
 			>
 				${this._label}
@@ -597,15 +613,25 @@ class WarpSlider extends LitElement {
 					name="to"
 					@slotchange=${this.#syncSliderThumbs}
 				></slot>
-				${this.errorText
-					? html`<p class="w-slider__error" aria-describes="fieldset">
-							${this.errorText}
-						</p>`
-					: this.helpText
-						? html`<p class="w-slider__help-text" aria-describes="fieldset">
-								${this.helpText}
+				${
+					this.errorText
+						? html`<p class="w-slider__error" aria-describes="fieldset">
+								${this.errorText}
 							</p>`
-						: nothing}
+						: html`
+								<p
+									?hidden=${!this.#hasHelpText}
+									class="w-slider__help-text"
+									aria-describes="fieldset"
+								>
+									${this.helpText}
+									<slot
+										@slotchange="${this.helpTextSlotChange}"
+										name="help-text"
+									></slot>
+								</p>
+							`
+				}
 			</fieldset>
 		`;
 	}
