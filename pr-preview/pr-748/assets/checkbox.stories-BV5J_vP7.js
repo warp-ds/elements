@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d as i,g as a,h as o,l as s,p as c,r as l,s as u,t as d,y as ee}from"./decorate-J4WBtiHw.js";import{l as te,s as ne,u as re}from"./async-directive-6aA0qmsc.js";import{a as f,o as ie,r as ae,t as oe}from"./i18n-CkjYRTT1.js";import{i as p,n as se,r as ce,t as le}from"./directive-CZiujxgm.js";import{n as ue,t as de}from"./dist-DYA0KhTf.js";import{t as fe}from"./query-BHY-nhsh.js";import{n as pe,t as me}from"./styles-CYn3YYhE.js";import{i as he,n as ge,r as _e}from"./utilities-DhdP2kMI.js";import{n as ve,t as ye}from"./FormControlMixin-BCJbRrUC.js";import{r as m,t as h}from"./if-defined-hoo3qVMT.js";var g;function _(){return(_=e((()=>{a(),ce(),ne(),g=le(class extends se{constructor(e){if(super(e),e.type!==p.PROPERTY&&e.type!==p.ATTRIBUTE&&e.type!==p.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!re(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===c||t===i)return t;let n=e.element,r=e.name;if(e.type===p.PROPERTY){if(t===n[r])return c}else if(e.type===p.BOOLEAN_ATTRIBUTE){if(!!t===n.hasAttribute(r))return c}else if(e.type===p.ATTRIBUTE&&n.getAttribute(r)===t+``)return c;return te(e),t}})})))()}function v(){return(v=e((()=>{_()})))()}var y;function b(){return(b=e((()=>{r(),y=ee`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d as i,g as a,h as o,l as s,p as c,r as l,s as u,t as d,y as ee}from"./decorate-J4WBtiHw.js";import{l as te,s as ne,u as re}from"./async-directive-6aA0qmsc.js";import{a as f,o as ie,r as ae,t as oe}from"./i18n-CkjYRTT1.js";import{i as p,n as se,r as ce,t as le}from"./directive-CZiujxgm.js";import{n as ue,t as de}from"./dist-DYA0KhTf.js";import{t as fe}from"./query-BHY-nhsh.js";import{t as pe}from"./icon-oWwEbYYO.js";import{n as me,t as he}from"./styles-CYn3YYhE.js";import{i as ge,n as _e,r as ve}from"./utilities-DhdP2kMI.js";import{n as ye,t as be}from"./FormControlMixin-BCJbRrUC.js";import{r as m,t as h}from"./if-defined-hoo3qVMT.js";import{t as g}from"./tooltip-Cg97vTGg.js";var _;function v(){return(v=e((()=>{a(),ce(),ne(),_=le(class extends se{constructor(e){if(super(e),e.type!==p.PROPERTY&&e.type!==p.ATTRIBUTE&&e.type!==p.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!re(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===c||t===i)return t;let n=e.element,r=e.name;if(e.type===p.PROPERTY){if(t===n[r])return c}else if(e.type===p.BOOLEAN_ATTRIBUTE){if(!!t===n.hasAttribute(r))return c}else if(e.type===p.ATTRIBUTE&&n.getAttribute(r)===t+``)return c;return te(e),t}})})))()}function y(){return(y=e((()=>{v()})))()}var b;function x(){return(x=e((()=>{r(),b=ee`
 	:host {
 		--_label-font-size: var(
 			--w-c-checkbox-label-font-size,
@@ -182,7 +182,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 			--w-c-checkbox-transition: none;
 		}
 	}
-`})))()}var x;function S(){return(S=e((()=>{ve(),r(),l(),h(),v(),me(),b(),x=class extends ye(s){constructor(...e){super(...e),this.value=null,this.indeterminate=!1,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.#r=()=>{this.#a(),this.#l()},this.#i=e=>{if(!this.disabled&&!e.defaultPrevented&&(e.key===` `||e.key===`Spacebar`||e.key===`Enter`)){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.composedPath()[0]!==this.input&&(e.preventDefault(),this.click())}}}static{this.styles=[pe,y]}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}set name(e){this._ownName=e}get name(){return this._ownName||this._groupName}#e;#t;#n;get _computedInvalid(){return this.invalid||this._groupInvalid===!0}connectedCallback(){super.connectedCallback();let e=this.getAttribute(`value`);this.value=e??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.addEventListener(`invalid`,this.#r),this.addEventListener(`keydown`,this.#i),this.#u()}handleClick(){this.disabled||(this.#a(),this.checked=!this.checked,this.indeterminate=!1,this.updateComplete.then(()=>{this.input.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))}))}#r;#i;updated(e){super.updated(e),(e.has(`checked`)||e.has(`indeterminate`))&&this.#d(),this.#f(e)&&(this.#u(),this.#l())}resetFormControl(){this.checked=this.#e,this.#u(),this.#l()}click(){this.disabled||this.input?.click()}focus(e){this.input?.focus(e)}blur(){this.input?.blur()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.#l(),this.internals.checkValidity()}reportValidity(){return this.#a(),this.#l(),this.internals.checkValidity()}#a(){this.#n=!0}#o(){return this.input?.validationMessage||` `}#s(){return this.input??void 0}#c(e){this.internals.setValidity(e,this.#o(),this.#s())}#l(){if(this.disabled){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.#c({valueMissing:!0});return}if(this.#t&&=(this.invalid=!1,!1),t){this.#c({customError:!0});return}this.internals.setValidity({})}#u(){if(this.disabled){this.setValue(null);return}let e=this.checked?this.value:null;this.setValue(e)}#d(){this.input&&(this.input.checked=this.checked,this.input.indeterminate=this.indeterminate)}#f(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){let e=!this.checked&&this.indeterminate,t=e?`mixed`:this.checked?`true`:`false`;return o`
+`})))()}var S;function C(){return(C=e((()=>{ye(),r(),l(),h(),y(),he(),x(),S=class extends be(s){constructor(...e){super(...e),this.value=null,this.indeterminate=!1,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.#r=()=>{this.#a(),this.#l()},this.#i=e=>{if(!this.disabled&&!e.defaultPrevented&&(e.key===` `||e.key===`Spacebar`||e.key===`Enter`)){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.composedPath()[0]!==this.input&&(e.preventDefault(),this.click())}}}static{this.styles=[me,b]}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}set name(e){this._ownName=e}get name(){return this._ownName||this._groupName}#e;#t;#n;get _computedInvalid(){return this.invalid||this._groupInvalid===!0}connectedCallback(){super.connectedCallback();let e=this.getAttribute(`value`);this.value=e??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.addEventListener(`invalid`,this.#r),this.addEventListener(`keydown`,this.#i),this.#u()}handleClick(){this.disabled||(this.#a(),this.checked=!this.checked,this.indeterminate=!1,this.updateComplete.then(()=>{this.input.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))}))}#r;#i;updated(e){super.updated(e),(e.has(`checked`)||e.has(`indeterminate`))&&this.#d(),this.#f(e)&&(this.#u(),this.#l())}resetFormControl(){this.checked=this.#e,this.#u(),this.#l()}click(){this.disabled||this.input?.click()}focus(e){this.input?.focus(e)}blur(){this.input?.blur()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.#l(),this.internals.checkValidity()}reportValidity(){return this.#a(),this.#l(),this.internals.checkValidity()}#a(){this.#n=!0}#o(){return this.input?.validationMessage||` `}#s(){return this.input??void 0}#c(e){this.internals.setValidity(e,this.#o(),this.#s())}#l(){if(this.disabled){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.#c({valueMissing:!0});return}if(this.#t&&=(this.invalid=!1,!1),t){this.#c({customError:!0});return}this.internals.setValidity({})}#u(){if(this.disabled){this.setValue(null);return}let e=this.checked?this.value:null;this.setValue(e)}#d(){this.input&&(this.input.checked=this.checked,this.input.indeterminate=this.indeterminate)}#f(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){let e=!this.checked&&this.indeterminate,t=e?`mixed`:this.checked?`true`:`false`;return o`
 			<label part="base">
 				<span part="control">
 					<input
@@ -190,8 +190,8 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 						type="checkbox"
 						name=${m(this.name||void 0)}
 						value=${m(this.value)}
-						.indeterminate=${g(this.indeterminate)}
-						.checked=${g(this.checked)}
+						.indeterminate=${_(this.indeterminate)}
+						.checked=${_(this.checked)}
 						.disabled=${this.disabled}
 						.required=${this.required}
 						aria-checked=${t}
@@ -203,7 +203,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 
 				<slot part="label"></slot>
 			</label>
-		`}},d([fe(`input[type="checkbox"]`)],x.prototype,`input`,void 0),d([u({reflect:!0})],x.prototype,`name`,null),d([u({reflect:!0})],x.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],x.prototype,`indeterminate`,void 0),d([u({type:Boolean,reflect:!0})],x.prototype,`checked`,void 0),d([u({type:Boolean,reflect:!0})],x.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],x.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],x.prototype,`invalid`,void 0),d([u({attribute:!1})],x.prototype,`_groupInvalid`,void 0),d([u({attribute:!1})],x.prototype,`_groupName`,void 0),customElements.get(`w-checkbox`)||customElements.define(`w-checkbox`,x)})))()}var C;function w(){return(w=e((()=>{C=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Mindst én valgt mulighed er påkrævet."]}`)})))()}var T;function E(){return(E=e((()=>{T=JSON.parse(`{"checkbox-group.label.optional":["Optional"],"checkbox-group.validation.required":["At least one selection is required."]}`)})))()}var D;function O(){return(O=e((()=>{D=JSON.parse(`{"checkbox-group.label.optional":["Valinnainen"],"checkbox-group.validation.required":["Vähintään yksi valinta vaaditaan."]}`)})))()}var k;function A(){return(A=e((()=>{k=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Minst ett valg er påkrevd."]}`)})))()}var j;function M(){return(M=e((()=>{j=JSON.parse(`{"checkbox-group.label.optional":["Valfritt"],"checkbox-group.validation.required":["Minst ett val krävs."]}`)})))()}var N,P;function F(){return(F=e((()=>{ie(),ve(),r(),l(),h(),ae(),w(),E(),O(),A(),M(),oe(T,k,D,C,j),N=()=>f._({id:`checkbox-group.validation.required`,message:`At least one selection is required.`,comment:`Shown when required checkbox group has no selections`}),P=class extends ye(s){constructor(...e){super(...e),this.optional=!1,this.required=!1,this.invalid=!1,this._hasHelpTextSlot=!1,this.#e=!1,this.#t=!1,this._internalTabIndex=-1,this.#r=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#i=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#a=()=>{this.#l(),this.#_(),this.requestUpdate()},this.#s=()=>{this.requestUpdate()}}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}#e;#t;#n;static{this.styles=ee`
+		`}},d([fe(`input[type="checkbox"]`)],S.prototype,`input`,void 0),d([u({reflect:!0})],S.prototype,`name`,null),d([u({reflect:!0})],S.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`indeterminate`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`checked`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`invalid`,void 0),d([u({attribute:!1})],S.prototype,`_groupInvalid`,void 0),d([u({attribute:!1})],S.prototype,`_groupName`,void 0),customElements.get(`w-checkbox`)||customElements.define(`w-checkbox`,S)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Mindst én valgt mulighed er påkrævet."]}`)})))()}var E;function D(){return(D=e((()=>{E=JSON.parse(`{"checkbox-group.label.optional":["Optional"],"checkbox-group.validation.required":["At least one selection is required."]}`)})))()}var O;function k(){return(k=e((()=>{O=JSON.parse(`{"checkbox-group.label.optional":["Valinnainen"],"checkbox-group.validation.required":["Vähintään yksi valinta vaaditaan."]}`)})))()}var A;function j(){return(j=e((()=>{A=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Minst ett valg er påkrevd."]}`)})))()}var M;function N(){return(N=e((()=>{M=JSON.parse(`{"checkbox-group.label.optional":["Valfritt"],"checkbox-group.validation.required":["Minst ett val krävs."]}`)})))()}var P,F;function I(){return(I=e((()=>{ie(),ye(),r(),l(),h(),ae(),T(),D(),k(),j(),N(),pe(),g(),oe(E,A,O,w,M),P=()=>f._({id:`checkbox-group.validation.required`,message:`At least one selection is required.`,comment:`Shown when required checkbox group has no selections`}),F=class extends be(s){constructor(...e){super(...e),this.optional=!1,this.required=!1,this.invalid=!1,this._hasHelpTextSlot=!1,this.#e=!1,this.#t=!1,this._internalTabIndex=-1,this.#r=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#i=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#a=()=>{this.#l(),this.#_(),this.requestUpdate()},this.#s=()=>{this.requestUpdate()}}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}#e;#t;#n;static{this.styles=ee`
 		.wrapper {
 			display: inline-flex;
 			flex-direction: column;
@@ -240,6 +240,20 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 		.error {
 			color: var(--w-s-color-text-negative);
 		}
+
+		[part="tooltip-target"] {
+			appearance: none;
+			background: transparent;
+			border: none;
+			height: 16px;
+			margin: 0 0 0 4px;
+			padding: 0;
+			vertical-align: text-top;
+		}
+
+		w-tooltip {
+			display: inline-block;
+		}
 	`}helpTextSlotChange(){this.renderRoot.querySelector(`slot[name=help-text]`).assignedElements().length&&(this._hasHelpTextSlot=!0)}render(){let e=this.#c()>0,t=this.required&&!e&&this.#e,n=this.invalid||t,r=n?this.#p():this.helpText,a=!!(r||this._hasHelpTextSlot),s=a?`checkbox-group__help`:void 0,c=this.label?`checkbox-group__label`:void 0,l=n?`true`:void 0;return o`
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
 				${this.label?o`
@@ -249,6 +263,22 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 													<span class="optional">
 														${f._({id:`checkbox-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
 													</span>
+												`:i}
+									${this.tooltip?o`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
 												`:i}
 								</div>
 							`:i}
@@ -273,7 +303,20 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 					></slot>
 				</div>
 			</div>
-		`}connectedCallback(){super.connectedCallback(),this.addEventListener(`change`,this.#r),this.addEventListener(`invalid`,this.#i),this.addEventListener(`slotchange`,this.#a),this.#n=f.on(`change`,this.#s),this.setValue(null),this.#v()}disconnectedCallback(){this.#n?.(),this.#n=void 0,super.disconnectedCallback()}checkValidity(){return this.#_(),this.internals.checkValidity()}reportValidity(){return this.#o(),this.#_(),this.internals.checkValidity()}focus(e){let t=this.#d();if(t?.focus){t.focus(e);return}HTMLElement.prototype.focus.call(this,e)}#r;#i;#a;#o(){this.#e=!0}#s;#c(){return this.#f().filter(e=>e.checked).length}#l(){if(this.name)for(let e of this.#f()){let t=e;t&&typeof t==`object`&&!t.name&&(t._groupName=this.name)}}#u(e){for(let t of this.#f())`_groupInvalid`in t&&(t._groupInvalid=e)}#d(){return this.#f()[0]}#f(){return(this.shadowRoot?.querySelector(`slot`))?.assignedElements({flatten:!0})??[]}#p(){return N()}updated(e){super.updated(e),this.#m(e)&&(e.has(`name`)&&this.#l(),this.#_())}#m(e){return e.has(`invalid`)||e.has(`required`)||e.has(`helpText`)||e.has(`name`)}#h(e){let t=this.#d();this.internals.setValidity(e,` `,t??void 0)}#g(e){this._internalTabIndex=e?0:-1}#_(){this.#v();let e=this.#c()>0,t=this.required&&!e,n=this.invalid,r=t&&this.#e,i=n||r;if(this.#g(i),t){this.#h({valueMissing:!0}),this.#u(i);return}if(n){this.#h({customError:!0}),this.#u(!0);return}this.internals.setValidity({}),this.#u(!1)}#v(){this.#t||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-checkbox-group: "name" is required for form submission.`),this.#t=!0))}},d([u({type:String,reflect:!0})],P.prototype,`label`,void 0),d([u({type:String,reflect:!0})],P.prototype,`name`,void 0),d([u({type:Boolean,reflect:!0})],P.prototype,`optional`,void 0),d([u({type:String,reflect:!0,attribute:`help-text`})],P.prototype,`helpText`,void 0),d([u({type:Boolean,reflect:!0})],P.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],P.prototype,`invalid`,void 0),d([n()],P.prototype,`_hasHelpTextSlot`,void 0),d([n()],P.prototype,`_internalTabIndex`,void 0),customElements.get(`w-checkbox-group`)||customElements.define(`w-checkbox-group`,P)})))()}var be=t({CheckboxFormAssociated:()=>W,CheckboxGroup:()=>K,CheckboxGroupFormAssociated:()=>$,CheckboxGroupRequired:()=>Q,CheckboxGroupWithHelpText:()=>q,CheckboxGroupWithHelpTextAndLabel:()=>Y,CheckboxGroupWithInvalid:()=>Z,CheckboxGroupWithLabel:()=>J,CheckboxGroupWithOptional:()=>X,Default:()=>z,Disabled:()=>G,Indeterminate:()=>V,IndeterminateDisabled:()=>U,IndeterminateError:()=>H,Invalid:()=>B,__namedExportsOrder:()=>Se,default:()=>xe}),I,L,R,xe,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,Se;function Ce(){return(Ce=e((()=>{_e(),ue(),r(),S(),F(),{events:I,args:L,argTypes:R}=de(`w-checkbox`),xe={title:`Forms/Checkbox`,render(e){return o` <w-checkbox ${he(ge(e))}>Check me</w-checkbox> `},args:L,argTypes:R,parameters:{actions:{handles:I}}},z={},B={args:{name:`invalidfoo`,value:`bar`,invalid:!0}},V={args:{name:`indeterminatefoo`,value:`bar`,indeterminate:!0}},H={args:{name:`indeterminateerrorfoo`,value:`bar`,indeterminate:!0,invalid:!0}},U={args:{name:`indeterminatedisabledfoo`,value:`bar`,indeterminate:!0,disabled:!0}},W={render:()=>o`
+		`}connectedCallback(){super.connectedCallback(),this.addEventListener(`change`,this.#r),this.addEventListener(`invalid`,this.#i),this.addEventListener(`slotchange`,this.#a),this.#n=f.on(`change`,this.#s),this.setValue(null),this.#v()}disconnectedCallback(){this.#n?.(),this.#n=void 0,super.disconnectedCallback()}checkValidity(){return this.#_(),this.internals.checkValidity()}reportValidity(){return this.#o(),this.#_(),this.internals.checkValidity()}focus(e){let t=this.#d();if(t?.focus){t.focus(e);return}HTMLElement.prototype.focus.call(this,e)}#r;#i;#a;#o(){this.#e=!0}#s;#c(){return this.#f().filter(e=>e.checked).length}#l(){if(this.name)for(let e of this.#f()){let t=e;t&&typeof t==`object`&&!t.name&&(t._groupName=this.name)}}#u(e){for(let t of this.#f())`_groupInvalid`in t&&(t._groupInvalid=e)}#d(){return this.#f()[0]}#f(){return(this.shadowRoot?.querySelector(`slot`))?.assignedElements({flatten:!0})??[]}#p(){return P()}updated(e){super.updated(e),this.#m(e)&&(e.has(`name`)&&this.#l(),this.#_())}#m(e){return e.has(`invalid`)||e.has(`required`)||e.has(`helpText`)||e.has(`name`)}#h(e){let t=this.#d();this.internals.setValidity(e,` `,t??void 0)}#g(e){this._internalTabIndex=e?0:-1}#_(){this.#v();let e=this.#c()>0,t=this.required&&!e,n=this.invalid,r=t&&this.#e,i=n||r;if(this.#g(i),t){this.#h({valueMissing:!0}),this.#u(i);return}if(n){this.#h({customError:!0}),this.#u(!0);return}this.internals.setValidity({}),this.#u(!1)}#v(){this.#t||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-checkbox-group: "name" is required for form submission.`),this.#t=!0))}},d([u({type:String,reflect:!0})],F.prototype,`label`,void 0),d([u({type:String,reflect:!0})],F.prototype,`tooltip`,void 0),d([u({type:String,reflect:!0})],F.prototype,`name`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`optional`,void 0),d([u({type:String,reflect:!0,attribute:`help-text`})],F.prototype,`helpText`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`invalid`,void 0),d([n()],F.prototype,`_hasHelpTextSlot`,void 0),d([n()],F.prototype,`_internalTabIndex`,void 0),customElements.get(`w-checkbox-group`)||customElements.define(`w-checkbox-group`,F)})))()}var xe=t({CheckboxFormAssociated:()=>W,CheckboxGroup:()=>K,CheckboxGroupFormAssociated:()=>$,CheckboxGroupRequired:()=>Q,CheckboxGroupWithHelpText:()=>q,CheckboxGroupWithHelpTextAndLabel:()=>Y,CheckboxGroupWithInvalid:()=>Z,CheckboxGroupWithLabel:()=>J,CheckboxGroupWithOptional:()=>X,Default:()=>R,Disabled:()=>G,Indeterminate:()=>V,IndeterminateDisabled:()=>U,IndeterminateError:()=>H,Invalid:()=>B,WithTooltip:()=>z,__namedExportsOrder:()=>Te,default:()=>we}),L,Se,Ce,we,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,Te;function Ee(){return(Ee=e((()=>{ve(),ue(),r(),C(),I(),g(),{events:L,args:Se,argTypes:Ce}=de(`w-checkbox`),we={title:`Forms/Checkbox`,render(e){return o` <w-checkbox ${ge(_e(e))}>Check me</w-checkbox> `},args:Se,argTypes:Ce,parameters:{actions:{handles:L}}},R={},z={args:{optional:!0,required:!1,helpText:`Help text is available, but might not be enough, or the added context is not important enough that we use help-text`,tooltip:`This tooltip adds supplementary information`},render({optional:e,required:t}){return o`
+            <w-checkbox-group
+                name="tooltip-demo"
+                label="Needs an explanation"
+                help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+                tooltip="This tooltip adds supplementary information"
+                ?optional=${e}
+                ?required=${t}
+            >
+                <w-checkbox value="foo">Foo</w-checkbox>
+                <w-checkbox value="bar">Bar</w-checkbox>
+                <w-checkbox value="baz">Baz</w-checkbox>
+            </w-checkbox-group>
+        `}},B={args:{name:`invalidfoo`,value:`bar`,invalid:!0}},V={args:{name:`indeterminatefoo`,value:`bar`,indeterminate:!0}},H={args:{name:`indeterminateerrorfoo`,value:`bar`,indeterminate:!0,invalid:!0}},U={args:{name:`indeterminatedisabledfoo`,value:`bar`,indeterminate:!0,disabled:!0}},W={render:()=>o`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget,n=t.querySelector(`[data-status]`);n&&(n.textContent=`Submitted value: ${new FormData(t).get(`newsletter`)??`none`}`)}} style="display: grid; gap: 12px;">
                 <w-checkbox
                     name="newsletter"
@@ -343,7 +386,33 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
+        `},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+  args: {
+    optional: true,
+    required: false,
+    helpText: "Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+    tooltip: "This tooltip adds supplementary information"
+  },
+  render({
+    optional,
+    required
+  }) {
+    return html\`
+            <w-checkbox-group
+                name="tooltip-demo"
+                label="Needs an explanation"
+                help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+                tooltip="This tooltip adds supplementary information"
+                ?optional=\${optional}
+                ?required=\${required}
+            >
+                <w-checkbox value="foo">Foo</w-checkbox>
+                <w-checkbox value="bar">Bar</w-checkbox>
+                <w-checkbox value="baz">Baz</w-checkbox>
+            </w-checkbox-group>
+        \`;
+  }
+}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
     name: "invalidfoo",
     value: "bar",
@@ -494,4 +563,4 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             </form>
         \`;
   }
-}`,...$.parameters?.docs?.source}}},Se=[`Default`,`Invalid`,`Indeterminate`,`IndeterminateError`,`IndeterminateDisabled`,`CheckboxFormAssociated`,`Disabled`,`CheckboxGroup`,`CheckboxGroupWithHelpText`,`CheckboxGroupWithLabel`,`CheckboxGroupWithHelpTextAndLabel`,`CheckboxGroupWithOptional`,`CheckboxGroupWithInvalid`,`CheckboxGroupRequired`,`CheckboxGroupFormAssociated`]})))()}export{q as a,z as c,U as d,H as f,Ce as h,Q as i,G as l,be as m,K as n,J as o,B as p,$ as r,X as s,W as t,V as u};
+}`,...$.parameters?.docs?.source}}},Te=[`Default`,`WithTooltip`,`Invalid`,`Indeterminate`,`IndeterminateError`,`IndeterminateDisabled`,`CheckboxFormAssociated`,`Disabled`,`CheckboxGroup`,`CheckboxGroupWithHelpText`,`CheckboxGroupWithLabel`,`CheckboxGroupWithHelpTextAndLabel`,`CheckboxGroupWithOptional`,`CheckboxGroupWithInvalid`,`CheckboxGroupRequired`,`CheckboxGroupFormAssociated`]})))()}export{q as a,R as c,U as d,H as f,Ee as h,Q as i,G as l,xe as m,K as n,J as o,B as p,$ as r,X as s,W as t,V as u};

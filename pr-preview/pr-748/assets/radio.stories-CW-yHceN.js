@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-J4WBtiHw.js";import{a as l,o as u,r as d,t as ee}from"./i18n-CkjYRTT1.js";import{n as f,t as te}from"./dist-DYA0KhTf.js";import{n as ne,t as re}from"./styles-CYn3YYhE.js";import{i as ie,n as ae,r as oe}from"./utilities-DhdP2kMI.js";import{n as p,t as m}from"./FormControlMixin-BCJbRrUC.js";import{r as h,t as se}from"./if-defined-hoo3qVMT.js";var g;function _(){return(_=e((()=>{n(),g=c`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,d as r,h as i,l as a,r as o,s,t as c,y as l}from"./decorate-J4WBtiHw.js";import{a as u,o as d,r as ee,t as f}from"./i18n-CkjYRTT1.js";import{n as p,t as te}from"./dist-DYA0KhTf.js";import{t as ne}from"./icon-oWwEbYYO.js";import{n as re,t as ie}from"./styles-CYn3YYhE.js";import{i as ae,n as oe,r as se}from"./utilities-DhdP2kMI.js";import{n as m,t as h}from"./FormControlMixin-BCJbRrUC.js";import{r as g,t as ce}from"./if-defined-hoo3qVMT.js";import{t as _}from"./tooltip-Cg97vTGg.js";var v;function y(){return(y=e((()=>{n(),v=l`
 	:host {
 		box-sizing: border-box !important;
 	}
@@ -8,7 +8,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 	:host *::after {
 		box-sizing: inherit !important;
 	}
-`})))()}var v;function ce(){return(ce=e((()=>{n(),v=c`
+`})))()}var b;function x(){return(x=e((()=>{n(),b=l`
 	:host {
 		display: inline-flex;
 		align-items: center;
@@ -207,12 +207,12 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 			border-color: var(--_border-color-disabled);
 		}
 	}
-`})))()}var y;function b(){return(b=e((()=>{p(),n(),a(),re(),_(),ce(),y=class extends m(i){static{this.styles=[g,ne,v]}static{this.shadowRootOptions={...i.shadowRootOptions,delegatesFocus:!0}}get tabIndex(){return this._internalTabIndex}set tabIndex(e){this._groupTabIndex=e}#e;#t;#n;constructor(){super(),this.value=null,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.handleClick=()=>{this.isInGroup()||this.disabled||(this.#n=!0,!this.checked&&(this.checked=!0,this.updateComplete.then(()=>{this.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))})))},this.handleInvalid=()=>{this.#n=!0,this.updateValidity()},this.handleKeyDown=e=>{if(!this.isInGroup()&&!this.disabled&&!e.defaultPrevented){if([`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key)){let t=this.getStandaloneNamedRadios().filter(e=>!e.disabled);if(t.length<=1)return;e.preventDefault();let n=t.find(e=>e.checked)??t.find(e=>e===this)??t[0],r=e.key===`ArrowUp`||e.key===`ArrowLeft`?-1:1,i=t[(t.indexOf(n)+r+t.length)%t.length];i.#n=!0,i.checked||(i.checked=!0,i.updateComplete.then(()=>{i.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))})),i.focus();return}if(e.key===` `||e.key===`Spacebar`||e.key===`Enter`){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.preventDefault(),this.click()}}},this.addEventListener(`click`,this.handleClick),this.addEventListener(`invalid`,this.handleInvalid),this.addEventListener(`keydown`,this.handleKeyDown)}connectedCallback(){super.connectedCallback(),this.value=this.getAttribute(`value`)??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.internals.role=`radio`,this.syncAriaDisabled(),this.syncFormValue(),this.updateValidity()}syncAriaDisabled(){this.internals.ariaDisabled=this.disabled?`true`:`false`}syncAriaChecked(){this.internals.ariaChecked=this.checked?`true`:`false`}willUpdate(e){this.shouldSyncFormState(e)&&(this.syncFormValue(),this.updateValidity())}updated(e){super.updated(e),e.has(`checked`)&&(this.syncAriaChecked(),this.checked&&!this.isInGroup()&&(this.uncheckOtherRadios(),this.syncStandaloneTabOrder())),e.has(`disabled`)&&(this.syncAriaDisabled(),this.isInGroup()||this.syncStandaloneTabOrder()),e.has(`invalid`)&&(this.internals.ariaInvalid=this.invalid?`true`:null),e.has(`name`)&&this.checked&&!this.isInGroup()&&this.uncheckOtherRadios()}resetFormControl(){this.checked=this.#e,this.syncFormValue(),this.updateValidity()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.updateValidity(),this.internals.checkValidity()}reportValidity(){return this.#n=!0,this.updateValidity(),this.internals.checkValidity()}isInGroup(){return!!this.closest(`w-radio-group`)}getRadioScope(){return this.internals.form??this.closest(`form`)??document}getStandaloneNamedRadios(){return this.name?[...this.getRadioScope().querySelectorAll(`w-radio[name="${this.name}"]`)].filter(e=>!e.closest(`w-radio-group`)):[this]}syncStandaloneTabOrder(){let e=this.getStandaloneNamedRadios(),t=e.filter(e=>!e.disabled),n=t.find(e=>e.checked)??t[0]??null;e.forEach(e=>{e._standaloneTabIndex=e===n?0:-1})}get _internalTabIndex(){return this.disabled?-1:this._groupTabIndex===void 0?this._standaloneTabIndex===void 0?0:this._standaloneTabIndex:this._groupTabIndex}firstUpdated(){this.isInGroup()||this.syncStandaloneTabOrder()}uncheckOtherRadios(){this.name&&[...this.getRadioScope().querySelectorAll(`w-radio[name="${this.name}"]`)].forEach(e=>{e!==this&&(e.closest(`w-radio-group`)||(e.checked&&=!1))})}updateValidity(){if(this.disabled||this.isInGroup()){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.internals.setValidity({valueMissing:!0},this.internals.validationMessage||` `);return}if(this.#t&&=(this.invalid=!1,!1),t){this.internals.setValidity({customError:!0},this.internals.validationMessage||` `);return}this.internals.setValidity({})}syncFormValue(){if(this.disabled){this.setValue(null);return}this.setValue(this.checked?this.value:null)}shouldSyncFormState(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){return r`
+`})))()}var S;function C(){return(C=e((()=>{m(),n(),o(),ie(),y(),x(),S=class extends h(a){static{this.styles=[v,re,b]}static{this.shadowRootOptions={...a.shadowRootOptions,delegatesFocus:!0}}get tabIndex(){return this._internalTabIndex}set tabIndex(e){this._groupTabIndex=e}#e;#t;#n;constructor(){super(),this.value=null,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.handleClick=()=>{this.isInGroup()||this.disabled||(this.#n=!0,!this.checked&&(this.checked=!0,this.updateComplete.then(()=>{this.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))})))},this.handleInvalid=()=>{this.#n=!0,this.updateValidity()},this.handleKeyDown=e=>{if(!this.isInGroup()&&!this.disabled&&!e.defaultPrevented){if([`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`].includes(e.key)){let t=this.getStandaloneNamedRadios().filter(e=>!e.disabled);if(t.length<=1)return;e.preventDefault();let n=t.find(e=>e.checked)??t.find(e=>e===this)??t[0],r=e.key===`ArrowUp`||e.key===`ArrowLeft`?-1:1,i=t[(t.indexOf(n)+r+t.length)%t.length];i.#n=!0,i.checked||(i.checked=!0,i.updateComplete.then(()=>{i.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))})),i.focus();return}if(e.key===` `||e.key===`Spacebar`||e.key===`Enter`){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.preventDefault(),this.click()}}},this.addEventListener(`click`,this.handleClick),this.addEventListener(`invalid`,this.handleInvalid),this.addEventListener(`keydown`,this.handleKeyDown)}connectedCallback(){super.connectedCallback(),this.value=this.getAttribute(`value`)??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.internals.role=`radio`,this.syncAriaDisabled(),this.syncFormValue(),this.updateValidity()}syncAriaDisabled(){this.internals.ariaDisabled=this.disabled?`true`:`false`}syncAriaChecked(){this.internals.ariaChecked=this.checked?`true`:`false`}willUpdate(e){this.shouldSyncFormState(e)&&(this.syncFormValue(),this.updateValidity())}updated(e){super.updated(e),e.has(`checked`)&&(this.syncAriaChecked(),this.checked&&!this.isInGroup()&&(this.uncheckOtherRadios(),this.syncStandaloneTabOrder())),e.has(`disabled`)&&(this.syncAriaDisabled(),this.isInGroup()||this.syncStandaloneTabOrder()),e.has(`invalid`)&&(this.internals.ariaInvalid=this.invalid?`true`:null),e.has(`name`)&&this.checked&&!this.isInGroup()&&this.uncheckOtherRadios()}resetFormControl(){this.checked=this.#e,this.syncFormValue(),this.updateValidity()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.updateValidity(),this.internals.checkValidity()}reportValidity(){return this.#n=!0,this.updateValidity(),this.internals.checkValidity()}isInGroup(){return!!this.closest(`w-radio-group`)}getRadioScope(){return this.internals.form??this.closest(`form`)??document}getStandaloneNamedRadios(){return this.name?[...this.getRadioScope().querySelectorAll(`w-radio[name="${this.name}"]`)].filter(e=>!e.closest(`w-radio-group`)):[this]}syncStandaloneTabOrder(){let e=this.getStandaloneNamedRadios(),t=e.filter(e=>!e.disabled),n=t.find(e=>e.checked)??t[0]??null;e.forEach(e=>{e._standaloneTabIndex=e===n?0:-1})}get _internalTabIndex(){return this.disabled?-1:this._groupTabIndex===void 0?this._standaloneTabIndex===void 0?0:this._standaloneTabIndex:this._groupTabIndex}firstUpdated(){this.isInGroup()||this.syncStandaloneTabOrder()}uncheckOtherRadios(){this.name&&[...this.getRadioScope().querySelectorAll(`w-radio[name="${this.name}"]`)].forEach(e=>{e!==this&&(e.closest(`w-radio-group`)||(e.checked&&=!1))})}updateValidity(){if(this.disabled||this.isInGroup()){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.internals.setValidity({valueMissing:!0},this.internals.validationMessage||` `);return}if(this.#t&&=(this.invalid=!1,!1),t){this.internals.setValidity({customError:!0},this.internals.validationMessage||` `);return}this.internals.setValidity({})}syncFormValue(){if(this.disabled){this.setValue(null);return}this.setValue(this.checked?this.value:null)}shouldSyncFormState(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){return i`
 			<div part="base" tabindex="${this._internalTabIndex}">
 				<div part="control"></div>
 				<slot part="label"></slot>
 			</div>
-		`}},s([o({reflect:!0})],y.prototype,`name`,void 0),s([o({reflect:!0})],y.prototype,`value`,void 0),s([o({type:Boolean,reflect:!0})],y.prototype,`checked`,void 0),s([o({type:Boolean,reflect:!0})],y.prototype,`disabled`,void 0),s([o({type:Boolean,reflect:!0})],y.prototype,`required`,void 0),s([o({type:Boolean,reflect:!0})],y.prototype,`invalid`,void 0),s([o({attribute:!1})],y.prototype,`_groupTabIndex`,void 0),s([o({attribute:!1})],y.prototype,`_standaloneTabIndex`,void 0),customElements.get(`w-radio`)||customElements.define(`w-radio`,y)})))()}var le;function ue(){return(ue=e((()=>{le=JSON.parse(`{"radio-group.label.optional":["Valgfri"],"radio-group.validation.required":["Vælg en mulighed."]}`)})))()}var de;function fe(){return(fe=e((()=>{de=JSON.parse(`{"radio-group.label.optional":["Optional"],"radio-group.validation.required":["Please select an option."]}`)})))()}var pe;function x(){return(x=e((()=>{pe=JSON.parse(`{"radio-group.label.optional":["Valinnainen"],"radio-group.validation.required":["Valitse vaihtoehto."]}`)})))()}var S;function C(){return(C=e((()=>{S=JSON.parse(`{"radio-group.label.optional":["Valgfri"],"radio-group.validation.required":["Velg et alternativ."]}`)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"radio-group.label.optional":["Valfritt"],"radio-group.validation.required":["Välj ett alternativ."]}`)})))()}var me;function E(){return(E=e((()=>{n(),me=c`
+		`}},c([s({reflect:!0})],S.prototype,`name`,void 0),c([s({reflect:!0})],S.prototype,`value`,void 0),c([s({type:Boolean,reflect:!0})],S.prototype,`checked`,void 0),c([s({type:Boolean,reflect:!0})],S.prototype,`disabled`,void 0),c([s({type:Boolean,reflect:!0})],S.prototype,`required`,void 0),c([s({type:Boolean,reflect:!0})],S.prototype,`invalid`,void 0),c([s({attribute:!1})],S.prototype,`_groupTabIndex`,void 0),c([s({attribute:!1})],S.prototype,`_standaloneTabIndex`,void 0),customElements.get(`w-radio`)||customElements.define(`w-radio`,S)})))()}var le;function ue(){return(ue=e((()=>{le=JSON.parse(`{"radio-group.label.optional":["Valgfri"],"radio-group.validation.required":["Vælg en mulighed."]}`)})))()}var de;function fe(){return(fe=e((()=>{de=JSON.parse(`{"radio-group.label.optional":["Optional"],"radio-group.validation.required":["Please select an option."]}`)})))()}var pe;function me(){return(me=e((()=>{pe=JSON.parse(`{"radio-group.label.optional":["Valinnainen"],"radio-group.validation.required":["Valitse vaihtoehto."]}`)})))()}var he;function ge(){return(ge=e((()=>{he=JSON.parse(`{"radio-group.label.optional":["Valgfri"],"radio-group.validation.required":["Velg et alternativ."]}`)})))()}var _e;function ve(){return(ve=e((()=>{_e=JSON.parse(`{"radio-group.label.optional":["Valfritt"],"radio-group.validation.required":["Välj ett alternativ."]}`)})))()}var w;function T(){return(T=e((()=>{n(),w=l`
 	:host {
 		display: block;
 
@@ -326,6 +326,20 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 		color: var(--_help-text-color);
 	}
 
+	[part="tooltip-target"] {
+		appearance: none;
+		background: transparent;
+		border: none;
+		height: 16px;
+		margin: 0 0 0 4px;
+		padding: 0;
+		vertical-align: text-top;
+	}
+
+	w-tooltip {
+		display: inline-block;
+	}
+
 	:host([disabled]) [part~="help-text"] {
 		color: var(--_help-text-color-disabled);
 	}
@@ -333,57 +347,73 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 	:host([data-show-error]) [part~="help-text"] {
 		color: var(--_help-text-color-error);
 	}
-`})))()}var D,O;function k(){return(k=e((()=>{u(),p(),n(),a(),se(),b(),d(),_(),ue(),fe(),x(),C(),T(),E(),ee(de,S,pe,le,w),D=()=>l._({id:`radio-group.validation.required`,message:`Please select an option.`,comment:`Shown when required radio group has no selections`}),O=class extends m(i){static{this.styles=[g,me]}static{this.shadowRootOptions={...i.shadowRootOptions,delegatesFocus:!0}}constructor(){super(),this.hasInteracted=!1,this.hasWarnedMissingName=!1,this.autoTabIndex=!1,this.label=``,this.helpText=``,this.optional=!1,this.invalid=!1,this.name=null,this.disabled=!1,this.required=!1,this.defaultCheckedValue=void 0,this.slottedHelpText=null,this.nameManagedRadios=new WeakSet,this.disabledManagedRadios=new WeakSet,this.handleRadioClick=e=>{let t=e.target.closest(`w-radio`);if(!t||t.disabled||this.disabled)return;let n=this.getCheckedValue(),r=this.getAllRadios();this.selectSingleRadio(t,r),this.getCheckedValue()!==n&&this.updateComplete.then(this.emitSelectionChange)},this.handleInvalid=e=>{e.preventDefault(),this.hasInteracted=!0,this.updateValidity()},this.handleHelpTextSlotChange=()=>{this.syncSlottedHelpText(),this.requestUpdate()},this.handleI18nChange=()=>{this.requestUpdate()},this.emitSelectionChange=()=>{this.hasInteracted=!0,this.syncFormValue(),this.updateValidity(),this.requestUpdate(),this.dispatchEvent(new InputEvent(`input`,{bubbles:!0,composed:!0})),this.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))},this.captureDefaultSelection=()=>{this.defaultCheckedValue===void 0&&(this.defaultCheckedValue=this.getCheckedValue())},this.addEventListener(`keydown`,this.handleKeyDown),this.addEventListener(`click`,this.handleRadioClick),this.addEventListener(`invalid`,this.handleInvalid)}get validationTarget(){return this.querySelector(`:is(w-radio):not([disabled])`)??void 0}connectedCallback(){super.connectedCallback(),this.syncSlottedHelpText(),this.syncFormValue(),this.updateValidity(),this.unsubscribeI18n=l.on(`change`,this.handleI18nChange),this.warnIfMissingName(),this.updateComplete.then(this.captureDefaultSelection)}disconnectedCallback(){this.unsubscribeI18n?.(),this.unsubscribeI18n=void 0,super.disconnectedCallback()}async updated(e){(e.has(`disabled`)||e.has(`name`)||e.has(`required`)||e.has(`invalid`)||e.has(`helpText`))&&(this.syncFormValue(),this.updateValidity(),this.syncRadioElements(),this.syncFormValue(),this.updateValidity())}resetFormControl(){let e=this.defaultCheckedValue??null;this.getAllRadios().forEach(t=>{t.checked=e?t.value===e:!1}),this.syncRadioElements(),this.syncFormValue(),this.updateValidity()}getAllRadios(){return[...this.querySelectorAll(`w-radio`)]}getCheckedValue(){return this.getAllRadios().find(e=>e.checked)?.value??null}getEnabledRadios(e=this.getAllRadios()){return e.filter(e=>!e.disabled)}selectSingleRadio(e,t=this.getAllRadios()){t.forEach(t=>{let n=t===e;t.checked=n,t._groupTabIndex=n?0:-1})}handleLabelClick(){this.focus()}async syncRadioElements(){let e=this.getAllRadios();e.forEach((t,n)=>{t.toggleAttribute(`data-w-radio-first`,n===0),t.toggleAttribute(`data-w-radio-inner`,n!==0&&n!==e.length-1),t.toggleAttribute(`data-w-radio-last`,n===e.length-1),this.syncRadioDisabledState(t),this.name?(!t.getAttribute(`name`)||this.nameManagedRadios.has(t))&&(t.setAttribute(`name`,this.name),this.nameManagedRadios.add(t)):this.nameManagedRadios.has(t)&&(t.removeAttribute(`name`),this.nameManagedRadios.delete(t))}),await Promise.all(e.map(async e=>e.updateComplete)),this.normalizeCheckedRadios(e),this.syncTabOrder(e)}syncRadioDisabledState(e){if(this.disabled){e.disabled||(e.disabled=!0,this.disabledManagedRadios.add(e));return}this.disabledManagedRadios.has(e)&&(e.disabled=!1,this.disabledManagedRadios.delete(e))}syncTabOrder(e){if(this.disabled){e.forEach(e=>e._groupTabIndex=-1);return}let t=this.getEnabledRadios(e),n=t.find(e=>e.checked);t.length>0&&(n?t.forEach(e=>e._groupTabIndex=e.checked?0:-1):t.forEach((e,t)=>e._groupTabIndex=t===0?0:-1)),e.filter(e=>e.disabled).forEach(e=>e._groupTabIndex=-1)}handleKeyDown(e){if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`,` `].includes(e.key)||this.disabled)return;let t=this.getAllRadios(),n=this.getEnabledRadios(t);if(n.length<=0)return;e.preventDefault();let r=this.getCheckedValue(),i=n.find(e=>e.checked)??n[0],a=e.key===` `?0:[`ArrowUp`,`ArrowLeft`].includes(e.key)?-1:1,o=n.indexOf(i)+a;o<0&&(o=n.length-1),o>=n.length&&(o=0),this.selectSingleRadio(n[o],t),n[o].focus(),this.getCheckedValue()!==r&&this.updateComplete.then(this.emitSelectionChange)}focus(e){if(this.disabled)return;let t=this.getAllRadios(),n=t.find(e=>e.checked),r=t.find(e=>!e.disabled),i=n||r;i&&i.focus(e)}checkValidity(){return this.updateValidity(),this.internals.checkValidity()}reportValidity(){return this.hasInteracted=!0,this.updateValidity(),this.internals.checkValidity()}hasSlottedContent(e){if(this.querySelector(`[slot="${e}"]`))return!0;let t=this.shadowRoot?.querySelector(`slot[name="${e}"]`);return t?t.assignedNodes({flatten:!0}).some(e=>e.nodeType===Node.ELEMENT_NODE||e.nodeType===Node.TEXT_NODE&&!!e.textContent?.trim()):!1}syncFormValue(){this.setValue(null)}syncSlottedHelpText(){let e=this.querySelector(`[slot="help-text"]`);this.slottedHelpText=e?.textContent?.trim()||null}updateValidity(){this.warnIfMissingName();let e=this.required&&!this.getCheckedValue(),t=e&&this.hasInteracted,n=this.invalid||this.hasAttribute(`invalid`),r=n||t;if(this.toggleAttribute(`data-show-error`,r),this.disabled){this.internals.setValidity({}),this.syncChildInvalid(!1),this.syncHostTabIndex(!1);return}if(this.syncHostTabIndex(r),e){this.setValidityState({valueMissing:!0}),this.syncChildInvalid(r);return}if(n){this.setValidityState({customError:!0}),this.syncChildInvalid(!0);return}this.internals.setValidity({}),this.syncChildInvalid(!1)}normalizeCheckedRadios(e){let t=e.find(e=>e.checked);t&&e.forEach(e=>{e!==t&&(e.checked=!1)})}syncChildInvalid(e){this.getAllRadios().forEach(t=>{t.invalid=e})}setValidityState(e){let t=this.validationTarget;this.internals.setValidity(e,` `,t??void 0)}syncHostTabIndex(e){if(!(this.hasAttribute(`tabindex`)&&!this.autoTabIndex)){if(e){this.setAttribute(`tabindex`,`0`),this.autoTabIndex=!0;return}this.autoTabIndex&&=(this.removeAttribute(`tabindex`),!1)}}warnIfMissingName(){this.hasWarnedMissingName||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-radio-group: "name" is required for form submission.`),this.hasWarnedMissingName=!0))}render(){let e=this.hasSlottedContent(`label`),t=this.hasSlottedContent(`help-text`),n=this.label?!0:!!e,i=this.helpText?!0:!!t,a=this.required&&!this.getCheckedValue()&&this.hasInteracted,o=this.invalid||this.hasAttribute(`invalid`),s=o||a,c=s?o&&this.helpText?this.helpText:D():this.helpText,u=s||i,d=n?`label`:void 0,ee=u?`help-text`:void 0,f=this.slottedHelpText||void 0;return r`
+`})))()}var E,D;function O(){return(O=e((()=>{d(),m(),n(),o(),ce(),C(),ee(),y(),ue(),fe(),me(),ge(),ve(),T(),ne(),_(),f(de,he,pe,le,_e),E=()=>u._({id:`radio-group.validation.required`,message:`Please select an option.`,comment:`Shown when required radio group has no selections`}),D=class extends h(a){static{this.styles=[v,w]}static{this.shadowRootOptions={...a.shadowRootOptions,delegatesFocus:!0}}constructor(){super(),this.hasInteracted=!1,this.hasWarnedMissingName=!1,this.autoTabIndex=!1,this.label=``,this.helpText=``,this.optional=!1,this.invalid=!1,this.name=null,this.disabled=!1,this.required=!1,this.defaultCheckedValue=void 0,this.slottedHelpText=null,this.nameManagedRadios=new WeakSet,this.disabledManagedRadios=new WeakSet,this.handleRadioClick=e=>{let t=e.target.closest(`w-radio`);if(!t||t.disabled||this.disabled)return;let n=this.getCheckedValue(),r=this.getAllRadios();this.selectSingleRadio(t,r),this.getCheckedValue()!==n&&this.updateComplete.then(this.emitSelectionChange)},this.handleInvalid=e=>{e.preventDefault(),this.hasInteracted=!0,this.updateValidity()},this.handleHelpTextSlotChange=()=>{this.syncSlottedHelpText(),this.requestUpdate()},this.handleI18nChange=()=>{this.requestUpdate()},this.emitSelectionChange=()=>{this.hasInteracted=!0,this.syncFormValue(),this.updateValidity(),this.requestUpdate(),this.dispatchEvent(new InputEvent(`input`,{bubbles:!0,composed:!0})),this.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))},this.captureDefaultSelection=()=>{this.defaultCheckedValue===void 0&&(this.defaultCheckedValue=this.getCheckedValue())},this.addEventListener(`keydown`,this.handleKeyDown),this.addEventListener(`click`,this.handleRadioClick),this.addEventListener(`invalid`,this.handleInvalid)}get validationTarget(){return this.querySelector(`:is(w-radio):not([disabled])`)??void 0}connectedCallback(){super.connectedCallback(),this.syncSlottedHelpText(),this.syncFormValue(),this.updateValidity(),this.unsubscribeI18n=u.on(`change`,this.handleI18nChange),this.warnIfMissingName(),this.updateComplete.then(this.captureDefaultSelection)}disconnectedCallback(){this.unsubscribeI18n?.(),this.unsubscribeI18n=void 0,super.disconnectedCallback()}async updated(e){(e.has(`disabled`)||e.has(`name`)||e.has(`required`)||e.has(`invalid`)||e.has(`helpText`))&&(this.syncFormValue(),this.updateValidity(),this.syncRadioElements(),this.syncFormValue(),this.updateValidity())}resetFormControl(){let e=this.defaultCheckedValue??null;this.getAllRadios().forEach(t=>{t.checked=e?t.value===e:!1}),this.syncRadioElements(),this.syncFormValue(),this.updateValidity()}getAllRadios(){return[...this.querySelectorAll(`w-radio`)]}getCheckedValue(){return this.getAllRadios().find(e=>e.checked)?.value??null}getEnabledRadios(e=this.getAllRadios()){return e.filter(e=>!e.disabled)}selectSingleRadio(e,t=this.getAllRadios()){t.forEach(t=>{let n=t===e;t.checked=n,t._groupTabIndex=n?0:-1})}handleLabelClick(){this.focus()}async syncRadioElements(){let e=this.getAllRadios();e.forEach((t,n)=>{t.toggleAttribute(`data-w-radio-first`,n===0),t.toggleAttribute(`data-w-radio-inner`,n!==0&&n!==e.length-1),t.toggleAttribute(`data-w-radio-last`,n===e.length-1),this.syncRadioDisabledState(t),this.name?(!t.getAttribute(`name`)||this.nameManagedRadios.has(t))&&(t.setAttribute(`name`,this.name),this.nameManagedRadios.add(t)):this.nameManagedRadios.has(t)&&(t.removeAttribute(`name`),this.nameManagedRadios.delete(t))}),await Promise.all(e.map(async e=>e.updateComplete)),this.normalizeCheckedRadios(e),this.syncTabOrder(e)}syncRadioDisabledState(e){if(this.disabled){e.disabled||(e.disabled=!0,this.disabledManagedRadios.add(e));return}this.disabledManagedRadios.has(e)&&(e.disabled=!1,this.disabledManagedRadios.delete(e))}syncTabOrder(e){if(this.disabled){e.forEach(e=>e._groupTabIndex=-1);return}let t=this.getEnabledRadios(e),n=t.find(e=>e.checked);t.length>0&&(n?t.forEach(e=>e._groupTabIndex=e.checked?0:-1):t.forEach((e,t)=>e._groupTabIndex=t===0?0:-1)),e.filter(e=>e.disabled).forEach(e=>e._groupTabIndex=-1)}handleKeyDown(e){if(![`ArrowUp`,`ArrowDown`,`ArrowLeft`,`ArrowRight`,` `].includes(e.key)||this.disabled)return;let t=this.getAllRadios(),n=this.getEnabledRadios(t);if(n.length<=0)return;e.preventDefault();let r=this.getCheckedValue(),i=n.find(e=>e.checked)??n[0],a=e.key===` `?0:[`ArrowUp`,`ArrowLeft`].includes(e.key)?-1:1,o=n.indexOf(i)+a;o<0&&(o=n.length-1),o>=n.length&&(o=0),this.selectSingleRadio(n[o],t),n[o].focus(),this.getCheckedValue()!==r&&this.updateComplete.then(this.emitSelectionChange)}focus(e){if(this.disabled)return;let t=this.getAllRadios(),n=t.find(e=>e.checked),r=t.find(e=>!e.disabled),i=n||r;i&&i.focus(e)}checkValidity(){return this.updateValidity(),this.internals.checkValidity()}reportValidity(){return this.hasInteracted=!0,this.updateValidity(),this.internals.checkValidity()}hasSlottedContent(e){if(this.querySelector(`[slot="${e}"]`))return!0;let t=this.shadowRoot?.querySelector(`slot[name="${e}"]`);return t?t.assignedNodes({flatten:!0}).some(e=>e.nodeType===Node.ELEMENT_NODE||e.nodeType===Node.TEXT_NODE&&!!e.textContent?.trim()):!1}syncFormValue(){this.setValue(null)}syncSlottedHelpText(){let e=this.querySelector(`[slot="help-text"]`);this.slottedHelpText=e?.textContent?.trim()||null}updateValidity(){this.warnIfMissingName();let e=this.required&&!this.getCheckedValue(),t=e&&this.hasInteracted,n=this.invalid||this.hasAttribute(`invalid`),r=n||t;if(this.toggleAttribute(`data-show-error`,r),this.disabled){this.internals.setValidity({}),this.syncChildInvalid(!1),this.syncHostTabIndex(!1);return}if(this.syncHostTabIndex(r),e){this.setValidityState({valueMissing:!0}),this.syncChildInvalid(r);return}if(n){this.setValidityState({customError:!0}),this.syncChildInvalid(!0);return}this.internals.setValidity({}),this.syncChildInvalid(!1)}normalizeCheckedRadios(e){let t=e.find(e=>e.checked);t&&e.forEach(e=>{e!==t&&(e.checked=!1)})}syncChildInvalid(e){this.getAllRadios().forEach(t=>{t.invalid=e})}setValidityState(e){let t=this.validationTarget;this.internals.setValidity(e,` `,t??void 0)}syncHostTabIndex(e){if(!(this.hasAttribute(`tabindex`)&&!this.autoTabIndex)){if(e){this.setAttribute(`tabindex`,`0`),this.autoTabIndex=!0;return}this.autoTabIndex&&=(this.removeAttribute(`tabindex`),!1)}}warnIfMissingName(){this.hasWarnedMissingName||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-radio-group: "name" is required for form submission.`),this.hasWarnedMissingName=!0))}render(){let e=this.hasSlottedContent(`label`),t=this.hasSlottedContent(`help-text`),n=this.label?!0:!!e,a=this.helpText?!0:!!t,o=this.required&&!this.getCheckedValue()&&this.hasInteracted,s=this.invalid||this.hasAttribute(`invalid`),c=s||o,l=c?s&&this.helpText?this.helpText:E():this.helpText,d=c||a,ee=n?`label`:void 0,f=d?`help-text`:void 0,p=this.slottedHelpText||void 0;return i`
 			<fieldset
 				part="form-control"
 				role="radiogroup"
-				aria-labelledby=${h(d)}
-				aria-describedby=${h(ee)}
+				aria-labelledby=${g(ee)}
+				aria-describedby=${g(f)}
 				aria-errormessage="error-message"
-				aria-invalid=${s?`true`:void 0}
+				aria-invalid=${g(c?`true`:void 0)}
 			>
-				${n?r`
+				${n?i`
 								<label
 									part="form-control-label"
 									id="label"
 									@click=${this.handleLabelClick}
 								>
 									<slot name="label">${this.label}</slot>
-									${this.optional&&!this.required?r`<span class="optional">
-													${l._({id:`radio-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-												</span>`:null}
+									${this.optional&&!this.required?i`<span class="optional">
+													${u._({id:`radio-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+												</span>`:r}
+									${this.tooltip?i`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`:r}
 								</label>
-							`:null}
+							`:r}
 
 				<slot
 					part="form-control-input"
 					@slotchange=${this.syncRadioElements}
 				></slot>
 
-				${u?r`
+				${d?i`
 								<div
 									id="help-text"
 									part="help-text"
-									aria-label=${h(f)}
+									aria-label=${g(p)}
 								>
 									<slot
 										name="help-text"
 										@slotchange=${this.handleHelpTextSlotChange}
-										>${c}</slot
+										>${l}</slot
 									>
 								</div>
 							`:null}
 			</fieldset>
-		`}},s([t()],O.prototype,`hasInteracted`,void 0),s([o()],O.prototype,`label`,void 0),s([o({attribute:`help-text`})],O.prototype,`helpText`,void 0),s([o({type:Boolean,reflect:!0})],O.prototype,`optional`,void 0),s([o({type:Boolean,reflect:!0})],O.prototype,`invalid`,void 0),s([o({reflect:!0})],O.prototype,`name`,void 0),s([o({type:Boolean,reflect:!0})],O.prototype,`disabled`,void 0),s([o({type:Boolean,reflect:!0})],O.prototype,`required`,void 0),customElements.get(`w-radio-group`)||customElements.define(`w-radio-group`,O)})))()}var A,j,M,N,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,he;function ge(){return(ge=e((()=>{oe(),f(),n(),b(),k(),{args:A}=te(`w-radio-group`),j={title:`Forms/Radio`,render:e=>r`
-            <w-radio-group ${ie(ae(e))}>
+		`}},c([t()],D.prototype,`hasInteracted`,void 0),c([s()],D.prototype,`label`,void 0),c([s({attribute:`help-text`})],D.prototype,`helpText`,void 0),c([s({type:Boolean,reflect:!0})],D.prototype,`optional`,void 0),c([s({type:String,reflect:!0})],D.prototype,`tooltip`,void 0),c([s({type:Boolean,reflect:!0})],D.prototype,`invalid`,void 0),c([s({reflect:!0})],D.prototype,`name`,void 0),c([s({type:Boolean,reflect:!0})],D.prototype,`disabled`,void 0),c([s({type:Boolean,reflect:!0})],D.prototype,`required`,void 0),customElements.get(`w-radio-group`)||customElements.define(`w-radio-group`,D)})))()}var k,A,j,M,N,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,ye;function be(){return(be=e((()=>{se(),p(),n(),C(),O(),_(),{args:k}=te(`w-radio-group`),A={title:`Forms/Radio`,render:e=>i`
+            <w-radio-group ${ae(oe(e))}>
                 <w-radio value="foo" checked>foo</w-radio>
                 <w-radio value="bar">bar</w-radio>
             </w-radio-group>
-        `,args:A},M={args:{label:`Group`,name:`foobar`}},N={args:{},render(){return r` <w-radio value="single">Single radio</w-radio> `}},P={args:{},render(){return r`
+        `,args:k},j={args:{label:`Group`,name:`foobar`}},M={args:{},render(){return i` <w-radio value="single">Single radio</w-radio> `}},N={args:{},render(){return i`
             <w-radio value="single" invalid>Single invalid radio</w-radio>
-        `}},F={args:{},render(){return r`
+        `}},P={args:{},render(){return i`
             <w-radio value="single" disabled>Single disabled radio</w-radio>
-        `}},I={args:{},render(){return r`
+        `}},F={args:{},render(){return i`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget,n=t.querySelector(`[data-status]`);n&&(n.textContent=`Submitted value: ${new FormData(t).get(`newsletter`)??`none`}`)}} style="display: grid; gap: 12px;">
                 <w-radio
                     name="newsletter"
@@ -396,12 +426,12 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `}},L={args:{},render(){return r`
+        `}},I={args:{},render(){return i`
             <div style="display: grid; gap: 12px;">
                 <w-radio name="standalone" value="one">Standalone one</w-radio>
                 <w-radio name="standalone" value="two">Standalone two</w-radio>
             </div>
-        `}},R={args:{name:`disabled`,label:`Disabled`,disabled:!0}},z={args:{},render(){return r`
+        `}},L={args:{name:`disabled`,label:`Disabled`,disabled:!0}},R={args:{},render(){return i`
             <form>
                 <w-radio-group required name="required">
                     <w-radio value="foo">foo</w-radio>
@@ -409,42 +439,42 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
                 </w-radio-group>
                 <button style="margin-top: 16px;">click me</button>
             </form>
-        `}},B={args:{name:`disabled group`,disabled:!0,helpText:`This group is disabled`}},V={args:{},render(){return r`
+        `}},z={args:{name:`disabled group`,disabled:!0,helpText:`This group is disabled`}},B={args:{},render(){return i`
             <w-radio-group name="disabled radio">
                 <w-radio value="foo" disabled>disabled</w-radio>
                 <w-radio value="bar">not disabled</w-radio>
             </w-radio-group>
-        `}},H={args:{label:`Help text`,helpText:`Pick one option`,name:`help-text`}},U={args:{label:`Optional`,optional:!0,helpText:`This is optional`,name:`optional`}},W={render:()=>r`
+        `}},V={args:{label:`Help text`,helpText:`Pick one option`,name:`help-text`}},H={args:{label:`With tooltip`,optional:!0,required:!1,helpText:`Help text is available, but might not be enough, or the added context is not important enough that we use help-text`,tooltip:`This tooltip adds supplementary information`}},U={args:{label:`Optional`,optional:!0,helpText:`This is optional`,name:`optional`}},W={render:()=>i`
         <w-radio-group name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},G={render:()=>r`
+    `},G={render:()=>i`
         <w-radio-group help-text="Select one" name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},K={render:()=>r`
+    `},K={render:()=>i`
         <w-radio-group label="Label" name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},q={render:()=>r`
+    `},q={render:()=>i`
         <w-radio-group label="Label" help-text="help text" name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},J={render:()=>r`
+    `},J={render:()=>i`
         <w-radio-group label="Label" optional help-text="help text" name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},Y={render:()=>r`
+    `},Y={render:()=>i`
         <w-radio-group label="Label" invalid help-text="help text" name="group">
             <w-radio value="foo">Foo</w-radio>
             <w-radio value="bar">Bar</w-radio>
         </w-radio-group>
-    `},X={render:()=>r`
+    `},X={render:()=>i`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget.querySelector(`[data-status]`);t&&(t.textContent=`Submitted.`)}} style="display: grid; gap: 12px;">
                 <w-radio-group
                     label="Preferences"
@@ -460,7 +490,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `},Z={render:()=>r`
+        `},Z={render:()=>i`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget.querySelector(`[data-status]`);t&&(t.textContent=`Submitted.`)}} style="display: grid; gap: 12px;">
                 <w-radio-group
                     name="radio group form associated"
@@ -476,43 +506,43 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `},Q={args:{},render(){return r`
+        `},Q={args:{},render(){return i`
             <w-radio-group name="invalid group" label="Invalid group" invalid>
                 <w-radio value="foo">foo</w-radio>
                 <w-radio value="bar">bar</w-radio>
             </w-radio-group>
-        `}},$={args:{},render(){return r`
+        `}},$={args:{},render(){return i`
             <w-radio-group name="slotted label and hint">
                 <span slot="label">Slotted label</span>
                 <span slot="help-text">Slotted hint text</span>
                 <w-radio value="foo">foo</w-radio>
                 <w-radio value="bar">bar</w-radio>
             </w-radio-group>
-        `}},M.parameters={...M.parameters,docs:{...M.parameters?.docs,source:{originalSource:`{
+        `}},j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`{
   args: {
     label: "Group",
     name: "foobar"
   }
-}`,...M.parameters?.docs?.source}}},N.parameters={...N.parameters,docs:{...N.parameters?.docs,source:{originalSource:`{
+}`,...j.parameters?.docs?.source}}},M.parameters={...M.parameters,docs:{...M.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\` <w-radio value="single">Single radio</w-radio> \`;
   }
-}`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
+}`,...M.parameters?.docs?.source}}},N.parameters={...N.parameters,docs:{...N.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
             <w-radio value="single" invalid>Single invalid radio</w-radio>
         \`;
   }
-}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
+}`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
             <w-radio value="single" disabled>Single disabled radio</w-radio>
         \`;
   }
-}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
+}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     const handleSubmit = (event: Event) => {
@@ -545,7 +575,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
             </form>
         \`;
   }
-}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
+}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -555,13 +585,13 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
             </div>
         \`;
   }
-}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
+}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
   args: {
     name: "disabled",
     label: "Disabled",
     disabled: true
   }
-}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -574,13 +604,13 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
             </form>
         \`;
   }
-}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
+}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
     name: "disabled group",
     disabled: true,
     helpText: "This group is disabled"
   }
-}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
+}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -590,11 +620,19 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
             </w-radio-group>
         \`;
   }
-}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
+}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
   args: {
     label: "Help text",
     helpText: "Pick one option",
     name: "help-text"
+  }
+}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
+  args: {
+    label: "With tooltip",
+    optional: true,
+    required: false,
+    helpText: "Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+    tooltip: "This tooltip adds supplementary information"
   }
 }`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
   args: {
@@ -731,4 +769,4 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
             </w-radio-group>
         \`;
   }
-}`,...$.parameters?.docs?.source}}},he=[`Default`,`SingleRadioDefault`,`SingleRadioInvalid`,`SingleRadioDisabled`,`SingleRadioFormAssociated`,`StandaloneRadioGroupByName`,`Disabled`,`Required`,`DisabledGroup`,`DisabledRadio`,`HelpText`,`Optional`,`RadioGroup`,`RadioGroupWithHelpText`,`RadioGroupWithLabel`,`RadioGroupWithHelpTextAndLabel`,`RadioGroupWithOptional`,`RadioGroupWithInvalid`,`RadioGroupRequired`,`RadioGroupFormAssociated`,`InvalidWithMessage`,`SlottedLabelAndHint`]})))()}ge();export{M as Default,R as Disabled,B as DisabledGroup,V as DisabledRadio,H as HelpText,Q as InvalidWithMessage,U as Optional,W as RadioGroup,Z as RadioGroupFormAssociated,X as RadioGroupRequired,G as RadioGroupWithHelpText,q as RadioGroupWithHelpTextAndLabel,Y as RadioGroupWithInvalid,K as RadioGroupWithLabel,J as RadioGroupWithOptional,z as Required,N as SingleRadioDefault,F as SingleRadioDisabled,I as SingleRadioFormAssociated,P as SingleRadioInvalid,$ as SlottedLabelAndHint,L as StandaloneRadioGroupByName,he as __namedExportsOrder,j as default};
+}`,...$.parameters?.docs?.source}}},ye=[`Default`,`SingleRadioDefault`,`SingleRadioInvalid`,`SingleRadioDisabled`,`SingleRadioFormAssociated`,`StandaloneRadioGroupByName`,`Disabled`,`Required`,`DisabledGroup`,`DisabledRadio`,`HelpText`,`WithTooltip`,`Optional`,`RadioGroup`,`RadioGroupWithHelpText`,`RadioGroupWithLabel`,`RadioGroupWithHelpTextAndLabel`,`RadioGroupWithOptional`,`RadioGroupWithInvalid`,`RadioGroupRequired`,`RadioGroupFormAssociated`,`InvalidWithMessage`,`SlottedLabelAndHint`]})))()}be();export{j as Default,L as Disabled,z as DisabledGroup,B as DisabledRadio,V as HelpText,Q as InvalidWithMessage,U as Optional,W as RadioGroup,Z as RadioGroupFormAssociated,X as RadioGroupRequired,G as RadioGroupWithHelpText,q as RadioGroupWithHelpTextAndLabel,Y as RadioGroupWithInvalid,K as RadioGroupWithLabel,J as RadioGroupWithOptional,R as Required,M as SingleRadioDefault,P as SingleRadioDisabled,F as SingleRadioFormAssociated,N as SingleRadioInvalid,$ as SlottedLabelAndHint,I as StandaloneRadioGroupByName,H as WithTooltip,ye as __namedExportsOrder,A as default};
