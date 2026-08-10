@@ -1,3 +1,10 @@
+# [2.12.0-next.6](https://github.com/warp-ds/elements/compare/v2.12.0-next.5...v2.12.0-next.6) (2026-08-10)
+
+
+### Features
+
+* add info icon with tooltip to form fields ([#729](https://github.com/warp-ds/elements/issues/729)) ([663e49d](https://github.com/warp-ds/elements/commit/663e49d6bab78206ce62af82939074fdf5c94e7f))
+
 # [2.12.0-next.5](https://github.com/warp-ds/elements/compare/v2.12.0-next.4...v2.12.0-next.5) (2026-08-06)
 
 
