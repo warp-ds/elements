@@ -90,31 +90,31 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 	}
 `})))()}var C;function w(){return(w=e((()=>{C=JSON.parse(`{"textarea.label.optional":["Valgfri"],"textarea.validation.invalid":["Angiv en gyldig værdi."],"textarea.validation.tooLong":["Gør teksten kortere til højst ",["maxLength"]," tegn (du bruger i øjeblikket ",["currentLength"]," tegn)."],"textarea.validation.tooShort":["Gør teksten længere til mindst ",["minLength"]," tegn (du bruger i øjeblikket ",["currentLength"]," tegn)."],"textarea.validation.valueMissing":["Udfyld dette felt."]}`)})))()}var T;function E(){return(E=e((()=>{T=JSON.parse(`{"textarea.label.optional":["Optional"],"textarea.validation.invalid":["Please enter a valid value."],"textarea.validation.tooLong":["Please shorten this text to ",["maxLength"]," characters or less (you are currently using ",["currentLength"]," characters)."],"textarea.validation.tooShort":["Please lengthen this text to ",["minLength"]," characters or more (you are currently using ",["currentLength"]," characters)."],"textarea.validation.valueMissing":["Please fill out this field."]}`)})))()}var D;function O(){return(O=e((()=>{D=JSON.parse(`{"textarea.label.optional":["Valinnainen"],"textarea.validation.invalid":["Anna kelvollinen arvo."],"textarea.validation.tooLong":["Lyhennä teksti enintään ",["maxLength"]," merkkiin (käytät tällä hetkellä ",["currentLength"]," merkkiä)."],"textarea.validation.tooShort":["Pidennä tekstiä vähintään ",["minLength"]," merkkiin (käytät tällä hetkellä ",["currentLength"]," merkkiä)."],"textarea.validation.valueMissing":["Täytä tämä kenttä."]}`)})))()}var k;function A(){return(A=e((()=>{k=JSON.parse(`{"textarea.label.optional":["Valgfri"],"textarea.validation.invalid":["Angi en gyldig verdi."],"textarea.validation.tooLong":["Gjør teksten kortere til høyst ",["maxLength"]," tegn (du bruker for øyeblikket ",["currentLength"]," tegn)."],"textarea.validation.tooShort":["Gjør teksten lengre til minst ",["minLength"]," tegn (du bruker for øyeblikket ",["currentLength"]," tegn)."],"textarea.validation.valueMissing":["Fyll ut dette feltet."]}`)})))()}var j;function M(){return(M=e((()=>{j=JSON.parse(`{"textarea.label.optional":["Valfritt"],"textarea.validation.invalid":["Ange ett giltigt värde."],"textarea.validation.tooLong":["Gör texten kortare till högst ",["maxLength"]," tecken (du använder för närvarande ",["currentLength"]," tecken)."],"textarea.validation.tooShort":["Gör texten längre till minst ",["minLength"]," tecken (du använder för närvarande ",["currentLength"]," tecken)."],"textarea.validation.valueMissing":["Fyll i det här fältet."]}`)})))()}var N,P;function F(){return(F=e((()=>{ae(),p(),m(),r(),s(),pe(),le(),y(),S(),ee(),w(),E(),O(),A(),M(),se(),_(),N={base:`block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current`,default:`border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected`,disabled:`border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none`,invalid:`border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!`,readOnly:`pl-0 bg-transparent pointer-events-none`,placeholder:`placeholder:s-text-placeholder`,suffix:`pr-40`,prefix:`pl-[var(--w-prefix-width,_40px)]`,textArea:`min-h-[42] sm:min-h-[45]`,fixed:`resize-none`},P=class extends h(o){static{this.shadowRootOptions={...o.shadowRootOptions,delegatesFocus:!0}}get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}#t;#n;#r;#i;#a;constructor(){super(),this.disabled=!1,this.invalid=!1,this.readOnly=!1,this.readonly=!1,this.required=!1,this.optional=!1,this.minHeight=-1/0,this.maxHeight=1/0,this._hasHelpTextSlot=!1,this.#t=void 0,this.#n=!1,this.#r=void 0,this.#i=!1,this.#a=``,this.#f=e=>{e.preventDefault(),this.#i=!0,this.#c()},te(T,k,D,C,j)}updated(e){e.has(`value`)&&this.value!==void 0&&this.setValue(this.value),(e.has(`value`)||e.has(`required`)||e.has(`disabled`)||e.has(`minLength`)||e.has(`maxLength`))&&this.#c()}resetFormControl(){this.value=this.#t,this.#i=!1,this.#s(),this.#c()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.#c(),this.internals.checkValidity()}reportValidity(){return this.#i=!0,this.#c(),this.internals.checkValidity()}setCustomValidity(e){this.#a=e,e?(this.#c(),this.#o(e)):(this.#s(),this.#c())}#o(e){this.#n||(this.#r=this.helpText),this.#n=!0,this.invalid=!0,this.helpText=e}#s(){this.#n&&=(this.invalid=!1,this.helpText=this.#r,this.#r=void 0,!1)}#c(){if(!this._textarea)return;if(this.disabled){this.internals.setValidity({}),this.#s();return}let e=this._textarea.validity,t=this.value??this._textarea.value??``,n=t.length>0&&typeof this.minLength==`number`&&t.length<this.minLength,r=typeof this.maxLength==`number`&&t.length>this.maxLength,i={valueMissing:e.valueMissing,tooShort:e.tooShort||n,tooLong:e.tooLong||r,customError:this.#a!==``};if(Object.values(i).some(Boolean)){let e=this.#l(i,t.length);this.internals.setValidity(i,e,this._textarea),this.#i&&this.#o(e);return}this.internals.setValidity({}),this.#s()}#l(e,t){return e.customError&&this.#a?this.#a:e.valueMissing?f._({id:`textarea.validation.valueMissing`,message:`Please fill out this field.`,comment:`Validation message shown when textarea value is required`}):e.tooShort&&typeof this.minLength==`number`?f._({id:`textarea.validation.tooShort`,message:`Please lengthen this text to {minLength} characters or more (you are currently using {currentLength} characters).`,comment:`Validation message shown when textarea value is too short`,values:{minLength:this.minLength,currentLength:t}}):e.tooLong&&typeof this.maxLength==`number`?f._({id:`textarea.validation.tooLong`,message:`Please shorten this text to {maxLength} characters or less (you are currently using {currentLength} characters).`,comment:`Validation message shown when textarea value is too long`,values:{maxLength:this.maxLength,currentLength:t}}):f._({id:`textarea.validation.invalid`,message:`Please enter a valid value.`,comment:`Fallback validation message for textarea`})}static{this.styles=[ce,v,b,x]}get _textareaStyles(){return ie([N.base,N.textArea,!!this.placeholder&&N.placeholder,!this.invalid&&!this.disabled&&!(this.readonly||this.readOnly)&&N.default,this.invalid&&!this.disabled&&!(this.readonly||this.readOnly)&&N.invalid,!this.invalid&&this.disabled&&!(this.readonly||this.readOnly)&&N.disabled,!this.invalid&&!this.disabled&&(this.readonly||this.readOnly)&&N.readOnly,this.maxRows&&N.fixed])}get _helptextstyles(){return`help-text`}get _helpId(){if(this.#e)return`${this._id}__hint`}get _id(){return`textarea`}get _error(){if(this.invalid&&this._helpId)return this._helpId}async connectedCallback(){if(super.connectedCallback(),this.#t=this.value,this.value!==void 0&&this.setValue(this.value),this.addEventListener(`invalid`,this.#f),await this.updateComplete,this.value||this.minRows){let e=this.shadowRoot?.querySelector(`textarea`);e&&this.#p(e)}}disconnectedCallback(){super.disconnectedCallback(),this.removeEventListener(`invalid`,this.#f)}firstUpdated(e){super.firstUpdated(e),this.#c()}handler(e){let t=e.currentTarget;this.value=t.value,this.#p(t)}#u(e){this.dispatchEvent(new e.constructor(e.type,e))}#d(){this.#i=!0,this.#c()}#f;#p(e){let t=getComputedStyle(e),n=Number.parseFloat(t.getPropertyValue(`border-top-width`)),r=Number.parseFloat(t.getPropertyValue(`border-bottom-width`)),i=Number.parseFloat(t.getPropertyValue(`line-height`)),a=Number.parseFloat(t.getPropertyValue(`padding-top`))+Number.parseFloat(t.getPropertyValue(`padding-bottom`))+r+n;this.minRows&&(this.minHeight=i*this.minRows+a),this.maxRows&&(this.maxHeight=i*this.maxRows+a);let o=e.scrollHeight+n+r,s=Math.min(this.maxHeight,Math.max(this.minHeight,o));e.style.setProperty(`height`,s+`px`)}helpTextSlotChange(){let e=this.renderRoot.querySelector(`slot[name=help-text]`);this._hasHelpTextSlot=e.assignedElements().length>0}render(){return a`
 			${this.label?a`
-						<label for="${this._id}">
-							${this.label}
-							${this.optional&&!this.required?a`
-										<span>
-											${f._({id:`textarea.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-										</span>
-									`:i}
-							${this.tooltip?a`
-										<button
-											id="tooltip-target"
-											part="tooltip-target"
-											aria-describedby="tooltip"
-										>
-											<w-icon name="Info" size="small"></w-icon>
-										</button>
-										<w-tooltip
-											for="tooltip-target"
-											id="tooltip"
-											exportparts="tooltip, arrow, beak, hover-bridge"
-										>
-											${this.tooltip}
-										</w-tooltip>
-									`:i}
-						</label>
-					`:i}
+							<label for="${this._id}">
+								${this.label}
+								${this.optional&&!this.required?a`
+												<span>
+													${f._({id:`textarea.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+												</span>
+											`:i}
+								${this.tooltip?a`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`:i}
+							</label>
+						`:i}
 			<textarea
 				part="input"
 				id="${this._id}"

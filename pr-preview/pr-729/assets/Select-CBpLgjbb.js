@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,i as l,l as u,n as d,o as f,r as p,s as m,t as h,u as g}from"./select.stories-B1oCj6Ar.js";function _(e){let r={code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,y.jsxs)(y.Fragment,{children:[(0,y.jsx)(n,{of:g,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,i as l,l as u,n as d,o as f,r as p,s as m,t as h,u as g}from"./select.stories-BRWm_U-K.js";function _(e){let r={code:`code`,h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,y.jsxs)(y.Fragment,{children:[(0,y.jsx)(n,{of:g,name:`Docs`}),`
 `,(0,y.jsx)(r.h1,{id:`select`,children:`Select`}),`
 `,(0,y.jsx)(r.p,{children:`A dropdown component for selecting a single value.`}),`
 `,(0,y.jsx)(t,{of:h}),`

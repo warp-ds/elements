@@ -328,26 +328,26 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 				<label class="w-datepicker-input-label" for="${G}">
 					${this.label}
 					${this.optional&&!this.required?o`
-								<span>
-									${p._({id:`datepicker.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-								</span>
-							`:i}
+									<span>
+										${p._({id:`datepicker.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+									</span>
+								`:i}
 					${this.tooltip?o`
-								<button
-									id="tooltip-target"
-									part="tooltip-target"
-									aria-describedby="tooltip"
-								>
-									<w-icon name="Info" size="small"></w-icon>
-								</button>
-								<w-tooltip
-									for="tooltip-target"
-									id="tooltip"
-									exportparts="tooltip, arrow, beak, hover-bridge"
-								>
-									${this.tooltip}
-								</w-tooltip>
-							`:i}
+									<button
+										id="tooltip-target"
+										part="tooltip-target"
+										aria-describedby="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip
+										for="tooltip-target"
+										id="tooltip"
+										exportparts="tooltip, arrow, beak, hover-bridge"
+									>
+										${this.tooltip}
+									</w-tooltip>
+								`:i}
 				</label>
 				<div class="w-datepicker-input-wrapper">
 					<input

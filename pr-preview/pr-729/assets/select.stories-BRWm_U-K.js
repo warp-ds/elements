@@ -103,31 +103,31 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 				${i}
 			</option>`});this._options=r,e&&n!==void 0&&n!==this.value&&this._setValue(n)}connectedCallback(){super.connectedCallback(),this.#t=this.value,(this.autofocus||this.autoFocus)&&this.shadowRoot.querySelector(`select`).focus(),this.#l({syncValueFromSelected:!0}),this.ownerDocument?.defaultView?.addEventListener(`pageshow`,this.#n),this.#r=new MutationObserver(()=>{this.#l({syncValueFromSelected:!0})}),this.#r.observe(this,{childList:!0,subtree:!0,characterData:!0,attributes:!0,attributeFilter:[`selected`,`disabled`,`value`]})}disconnectedCallback(){super.disconnectedCallback(),this.ownerDocument?.defaultView?.removeEventListener(`pageshow`,this.#n),this.#r?.disconnect()}firstUpdated(){this.value&&this.#s(this.value),this.#c({allowDefaultFirstOption:!1})}formStateRestoreCallback(e,t){if(typeof e==`string`&&e){this._setValue(e),this.#s(e);return}this.#c({allowDefaultFirstOption:!0})}willUpdate(e){e.has(`value`)&&this.setValue(this.value)}updated(e){if(e.has(`value`)){let e=this.#a();e&&e.value!==this.value&&(e.value=this.value??``),this.#s(this.value??``)}}handleKeyDown(e){if((this.readonly||this.readOnly)&&(e.key===` `||e.key===`ArrowDown`||e.key===`ArrowUp`)&&e.preventDefault(),e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}}get#u(){return f([F.base,!this.invalid&&!this.disabled&&!(this.readonly||this.readOnly)&&F.default,this.invalid&&F.invalid,this.disabled&&F.disabled,(this.readonly||this.readOnly)&&F.readOnly])}get#d(){return`help-text`}get#f(){return f([F.chevron,this.disabled&&F.chevronDisabled])}get#p(){return`select_id`}get#m(){return this.helpText||this.hint?`${this.#p}__hint`:void 0}onChange(e){let t=e.currentTarget.value;this._setValue(t),this.#s(t),this.dispatchEvent(new CustomEvent(`change`,{detail:t,bubbles:!0,composed:!0}))}helpTextSlotChange(){this.renderRoot.querySelector(`slot[name=help-text]`).assignedElements().length&&(this._hasHelpTextSlot=!0)}render(){return a`<div class="${F.wrapper}">
 			${this.label?a`
-						<label for="${this.#p}">
-							${this.label}
-							${this.optional?a`
-										<span>
-											${te.t({id:`select.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-										</span>
-									`:i}
-							${this.tooltip?a`
-										<button
-											id="tooltip-target"
-											part="tooltip-target"
-											aria-describedby="tooltip"
-										>
-											<w-icon name="Info" size="small"></w-icon>
-										</button>
-										<w-tooltip
-											for="tooltip-target"
-											id="tooltip"
-											exportparts="tooltip, arrow, beak, hover-bridge"
-										>
-											${this.tooltip}
-										</w-tooltip>
-									`:i}
-						</label>
-					`:i}
+							<label for="${this.#p}">
+								${this.label}
+								${this.optional?a`
+												<span>
+													${te.t({id:`select.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+												</span>
+											`:i}
+								${this.tooltip?a`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`:i}
+							</label>
+						`:i}
 			<div class="${F.selectWrapper}">
 				<select
 					part="input"

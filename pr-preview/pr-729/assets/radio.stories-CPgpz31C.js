@@ -357,33 +357,33 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,d as r,h
 				aria-invalid=${g(c?`true`:void 0)}
 			>
 				${n?i`
-							<label
-								part="form-control-label"
-								id="label"
-								@click=${this.handleLabelClick}
-							>
-								<slot name="label">${this.label}</slot>
-								${this.optional&&!this.required?i`<span class="optional">
-											${u._({id:`radio-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-										</span>`:r}
-								${this.tooltip?i`
-											<button
-												id="tooltip-target"
-												part="tooltip-target"
-												aria-describedby="tooltip"
-											>
-												<w-icon name="Info" size="small"></w-icon>
-											</button>
-											<w-tooltip
-												for="tooltip-target"
-												id="tooltip"
-												exportparts="tooltip, arrow, beak, hover-bridge"
-											>
-												${this.tooltip}
-											</w-tooltip>
-										`:r}
-							</label>
-						`:r}
+								<label
+									part="form-control-label"
+									id="label"
+									@click=${this.handleLabelClick}
+								>
+									<slot name="label">${this.label}</slot>
+									${this.optional&&!this.required?i`<span class="optional">
+													${u._({id:`radio-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+												</span>`:r}
+									${this.tooltip?i`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`:r}
+								</label>
+							`:r}
 
 				<slot
 					part="form-control-input"

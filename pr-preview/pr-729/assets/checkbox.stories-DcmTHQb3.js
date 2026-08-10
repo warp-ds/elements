@@ -257,31 +257,31 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 	`}helpTextSlotChange(){this.renderRoot.querySelector(`slot[name=help-text]`).assignedElements().length&&(this._hasHelpTextSlot=!0)}render(){let e=this.#c()>0,t=this.required&&!e&&this.#e,n=this.invalid||t,r=n?this.#p():this.helpText,a=!!(r||this._hasHelpTextSlot),s=a?`checkbox-group__help`:void 0,c=this.label?`checkbox-group__label`:void 0,l=n?`true`:void 0;return o`
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
 				${this.label?o`
-							<div class="label" id="${m(c)}">
-								<span>${this.label}</span>
-								${this.optional&&!this.required?o`
-											<span class="optional">
-												${f._({id:`checkbox-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-											</span>
-										`:i}
-								${this.tooltip?o`
-											<button
-												id="tooltip-target"
-												part="tooltip-target"
-												aria-describedby="tooltip"
-											>
-												<w-icon name="Info" size="small"></w-icon>
-											</button>
-											<w-tooltip
-												for="tooltip-target"
-												id="tooltip"
-												exportparts="tooltip, arrow, beak, hover-bridge"
-											>
-												${this.tooltip}
-											</w-tooltip>
-										`:i}
-							</div>
-						`:i}
+								<div class="label" id="${m(c)}">
+									<span>${this.label}</span>
+									${this.optional&&!this.required?o`
+													<span class="optional">
+														${f._({id:`checkbox-group.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+													</span>
+												`:i}
+									${this.tooltip?o`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`:i}
+								</div>
+							`:i}
 				<div
 					class="checkbox-group"
 					role="group"

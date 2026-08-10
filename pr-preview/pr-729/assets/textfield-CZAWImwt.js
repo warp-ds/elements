@@ -151,26 +151,26 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,d as r,h
 `})))()}var G,K;function q(){return(q=e((()=>{g(),f(),C(),n(),o(),y(),E(),p(),S(),k(),j(),N(),F(),L(),z(),V(),W(),b(),D(),G={base:`block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current`,default:`border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected`,disabled:`border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none`,invalid:`border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!`,readOnly:`pl-0 bg-transparent pointer-events-none`,placeholder:`placeholder:s-text-placeholder`,suffix:`pr-40`,prefix:`pl-[var(--w-prefix-width,_40px)]`,textArea:`min-h-[42] sm:min-h-[45]`},K=class extends w(a){static{this.shadowRootOptions={...a.shadowRootOptions,delegatesFocus:!0}}constructor(){super(),this.disabled=!1,this.invalid=!1,this.optional=!1,this.readOnly=!1,this.readonly=!1,this.required=!1,this._hasPrefix=!1,this._hasSuffix=!1,this._hasHelpTextSlot=!1,this.#n=void 0,m(A,P,M,O,I)}get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}#t(e){e.key===`Enter`&&this.internals.form&&this.internals.form.requestSubmit()}updated(e){e.has(`value`)&&this.value!==void 0&&(this.setValue(this.value),this.formatter&&this.mask&&(this.mask.innerText=this.formatter(this.value)))}#n;static{this.styles=[x,B,R,H,U]}firstUpdated(){this.#n=this.value}resetFormControl(){this.value=this.#n}get _inputstyles(){return h([G.base,this._hasSuffix&&G.suffix,this._hasPrefix&&G.prefix,!this.invalid&&!this.disabled&&!(this.readonly||this.readOnly)&&G.default,this.invalid&&!this.disabled&&!(this.readonly||this.readOnly)&&G.invalid,!this.invalid&&this.disabled&&!(this.readonly||this.readOnly)&&G.disabled,!this.invalid&&!this.disabled&&(this.readonly||this.readOnly)&&G.readOnly])}get _helptextstyles(){return`help-text`}get _label(){if(this.label){let e=this.label.length&&this.optional&&!this.required,t=!!this.tooltip;return i`
 				<label for="${this._id}">
 					${this.label}${e?i`
-								<span>
-									${d._({id:`textfield.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
-								</span>
-							`:r}
+									<span>
+										${d._({id:`textfield.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
+									</span>
+								`:r}
 					${t?i`
-								<button
-									id="tooltip-target"
-									part="tooltip-target"
-									aria-describedby="tooltip"
-								>
-									<w-icon name="Info" size="small"></w-icon>
-								</button>
-								<w-tooltip
-									for="tooltip-target"
-									id="tooltip"
-									exportparts="tooltip, arrow, beak, hover-bridge"
-								>
-									${this.tooltip}
-								</w-tooltip>
-							`:r}
+									<button
+										id="tooltip-target"
+										part="tooltip-target"
+										aria-describedby="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip
+										for="tooltip-target"
+										id="tooltip"
+										exportparts="tooltip, arrow, beak, hover-bridge"
+									>
+										${this.tooltip}
+									</w-tooltip>
+								`:r}
 				</label>
 			`}}get _helpId(){if(this.#e)return`${this._id}__hint`}get _id(){return`textfield`}get _error(){if(this.invalid&&this._helpId)return this._helpId}handler(e){let{name:t,value:n}=e.currentTarget;this.value=n;let r={name:t,value:n,target:e.target},i=new Proxy(r,{get(e,t){return typeof window<`u`&&(window.location.host.startsWith(`www`)||console.warn(`w-textfield's CustomEvent is deprecated, please use the browser-native events instead (e.g. replace e.detail.value with e.target.value)`)),e[t]}}),a=new CustomEvent(e.type,{detail:i});this.dispatchEvent(a)}prefixSlotChange(){this.renderRoot.querySelector(`slot[name=prefix]`).assignedElements().length&&(this._hasPrefix=!0)}suffixSlotChange(){this.renderRoot.querySelector(`slot[name=suffix]`).assignedElements().length&&(this._hasSuffix=!0)}helpTextSlotChange(){this.renderRoot.querySelector(`slot[name=help-text]`).assignedElements().length&&(this._hasHelpTextSlot=!0)}render(){return i`
 			${this._label}
