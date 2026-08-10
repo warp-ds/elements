@@ -525,43 +525,49 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			${this.label
-				? html`
-						<label for="${this._id}">
-							${this.label}
-							${this.optional && !this.required
-								? html`
-										<span>
-											${i18n._({
-												id: "textarea.label.optional",
-												message: "Optional",
-												comment:
-													"Shown behind label when marked as optional",
-											})}
-										</span>
-									`
-								: nothing}
-							${this.tooltip
-								? html`
-										<button
-											id="tooltip-target"
-											part="tooltip-target"
-											aria-describedby="tooltip"
-										>
-											<w-icon name="Info" size="small"></w-icon>
-										</button>
-										<w-tooltip
-											for="tooltip-target"
-											id="tooltip"
-											exportparts="tooltip, arrow, beak, hover-bridge"
-										>
-											${this.tooltip}
-										</w-tooltip>
-									`
-								: nothing}
-						</label>
-					`
-				: nothing}
+			${
+				this.label
+					? html`
+							<label for="${this._id}">
+								${this.label}
+								${
+									this.optional && !this.required
+										? html`
+												<span>
+													${i18n._({
+														id: "textarea.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>
+											`
+										: nothing
+								}
+								${
+									this.tooltip
+										? html`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`
+										: nothing
+								}
+							</label>
+						`
+					: nothing
+			}
 			<textarea
 				part="input"
 				id="${this._id}"

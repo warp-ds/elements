@@ -13,7 +13,6 @@ import {
 } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { when } from "lit/directives/when.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
@@ -454,42 +453,49 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`<div class="${ccSelect.wrapper}">
-			${this.label
-				? html`
-						<label for="${this.#id}">
-							${this.label}
-							${this.optional
-								? html`
-										<span>
-											${i18n.t({
-												id: "select.label.optional",
-												message: "Optional",
-												comment: "Shown behind label when marked as optional",
-											})}
-										</span>
-									`
-								: nothing}
-							${this.tooltip
-								? html`
-										<button
-											id="tooltip-target"
-											part="tooltip-target"
-											aria-describedby="tooltip"
-										>
-											<w-icon name="Info" size="small"></w-icon>
-										</button>
-										<w-tooltip
-											for="tooltip-target"
-											id="tooltip"
-											exportparts="tooltip, arrow, beak, hover-bridge"
-										>
-											${this.tooltip}
-										</w-tooltip>
-									`
-								: nothing}
-						</label>
-					`
-				: nothing}
+			${
+				this.label
+					? html`
+							<label for="${this.#id}">
+								${this.label}
+								${
+									this.optional
+										? html`
+												<span>
+													${i18n.t({
+														id: "select.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>
+											`
+										: nothing
+								}
+								${
+									this.tooltip
+										? html`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`
+										: nothing
+								}
+							</label>
+						`
+					: nothing
+			}
 			<div class="${ccSelect.selectWrapper}">
 				<select
 					part="input"

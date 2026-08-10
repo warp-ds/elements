@@ -334,35 +334,39 @@ class WarpTextField extends FormControlMixin(LitElement) {
 			const hasTooltip = Boolean(this.tooltip);
 			return html`
 				<label for="${this._id}">
-					${this.label}${showOptionalLabel
-						? html`
-								<span>
-									${i18n._({
-										id: "textfield.label.optional",
-										message: "Optional",
-										comment: "Shown behind label when marked as optional",
-									})}
-								</span>
-							`
-						: nothing}
-					${hasTooltip
-						? html`
-								<button
-									id="tooltip-target"
-									part="tooltip-target"
-									aria-describedby="tooltip"
-								>
-									<w-icon name="Info" size="small"></w-icon>
-								</button>
-								<w-tooltip
-									for="tooltip-target"
-									id="tooltip"
-									exportparts="tooltip, arrow, beak, hover-bridge"
-								>
-									${this.tooltip}
-								</w-tooltip>
-							`
-						: nothing}
+					${this.label}${
+						showOptionalLabel
+							? html`
+									<span>
+										${i18n._({
+											id: "textfield.label.optional",
+											message: "Optional",
+											comment: "Shown behind label when marked as optional",
+										})}
+									</span>
+								`
+							: nothing
+					}
+					${
+						hasTooltip
+							? html`
+									<button
+										id="tooltip-target"
+										part="tooltip-target"
+										aria-describedby="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip
+										for="tooltip-target"
+										id="tooltip"
+										exportparts="tooltip, arrow, beak, hover-bridge"
+									>
+										${this.tooltip}
+									</w-tooltip>
+								`
+							: nothing
+					}
 				</label>
 			`;
 		}

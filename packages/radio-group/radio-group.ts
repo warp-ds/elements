@@ -535,45 +535,51 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 				aria-errormessage="error-message"
 				aria-invalid=${ifDefined(showInvalidError ? "true" : undefined)}
 			>
-				${hasLabel
-					? html`
-							<label
-								part="form-control-label"
-								id="label"
-								@click=${this.handleLabelClick}
-							>
-								<slot name="label">${this.label}</slot>
-								${this.optional && !this.required
-									? html`<span class="optional">
-											${i18n._({
-												id: "radio-group.label.optional",
-												message: "Optional",
-												comment:
-													"Shown behind label when marked as optional",
-											})}
-										</span>`
-									: nothing}
-								${this.tooltip
-									? html`
-											<button
-												id="tooltip-target"
-												part="tooltip-target"
-												aria-describedby="tooltip"
-											>
-												<w-icon name="Info" size="small"></w-icon>
-											</button>
-											<w-tooltip
-												for="tooltip-target"
-												id="tooltip"
-												exportparts="tooltip, arrow, beak, hover-bridge"
-											>
-												${this.tooltip}
-											</w-tooltip>
-										`
-									: nothing}
-							</label>
-						`
-					: nothing}
+				${
+					hasLabel
+						? html`
+								<label
+									part="form-control-label"
+									id="label"
+									@click=${this.handleLabelClick}
+								>
+									<slot name="label">${this.label}</slot>
+									${
+										this.optional && !this.required
+											? html`<span class="optional">
+													${i18n._({
+														id: "radio-group.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>`
+											: nothing
+									}
+									${
+										this.tooltip
+											? html`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`
+											: nothing
+									}
+								</label>
+							`
+						: nothing
+				}
 
 				<slot
 					part="form-control-input"

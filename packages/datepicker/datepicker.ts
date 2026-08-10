@@ -678,35 +678,39 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 			<div class="w-datepicker-wrapper" id="${wrapperId}">
 				<label class="w-datepicker-input-label" for="${inputId}">
 					${this.label}
-					${this.optional && !this.required
-						? html`
-								<span>
-									${i18n._({
-										id: "datepicker.label.optional",
-										message: "Optional",
-										comment: "Shown behind label when marked as optional",
-									})}
-								</span>
-							`
-						: nothing}
-					${this.tooltip
-						? html`
-								<button
-									id="tooltip-target"
-									part="tooltip-target"
-									aria-describedby="tooltip"
-								>
-									<w-icon name="Info" size="small"></w-icon>
-								</button>
-								<w-tooltip
-									for="tooltip-target"
-									id="tooltip"
-									exportparts="tooltip, arrow, beak, hover-bridge"
-								>
-									${this.tooltip}
-								</w-tooltip>
-							`
-						: nothing}
+					${
+						this.optional && !this.required
+							? html`
+									<span>
+										${i18n._({
+											id: "datepicker.label.optional",
+											message: "Optional",
+											comment: "Shown behind label when marked as optional",
+										})}
+									</span>
+								`
+							: nothing
+					}
+					${
+						this.tooltip
+							? html`
+									<button
+										id="tooltip-target"
+										part="tooltip-target"
+										aria-describedby="tooltip"
+									>
+										<w-icon name="Info" size="small"></w-icon>
+									</button>
+									<w-tooltip
+										for="tooltip-target"
+										id="tooltip"
+										exportparts="tooltip, arrow, beak, hover-bridge"
+									>
+										${this.tooltip}
+									</w-tooltip>
+								`
+							: nothing
+					}
 				</label>
 				<div class="w-datepicker-input-wrapper">
 					<input
@@ -773,9 +777,11 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 						></w-icon>
 					</w-button>
 				</div>
-				${this.helpText
-					? html`<div id="help-text" class="help-text">${this.helpText}</div>`
-					: nothing}
+				${
+					this.helpText
+						? html`<div id="help-text" class="help-text">${this.helpText}</div>`
+						: nothing
+				}
 			</div>
 			<div
 				class="w-dropdown__popover w-dropdown__popover--open"

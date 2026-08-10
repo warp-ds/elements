@@ -193,43 +193,49 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 
 		return html`
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
-				${this.label
-					? html`
-							<div class="label" id="${ifDefined(labelId)}">
-								<span>${this.label}</span>
-								${this.optional && !this.required
-									? html`
-											<span class="optional">
-												${i18n._({
-													id: "checkbox-group.label.optional",
-													message: "Optional",
-													comment:
-														"Shown behind label when marked as optional",
-												})}
-											</span>
-										`
-									: nothing}
-								${this.tooltip
-									? html`
-											<button
-												id="tooltip-target"
-												part="tooltip-target"
-												aria-describedby="tooltip"
-											>
-												<w-icon name="Info" size="small"></w-icon>
-											</button>
-											<w-tooltip
-												for="tooltip-target"
-												id="tooltip"
-												exportparts="tooltip, arrow, beak, hover-bridge"
-											>
-												${this.tooltip}
-											</w-tooltip>
-										`
-									: nothing}
-							</div>
-						`
-					: nothing}
+				${
+					this.label
+						? html`
+								<div class="label" id="${ifDefined(labelId)}">
+									<span>${this.label}</span>
+									${
+										this.optional && !this.required
+											? html`
+													<span class="optional">
+														${i18n._({
+															id: "checkbox-group.label.optional",
+															message: "Optional",
+															comment:
+																"Shown behind label when marked as optional",
+														})}
+													</span>
+												`
+											: nothing
+									}
+									${
+										this.tooltip
+											? html`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`
+											: nothing
+									}
+								</div>
+							`
+						: nothing
+				}
 				<div
 					class="checkbox-group"
 					role="group"
