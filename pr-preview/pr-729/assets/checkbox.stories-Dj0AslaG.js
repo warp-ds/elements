@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d as i,g as a,h as o,l as s,p as c,r as l,s as u,t as d,y as ee}from"./decorate-Bt2QF_uA.js";import{l as te,s as ne,u as re}from"./async-directive-BZIqf2aE.js";import{a as f,o as ie,r as ae,t as oe}from"./i18n-CkjYRTT1.js";import{i as p,n as se,r as ce,t as le}from"./directive-CZiujxgm.js";import{n as ue,t as de}from"./dist-D5kJVy4t.js";import{t as fe}from"./query-BHY-nhsh.js";import{n as pe,t as me}from"./styles-Cw_r5k83.js";import{i as he,n as ge,r as _e}from"./utilities-BHNt5DhH.js";import{n as ve,t as ye}from"./FormControlMixin-BCJbRrUC.js";import{r as m,t as be}from"./if-defined-DBI32Ir5.js";import{t as xe}from"./tooltip-D5IbvAIJ.js";var h;function g(){return(g=e((()=>{a(),ce(),ne(),h=le(class extends se{constructor(e){if(super(e),e.type!==p.PROPERTY&&e.type!==p.ATTRIBUTE&&e.type!==p.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!re(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===c||t===i)return t;let n=e.element,r=e.name;if(e.type===p.PROPERTY){if(t===n[r])return c}else if(e.type===p.BOOLEAN_ATTRIBUTE){if(!!t===n.hasAttribute(r))return c}else if(e.type===p.ATTRIBUTE&&n.getAttribute(r)===t+``)return c;return te(e),t}})})))()}function _(){return(_=e((()=>{g()})))()}var v;function y(){return(y=e((()=>{r(),v=ee`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d as i,g as a,h as o,l as s,p as c,r as l,s as u,t as d,y as ee}from"./decorate-Bt2QF_uA.js";import{l as te,s as ne,u as re}from"./async-directive-BZIqf2aE.js";import{a as f,o as ie,r as ae,t as oe}from"./i18n-CkjYRTT1.js";import{i as p,n as se,r as ce,t as le}from"./directive-CZiujxgm.js";import{n as ue,t as de}from"./dist-D5kJVy4t.js";import{t as fe}from"./query-BHY-nhsh.js";import{t as pe}from"./icon-CD69d68Q.js";import{n as me,t as he}from"./styles-Cw_r5k83.js";import{i as ge,n as _e,r as ve}from"./utilities-BHNt5DhH.js";import{n as ye,t as be}from"./FormControlMixin-BCJbRrUC.js";import{r as m,t as h}from"./if-defined-DBI32Ir5.js";import{t as g}from"./tooltip-D5IbvAIJ.js";var _;function v(){return(v=e((()=>{a(),ce(),ne(),_=le(class extends se{constructor(e){if(super(e),e.type!==p.PROPERTY&&e.type!==p.ATTRIBUTE&&e.type!==p.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!re(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===c||t===i)return t;let n=e.element,r=e.name;if(e.type===p.PROPERTY){if(t===n[r])return c}else if(e.type===p.BOOLEAN_ATTRIBUTE){if(!!t===n.hasAttribute(r))return c}else if(e.type===p.ATTRIBUTE&&n.getAttribute(r)===t+``)return c;return te(e),t}})})))()}function y(){return(y=e((()=>{v()})))()}var b;function x(){return(x=e((()=>{r(),b=ee`
 	:host {
 		--_label-font-size: var(
 			--w-c-checkbox-label-font-size,
@@ -182,7 +182,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 			--w-c-checkbox-transition: none;
 		}
 	}
-`})))()}var b;function x(){return(x=e((()=>{ve(),r(),l(),be(),_(),me(),y(),b=class extends ye(s){constructor(...e){super(...e),this.value=null,this.indeterminate=!1,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.#r=()=>{this.#a(),this.#l()},this.#i=e=>{if(!this.disabled&&!e.defaultPrevented&&(e.key===` `||e.key===`Spacebar`||e.key===`Enter`)){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.composedPath()[0]!==this.input&&(e.preventDefault(),this.click())}}}static{this.styles=[pe,v]}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}set name(e){this._ownName=e}get name(){return this._ownName||this._groupName}#e;#t;#n;get _computedInvalid(){return this.invalid||this._groupInvalid===!0}connectedCallback(){super.connectedCallback();let e=this.getAttribute(`value`);this.value=e??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.addEventListener(`invalid`,this.#r),this.addEventListener(`keydown`,this.#i),this.#u()}handleClick(){this.disabled||(this.#a(),this.checked=!this.checked,this.indeterminate=!1,this.updateComplete.then(()=>{this.input.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))}))}#r;#i;updated(e){super.updated(e),(e.has(`checked`)||e.has(`indeterminate`))&&this.#d(),this.#f(e)&&(this.#u(),this.#l())}resetFormControl(){this.checked=this.#e,this.#u(),this.#l()}click(){this.disabled||this.input?.click()}focus(e){this.input?.focus(e)}blur(){this.input?.blur()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.#l(),this.internals.checkValidity()}reportValidity(){return this.#a(),this.#l(),this.internals.checkValidity()}#a(){this.#n=!0}#o(){return this.input?.validationMessage||` `}#s(){return this.input??void 0}#c(e){this.internals.setValidity(e,this.#o(),this.#s())}#l(){if(this.disabled){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.#c({valueMissing:!0});return}if(this.#t&&=(this.invalid=!1,!1),t){this.#c({customError:!0});return}this.internals.setValidity({})}#u(){if(this.disabled){this.setValue(null);return}let e=this.checked?this.value:null;this.setValue(e)}#d(){this.input&&(this.input.checked=this.checked,this.input.indeterminate=this.indeterminate)}#f(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){let e=!this.checked&&this.indeterminate,t=e?`mixed`:this.checked?`true`:`false`;return o`
+`})))()}var S;function C(){return(C=e((()=>{ye(),r(),l(),h(),y(),he(),x(),S=class extends be(s){constructor(...e){super(...e),this.value=null,this.indeterminate=!1,this.checked=!1,this.disabled=!1,this.required=!1,this.invalid=!1,this.#e=!1,this.#t=!1,this.#n=!1,this.#r=()=>{this.#a(),this.#l()},this.#i=e=>{if(!this.disabled&&!e.defaultPrevented&&(e.key===` `||e.key===`Spacebar`||e.key===`Enter`)){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}e.composedPath()[0]!==this.input&&(e.preventDefault(),this.click())}}}static{this.styles=[me,b]}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}set name(e){this._ownName=e}get name(){return this._ownName||this._groupName}#e;#t;#n;get _computedInvalid(){return this.invalid||this._groupInvalid===!0}connectedCallback(){super.connectedCallback();let e=this.getAttribute(`value`);this.value=e??`on`,this.#e=this.hasAttribute(`checked`),this.checked=this.#e,this.addEventListener(`invalid`,this.#r),this.addEventListener(`keydown`,this.#i),this.#u()}handleClick(){this.disabled||(this.#a(),this.checked=!this.checked,this.indeterminate=!1,this.updateComplete.then(()=>{this.input.dispatchEvent(new Event(`change`,{bubbles:!0,composed:!0}))}))}#r;#i;updated(e){super.updated(e),(e.has(`checked`)||e.has(`indeterminate`))&&this.#d(),this.#f(e)&&(this.#u(),this.#l())}resetFormControl(){this.checked=this.#e,this.#u(),this.#l()}click(){this.disabled||this.input?.click()}focus(e){this.input?.focus(e)}blur(){this.input?.blur()}get validationMessage(){return this.internals.validationMessage}get validity(){return this.internals.validity}checkValidity(){return this.#l(),this.internals.checkValidity()}reportValidity(){return this.#a(),this.#l(),this.internals.checkValidity()}#a(){this.#n=!0}#o(){return this.input?.validationMessage||` `}#s(){return this.input??void 0}#c(e){this.internals.setValidity(e,this.#o(),this.#s())}#l(){if(this.disabled){this.internals.setValidity({});return}let e=this.required&&!this.checked,t=this.invalid&&!this.#t;if(e){this.#t=!0,this.invalid=this.#n,this.#c({valueMissing:!0});return}if(this.#t&&=(this.invalid=!1,!1),t){this.#c({customError:!0});return}this.internals.setValidity({})}#u(){if(this.disabled){this.setValue(null);return}let e=this.checked?this.value:null;this.setValue(e)}#d(){this.input&&(this.input.checked=this.checked,this.input.indeterminate=this.indeterminate)}#f(e){return e.has(`checked`)||e.has(`value`)||e.has(`disabled`)||e.has(`required`)||e.has(`invalid`)}render(){let e=!this.checked&&this.indeterminate,t=e?`mixed`:this.checked?`true`:`false`;return o`
 			<label part="base">
 				<span part="control">
 					<input
@@ -190,8 +190,8 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 						type="checkbox"
 						name=${m(this.name||void 0)}
 						value=${m(this.value)}
-						.indeterminate=${h(this.indeterminate)}
-						.checked=${h(this.checked)}
+						.indeterminate=${_(this.indeterminate)}
+						.checked=${_(this.checked)}
 						.disabled=${this.disabled}
 						.required=${this.required}
 						aria-checked=${t}
@@ -203,7 +203,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 
 				<slot part="label"></slot>
 			</label>
-		`}},d([fe(`input[type="checkbox"]`)],b.prototype,`input`,void 0),d([u({reflect:!0})],b.prototype,`name`,null),d([u({reflect:!0})],b.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],b.prototype,`indeterminate`,void 0),d([u({type:Boolean,reflect:!0})],b.prototype,`checked`,void 0),d([u({type:Boolean,reflect:!0})],b.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],b.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],b.prototype,`invalid`,void 0),d([u({attribute:!1})],b.prototype,`_groupInvalid`,void 0),d([u({attribute:!1})],b.prototype,`_groupName`,void 0),customElements.get(`w-checkbox`)||customElements.define(`w-checkbox`,b)})))()}var S;function C(){return(C=e((()=>{S=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Mindst én valgt mulighed er påkrævet."]}`)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"checkbox-group.label.optional":["Optional"],"checkbox-group.validation.required":["At least one selection is required."]}`)})))()}var E;function D(){return(D=e((()=>{E=JSON.parse(`{"checkbox-group.label.optional":["Valinnainen"],"checkbox-group.validation.required":["Vähintään yksi valinta vaaditaan."]}`)})))()}var O;function k(){return(k=e((()=>{O=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Minst ett valg er påkrevd."]}`)})))()}var A;function j(){return(j=e((()=>{A=JSON.parse(`{"checkbox-group.label.optional":["Valfritt"],"checkbox-group.validation.required":["Minst ett val krävs."]}`)})))()}var M,N;function P(){return(P=e((()=>{ie(),ve(),r(),l(),be(),ae(),C(),T(),D(),k(),j(),oe(w,O,E,S,A),M=()=>f._({id:`checkbox-group.validation.required`,message:`At least one selection is required.`,comment:`Shown when required checkbox group has no selections`}),N=class extends ye(s){constructor(...e){super(...e),this.optional=!1,this.required=!1,this.invalid=!1,this._hasHelpTextSlot=!1,this.#e=!1,this.#t=!1,this._internalTabIndex=-1,this.#r=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#i=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#a=()=>{this.#l(),this.#_(),this.requestUpdate()},this.#s=()=>{this.requestUpdate()}}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}#e;#t;#n;static{this.styles=ee`
+		`}},d([fe(`input[type="checkbox"]`)],S.prototype,`input`,void 0),d([u({reflect:!0})],S.prototype,`name`,null),d([u({reflect:!0})],S.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`indeterminate`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`checked`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],S.prototype,`invalid`,void 0),d([u({attribute:!1})],S.prototype,`_groupInvalid`,void 0),d([u({attribute:!1})],S.prototype,`_groupName`,void 0),customElements.get(`w-checkbox`)||customElements.define(`w-checkbox`,S)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Mindst én valgt mulighed er påkrævet."]}`)})))()}var E;function D(){return(D=e((()=>{E=JSON.parse(`{"checkbox-group.label.optional":["Optional"],"checkbox-group.validation.required":["At least one selection is required."]}`)})))()}var O;function k(){return(k=e((()=>{O=JSON.parse(`{"checkbox-group.label.optional":["Valinnainen"],"checkbox-group.validation.required":["Vähintään yksi valinta vaaditaan."]}`)})))()}var A;function j(){return(j=e((()=>{A=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Minst ett valg er påkrevd."]}`)})))()}var M;function N(){return(N=e((()=>{M=JSON.parse(`{"checkbox-group.label.optional":["Valfritt"],"checkbox-group.validation.required":["Minst ett val krävs."]}`)})))()}var P,F;function I(){return(I=e((()=>{ie(),ye(),r(),l(),h(),ae(),T(),D(),k(),j(),N(),pe(),g(),oe(E,A,O,w,M),P=()=>f._({id:`checkbox-group.validation.required`,message:`At least one selection is required.`,comment:`Shown when required checkbox group has no selections`}),F=class extends be(s){constructor(...e){super(...e),this.optional=!1,this.required=!1,this.invalid=!1,this._hasHelpTextSlot=!1,this.#e=!1,this.#t=!1,this._internalTabIndex=-1,this.#r=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#i=()=>{this.#o(),this.#_(),this.requestUpdate()},this.#a=()=>{this.#l(),this.#_(),this.requestUpdate()},this.#s=()=>{this.requestUpdate()}}static{this.shadowRootOptions={...s.shadowRootOptions,delegatesFocus:!0}}#e;#t;#n;static{this.styles=ee`
 		.wrapper {
 			display: inline-flex;
 			flex-direction: column;
@@ -303,7 +303,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 					></slot>
 				</div>
 			</div>
-		`}connectedCallback(){super.connectedCallback(),this.addEventListener(`change`,this.#r),this.addEventListener(`invalid`,this.#i),this.addEventListener(`slotchange`,this.#a),this.#n=f.on(`change`,this.#s),this.setValue(null),this.#v()}disconnectedCallback(){this.#n?.(),this.#n=void 0,super.disconnectedCallback()}checkValidity(){return this.#_(),this.internals.checkValidity()}reportValidity(){return this.#o(),this.#_(),this.internals.checkValidity()}focus(e){let t=this.#d();if(t?.focus){t.focus(e);return}HTMLElement.prototype.focus.call(this,e)}#r;#i;#a;#o(){this.#e=!0}#s;#c(){return this.#f().filter(e=>e.checked).length}#l(){if(this.name)for(let e of this.#f()){let t=e;t&&typeof t==`object`&&!t.name&&(t._groupName=this.name)}}#u(e){for(let t of this.#f())`_groupInvalid`in t&&(t._groupInvalid=e)}#d(){return this.#f()[0]}#f(){return(this.shadowRoot?.querySelector(`slot`))?.assignedElements({flatten:!0})??[]}#p(){return M()}updated(e){super.updated(e),this.#m(e)&&(e.has(`name`)&&this.#l(),this.#_())}#m(e){return e.has(`invalid`)||e.has(`required`)||e.has(`helpText`)||e.has(`name`)}#h(e){let t=this.#d();this.internals.setValidity(e,` `,t??void 0)}#g(e){this._internalTabIndex=e?0:-1}#_(){this.#v();let e=this.#c()>0,t=this.required&&!e,n=this.invalid,r=t&&this.#e,i=n||r;if(this.#g(i),t){this.#h({valueMissing:!0}),this.#u(i);return}if(n){this.#h({customError:!0}),this.#u(!0);return}this.internals.setValidity({}),this.#u(!1)}#v(){this.#t||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-checkbox-group: "name" is required for form submission.`),this.#t=!0))}},d([u({type:String,reflect:!0})],N.prototype,`label`,void 0),d([u({type:String,reflect:!0})],N.prototype,`tooltip`,void 0),d([u({type:String,reflect:!0})],N.prototype,`name`,void 0),d([u({type:Boolean,reflect:!0})],N.prototype,`optional`,void 0),d([u({type:String,reflect:!0,attribute:`help-text`})],N.prototype,`helpText`,void 0),d([u({type:Boolean,reflect:!0})],N.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],N.prototype,`invalid`,void 0),d([n()],N.prototype,`_hasHelpTextSlot`,void 0),d([n()],N.prototype,`_internalTabIndex`,void 0),customElements.get(`w-checkbox-group`)||customElements.define(`w-checkbox-group`,N)})))()}var Se=t({CheckboxFormAssociated:()=>U,CheckboxGroup:()=>G,CheckboxGroupFormAssociated:()=>Q,CheckboxGroupRequired:()=>Z,CheckboxGroupWithHelpText:()=>K,CheckboxGroupWithHelpTextAndLabel:()=>J,CheckboxGroupWithInvalid:()=>X,CheckboxGroupWithLabel:()=>q,CheckboxGroupWithOptional:()=>Y,Default:()=>L,Disabled:()=>W,Indeterminate:()=>B,IndeterminateDisabled:()=>H,IndeterminateError:()=>V,Invalid:()=>z,WithTooltip:()=>R,__namedExportsOrder:()=>Te,default:()=>we}),F,I,Ce,we,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,Te;function $(){return($=e((()=>{_e(),ue(),r(),x(),P(),xe(),{events:F,args:I,argTypes:Ce}=de(`w-checkbox`),we={title:`Forms/Checkbox`,render(e){return o` <w-checkbox ${he(ge(e))}>Check me</w-checkbox> `},args:I,argTypes:Ce,parameters:{actions:{handles:F}}},L={},R={args:{optional:!0,required:!1,helpText:`Help text is available, but might not be enough, or the added context is not important enough that we use help-text`,tooltip:`This tooltip adds supplementary information`},render({optional:e,required:t}){return o`
+		`}connectedCallback(){super.connectedCallback(),this.addEventListener(`change`,this.#r),this.addEventListener(`invalid`,this.#i),this.addEventListener(`slotchange`,this.#a),this.#n=f.on(`change`,this.#s),this.setValue(null),this.#v()}disconnectedCallback(){this.#n?.(),this.#n=void 0,super.disconnectedCallback()}checkValidity(){return this.#_(),this.internals.checkValidity()}reportValidity(){return this.#o(),this.#_(),this.internals.checkValidity()}focus(e){let t=this.#d();if(t?.focus){t.focus(e);return}HTMLElement.prototype.focus.call(this,e)}#r;#i;#a;#o(){this.#e=!0}#s;#c(){return this.#f().filter(e=>e.checked).length}#l(){if(this.name)for(let e of this.#f()){let t=e;t&&typeof t==`object`&&!t.name&&(t._groupName=this.name)}}#u(e){for(let t of this.#f())`_groupInvalid`in t&&(t._groupInvalid=e)}#d(){return this.#f()[0]}#f(){return(this.shadowRoot?.querySelector(`slot`))?.assignedElements({flatten:!0})??[]}#p(){return P()}updated(e){super.updated(e),this.#m(e)&&(e.has(`name`)&&this.#l(),this.#_())}#m(e){return e.has(`invalid`)||e.has(`required`)||e.has(`helpText`)||e.has(`name`)}#h(e){let t=this.#d();this.internals.setValidity(e,` `,t??void 0)}#g(e){this._internalTabIndex=e?0:-1}#_(){this.#v();let e=this.#c()>0,t=this.required&&!e,n=this.invalid,r=t&&this.#e,i=n||r;if(this.#g(i),t){this.#h({valueMissing:!0}),this.#u(i);return}if(n){this.#h({customError:!0}),this.#u(!0);return}this.internals.setValidity({}),this.#u(!1)}#v(){this.#t||this.internals.form&&(this.name&&this.name.trim().length>0||(console.warn(`w-checkbox-group: "name" is required for form submission.`),this.#t=!0))}},d([u({type:String,reflect:!0})],F.prototype,`label`,void 0),d([u({type:String,reflect:!0})],F.prototype,`tooltip`,void 0),d([u({type:String,reflect:!0})],F.prototype,`name`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`optional`,void 0),d([u({type:String,reflect:!0,attribute:`help-text`})],F.prototype,`helpText`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`required`,void 0),d([u({type:Boolean,reflect:!0})],F.prototype,`invalid`,void 0),d([n()],F.prototype,`_hasHelpTextSlot`,void 0),d([n()],F.prototype,`_internalTabIndex`,void 0),customElements.get(`w-checkbox-group`)||customElements.define(`w-checkbox-group`,F)})))()}var xe=t({CheckboxFormAssociated:()=>W,CheckboxGroup:()=>K,CheckboxGroupFormAssociated:()=>$,CheckboxGroupRequired:()=>Q,CheckboxGroupWithHelpText:()=>q,CheckboxGroupWithHelpTextAndLabel:()=>Y,CheckboxGroupWithInvalid:()=>Z,CheckboxGroupWithLabel:()=>J,CheckboxGroupWithOptional:()=>X,Default:()=>R,Disabled:()=>G,Indeterminate:()=>V,IndeterminateDisabled:()=>U,IndeterminateError:()=>H,Invalid:()=>B,WithTooltip:()=>z,__namedExportsOrder:()=>Te,default:()=>we}),L,Se,Ce,we,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,Te;function Ee(){return(Ee=e((()=>{ve(),ue(),r(),C(),I(),g(),{events:L,args:Se,argTypes:Ce}=de(`w-checkbox`),we={title:`Forms/Checkbox`,render(e){return o` <w-checkbox ${ge(_e(e))}>Check me</w-checkbox> `},args:Se,argTypes:Ce,parameters:{actions:{handles:L}}},R={},z={args:{optional:!0,required:!1,helpText:`Help text is available, but might not be enough, or the added context is not important enough that we use help-text`,tooltip:`This tooltip adds supplementary information`},render({optional:e,required:t}){return o`
             <w-checkbox-group
                 name="tooltip-demo"
                 label="Needs an explanation"
@@ -316,7 +316,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
                 <w-checkbox value="bar">Bar</w-checkbox>
                 <w-checkbox value="baz">Baz</w-checkbox>
             </w-checkbox-group>
-        `}},z={args:{name:`invalidfoo`,value:`bar`,invalid:!0}},B={args:{name:`indeterminatefoo`,value:`bar`,indeterminate:!0}},V={args:{name:`indeterminateerrorfoo`,value:`bar`,indeterminate:!0,invalid:!0}},H={args:{name:`indeterminatedisabledfoo`,value:`bar`,indeterminate:!0,disabled:!0}},U={render:()=>o`
+        `}},B={args:{name:`invalidfoo`,value:`bar`,invalid:!0}},V={args:{name:`indeterminatefoo`,value:`bar`,indeterminate:!0}},H={args:{name:`indeterminateerrorfoo`,value:`bar`,indeterminate:!0,invalid:!0}},U={args:{name:`indeterminatedisabledfoo`,value:`bar`,indeterminate:!0,disabled:!0}},W={render:()=>o`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget,n=t.querySelector(`[data-status]`);n&&(n.textContent=`Submitted value: ${new FormData(t).get(`newsletter`)??`none`}`)}} style="display: grid; gap: 12px;">
                 <w-checkbox
                     name="newsletter"
@@ -329,37 +329,37 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `},W={args:{name:`disabledfoo`,value:`bar`,disabled:!0}},G={render:()=>o`
+        `},G={args:{name:`disabledfoo`,value:`bar`,disabled:!0}},K={render:()=>o`
         <w-checkbox-group name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},K={render:()=>o`
+    `},q={render:()=>o`
         <w-checkbox-group help-text="Select all that apply" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},q={render:()=>o`
+    `},J={render:()=>o`
         <w-checkbox-group label="Label" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},J={render:()=>o`
+    `},Y={render:()=>o`
         <w-checkbox-group label="Label" help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},Y={render:()=>o`
+    `},X={render:()=>o`
         <w-checkbox-group label="Label" optional help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},X={render:()=>o`
+    `},Z={render:()=>o`
         <w-checkbox-group label="Label" invalid help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
-    `},Z={render:()=>o`
+    `},Q={render:()=>o`
         <w-checkbox-group
             label="Preferences"
             required
@@ -370,7 +370,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             <w-checkbox value="bar">Bar</w-checkbox>
             <w-checkbox value="baz">Baz</w-checkbox>
         </w-checkbox-group>
-    `},Q={render:()=>o`
+    `},$={render:()=>o`
             <form @submit=${e=>{e.preventDefault();let t=e.currentTarget.querySelector(`[data-status]`);t&&(t.textContent=`Submitted.`)}} style="display: grid; gap: 12px;">
                 <w-checkbox-group
                     label="Preferences"
@@ -386,7 +386,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
                 <button type="submit">Submit</button>
                 <div data-status aria-live="polite"></div>
             </form>
-        `},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
+        `},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
     optional: true,
     required: false,
@@ -412,33 +412,33 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             </w-checkbox-group>
         \`;
   }
-}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
     name: "invalidfoo",
     value: "bar",
     invalid: true
   }
-}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
+}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
   args: {
     name: "indeterminatefoo",
     value: "bar",
     indeterminate: true
   }
-}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
+}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
   args: {
     name: "indeterminateerrorfoo",
     value: "bar",
     indeterminate: true,
     invalid: true
   }
-}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
+}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
   args: {
     name: "indeterminatedisabledfoo",
     value: "bar",
     indeterminate: true,
     disabled: true
   }
-}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
+}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
   render: () => {
     const handleSubmit = (event: Event) => {
       event.preventDefault();
@@ -470,55 +470,55 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             </form>
         \`;
   }
-}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
+}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
   args: {
     name: "disabledfoo",
     value: "bar",
     disabled: true
   }
-}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
+}`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
+}`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group help-text="Select all that apply" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
+}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group label="Label" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
+}`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group label="Label" help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
+}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group label="Label" optional help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
+}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group label="Label" invalid help-text="help text" name="group">
             <w-checkbox value="foo">Foo</w-checkbox>
             <w-checkbox value="bar">Bar</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
+}`,...Z.parameters?.docs?.source}}},Q.parameters={...Q.parameters,docs:{...Q.parameters?.docs,source:{originalSource:`{
   render: () => html\`
         <w-checkbox-group
             label="Preferences"
@@ -531,7 +531,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             <w-checkbox value="baz">Baz</w-checkbox>
         </w-checkbox-group>
     \`
-}`,...Z.parameters?.docs?.source}}},Q.parameters={...Q.parameters,docs:{...Q.parameters?.docs,source:{originalSource:`{
+}`,...Q.parameters?.docs?.source}}},$.parameters={...$.parameters,docs:{...$.parameters?.docs,source:{originalSource:`{
   render: () => {
     const handleSubmit = (event: Event) => {
       event.preventDefault();
@@ -563,4 +563,4 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
             </form>
         \`;
   }
-}`,...Q.parameters?.docs?.source}}},Te=[`Default`,`WithTooltip`,`Invalid`,`Indeterminate`,`IndeterminateError`,`IndeterminateDisabled`,`CheckboxFormAssociated`,`Disabled`,`CheckboxGroup`,`CheckboxGroupWithHelpText`,`CheckboxGroupWithLabel`,`CheckboxGroupWithHelpTextAndLabel`,`CheckboxGroupWithOptional`,`CheckboxGroupWithInvalid`,`CheckboxGroupRequired`,`CheckboxGroupFormAssociated`]})))()}export{K as a,L as c,H as d,V as f,$ as h,Z as i,W as l,Se as m,G as n,q as o,z as p,Q as r,Y as s,U as t,B as u};
+}`,...$.parameters?.docs?.source}}},Te=[`Default`,`WithTooltip`,`Invalid`,`Indeterminate`,`IndeterminateError`,`IndeterminateDisabled`,`CheckboxFormAssociated`,`Disabled`,`CheckboxGroup`,`CheckboxGroupWithHelpText`,`CheckboxGroupWithLabel`,`CheckboxGroupWithHelpTextAndLabel`,`CheckboxGroupWithOptional`,`CheckboxGroupWithInvalid`,`CheckboxGroupRequired`,`CheckboxGroupFormAssociated`]})))()}export{q as a,R as c,U as d,H as f,Ee as h,Q as i,G as l,xe as m,K as n,J as o,B as p,$ as r,X as s,W as t,V as u};
