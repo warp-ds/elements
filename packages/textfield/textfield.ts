@@ -20,6 +20,9 @@ import { wTextfieldStyles } from "./styles/w-textfield.styles.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.

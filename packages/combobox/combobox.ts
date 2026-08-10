@@ -19,6 +19,9 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 import { InputEventWithTarget } from "../types.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 const ccCombobox = {
 	wrapper: "relative z-0",
 	base: "absolute z-20 left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m",

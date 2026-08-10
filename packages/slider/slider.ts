@@ -15,6 +15,9 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { wSliderStyles } from "./styles/w-slider.styles.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 // Inspo:
 //   https://css-tricks.com/multi-thumb-sliders-particular-two-thumb-case/
 //   https://css-tricks.com/multi-thumb-sliders-general-case/

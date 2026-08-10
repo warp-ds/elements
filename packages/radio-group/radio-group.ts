@@ -18,6 +18,9 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 // @ts-ignore
 import { styles } from "./radio-group-styles.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 const REQUIRED_MESSAGE = () =>
