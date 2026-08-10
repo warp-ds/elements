@@ -16,6 +16,9 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.
@@ -142,6 +145,14 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: Boolean, reflect: true })
 	required = false;
+
+	/**
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * Lets you set the current value
@@ -530,6 +541,26 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 															"Shown behind label when marked as optional",
 													})}
 												</span>
+											`
+										: nothing
+								}
+								${
+									this.tooltip
+										? html`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
 											`
 										: nothing
 								}

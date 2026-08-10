@@ -8,6 +8,7 @@ import type { WarpSlider } from "./slider.js";
 import "../affix/affix.js";
 import "../attention/attention.js";
 import "../textfield/textfield.js";
+import "../tooltip/tooltip.js";
 import "./slider.js";
 import "../slider-thumb/slider-thumb.js";
 
@@ -67,6 +68,30 @@ export const SingleOptional: Story = {
 	},
 };
 
+export const SingleWithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<form>
+				<w-slider
+					label="Single"
+					tooltip="This tooltip adds supplementary information"
+					min="0"
+					max="100"
+					?optional=${optional}
+					?required=${required}
+				>
+					<w-slider-thumb name="value"></w-slider-thumb>
+				</w-slider>
+				<input type="submit" hidden />
+			</form>
+		`;
+	},
+};
+
 export const Range: Story = {
 	render() {
 		return html`
@@ -97,6 +122,42 @@ export const RangeOptional: Story = {
 		return html`
 			<form>
 				<w-slider label="Range" min="0" max="100" optional>
+					<w-slider-thumb
+						slot="from"
+						aria-label="From value"
+						name="from"
+					></w-slider-thumb>
+					<w-slider-thumb
+						slot="to"
+						aria-label="To value"
+						name="to"
+					></w-slider-thumb>
+				</w-slider>
+				<div class="py-8">
+					<w-button type="reset">Reset</w-button>
+					<w-button type="submit">Submit</w-button>
+				</div>
+			</form>
+		`;
+	},
+};
+
+export const RangeWithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<form>
+				<w-slider
+					label="Range"
+					min="0"
+					max="100"
+					tooltip="This tooltip adds supplementary information"
+					?optional=${optional}
+					?required=${required}
+				>
 					<w-slider-thumb
 						slot="from"
 						aria-label="From value"
