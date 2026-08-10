@@ -259,7 +259,6 @@ test("when required checkValidity returns true if the field has a value", async 
 	const input = document.querySelector("w-datepicker") as WarpDatepicker;
 
 	// Wait for component to be ready
-	// Wait for component to be ready
 	await expect.poll(() => input.checkValidity()).toBe(true);
 	expect(input.validity.valid).toBe(true);
 });
