@@ -22,8 +22,12 @@ test("defaults to neutral variant when no variant attribute is set", async () =>
 	`;
 
 	const page = render(component);
-	const defaultBadge = page.getByTestId("default-badge").element() as HTMLElement;
-	const neutralBadge = page.getByTestId("neutral-badge").element() as HTMLElement;
+	const defaultBadge = page
+		.getByTestId("default-badge")
+		.element() as HTMLElement;
+	const neutralBadge = page
+		.getByTestId("neutral-badge")
+		.element() as HTMLElement;
 
 	// The variant attribute should not be reflected (to avoid hydration mismatch)
 	expect(defaultBadge.hasAttribute("variant")).toBe(false);
@@ -73,9 +77,9 @@ test("supports styling through component tokens", async () => {
 
 	await expect
 		.poll(() => {
-			const base = el.shadowRoot?.querySelector('[part="base"]') as
-				| HTMLElement
-				| null;
+			const base = el.shadowRoot?.querySelector(
+				'[part="base"]',
+			) as HTMLElement | null;
 			if (!base) return null;
 
 			const style = getComputedStyle(base);
@@ -108,9 +112,9 @@ test("supports styling through the base part", async () => {
 
 	await expect
 		.poll(() => {
-			const base = el.shadowRoot?.querySelector('[part="base"]') as
-				| HTMLElement
-				| null;
+			const base = el.shadowRoot?.querySelector(
+				'[part="base"]',
+			) as HTMLElement | null;
 			if (!base) return null;
 
 			const style = getComputedStyle(base);
