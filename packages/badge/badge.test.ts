@@ -25,10 +25,8 @@ test("defaults to neutral variant when no variant attribute is set", async () =>
 	// But the neutral styles should still be applied
 	await expect
 		.poll(() => {
-			const inner = el.shadowRoot?.querySelector("div");
-			return inner?.className.includes(
-				"bg-[--w-color-badge-neutral-background]",
-			);
+			const inner = el.shadowRoot?.querySelector('[part="base"]');
+			return inner?.classList.contains("badge--neutral");
 		})
 		.toBe(true);
 });
