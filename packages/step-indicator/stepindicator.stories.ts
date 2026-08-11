@@ -32,20 +32,26 @@ export const Default: Story = {
 	render: (args) => html`
 		<w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
 			<w-step completed>
-				<h3>Step 1: Account Setup</h3>
-				<p>Create your account and verify your email address.</p>
+				<p class="text-body font-bold">Step 1: Account Setup</p>
+				<p class="text-caption">
+					Create your account and verify your email address.
+				</p>
 			</w-step>
 			<w-step active>
-				<h3>Step 2: Profile Information</h3>
-				<p>Fill in your personal details and preferences.</p>
+				<p class="text-body font-bold">Step 2: Profile Information</p>
+				<p class="text-caption">
+					Fill in your personal details and preferences.
+				</p>
 			</w-step>
 			<w-step>
-				<h3>Step 3: Payment Method</h3>
-				<p>Add a payment method to complete your registration.</p>
+				<p class="text-body font-bold">Step 3: Payment Method</p>
+				<p class="text-caption">
+					Add a payment method to complete your registration.
+				</p>
 			</w-step>
 			<w-step>
-				<h3>Step 4: Confirmation</h3>
-				<p>Review and confirm your information.</p>
+				<p class="text-body font-bold">Step 4: Confirmation</p>
+				<p class="text-caption">Review and confirm your information.</p>
 			</w-step>
 		</w-step-indicator>
 	`,
@@ -59,20 +65,20 @@ export const Horizontal: Story = {
 	render: (args) => html`
 		<w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
 			<w-step completed>
-				<h4>Setup</h4>
-				<p>Account created</p>
+				<p class="text-body font-bold">Setup</p>
+				<p class="text-caption">Account created</p>
 			</w-step>
 			<w-step completed>
-				<h4>Profile</h4>
-				<p>Information added</p>
+				<p class="text-body font-bold">Profile</p>
+				<p class="text-caption">Information added</p>
 			</w-step>
 			<w-step active>
-				<h4>Payment</h4>
-				<p>Add payment method</p>
+				<p class="text-body font-bold">Payment</p>
+				<p class="text-caption">Add payment method</p>
 			</w-step>
 			<w-step>
-				<h4>Done</h4>
-				<p>Complete setup</p>
+				<p class="text-body font-bold">Done</p>
+				<p class="text-caption">Complete setup</p>
 			</w-step>
 		</w-step-indicator>
 	`,
@@ -86,22 +92,24 @@ export const RightAligned: Story = {
 	render: (args) => html`
 		<w-step-indicator ?horizontal=${args.horizontal} ?right=${args.right}>
 			<w-step completed>
-				<h3>Order Placed</h3>
-				<p>Your order has been received and is being processed.</p>
+				<p class="text-body font-bold">Order Placed</p>
+				<p class="text-caption">
+					Your order has been received and is being processed.
+				</p>
 				<small>2:34 PM</small>
 			</w-step>
 			<w-step completed>
-				<h3>Payment Confirmed</h3>
-				<p>Payment has been successfully processed.</p>
+				<p class="text-body font-bold">Payment Confirmed</p>
+				<p class="text-caption">Payment has been successfully processed.</p>
 				<small>2:35 PM</small>
 			</w-step>
 			<w-step active>
-				<h3>Preparing for Shipment</h3>
-				<p>Your items are being prepared for shipment.</p>
+				<p class="text-body font-bold">Preparing for Shipment</p>
+				<p class="text-caption">Your items are being prepared for shipment.</p>
 			</w-step>
 			<w-step>
-				<h3>Shipped</h3>
-				<p>Your order is on its way!</p>
+				<p class="text-body font-bold">Shipped</p>
+				<p class="text-caption">Your order is on its way!</p>
 			</w-step>
 		</w-step-indicator>
 	`,
@@ -111,19 +119,19 @@ export const SimpleSteps: Story = {
 	render: () => html`
 		<w-step-indicator>
 			<w-step completed>
-				<strong>Step 1</strong>
+				<p class="text-body font-bold">Step 1</p>
 			</w-step>
 			<w-step completed>
-				<strong>Step 2</strong>
+				<p class="text-body font-bold">Step 2</p>
 			</w-step>
 			<w-step active>
-				<strong>Step 3</strong>
+				<p class="text-body font-bold">Step 3</p>
 			</w-step>
 			<w-step>
-				<strong>Step 4</strong>
+				<p class="text-body font-bold">Step 4</p>
 			</w-step>
 			<w-step>
-				<strong>Step 5</strong>
+				<p class="text-body font-bold">Step 5</p>
 			</w-step>
 		</w-step-indicator>
 	`,
@@ -133,19 +141,19 @@ export const SimpleHorizontal: Story = {
 	render: () => html`
 		<w-step-indicator horizontal>
 			<w-step completed>
-				<strong>Start</strong>
+				<p class="text-body font-bold">Start</p>
 			</w-step>
 			<w-step completed>
-				<strong>Progress</strong>
+				<p class="text-body font-bold">Progress</p>
 			</w-step>
 			<w-step active>
-				<strong>Current</strong>
+				<p class="text-body font-bold">Current</p>
 			</w-step>
 			<w-step>
-				<strong>Next</strong>
+				<p class="text-body font-bold">Next</p>
 			</w-step>
 			<w-step>
-				<strong>End</strong>
+				<p class="text-body font-bold">End</p>
 			</w-step>
 		</w-step-indicator>
 	`,
@@ -155,20 +163,20 @@ export const AllCompleted: Story = {
 	render: () => html`
 		<w-step-indicator>
 			<w-step completed>
-				<h3>Registration</h3>
-				<p>Account successfully created</p>
+				<p class="text-body font-bold">Registration</p>
+				<p class="text-caption">Account successfully created</p>
 			</w-step>
 			<w-step completed>
-				<h3>Verification</h3>
-				<p>Email address verified</p>
+				<p class="text-body font-bold">Verification</p>
+				<p class="text-caption">Email address verified</p>
 			</w-step>
 			<w-step completed>
-				<h3>Setup</h3>
-				<p>Profile information completed</p>
+				<p class="text-body font-bold">Setup</p>
+				<p class="text-caption">Profile information completed</p>
 			</w-step>
 			<w-step completed>
-				<h3>Welcome</h3>
-				<p>You're all set to get started!</p>
+				<p class="text-body font-bold">Welcome</p>
+				<p class="text-caption">You're all set to get started!</p>
 			</w-step>
 		</w-step-indicator>
 	`,

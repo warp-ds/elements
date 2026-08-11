@@ -5,16 +5,16 @@
 ```html
 <w-step-indicator>
   <w-step completed>
-    <h4>Step one</h4>
-    <p>This step is completed</p>
+    <p class="text-body font-bold">Step one</p>
+    <p class="text-caption">This step is completed</p>
   </w-step>
   <w-step active>
-    <h4>Step two</h4>
-    <p>This is the current step</p>
+    <p class="text-body font-bold">Step two</p>
+    <p class="text-caption">This is the current step</p>
   </w-step>
   <w-step>
-    <h4>Step three</h4>
-    <p>This step is upcoming</p>
+    <p class="text-body font-bold">Step three</p>
+    <p class="text-caption">This step is upcoming</p>
   </w-step>
 </w-step-indicator>
 
@@ -40,16 +40,16 @@
 ```html
 <w-step-indicator horizontal>
   <w-step completed>
-    <h4>Step 1</h4>
-    <p>Completed</p>
+    <p class="text-body font-bold">Step 1</p>
+    <p class="text-caption">Completed</p>
   </w-step>
   <w-step active>
-    <h4>Step 2</h4>
-    <p>In progress</p>
+    <p class="text-body font-bold">Step 2</p>
+    <p class="text-caption">In progress</p>
   </w-step>
   <w-step>
-    <h4>Step 3</h4>
-    <p>Upcoming</p>
+    <p class="text-body font-bold">Step 3</p>
+    <p class="text-caption">Upcoming</p>
   </w-step>
 </w-step-indicator>
 ```
@@ -65,16 +65,16 @@
 ```html
 <w-step-indicator right>
   <w-step completed>
-    <h4>Step 1</h4>
-    <p>Completed</p>
+    <p class="text-body font-bold">Step 1</p>
+    <p class="text-caption">Completed</p>
   </w-step>
   <w-step active>
-    <h4>Step 2</h4>
-    <p>In progress</p>
+    <p class="text-body font-bold">Step 2</p>
+    <p class="text-caption">In progress</p>
   </w-step>
   <w-step>
-    <h4>Step 3</h4>
-    <p>Upcoming</p>
+    <p class="text-body font-bold">Step 3</p>
+    <p class="text-caption">Upcoming</p>
   </w-step>
 </w-step-indicator>
 ```

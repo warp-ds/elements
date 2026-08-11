@@ -60,14 +60,7 @@ export class WarpStepIndicator extends LitElement {
 		]);
 
 		return html`
-			<div
-				role="list"
-				class=${classes}
-				${
-					this.horizontal &&
-					`style='display: grid; grid-auto-rows: 1fr;grid-template-columns: 1fr;'`
-				}
-			>
+			<div role="list" class=${classes}>
 				<slot></slot>
 			</div>
 		`;
