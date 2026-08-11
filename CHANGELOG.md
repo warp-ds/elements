@@ -1,3 +1,11 @@
+# [2.12.0-next.8](https://github.com/warp-ds/elements/compare/v2.12.0-next.7...v2.12.0-next.8) (2026-08-11)
+
+
+### Bug Fixes
+
+* **button:** include an accessible description for primary, negative, negativeQuiet ([#730](https://github.com/warp-ds/elements/issues/730)) ([92ea40b](https://github.com/warp-ds/elements/commit/92ea40b5cc15df4a15af09dad00159dd08a7e121))
+* **step-indicator:** adjust gaps and fix example typography ([#734](https://github.com/warp-ds/elements/issues/734)) ([30e5619](https://github.com/warp-ds/elements/commit/30e5619e68da683d99a4ef055a20a2d587273717))
+
 # [2.12.0-next.7](https://github.com/warp-ds/elements/compare/v2.12.0-next.6...v2.12.0-next.7) (2026-08-11)
 
 
