@@ -52,6 +52,20 @@ export const inputLabelStyles = css`
 		line-height: var(--_line-height);
 		color: var(--_color);
 	}
+
+	[part="tooltip-target"] {
+		appearance: none;
+		background: transparent;
+		border: none;
+		height: 16px;
+		margin: 0 0 0 4px;
+		padding: 0;
+		vertical-align: text-top;
+	}
+
+	w-tooltip {
+		display: inline-block;
+	}
 `;
 
 export const inputHelpTextStyles = css`

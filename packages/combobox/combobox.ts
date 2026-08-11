@@ -19,6 +19,9 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 import { InputEventWithTarget } from "../types.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 const ccCombobox = {
 	wrapper: "relative z-0",
 	base: "absolute z-20 left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m",
@@ -63,6 +66,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: String, reflect: true, useDefault: true })
 	label?: string = "";
+
+	/**
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * Placeholder text displayed when the input is empty.
@@ -693,6 +704,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					.optional=${this.optional}
 					.name=${this.name}
 					.autocomplete="${this.autocomplete || "off"}"
+					.tooltip="${this.tooltip}"
 					role="combobox"
 					aria-autocomplete="list"
 					aria-expanded=${this._isOpen && this._currentOptions.length !== 0}

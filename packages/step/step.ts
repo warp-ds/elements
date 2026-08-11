@@ -174,24 +174,26 @@ export class WarpStep extends LitElement {
 					this._context.horizontal ? "height: 100%;" : undefined,
 				)}
 			>
-				${!vertical
-					? html`<div class=${lineHorizontalClasses}></div>`
-					: nothing}
+				${
+					!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing
+				}
 				<div
 					class=${dotClasses}
 					role="img"
 					aria-label=${this.getAriaLabel()}
 					aria-current=${ifDefined(this.active ? "step" : undefined)}
 				>
-					${this.completed
-						? html`<w-icon
-								name="Check"
-								size="small"
-								locale="${detectLocale()}"
-								data-testid="completed-icon"
-								class="flex"
-							></w-icon>`
-						: nothing}
+					${
+						this.completed
+							? html`<w-icon
+									name="Check"
+									size="small"
+									locale="${detectLocale()}"
+									data-testid="completed-icon"
+									class="flex"
+								></w-icon>`
+							: nothing
+					}
 				</div>
 				<div class=${lineClasses}></div>
 				<div

@@ -79,6 +79,18 @@ export const WithHelpText: Story = {
 	},
 };
 
+export const WithJsxHelpText: Story = {
+	args: {
+		label: "Password",
+		helpText: (
+			<>
+				Can include <a href="#">markup such as links</a>
+			</>
+		),
+		type: "password",
+	},
+};
+
 export const Invalid: Story = {
 	args: {
 		label: "Email",

@@ -10,6 +10,9 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 const REQUIRED_MESSAGE = () =>
@@ -54,6 +57,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	label: string | undefined;
 
 	/**
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
+
+	/**
 	 * The name applied to child checkboxes when they do not provide one.
 	 *
 	 * Use this when the grouped checkboxes should submit values under the same form field name. Individual checkboxes can still override the group name with their own `name`.
@@ -92,6 +103,9 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: Boolean, reflect: true })
 	invalid = false;
+
+	@state()
+	private _hasHelpTextSlot = false;
 
 	// Track whether the user has interacted with the group.
 	#hasInteracted = false;
@@ -142,7 +156,29 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		.error {
 			color: var(--w-s-color-text-negative);
 		}
+
+		[part="tooltip-target"] {
+			appearance: none;
+			background: transparent;
+			border: none;
+			height: 16px;
+			margin: 0 0 0 4px;
+			padding: 0;
+			vertical-align: text-top;
+		}
+
+		w-tooltip {
+			display: inline-block;
+		}
 	`;
+
+	helpTextSlotChange() {
+		const el = this.renderRoot.querySelector(
+			"slot[name=help-text]",
+		) as HTMLSlotElement;
+		const helpText = el.assignedElements();
+		if (helpText.length) this._hasHelpTextSlot = true;
+	}
 
 	render() {
 		const hasSelection = this.#getCheckedCount() > 0;
@@ -150,30 +186,56 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		const showRequiredError = requiredInvalid && this.#hasInteracted;
 		const isInvalid = this.invalid || showRequiredError;
 		const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
-		const helpId = helpText ? "checkbox-group__help" : undefined;
+		const hasHelpText = Boolean(helpText || this._hasHelpTextSlot);
+		const helpId = hasHelpText ? "checkbox-group__help" : undefined;
 		const labelId = this.label ? "checkbox-group__label" : undefined;
 		const ariaInvalid = isInvalid ? "true" : undefined;
 
 		return html`
 			<div class="wrapper" tabindex="${this._internalTabIndex}">
-				${this.label
-					? html`
-							<div class="label" id="${labelId}">
-								<span>${this.label}</span>
-								${this.optional && !this.required
-									? html`
-											<span class="optional">
-												${i18n._({
-													id: "checkbox-group.label.optional",
-													message: "Optional",
-													comment: "Shown behind label when marked as optional",
-												})}
-											</span>
-										`
-									: nothing}
-							</div>
-						`
-					: nothing}
+				${
+					this.label
+						? html`
+								<div class="label" id="${ifDefined(labelId)}">
+									<span>${this.label}</span>
+									${
+										this.optional && !this.required
+											? html`
+													<span class="optional">
+														${i18n._({
+															id: "checkbox-group.label.optional",
+															message: "Optional",
+															comment:
+																"Shown behind label when marked as optional",
+														})}
+													</span>
+												`
+											: nothing
+									}
+									${
+										this.tooltip
+											? html`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`
+											: nothing
+									}
+								</div>
+							`
+						: nothing
+				}
 				<div
 					class="checkbox-group"
 					role="group"
@@ -183,14 +245,17 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 				>
 					<slot></slot>
 				</div>
-				${helpText
-					? html`<div
-							class="${isInvalid ? "help-text error" : "help-text"}"
-							id="${helpId}"
-						>
-							${helpText}
-						</div>`
-					: nothing}
+				<div
+					?hidden=${!hasHelpText}
+					class="${isInvalid ? "help-text error" : "help-text"}"
+					id="${ifDefined(helpId)}"
+				>
+					${helpText}
+					<slot
+						@slotchange="${this.helpTextSlotChange}"
+						name="help-text"
+					></slot>
+				</div>
 			</div>
 		`;
 	}

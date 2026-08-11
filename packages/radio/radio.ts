@@ -16,6 +16,11 @@ import { styles as radioStyles } from "./radio-styles";
  *
  * @parent w-radio-group
  */
+// Implementation note: this component uses role="radio" via ElementInternals
+// rather than a native <input type="radio">.
+// TODO: Checkbox uses a hidden native <input type="checkbox"> for historical
+// reasons. Consider aligning both components in a future major version after
+// assessing backwards compatibility implications.
 export class WarpRadio extends FormControlMixin(LitElement) {
 	static styles = [hostStyles, reset, radioStyles];
 
@@ -406,9 +411,9 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div class="wrapper" tabindex="${this._internalTabIndex}">
-				<div part="control" class="control"></div>
-				<slot part="label" class="label"></slot>
+			<div part="base" tabindex="${this._internalTabIndex}">
+				<div part="control"></div>
+				<slot part="label"></slot>
 			</div>
 		`;
 	}

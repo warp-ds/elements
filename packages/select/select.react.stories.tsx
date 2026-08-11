@@ -27,6 +27,24 @@ export const Default: Story = {
 	},
 };
 
+export const WithHelpText: Story = {
+	args: {
+		label: "Berries",
+		helpText: "Can include a help text",
+	},
+};
+
+export const WithJsxHelpText: Story = {
+	args: {
+		label: "Berries",
+		helpText: (
+			<>
+				Can include <a href="#">markup such as links</a>
+			</>
+		),
+	},
+};
+
 export const ChangeEvent: Story = {
 	args: {
 		label: "Berries",

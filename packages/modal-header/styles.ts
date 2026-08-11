@@ -35,7 +35,7 @@ export const styles = css`
 	[part="header"][show-close]:not([show-back]) {
 		grid-template:
 			"top top top"
-			"title title close";
+			"title title close" / 1fr 1fr 44px;
 	}
 
 	[part="header"][show-back][show-close] {
