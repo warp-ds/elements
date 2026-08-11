@@ -30,3 +30,70 @@ test("defaults to neutral variant when no variant attribute is set", async () =>
 		})
 		.toBe(true);
 });
+
+test("supports styling through component tokens", async () => {
+	const component = html`
+		<w-badge
+			data-testid="badge"
+			style="--w-c-badge-bg: rgb(1, 2, 3); --w-c-badge-color: rgb(4, 5, 6); --w-c-badge-border-radius: 13px;"
+		>
+			Styled badge
+		</w-badge>
+	`;
+
+	const page = render(component);
+	const el = page.getByTestId("badge").element() as HTMLElement;
+
+	await expect
+		.poll(() => {
+			const base = el.shadowRoot?.querySelector('[part="base"]') as
+				| HTMLElement
+				| null;
+			if (!base) return null;
+
+			const style = getComputedStyle(base);
+			return {
+				backgroundColor: style.backgroundColor,
+				color: style.color,
+				borderRadius: style.borderRadius,
+			};
+		})
+		.toEqual({
+			backgroundColor: "rgb(1, 2, 3)",
+			color: "rgb(4, 5, 6)",
+			borderRadius: "13px",
+		});
+});
+
+test("supports styling through the base part", async () => {
+	const component = html`
+		<style>
+			w-badge::part(base) {
+				background-color: rgb(7, 8, 9);
+				border-radius: 17px;
+			}
+		</style>
+		<w-badge data-testid="badge">Part styled badge</w-badge>
+	`;
+
+	const page = render(component);
+	const el = page.getByTestId("badge").element() as HTMLElement;
+
+	await expect
+		.poll(() => {
+			const base = el.shadowRoot?.querySelector('[part="base"]') as
+				| HTMLElement
+				| null;
+			if (!base) return null;
+
+			const style = getComputedStyle(base);
+			return {
+				backgroundColor: style.backgroundColor,
+				borderRadius: style.borderRadius,
+			};
+		})
+		.toEqual({
+			backgroundColor: "rgb(7, 8, 9)",
+			borderRadius: "17px",
+		});
+});
