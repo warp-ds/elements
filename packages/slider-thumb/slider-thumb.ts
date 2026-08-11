@@ -799,9 +799,9 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 						slot="target"
 					></output>
 					<span slot="message">
-						${this.tooltipDisplayValue}${showTooltipSuffix
-							? html`&nbsp;${this.suffix ?? ""}`
-							: nothing}
+						${this.tooltipDisplayValue}${
+							showTooltipSuffix ? html`&nbsp;${this.suffix ?? ""}` : nothing
+						}
 					</span>
 				</w-attention>
 
