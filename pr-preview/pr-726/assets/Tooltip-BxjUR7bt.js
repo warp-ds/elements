@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./tooltip.stories-zm5UFjJM.js";function f(e){let r={code:`code`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./tooltip.stories-Ct3kMVVu.js";function f(e){let r={code:`code`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
 `,(0,m.jsx)(r.h1,{id:`tooltip`,children:`Tooltip`}),`
 `,(0,m.jsx)(r.p,{children:`A tooltip is a message box that is displayed when a user hovers over or gives focus to a UI element.`}),`
 `,(0,m.jsx)(r.p,{children:`Tooltips should be used sparingly and contain succinct, supplementary information.`}),`
