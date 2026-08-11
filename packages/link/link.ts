@@ -4,6 +4,7 @@ import { property } from "lit/decorators.js";
 import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 type ButtonVariant =
 	| "primary"
@@ -126,6 +127,7 @@ class WarpLink extends LitElement {
 				target="${this.target}"
 				rel="${this.target === "_blank" ? this.rel || "noopener" : nothing}"
 				tabindex="0"
+				aria-description="${ifDefined(this.ariaDescription)}"
 			>
 				<slot></slot>
 			</a>

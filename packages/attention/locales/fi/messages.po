@@ -19,54 +19,54 @@ msgstr ""
 
 #. Default screenreader message for callout speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:543
+#: packages/attention/attention.ts
 msgid "attention.aria.callout"
 msgstr "Vihreä puhekupla, joka esittelee jotain uutta"
 
 #. Aria label for the close button in attention
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:423
+#: packages/attention/attention.ts
 msgid "attention.aria.close"
 msgstr "Sulje"
 
 #. Default screenreader message for highlighted speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:557
+#: packages/attention/attention.ts
 msgid "attention.aria.highlight"
 msgstr "Puhekupla, joka sisältää tärkeää tietoa"
 
 #. Default screenreader message for bottom direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:513
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingDown"
 msgstr "osoittaa alas"
 
 #. Default screenreader message for left direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:522
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingLeft"
 msgstr "osoittaa vasemmalle"
 
 #. Default screenreader message for right direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:504
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingRight"
 msgstr "osoittaa oikealle"
 
 #. Default screenreader message for top direction in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:495
+#: packages/attention/attention.ts
 msgid "attention.aria.pointingUp"
 msgstr "osoittaa ylös"
 
 #. Default screenreader message for popover speech bubble in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:550
+#: packages/attention/attention.ts
 msgid "attention.aria.popover"
 msgstr "Valkoinen puhekupla, joka tarjoaa lisätietoa"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
-#: packages/attention/attention.ts:536
+#: packages/attention/attention.ts
 msgid "attention.aria.tooltip"
 msgstr "Musta puhekupla, joka tarjoaa täydentävää tietoa"

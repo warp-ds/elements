@@ -17,27 +17,32 @@ msgstr ""
 "X-Crowdin-File-ID: 12402\n"
 "PO-Revision-Date: \n"
 
-#. Default screenreader message for bottom direction in the attention component
+#. Screenreader description for downwards arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingDown"
 msgstr "peker ned"
 
-#. Default screenreader message for left direction in the attention component
+#. Screenreader description for left arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingLeft"
 msgstr "peker til venstre"
 
-#. Default screenreader message for right direction in the attention component
+#. Screenreader description for right arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingRight"
 msgstr "peker til høyre"
 
-#. Default screenreader message for top direction in the attention component
+#. Screenreader description for upwards arrow direction in the tooltip component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.pointingUp"
 msgstr "peker opp"
 
 #. Default screenreader message for tooltip in the attention component
 #. js-lingui-explicit-id
+#: packages/tooltip/tooltip.ts
 msgid "tooltip.aria.description"
 msgstr "En svart taleboble som forklarer konteksten"

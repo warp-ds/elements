@@ -4,6 +4,9 @@ import { supportedLocales } from "./packages/i18n";
 
 const config: LinguiConfig = {
 	locales: supportedLocales as unknown as string[],
+	formatOptions: {
+		lineNumbers: false,
+	},
 	catalogs: [
 		/* Remember to update crowdin.yml as well, otherwise translations won't sync! */
 		{
