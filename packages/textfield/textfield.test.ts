@@ -7,6 +7,7 @@ import { render } from "vitest-browser-lit";
 import "../affix/affix.js";
 import "./textfield.js";
 import { messages } from "./locales/en/messages.mjs";
+import type { WarpTextField } from "./textfield.js";
 
 // Initialize i18n with English locale for tests
 i18n.load("en", messages);
@@ -305,4 +306,22 @@ test("renders localized optional text based on document lang", async () => {
 	await expect.element(page.getByText("Valgfri")).toBeVisible();
 
 	document.documentElement.lang = originalLang;
+});
+
+test("shows info tooltip after label when the tooltip property is set", async () => {
+	const page = render(
+		html`<w-textfield
+			label="Email"
+			tooltip="This is a tooltip"
+			optional
+			data-testid="field"
+		></w-textfield>`,
+	);
+
+	const el = page.getByTestId("field").element() as WarpTextField;
+	await el.updateComplete;
+
+	const tooltip = el?.shadowRoot?.querySelector("w-tooltip");
+
+	expect(tooltip).toBeTruthy();
 });

@@ -7,6 +7,7 @@ import type { WarpRadioGroup } from "../radio-group/radio-group.js";
 
 import "./radio.js";
 import "../radio-group/radio-group.js";
+import "../tooltip/tooltip.js";
 
 const { args } = getStorybookHelpers<WarpRadioGroup>("w-radio-group");
 
@@ -155,6 +156,17 @@ export const HelpText: Story = {
 		label: "Help text",
 		helpText: "Pick one option",
 		name: "help-text",
+	},
+};
+
+export const WithTooltip: Story = {
+	args: {
+		label: "With tooltip",
+		optional: true,
+		required: false,
+		helpText:
+			"Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+		tooltip: "This tooltip adds supplementary information",
 	},
 };
 

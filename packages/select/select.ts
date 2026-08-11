@@ -3,10 +3,16 @@
 import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
-import { css, html, LitElement, PropertyValues, TemplateResult } from "lit";
+import {
+	css,
+	html,
+	LitElement,
+	nothing,
+	PropertyValues,
+	TemplateResult,
+} from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { when } from "lit/directives/when.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
@@ -20,6 +26,7 @@ import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 
 import "../icon/icon.js";
+import "../tooltip/tooltip.js";
 
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
@@ -106,6 +113,14 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: Boolean, reflect: true })
 	optional = false;
+
+	/**
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * Renders the field in a disabled state.
@@ -439,24 +454,49 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`<div class="${ccSelect.wrapper}">
-			${when(
-				this.label,
-				() =>
-					html`<label for="${this.#id}">
-						${this.label}
-						${when(
-							this.optional,
-							() =>
-								html`<span
-									>${i18n._({
-										id: "select.label.optional",
-										message: "Optional",
-										comment: "Shown behind label when marked as optional",
-									})}</span
-								>`,
-						)}</label
-					>`,
-			)}
+			${
+				this.label
+					? html`
+							<label for="${this.#id}">
+								${this.label}
+								${
+									this.optional
+										? html`
+												<span>
+													${i18n.t({
+														id: "select.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
+												</span>
+											`
+										: nothing
+								}
+								${
+									this.tooltip
+										? html`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`
+										: nothing
+								}
+							</label>
+						`
+					: nothing
+			}
 			<div class="${ccSelect.selectWrapper}">
 				<select
 					part="input"

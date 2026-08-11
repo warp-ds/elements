@@ -20,6 +20,9 @@ import { wTextfieldStyles } from "./styles/w-textfield.styles.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.
@@ -214,9 +217,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	autocomplete?: HTMLInputElement["autocomplete"];
 
 	/**
-	 * Suplementary information that should show in a tooltip behind an information icon after the label.
-	 *
-	 * Use the `tooltip` slot if you need markup and not just text.
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
 	 *
 	 * You must provide a label to be able to show an info icon with a tooltip.
 	 */
@@ -351,13 +352,16 @@ class WarpTextField extends FormControlMixin(LitElement) {
 							? html`
 									<button
 										id="tooltip-target"
-										class="appearance-none align-text-top bg-transparent m-0 p-0 ml-4"
 										part="tooltip-target"
-										aria-details="tooltip"
+										aria-describedby="tooltip"
 									>
 										<w-icon name="Info" size="small"></w-icon>
 									</button>
-									<w-tooltip for="tooltip-target" id="tooltip">
+									<w-tooltip
+										for="tooltip-target"
+										id="tooltip"
+										exportparts="tooltip, arrow, beak, hover-bridge"
+									>
 										${this.tooltip}
 									</w-tooltip>
 								`

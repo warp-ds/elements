@@ -10,6 +10,9 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 
+import "../icon/icon.js";
+import "../tooltip/tooltip.js";
+
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 const REQUIRED_MESSAGE = () =>
@@ -52,6 +55,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	 */
 	@property({ type: String, reflect: true })
 	label: string | undefined;
+
+	/**
+	 * Supplementary information that should show in a tooltip behind an information icon after the label.
+	 *
+	 * You must provide a label to be able to show an info icon with a tooltip.
+	 */
+	@property({ type: String, reflect: true })
+	tooltip?: string;
 
 	/**
 	 * The name applied to child checkboxes when they do not provide one.
@@ -145,6 +156,20 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		.error {
 			color: var(--w-s-color-text-negative);
 		}
+
+		[part="tooltip-target"] {
+			appearance: none;
+			background: transparent;
+			border: none;
+			height: 16px;
+			margin: 0 0 0 4px;
+			padding: 0;
+			vertical-align: text-top;
+		}
+
+		w-tooltip {
+			display: inline-block;
+		}
 	`;
 
 	helpTextSlotChange() {
@@ -184,6 +209,26 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 																"Shown behind label when marked as optional",
 														})}
 													</span>
+												`
+											: nothing
+									}
+									${
+										this.tooltip
+											? html`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
 												`
 											: nothing
 									}
