@@ -7,22 +7,22 @@ import { prespread } from "../../.storybook/utilities.js";
 
 import type { WarpTextarea } from "./textarea.js";
 import "./textarea.js";
+import "../tooltip/tooltip.js";
 
-const { events, args, argTypes } =
-	getStorybookHelpers<WarpTextarea>("w-textarea");
+const { args, argTypes } = getStorybookHelpers<WarpTextarea>("w-textarea");
 
 const meta: Meta<typeof args> = {
 	title: "Forms/Textarea",
 	render(args) {
-		return html`<w-textarea ${spread(prespread(args))}></w-textarea>`;
+		return html`<w-textarea
+			${spread(prespread(args))}
+			@blur=${(e: Event) => console.log(e)}
+			@input=${(e: Event) => console.log(e)}
+			@change=${(e: Event) => console.log(e)}
+		></w-textarea>`;
 	},
 	args,
 	argTypes,
-	parameters: {
-		actions: {
-			handles: events,
-		},
-	},
 };
 
 export default meta;
@@ -135,5 +135,24 @@ export const FormParticipation: Story = {
 					"Demonstrates form validation using ElementInternals. The textarea participates in native form validation - submission is blocked when the required field is empty, and the browser shows a validation message.",
 			},
 		},
+	},
+};
+
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<w-textarea
+				name="tooltip-demo"
+				label="Needs an explanation"
+				help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+				tooltip="This tooltip adds supplementary information"
+				?optional=${optional}
+				?required=${required}
+			></w-textarea>
+		`;
 	},
 };

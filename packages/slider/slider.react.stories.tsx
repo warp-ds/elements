@@ -40,6 +40,26 @@ export const Range: Story = {
 	},
 };
 
+export const WithJsxHelpText: Story = {
+	render() {
+		return (
+			<Slider
+				label="Range"
+				min="0"
+				max="100"
+				helpText={
+					<>
+						Help text can include <a href="#">markup such as links</a>
+					</>
+				}
+			>
+				<SliderThumb name="from" slot="from" aria-label="From value" />
+				<SliderThumb name="to" slot="to" aria-label="To value" />
+			</Slider>
+		);
+	},
+};
+
 // Take a suffix attribute on `<Slider>` I think, have `<SliderThumb>` get from that.
 export const SuffixSquareMeters: Story = {
 	args: {

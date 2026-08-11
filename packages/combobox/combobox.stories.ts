@@ -119,6 +119,18 @@ export const Optional: Story = {
 	},
 };
 
+export const WithTooltip: Story = {
+	args: {
+		label: "Select a fruit",
+		placeholder: "Type to search...",
+		optional: true,
+		required: false,
+		helpText:
+			"Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+		tooltip: "This tooltip adds supplementary information",
+	},
+};
+
 export const DisableStaticFiltering: Story = {
 	render: () => html`
 		<w-combobox

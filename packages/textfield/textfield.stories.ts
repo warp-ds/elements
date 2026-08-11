@@ -8,6 +8,7 @@ import { prespread } from "../../.storybook/utilities.js";
 import type { WarpTextField } from "./textfield.js";
 import "./textfield.js";
 import "../affix/affix.js";
+import "../tooltip/tooltip.js";
 
 const { events, args, argTypes } =
 	getStorybookHelpers<WarpTextField>("w-textfield");
@@ -218,6 +219,26 @@ export const FormParticipation: Story = {
 				<button type="reset">Reset</button>
 				<button type="submit">Submit</button>
 			</form>
+		`;
+	},
+};
+
+export const WithTooltip: Story = {
+	args: {
+		optional: true,
+		required: false,
+	},
+	render({ optional, required }) {
+		return html`
+			<w-textfield
+				name="tooltip-demo"
+				label="Needs an explanation"
+				placeholder="Placeholder"
+				help-text="Help text is available, but might not be enough, or the added context is not important enough that we use help-text"
+				tooltip="This tooltip adds supplementary information"
+				?optional=${optional}
+				?required=${required}
+			></w-textfield>
 		`;
 	},
 };

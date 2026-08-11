@@ -6,6 +6,7 @@ import { html } from "lit";
 import { prespread } from "../../.storybook/utilities.js";
 
 import "../button/button.js";
+import "../tooltip/tooltip.js";
 import type { WarpDatepicker } from "./datepicker.js";
 import "./datepicker.js";
 
@@ -44,6 +45,34 @@ type Story = StoryObj<typeof args>;
 export const Default: Story = {
 	args: {
 		label: "Date",
+	},
+};
+
+export const WithHelpText: Story = {
+	args: {
+		label: "Date",
+		optional: true,
+		required: false,
+		helpText: "Help text is available",
+	},
+};
+
+export const Invalid: Story = {
+	args: {
+		label: "Date",
+		invalid: true,
+		helpText: "Description of how to fix the problem",
+	},
+};
+
+export const WithTooltip: Story = {
+	args: {
+		label: "Date",
+		optional: true,
+		required: false,
+		helpText:
+			"Help text is available, but might not be enough, or the added context is not important enough that we use help-text",
+		tooltip: "This tooltip adds supplementary information",
 	},
 };
 

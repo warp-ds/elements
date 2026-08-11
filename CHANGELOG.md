@@ -1,3 +1,38 @@
+# [2.12.0-next.6](https://github.com/warp-ds/elements/compare/v2.12.0-next.5...v2.12.0-next.6) (2026-08-10)
+
+
+### Features
+
+* add info icon with tooltip to form fields ([#729](https://github.com/warp-ds/elements/issues/729)) ([663e49d](https://github.com/warp-ds/elements/commit/663e49d6bab78206ce62af82939074fdf5c94e7f))
+
+# [2.12.0-next.5](https://github.com/warp-ds/elements/compare/v2.12.0-next.4...v2.12.0-next.5) (2026-08-06)
+
+
+### Features
+
+* min/maxlength, JSX helpText, bugfix for onchange in textarea ([#731](https://github.com/warp-ds/elements/issues/731)) ([bc04a71](https://github.com/warp-ds/elements/commit/bc04a712ff5903f8e0e1547d87f735ad06013be9)), closes [#722](https://github.com/warp-ds/elements/issues/722) [#720](https://github.com/warp-ds/elements/issues/720) [#721](https://github.com/warp-ds/elements/issues/721)
+
+# [2.12.0-next.4](https://github.com/warp-ds/elements/compare/v2.12.0-next.3...v2.12.0-next.4) (2026-08-04)
+
+
+### Bug Fixes
+
+* **pagination:** add missing last page button, visual fixes ([#735](https://github.com/warp-ds/elements/issues/735)) ([2911639](https://github.com/warp-ds/elements/commit/291163947f86cf58389abf0c78ad4ddfa8d24c51))
+
+# [2.12.0-next.3](https://github.com/warp-ds/elements/compare/v2.12.0-next.2...v2.12.0-next.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* **tab:** remove button inside tab that confused screen readers ([#736](https://github.com/warp-ds/elements/issues/736)) ([04013f6](https://github.com/warp-ds/elements/commit/04013f6904dc555cca4ff304f7e9f2a77e469f76))
+
+# [2.12.0-next.2](https://github.com/warp-ds/elements/compare/v2.12.0-next.1...v2.12.0-next.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* **modal-header:** constrain close button column width to prevent title overflow ([#743](https://github.com/warp-ds/elements/issues/743)) ([b247735](https://github.com/warp-ds/elements/commit/b247735aec38e298fde07ba9b1311e4d4163d8a7)), closes [#742](https://github.com/warp-ds/elements/issues/742)
+
 # [2.12.0-next.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.12.0-next.1) (2026-07-08)
 
 

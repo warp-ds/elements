@@ -42,3 +42,10 @@ msgstr ""
 #: packages/datepicker/datepicker.ts
 msgid "datepicker.calendar.previousMonth"
 msgstr ""
+
+
+#. Shown behind label when marked as optional
+#. js-lingui-explicit-id
+#: packages/datepicker/datepicker.ts
+msgid "datepicker.label.optional"
+msgstr "Valinnainen"

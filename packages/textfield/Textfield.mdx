@@ -19,6 +19,18 @@ Text fields can communicate to the user whether the current value is invalid. Im
 
 ## Visual options
 
+### Help text
+
+You can use the `help-text` property to show a descriptive message below the textarea.
+
+<Canvas of={TextFieldStories.WithHelpText} />
+
+### Tooltip
+
+If you need to add supplementary information you can use the `tooltip` property.
+
+<Canvas of={TextFieldStories.WithTooltip} />
+
 ### Placeholder
 
 Placeholder text can be used to describe the expected value or formatting for the w-textfield. Placeholder text will only appear when the w-textfield is empty, and should not be used as a substitute for labeling the element with a visible label.

@@ -12,7 +12,7 @@ Before changing the default styles, remember that doing so can result in less co
 
 ### Parts
 
-The textfield exposes a minimal set of parts that can be targeted for last‑mile layout or typography tweaks.
+The textfield exposes a minimal set of parts that can be targeted for last‑mile layout or typography tweaks. If you use the `tooltip` property you can also style the tooltip component's parts.
 
 | Part | Targets | Typical use |
 |---|---|---|

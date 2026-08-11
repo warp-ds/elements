@@ -118,6 +118,18 @@ describe("w-textarea accessibility (WCAG 2.2)", () => {
 				.element(page.getByLabelText("Bio"))
 				.toHaveAccessibleDescription("Tell us about yourself");
 		});
+
+		test("slotted help text is programmatically associated", async () => {
+			const page = render(html`
+				<w-textarea label="Bio">
+					<span slot="help-text">Tell us about yourself</span>
+				</w-textarea>
+			`);
+
+			await expect
+				.element(page.getByLabelText("Bio"))
+				.toHaveAccessibleDescription("Tell us about yourself");
+		});
 	});
 
 	// these tests essentially verify that the attributes we set on the host are mirrored to the internal textarea
