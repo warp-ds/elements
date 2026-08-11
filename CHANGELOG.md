@@ -1,3 +1,10 @@
+# [2.12.0-next.7](https://github.com/warp-ds/elements/compare/v2.12.0-next.6...v2.12.0-next.7) (2026-08-11)
+
+
+### Bug Fixes
+
+* **slider:** don't show suffix if tooltip value is Min or Max ([#726](https://github.com/warp-ds/elements/issues/726)) ([ed83cec](https://github.com/warp-ds/elements/commit/ed83cecb4b2acd58c31d27d96792a4b4eecfca44))
+
 # [2.12.0-next.6](https://github.com/warp-ds/elements/compare/v2.12.0-next.5...v2.12.0-next.6) (2026-08-10)
 
 
