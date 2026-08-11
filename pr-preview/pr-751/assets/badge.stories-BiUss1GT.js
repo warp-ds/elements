@@ -58,10 +58,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l
 	}
 
 	:host([variant="price"]) {
-		--_background-color: var(
-			--w-c-badge-bg,
-			rgba(var(--w-rgb-black), 0.7)
-		);
+		--_background-color: var(--w-c-badge-bg, rgba(var(--w-rgb-black), 0.7));
 		--_color: var(--w-c-badge-color, var(--w-s-color-text-inverted-static));
 	}
 
