@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-J4WBtiHw.js";import{n as l,t as u}from"./styles-CYn3YYhE.js";var d,f,p,m,h;function g(){return(g=e((()=>{t(),d=c`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-J4WBtiHw.js";import{n as l,t as u}from"./styles-CYn3YYhE.js";import{r as d,t as f}from"./if-defined-hoo3qVMT.js";var p,m,h,g,_;function v(){return(v=e((()=>{t(),p=c`
 	:host {
 		display: inline-block;
 
@@ -58,7 +58,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	:host(:focus-visible) {
 		outline: none;
 	}
-`,f=c`
+`,m=c`
 	:host([variant="primary"]) {
 		--w-c-button-bg: var(--w-s-color-background-primary);
 		--w-c-button-bg-hover: var(--w-s-color-background-primary-hover);
@@ -157,14 +157,14 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 			var(--w-c-button-color)
 		);
 	}
-`,p=c`
+`,h=c`
 	:host([small]) {
 		--w-c-button-padding-x: 12px;
 		--w-c-button-padding-y: 8px;
 		--w-c-button-font-size: var(--w-font-size-xs);
 		--w-c-button-line-height: var(--w-line-height-xs);
 	}
-`,m=c`
+`,g=c`
 	:host([disabled]) {
 		pointer-events: none;
 		cursor: default;
@@ -176,8 +176,8 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 		--w-c-button-color: var(--w-s-color-text-inverted);
 		--w-c-button-border-width: 0px;
 	}
-`,h=c`
-	${d}
+`,_=c`
+	${p}
 
 	/* ============================================================
    * Base element (NATIVE button mode ONLY)
@@ -243,7 +243,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	/* ============================================================
    * Variants (shared + button-specific quiet mappings)
    * ============================================================ */
-	${f}
+	${m}
 
 	/* Button-specific: quiet attribute backwards compatibility */
   :host([variant='negative'][quiet]) {
@@ -297,7 +297,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	}
 
 	/* ===== Size ===== */
-	${p}
+	${h}
 
 	:host([small][variant='pill']) {
 		--w-c-button-padding-x: 8px;
@@ -336,7 +336,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
    * ============================================================ */
 
 	/* ===== Disabled ===== */
-	${m}
+	${g}
 
 	/* Additional specificity for button to override quiet variants */
   :host([disabled][variant]),
@@ -407,8 +407,8 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 			background-position: 60px 0;
 		}
 	}
-`})))()}var _;function v(){return(v=e((()=>{t(),g(),_=c`
-	${d}
+`})))()}var y;function b(){return(b=e((()=>{t(),v(),y=c`
+	${p}
 
 	/* ============================================================
    * Link element (anchor with button styling)
@@ -456,7 +456,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	}
 
 	/* ===== Variants (shared from button) ===== */
-	${f}
+	${m}
 
 	/* Link-specific: link variant element styles */
   :host([variant='link']) a[part='base'] {
@@ -471,7 +471,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	}
 
 	/* ===== Sizes (shared from button) ===== */
-	${p}
+	${h}
 
 	/* ===== Layout ===== */
   :host([full-width]) {
@@ -484,15 +484,16 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	}
 
 	/* ===== Disabled (shared from button) ===== */
-	${m}
-`})))()}var y,b;function x(){return(x=e((()=>{t(),a(),u(),v(),y=[`primary`,`secondary`,`negative`,`negativeQuiet`,`utility`,`utilityQuiet`,`quiet`,`link`,`overlay`,`overlayInverted`,`overlayQuiet`,`overlayInvertedQuiet`],b=class extends i{constructor(...e){super(...e),this.autofocus=!1,this.small=!1,this.disabled=!1,this.fullWidth=!1}static{this.shadowRootOptions={...i.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[l,_]}connectedCallback(){if(super.connectedCallback(),this.variant&&!y.includes(this.variant))throw Error(`Invalid "variant" attribute. Set its value to one of the following:\n${y.join(`, `)}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0)}render(){return r`
+	${g}
+`})))()}var x,S;function C(){return(C=e((()=>{t(),a(),u(),b(),f(),x=[`primary`,`secondary`,`negative`,`negativeQuiet`,`utility`,`utilityQuiet`,`quiet`,`link`,`overlay`,`overlayInverted`,`overlayQuiet`,`overlayInvertedQuiet`],S=class extends i{constructor(...e){super(...e),this.autofocus=!1,this.small=!1,this.disabled=!1,this.fullWidth=!1}static{this.shadowRootOptions={...i.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[l,y]}connectedCallback(){if(super.connectedCallback(),this.variant&&!x.includes(this.variant))throw Error(`Invalid "variant" attribute. Set its value to one of the following:\n${x.join(`, `)}.`)}firstUpdated(){this.autofocus&&setTimeout(()=>this.focus(),0)}render(){return r`
 			<a
 				href="${this.href}"
 				part="base"
 				target="${this.target}"
 				rel="${this.target===`_blank`?this.rel||`noopener`:n}"
 				tabindex="0"
+				aria-description="${d(this.ariaDescription)}"
 			>
 				<slot></slot>
 			</a>
-		`}},s([o({type:Boolean,reflect:!0})],b.prototype,`autofocus`,void 0),s([o({reflect:!0})],b.prototype,`variant`,void 0),s([o({type:Boolean,reflect:!0})],b.prototype,`small`,void 0),s([o({reflect:!0})],b.prototype,`href`,void 0),s([o({type:Boolean,reflect:!0})],b.prototype,`disabled`,void 0),s([o({reflect:!0})],b.prototype,`target`,void 0),s([o({reflect:!0})],b.prototype,`rel`,void 0),s([o({attribute:`full-width`,type:Boolean,reflect:!0})],b.prototype,`fullWidth`,void 0),customElements.get(`w-link`)||customElements.define(`w-link`,b)})))()}export{g as n,h as r,x as t};
+		`}},s([o({type:Boolean,reflect:!0})],S.prototype,`autofocus`,void 0),s([o({reflect:!0})],S.prototype,`variant`,void 0),s([o({type:Boolean,reflect:!0})],S.prototype,`small`,void 0),s([o({reflect:!0})],S.prototype,`href`,void 0),s([o({type:Boolean,reflect:!0})],S.prototype,`disabled`,void 0),s([o({reflect:!0})],S.prototype,`target`,void 0),s([o({reflect:!0})],S.prototype,`rel`,void 0),s([o({attribute:`full-width`,type:Boolean,reflect:!0})],S.prototype,`fullWidth`,void 0),customElements.get(`w-link`)||customElements.define(`w-link`,S)})))()}export{v as n,_ as r,C as t};
