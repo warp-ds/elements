@@ -40,6 +40,11 @@ w-badge {
 - `--w-c-badge-bg`
 - `--w-c-badge-color`
 
+##### Border
+
+- `--w-c-badge-border-width`
+- `--w-c-badge-border-color`
+
 ##### Positioned badges
 
 - `--w-c-badge-backdrop-filter`

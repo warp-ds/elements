@@ -1,9 +1,7 @@
-import { classMap } from 'lit/directives/class-map.js';
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import { reset } from "../styles";
-
 import { styles } from "./styles";
 
 /**
@@ -40,23 +38,8 @@ class WarpBadge extends LitElement {
 
 	static styles = [reset, styles];
 
-	/** @internal */
-	get _class() {
-		const classes = {
-			badge: true,
-			[`badge--${this.variant}`]: true,
-			"badge--positioned": !!this.position,
-			[`badge--${this.position}`]: !!this.position,
-		};
-		return classMap(classes);
-	}
-
 	render() {
-		return html`
-			<div part="base" class="${this._class}">
-				<slot></slot>
-			</div>
-		`;
+		return html`<div part="base"><slot></slot></div>`;
 	}
 }
 
