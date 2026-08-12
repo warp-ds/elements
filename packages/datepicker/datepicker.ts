@@ -33,7 +33,7 @@ import "../icon/icon.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
-import { requestSubmitWithDefaultSubmitter } from "../utils.js";
+import { SubmitOnEnterController } from "../utils.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -76,6 +76,8 @@ const datefnsLocale = {
  * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
  */
 class WarpDatepicker extends FormControlMixin(LitElement) {
+	#submitOnEnter = new SubmitOnEnterController(this);
+
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,
 		delegatesFocus: true,
@@ -331,12 +333,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		if (e.key === ",") {
 			e.preventDefault();
 		}
-		if (e.key === "Enter" && this.internals.form) {
-			requestSubmitWithDefaultSubmitter(
-				this.internals.form as HTMLFormElement,
-				this,
-			);
-		}
+		this.#submitOnEnter.submit(e);
 	}
 
 	async #onCalendarKeyDown(e: KeyboardEvent) {

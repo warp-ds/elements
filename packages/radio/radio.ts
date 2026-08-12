@@ -4,7 +4,7 @@ import { html, LitElement } from "lit";
 
 import { property } from "lit/decorators.js";
 import { reset } from "../styles";
-import { requestSubmitWithDefaultSubmitter } from "../utils.js";
+import { SubmitOnEnterController } from "../utils.js";
 import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
 
@@ -24,6 +24,8 @@ import { styles as radioStyles } from "./radio-styles";
 // assessing backwards compatibility implications.
 export class WarpRadio extends FormControlMixin(LitElement) {
 	static styles = [hostStyles, reset, radioStyles];
+
+	#submitOnEnter = new SubmitOnEnterController(this);
 
 	/** @internal */
 	static shadowRootOptions = {
@@ -228,11 +230,7 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 		if (event.key !== " " && event.key !== "Spacebar" && event.key !== "Enter")
 			return;
 
-		if (event.key === "Enter" && this.internals.form) {
-			requestSubmitWithDefaultSubmitter(
-				this.internals.form as HTMLFormElement,
-				this,
-			);
+		if (this.#submitOnEnter.submit(event)) {
 			return;
 		}
 

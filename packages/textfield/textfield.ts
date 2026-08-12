@@ -10,7 +10,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 import { activateI18n } from "../i18n.js";
 import { reset } from "../styles.js";
-import { requestSubmitWithDefaultSubmitter } from "../utils.js";
+import { SubmitOnEnterController } from "../utils.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -251,17 +251,14 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	@state()
 	private _hasHelpTextSlot = false;
 
+	#submitOnEnter = new SubmitOnEnterController(this);
+
 	get #hasHelpText() {
 		return typeof this.helpText !== "undefined" || this._hasHelpTextSlot;
 	}
 
 	#onKeyDownHandler(e: KeyboardEvent) {
-		if (e.key === "Enter" && this.internals.form) {
-			requestSubmitWithDefaultSubmitter(
-				this.internals.form as HTMLFormElement,
-				this,
-			);
-		}
+		this.#submitOnEnter.submit(e);
 	}
 
 	updated(changedProperties: PropertyValues<this>) {

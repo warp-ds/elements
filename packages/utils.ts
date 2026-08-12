@@ -1,3 +1,4 @@
+import type { ReactiveController, ReactiveControllerHost } from "lit";
 import { nanoid } from "nanoid";
 
 export function uniqueId(prefix = "") {
@@ -25,6 +26,13 @@ export type WarpSubmitContext = {
 	 */
 	defaultSubmitter: HTMLElement | null;
 };
+
+type FormAssociatedHost = ReactiveControllerHost &
+	HTMLElement & {
+		internals?: {
+			form?: HTMLFormElement | null;
+		};
+	};
 
 const pendingSubmitContexts = new WeakMap<
 	HTMLFormElement,
@@ -207,6 +215,27 @@ export function requestSubmitWithDefaultSubmitter(
 			form.requestSubmit();
 		}
 	});
+}
+
+export class SubmitOnEnterController implements ReactiveController {
+	constructor(private host: FormAssociatedHost) {
+		this.host.addController(this);
+	}
+
+	hostConnected() {
+		// No setup needed; this satisfies Lit's ReactiveController shape.
+	}
+
+	submit(event: KeyboardEvent, shouldSubmit = () => true): boolean {
+		const form = this.host.internals?.form;
+
+		if (event.key !== "Enter" || !form || !shouldSubmit()) {
+			return false;
+		}
+
+		requestSubmitWithDefaultSubmitter(form, this.host);
+		return true;
+	}
 }
 
 declare global {
