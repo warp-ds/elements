@@ -22,8 +22,8 @@ Set these on `w-button` to override visuals.
 
 ```css
 w-button {
-  --w-c-button-bg: var(--w-s-color-background-primary);
-  --w-c-button-color: var(--w-s-color-text-inverted);
+	--w-c-button-bg: var(--w-color-button-primary-background);
+	--w-c-button-color: var(--w-s-color-text-inverted);
 }
 ```
 
