@@ -25,6 +25,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l
 		</div>`}render(){return r` <div part="wrapper" class="${this.#e}">
 			${this._hasTitle?r`<w-unstyled-heading level=${w(this.headingLevel)}>
 							<button
+								part="button"
 								type="button"
 								aria-expanded="${this.expanded}"
 								class="${this.#t}"
