@@ -1,3 +1,11 @@
+## [2.11.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.11.1) (2026-08-13)
+
+
+### Bug Fixes
+
+* use correct background color token on buttons ([7f5ded9](https://github.com/warp-ds/elements/commit/7f5ded9ae120ba6e952ffcf4819faaf3812e235e))
+
+
 # [2.12.0-next.8](https://github.com/warp-ds/elements/compare/v2.12.0-next.7...v2.12.0-next.8) (2026-08-11)
 
 
