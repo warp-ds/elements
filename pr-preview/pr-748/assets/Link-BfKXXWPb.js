@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-HKgIuKsZ.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,d as l,i as u,l as d,n as f,o as p,r as m,s as h,t as g,u as _}from"./link.stories-Cbmf5lLD.js";function v(e){let r={h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(n,{of:l,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-HKgIuKsZ.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,d as l,i as u,l as d,n as f,o as p,r as m,s as h,t as g,u as _}from"./link.stories-CQgfN5dc.js";function v(e){let r={h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(n,{of:l,name:`Docs`}),`
 `,(0,b.jsx)(r.h1,{id:`link`,children:`Link`}),`
 `,(0,b.jsx)(r.p,{children:`Link buttons are used to perform actions, with different visuals for different needs.`}),`
 `,(0,b.jsx)(r.h2,{id:`accessibility`,children:`Accessibility`}),`

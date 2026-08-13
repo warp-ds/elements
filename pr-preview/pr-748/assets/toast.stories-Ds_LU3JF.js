@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}from"./decorate-J4WBtiHw.js";import{n as i,r as a}from"./toast-container-BaOJ81Oa.js";import{i as o,n as s,r as c}from"./utilities-DhdP2kMI.js";import{t as l}from"./button-DCNemgd7.js";var u=t({Default:()=>f,Toast:()=>m,ToastContainer:()=>p,__namedExportsOrder:()=>h,default:()=>d}),d,f,p,m,h;function g(){return(g=e((()=>{c(),n(),l(),a(),i(),d={title:`Overlays/Toast`},f={args:{},render(){return r`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}from"./decorate-J4WBtiHw.js";import{n as i,r as a}from"./toast-container-BaOJ81Oa.js";import{i as o,n as s,r as c}from"./utilities-DhdP2kMI.js";import{t as l}from"./button-DJxYfhFB.js";var u=t({Default:()=>f,Toast:()=>m,ToastContainer:()=>p,__namedExportsOrder:()=>h,default:()=>d}),d,f,p,m,h;function g(){return(g=e((()=>{c(),n(),l(),a(),i(),d={title:`Overlays/Toast`},f={args:{},render(){return r`
             <w-button
                 small
                 onclick="window.toast('message goes here', { type: 'error', canclose: true })"
