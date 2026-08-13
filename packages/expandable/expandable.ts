@@ -56,6 +56,9 @@ const ccExpandable = {
  * [Warp component reference](https://warp-ds.github.io/docs/components/expandable/frameworks/elements)
  *
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
+ *
+ * @csspart wrapper - the root wrapper element inside the component.
+ * @csspart button - the toggle button, if a title is present.
  */
 class WarpExpandable extends LitElement {
 	/**
@@ -231,11 +234,12 @@ class WarpExpandable extends LitElement {
 	}
 
 	render() {
-		return html` <div class="${this.#wrapperClasses}">
+		return html` <div part="wrapper" class="${this.#wrapperClasses}">
 			${
 				this._hasTitle
 					? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
 							<button
+								part="button"
 								type="button"
 								aria-expanded="${this.expanded}"
 								class="${this.#buttonClasses}"
