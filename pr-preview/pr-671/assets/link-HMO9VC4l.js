@@ -60,9 +60,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 	}
 `,m=c`
 	:host([variant="primary"]) {
-		--w-c-button-bg: var(--w-s-color-background-primary);
-		--w-c-button-bg-hover: var(--w-s-color-background-primary-hover);
-		--w-c-button-bg-active: var(--w-s-color-background-primary-active);
+		--w-c-button-bg: var(--w-color-button-primary-background);
+		--w-c-button-bg-hover: var(--w-color-button-primary-background-hover);
+		--w-c-button-bg-active: var(--w-color-button-primary-background-active);
 		--w-c-button-color: var(--w-s-color-text-inverted);
 		--w-c-button-border-width: 0px;
 	}
