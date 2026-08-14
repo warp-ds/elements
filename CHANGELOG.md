@@ -1,3 +1,10 @@
+## [2.11.2](https://github.com/warp-ds/elements/compare/v2.11.1...v2.11.2) (2026-08-14)
+
+
+### Bug Fixes
+
+* **button:** set correct background color on pill variant ([8fdece1](https://github.com/warp-ds/elements/commit/8fdece19f7d5b24086017af2dd5b94de1d54aab8))
+
 ## [2.11.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.11.1) (2026-08-13)
 
 
