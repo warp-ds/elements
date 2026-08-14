@@ -158,11 +158,7 @@ describe("FOUC prevention", () => {
 		);
 
 		const page = render(
-			html`<w-icon
-				name="${uid()}"
-				size="medium"
-				data-testid="icon"
-			></w-icon>`,
+			html`<w-icon name="${uid()}" size="medium" data-testid="icon"></w-icon>`,
 		);
 		const el = page.getByTestId("icon").element() as HTMLElement;
 
