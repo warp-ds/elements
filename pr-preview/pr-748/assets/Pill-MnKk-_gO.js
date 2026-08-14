@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-HKgIuKsZ.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./pill.stories-CppgsR7b.js";function f(e){let r={h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-BfBopLt_.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,i as c,n as l,r as u,t as d}from"./pill.stories-CppgsR7b.js";function f(e){let r={h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(n,{of:s,name:`Docs`}),`
 `,(0,m.jsx)(r.h1,{id:`pill`,children:`Pill`}),`
 `,(0,m.jsx)(r.p,{children:`Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.`}),`
 `,(0,m.jsx)(r.h2,{id:`default`,children:`Default`}),`
