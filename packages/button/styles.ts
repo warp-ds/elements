@@ -239,6 +239,10 @@ export const wButtonStyles = css`
 		line-height: inherit;
 	}
 
+	:host([icon-only]) button[part="base"] ::slotted(*) {
+		line-height: normal;
+	}
+
 	/* ============================================================
    * Link mode wrapper (w-link host carries part="base" in button.ts)
    * Keep it layout-only to avoid double chrome.
@@ -291,6 +295,8 @@ export const wButtonStyles = css`
 	/* Button-specific: pill variant */
 	:host([variant="pill"]) {
 		--w-c-button-bg: transparent;
+		--w-c-button-bg-hover: var(--w-color-button-pill-background-hover);
+		--w-c-button-bg-active: var(--w-color-button-pill-background-active);
 		--w-c-button-radius: 50%;
 		--w-c-button-border-width: 0px;
 		--w-c-button-padding-x: 14px;
@@ -298,6 +304,8 @@ export const wButtonStyles = css`
 
 		/* pill uses semantic icon color (dark grey by default) */
 		--w-c-button-color: var(--w-c-button-icon-color, var(--w-s-color-icon));
+		--w-c-button-color-hover: var(--w-s-color-icon-hover);
+		--w-c-button-color-active: var(--w-s-color-icon-active);
 	}
 
 	:host([variant="pill"]) button[part="base"] {
