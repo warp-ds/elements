@@ -49,9 +49,9 @@ test("supports styling through component tokens", async () => {
 
 	await expect
 		.poll(() => {
-			const base = el.shadowRoot?.querySelector('[part="base"]') as
-				| HTMLElement
-				| null;
+			const base = el.shadowRoot?.querySelector(
+				'[part="base"]',
+			) as HTMLElement | null;
 			if (!base) return null;
 
 			const style = getComputedStyle(base);
@@ -92,9 +92,9 @@ test("supports styling through the base part", async () => {
 
 	await expect
 		.poll(() => {
-			const base = el.shadowRoot?.querySelector('[part="base"]') as
-				| HTMLElement
-				| null;
+			const base = el.shadowRoot?.querySelector(
+				'[part="base"]',
+			) as HTMLElement | null;
 			if (!base) return null;
 
 			const style = getComputedStyle(base);

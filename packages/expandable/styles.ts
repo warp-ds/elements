@@ -30,10 +30,7 @@ export const styles = css`
 			var(--w-line-height-m)
 		);
 		--_title-font-weight: var(--w-c-expandable-title-font-weight, 700);
-		--_transition-duration: var(
-			--w-c-expandable-transition-duration,
-			150ms
-		);
+		--_transition-duration: var(--w-c-expandable-transition-duration, 150ms);
 		--_transition-timing-function: var(
 			--w-c-expandable-transition-timing-function,
 			ease-in-out
@@ -48,9 +45,7 @@ export const styles = css`
 
 		/* Forwarded to w-expand-transition / element-collapse.js */
 		--w-expansion-duration: var(--_expansion-transition-duration);
-		--w-expansion-timing-function: var(
-			--_expansion-transition-timing-function
-		);
+		--w-expansion-timing-function: var(--_expansion-transition-timing-function);
 	}
 
 	:host([box]) {

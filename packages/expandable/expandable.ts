@@ -138,10 +138,10 @@ class WarpExpandable extends LitElement {
 		</div>`;
 	}
 
-		render() {
-			const buttonClass = this.buttonClass
-				? `button ${this.buttonClass}`
-				: "button";
+	render() {
+		const buttonClass = this.buttonClass
+			? `button ${this.buttonClass}`
+			: "button";
 		return html` <div part="base">
 			${
 				this._hasTitle
@@ -155,17 +155,13 @@ class WarpExpandable extends LitElement {
 								<div class="title">
 									${
 										this.title
-											? html`<span class="title-text"
-													>${this.title}</span
-												>`
+											? html`<span class="title-text">${this.title}</span>`
 											: html`<slot class="title-text" name="title"></slot>`
 									}
 									${
 										this.noChevron
 											? ""
-											: html`<div part="chevron">
-													${this.#chevronIcon}
-												</div>`
+											: html`<div part="chevron">${this.#chevronIcon}</div>`
 									}
 								</div>
 							</button>
