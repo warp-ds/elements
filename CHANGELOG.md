@@ -1,3 +1,10 @@
+# [2.12.0-next.11](https://github.com/warp-ds/elements/compare/v2.12.0-next.10...v2.12.0-next.11) (2026-08-17)
+
+
+### Bug Fixes
+
+* **icon:** prevent FOUC by holding layout space during SVG load ([#757](https://github.com/warp-ds/elements/issues/757)) ([89183a5](https://github.com/warp-ds/elements/commit/89183a5a19dfdaf3de9152d933e6081ae9b5fce4))
+
 # [2.12.0-next.10](https://github.com/warp-ds/elements/compare/v2.12.0-next.9...v2.12.0-next.10) (2026-08-17)
 
 
