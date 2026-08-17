@@ -9,6 +9,10 @@ export const styles = css`
 		height: var(--_w-icon-size);
 		width: var(--_w-icon-size);
 		display: flex;
+		visibility: hidden;
+	}
+	.w-icon--ready {
+		visibility: visible;
 	}
 	.w-icon svg {
 		pointer-events: none;

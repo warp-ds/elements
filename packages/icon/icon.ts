@@ -1,38 +1,52 @@
-import { html, LitElement, TemplateResult } from "lit";
+import { html, LitElement, type TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { styles } from "./style.js";
 
-// Generic parser for fetch responses
-type ResponseParser<T> = (response: Response) => Promise<T>;
-
 type PixelValue = `${number}px`;
 
-interface CacheFetchOptions<T> {
-	responseParser?: ResponseParser<T>;
+// Module-level caches shared across all <w-icon> instances on the page.
+// _svgCache: resolved SVGElements (null = failed fetch, kept to avoid retries).
+// _fetchMap: in-flight promises, so N simultaneous icons with the same name
+//            issue exactly one HTTP request and all await the same promise.
+const _svgCache = new Map<string, SVGElement | null>();
+const _fetchMap = new Map<string, Promise<SVGElement | null>>();
+
+function buildIconUrl(name: string, locale: string): string {
+	return `https://assets.finn.no/pkg/eikons/~1/${locale}/${name}.svg`;
 }
 
-const _fetchMap = new Map<string, Promise<unknown>>();
-const ERROR_SVG =
-	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"></svg>';
+function parseSvg(text: string): SVGElement | null {
+	const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+	if (doc.querySelector("parsererror")) return null;
+	return doc.querySelector("svg");
+}
 
-/**
- * A minimal in-memory map to de-duplicate Fetch API media requests.
- *
- * @param uri - Resource URL
- * @param options - Optional parser for the response
- * @returns Promise of parsed response
- */
-function cacheFetch<T = string>(
-	uri: string,
-	options: CacheFetchOptions<T> = {},
-): Promise<T> {
-	const parser =
-		options.responseParser ?? ((res: Response) => res.text() as Promise<T>);
-	if (!_fetchMap.has(uri)) {
-		_fetchMap.set(uri, fetch(uri).then(parser));
-	}
-	return _fetchMap.get(uri) as Promise<T>;
+function fetchIcon(url: string): Promise<SVGElement | null> {
+	if (_svgCache.has(url)) return Promise.resolve(_svgCache.get(url) ?? null);
+	const pending = _fetchMap.get(url);
+	if (pending !== undefined) return pending;
+
+	const promise = fetch(url)
+		.then((res) => {
+			if (!res.ok) throw new Error(`HTTP ${res.status}`);
+			return res.text();
+		})
+		.then((text) => {
+			const svg = parseSvg(text);
+			_svgCache.set(url, svg);
+			return svg;
+		})
+		.catch(() => {
+			_svgCache.set(url, null);
+			return null;
+		})
+		.finally(() => {
+			_fetchMap.delete(url);
+		});
+
+	_fetchMap.set(url, promise);
+	return promise;
 }
 
 /**
@@ -61,48 +75,45 @@ export class WarpIcon extends LitElement {
 	@property({ type: String, reflect: true, useDefault: true })
 	locale: string = document.documentElement.lang || "en";
 
-	/** Parsed SVG element (not reflected as attribute) */
 	@state()
 	private svg: SVGElement | null = null;
 
-	/**
-	 * Fetch an icon SVG from the CDN, with caching
-	 * @param iconName - Name of the icon file
-	 * @returns SVGElement or null on failure
-	 */
-	private async fetchIcon(iconName: string): Promise<SVGElement | null> {
-		const uri = `https://assets.finn.no/pkg/eikons/~1/${this.locale}/${iconName}.svg`;
-		try {
-			const svgText = await cacheFetch<string>(uri);
-			const doc = new DOMParser().parseFromString(svgText, "text/html");
-			return doc.body.querySelector("svg");
-		} catch {
-			return null;
-		}
-	}
+	@state()
+	private _ready = false;
 
-	protected firstUpdated(): void {
-		this.loadIcon();
-	}
+	// Minted fresh on each loadIcon() call. If name/locale changes while a
+	// fetch is in flight the stale response sees a mismatched token and is
+	// discarded, preventing it from overwriting the current icon.
+	private _loadToken: symbol | null = null;
 
 	protected updated(changedProps: Map<string, unknown>): void {
 		if (changedProps.has("name") || changedProps.has("locale")) {
-			this.loadIcon();
+			void this.loadIcon();
 		}
 	}
 
 	private async loadIcon(): Promise<void> {
 		if (!this.name) {
 			this.svg = null;
+			this._ready = false;
 			return;
 		}
 
-		let iconEl = await this.fetchIcon(this.name);
-		if (!iconEl) {
-			const doc = new DOMParser().parseFromString(ERROR_SVG, "text/html");
-			iconEl = doc.body.firstElementChild as SVGElement;
+		const url = buildIconUrl(this.name, this.locale);
+		const token = Symbol();
+		this._loadToken = token;
+		this._ready = false;
+
+		const svg = await fetchIcon(url);
+
+		if (this._loadToken !== token) return;
+
+		if (svg) {
+			this.svg = svg.cloneNode(true) as SVGElement;
+			this._ready = true;
+		} else {
+			this.svg = null;
 		}
-		this.svg = iconEl;
 	}
 
 	render(): TemplateResult {
@@ -110,6 +121,7 @@ export class WarpIcon extends LitElement {
 		const name = this.name || "";
 		const classes = {
 			"w-icon": true,
+			"w-icon--ready": this._ready,
 			"w-icon--s": size === "small",
 			"w-icon--m": size === "medium",
 			"w-icon--l": size === "large",
