@@ -4,6 +4,8 @@ import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
 
 import "./button.js";
+import "../icon/icon.js";
+import { wButtonStyles } from "./styles.js";
 
 test("renders the slotted label", async () => {
 	const component = html`<w-button>This is a button</w-button>`;
@@ -159,4 +161,36 @@ test("other variants don't have a semantic description", async () => {
 	await expect
 		.element(page.getByRole("button"))
 		.not.toHaveAccessibleDescription();
+});
+
+test("pill variant keeps pill-specific hover tokens", () => {
+	expect(wButtonStyles.cssText).toContain(
+		"--w-c-button-bg-hover: var(--w-color-button-pill-background-hover);",
+	);
+	expect(wButtonStyles.cssText).toContain(
+		"--w-c-button-bg-active: var(--w-color-button-pill-background-active);",
+	);
+	expect(wButtonStyles.cssText).toContain(
+		"--w-c-button-color-hover: var(--w-s-color-icon-hover);",
+	);
+	expect(wButtonStyles.cssText).toContain(
+		"--w-c-button-color-active: var(--w-s-color-icon-active);",
+	);
+});
+
+test("icon-only pill keeps the default 44px size", async () => {
+	const page = render(html`
+		<w-button variant="pill" icon-only aria-label="Pill icon">
+			<w-icon name="Heart" size="small"></w-icon>
+		</w-button>
+	`);
+	const button = page.getByRole("button");
+	await expect.element(button).toBeVisible();
+
+	const host = page.container.querySelector("w-button") as HTMLElement & {
+		shadowRoot: ShadowRoot;
+	};
+	const buttonEl = host.shadowRoot.querySelector("button") as HTMLButtonElement;
+	expect(buttonEl.getBoundingClientRect().height).toBe(44);
+	expect(buttonEl.getBoundingClientRect().width).toBe(44);
 });
