@@ -63,7 +63,8 @@ export const expand = (el, done) => {
 		requestAnimationFrame(() => {
 			el.addEventListener("transitionend", afterExpandCallback, { once: true });
 			el.style.height = "0px";
-			el.style.transitionTimingFunction = "ease-out";
+			el.style.transitionTimingFunction =
+				"var(--w-expansion-timing-function, var(--f-expansion-timing-function, ease-out))";
 			addTransition(el);
 			requestAnimationFrame(() => (el.style.height = dest + "px"));
 		});
@@ -99,7 +100,8 @@ export const collapse = (el, done) => {
 				once: true,
 			});
 			el.style.height = original + "px";
-			el.style.transitionTimingFunction = "ease-in";
+			el.style.transitionTimingFunction =
+				"var(--w-expansion-timing-function, var(--f-expansion-timing-function, ease-in))";
 			addTransition(el);
 			requestAnimationFrame(() => (el.style.height = "0px"));
 		});
