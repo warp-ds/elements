@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-Bt2QF_uA.js";import{n as l,r as u}from"./i18n-CkjYRTT1.js";import{i as d,n as f,o as p,t as m}from"./dist-D5kJVy4t.js";import{t as h}from"./icon-CD69d68Q.js";import{n as g,t as _}from"./styles-Cw_r5k83.js";import{i as v,n as y,r as b}from"./utilities-BHNt5DhH.js";import{r as x,t as S}from"./if-defined-DBI32Ir5.js";import{t as C}from"./expand-transition-ljF2sTGn.js";import{t as w}from"./button-BgpsxuOo.js";import{t as T}from"./taggedTemplateLiteral-BZenJ0bZ.js";var E;function D(){return(D=e((()=>{n(),d(),E=class extends i{static properties={level:{type:Number}};get _markup(){return`<h${this.level}
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-Bt2QF_uA.js";import{n as l,r as u}from"./i18n-CkjYRTT1.js";import{i as d,n as f,o as p,t as m}from"./dist-D5kJVy4t.js";import{t as h}from"./icon-CD69d68Q.js";import{n as g,t as _}from"./styles-Cw_r5k83.js";import{i as v,n as y,r as b}from"./utilities-BHNt5DhH.js";import{r as x,t as S}from"./if-defined-DBI32Ir5.js";import{t as C}from"./expand-transition-ljF2sTGn.js";import{t as w}from"./button-BUSt27aY.js";import{t as T}from"./taggedTemplateLiteral-BZenJ0bZ.js";var E;function D(){return(D=e((()=>{n(),d(),E=class extends i{static properties={level:{type:Number}};get _markup(){return`<h${this.level}
     style="margin: 0; font-weight: unset; font-size: unset; line-height: unset;"
   >
     <slot></slot>
@@ -33,10 +33,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l
 			var(--w-line-height-m)
 		);
 		--_title-font-weight: var(--w-c-expandable-title-font-weight, 700);
-		--_transition-duration: var(
-			--w-c-expandable-transition-duration,
-			150ms
-		);
+		--_transition-duration: var(--w-c-expandable-transition-duration, 150ms);
 		--_transition-timing-function: var(
 			--w-c-expandable-transition-timing-function,
 			ease-in-out
@@ -51,9 +48,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l
 
 		/* Forwarded to w-expand-transition / element-collapse.js */
 		--w-expansion-duration: var(--_expansion-transition-duration);
-		--w-expansion-timing-function: var(
-			--_expansion-transition-timing-function
-		);
+		--w-expansion-timing-function: var(--_expansion-transition-timing-function);
 	}
 
 	:host([box]) {
@@ -230,12 +225,8 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,l
 								@click=${()=>this.expanded=!this.expanded}
 							>
 								<div class="title">
-									${this.title?r`<span class="title-text"
-													>${this.title}</span
-												>`:r`<slot class="title-text" name="title"></slot>`}
-									${this.noChevron?``:r`<div part="chevron">
-													${this.#e}
-												</div>`}
+									${this.title?r`<span class="title-text">${this.title}</span>`:r`<slot class="title-text" name="title"></slot>`}
+									${this.noChevron?``:r`<div part="chevron">${this.#e}</div>`}
 								</div>
 							</button>
 						</w-unstyled-heading>`:``}
