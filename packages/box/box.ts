@@ -1,7 +1,4 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
-import { css, html, LitElement, PropertyValues } from "lit";
+import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { FormControlMixin } from "@open-wc/form-control";
 
@@ -50,22 +47,7 @@ class WarpBox extends FormControlMixin(LitElement) {
 	@property({ type: String, reflect: true, useDefault: true })
 	role = "region";
 
-	// Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
-	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
-	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
-	// https://stackoverflow.com/a/61631668
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				display: block;
-			}
-			::slotted(:last-child) {
-				margin-bottom: 0px !important;
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	connectedCallback(): void {
 		super.connectedCallback();
@@ -79,20 +61,9 @@ class WarpBox extends FormControlMixin(LitElement) {
 		}
 	}
 
-	/** @internal */
-	get _class() {
-		return classNames([
-			"group block relative break-words last-child:mb-0 p-16 rounded-8",
-			this.bleed && "-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8",
-			this.info && "s-bg-info-subtle",
-			this.neutral && "s-surface-sunken",
-			this.bordered && "border-2 s-border s-bg",
-		]);
-	}
-
 	render() {
 		return html`
-			<div class="${this._class}">
+			<div part="base">
 				<slot></slot>
 			</div>
 		`;
