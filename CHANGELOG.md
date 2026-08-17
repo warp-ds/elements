@@ -1,3 +1,16 @@
+# [2.12.0-next.10](https://github.com/warp-ds/elements/compare/v2.12.0-next.9...v2.12.0-next.10) (2026-08-17)
+
+
+### Bug Fixes
+
+* **button:** set correct background color on pill variant ([8fdece1](https://github.com/warp-ds/elements/commit/8fdece19f7d5b24086017af2dd5b94de1d54aab8))
+
+
+### Features
+
+* **badge:** provide styling api ([#751](https://github.com/warp-ds/elements/issues/751)) ([a1c45ba](https://github.com/warp-ds/elements/commit/a1c45ba1ec21471828cda5bf28f3b7e9bbeaa0ad))
+* **box:** add styling api ([#752](https://github.com/warp-ds/elements/issues/752)) ([296d409](https://github.com/warp-ds/elements/commit/296d4098617fc725b566a437a700aa2c2560fd97))
+
 ## [2.11.2](https://github.com/warp-ds/elements/compare/v2.11.1...v2.11.2) (2026-08-14)
 
 
