@@ -62,6 +62,22 @@ Use a link for navigation:
 </w-card>
 ```
 
+To make the whole card a link, use a native anchor in a non-clickable card. This pattern is only suitable when the card has no other interactive elements:
+
+```html
+<w-card>
+  <a
+    href="/listings/123"
+    aria-label="View Apartment in Oslo"
+    style="position: absolute; inset: 0; border-radius: 8px;"
+  ></a>
+  <div style="padding: 16px;">
+    <h3>Apartment in Oslo</h3>
+    <p>Bright 3-room apartment with balcony.</p>
+  </div>
+</w-card>
+```
+
 Use a button for an action on the current page:
 
 ```html

@@ -77,3 +77,23 @@ Listen for the card's click event and update `selected` yourself.
 ```
 
 Do not use `clickable` when the card contains separate links, buttons, form controls, or other interactive elements. In those cases, keep the card non-clickable and make the specific control interactive instead.
+
+### Cards as Links
+
+For navigation, use a native link inside a non-clickable card. To make the whole card activate the link, position the link over the card and keep the card content above it only when it contains no other interactive controls.
+
+```html
+<w-card>
+  <a
+    href="/listings/123"
+    aria-label="View Apartment in Oslo"
+    style="position: absolute; inset: 0; border-radius: 8px;"
+  ></a>
+  <div style="padding: 16px;">
+    <h3>Apartment in Oslo</h3>
+    <p>Bright 3-room apartment with balcony.</p>
+  </div>
+</w-card>
+```
+
+Use a normal inline link instead when the card also contains buttons or other interactive elements.

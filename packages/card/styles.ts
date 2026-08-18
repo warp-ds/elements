@@ -80,21 +80,24 @@ export const styles = css`
 		background-color: var(--_background-color);
 		border-radius: var(--_border-radius);
 		box-shadow: var(--_box-shadow);
-		cursor: pointer;
 		display: block;
 		overflow: hidden;
 		position: relative;
+	}
+
+	:host([clickable]) [part="base"] {
+		cursor: pointer;
 		transition-property: all;
 		transition-duration: 0.15s;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	[part="base"]:hover {
+	:host([clickable]) [part="base"]:hover {
 		background-color: var(--_background-color-hover);
 		box-shadow: var(--_box-shadow-hover);
 	}
 
-	[part="base"]:active {
+	:host([clickable]) [part="base"]:active {
 		background-color: var(--_background-color-active);
 		box-shadow: var(--_box-shadow-active);
 	}
@@ -110,12 +113,12 @@ export const styles = css`
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	:host([flat]) [part="base"]:hover [part="border"],
-	:host([selected]) [part="base"]:hover [part="border"] {
+	:host([clickable][flat]) [part="base"]:hover [part="border"],
+	:host([clickable][selected]) [part="base"]:hover [part="border"] {
 		border-color: var(--_border-color-hover);
 	}
 
-	[part="base"]:active [part="border"] {
+	:host([clickable]) [part="base"]:active [part="border"] {
 		border-color: var(--_border-color-active);
 	}
 
