@@ -78,7 +78,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 	disabled = false;
 
 	@property({ type: Number, reflect: true, attribute: "tabindex" })
-	tabIndex!: number;
+	tabIndex: number = 0;
 
 	#initialState = false;
 
@@ -177,12 +177,6 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 		// Use ElementInternals for role - works with real AT,
 		// avoids hydration mismatches from client-side attribute changes
 		this.internals.role = "switch";
-
-		// The React wrapper sets tabIndex on behalf of users to avoid
-		// hydration mismatches.
-		if (typeof this.tabIndex !== "number") {
-			this.tabIndex = 0;
-		}
 
 		// Sync aria-label to internals (keep attribute for hydration compatibility)
 		const ariaLabel = this.getAttribute("aria-label");
