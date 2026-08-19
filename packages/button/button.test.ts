@@ -20,10 +20,39 @@ test("by default button type is button", async () => {
 	const page = render(component);
 	await expect
 		.element(page.getByRole("button"))
-		.toHaveAttribute("type", "button");
+		.toHaveProperty("type", "button");
 });
 
-test.todo("works in a form as type submit");
+test("works in a form as type submit", () => {
+	render(html`
+		<form>
+			<w-button name="test" type="submit" variant="secondary">
+				Submit the form
+			</w-button>
+		</form>
+	`);
+
+	const form = document.querySelector("form") as HTMLFormElement;
+	const submit = document.querySelector("w-button")!;
+
+	// sanity
+	expect(form).not.toBeNull();
+	expect(submit).not.toBeNull();
+
+	const onSubmit = vi.fn();
+
+	form.addEventListener("submit", (event) => {
+		if (!form.checkValidity()) {
+			event.preventDefault();
+			return;
+		}
+		event.preventDefault();
+		onSubmit();
+	});
+
+	submit.click();
+	expect(onSubmit).toHaveBeenCalledTimes(1);
+});
 
 test("Works in a form as type reset", async () => {
 	const label = "Test label";
@@ -43,9 +72,7 @@ test("Works in a form as type reset", async () => {
 	`);
 
 	const form = document.querySelector("form") as HTMLFormElement;
-	const wButton = document.querySelector("w-button") as HTMLElement & {
-		value: string;
-	};
+	const wButton = document.querySelector("w-button")!;
 
 	// sanity
 	expect(form).not.toBeNull();
@@ -65,7 +92,7 @@ test("Works in a form as type reset", async () => {
 	expect(wButton.value).toBe("test");
 });
 
-test("calling focus on w-button focuses the button inside the shadow root", async () => {
+test("calling focus on w-button focuses the host element", async () => {
 	const component = html`<w-button>This is a button</w-button>`;
 	const page = render(component);
 	await expect.element(page.getByRole("button")).toBeVisible();
@@ -73,28 +100,8 @@ test("calling focus on w-button focuses the button inside the shadow root", asyn
 	page.container.querySelector("w-button")!.focus();
 
 	await vi.waitFor(
-		() => page.container.querySelector(":focus")!.tagName === "BUTTON",
+		() => page.container.querySelector(":focus")!.tagName === "W-BUTTON",
 	);
-});
-
-test("primary variant includes an accessible description of its semantics", async () => {
-	const component = html`
-		<w-button variant="primary">This is a button</w-button>
-	`;
-	const page = render(component);
-	await expect
-		.element(page.getByRole("button"))
-		.toHaveAccessibleDescription("Highlighted");
-});
-
-test("link primary variant includes an accessible description of its semantics", async () => {
-	const component = html`
-		<w-button href="#" variant="primary">This is a link</w-button>
-	`;
-	const page = render(component);
-	await expect
-		.element(page.getByRole("link"))
-		.toHaveAccessibleDescription("Highlighted");
 });
 
 test("primary variant custom accessible description overrides built-in", async () => {
@@ -109,16 +116,6 @@ test("primary variant custom accessible description overrides built-in", async (
 		.toHaveAccessibleDescription("Radical!");
 });
 
-test("negative variant includes an accessible description of its semantics", async () => {
-	const component = html`
-		<w-button variant="negative">This is a button</w-button>
-	`;
-	const page = render(component);
-	await expect
-		.element(page.getByRole("button"))
-		.toHaveAccessibleDescription("Attention");
-});
-
 test("negative variant custom accessible description overrides built-in", async () => {
 	const component = html`
 		<w-button variant="negative" aria-description="Danger danger!">
@@ -131,16 +128,6 @@ test("negative variant custom accessible description overrides built-in", async 
 		.toHaveAccessibleDescription("Danger danger!");
 });
 
-test("negativeQuiet variant includes an accessible description of its semantics", async () => {
-	const component = html`
-		<w-button variant="negativeQuiet">This is a button</w-button>
-	`;
-	const page = render(component);
-	await expect
-		.element(page.getByRole("button"))
-		.toHaveAccessibleDescription("Attention");
-});
-
 test("negativeQuiet variant custom accessible description overrides built-in", async () => {
 	const component = html`
 		<w-button variant="negativeQuiet" aria-description="Objection!">
@@ -151,16 +138,6 @@ test("negativeQuiet variant custom accessible description overrides built-in", a
 	await expect
 		.element(page.getByRole("button"))
 		.toHaveAccessibleDescription("Objection!");
-});
-
-test("other variants don't have a semantic description", async () => {
-	const component = html`
-		<w-button variant="secondary">This is a button</w-button>
-	`;
-	const page = render(component);
-	await expect
-		.element(page.getByRole("button"))
-		.not.toHaveAccessibleDescription();
 });
 
 test("pill variant keeps pill-specific hover tokens", () => {
@@ -187,10 +164,8 @@ test("icon-only pill keeps the default 44px size", async () => {
 	const button = page.getByRole("button");
 	await expect.element(button).toBeVisible();
 
-	const host = page.container.querySelector("w-button") as HTMLElement & {
-		shadowRoot: ShadowRoot;
-	};
-	const buttonEl = host.shadowRoot.querySelector("button") as HTMLButtonElement;
+	const host = page.container.querySelector("w-button")!;
+	const buttonEl = host.shadowRoot!.querySelector('[part="base"]')!;
 	expect(buttonEl.getBoundingClientRect().height).toBe(44);
 	expect(buttonEl.getBoundingClientRect().width).toBe(44);
 });

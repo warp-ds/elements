@@ -15,7 +15,11 @@ import { detectLocale } from "../i18n.js";
 const meta: Meta<typeof args> = {
 	title: "Buttons/Button",
 	render(args) {
-		return html`<w-button ${spread(prespread(args))}>Button Text</w-button>`;
+		return html`<w-button
+			${spread(prespread(args))}
+			@click=${() => console.log("Clicked")}
+			>Button Text</w-button
+		>`;
 	},
 	args,
 	argTypes,
