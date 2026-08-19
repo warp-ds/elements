@@ -1,0 +1,29 @@
+[data-card-action]::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+[data-card-action]:hover {
+	text-decoration: none;
+}
+[data-card-secondary-action] {
+	position: relative;
+	z-index: 1;
+}
+
+w-card:has([data-card-action]) {
+	position: relative;
+}
+
+w-card:has([data-card-action]:hover)::part(base),
+w-card:has([data-card-action]:focus-visible)::part(base) {
+	background-color: var(--w-s-color-background-hover);
+	box-shadow: var(--w-s-shadow-surface-elevated-200-hover);
+	cursor: pointer;
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+w-card:has([data-card-action]:active)::part(base) {
+	background-color: var(--w-s-color-background-active);
+	box-shadow: var(--w-s-shadow-surface-elevated-200-active);
+}
