@@ -1,7 +1,4 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
-import { css, html, LitElement, PropertyValues } from "lit";
+import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import "../icon/icon.js";
@@ -13,49 +10,15 @@ import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
 
-const ccBox = {
-	base: "group block relative break-words last-child:mb-0 px-16 rounded-8", // Relative here enables w-clickable
-	bleed: "-mx-16 sm:mx-0 rounded-l-0 rounded-r-0 sm:rounded-8", // We target L and R to override the default rounded-8
-	info: "s-bg-info-subtle",
-	neutral: "s-surface-sunken",
-	bordered: "border-2 s-border s-bg",
-};
-
-const ccExpandable = {
-	wrapper: "will-change-height s-text py-16",
-	box: "s-bg-subtle hover:s-bg-subtle-hover active:s-bg-subtle-active py-0 px-0 group block relative break-words last-child:mb-0 rounded-8",
-	bleed: "-mx-16 rounded-l-0 rounded-r-0 sm:mx-0 sm:rounded-8",
-	chevron: "inline-block align-middle s-icon",
-	chevronNonBox: "ml-8",
-	chevronTransform: "transform transition-transform transform-gpu ease-in-out",
-	chevronExpand: "-rotate-180",
-	chevronCollapse: "rotate-180",
-
-	// These are web component specific classes, using the ::part-selector:
-	elementsChevronDownTransform:
-		"part-[w-chevrondown]:transform part-[w-chevrondown]:transition-transform part-[w-chevrondown]:transform-gpu part-[w-chevrondown]:ease-in-out",
-	elementsChevronUpTransform:
-		"part-[w-chevronup]:transform part-[w-chevronup]:transition-transform part-[w-chevronup]:transform-gpu part-[w-chevronup]:ease-in-out",
-	elementsChevronExpand: "part-[w-chevrondown]:-rotate-180",
-	elementsChevronCollapse: "part-[w-chevronup]:rotate-180",
-
-	expansion: "overflow-hidden",
-	expansionNotExpanded: "h-0 invisible",
-	button:
-		"focus:outline-none appearance-none cursor-pointer bg-transparent border-0 m-0 hover:underline focus-visible:underline",
-	buttonBox:
-		"w-full text-left relative inline-flex items-center justify-between group relative break-words last-child:mb-0 px-16 rounded-8",
-	contentWithTitle: "pt-0",
-	title: "flex w-full justify-between items-center",
-	titleType: "t4",
-};
-
 /**
  * Expandable is a layout component used for creating expandable content areas on a page.
  *
  * [Warp component reference](https://warp-ds.github.io/docs/components/expandable/frameworks/elements)
  *
  * @slot title - Alternative to the `title` attribute should you need to provide some additional markup.
+ *
+ * @csspart base - the root wrapper element inside the component.
+ * @csspart chevron - the chevron container.
  */
 class WarpExpandable extends LitElement {
 	/**
@@ -73,13 +36,13 @@ class WarpExpandable extends LitElement {
 	/**
 	 * Will make the expandable a Box
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	box = false;
 
 	/**
 	 * Will make the expandable full-width on the sm breakpoint size
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	bleed = false;
 
 	/**
@@ -122,18 +85,7 @@ class WarpExpandable extends LitElement {
 	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
 	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
 	// https://stackoverflow.com/a/61631668
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				display: block;
-			}
-			::slotted(:last-child) {
-				margin-bottom: 0px !important;
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	updated(changedProperties: PropertyValues<this>) {
 		// We need a slight delay for the animation since it has a transition-duration of 150ms:
@@ -154,107 +106,62 @@ class WarpExpandable extends LitElement {
 		this._hasTitle = hasTitleProp || hasTitleSlot;
 	}
 
-	get #wrapperClasses() {
-		return classNames([
-			ccExpandable.wrapper,
-			this.box && ccExpandable.box,
-			this.bleed && ccExpandable.bleed,
-		]);
-	}
-
-	get #buttonClasses() {
-		return classNames(this.buttonClass, [
-			ccExpandable.button,
-			this.box && ccExpandable.buttonBox,
-		]);
-	}
-
-	get #chevronClasses() {
-		return classNames([
-			ccExpandable.chevron,
-			!this.box && ccExpandable.chevronNonBox,
-		]);
-	}
-
 	get #chevronIcon() {
-		const upClasses = classNames([
-			ccExpandable.elementsChevronUpTransform,
-			"flex",
-			!this.expanded &&
-				this._showChevronUp &&
-				ccExpandable.elementsChevronCollapse,
-		]);
-		const downClasses = classNames([
-			ccExpandable.elementsChevronDownTransform,
-			"flex",
-			this.expanded &&
-				!this._showChevronUp &&
-				ccExpandable.elementsChevronExpand,
-		]);
-
 		const locale = detectLocale();
 		return this._showChevronUp
 			? html`<w-icon
+					class="chevron-icon"
+					data-direction="up"
 					name="ChevronUp"
 					size="small"
 					locale="${locale}"
-					class="${upClasses}"
 				></w-icon>`
 			: html`<w-icon
+					class="chevron-icon"
+					data-direction="down"
 					name="ChevronDown"
 					size="small"
 					locale="${locale}"
-					class="${downClasses}"
 				></w-icon>`;
-	}
-
-	get #contentClasses() {
-		return classNames(this.contentClass, [
-			this.box ? "pt-16" : "pt-8",
-			this.box && ccBox.base,
-			this._hasTitle && this.box && ccExpandable.contentWithTitle,
-		]);
-	}
-
-	get #expansionClasses() {
-		return classNames([
-			ccExpandable.expansion,
-			!this.expanded && ccExpandable.expansionNotExpanded,
-		]);
 	}
 
 	/** @internal */
 	get _expandableSlot() {
-		return html`<div class="${this.#contentClasses}">
+		const contentClass = this.contentClass
+			? `content ${this.contentClass}`
+			: "content";
+		return html`<div
+			class=${contentClass}
+			data-has-title=${ifDefined(this._hasTitle ? "" : undefined)}
+		>
 			<slot></slot>
 		</div>`;
 	}
 
 	render() {
-		return html` <div class="${this.#wrapperClasses}">
+		const buttonClass = this.buttonClass
+			? `button ${this.buttonClass}`
+			: "button";
+		return html` <div part="base">
 			${
 				this._hasTitle
 					? html`<w-unstyled-heading level=${ifDefined(this.headingLevel)}>
 							<button
+								class=${buttonClass}
 								type="button"
 								aria-expanded="${this.expanded}"
-								class="${this.#buttonClasses}"
 								@click=${() => (this.expanded = !this.expanded)}
 							>
-								<div class="${ccExpandable.title}">
+								<div class="title">
 									${
 										this.title
-											? html`<span class="${ccExpandable.titleType}"
-													>${this.title}</span
-												>`
-											: html`<slot name="title"></slot>`
+											? html`<span class="title-text">${this.title}</span>`
+											: html`<slot class="title-text" name="title"></slot>`
 									}
 									${
 										this.noChevron
 											? ""
-											: html`<div class="${this.#chevronClasses}">
-													${this.#chevronIcon}
-												</div>`
+											: html`<div part="chevron">${this.#chevronIcon}</div>`
 									}
 								</div>
 							</button>
@@ -263,11 +170,11 @@ class WarpExpandable extends LitElement {
 			}
 			${
 				this.animated
-					? html`<w-expand-transition ?show=${this.expanded}>
+					? html`<w-expand-transition class="expansion" ?show=${this.expanded}>
 							${this._expandableSlot}
 						</w-expand-transition>`
 					: html`<div
-							class="${this.#expansionClasses}"
+							class="expansion"
 							aria-hidden=${ifDefined(!this.expanded ? true : undefined)}
 						>
 							${this._expandableSlot}
