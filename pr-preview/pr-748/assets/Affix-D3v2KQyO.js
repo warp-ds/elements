@@ -1,4 +1,0 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-tcdpi8UK.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{n as s,r as c,t as l}from"./affix.stories-BEtDG6Wy.js";function u(e){let r={a:`a`,h1:`h1`,p:`p`,...o(),...e.components};return(0,f.jsxs)(f.Fragment,{children:[(0,f.jsx)(n,{of:s,name:`Docs`}),`
-`,(0,f.jsx)(r.h1,{id:`affix`,children:`Affix`}),`
-`,(0,f.jsxs)(r.p,{children:[`This component is usually used in other components like form elements to show a prefix or suffix. See for example `,(0,f.jsx)(r.a,{href:`https://warp-ds.github.io/elements/?path=/story/forms-textfield--with-affix`,rel:`nofollow`,children:`w-textfield`}),`.`]}),`
-`,(0,f.jsx)(t,{of:l})]})}function d(e={}){let{wrapper:t}={...o(),...e.components};return t?(0,f.jsx)(t,{...e,children:(0,f.jsx)(u,{...e})}):u(e)}var f;function p(){return(p=e((()=>{f=i(),a(),r(),c()})))()}p();export{d as default};
