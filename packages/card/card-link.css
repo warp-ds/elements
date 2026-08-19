@@ -3,6 +3,11 @@
 	position: absolute;
 	inset: 0;
 }
+
+[data-card-secondary-action] {
+	position: relative;
+	z-index: 1;
+}
 [data-card-action]:hover {
 	text-decoration: none;
 }
