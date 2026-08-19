@@ -62,6 +62,8 @@ class WarpCard extends LitElement {
 	 * Whether the whole card is interactive.
 	 *
 	 * When set, the card becomes keyboard focusable and Enter or Space triggers a click on the card. Use this only when the whole card has one action or represents one selectable choice.
+	 *
+	 * @deprecated This will be removed in a future version. Use data-card-action attribute on a link or button inside the card instead.
 	 */
 	@property({ type: Boolean })
 	clickable = false;

@@ -6,6 +6,8 @@ import { html } from "lit";
 import { prespread } from "../../.storybook/utilities.js";
 
 import type { WarpCard } from "./card.js";
+// @ts-expect-error css is not typed
+import "./card-link.css";
 import "./card.js";
 
 const { events, args, argTypes } = getStorybookHelpers<WarpCard>("w-card");
@@ -145,6 +147,81 @@ w-card::part(border) {
 				<div style="padding: 16px;">
 					<h3>Card Title</h3>
 					<p>This is card content with some example text.</p>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+/**
+ * Example of a card that is not focusable or clickable, and has no interactive elements inside it.
+ */
+export const CardNoNavigation: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px;">
+					<h3 class="t3">This is the card title</h3>
+					<p>This is the card content</p>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+/**
+ * Example of a card that has a single interactive element inside it that is both sematically correct and the clickable area expands to fill the card.
+ */
+export const CardWholeCardClickable: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px;">
+					<h3 class="t3">
+						<a href="#" data-card-action>This is the card title</a>
+					</h3>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+/**
+ * Example of a card that has a sematically correct main clickable interactive element that expands to fill the card, 
+ * and also has a second interactive element inside it.
+ */
+export const CardCardClickablePlusASecondInteractiveElement: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px;">
+					<h3 class="t3">
+						<a href="#" data-card-action>This is the card title</a>
+					</h3>
+					<a href="http://google.com" data-card-secondary-action>Learn more</a>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+/**
+ * Example of a card that has two interactive elements inside it, but the card itself is not clickable.
+ * The interactive elements are independently clickable and focusable, and the card itself is not focusable or clickable.
+ */
+export const CardSeparateInteractiveElements: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px;">
+					<h3 class="t3">
+						<a href="#">This is the card title</a>
+					</h3>
+					<a href="http://google.com">Learn more</a>
 				</div>
 			</w-card>
 		`;

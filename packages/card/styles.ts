@@ -106,6 +106,7 @@ export const styles = css`
 		border-radius: var(--_border-radius);
 		border-color: var(--_border-color);
 		border-width: var(--_border-width);
+		pointer-events: none;
 		position: absolute;
 		inset: 0px;
 		transition-property: all;
