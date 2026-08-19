@@ -258,3 +258,269 @@ export const AdvancedExample: Story = {
 		`;
 	},
 };
+
+export const AdvancederExamples: Story = {
+	args: {},
+	render(args) {
+		return html`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
+				<w-card class="max-w-[223] min-w-[223]" ${spread(prespread(args))}>
+					<article
+						class="flex flex-col p-16 s-text-inverted-static"
+						style="background-color: #486579"
+					>
+						<h4 class="t4">
+							<a
+								href="#"
+								@click="${() => console.log("tracking event")}"
+								data-card-action
+							>
+								BYD Atto 2</a
+							>
+						</h4>
+						<p class="text-details">Från 369 900 kr</p>
+						<img
+							src="https://unsplash.it/300/200?random"
+							class="w-full"
+							loading="lazy"
+							width="800"
+							height="500"
+						/>
+					</article>
+				</w-card>
+				<w-card class="max-w-[223] min-w-[223]" ${spread(prespread(args))}>
+					<article
+						class="flex flex-col p-16 s-text-inverted-static"
+						style="background-color: #486579"
+					>
+						<h4 class="t4">
+							<a
+								href="#"
+								@click="${() => console.log("tracking event")}"
+								data-card-action
+							>
+								BYD Atto 2</a
+							>
+						</h4>
+						<p class="text-details">Från 369 900 kr</p>
+						<img
+							src="https://unsplash.it/300/200?random"
+							class="w-full"
+							loading="lazy"
+							width="800"
+							height="500"
+						/>
+					</article>
+				</w-card>
+				<w-card class="max-w-[223] min-w-[223]" ${spread(prespread(args))}>
+					<article
+						class="flex flex-col p-16 s-text-inverted-static"
+						style="background-color: #486579"
+					>
+						<h4 class="t4">
+							<a
+								href="#"
+								@click="${() => console.log("tracking event")}"
+								data-card-action
+							>
+								BYD Atto 2</a
+							>
+						</h4>
+						<p class="text-details">Från 369 900 kr</p>
+						<img
+							src="https://unsplash.it/300/200?random"
+							class="w-full"
+							loading="lazy"
+							width="800"
+							height="500"
+						/>
+					</article>
+				</w-card>
+			</div>
+			<div
+				class="grid gap-16 grid-cols-1 md:grid-cols-3"
+				style="gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 40px"
+			>
+				<w-card
+					class="relative grid grid-rows-1 h-full"
+					${spread(prespread(args))}
+				>
+					<div
+						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
+					>
+						<div class="relative w-[112] h-[112] shrink-0">
+							<img
+								class="w-full h-full object-cover"
+								src="https://unsplash.it/100/100?random"
+								alt=""
+							/>
+							<div
+								class="absolute inset-0"
+								style="background-color: rgba(0, 0, 0, 0.3)"
+							></div>
+							<img
+								class="absolute left-12 top-12 w-32 h-32 object-contain"
+								src="https://unsplash.it/300/200?random"
+								alt=""
+							/>
+						</div>
+						<div class="flex flex-col gap-4 min-w-0">
+							<h4 class="font-bold s-text">
+								<a
+									href="#"
+									@click="${() => console.log("tracking event")}"
+									data-card-action
+									>BYD</a
+								>
+							</h4>
+							<span class="text-s s-text-subtle">7 modeller</span>
+						</div>
+					</div>
+				</w-card>
+				<w-card
+					class="relative grid grid-rows-1 h-full"
+					${spread(prespread(args))}
+				>
+					<div
+						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
+					>
+						<div class="relative w-[112] h-[112] shrink-0">
+							<img
+								class="w-full h-full object-cover"
+								src="https://unsplash.it/100/100?random"
+								alt=""
+							/>
+							<div
+								class="absolute inset-0"
+								style="background-color: rgba(0, 0, 0, 0.3)"
+							></div>
+							<img
+								class="absolute left-12 top-12 w-32 h-32 object-contain"
+								src="https://unsplash.it/300/200?random"
+								alt=""
+							/>
+						</div>
+						<div class="flex flex-col gap-4 min-w-0">
+							<h4 class="font-bold s-text">
+								<a
+									href="#"
+									@click="${() => console.log("tracking event")}"
+									data-card-action
+									>BYD</a
+								>
+							</h4>
+							<span class="text-s s-text-subtle">7 modeller</span>
+						</div>
+					</div>
+				</w-card>
+				<w-card
+					class="relative grid grid-rows-1 h-full"
+					${spread(prespread(args))}
+				>
+					<div
+						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
+					>
+						<div class="relative w-[112] h-[112] shrink-0">
+							<img
+								class="w-full h-full object-cover"
+								src="https://unsplash.it/100/100?random"
+								alt=""
+							/>
+							<div
+								class="absolute inset-0"
+								style="background-color: rgba(0, 0, 0, 0.3)"
+							></div>
+							<img
+								class="absolute left-12 top-12 w-32 h-32 object-contain"
+								src="https://unsplash.it/300/200?random"
+								alt=""
+							/>
+						</div>
+						<div class="flex flex-col gap-4 min-w-0">
+							<h4 class="font-bold s-text">
+								<a
+									href="#"
+									@click="${() => console.log("tracking event")}"
+									data-card-action
+									>BYD</a
+								>
+							</h4>
+							<span class="text-s s-text-subtle">7 modeller</span>
+						</div>
+					</div>
+				</w-card>
+			</div>
+			<div
+				class="flex"
+				style="gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 40px"
+			>
+				<w-card class="relative grid grid-rows-1 h-full">
+					<article class="flex flex-col gap-8 p-16 h-full">
+						<div class="flex flex-col gap-4">
+							<h4 class="font-bold s-text">
+								<a
+									href="#"
+									@click="${() => console.log("tracking event")}"
+									data-card-action
+									>BYD</a
+								>
+							</h4>
+							<span class="s-text-subtle">Från 369 900 kr</span>
+						</div>
+						<img
+							class="w-full object-cover"
+							width="800"
+							height="500"
+							loading="lazy"
+							src="https://unsplash.it/300/200?random"
+							alt=""
+						/>
+						<div class="flex gap-16">
+							<div class="flex flex-col">
+								<span class="text-s s-text-subtle">Drivmedel</span>
+								<span class="font-bold s-text">Flera</span>
+							</div>
+
+							<div class="flex flex-col">
+								<span class="text-s s-text-subtle">Förbrukning (blandad)</span>
+								<span class="font-bold s-text">2.7 - 6.3 l/100km</span>
+							</div>
+						</div>
+					</article>
+				</w-card>
+				<w-card class="relative grid grid-rows-1 h-full">
+					<article class="flex flex-col gap-8 p-16 h-full">
+						<div class="flex flex-col gap-4">
+							<h4 class="font-bold s-text">
+								<a
+									href="#"
+									@click="${() => console.log("tracking event")}"
+									data-card-action
+									>BYD</a
+								>
+							</h4>
+							<span class="s-text-subtle">Från 369 900 kr</span>
+						</div>
+						<img
+							class="w-full object-cover"
+							width="800"
+							height="500"
+							loading="lazy"
+							src="https://unsplash.it/300/200?random"
+							alt=""
+						/>
+						<div class="flex gap-16">
+							<div class="flex flex-col">
+								<span class="text-s s-text-subtle">Drivmedel</span>
+								<span class="font-bold s-text">Flera</span>
+							</div>
+
+							<div class="flex flex-col">
+								<span class="text-s s-text-subtle">Förbrukning (blandad)</span>
+								<span class="font-bold s-text">2.7 - 6.3 l/100km</span>
+							</div>
+						</div>
+					</article>
+				</w-card>
+			</div>`;
+	},
+};
