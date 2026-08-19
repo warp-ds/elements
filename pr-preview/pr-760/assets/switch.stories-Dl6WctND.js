@@ -19,7 +19,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
 			</div>
 		`}},s([o({type:String,reflect:!0})],x.prototype,`name`,void 0),s([o({type:String,reflect:!0})],x.prototype,`value`,void 0),s([o({type:Boolean,reflect:!0})],x.prototype,`checked`,void 0),s([o({type:Boolean,reflect:!0})],x.prototype,`disabled`,void 0),s([o({type:Number,reflect:!0,attribute:`tabindex`})],x.prototype,`tabIndex`,void 0),customElements.get(`w-switch`)||customElements.define(`w-switch`,x)})))()}var C,w,T,E,D,O,k;function A(){return(A=e((()=>{h(),r(),S(),C={title:`Forms/Switch`,component:`w-switch`,argTypes:{checked:{control:`boolean`},disabled:{control:`boolean`},value:{control:`text`}},render(e){return c`
             <div style="display: inline-flex; align-items: center; gap: 8px;">
-                <label for="switch-label">Enable notifications</label>
+                <label id="switch-label">Enable notifications</label>
                 <w-switch
                     aria-labelledby="switch-label"
                     ${p(m(e))}
@@ -31,9 +31,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
                 style="display: grid; gap: 12px; max-width: 320px;"
             >
                 <div style="display: inline-flex; align-items: center; gap: 8px;">
-                    <label for="switch-form-label">Enable notifications</label>
+                    <label for="switch-form">Enable notifications</label>
                     <w-switch
-                        aria-labelledby="switch-form-label"
+                        id="switch-form"
                         name="notifications"
                         value="enabled"
                     ></w-switch>
@@ -79,9 +79,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
                 style="display: grid; gap: 12px; max-width: 320px;"
             >
                 <div style="display: inline-flex; align-items: center; gap: 8px;">
-                    <label for="switch-form-label">Enable notifications</label>
+                    <label for="switch-form">Enable notifications</label>
                     <w-switch
-                        aria-labelledby="switch-form-label"
+                        id="switch-form"
                         name="notifications"
                         value="enabled"
                     ></w-switch>
