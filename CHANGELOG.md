@@ -1,3 +1,10 @@
+# [2.12.0-next.12](https://github.com/warp-ds/elements/compare/v2.12.0-next.11...v2.12.0-next.12) (2026-08-19)
+
+
+### Features
+
+* **expandable:** expose wrapper and button as CSS parts ([#755](https://github.com/warp-ds/elements/issues/755)) ([dbfdbf4](https://github.com/warp-ds/elements/commit/dbfdbf4bb9b839cda075a7e849c0a3be89bffd4f))
+
 # [2.12.0-next.11](https://github.com/warp-ds/elements/compare/v2.12.0-next.10...v2.12.0-next.11) (2026-08-17)
 
 
