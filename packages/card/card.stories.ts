@@ -189,7 +189,7 @@ export const CardWholeCardClickable: Story = {
 };
 
 /**
- * Example of a card that has a sematically correct main clickable interactive element that expands to fill the card, 
+ * Example of a card that has a sematically correct main clickable interactive element that expands to fill the card,
  * and also has a second interactive element inside it.
  */
 export const CardCardClickablePlusASecondInteractiveElement: Story = {
