@@ -1,0 +1,467 @@
+{
+  "generatedAt": "2026-08-19T12:56:12.335Z",
+  "delay": 50,
+  "runs": 10,
+  "results": [
+    {
+      "scenario": "single",
+      "runs": [
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 64.29999995231628,
+          "allReadyMs": 64.29999995231628,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 54.60000002384186,
+          "allReadyMs": 54.60000002384186,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 56.39999997615814,
+          "allReadyMs": 56.39999997615814,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 53.699999928474426,
+          "allReadyMs": 53.699999928474426,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 57.699999928474426,
+          "allReadyMs": 57.799999952316284,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 56.800000071525574,
+          "allReadyMs": 56.800000071525574,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 55.699999928474426,
+          "allReadyMs": 55.699999928474426,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 58.299999952316284,
+          "allReadyMs": 58.299999952316284,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 70.29999995231628,
+          "allReadyMs": 70.29999995231628,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "single",
+          "count": 1,
+          "unique": true,
+          "firstReadyMs": 68,
+          "allReadyMs": 68,
+          "layoutShift": 0,
+          "iconCount": 1,
+          "requests": 1,
+          "responseBytes": 92
+        }
+      ]
+    },
+    {
+      "scenario": "repeated-100",
+      "runs": [
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 56,
+          "allReadyMs": 56,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 60,
+          "allReadyMs": 60,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 55,
+          "allReadyMs": 55,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 61.5,
+          "allReadyMs": 61.5,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 63.300000071525574,
+          "allReadyMs": 63.300000071525574,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 67.70000004768372,
+          "allReadyMs": 67.80000007152557,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 68.60000002384186,
+          "allReadyMs": 68.60000002384186,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 67.80000007152557,
+          "allReadyMs": 67.80000007152557,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 55.199999928474426,
+          "allReadyMs": 55.199999928474426,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-100",
+          "count": 100,
+          "unique": false,
+          "firstReadyMs": 57.39999997615814,
+          "allReadyMs": 57.39999997615814,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 1,
+          "responseBytes": 92
+        }
+      ]
+    },
+    {
+      "scenario": "unique-100",
+      "runs": [
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 60.200000047683716,
+          "allReadyMs": 76.89999997615814,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 68.59999990463257,
+          "allReadyMs": 85.5,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 64.90000009536743,
+          "allReadyMs": 81.80000007152557,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 61.299999952316284,
+          "allReadyMs": 78,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 184
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 63.09999990463257,
+          "allReadyMs": 80,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 60.89999997615814,
+          "allReadyMs": 77.60000002384186,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 71.10000002384186,
+          "allReadyMs": 88,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 61.200000047683716,
+          "allReadyMs": 77.89999997615814,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 74,
+          "allReadyMs": 74,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        },
+        {
+          "name": "unique-100",
+          "count": 100,
+          "unique": true,
+          "firstReadyMs": 60.40000009536743,
+          "allReadyMs": 77,
+          "layoutShift": 0,
+          "iconCount": 100,
+          "requests": 100,
+          "responseBytes": 92
+        }
+      ]
+    },
+    {
+      "scenario": "repeated-1000",
+      "runs": [
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 67.79999995231628,
+          "allReadyMs": 67.89999997615814,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 72.10000002384186,
+          "allReadyMs": 72.20000004768372,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 75.10000002384186,
+          "allReadyMs": 75.20000004768372,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 74.29999995231628,
+          "allReadyMs": 74.29999995231628,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 68.39999997615814,
+          "allReadyMs": 68.39999997615814,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 74.89999997615814,
+          "allReadyMs": 74.89999997615814,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 70.89999997615814,
+          "allReadyMs": 70.89999997615814,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 62.799999952316284,
+          "allReadyMs": 62.799999952316284,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 61.799999952316284,
+          "allReadyMs": 61.799999952316284,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        },
+        {
+          "name": "repeated-1000",
+          "count": 1000,
+          "unique": false,
+          "firstReadyMs": 72.10000002384186,
+          "allReadyMs": 72.10000002384186,
+          "layoutShift": 0,
+          "iconCount": 1000,
+          "requests": 1,
+          "responseBytes": 92
+        }
+      ]
+    }
+  ]
+}

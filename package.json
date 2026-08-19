@@ -193,6 +193,7 @@
     "messages:extract": "lingui extract --clean",
     "semantic-release": "semantic-release",
     "test": "vitest",
+    "benchmark:icon": "node benchmarks/icon/run.mjs",
     "test:module-resolution": "cd tests/module-resolution && ./setup.sh && ./test.sh",
     "test:output-validation": "node tests/output-validation/validate-eik-output.js",
     "test:eik-backwards-compat": "node tests/output-validation/validate-eik-backwards-compat.js",
