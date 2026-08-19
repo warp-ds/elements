@@ -366,9 +366,7 @@ w-card::part(border) {
                     class="relative grid grid-rows-1 h-full"
                     ${g(_(e))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
@@ -402,9 +400,7 @@ w-card::part(border) {
                     class="relative grid grid-rows-1 h-full"
                     ${g(_(e))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
@@ -438,9 +434,7 @@ w-card::part(border) {
                     class="relative grid grid-rows-1 h-full"
                     ${g(_(e))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
@@ -815,9 +809,7 @@ The interactive elements are independently clickable and focusable, and the card
                     class="relative grid grid-rows-1 h-full"
                     \${spread(prespread(args))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
@@ -851,9 +843,7 @@ The interactive elements are independently clickable and focusable, and the card
                     class="relative grid grid-rows-1 h-full"
                     \${spread(prespread(args))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
@@ -887,9 +877,7 @@ The interactive elements are independently clickable and focusable, and the card
                     class="relative grid grid-rows-1 h-full"
                     \${spread(prespread(args))}
                 >
-                    <div
-                        class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-                    >
+                    <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
                             <img
                                 class="w-full h-full object-cover"
