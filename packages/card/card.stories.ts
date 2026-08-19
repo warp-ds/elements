@@ -344,9 +344,7 @@ export const AdvancederExamples: Story = {
 					class="relative grid grid-rows-1 h-full"
 					${spread(prespread(args))}
 				>
-					<div
-						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-					>
+					<div class="flex items-center gap-24 pr-16 h-full">
 						<div class="relative w-[112] h-[112] shrink-0">
 							<img
 								class="w-full h-full object-cover"
@@ -380,9 +378,7 @@ export const AdvancederExamples: Story = {
 					class="relative grid grid-rows-1 h-full"
 					${spread(prespread(args))}
 				>
-					<div
-						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-					>
+					<div class="flex items-center gap-24 pr-16 h-full">
 						<div class="relative w-[112] h-[112] shrink-0">
 							<img
 								class="w-full h-full object-cover"
@@ -416,9 +412,7 @@ export const AdvancederExamples: Story = {
 					class="relative grid grid-rows-1 h-full"
 					${spread(prespread(args))}
 				>
-					<div
-						class="flex items-center gap-24 pr-16 h-full pointer-events-none"
-					>
+					<div class="flex items-center gap-24 pr-16 h-full">
 						<div class="relative w-[112] h-[112] shrink-0">
 							<img
 								class="w-full h-full object-cover"
