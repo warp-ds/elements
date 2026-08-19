@@ -8,8 +8,12 @@
 	position: relative;
 	z-index: 1;
 }
+[data-card-action] {
+	color: inherit;
+}
 [data-card-action]:hover {
 	text-decoration: none;
+	color: inherit;
 }
 [data-card-secondary-action] {
 	position: relative;
