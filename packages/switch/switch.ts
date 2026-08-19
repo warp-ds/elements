@@ -52,17 +52,6 @@ export type WarpSwitchChangeEvent = CustomEvent<{
  */
 export class WarpSwitch extends FormControlMixin(LitElement) {
 	/**
-	 * Use delegatesFocus so focus is delegated to the button inside shadow DOM.
-	 *
-	 * This avoids needing tabindex on the host element (prevents hydration mismatch).
-	 * @internal
-	 */
-	static shadowRootOptions = {
-		...LitElement.shadowRootOptions,
-		delegatesFocus: true,
-	};
-
-	/**
 	 * Name used when submitting an HTML form.
 	 */
 	@property({ type: String, reflect: true })
@@ -88,6 +77,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	disabled = false;
 
+	@property({ type: Number, reflect: true, attribute: "tabindex" })
+	tabIndex!: number;
+
 	#initialState = false;
 
 	static styles = [
@@ -95,14 +87,15 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 		styles,
 		css`
 			:host {
+				border-radius: 9999px;
 				display: inline-block;
 			}
 
-			button:focus {
+			:host(:focus) {
 				outline: none;
 			}
 
-			button:focus-visible {
+			:host(:focus-visible) {
 				outline: 2px solid var(--w-s-color-border-focus);
 				outline-offset: var(--w-outline-offset, 1px);
 			}
@@ -146,25 +139,16 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 	/** @internal */
 	_handleClick() {
-		if (!this.disabled) {
-			this.checked = !this.checked;
-			this.dispatchEvent(
-				new CustomEvent("change", {
-					detail: { checked: this.checked, value: this.value || null },
-					bubbles: true,
-					composed: true,
-				}),
-			);
-		}
-	}
-
-	/** @internal */
-	_handleHostClick = (event: MouseEvent) => {
 		if (this.disabled) return;
-		if (event.composedPath()[0] === this) {
-			this._handleClick();
-		}
-	};
+		this.checked = !this.checked;
+		this.dispatchEvent(
+			new CustomEvent("change", {
+				detail: { checked: this.checked, value: this.value || null },
+				bubbles: true,
+				composed: true,
+			}),
+		);
+	}
 
 	/** @internal */
 	_handleKeyDown = (event: KeyboardEvent) => {
@@ -189,25 +173,34 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 	connectedCallback(): void {
 		this.#initialState = this.checked;
 		super.connectedCallback();
+
 		// Use ElementInternals for role - works with real AT,
 		// avoids hydration mismatches from client-side attribute changes
 		this.internals.role = "switch";
+
+		// The React wrapper sets tabIndex on behalf of users to avoid
+		// hydration mismatches.
+		if (typeof this.tabIndex !== "number") {
+			this.tabIndex = 0;
+		}
+
 		// Sync aria-label to internals (keep attribute for hydration compatibility)
 		const ariaLabel = this.getAttribute("aria-label");
 		if (ariaLabel) {
 			this.internals.ariaLabel = ariaLabel;
 		}
+
 		if (!this.disabled) {
 			this.setValue(this.checked && this.value ? this.value : null);
 		}
 
 		this._syncA11yState();
-		this.addEventListener("click", this._handleHostClick);
+		this.addEventListener("click", this._handleClick);
 		this.addEventListener("keydown", this._handleKeyDown);
 	}
 
 	disconnectedCallback(): void {
-		this.removeEventListener("click", this._handleHostClick);
+		this.removeEventListener("click", this._handleClick);
 		this.removeEventListener("keydown", this._handleKeyDown);
 		super.disconnectedCallback();
 	}
@@ -229,18 +222,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div>
-				<button
-					type="button"
-					role="none"
-					tabindex=${this.disabled ? -1 : 0}
-					class=${this._baseClasses}
-					?disabled=${this.disabled}
-					@click=${this._handleClick}
-				>
-					<span data-testid="track" class=${this._trackClasses}></span>
-					<span data-testid="handle" class=${this._handleClasses}></span>
-				</button>
+			<div class=${this._baseClasses}>
+				<span data-testid="track" class=${this._trackClasses}></span>
+				<span data-testid="handle" class=${this._handleClasses}></span>
 			</div>
 		`;
 	}

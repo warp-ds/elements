@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
+import { spread } from "@open-wc/lit-helpers";
+import { prespread } from "../../.storybook/utilities.js";
 import { html } from "lit";
 
 import "./switch.js";
@@ -10,6 +12,17 @@ const meta: Meta = {
 		checked: { control: "boolean" },
 		disabled: { control: "boolean" },
 		value: { control: "text" },
+	},
+	render(args) {
+		return html`
+			<div style="display: inline-flex; align-items: center; gap: 8px;">
+				<label id="switch-label">Enable notifications</label>
+				<w-switch
+					aria-labelledby="switch-label"
+					${spread(prespread(args))}
+				></w-switch>
+			</div>
+		`;
 	},
 };
 
@@ -44,28 +57,6 @@ export const DisabledChecked: Story = {
 	},
 };
 
-export const WithLabel: Story = {
-	render: () => html`
-		<div style="display: inline-flex; align-items: center; gap: 8px;">
-			<span id="switch-label">Enable notifications</span>
-			<w-switch aria-labelledby="switch-label"></w-switch>
-		</div>
-	`,
-};
-
-export const NativeLabel: Story = {
-	render: () => html`
-		<div style="display: inline-flex; align-items: center; gap: 8px;">
-			<label for="native-label-switch">Enable notifications</label>
-			<w-switch
-				id="native-label-switch"
-				name="notifications"
-				value="enabled"
-			></w-switch>
-		</div>
-	`,
-};
-
 export const SwitchFormAssociated: Story = {
 	render: () => {
 		const handleSubmit = (event: Event) => {
@@ -89,9 +80,9 @@ export const SwitchFormAssociated: Story = {
 				style="display: grid; gap: 12px; max-width: 320px;"
 			>
 				<div style="display: inline-flex; align-items: center; gap: 8px;">
-					<span id="switch-form-label">Enable notifications</span>
+					<label for="switch-form">Enable notifications</label>
 					<w-switch
-						aria-labelledby="switch-form-label"
+						id="switch-form"
 						name="notifications"
 						value="enabled"
 					></w-switch>
