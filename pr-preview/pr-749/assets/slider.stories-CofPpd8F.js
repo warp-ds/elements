@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from"./preload-helper-wdlQj8DP.js";import{a as i,c as a,d as o,h as s,l as c,r as l,s as u,t as d,x as f,y as p}from"./decorate-Bt2QF_uA.js";import{a as m,o as ee,r as te,t as ne}from"./i18n-CkjYRTT1.js";import"./__uno-CmvWQQDY.js";import{n as re,t as ie}from"./dist-D5kJVy4t.js";import{t as h}from"./query-BHY-nhsh.js";import{n as ae,t as oe}from"./class-map-DaGxfNVq.js";import{t as se}from"./icon-ND47zKHd.js";import{n as ce,t as le}from"./styles-Cw_r5k83.js";import{n as ue,t as de}from"./FormControlMixin-BCJbRrUC.js";import{t as fe}from"./affix-BfpU2A-U.js";import{r as g,t as pe}from"./if-defined-DBI32Ir5.js";import{t as me}from"./attention-B4Dzaore.js";import{t as _}from"./taggedTemplateLiteral-BZenJ0bZ.js";import{t as he}from"./tooltip-D5IbvAIJ.js";import{t as ge}from"./textfield-z90HYaAB.js";var _e;function ve(){return(ve=e((()=>{_e=JSON.parse(`{"select.label.optional":["Valgfri"],"slider.error.out_of_bounds":["Værdien skal være mellem ",["min"]," og ",["max"]],"slider.error.overlap":["Maksimumværdien må ikke være mindre end minimumværdien"],"slider.error.required":["Dette felt er påkrævet"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var ye;function be(){return(be=e((()=>{ye=JSON.parse(`{"select.label.optional":["Optional"],"slider.error.out_of_bounds":["Value must be between ",["min"]," and ",["max"]],"slider.error.overlap":["The maximum value cannot be less than the minimum"],"slider.error.required":["This field is required"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var xe;function Se(){return(Se=e((()=>{xe=JSON.parse(`{"select.label.optional":["Valinnainen"],"slider.error.out_of_bounds":["Arvon on oltava välillä ",["min"]," - ",["max"]],"slider.error.overlap":["Maksimiarvo ei voi olla pienempi kuin minimiarvo"],"slider.error.required":["Tämä kenttä on pakollinen"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var Ce;function v(){return(v=e((()=>{Ce=JSON.parse(`{"select.label.optional":["Valgfri"],"slider.error.out_of_bounds":["Verdien må være mellom ",["min"]," og ",["max"]],"slider.error.overlap":["Maksimumsverdien kan ikke være mindre enn minimumsverdien"],"slider.error.required":["Dette feltet er påkrevd"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var y;function b(){return(b=e((()=>{y=JSON.parse(`{"select.label.optional":["Valfritt"],"slider.error.out_of_bounds":["Värdet måste vara mellan ",["min"]," och ",["max"]],"slider.error.overlap":["Maxvärdet kan inte vara mindre än minimivärdet"],"slider.error.required":["Detta fält är obligatoriskt"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var x;function S(){return(S=e((()=>{a(),x=p`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from"./preload-helper-wdlQj8DP.js";import{a as i,c as a,d as o,h as s,l as c,r as l,s as u,t as d,x as f,y as p}from"./decorate-Bt2QF_uA.js";import{a as m,o as ee,r as te,t as ne}from"./i18n-CkjYRTT1.js";import"./__uno-CmvWQQDY.js";import{n as re,t as ie}from"./dist-D5kJVy4t.js";import{t as h}from"./query-BHY-nhsh.js";import{n as ae,t as oe}from"./class-map-DaGxfNVq.js";import{t as se}from"./icon-ND47zKHd.js";import{n as ce,t as le}from"./styles-Cw_r5k83.js";import{n as ue,t as de}from"./FormControlMixin-BCJbRrUC.js";import{t as fe}from"./affix-BfpU2A-U.js";import{r as g,t as pe}from"./if-defined-DBI32Ir5.js";import{t as me}from"./attention-B4Dzaore.js";import{t as _}from"./taggedTemplateLiteral-BZenJ0bZ.js";import{t as he}from"./tooltip-D5IbvAIJ.js";import{t as ge}from"./textfield-z90HYaAB.js";import{t as _e}from"./expandable-CxXe_zF7.js";import{t as ve}from"./modal-CIOf8Xw7.js";var ye;function be(){return(be=e((()=>{ye=JSON.parse(`{"select.label.optional":["Valgfri"],"slider.error.out_of_bounds":["Værdien skal være mellem ",["min"]," og ",["max"]],"slider.error.overlap":["Maksimumværdien må ikke være mindre end minimumværdien"],"slider.error.required":["Dette felt er påkrævet"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var xe;function Se(){return(Se=e((()=>{xe=JSON.parse(`{"select.label.optional":["Optional"],"slider.error.out_of_bounds":["Value must be between ",["min"]," and ",["max"]],"slider.error.overlap":["The maximum value cannot be less than the minimum"],"slider.error.required":["This field is required"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var Ce;function we(){return(we=e((()=>{Ce=JSON.parse(`{"select.label.optional":["Valinnainen"],"slider.error.out_of_bounds":["Arvon on oltava välillä ",["min"]," - ",["max"]],"slider.error.overlap":["Maksimiarvo ei voi olla pienempi kuin minimiarvo"],"slider.error.required":["Tämä kenttä on pakollinen"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var Te;function v(){return(v=e((()=>{Te=JSON.parse(`{"select.label.optional":["Valgfri"],"slider.error.out_of_bounds":["Verdien må være mellom ",["min"]," og ",["max"]],"slider.error.overlap":["Maksimumsverdien kan ikke være mindre enn minimumsverdien"],"slider.error.required":["Dette feltet er påkrevd"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var y;function b(){return(b=e((()=>{y=JSON.parse(`{"select.label.optional":["Valfritt"],"slider.error.out_of_bounds":["Värdet måste vara mellan ",["min"]," och ",["max"]],"slider.error.overlap":["Maxvärdet kan inte vara mindre än minimivärdet"],"slider.error.required":["Detta fält är obligatoriskt"],"slider.label.from":["From"],"slider.label.to":["To"],"slider.placeholder.from":["Min"],"slider.placeholder.to":["Max"]}`)})))()}var x;function S(){return(S=e((()=>{a(),x=p`
 	.w-slider {
 		position: relative;
 		border: none;
@@ -182,7 +182,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
 		bottom: 0;
 		grid-area: slider;
 	}
-`})))()}var C;function w(){return(w=e((()=>{a(),l(),ee(),te(),le(),ve(),be(),Se(),v(),b(),S(),pe(),se(),he(),C=class extends c{static{this.shadowRootOptions={...c.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[ce,x,p`
+`})))()}var C;function w(){return(w=e((()=>{a(),l(),ee(),te(),le(),be(),Se(),we(),v(),b(),S(),pe(),se(),he(),C=class extends c{static{this.shadowRootOptions={...c.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[ce,x,p`
 			:host {
 				/* Added style API for optional only just to mirror other optional implementations */
 				/* The rest of the styling API still needs to be implemented */
@@ -209,7 +209,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
 				line-height: var(--_line-height);
 				color: var(--_color);
 			}
-		`]}get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}constructor(){super(),this.disabled=!1,this.openEnded=!1,this.invalid=!1,this.required=!1,this.optional=!1,this.hiddenTextfield=!1,this._invalidMessage=``,this._hasInternalError=!1,this._showError=!1,this._tabbableElements=[],this._hasLabel=!1,this._hasHelpTextSlot=!1,ne(ye,Ce,xe,_e,y)}#t(){let e=this.querySelectorAll(`w-slider-thumb`),t=!1;for(let n of e.values())n.min=this.edgeMin,n.max=this.edgeMax,n.step=this.step,n.suffix=this.suffix??``,n.required=this.required,n.labelFormatter=this.labelFormatter,n.valueFormatter=this.valueFormatter,n.tooltipFormatter=this.tooltipFormatter,n.openEnded=this.openEnded,n._hiddenTextfield=this.hiddenTextfield,n.ariaLabel||(n.slot||(n.ariaLabel=this.label||null),n.slot===`from`&&(n.ariaLabel=`${this.label} min`),n.slot===`to`&&(n.ariaLabel=`${this.label} max`)),(n.slot===`from`||n.slot===`to`)&&(t=!0),n.disabled=this.disabled,n.invalid=!!this.errorText,this.#l(n);t?(this.fieldset.style.setProperty(`--active-range-inline-start-padding`,`var(--w-slider-thumb-size, 28px)`),this.fieldset.style.setProperty(`--active-range-inline-end-padding`,`var(--w-slider-thumb-size, 28px)`)):this.fieldset.style.setProperty(`--active-range-border-radius`,`4px`)}get edgeMin(){return this.openEnded?(Number(this.min)-1).toString():this.min}get edgeMax(){return this.openEnded?(Number(this.max)+1).toString():this.max}async connectedCallback(){super.connectedCallback(),await this.updateComplete,this.step&&this.fieldset.style.setProperty(`--step`,String(this.step)),this.min!==void 0&&this.fieldset.style.setProperty(`--min`,this.edgeMin),this.max!==void 0&&this.fieldset.style.setProperty(`--max`,this.max),this.markers&&this.fieldset.style.setProperty(`--markers`,String(this.markers)),this.openEnded&&this.fieldset.style.setProperty(`--over-under-offset`,`1`),this.label&&(this._hasLabel=!0);let e=this.querySelectorAll(`w-slider-thumb`);if(e.length===2){this.fieldset.style.setProperty(`--range-slider-magic-pixel`,`1px`);let t=[...e];this._tabbableElements[0]=t[0].shadowRoot.querySelector(`input`),this._tabbableElements[1]=t[1].shadowRoot.querySelector(`input`),this._tabbableElements[2]=t[0].shadowRoot.querySelector(`w-textfield`),this._tabbableElements[3]=t[1].shadowRoot.querySelector(`w-textfield`)}else if(e.length===1){let t=[...e];this._tabbableElements[0]=t[0].shadowRoot.querySelector(`input`),this._tabbableElements[1]=t[0].shadowRoot.querySelector(`w-textfield`)}this.invalid&&this.error&&(this._showError=!0),this.#t()}updated(e){(e.has(`disabled`)||e.has(`required`)||e.has(`min`)||e.has(`step`)||e.has(`max`)||e.has(`suffix`)||e.has(`labelFormatter`)||e.has(`valueFormatter`)||e.has(`_invalidMessage`)||e.has(`_hasInternalError`))&&this.#t(),(e.has(`error`)||e.has(`invalid`))&&(this._showError=!!(this.error&&this.invalid),this.#t())}#n(e){e.stopPropagation();let t=e.target;this.#l(t)}#r(e){let t=e.target;this.#l(t),t.slot&&this.#o()}#i(){this._showError=!!this.componentHasError,this.#t()}#a(e){if(e.key===`Tab`){let t=this._tabbableElements.indexOf(e.target.shadowRoot.activeElement);if(t===-1)return;let n=e.shiftKey?-1:1,r=this._tabbableElements[t+n];if(!r)return;e.preventDefault(),r.focus()}}#o(){let e=null,t=null,n=this.querySelectorAll(`w-slider-thumb`);for(let r of n.values())r.slot===`from`&&(e=r),r.slot===`to`&&(t=r);!e||!t||!e.invalid&&t.invalid}#s(e){e.stopPropagation();let t=this._hasInternalError||this.invalid,n=e.target;if(this._hasInternalError=!!e.detail.invalid||this.invalid,this._invalidMessage=e.detail.invalid,t===!0&&this._hasInternalError===!1){let e=this.querySelectorAll(`w-slider-thumb`);for(let t of e.values())t!==n&&t.updateFieldAfterValidation()}}#c(e,t){return t.value??=this.openEnded?``:e,t.value===``?e:t.value}#l(e){let t=e.slot;t||this.fieldset.style.setProperty(`--from`,`0`),t===`from`&&this.fieldset.style.setProperty(`--from`,this.#c(this.edgeMin,e)),(!t||t===`to`)&&this.fieldset.style.setProperty(`--to`,this.#c(this.edgeMax,e))}get componentHasError(){return this.invalid||this._hasInternalError}get errorText(){return this._showError?this.error||this._invalidMessage:``}_handleLabelSlotChange(e){let t=e.target.assignedElements().length>0;this._hasLabel=t||!!this.label,console.log(`Label content changed, has label:`,this._hasLabel)}get _label(){let e=this._hasLabel&&this.optional&&!this.required?s`
+		`]}get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}constructor(){super(),this.disabled=!1,this.openEnded=!1,this.invalid=!1,this.required=!1,this.optional=!1,this.hiddenTextfield=!1,this._invalidMessage=``,this._hasInternalError=!1,this._showError=!1,this._tabbableElements=[],this._hasLabel=!1,this._hasHelpTextSlot=!1,ne(xe,Te,Ce,ye,y)}#t(){let e=this.querySelectorAll(`w-slider-thumb`),t=!1;for(let n of e.values())n.min=this.edgeMin,n.max=this.edgeMax,n.step=this.step,n.suffix=this.suffix??``,n.required=this.required,n.labelFormatter=this.labelFormatter,n.valueFormatter=this.valueFormatter,n.tooltipFormatter=this.tooltipFormatter,n.openEnded=this.openEnded,n._hiddenTextfield=this.hiddenTextfield,n.ariaLabel||(n.slot||(n.ariaLabel=this.label||null),n.slot===`from`&&(n.ariaLabel=`${this.label} min`),n.slot===`to`&&(n.ariaLabel=`${this.label} max`)),(n.slot===`from`||n.slot===`to`)&&(t=!0),n.disabled=this.disabled,n.invalid=!!this.errorText,this.#l(n);t?(this.fieldset.style.setProperty(`--active-range-inline-start-padding`,`var(--w-slider-thumb-size, 28px)`),this.fieldset.style.setProperty(`--active-range-inline-end-padding`,`var(--w-slider-thumb-size, 28px)`)):this.fieldset.style.setProperty(`--active-range-border-radius`,`4px`)}get edgeMin(){return this.openEnded?(Number(this.min)-1).toString():this.min}get edgeMax(){return this.openEnded?(Number(this.max)+1).toString():this.max}async connectedCallback(){super.connectedCallback(),await this.updateComplete,this.step&&this.fieldset.style.setProperty(`--step`,String(this.step)),this.min!==void 0&&this.fieldset.style.setProperty(`--min`,this.edgeMin),this.max!==void 0&&this.fieldset.style.setProperty(`--max`,this.max),this.markers&&this.fieldset.style.setProperty(`--markers`,String(this.markers)),this.openEnded&&this.fieldset.style.setProperty(`--over-under-offset`,`1`),this.label&&(this._hasLabel=!0);let e=this.querySelectorAll(`w-slider-thumb`);if(e.length===2){this.fieldset.style.setProperty(`--range-slider-magic-pixel`,`1px`);let t=[...e];this._tabbableElements[0]=t[0].shadowRoot.querySelector(`input`),this._tabbableElements[1]=t[1].shadowRoot.querySelector(`input`),this._tabbableElements[2]=t[0].shadowRoot.querySelector(`w-textfield`),this._tabbableElements[3]=t[1].shadowRoot.querySelector(`w-textfield`)}else if(e.length===1){let t=[...e];this._tabbableElements[0]=t[0].shadowRoot.querySelector(`input`),this._tabbableElements[1]=t[0].shadowRoot.querySelector(`w-textfield`)}this.invalid&&this.error&&(this._showError=!0),this.#t()}updated(e){(e.has(`disabled`)||e.has(`required`)||e.has(`min`)||e.has(`step`)||e.has(`max`)||e.has(`suffix`)||e.has(`labelFormatter`)||e.has(`valueFormatter`)||e.has(`_invalidMessage`)||e.has(`_hasInternalError`))&&this.#t(),(e.has(`error`)||e.has(`invalid`))&&(this._showError=!!(this.error&&this.invalid),this.#t())}#n(e){e.stopPropagation();let t=e.target;this.#l(t)}#r(e){let t=e.target;this.#l(t),t.slot&&this.#o()}#i(){this._showError=!!this.componentHasError,this.#t()}#a(e){if(e.key===`Tab`){let t=this._tabbableElements.indexOf(e.target.shadowRoot.activeElement);if(t===-1)return;let n=e.shiftKey?-1:1,r=this._tabbableElements[t+n];if(!r)return;e.preventDefault(),r.focus()}}#o(){let e=null,t=null,n=this.querySelectorAll(`w-slider-thumb`);for(let r of n.values())r.slot===`from`&&(e=r),r.slot===`to`&&(t=r);!e||!t||!e.invalid&&t.invalid}#s(e){e.stopPropagation();let t=this._hasInternalError||this.invalid,n=e.target;if(this._hasInternalError=!!e.detail.invalid||this.invalid,this._invalidMessage=e.detail.invalid,t===!0&&this._hasInternalError===!1){let e=this.querySelectorAll(`w-slider-thumb`);for(let t of e.values())t!==n&&t.updateFieldAfterValidation()}}#c(e,t){return t.value??=this.openEnded?``:e,t.value===``?e:t.value}#l(e){let t=e.slot;t||this.fieldset.style.setProperty(`--from`,`0`),t===`from`&&this.fieldset.style.setProperty(`--from`,this.#c(this.edgeMin,e)),(!t||t===`to`)&&this.fieldset.style.setProperty(`--to`,this.#c(this.edgeMax,e))}get componentHasError(){return this.invalid||this._hasInternalError}get errorText(){return this._showError?this.error||this._invalidMessage:``}_handleLabelSlotChange(e){let t=e.target.assignedElements().length>0;this._hasLabel=t||!!this.label,console.log(`Label content changed, has label:`,this._hasLabel)}get _label(){let e=this._hasLabel&&this.optional&&!this.required?s`
 						<span class="w-slider__optional">
 							${m._({id:`select.label.optional`,message:`Optional`,comment:`Shown behind label when marked as optional`})}
 						</span>
@@ -487,7 +487,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
 	w-textfield {
 		--w-textfield-placeholder-color-text: var(--w-s-color-text);
 	}
-`})))()}var k,A,j;function M(){return(M=e((()=>{ee(),ue(),a(),l(),oe(),pe(),E(),le(),O(),n(),k=/WebKit/,A=/Chrome/,j=class extends de(c){constructor(...e){super(...e),this.ariaLabel=null,this.ariaDescription=null,this.disabled=!1,this.invalid=!1,this.openEnded=!1,this.required=!1,this.suffix=``,this._showTooltip=!1,this._inputHasFocus=!1,this._hiddenTextfield=!1,this.#e=void 0,this.anchorPositioningStyleElement=null}static{this.shadowRootOptions={...c.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[ce,T,D]}#e;resetFormControl(){this.value=this.#e,this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}#t(){this._showTooltip=!0,this.shadowRoot.querySelector(`w-attention`).handleDone()}#n(){this._showTooltip=!1}#r(){this.range&&(this.value===``?this.range.value=this.boundaryValue:this.value&&(this.range.value=this.value))}#i(e){this.dispatchEvent(new CustomEvent(`slidervalidity`,{bubbles:!0,detail:{invalid:e,slot:this.slot}}))}async updateFieldAfterValidation(){let e=this.shadowRoot.querySelector(`w-textfield`);await this.#a(e.value??``,!0)}async#a(e,t){let n=this.suffix??``,r=Number.parseInt(e);if(this.openEnded&&!t&&this.step&&!(this.slot===`to`&&r>=Number(this.max)-1||this.slot===`from`&&r<=Number(this.min)+1)){let t=1/this.step;r=Math.round(r*t)/t,e=r.toString()}let i=Number.parseInt(this.max),a=Number.parseInt(this.min);if(!this.openEnded&&(r>i||r<a))return this.#i(m.t({id:`slider.error.out_of_bounds`,message:`Value must be between {min} and {max}`,values:{min:`${this.min} ${n}`.trim(),max:`${this.max} ${n}`.trim()}})),{shouldCancel:!0};e===``&&this.required&&this.#i(m.t({id:`slider.error.required`,message:`This field is required`})),this.value=e;let o=e===this.max||e===this.min,s=!1;if(this.slot){let n=this.parentElement.querySelector(`w-slider-thumb[slot="to"]`),c=this.parentElement.querySelector(`w-slider-thumb[slot="from"]`),l=n.textfield.value||this.max,u=c.textfield.value||this.min,d=Number.parseInt(l),f=Number.parseInt(u),p=m.t({id:`slider.error.overlap`,message:`The maximum value cannot be less than the minimum`});if(this.slot===`from`){let n=this.openEnded&&d>i?d:Math.min(d,this.openEnded?i-1:i);r>n&&(s=!0,this.value=this.openEnded&&o?String(n):l,t&&(this.#i(p),await this.updateComplete,this.textfield.value=e))}else{let n=this.openEnded&&f<a?f:Math.max(Number.parseInt(u),this.openEnded?a+1:a);r<n&&(s=!0,this.value=this.openEnded&&o?String(n):u,t&&(this.#i(p),await this.updateComplete,this.textfield.value=e))}}return s?{shouldCancel:!0}:(this.#i(``),this.range.value=Math.min(Math.max(Number(e),Number(this.min)),Number(this.max)).toString(),this.value=this.openEnded&&!t&&o?``:e,this.shadowRoot.querySelector(`w-attention`).handleDone(),{shouldCancel:!1})}async#o(e){let t=e.currentTarget.tagName===`W-TEXTFIELD`;if(e instanceof CustomEvent)return!1;let n=e.currentTarget.value;return!(await this.#a(n,t)).shouldCancel||(e.preventDefault(),!1)}async#s(e){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}if(!this.openEnded||e.key!==`ArrowLeft`&&e.key!==`ArrowRight`)return;let t=Number(this.range.value),n=this.step||1,r;r=e.key===`ArrowLeft`?t-n:t+n,r=Math.min(Math.max(r,Number(this.min)),Number(this.max)),(await this.#a(r.toString(),!1)).shouldCancel&&e.preventDefault()}async#c(e){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}if(this.textfield.value)return;let t=``;this.slot===`from`?e.key===`ArrowUp`?t=String(Number(this.min)+1)||`1`:e.key===`ArrowDown`&&(t=String(Number(this.min))||`0`):e.key===`ArrowUp`?t=String(Number(this.max))||`100`:e.key===`ArrowDown`&&(t=String(Number(this.max)-1)||`99`),t&&(e.preventDefault(),await this.#a(t,!0))}async connectedCallback(){if(super.connectedCallback(),this.#e=this.value,this.setValue(this.value),this.slot&&!this.ariaDescription&&(this.slot===`from`?this.ariaDescription=m.t({id:`slider.label.from`,comment:`Accessible label for the 'from value' input field in a range slider`,message:`From`}):this.slot===`to`&&(this.ariaDescription=m.t({id:`slider.label.to`,comment:`Accessible label for the 'to value' input field in a range slider`,message:`To`}))),`anchorName`in document.documentElement.style)await this.updateComplete;else{let e=import.meta.url.substring(0,import.meta.url.lastIndexOf(`/`));try{let[{default:t}]=await Promise.all([r(()=>import(`${e}/oddbird-css-anchor-positioning.js`),[],import.meta.url),this.updateComplete]);this.anchorPositioningStyleElement||(this.anchorPositioningStyleElement=document.createElement(`style`),this.shadowRoot.prepend(this.anchorPositioningStyleElement)),this.anchorPositioningStyleElement.textContent=`
+`})))()}var k,A,j;function Ee(){return(Ee=e((()=>{ee(),ue(),a(),l(),oe(),pe(),E(),le(),O(),n(),k=/WebKit/,A=/Chrome/,j=class extends de(c){constructor(...e){super(...e),this.ariaLabel=null,this.ariaDescription=null,this.disabled=!1,this.invalid=!1,this.openEnded=!1,this.required=!1,this.suffix=``,this._showTooltip=!1,this._inputHasFocus=!1,this._hiddenTextfield=!1,this.#e=void 0,this.anchorPositioningStyleElement=null}static{this.shadowRootOptions={...c.shadowRootOptions,delegatesFocus:!0}}static{this.styles=[ce,T,D]}#e;resetFormControl(){this.value=this.#e,this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}#t(){this._showTooltip=!0,this.shadowRoot.querySelector(`w-attention`).handleDone()}#n(){this._showTooltip=!1}#r(){this.range&&(this.value===``?this.range.value=this.boundaryValue:this.value&&(this.range.value=this.value))}#i(e){this.dispatchEvent(new CustomEvent(`slidervalidity`,{bubbles:!0,detail:{invalid:e,slot:this.slot}}))}async updateFieldAfterValidation(){let e=this.shadowRoot.querySelector(`w-textfield`);await this.#a(e.value??``,!0)}async#a(e,t){let n=this.suffix??``,r=Number.parseInt(e);if(this.openEnded&&!t&&this.step&&!(this.slot===`to`&&r>=Number(this.max)-1||this.slot===`from`&&r<=Number(this.min)+1)){let t=1/this.step;r=Math.round(r*t)/t,e=r.toString()}let i=Number.parseInt(this.max),a=Number.parseInt(this.min);if(!this.openEnded&&(r>i||r<a))return this.#i(m.t({id:`slider.error.out_of_bounds`,message:`Value must be between {min} and {max}`,values:{min:`${this.min} ${n}`.trim(),max:`${this.max} ${n}`.trim()}})),{shouldCancel:!0};e===``&&this.required&&this.#i(m.t({id:`slider.error.required`,message:`This field is required`})),this.value=e;let o=e===this.max||e===this.min,s=!1;if(this.slot){let n=this.parentElement.querySelector(`w-slider-thumb[slot="to"]`),c=this.parentElement.querySelector(`w-slider-thumb[slot="from"]`),l=n.textfield.value||this.max,u=c.textfield.value||this.min,d=Number.parseInt(l),f=Number.parseInt(u),p=m.t({id:`slider.error.overlap`,message:`The maximum value cannot be less than the minimum`});if(this.slot===`from`){let n=this.openEnded&&d>i?d:Math.min(d,this.openEnded?i-1:i);r>n&&(s=!0,this.value=this.openEnded&&o?String(n):l,t&&(this.#i(p),await this.updateComplete,this.textfield.value=e))}else{let n=this.openEnded&&f<a?f:Math.max(Number.parseInt(u),this.openEnded?a+1:a);r<n&&(s=!0,this.value=this.openEnded&&o?String(n):u,t&&(this.#i(p),await this.updateComplete,this.textfield.value=e))}}return s?{shouldCancel:!0}:(this.#i(``),this.range.value=Math.min(Math.max(Number(e),Number(this.min)),Number(this.max)).toString(),this.value=this.openEnded&&!t&&o?``:e,this.shadowRoot.querySelector(`w-attention`).handleDone(),{shouldCancel:!1})}async#o(e){let t=e.currentTarget.tagName===`W-TEXTFIELD`;if(e instanceof CustomEvent)return!1;let n=e.currentTarget.value;return!(await this.#a(n,t)).shouldCancel||(e.preventDefault(),!1)}async#s(e){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}if(!this.openEnded||e.key!==`ArrowLeft`&&e.key!==`ArrowRight`)return;let t=Number(this.range.value),n=this.step||1,r;r=e.key===`ArrowLeft`?t-n:t+n,r=Math.min(Math.max(r,Number(this.min)),Number(this.max)),(await this.#a(r.toString(),!1)).shouldCancel&&e.preventDefault()}async#c(e){if(e.key===`Enter`&&this.internals.form){this.internals.form.requestSubmit();return}if(this.textfield.value)return;let t=``;this.slot===`from`?e.key===`ArrowUp`?t=String(Number(this.min)+1)||`1`:e.key===`ArrowDown`&&(t=String(Number(this.min))||`0`):e.key===`ArrowUp`?t=String(Number(this.max))||`100`:e.key===`ArrowDown`&&(t=String(Number(this.max)-1)||`99`),t&&(e.preventDefault(),await this.#a(t,!0))}async connectedCallback(){if(super.connectedCallback(),this.#e=this.value,this.setValue(this.value),this.slot&&!this.ariaDescription&&(this.slot===`from`?this.ariaDescription=m.t({id:`slider.label.from`,comment:`Accessible label for the 'from value' input field in a range slider`,message:`From`}):this.slot===`to`&&(this.ariaDescription=m.t({id:`slider.label.to`,comment:`Accessible label for the 'to value' input field in a range slider`,message:`To`}))),`anchorName`in document.documentElement.style)await this.updateComplete;else{let e=import.meta.url.substring(0,import.meta.url.lastIndexOf(`/`));try{let[{default:t}]=await Promise.all([r(()=>import(`${e}/oddbird-css-anchor-positioning.js`),[],import.meta.url),this.updateComplete]);this.anchorPositioningStyleElement||(this.anchorPositioningStyleElement=document.createElement(`style`),this.shadowRoot.prepend(this.anchorPositioningStyleElement)),this.anchorPositioningStyleElement.textContent=`
         /*
          * The polyfill can only anchor to ::before and ::after pseudo elements, not the pseudo element slider thumb.
          * We work around that by recreating a transparent version of the active range
@@ -536,7 +536,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
           left: anchor(--polyfilled-thumb left);
           margin-left: 38px;
         }
-      `,await t({roots:[this.shadowRoot],elements:[this.anchorPositioningStyleElement]})}catch(e){console.error(Error(`Error registering the CSS anchor positioning polyfill. The UI will look broken.`,{cause:e}))}}let e=window.navigator.userAgent;k.test(e)&&!A.test(e)&&this.tooltipTarget&&this.tooltipTarget.style.setProperty(`--transform-offset`,`var(--w-slider-thumb-size, 28px)`),this.#r()}get boundaryValue(){return this.slot===`from`?this.min:this.max}get textFieldDisplayValue(){return this._inputHasFocus&&this.value===``?this.range?.value?Math.min(Math.max(Number(this.range.value),Number(this.min)+1),Number(this.max)-1).toString():``:this.value}get tooltipDisplayValue(){let e;return e=this.tooltipFormatter?this.tooltipFormatter(this.value,this.slot):this.valueFormatter?this.valueFormatter(this.value,this.slot):this.value===``?this.range?.value??this.boundaryValue:this.value||0,e}get ariaDescriptionText(){let e=``,t=this.ariaDescription||``,n=this.value===``;return this.openEnded&&n&&(e=this.slot===`from`?m.t({id:`slider.placeholder.from`,message:`Min`}):m.t({id:`slider.placeholder.to`,message:`Max`})),e?`${e}, ${t}`:t}updated(e){if(e.has(`openEnded`)&&this.openEnded&&!this.placeholder&&(this.slot===`to`||this.slot===``?this.placeholder=m.t({id:`slider.placeholder.to`,message:`Max`,comment:`Max as in short for Maximum`}):this.slot===`from`&&(this.placeholder=m.t({id:`slider.placeholder.from`,message:`Min`,comment:`Min as in short for Minimum`}))),e.has(`value`)){this.#e===void 0&&this.value!==void 0&&(this.#e=this.value),this.setValue(this.value),this.#r();let t=e.get(`value`);this.value===``&&t&&this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}}render(){let e=this.placeholder&&!this.value,t=this.tooltipDisplayValue!==`Min`&&this.tooltipDisplayValue!==`Max`&&(this.suffix??``)!==``;return s`
+      `,await t({roots:[this.shadowRoot],elements:[this.anchorPositioningStyleElement]})}catch(e){console.error(Error(`Error registering the CSS anchor positioning polyfill. The UI will look broken.`,{cause:e}))}}let e=window.navigator.userAgent;k.test(e)&&!A.test(e)&&this.tooltipTarget&&this.tooltipTarget.style.setProperty(`--transform-offset`,`var(--w-slider-thumb-size, 28px)`),this.#r()}get boundaryValue(){return this.slot===`from`?this.min:this.max}get textFieldDisplayValue(){return this._inputHasFocus&&this.value===``?this.range?.value?Math.min(Math.max(Number(this.range.value),Number(this.min)+1),Number(this.max)-1).toString():``:this.value}get tooltipDisplayValue(){let e;return e=this.tooltipFormatter?this.tooltipFormatter(this.value,this.slot):this.valueFormatter?this.valueFormatter(this.value,this.slot):this.value===``?this.range?.value??this.boundaryValue:this.value||0,e}get ariaDescriptionText(){let e=``,t=this.ariaDescription||``,n=this.value===``;return this.openEnded&&n&&(e=this.slot===`from`?m.t({id:`slider.placeholder.from`,message:`Min`}):m.t({id:`slider.placeholder.to`,message:`Max`})),e?`${e}, ${t}`:t}updated(e){if(e.has(`openEnded`)&&this.openEnded&&!this.placeholder&&(this.slot===`to`||this.slot===``?this.placeholder=m.t({id:`slider.placeholder.to`,message:`Max`,comment:`Max as in short for Maximum`}):this.slot===`from`&&(this.placeholder=m.t({id:`slider.placeholder.from`,message:`Min`,comment:`Min as in short for Minimum`}))),e.has(`value`)){this.#e===void 0&&this.value!==void 0&&(this.#e=this.value),this.setValue(this.value),this.#r();let t=e.get(`value`);(this.value===``&&t||this.slot===`from`&&this.value===this.min||this.slot===`to`&&this.value===this.max)&&this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}(e.has(`min`)||e.has(`max`))&&(this.value=this.#e,this.setValue(this.value),this.#r())}render(){let e=this.placeholder&&!this.value,t=this.tooltipDisplayValue!==`Min`&&this.tooltipDisplayValue!==`Max`&&(this.suffix??``)!==``;return s`
 			<div class="w-slider-thumb">
 				${`anchorName`in document.documentElement.style?o:s`<div class="polyfill-range">
 								<div class="polyfill-active-range"></div>
@@ -617,25 +617,28 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
 					${this.ariaDescriptionText}
 				</span>
 			</div>
-		`}},d([u({attribute:`aria-label`})],j.prototype,`ariaLabel`,void 0),d([u({attribute:`aria-description`})],j.prototype,`ariaDescription`,void 0),d([u({reflect:!0})],j.prototype,`name`,void 0),d([u({reflect:!0})],j.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],j.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],j.prototype,`invalid`,void 0),d([u({attribute:!1,reflect:!1})],j.prototype,`openEnded`,void 0),d([u({reflect:!0})],j.prototype,`placeholder`,void 0),d([i()],j.prototype,`markers`,void 0),d([i()],j.prototype,`required`,void 0),d([i()],j.prototype,`step`,void 0),d([i()],j.prototype,`min`,void 0),d([i()],j.prototype,`max`,void 0),d([i()],j.prototype,`suffix`,void 0),d([u({attribute:!1})],j.prototype,`valueFormatter`,void 0),d([u({attribute:!1})],j.prototype,`tooltipFormatter`,void 0),d([u({attribute:!1})],j.prototype,`labelFormatter`,void 0),d([h(`input[type="range"]`)],j.prototype,`range`,void 0),d([h(`.w-slider-thumb__tooltip-target`)],j.prototype,`tooltipTarget`,void 0),d([h(`w-textfield`)],j.prototype,`textfield`,void 0),d([i()],j.prototype,`_showTooltip`,void 0),d([i()],j.prototype,`_inputHasFocus`,void 0),d([i()],j.prototype,`_hiddenTextfield`,void 0),customElements.get(`w-slider-thumb`)||customElements.define(`w-slider-thumb`,j)})))()}var we=t({CustomError:()=>Y,Description:()=>X,HiddenMinimumMaximumLabels:()=>Q,Marks:()=>W,OpenEnded:()=>K,Range:()=>R,RangeError:()=>J,RangeOptional:()=>z,RangeWithTooltip:()=>B,Single:()=>P,SingleDisabled:()=>F,SingleError:()=>q,SingleOptional:()=>I,SingleWithTooltip:()=>L,Step:()=>G,SuffixCurrency:()=>H,SuffixKilometers:()=>U,SuffixSquareMeters:()=>V,VisuallyHiddenLabel:()=>Z,VisuallyHiddenTextfield:()=>$,__namedExportsOrder:()=>Pe,default:()=>Ne}),Te,Ee,De,Oe,ke,Ae,N,je,Me,Ne,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,Pe;function Fe(){return(Fe=e((()=>{re(),a(),fe(),me(),ge(),he(),w(),M(),{events:N,args:je,argTypes:Me}=ie(`w-slider`),Ne={title:`Forms/Slider and Range Slider`,args:je,argTypes:Me,parameters:{actions:{handles:N}}},P={render(){return s`
+		`}},d([u({attribute:`aria-label`})],j.prototype,`ariaLabel`,void 0),d([u({attribute:`aria-description`})],j.prototype,`ariaDescription`,void 0),d([u({reflect:!0})],j.prototype,`name`,void 0),d([u({reflect:!0})],j.prototype,`value`,void 0),d([u({type:Boolean,reflect:!0})],j.prototype,`disabled`,void 0),d([u({type:Boolean,reflect:!0})],j.prototype,`invalid`,void 0),d([u({attribute:!1,reflect:!1})],j.prototype,`openEnded`,void 0),d([u({reflect:!0})],j.prototype,`placeholder`,void 0),d([u({reflect:!1})],j.prototype,`markers`,void 0),d([u({reflect:!1})],j.prototype,`required`,void 0),d([u({reflect:!1})],j.prototype,`step`,void 0),d([u({reflect:!1})],j.prototype,`min`,void 0),d([u({reflect:!1})],j.prototype,`max`,void 0),d([u({reflect:!1})],j.prototype,`suffix`,void 0),d([u({attribute:!1})],j.prototype,`valueFormatter`,void 0),d([u({attribute:!1})],j.prototype,`tooltipFormatter`,void 0),d([u({attribute:!1})],j.prototype,`labelFormatter`,void 0),d([h(`input[type="range"]`)],j.prototype,`range`,void 0),d([h(`.w-slider-thumb__tooltip-target`)],j.prototype,`tooltipTarget`,void 0),d([h(`w-textfield`)],j.prototype,`textfield`,void 0),d([i()],j.prototype,`_showTooltip`,void 0),d([i()],j.prototype,`_inputHasFocus`,void 0),d([i()],j.prototype,`_hiddenTextfield`,void 0),customElements.get(`w-slider-thumb`)||customElements.define(`w-slider-thumb`,j)})))()}var De=t({CustomError:()=>q,Description:()=>J,HiddenMinimumMaximumLabels:()=>X,Marks:()=>H,OpenEnded:()=>W,Range:()=>I,RangeError:()=>K,RangeInExpandable:()=>Q,RangeInModal:()=>$,RangeOptional:()=>L,RangeWithTooltip:()=>R,Single:()=>M,SingleDisabled:()=>N,SingleError:()=>G,SingleOptional:()=>P,SingleWithTooltip:()=>F,Step:()=>U,SuffixCurrency:()=>B,SuffixKilometers:()=>V,SuffixSquareMeters:()=>z,VisuallyHiddenLabel:()=>Y,VisuallyHiddenTextfield:()=>Z,__namedExportsOrder:()=>ze,default:()=>Re}),Oe,ke,Ae,je,Me,Ne,Pe,Fe,Ie,Le,Re,M,N,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q,$,ze;function Be(){return(Be=e((()=>{re(),a(),fe(),me(),_e(),ve(),ge(),he(),w(),Ee(),{events:Fe,args:Ie,argTypes:Le}=ie(`w-slider`),Re={title:`Forms/Slider and Range Slider`,args:Ie,argTypes:Le,parameters:{actions:{handles:Fe}}},M={render(){return s`
             <form>
                 <w-slider label="Single" min="0" max="100">
                     <w-slider-thumb name="value"></w-slider-thumb>
                 </w-slider>
-                <input type="submit" hidden />
+                <div class="py-8">
+                    <w-button type="reset">Reset</w-button>
+                    <w-button type="submit">Submit</w-button>
+                </div>
             </form>
-        `}},F={render(){return s`
+        `}},N={render(){return s`
             <w-slider label="Single disabled" min="0" max="100" disabled>
                 <w-slider-thumb name="value"></w-slider-thumb>
             </w-slider>
-        `}},I={render(){return s`
+        `}},P={render(){return s`
             <form>
                 <w-slider label="Single" min="0" max="100" optional>
                     <w-slider-thumb name="value"></w-slider-thumb>
                 </w-slider>
                 <input type="submit" hidden />
             </form>
-        `}},L={args:{optional:!0,required:!1},render({optional:e,required:t}){return s`
+        `}},F={args:{optional:!0,required:!1},render({optional:e,required:t}){return s`
             <form>
                 <w-slider
                     label="Single"
@@ -649,7 +652,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 </w-slider>
                 <input type="submit" hidden />
             </form>
-        `}},R={render(){return s`
+        `}},I={render(){return s`
             <form>
                 <w-slider label="Range" min="0" max="100">
                     <w-slider-thumb
@@ -660,6 +663,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     <w-slider-thumb
                         slot="to"
                         aria-label="To value"
+                        value="50"
                         name="to"
                     ></w-slider-thumb>
                 </w-slider>
@@ -668,7 +672,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     <w-button type="submit">Submit</w-button>
                 </div>
             </form>
-        `}},z={render(){return s`
+        `}},L={render(){return s`
             <form>
                 <w-slider label="Range" min="0" max="100" optional>
                     <w-slider-thumb
@@ -687,7 +691,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     <w-button type="submit">Submit</w-button>
                 </div>
             </form>
-        `}},B={args:{optional:!0,required:!1},render({optional:e,required:t}){return s`
+        `}},R={args:{optional:!0,required:!1},render({optional:e,required:t}){return s`
             <form>
                 <w-slider
                     label="Range"
@@ -713,7 +717,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     <w-button type="submit">Submit</w-button>
                 </div>
             </form>
-        `}},V={args:{locale:`nb`,suffix:`m²`},render({suffix:e}){return s`
+        `}},z={args:{locale:`nb`,suffix:`m²`},render({suffix:e}){return s`
             <w-slider
                 label="Apartment size"
                 min="0"
@@ -732,7 +736,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     name="to"
                 ></w-slider-thumb>
             </w-slider>
-        `}},H={args:{locale:`nb`,suffix:`kr`},render({locale:e,suffix:t}){return s(Te||=_([`
+        `}},B={args:{locale:`nb`,suffix:`kr`},render({locale:e,suffix:t}){return s(Oe||=_([`
             <w-slider
                 label="Price"
                 min="0"
@@ -762,7 +766,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 };
                 currencySlider.valueFormatter = numberFormatter;
             <\/script>
-        `]),t,e)}},U={args:{locale:`nb`,suffix:`km`},render({locale:e,suffix:t}){return s(Ee||=_([`
+        `]),t,e)}},V={args:{locale:`nb`,suffix:`km`},render({locale:e,suffix:t}){return s(ke||=_([`
             <w-slider
                 label="Distance"
                 min="0"
@@ -790,7 +794,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 };
                 kmSlider.valueFormatter = numberFormatter;
             <\/script>
-        `]),t,e)}},W={args:{locale:`nb`,step:`5`,markers:`5`},render({markers:e,step:t}){return s`
+        `]),t,e)}},H={args:{locale:`nb`,step:`5`,markers:`5`},render({markers:e,step:t}){return s`
             <w-slider
                 label="Single"
                 min="0"
@@ -800,11 +804,11 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             >
                 <w-slider-thumb name="value"></w-slider-thumb>
             </w-slider>
-        `}},G={args:{step:5},render({step:e}){return s`
+        `}},U={args:{step:5},render({step:e}){return s`
             <w-slider label="Single" step="${e}" min="0" max="100">
                 <w-slider-thumb name="value"></w-slider-thumb>
             </w-slider>
-        `}},K={args:{},render(){return s(De||=_([`
+        `}},W={args:{},render(){return s(Ae||=_([`
             <form id="openended" style="margin-bottom: 16px">
                 <w-slider
                     label="Model year"
@@ -867,12 +871,12 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     document.getElementById("openended-to").innerText = to;
                 });
             <\/script>
-        `]))}},q={render(){return s`
+        `]))}},G={render(){return s`
             <w-slider label="Single" min="0" max="100">
                 <p slot="description">Try typing a value over 100</p>
                 <w-slider-thumb></w-slider-thumb>
             </w-slider>
-        `}},J={args:{},render(){return s(Oe||=_([`
+        `}},K={args:{},render(){return s(je||=_([`
             <form id="rangeerror" style="margin-bottom: 16px">
                 <w-slider label="Model year" min="1950" max="2025">
                     <p slot="description">
@@ -904,7 +908,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     document.getElementById("rangeerror-to").innerText = to;
                 });
             <\/script>
-        `]))}},Y={args:{error:`I'm an external error telling you something is wrong`,invalid:!0},render(e){return s`
+        `]))}},q={args:{error:`I'm an external error telling you something is wrong`,invalid:!0},render(e){return s`
             <w-slider
                 label="Model year"
                 min="1950"
@@ -915,7 +919,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 <w-slider-thumb slot="from" name="from"></w-slider-thumb>
                 <w-slider-thumb slot="to" name="to"></w-slider-thumb>
             </w-slider>
-        `}},X={render(){return s`
+        `}},J={render(){return s`
             <w-slider
                 label="Model year"
                 min="1950"
@@ -925,13 +929,13 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 <w-slider-thumb slot="from" name="from"></w-slider-thumb>
                 <w-slider-thumb slot="to" name="to"></w-slider-thumb>
             </w-slider>
-        `}},Z={render(){return s`
+        `}},Y={render(){return s`
             <w-slider min="1950" max="2025" help-text="Model year of the car">
                 <legend class="sr-only" slot="label">Model year</legend>
                 <w-slider-thumb slot="from" name="from"></w-slider-thumb>
                 <w-slider-thumb slot="to" name="to"></w-slider-thumb>
             </w-slider>
-        `}},Q={render(){return s(ke||=_([`
+        `}},X={render(){return s(Me||=_([`
             <w-slider
                 min="1950"
                 max="2025"
@@ -948,7 +952,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                 );
                 hiddenMinMaxSlider.labelFormatter = () => "";
             <\/script>
-        `]))}},$={render({locale:e}){return s(Ae||=_([`
+        `]))}},Z={render({locale:e}){return s(Ne||=_([`
             <output class="text-xs">
                 <span class="font-bold">Distance:</span>
                 <span id="distance-value"></span>
@@ -999,18 +1003,92 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     const distance = formData.get("distance");
                 });
             <\/script>
-        `]),e)}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
+        `]),e)}},Q={args:{step:100,suffix:`kr`},render({step:e,locale:t,suffix:n}){return s(Pe||=_([`
+            <w-expandable title="Price">
+                <w-slider
+                    label="Price"
+                    min="0"
+                    max="250000"
+                    suffix="`,`"
+                    step="`,`"
+                    data-testid="expandable"
+                >
+                    <w-slider-thumb
+                        slot="from"
+                        aria-label="From price"
+                        name="from"
+                    ></w-slider-thumb>
+                    <w-slider-thumb
+                        slot="to"
+                        aria-label="To price"
+                        name="to"
+                    ></w-slider-thumb>
+                </w-slider>
+            </w-expandable>
+            <script type="module">
+                const numberFormatter = window.getNumberFormatter("`,`").format;
+                const expandableSlider = document.querySelector(
+                    'w-slider[data-testid="expandable"]',
+                );
+                expandableSlider.labelFormatter = (slot) => {
+                    if (slot === "from") return "0";
+                    return numberFormatter("250000");
+                };
+                expandableSlider.valueFormatter = numberFormatter;
+            <\/script>
+        `]),n,e,t)}},$={args:{step:100,suffix:`kr`},render({step:e,suffix:t}){return s`
+            <w-button
+                commandfor="invoker-modal"
+                command="--show-modal"
+                aria-haspopup="dialog"
+            >
+                Open a modal
+            </w-button>
+            <w-modal id="invoker-modal">
+                <w-modal-header
+                    id="modal-header-one"
+                    slot="header"
+                    title="An example modal"
+                ></w-modal-header>
+                <div slot="content" @input=${console.log}>
+                    <w-slider
+                        label="Price"
+                        min="0"
+                        max="250000"
+                        suffix="${t}"
+                        step="${e}"
+                        data-testid="expandable"
+                    >
+                        <w-slider-thumb
+                            slot="from"
+                            aria-label="From price"
+                            value="0"
+                            name="from"
+                        ></w-slider-thumb>
+                        <w-slider-thumb
+                            slot="to"
+                            aria-label="To price"
+                            value="250000"
+                            name="to"
+                        ></w-slider-thumb>
+                    </w-slider>
+                </div>
+            </w-modal>
+        `}},M.parameters={...M.parameters,docs:{...M.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <form>
                 <w-slider label="Single" min="0" max="100">
                     <w-slider-thumb name="value"></w-slider-thumb>
                 </w-slider>
-                <input type="submit" hidden />
+                <div class="py-8">
+                    <w-button type="reset">Reset</w-button>
+                    <w-button type="submit">Submit</w-button>
+                </div>
             </form>
         \`;
   }
-}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
+}`,...M.parameters?.docs?.source}}},N.parameters={...N.parameters,docs:{...N.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <w-slider label="Single disabled" min="0" max="100" disabled>
@@ -1018,7 +1096,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
+}`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <form>
@@ -1029,7 +1107,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </form>
         \`;
   }
-}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
+}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
   args: {
     optional: true,
     required: false
@@ -1054,7 +1132,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </form>
         \`;
   }
-}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
+}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <form>
@@ -1067,6 +1145,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
                     <w-slider-thumb
                         slot="to"
                         aria-label="To value"
+                        value="50"
                         name="to"
                     ></w-slider-thumb>
                 </w-slider>
@@ -1077,7 +1156,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </form>
         \`;
   }
-}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <form>
@@ -1100,7 +1179,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </form>
         \`;
   }
-}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
+}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
   args: {
     optional: true,
     required: false
@@ -1137,7 +1216,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </form>
         \`;
   }
-}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
+}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
     locale: "nb",
     suffix: "m²"
@@ -1166,7 +1245,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
+}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
     locale: "nb",
     suffix: "kr"
@@ -1207,7 +1286,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
+}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
   args: {
     locale: "nb",
     suffix: "km"
@@ -1246,7 +1325,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
+}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
   args: {
     locale: "nb",
     step: "5",
@@ -1268,7 +1347,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
+}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
   args: {
     step: 5
   },
@@ -1281,7 +1360,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
+}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -1349,7 +1428,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
+}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <w-slider label="Single" min="0" max="100">
@@ -1358,7 +1437,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
+}`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -1395,7 +1474,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
+}`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
   args: {
     error: "I'm an external error telling you something is wrong",
     invalid: true
@@ -1414,7 +1493,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
+}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <w-slider
@@ -1428,7 +1507,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
+}`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <w-slider min="1950" max="2025" help-text="Model year of the car">
@@ -1438,7 +1517,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             </w-slider>
         \`;
   }
-}`,...Z.parameters?.docs?.source}}},Q.parameters={...Q.parameters,docs:{...Q.parameters?.docs,source:{originalSource:`{
+}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
             <w-slider
@@ -1459,7 +1538,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...Q.parameters?.docs?.source}}},$.parameters={...$.parameters,docs:{...$.parameters?.docs,source:{originalSource:`{
+}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
   render({
     locale
   }) {
@@ -1516,4 +1595,98 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from".
             <\/script>
         \`;
   }
-}`,...$.parameters?.docs?.source}}},Pe=[`Single`,`SingleDisabled`,`SingleOptional`,`SingleWithTooltip`,`Range`,`RangeOptional`,`RangeWithTooltip`,`SuffixSquareMeters`,`SuffixCurrency`,`SuffixKilometers`,`Marks`,`Step`,`OpenEnded`,`SingleError`,`RangeError`,`CustomError`,`Description`,`VisuallyHiddenLabel`,`HiddenMinimumMaximumLabels`,`VisuallyHiddenTextfield`]})))()}export{P as a,H as c,Fe as d,we as f,J as i,U as l,K as n,q as o,R as r,G as s,W as t,V as u};
+}`,...Z.parameters?.docs?.source}}},Q.parameters={...Q.parameters,docs:{...Q.parameters?.docs,source:{originalSource:`{
+  args: {
+    step: 100,
+    suffix: "kr"
+  },
+  render({
+    step,
+    locale,
+    suffix
+  }) {
+    return html\`
+            <w-expandable title="Price">
+                <w-slider
+                    label="Price"
+                    min="0"
+                    max="250000"
+                    suffix="\${suffix}"
+                    step="\${step}"
+                    data-testid="expandable"
+                >
+                    <w-slider-thumb
+                        slot="from"
+                        aria-label="From price"
+                        name="from"
+                    ></w-slider-thumb>
+                    <w-slider-thumb
+                        slot="to"
+                        aria-label="To price"
+                        name="to"
+                    ></w-slider-thumb>
+                </w-slider>
+            </w-expandable>
+            <script type="module">
+                const numberFormatter = window.getNumberFormatter("\${locale}").format;
+                const expandableSlider = document.querySelector(
+                    'w-slider[data-testid="expandable"]',
+                );
+                expandableSlider.labelFormatter = (slot) => {
+                    if (slot === "from") return "0";
+                    return numberFormatter("250000");
+                };
+                expandableSlider.valueFormatter = numberFormatter;
+            <\/script>
+        \`;
+  }
+}`,...Q.parameters?.docs?.source}}},$.parameters={...$.parameters,docs:{...$.parameters?.docs,source:{originalSource:`{
+  args: {
+    step: 100,
+    suffix: "kr"
+  },
+  render({
+    step,
+    suffix
+  }) {
+    return html\`
+            <w-button
+                commandfor="invoker-modal"
+                command="--show-modal"
+                aria-haspopup="dialog"
+            >
+                Open a modal
+            </w-button>
+            <w-modal id="invoker-modal">
+                <w-modal-header
+                    id="modal-header-one"
+                    slot="header"
+                    title="An example modal"
+                ></w-modal-header>
+                <div slot="content" @input=\${console.log}>
+                    <w-slider
+                        label="Price"
+                        min="0"
+                        max="250000"
+                        suffix="\${suffix}"
+                        step="\${step}"
+                        data-testid="expandable"
+                    >
+                        <w-slider-thumb
+                            slot="from"
+                            aria-label="From price"
+                            value="0"
+                            name="from"
+                        ></w-slider-thumb>
+                        <w-slider-thumb
+                            slot="to"
+                            aria-label="To price"
+                            value="250000"
+                            name="to"
+                        ></w-slider-thumb>
+                    </w-slider>
+                </div>
+            </w-modal>
+        \`;
+  }
+}`,...$.parameters?.docs?.source}}},ze=[`Single`,`SingleDisabled`,`SingleOptional`,`SingleWithTooltip`,`Range`,`RangeOptional`,`RangeWithTooltip`,`SuffixSquareMeters`,`SuffixCurrency`,`SuffixKilometers`,`Marks`,`Step`,`OpenEnded`,`SingleError`,`RangeError`,`CustomError`,`Description`,`VisuallyHiddenLabel`,`HiddenMinimumMaximumLabels`,`VisuallyHiddenTextfield`,`RangeInExpandable`,`RangeInModal`]})))()}export{M as a,B as c,Be as d,De as f,K as i,V as l,W as n,G as o,I as r,U as s,H as t,z as u};

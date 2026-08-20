@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-Bt2QF_uA.js";import{a as ee,o as l,r as u,t as d}from"./i18n-CkjYRTT1.js";import"./__uno-CmvWQQDY.js";import{n as f,t as te}from"./dist-D5kJVy4t.js";import{t as p}from"./query-BHY-nhsh.js";import{t as m}from"./icon-ND47zKHd.js";import{n as h,t as g}from"./styles-Cw_r5k83.js";import{n as _,r as v,t as ne}from"./element-collapse-D7tK4piP.js";import{t as y}from"./attention-B4Dzaore.js";import{t as b}from"./button-BUSt27aY.js";import{n as x,r as S,t as C}from"./modal-footer-BR-Kg21W.js";var w;function T(){return(T=e((()=>{n(),w=c`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-Bt2QF_uA.js";import{a as ee,o as l,r as u,t as d}from"./i18n-CkjYRTT1.js";import"./__uno-CmvWQQDY.js";import{n as f,t as te}from"./dist-D5kJVy4t.js";import{t as p}from"./query-BHY-nhsh.js";import{t as m}from"./icon-ND47zKHd.js";import{n as h,t as g}from"./styles-Cw_r5k83.js";import{n as _,r as v,t as ne}from"./element-collapse-D7tK4piP.js";import{t as y}from"./attention-B4Dzaore.js";import{t as b}from"./button-BUSt27aY.js";import{t as x}from"./modal-CIOf8Xw7.js";import{n as S,t as C}from"./modal-footer-D3m9zSh3.js";var w;function T(){return(T=e((()=>{n(),w=c`
 	:host {
 		display: block;
 
@@ -214,7 +214,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t,c as n,h as r,l
 			<aside part="container">
 				<slot></slot>
 			</aside>
-		`}},customElements.get(`w-snackbar`)||customElements.define(`w-snackbar`,U)})))()}var G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{f(),n(),y(),b(),m(),S(),x(),C(),W(),O(),{events:G,args:K,argTypes:q}=te(`w-snackbar`),J={title:`Overlays/Snackbar`,args:{...K,canClose:!0,duration:void 0},argTypes:{...q,duration:{control:{type:`select`},options:[`4 seconds`,`10 seconds`,`Infinite`]}},parameters:{actions:{handles:G}}},Y={render({duration:e,canClose:t}){let n=e===`Infinite`?E.Infinite:e===`10 seconds`?E.Long:E.Short;return r`
+		`}},customElements.get(`w-snackbar`)||customElements.define(`w-snackbar`,U)})))()}var G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{f(),n(),y(),b(),m(),x(),S(),C(),W(),O(),{events:G,args:K,argTypes:q}=te(`w-snackbar`),J={title:`Overlays/Snackbar`,args:{...K,canClose:!0,duration:void 0},argTypes:{...q,duration:{control:{type:`select`},options:[`4 seconds`,`10 seconds`,`Infinite`]}},parameters:{actions:{handles:G}}},Y={render({duration:e,canClose:t}){let n=e===`Infinite`?E.Infinite:e===`10 seconds`?E.Long:E.Short;return r`
             <div class="flex gap-8">
                 <w-button
                     @click="${()=>{document.querySelector(`w-snackbar`).create(`The message should be short, but if it is not and spans multiple lines then the icon and actions should be centered vertically`,{variant:`positive`,duration:n,canClose:t})}}"
