@@ -312,9 +312,10 @@ export const TestCase: Story = {
 
 export const InExpandable: Story = {
 	args: {
+		step: 100,
 		suffix: "kr",
 	},
-	render({ suffix }) {
+	render({ suffix, step }) {
 		const numberFormatter = getNumberFormatter(locale);
 		const min = "0";
 		const max = "250000";
@@ -324,6 +325,7 @@ export const InExpandable: Story = {
 					label="Price"
 					min={min}
 					max={max}
+					step={step}
 					suffix={suffix}
 					labelFormatter={(slot) => {
 						if (slot === "from") {
@@ -344,8 +346,9 @@ export const InExpandable: Story = {
 export const InModal: Story = {
 	args: {
 		suffix: "kr",
+		step: 100,
 	},
-	render({ suffix }) {
+	render({ suffix, step }) {
 		const [open, setOpen] = useState(false);
 		const numberFormatter = getNumberFormatter(locale);
 		const min = "0";
@@ -366,6 +369,7 @@ export const InModal: Story = {
 							label="Price"
 							min={min}
 							max={max}
+							step={step}
 							suffix={suffix}
 							labelFormatter={(slot) => {
 								if (slot === "from") {

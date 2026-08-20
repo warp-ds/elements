@@ -41,7 +41,10 @@ export const Single: Story = {
 				<w-slider label="Single" min="0" max="100">
 					<w-slider-thumb name="value"></w-slider-thumb>
 				</w-slider>
-				<input type="submit" hidden />
+				<div class="py-8">
+					<w-button type="reset">Reset</w-button>
+					<w-button type="submit">Submit</w-button>
+				</div>
 			</form>
 		`;
 	},
@@ -107,6 +110,7 @@ export const Range: Story = {
 					<w-slider-thumb
 						slot="to"
 						aria-label="To value"
+						value="50"
 						name="to"
 					></w-slider-thumb>
 				</w-slider>
@@ -573,7 +577,7 @@ export const VisuallyHiddenTextfield: Story = {
 
 export const RangeInExpandable: Story = {
 	args: {
-		step: 5,
+		step: 100,
 		suffix: "kr",
 	},
 	render({ step, locale, suffix }) {
@@ -616,10 +620,10 @@ export const RangeInExpandable: Story = {
 
 export const RangeInModal: Story = {
 	args: {
-		step: 5,
+		step: 100,
 		suffix: "kr",
 	},
-	render({ step, locale, suffix }) {
+	render({ step, suffix }) {
 		return html`
 			<w-button
 				commandfor="invoker-modal"
@@ -658,17 +662,6 @@ export const RangeInModal: Story = {
 					</w-slider>
 				</div>
 			</w-modal>
-			<script type="module">
-				const numberFormatter = window.getNumberFormatter("${locale}").format;
-				const expandableSlider = document.querySelector(
-					'w-slider[data-testid="expandable"]',
-				);
-				expandableSlider.labelFormatter = (slot) => {
-					if (slot === "from") return "0";
-					return numberFormatter("250000");
-				};
-				expandableSlider.valueFormatter = numberFormatter;
-			</script>
 		`;
 	},
 };
