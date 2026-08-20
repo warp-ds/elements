@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,i as l,n as u,o as d,r as f,s as p,t as m}from"./card.stories-DW0m1jzJ.js";function h(e){let r={a:`a`,code:`code`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,_.jsxs)(_.Fragment,{children:[(0,_.jsx)(n,{of:p,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-CVd2aGst.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,i as l,n as u,o as d,r as f,s as p,t as m}from"./card.stories-DNuP5GCP.js";function h(e){let r={a:`a`,code:`code`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,_.jsxs)(_.Fragment,{children:[(0,_.jsx)(n,{of:p,name:`Docs`}),`
 `,(0,_.jsx)(r.h1,{id:`card`,children:`Card`}),`
 `,(0,_.jsx)(r.p,{children:`Card is a layout component used for grouping interactive content areas on a page.`}),`
 `,(0,_.jsx)(r.h2,{id:`accessibility`,children:`Accessibility`}),`
