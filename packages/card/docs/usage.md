@@ -37,20 +37,40 @@ The default card uses an elevated surface. Use `flat` when the card should sit m
 </w-card>
 ```
 
-### Selected Cards
+### Selection Cards
 
-Use `selected` when a card represents a selected item or choice.
+The `selected` card property is deprecated. For selectable cards, place a `w-radio` or `w-checkbox` inside the card and add `data-card-action` to the control. The card automatically uses its selected styling when the control is checked.
 
 ```html
-<w-card selected>
+<w-card>
 	<div style="padding: 16px;">
-		<h3>Standard delivery</h3>
-		<p>Delivered in 2-4 business days.</p>
+		<w-radio
+			id="delivery-home"
+			name="delivery"
+			value="home"
+			data-card-action
+		></w-radio>
+		<label for="delivery-home">Home delivery</label>
+		<p>Delivered to your door.</p>
 	</div>
 </w-card>
 ```
 
-The `selected` property only controls the card's visual state. Update it from your application state when the selection changes.
+Use `w-checkbox` in the same way when more than one card can be selected:
+
+```html
+<w-card>
+	<div style="padding: 16px;">
+		<w-checkbox
+			id="gift-wrap"
+			name="options"
+			value="gift-wrap"
+			data-card-action
+		></w-checkbox>
+		<label for="gift-wrap">Add gift wrapping</label>
+	</div>
+</w-card>
+```
 
 ### Cards as Links
 

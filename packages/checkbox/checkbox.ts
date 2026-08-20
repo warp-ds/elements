@@ -113,6 +113,7 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.addEventListener("click", this.#handleHostClick);
 		const attrValue = this.getAttribute("value");
 		this.value = attrValue ?? "on";
 		this.#defaultChecked = this.hasAttribute("checked");
@@ -134,6 +135,10 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 			);
 		});
 	}
+
+	#handleHostClick = (event: MouseEvent) => {
+		if (event.composedPath()[0] === this) this.handleClick();
+	};
 
 	/* @internal */
 	#handleInvalid = () => {

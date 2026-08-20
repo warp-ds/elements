@@ -15,24 +15,52 @@
 	text-decoration: none;
 	color: inherit;
 }
-[data-card-secondary-action] {
-	position: relative;
-	z-index: 1;
-}
-
 w-card:has([data-card-action]) {
 	position: relative;
 }
 
+w-card:has([data-card-action][checked]) {
+	--w-c-card-bg: var(--w-s-color-background-selected);
+	--w-c-card-bg-hover: var(--w-s-color-background-selected-hover);
+	--w-c-card-bg-active: var(--w-s-color-background-selected-active);
+	--w-c-card-border-color: var(--w-s-color-border-selected);
+	--w-c-card-border-color-hover: var(--w-s-color-border-selected-hover);
+	--w-c-card-border-color-active: var(--w-s-color-border-selected-active);
+}
+
 w-card:has([data-card-action]:hover)::part(base),
 w-card:has([data-card-action]:focus-visible)::part(base) {
-	background-color: var(--w-s-color-background-hover);
-	box-shadow: var(--w-s-shadow-surface-elevated-200-hover);
+	background-color: var(--w-c-card-bg-hover, var(--w-s-color-background-hover));
+	box-shadow: var(
+		--w-c-card-box-shadow-hover,
+		var(--w-s-shadow-surface-elevated-200-hover)
+	);
 	cursor: pointer;
 	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 w-card:has([data-card-action]:active)::part(base) {
-	background-color: var(--w-s-color-background-active);
-	box-shadow: var(--w-s-shadow-surface-elevated-200-active);
+	background-color: var(
+		--w-c-card-bg-active,
+		var(--w-s-color-background-active)
+	);
+	box-shadow: var(
+		--w-c-card-box-shadow-active,
+		var(--w-s-shadow-surface-elevated-200-active)
+	);
+}
+
+w-card:has([data-card-action]:hover)::part(border),
+w-card:has([data-card-action]:focus-visible)::part(border) {
+	border-color: var(
+		--w-c-card-border-color-hover,
+		var(--w-s-color-border-hover)
+	);
+}
+
+w-card:has([data-card-action]:active)::part(border) {
+	border-color: var(
+		--w-c-card-border-color-active,
+		var(--w-s-color-border-active)
+	);
 }
