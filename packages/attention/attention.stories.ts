@@ -84,10 +84,14 @@ export const ToolTip: Story = {
 				(() => {
 					const button = document.getElementById("tooltip-target");
 					const tooltip = document.getElementById("tooltip-element");
+					tooltip.show = true;
 					button.addEventListener("click", (e) => {
 						tooltip.show = true;
 					});
-					button.addEventListener("mouseleave", () => {
+					button.addEventListener("mouseover", () => {
+						tooltip.show = true;
+					});
+					button.addEventListener("mouseout", () => {
 						tooltip.show = false;
 					});
 					button.addEventListener("focus", () => {

@@ -15,12 +15,12 @@ msgstr ""
 
 #. Aria label for the clear input button in affix
 #. js-lingui-explicit-id
-#: packages/affix/affix.ts:127
+#: packages/affix/affix.ts
 msgid "affix.aria.clearInput"
 msgstr "Tyhjennä syöte"
 
 #. Aria label for the search button in affix
 #. js-lingui-explicit-id
-#: packages/affix/affix.ts:100
+#: packages/affix/affix.ts
 msgid "affix.aria.search"
 msgstr "Hae"

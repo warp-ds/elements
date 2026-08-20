@@ -10,10 +10,10 @@ The component does not add padding, headings, spacing between children, or seman
 
 ```html
 <w-card>
-  <div style="padding: 16px;">
-    <h3>Apartment in Oslo</h3>
-    <p>Bright 3-room apartment with balcony.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Apartment in Oslo</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+	</div>
 </w-card>
 ```
 
@@ -23,17 +23,17 @@ The default card uses an elevated surface. Use `flat` when the card should sit m
 
 ```html
 <w-card>
-  <div style="padding: 16px;">
-    <h3>Elevated card</h3>
-    <p>Use this for cards that need more visual separation.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Elevated card</h3>
+		<p>Use this for cards that need more visual separation.</p>
+	</div>
 </w-card>
 
 <w-card flat>
-  <div style="padding: 16px;">
-    <h3>Flat card</h3>
-    <p>Use this for dense layouts or cards inside another surface.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Flat card</h3>
+		<p>Use this for dense layouts or cards inside another surface.</p>
+	</div>
 </w-card>
 ```
 
@@ -43,37 +43,44 @@ Use `selected` when a card represents a selected item or choice.
 
 ```html
 <w-card selected>
-  <div style="padding: 16px;">
-    <h3>Standard delivery</h3>
-    <p>Delivered in 2-4 business days.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Standard delivery</h3>
+		<p>Delivered in 2-4 business days.</p>
+	</div>
 </w-card>
 ```
 
 The `selected` property only controls the card's visual state. Update it from your application state when the selection changes.
 
-### Clickable Cards
+### Cards as Links
 
-Use `clickable` when the whole card should behave as one interactive choice. The card becomes keyboard focusable, and Enter or Space triggers a click on the card.
+For navigation, use a native link inside the card and add `data-card-action` to expand its click area to the whole card.
 
 ```html
-<w-card clickable>
-  <div style="padding: 16px;">
-    <h3>Pick up nearby</h3>
-    <p>Collect the item from a pickup point.</p>
-  </div>
+<w-card>
+	<div style="padding: 16px;">
+		<h3>
+			<a href="/listings/123" data-card-action>Apartment in Oslo</a>
+		</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+	</div>
 </w-card>
 ```
 
-Listen for the card's click event and update `selected` yourself.
+When the card has a second independent navigation target, add `data-card-secondary-action` to that link. The secondary action remains independently clickable and should be layered above the primary card action.
 
 ```html
-<w-card clickable selected>
-  <div style="padding: 16px;">
-    <h3>Home delivery</h3>
-    <p>Delivered to your door.</p>
-  </div>
+<w-card>
+	<div style="padding: 16px;">
+		<h3>
+			<a href="/listings/123" data-card-action>Apartment in Oslo</a>
+		</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+		<a href="/listings/123/contact" data-card-secondary-action>
+			Contact seller
+		</a>
+	</div>
 </w-card>
 ```
 
-Do not use `clickable` when the card contains separate links, buttons, form controls, or other interactive elements. In those cases, keep the card non-clickable and make the specific control interactive instead.
+Do not use a card action when the card contains buttons, form controls, or other interactive elements that should be part of the same content area. Use the specific control directly instead.

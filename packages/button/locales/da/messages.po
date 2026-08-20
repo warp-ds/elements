@@ -17,8 +17,20 @@ msgstr ""
 "X-Crowdin-File-ID: 1450\n"
 "PO-Revision-Date: \n"
 
+#. Short (preferably a single word) description indicating to screen reader users that this button tries to get the user's attention
+#. js-lingui-explicit-id
+#: packages/button/button.ts
+msgid "button.aria.negativeDescription"
+msgstr ""
+
+#. Short (preferably a single word) description indicating to screen reader users that this button is visually highlighted
+#. js-lingui-explicit-id
+#: packages/button/button.ts
+msgid "button.aria.primaryDescription"
+msgstr ""
+
 #. Screen reader message for buttons that are loading
 #. js-lingui-explicit-id
-#: packages/button/button.ts:208
+#: packages/button/button.ts
 msgid "button.aria.loading"
 msgstr "Indlæser..."

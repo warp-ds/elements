@@ -14,8 +14,8 @@ If you want to override this in your app and handle things like scroll and focus
 
   pagination.addEventListener('page-click', (event) => {
     event.preventDefault();
-    // event.detail = { clickedPage: string }
-    console.log('Do something with the clicked page after preventing default navigation:', event.detail.clickedPage);
+    // event.detail = { clickedPage: number }
+    pagination.currentPageNumber = event.detail.clickedPage;
   });
 </script>
 ```

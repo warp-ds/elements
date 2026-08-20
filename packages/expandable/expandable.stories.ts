@@ -4,6 +4,7 @@ import { getStorybookHelpers } from "@wc-toolkit/storybook-helpers";
 import { html } from "lit";
 
 import { prespread } from "../../.storybook/utilities.js";
+import "../button/button.js";
 import "../utils/expand-transition.js";
 import "../utils/unstyled-heading.js";
 
@@ -42,7 +43,7 @@ export const Default: Story = {
 		box: false,
 		bleed: false,
 		animated: false,
-		"no-chevron": false,
+		noChevron: false,
 	},
 };
 
@@ -53,7 +54,7 @@ export const Expanded: Story = {
 		box: false,
 		bleed: false,
 		animated: false,
-		"no-chevron": false,
+		noChevron: false,
 	},
 };
 
@@ -64,7 +65,7 @@ export const Box: Story = {
 		box: true,
 		bleed: false,
 		animated: false,
-		"no-chevron": false,
+		noChevron: false,
 	},
 };
 
@@ -75,7 +76,7 @@ export const Animated: Story = {
 		box: true,
 		bleed: false,
 		animated: true,
-		"no-chevron": false,
+		noChevron: false,
 	},
 };
 
@@ -86,7 +87,7 @@ export const WithHeading: Story = {
 		box: true,
 		bleed: false,
 		animated: false,
-		"no-chevron": false,
+		noChevron: false,
 		"heading-level": 2,
 	},
 };
@@ -98,7 +99,7 @@ export const NoChevron: Story = {
 		box: false,
 		bleed: false,
 		animated: false,
-		"no-chevron": true,
+		noChevron: true,
 	},
 };
 
@@ -108,7 +109,7 @@ export const CustomTitle: Story = {
 		box: true,
 		bleed: false,
 		animated: false,
-		"no-chevron": false,
+		noChevron: false,
 	},
 	render(args) {
 		return html`
@@ -150,6 +151,69 @@ export const NoTitle: Story = {
 						}
 					});
 			</script>
+		`;
+	},
+};
+
+export const StylingApi: Story = {
+	args: {
+		title: "Styled expandable",
+		box: true,
+		expanded: false,
+	},
+	render(args) {
+		return html`
+			<pre>
+<code>
+&lt;style&gt;
+w-expandable {
+	--w-c-expandable-bg: rebeccapurple;
+	--w-c-expandable-bg-hover: indigo;
+	--w-c-expandable-border-color: cyan;
+	--w-c-expandable-border-width: 2px;
+	--w-c-expandable-border-radius: 24px;
+	--w-c-expandable-padding-x: 2rem;
+	--w-c-expandable-padding-y: 1rem;
+	--w-c-expandable-gap: 1.5rem;
+	color: white;
+}
+
+w-expandable::part(base) {
+	text-transform: uppercase;
+	box-shadow: inset 0 0 0 2px magenta;
+}
+
+w-expandable::part(chevron) {
+	color: white;
+}
+&lt;/style&gt;
+</code>
+			</pre>
+			<style>
+				w-expandable {
+					--w-c-expandable-bg: rebeccapurple;
+					--w-c-expandable-bg-hover: indigo;
+					--w-c-expandable-border-color: cyan;
+					--w-c-expandable-border-width: 2px;
+					--w-c-expandable-border-radius: 24px;
+					--w-c-expandable-padding-x: 2rem;
+					--w-c-expandable-padding-y: 1rem;
+					--w-c-expandable-gap: 1.5rem;
+					color: white;
+				}
+
+				w-expandable::part(base) {
+					text-transform: uppercase;
+					box-shadow: inset 0 0 0 2px magenta;
+				}
+
+				w-expandable::part(chevron) {
+					color: white;
+				}
+			</style>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This story demonstrates expandable tokens and parts.</p>
+			</w-expandable>
 		`;
 	},
 };

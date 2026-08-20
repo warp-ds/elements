@@ -84,3 +84,49 @@ export const AccessibleRegion: Story = {
 		`;
 	},
 };
+
+export const StylingApi: Story = {
+	args: {
+		bordered: true,
+	},
+	render(args) {
+		return html`
+			<pre>
+<code>
+&lt;style&gt;
+w-box {
+	--w-c-box-bg: rebeccapurple;
+	--w-c-box-border-color: cyan;
+	--w-c-box-border-radius: 24px;
+	--w-c-box-border-width: 4px;
+	--w-c-box-padding: 2rem;
+}
+
+w-box::part(base) {
+	color: white;
+	box-shadow: inset 0 0 0 2px magenta;
+}
+&lt;/style&gt;
+</code>
+			</pre>
+			<style>
+				w-box {
+					--w-c-box-bg: rebeccapurple;
+					--w-c-box-border-color: cyan;
+					--w-c-box-border-radius: 24px;
+					--w-c-box-border-width: 4px;
+					--w-c-box-padding: 2rem;
+				}
+
+				w-box::part(base) {
+					color: white;
+					box-shadow: inset 0 0 0 2px magenta;
+				}
+			</style>
+			<w-box ${spread(prespread(args))}>
+				<h3>Styled box</h3>
+				<p>This story demonstrates box tokens and the base part.</p>
+			</w-box>
+		`;
+	},
+};

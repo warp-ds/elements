@@ -37,7 +37,7 @@ export const inputLabelStyles = css`
 
 	/* Optional text styling */
 	label span {
-		--_padding-left: var(--w-c-input-optional-padding-left, 0.8rem);
+		--_padding-left: var(--w-c-input-optional-padding-left, 0.4rem);
 		--_font-weight: var(--w-c-input-optional-font-weight, 400);
 		--_font-size: var(--w-c-input-optional-font-size, var(--w-font-size-s));
 		--_line-height: var(
@@ -51,6 +51,20 @@ export const inputLabelStyles = css`
 		font-size: var(--_font-size);
 		line-height: var(--_line-height);
 		color: var(--_color);
+	}
+
+	[part="tooltip-target"] {
+		appearance: none;
+		background: transparent;
+		border: none;
+		height: 16px;
+		margin: 0 0 0 4px;
+		padding: 0;
+		vertical-align: text-top;
+	}
+
+	w-tooltip {
+		display: inline-block;
 	}
 `;
 

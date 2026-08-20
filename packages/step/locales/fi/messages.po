@@ -19,18 +19,18 @@ msgstr ""
 
 #. Empty circle
 #. js-lingui-explicit-id
-#: packages/step/step.ts:118
+#: packages/step/step.ts
 msgid "steps.aria.emptyCircle"
 msgstr "Tyhjä ympyrä"
 
 #. Active circle
 #. js-lingui-explicit-id
-#: packages/step/step.ts:112
+#: packages/step/step.ts
 msgid "steps.aria.active"
 msgstr "Vaiheilmaisin aktiivinen ympyrä"
 
 #. Completed circle
 #. js-lingui-explicit-id
-#: packages/step/step.ts:105
+#: packages/step/step.ts
 msgid "steps.aria.completed"
 msgstr "Vaiheilmaisin valmis ympyrä"

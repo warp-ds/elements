@@ -1,4 +1,65 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.border-2{border-width:2px}.rounded{border-radius:4px}.rounded-8{border-radius:8px}.rounded-l-0{border-top-left-radius:0;border-bottom-left-radius:0}.rounded-r-0{border-top-right-radius:0;border-bottom-right-radius:0}.block{display:block}.relative{position:relative}.static{position:static}.s-bg{background-color:var(--w-s-color-background)}.s-bg-info-subtle{background-color:var(--w-s-color-background-info-subtle)}.s-border{border-color:var(--w-s-color-border)}.s-surface-sunken{background-color:var(--w-s-color-surface-sunken)}.-mx-16{margin-left:-1.6rem;margin-right:-1.6rem}.last-child\\:mb-0>:last-child{margin-bottom:0}.p-16{padding:1.6rem}.break-words{overflow-wrap:break-word}@media (min-width:480px){.sm\\:rounded-8{border-radius:8px}.sm\\:mx-0{margin-left:0;margin-right:0}}",
-);
+import { css } from "lit";
+
+export const styles = css`
+	:host {
+		display: block;
+		--_background-color: var(--w-c-box-bg, transparent);
+		--_border-color: var(--w-c-box-border-color, transparent);
+		--_border-radius: var(--w-c-box-border-radius, 8px);
+		--_border-width: var(--w-c-box-border-width, 0px);
+		--_padding: var(--w-c-box-padding, 1.6rem);
+		--_bleed-margin-inline: var(--w-c-box-bleed-margin-inline, 1.6rem);
+	}
+
+	:host([info]) {
+		--_background-color: var(
+			--w-c-box-bg,
+			var(--w-s-color-background-info-subtle)
+		);
+	}
+
+	:host([neutral]) {
+		--_background-color: var(--w-c-box-bg, var(--w-s-color-surface-sunken));
+	}
+
+	:host([bordered]) {
+		--_background-color: var(--w-c-box-bg, var(--w-s-color-background));
+		--_border-color: var(--w-c-box-border-color, var(--w-s-color-border));
+		--_border-width: var(--w-c-box-border-width, 2px);
+	}
+
+	[part="base"] {
+		background-color: var(--_background-color);
+		border: var(--_border-width) solid var(--_border-color);
+		border-radius: var(--_border-radius);
+		display: block;
+		overflow-wrap: break-word;
+		padding: var(--_padding);
+		position: relative;
+	}
+
+	:host([bleed]) [part="base"] {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		margin-left: calc(var(--_bleed-margin-inline) * -1);
+		margin-right: calc(var(--_bleed-margin-inline) * -1);
+	}
+
+	// Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
+	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
+	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
+	// https://stackoverflow.com/a/61631668
+	::slotted(:last-child) {
+		margin-bottom: 0px !important;
+	}
+
+	@media (min-width: 480px) {
+		:host([bleed]) [part="base"] {
+			border-radius: var(--_border-radius);
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+`;

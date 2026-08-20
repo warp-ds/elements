@@ -1,3 +1,37 @@
+# [2.12.0-next.13](https://github.com/warp-ds/elements/compare/v2.12.0-next.12...v2.12.0-next.13) (2026-08-20)
+
+
+### Bug Fixes
+
+* **card:** respect clickable attribute and provide css based clickable behavior  ([#759](https://github.com/warp-ds/elements/issues/759)) ([dbafa40](https://github.com/warp-ds/elements/commit/dbafa40c7a8ab55a96de458c6561579d8ff167b2))
+
+# [2.12.0-next.12](https://github.com/warp-ds/elements/compare/v2.12.0-next.11...v2.12.0-next.12) (2026-08-19)
+
+
+### Features
+
+* **expandable:** expose wrapper and button as CSS parts ([#755](https://github.com/warp-ds/elements/issues/755)) ([dbfdbf4](https://github.com/warp-ds/elements/commit/dbfdbf4bb9b839cda075a7e849c0a3be89bffd4f))
+
+# [2.12.0-next.11](https://github.com/warp-ds/elements/compare/v2.12.0-next.10...v2.12.0-next.11) (2026-08-17)
+
+
+### Bug Fixes
+
+* **icon:** prevent FOUC by holding layout space during SVG load ([#757](https://github.com/warp-ds/elements/issues/757)) ([89183a5](https://github.com/warp-ds/elements/commit/89183a5a19dfdaf3de9152d933e6081ae9b5fce4))
+
+# [2.12.0-next.10](https://github.com/warp-ds/elements/compare/v2.12.0-next.9...v2.12.0-next.10) (2026-08-17)
+
+
+### Bug Fixes
+
+* **button:** set correct background color on pill variant ([8fdece1](https://github.com/warp-ds/elements/commit/8fdece19f7d5b24086017af2dd5b94de1d54aab8))
+
+
+### Features
+
+* **badge:** provide styling api ([#751](https://github.com/warp-ds/elements/issues/751)) ([a1c45ba](https://github.com/warp-ds/elements/commit/a1c45ba1ec21471828cda5bf28f3b7e9bbeaa0ad))
+* **box:** add styling api ([#752](https://github.com/warp-ds/elements/issues/752)) ([296d409](https://github.com/warp-ds/elements/commit/296d4098617fc725b566a437a700aa2c2560fd97))
+
 ## [2.11.2](https://github.com/warp-ds/elements/compare/v2.11.1...v2.11.2) (2026-08-14)
 
 
@@ -5,12 +39,85 @@
 
 * **button:** set correct background color on pill variant ([8fdece1](https://github.com/warp-ds/elements/commit/8fdece19f7d5b24086017af2dd5b94de1d54aab8))
 
+
+# [2.12.0-next.9](https://github.com/warp-ds/elements/compare/v2.12.0-next.8...v2.12.0-next.9) (2026-08-13)
+
+
+### Bug Fixes
+
+* use correct background color token on buttons ([7f5ded9](https://github.com/warp-ds/elements/commit/7f5ded9ae120ba6e952ffcf4819faaf3812e235e))
+
 ## [2.11.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.11.1) (2026-08-13)
 
 
 ### Bug Fixes
 
 * use correct background color token on buttons ([7f5ded9](https://github.com/warp-ds/elements/commit/7f5ded9ae120ba6e952ffcf4819faaf3812e235e))
+
+
+# [2.12.0-next.8](https://github.com/warp-ds/elements/compare/v2.12.0-next.7...v2.12.0-next.8) (2026-08-11)
+
+
+### Bug Fixes
+
+* **button:** include an accessible description for primary, negative, negativeQuiet ([#730](https://github.com/warp-ds/elements/issues/730)) ([92ea40b](https://github.com/warp-ds/elements/commit/92ea40b5cc15df4a15af09dad00159dd08a7e121))
+* **step-indicator:** adjust gaps and fix example typography ([#734](https://github.com/warp-ds/elements/issues/734)) ([30e5619](https://github.com/warp-ds/elements/commit/30e5619e68da683d99a4ef055a20a2d587273717))
+
+# [2.12.0-next.7](https://github.com/warp-ds/elements/compare/v2.12.0-next.6...v2.12.0-next.7) (2026-08-11)
+
+
+### Bug Fixes
+
+* **slider:** don't show suffix if tooltip value is Min or Max ([#726](https://github.com/warp-ds/elements/issues/726)) ([ed83cec](https://github.com/warp-ds/elements/commit/ed83cecb4b2acd58c31d27d96792a4b4eecfca44))
+
+# [2.12.0-next.6](https://github.com/warp-ds/elements/compare/v2.12.0-next.5...v2.12.0-next.6) (2026-08-10)
+
+
+### Features
+
+* add info icon with tooltip to form fields ([#729](https://github.com/warp-ds/elements/issues/729)) ([663e49d](https://github.com/warp-ds/elements/commit/663e49d6bab78206ce62af82939074fdf5c94e7f))
+
+# [2.12.0-next.5](https://github.com/warp-ds/elements/compare/v2.12.0-next.4...v2.12.0-next.5) (2026-08-06)
+
+
+### Features
+
+* min/maxlength, JSX helpText, bugfix for onchange in textarea ([#731](https://github.com/warp-ds/elements/issues/731)) ([bc04a71](https://github.com/warp-ds/elements/commit/bc04a712ff5903f8e0e1547d87f735ad06013be9)), closes [#722](https://github.com/warp-ds/elements/issues/722) [#720](https://github.com/warp-ds/elements/issues/720) [#721](https://github.com/warp-ds/elements/issues/721)
+
+# [2.12.0-next.4](https://github.com/warp-ds/elements/compare/v2.12.0-next.3...v2.12.0-next.4) (2026-08-04)
+
+
+### Bug Fixes
+
+* **pagination:** add missing last page button, visual fixes ([#735](https://github.com/warp-ds/elements/issues/735)) ([2911639](https://github.com/warp-ds/elements/commit/291163947f86cf58389abf0c78ad4ddfa8d24c51))
+
+# [2.12.0-next.3](https://github.com/warp-ds/elements/compare/v2.12.0-next.2...v2.12.0-next.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* **tab:** remove button inside tab that confused screen readers ([#736](https://github.com/warp-ds/elements/issues/736)) ([04013f6](https://github.com/warp-ds/elements/commit/04013f6904dc555cca4ff304f7e9f2a77e469f76))
+
+# [2.12.0-next.2](https://github.com/warp-ds/elements/compare/v2.12.0-next.1...v2.12.0-next.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* **modal-header:** constrain close button column width to prevent title overflow ([#743](https://github.com/warp-ds/elements/issues/743)) ([b247735](https://github.com/warp-ds/elements/commit/b247735aec38e298fde07ba9b1311e4d4163d8a7)), closes [#742](https://github.com/warp-ds/elements/issues/742)
+
+# [2.12.0-next.1](https://github.com/warp-ds/elements/compare/v2.11.0...v2.12.0-next.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **tabs:** map htmlFor to for in the React wrapper ([fd49268](https://github.com/warp-ds/elements/commit/fd49268d7968209005b2fcdcead609d5f47735cd))
+* **tooltip:** accessible description ([d3fbb69](https://github.com/warp-ds/elements/commit/d3fbb691e56ebd1dbb07285e93ef7c1c8750f6e6))
+
+
+### Features
+
+* **textfield:** add tooltip prop ([2dbf34d](https://github.com/warp-ds/elements/commit/2dbf34dd10237eafce7f0063765feaa1e990739f))
+* **tooltip:** create a new tooltip component ([a219978](https://github.com/warp-ds/elements/commit/a2199784a73720b75826241c33568ea8f056423b))
 
 # [2.11.0](https://github.com/warp-ds/elements/compare/v2.10.0...v2.11.0) (2026-06-26)
 

@@ -84,3 +84,48 @@ export const Positioned: Story = {
 		`;
 	},
 };
+
+export const StylingApi: Story = {
+	args: {
+		variant: "info",
+	},
+	render(args) {
+		return html`
+			<pre>
+<code>
+&lt;style&gt;
+w-badge {
+	--w-c-badge-bg: rebeccapurple;
+	--w-c-badge-color: white;
+	--w-c-badge-border-radius: 9999px;
+	--w-c-badge-padding-x: 1.2rem;
+	--w-c-badge-padding-y: 0.6rem;
+}
+
+w-badge::part(base) {
+	border: 2px solid cyan;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+&lt;/style&gt;
+</code>
+			</pre>
+			<style>
+				w-badge {
+					--w-c-badge-bg: rebeccapurple;
+					--w-c-badge-color: white;
+					--w-c-badge-border-radius: 9999px;
+					--w-c-badge-padding-x: 1.2rem;
+					--w-c-badge-padding-y: 0.6rem;
+				}
+
+				w-badge::part(base) {
+					border: 2px solid cyan;
+					text-transform: uppercase;
+					letter-spacing: 0.08em;
+				}
+			</style>
+			<w-badge ${spread(prespread(args))}>Styled badge</w-badge>
+		`;
+	},
+};

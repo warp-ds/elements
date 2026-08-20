@@ -8,10 +8,10 @@ Use semantic HTML inside the card so assistive technologies can understand the c
 
 ```html
 <w-card>
-  <article style="padding: 16px;" aria-labelledby="listing-heading">
-    <h3 id="listing-heading">Apartment in Oslo</h3>
-    <p>Bright 3-room apartment with balcony.</p>
-  </article>
+	<article style="padding: 16px;" aria-labelledby="listing-heading">
+		<h3 id="listing-heading">Apartment in Oslo</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+	</article>
 </w-card>
 ```
 
@@ -23,10 +23,10 @@ Use `selected` only when the card represents a selected item or choice.
 
 ```html
 <w-card selected>
-  <div style="padding: 16px;">
-    <h3>Standard delivery</h3>
-    <p>Delivered in 2-4 business days.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Standard delivery</h3>
+		<p>Delivered in 2-4 business days.</p>
+	</div>
 </w-card>
 ```
 
@@ -38,10 +38,10 @@ Use `clickable` only when the whole card has one action or represents one select
 
 ```html
 <w-card clickable>
-  <div style="padding: 16px;">
-    <h3>Home delivery</h3>
-    <p>Delivered to your door.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Home delivery</h3>
+		<p>Delivered to your door.</p>
+	</div>
 </w-card>
 ```
 
@@ -55,10 +55,36 @@ Use a link for navigation:
 
 ```html
 <w-card>
-  <div style="padding: 16px;">
-    <h3><a href="/listings/123">Apartment in Oslo</a></h3>
-    <p>Bright 3-room apartment with balcony.</p>
-  </div>
+	<div style="padding: 16px;">
+		<h3><a href="/listings/123">Apartment in Oslo</a></h3>
+		<p>Bright 3-room apartment with balcony.</p>
+	</div>
+</w-card>
+```
+
+To make the whole card a link, use a native anchor with `data-card-action` in a non-clickable card.
+
+```html
+<w-card>
+	<div style="padding: 16px;">
+		<h3>
+			<a href="/listings/123" data-card-action> Apartment in Oslo </a>
+		</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+	</div>
+</w-card>
+```
+
+If you need the whole card to be a link and you have additional interactive elements on the card, use `data-card-secondary-action` as well.
+
+```html
+<w-card>
+	<div style="padding: 16px;">
+		<h3>
+			<a href="/listings/123" data-card-action> Apartment in Oslo </a>
+		</h3>
+		<w-button variant="primary" data-card-secondary-action>Contact seller</w-button>
+	</div>
 </w-card>
 ```
 
@@ -66,10 +92,10 @@ Use a button for an action on the current page:
 
 ```html
 <w-card>
-  <div style="padding: 16px;">
-    <h3>Apartment in Oslo</h3>
-    <p>Bright 3-room apartment with balcony.</p>
-    <w-button variant="primary">Contact seller</w-button>
-  </div>
+	<div style="padding: 16px;">
+		<h3>Apartment in Oslo</h3>
+		<p>Bright 3-room apartment with balcony.</p>
+		<w-button variant="primary">Contact seller</w-button>
+	</div>
 </w-card>
 ```

@@ -114,6 +114,20 @@ export const styles = css`
 		color: var(--_help-text-color);
 	}
 
+	[part="tooltip-target"] {
+		appearance: none;
+		background: transparent;
+		border: none;
+		height: 16px;
+		margin: 0 0 0 4px;
+		padding: 0;
+		vertical-align: text-top;
+	}
+
+	w-tooltip {
+		display: inline-block;
+	}
+
 	:host([disabled]) [part~="help-text"] {
 		color: var(--_help-text-color-disabled);
 	}

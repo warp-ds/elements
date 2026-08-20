@@ -196,6 +196,33 @@ class WarpButton extends FormControlMixin(LitElement) {
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
 
+	get #ariaDescription(): string | undefined {
+		// let users override our default description
+		if (this.ariaDescription) {
+			return this.ariaDescription;
+		}
+
+		if (this.variant === "primary") {
+			return i18n.t({
+				id: "button.aria.primaryDescription",
+				message: "Highlighted",
+				comment:
+					"Short (preferably a single word) description indicating to screen reader users that this button is visually highlighted",
+			});
+		}
+
+		if (this.variant === "negative" || this.variant === "negativeQuiet") {
+			return i18n.t({
+				id: "button.aria.negativeDescription",
+				message: "Attention",
+				comment:
+					"Short (preferably a single word) description indicating to screen reader users that this button tries to get the user's attention",
+			});
+		}
+
+		return undefined;
+	}
+
 	updated(changedProperties: PropertyValues<this>) {
 		if (changedProperties.has("value")) {
 			this.setValue(this.value!);
@@ -268,42 +295,48 @@ class WarpButton extends FormControlMixin(LitElement) {
 
 	render() {
 		const variant = this.variant || "secondary";
-		return html` ${this.href
-			? html`
-					<w-link
-						href=${this.href}
-						target=${this.target}
-						variant=${this.quiet ? "quiet" : variant}
-						?small=${this.small}
-						?loading=${this.loading}
-						?autofocus=${this.autofocus}
-						?full-width=${this.fullWidth}
-						class=${this.buttonClass}
-						rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
-					>
-						<slot></slot>
-					</w-link>
-				`
-			: html`
-					<button
-						type=${this.type || "button"}
-						part="base"
-						class=${ifDefined(this.buttonClass)}
-						@click="${this._handleButtonClick}"
-						commandfor=${ifDefined(this.commandfor)}
-						command=${ifDefined(this.command)}
-					>
-						<slot></slot>
-					</button>
-				`}
-		${this.loading
-			? html`<span
-					class="sr-only"
-					role="progressbar"
-					aria-valuenow="{0}"
-					aria-valuetext=${this.ariaValueTextLoading}
-				></span>`
-			: nothing}`;
+		return html` ${
+			this.href
+				? html`
+						<w-link
+							href=${this.href}
+							target=${this.target}
+							variant=${this.quiet ? "quiet" : variant}
+							?small=${this.small}
+							?loading=${this.loading}
+							?autofocus=${this.autofocus}
+							?full-width=${this.fullWidth}
+							class=${this.buttonClass}
+							rel=${this.target === "_blank" ? this.rel || "noopener" : undefined}
+							aria-description=${ifDefined(this.#ariaDescription)}
+						>
+							<slot></slot>
+						</w-link>
+					`
+				: html`
+						<button
+							type=${this.type || "button"}
+							part="base"
+							class=${ifDefined(this.buttonClass)}
+							@click="${this._handleButtonClick}"
+							commandfor=${ifDefined(this.commandfor)}
+							command=${ifDefined(this.command)}
+							aria-description=${ifDefined(this.#ariaDescription)}
+						>
+							<slot></slot>
+						</button>
+					`
+		}
+		${
+			this.loading
+				? html`<span
+						class="sr-only"
+						role="progressbar"
+						aria-valuenow="{0}"
+						aria-valuetext=${this.ariaValueTextLoading}
+					></span>`
+				: nothing
+		}`;
 	}
 }
 

@@ -28,11 +28,19 @@ type BaseTextareaProps = React.ComponentPropsWithoutRef<typeof BaseTextarea>;
 
 type TextareaProps = Omit<
 	BaseTextareaProps,
-	"help-text" | "maximum-rows" | "minimum-rows" | "read-only"
+	| "help-text"
+	| "helpText"
+	| "maximum-rows"
+	| "minimum-rows"
+	| "maxlength"
+	| "minlength"
+	| "read-only"
 > & {
-	helpText?: string;
+	helpText?: string | React.ReactElement;
 	maxRows?: number;
 	minRows?: number;
+	maxLength?: number;
+	minLength?: number;
 	readOnly?: boolean;
 };
 
@@ -42,20 +50,39 @@ type TextareaProps = Omit<
  * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
  */
 export const Textarea = React.forwardRef<WarpTextarea, TextareaProps>(
-	({ helpText, maxRows, minRows, readOnly, ...props }, ref) =>
-		React.createElement(BaseTextarea, {
-			...props,
-			...(helpText !== undefined ? { "help-text": helpText } : {}),
-			...(maxRows !== undefined ? { "maximum-rows": maxRows } : {}),
-			...(minRows !== undefined ? { "minimum-rows": minRows } : {}),
-			...(readOnly ? { "read-only": true } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseTextarea> & {
-			"help-text"?: string;
-			"maximum-rows"?: number;
-			"minimum-rows"?: number;
-			"read-only"?: boolean;
-		}),
+	(
+		{ helpText, maxRows, minRows, maxLength, minLength, readOnly, ...props },
+		ref,
+	) =>
+		React.createElement(
+			BaseTextarea,
+			{
+				...props,
+				...(typeof helpText === "string" ? { "help-text": helpText } : {}),
+				...(maxRows !== undefined ? { "maximum-rows": maxRows } : {}),
+				...(minRows !== undefined ? { "minimum-rows": minRows } : {}),
+				...(maxLength !== undefined ? { maxlength: maxLength } : {}),
+				...(minLength !== undefined ? { minlength: minLength } : {}),
+				...(readOnly ? { "read-only": true } : {}),
+				ref,
+			} as React.ComponentProps<typeof BaseTextarea> & {
+				"help-text"?: string;
+				"maximum-rows"?: number;
+				"minimum-rows"?: number;
+				"read-only"?: boolean;
+			},
+			[
+				props.children,
+				// support taking in JSX in helpText and placing it in the correct slot on behalf of users
+				typeof helpText !== "undefined" && typeof helpText !== "string"
+					? React.createElement(
+							"div",
+							{ slot: "help-text" },
+							helpText as React.ReactElement,
+						)
+					: null,
+			],
+		),
 );
 
 Textarea.displayName = "Textarea";

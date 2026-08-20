@@ -15,6 +15,6 @@ msgstr ""
 
 #. Accessibility label for the button that closes the snackbar/toast popup
 #. js-lingui-explicit-id
-#: packages/snackbar/snackbar.ts:319
+#: packages/snackbar/snackbar.ts
 msgid "snackbar.aria.close"
 msgstr ""

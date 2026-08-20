@@ -15,6 +15,30 @@ msgstr ""
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/textarea/textarea.ts:426
+#: packages/textarea/textarea.ts
 msgid "textarea.label.optional"
 msgstr "Valinnainen"
+
+#. Validation message shown when textarea value is required
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:321
+msgid "textarea.validation.valueMissing"
+msgstr "Täytä tämä kenttä."
+
+#. Validation message shown when textarea value is too short
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:319
+msgid "textarea.validation.tooShort"
+msgstr "Pidennä tekstiä vähintään {minLength} merkkiin (käytät tällä hetkellä {currentLength} merkkiä)."
+
+#. Validation message shown when textarea value is too long
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:330
+msgid "textarea.validation.tooLong"
+msgstr "Lyhennä teksti enintään {maxLength} merkkiin (käytät tällä hetkellä {currentLength} merkkiä)."
+
+#. Fallback validation message for textarea
+#. js-lingui-explicit-id
+#: packages/textarea/textarea.ts:342
+msgid "textarea.validation.invalid"
+msgstr "Anna kelvollinen arvo."

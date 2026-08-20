@@ -1,0 +1,29 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as Stories from './tooltip.stories';
+
+<Meta of={Stories} name="Docs" />
+
+# Tooltip
+
+A tooltip is a message box that is displayed when a user hovers over or gives focus to a UI element.
+ 
+Tooltips should be used sparingly and contain succinct, supplementary information.
+
+## Default
+
+By default the tooltip is placed above the target element. If there is no room it will flip below the target element automatically.
+
+<Canvas of={Stories.Default} />
+
+## Placement
+
+You can set a different default placement from the default `top`. These placements will still flip to the opposite side if there is no room.
+
+<Canvas of={Stories.Placement} />
+
+## In form elements
+
+You can add tooltips to form elements by passing in the tooltip prop or by using the tooltip slot. Here demonstrated with `w-textfield`, all form elements have this feature.
+
+<Canvas of={Stories.Textfield} />

@@ -15,49 +15,49 @@ msgstr ""
 
 #. Accessible label for the 'from value' input field in a range slider
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:442
-#: packages/slider-thumb/slider-thumb.ts:722
+#: packages/slider-thumb/slider-thumb.ts
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.from"
 msgstr "From"
 
 #. Max as in short for Maximum
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:626
-#: packages/slider-thumb/slider-thumb.ts:645
+#: packages/slider-thumb/slider-thumb.ts
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.placeholder.to"
 msgstr "Max"
 
 #. Min as in short for Minimum
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:622
-#: packages/slider-thumb/slider-thumb.ts:651
+#: packages/slider-thumb/slider-thumb.ts
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.placeholder.from"
 msgstr "Min"
 
 #. Shown behind label when marked as optional
 #. js-lingui-explicit-id
-#: packages/slider/slider.ts:474
+#: packages/slider/slider.ts
 msgid "select.label.optional"
 msgstr "Optional"
 
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:275
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.error.overlap"
 msgstr "The maximum value cannot be less than the minimum"
 
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:246
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.error.required"
 msgstr "This field is required"
 
 #. Accessible label for the 'to value' input field in a range slider
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:449
-#: packages/slider-thumb/slider-thumb.ts:729
+#: packages/slider-thumb/slider-thumb.ts
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.to"
 msgstr "To"
 
 #. js-lingui-explicit-id
-#: packages/slider-thumb/slider-thumb.ts:232
+#: packages/slider-thumb/slider-thumb.ts
 msgid "slider.error.out_of_bounds"
 msgstr "Value must be between {min} and {max}"

@@ -19,7 +19,7 @@ import { styles } from "./styles.js";
 
 const ccStep = {
 	base: "group/step",
-	vertical: "group/stepv grid-rows-[20px_auto] grid grid-flow-col gap-x-16",
+	vertical: "group/stepv grid-rows-[20px_auto] grid grid-flow-col gap-x-8",
 	horizontal:
 		"group/steph grid-rows-[auto_20px] grid-cols-[1fr_20px_1fr] flex-1 grid items-center",
 
@@ -42,7 +42,7 @@ const ccStep = {
 
 	content: "last:mb-0",
 	contentVertical: "row-span-2 pb-32",
-	contentHorizontal: "col-span-3 px-16 row-start-1 text-center",
+	contentHorizontal: "col-span-3 px-12 row-start-1 text-center",
 };
 
 export interface StepsContext {
@@ -174,24 +174,26 @@ export class WarpStep extends LitElement {
 					this._context.horizontal ? "height: 100%;" : undefined,
 				)}
 			>
-				${!vertical
-					? html`<div class=${lineHorizontalClasses}></div>`
-					: nothing}
+				${
+					!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing
+				}
 				<div
 					class=${dotClasses}
 					role="img"
 					aria-label=${this.getAriaLabel()}
-					aria-current=${this.active ? "step" : nothing}
+					aria-current=${ifDefined(this.active ? "step" : undefined)}
 				>
-					${this.completed
-						? html`<w-icon
-								name="Check"
-								size="small"
-								locale="${detectLocale()}"
-								data-testid="completed-icon"
-								class="flex"
-							></w-icon>`
-						: nothing}
+					${
+						this.completed
+							? html`<w-icon
+									name="Check"
+									size="small"
+									locale="${detectLocale()}"
+									data-testid="completed-icon"
+									class="flex"
+								></w-icon>`
+							: nothing
+					}
 				</div>
 				<div class=${lineClasses}></div>
 				<div

@@ -4,10 +4,18 @@ import { supportedLocales } from "./packages/i18n";
 
 const config: LinguiConfig = {
 	locales: supportedLocales as unknown as string[],
+	formatOptions: {
+		lineNumbers: false,
+	},
 	catalogs: [
+		/* Remember to update crowdin.yml as well, otherwise translations won't sync! */
 		{
 			include: ["packages/affix/"],
 			path: "packages/affix/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/attention/"],
+			path: "packages/attention/locales/{locale}/messages",
 		},
 		{
 			include: ["packages/breadcrumbs/"],
@@ -22,40 +30,40 @@ const config: LinguiConfig = {
 			path: "packages/card/locales/{locale}/messages",
 		},
 		{
+			include: ["packages/checkbox-group/"],
+			path: "packages/checkbox-group/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/combobox/"],
+			path: "packages/combobox/locales/{locale}/messages",
+		},
+		{
 			include: ["packages/datepicker/"],
 			path: "packages/datepicker/locales/{locale}/messages",
-		},
-		{
-			include: ["packages/select/"],
-			path: "packages/select/locales/{locale}/messages",
-		},
-		{
-			include: ["packages/attention/"],
-			path: "packages/attention/locales/{locale}/messages",
 		},
 		{
 			include: ["packages/modal/", "packages/modal-header/"],
 			path: "packages/modal/locales/{locale}/messages",
 		},
 		{
-			include: ["packages/toast/"],
-			path: "packages/toast/locales/{locale}/messages",
-		},
-		{
-			include: ["packages/pill/"],
-			path: "packages/pill/locales/{locale}/messages",
+			include: ["packages/page-indicator/"],
+			path: "packages/page-indicator/locales/{locale}/messages",
 		},
 		{
 			include: ["packages/pagination/"],
 			path: "packages/pagination/locales/{locale}/messages",
 		},
 		{
-			include: ["packages/step/"],
-			path: "packages/step/locales/{locale}/messages",
+			include: ["packages/pill/"],
+			path: "packages/pill/locales/{locale}/messages",
 		},
 		{
-			include: ["packages/combobox/"],
-			path: "packages/combobox/locales/{locale}/messages",
+			include: ["packages/radio-group/"],
+			path: "packages/radio-group/locales/{locale}/messages",
+		},
+		{
+			include: ["packages/select/"],
+			path: "packages/select/locales/{locale}/messages",
 		},
 		{
 			include: ["packages/slider/", "packages/slider-thumb/"],
@@ -66,6 +74,10 @@ const config: LinguiConfig = {
 			path: "packages/snackbar/locales/{locale}/messages",
 		},
 		{
+			include: ["packages/step/"],
+			path: "packages/step/locales/{locale}/messages",
+		},
+		{
 			include: ["packages/textarea/"],
 			path: "packages/textarea/locales/{locale}/messages",
 		},
@@ -74,17 +86,15 @@ const config: LinguiConfig = {
 			path: "packages/textfield/locales/{locale}/messages",
 		},
 		{
-			include: ["packages/page-indicator/"],
-			path: "packages/page-indicator/locales/{locale}/messages",
+			include: ["packages/toast/"],
+			path: "packages/toast/locales/{locale}/messages",
 		},
 		{
-			include: ["packages/checkbox-group/"],
-			path: "packages/checkbox-group/locales/{locale}/messages",
+			include: ["packages/tooltip/"],
+			path: "packages/tooltip/locales/{locale}/messages",
 		},
-		{
-			include: ["packages/radio-group/"],
-			path: "packages/radio-group/locales/{locale}/messages",
-		},
+		/* Sort entries alphabetically so we can keep track */
+		/* Remember to update crowdin.yml as well, otherwise translations won't sync! */
 	],
 	compileNamespace: "es",
 	sourceLocale: "en",
