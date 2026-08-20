@@ -1,3 +1,10 @@
+## [2.12.1-next.1](https://github.com/warp-ds/elements/compare/v2.12.0...v2.12.1-next.1) (2026-08-20)
+
+
+### Bug Fixes
+
+* **slider:** handle setting an initial thumb value with min and max  ([#762](https://github.com/warp-ds/elements/issues/762)) ([4812c71](https://github.com/warp-ds/elements/commit/4812c71d1a3e21b4cd226dc5a120112f9825f242))
+
 # [2.12.0](https://github.com/warp-ds/elements/compare/v2.11.2...v2.12.0) (2026-08-20)
 
 
