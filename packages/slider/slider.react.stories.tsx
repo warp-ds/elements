@@ -2,6 +2,9 @@ import { Meta, StoryObj } from "@storybook/react";
 import React, { useState } from "react";
 
 import { Slider, SliderThumb } from "./react";
+import { Button } from "../button/react";
+import { Expandable } from "../expandable/react";
+import { Modal, ModalContent } from "../modal/react";
 
 const locale = "nb";
 
@@ -302,6 +305,85 @@ export const TestCase: Story = {
 						<dd>{toValue}</dd>
 					</dl>
 				</output>
+			</>
+		);
+	},
+};
+
+export const InExpandable: Story = {
+	args: {
+		step: 100,
+		suffix: "kr",
+	},
+	render({ suffix, step }) {
+		const numberFormatter = getNumberFormatter(locale);
+		const min = "0";
+		const max = "250000";
+		return (
+			<Expandable title="Price">
+				<Slider
+					label="Price"
+					min={min}
+					max={max}
+					step={step}
+					suffix={suffix}
+					labelFormatter={(slot) => {
+						if (slot === "from") {
+							return min;
+						}
+						return numberFormatter(max);
+					}}
+					valueFormatter={numberFormatter}
+				>
+					<SliderThumb slot="from" aria-label="From price" name="from" />
+					<SliderThumb slot="to" aria-label="To price" name="to" />
+				</Slider>
+			</Expandable>
+		);
+	},
+};
+
+export const InModal: Story = {
+	args: {
+		suffix: "kr",
+		step: 100,
+	},
+	render({ suffix, step }) {
+		const [open, setOpen] = useState(false);
+		const numberFormatter = getNumberFormatter(locale);
+		const min = "0";
+		const max = "250000";
+		return (
+			<>
+				<Button variant="primary" onClick={() => setOpen(true)}>
+					Open Modal
+				</Button>
+				<Modal
+					show={open}
+					id="example-modal-one"
+					onHidden={() => setOpen(false)}
+					onShown={() => setOpen(true)}
+				>
+					<ModalContent>
+						<Slider
+							label="Price"
+							min={min}
+							max={max}
+							step={step}
+							suffix={suffix}
+							labelFormatter={(slot) => {
+								if (slot === "from") {
+									return min;
+								}
+								return numberFormatter(max);
+							}}
+							valueFormatter={numberFormatter}
+						>
+							<SliderThumb slot="from" aria-label="From price" name="from" />
+							<SliderThumb slot="to" aria-label="To price" name="to" />
+						</Slider>
+					</ModalContent>
+				</Modal>
 			</>
 		);
 	},

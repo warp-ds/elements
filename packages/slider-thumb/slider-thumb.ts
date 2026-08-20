@@ -83,27 +83,27 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	placeholder: string | undefined;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	markers: string | undefined;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	required = false;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	step: number | undefined;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	min: string | undefined;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	max: string | undefined;
 
 	/** @internal Set by `<w-slider>` */
-	@state()
+	@property({ reflect: false })
 	suffix = "";
 
 	/**
@@ -670,13 +670,27 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 
 			const previousValue = changedProperties.get("value");
 
-			if (this.value === "" && previousValue) {
+			if (
+				(this.value === "" && previousValue) ||
+				(this.slot === "from" && this.value === this.min) ||
+				(this.slot === "to" && this.value === this.max)
+			) {
 				this.dispatchEvent(
 					new CustomEvent("thumbreset", {
 						bubbles: true,
 					}),
 				);
 			}
+		}
+
+		if (changedProperties.has("min") || changedProperties.has("max")) {
+			// Cover a scenario where the slider thumb renders with a value greater than 100
+			// before the parent slider component has a chance to set a non-default max value.
+			// In such a scenario the input's value and thumb position would be set to 100,
+			// the browser-default max value of a range input, and would be stuck there until interaction.
+			this.value = this.#initialValue;
+			this.setValue(this.value!);
+			this.#syncRangeValue();
 		}
 	}
 

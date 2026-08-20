@@ -7,6 +7,8 @@ import "virtual:uno.css";
 import type { WarpSlider } from "./slider.js";
 import "../affix/affix.js";
 import "../attention/attention.js";
+import "../expandable/expandable.js";
+import "../modal/modal.js";
 import "../textfield/textfield.js";
 import "../tooltip/tooltip.js";
 import "./slider.js";
@@ -39,7 +41,10 @@ export const Single: Story = {
 				<w-slider label="Single" min="0" max="100">
 					<w-slider-thumb name="value"></w-slider-thumb>
 				</w-slider>
-				<input type="submit" hidden />
+				<div class="py-8">
+					<w-button type="reset">Reset</w-button>
+					<w-button type="submit">Submit</w-button>
+				</div>
 			</form>
 		`;
 	},
@@ -105,6 +110,7 @@ export const Range: Story = {
 					<w-slider-thumb
 						slot="to"
 						aria-label="To value"
+						value="50"
 						name="to"
 					></w-slider-thumb>
 				</w-slider>
@@ -565,6 +571,97 @@ export const VisuallyHiddenTextfield: Story = {
 					const distance = formData.get("distance");
 				});
 			</script>
+		`;
+	},
+};
+
+export const RangeInExpandable: Story = {
+	args: {
+		step: 100,
+		suffix: "kr",
+	},
+	render({ step, locale, suffix }) {
+		return html`
+			<w-expandable title="Price">
+				<w-slider
+					label="Price"
+					min="0"
+					max="250000"
+					suffix="${suffix}"
+					step="${step}"
+					data-testid="expandable"
+				>
+					<w-slider-thumb
+						slot="from"
+						aria-label="From price"
+						name="from"
+					></w-slider-thumb>
+					<w-slider-thumb
+						slot="to"
+						aria-label="To price"
+						name="to"
+					></w-slider-thumb>
+				</w-slider>
+			</w-expandable>
+			<script type="module">
+				const numberFormatter = window.getNumberFormatter("${locale}").format;
+				const expandableSlider = document.querySelector(
+					'w-slider[data-testid="expandable"]',
+				);
+				expandableSlider.labelFormatter = (slot) => {
+					if (slot === "from") return "0";
+					return numberFormatter("250000");
+				};
+				expandableSlider.valueFormatter = numberFormatter;
+			</script>
+		`;
+	},
+};
+
+export const RangeInModal: Story = {
+	args: {
+		step: 100,
+		suffix: "kr",
+	},
+	render({ step, suffix }) {
+		return html`
+			<w-button
+				commandfor="invoker-modal"
+				command="--show-modal"
+				aria-haspopup="dialog"
+			>
+				Open a modal
+			</w-button>
+			<w-modal id="invoker-modal">
+				<w-modal-header
+					id="modal-header-one"
+					slot="header"
+					title="An example modal"
+				></w-modal-header>
+				<div slot="content" @input=${console.log}>
+					<w-slider
+						label="Price"
+						min="0"
+						max="250000"
+						suffix="${suffix}"
+						step="${step}"
+						data-testid="expandable"
+					>
+						<w-slider-thumb
+							slot="from"
+							aria-label="From price"
+							value="0"
+							name="from"
+						></w-slider-thumb>
+						<w-slider-thumb
+							slot="to"
+							aria-label="To price"
+							value="250000"
+							name="to"
+						></w-slider-thumb>
+					</w-slider>
+				</div>
+			</w-modal>
 		`;
 	},
 };
