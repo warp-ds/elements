@@ -1,3 +1,10 @@
+# [2.12.0-next.13](https://github.com/warp-ds/elements/compare/v2.12.0-next.12...v2.12.0-next.13) (2026-08-20)
+
+
+### Bug Fixes
+
+* **card:** respect clickable attribute and provide css based clickable behavior  ([#759](https://github.com/warp-ds/elements/issues/759)) ([dbafa40](https://github.com/warp-ds/elements/commit/dbafa40c7a8ab55a96de458c6561579d8ff167b2))
+
 # [2.12.0-next.12](https://github.com/warp-ds/elements/compare/v2.12.0-next.11...v2.12.0-next.12) (2026-08-19)
 
 
