@@ -3,10 +3,10 @@ import { createServer } from "vite";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 
-const args = new Set(process.argv.slice(2));
 const runs = Number(process.env.ICON_BENCHMARK_RUNS ?? 10);
 const delay = Number(process.env.ICON_BENCHMARK_DELAY ?? 50);
-const output = process.env.ICON_BENCHMARK_OUTPUT ?? "benchmarks/icon/results.json";
+const output =
+	process.env.ICON_BENCHMARK_OUTPUT ?? "benchmarks/icon/results.json";
 
 const scenarios = [
 	{ name: "single", count: 1, unique: true },
@@ -15,7 +15,8 @@ const scenarios = [
 	{ name: "repeated-1000", count: 1000, unique: false },
 ];
 
-const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" /></svg>';
+const svg =
+	'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" /></svg>';
 
 async function measure(page, scenario) {
 	const result = await page.evaluate(async ({ count, unique }) => {
@@ -41,7 +42,10 @@ async function measure(page, scenario) {
 		const started = performance.now();
 		let firstReady;
 		await new Promise((resolve, reject) => {
-			const timeout = setTimeout(() => reject(new Error("icon readiness timeout")), 30000);
+			const timeout = setTimeout(
+				() => reject(new Error("icon readiness timeout")),
+				30000,
+			);
 			const poll = () => {
 				// The parent revision has no ready class, so SVG presence is the
 				// cross-revision readiness signal. The branch still exposes the
@@ -49,7 +53,8 @@ async function measure(page, scenario) {
 				const ready = elements.filter((element) =>
 					element.shadowRoot?.querySelector("svg"),
 				);
-				if (ready.length && firstReady === undefined) firstReady = performance.now() - started;
+				if (ready.length && firstReady === undefined)
+					firstReady = performance.now() - started;
 				if (ready.length === elements.length) {
 					clearTimeout(timeout);
 					resolve();
@@ -86,7 +91,8 @@ async function runScenario(browser, serverUrl, scenario) {
 		if (request.url().startsWith("https://assets.finn.no/")) requests++;
 	});
 	page.on("response", async (response) => {
-		if (response.url().startsWith("https://assets.finn.no/")) bytes += (await response.body()).byteLength;
+		if (response.url().startsWith("https://assets.finn.no/"))
+			bytes += (await response.body()).byteLength;
 	});
 	await page.goto(`${serverUrl}/benchmarks/icon/index.html`);
 	const measurement = await measure(page, scenario);
@@ -117,12 +123,17 @@ try {
 }
 
 await mkdir(dirname(output), { recursive: true });
-await writeFile(output, `${JSON.stringify({ generatedAt: new Date().toISOString(), delay, runs, results }, null, 2)}\n`);
+await writeFile(
+	output,
+	`${JSON.stringify({ generatedAt: new Date().toISOString(), delay, runs, results }, null, 2)}\n`,
+);
 console.log(`Wrote ${output}`);
 
 function summarize(measurements) {
 	const median = (key) => {
-		const values = measurements.map((measurement) => measurement[key]).sort((a, b) => a - b);
+		const values = measurements
+			.map((measurement) => measurement[key])
+			.sort((a, b) => a - b);
 		return values[Math.floor(values.length / 2)].toFixed(2);
 	};
 	return `first=${median("firstReadyMs")}ms all=${median("allReadyMs")}ms requests=${measurements[0].requests} CLS=${median("layoutShift")}`;
