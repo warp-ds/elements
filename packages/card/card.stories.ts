@@ -5,9 +5,15 @@ import { html } from "lit";
 
 import { prespread } from "../../.storybook/utilities.js";
 
+import "../checkbox/checkbox.js";
+import "../checkbox-group/checkbox-group.js";
+import "../radio/radio.js";
+import "../radio-group/radio-group.js";
 import type { WarpCard } from "./card.js";
 // @ts-expect-error css is not typed
-import "./card-link.css";
+import "./card.css";
+import "../checkbox/checkbox.js";
+import "../radio/radio.js";
 import "./card.js";
 
 const { events, args, argTypes } = getStorybookHelpers<WarpCard>("w-card");
@@ -153,6 +159,90 @@ w-card::part(border) {
 	},
 };
 
+export const GroupedRadioCards: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-radio-group label="Package size" name="package-size">
+				<div data-card-group>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-small"
+								value="small"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-small">Small</label>
+						</div>
+					</w-card>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-medium"
+								value="medium"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-medium">Medium</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-radio
+							id="separate-radio-large"
+							value="large"
+							data-card-action
+						></w-radio>
+						<label for="separate-radio-large">Large</label>
+					</div>
+				</w-card>
+			</w-radio-group>
+		`;
+	},
+};
+
+export const GroupedCheckboxCards: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-checkbox-group label="Optional services" name="services">
+				<div data-card-group>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-gift-wrap"
+								value="gift-wrap"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
+						</div>
+					</w-card>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-insurance"
+								value="insurance"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-insurance">Extra insurance</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-checkbox
+							id="separate-checkbox-priority"
+							value="priority"
+							data-card-action
+						></w-checkbox>
+						<label for="separate-checkbox-priority">Priority handling</label>
+					</div>
+				</w-card>
+			</w-checkbox-group>
+		`;
+	},
+};
+
 /**
  * Example of a card that is not focusable or clickable, and has no interactive elements inside it.
  */
@@ -222,6 +312,76 @@ export const CardSeparateInteractiveElements: Story = {
 						<a href="#">This is the card title</a>
 					</h3>
 					<a href="http://google.com">Learn more</a>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const RadioCard: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-radio
+						id="radio-card-story-option"
+						name="radio-card-story"
+						value="option"
+						data-card-action
+					></w-radio>
+					<label for="radio-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const RadioCardGroup: Story = {
+	args: {},
+	render() {
+		return html`
+			<div style="display: grid; gap: 8px;">
+				<w-card>
+					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+						<w-radio
+							id="radio-card-story-standard"
+							name="radio-card-story-group"
+							value="standard"
+							data-card-action
+						></w-radio>
+						<label for="radio-card-story-standard">Standard delivery</label>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+						<w-radio
+							id="radio-card-story-express"
+							name="radio-card-story-group"
+							value="express"
+							data-card-action
+						></w-radio>
+						<label for="radio-card-story-express">Express delivery</label>
+					</div>
+				</w-card>
+			</div>
+		`;
+	},
+};
+
+export const CheckboxCard: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-card>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-checkbox
+						id="checkbox-card-story-option"
+						name="checkbox-card-story"
+						value="option"
+						data-card-action
+					></w-checkbox>
+					<label for="checkbox-card-story-option">Select this option</label>
 				</div>
 			</w-card>
 		`;
