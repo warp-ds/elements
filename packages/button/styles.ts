@@ -208,9 +208,9 @@ export const wButtonStyles = css`
 	${buttonSharedBase}
 
 	/* ============================================================
-   * Base element (NATIVE button mode ONLY)
+   * Base element (button mode ONLY)
    * ============================================================ */
-  button[part='base'] {
+  span[part='base'] {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
@@ -235,11 +235,11 @@ export const wButtonStyles = css`
 	}
 
 	/* Optional: helps avoid "grew a bit" from slot typography differences */
-	button[part="base"] ::slotted(*) {
+	span[part="base"] ::slotted(*) {
 		line-height: inherit;
 	}
 
-	:host([icon-only]) button[part="base"] ::slotted(*) {
+	:host([icon-only]) span[part="base"] ::slotted(*) {
 		line-height: normal;
 	}
 
@@ -254,20 +254,21 @@ export const wButtonStyles = css`
 		background: transparent;
 	}
 
-	/* Hover / active (native button mode only) */
-	:host(:not([disabled]):not([loading])) button[part="base"]:hover {
+	/* Hover / active (button mode only) */
+	:host(:hover:not([disabled]):not([loading])) span[part="base"] {
 		background-color: var(--_bg-hover);
 		border-color: var(--_border-color-hover);
 		color: var(--_color-hover);
 	}
 
-	:host(:not([disabled]):not([loading])) button[part="base"]:active {
+	:host(:active:not([disabled]):not([loading])) span[part="base"],
+	:host([data-active]:not([disabled]):not([loading])) span[part="base"] {
 		background-color: var(--_bg-active);
 		border-color: var(--_border-color-active);
 		color: var(--_color-active);
 	}
 
-	:host button[part="base"]:focus-visible {
+	:host(:focus-visible) span[part="base"] {
 		outline: var(--_outline-width) solid var(--_outline-color);
 		outline-offset: var(--_outline-offset);
 	}
@@ -308,24 +309,24 @@ export const wButtonStyles = css`
 		--w-c-button-color-active: var(--w-s-color-icon-active);
 	}
 
-	:host([variant="pill"]) button[part="base"] {
+	:host([variant="pill"]) span[part="base"] {
 		min-height: 44px;
 		min-width: 44px;
 	}
 
-	:host([small][variant="pill"]) button[part="base"] {
+	:host([small][variant="pill"]) span[part="base"] {
 		min-height: 32px;
 		min-width: 32px;
 	}
 
 	/* Button-specific: link variant element styles */
-	:host([variant="link"]) button[part="base"] {
+	:host([variant="link"]) span[part="base"] {
 		display: inline;
 		padding: 0;
 	}
 
-	:host([variant="link"]:not([disabled]):not([loading]))
-		button[part="base"]:hover {
+	:host([variant="link"]:hover:not([disabled]):not([loading]))
+		span[part="base"] {
 		text-decoration: underline;
 		background-color: transparent;
 		border-color: transparent;
@@ -347,12 +348,12 @@ export const wButtonStyles = css`
 		width: 100%;
 	}
 
-	:host([full-width]) button[part="base"],
+	:host([full-width]) span[part="base"],
 	:host([full-width]) > w-link[part="base"] {
 		width: 100%;
 	}
 
-	:host([icon-only]) button[part="base"] {
+	:host([icon-only]) span[part="base"] {
 		aspect-ratio: 1 / 1;
 		padding-left: calc(
 			var(--w-c-button-padding-y) - var(--w-c-button-border-width, 0px)
@@ -413,8 +414,8 @@ export const wButtonStyles = css`
 		--w-c-button-border-color-active: transparent;
 	}
 
-	/* Loading stripes (native button mode only) */
-	:host([loading]) button[part="base"] {
+	/* Loading stripes (button mode only) */
+	:host([loading]) span[part="base"] {
 		background-image: linear-gradient(
 			135deg,
 			rgba(0, 0, 0, 0.05) 25%,
@@ -430,7 +431,7 @@ export const wButtonStyles = css`
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		:host([loading]) button[part="base"] {
+		:host([loading]) span[part="base"] {
 			animation: none;
 		}
 	}

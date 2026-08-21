@@ -30,6 +30,8 @@ type ButtonProps = Omit<BaseButtonProps, "full-width" | "icon-only"> & {
 export const Button = React.forwardRef<WarpButton, ButtonProps>(
 	({ fullWidth, iconOnly, ...props }, ref) =>
 		React.createElement(BaseButton, {
+			role: "button",
+			tabIndex: 0,
 			...props,
 			...(fullWidth ? { "full-width": true } : {}),
 			...(iconOnly ? { "icon-only": true } : {}),
