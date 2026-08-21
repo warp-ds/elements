@@ -1,3 +1,36 @@
+## [2.12.1-next.1](https://github.com/warp-ds/elements/compare/v2.12.0...v2.12.1-next.1) (2026-08-20)
+
+
+### Bug Fixes
+
+* **slider:** handle setting an initial thumb value with min and max  ([#762](https://github.com/warp-ds/elements/issues/762)) ([4812c71](https://github.com/warp-ds/elements/commit/4812c71d1a3e21b4cd226dc5a120112f9825f242))
+
+# [2.12.0](https://github.com/warp-ds/elements/compare/v2.11.2...v2.12.0) (2026-08-20)
+
+
+### Bug Fixes
+
+* **button:** include an accessible description for primary, negative, negativeQuiet ([#730](https://github.com/warp-ds/elements/issues/730)) ([92ea40b](https://github.com/warp-ds/elements/commit/92ea40b5cc15df4a15af09dad00159dd08a7e121))
+* **card:** respect clickable attribute and provide css based clickable behavior  ([#759](https://github.com/warp-ds/elements/issues/759)) ([dbafa40](https://github.com/warp-ds/elements/commit/dbafa40c7a8ab55a96de458c6561579d8ff167b2))
+* **icon:** prevent FOUC by holding layout space during SVG load ([#757](https://github.com/warp-ds/elements/issues/757)) ([89183a5](https://github.com/warp-ds/elements/commit/89183a5a19dfdaf3de9152d933e6081ae9b5fce4))
+* **modal-header:** constrain close button column width to prevent title overflow ([#743](https://github.com/warp-ds/elements/issues/743)) ([b247735](https://github.com/warp-ds/elements/commit/b247735aec38e298fde07ba9b1311e4d4163d8a7)), closes [#742](https://github.com/warp-ds/elements/issues/742)
+* **pagination:** add missing last page button, visual fixes ([#735](https://github.com/warp-ds/elements/issues/735)) ([2911639](https://github.com/warp-ds/elements/commit/291163947f86cf58389abf0c78ad4ddfa8d24c51))
+* **slider:** don't show suffix if tooltip value is Min or Max ([#726](https://github.com/warp-ds/elements/issues/726)) ([ed83cec](https://github.com/warp-ds/elements/commit/ed83cecb4b2acd58c31d27d96792a4b4eecfca44))
+* **step-indicator:** adjust gaps and fix example typography ([#734](https://github.com/warp-ds/elements/issues/734)) ([30e5619](https://github.com/warp-ds/elements/commit/30e5619e68da683d99a4ef055a20a2d587273717))
+* **tab:** remove button inside tab that confused screen readers ([#736](https://github.com/warp-ds/elements/issues/736)) ([04013f6](https://github.com/warp-ds/elements/commit/04013f6904dc555cca4ff304f7e9f2a77e469f76))
+* **tabs:** map htmlFor to for in the React wrapper ([fd49268](https://github.com/warp-ds/elements/commit/fd49268d7968209005b2fcdcead609d5f47735cd))
+* **tooltip:** accessible description ([d3fbb69](https://github.com/warp-ds/elements/commit/d3fbb691e56ebd1dbb07285e93ef7c1c8750f6e6))
+
+
+### Features
+
+* **badge:** provide styling api ([#751](https://github.com/warp-ds/elements/issues/751)) ([a1c45ba](https://github.com/warp-ds/elements/commit/a1c45ba1ec21471828cda5bf28f3b7e9bbeaa0ad))
+* **box:** add styling api ([#752](https://github.com/warp-ds/elements/issues/752)) ([296d409](https://github.com/warp-ds/elements/commit/296d4098617fc725b566a437a700aa2c2560fd97))
+* **expandable:** expose wrapper and button as CSS parts ([#755](https://github.com/warp-ds/elements/issues/755)) ([dbfdbf4](https://github.com/warp-ds/elements/commit/dbfdbf4bb9b839cda075a7e849c0a3be89bffd4f))
+* min/maxlength, JSX helpText, bugfix for onchange in textarea ([#731](https://github.com/warp-ds/elements/issues/731)) ([bc04a71](https://github.com/warp-ds/elements/commit/bc04a712ff5903f8e0e1547d87f735ad06013be9)), closes [#722](https://github.com/warp-ds/elements/issues/722) [#720](https://github.com/warp-ds/elements/issues/720) [#721](https://github.com/warp-ds/elements/issues/721)
+* **textfield:** add tooltip prop ([2dbf34d](https://github.com/warp-ds/elements/commit/2dbf34dd10237eafce7f0063765feaa1e990739f))
+* **tooltip:** create a new tooltip component ([a219978](https://github.com/warp-ds/elements/commit/a2199784a73720b75826241c33568ea8f056423b))
+
 # [2.12.0-next.13](https://github.com/warp-ds/elements/compare/v2.12.0-next.12...v2.12.0-next.13) (2026-08-20)
 
 

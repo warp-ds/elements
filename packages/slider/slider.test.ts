@@ -254,6 +254,7 @@ test("can reset slider by resetting surrounding form", async () => {
 
 	const form = document.querySelector("form") as HTMLFormElement;
 	const wSlider = document.querySelector("w-slider") as WarpSlider;
+	await wSlider.updateComplete;
 	const wSliderThumb = wSlider.querySelector(
 		"w-slider-thumb",
 	) as WarpSliderThumb;
