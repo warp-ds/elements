@@ -370,7 +370,7 @@ test("reflects dynamic light-DOM option selected changes into native select", as
 
 /* For some reason this test fails only in Chromium and only on CI. Manually tested OK in Chrome. */
 test.skipIf(server.browser === "chromium" && server.config.env.CI)(
-	"submits the associated form when radio has focus and user presses Enter",
+	"submits the associated form when select has focus and user presses Enter",
 	async () => {
 		const screen = render(html`
 			<form>
@@ -383,15 +383,27 @@ test.skipIf(server.browser === "chromium" && server.config.env.CI)(
 		`);
 
 		const onSubmit = vi.fn();
+		let submitter: HTMLElement | null = null;
+		let submitContext: SubmitEvent["warpSubmitContext"];
 		const form = document.querySelector("form") as HTMLFormElement;
+		const select = document.querySelector("w-select") as HTMLElement;
+		const submitButton = document.querySelector(
+			'button[type="submit"]',
+		) as HTMLButtonElement;
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
+			submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+			submitContext = (event as SubmitEvent).warpSubmitContext;
 			onSubmit();
 		});
 
 		await userEvent.click(screen.getByTestId("select"));
 		await userEvent.keyboard("{Enter}");
 		expect(onSubmit).toHaveBeenCalled();
+		expect(submitter).toBe(submitButton);
+		expect(submitContext?.initiator).toBe(select);
+		expect(submitContext?.nativeSubmitter).toBe(submitButton);
+		expect(submitContext?.defaultSubmitter).toBe(submitButton);
 	},
 );
 

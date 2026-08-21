@@ -237,9 +237,17 @@ test.skipIf(server.browser === "webkit")(
 		`);
 
 		const onSubmit = vi.fn();
+		let submitter: HTMLElement | null = null;
+		let submitContext: SubmitEvent["warpSubmitContext"];
 		const form = document.querySelector("form") as HTMLFormElement;
+		const wCheckbox = document.querySelector("w-checkbox") as HTMLElement;
+		const submitButton = document.querySelector(
+			'button[type="submit"]',
+		) as HTMLButtonElement;
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
+			submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+			submitContext = (event as SubmitEvent).warpSubmitContext;
 			onSubmit();
 		});
 
@@ -248,5 +256,9 @@ test.skipIf(server.browser === "webkit")(
 		await userEvent.keyboard("{Enter}");
 
 		expect(onSubmit).toHaveBeenCalled();
+		expect(submitter).toBe(submitButton);
+		expect(submitContext?.initiator).toBe(wCheckbox);
+		expect(submitContext?.nativeSubmitter).toBe(submitButton);
+		expect(submitContext?.defaultSubmitter).toBe(submitButton);
 	},
 );

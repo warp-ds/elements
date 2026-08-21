@@ -5,6 +5,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 
 import { reset } from "../styles";
+import { SubmitOnEnterController } from "../utils.js";
 import { styles } from "./styles";
 
 /**
@@ -18,6 +19,8 @@ import { styles } from "./styles";
  */
 export class WarpCheckbox extends FormControlMixin(LitElement) {
 	static styles = [reset, styles];
+
+	#submitOnEnter = new SubmitOnEnterController(this);
 
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,
@@ -147,8 +150,7 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 		if (event.defaultPrevented) return;
 		if (event.key !== " " && event.key !== "Spacebar" && event.key !== "Enter")
 			return;
-		if (event.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+		if (this.#submitOnEnter.submit(event)) {
 			return;
 		}
 		if (event.composedPath()[0] === this.input) return;

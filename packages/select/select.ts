@@ -16,6 +16,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
+import { SubmitOnEnterController } from "../utils.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -56,6 +57,8 @@ const ccSelect = {
  * [Warp component reference](https://warp-ds.github.io/docs/components/select/frameworks/elements)
  */
 export class WarpSelect extends FormControlMixin(LitElement) {
+	#submitOnEnter = new SubmitOnEnterController(this);
+
 	/**
 	 * Whether the element should receive focus on render.
 	 *
@@ -381,8 +384,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 		) {
 			event.preventDefault();
 		}
-		if (event.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+		if (this.#submitOnEnter.submit(event)) {
 			return;
 		}
 	}

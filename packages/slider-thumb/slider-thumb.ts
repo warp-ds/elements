@@ -10,6 +10,7 @@ import type { WarpAttention } from "../attention/attention.js";
 import { styles as unoStyles } from "../slider/styles.js";
 import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
+import { SubmitOnEnterController } from "../utils.js";
 import { wSliderThumbStyles } from "./styles/w-slider-thumb.styles.js";
 
 export type SliderSlot = "to" | "from";
@@ -24,6 +25,8 @@ const chromeRe = /Chrome/;
  * @event {CustomEvent} thumbreset - Internal event used by (and stopped by) `w-slider`.
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
+	#submitOnEnter = new SubmitOnEnterController(this);
+
 	/** @internal */
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,
@@ -368,8 +371,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	}
 
 	async #onRangeSliderKeyDown(e: KeyboardEvent): Promise<void> {
-		if (e.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+		if (this.#submitOnEnter.submit(e)) {
 			return;
 		}
 
@@ -395,8 +397,7 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	}
 
 	async #onInputFieldKeyDown(e: KeyboardEvent): Promise<void> {
-		if (e.key === "Enter" && this.internals.form) {
-			(this.internals.form as HTMLFormElement).requestSubmit();
+		if (this.#submitOnEnter.submit(e)) {
 			return;
 		}
 
