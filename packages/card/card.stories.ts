@@ -11,7 +11,7 @@ import "../radio/radio.js";
 import "../radio-group/radio-group.js";
 import type { WarpCard } from "./card.js";
 // @ts-expect-error css is not typed
-import "./card-link.css";
+import "./card.css";
 import "../checkbox/checkbox.js";
 import "../radio/radio.js";
 import "./card.js";

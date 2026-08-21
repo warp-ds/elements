@@ -20,6 +20,16 @@
 	overflow: hidden;
 	border: 1px solid var(--w-s-color-border);
 	border-radius: 8px;
+	box-shadow: var(--w-s-shadow-surface-elevated-200);
+}
+
+[data-card-group]:has([data-card-action]:hover),
+[data-card-group]:has([data-card-action]:focus-visible) {
+	box-shadow: var(--w-s-shadow-surface-elevated-200-hover);
+}
+
+[data-card-group]:has([data-card-action]:active) {
+	box-shadow: var(--w-s-shadow-surface-elevated-200-active);
 }
 
 [data-card-group] > w-card {

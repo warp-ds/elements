@@ -8,6 +8,7 @@ import "../checkbox-group/checkbox-group.js";
 import "../radio/radio.js";
 import "../radio-group/radio-group.js";
 import "./card.js";
+// @ts-expect-error css is not typed
 import "../global.css";
 
 test("renders the slotted text", async () => {
@@ -81,6 +82,7 @@ test("card action selects a radio and applies selected styling", async () => {
 	const radio = page.container.querySelector("w-radio") as HTMLElement & {
 		checked: boolean;
 		click: () => void;
+		updateComplete: Promise<unknown>;
 	};
 	radio.click();
 	await radio.updateComplete;
@@ -108,6 +110,7 @@ test("card action toggles a checkbox and does not toggle when disabled", async (
 	const checkbox = page.container.querySelector("w-checkbox") as HTMLElement & {
 		checked: boolean;
 		click: () => void;
+		updateComplete: Promise<unknown>;
 	};
 	await checkbox.updateComplete;
 	checkbox.click();
