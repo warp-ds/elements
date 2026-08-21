@@ -104,3 +104,36 @@ When the card has a second independent navigation target, add `data-card-seconda
 ```
 
 Do not use a card action when the card contains buttons, form controls, or other interactive elements that should be part of the same content area. Use the specific control directly instead.
+
+### Grouped Selection Cards
+
+Use `w-radio-group` or `w-checkbox-group` to provide the semantic and behavioral group. Add `data-card-group` around the cards that should appear as one connected list. Cards outside that wrapper can remain visually separate while still belonging to the same group.
+
+```html
+<w-radio-group label="Package size" name="package-size">
+	<div data-card-group>
+		<w-card>
+			<div style="padding: 16px;">
+				<w-radio id="package-small" value="small" data-card-action></w-radio>
+				<label for="package-small">Small</label>
+			</div>
+		</w-card>
+
+		<w-card>
+			<div style="padding: 16px;">
+				<w-radio id="package-medium" value="medium" data-card-action></w-radio>
+				<label for="package-medium">Medium</label>
+			</div>
+		</w-card>
+	</div>
+
+	<w-card>
+		<div style="padding: 16px;">
+			<w-radio id="package-large" value="large" data-card-action></w-radio>
+			<label for="package-large">Large</label>
+		</div>
+	</w-card>
+</w-radio-group>
+```
+
+The separate `Large` card remains part of the radio group: selecting it deselects either card in the connected list. Use the same structure with `w-checkbox-group` when multiple cards can be selected.

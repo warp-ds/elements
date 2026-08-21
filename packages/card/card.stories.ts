@@ -5,6 +5,10 @@ import { html } from "lit";
 
 import { prespread } from "../../.storybook/utilities.js";
 
+import "../checkbox/checkbox.js";
+import "../checkbox-group/checkbox-group.js";
+import "../radio/radio.js";
+import "../radio-group/radio-group.js";
 import type { WarpCard } from "./card.js";
 // @ts-expect-error css is not typed
 import "./card-link.css";
@@ -151,6 +155,90 @@ w-card::part(border) {
 					<p>This is card content with some example text.</p>
 				</div>
 			</w-card>
+		`;
+	},
+};
+
+export const GroupedRadioCards: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-radio-group label="Package size" name="package-size">
+				<div data-card-group>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-small"
+								value="small"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-small">Small</label>
+						</div>
+					</w-card>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-medium"
+								value="medium"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-medium">Medium</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-radio
+							id="separate-radio-large"
+							value="large"
+							data-card-action
+						></w-radio>
+						<label for="separate-radio-large">Large</label>
+					</div>
+				</w-card>
+			</w-radio-group>
+		`;
+	},
+};
+
+export const GroupedCheckboxCards: Story = {
+	args: {},
+	render() {
+		return html`
+			<w-checkbox-group label="Optional services" name="services">
+				<div data-card-group>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-gift-wrap"
+								value="gift-wrap"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
+						</div>
+					</w-card>
+					<w-card>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-insurance"
+								value="insurance"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-insurance">Extra insurance</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-checkbox
+							id="separate-checkbox-priority"
+							value="priority"
+							data-card-action
+						></w-checkbox>
+						<label for="separate-checkbox-priority">Priority handling</label>
+					</div>
+				</w-card>
+			</w-checkbox-group>
 		`;
 	},
 };

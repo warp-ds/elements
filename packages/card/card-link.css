@@ -15,6 +15,25 @@
 	text-decoration: none;
 	color: inherit;
 }
+[data-card-group] {
+	display: block;
+	overflow: hidden;
+	border: 1px solid var(--w-s-color-border);
+	border-radius: 8px;
+}
+
+[data-card-group] > w-card {
+	--w-c-card-border-radius: 0;
+	--w-c-card-border-width: 0;
+	--w-c-card-box-shadow: none;
+	--w-c-card-box-shadow-hover: none;
+	--w-c-card-box-shadow-active: none;
+}
+
+[data-card-group] > w-card + w-card {
+	border-top: 1px solid var(--w-s-color-border);
+}
+
 w-card:has([data-card-action]) {
 	position: relative;
 }
