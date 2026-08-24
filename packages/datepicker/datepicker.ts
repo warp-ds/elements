@@ -466,29 +466,39 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 		}
 	}
 
-	#onCalendarSelect(event: MouseEvent | KeyboardEvent) {
+	#onCalendarClick(event: MouseEvent) {
 		// Clicks can hit the `<div>` inside the `<td>`, so look at
 		// currentTarget (where the listener is registered) to get
 		// the `<td>` consistently.
 		const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
-		if ("key" in event) {
-			if (event.key === "Enter" || event.key === " ") {
-				// Prevents whitespace from being added to the input field
-				event.preventDefault();
-				this.value = isoDate;
-				this.input.value = this.#inputValue;
-				this.#updateValidity();
-				this.isCalendarOpen = false;
-				this.toggleButton.focus();
-				this.#dispatchChangeEvent();
-			}
-		} else {
-			this.value = isoDate;
-			this.input.value = this.#inputValue;
-			this.#updateValidity();
-			this.isCalendarOpen = false;
-			this.#dispatchChangeEvent();
+		this.value = isoDate;
+		this.input.value = this.#inputValue;
+		this.#updateValidity();
+		this.isCalendarOpen = false;
+		this.#dispatchChangeEvent();
+	}
+
+	#onCalendarKeydown(event: KeyboardEvent) {
+		if (event.key === "Enter") {
+			this.#closeByKeyboard(event);
 		}
+	}
+
+	// Close with space only on keyup so we follow expected conventions on Enter vs space for buttons
+	#onCalendarKeyup(event: KeyboardEvent) {
+		if (event.key === " ") {
+			this.#closeByKeyboard(event);
+		}
+	}
+
+	#closeByKeyboard(event: KeyboardEvent) {
+		const isoDate = (event.currentTarget as HTMLTableCellElement).dataset.date;
+		this.value = isoDate;
+		this.input.value = this.#inputValue;
+		this.#updateValidity();
+		this.isCalendarOpen = false;
+		this.toggleButton.focus();
+		this.#dispatchChangeEvent();
 	}
 
 	// Track whether the current invalid/helpText state was set by validation
@@ -911,10 +921,13 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 													role="gridcell"
 													tabindex="${isNavigationDate ? 0 : -1}"
 													@click="${
-														isDisabled ? undefined : this.#onCalendarSelect
+														isDisabled ? undefined : this.#onCalendarClick
 													}"
 													@keydown="${
-														isDisabled ? undefined : this.#onCalendarSelect
+														isDisabled ? undefined : this.#onCalendarKeydown
+													}"
+													@keyup="${
+														isDisabled ? undefined : this.#onCalendarKeyup
 													}"
 												>
 													<div>${getDate(day)}</div>
