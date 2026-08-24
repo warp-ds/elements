@@ -16,29 +16,53 @@
 	color: inherit;
 }
 [data-card-group] {
+	--_card-group-radius: 8px;
 	display: block;
 	overflow: hidden;
-	border: 1px solid var(--w-s-color-border);
-	border-radius: 8px;
+	border: 0;
+	border-radius: var(--_card-group-radius);
+	position: relative;
+	box-shadow: 0 0 0 1px var(--w-s-color-border);
 }
 
 [data-card-group]:not(:has(> w-card[flat])) {
-	box-shadow: var(--w-s-shadow-surface-elevated-200);
+	box-shadow:
+		0 0 0 1px var(--w-s-color-border),
+		var(--w-s-shadow-surface-elevated-200);
 }
 
 [data-card-group]:not(:has(> w-card[flat])):has([data-card-action]:hover),
 [data-card-group]:not(:has(> w-card[flat])):has(
 		[data-card-action]:focus-visible
 	) {
-	box-shadow: var(--w-s-shadow-surface-elevated-200-hover);
+	box-shadow:
+		0 0 0 1px var(--w-s-color-border),
+		var(--w-s-shadow-surface-elevated-200-hover);
 }
 
 [data-card-group]:not(:has(> w-card[flat])):has([data-card-action]:active) {
-	box-shadow: var(--w-s-shadow-surface-elevated-200-active);
+	box-shadow:
+		0 0 0 1px var(--w-s-color-border),
+		var(--w-s-shadow-surface-elevated-200-active);
+}
+
+[data-card-group]:has(> w-card:first-child [data-card-action][checked]),
+[data-card-group]:has(> w-card:last-child [data-card-action][checked]) {
+	box-shadow: none;
+}
+
+[data-card-group]:not(:has(> w-card[flat])):has(
+		> w-card:first-child [data-card-action][checked]
+	),
+[data-card-group]:not(:has(> w-card[flat])):has(
+		> w-card:last-child [data-card-action][checked]
+	) {
+	box-shadow: var(--w-s-shadow-surface-elevated-200);
 }
 
 [data-card-group]:has(> w-card[flat]) {
-	border-radius: 4px;
+	--_card-group-radius: 4px;
+	border-radius: var(--_card-group-radius);
 }
 
 [data-card-group] > w-card {
@@ -51,6 +75,73 @@
 
 [data-card-group] > w-card + w-card {
 	border-top: 1px solid var(--w-s-color-border);
+}
+
+[data-card-group] > w-card:has([data-card-action][checked]) + w-card,
+[data-card-group] > w-card + w-card:has([data-card-action][checked]) {
+	border-top: 0;
+}
+
+[data-card-group] > w-card:has([data-card-action][checked])::part(border) {
+	border-color: var(--w-c-card-border-color, var(--w-s-color-border-selected));
+	border-width: 2px;
+}
+
+[data-card-group]
+	> w-card:has([data-card-action][checked])
+	+ w-card:has([data-card-action][checked])::part(border) {
+	border-top-width: 0;
+}
+
+[data-card-group]
+	> w-card:first-child:has([data-card-action][checked])::part(border) {
+	border-radius: var(--_card-group-radius) var(--_card-group-radius) 0 0;
+}
+
+[data-card-group]
+	> w-card:last-child:has([data-card-action][checked])::part(border) {
+	border-radius: 0 0 var(--_card-group-radius) var(--_card-group-radius);
+}
+
+[data-card-group]
+	> w-card:first-child:last-child:has([data-card-action][checked])::part(
+		border
+	) {
+	border-radius: var(--_card-group-radius);
+}
+
+[data-card-group]:has(> w-card:first-child [data-card-action][checked])::before,
+[data-card-group]:has(> w-card:last-child [data-card-action][checked])::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--w-s-color-border-selected);
+	z-index: 1;
+	pointer-events: none;
+}
+
+[data-card-group]:has(
+		> w-card:first-child [data-card-action][checked]
+	)::before {
+	top: 0;
+	border-radius: var(--_card-group-radius) var(--_card-group-radius) 0 0;
+}
+
+[data-card-group]:has(> w-card:last-child [data-card-action][checked])::after {
+	bottom: 0;
+	border-radius: 0 0 var(--_card-group-radius) var(--_card-group-radius);
+}
+
+[data-card-group]
+	> w-card:first-child:has([data-card-action][checked])::part(border) {
+	border-top-width: 0;
+}
+
+[data-card-group]
+	> w-card:last-child:has([data-card-action][checked])::part(border) {
+	border-bottom-width: 0;
 }
 
 w-card:has([data-card-action]) {
