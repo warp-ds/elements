@@ -16,7 +16,23 @@ import "../checkbox/checkbox.js";
 import "../radio/radio.js";
 import "./card.js";
 
-const { events, args, argTypes } = getStorybookHelpers<WarpCard>("w-card");
+const {
+	events,
+	args: generatedArgs,
+	argTypes: generatedArgTypes,
+} = getStorybookHelpers<WarpCard>("w-card");
+
+const deprecatedProperties = new Set(["clickable", "selected"]);
+const args = Object.fromEntries(
+	Object.entries(generatedArgs).filter(
+		([name]) => !deprecatedProperties.has(name),
+	),
+);
+const argTypes = Object.fromEntries(
+	Object.entries(generatedArgTypes).filter(
+		([name]) => !deprecatedProperties.has(name),
+	),
+);
 
 const meta: Meta<typeof args> = {
 	title: "Navigation/Card",
@@ -44,49 +60,19 @@ type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
 	args: {
-		selected: false,
 		flat: false,
-		clickable: false,
-	},
-};
-
-export const Selected: Story = {
-	args: {
-		selected: true,
-		flat: false,
-		clickable: false,
 	},
 };
 
 export const Flat: Story = {
 	args: {
-		selected: false,
 		flat: true,
-		clickable: false,
-	},
-};
-
-export const FlatSelected: Story = {
-	args: {
-		selected: true,
-		flat: true,
-		clickable: false,
-	},
-};
-
-export const Clickable: Story = {
-	args: {
-		selected: false,
-		flat: false,
-		clickable: true,
 	},
 };
 
 export const PropertyExample: Story = {
 	args: {
-		selected: false,
 		flat: false,
-		clickable: true,
 	},
 	render(args) {
 		return html`
@@ -117,8 +103,6 @@ export const PropertyExample: Story = {
 
 export const StylingApi: Story = {
 	args: {
-		clickable: false,
-		selected: false,
 		flat: false,
 	},
 	render(args) {
