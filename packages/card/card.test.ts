@@ -8,8 +8,6 @@ import "../checkbox-group/checkbox-group.js";
 import "../radio/radio.js";
 import "../radio-group/radio-group.js";
 import "./card.js";
-// @ts-expect-error css is not typed
-import "../global.css";
 
 test("renders the slotted text", async () => {
 	const component = html`<w-card>This is a card</w-card>`;
