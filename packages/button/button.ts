@@ -186,6 +186,13 @@ class WarpButton extends FormControlMixin(LitElement) {
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
 
+	/**
+	 * We want to emulate native button behavior which fires click listeners when space is
+	 * pressed and released on the same element. To avoid emulating click only on keyup,
+	 * keep track of whether we got a keydown-event. This value must reset on blur.
+	 */
+	#gotSpaceKeydownAndNoBlur = false;
+
 	get #ariaDescription(): string | undefined {
 		// let users override our default description
 		if (this.ariaDescription) {
@@ -252,6 +259,9 @@ class WarpButton extends FormControlMixin(LitElement) {
 		this.internals.ariaDescription = this.#ariaDescription;
 
 		this.addEventListener("click", this._handleButtonClick);
+		this.addEventListener("blur", () => {
+			this.#gotSpaceKeydownAndNoBlur = false;
+		});
 		this.addEventListener("keydown", (e) => {
 			if (e.key === "Enter") {
 				this.click(); // call this.click so user-provided click handlers get triggered
@@ -263,13 +273,17 @@ class WarpButton extends FormControlMixin(LitElement) {
 				// Mark the button as active while space is held.
 				// We don't get access to the :active pseudo class when interacting with a keyboard unfortunately.
 				this.dataset.active = "true";
+				this.#gotSpaceKeydownAndNoBlur = true;
 			}
 		});
 
 		this.addEventListener("keyup", (e) => {
 			if (e.key === " ") {
 				delete this.dataset.active;
-				this.click(); // call this.click so user-provided click handlers get triggered
+				if (this.#gotSpaceKeydownAndNoBlur) {
+					this.click(); // call this.click so user-provided click handlers get triggered
+				}
+				this.#gotSpaceKeydownAndNoBlur = false;
 			}
 		});
 
