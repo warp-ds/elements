@@ -241,7 +241,8 @@ class WarpButton extends FormControlMixin(LitElement) {
 		}
 
 		if (!this.href && !this.hasAttribute("role")) {
-			// Using this.internals for role breaks Playwright locators
+			// Using this.internals for role breaks Playwright locators.
+			// Set in connectedCallback to avoid a role attribute when we render w-link.
 			this.setAttribute("role", "button");
 		}
 		if (!this.href && !this.hasAttribute("tabindex")) {
