@@ -1,4 +1,4 @@
-import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te,h as n,l as ne,r as re,s as r,t as i,y as a}from"./decorate-Bt2QF_uA.js";import{a as o,o as ie,r as s,t as ae}from"./i18n-CkjYRTT1.js";import{n as oe,t as se}from"./dist-D5kJVy4t.js";import{n as c,t as l}from"./styles-Cw_r5k83.js";import{i as u,n as d,r as f}from"./utilities-BHNt5DhH.js";import{r as p,t as m}from"./if-defined-DBI32Ir5.js";import{n as ce,t as le}from"./checkbox-group-ByUamKK4.js";import{n as ue,t as de}from"./radio-group-DtlYlB9v.js";var h;function g(){return(g=e((()=>{h=JSON.parse(`{"card.button.text":["Vælg"]}`)})))()}var _;function v(){return(v=e((()=>{_=JSON.parse(`{"card.button.text":["Select"]}`)})))()}var y;function b(){return(b=e((()=>{y=JSON.parse(`{"card.button.text":["Valitse"]}`)})))()}var x;function S(){return(S=e((()=>{x=JSON.parse(`{"card.button.text":["Velg"]}`)})))()}var C;function w(){return(w=e((()=>{C=JSON.parse(`{"card.button.text":["Välj"]}`)})))()}var T;function E(){return(E=e((()=>{t(),T=a`
+import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l as i,r as a,s as o,t as s,y as c}from"./decorate-Bt2QF_uA.js";import{a as te,o as ne,r as re,t as l}from"./i18n-CkjYRTT1.js";import{n as u,t as ie}from"./dist-D5kJVy4t.js";import{n as ae,t as d}from"./styles-Cw_r5k83.js";import{i as f,n as p,r as m}from"./utilities-BHNt5DhH.js";import{r as h,t as oe}from"./if-defined-DBI32Ir5.js";import{n as se,t as ce}from"./checkbox-group-CGXa3atg.js";import{n as le,t as ue}from"./radio-group-F_P73Un7.js";var g;function _(){return(_=e((()=>{g=JSON.parse(`{"card.button.text":["Vælg"]}`)})))()}var v;function y(){return(y=e((()=>{v=JSON.parse(`{"card.button.text":["Select"]}`)})))()}var b;function x(){return(x=e((()=>{b=JSON.parse(`{"card.button.text":["Valitse"]}`)})))()}var S;function C(){return(C=e((()=>{S=JSON.parse(`{"card.button.text":["Velg"]}`)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"card.button.text":["Välj"]}`)})))()}var E;function D(){return(D=e((()=>{t(),E=c`
 	:host {
 		--_background-color: var(
 			--w-c-card-bg,
@@ -92,7 +92,6 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te
 
 	:host([clickable]) [part="base"]:hover {
 		background-color: var(--_background-color-hover);
-		box-shadow: var(--_box-shadow-hover);
 	}
 
 	:host([clickable]) [part="base"]:active {
@@ -112,11 +111,6 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	:host([clickable][flat]) [part="base"]:hover [part="border"],
-	:host([clickable][selected]) [part="base"]:hover [part="border"] {
-		border-color: var(--_border-color-hover);
-	}
-
 	:host([clickable]) [part="base"]:active [part="border"] {
 		border-color: var(--_border-color-active);
 	}
@@ -132,7 +126,7 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te
 		white-space: nowrap;
 		border-width: 0;
 	}
-`})))()}var D,O;function k(){return(k=e((()=>{ie(),t(),re(),m(),s(),l(),g(),v(),b(),S(),w(),E(),D={ENTER:`Enter`,SPACE:` `},O=class extends ne{static{this.styles=[c,T,a`
+`})))()}var O,k;function A(){return(A=e((()=>{ne(),t(),a(),oe(),re(),d(),_(),y(),x(),C(),T(),D(),O={ENTER:`Enter`,SPACE:` `},k=class extends i{static{this.styles=[ae,E,c`
 			a::after {
 				content: "";
 				position: absolute;
@@ -144,36 +138,36 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te
 			:host {
 				display: block;
 			}
-		`]}constructor(){super(),this.selected=!1,this.flat=!1,this.clickable=!1,ae(_,x,y,h,C),this.buttonText=o._({id:`card.button.text`,message:`Select`,comment:`Screenreader message to indicate that the card is clickable`})}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===D.ENTER||e.key===D.SPACE)&&(e.preventDefault(),this.click())}render(){return n`
+		`]}constructor(){super(),this.selected=!1,this.flat=!1,this.clickable=!1,l(v,S,b,g,w),this.buttonText=te._({id:`card.button.text`,message:`Select`,comment:`Screenreader message to indicate that the card is clickable`})}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===O.ENTER||e.key===O.SPACE)&&(e.preventDefault(),this.click())}render(){return r`
 			<div
 				part="base"
-				tabindex=${p(this.clickable?`0`:void 0)}
+				tabindex=${h(this.clickable?`0`:void 0)}
 				@keydown=${this.keypressed}
 			>
 				<div part="border"></div>
-				${this.clickable?n`<button
+				${this.clickable?r`<button
 								class="sr-only"
 								aria-pressed="${this.selected}"
 								tabindex="-1"
 							>
 								${this.buttonText}
-							</button>`:this.selected?n`<span
+							</button>`:this.selected?r`<span
 									class="sr-only"
 									role="checkbox"
 									aria-checked="true"
 									aria-disabled="true"
-								></span>`:te}
+								></span>`:n}
 				<slot></slot>
 			</div>
-		`}},i([r({type:Boolean,reflect:!0})],O.prototype,`selected`,void 0),i([r({type:Boolean})],O.prototype,`flat`,void 0),i([r({type:Boolean})],O.prototype,`clickable`,void 0),customElements.get(`w-card`)||customElements.define(`w-card`,O)})))()}var fe=ee({AdvancedExample:()=>X,AdvancederExamples:()=>Z,CardCardClickablePlusASecondInteractiveElement:()=>G,CardNoNavigation:()=>U,CardSeparateInteractiveElements:()=>K,CardWholeCardClickable:()=>W,CheckboxCard:()=>Y,Clickable:()=>R,Default:()=>P,Flat:()=>I,FlatSelected:()=>L,GroupedCheckboxCards:()=>H,GroupedRadioCards:()=>V,PropertyExample:()=>z,RadioCard:()=>q,RadioCardGroup:()=>J,Selected:()=>F,StylingApi:()=>B,__namedExportsOrder:()=>Q,default:()=>N}),A,j,M,N,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{f(),oe(),t(),ce(),le(),ue(),de(),k(),{events:A,args:j,argTypes:M}=se(`w-card`),N={title:`Navigation/Card`,render(e){return n`
-            <w-card ${u(d(e))}>
+		`}},s([o({type:Boolean,reflect:!0})],k.prototype,`selected`,void 0),s([o({type:Boolean})],k.prototype,`flat`,void 0),s([o({type:Boolean})],k.prototype,`clickable`,void 0),customElements.get(`w-card`)||customElements.define(`w-card`,k)})))()}var j=ee({AdvancedExample:()=>X,AdvancederExamples:()=>Z,CardCardClickablePlusASecondInteractiveElement:()=>G,CardNoNavigation:()=>U,CardSeparateInteractiveElements:()=>K,CardWholeCardClickable:()=>W,CheckboxCard:()=>Y,Default:()=>L,Flat:()=>R,GroupedCheckboxCards:()=>H,GroupedRadioCards:()=>V,PropertyExample:()=>z,RadioCard:()=>q,RadioCardGroup:()=>J,StylingApi:()=>B,__namedExportsOrder:()=>Q,default:()=>I}),M,N,P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{m(),u(),t(),se(),ce(),le(),ue(),A(),{events:M,args:N,argTypes:P}=ie(`w-card`),F=new Set([`clickable`,`selected`]),I={title:`Navigation/Card`,render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3>Card Title</h3>
                     <p>This is card content with some example text.</p>
                 </div>
             </w-card>
-        `},args:j,argTypes:M,parameters:{actions:{handles:A}}},P={args:{selected:!1,flat:!1,clickable:!1}},F={args:{selected:!0,flat:!1,clickable:!1}},I={args:{selected:!1,flat:!0,clickable:!1}},L={args:{selected:!0,flat:!0,clickable:!1}},R={args:{selected:!1,flat:!1,clickable:!0}},z={args:{selected:!1,flat:!1,clickable:!0},render(e){return n`
-            <w-card ${u(d(e))}>
+        `},args:Object.fromEntries(Object.entries(N).filter(([e])=>!F.has(e))),argTypes:Object.fromEntries(Object.entries(P).filter(([e])=>!F.has(e))),parameters:{actions:{handles:M}}},L={args:{flat:!1}},R={args:{flat:!0}},z={args:{flat:!1},render(e){return r`
+            <w-card ${f(p(e))}>
                 <img
                     style="width: 100%; height: 200px; object-fit: cover;"
                     src="https://unsplash.it/300/200?random"
@@ -194,7 +188,7 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as te
                     </p>
                 </div>
             </w-card>
-        `}},B={args:{clickable:!1,selected:!1,flat:!1},render(e){return n`
+        `}},B={args:{flat:!1},render(e){return r`
             <pre>
 <code>
 &lt;style&gt;
@@ -221,16 +215,16 @@ w-card::part(border) {
                     border-width: 8px;
                 }
             </style>
-            <w-card ${u(d(e))}>
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3>Card Title</h3>
                     <p>This is card content with some example text.</p>
                 </div>
             </w-card>
-        `}},V={args:{},render(){return n`
+        `}},V={args:{},render(e){return r`
             <w-radio-group label="Package size" name="package-size">
                 <div data-card-group>
-                    <w-card>
+                    <w-card ${f(p(e))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-radio
                                 id="grouped-radio-small"
@@ -240,7 +234,7 @@ w-card::part(border) {
                             <label for="grouped-radio-small">Small</label>
                         </div>
                     </w-card>
-                    <w-card>
+                    <w-card ${f(p(e))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-radio
                                 id="grouped-radio-medium"
@@ -251,7 +245,7 @@ w-card::part(border) {
                         </div>
                     </w-card>
                 </div>
-                <w-card>
+                <w-card ${f(p(e))}>
                     <div style="padding: 16px; display: flex; gap: 8px;">
                         <w-radio
                             id="separate-radio-large"
@@ -262,10 +256,10 @@ w-card::part(border) {
                     </div>
                 </w-card>
             </w-radio-group>
-        `}},H={args:{},render(){return n`
+        `}},H={args:{},render(e){return r`
             <w-checkbox-group label="Optional services" name="services">
                 <div data-card-group>
-                    <w-card>
+                    <w-card ${f(p(e))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-checkbox
                                 id="grouped-checkbox-gift-wrap"
@@ -275,7 +269,7 @@ w-card::part(border) {
                             <label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
                         </div>
                     </w-card>
-                    <w-card>
+                    <w-card ${f(p(e))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-checkbox
                                 id="grouped-checkbox-insurance"
@@ -286,7 +280,7 @@ w-card::part(border) {
                         </div>
                     </w-card>
                 </div>
-                <w-card>
+                <w-card ${f(p(e))}>
                     <div style="padding: 16px; display: flex; gap: 8px;">
                         <w-checkbox
                             id="separate-checkbox-priority"
@@ -297,23 +291,23 @@ w-card::part(border) {
                     </div>
                 </w-card>
             </w-checkbox-group>
-        `}},U={args:{},render(){return n`
-            <w-card>
+        `}},U={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">This is the card title</h3>
                     <p>This is the card content</p>
                 </div>
             </w-card>
-        `}},W={args:{},render(){return n`
-            <w-card>
+        `}},W={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#" data-card-action>This is the card title</a>
                     </h3>
                 </div>
             </w-card>
-        `}},G={args:{},render(){return n`
-            <w-card>
+        `}},G={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#" data-card-action>This is the card title</a>
@@ -321,8 +315,8 @@ w-card::part(border) {
                     <a href="http://google.com" data-card-secondary-action>Learn more</a>
                 </div>
             </w-card>
-        `}},K={args:{},render(){return n`
-            <w-card>
+        `}},K={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#">This is the card title</a>
@@ -330,8 +324,8 @@ w-card::part(border) {
                     <a href="http://google.com">Learn more</a>
                 </div>
             </w-card>
-        `}},q={args:{},render(){return n`
-            <w-card>
+        `}},q={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                     <w-radio
                         id="radio-card-story-option"
@@ -342,9 +336,9 @@ w-card::part(border) {
                     <label for="radio-card-story-option">Select this option</label>
                 </div>
             </w-card>
-        `}},J={args:{},render(){return n`
+        `}},J={args:{},render(e){return r`
             <div style="display: grid; gap: 8px;">
-                <w-card>
+                <w-card ${f(p(e))}>
                     <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                         <w-radio
                             id="radio-card-story-standard"
@@ -355,7 +349,7 @@ w-card::part(border) {
                         <label for="radio-card-story-standard">Standard delivery</label>
                     </div>
                 </w-card>
-                <w-card>
+                <w-card ${f(p(e))}>
                     <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                         <w-radio
                             id="radio-card-story-express"
@@ -367,8 +361,8 @@ w-card::part(border) {
                     </div>
                 </w-card>
             </div>
-        `}},Y={args:{},render(){return n`
-            <w-card>
+        `}},Y={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                     <w-checkbox
                         id="checkbox-card-story-option"
@@ -379,8 +373,8 @@ w-card::part(border) {
                     <label for="checkbox-card-story-option">Select this option</label>
                 </div>
             </w-card>
-        `}},X={args:{},render(e){return n`
-            <w-card ${u(d(e))}>
+        `}},X={args:{},render(e){return r`
+            <w-card ${f(p(e))}>
                 <img
                     style="width: 100%; height: 200px; object-fit: cover;"
                     src="https://unsplash.it/300/200?random"
@@ -403,8 +397,8 @@ w-card::part(border) {
                     </p>
                 </div>
             </w-card>
-        `}},Z={args:{},render(e){return n`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
-                <w-card class="max-w-[223] min-w-[223]" ${u(d(e))}>
+        `}},Z={args:{},render(e){return r`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
+                <w-card class="max-w-[223] min-w-[223]" ${f(p(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -428,7 +422,7 @@ w-card::part(border) {
                         />
                     </article>
                 </w-card>
-                <w-card class="max-w-[223] min-w-[223]" ${u(d(e))}>
+                <w-card class="max-w-[223] min-w-[223]" ${f(p(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -452,7 +446,7 @@ w-card::part(border) {
                         />
                     </article>
                 </w-card>
-                <w-card class="max-w-[223] min-w-[223]" ${u(d(e))}>
+                <w-card class="max-w-[223] min-w-[223]" ${f(p(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -483,7 +477,7 @@ w-card::part(border) {
             >
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${u(d(e))}
+                    ${f(p(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -517,7 +511,7 @@ w-card::part(border) {
                 </w-card>
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${u(d(e))}
+                    ${f(p(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -551,7 +545,7 @@ w-card::part(border) {
                 </w-card>
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${u(d(e))}
+                    ${f(p(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -656,41 +650,17 @@ w-card::part(border) {
                         </div>
                     </article>
                 </w-card>
-            </div>`}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
+            </div>`}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: false,
-    flat: false,
-    clickable: false
-  }
-}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`{
-  args: {
-    selected: true,
-    flat: false,
-    clickable: false
-  }
-}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
-  args: {
-    selected: false,
-    flat: true,
-    clickable: false
-  }
-}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`{
-  args: {
-    selected: true,
-    flat: true,
-    clickable: false
+    flat: false
   }
 }`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: false,
-    flat: false,
-    clickable: true
+    flat: true
   }
 }`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: false,
-    flat: false,
-    clickable: true
+    flat: false
   },
   render(args) {
     return html\`
@@ -719,8 +689,6 @@ w-card::part(border) {
   }
 }`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
-    clickable: false,
-    selected: false,
     flat: false
   },
   render(args) {
@@ -761,11 +729,11 @@ w-card::part(border) {
   }
 }`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
             <w-radio-group label="Package size" name="package-size">
                 <div data-card-group>
-                    <w-card>
+                    <w-card \${spread(prespread(args))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-radio
                                 id="grouped-radio-small"
@@ -775,7 +743,7 @@ w-card::part(border) {
                             <label for="grouped-radio-small">Small</label>
                         </div>
                     </w-card>
-                    <w-card>
+                    <w-card \${spread(prespread(args))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-radio
                                 id="grouped-radio-medium"
@@ -786,7 +754,7 @@ w-card::part(border) {
                         </div>
                     </w-card>
                 </div>
-                <w-card>
+                <w-card \${spread(prespread(args))}>
                     <div style="padding: 16px; display: flex; gap: 8px;">
                         <w-radio
                             id="separate-radio-large"
@@ -801,11 +769,11 @@ w-card::part(border) {
   }
 }`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
             <w-checkbox-group label="Optional services" name="services">
                 <div data-card-group>
-                    <w-card>
+                    <w-card \${spread(prespread(args))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-checkbox
                                 id="grouped-checkbox-gift-wrap"
@@ -815,7 +783,7 @@ w-card::part(border) {
                             <label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
                         </div>
                     </w-card>
-                    <w-card>
+                    <w-card \${spread(prespread(args))}>
                         <div style="padding: 16px; display: flex; gap: 8px;">
                             <w-checkbox
                                 id="grouped-checkbox-insurance"
@@ -826,7 +794,7 @@ w-card::part(border) {
                         </div>
                     </w-card>
                 </div>
-                <w-card>
+                <w-card \${spread(prespread(args))}>
                     <div style="padding: 16px; display: flex; gap: 8px;">
                         <w-checkbox
                             id="separate-checkbox-priority"
@@ -841,9 +809,9 @@ w-card::part(border) {
   }
 }`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">This is the card title</h3>
                     <p>This is the card content</p>
@@ -853,9 +821,9 @@ w-card::part(border) {
   }
 }`,...U.parameters?.docs?.source},description:{story:`Example of a card that is not focusable or clickable, and has no interactive elements inside it.`,...U.parameters?.docs?.description}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#" data-card-action>This is the card title</a>
@@ -866,9 +834,9 @@ w-card::part(border) {
   }
 }`,...W.parameters?.docs?.source},description:{story:`Example of a card that has a single interactive element inside it that is both sematically correct and the clickable area expands to fill the card.`,...W.parameters?.docs?.description}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#" data-card-action>This is the card title</a>
@@ -881,9 +849,9 @@ w-card::part(border) {
 }`,...G.parameters?.docs?.source},description:{story:`Example of a card that has a sematically correct main clickable interactive element that expands to fill the card,
 and also has a second interactive element inside it.`,...G.parameters?.docs?.description}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px;">
                     <h3 class="t3">
                         <a href="#">This is the card title</a>
@@ -896,9 +864,9 @@ and also has a second interactive element inside it.`,...G.parameters?.docs?.des
 }`,...K.parameters?.docs?.source},description:{story:`Example of a card that has two interactive elements inside it, but the card itself is not clickable.
 The interactive elements are independently clickable and focusable, and the card itself is not focusable or clickable.`,...K.parameters?.docs?.description}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                     <w-radio
                         id="radio-card-story-option"
@@ -913,10 +881,10 @@ The interactive elements are independently clickable and focusable, and the card
   }
 }`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
             <div style="display: grid; gap: 8px;">
-                <w-card>
+                <w-card \${spread(prespread(args))}>
                     <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                         <w-radio
                             id="radio-card-story-standard"
@@ -927,7 +895,7 @@ The interactive elements are independently clickable and focusable, and the card
                         <label for="radio-card-story-standard">Standard delivery</label>
                     </div>
                 </w-card>
-                <w-card>
+                <w-card \${spread(prespread(args))}>
                     <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                         <w-radio
                             id="radio-card-story-express"
@@ -943,9 +911,9 @@ The interactive elements are independently clickable and focusable, and the card
   }
 }`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
   args: {},
-  render() {
+  render(args) {
     return html\`
-            <w-card>
+            <w-card \${spread(prespread(args))}>
                 <div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
                     <w-checkbox
                         id="checkbox-card-story-option"
@@ -1245,4 +1213,4 @@ The interactive elements are independently clickable and focusable, and the card
                 </w-card>
             </div>\`;
   }
-}`,...Z.parameters?.docs?.source}}},Q=[`Default`,`Selected`,`Flat`,`FlatSelected`,`Clickable`,`PropertyExample`,`StylingApi`,`GroupedRadioCards`,`GroupedCheckboxCards`,`CardNoNavigation`,`CardWholeCardClickable`,`CardCardClickablePlusASecondInteractiveElement`,`CardSeparateInteractiveElements`,`RadioCard`,`RadioCardGroup`,`CheckboxCard`,`AdvancedExample`,`AdvancederExamples`]})))()}export{z as a,$ as c,L as i,P as n,F as o,I as r,fe as s,R as t};
+}`,...Z.parameters?.docs?.source}}},Q=[`Default`,`Flat`,`PropertyExample`,`StylingApi`,`GroupedRadioCards`,`GroupedCheckboxCards`,`CardNoNavigation`,`CardWholeCardClickable`,`CardCardClickablePlusASecondInteractiveElement`,`CardSeparateInteractiveElements`,`RadioCard`,`RadioCardGroup`,`CheckboxCard`,`AdvancedExample`,`AdvancederExamples`]})))()}export{$ as a,j as i,R as n,z as r,L as t};
