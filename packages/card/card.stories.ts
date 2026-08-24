@@ -321,6 +321,27 @@ export const RadioCard: Story = {
 	},
 };
 
+export const FlatRadioCard: Story = {
+	args: {
+		flat: true,
+	},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-radio
+						id="radio-card-story-option"
+						name="radio-card-story"
+						value="option"
+						data-card-action
+					></w-radio>
+					<label for="radio-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
 export const RadioCardGroup: Story = {
 	args: {},
 	render(args) {
@@ -355,6 +376,27 @@ export const RadioCardGroup: Story = {
 
 export const CheckboxCard: Story = {
 	args: {},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-checkbox
+						id="checkbox-card-story-option"
+						name="checkbox-card-story"
+						value="option"
+						data-card-action
+					></w-checkbox>
+					<label for="checkbox-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const FlatCheckboxCard: Story = {
+	args: {
+		flat: true,
+	},
 	render(args) {
 		return html`
 			<w-card ${spread(prespread(args))}>

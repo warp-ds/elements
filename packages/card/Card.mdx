@@ -15,8 +15,23 @@ Use the ARIA role attribute to provide semantic meaning to a box element. If no 
 ## Visual options
 
 <Canvas of={CardStories.Default} />
-<Canvas of={CardStories.Selected} />
 <Canvas of={CardStories.Flat} />
-<Canvas of={CardStories.FlatSelected} />
-<Canvas of={CardStories.Clickable} />
 <Canvas of={CardStories.PropertyExample} />
+
+### Interactive Cards
+
+#### Radio Cards
+**Regular style card**
+<Canvas of={CardStories.RadioCard} />
+**Flat style card**
+<Canvas of={CardStories.FlatRadioCard} />
+
+#### Checkbox Cards
+**Regular style card**
+<Canvas of={CardStories.CheckboxCard} />
+**Flat style card**
+<Canvas of={CardStories.FlatCheckboxCard} />
+
+#### Grouped Cards
+Cards can be grouped together or visually separated, even if part of the same set of options.
+<Canvas of={CardStories.GroupedRadioCards} />
