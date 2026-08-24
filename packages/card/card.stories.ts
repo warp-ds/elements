@@ -161,11 +161,11 @@ w-card::part(border) {
 
 export const GroupedRadioCards: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
 			<w-radio-group label="Package size" name="package-size">
 				<div data-card-group>
-					<w-card>
+					<w-card ${spread(prespread(args))}>
 						<div style="padding: 16px; display: flex; gap: 8px;">
 							<w-radio
 								id="grouped-radio-small"
@@ -175,7 +175,7 @@ export const GroupedRadioCards: Story = {
 							<label for="grouped-radio-small">Small</label>
 						</div>
 					</w-card>
-					<w-card>
+					<w-card ${spread(prespread(args))}>
 						<div style="padding: 16px; display: flex; gap: 8px;">
 							<w-radio
 								id="grouped-radio-medium"
@@ -186,7 +186,7 @@ export const GroupedRadioCards: Story = {
 						</div>
 					</w-card>
 				</div>
-				<w-card>
+				<w-card ${spread(prespread(args))}>
 					<div style="padding: 16px; display: flex; gap: 8px;">
 						<w-radio
 							id="separate-radio-large"
@@ -203,11 +203,11 @@ export const GroupedRadioCards: Story = {
 
 export const GroupedCheckboxCards: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
 			<w-checkbox-group label="Optional services" name="services">
 				<div data-card-group>
-					<w-card>
+					<w-card ${spread(prespread(args))}>
 						<div style="padding: 16px; display: flex; gap: 8px;">
 							<w-checkbox
 								id="grouped-checkbox-gift-wrap"
@@ -217,7 +217,7 @@ export const GroupedCheckboxCards: Story = {
 							<label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
 						</div>
 					</w-card>
-					<w-card>
+					<w-card ${spread(prespread(args))}>
 						<div style="padding: 16px; display: flex; gap: 8px;">
 							<w-checkbox
 								id="grouped-checkbox-insurance"
@@ -228,7 +228,7 @@ export const GroupedCheckboxCards: Story = {
 						</div>
 					</w-card>
 				</div>
-				<w-card>
+				<w-card ${spread(prespread(args))}>
 					<div style="padding: 16px; display: flex; gap: 8px;">
 						<w-checkbox
 							id="separate-checkbox-priority"
@@ -248,9 +248,9 @@ export const GroupedCheckboxCards: Story = {
  */
 export const CardNoNavigation: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">This is the card title</h3>
 					<p>This is the card content</p>
@@ -265,9 +265,9 @@ export const CardNoNavigation: Story = {
  */
 export const CardWholeCardClickable: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#" data-card-action>This is the card title</a>
@@ -284,9 +284,9 @@ export const CardWholeCardClickable: Story = {
  */
 export const CardCardClickablePlusASecondInteractiveElement: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#" data-card-action>This is the card title</a>
@@ -304,9 +304,9 @@ export const CardCardClickablePlusASecondInteractiveElement: Story = {
  */
 export const CardSeparateInteractiveElements: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#">This is the card title</a>
@@ -320,9 +320,9 @@ export const CardSeparateInteractiveElements: Story = {
 
 export const RadioCard: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
 					<w-radio
 						id="radio-card-story-option"
@@ -339,10 +339,10 @@ export const RadioCard: Story = {
 
 export const RadioCardGroup: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
 			<div style="display: grid; gap: 8px;">
-				<w-card>
+				<w-card ${spread(prespread(args))}>
 					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
 						<w-radio
 							id="radio-card-story-standard"
@@ -353,7 +353,7 @@ export const RadioCardGroup: Story = {
 						<label for="radio-card-story-standard">Standard delivery</label>
 					</div>
 				</w-card>
-				<w-card>
+				<w-card ${spread(prespread(args))}>
 					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
 						<w-radio
 							id="radio-card-story-express"
@@ -371,9 +371,9 @@ export const RadioCardGroup: Story = {
 
 export const CheckboxCard: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
 					<w-checkbox
 						id="checkbox-card-story-option"
