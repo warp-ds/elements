@@ -64,15 +64,13 @@ w-card:has([data-card-action]) * {
 	border: 0;
 	border-radius: var(--_card-group-radius);
 	position: relative;
-	box-shadow:
-		0 1px 6px 0 rgba(0, 0, 0, 0.12),
-		0 1px 1px 0 rgba(0, 0, 0, 0.16);
+	box-shadow: var(--w-shadow-s);
 }
 
 [data-card-group]:has(> w-card[flat]) {
 	--_card-group-radius: 4px;
 	border-radius: var(--_card-group-radius);
-	box-shadow: none;
+	box-shadow: var(--w-none);
 }
 
 [data-card-group]:has([data-card-action]) {
@@ -82,9 +80,9 @@ w-card:has([data-card-action]) * {
 [data-card-group] > w-card {
 	--w-c-card-border-radius: 0;
 	--w-c-card-border-width: 0;
-	--w-c-card-box-shadow: none;
-	--w-c-card-box-shadow-hover: none;
-	--w-c-card-box-shadow-active: none;
+	--w-c-card-box-shadow: var(--w-none);
+	--w-c-card-box-shadow-hover: var(--w-none);
+	--w-c-card-box-shadow-active: var(--w-none);
 	position: relative;
 }
 
@@ -94,7 +92,7 @@ w-card:has([data-card-action]) * {
 }
 
 [data-card-group] > w-card:not([flat])::part(border) {
-	border-color: transparent;
+	border-color: var(--w-transparent);
 }
 
 [data-card-group] > w-card:has([data-card-action]:hover)::part(base),
@@ -102,7 +100,7 @@ w-card:has([data-card-action]) * {
 [data-card-group]
 	> w-card:has([data-card-action][data-focus-visible])::part(base),
 [data-card-group] > w-card:has([data-card-action]:active)::part(base) {
-	box-shadow: none;
+	box-shadow: var(--w-none);
 }
 
 [data-card-group] > w-card:first-child::part(border) {
@@ -164,7 +162,19 @@ w-card:has([data-card-action])::part(base) {
 	cursor: pointer !important;
 }
 
-w-card:has([data-card-action][checked]) {
+w-card:not([flat]):has([data-card-action][checked]) {
+	--w-c-card-bg: var(--w-s-color-surface-elevated-200);
+	--w-c-card-bg-hover: var(--w-s-color-surface-elevated-200-hover);
+	--w-c-card-bg-active: var(--w-s-color-surface-elevated-200-active);
+	--w-c-card-border-color: var(--w-s-color-border-selected);
+	--w-c-card-border-color-hover: var(--w-s-color-border-selected-hover);
+	--w-c-card-border-color-active: var(--w-s-color-border-selected-active);
+	--w-c-card-box-shadow: var(--w-shadow-s);
+	--w-c-card-box-shadow-hover: var(--w-shadow-m);
+	--w-c-card-box-shadow-active: var(--w-none);
+}
+
+w-card[flat]:has([data-card-action][checked]) {
 	--w-c-card-bg: var(--w-s-color-background-selected);
 	--w-c-card-bg-hover: var(--w-s-color-background-selected-hover);
 	--w-c-card-bg-active: var(--w-s-color-background-selected-active);
@@ -173,12 +183,31 @@ w-card:has([data-card-action][checked]) {
 	--w-c-card-border-color-active: var(--w-s-color-border-selected-active);
 }
 
-w-card:has([data-card-action]:hover)::part(base),
-w-card:has([data-card-action]:focus-visible)::part(base),
-w-card:has([data-card-action][data-focus-visible])::part(base) {
+w-card:not([flat]):has([data-card-action]:hover)::part(base),
+w-card:not([flat]):has([data-card-action]:focus-visible)::part(base),
+w-card:not([flat]):has([data-card-action][data-focus-visible])::part(base) {
+	background-color: var(
+		--w-c-card-bg-hover,
+		var(--w-s-color-surface-elevated-200-hover)
+	);
+	box-shadow: var(--w-c-card-box-shadow-hover, var(--w-shadow-m));
+	cursor: pointer;
+	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+w-card[flat]:has([data-card-action]:hover)::part(base),
+w-card[flat]:has([data-card-action]:focus-visible)::part(base),
+w-card[flat]:has([data-card-action][data-focus-visible])::part(base) {
 	background-color: var(--w-c-card-bg-hover, var(--w-s-color-background-hover));
 	cursor: pointer;
 	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+w-card:not([flat]):has([data-card-action][checked]:hover)::part(border) {
+	border-color: var(
+		--w-c-card-border-color-hover,
+		var(--w-s-color-border-selected-hover)
+	);
 }
 
 w-card:has([data-card-action]:focus-visible)::part(border),
@@ -187,7 +216,15 @@ w-card:has([data-card-action][data-focus-visible])::part(border) {
 	border-width: 2px;
 }
 
-w-card:has([data-card-action]:active)::part(base) {
+w-card:not([flat]):has([data-card-action]:active)::part(base) {
+	background-color: var(
+		--w-c-card-bg-active,
+		var(--w-s-color-surface-elevated-200-active)
+	);
+	box-shadow: var(--w-c-card-box-shadow-active, var(--w-none));
+}
+
+w-card[flat]:has([data-card-action]:active)::part(base) {
 	background-color: var(
 		--w-c-card-bg-active,
 		var(--w-s-color-background-active)
@@ -198,7 +235,11 @@ w-card:has([data-card-action]:active)::part(base) {
 	);
 }
 
-w-card:has([data-card-action]:active)::part(border) {
+w-card:not([flat]):has([data-card-action]:active)::part(border) {
+	border-color: var(--w-c-card-border-color-active, var(--w-transparent));
+}
+
+w-card[flat]:has([data-card-action]:active)::part(border) {
 	border-color: var(
 		--w-c-card-border-color-active,
 		var(--w-s-color-border-active)
