@@ -39,9 +39,8 @@ type Story = StoryObj<typeof args>;
 export const Default: Story = {
 	args: {
 		title: "I'm expandable",
+		variant: "default",
 		expanded: false,
-		box: false,
-		bleed: false,
 		animated: false,
 		noChevron: false,
 	},
@@ -50,9 +49,8 @@ export const Default: Story = {
 export const Expanded: Story = {
 	args: {
 		title: "I'm expanded by default",
+		variant: "default",
 		expanded: true,
-		box: false,
-		bleed: false,
 		animated: false,
 		noChevron: false,
 	},
@@ -61,20 +59,60 @@ export const Expanded: Story = {
 export const Box: Story = {
 	args: {
 		title: "I'm a box expandable",
+		variant: "box",
 		expanded: false,
-		box: true,
-		bleed: false,
 		animated: false,
 		noChevron: false,
+	},
+};
+
+export const BoxBleed: Story = {
+	args: {
+		title: "I'm a box bleed expandable",
+		variant: "box-bleed",
+		expanded: false,
+		animated: false,
+		noChevron: false,
+	},
+};
+
+export const DefaultWithDivider: Story = {
+	args: {
+		title: "I'm a divider expandable",
+		variant: "default-with-divider",
+		expanded: false,
+		animated: true,
+		noChevron: false,
+	},
+	render(args) {
+		return html`
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+			<w-expandable ${spread(prespread(args))}>
+				<p>This expandable has a custom title slot with an icon.</p>
+			</w-expandable>
+		`;
 	},
 };
 
 export const Animated: Story = {
 	args: {
 		title: "I'm animated",
+		variant: "box",
 		expanded: false,
-		box: true,
-		bleed: false,
 		animated: true,
 		noChevron: false,
 	},
@@ -83,9 +121,8 @@ export const Animated: Story = {
 export const WithHeading: Story = {
 	args: {
 		title: "I'm wrapped in h2",
+		variant: "box",
 		expanded: false,
-		box: true,
-		bleed: false,
 		animated: false,
 		noChevron: false,
 		"heading-level": 2,
@@ -95,9 +132,8 @@ export const WithHeading: Story = {
 export const NoChevron: Story = {
 	args: {
 		title: "I have no chevron",
+		variant: "default",
 		expanded: false,
-		box: false,
-		bleed: false,
 		animated: false,
 		noChevron: true,
 	},
@@ -105,9 +141,8 @@ export const NoChevron: Story = {
 
 export const CustomTitle: Story = {
 	args: {
+		variant: "box",
 		expanded: false,
-		box: true,
-		bleed: false,
 		animated: false,
 		noChevron: false,
 	},
@@ -125,8 +160,8 @@ export const CustomTitle: Story = {
 
 export const NoTitle: Story = {
 	args: {
+		variant: "box",
 		expanded: true,
-		box: true,
 		animated: true,
 	},
 	render(args) {
@@ -158,7 +193,7 @@ export const NoTitle: Story = {
 export const StylingApi: Story = {
 	args: {
 		title: "Styled expandable",
-		box: true,
+		variant: "box",
 		expanded: false,
 	},
 	render(args) {
@@ -215,5 +250,14 @@ w-expandable::part(chevron) {
 				<p>This story demonstrates expandable tokens and parts.</p>
 			</w-expandable>
 		`;
+	},
+};
+
+export const DeprecatedFlagsCompatibility: Story = {
+	args: {
+		title: "Deprecated flags compatibility",
+		expanded: false,
+		box: true,
+		bleed: true,
 	},
 };
