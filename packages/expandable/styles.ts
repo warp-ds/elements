@@ -176,6 +176,10 @@ export const styles = css`
 		padding: 16px 16px 16px 0;
 	}
 
+	:host([variant="default-with-divider"][expanded]) [part="base"] {
+		padding-bottom: 16px;
+	}
+
 	.title-text,
 	slot[name="title"] {
 		font-size: var(--_title-font-size);

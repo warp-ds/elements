@@ -407,6 +407,45 @@ test("adds the divider bottom border only to the last default-with-divider sibli
 		});
 });
 
+test("adds 16px after expanded default-with-divider content before the next element", async () => {
+	const component = html`
+		<w-expandable
+			data-testid="expanded-divider"
+			variant="default-with-divider"
+			title="Expanded divider"
+			expanded
+		>
+			<div style="height: 20px;">Expanded divider content</div>
+		</w-expandable>
+		<div data-testid="after-divider">After divider</div>
+	`;
+
+	render(component);
+	const el = getExpandable("expanded-divider");
+	const after = document.querySelector(
+		'[data-testid="after-divider"]',
+	) as HTMLElement;
+
+	await expect
+		.poll(() => {
+			const base = getShadowElement<HTMLElement>(el, '[part="base"]');
+			const content = getShadowElement<HTMLElement>(el, ".content");
+			if (!base || !content || !after) return null;
+
+			const contentRect = content.getBoundingClientRect();
+			const afterRect = after.getBoundingClientRect();
+
+			return {
+				basePaddingBottom: getComputedStyle(base).paddingBottom,
+				contentToNextGap: Math.round(afterRect.top - contentRect.bottom),
+			};
+		})
+		.toEqual({
+			basePaddingBottom: "16px",
+			contentToNextGap: 16,
+		});
+});
+
 test("preserves expandable rendering and state behavior for default-with-divider", async () => {
 	const component = html`
 		<w-expandable
