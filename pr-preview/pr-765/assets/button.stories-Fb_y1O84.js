@@ -1,26 +1,12 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}from"./decorate-Bt2QF_uA.js";import{n as i,r as a}from"./i18n-CkjYRTT1.js";import{n as o,t as s}from"./dist-D5kJVy4t.js";import{t as c}from"./icon-ND47zKHd.js";import{i as l,n as u,r as d}from"./utilities-BHNt5DhH.js";import{t as f}from"./button-Le0CJF4x.js";var p=t({AllVariantsGrid:()=>P,AsLink:()=>O,FormControl:()=>k,FullWidth:()=>D,HrefModeRegression:()=>L,Link:()=>S,Loading:()=>E,LoadingAcrossVariants:()=>I,Negative:()=>b,Overlay:()=>A,OverlayInverted:()=>j,OverlayInvertedQuiet:()=>N,OverlayQuiet:()=>M,Pill:()=>C,Primary:()=>v,Quiet:()=>T,QuietBackCompatMapping:()=>F,Secondary:()=>y,Small:()=>w,Utility:()=>x,__namedExportsOrder:()=>R,default:()=>_}),m,h,g,_,v,y,b,x,S,C,w,T,E,D,O,k,A,j,M,N,P,F,I,L,R;function z(){return(z=e((()=>{d(),o(),n(),f(),c(),a(),{events:m,args:h,argTypes:g}=s(`w-button`),_={title:`Buttons/Button`,render(e){return r`<w-button
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}from"./decorate-Bt2QF_uA.js";import{n as i,r as a}from"./i18n-CkjYRTT1.js";import{n as o,t as s}from"./dist-D5kJVy4t.js";import{t as c}from"./icon-ND47zKHd.js";import{i as l,n as u,r as d}from"./utilities-BHNt5DhH.js";import{t as f}from"./button-Le0CJF4x.js";var p=t({AllVariantsGrid:()=>P,AsLink:()=>O,FormControl:()=>k,FullWidth:()=>D,HrefModeRegression:()=>L,IconButton:()=>C,Link:()=>S,Loading:()=>E,LoadingAcrossVariants:()=>I,Negative:()=>b,Overlay:()=>A,OverlayInverted:()=>j,OverlayInvertedQuiet:()=>N,OverlayQuiet:()=>M,Primary:()=>v,Quiet:()=>T,QuietBackCompatMapping:()=>F,Secondary:()=>y,Small:()=>w,Utility:()=>x,__namedExportsOrder:()=>R,default:()=>_}),m,h,g,_,v,y,b,x,S,C,w,T,E,D,O,k,A,j,M,N,P,F,I,L,R;function z(){return(z=e((()=>{d(),o(),n(),f(),c(),a(),{events:m,args:h,argTypes:g}=s(`w-button`),_={title:`Buttons/Button`,render(e){return r`<w-button
             ${l(u(e))}
-            @click=${()=>console.log(`Clicked`)}
+            @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
             >Button Text</w-button
-        >`},args:h,argTypes:g,parameters:{actions:{handles:m}}},v={args:{variant:`primary`,type:`button`}},y={args:{variant:`secondary`,type:`button`}},b={args:{variant:`negative`,type:`button`}},x={args:{variant:`utility`,type:`button`}},S={args:{variant:`link`,type:`button`}},C={args:{variant:`pill`,type:`button`},render(e){let t=i();return r`<w-button ${l(u(e))}>
-                <w-icon
-                    name="ChevronLeft"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button ${l(u(e))}>
-                <w-icon
-                    name="Close"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button ${l(u(e))}>
+        >`},args:h,argTypes:g,parameters:{actions:{handles:m}}},v={args:{variant:`primary`,type:`button`}},y={args:{variant:`secondary`,type:`button`}},b={args:{variant:`negative`,type:`button`}},x={args:{variant:`utility`,type:`button`}},S={args:{variant:`link`,type:`button`}},C={args:{variant:`pill`,type:`button`},render(e){let t=i();return r`
+            <w-button
+                ${l(u(e))}
+                @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
+            >
                 <w-icon
                     name="Heart"
                     size="small"
@@ -29,54 +15,13 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                     class="flex"
                 ></w-icon>
             </w-button>
-            <w-button ${l(u(e))}>
-                <w-icon
-                    name="ChevronRight"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <br />
-            <w-button ${l(u(e))} small="">
-                <w-icon
-                    name="ChevronLeft"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button ${l(u(e))} small="">
-                <w-icon
-                    name="Close"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button ${l(u(e))} small="">
-                <w-icon
-                    name="Heart"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button ${l(u(e))} small="">
-                <w-icon
-                    name="ChevronRight"
-                    size="small"
-                    locale="${t}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>`}},w={args:{variant:`primary`,small:!0,type:`button`}},T={args:{variant:`secondary`,quiet:!0,type:`button`}},E={args:{variant:`primary`,loading:!0,type:`button`}},D={args:{variant:`primary`,"full-width":!0,type:`button`},render(e){return r`
+        `}},w={args:{variant:`primary`,small:!0,type:`button`}},T={args:{variant:`secondary`,quiet:!0,type:`button`}},E={args:{variant:`primary`,loading:!0,type:`button`}},D={args:{variant:`primary`,"full-width":!0,type:`button`},render(e){return r`
             <div class="w-full flex flex-col gap-8">
-                <w-button ${l(u(e))}>Full width</w-button>
+                <w-button
+                    ${l(u(e))}
+                    @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
+                    >Full width</w-button
+                >
             </div>
         `}},O={args:{variant:`primary`,href:`https://example.com`,target:`_blank`,type:`button`},render(e){return r`<w-button ${l(u(e))}>Visit Example</w-button>`}},k={args:{},render(){return r`
             <form name="form-control">
@@ -111,14 +56,19 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                                     variant="${t}"
                                 </div>
 
-                                <w-button variant=${t} type="button">Label</w-button>
+                                <w-button
+                                    variant=${t}
+                                    type="button"
+                                    @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
+                                    >${t} label</w-button
+                                >
 
                                 ${t===`pill`?r`
                                                 <w-button
                                                     variant="pill"
                                                     type="button"
                                                     icon-only
-                                                    aria-label="Pill icon"
+                                                    @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                                                 >
                                                     <w-icon
                                                         name="Heart"
@@ -141,19 +91,39 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                 </div>
 
                 <div style="display:flex; gap: 12px; flex-wrap: wrap;">
-                    <w-button variant="negative" quiet type="button"
+                    <w-button
+                        variant="negative"
+                        quiet
+                        type="button"
+                        @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                         >negative + quiet</w-button
                     >
-                    <w-button variant="utility" quiet type="button"
+                    <w-button
+                        variant="utility"
+                        quiet
+                        type="button"
+                        @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                         >utility + quiet</w-button
                     >
-                    <w-button variant="overlay" quiet type="button"
+                    <w-button
+                        variant="overlay"
+                        quiet
+                        type="button"
+                        @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                         >overlay + quiet</w-button
                     >
-                    <w-button variant="overlayInverted" quiet type="button"
+                    <w-button
+                        variant="overlayInverted"
+                        quiet
+                        type="button"
+                        @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                         >overlayInverted + quiet</w-button
                     >
-                    <w-button variant="secondary" quiet type="button"
+                    <w-button
+                        variant="secondary"
+                        quiet
+                        type="button"
+                        @click=${()=>alert(`Time is `+new Date().toLocaleTimeString())}
                         >secondary + quiet</w-button
                     >
                 </div>
@@ -248,25 +218,11 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
   },
   render(args) {
     const locale = detectLocale();
-    return html\`<w-button \${spread(prespread(args))}>
-                <w-icon
-                    name="ChevronLeft"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button \${spread(prespread(args))}>
-                <w-icon
-                    name="Close"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button \${spread(prespread(args))}>
+    return html\`
+            <w-button
+                \${spread(prespread(args))}
+                @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
+            >
                 <w-icon
                     name="Heart"
                     size="small"
@@ -275,52 +231,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                     class="flex"
                 ></w-icon>
             </w-button>
-            <w-button \${spread(prespread(args))}>
-                <w-icon
-                    name="ChevronRight"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <br />
-            <w-button \${spread(prespread(args))} small="">
-                <w-icon
-                    name="ChevronLeft"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button \${spread(prespread(args))} small="">
-                <w-icon
-                    name="Close"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button \${spread(prespread(args))} small="">
-                <w-icon
-                    name="Heart"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>
-            <w-button \${spread(prespread(args))} small="">
-                <w-icon
-                    name="ChevronRight"
-                    size="small"
-                    locale="\${locale}"
-                    style="height: 16px;"
-                    class="flex"
-                ></w-icon>
-            </w-button>\`;
+        \`;
   }
 }`,...C.parameters?.docs?.source}}},w.parameters={...w.parameters,docs:{...w.parameters?.docs,source:{originalSource:`{
   args: {
@@ -349,7 +260,11 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
   render(args) {
     return html\`
             <div class="w-full flex flex-col gap-8">
-                <w-button \${spread(prespread(args))}>Full width</w-button>
+                <w-button
+                    \${spread(prespread(args))}
+                    @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
+                    >Full width</w-button
+                >
             </div>
         \`;
   }
@@ -426,14 +341,19 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                                     variant="\${v}"
                                 </div>
 
-                                <w-button variant=\${v} type="button">Label</w-button>
+                                <w-button
+                                    variant=\${v}
+                                    type="button"
+                                    @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
+                                    >\${v} label</w-button
+                                >
 
                                 \${v === "pill" ? html\`
                                                 <w-button
                                                     variant="pill"
                                                     type="button"
                                                     icon-only
-                                                    aria-label="Pill icon"
+                                                    @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                                                 >
                                                     <w-icon
                                                         name="Heart"
@@ -464,19 +384,39 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r}f
                 </div>
 
                 <div style="display:flex; gap: 12px; flex-wrap: wrap;">
-                    <w-button variant="negative" quiet type="button"
+                    <w-button
+                        variant="negative"
+                        quiet
+                        type="button"
+                        @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                         >negative + quiet</w-button
                     >
-                    <w-button variant="utility" quiet type="button"
+                    <w-button
+                        variant="utility"
+                        quiet
+                        type="button"
+                        @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                         >utility + quiet</w-button
                     >
-                    <w-button variant="overlay" quiet type="button"
+                    <w-button
+                        variant="overlay"
+                        quiet
+                        type="button"
+                        @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                         >overlay + quiet</w-button
                     >
-                    <w-button variant="overlayInverted" quiet type="button"
+                    <w-button
+                        variant="overlayInverted"
+                        quiet
+                        type="button"
+                        @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                         >overlayInverted + quiet</w-button
                     >
-                    <w-button variant="secondary" quiet type="button"
+                    <w-button
+                        variant="secondary"
+                        quiet
+                        type="button"
+                        @click=\${() => alert("Time is " + new Date().toLocaleTimeString())}
                         >secondary + quiet</w-button
                     >
                 </div>
@@ -557,4 +497,4 @@ This story makes it obvious if a variant leaks hover/background/color into loadi
 w-button with href renders w-link (back-compat).
 Great for spotting:
 - hover gray bg (should not happen for "link" look)
-- double padding when link is rendered inside button styling assumptions`,...L.parameters?.docs?.description}}},R=[`Primary`,`Secondary`,`Negative`,`Utility`,`Link`,`Pill`,`Small`,`Quiet`,`Loading`,`FullWidth`,`AsLink`,`FormControl`,`Overlay`,`OverlayInverted`,`OverlayQuiet`,`OverlayInvertedQuiet`,`AllVariantsGrid`,`QuietBackCompatMapping`,`LoadingAcrossVariants`,`HrefModeRegression`]})))()}export{E as a,v as c,w as d,x as f,S as i,T as l,z as m,k as n,b as o,p,D as r,C as s,O as t,y as u};
+- double padding when link is rendered inside button styling assumptions`,...L.parameters?.docs?.description}}},R=[`Primary`,`Secondary`,`Negative`,`Utility`,`Link`,`IconButton`,`Small`,`Quiet`,`Loading`,`FullWidth`,`AsLink`,`FormControl`,`Overlay`,`OverlayInverted`,`OverlayQuiet`,`OverlayInvertedQuiet`,`AllVariantsGrid`,`QuietBackCompatMapping`,`LoadingAcrossVariants`,`HrefModeRegression`]})))()}export{E as a,T as c,x as d,p as f,S as i,y as l,k as n,b as o,z as p,D as r,v as s,O as t,w as u};
