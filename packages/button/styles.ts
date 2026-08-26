@@ -215,6 +215,7 @@ export const wButtonStyles = css`
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		user-select: none;
 
 		cursor: pointer;
 
