@@ -187,6 +187,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,h as r,l
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+		user-select: none;
 
 		cursor: pointer;
 
