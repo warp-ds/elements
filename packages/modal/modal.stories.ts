@@ -241,7 +241,12 @@ export const InvokerCommands: StoryObj = {
 							command="--close"
 							>Cancel</w-button
 						>
-						<w-button variant="primary" id="invoker-confirm">Confirm</w-button>
+						<w-button
+							variant="primary"
+							commandfor="invoker-modal"
+							command="--confirm"
+							>Confirm</w-button
+						>
 					</div>
 				</w-modal-footer>
 			</w-modal>
