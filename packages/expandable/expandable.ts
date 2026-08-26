@@ -11,10 +11,7 @@ import { reset } from "../styles.js";
 import { styles } from "./styles.js";
 
 export type ExpandableVariant =
-	| "default"
-	| "box"
-	| "box-bleed"
-	| "default-with-divider";
+	"default" | "box" | "box-bleed" | "default-with-divider";
 
 const expandableVariants: ExpandableVariant[] = [
 	"default",
