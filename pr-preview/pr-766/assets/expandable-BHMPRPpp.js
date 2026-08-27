@@ -252,7 +252,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 			margin-right: 0;
 		}
 	}
-`})))()}var S,C;function w(){return(w=e((()=>{t(),i(),g(),f(),_(),l(),y(),m(),x(),S=[`default`,`box`,`box-bleed`,`default-with-divider`],C=class extends r{constructor(...e){super(...e),this.expanded=!1,this.box=!1,this.bleed=!1,this.noChevron=!1,this.animated=!1,this._hasTitle=!0,this._showChevronUp=!1}#e;get variant(){return this.#e&&S.includes(this.#e)?this.#e:this.box&&this.bleed?`box-bleed`:this.box?`box`:`default`}set variant(e){let t=this.#e;this.#e=S.includes(e)?e:void 0,this.#e&&this.getAttribute(`variant`)!==this.#e?this.setAttribute(`variant`,this.#e):!this.#e&&this.hasAttribute(`variant`)&&this.removeAttribute(`variant`),this.requestUpdate(`variant`,t)}static{this.styles=[p,b]}updated(e){e.has(`expanded`)&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){let e=!!this.title,t=this.renderRoot.querySelector(`slot[name='title']`)?.assignedNodes().length>0;this._hasTitle=e||t}get#t(){let e=c();return this._showChevronUp?n`<w-icon
+`})))()}var S;function C(){return(C=e((()=>{t(),i(),g(),f(),_(),l(),y(),m(),x(),S=class extends r{constructor(...e){super(...e),this.expanded=!1,this.variant=`default`,this.box=!1,this.bleed=!1,this.noChevron=!1,this.animated=!1,this._hasTitle=!0,this._showChevronUp=!1}static{this.styles=[p,b]}updated(e){e.has(`expanded`)&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){let e=!!this.title,t=this.renderRoot.querySelector(`slot[name='title']`)?.assignedNodes().length>0;this._hasTitle=e||t}get#e(){let e=c();return this._showChevronUp?n`<w-icon
 					class="chevron-icon"
 					data-direction="up"
 					name="ChevronUp"
@@ -279,7 +279,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 							>
 								<div class="title">
 									${this.title?n`<span class="title-text">${this.title}</span>`:n`<slot class="title-text" name="title"></slot>`}
-									${this.noChevron?``:n`<div part="chevron">${this.#t}</div>`}
+									${this.noChevron?``:n`<div part="chevron">${this.#e}</div>`}
 								</div>
 							</button>
 						</w-unstyled-heading>`:``}
@@ -291,4 +291,4 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 						>
 							${this._expandableSlot}
 						</div>`}
-		</div>`}},o([a({type:Boolean,reflect:!0})],C.prototype,`expanded`,void 0),o([a({type:String})],C.prototype,`title`,void 0),o([a({type:String})],C.prototype,`variant`,null),o([a({type:Boolean,reflect:!0})],C.prototype,`box`,void 0),o([a({type:Boolean,reflect:!0})],C.prototype,`bleed`,void 0),o([a({attribute:`button-class`,type:String})],C.prototype,`buttonClass`,void 0),o([a({attribute:`content-class`,type:String})],C.prototype,`contentClass`,void 0),o([a({attribute:`no-chevron`,type:Boolean})],C.prototype,`noChevron`,void 0),o([a({type:Boolean})],C.prototype,`animated`,void 0),o([a({attribute:`heading-level`,type:Number})],C.prototype,`headingLevel`,void 0),o([a({type:Boolean,state:!0})],C.prototype,`_hasTitle`,void 0),o([a({type:Boolean,state:!0})],C.prototype,`_showChevronUp`,void 0),customElements.get(`w-expandable`)||customElements.define(`w-expandable`,C)})))()}export{y as n,w as t};
+		</div>`}},o([a({type:Boolean,reflect:!0})],S.prototype,`expanded`,void 0),o([a({type:String})],S.prototype,`title`,void 0),o([a({type:String,reflect:!0,useDefault:!0})],S.prototype,`variant`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`box`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`bleed`,void 0),o([a({attribute:`button-class`,type:String})],S.prototype,`buttonClass`,void 0),o([a({attribute:`content-class`,type:String})],S.prototype,`contentClass`,void 0),o([a({attribute:`no-chevron`,type:Boolean})],S.prototype,`noChevron`,void 0),o([a({type:Boolean})],S.prototype,`animated`,void 0),o([a({attribute:`heading-level`,type:Number})],S.prototype,`headingLevel`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_hasTitle`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_showChevronUp`,void 0),customElements.get(`w-expandable`)||customElements.define(`w-expandable`,S)})))()}export{y as n,C as t};
