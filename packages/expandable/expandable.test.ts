@@ -331,6 +331,29 @@ test("renders default-with-divider with the required row layout and visual treat
 		});
 });
 
+test("underlines the default-with-divider title row on hover", async () => {
+	const component = html`
+		<w-expandable
+			data-testid="divider-hover"
+			variant="default-with-divider"
+			title="Hover title"
+		>
+			<p>Divider content</p>
+		</w-expandable>
+	`;
+
+	const page = render(component);
+	const el = getExpandable("divider-hover");
+	await page.getByRole("button").hover();
+
+	await expect
+		.poll(() => {
+			const button = getShadowElement<HTMLButtonElement>(el, "button");
+			return button ? getComputedStyle(button).textDecorationLine : null;
+		})
+		.toBe("underline");
+});
+
 test("adds the divider bottom border only to the last default-with-divider sibling and lets variant win over flags", async () => {
 	const component = html`
 		<w-expandable

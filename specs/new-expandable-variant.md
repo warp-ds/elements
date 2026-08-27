@@ -137,6 +137,7 @@ For `variant="default-with-divider"`:
 - When expanded, the space between the bottom of the content and the top of the next element is 16px.
 - The variant has no box background by default.
 - The variant has no border radius by default.
+- The title uses the same underline hover/focus-visible affordance as the other variants.
 - Hover and active styling must not introduce a box-style background unless design tokens explicitly override it.
 
 Figma reference CSS for the title row:
@@ -207,25 +208,27 @@ border-top: 1px solid var(--Semantic-Color-Border-Default, #DEDEE3);
 
 11. Given `<w-expandable variant="default-with-divider" title="Details">`, when the title row is clicked, then `expanded` toggles and `aria-expanded` updates to match.
 
-12. Given `<w-expandable variant="default-with-divider" title="Details" no-chevron>`, when rendered, then no chevron part is rendered and the title row still spans the full width.
+12. Given `<w-expandable variant="default-with-divider" title="Details">`, when the title row is hovered or focus-visible, then the title uses the same underline affordance as the other variants.
 
-13. Given `<w-expandable variant="default-with-divider" heading-level="2" title="Details">`, when rendered, then the toggle button is wrapped in the existing unstyled heading behavior.
+13. Given `<w-expandable variant="default-with-divider" title="Details" no-chevron>`, when rendered, then no chevron part is rendered and the title row still spans the full width.
 
-14. Given `<w-expandable variant="default-with-divider" animated title="Details">`, when opened or closed, then the existing animation behavior still works.
+14. Given `<w-expandable variant="default-with-divider" heading-level="2" title="Details">`, when rendered, then the toggle button is wrapped in the existing unstyled heading behavior.
 
-15. Given `<w-expandable box title="Details">`, when rendered with no `variant`, then the deprecated flag still produces the existing box visual treatment.
+15. Given `<w-expandable variant="default-with-divider" animated title="Details">`, when opened or closed, then the existing animation behavior still works.
 
-16. Given `<w-expandable box bleed title="Details">`, when rendered with no `variant`, then the deprecated flags still produce the existing box bleed visual treatment.
+16. Given `<w-expandable box title="Details">`, when rendered with no `variant`, then the deprecated flag still produces the existing box visual treatment.
 
-17. Given `<w-expandable variant="default-with-divider" box bleed title="Details">`, when rendered, then the `default-with-divider` variant styling wins over deprecated flag styling.
+17. Given `<w-expandable box bleed title="Details">`, when rendered with no `variant`, then the deprecated flags still produce the existing box bleed visual treatment.
 
-18. Given `<Expandable variant="default-with-divider" title="Details" />` in React, when rendered, then the `variant` attribute is passed to `w-expandable`.
+18. Given `<w-expandable variant="default-with-divider" box bleed title="Details">`, when rendered, then the `default-with-divider` variant styling wins over deprecated flag styling.
 
-19. Given React SSR hydration for `variant="default-with-divider"`, when hydrated, then no hydration warnings are produced.
+19. Given `<Expandable variant="default-with-divider" title="Details" />` in React, when rendered, then the `variant` attribute is passed to `w-expandable`.
 
-20. Given generated custom elements metadata, when inspected, then `variant` is documented with the four accepted values and `box` and `bleed` are marked deprecated.
+20. Given React SSR hydration for `variant="default-with-divider"`, when hydrated, then no hydration warnings are produced.
 
-21. Given expandable docs and stories, when reviewed, then new examples use `variant` and deprecated `box`/`bleed` usage is only shown as compatibility guidance.
+21. Given generated custom elements metadata, when inspected, then `variant` is documented with the four accepted values and `box` and `bleed` are marked deprecated.
+
+22. Given expandable docs and stories, when reviewed, then new examples use `variant` and deprecated `box`/`bleed` usage is only shown as compatibility guidance.
 
 ## Edge Cases
 

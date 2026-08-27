@@ -158,11 +158,6 @@ export const styles = css`
 		width: 100%;
 	}
 
-	:host([variant="default-with-divider"]) .button:hover,
-	:host([variant="default-with-divider"]) .button:focus-visible {
-		text-decoration: none;
-	}
-
 	.title {
 		align-items: center;
 		display: flex;
