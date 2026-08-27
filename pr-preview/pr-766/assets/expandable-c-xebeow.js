@@ -161,11 +161,6 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		width: 100%;
 	}
 
-	:host([variant="default-with-divider"]) .button:hover,
-	:host([variant="default-with-divider"]) .button:focus-visible {
-		text-decoration: none;
-	}
-
 	.title {
 		align-items: center;
 		display: flex;
