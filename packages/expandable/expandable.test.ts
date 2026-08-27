@@ -227,7 +227,7 @@ test("exposes variant and resolves variants against deprecated flags", async () 
 	expect(explicitDefaultEl.variant).toBe("default");
 	expect(variantBoxEl.variant).toBe("box");
 	expect(variantBoxBleedEl.variant).toBe("box-bleed");
-	expect(invalidEl.variant).toBe("default");
+	expect(invalidEl.variant).toBe("does-not-exist");
 
 	await expect
 		.poll(() => ({

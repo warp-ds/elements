@@ -104,7 +104,7 @@ New usage should prefer `variant`.
 - If `variant="box"` is set, the component uses the same visual treatment as the current `box` expandable.
 - If `variant="box-bleed"` is set, the component uses the same visual treatment as the current `box bleed` expandable.
 - If `variant="default-with-divider"` is set, the component uses the divider treatment defined below.
-- Invalid `variant` values must not crash the component. They should fall back to `default` and may emit a development warning.
+- Invalid `variant` values are developer errors. The component does not need custom normalization or warnings for them.
 - The React `Expandable` props must include `variant?: "default" | "box" | "box-bleed" | "default-with-divider"`.
 - Generated custom elements metadata must list the `variant` attribute/property and the accepted values.
 
@@ -251,7 +251,7 @@ border-top: 1px solid var(--Semantic-Color-Border-Default, #DEDEE3);
 ## Test Notes
 
 - Unit tests should cover effective variant resolution for omitted `variant`, each explicit variant, and deprecated `box`/`bleed` combinations.
-- Unit tests should cover invalid `variant` fallback behavior.
+- Unit tests should cover that invalid `variant` values do not crash and naturally render with default styling.
 - Unit tests should assert divider variant computed styles for padding, top border, bottom border on the last item, width, and chevron alignment.
 - Unit tests should cover `expanded`, click toggling, `animated`, `heading-level`, and `no-chevron` with `default-with-divider`.
 - Tests should cover both title attribute and title slot for the new variant.

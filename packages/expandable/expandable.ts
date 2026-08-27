@@ -13,13 +13,6 @@ import { styles } from "./styles.js";
 export type ExpandableVariant =
 	"default" | "box" | "box-bleed" | "default-with-divider";
 
-const expandableVariants: ExpandableVariant[] = [
-	"default",
-	"box",
-	"box-bleed",
-	"default-with-divider",
-];
-
 /**
  * Expandable is a layout component used for creating expandable content areas on a page.
  *
@@ -31,8 +24,6 @@ const expandableVariants: ExpandableVariant[] = [
  * @csspart chevron - the chevron container.
  */
 class WarpExpandable extends LitElement {
-	#variant: ExpandableVariant | undefined;
-
 	/**
 	 * Controls component's expanded state
 	 */
@@ -50,37 +41,8 @@ class WarpExpandable extends LitElement {
 	 * Accepted values are `"default"`, `"box"`, `"box-bleed"`, and `"default-with-divider"`.
 	 * If omitted, deprecated `box` and `bleed` flags are still used for compatibility.
 	 */
-	@property({ type: String })
-	get variant(): "default" | "box" | "box-bleed" | "default-with-divider" {
-		if (this.#variant && expandableVariants.includes(this.#variant)) {
-			return this.#variant;
-		}
-
-		if (this.box && this.bleed) {
-			return "box-bleed";
-		}
-
-		if (this.box) {
-			return "box";
-		}
-
-		return "default";
-	}
-
-	set variant(value: ExpandableVariant | string | undefined) {
-		const oldValue = this.#variant;
-		this.#variant = expandableVariants.includes(value as ExpandableVariant)
-			? (value as ExpandableVariant)
-			: undefined;
-
-		if (this.#variant && this.getAttribute("variant") !== this.#variant) {
-			this.setAttribute("variant", this.#variant);
-		} else if (!this.#variant && this.hasAttribute("variant")) {
-			this.removeAttribute("variant");
-		}
-
-		this.requestUpdate("variant", oldValue);
-	}
+	@property({ type: String, reflect: true, useDefault: true })
+	variant: ExpandableVariant = "default";
 
 	/**
 	 * Will make the expandable a Box.
