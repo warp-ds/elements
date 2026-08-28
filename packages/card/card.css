@@ -190,9 +190,11 @@ w-card:not([flat]):has([data-card-action][data-focus-visible])::part(base) {
 		--w-c-card-bg-hover,
 		var(--w-s-color-surface-elevated-200-hover)
 	);
-	box-shadow: var(--w-c-card-box-shadow-hover, var(--w-shadow-m));
 	cursor: pointer;
 	transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+w-card:has([data-card-action]:hover)::part(base) {
+	box-shadow: var(--w-c-card-box-shadow-hover, var(--w-shadow-m));
 }
 
 w-card[flat]:has([data-card-action]:hover)::part(base),
