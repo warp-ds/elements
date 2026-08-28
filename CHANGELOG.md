@@ -1,3 +1,10 @@
+# [2.13.0-next.1](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0-next.1) (2026-08-28)
+
+
+### Features
+
+* new expandable default-with-divider variant ([#766](https://github.com/warp-ds/elements/issues/766)) ([877c00d](https://github.com/warp-ds/elements/commit/877c00daf850af3ab5f2488d726e98c53bbc5102))
+
 ## [2.12.1](https://github.com/warp-ds/elements/compare/v2.12.0...v2.12.1) (2026-08-21)
 
 
