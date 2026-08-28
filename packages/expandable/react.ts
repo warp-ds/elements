@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import type { WarpExpandable } from "./expandable.js";
+import type { ExpandableVariant, WarpExpandable } from "./expandable.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -25,6 +25,7 @@ type ExpandableProps = Omit<
 	contentClass?: string;
 	noChevron?: boolean;
 	headingLevel?: number;
+	variant?: ExpandableVariant;
 };
 
 /**
