@@ -5,8 +5,6 @@ import { render } from "vitest-browser-lit";
 
 import "./expandable.js";
 
-const dividerBorderColor = "rgb(222, 222, 227)";
-
 function getExpandable(testId: string) {
 	return document.querySelector(
 		`w-expandable[data-testid="${testId}"]`,
@@ -20,22 +18,6 @@ function getShadowElement<T extends HTMLElement>(
 	selector: string,
 ) {
 	return el.shadowRoot?.querySelector(selector) as T | null;
-}
-
-function baseStyleSnapshot(el: HTMLElement) {
-	const base = getShadowElement<HTMLElement>(el, '[part="base"]');
-	if (!base) return null;
-
-	const style = getComputedStyle(base);
-	return {
-		backgroundColor: style.backgroundColor,
-		borderRadius: style.borderRadius,
-		marginLeft: style.marginLeft,
-		marginRight: style.marginRight,
-		paddingLeft: style.paddingLeft,
-		paddingRight: style.paddingRight,
-		paddingTop: style.paddingTop,
-	};
 }
 
 test("renders the given title prop and hides the slotted content", async () => {
