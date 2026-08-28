@@ -10,6 +10,9 @@ import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
 
+export type ExpandableVariant =
+	"default" | "box" | "box-bleed" | "default-with-divider";
+
 /**
  * Expandable is a layout component used for creating expandable content areas on a page.
  *
@@ -34,13 +37,25 @@ class WarpExpandable extends LitElement {
 	title!: string;
 
 	/**
-	 * Will make the expandable a Box
+	 * Visual style of the expandable.
+	 * Accepted values are `"default"`, `"box"`, `"box-bleed"`, and `"default-with-divider"`.
+	 * If omitted, deprecated `box` and `bleed` flags are still used for compatibility.
+	 */
+	@property({ type: String, reflect: true, useDefault: true })
+	variant: ExpandableVariant = "default";
+
+	/**
+	 * Will make the expandable a Box.
+	 *
+	 * @deprecated Use `variant="box"` instead.
 	 */
 	@property({ type: Boolean, reflect: true })
 	box = false;
 
 	/**
-	 * Will make the expandable full-width on the sm breakpoint size
+	 * Will make the expandable full-width on the sm breakpoint size.
+	 *
+	 * @deprecated Use `variant="box-bleed"` instead.
 	 */
 	@property({ type: Boolean, reflect: true })
 	bleed = false;
