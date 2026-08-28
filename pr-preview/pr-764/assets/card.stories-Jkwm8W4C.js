@@ -39,10 +39,9 @@ import{n as e,r as ee}from"./rolldown-runtime-DkW27tQK.js";import{c as t,d as n,
 			var(--w-s-color-border-hover)
 		);
 		--_border-width: var(--w-c-card-border-width, 2px);
-		--_border-radius: var(--w-c-card-border-radius, 4px);
+		--_border-radius: var(--w-c-card-border-radius, 8px);
 		--_box-shadow: var(--w-none);
 		--_box-shadow-active: var(--w-none);
-		--_box-shadow-hover: var(--w-none);
 	}
 
 	:host([selected]) {
