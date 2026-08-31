@@ -110,7 +110,7 @@ export const styles = css`
 
 	[part="base"] {
 		display: grid;
-		grid-template-columns: var(--_control-size) max-content;
+		grid-template-columns: var(--_control-size) minmax(0, 1fr);
 		gap: var(--_gap);
 	}
 
