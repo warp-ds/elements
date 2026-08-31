@@ -51,13 +51,9 @@ test("mouse click toggles switch once", async () => {
 	const wSwitch = document.querySelector("w-switch")!;
 
 	await wSwitch.updateComplete;
-	const button = wSwitch.shadowRoot!.querySelector(
-		"button",
-	) as HTMLButtonElement;
-
 	expect(wSwitch.checked).toBe(false);
 
-	button.click();
+	wSwitch.click();
 	await wSwitch.updateComplete;
 
 	expect(wSwitch.checked).toBe(true);
