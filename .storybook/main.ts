@@ -26,13 +26,21 @@ const config: StorybookConfig = {
 			},
 			plugins: [
 				uno({
-					presets: [presetWarp()],
+					presets: [
+						presetWarp({
+							skipResets: true,
+						}),
+					],
 					safelist: classes,
 				}),
 				configType === "DEVELOPMENT" &&
 					uno({
 						mode: "shadow-dom",
-						presets: [presetWarp()],
+						presets: [
+							presetWarp({
+								skipResets: true,
+							}),
+						],
 						safelist: classes,
 					}),
 			],
