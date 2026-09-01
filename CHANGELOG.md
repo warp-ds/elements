@@ -1,3 +1,11 @@
+# [2.13.0-next.2](https://github.com/warp-ds/elements/compare/v2.13.0-next.1...v2.13.0-next.2) (2026-09-01)
+
+
+### Bug Fixes
+
+* checkbox and radio hover styles ([#769](https://github.com/warp-ds/elements/issues/769)) ([26c7e28](https://github.com/warp-ds/elements/commit/26c7e285ac280dd60e639ef45dff0cc3c9ad1556))
+* **checkbox:** ensure long labels wrap instead of overflow ([#768](https://github.com/warp-ds/elements/issues/768)) ([85348e5](https://github.com/warp-ds/elements/commit/85348e506148ddc1b287e70ec122022c883713e1)), closes [#741](https://github.com/warp-ds/elements/issues/741)
+
 # [2.13.0-next.1](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0-next.1) (2026-08-28)
 
 
