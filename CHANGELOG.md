@@ -1,3 +1,10 @@
+# [2.13.0-next.3](https://github.com/warp-ds/elements/compare/v2.13.0-next.2...v2.13.0-next.3) (2026-09-01)
+
+
+### Bug Fixes
+
+* **slider:** no longer marks open-ended slider from value greater than max attribute as too high ([#767](https://github.com/warp-ds/elements/issues/767)) ([945562b](https://github.com/warp-ds/elements/commit/945562bd982ee180a2b9289adeaa4994cfd8847b))
+
 # [2.13.0-next.2](https://github.com/warp-ds/elements/compare/v2.13.0-next.1...v2.13.0-next.2) (2026-09-01)
 
 
