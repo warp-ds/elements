@@ -153,7 +153,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{a as n,c as r,d
 
 	[part="base"] {
 		display: grid;
-		grid-template-columns: var(--_control-size) max-content;
+		grid-template-columns: var(--_control-size) minmax(0, 1fr);
 		gap: var(--_gap);
 	}
 
