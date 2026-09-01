@@ -1,7 +1,7 @@
 import { i18n } from "@lingui/core";
 import { userEvent } from "vitest/browser";
 import { html } from "lit";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
 
 import "../attention/attention.js";
@@ -103,6 +103,51 @@ test("can set slider value via the number input", async () => {
 		page.getByTestId("form").element() as HTMLFormElement,
 	);
 	expect(formData.get("value")).toBe("50");
+});
+
+test("submits the associated form when slider thumb has focus and user presses Enter", async () => {
+	render(html`
+		<form>
+			<w-slider label="Single" min="0" max="100">
+				<w-slider-thumb name="value"></w-slider-thumb>
+			</w-slider>
+			<button type="submit">Submit</button>
+		</form>
+	`);
+
+	const onSubmit = vi.fn();
+	let submitter: HTMLElement | null = null;
+	let submitContext: SubmitEvent["warpSubmitContext"];
+	const form = document.querySelector("form") as HTMLFormElement;
+	const submitButton = document.querySelector(
+		'button[type="submit"]',
+	) as HTMLButtonElement;
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+		submitter = (event as SubmitEvent).submitter as HTMLElement | null;
+		submitContext = (event as SubmitEvent).warpSubmitContext;
+		onSubmit();
+	});
+
+	const thumb = document.querySelector("w-slider-thumb") as WarpSliderThumb;
+	await thumb.updateComplete;
+	const range = thumb.shadowRoot!.querySelector(
+		'input[type="range"]',
+	) as HTMLInputElement;
+	range.dispatchEvent(
+		new KeyboardEvent("keydown", {
+			key: "Enter",
+			bubbles: true,
+			composed: true,
+			cancelable: true,
+		}),
+	);
+
+	expect(onSubmit).toHaveBeenCalled();
+	expect(submitter).toBe(submitButton);
+	expect(submitContext?.initiator).toBe(thumb);
+	expect(submitContext?.nativeSubmitter).toBe(submitButton);
+	expect(submitContext?.defaultSubmitter).toBe(submitButton);
 });
 
 test("can increment and decrement the slider values with arrow keys in the number input", async () => {
