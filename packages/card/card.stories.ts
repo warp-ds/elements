@@ -5,12 +5,34 @@ import { html } from "lit";
 
 import { prespread } from "../../.storybook/utilities.js";
 
+import "../checkbox/checkbox.js";
+import "../checkbox-group/checkbox-group.js";
+import "../radio/radio.js";
+import "../radio-group/radio-group.js";
 import type { WarpCard } from "./card.js";
 // @ts-expect-error css is not typed
-import "./card-link.css";
+import "./card.css";
+import "../checkbox/checkbox.js";
+import "../radio/radio.js";
 import "./card.js";
 
-const { events, args, argTypes } = getStorybookHelpers<WarpCard>("w-card");
+const {
+	events,
+	args: generatedArgs,
+	argTypes: generatedArgTypes,
+} = getStorybookHelpers<WarpCard>("w-card");
+
+const deprecatedProperties = new Set(["clickable", "selected"]);
+const args = Object.fromEntries(
+	Object.entries(generatedArgs).filter(
+		([name]) => !deprecatedProperties.has(name),
+	),
+);
+const argTypes = Object.fromEntries(
+	Object.entries(generatedArgTypes).filter(
+		([name]) => !deprecatedProperties.has(name),
+	),
+);
 
 const meta: Meta<typeof args> = {
 	title: "Navigation/Card",
@@ -38,49 +60,19 @@ type Story = StoryObj<typeof args>;
 
 export const Default: Story = {
 	args: {
-		selected: false,
 		flat: false,
-		clickable: false,
-	},
-};
-
-export const Selected: Story = {
-	args: {
-		selected: true,
-		flat: false,
-		clickable: false,
 	},
 };
 
 export const Flat: Story = {
 	args: {
-		selected: false,
 		flat: true,
-		clickable: false,
-	},
-};
-
-export const FlatSelected: Story = {
-	args: {
-		selected: true,
-		flat: true,
-		clickable: false,
-	},
-};
-
-export const Clickable: Story = {
-	args: {
-		selected: false,
-		flat: false,
-		clickable: true,
 	},
 };
 
 export const PropertyExample: Story = {
 	args: {
-		selected: false,
 		flat: false,
-		clickable: true,
 	},
 	render(args) {
 		return html`
@@ -111,8 +103,6 @@ export const PropertyExample: Story = {
 
 export const StylingApi: Story = {
 	args: {
-		clickable: false,
-		selected: false,
 		flat: false,
 	},
 	render(args) {
@@ -153,14 +143,98 @@ w-card::part(border) {
 	},
 };
 
+export const GroupedRadioCards: Story = {
+	args: {},
+	render(args) {
+		return html`
+			<w-radio-group label="Package size" name="package-size">
+				<div data-card-group>
+					<w-card ${spread(prespread(args))}>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-small"
+								value="small"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-small">Small</label>
+						</div>
+					</w-card>
+					<w-card ${spread(prespread(args))}>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-radio
+								id="grouped-radio-medium"
+								value="medium"
+								data-card-action
+							></w-radio>
+							<label for="grouped-radio-medium">Medium</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card ${spread(prespread(args))}>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-radio
+							id="separate-radio-large"
+							value="large"
+							data-card-action
+						></w-radio>
+						<label for="separate-radio-large">Large</label>
+					</div>
+				</w-card>
+			</w-radio-group>
+		`;
+	},
+};
+
+export const GroupedCheckboxCards: Story = {
+	args: {},
+	render(args) {
+		return html`
+			<w-checkbox-group label="Optional services" name="services">
+				<div data-card-group>
+					<w-card ${spread(prespread(args))}>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-gift-wrap"
+								value="gift-wrap"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-gift-wrap">Gift wrapping</label>
+						</div>
+					</w-card>
+					<w-card ${spread(prespread(args))}>
+						<div style="padding: 16px; display: flex; gap: 8px;">
+							<w-checkbox
+								id="grouped-checkbox-insurance"
+								value="insurance"
+								data-card-action
+							></w-checkbox>
+							<label for="grouped-checkbox-insurance">Extra insurance</label>
+						</div>
+					</w-card>
+				</div>
+				<w-card ${spread(prespread(args))}>
+					<div style="padding: 16px; display: flex; gap: 8px;">
+						<w-checkbox
+							id="separate-checkbox-priority"
+							value="priority"
+							data-card-action
+						></w-checkbox>
+						<label for="separate-checkbox-priority">Priority handling</label>
+					</div>
+				</w-card>
+			</w-checkbox-group>
+		`;
+	},
+};
+
 /**
  * Example of a card that is not focusable or clickable, and has no interactive elements inside it.
  */
 export const CardNoNavigation: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">This is the card title</h3>
 					<p>This is the card content</p>
@@ -175,9 +249,9 @@ export const CardNoNavigation: Story = {
  */
 export const CardWholeCardClickable: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#" data-card-action>This is the card title</a>
@@ -194,9 +268,9 @@ export const CardWholeCardClickable: Story = {
  */
 export const CardCardClickablePlusASecondInteractiveElement: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#" data-card-action>This is the card title</a>
@@ -214,14 +288,126 @@ export const CardCardClickablePlusASecondInteractiveElement: Story = {
  */
 export const CardSeparateInteractiveElements: Story = {
 	args: {},
-	render() {
+	render(args) {
 		return html`
-			<w-card>
+			<w-card ${spread(prespread(args))}>
 				<div style="padding: 16px;">
 					<h3 class="t3">
 						<a href="#">This is the card title</a>
 					</h3>
 					<a href="http://google.com">Learn more</a>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const RadioCard: Story = {
+	args: {},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-radio
+						id="radio-card-story-option"
+						name="radio-card-story"
+						value="option"
+						data-card-action
+					></w-radio>
+					<label for="radio-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const FlatRadioCard: Story = {
+	args: {
+		flat: true,
+	},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-radio
+						id="radio-card-story-option"
+						name="radio-card-story"
+						value="option"
+						data-card-action
+					></w-radio>
+					<label for="radio-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const RadioCardGroup: Story = {
+	args: {},
+	render(args) {
+		return html`
+			<div style="display: grid; gap: 8px;">
+				<w-card ${spread(prespread(args))}>
+					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+						<w-radio
+							id="radio-card-story-standard"
+							name="radio-card-story-group"
+							value="standard"
+							data-card-action
+						></w-radio>
+						<label for="radio-card-story-standard">Standard delivery</label>
+					</div>
+				</w-card>
+				<w-card ${spread(prespread(args))}>
+					<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+						<w-radio
+							id="radio-card-story-express"
+							name="radio-card-story-group"
+							value="express"
+							data-card-action
+						></w-radio>
+						<label for="radio-card-story-express">Express delivery</label>
+					</div>
+				</w-card>
+			</div>
+		`;
+	},
+};
+
+export const CheckboxCard: Story = {
+	args: {},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-checkbox
+						id="checkbox-card-story-option"
+						name="checkbox-card-story"
+						value="option"
+						data-card-action
+					></w-checkbox>
+					<label for="checkbox-card-story-option">Select this option</label>
+				</div>
+			</w-card>
+		`;
+	},
+};
+
+export const FlatCheckboxCard: Story = {
+	args: {
+		flat: true,
+	},
+	render(args) {
+		return html`
+			<w-card ${spread(prespread(args))}>
+				<div style="padding: 16px; padding: 16px; display:flex; gap: 16px;">
+					<w-checkbox
+						id="checkbox-card-story-option"
+						name="checkbox-card-story"
+						value="option"
+						data-card-action
+					></w-checkbox>
+					<label for="checkbox-card-story-option">Select this option</label>
 				</div>
 			</w-card>
 		`;

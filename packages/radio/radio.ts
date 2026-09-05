@@ -107,6 +107,8 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 		this.addEventListener("click", this.handleClick);
 		this.addEventListener("invalid", this.handleInvalid);
 		this.addEventListener("keydown", this.handleKeyDown);
+		this.addEventListener("focusin", this.handleFocusIn);
+		this.addEventListener("focusout", this.handleFocusOut);
 	}
 
 	connectedCallback() {
@@ -177,6 +179,17 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 				new Event("change", { bubbles: true, composed: true }),
 			);
 		});
+	};
+
+	private handleFocusIn = () => {
+		this.toggleAttribute(
+			"data-focus-visible",
+			this.shadowRoot?.activeElement?.matches(":focus-visible") ?? false,
+		);
+	};
+
+	private handleFocusOut = () => {
+		this.removeAttribute("data-focus-visible");
 	};
 
 	private handleInvalid = () => {

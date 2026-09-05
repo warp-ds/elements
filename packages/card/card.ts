@@ -46,6 +46,8 @@ class WarpCard extends LitElement {
 	 * Whether the card is visually selected.
 	 *
 	 * Use this when the card represents a selected item or choice. This only controls the visual selected state; update it from your application state when the selection changes.
+	 *
+	 * @deprecated This will be removed in a future version. Use data-card-action attribute on an input type checkbox or radio button inside the card instead.
 	 */
 	@property({ type: Boolean, reflect: true })
 	selected = false;

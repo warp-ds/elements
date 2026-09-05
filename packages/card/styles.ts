@@ -8,13 +8,30 @@ export const styles = css`
 		);
 		--_background-color-active: var(
 			--w-c-card-bg-active,
-			var(--w-s-color-background-active)
+			var(--w-s-color-surface-elevated-200-active)
 		);
 		--_background-color-hover: var(
 			--w-c-card-bg-hover,
-			var(--w-s-color-background-hover)
+			var(--w-s-color-surface-elevated-200-hover)
 		);
-		--_border-color: var(--w-c-card-border-color, transparent);
+		--_border-color: var(--w-c-card-border-color, var(--w-transparent));
+		--_border-color-active: var(
+			--w-c-card-border-color-active,
+			var(--w-transparent)
+		);
+		--_border-color-hover: var(
+			--w-c-card-border-color-hover,
+			var(--w-transparent)
+		);
+		--_border-radius: var(--w-c-card-border-radius, 8px);
+		--_border-width: var(--w-c-card-border-width, 2px);
+		--_box-shadow: var(--w-c-card-box-shadow, var(--w-shadow-s));
+		--_box-shadow-active: var(--w-c-card-box-shadow-active, var(--w-none));
+		--_box-shadow-hover: var(--w-c-card-box-shadow-hover, var(--w-shadow-m));
+	}
+
+	:host([flat]) {
+		--_border-color: var(--w-c-card-border-color, var(--w-s-color-border));
 		--_border-color-active: var(
 			--w-c-card-border-color-active,
 			var(--w-s-color-border-active)
@@ -23,44 +40,13 @@ export const styles = css`
 			--w-c-card-border-color-hover,
 			var(--w-s-color-border-hover)
 		);
+		--_border-width: var(--w-c-card-border-width, 2px);
 		--_border-radius: var(--w-c-card-border-radius, 8px);
-		--_border-width: var(--w-c-card-border-width, 2px);
-		--_box-shadow: var(
-			--w-c-card-box-shadow,
-			var(--w-s-shadow-surface-elevated-200)
-		);
-		--_box-shadow-active: var(
-			--w-c-card-box-shadow-active,
-			var(--w-s-shadow-surface-elevated-200-active)
-		);
-		--_box-shadow-hover: var(
-			--w-c-card-box-shadow-hover,
-			var(--w-s-shadow-surface-elevated-200-hover)
-		);
-	}
-
-	:host([flat]) {
-		--_border-color: var(--w-c-card-border-color, var(--w-s-color-border));
-		--_border-width: var(--w-c-card-border-width, 2px);
-		--_border-radius: var(--w-c-card-border-radius, 4px);
-		--_box-shadow: none;
-		--_box-shadow-active: none;
-		--_box-shadow-hover: none;
+		--_box-shadow: var(--w-none);
+		--_box-shadow-active: var(--w-none);
 	}
 
 	:host([selected]) {
-		--_background-color: var(
-			--w-c-card-bg,
-			var(--w-s-color-background-selected)
-		);
-		--_background-color-active: var(
-			--w-c-card-bg-active,
-			var(--w-s-color-background-selected-active)
-		);
-		--_background-color-hover: var(
-			--w-c-card-bg-hover,
-			var(--w-s-color-background-selected-hover)
-		);
 		--_border-color: var(
 			--w-c-card-border-color,
 			var(--w-s-color-border-selected)
@@ -74,6 +60,36 @@ export const styles = css`
 			var(--w-s-color-border-selected-hover)
 		);
 		--_border-width: var(--w-c-card-border-width, 2px);
+	}
+
+	:host([selected]:not([flat])) {
+		--_background-color: var(
+			--w-c-card-bg,
+			var(--w-s-color-surface-elevated-200)
+		);
+		--_background-color-active: var(
+			--w-c-card-bg-active,
+			var(--w-s-color-surface-elevated-200-active)
+		);
+		--_background-color-hover: var(
+			--w-c-card-bg-hover,
+			var(--w-s-color-surface-elevated-200-hover)
+		);
+	}
+
+	:host([selected][flat]) {
+		--_background-color: var(
+			--w-c-card-bg,
+			var(--w-s-color-background-selected)
+		);
+		--_background-color-active: var(
+			--w-c-card-bg-active,
+			var(--w-s-color-background-selected-active)
+		);
+		--_background-color-hover: var(
+			--w-c-card-bg-hover,
+			var(--w-s-color-background-selected-hover)
+		);
 	}
 
 	[part="base"] {
@@ -114,8 +130,7 @@ export const styles = css`
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	:host([clickable][flat]) [part="base"]:hover [part="border"],
-	:host([clickable][selected]) [part="base"]:hover [part="border"] {
+	:host([clickable][selected]:not([flat])) [part="base"]:hover [part="border"] {
 		border-color: var(--_border-color-hover);
 	}
 
