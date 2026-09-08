@@ -1,3 +1,10 @@
+# [2.13.0-next.5](https://github.com/warp-ds/elements/compare/v2.13.0-next.4...v2.13.0-next.5) (2026-09-08)
+
+
+### Bug Fixes
+
+* **switch:** make the host element itself interactive ([#760](https://github.com/warp-ds/elements/issues/760)) ([666ae82](https://github.com/warp-ds/elements/commit/666ae82e051343b55ee3ad319106835595c81bc4))
+
 # [2.13.0-next.4](https://github.com/warp-ds/elements/compare/v2.13.0-next.3...v2.13.0-next.4) (2026-09-08)
 
 
