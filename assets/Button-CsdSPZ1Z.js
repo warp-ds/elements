@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-DAIyXY5k.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,d as l,f as u,i as d,l as f,m as p,n as m,o as h,p as g,r as _,s as v,t as y,u as b}from"./button.stories-ZZHMZQYN.js";function x(e){let r={a:`a`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,C.jsxs)(C.Fragment,{children:[(0,C.jsx)(n,{of:g,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}from"./blocks-DAIyXY5k.js";import{t as i}from"./jsx-runtime-DeHZSEgm.js";import{n as a,r as o}from"./lib-BRDOWE9X.js";import{a as s,c,d as l,f as u,i as d,l as f,m as p,n as m,o as h,p as g,r as _,s as v,t as y,u as b}from"./button.stories-BenfjYuY.js";function x(e){let r={a:`a`,h1:`h1`,h2:`h2`,p:`p`,...o(),...e.components};return(0,C.jsxs)(C.Fragment,{children:[(0,C.jsx)(n,{of:g,name:`Docs`}),`
 `,(0,C.jsx)(r.h1,{id:`button`,children:`Button`}),`
 `,(0,C.jsx)(r.p,{children:`Buttons are used to perform actions, with different visuals for different needs.`}),`
 `,(0,C.jsx)(r.h2,{id:`accessibility`,children:`Accessibility`}),`
@@ -9,10 +9,10 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}f
 `,(0,C.jsx)(r.p,{children:`The secondary button is for secondary or tertiary actions. "secondary" is the default value of the "variant" attribute.`}),`
 `,(0,C.jsx)(t,{of:b}),`
 `,(0,C.jsx)(r.p,{children:`The negative button is for emphasizing actions that can be destructive or have negative consequences if taken.`}),`
-`,(0,C.jsx)(t,{of:h}),`
-`,(0,C.jsx)(t,{of:u}),`
-`,(0,C.jsx)(t,{of:d}),`
 `,(0,C.jsx)(t,{of:v}),`
+`,(0,C.jsx)(t,{of:u}),`
+`,(0,C.jsx)(t,{of:s}),`
+`,(0,C.jsx)(t,{of:d}),`
 `,(0,C.jsx)(r.p,{children:`All of the above buttons have a small variant.`}),`
 `,(0,C.jsx)(t,{of:l}),`
 `,(0,C.jsx)(r.h2,{id:`quiet`,children:`Quiet`}),`
@@ -26,7 +26,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,o as n,s as r}f
 `,(0,C.jsx)(t,{of:y}),`
 `,(0,C.jsx)(r.h2,{id:`loading-state`,children:`Loading state`}),`
 `,(0,C.jsx)(r.p,{children:`To show the user that the action they triggered has begun, buttons have an in progress or loading state.`}),`
-`,(0,C.jsx)(t,{of:s}),`
+`,(0,C.jsx)(t,{of:h}),`
 `,(0,C.jsx)(r.h2,{id:`full-width`,children:`Full width`}),`
 `,(0,C.jsx)(r.p,{children:`Button will take the parent's width instead of content width. Useful on mobile when button should take full width.`}),`
 `,(0,C.jsx)(t,{of:_}),`
