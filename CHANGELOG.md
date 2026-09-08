@@ -1,3 +1,25 @@
+# [2.13.0-next.3](https://github.com/warp-ds/elements/compare/v2.13.0-next.2...v2.13.0-next.3) (2026-09-01)
+
+
+### Bug Fixes
+
+* **slider:** no longer marks open-ended slider from value greater than max attribute as too high ([#767](https://github.com/warp-ds/elements/issues/767)) ([945562b](https://github.com/warp-ds/elements/commit/945562bd982ee180a2b9289adeaa4994cfd8847b))
+
+# [2.13.0-next.2](https://github.com/warp-ds/elements/compare/v2.13.0-next.1...v2.13.0-next.2) (2026-09-01)
+
+
+### Bug Fixes
+
+* checkbox and radio hover styles ([#769](https://github.com/warp-ds/elements/issues/769)) ([26c7e28](https://github.com/warp-ds/elements/commit/26c7e285ac280dd60e639ef45dff0cc3c9ad1556))
+* **checkbox:** ensure long labels wrap instead of overflow ([#768](https://github.com/warp-ds/elements/issues/768)) ([85348e5](https://github.com/warp-ds/elements/commit/85348e506148ddc1b287e70ec122022c883713e1)), closes [#741](https://github.com/warp-ds/elements/issues/741)
+
+# [2.13.0-next.1](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0-next.1) (2026-08-28)
+
+
+### Features
+
+* new expandable default-with-divider variant ([#766](https://github.com/warp-ds/elements/issues/766)) ([877c00d](https://github.com/warp-ds/elements/commit/877c00daf850af3ab5f2488d726e98c53bbc5102))
+
 ## [2.12.1](https://github.com/warp-ds/elements/compare/v2.12.0...v2.12.1) (2026-08-21)
 
 

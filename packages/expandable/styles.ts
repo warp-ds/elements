@@ -48,7 +48,9 @@ export const styles = css`
 		--w-expansion-timing-function: var(--_expansion-transition-timing-function);
 	}
 
-	:host([box]) {
+	:host([box]:not([variant])),
+	:host([variant="box"]),
+	:host([variant="box-bleed"]) {
 		--_background-color: var(
 			--w-c-expandable-bg,
 			var(--w-s-color-background-subtle)
@@ -64,6 +66,26 @@ export const styles = css`
 		--_padding-x: var(--w-c-expandable-padding-x, 1.6rem);
 		--_padding-y: var(--w-c-expandable-padding-y, 1.6rem);
 		--_gap: var(--w-c-expandable-gap, 1.6rem);
+	}
+
+	:host([variant="default-with-divider"]) {
+		--_background-color: transparent;
+		--_background-color-hover: var(
+			--w-c-expandable-bg-hover,
+			var(--_background-color)
+		);
+		--_background-color-active: var(
+			--w-c-expandable-bg-active,
+			var(--_background-color)
+		);
+		--_border-color: var(
+			--w-c-expandable-divider-border-color,
+			var(--Semantic-Color-Border-Default, #dedee3)
+		);
+		--_border-radius: 0px;
+		--_gap: var(--w-c-expandable-gap, 8px);
+		--_padding-x: 0px;
+		--_padding-y: 0px;
 	}
 
 	[part="base"] {
@@ -83,15 +105,20 @@ export const styles = css`
 		will-change: height;
 	}
 
-	:host([box]) [part="base"]:hover {
+	:host([box]:not([variant])) [part="base"]:hover,
+	:host([variant="box"]) [part="base"]:hover,
+	:host([variant="box-bleed"]) [part="base"]:hover {
 		background-color: var(--_background-color-hover);
 	}
 
-	:host([box]) [part="base"]:active {
+	:host([box]:not([variant])) [part="base"]:active,
+	:host([variant="box"]) [part="base"]:active,
+	:host([variant="box-bleed"]) [part="base"]:active {
 		background-color: var(--_background-color-active);
 	}
 
-	:host([bleed]) [part="base"] {
+	:host([bleed]:not([variant])) [part="base"],
+	:host([variant="box-bleed"]) [part="base"] {
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
 		border-top-right-radius: 0;
@@ -120,7 +147,10 @@ export const styles = css`
 		text-decoration: underline;
 	}
 
-	:host([box]) .button {
+	:host([box]:not([variant])) .button,
+	:host([variant="box"]) .button,
+	:host([variant="box-bleed"]) .button,
+	:host([variant="default-with-divider"]) .button {
 		align-items: center;
 		display: inline-flex;
 		justify-content: space-between;
@@ -133,6 +163,16 @@ export const styles = css`
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
+	}
+
+	:host([variant="default-with-divider"]) .title {
+		border-top: 1px solid var(--_border-color);
+		gap: var(--_gap);
+		padding: 16px 16px 16px 0;
+	}
+
+	:host([variant="default-with-divider"][expanded]) [part="base"] {
+		padding-bottom: 16px;
 	}
 
 	.title-text,
@@ -149,7 +189,9 @@ export const styles = css`
 		vertical-align: middle;
 	}
 
-	:host(:not([box])) [part="chevron"] {
+	:host(:not([box]):not([variant])) [part="chevron"],
+	:host([variant="default"]) [part="chevron"],
+	:host([variant="default-with-divider"]) [part="chevron"] {
 		margin-left: var(--_gap);
 	}
 
@@ -185,12 +227,18 @@ export const styles = css`
 		position: relative;
 	}
 
+	:host([variant="default-with-divider"]:not(:first-of-type):last-of-type)
+		[part="base"] {
+		border-bottom: 1px solid var(--_border-color);
+	}
+
 	::slotted(:last-child) {
 		margin-bottom: 0px !important;
 	}
 
 	@media (min-width: 480px) {
-		:host([bleed]) [part="base"] {
+		:host([bleed]:not([variant])) [part="base"],
+		:host([variant="box-bleed"]) [part="base"] {
 			border-radius: var(--_border-radius);
 			margin-left: 0;
 			margin-right: 0;

@@ -14,17 +14,41 @@ export const styles = css`
 		--_checked-border-width: var(--w-c-radio-checked-border-width, 0.6rem);
 
 		--_bg: var(--w-c-radio-bg, var(--w-s-color-background));
+		--_bg-hover: var(
+			--w-c-checkbox-bg-hover,
+			var(--w-s-color-background-hover)
+		);
+		--_bg-invalid-hover: var(
+			--w-c-checkbox-bg-hover,
+			var(--w-s-color-background-negative-subtle-hover)
+		);
 		--_border-color: var(
 			--w-c-radio-border-color,
 			var(--w-s-color-border-strong)
+		);
+		--_border-color-hover: var(
+			--w-c-checkbox-border-color-hover,
+			var(--w-s-color-border-strong-hover)
 		);
 		--_border-color-checked: var(
 			--w-c-radio-border-color-checked,
 			var(--w-s-color-border-selected)
 		);
+		--_border-color-checked-hover: var(
+			--w-c-radio-border-color-checked-hover,
+			var(--w-s-color-border-selected-hover)
+		);
 		--_border-color-invalid: var(
 			--w-c-radio-border-color-invalid,
 			var(--w-s-color-border-negative)
+		);
+		--_border-color-invalid-hover: var(
+			--w-c-radio-border-color-invalid,
+			var(--w-s-color-border-negative-hover)
+		);
+		--_border-color-invalid-checked-hover: var(
+			--w-c-radio-border-color-invalid-checked-hover,
+			var(--w-s-color-border-negative-hover)
 		);
 
 		--_outline-width: var(--w-c-radio-outline-width, 2px);
@@ -66,6 +90,11 @@ export const styles = css`
 			border-width 150ms cubic-bezier(0.4, 0, 0.2, 1),
 			background-color 150ms cubic-bezier(0.4, 0, 0.2, 1)
 		);
+	}
+
+	:host(:hover) [part="control"] {
+		border-color: var(--_border-color-hover);
+		background-color: var(--_bg-hover);
 	}
 
 	:host([disabled]),
@@ -119,10 +148,31 @@ export const styles = css`
 	:host([role="radio"]:state(checked)) [part="control"] {
 		border-color: var(--_border-color-checked);
 		border-width: var(--_checked-border-width);
+		background-color: var(--_bg);
+	}
+
+	:host([checked]:hover) [part="control"],
+	:host([checked-ui]:hover) [part="control"],
+	:host([role="radio"][checked-ui]:hover) [part="control"],
+	:host([role="radio"]:state(checked):hover) [part="control"] {
+		border-color: var(--_border-color-checked-hover);
 	}
 
 	:host([invalid]) [part="control"] {
 		border-color: var(--_border-color-invalid);
+		background-color: var(--_bg);
+	}
+
+	:host([invalid]:hover) [part="control"] {
+		border-color: var(--_border-color-invalid-hover);
+		background-color: var(--_bg-invalid-hover);
+	}
+
+	:host([invalid][checked]:hover) [part="control"],
+	:host([invalid][checked-ui]:hover) [part="control"],
+	:host([invalid][role="radio"][checked-ui]:hover) [part="control"],
+	:host([invalid][role="radio"]:state(checked):hover) [part="control"] {
+		background-color: var(--_bg);
 	}
 
 	:host(:focus-visible) {
