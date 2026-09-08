@@ -15,7 +15,11 @@ import { detectLocale } from "../i18n.js";
 const meta: Meta<typeof args> = {
 	title: "Buttons/Button",
 	render(args) {
-		return html`<w-button ${spread(prespread(args))}>Button Text</w-button>`;
+		return html`<w-button
+			${spread(prespread(args))}
+			@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
+			>Button Text</w-button
+		>`;
 	},
 	args,
 	argTypes,
@@ -64,32 +68,18 @@ export const Link: Story = {
 	},
 };
 
-export const Pill: Story = {
+export const IconButton: Story = {
 	args: {
 		variant: "pill",
 		type: "button",
 	},
 	render(args) {
 		const locale = detectLocale();
-		return html`<w-button ${spread(prespread(args))}>
-				<w-icon
-					name="ChevronLeft"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<w-button ${spread(prespread(args))}>
-				<w-icon
-					name="Close"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<w-button ${spread(prespread(args))}>
+		return html`
+			<w-button
+				${spread(prespread(args))}
+				@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
+			>
 				<w-icon
 					name="Heart"
 					size="small"
@@ -98,52 +88,7 @@ export const Pill: Story = {
 					class="flex"
 				></w-icon>
 			</w-button>
-			<w-button ${spread(prespread(args))}>
-				<w-icon
-					name="ChevronRight"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<br />
-			<w-button ${spread(prespread(args))} small="">
-				<w-icon
-					name="ChevronLeft"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<w-button ${spread(prespread(args))} small="">
-				<w-icon
-					name="Close"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<w-button ${spread(prespread(args))} small="">
-				<w-icon
-					name="Heart"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>
-			<w-button ${spread(prespread(args))} small="">
-				<w-icon
-					name="ChevronRight"
-					size="small"
-					locale="${locale}"
-					style="height: 16px;"
-					class="flex"
-				></w-icon>
-			</w-button>`;
+		`;
 	},
 };
 
@@ -180,7 +125,11 @@ export const FullWidth: Story = {
 	render(args) {
 		return html`
 			<div class="w-full flex flex-col gap-8">
-				<w-button ${spread(prespread(args))}>Full width</w-button>
+				<w-button
+					${spread(prespread(args))}
+					@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
+					>Full width</w-button
+				>
 			</div>
 		`;
 	},
@@ -298,7 +247,12 @@ export const AllVariantsGrid: Story = {
 									variant="${v}"
 								</div>
 
-								<w-button variant=${v} type="button">Label</w-button>
+								<w-button
+									variant=${v}
+									type="button"
+									@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
+									>${v} label</w-button
+								>
 
 								${
 									v === "pill"
@@ -307,7 +261,7 @@ export const AllVariantsGrid: Story = {
 													variant="pill"
 													type="button"
 													icon-only
-													aria-label="Pill icon"
+													@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 												>
 													<w-icon
 														name="Heart"
@@ -344,19 +298,39 @@ export const QuietBackCompatMapping: Story = {
 				</div>
 
 				<div style="display:flex; gap: 12px; flex-wrap: wrap;">
-					<w-button variant="negative" quiet type="button"
+					<w-button
+						variant="negative"
+						quiet
+						type="button"
+						@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 						>negative + quiet</w-button
 					>
-					<w-button variant="utility" quiet type="button"
+					<w-button
+						variant="utility"
+						quiet
+						type="button"
+						@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 						>utility + quiet</w-button
 					>
-					<w-button variant="overlay" quiet type="button"
+					<w-button
+						variant="overlay"
+						quiet
+						type="button"
+						@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 						>overlay + quiet</w-button
 					>
-					<w-button variant="overlayInverted" quiet type="button"
+					<w-button
+						variant="overlayInverted"
+						quiet
+						type="button"
+						@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 						>overlayInverted + quiet</w-button
 					>
-					<w-button variant="secondary" quiet type="button"
+					<w-button
+						variant="secondary"
+						quiet
+						type="button"
+						@click=${() => alert("Time is " + new Date().toLocaleTimeString())}
 						>secondary + quiet</w-button
 					>
 				</div>

@@ -1,7 +1,7 @@
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 
 import { activateI18n } from "../i18n";
 import "../link/link.js";
@@ -58,24 +58,15 @@ class WarpButton extends FormControlMixin(LitElement) {
 	static styles = [reset, wButtonStyles];
 
 	/**
-	 * Shadow root configuration.
-	 * Delegates focus from the host to the internal control.
-	 */
-	static shadowRootOptions = {
-		...LitElement.shadowRootOptions,
-		delegatesFocus: true,
-	};
-
-	/**
-	 * Native button type.
+	 * Button type.
 	 * Controls whether the internal button behaves as a regular button, submits a form, or resets a form. Defaults to `button`.
 	 */
-	@property({ reflect: true })
-	type: ButtonType | undefined;
+	@property({ reflect: true, useDefault: true })
+	type: ButtonType = "button";
 
 	/**
 	 * Focuses the button when it is first rendered.
-	 * Applies only when the component renders a native button. Link buttons with `href` do not autofocus through this component.
+	 * Applies only when the component renders as a button (as opposed to an anchor/link). Link buttons with `href` do not autofocus through this component.
 	 */
 	@property({ type: Boolean, reflect: true })
 	autofocus = false;
@@ -84,8 +75,8 @@ class WarpButton extends FormControlMixin(LitElement) {
 	 * Visual style of the button.
 	 * Defaults to `secondary`. Use the variant that matches the action priority, risk, and placement.
 	 */
-	@property({ reflect: true })
-	variant: ButtonVariant | undefined;
+	@property({ reflect: true, useDefault: true })
+	variant: ButtonVariant = "secondary";
 
 	/**
 	 * Deprecated quiet visual treatment flag
@@ -119,7 +110,7 @@ class WarpButton extends FormControlMixin(LitElement) {
 
 	/**
 	 * URL for rendering the button as a link.
-	 * When set, the component renders `w-link` instead of a native `button`.
+	 * When set, the component renders `w-link` instead of a button.
 	 */
 	@property({ reflect: true })
 	href: string | undefined;
@@ -181,20 +172,26 @@ class WarpButton extends FormControlMixin(LitElement) {
 	@property()
 	commandfor: string | undefined;
 
+	@property()
+	commandForElement: HTMLElement | null | undefined;
+
 	/**
 	 * The [command HTML attribute](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#html_attributes) for Invoker Commands.
 	 */
 	@property()
 	command: string | undefined;
 
-	@query("button")
-	// @ts-expect-error We can't assign to this field because of @query
-	private buttonEl: HTMLButtonElement | null;
-
 	private ariaValueTextLoading: string;
 
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
+
+	/**
+	 * We want to emulate native button behavior which fires click listeners when space is
+	 * pressed and released on the same element. To avoid emulating click only on keyup,
+	 * keep track of whether we got a keydown-event. This value must reset on blur.
+	 */
+	#gotSpaceKeydownAndNoBlur = false;
 
 	get #ariaDescription(): string | undefined {
 		// let users override our default description
@@ -250,6 +247,46 @@ class WarpButton extends FormControlMixin(LitElement) {
 			);
 		}
 
+		if (!this.href && !this.hasAttribute("role")) {
+			// Using this.internals for role breaks Playwright locators.
+			// Set in connectedCallback to avoid a role attribute when we render w-link.
+			this.setAttribute("role", "button");
+		}
+		if (!this.href && !this.hasAttribute("tabindex")) {
+			this.setAttribute("tabindex", "0");
+		}
+
+		this.internals.ariaDescription = this.#ariaDescription;
+
+		this.addEventListener("click", this._handleButtonClick);
+		this.addEventListener("blur", () => {
+			this.#gotSpaceKeydownAndNoBlur = false;
+		});
+		this.addEventListener("keydown", (e) => {
+			if (e.key === "Enter") {
+				this.click(); // call this.click so user-provided click handlers get triggered
+			}
+
+			if (e.key === " ") {
+				// Stop Space from scrolling.
+				e.preventDefault();
+				// Mark the button as active while space is held.
+				// We don't get access to the :active pseudo class when interacting with a keyboard unfortunately.
+				this.dataset.active = "true";
+				this.#gotSpaceKeydownAndNoBlur = true;
+			}
+		});
+
+		this.addEventListener("keyup", (e) => {
+			if (e.key === " ") {
+				delete this.dataset.active;
+				if (this.#gotSpaceKeydownAndNoBlur) {
+					this.click(); // call this.click so user-provided click handlers get triggered
+				}
+				this.#gotSpaceKeydownAndNoBlur = false;
+			}
+		});
+
 		this.#initialValue = this.value;
 	}
 
@@ -278,15 +315,30 @@ class WarpButton extends FormControlMixin(LitElement) {
 		if (this.autofocus && !this.href) {
 			setTimeout(() => this.focus(), 0);
 		}
-		if (this.buttonEl && this.commandfor) {
-			this.buttonEl.commandForElement = this.closestWithId(this.commandfor);
+		if (this.commandfor) {
+			this.commandForElement = this.closestWithId(this.commandfor);
 		}
 	}
 
-	/** @internal */
-	_handleButtonClick() {
-		if (this.type === "submit") this.internals.form.requestSubmit();
-		else if (this.type === "reset") this.internals.form.reset();
+	private _handleButtonClick() {
+		if (this.disabled) return;
+
+		if (this.type === "submit") {
+			this.internals.form.requestSubmit();
+		} else if (this.type === "reset") {
+			this.internals.form.reset();
+		}
+
+		if (
+			this.command &&
+			this.commandForElement &&
+			"CommandEvent" in globalThis
+		) {
+			const commandEvent = new CommandEvent("command", {
+				command: this.command,
+			});
+			this.commandForElement.dispatchEvent(commandEvent);
+		}
 	}
 
 	resetFormControl(): void {
@@ -314,17 +366,9 @@ class WarpButton extends FormControlMixin(LitElement) {
 						</w-link>
 					`
 				: html`
-						<button
-							type=${this.type || "button"}
-							part="base"
-							class=${ifDefined(this.buttonClass)}
-							@click="${this._handleButtonClick}"
-							commandfor=${ifDefined(this.commandfor)}
-							command=${ifDefined(this.command)}
-							aria-description=${ifDefined(this.#ariaDescription)}
-						>
+						<span part="base" class=${ifDefined(this.buttonClass)}>
 							<slot></slot>
-						</button>
+						</span>
 					`
 		}
 		${
@@ -332,7 +376,7 @@ class WarpButton extends FormControlMixin(LitElement) {
 				? html`<span
 						class="sr-only"
 						role="progressbar"
-						aria-valuenow="{0}"
+						aria-valuenow="0"
 						aria-valuetext=${this.ariaValueTextLoading}
 					></span>`
 				: nothing
