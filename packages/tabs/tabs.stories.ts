@@ -128,3 +128,47 @@ export const ManyTabs = () => html`
 		</w-tab-panel>
 	</w-tabs>
 `;
+
+export const StylingAPI = () => html`
+	<style>
+		w-tabs::part(tablist) {
+			display: flex;
+		}
+
+		w-tabs {
+			--w-c-tabs-selection-color: limegreen;
+		}
+
+		w-tab {
+			--w-c-tab-hover-color: magenta;
+			--w-c-tab-hover-color-border: magenta;
+			--w-c-tab-active-color: magenta;
+			--w-c-tab-active-color-border: magenta;
+		}
+	</style>
+	<w-tabs active="info">
+		<w-tab for="info">
+			<w-icon name="Info" slot="icon"></w-icon>
+			Info
+		</w-tab>
+		<w-tab-panel id="info">
+			<p>Info content.</p>
+		</w-tab-panel>
+
+		<w-tab for="done">
+			<w-icon name="Success" slot="icon"></w-icon>
+			Done
+		</w-tab>
+		<w-tab-panel id="done" hidden>
+			<p>Done content.</p>
+		</w-tab-panel>
+
+		<w-tab for="error">
+			<w-icon name="Error" slot="icon"></w-icon>
+			Failures
+		</w-tab>
+		<w-tab-panel id="error" hidden>
+			<p>Error content.</p>
+		</w-tab-panel>
+	</w-tabs>
+`;
