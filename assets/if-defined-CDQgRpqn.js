@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{b as t,h as n}from"./decorate-D-MUTuIl.js";var r;function i(){return(i=e((()=>{t(),r=e=>e??n})))()}function a(){return(a=e((()=>{i()})))()}export{i as n,r,a as t};
