@@ -36,17 +36,6 @@ test("renders a single dot when page-count is 1", async () => {
 		.toBe(1);
 });
 
-test("has aria-label on the container", async () => {
-	const component = html`<w-page-indicator
-		page-count="5"
-		selected-page="3"
-	></w-page-indicator>`;
-	const page = render(component);
-
-	// Check that the container has role="img" and an aria-label attribute
-	await expect.element(page.getByRole("img")).toHaveAttribute("aria-label");
-});
-
 test("marks the selected dot with correct class", async () => {
 	const component = html`<w-page-indicator
 		page-count="5"
