@@ -1,21 +1,8 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
-import { css, html, LitElement, PropertyValues } from "lit";
+import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
 import { reset } from "../styles.js";
-
 import { styles } from "./styles.js";
-
-const ccTab = {
-	base: "focusable cursor-pointer text-center bg-transparent border-0 m-0 grid w-full items-center font-bold gap-8 antialias p-16 pb-8 border-b-4 bg-transparent border-transparent hover:s-text-link hover:s-border-primary",
-	inactive: "s-text-subtle",
-	active: "s-text-link s-border-selected",
-	icon: "mx-auto",
-	content: "flex items-center justify-center gap-8",
-	contentUnderlined: "content-underlined", // content-underlined is a no-op that prevents a quirk in how Vue handles class bindings
-};
 
 /**
  * Individual tab component used within w-tabs container.
@@ -25,20 +12,7 @@ const ccTab = {
  * @parent w-tabs
  */
 export class WarpTab extends LitElement {
-	static styles = [
-		reset,
-		styles,
-		css`
-			::slotted([slot="icon"]) {
-				display: flex;
-			}
-
-			:host(:focus-visible) {
-				outline: 2px solid var(--w-s-color-border-focus, #1a73e8);
-				outline-offset: var(--w-outline-offset, 1px);
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	/** @internal */
 	_internals: ElementInternals;
@@ -126,15 +100,6 @@ export class WarpTab extends LitElement {
 	@property({ type: Boolean, reflect: true })
 	over = false;
 
-	private get _classes() {
-		return classNames([
-			ccTab.base,
-			this.active || this.ariaSelected === "true"
-				? ccTab.active
-				: ccTab.inactive,
-		]);
-	}
-
 	private get _hasIcon() {
 		return this.querySelector('[slot="icon"]') !== null;
 	}
@@ -199,21 +164,23 @@ export class WarpTab extends LitElement {
 		const hasIcon = this._hasIcon;
 
 		return html`
-			<div class="${this._classes}" style="height: 100%">
+			<div part="base">
 				${
 					!hasIcon
-						? html`<span class="${ccTab.contentUnderlined}"
-								><slot></slot
-							></span>`
+						? html`
+								<span>
+									<slot></slot>
+								</span>
+							`
 						: this.over
 							? html`
-									<span class="${ccTab.icon}">
+									<span part="icon-block">
 										<slot name="icon"></slot>
 									</span>
-									<span class="${ccTab.contentUnderlined}"><slot></slot></span>
+									<span><slot></slot></span>
 								`
 							: html`
-									<div class="${ccTab.content}">
+									<div part="icon-inline">
 										<slot name="icon"></slot>
 										<slot></slot>
 									</div>

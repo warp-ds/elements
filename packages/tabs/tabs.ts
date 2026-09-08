@@ -1,6 +1,3 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { html, LitElement, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 
@@ -9,13 +6,6 @@ import { WarpTab } from "../tab/tab.js";
 import { WarpTabPanel } from "../tab-panel/tab-panel.js";
 import { uniqueId } from "../utils.js";
 import { styles } from "./styles.js";
-
-const ccTabs = {
-	wrapper: "border-b s-border mb-32",
-	base: "inline-grid relative -mb-1",
-	selectionIndicator:
-		"absolute s-border-selected -bottom-0 border-b-4 transition-all",
-};
 
 const ccGridLayout = {
 	cols1: "grid-cols-1",
@@ -73,7 +63,7 @@ export class WarpTabs extends LitElement {
 	@query('[role="tablist"]')
 	private tabList!: HTMLElement;
 
-	@query(".selection-indicator")
+	@query('[part="selection"]')
 	private selectionIndicator!: HTMLElement;
 
 	private _uniqueId = uniqueId();
@@ -322,21 +312,16 @@ export class WarpTabs extends LitElement {
 	}
 
 	render() {
-		const navClasses = classNames(ccTabs.wrapper);
-		const divClasses = classNames([ccTabs.base, this._gridClass]);
-
 		return html`
-			<div class="${navClasses}">
+			<div part="base">
 				<div
 					role="tablist"
-					class="${divClasses}"
+					part="tablist"
+					class="${this._gridClass}"
 					@keydown="${this._handleKeyDown}"
 				>
 					<slot name="tabs" @slotchange="${this._assignSlots}"></slot>
-					<span
-						class="selection-indicator ${ccTabs.selectionIndicator}"
-						data-testid="selection-indicator"
-					></span>
+					<span part="selection" data-testid="selection-indicator"></span>
 				</div>
 			</div>
 			<slot name="panels" @slotchange="${this._assignSlots}"></slot>
