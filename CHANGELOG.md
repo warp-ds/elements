@@ -1,3 +1,10 @@
+# [2.13.0-next.4](https://github.com/warp-ds/elements/compare/v2.13.0-next.3...v2.13.0-next.4) (2026-09-08)
+
+
+### Bug Fixes
+
+* **button:** make the host element itself a button ([#765](https://github.com/warp-ds/elements/issues/765)) ([b767ae8](https://github.com/warp-ds/elements/commit/b767ae87168fca127a0e47d7f40a52e1f8ad9a6e))
+
 # [2.13.0-next.3](https://github.com/warp-ds/elements/compare/v2.13.0-next.2...v2.13.0-next.3) (2026-09-01)
 
 
