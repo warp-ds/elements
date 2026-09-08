@@ -51,7 +51,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		--w-expansion-timing-function: var(--_expansion-transition-timing-function);
 	}
 
-	:host([box]) {
+	:host([box]:not([variant])),
+	:host([variant="box"]),
+	:host([variant="box-bleed"]) {
 		--_background-color: var(
 			--w-c-expandable-bg,
 			var(--w-s-color-background-subtle)
@@ -67,6 +69,26 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		--_padding-x: var(--w-c-expandable-padding-x, 1.6rem);
 		--_padding-y: var(--w-c-expandable-padding-y, 1.6rem);
 		--_gap: var(--w-c-expandable-gap, 1.6rem);
+	}
+
+	:host([variant="default-with-divider"]) {
+		--_background-color: transparent;
+		--_background-color-hover: var(
+			--w-c-expandable-bg-hover,
+			var(--_background-color)
+		);
+		--_background-color-active: var(
+			--w-c-expandable-bg-active,
+			var(--_background-color)
+		);
+		--_border-color: var(
+			--w-c-expandable-divider-border-color,
+			var(--Semantic-Color-Border-Default, #dedee3)
+		);
+		--_border-radius: 0px;
+		--_gap: var(--w-c-expandable-gap, 8px);
+		--_padding-x: 0px;
+		--_padding-y: 0px;
 	}
 
 	[part="base"] {
@@ -86,15 +108,20 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		will-change: height;
 	}
 
-	:host([box]) [part="base"]:hover {
+	:host([box]:not([variant])) [part="base"]:hover,
+	:host([variant="box"]) [part="base"]:hover,
+	:host([variant="box-bleed"]) [part="base"]:hover {
 		background-color: var(--_background-color-hover);
 	}
 
-	:host([box]) [part="base"]:active {
+	:host([box]:not([variant])) [part="base"]:active,
+	:host([variant="box"]) [part="base"]:active,
+	:host([variant="box-bleed"]) [part="base"]:active {
 		background-color: var(--_background-color-active);
 	}
 
-	:host([bleed]) [part="base"] {
+	:host([bleed]:not([variant])) [part="base"],
+	:host([variant="box-bleed"]) [part="base"] {
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
 		border-top-right-radius: 0;
@@ -123,7 +150,10 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		text-decoration: underline;
 	}
 
-	:host([box]) .button {
+	:host([box]:not([variant])) .button,
+	:host([variant="box"]) .button,
+	:host([variant="box-bleed"]) .button,
+	:host([variant="default-with-divider"]) .button {
 		align-items: center;
 		display: inline-flex;
 		justify-content: space-between;
@@ -136,6 +166,16 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		display: flex;
 		justify-content: space-between;
 		width: 100%;
+	}
+
+	:host([variant="default-with-divider"]) .title {
+		border-top: 1px solid var(--_border-color);
+		gap: var(--_gap);
+		padding: 16px 16px 16px 0;
+	}
+
+	:host([variant="default-with-divider"][expanded]) [part="base"] {
+		padding-bottom: 16px;
 	}
 
 	.title-text,
@@ -152,7 +192,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		vertical-align: middle;
 	}
 
-	:host(:not([box])) [part="chevron"] {
+	:host(:not([box]):not([variant])) [part="chevron"],
+	:host([variant="default"]) [part="chevron"],
+	:host([variant="default-with-divider"]) [part="chevron"] {
 		margin-left: var(--_gap);
 	}
 
@@ -188,18 +230,24 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 		position: relative;
 	}
 
+	:host([variant="default-with-divider"]:not(:first-of-type):last-of-type)
+		[part="base"] {
+		border-bottom: 1px solid var(--_border-color);
+	}
+
 	::slotted(:last-child) {
 		margin-bottom: 0px !important;
 	}
 
 	@media (min-width: 480px) {
-		:host([bleed]) [part="base"] {
+		:host([bleed]:not([variant])) [part="base"],
+		:host([variant="box-bleed"]) [part="base"] {
 			border-radius: var(--_border-radius);
 			margin-left: 0;
 			margin-right: 0;
 		}
 	}
-`})))()}var S;function C(){return(C=e((()=>{t(),i(),g(),f(),_(),l(),y(),m(),x(),S=class extends r{constructor(...e){super(...e),this.expanded=!1,this.box=!1,this.bleed=!1,this.noChevron=!1,this.animated=!1,this._hasTitle=!0,this._showChevronUp=!1}static{this.styles=[p,b]}updated(e){e.has(`expanded`)&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){let e=!!this.title,t=this.renderRoot.querySelector(`slot[name='title']`)?.assignedNodes().length>0;this._hasTitle=e||t}get#e(){let e=c();return this._showChevronUp?n`<w-icon
+`})))()}var S;function C(){return(C=e((()=>{t(),i(),g(),f(),_(),l(),y(),m(),x(),S=class extends r{constructor(...e){super(...e),this.expanded=!1,this.variant=`default`,this.box=!1,this.bleed=!1,this.noChevron=!1,this.animated=!1,this._hasTitle=!0,this._showChevronUp=!1}static{this.styles=[p,b]}updated(e){e.has(`expanded`)&&setTimeout(()=>{this._showChevronUp=this.expanded},200)}firstUpdated(){let e=!!this.title,t=this.renderRoot.querySelector(`slot[name='title']`)?.assignedNodes().length>0;this._hasTitle=e||t}get#e(){let e=c();return this._showChevronUp?n`<w-icon
 					class="chevron-icon"
 					data-direction="up"
 					name="ChevronUp"
@@ -238,4 +286,4 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,l as r,r
 						>
 							${this._expandableSlot}
 						</div>`}
-		</div>`}},o([a({type:Boolean,reflect:!0})],S.prototype,`expanded`,void 0),o([a({type:String})],S.prototype,`title`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`box`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`bleed`,void 0),o([a({attribute:`button-class`,type:String})],S.prototype,`buttonClass`,void 0),o([a({attribute:`content-class`,type:String})],S.prototype,`contentClass`,void 0),o([a({attribute:`no-chevron`,type:Boolean})],S.prototype,`noChevron`,void 0),o([a({type:Boolean})],S.prototype,`animated`,void 0),o([a({attribute:`heading-level`,type:Number})],S.prototype,`headingLevel`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_hasTitle`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_showChevronUp`,void 0),customElements.get(`w-expandable`)||customElements.define(`w-expandable`,S)})))()}export{y as n,C as t};
+		</div>`}},o([a({type:Boolean,reflect:!0})],S.prototype,`expanded`,void 0),o([a({type:String})],S.prototype,`title`,void 0),o([a({type:String,reflect:!0,useDefault:!0})],S.prototype,`variant`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`box`,void 0),o([a({type:Boolean,reflect:!0})],S.prototype,`bleed`,void 0),o([a({attribute:`button-class`,type:String})],S.prototype,`buttonClass`,void 0),o([a({attribute:`content-class`,type:String})],S.prototype,`contentClass`,void 0),o([a({attribute:`no-chevron`,type:Boolean})],S.prototype,`noChevron`,void 0),o([a({type:Boolean})],S.prototype,`animated`,void 0),o([a({attribute:`heading-level`,type:Number})],S.prototype,`headingLevel`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_hasTitle`,void 0),o([a({type:Boolean,state:!0})],S.prototype,`_showChevronUp`,void 0),customElements.get(`w-expandable`)||customElements.define(`w-expandable`,S)})))()}export{y as n,C as t};
