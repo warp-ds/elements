@@ -13,12 +13,15 @@ describe("w-radio React SSR hydration", () => {
 	});
 
 	test("default (no attributes) hydrates without warnings", async () => {
-		const warnings = await testHydration("w-radio", {});
+		const warnings = await testHydration("w-radio", { tabindex: 0 });
 		expect(warnings).toEqual([]);
 	});
 
 	test("with value hydrates without warnings", async () => {
-		const warnings = await testHydration("w-radio", { value: "option1" });
+		const warnings = await testHydration("w-radio", {
+			value: "option1",
+			tabindex: 0,
+		});
 		expect(warnings).toEqual([]);
 	});
 
@@ -26,6 +29,7 @@ describe("w-radio React SSR hydration", () => {
 		const warnings = await testHydration("w-radio", {
 			value: "option1",
 			name: "options",
+			tabindex: 0,
 		});
 		expect(warnings).toEqual([]);
 	});
@@ -34,6 +38,7 @@ describe("w-radio React SSR hydration", () => {
 		const warnings = await testHydration("w-radio", {
 			value: "option1",
 			checked: true,
+			tabindex: 0,
 		});
 		expect(warnings).toEqual([]);
 	});
@@ -42,6 +47,7 @@ describe("w-radio React SSR hydration", () => {
 		const warnings = await testHydration("w-radio", {
 			value: "option1",
 			disabled: true,
+			tabindex: -1,
 		});
 		expect(warnings).toEqual([]);
 	});
