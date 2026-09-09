@@ -1,3 +1,10 @@
+# [2.13.0-next.6](https://github.com/warp-ds/elements/compare/v2.13.0-next.5...v2.13.0-next.6) (2026-09-09)
+
+
+### Features
+
+* **tabs:** styling API with parts and variables ([#773](https://github.com/warp-ds/elements/issues/773)) ([4b18f79](https://github.com/warp-ds/elements/commit/4b18f791c1e5d0e24bba30ef01a248e5069187bf))
+
 # [2.13.0-next.5](https://github.com/warp-ds/elements/compare/v2.13.0-next.4...v2.13.0-next.5) (2026-09-08)
 
 
