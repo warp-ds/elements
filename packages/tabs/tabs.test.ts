@@ -168,8 +168,8 @@ test("tab-panel visibility is controlled via internal shadow DOM (no host attrib
 	expect(panels[1].active).toBe(false);
 
 	// Internal shadow DOM wrapper has data-active attribute for CSS visibility
-	const activeWrapper = panels[0].shadowRoot?.querySelector(".panel-content");
-	const inactiveWrapper = panels[1].shadowRoot?.querySelector(".panel-content");
+	const activeWrapper = panels[0].shadowRoot?.querySelector('[part="base"]');
+	const inactiveWrapper = panels[1].shadowRoot?.querySelector('[part="base"]');
 	expect(activeWrapper?.hasAttribute("data-active")).toBe(true);
 	expect(inactiveWrapper?.hasAttribute("data-active")).toBe(false);
 
