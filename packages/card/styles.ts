@@ -92,9 +92,11 @@ export const styles = css`
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	:host([clickable]) [part="base"]:hover {
-		background-color: var(--_background-color-hover);
-		box-shadow: var(--_box-shadow-hover);
+	@media (hover: hover) {
+		:host([clickable]) [part="base"]:hover {
+			background-color: var(--_background-color-hover);
+			box-shadow: var(--_box-shadow-hover);
+		}
 	}
 
 	:host([clickable]) [part="base"]:active {
@@ -114,9 +116,11 @@ export const styles = css`
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	:host([clickable][flat]) [part="base"]:hover [part="border"],
-	:host([clickable][selected]) [part="base"]:hover [part="border"] {
-		border-color: var(--_border-color-hover);
+	@media (hover: hover) {
+		:host([clickable][flat]) [part="base"]:hover [part="border"],
+		:host([clickable][selected]) [part="base"]:hover [part="border"] {
+			border-color: var(--_border-color-hover);
+		}
 	}
 
 	:host([clickable]) [part="base"]:active [part="border"] {
