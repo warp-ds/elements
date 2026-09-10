@@ -113,12 +113,15 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.addEventListener("click", this.#handleHostClick);
 		const attrValue = this.getAttribute("value");
 		this.value = attrValue ?? "on";
 		this.#defaultChecked = this.hasAttribute("checked");
 		this.checked = this.#defaultChecked;
 		this.addEventListener("invalid", this.#handleInvalid);
 		this.addEventListener("keydown", this.#handleKeyDown);
+		this.addEventListener("focusin", this.#handleFocusIn);
+		this.addEventListener("focusout", this.#handleFocusOut);
 		this.#syncFormValue();
 	}
 
@@ -134,6 +137,24 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 			);
 		});
 	}
+
+	// Handle clicks on the host, but ignore clicks already handled by the internal input.
+	// TODO: Remove this when we refactor checkbox to no longer use a native input element.
+	// See w-radio which already does not use a native input element.
+	#handleHostClick = (event: MouseEvent) => {
+		if (event.composedPath()[0] === this) this.handleClick();
+	};
+
+	#handleFocusIn = () => {
+		this.toggleAttribute(
+			"data-focus-visible",
+			this.shadowRoot?.activeElement?.matches(":focus-visible") ?? false,
+		);
+	};
+
+	#handleFocusOut = () => {
+		this.removeAttribute("data-focus-visible");
+	};
 
 	/* @internal */
 	#handleInvalid = () => {
