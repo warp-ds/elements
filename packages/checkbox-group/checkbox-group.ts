@@ -12,7 +12,6 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 
 import "../icon/icon.js";
 import "../tooltip/tooltip.js";
-import { buttonGroupComponentVariables } from "../button-group/styles.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
 
@@ -130,7 +129,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 
 	#unsubscribeI18n?: () => void;
 
-	static styles = [reset, buttonGroupComponentVariables, styles];
+	static styles = [reset, styles];
 
 	helpTextSlotChange() {
 		const el = this.renderRoot.querySelector(
@@ -197,13 +196,13 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 						: nothing
 				}
 				<div
-					class="form-control-input"
+					part="form-control-input"
 					role="group"
 					aria-labelledby=${ifDefined(labelId)}
 					aria-describedby=${ifDefined(helpId)}
 					aria-invalid=${ifDefined(ariaInvalid)}
 				>
-					<slot></slot>
+					<slot @slotchange="${this.#onFormControlsSlotChange}"></slot>
 				</div>
 				<div
 					?hidden=${!hasHelpText}
@@ -259,6 +258,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		}
 		HTMLElement.prototype.focus.call(this, options);
 	}
+
+	#onFormControlsSlotChange = () => {
+		if (this.type) {
+			for (const el of this.#getAssignedElements()) {
+				el.setAttribute("type", this.type);
+			}
+		}
+	};
 
 	#handleChange = () => {
 		this.#markInteracted();

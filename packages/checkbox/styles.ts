@@ -230,4 +230,65 @@ export const styles = css`
 			--w-c-checkbox-transition: none;
 		}
 	}
+
+	:host([type="button"]) [part="base"] {
+		display: inline-block;
+	}
+
+	:host([type="button"]) [part="control"] {
+		/** this is our focus target and more, cannot use display:none */
+		position: absolute;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		pointer-events: none;
+		inset: 0;
+	}
+
+	:host([type="button"]) [part="label"] {
+		align-items: center;
+		background: var(--_button-group-background);
+		border-color: var(--_button-group-border-color);
+		border-style: solid;
+		border-bottom-width: var(--_button-group-border-width);
+		border-top-width: var(--_button-group-border-width);
+		color: var(--_button-group-color-text);
+		display: inline-flex;
+		flex-direction: column;
+		font-size: var(--_button-group-font-size);
+		font-weight: var(--_button-group-font-weight);
+		height: var(--_button-group-height);
+		justify-content: center;
+		line-height: var(--_button-group-line-height);
+		padding: var(--_button-group-padding);
+		transition: var(--_button-group-transition);
+	}
+
+	:host([type="button"]):has([part="input"]:focus-visible:not(:disabled))
+		[part="label"],
+	:host([type="button"]:focus-visible) [part="label"] {
+		outline: 2px solid var(--w-s-color-border-focus);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	:host([type="button"]:first-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 8px 0 0 8px;
+	}
+
+	:host([type="button"]:last-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 0 8px 8px 0;
+	}
+
+	:host([type="button"]:hover) [part="label"] {
+		background: var(--_button-group-background-hover);
+		border-color: var(--_button-group-border-color-hover);
+	}
+
+	:host([type="button"][checked]) [part="label"] {
+		background: var(--_button-group-background-selected);
+		color: var(--_button-group-color-text-selected);
+		border-color: var(--_button-group-border-color-selected);
+	}
 `;

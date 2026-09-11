@@ -270,7 +270,7 @@ export const styles = css`
 		justify-content: center;
 		line-height: var(--_button-group-line-height);
 		padding: var(--_button-group-padding);
-		transition: var(--_transition);
+		transition: var(--_button-group-transition);
 	}
 
 	:host([type="button"]:focus-visible) {
@@ -278,19 +278,17 @@ export const styles = css`
 		outline-offset: var(--w-outline-offset, 1px);
 	}
 
-	:host([type="button"][data-w-radio-first]) [part="label"] {
+	:host([type="button"]:first-of-type) [part="label"] {
 		border-width: var(--_button-group-border-width);
 		border-radius: 8px 0 0 8px;
 	}
 
-	:host([type="button"][data-w-radio-last]) [part="label"] {
+	:host([type="button"]:last-of-type) [part="label"] {
 		border-width: var(--_button-group-border-width);
 		border-radius: 0 8px 8px 0;
 	}
 
 	:host([type="button"]:hover) [part="label"],
-	:host([type="button"]:hover) [part="label"],
-	:host([type="button"][role="radio"]:hover) [part="label"],
 	:host([type="button"][role="radio"]:hover) [part="label"] {
 		background: var(--_button-group-background-hover);
 		border-color: var(--_button-group-border-color-hover);

@@ -49,6 +49,12 @@ export const buttonGroupComponentVariables = css`
 		);
 		--_button-group-height: var(--w-c-button-group-height, 32px);
 		--_button-group-padding: var(--w-c-button-group-padding, 0 12px);
+		--_button-group-transition: var(
+			--w-c-button-group-transition,
+			color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+			background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)
+		);
 	}
 `;
 
