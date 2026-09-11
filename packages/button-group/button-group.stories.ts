@@ -21,9 +21,11 @@ const meta: Meta<typeof args> = {
 	title: "Buttons/Button Group",
 	render: (args) => {
 		return html`
+			<p>TODO: variant=primary here gets us visually in the ballpark (minus borders), but Figma talks about that being an Active state. What is this component when it's got buttons, is it a tablist? When is a button in a button group considered active? Can we even use w-button here?</p>
 			<w-button-group ${spread(prespread(args))}>
-				<w-button>Save as</w-button>
-				<w-button>Save</w-button>
+				<w-button variant="primary">Left</w-button>
+				<w-button>Middle</w-button>
+				<w-button>Right</w-button>
 			</w-button-group>
 		`;
 	},
