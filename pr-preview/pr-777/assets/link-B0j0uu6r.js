@@ -14,8 +14,16 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n,h as r,p
 		--_color-hover: var(--w-c-button-color-hover, var(--_color));
 		--_color-active: var(--w-c-button-color-active, var(--_color));
 
+		--_border: var(--_border-width) solid var(--_border-color);
+
+		--_border-top: var(--w-c-button-border-top, var(--_border));
+		--_border-right: var(--w-c-button-border-right, var(--_border));
+		--_border-bottom: var(--w-c-button-border-bottom, var(--_border));
+		--_border-left: var(--w-c-button-border-left, var(--_border));
+
 		--_border-width: var(--w-c-button-border-width, 2px);
 		--_border-color: var(--w-c-button-border-color, var(--w-s-color-border));
+
 		--_border-color-hover: var(
 			--w-c-button-border-color-hover,
 			var(--w-s-color-border-hover)
@@ -194,7 +202,11 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n,h as r,p
 		background-color: var(--_bg);
 		color: var(--_color);
 
-		border: var(--_border-width) solid var(--_border-color);
+		border-top: var(--_border-top);
+		border-right: var(--_border-right);
+		border-bottom: var(--_border-bottom);
+		border-left: var(--_border-left);
+
 		border-radius: var(--_radius);
 
 		padding: calc(var(--_pad-y) - var(--_border-width))

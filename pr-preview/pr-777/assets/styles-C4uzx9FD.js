@@ -55,6 +55,40 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n}from"./d
 		);
 	}
 `,i=t`
-	:host {
+	[part="base"] {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 0;
+	}
+
+	::slotted(w-button) {
+		--w-c-button-padding-y: 5px;
+		--w-c-button-padding-x: 12px;
+		--w-c-button-border-width: 1px;
+		--w-c-button-radius: 0px;
+		--w-c-button-border: unset;
+		--w-c-button-border-top: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
+		--w-c-button-border-right: none;
+		--w-c-button-border-left: none;
+		--w-c-button-border-bottom: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
+	}
+
+	::slotted(w-button:first-of-type) {
+		--w-c-button-radius: 8px 0 0 8px;
+		--w-c-button-border-left: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
+		--w-c-button-border-right: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
+	}
+
+	::slotted(w-button:last-of-type) {
+		--w-c-button-radius: 0 8px 8px 0;
+		--w-c-button-border-left: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
+		--w-c-button-border-right: var(--_button-group-border-width) solid
+			var(--_button-group-border-color);
 	}
 `})))()}export{a as n,i as r,r as t};
