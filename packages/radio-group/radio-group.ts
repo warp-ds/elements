@@ -280,6 +280,10 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 				radio.removeAttribute("name");
 				this.nameManagedRadios.delete(radio);
 			}
+
+			if (this.type) {
+				radio.setAttribute("type", this.type);
+			}
 		});
 
 		await Promise.all(radios.map(async (radio) => radio.updateComplete));

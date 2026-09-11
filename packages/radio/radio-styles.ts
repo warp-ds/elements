@@ -249,4 +249,53 @@ export const styles = css`
 			border-color: var(--_border-color-disabled);
 		}
 	}
+
+	:host([type="button"]) [part="control"] {
+		display: none;
+	}
+
+	:host([type="button"]) [part="label"] {
+		display: inline-flex;
+		height: 32px;
+		padding: 0 12px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		border-top: 1px solid var(--w-s-color-border);
+		border-bottom: 1px solid var(--w-s-color-border);
+		background: var(--w-s-color-background);
+
+		color: var(--w-s-color-text-link);
+
+		font-size: var(--w-c-button-font-size, var(--w-font-size-m));
+		line-height: var(--w-c-button-line-height, var(--w-line-height-m));
+		font-weight: var(--w-c-button-font-weight, 700);
+	}
+
+	:host([type="button"][data-w-radio-first]) [part="label"] {
+		border: 1px solid var(--w-s-color-border);
+		border-radius: 8px 0 0 8px;
+	}
+
+	:host([type="button"][data-w-radio-last]) [part="label"] {
+		border: 1px solid var(--w-s-color-border);
+		border-radius: 0 8px 8px 0;
+	}
+
+	:host([type="button"]:hover) [part="label"],
+	:host([type="button"]:hover) [part="label"],
+	:host([type="button"][role="radio"]:hover) [part="label"],
+	:host([type="button"][role="radio"]:hover) [part="label"] {
+		background: var(--w-s-color-background-hover);
+		border-color: var(--w-s-color-border-hover);
+	}
+
+	:host([type="button"][checked]) [part="label"],
+	:host([type="button"][checked-ui]) [part="label"],
+	:host([type="button"][role="radio"]:state(checked)) [part="label"] {
+		background: var(--w-s-color-background-primary);
+		color: var(--w-s-color-text-inverted);
+		border-color: var(--w-s-color-border-selected);
+	}
 `;
