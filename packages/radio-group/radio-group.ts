@@ -120,6 +120,14 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	required = false;
 
+	/**
+	 * Override the default visual representation (radio buttons).
+	 *
+	 * Set to `"button"` to render the radio group as a Button group with radio semantics.
+	 */
+	@property({ reflect: true })
+	type: "button" | undefined;
+
 	private defaultCheckedValue: string | null | undefined = undefined;
 	private slottedHelpText: string | null = null;
 	private readonly nameManagedRadios = new WeakSet<WarpRadio>();

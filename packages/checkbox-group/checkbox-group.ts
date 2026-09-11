@@ -104,6 +104,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	invalid = false;
 
+	/**
+	 * Override the default visual representation (checkboxes).
+	 *
+	 * Set to `"button"` to render the checkbox group as a Button group with checkbox semantics.
+	 */
+	@property({ reflect: true })
+	type: "button" | undefined;
+
 	@state()
 	private _hasHelpTextSlot = false;
 
