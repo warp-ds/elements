@@ -26,6 +26,10 @@ const config: LinguiConfig = {
 			path: "packages/button/locales/{locale}/messages",
 		},
 		{
+			include: ["packages/button-group/"],
+			path: "packages/button-group/locales/{locale}/messages",
+		},
+		{
 			include: ["packages/card/"],
 			path: "packages/card/locales/{locale}/messages",
 		},

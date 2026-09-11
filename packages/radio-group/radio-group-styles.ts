@@ -135,4 +135,10 @@ export const styles = css`
 	:host([data-show-error]) [part~="help-text"] {
 		color: var(--_help-text-color-error);
 	}
+
+	:host([type="button"]) [part="form-control-input"] {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 0;
+	}
 `;

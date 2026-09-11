@@ -129,6 +129,7 @@ export default {
 		"packages/breadcrumbs/breadcrumbs.ts",
 		"packages/breadcrumb-item/breadcrumb-item.ts",
 		"packages/button/button.ts",
+		"packages/button-group/button-group.ts",
 		"packages/card/card.ts",
 		"packages/checkbox/checkbox.ts",
 		"packages/checkbox-group/checkbox-group.ts",
