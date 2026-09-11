@@ -2,6 +2,9 @@
 
 Sketching. I _think_ let's use a similar API to cards in this case, which wrap cards in the w-<type>-group component. Our challenge becomes how to style a radio and checkbox to look like a Warp button (kind of sort of, maybe it's good it's a separate one?) instead of a regular component.
 
+TODO: how to label these groups in an accessible way
+TODO: how to label these groups in an accessible way with visually hidden labels
+
 RADIORADIORADIO
 
 ```

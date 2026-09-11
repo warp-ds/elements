@@ -18,10 +18,13 @@ const { events, args, argTypes } =
 	getStorybookHelpers<WarpButtonGroup>("w-button-group");
 
 const meta: Meta<typeof args> = {
-	title: "Layout/ButtonGroup",
+	title: "Buttons/Button Group",
 	render: (args) => {
 		return html`
-			<w-button-group ${spread(prespread(args))}> Slot content </w-button-group>
+			<w-button-group ${spread(prespread(args))}>
+				<w-button>Save as</w-button>
+				<w-button>Save</w-button>
+			</w-button-group>
 		`;
 	},
 	args,
@@ -46,6 +49,18 @@ export const ButtonGroupRadio: Story = {
 				<w-radio value="medium">Medium</w-radio>
 				<w-radio value="large">Large</w-radio>
 			</w-radio-group>
+		`;
+	},
+};
+
+export const ButtonGroupCheckbox: Story = {
+	render() {
+		return html`
+			<w-checkbox-group name="color-filters" type="button">
+				<w-checkbox value="red">Red</w-checkbox>
+				<w-checkbox value="green">Green</w-checkbox>
+				<w-checkbox value="blue">Blue</w-checkbox>
+			</w-checkbox-group>
 		`;
 	},
 };
