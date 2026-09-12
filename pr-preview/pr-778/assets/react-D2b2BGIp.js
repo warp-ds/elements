@@ -1,0 +1,1 @@
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{n,t as r}from"./lib-DGqIrx_S.js";var i=t({MDXProvider:()=>r});function a(){return(a=e((()=>{n()})))()}export{i as n,a as t};
