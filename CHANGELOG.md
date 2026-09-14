@@ -1,3 +1,10 @@
+# [2.13.0-next.7](https://github.com/warp-ds/elements/compare/v2.13.0-next.6...v2.13.0-next.7) (2026-09-14)
+
+
+### Bug Fixes
+
+* **page-indicator:** move role and ariaLabel to host element ([#774](https://github.com/warp-ds/elements/issues/774)) ([0e7ff41](https://github.com/warp-ds/elements/commit/0e7ff41eb88b373fb5d5d5390289719d49d46f7f))
+
 # [2.13.0-next.6](https://github.com/warp-ds/elements/compare/v2.13.0-next.5...v2.13.0-next.6) (2026-09-09)
 
 
