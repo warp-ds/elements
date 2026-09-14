@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
-import { css, html, LitElement, nothing, PropertyValues } from "lit";
+import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { activateI18n } from "../i18n";
@@ -12,6 +12,8 @@ import { messages as svMessages } from "./locales/sv/messages.mjs";
 
 import "../icon/icon.js";
 import "../tooltip/tooltip.js";
+import { reset } from "../styles.js";
+import { styles } from "./styles.js";
 
 activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
@@ -104,6 +106,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	@property({ type: Boolean, reflect: true })
 	invalid = false;
 
+	/**
+	 * Override the default visual representation (checkboxes).
+	 *
+	 * Set to `"button"` to render the checkbox group as a Button group with checkbox semantics.
+	 */
+	@property({ reflect: true })
+	type: "button" | undefined;
+
 	@state()
 	private _hasHelpTextSlot = false;
 
@@ -119,58 +129,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 
 	#unsubscribeI18n?: () => void;
 
-	static styles = css`
-		.wrapper {
-			display: inline-flex;
-			flex-direction: column;
-			gap: 16px;
-		}
-
-		.checkbox-group {
-			display: grid;
-			gap: 16px;
-		}
-
-		.label {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			font-size: var(--w-font-size-s);
-			line-height: var(--w-line-height-s);
-			font-weight: 700;
-			color: var(--w-s-color-text);
-		}
-
-		.optional {
-			font-weight: 400;
-			color: var(--w-s-color-text-subtle);
-		}
-
-		.help-text {
-			display: block;
-			font-size: var(--w-font-size-xs);
-			line-height: var(--w-line-height-xs);
-			color: var(--w-s-color-text-subtle);
-		}
-
-		.error {
-			color: var(--w-s-color-text-negative);
-		}
-
-		[part="tooltip-target"] {
-			appearance: none;
-			background: transparent;
-			border: none;
-			height: 16px;
-			margin: 0 0 0 4px;
-			padding: 0;
-			vertical-align: text-top;
-		}
-
-		w-tooltip {
-			display: inline-block;
-		}
-	`;
+	static styles = [reset, styles];
 
 	helpTextSlotChange() {
 		const el = this.renderRoot.querySelector(
@@ -192,11 +151,11 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		const ariaInvalid = isInvalid ? "true" : undefined;
 
 		return html`
-			<div class="wrapper" tabindex="${this._internalTabIndex}">
+			<div part="form-control" tabindex="${this._internalTabIndex}">
 				${
 					this.label
 						? html`
-								<div class="label" id="${ifDefined(labelId)}">
+								<div part="form-control-label" id="${ifDefined(labelId)}">
 									<span>${this.label}</span>
 									${
 										this.optional && !this.required
@@ -237,17 +196,18 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 						: nothing
 				}
 				<div
-					class="checkbox-group"
+					part="form-control-input"
 					role="group"
 					aria-labelledby=${ifDefined(labelId)}
 					aria-describedby=${ifDefined(helpId)}
 					aria-invalid=${ifDefined(ariaInvalid)}
 				>
-					<slot></slot>
+					<slot @slotchange="${this.#onFormControlsSlotChange}"></slot>
 				</div>
 				<div
 					?hidden=${!hasHelpText}
 					class="${isInvalid ? "help-text error" : "help-text"}"
+					part="help-text"
 					id="${ifDefined(helpId)}"
 				>
 					${helpText}
@@ -298,6 +258,14 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		}
 		HTMLElement.prototype.focus.call(this, options);
 	}
+
+	#onFormControlsSlotChange = () => {
+		if (this.type) {
+			for (const el of this.#getAssignedElements()) {
+				el.setAttribute("type", this.type);
+			}
+		}
+	};
 
 	#handleChange = () => {
 		this.#markInteracted();

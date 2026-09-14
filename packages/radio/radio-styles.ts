@@ -249,4 +249,56 @@ export const styles = css`
 			border-color: var(--_border-color-disabled);
 		}
 	}
+
+	:host([type="button"]) [part="control"] {
+		display: none;
+	}
+
+	:host([type="button"]) [part="label"] {
+		align-items: center;
+		background: var(--_button-group-background);
+		border-color: var(--_button-group-border-color);
+		border-style: solid;
+		border-bottom-width: var(--_button-group-border-width);
+		border-top-width: var(--_button-group-border-width);
+		color: var(--_button-group-color-text);
+		display: inline-flex;
+		flex-direction: column;
+		font-size: var(--_button-group-font-size);
+		font-weight: var(--_button-group-font-weight);
+		height: var(--_button-group-height);
+		justify-content: center;
+		line-height: var(--_button-group-line-height);
+		padding: var(--_button-group-padding);
+		transition: var(--_button-group-transition);
+	}
+
+	:host([type="button"]:focus-visible) {
+		outline: 2px solid var(--w-s-color-border-focus);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	:host([type="button"]:first-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 8px 0 0 8px;
+	}
+
+	:host([type="button"]:last-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 0 8px 8px 0;
+	}
+
+	:host([type="button"]:hover) [part="label"],
+	:host([type="button"][role="radio"]:hover) [part="label"] {
+		background: var(--_button-group-background-hover);
+		border-color: var(--_button-group-border-color-hover);
+	}
+
+	:host([type="button"][checked]) [part="label"],
+	:host([type="button"][checked-ui]) [part="label"],
+	:host([type="button"][role="radio"]:state(checked)) [part="label"] {
+		background: var(--_button-group-background-selected);
+		color: var(--_button-group-color-text-selected);
+		border-color: var(--_button-group-border-color-selected);
+	}
 `;
