@@ -22,10 +22,10 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,p
 	.w-page-indicator--selecteddot {
 		background-color: var(--w-s-color-icon-selected);
 	}
-`})))()}var j;function M(){return(M=e((()=>{u(),r(),a(),g(),d(),b(),S(),w(),E(),O(),A(),f(x,T,C,y,D),j=class extends i{constructor(...e){super(...e),this.selectedPage=1,this.pageCount=1}static{this.styles=[k]}get _validPageCount(){return Math.max(1,Math.floor(this.pageCount??1))}get _validSelectedPage(){let e=Math.floor(this.selectedPage??1);return Math.max(1,Math.min(e,this._validPageCount))}render(){let e=this._validPageCount,t=this._validSelectedPage,n=l._({id:`page-indicator.aria.label`,comment:`Default screenreader message for page indicator group`,message:`Dot {selectedPage} is highlighted in a row of {pageCount} dots`,values:{selectedPage:t,pageCount:e}});return c`
-			<div class="w-page-indicator" role="img" aria-label="${n}">
+`})))()}var j;function M(){return(M=e((()=>{u(),r(),a(),g(),d(),b(),S(),w(),E(),O(),A(),f(x,T,C,y,D),j=class extends i{static{this.styles=[k]}constructor(){super(),this.selectedPage=1,this.pageCount=1,this._internals=this.attachInternals(),this._internals.role=`img`;let e=l._({id:`page-indicator.aria.label`,comment:`Default screenreader message for page indicator group`,message:`Dot {selectedPage} is highlighted in a row of {pageCount} dots`,values:{selectedPage:this._validSelectedPage,pageCount:this._validPageCount}});this._internals.ariaLabel=e}get _validPageCount(){return Math.max(1,Math.floor(this.pageCount??1))}get _validSelectedPage(){let e=Math.floor(this.selectedPage??1);return Math.max(1,Math.min(e,this._validPageCount))}render(){return c`
+			<div class="w-page-indicator">
 				<div class="w-page-indicator--container">
-					${_(v(e),e=>{let n={"w-page-indicator--dot":!0,"w-page-indicator--selecteddot":e+1===t};return c`<div class="${h(n)}"></div>`})}
+					${_(v(this._validPageCount),e=>{let t={"w-page-indicator--dot":!0,"w-page-indicator--selecteddot":e+1===this._validSelectedPage};return c`<div class="${h(t)}"></div>`})}
 				</div>
 			</div>
 		`}},s([o({type:Number,attribute:`selected-page`,reflect:!0,useDefault:!0})],j.prototype,`selectedPage`,void 0),s([o({type:Number,attribute:`page-count`,reflect:!0,useDefault:!0})],j.prototype,`pageCount`,void 0),customElements.get(`w-page-indicator`)||customElements.define(`w-page-indicator`,j)})))()}var N,P,F,I,L,R,z,B,V,H,U;function W(){return(W=e((()=>{p(),r(),a(),M(),{events:N,args:P,argTypes:F}=m(`w-page-indicator`),I={component:`w-page-indicator`,title:`Navigation/PageIndicator`,render:({pageCount:e,selectedPage:t})=>c`
