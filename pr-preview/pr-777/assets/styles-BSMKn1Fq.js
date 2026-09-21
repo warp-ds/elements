@@ -46,7 +46,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n}from"./d
 			var(--w-line-height-s)
 		);
 		--_button-group-height: var(--w-c-button-group-height, 32px);
-		--_button-group-padding: var(--w-c-button-group-padding, 0 12px);
+		--_button-group-padding: var(--w-c-button-group-padding, 7px 12px);
 		--_button-group-transition: var(
 			--w-c-button-group-transition,
 			color 150ms cubic-bezier(0.4, 0, 0.2, 1),

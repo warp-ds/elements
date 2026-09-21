@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,h as i,p as a,r as o,s,t as c,y as l}from"./decorate-kJVNAdyH.js";import{a as u,o as d,r as f,t as p}from"./i18n-CkjYRTT1.js";import{t as m}from"./icon-DgzLkPq-.js";import{n as h,t as g}from"./styles-BxpTFSox.js";import{n as _,t as v}from"./FormControlMixin-BCJbRrUC.js";import{r as y,t as b}from"./if-defined-CHz3vSYq.js";import{n as x,t as S}from"./styles-h05kvuo1.js";import{t as C}from"./tooltip-DFh_EJXQ.js";var w;function T(){return(T=e((()=>{r(),w=t`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,h as i,p as a,r as o,s,t as c,y as l}from"./decorate-kJVNAdyH.js";import{a as u,o as d,r as f,t as p}from"./i18n-CkjYRTT1.js";import{t as m}from"./icon-DgzLkPq-.js";import{n as h,t as g}from"./styles-BxpTFSox.js";import{n as _,t as v}from"./FormControlMixin-BCJbRrUC.js";import{r as y,t as b}from"./if-defined-CHz3vSYq.js";import{n as x,t as S}from"./styles-BSMKn1Fq.js";import{t as C}from"./tooltip-DFh_EJXQ.js";var w;function T(){return(T=e((()=>{r(),w=t`
 	:host {
 		box-sizing: border-box !important;
 	}
@@ -263,19 +263,16 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,h
 	}
 
 	:host([type="button"]) [part="label"] {
-		align-items: center;
 		background: var(--_button-group-background);
 		border-color: var(--_button-group-border-color);
 		border-style: solid;
 		border-bottom-width: var(--_button-group-border-width);
 		border-top-width: var(--_button-group-border-width);
 		color: var(--_button-group-color-text);
-		display: inline-flex;
-		flex-direction: column;
+		display: inline-block;
 		font-size: var(--_button-group-font-size);
 		font-weight: var(--_button-group-font-weight);
 		height: var(--_button-group-height);
-		justify-content: center;
 		line-height: var(--_button-group-line-height);
 		padding: var(--_button-group-padding);
 		transition: var(--_button-group-transition);

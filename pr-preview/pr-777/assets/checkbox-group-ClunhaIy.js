@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,_ as n,a as r,b as i,c as a,d as o,f as s,h as c,l,p as u,r as d,s as f,t as p,u as m,y as h}from"./decorate-kJVNAdyH.js";import{a as g,o as _,r as ee}from"./directive-helpers-DU1AX8t9.js";import{a as v,o as y,r as b,t as x}from"./i18n-CkjYRTT1.js";import{t as S}from"./query-BHY-nhsh.js";import{t as C}from"./icon-DgzLkPq-.js";import{n as w,t as T}from"./styles-BxpTFSox.js";import{n as E,t as D}from"./FormControlMixin-BCJbRrUC.js";import{r as O,t as k}from"./if-defined-CHz3vSYq.js";import{n as A,t as j}from"./styles-h05kvuo1.js";import{t as te}from"./tooltip-DFh_EJXQ.js";var M;function N(){return(N=e((()=>{i(),m(),ee(),M=a(class extends l{constructor(e){if(super(e),e.type!==o.PROPERTY&&e.type!==o.ATTRIBUTE&&e.type!==o.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!_(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===n||t===c)return t;let r=e.element,i=e.name;if(e.type===o.PROPERTY){if(t===r[i])return n}else if(e.type===o.BOOLEAN_ATTRIBUTE){if(!!t===r.hasAttribute(i))return n}else if(e.type===o.ATTRIBUTE&&r.getAttribute(i)===t+``)return n;return g(e),t}})})))()}function P(){return(P=e((()=>{N()})))()}var F;function I(){return(I=e((()=>{s(),F=t`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,_ as n,a as r,b as i,c as a,d as o,f as s,h as c,l,p as u,r as d,s as f,t as p,u as m,y as h}from"./decorate-kJVNAdyH.js";import{a as g,o as _,r as ee}from"./directive-helpers-DU1AX8t9.js";import{a as v,o as y,r as b,t as x}from"./i18n-CkjYRTT1.js";import{t as S}from"./query-BHY-nhsh.js";import{t as C}from"./icon-DgzLkPq-.js";import{n as w,t as T}from"./styles-BxpTFSox.js";import{n as E,t as D}from"./FormControlMixin-BCJbRrUC.js";import{r as O,t as k}from"./if-defined-CHz3vSYq.js";import{n as A,t as j}from"./styles-BSMKn1Fq.js";import{t as te}from"./tooltip-DFh_EJXQ.js";var M;function N(){return(N=e((()=>{i(),m(),ee(),M=a(class extends l{constructor(e){if(super(e),e.type!==o.PROPERTY&&e.type!==o.ATTRIBUTE&&e.type!==o.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!_(e))throw Error("`live` bindings can only contain a single expression")}render(e){return e}update(e,[t]){if(t===n||t===c)return t;let r=e.element,i=e.name;if(e.type===o.PROPERTY){if(t===r[i])return n}else if(e.type===o.BOOLEAN_ATTRIBUTE){if(!!t===r.hasAttribute(i))return n}else if(e.type===o.ATTRIBUTE&&r.getAttribute(i)===t+``)return n;return g(e),t}})})))()}function P(){return(P=e((()=>{N()})))()}var F;function I(){return(I=e((()=>{s(),F=t`
 	:host {
 		--_label-font-size: var(
 			--w-c-checkbox-label-font-size,
@@ -244,19 +244,16 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,_ as n,a as r,b
 	}
 
 	:host([type="button"]) [part="label"] {
-		align-items: center;
 		background: var(--_button-group-background);
 		border-color: var(--_button-group-border-color);
 		border-style: solid;
 		border-bottom-width: var(--_button-group-border-width);
 		border-top-width: var(--_button-group-border-width);
 		color: var(--_button-group-color-text);
-		display: inline-flex;
-		flex-direction: column;
+		display: inline-block;
 		font-size: var(--_button-group-font-size);
 		font-weight: var(--_button-group-font-weight);
 		height: var(--_button-group-height);
-		justify-content: center;
 		line-height: var(--_button-group-line-height);
 		padding: var(--_button-group-padding);
 		transition: var(--_button-group-transition);
