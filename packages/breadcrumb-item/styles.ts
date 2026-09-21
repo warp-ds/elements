@@ -40,6 +40,19 @@ export const styles = css`
 		--_outline-offset: var(--w-c-breadcrumb-item-outline-offset, 1px);
 	}
 
+	:host(:not(:last-of-type))::after {
+		display: inline-block;
+		content: "/" / "";
+		color: var(--_separator-color);
+		-webkit-user-select: none;
+		user-select: none;
+		font-size: var(--_font-size);
+		line-height: var(--_line-height);
+		font-weight: var(--_font-weight);
+		margin-left: var(--_separator-spacing);
+		margin-right: var(--_separator-spacing);
+	}
+
 	.s-text {
 		color: var(--_text-color);
 		font-size: var(--_font-size);
@@ -68,15 +81,5 @@ export const styles = css`
 		outline-color: var(--_outline-color);
 		outline-width: var(--_outline-width);
 		outline-offset: var(--_outline-offset);
-	}
-	.separator {
-		color: var(--_separator-color);
-		-webkit-user-select: none;
-		user-select: none;
-		font-size: var(--_font-size);
-		line-height: var(--_line-height);
-		font-weight: var(--_font-weight);
-		margin-left: var(--_separator-spacing);
-		margin-right: var(--_separator-spacing);
 	}
 `;

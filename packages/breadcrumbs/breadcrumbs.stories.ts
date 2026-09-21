@@ -64,3 +64,15 @@ export const WithSpanForCurrentPage: Story = {
 		`;
 	},
 };
+
+export const WithoutCurrentPageInTrail: Story = {
+	render(args) {
+		return html`
+			<w-breadcrumbs ${spread(prespread(args))}>
+				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+			</w-breadcrumbs>
+			<h2>Current page</h2>
+		`;
+	},
+};

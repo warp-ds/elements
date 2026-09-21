@@ -30,6 +30,16 @@ By default the current-page will not be presented as a link, setting href will c
 </w-breadcrumbs>
 ```
 
+You can omit the current page from the breadcrumbs if the page heading immediately below the breadcrumbs already identifies the location.
+
+```html
+<w-breadcrumbs aria-label="You are here">
+  <w-breadcrumb-item href="/real-estate">Real estate</w-breadcrumb-item>
+  <w-breadcrumb-item href="/real-estate/homes">Homes for sale</w-breadcrumb-item>
+</w-breadcrumbs>
+<h2>Homes for sale in Oslo</h2>
+```
+
 ### Content Guidelines
 
 Keep breadcrumb labels short and ordered from broadest section to most specific page. Do not add slash separators yourself; the component inserts them between items.
