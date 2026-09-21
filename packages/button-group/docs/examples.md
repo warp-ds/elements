@@ -1,50 +1,29 @@
 ## Examples
 
-TODO: how to label these groups in an accessible way
-TODO: how to label these groups in an accessible way with visually hidden labels
+### Multiple selection button group
 
-RADIORADIORADIO
+<elements-example>
 
+```html
+<w-checkbox-group label="Filter by color" name="color-filters" type="button">
+	<w-checkbox value="red">Red</w-checkbox>
+	<w-checkbox value="green">Green</w-checkbox>
+	<w-checkbox value="blue">Blue</w-checkbox>
+</w-checkbox-group>
 ```
-<w-radio-group name="package-size" type="button">
-  <w-radio value="small"></w-radio>
-  <w-radio value="medium"></w-radio>
-  <w-radio value="large"></w-radio>
-</w-button-group>
-```
 
-RADIORADIO  RADIO
+</elements-example>
 
-```
-<w-radio-group name="package-size" type="button">
-  <div data-button-group>
-    <w-radio value="small"></w-radio>
-    <w-radio value="medium"></w-radio>
-  </div>
-  <w-radio value="large"></w-radio>
+### Single selection button group
+
+<elements-example>
+
+```html
+<w-radio-group label="Package size" name="package-size" type="button">
+	<w-radio value="small">Small</w-radio>
+	<w-radio value="medium">Medium</w-radio>
+	<w-radio value="large">Large</w-radio>
 </w-radio-group>
 ```
 
-checkboxcheckboxcheckbox
-
-```
-<w-checkbox-group name="package-size" type="button">
-  <w-checkbox value="small"></w-checkbox>
-  <w-checkbox value="medium"></w-checkbox>
-  <w-checkbox value="large"></w-checkbox>
-</w-checkbox-group>
-```
-
-checkboxcheckbox  checkbox
-
-```
-<w-checkbox-group name="package-size" type="button">
-  <div data-button-group>
-    <w-checkbox value="small"></w-checkbox>
-    <w-checkbox value="medium"></w-checkbox>
-  </div>
-  <w-checkbox value="large"></w-checkbox>
-</w-checkbox-group>
-```
-
-So the docs flow would be button group -> radio group type button and checkbox group type button (reference card group as a reference point).
+</elements-example>

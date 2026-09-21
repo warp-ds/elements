@@ -141,4 +141,13 @@ export const styles = css`
 		flex-wrap: nowrap;
 		gap: 0;
 	}
+
+	/** Visually hide the label for button groups */
+	:host([type="button"]) [part="form-control-label"] {
+		position: absolute;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 1px;
+		height: 1px;
+	}
 `;
