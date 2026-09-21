@@ -372,10 +372,14 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,_ as n,a as r,b
 	/** Visually hide the label for button groups */
 	:host([type="button"]) [part="form-control-label"] {
 		position: absolute;
-		overflow: hidden;
-		white-space: nowrap;
 		width: 1px;
 		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
 	}
 `})))()}var Z,Q;function $(){return($=e((()=>{y(),E(),s(),d(),k(),b(),B(),H(),W(),K(),J(),C(),te(),T(),X(),x(V,G,U,z,q),Z=()=>v._({id:`checkbox-group.validation.required`,message:`At least one selection is required.`,comment:`Shown when required checkbox group has no selections`}),Q=class extends D(u){constructor(...e){super(...e),this.optional=!1,this.required=!1,this.invalid=!1,this._hasHelpTextSlot=!1,this.#e=!1,this.#t=!1,this._internalTabIndex=-1,this.#r=()=>{if(this.type)for(let e of this.#p())e.setAttribute(`type`,this.type)},this.#i=()=>{this.#s(),this.#v(),this.requestUpdate()},this.#a=()=>{this.#s(),this.#v(),this.requestUpdate()},this.#o=()=>{this.#u(),this.#v(),this.requestUpdate()},this.#c=()=>{this.requestUpdate()}}static{this.shadowRootOptions={...u.shadowRootOptions,delegatesFocus:!0}}#e;#t;#n;static{this.styles=[w,Y]}helpTextSlotChange(){this.renderRoot.querySelector(`slot[name=help-text]`).assignedElements().length&&(this._hasHelpTextSlot=!0)}render(){let e=this.#l()>0,t=this.required&&!e&&this.#e,n=this.invalid||t,r=n?this.#m():this.helpText,i=!!(r||this._hasHelpTextSlot),a=i?`checkbox-group__help`:void 0,o=this.label?`checkbox-group__label`:void 0,s=n?`true`:void 0;return h`
 			<div part="form-control" tabindex="${this._internalTabIndex}">
