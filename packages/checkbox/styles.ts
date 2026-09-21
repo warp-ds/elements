@@ -246,19 +246,16 @@ export const styles = css`
 	}
 
 	:host([type="button"]) [part="label"] {
-		align-items: center;
 		background: var(--_button-group-background);
 		border-color: var(--_button-group-border-color);
 		border-style: solid;
 		border-bottom-width: var(--_button-group-border-width);
 		border-top-width: var(--_button-group-border-width);
 		color: var(--_button-group-color-text);
-		display: inline-flex;
-		flex-direction: column;
+		display: inline-block;
 		font-size: var(--_button-group-font-size);
 		font-weight: var(--_button-group-font-weight);
 		height: var(--_button-group-height);
-		justify-content: center;
 		line-height: var(--_button-group-line-height);
 		padding: var(--_button-group-padding);
 		transition: var(--_button-group-transition);
