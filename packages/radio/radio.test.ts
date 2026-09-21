@@ -64,7 +64,7 @@ test("updates checked state and tabIndex when checked", async () => {
 
 	expect(radio.checked).toBe(true);
 	// tabIndex is set after RAF for hydration compatibility
-	await expect.poll(() => radio.tabIndex).toBe(0);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("0");
 });
 
 test("keeps host element inline-flex for backwards compatibility", async () => {
@@ -155,21 +155,21 @@ test("reflects disabled state changes and updates tabIndex", async () => {
 	await radio.updateComplete;
 	expect(radio.disabled).toBe(false);
 	// tabIndex is set after RAF for hydration compatibility
-	await expect.poll(() => radio.tabIndex).toBe(0);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("0");
 
 	radio.checked = true;
 	await radio.updateComplete;
-	await expect.poll(() => radio.tabIndex).toBe(0);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("0");
 
 	radio.disabled = true;
 	await radio.updateComplete;
 	expect(radio.disabled).toBe(true);
-	await expect.poll(() => radio.tabIndex).toBe(-1);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("-1");
 
 	radio.disabled = false;
 	await radio.updateComplete;
 	expect(radio.disabled).toBe(false);
-	await expect.poll(() => radio.tabIndex).toBe(0);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("0");
 });
 
 test("focuses the host element", async () => {
@@ -183,7 +183,7 @@ test("focuses the host element", async () => {
 
 	await radio.updateComplete;
 	// Wait for tabindex to be set (delayed for hydration compatibility)
-	await expect.poll(() => radio.tabIndex).toBe(0);
+	await expect.poll(() => radio.getAttribute("tabindex")).toBe("0");
 	radio.focus();
 	await expect.poll(() => document.activeElement).toBe(radio);
 });
@@ -271,16 +271,16 @@ test("standalone radios with same name use roving tab order", async () => {
 
 	await Promise.all(radios.map((radio) => radio.updateComplete));
 	// tabIndex is set after RAF to avoid hydration mismatch, so poll for it
-	await expect.poll(() => radios[0].tabIndex).toBe(0);
-	expect(radios[1].tabIndex).toBe(-1);
-	expect(radios[2].tabIndex).toBe(-1);
+	await expect.poll(() => radios[0].getAttribute("tabindex")).toBe("0");
+	expect(radios[1].getAttribute("tabindex")).toBe("-1");
+	expect(radios[2].getAttribute("tabindex")).toBe("-1");
 
 	radios[2].click();
 	await Promise.all(radios.map((radio) => radio.updateComplete));
 
-	await expect.poll(() => radios[2].tabIndex).toBe(0);
-	expect(radios[0].tabIndex).toBe(-1);
-	expect(radios[1].tabIndex).toBe(-1);
+	await expect.poll(() => radios[2].getAttribute("tabindex")).toBe("0");
+	expect(radios[0].getAttribute("tabindex")).toBe("-1");
+	expect(radios[1].getAttribute("tabindex")).toBe("-1");
 });
 
 test("arrow keys move selection between standalone radios with same name", async () => {
@@ -301,7 +301,9 @@ test("arrow keys move selection between standalone radios with same name", async
 
 	await Promise.all(radios.map((radio) => radio.updateComplete));
 	// Wait for initial tabIndex to be set (delayed for hydration compatibility)
-	await expect.poll(() => radios[0].tabIndex).toBe(0);
+	// Check that tabindex is set on the host element in light DOM for it to take effect
+	// and be properly associated with the element with the role 'radio'.
+	await expect.poll(() => radios[0].getAttribute("tabindex")).toBe("0");
 
 	radios[0].focus();
 	radios[0].dispatchEvent(
@@ -311,7 +313,7 @@ test("arrow keys move selection between standalone radios with same name", async
 
 	expect(radios[0].checked).toBe(false);
 	expect(radios[1].checked).toBe(true);
-	await expect.poll(() => radios[1].tabIndex).toBe(0);
+	await expect.poll(() => radios[1].getAttribute("tabindex")).toBe("0");
 	await expect.poll(() => document.activeElement).toBe(radios[1]);
 });
 
