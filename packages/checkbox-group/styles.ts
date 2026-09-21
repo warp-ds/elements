@@ -62,9 +62,13 @@ export const styles = css`
 	/** Visually hide the label for button groups */
 	:host([type="button"]) [part="form-control-label"] {
 		position: absolute;
-		overflow: hidden;
-		white-space: nowrap;
 		width: 1px;
 		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
 	}
 `;
