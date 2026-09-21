@@ -9,6 +9,7 @@
     "packages/breadcrumb-item",
     "packages/breadcrumbs",
     "packages/button",
+    "packages/button-group",
     "packages/card",
     "packages/checkbox",
     "packages/checkbox-group",

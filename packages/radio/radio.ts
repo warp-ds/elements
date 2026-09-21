@@ -6,6 +6,7 @@ import { property } from "lit/decorators.js";
 import { reset } from "../styles";
 import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
+import { buttonGroupComponentVariables } from "../button-group/styles";
 
 /**
  * Radios allow users to select a single option from a list of choices.
@@ -22,7 +23,12 @@ import { styles as radioStyles } from "./radio-styles";
 // reasons. Consider aligning both components in a future major version after
 // assessing backwards compatibility implications.
 export class WarpRadio extends FormControlMixin(LitElement) {
-	static styles = [hostStyles, reset, radioStyles];
+	static styles = [
+		hostStyles,
+		reset,
+		buttonGroupComponentVariables,
+		radioStyles,
+	];
 
 	/** @internal */
 	static shadowRootOptions = {

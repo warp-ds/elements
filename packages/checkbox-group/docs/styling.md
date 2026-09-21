@@ -10,9 +10,9 @@ Before changing the default styles, remember that doing so can result in less co
 - Use **parts** only for small, local tweaks.
 - Avoid relying on internal class names or selectors.
 
-## w-checkbox
+### w-checkbox
 
-### Parts
+#### Parts
 
 The checkbox exposes a small set of parts that can be targeted for last‑mile layout or typography tweaks.
 
@@ -38,7 +38,7 @@ w-checkbox::part(control) {
 Parts are intended as an **escape hatch**.
 Prefer component tokens for anything state‑ or size‑related.
 
-### Component tokens
+#### Component tokens
 
 Component tokens (`--w-c-checkbox-*`) act as inputs to the checkbox styling.
 They can be set directly on the component or inherited from a parent container.
@@ -52,7 +52,7 @@ They can be set directly on the component or inherited from a parent container.
 Defaults are defined internally; setting a token is always optional.
 
 
-#### Layout & size
+##### Layout & size
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -62,7 +62,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-border-width` | border width | `1px` |
 
 
-#### Colors
+##### Colors
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -73,7 +73,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-icon-color` | icon color | theme default |
 
 
-#### Invalid state
+##### Invalid state
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -81,7 +81,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-bg-invalid-checked` | background when invalid and checked | theme default |
 
 
-#### Disabled state
+##### Disabled state
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -89,7 +89,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-border-color-disabled` | border when disabled | theme default |
 | `--w-c-checkbox-bg-disabled-checked` | background when disabled and checked | theme default |
 
-#### Focus
+##### Focus
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -97,7 +97,7 @@ Defaults are defined internally; setting a token is always optional.
 | `--w-c-checkbox-outline-color` | focus outline color | theme default |
 | `--w-c-checkbox-outline-offset` | focus outline offset | theme default |
 
-#### Motion
+##### Motion
 
 | Token | Purpose | Default |
 |---|---|---|
@@ -106,11 +106,11 @@ Defaults are defined internally; setting a token is always optional.
 Transitions are automatically disabled when `prefers-reduced-motion: reduce` is active.
 
 
-## w-checkbox-group
+### w-checkbox-group
 
 The checkbox-group component uses direct CSS styling rather than component tokens. Customization is limited to ensure consistent form control patterns across the design system.
 
-### Styling
+#### Styling
 
 The checkbox-group provides minimal styling hooks:
 
@@ -122,13 +122,25 @@ The checkbox-group provides minimal styling hooks:
 | Checkbox spacing | `gap: 16px` | Spacing between checkboxes |
 | Wrapper spacing | `gap: 16px` | Spacing between label and group |
 
+#### Parts
 
-## Implementation notes
+The checkbox group exposes a set of parts that can be targeted for last‑mile layout or typography tweaks.
 
-### Architecture note
+| Part | Targets | Typical use |
+|---|---|---|
+| `form-control` | base element around the group label and inputs | layout adjustments (spacing, alignment) |
+| `form-control-label` | the label describing the checkbox group | typography, visually hiding |
+| `form-control-input` | the list of checkbox inputs | layout adjustments |
+| `help-text` | help text / validation error | typography tweaks |
+| `tooltip-target` | form label tooltip target (the Info icon) | layout adjustments |
 
-This component uses a `<div>` wrapper instead of the more semantic `<fieldset>` element. Note that `w-radio-group` uses `<fieldset>`, which provides better accessibility and follows HTML best practices. This inconsistency exists for historical reasons and may be addressed in a future major version to align both on the more semantic approach.
+Example:
 
-**Why this matters:** `<fieldset>` with `<legend>` provides automatic grouping semantics and better screen reader support. The current `<div>` + `role="group"` implementation works but requires manual ARIA wiring.
+```css
+w-checkbox-group::part(form-control-input) {
+    gap: 8px;
+}
+```
 
-**TODO:** Consider aligning w-checkbox-group to use `<fieldset>` in a future major version after assessing backwards compatibility implications (CSS selectors, etc.).
+Parts are intended as an **escape hatch**.
+Prefer component tokens for anything state‑ or size‑related.
