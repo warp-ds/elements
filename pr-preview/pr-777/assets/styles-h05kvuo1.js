@@ -35,7 +35,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n}from"./d
 		);
 		--_button-group-font-size: var(
 			--w-c-button-group-font-size,
-			var(--w-font-size-m)
+			var(--w-font-size-s)
 		);
 		--_button-group-font-weight: var(
 			--w-c-button-group-font-weight,
@@ -43,7 +43,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n}from"./d
 		);
 		--_button-group-line-height: var(
 			--w-c-button-group-line-height,
-			var(--w-line-height-m)
+			var(--w-line-height-s)
 		);
 		--_button-group-height: var(--w-c-button-group-height, 32px);
 		--_button-group-padding: var(--w-c-button-group-padding, 0 12px);
