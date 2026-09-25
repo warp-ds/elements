@@ -113,10 +113,11 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 
 	connectedCallback() {
 		super.connectedCallback();
-		const attrValue = this.getAttribute("value");
-		this.value = attrValue ?? "on";
+		this.value = this.getAttribute("value") ?? "on";
 		this.#defaultChecked = this.hasAttribute("checked");
 		this.checked = this.#defaultChecked;
+		// Use ElementInternals for ARIA to avoid hydration mismatches
+		this.internals.role = "checkbox";
 		this.addEventListener("invalid", this.#handleInvalid);
 		this.addEventListener("keydown", this.#handleKeyDown);
 		this.#syncFormValue();
@@ -313,9 +314,9 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 		return html`
 			<label part="base">
 				<span part="control">
-					<input
+					<span
 						part="input"
-						type="checkbox"
+						data-todo="move attributes to host"
 						name=${ifDefined(this.name || undefined)}
 						value=${ifDefined(this.value)}
 						.indeterminate=${live(this.indeterminate)}
@@ -328,7 +329,6 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 						)}
 						@click=${this.handleClick}
 					/>
-					${isIndeterminate ? "–" : ""}
 				</span>
 
 				<slot part="label"></slot>

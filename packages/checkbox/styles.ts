@@ -53,7 +53,11 @@ export const styles = css`
 		);
 		--_checked-icon: var(
 			--w-c-checkbox-checked-icon,
-			var(--w-icon-toggle-checked)
+			url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" width="11" height="9" viewBox="0 0 11 9" fill="none"%3e%3cpath d="M3.8938 5.84774L8.49015 0.348736C8.83451 -0.0632444 9.44764 -0.118066 9.85962 0.226289C10.2716 0.570644 10.3264 1.18377 9.98207 1.59576L4.69995 7.9152C4.33222 8.35514 3.66558 8.38293 3.26252 7.97512L0.280746 4.95825C-0.0967018 4.57636 -0.0930997 3.96079 0.288792 3.58334C0.670684 3.20589 1.28625 3.2095 1.6637 3.59139L3.8938 5.84774Z" fill="currentColor"/%3e%3c/svg%3e')
+		);
+		--_indeterminate-icon: var(
+			--w-c-checkbox-indeterminate-icon,
+			url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" width="8" height="2" viewBox="0 0 8 2" fill="none"%3e%3cpath fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.358172 0 0.8 0H7.2C7.64183 0 8 0.447715 8 1C8 1.55228 7.64183 2 7.2 2H0.8C0.358172 2 0 1.55228 0 1Z" fill="currentColor"/%3e%3c/svg%3e')
 		);
 
 		--_border-invalid: var(
@@ -222,6 +226,11 @@ export const styles = css`
 	/* checked icon (keep driven by actual input state for parity) */
 	[part="control"]:has(:checked) {
 		background-image: var(--_checked-icon);
+		background-position: center;
+	}
+	/* indeterminate icon (keep driven by actual input state for parity) */
+	[part="control"]:has(:indeterminate) {
+		background-image: var(--_indeterminate-icon);
 		background-position: center;
 	}
 

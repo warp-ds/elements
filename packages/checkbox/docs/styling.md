@@ -41,8 +41,8 @@ Customize the checkbox control (the box itself):
 --w-c-checkbox-bg-checked-hover: var(--w-s-color-background-primary-hover);
 --w-c-checkbox-border-color-checked: var(--w-s-color-border-primary);
 --w-c-checkbox-border-color-checked-hover: var(--w-s-color-background-primary-hover);
---w-c-checkbox-checked-icon: var(--w-icon-toggle-checked);
-
+--w-c-checkbox-checked-icon: url(encoded SVG);
+--w-c-checkbox-indeterminate-icon: url(encoded SVG);
 ```
 
 ### Color Tokens - Invalid State
