@@ -37,15 +37,6 @@ const REQUIRED_MESSAGE = () =>
  *
  * @slot label - Alternative to the `label` attribute should you need custom HTML.
  * @slot help-text - Alternative to the `help-text` attribute should you need custom HTML.
- *
- * ## Architecture Note
- * This component uses semantic <fieldset> element for grouping radio controls, which
- * provides better accessibility and follows HTML best practices. Note that w-checkbox-group
- * currently uses <div> instead - this inconsistency exists for historical reasons and may
- * be addressed in a future major version to align both on the more semantic approach.
- *
- * TODO: Align w-checkbox-group to also use <fieldset> in a future major version after
- * assessing backwards compatibility implications (CSS selectors, etc.).
  */
 
 /**

@@ -22,18 +22,6 @@ const REQUIRED_MESSAGE = () =>
 		comment: "Shown when required checkbox group has no selections",
 	});
 
-/*
- *
- * ## Architecture Note
- * This component uses a <div> wrapper instead of the more semantic <fieldset> element.
- * Note that w-radio-group uses <fieldset>, which provides better accessibility and follows
- * HTML best practices. This inconsistency exists for historical reasons and may be addressed
- * in a future major version to align both on the more semantic approach.
- *
- * TODO: Align w-checkbox-group to use <fieldset> in a future major version after assessing
- * backwards compatibility implications (CSS selectors, etc.).
- */
-
 /**
  * Checkboxes allow users to select one or more options from a number of choices.
  *
@@ -120,18 +108,18 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	#unsubscribeI18n?: () => void;
 
 	static styles = css`
-		.wrapper {
+		[part="form-control"] {
 			display: inline-flex;
 			flex-direction: column;
 			gap: 16px;
 		}
 
-		.checkbox-group {
+		[part="form-control-input"] {
 			display: grid;
 			gap: 16px;
 		}
 
-		.label {
+		[part="form-control-label"] {
 			display: flex;
 			align-items: center;
 			gap: 8px;
@@ -146,7 +134,7 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 			color: var(--w-s-color-text-subtle);
 		}
 
-		.help-text {
+		[part="help-text"] {
 			display: block;
 			font-size: var(--w-font-size-xs);
 			line-height: var(--w-line-height-xs);
@@ -178,86 +166,6 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		) as HTMLSlotElement;
 		const helpText = el.assignedElements();
 		if (helpText.length) this._hasHelpTextSlot = true;
-	}
-
-	render() {
-		const hasSelection = this.#getCheckedCount() > 0;
-		const requiredInvalid = this.required && !hasSelection;
-		const showRequiredError = requiredInvalid && this.#hasInteracted;
-		const isInvalid = this.invalid || showRequiredError;
-		const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
-		const hasHelpText = Boolean(helpText || this._hasHelpTextSlot);
-		const helpId = hasHelpText ? "checkbox-group__help" : undefined;
-		const labelId = this.label ? "checkbox-group__label" : undefined;
-		const ariaInvalid = isInvalid ? "true" : undefined;
-
-		return html`
-			<div class="wrapper" tabindex="${this._internalTabIndex}">
-				${
-					this.label
-						? html`
-								<div class="label" id="${ifDefined(labelId)}">
-									<span>${this.label}</span>
-									${
-										this.optional && !this.required
-											? html`
-													<span class="optional">
-														${i18n._({
-															id: "checkbox-group.label.optional",
-															message: "Optional",
-															comment:
-																"Shown behind label when marked as optional",
-														})}
-													</span>
-												`
-											: nothing
-									}
-									${
-										this.tooltip
-											? html`
-													<button
-														id="tooltip-target"
-														part="tooltip-target"
-														aria-describedby="tooltip"
-													>
-														<w-icon name="Info" size="small"></w-icon>
-													</button>
-													<w-tooltip
-														for="tooltip-target"
-														id="tooltip"
-														exportparts="tooltip, arrow, beak, hover-bridge"
-													>
-														${this.tooltip}
-													</w-tooltip>
-												`
-											: nothing
-									}
-								</div>
-							`
-						: nothing
-				}
-				<div
-					class="checkbox-group"
-					role="group"
-					aria-labelledby=${ifDefined(labelId)}
-					aria-describedby=${ifDefined(helpId)}
-					aria-invalid=${ifDefined(ariaInvalid)}
-				>
-					<slot></slot>
-				</div>
-				<div
-					?hidden=${!hasHelpText}
-					class="${isInvalid ? "help-text error" : "help-text"}"
-					id="${ifDefined(helpId)}"
-				>
-					${helpText}
-					<slot
-						@slotchange="${this.helpTextSlotChange}"
-						name="help-text"
-					></slot>
-				</div>
-			</div>
-		`;
 	}
 
 	connectedCallback(): void {
@@ -356,7 +264,9 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 	}
 
 	#getAssignedElements(): Element[] {
-		const slot = this.shadowRoot?.querySelector("slot");
+		const slot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+			'slot[part="form-control-input"]',
+		);
 		return slot?.assignedElements({ flatten: true }) ?? [];
 	}
 
@@ -427,6 +337,91 @@ export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
 		if (this.name && this.name.trim().length > 0) return;
 		console.warn('w-checkbox-group: "name" is required for form submission.');
 		this.#hasWarnedMissingName = true;
+	}
+
+	render() {
+		const hasSelection = this.#getCheckedCount() > 0;
+		const requiredInvalid = this.required && !hasSelection;
+		const showRequiredError = requiredInvalid && this.#hasInteracted;
+		const isInvalid = this.invalid || showRequiredError;
+		const helpText = isInvalid ? this.#getRequiredMessage() : this.helpText;
+		const hasHelpText = Boolean(helpText || this._hasHelpTextSlot);
+		const helpId = hasHelpText ? "checkbox-group__help" : undefined;
+		const labelId = this.label ? "checkbox-group__label" : undefined;
+		const ariaInvalid = isInvalid ? "true" : undefined;
+
+		return html`
+			<fieldset
+				tabindex="${this._internalTabIndex}"
+				part="form-control"
+				aria-labelledby=${ifDefined(labelId)}
+				aria-describedby=${ifDefined(helpId)}
+				aria-invalid=${ifDefined(ariaInvalid)}
+			>
+				${
+					this.label
+						? html`
+								<label
+									class="label"
+									part="form-control-label"
+									id="${ifDefined(labelId)}"
+								>
+									<slot name="label">${this.label}</slot>
+									${
+										this.optional && !this.required
+											? html`
+													<span class="optional">
+														${i18n._({
+															id: "checkbox-group.label.optional",
+															message: "Optional",
+															comment:
+																"Shown behind label when marked as optional",
+														})}
+													</span>
+												`
+											: nothing
+									}
+									${
+										this.tooltip
+											? html`
+													<button
+														id="tooltip-target"
+														part="tooltip-target"
+														aria-describedby="tooltip"
+													>
+														<w-icon name="Info" size="small"></w-icon>
+													</button>
+													<w-tooltip
+														for="tooltip-target"
+														id="tooltip"
+														exportparts="tooltip, arrow, beak, hover-bridge"
+													>
+														${this.tooltip}
+													</w-tooltip>
+												`
+											: nothing
+									}
+								</label>
+							`
+						: nothing
+				}
+				<!--<div class="checkbox-group">-->
+				<slot part="form-control-input"></slot>
+				<!--</div>-->
+				<div
+					?hidden=${!hasHelpText}
+					class="${isInvalid ? "help-text error" : "help-text"}"
+					part="help-text"
+					id="${ifDefined(helpId)}"
+				>
+					${helpText}
+					<slot
+						@slotchange="${this.helpTextSlotChange}"
+						name="help-text"
+					></slot>
+				</div>
+			</fieldset>
+		`;
 	}
 }
 
