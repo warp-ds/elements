@@ -1,11 +1,7 @@
-// @warp-css;
-
-import { classNames as classnames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 import { activateI18n } from "../i18n.js";
@@ -16,7 +12,6 @@ import { messages as enMessages } from "./locales/en/messages.mjs";
 import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
-import { wTextfieldStyles } from "./styles/w-textfield.styles.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 
@@ -26,23 +21,6 @@ import "../tooltip/tooltip.js";
 // NOTE: Label and help-text are rendered inline using shared input styles.
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.
-
-const ccinput = {
-	// input classes
-	base: "block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current", // true
-	default:
-		"border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected", // !isInvalid && !isDisabled && !isReadOnly
-	disabled:
-		"border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none", // !isInvalid && isDisabled && !isReadOnly
-	invalid:
-		"border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!", // isInvalid && !isDisabled && !isReadOnly
-	readOnly: "pl-0 bg-transparent pointer-events-none", // !isInvalid && !isDisabled && isReadOnly
-	placeholder: "placeholder:s-text-placeholder",
-	suffix: "pr-40",
-	prefix: "pl-[var(--w-prefix-width,_40px)]",
-	// textarea classes
-	textArea: "min-h-[42] sm:min-h-[45]",
-};
 
 /**
  * A single-line input component used for entering and editing textual or numeric data.
@@ -237,7 +215,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	formatter: ((value: string) => string) | undefined;
 
 	/** @internal */
-	@query(".w-textfield__mask")
+	@query('[part="mask"]')
 	mask: HTMLDivElement | undefined;
 
 	/** @internal */
@@ -283,7 +261,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	static styles = [
 		reset,
 		styles,
-		wTextfieldStyles,
 		inputLabelStyles,
 		inputHelpTextStyles,
 	];
@@ -297,80 +274,8 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	}
 
 	/** @internal */
-	get _inputstyles() {
-		return classnames([
-			ccinput.base,
-			this._hasSuffix && ccinput.suffix,
-			this._hasPrefix && ccinput.prefix,
-			!this.invalid &&
-				!this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccinput.default,
-			this.invalid &&
-				!this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccinput.invalid,
-			!this.invalid &&
-				this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccinput.disabled,
-			!this.invalid &&
-				!this.disabled &&
-				(this.readonly || this.readOnly) &&
-				ccinput.readOnly,
-		]);
-	}
-
-	/** @internal */
 	get _helptextstyles() {
 		return "help-text";
-	}
-
-	/** @internal */
-	get _label() {
-		if (this.label) {
-			const showOptionalLabel =
-				this.label.length && this.optional && !this.required;
-			const hasTooltip = Boolean(this.tooltip);
-			return html`
-				<label for="${this._id}">
-					${this.label}${
-						showOptionalLabel
-							? html`
-									<span>
-										${i18n._({
-											id: "textfield.label.optional",
-											message: "Optional",
-											comment: "Shown behind label when marked as optional",
-										})}
-									</span>
-								`
-							: nothing
-					}
-					${
-						hasTooltip
-							? html`
-									<button
-										id="tooltip-target"
-										part="tooltip-target"
-										aria-describedby="tooltip"
-									>
-										<w-icon name="Info" size="small"></w-icon>
-									</button>
-									<w-tooltip
-										for="tooltip-target"
-										id="tooltip"
-										exportparts="tooltip, arrow, beak, hover-bridge"
-									>
-										${this.tooltip}
-									</w-tooltip>
-								`
-							: nothing
-					}
-				</label>
-			`;
-		}
-		return undefined;
 	}
 
 	/** @internal */
@@ -452,26 +357,64 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	}
 
 	render() {
+		const showOptionalLabel =
+			this.label?.length && this.optional && !this.required;
+		const hasTooltip = Boolean(this.tooltip);
 		return html`
-			${this._label}
+			${
+				this.label
+					? html`
+							<label for="${this._id}" part="label">
+								${this.label}${
+									showOptionalLabel
+										? html`
+												<span>
+													${i18n._({
+													id: "textfield.label.optional",
+													message: "Optional",
+													comment: "Shown behind label when marked as optional",
+												})}
+												</span>
+											`
+										: nothing
+								}
+								${
+									hasTooltip
+										? html`
+												<button
+													id="tooltip-target"
+													part="tooltip-target"
+													aria-describedby="tooltip"
+												>
+													<w-icon name="Info" size="small"></w-icon>
+												</button>
+												<w-tooltip
+													for="tooltip-target"
+													id="tooltip"
+													exportparts="tooltip, arrow, beak, hover-bridge"
+												>
+													${this.tooltip}
+												</w-tooltip>
+											`
+										: nothing
+								}
+							</label>
+						`
+					: nothing
+			}
 			<div
-				class="${classMap({
-					"w-textfield": true,
-					// This could likely be replaced in the future by
-					// https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
-					"w-textfield--has-prefix": this._hasPrefix,
-					"w-textfield--has-suffix": this._hasSuffix,
-				})}"
+				part="base"
+				data-has-prefix="${ifDefined(this._hasPrefix)}"
+				data-has-suffix="${ifDefined(this._hasSuffix)}"
 			>
-				<div class="w-textfield__input-wrapper">
+				<div part="mask-wrapper">
 					${
 						this.formatter
-							? html`<div class="w-textfield__mask"></div>`
+							? html`<div part="mask"></div>`
 							: nothing
 					}
 					<input
 						part="input"
-						class="${this._inputstyles}"
 						type="${this.type || "text"}"
 						min="${ifDefined(this.min)}"
 						max="${ifDefined(this.max)}"
@@ -508,6 +451,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 			<div
 				?hidden=${!this.#hasHelpText}
 				class="${this._helptextstyles}"
+				part="help-text"
 				id="${ifDefined(this._helpId)}"
 			>
 				${this.helpText}
