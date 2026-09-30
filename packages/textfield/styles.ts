@@ -54,7 +54,7 @@ export const styles = css`
 			var(--w-s-color-background-disabled-subtle)
 		);
 		--_placeholder-color: var(
-			--w-c-textfield-placeholder-color,
+			--w-c-textfield-color-placeholder,
 			var(--w-s-color-text-placeholder)
 		);
 	}

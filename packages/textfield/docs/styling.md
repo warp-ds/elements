@@ -54,7 +54,7 @@ Textfield has its own `--w-c-textfield-*` tokens for the input element. It also 
 
 w-textfield.search {
   --w-c-textfield-padding-left: 12px;
-  --w-c-textfield-placeholder-color: var(--w-s-color-text-subtle);
+  --w-c-textfield-color-placeholder: var(--w-s-color-text-subtle);
 }
 ```
 
@@ -80,7 +80,7 @@ w-textfield.search {
 | `--w-c-textfield-color-border-disabled` | border color when disabled | `--w-s-color-border-disabled` |
 | `--w-c-textfield-color-disabled` | text color when disabled | `--w-s-color-text-disabled` |
 | `--w-c-textfield-color-background-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
-| `--w-c-textfield-placeholder-color` | placeholder text color | `--w-s-color-text-placeholder` |
+| `--w-c-textfield-color-placeholder` | placeholder text color | `--w-s-color-text-placeholder` |
 
 #### Label tokens
 
