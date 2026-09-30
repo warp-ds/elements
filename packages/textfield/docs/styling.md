@@ -69,17 +69,17 @@ w-textfield.search {
 | `--w-c-textfield-border-color` | border color | `--w-s-color-border-strong` |
 | `--w-c-textfield-color` | input text color | `--w-s-color-text` |
 | `--w-c-textfield-background-color` | input background color | `--w-s-color-background` |
-| `--w-c-textfield-active-border-color` | border color while active | `--w-s-color-border-selected` |
-| `--w-c-textfield-hover-border-color` | border color on hover | `--w-s-color-border-strong-hover` |
-| `--w-c-textfield-focus-outline` | focus outline | `2px solid var(--w-s-color-border-focus)` |
+| `--w-c-textfield-border-color-active` | border color while active | `--w-s-color-border-selected` |
+| `--w-c-textfield-border-color-hover` | border color on hover | `--w-s-color-border-strong-hover` |
+| `--w-c-textfield-outline-focus` | focus outline | `2px solid var(--w-s-color-border-focus)` |
 | `--w-c-textfield-outline-offset` | focus outline offset | `-2px` |
-| `--w-c-textfield-invalid-border-color` | border color when invalid | `--w-s-color-border-negative` |
-| `--w-c-textfield-invalid-color` | text color when invalid | `--w-s-color-text-negative` |
-| `--w-c-textfield-invalid-outline` | outline when invalid | `2px solid var(--w-s-color-border-negative)` |
-| `--w-c-textfield-invalid-hover-border-color` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
-| `--w-c-textfield-disabled-border-color` | border color when disabled | `--w-s-color-border-disabled` |
-| `--w-c-textfield-disabled-color` | text color when disabled | `--w-s-color-text-disabled` |
-| `--w-c-textfield-disabled-background-color` | background color when disabled | `--w-s-color-background-disabled-subtle` |
+| `--w-c-textfield-border-color-invalid` | border color when invalid | `--w-s-color-border-negative` |
+| `--w-c-textfield-color-invalid` | text color when invalid | `--w-s-color-text-negative` |
+| `--w-c-textfield-outline-invalid` | outline when invalid | `2px solid var(--w-s-color-border-negative)` |
+| `--w-c-textfield-border-color-invalid-hover` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
+| `--w-c-textfield-border-color-disabled` | border color when disabled | `--w-s-color-border-disabled` |
+| `--w-c-textfield-color-disabled` | text color when disabled | `--w-s-color-text-disabled` |
+| `--w-c-textfield-bg-color-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
 | `--w-c-textfield-placeholder-color` | placeholder text color | `--w-s-color-text-placeholder` |
 
 #### Label tokens

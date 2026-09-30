@@ -13,44 +13,44 @@ export const styles = css`
 		--_color: var(--w-c-textfield-color, var(--w-s-color-text));
 		--_background-color: var(--w-c-textfield-bg, var(--w-s-color-background));
 		--_active-border-color: var(
-			--w-c-textfield-active-border-color,
+			--w-c-textfield-border-color-active,
 			var(--w-s-color-border-selected)
 		);
 		--_hover-border-color: var(
-			--w-c-textfield-color-border-hover,
+			--w-c-textfield-border-color-hover,
 			var(--w-s-color-border-strong-hover)
 		);
 		--_focus-outline: var(
-			--w-c-textfield-focus-outline,
+			--w-c-textfield-outline-focus,
 			2px solid var(--w-s-color-border-focus)
 		);
 		--_outline-offset: var(--w-c-textfield-outline-offset, -2px);
 		--_invalid-border-color: var(
-			--w-c-textfield-invalid-border-color,
+			--w-c-textfield-border-color-invalid,
 			var(--w-s-color-border-negative)
 		);
 		--_invalid-color: var(
-			--w-c-textfield-invalid-color,
+			--w-c-textfield-color-invalid,
 			var(--w-s-color-text-negative)
 		);
 		--_invalid-outline: var(
-			--w-c-textfield-invalid-outline,
+			--w-c-textfield-outline-invalid,
 			2px solid var(--w-s-color-border-negative)
 		);
 		--_invalid-hover-border-color: var(
-			--w-c-textfield-invalid-hover-border-color,
+			--w-c-textfield-border-color-invalid-hover,
 			var(--w-s-color-border-negative-hover)
 		);
 		--_disabled-border-color: var(
-			--w-c-textfield-disabled-border-color,
+			--w-c-textfield-border-color-disabled,
 			var(--w-s-color-border-disabled)
 		);
 		--_disabled-color: var(
-			--w-c-textfield-disabled-color,
+			--w-c-textfield-color-disabled,
 			var(--w-s-color-text-disabled)
 		);
 		--_disabled-background-color: var(
-			--w-c-textfield-disabled-background-color,
+			--w-c-textfield-bg-color-disabled,
 			var(--w-s-color-background-disabled-subtle)
 		);
 		--_placeholder-color: var(
