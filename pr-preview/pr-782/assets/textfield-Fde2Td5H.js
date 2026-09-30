@@ -6,7 +6,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,h
 		--_font-size: var(--w-c-textfield-font-size, var(--w-font-size-m));
 		--_border-color: var(--w-c-textfield-border-color, var(--w-s-color-border-strong));
 		--_color: var(--w-c-textfield-color, var(--w-s-color-text));
-		--_background-color: var(--w-c-textfield-background-color, var(--w-s-color-background));
+		--_background-color: var(--w-c-textfield-bg, var(--w-s-color-background));
 		--_active-border-color: var(--w-c-textfield-active-border-color, var(--w-s-color-border-selected));
 		--_hover-border-color: var(--w-c-textfield-hover-border-color, var(--w-s-color-border-strong-hover));
 		--_focus-outline: var(--w-c-textfield-focus-outline, 2px solid var(--w-s-color-border-focus));
