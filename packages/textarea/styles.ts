@@ -4,20 +4,20 @@ export const styles = css`
 		--_line-height: var(--w-c-textarea-line-height, var(--w-line-height-m));
 		--_font-size: var(--w-c-textarea-font-size, var(--w-font-size-m));
 		--_border-color: var(
-			--w-c-textarea-border-color,
+			--w-c-textarea-color-border,
 			var(--w-s-color-border-strong)
 		);
 		--_color: var(--w-c-textarea-color, var(--w-s-color-text));
 		--_background-color: var(
-			--w-c-textarea-bg-color,
+			--w-c-textarea-color-background,
 			var(--w-s-color-background)
 		);
 		--_hover-border-color: var(
-			--w-c-textarea-border-color-hover,
+			--w-c-textarea-color-border-hover,
 			var(--w-s-color-border-strong-hover)
 		);
 		--_active-border-color: var(
-			--w-c-textarea-border-color-active,
+			--w-c-textarea-color-border-active,
 			var(--w-s-color-border-selected)
 		);
 		--_outline-offset: var(--w-c-textarea-outline-offset, -2px);
@@ -26,7 +26,7 @@ export const styles = css`
 			2px solid var(--w-s-color-border-focus)
 		);
 		--_invalid-border-color: var(
-			--w-c-textarea-border-color-invalid,
+			--w-c-textarea-color-border-invalid,
 			var(--w-s-color-border-negative)
 		);
 		--_invalid-color: var(
@@ -38,11 +38,11 @@ export const styles = css`
 			2px solid var(--w-s-color-border-negative)
 		);
 		--_invalid-hover-border-color: var(
-			--w-c-textarea-border-color-invalid-hover,
+			--w-c-textarea-color-border-invalid-hover,
 			var(--w-s-color-border-negative-hover)
 		);
 		--_disabled-border-color: var(
-			--w-c-textarea-border-color-disabled,
+			--w-c-textarea-color-border-disabled,
 			var(--w-s-color-border-disabled)
 		);
 		--_disabled-color: var(
@@ -50,7 +50,7 @@ export const styles = css`
 			var(--w-s-color-text-disabled)
 		);
 		--_disabled-background-color: var(
-			--w-c-textarea-bg-color-disabled,
+			--w-c-textarea-color-background-disabled,
 			var(--w-s-color-background-disabled-subtle)
 		);
 	}

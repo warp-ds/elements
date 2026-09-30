@@ -59,20 +59,20 @@ Defaults are defined internally; setting a token is always optional.
 |---|---|---|
 | `--w-c-textarea-line-height` | textarea line height | `--w-line-height-m` |
 | `--w-c-textarea-font-size` | textarea font size | `--w-font-size-m` |
-| `--w-c-textarea-border-color` | border color | `--w-s-color-border-strong` |
+| `--w-c-textarea-color-border` | border color | `--w-s-color-border-strong` |
 | `--w-c-textarea-color` | text color | `--w-s-color-text` |
-| `--w-c-textarea-bg-color` | background color | `--w-s-color-background` |
-| `--w-c-textarea-border-color-hover` | border color when hovered | `--w-s-color-border-strong-hover` |
-| `--w-c-textarea-border-color-active` | border color when active | `--w-s-color-border-selected` |
+| `--w-c-textarea-color-background` | background color | `--w-s-color-background` |
+| `--w-c-textarea-color-border-hover` | border color when hovered | `--w-s-color-border-strong-hover` |
+| `--w-c-textarea-color-border-active` | border color when active | `--w-s-color-border-selected` |
 | `--w-c-textarea-outline-offset` | focus outline offset | `-2px` |
 | `--w-c-textarea-outline-focus` | outline when focused | `2px solid var(--w-s-color-border-focus)` |
-| `--w-c-textarea-border-color-invalid` | border color when invalid | `--w-s-color-border-negative` |
+| `--w-c-textarea-color-border-invalid` | border color when invalid | `--w-s-color-border-negative` |
 | `--w-c-textarea-color-invalid` | text color when invalid | `--w-s-color-text-negative` |
 | `--w-c-textarea-outline-invalid` | outline when invalid | `2px solid var(--w-s-color-border-negative)` |
-| `--w-c-textarea-border-color-invalid-hover` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
-| `--w-c-textarea-border-color-disabled` | border color when disabled | `--w-s-color-border-disabled` |
+| `--w-c-textarea-color-border-invalid-hover` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
+| `--w-c-textarea-color-border-disabled` | border color when disabled | `--w-s-color-border-disabled` |
 | `--w-c-textarea-color-disabled` | text color when disabled | `--w-s-color-text-disabled` |
-| `--w-c-textarea-bg-color-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
+| `--w-c-textarea-color-background-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
 
 #### Label tokens
 
