@@ -11,7 +11,10 @@ export const styles = css`
 			var(--w-s-color-border-strong)
 		);
 		--_color: var(--w-c-textfield-color, var(--w-s-color-text));
-		--_background-color: var(--w-c-textfield-background, var(--w-s-color-background));
+		--_background-color: var(
+			--w-c-textfield-background,
+			var(--w-s-color-background)
+		);
 		--_active-border-color: var(
 			--w-c-textfield-color-border-active,
 			var(--w-s-color-border-selected)
