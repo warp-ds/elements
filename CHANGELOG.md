@@ -1,3 +1,10 @@
+# [2.13.0-next.9](https://github.com/warp-ds/elements/compare/v2.13.0-next.8...v2.13.0-next.9) (2026-09-30)
+
+
+### Features
+
+* **textfield:** add styling API ([#782](https://github.com/warp-ds/elements/issues/782)) ([00d6137](https://github.com/warp-ds/elements/commit/00d61374b179208756020f498b1c12fb7b9365a3))
+
 # [2.13.0-next.8](https://github.com/warp-ds/elements/compare/v2.13.0-next.7...v2.13.0-next.8) (2026-09-30)
 
 
