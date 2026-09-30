@@ -1,4 +1,163 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.align-text-top{vertical-align:text-top}.focus\\:\\[--w-outline-offset\\:-2px\\]:focus{--w-outline-offset:-2px}.bg-transparent{background-color:#0000}.appearance-none{-webkit-appearance:none;appearance:none}.border-1{border-width:1px}.rounded-4{border-radius:4px}.caret-current{caret-color:currentColor}.block{display:block}.inline{display:inline}.focusable:focus{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:focus-visible{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:not(:focus-visible){outline:none}.outline-\\[--w-s-color-border-negative\\]\\!{outline-color:var(--w-s-color-border-negative)!important}.static{position:static}.s-bg{background-color:var(--w-s-color-background)}.s-bg-disabled-subtle{background-color:var(--w-s-color-background-disabled-subtle)}.s-text{color:var(--w-s-color-text)}.s-text-disabled{color:var(--w-s-color-text-disabled)}.s-text-negative{color:var(--w-s-color-text-negative)}.placeholder\\:s-text-placeholder::placeholder{color:var(--w-s-color-text-placeholder)}.s-border-disabled{border-color:var(--w-s-color-border-disabled)}.s-border-negative{border-color:var(--w-s-color-border-negative)}.s-border-strong{border-color:var(--w-s-color-border-strong)}.hover\\:s-border-negative-hover:hover{border-color:var(--w-s-color-border-negative-hover)}.hover\\:s-border-strong-hover:hover{border-color:var(--w-s-color-border-strong-hover)}.active\\:s-border-selected:active{border-color:var(--w-s-color-border-selected)}.w-full{width:100%}.min-h-\\[42\\]{min-height:4.2rem}.m-0{margin:0}.mb-0{margin-bottom:0}.ml-4{margin-left:.4rem}.p-0{padding:0}.px-8{padding-left:.8rem;padding-right:.8rem}.py-12{padding-top:1.2rem;padding-bottom:1.2rem}.pl-0{padding-left:0}.pr-40{padding-right:4rem}.pl-\\[var\\(--w-prefix-width\\,_40px\\)\\]{padding-left:var(--w-prefix-width,40px)}.visible{visibility:visible}.pointer-events-none{pointer-events:none}.sr-only{clip:rect(0,0,0,0);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}.text-m{font-size:var(--w-font-size-m);line-height:var(--w-line-height-m)}.leading-m{line-height:var(--w-line-height-m)}@media (min-width:480px){.sm\\:min-h-\\[45\\]{min-height:4.5rem}}",
-);
+import { css } from "lit";
+
+export const styles = css`
+	:host {
+		--_padding-left: var(--w-c-textfield-padding-left, 8px);
+		--_padding-right: var(--w-c-textfield-padding-right, 8px);
+		--_line-height: var(--w-c-textfield-line-height, var(--w-line-height-m));
+		--_font-size: var(--w-c-textfield-font-size, var(--w-font-size-m));
+		--_border-color: var(
+			--w-c-textfield-color-border,
+			var(--w-s-color-border-strong)
+		);
+		--_color: var(--w-c-textfield-color, var(--w-s-color-text));
+		--_background-color: var(
+			--w-c-textfield-background,
+			var(--w-s-color-background)
+		);
+		--_active-border-color: var(
+			--w-c-textfield-color-border-active,
+			var(--w-s-color-border-selected)
+		);
+		--_hover-border-color: var(
+			--w-c-textfield-color-border-hover,
+			var(--w-s-color-border-strong-hover)
+		);
+		--_focus-outline: var(
+			--w-c-textfield-outline-focus,
+			2px solid var(--w-s-color-border-focus)
+		);
+		--_outline-offset: var(--w-c-textfield-outline-offset, -2px);
+		--_invalid-border-color: var(
+			--w-c-textfield-color-border-invalid,
+			var(--w-s-color-border-negative)
+		);
+		--_invalid-color: var(
+			--w-c-textfield-color-invalid,
+			var(--w-s-color-text-negative)
+		);
+		--_invalid-outline: var(
+			--w-c-textfield-outline-invalid,
+			2px solid var(--w-s-color-border-negative)
+		);
+		--_invalid-hover-border-color: var(
+			--w-c-textfield-color-border-invalid-hover,
+			var(--w-s-color-border-negative-hover)
+		);
+		--_disabled-border-color: var(
+			--w-c-textfield-color-border-disabled,
+			var(--w-s-color-border-disabled)
+		);
+		--_disabled-color: var(
+			--w-c-textfield-color-disabled,
+			var(--w-s-color-text-disabled)
+		);
+		--_disabled-background-color: var(
+			--w-c-textfield-color-background-disabled,
+			var(--w-s-color-background-disabled-subtle)
+		);
+		--_placeholder-color: var(
+			--w-c-textfield-color-placeholder,
+			var(--w-s-color-text-placeholder)
+		);
+	}
+	[part="base"] {
+		position: relative;
+		--_input-padding-top: 12px;
+	}
+
+	[part="base"][data-has-prefix="true"] {
+		--_padding-left: var(--w-prefix-width, 40px);
+	}
+
+	[part="base"][data-has-suffix="true"] {
+		--_padding-right: var(--w-prefix-width, 40px);
+	}
+
+	[part="input"] {
+		outline: none;
+		line-height: var(--_line-height);
+		font-size: var(--_font-size);
+		padding-top: 1.2rem;
+		padding-bottom: 1.2rem;
+		padding-left: var(--_padding-left);
+		padding-right: var(--_padding-right);
+		margin-bottom: 0px;
+		width: 100%;
+		border-color: var(--_border-color);
+		color: var(--_color);
+		background-color: var(--_background-color);
+		display: block;
+		caret-color: currentcolor;
+		border-radius: 4px;
+		border-width: 1px;
+	}
+
+	[part="input"]:hover {
+		border-color: var(--_hover-border-color);
+	}
+
+	[part="input"]:active {
+		border-color: var(--_active-border-color);
+	}
+
+	[part="input"]:focus,
+	[part="input"]:focus-visible {
+		outline: var(--_focus-outline);
+		outline-offset: var(--_outline-offset);
+	}
+
+	[part="input"][aria-invalid="true"] {
+		border-color: var(--_invalid-border-color);
+		color: var(--_invalid-color);
+		outline-color: var(--_invalid-outline);
+	}
+
+	[part="input"][aria-invalid="true"]:hover {
+		border-color: var(--_invalid-hover-border-color);
+	}
+
+	[part="input"][disabled] {
+		border-color: var(--_disabled-border-color);
+		color: var(--_disabled-color);
+		background-color: var(--_disabled-background-color);
+	}
+	[part="mask-wrapper"] {
+		position: relative;
+		overflow: hidden;
+	}
+	[part="mask-wrapper"]:focus-within [part="mask"] {
+		display: none;
+	}
+	[part="mask-wrapper"]:has([part="mask"]):not(:focus-within) input {
+		color: transparent;
+	}
+
+	/* Hide the native browser controls */
+	input[type="number"] {
+		-moz-appearance: textfield;
+	}
+
+	input[type="number"]::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	/* It's supposed to behave like a placeholder, but look like a value. Don't tell the designers 🤫 */
+	input::placeholder {
+		color: var(--_placeholder-color);
+	}
+
+	[part="mask"] {
+		display: block;
+		border: 1px solid transparent;
+		top: var(--_input-padding-top);
+		left: var(--_padding-left);
+		right: var(--_padding-right);
+		position: absolute;
+		pointer-events: none;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		z-index: 1;
+	}
+`;

@@ -242,3 +242,15 @@ export const WithTooltip: Story = {
 		`;
 	},
 };
+
+export const UsingField: Story = {
+	render() {
+		return html`
+			<w-field>
+				<label for="my-email">Email</label>
+				<input id="my-email" type="text" aria-describedby="help-text" />
+				<p id="help-text">This is some help text...</p>
+			</w-field>
+		`;
+	},
+};
