@@ -1,22 +1,58 @@
 import { css } from "lit";
 export const styles = css`
- 	:host {
+	:host {
 		--_line-height: var(--w-c-textarea-line-height, var(--w-line-height-m));
 		--_font-size: var(--w-c-textarea-font-size, var(--w-font-size-m));
-		--_border-color: var(--w-c-textarea-border-color, var(--w-s-color-border-strong));
+		--_border-color: var(
+			--w-c-textarea-border-color,
+			var(--w-s-color-border-strong)
+		);
 		--_color: var(--w-c-textarea-color, var(--w-s-color-text));
-		--_background-color: var(--w-c-textarea-background-color, var(--w-s-color-background));
-		--_hover-border-color: var(--w-c-textarea-hover-border-color, var(--w-s-color-border-strong-hover));
-		--_active-border-color: var(--w-c-textarea-active-border-color, var(--w-s-color-border-selected));
+		--_background-color: var(
+			--w-c-textarea-background-color,
+			var(--w-s-color-background)
+		);
+		--_hover-border-color: var(
+			--w-c-textarea-hover-border-color,
+			var(--w-s-color-border-strong-hover)
+		);
+		--_active-border-color: var(
+			--w-c-textarea-active-border-color,
+			var(--w-s-color-border-selected)
+		);
 		--_outline-offset: var(--w-c-textarea-outline-offset, -2px);
-		--_focus-outline: var(--w-c-textarea-focus-outline, 2px solid var(--w-s-color-border-focus));
-		--_invalid-border-color: var(--w-c-textarea-invalid-border-color, var(--w-s-color-border-negative));
-		--_invalid-color: var(--w-c-textarea-invalid-color, var(--w-s-color-text-negative));
-		--_invalid-outline: var(--w-c-textarea-invalid-outline, 2px solid var(--w-s-color-border-negative));
-		--_invalid-hover-border-color: var(--w-c-textarea-invalid-hover-border-color, var(--w-s-color-border-negative-hover));
-		--_disabled-border-color: var(--w-c-textarea-disabled-border-color, var(--w-s-color-border-disabled));
-		--_disabled-color: var(--w-c-textarea-disabled-color, var(--w-s-color-text-disabled));
-		--_disabled-background-color: var(--w-c-textarea-disabled-background-color, var(--w-s-color-background-disabled-subtle));
+		--_focus-outline: var(
+			--w-c-textarea-focus-outline,
+			2px solid var(--w-s-color-border-focus)
+		);
+		--_invalid-border-color: var(
+			--w-c-textarea-invalid-border-color,
+			var(--w-s-color-border-negative)
+		);
+		--_invalid-color: var(
+			--w-c-textarea-invalid-color,
+			var(--w-s-color-text-negative)
+		);
+		--_invalid-outline: var(
+			--w-c-textarea-invalid-outline,
+			2px solid var(--w-s-color-border-negative)
+		);
+		--_invalid-hover-border-color: var(
+			--w-c-textarea-invalid-hover-border-color,
+			var(--w-s-color-border-negative-hover)
+		);
+		--_disabled-border-color: var(
+			--w-c-textarea-disabled-border-color,
+			var(--w-s-color-border-disabled)
+		);
+		--_disabled-color: var(
+			--w-c-textarea-disabled-color,
+			var(--w-s-color-text-disabled)
+		);
+		--_disabled-background-color: var(
+			--w-c-textarea-disabled-background-color,
+			var(--w-s-color-background-disabled-subtle)
+		);
 	}
 	[part="input"] {
 		outline: none;

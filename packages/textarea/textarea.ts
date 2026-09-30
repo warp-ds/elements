@@ -22,7 +22,6 @@ import "../tooltip/tooltip.js";
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.
 
-
 /**
  * A multi-line text input with built-in form validation, auto-resizing, and styling support.
  *
