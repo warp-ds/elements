@@ -9,48 +9,48 @@ export const styles = css`
 		);
 		--_color: var(--w-c-textarea-color, var(--w-s-color-text));
 		--_background-color: var(
-			--w-c-textarea-background-color,
+			--w-c-textarea-bg-color,
 			var(--w-s-color-background)
 		);
 		--_hover-border-color: var(
-			--w-c-textarea-hover-border-color,
+			--w-c-textarea-border-color-hover,
 			var(--w-s-color-border-strong-hover)
 		);
 		--_active-border-color: var(
-			--w-c-textarea-active-border-color,
+			--w-c-textarea-border-color-active,
 			var(--w-s-color-border-selected)
 		);
 		--_outline-offset: var(--w-c-textarea-outline-offset, -2px);
 		--_focus-outline: var(
-			--w-c-textarea-focus-outline,
+			--w-c-textarea-outline-focus,
 			2px solid var(--w-s-color-border-focus)
 		);
 		--_invalid-border-color: var(
-			--w-c-textarea-invalid-border-color,
+			--w-c-textarea-border-color-invalid,
 			var(--w-s-color-border-negative)
 		);
 		--_invalid-color: var(
-			--w-c-textarea-invalid-color,
+			--w-c-textarea-color-invalid,
 			var(--w-s-color-text-negative)
 		);
 		--_invalid-outline: var(
-			--w-c-textarea-invalid-outline,
+			--w-c-textarea-outline-invalid,
 			2px solid var(--w-s-color-border-negative)
 		);
 		--_invalid-hover-border-color: var(
-			--w-c-textarea-invalid-hover-border-color,
+			--w-c-textarea-border-color-invalid-hover,
 			var(--w-s-color-border-negative-hover)
 		);
 		--_disabled-border-color: var(
-			--w-c-textarea-disabled-border-color,
+			--w-c-textarea-border-color-disabled,
 			var(--w-s-color-border-disabled)
 		);
 		--_disabled-color: var(
-			--w-c-textarea-disabled-color,
+			--w-c-textarea-color-disabled,
 			var(--w-s-color-text-disabled)
 		);
 		--_disabled-background-color: var(
-			--w-c-textarea-disabled-background-color,
+			--w-c-textarea-bg-color-disabled,
 			var(--w-s-color-background-disabled-subtle)
 		);
 	}
