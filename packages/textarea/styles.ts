@@ -18,7 +18,6 @@ export const styles = css`
 		--_disabled-color: var(--w-c-textarea-disabled-color, var(--w-s-color-text-disabled));
 		--_disabled-background-color: var(--w-c-textarea-disabled-background-color, var(--w-s-color-background-disabled-subtle));
 	}
-
 	[part="input"] {
 		outline: none;
 		line-height: var(--_line-height);
@@ -55,18 +54,14 @@ export const styles = css`
 	[part="input"]:active {
 		border-color: var(--_active-border-color);
 	}
-
-
 	[part="input"][aria-invalid="true"] {
 		border-color: var(--_invalid-border-color);
 		color: var(--_invalid-color);
 		outline-color: var(--_invalid-outline);
 	}
-
 	[part="input"][aria-invalid="true"]:hover {
 		border-color: var(--_invalid-hover-border-color);
 	}
-
 	[part="input"][disabled] {
 		border-color: var(--_disabled-border-color);
 		color: var(--_disabled-color);

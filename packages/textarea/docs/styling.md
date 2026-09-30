@@ -12,11 +12,18 @@ Before changing the default styles, remember that doing so can result in less co
 
 ### Parts
 
-The textarea exposes a minimal set of parts that can be targeted for last‑mile layout or typography tweaks.
+The textarea exposes a set of parts that can be targeted for last‑mile layout or typography tweaks.
 
 | Part | Targets | Typical use |
 |---|---|---|
+| `label` | label element | minor label typography or spacing tweaks |
 | `input` | native textarea element | minor typography or spacing tweaks |
+| `tooltip-target` | tooltip trigger button | icon button alignment or spacing tweaks |
+| `tooltip` | tooltip container | minor tooltip typography or spacing tweaks |
+| `arrow` | tooltip arrow positioning container | advanced arrow positioning tweaks |
+| `beak` | visual tooltip arrow | matching custom tooltip background styles |
+| `hover-bridge` | invisible bridge between trigger and tooltip | advanced tooltip hover behavior tweaks |
+| `help-text` | help text container | minor help text typography or spacing tweaks |
 
 Example:
 
@@ -46,6 +53,26 @@ These tokens are **shared across textfield, textarea, and select** for consisten
 
 Defaults are defined internally; setting a token is always optional.
 
+#### Textarea tokens
+
+| Token | Purpose | Default |
+|---|---|---|
+| `--w-c-textarea-line-height` | textarea line height | `--w-line-height-m` |
+| `--w-c-textarea-font-size` | textarea font size | `--w-font-size-m` |
+| `--w-c-textarea-border-color` | border color | `--w-s-color-border-strong` |
+| `--w-c-textarea-color` | text color | `--w-s-color-text` |
+| `--w-c-textarea-background-color` | background color | `--w-s-color-background` |
+| `--w-c-textarea-hover-border-color` | border color when hovered | `--w-s-color-border-strong-hover` |
+| `--w-c-textarea-active-border-color` | border color when active | `--w-s-color-border-selected` |
+| `--w-c-textarea-outline-offset` | focus outline offset | `-2px` |
+| `--w-c-textarea-focus-outline` | outline when focused | `2px solid var(--w-s-color-border-focus)` |
+| `--w-c-textarea-invalid-border-color` | border color when invalid | `--w-s-color-border-negative` |
+| `--w-c-textarea-invalid-color` | text color when invalid | `--w-s-color-text-negative` |
+| `--w-c-textarea-invalid-outline` | outline when invalid | `2px solid var(--w-s-color-border-negative)` |
+| `--w-c-textarea-invalid-hover-border-color` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
+| `--w-c-textarea-disabled-border-color` | border color when disabled | `--w-s-color-border-disabled` |
+| `--w-c-textarea-disabled-color` | text color when disabled | `--w-s-color-text-disabled` |
+| `--w-c-textarea-disabled-background-color` | background color when disabled | `--w-s-color-background-disabled-subtle` |
 
 #### Label tokens
 
