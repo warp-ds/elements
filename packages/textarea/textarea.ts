@@ -1,6 +1,5 @@
 // @warp-css;
 
-import { classNames as classnames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
@@ -23,23 +22,6 @@ import "../tooltip/tooltip.js";
 // In a future major version, we could extract these into separate w-label and w-help-text components
 // if we find significant reuse opportunities across non-input components.
 
-const ccInput = {
-	// input classes
-	base: "block text-m leading-m mb-0 px-8 py-12 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] caret-current", // true
-	default:
-		"border-1 s-text s-bg s-border-strong hover:s-border-strong-hover active:s-border-selected", // !isInvalid && !isDisabled && !isReadOnly
-	disabled:
-		"border-1 s-text-disabled s-bg-disabled-subtle s-border-disabled pointer-events-none", // !isInvalid && isDisabled && !isReadOnly
-	invalid:
-		"border-1 s-text-negative s-bg s-border-negative hover:s-border-negative-hover outline-[--w-s-color-border-negative]!", // isInvalid && !isDisabled && !isReadOnly
-	readOnly: "pl-0 bg-transparent pointer-events-none", // !isInvalid && !isDisabled && isReadOnly
-	placeholder: "placeholder:s-text-placeholder",
-	suffix: "pr-40",
-	prefix: "pl-[var(--w-prefix-width,_40px)]",
-	// textarea classes
-	textArea: "min-h-[42] sm:min-h-[45]",
-	fixed: "resize-none",
-};
 
 /**
  * A multi-line text input with built-in form validation, auto-resizing, and styling support.
@@ -370,37 +352,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
 	/** @internal */
-	get _textareaStyles() {
-		return classnames([
-			ccInput.base,
-			ccInput.textArea,
-			!!this.placeholder && ccInput.placeholder,
-			!this.invalid &&
-				!this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccInput.default,
-			this.invalid &&
-				!this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccInput.invalid,
-			!this.invalid &&
-				this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccInput.disabled,
-			!this.invalid &&
-				!this.disabled &&
-				(this.readonly || this.readOnly) &&
-				ccInput.readOnly,
-			this.maxRows && ccInput.fixed,
-		]);
-	}
-
-	/** @internal */
-	get _helptextstyles() {
-		return "help-text";
-	}
-
-	/** @internal */
 	get _helpId() {
 		if (this.#hasHelpText) return `${this._id}__hint`;
 		return undefined;
@@ -528,7 +479,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 			${
 				this.label
 					? html`
-							<label for="${this._id}">
+							<label part="label" for="${this._id}">
 								${this.label}
 								${
 									this.optional && !this.required
@@ -571,7 +522,6 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 			<textarea
 				part="input"
 				id="${this._id}"
-				class="${this._textareaStyles}"
 				name="${ifDefined(this.name)}"
 				placeholder="${ifDefined(this.placeholder)}"
 				.value="${this.value || ""}"
@@ -593,8 +543,9 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 			</textarea>
 			<div
 				?hidden=${!this.#hasHelpText}
-				class="${this._helptextstyles}"
 				id="${ifDefined(this._helpId)}"
+				part="help-text"
+				class="help-text"
 			>
 				${this.helpText}
 				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
