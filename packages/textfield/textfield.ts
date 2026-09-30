@@ -258,12 +258,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
 	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
 	// https://stackoverflow.com/a/61631668
-	static styles = [
-		reset,
-		styles,
-		inputLabelStyles,
-		inputHelpTextStyles,
-	];
+	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
 	firstUpdated() {
 		this.#initialValue = this.value;
@@ -370,10 +365,11 @@ class WarpTextField extends FormControlMixin(LitElement) {
 										? html`
 												<span>
 													${i18n._({
-													id: "textfield.label.optional",
-													message: "Optional",
-													comment: "Shown behind label when marked as optional",
-												})}
+														id: "textfield.label.optional",
+														message: "Optional",
+														comment:
+															"Shown behind label when marked as optional",
+													})}
 												</span>
 											`
 										: nothing
@@ -408,11 +404,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 				data-has-suffix="${ifDefined(this._hasSuffix)}"
 			>
 				<div part="mask-wrapper">
-					${
-						this.formatter
-							? html`<div part="mask"></div>`
-							: nothing
-					}
+					${this.formatter ? html`<div part="mask"></div>` : nothing}
 					<input
 						part="input"
 						type="${this.type || "text"}"
