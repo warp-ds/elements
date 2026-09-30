@@ -66,20 +66,20 @@ w-textfield.search {
 | `--w-c-textfield-padding-right` | input right padding | `8px` |
 | `--w-c-textfield-line-height` | input line height | `--w-line-height-m` |
 | `--w-c-textfield-font-size` | input font size | `--w-font-size-m` |
-| `--w-c-textfield-border-color` | border color | `--w-s-color-border-strong` |
+| `--w-c-textfield-color-border` | border color | `--w-s-color-border-strong` |
 | `--w-c-textfield-color` | input text color | `--w-s-color-text` |
-| `--w-c-textfield-background-color` | input background color | `--w-s-color-background` |
-| `--w-c-textfield-border-color-active` | border color while active | `--w-s-color-border-selected` |
-| `--w-c-textfield-border-color-hover` | border color on hover | `--w-s-color-border-strong-hover` |
+| `--w-c-textfield-background` | input background color | `--w-s-color-background` |
+| `--w-c-textfield-color-border-active` | border color while active | `--w-s-color-border-selected` |
+| `--w-c-textfield-color-border-hover` | border color on hover | `--w-s-color-border-strong-hover` |
 | `--w-c-textfield-outline-focus` | focus outline | `2px solid var(--w-s-color-border-focus)` |
 | `--w-c-textfield-outline-offset` | focus outline offset | `-2px` |
-| `--w-c-textfield-border-color-invalid` | border color when invalid | `--w-s-color-border-negative` |
+| `--w-c-textfield-color-border-invalid` | border color when invalid | `--w-s-color-border-negative` |
 | `--w-c-textfield-color-invalid` | text color when invalid | `--w-s-color-text-negative` |
 | `--w-c-textfield-outline-invalid` | outline when invalid | `2px solid var(--w-s-color-border-negative)` |
-| `--w-c-textfield-border-color-invalid-hover` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
-| `--w-c-textfield-border-color-disabled` | border color when disabled | `--w-s-color-border-disabled` |
+| `--w-c-textfield-color-border-invalid-hover` | border color when invalid and hovered | `--w-s-color-border-negative-hover` |
+| `--w-c-textfield-color-border-disabled` | border color when disabled | `--w-s-color-border-disabled` |
 | `--w-c-textfield-color-disabled` | text color when disabled | `--w-s-color-text-disabled` |
-| `--w-c-textfield-bg-color-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
+| `--w-c-textfield-color-background-disabled` | background color when disabled | `--w-s-color-background-disabled-subtle` |
 | `--w-c-textfield-placeholder-color` | placeholder text color | `--w-s-color-text-placeholder` |
 
 #### Label tokens

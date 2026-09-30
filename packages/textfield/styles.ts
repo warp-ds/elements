@@ -7,17 +7,17 @@ export const styles = css`
 		--_line-height: var(--w-c-textfield-line-height, var(--w-line-height-m));
 		--_font-size: var(--w-c-textfield-font-size, var(--w-font-size-m));
 		--_border-color: var(
-			--w-c-textfield-border-color,
+			--w-c-textfield-color-border,
 			var(--w-s-color-border-strong)
 		);
 		--_color: var(--w-c-textfield-color, var(--w-s-color-text));
-		--_background-color: var(--w-c-textfield-bg, var(--w-s-color-background));
+		--_background-color: var(--w-c-textfield-background, var(--w-s-color-background));
 		--_active-border-color: var(
-			--w-c-textfield-border-color-active,
+			--w-c-textfield-color-border-active,
 			var(--w-s-color-border-selected)
 		);
 		--_hover-border-color: var(
-			--w-c-textfield-border-color-hover,
+			--w-c-textfield-color-border-hover,
 			var(--w-s-color-border-strong-hover)
 		);
 		--_focus-outline: var(
@@ -26,7 +26,7 @@ export const styles = css`
 		);
 		--_outline-offset: var(--w-c-textfield-outline-offset, -2px);
 		--_invalid-border-color: var(
-			--w-c-textfield-border-color-invalid,
+			--w-c-textfield-color-border-invalid,
 			var(--w-s-color-border-negative)
 		);
 		--_invalid-color: var(
@@ -38,11 +38,11 @@ export const styles = css`
 			2px solid var(--w-s-color-border-negative)
 		);
 		--_invalid-hover-border-color: var(
-			--w-c-textfield-border-color-invalid-hover,
+			--w-c-textfield-color-border-invalid-hover,
 			var(--w-s-color-border-negative-hover)
 		);
 		--_disabled-border-color: var(
-			--w-c-textfield-border-color-disabled,
+			--w-c-textfield-color-border-disabled,
 			var(--w-s-color-border-disabled)
 		);
 		--_disabled-color: var(
@@ -50,7 +50,7 @@ export const styles = css`
 			var(--w-s-color-text-disabled)
 		);
 		--_disabled-background-color: var(
-			--w-c-textfield-bg-color-disabled,
+			--w-c-textfield-color-background-disabled,
 			var(--w-s-color-background-disabled-subtle)
 		);
 		--_placeholder-color: var(
