@@ -52,7 +52,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,a as n,f as r,h
 			var(--w-s-color-background-disabled-subtle)
 		);
 		--_placeholder-color: var(
-			--w-c-textfield-placeholder-color,
+			--w-c-textfield-color-placeholder,
 			var(--w-s-color-text-placeholder)
 		);
 	}
