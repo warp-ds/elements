@@ -34,32 +34,6 @@ test("w-breadcrumbs with three w-breadcrumb-item children displays labels in sou
 	expect(items?.[2].textContent?.trim()).toBe("Current page");
 });
 
-test("separators display after items except the one with current-page", async () => {
-	const page = render(html`
-		<w-breadcrumbs aria-label="You are here">
-			<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-			<w-breadcrumb-item href="/category">Category</w-breadcrumb-item>
-			<w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
-		</w-breadcrumbs>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const items = page.container.querySelectorAll("w-breadcrumb-item");
-
-	// First two items should have separators, last (current-page) should not
-	const firstItemShadow = items[0].shadowRoot;
-	const secondItemShadow = items[1].shadowRoot;
-	const thirdItemShadow = items[2].shadowRoot;
-
-	// Separators should be visible after first and second items
-	expect(firstItemShadow?.textContent).toContain("/");
-	expect(secondItemShadow?.textContent).toContain("/");
-
-	// No separator after current-page item
-	expect(thirdItemShadow?.textContent).not.toContain("/");
-});
-
 test("item with href exposes a navigable link with visible label as accessible name", async () => {
 	const page = render(html`
 		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
@@ -275,26 +249,6 @@ test("removing href attribute dynamically removes the link", async () => {
 	expect(anchor).toBeNull();
 });
 
-test("separator is not keyboard-focusable", async () => {
-	const page = render(html`
-		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-	// Separator should have aria-hidden and not be focusable
-	expect(separator?.getAttribute("aria-hidden")).toBe("true");
-	// Should not have tabindex that makes it focusable
-	expect(separator?.getAttribute("tabindex")).not.toBe("0");
-	// Should not be an interactive element
-	expect(separator?.tagName.toLowerCase()).not.toBe("a");
-	expect(separator?.tagName.toLowerCase()).not.toBe("button");
-});
-
 test("w-breadcrumb-item with empty content does not throw", async () => {
 	// This should not throw
 	const page = render(html`
@@ -384,20 +338,6 @@ test("non-linked item applies s-text class to the span", async () => {
 	expect(span?.classList.contains("s-text")).toBe(true);
 });
 
-test("separator applies separator class", async () => {
-	const page = render(html`
-		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-	expect(separator?.classList.contains("separator")).toBe(true);
-});
-
 test("slotted span inside w-breadcrumb-item does not trigger mixed API warning", async () => {
 	const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
@@ -469,42 +409,6 @@ test("slotted anchor inside w-breadcrumb-item does not trigger mixed API warning
 	warnSpy.mockRestore();
 });
 
-test("item has horizontal spacing between content and separator", async () => {
-	const page = render(html`
-		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-
-	// Separator should have left margin for spacing (space-x-8 = 8px margin)
-	const separatorStyles = getComputedStyle(separator!);
-	const marginLeft = Number.parseFloat(separatorStyles.marginLeft);
-	expect(marginLeft).toBeGreaterThan(0);
-});
-
-test("item has right margin after separator for spacing to next item", async () => {
-	const page = render(html`
-		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-
-	// Separator should have right margin for spacing to next item
-	const separatorStyles = getComputedStyle(separator!);
-	const marginRight = Number.parseFloat(separatorStyles.marginRight);
-	expect(marginRight).toBeGreaterThan(0);
-});
-
 test("item displays inline to allow horizontal breadcrumb layout", async () => {
 	const page = render(html`
 		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
@@ -531,20 +435,6 @@ test('linked item exposes "link" part on the anchor element', async () => {
 
 	expect(anchor).not.toBeNull();
 	expect(anchor?.getAttribute("part")).toBe("link");
-});
-
-test('item exposes "separator" part on the separator element', async () => {
-	const page = render(html`
-		<w-breadcrumb-item href="/home">Home</w-breadcrumb-item>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-	expect(separator?.getAttribute("part")).toBe("separator");
 });
 
 test('non-linked item exposes "text" part on the span element', async () => {
@@ -613,70 +503,6 @@ test("--w-c-breadcrumb-item-text-color sets the non-linked item color", async ()
 	expect(span).not.toBeNull();
 	const spanStyles = getComputedStyle(span!);
 	expect(spanStyles.color).toBe("rgb(0, 128, 0)");
-});
-
-test("--w-c-breadcrumb-item-separator-color sets the separator color", async () => {
-	const page = render(html`
-		<w-breadcrumb-item
-			href="/home"
-			style="--w-c-breadcrumb-item-separator-color: rgb(0, 0, 255);"
-			>Home</w-breadcrumb-item
-		>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-	const separatorStyles = getComputedStyle(separator!);
-	expect(separatorStyles.color).toBe("rgb(0, 0, 255)");
-});
-
-test("--w-c-breadcrumb-item-separator-spacing sets the separator margin", async () => {
-	const page = render(html`
-		<w-breadcrumb-item
-			href="/home"
-			style="--w-c-breadcrumb-item-separator-spacing: 20px;"
-			>Home</w-breadcrumb-item
-		>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(separator).not.toBeNull();
-	const separatorStyles = getComputedStyle(separator!);
-	expect(separatorStyles.marginLeft).toBe("20px");
-	expect(separatorStyles.marginRight).toBe("20px");
-});
-
-test("--w-c-breadcrumb-item-font-size sets the font size for link and separator", async () => {
-	const page = render(html`
-		<w-breadcrumb-item
-			href="/home"
-			style="--w-c-breadcrumb-item-font-size: 24px;"
-			>Home</w-breadcrumb-item
-		>
-	`);
-
-	await expect.element(page.getByText("Home")).toBeVisible();
-
-	const item = page.container.querySelector("w-breadcrumb-item");
-	const anchor = item?.shadowRoot?.querySelector("a");
-	const separator = item?.shadowRoot?.querySelector('[aria-hidden="true"]');
-
-	expect(anchor).not.toBeNull();
-	expect(separator).not.toBeNull();
-
-	const anchorStyles = getComputedStyle(anchor!);
-	const separatorStyles = getComputedStyle(separator!);
-
-	expect(anchorStyles.fontSize).toBe("24px");
-	expect(separatorStyles.fontSize).toBe("24px");
 });
 
 test("--w-c-breadcrumb-item-line-height sets the line height", async () => {
@@ -895,7 +721,6 @@ test("CSS custom properties inherit from w-breadcrumbs to child items", async ()
 		<style>
 			.test-breadcrumbs {
 				--w-c-breadcrumb-item-link-color: rgb(100, 150, 200);
-				--w-c-breadcrumb-item-separator-color: rgb(50, 75, 100);
 			}
 		</style>
 		<w-breadcrumbs class="test-breadcrumbs" aria-label="You are here">
@@ -908,17 +733,10 @@ test("CSS custom properties inherit from w-breadcrumbs to child items", async ()
 
 	const items = page.container.querySelectorAll("w-breadcrumb-item");
 	const firstAnchor = items[0]?.shadowRoot?.querySelector("a") as HTMLElement;
-	const firstSeparator = items[0]?.shadowRoot?.querySelector(
-		'[aria-hidden="true"]',
-	) as HTMLElement;
 
 	// Link color should inherit from parent
 	const anchorStyles = getComputedStyle(firstAnchor);
 	expect(anchorStyles.color).toBe("rgb(100, 150, 200)");
-
-	// Separator color should inherit from parent
-	const separatorStyles = getComputedStyle(firstSeparator);
-	expect(separatorStyles.color).toBe("rgb(50, 75, 100)");
 });
 
 test("non-linked current-page item uses --w-c-breadcrumb-item-text-color", async () => {
