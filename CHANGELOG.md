@@ -1,3 +1,10 @@
+# [2.13.0-next.10](https://github.com/warp-ds/elements/compare/v2.13.0-next.9...v2.13.0-next.10) (2026-10-01)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** always omit slash from last item ([#780](https://github.com/warp-ds/elements/issues/780)) ([034f041](https://github.com/warp-ds/elements/commit/034f0414f7b874300cebcea7cc293c6e7dc772af))
+
 # [2.13.0-next.9](https://github.com/warp-ds/elements/compare/v2.13.0-next.8...v2.13.0-next.9) (2026-09-30)
 
 
