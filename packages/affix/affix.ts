@@ -97,11 +97,7 @@ class WarpAffix extends FormControlMixin(LitElement) {
 				type="submit"
 				@click="${this.submitContainingForm.bind(this)}"
 			>
-				<w-icon
-					name="Search"
-					size="small"
-					locale="${detectLocale()}"
-				></w-icon>
+				<w-icon name="Search" size="small" locale="${detectLocale()}"></w-icon>
 			</button>
 		`;
 	}
@@ -123,11 +119,7 @@ class WarpAffix extends FormControlMixin(LitElement) {
 				type="reset"
 				@click="${this.resetContainingTextField.bind(this)}"
 			>
-				<w-icon
-					name="Close"
-					size="small"
-					locale="${detectLocale()}"
-				></w-icon>
+				<w-icon name="Close" size="small" locale="${detectLocale()}"></w-icon>
 			</button>
 		`;
 	}
