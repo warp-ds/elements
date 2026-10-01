@@ -83,6 +83,7 @@ export const styles = css`
 		display: block;
 		overflow: hidden;
 		position: relative;
+		height: 100%;
 	}
 
 	:host([clickable]) [part="base"] {

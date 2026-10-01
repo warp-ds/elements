@@ -518,3 +518,54 @@ export const AdvancederExamples: Story = {
 			</div>`;
 	},
 };
+export const CardsInGrid: Story = {
+	render() {
+		return html`
+			<div
+				class="grid gap-16 grid-cols-1 md:grid-cols-3"
+				style="gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 40px"
+			>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+						<p>This is card content with some example text.</p>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+				<w-card>
+					<div style="padding: 16px;">
+						<h3 class="t3">Card Title</h3>
+						<p>This is card content with some example text.</p>
+						<p>This is card content with some example text.</p>
+						<p>This is card content with some example text.</p>
+					</div>
+				</w-card>
+			</div>
+		`;
+	},
+};
