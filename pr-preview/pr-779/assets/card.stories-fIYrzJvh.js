@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h as ee,p as te,r as i,s as a,t as o,y as s}from"./decorate-kJVNAdyH.js";import{a as c,o as l,r as u,t as d}from"./i18n-CkjYRTT1.js";import{n as f,t as p}from"./dist-Bn_0n649.js";import{n as m,t as h}from"./styles-BxpTFSox.js";import{i as g,n as _,r as ne}from"./utilities-DyUKeeub.js";import{r as re,t as v}from"./if-defined-CHz3vSYq.js";var y;function b(){return(b=e((()=>{y=JSON.parse(`{"card.button.text":["Vælg"]}`)})))()}var x;function S(){return(S=e((()=>{x=JSON.parse(`{"card.button.text":["Select"]}`)})))()}var C;function w(){return(w=e((()=>{C=JSON.parse(`{"card.button.text":["Valitse"]}`)})))()}var T;function E(){return(E=e((()=>{T=JSON.parse(`{"card.button.text":["Velg"]}`)})))()}var D;function O(){return(O=e((()=>{D=JSON.parse(`{"card.button.text":["Välj"]}`)})))()}var k;function A(){return(A=e((()=>{r(),k=n`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h as ee,p as te,r as ne,s as i,t as a,y as o}from"./decorate-kJVNAdyH.js";import{a as s,o as c,r as l,t as u}from"./i18n-CkjYRTT1.js";import{n as d,t as f}from"./dist-Bn_0n649.js";import{n as p,t as m}from"./styles-BxpTFSox.js";import{i as h,n as g,r as re}from"./utilities-DyUKeeub.js";import{r as ie,t as _}from"./if-defined-CHz3vSYq.js";var v;function y(){return(y=e((()=>{v=JSON.parse(`{"card.button.text":["Vælg"]}`)})))()}var b;function x(){return(x=e((()=>{b=JSON.parse(`{"card.button.text":["Select"]}`)})))()}var S;function C(){return(C=e((()=>{S=JSON.parse(`{"card.button.text":["Valitse"]}`)})))()}var w;function T(){return(T=e((()=>{w=JSON.parse(`{"card.button.text":["Velg"]}`)})))()}var E;function D(){return(D=e((()=>{E=JSON.parse(`{"card.button.text":["Välj"]}`)})))()}var O;function k(){return(k=e((()=>{r(),O=n`
 	:host {
 		--_background-color: var(
 			--w-c-card-bg,
@@ -81,6 +81,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h
 		display: block;
 		overflow: hidden;
 		position: relative;
+		height: 100%;
 	}
 
 	:host([clickable]) [part="base"] {
@@ -132,7 +133,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h
 		white-space: nowrap;
 		border-width: 0;
 	}
-`})))()}var j,M;function N(){return(N=e((()=>{l(),r(),i(),v(),u(),h(),b(),S(),w(),E(),O(),A(),j={ENTER:`Enter`,SPACE:` `},M=class extends te{static{this.styles=[m,k,n`
+`})))()}var A,j;function M(){return(M=e((()=>{c(),r(),ne(),_(),l(),m(),y(),x(),C(),T(),D(),k(),A={ENTER:`Enter`,SPACE:` `},j=class extends te{static{this.styles=[p,O,n`
 			a::after {
 				content: "";
 				position: absolute;
@@ -144,20 +145,20 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h
 			:host {
 				display: block;
 			}
-		`]}constructor(){super(),this.selected=!1,this.flat=!1,this.clickable=!1,d(x,T,C,y,D),this.buttonText=c._({id:`card.button.text`,message:`Select`,comment:`Screenreader message to indicate that the card is clickable`})}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===j.ENTER||e.key===j.SPACE)&&(e.preventDefault(),this.click())}render(){return s`
+		`]}constructor(){super(),this.selected=!1,this.flat=!1,this.clickable=!1,u(b,w,S,v,E),this.buttonText=s._({id:`card.button.text`,message:`Select`,comment:`Screenreader message to indicate that the card is clickable`})}keypressed(e){!this.clickable||e.altKey||e.ctrlKey||(e.key===A.ENTER||e.key===A.SPACE)&&(e.preventDefault(),this.click())}render(){return o`
 			<div
 				part="base"
-				tabindex=${re(this.clickable?`0`:void 0)}
+				tabindex=${ie(this.clickable?`0`:void 0)}
 				@keydown=${this.keypressed}
 			>
 				<div part="border"></div>
-				${this.clickable?s`<button
+				${this.clickable?o`<button
 								class="sr-only"
 								aria-pressed="${this.selected}"
 								tabindex="-1"
 							>
 								${this.buttonText}
-							</button>`:this.selected?s`<span
+							</button>`:this.selected?o`<span
 									class="sr-only"
 									role="checkbox"
 									aria-checked="true"
@@ -165,15 +166,15 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h
 								></span>`:ee}
 				<slot></slot>
 			</div>
-		`}},o([a({type:Boolean,reflect:!0})],M.prototype,`selected`,void 0),o([a({type:Boolean})],M.prototype,`flat`,void 0),o([a({type:Boolean})],M.prototype,`clickable`,void 0),customElements.get(`w-card`)||customElements.define(`w-card`,M)})))()}var P=t({AdvancedExample:()=>X,AdvancederExamples:()=>Z,CardCardClickablePlusASecondInteractiveElement:()=>J,CardNoNavigation:()=>K,CardSeparateInteractiveElements:()=>Y,CardWholeCardClickable:()=>q,Clickable:()=>U,Default:()=>z,Flat:()=>V,FlatSelected:()=>H,PropertyExample:()=>W,Selected:()=>B,StylingApi:()=>G,__namedExportsOrder:()=>Q,default:()=>R}),F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{ne(),f(),r(),N(),{events:F,args:I,argTypes:L}=p(`w-card`),R={title:`Navigation/Card`,render(e){return s`
-            <w-card ${g(_(e))}>
+		`}},a([i({type:Boolean,reflect:!0})],j.prototype,`selected`,void 0),a([i({type:Boolean})],j.prototype,`flat`,void 0),a([i({type:Boolean})],j.prototype,`clickable`,void 0),customElements.get(`w-card`)||customElements.define(`w-card`,j)})))()}var N=t({AdvancedExample:()=>Y,AdvancederExamples:()=>X,CardCardClickablePlusASecondInteractiveElement:()=>q,CardNoNavigation:()=>G,CardSeparateInteractiveElements:()=>J,CardWholeCardClickable:()=>K,CardsInGrid:()=>Z,Clickable:()=>H,Default:()=>R,Flat:()=>B,FlatSelected:()=>V,PropertyExample:()=>U,Selected:()=>z,StylingApi:()=>W,__namedExportsOrder:()=>Q,default:()=>L}),P,F,I,L,R,z,B,V,H,U,W,G,K,q,J,Y,X,Z,Q;function $(){return($=e((()=>{re(),d(),r(),M(),{events:P,args:F,argTypes:I}=f(`w-card`),L={title:`Navigation/Card`,render(e){return o`
+            <w-card ${h(g(e))}>
                 <div style="padding: 16px;">
                     <h3>Card Title</h3>
                     <p>This is card content with some example text.</p>
                 </div>
             </w-card>
-        `},args:I,argTypes:L,parameters:{actions:{handles:F}}},z={args:{selected:!1,flat:!1,clickable:!1}},B={args:{selected:!0,flat:!1,clickable:!1}},V={args:{selected:!1,flat:!0,clickable:!1}},H={args:{selected:!0,flat:!0,clickable:!1}},U={args:{selected:!1,flat:!1,clickable:!0}},W={args:{selected:!1,flat:!1,clickable:!0},render(e){return s`
-            <w-card ${g(_(e))}>
+        `},args:F,argTypes:I,parameters:{actions:{handles:P}}},R={args:{selected:!1,flat:!1,clickable:!1}},z={args:{selected:!0,flat:!1,clickable:!1}},B={args:{selected:!1,flat:!0,clickable:!1}},V={args:{selected:!0,flat:!0,clickable:!1}},H={args:{selected:!1,flat:!1,clickable:!0}},U={args:{selected:!1,flat:!1,clickable:!0},render(e){return o`
+            <w-card ${h(g(e))}>
                 <img
                     style="width: 100%; height: 200px; object-fit: cover;"
                     src="https://unsplash.it/300/200?random"
@@ -194,7 +195,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,f as r,h
                     </p>
                 </div>
             </w-card>
-        `}},G={args:{clickable:!1,selected:!1,flat:!1},render(e){return s`
+        `}},W={args:{clickable:!1,selected:!1,flat:!1},render(e){return o`
             <pre>
 <code>
 &lt;style&gt;
@@ -221,20 +222,20 @@ w-card::part(border) {
                     border-width: 8px;
                 }
             </style>
-            <w-card ${g(_(e))}>
+            <w-card ${h(g(e))}>
                 <div style="padding: 16px;">
                     <h3>Card Title</h3>
                     <p>This is card content with some example text.</p>
                 </div>
             </w-card>
-        `}},K={args:{},render(){return s`
+        `}},G={args:{},render(){return o`
             <w-card>
                 <div style="padding: 16px;">
                     <h3 class="t3">This is the card title</h3>
                     <p>This is the card content</p>
                 </div>
             </w-card>
-        `}},q={args:{},render(){return s`
+        `}},K={args:{},render(){return o`
             <w-card>
                 <div style="padding: 16px;">
                     <h3 class="t3">
@@ -242,7 +243,7 @@ w-card::part(border) {
                     </h3>
                 </div>
             </w-card>
-        `}},J={args:{},render(){return s`
+        `}},q={args:{},render(){return o`
             <w-card>
                 <div style="padding: 16px;">
                     <h3 class="t3">
@@ -251,7 +252,7 @@ w-card::part(border) {
                     <a href="http://google.com" data-card-secondary-action>Learn more</a>
                 </div>
             </w-card>
-        `}},Y={args:{},render(){return s`
+        `}},J={args:{},render(){return o`
             <w-card>
                 <div style="padding: 16px;">
                     <h3 class="t3">
@@ -260,8 +261,8 @@ w-card::part(border) {
                     <a href="http://google.com">Learn more</a>
                 </div>
             </w-card>
-        `}},X={args:{},render(e){return s`
-            <w-card ${g(_(e))}>
+        `}},Y={args:{},render(e){return o`
+            <w-card ${h(g(e))}>
                 <img
                     style="width: 100%; height: 200px; object-fit: cover;"
                     src="https://unsplash.it/300/200?random"
@@ -284,8 +285,8 @@ w-card::part(border) {
                     </p>
                 </div>
             </w-card>
-        `}},Z={args:{},render(e){return s`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
-                <w-card class="max-w-[223] min-w-[223]" ${g(_(e))}>
+        `}},X={args:{},render(e){return o`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
+                <w-card class="max-w-[223] min-w-[223]" ${h(g(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -309,7 +310,7 @@ w-card::part(border) {
                         />
                     </article>
                 </w-card>
-                <w-card class="max-w-[223] min-w-[223]" ${g(_(e))}>
+                <w-card class="max-w-[223] min-w-[223]" ${h(g(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -333,7 +334,7 @@ w-card::part(border) {
                         />
                     </article>
                 </w-card>
-                <w-card class="max-w-[223] min-w-[223]" ${g(_(e))}>
+                <w-card class="max-w-[223] min-w-[223]" ${h(g(e))}>
                     <article
                         class="flex flex-col p-16 s-text-inverted-static"
                         style="background-color: #486579"
@@ -364,7 +365,7 @@ w-card::part(border) {
             >
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${g(_(e))}
+                    ${h(g(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -398,7 +399,7 @@ w-card::part(border) {
                 </w-card>
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${g(_(e))}
+                    ${h(g(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -432,7 +433,7 @@ w-card::part(border) {
                 </w-card>
                 <w-card
                     class="relative grid grid-rows-1 h-full"
-                    ${g(_(e))}
+                    ${h(g(e))}
                 >
                     <div class="flex items-center gap-24 pr-16 h-full">
                         <div class="relative w-[112] h-[112] shrink-0">
@@ -537,37 +538,83 @@ w-card::part(border) {
                         </div>
                     </article>
                 </w-card>
-            </div>`}},Q=[`Default`,`Selected`,`Flat`,`FlatSelected`,`Clickable`,`PropertyExample`,`StylingApi`,`CardNoNavigation`,`CardWholeCardClickable`,`CardCardClickablePlusASecondInteractiveElement`,`CardSeparateInteractiveElements`,`AdvancedExample`,`AdvancederExamples`],z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+            </div>`}},Z={render(){return o`
+            <div
+                class="grid gap-16 grid-cols-1 md:grid-cols-3"
+                style="gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 40px"
+            >
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+            </div>
+        `}},Q=[`Default`,`Selected`,`Flat`,`FlatSelected`,`Clickable`,`PropertyExample`,`StylingApi`,`CardNoNavigation`,`CardWholeCardClickable`,`CardCardClickablePlusASecondInteractiveElement`,`CardSeparateInteractiveElements`,`AdvancedExample`,`AdvancederExamples`,`CardsInGrid`],R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`{
   args: {
     selected: false,
+    flat: false,
+    clickable: false
+  }
+}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`{
+  args: {
+    selected: true,
     flat: false,
     clickable: false
   }
 }`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: true,
-    flat: false,
+    selected: false,
+    flat: true,
     clickable: false
   }
 }`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: false,
+    selected: true,
     flat: true,
     clickable: false
   }
 }`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`{
   args: {
-    selected: true,
-    flat: true,
-    clickable: false
-  }
-}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
-  args: {
     selected: false,
     flat: false,
     clickable: true
   }
-}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
+}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`{
   args: {
     selected: false,
     flat: false,
@@ -598,7 +645,7 @@ w-card::part(border) {
             </w-card>
         \`;
   }
-}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
+}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`{
   args: {
     clickable: false,
     selected: false,
@@ -640,7 +687,7 @@ w-card::part(border) {
             </w-card>
         \`;
   }
-}`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
+}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -652,7 +699,7 @@ w-card::part(border) {
             </w-card>
         \`;
   }
-}`,...K.parameters?.docs?.source},description:{story:`Example of a card that is not focusable or clickable, and has no interactive elements inside it.`,...K.parameters?.docs?.description}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
+}`,...G.parameters?.docs?.source},description:{story:`Example of a card that is not focusable or clickable, and has no interactive elements inside it.`,...G.parameters?.docs?.description}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -665,7 +712,7 @@ w-card::part(border) {
             </w-card>
         \`;
   }
-}`,...q.parameters?.docs?.source},description:{story:`Example of a card that has a single interactive element inside it that is both sematically correct and the clickable area expands to fill the card.`,...q.parameters?.docs?.description}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
+}`,...K.parameters?.docs?.source},description:{story:`Example of a card that has a single interactive element inside it that is both sematically correct and the clickable area expands to fill the card.`,...K.parameters?.docs?.description}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -679,8 +726,8 @@ w-card::part(border) {
             </w-card>
         \`;
   }
-}`,...J.parameters?.docs?.source},description:{story:`Example of a card that has a sematically correct main clickable interactive element that expands to fill the card,
-and also has a second interactive element inside it.`,...J.parameters?.docs?.description}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
+}`,...q.parameters?.docs?.source},description:{story:`Example of a card that has a sematically correct main clickable interactive element that expands to fill the card,
+and also has a second interactive element inside it.`,...q.parameters?.docs?.description}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
   args: {},
   render() {
     return html\`
@@ -694,8 +741,8 @@ and also has a second interactive element inside it.`,...J.parameters?.docs?.des
             </w-card>
         \`;
   }
-}`,...Y.parameters?.docs?.source},description:{story:`Example of a card that has two interactive elements inside it, but the card itself is not clickable.
-The interactive elements are independently clickable and focusable, and the card itself is not focusable or clickable.`,...Y.parameters?.docs?.description}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
+}`,...J.parameters?.docs?.source},description:{story:`Example of a card that has two interactive elements inside it, but the card itself is not clickable.
+The interactive elements are independently clickable and focusable, and the card itself is not focusable or clickable.`,...J.parameters?.docs?.description}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`{
   args: {},
   render(args) {
     return html\`
@@ -724,7 +771,7 @@ The interactive elements are independently clickable and focusable, and the card
             </w-card>
         \`;
   }
-}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
+}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
   args: {},
   render(args) {
     return html\`<div class="flex" style="gap: 16px; margin-bottom: 40px;">
@@ -982,4 +1029,54 @@ The interactive elements are independently clickable and focusable, and the card
                 </w-card>
             </div>\`;
   }
-}`,...Z.parameters?.docs?.source}}}})))()}export{W as a,$ as c,H as i,z as n,B as o,V as r,P as s,U as t};
+}`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`{
+  render() {
+    return html\`
+            <div
+                class="grid gap-16 grid-cols-1 md:grid-cols-3"
+                style="gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 40px"
+            >
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+                <w-card>
+                    <div style="padding: 16px;">
+                        <h3 class="t3">Card Title</h3>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                        <p>This is card content with some example text.</p>
+                    </div>
+                </w-card>
+            </div>
+        \`;
+  }
+}`,...Z.parameters?.docs?.source}}}})))()}export{U as a,$ as c,V as i,R as n,z as o,B as r,N as s,H as t};
