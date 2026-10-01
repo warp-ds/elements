@@ -1,5 +1,3 @@
-// @warp-css;
-
 import { classNames } from "@chbphone55/classnames";
 import { FormControlMixin } from "@open-wc/form-control";
 import { i18n } from "@lingui/core";
@@ -11,7 +9,6 @@ import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
 
 import { affixStyles } from "./affix-styles.js";
-import { styles } from "./styles.js";
 
 import "../icon/icon.js";
 
@@ -58,7 +55,7 @@ class WarpAffix extends FormControlMixin(LitElement) {
 	 */
 	@property({ reflect: true, useDefault: true }) icon: string | null = null;
 
-	static styles = [reset, styles, affixStyles];
+	static styles = [reset, affixStyles];
 
 	/** @internal */
 	get _wrapperClasses() {
@@ -104,7 +101,6 @@ class WarpAffix extends FormControlMixin(LitElement) {
 					name="Search"
 					size="small"
 					locale="${detectLocale()}"
-					class="flex"
 				></w-icon>
 			</button>
 		`;
@@ -131,7 +127,6 @@ class WarpAffix extends FormControlMixin(LitElement) {
 					name="Close"
 					size="small"
 					locale="${detectLocale()}"
-					class="flex"
 				></w-icon>
 			</button>
 		`;
@@ -145,7 +140,6 @@ class WarpAffix extends FormControlMixin(LitElement) {
 						name="${this.icon}"
 						size="small"
 						locale="${detectLocale()}"
-						class="flex"
 					></w-icon>
 				</div>
 			`;
