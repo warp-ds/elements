@@ -1,3 +1,10 @@
+# [2.13.0-next.11](https://github.com/warp-ds/elements/compare/v2.13.0-next.10...v2.13.0-next.11) (2026-10-01)
+
+
+### Bug Fixes
+
+* **card:** ensure cards keep consistent heights in a grid ([#785](https://github.com/warp-ds/elements/issues/785)) ([ae1bd7f](https://github.com/warp-ds/elements/commit/ae1bd7fdc5d90a10b45029870b245dfceab8a29b))
+
 # [2.13.0-next.10](https://github.com/warp-ds/elements/compare/v2.13.0-next.9...v2.13.0-next.10) (2026-10-01)
 
 
