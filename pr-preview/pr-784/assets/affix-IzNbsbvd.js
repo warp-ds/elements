@@ -105,11 +105,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n,p as r,r
 				type="submit"
 				@click="${this.submitContainingForm.bind(this)}"
 			>
-				<w-icon
-					name="Search"
-					size="small"
-					locale="${l()}"
-				></w-icon>
+				<w-icon name="Search" size="small" locale="${l()}"></w-icon>
 			</button>
 		`}get _clearButton(){let e=this.ariaLabel||c._({id:`affix.aria.clearInput`,message:`Clear input`,comment:`Aria label for the clear input button in affix`});return s`
 			<button
@@ -119,11 +115,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n,p as r,r
 				type="reset"
 				@click="${this.resetContainingTextField.bind(this)}"
 			>
-				<w-icon
-					name="Close"
-					size="small"
-					locale="${l()}"
-				></w-icon>
+				<w-icon name="Close" size="small" locale="${l()}"></w-icon>
 			</button>
 		`}get _icon(){return this.icon?s`
 				<div part="wrapper" class="${this._wrapperClasses}">
