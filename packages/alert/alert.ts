@@ -1,6 +1,3 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
@@ -9,22 +6,6 @@ import { detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
-
-const ccAlert = {
-	wrapper: "flex p-16 border border-l-4 rounded-4 s-text",
-	willChangeHeight: "will-change-height",
-	textWrapper: "last-child:mb-0 text-s",
-	title: "text-s",
-	icon: "w-16 mr-8 min-w-16",
-	negative: "s-border-negative-subtle s-border-l-negative s-bg-negative-subtle",
-	negativeIcon: "s-icon-negative",
-	positive: "s-border-positive-subtle s-border-l-positive s-bg-positive-subtle",
-	positiveIcon: "s-icon-positive",
-	warning: "s-border-warning-subtle s-border-l-warning s-bg-warning-subtle",
-	warningIcon: "s-icon-warning",
-	info: "s-border-info-subtle s-border-l-info s-bg-info-subtle",
-	infoIcon: "s-icon-info",
-};
 
 export type AlertVariants = "negative" | "positive" | "warning" | "info";
 
@@ -86,20 +67,6 @@ class WarpAlert extends LitElement {
 		}
 	}
 
-	/** @internal */
-	get _wrapperClasses() {
-		const variant = this.variant;
-		return classNames([ccAlert.wrapper, ccAlert[variant]]);
-	}
-
-	/** @internal */
-	get _iconClasses() {
-		const variant = this.variant;
-		const activeIconClassNames = ccAlert[`${variant}Icon`];
-
-		return classNames([ccAlert.icon, activeIconClassNames]);
-	}
-
 	// Slotted elements remain in lightDOM which allows for control of their style outside of shadowDOM.
 	// ::slotted([Simple Selector]) confirms to Specificity rules, but (being simple) does not add weight to lightDOM skin selectors,
 	// so never gets higher Specificity. Thus in order to overwrite style linked within shadowDOM, we need to use !important.
@@ -131,7 +98,6 @@ class WarpAlert extends LitElement {
 				name="Info"
 				size="small"
 				locale="${locale}"
-				class="flex"
 			></w-icon>`;
 		}
 		if (variant === alertVariants.warning) {
@@ -139,7 +105,6 @@ class WarpAlert extends LitElement {
 				name="Warning"
 				size="small"
 				locale="${locale}"
-				class="flex"
 			></w-icon>`;
 		}
 		if (variant === alertVariants.negative) {
@@ -147,7 +112,6 @@ class WarpAlert extends LitElement {
 				name="Error"
 				size="small"
 				locale="${locale}"
-				class="flex"
 			></w-icon>`;
 		}
 		if (variant === alertVariants.positive) {
@@ -155,7 +119,6 @@ class WarpAlert extends LitElement {
 				name="Success"
 				size="small"
 				locale="${locale}"
-				class="flex"
 			></w-icon>`;
 		}
 		return "";
@@ -164,9 +127,9 @@ class WarpAlert extends LitElement {
 	render() {
 		return html`
 			<w-expand-transition ?show=${this.show}>
-				<div role=${this.role} class=${this._wrapperClasses}>
-					<div class=${this._iconClasses}>${this._icon}</div>
-					<div class=${ccAlert.textWrapper}>
+				<div role=${this.role} part="base">
+					<div part="icon">${this._icon}</div>
+					<div part="content">
 						<slot></slot>
 					</div>
 				</div>
