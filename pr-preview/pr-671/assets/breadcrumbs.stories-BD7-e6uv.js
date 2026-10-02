@@ -43,6 +43,19 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,T as r,f
 		--_outline-offset: var(--w-c-breadcrumb-item-outline-offset, 1px);
 	}
 
+	:host(:not(:last-of-type))::after {
+		display: inline-block;
+		content: "/" / "";
+		color: var(--_separator-color);
+		-webkit-user-select: none;
+		user-select: none;
+		font-size: var(--_font-size);
+		line-height: var(--_line-height);
+		font-weight: var(--_font-weight);
+		margin-left: var(--_separator-spacing);
+		margin-right: var(--_separator-spacing);
+	}
+
 	.s-text {
 		color: var(--_text-color);
 		font-size: var(--_font-size);
@@ -72,16 +85,6 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,T as r,f
 		outline-width: var(--_outline-width);
 		outline-offset: var(--_outline-offset);
 	}
-	.separator {
-		color: var(--_separator-color);
-		-webkit-user-select: none;
-		user-select: none;
-		font-size: var(--_font-size);
-		line-height: var(--_line-height);
-		font-weight: var(--_font-weight);
-		margin-left: var(--_separator-spacing);
-		margin-right: var(--_separator-spacing);
-	}
 `})))()}var V;function H(){return(H=e((()=>{i(),s(),B(),v(),V=class extends o{constructor(...e){super(...e),this.currentPage=!1,this.href=null}static{this.styles=[_,z]}get link(){return this.href?u`<a
 					part="link"
 					class="s-text-link"
@@ -93,9 +96,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,T as r,f
 					class="s-text"
 					aria-current=${this.currentPage?`page`:a}
 					><slot></slot
-				></span>`}get separator(){return this.currentPage?a:u`<span part="separator" class="separator" aria-hidden="true"
-					>/</span
-				>`}render(){return u`${this.link}${this.separator}`}},l([c({type:Boolean,attribute:`current-page`})],V.prototype,`currentPage`,void 0),l([c({type:String})],V.prototype,`href`,void 0),customElements.get(`w-breadcrumb-item`)||customElements.define(`w-breadcrumb-item`,V)})))()}var U=t({Default:()=>q,WithLinks:()=>J,WithSpanForCurrentPage:()=>Y,__namedExportsOrder:()=>X,default:()=>K}),W,G,K,q,J,Y,X;function Z(){return(Z=e((()=>{x(),h(),i(),R(),H(),{events:W,argTypes:G}=g(`w-breadcrumbs`),K={title:`Navigation/Breadcrumbs`,render(e){return u`
+				></span>`}render(){return u`${this.link}`}},l([c({type:Boolean,attribute:`current-page`})],V.prototype,`currentPage`,void 0),l([c({type:String})],V.prototype,`href`,void 0),customElements.get(`w-breadcrumb-item`)||customElements.define(`w-breadcrumb-item`,V)})))()}var U=t({Default:()=>q,WithLinks:()=>J,WithSpanForCurrentPage:()=>Y,WithoutCurrentPageInTrail:()=>X,__namedExportsOrder:()=>Z,default:()=>K}),W,G,K,q,J,Y,X,Z;function Q(){return(Q=e((()=>{x(),h(),i(),R(),H(),{events:W,argTypes:G}=g(`w-breadcrumbs`),K={title:`Navigation/Breadcrumbs`,render(e){return u`
             <w-breadcrumbs ${y(b(e))}>
                 <w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
                 <w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
@@ -115,7 +116,13 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,T as r,f
                 <w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
                 <w-breadcrumb-item current-page>Current page</w-breadcrumb-item>
             </w-breadcrumbs>
-        `}},X=[`Default`,`WithLinks`,`WithSpanForCurrentPage`],q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
+        `}},X={render(e){return u`
+            <w-breadcrumbs ${y(b(e))}>
+                <w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+                <w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+            </w-breadcrumbs>
+            <h2>Current page</h2>
+        `}},Z=[`Default`,`WithLinks`,`WithSpanForCurrentPage`,`WithoutCurrentPageInTrail`],q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`{}`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`{
   render(args) {
     return html\`
             <w-breadcrumbs \${spread(prespread(args))}>
@@ -137,4 +144,14 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{C as n,T as r,f
             </w-breadcrumbs>
         \`;
   }
-}`,...Y.parameters?.docs?.source}}}})))()}export{Z as a,U as i,J as n,Y as r,q as t};
+}`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`{
+  render(args) {
+    return html\`
+            <w-breadcrumbs \${spread(prespread(args))}>
+                <w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+                <w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+            </w-breadcrumbs>
+            <h2>Current page</h2>
+        \`;
+  }
+}`,...X.parameters?.docs?.source}}}})))()}export{U as a,X as i,J as n,Q as o,Y as r,q as t};

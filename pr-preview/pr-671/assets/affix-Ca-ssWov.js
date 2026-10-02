@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p as i,r as a,s as o,t as s,y as c}from"./decorate-kJVNAdyH.js";import{a as l,n as u,o as d,r as f}from"./i18n-DHFMqi9L.js";import{n as p,t as m}from"./index.m-DHqwZk2H.js";import{t as h}from"./icon-DgzLkPq-.js";import{n as g,t as _}from"./styles-BxpTFSox.js";import{n as v,t as y}from"./FormControlMixin-BCJbRrUC.js";var b;function x(){return(x=e((()=>{r(),b=t`
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n,p as r,r as i,s as a,t as o,y as s}from"./decorate-kJVNAdyH.js";import{a as c,n as l,o as u,r as d}from"./i18n-DHFMqi9L.js";import{n as f,t as p}from"./index.m-DHqwZk2H.js";import{t as m}from"./icon-DgzLkPq-.js";import{n as h,t as g}from"./styles-BxpTFSox.js";import{n as _,t as v}from"./FormControlMixin-BCJbRrUC.js";var y;function b(){return(b=e((()=>{n(),y=t`
 	/* Wrapper component tokens with semantic fallbacks */
 	:host {
 		/* Internal tokens - not part of public API */
@@ -97,7 +97,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
 	button[part="wrapper"]:not(:focus-visible) {
 		outline: none;
 	}
-`})))()}var S;function C(){return(C=e((()=>{r(),S=n(`*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.flex{display:flex}.static{position:static}`)})))()}var w;function T(){return(T=e((()=>{m(),v(),d(),r(),a(),f(),_(),x(),C(),h(),w=class extends y(i){constructor(...e){super(...e),this.ariaLabel=null,this.clear=!1,this.search=!1,this.label=``,this.icon=null}static{this.styles=[g,S,b]}get _wrapperClasses(){return p([this.label?`has-label`:`has-icon`])}resetContainingTextField(e){let t=this.closest(`w-textfield`);t&&t.resetFormControl(),e.stopPropagation()}submitContainingForm(e){let t=this.internals.form;t&&t.submit(),e.stopPropagation()}get _searchButton(){let e=this.ariaLabel||l._({id:`affix.aria.search`,message:`Search`,comment:`Aria label for the search button in affix`});return c`
+`})))()}var x;function S(){return(S=e((()=>{p(),_(),u(),n(),i(),d(),g(),b(),m(),x=class extends v(r){constructor(...e){super(...e),this.ariaLabel=null,this.clear=!1,this.search=!1,this.label=``,this.icon=null}static{this.styles=[h,y]}get _wrapperClasses(){return f([this.label?`has-label`:`has-icon`])}resetContainingTextField(e){let t=this.closest(`w-textfield`);t&&t.resetFormControl(),e.stopPropagation()}submitContainingForm(e){let t=this.internals.form;t&&t.submit(),e.stopPropagation()}get _searchButton(){let e=this.ariaLabel||c._({id:`affix.aria.search`,message:`Search`,comment:`Aria label for the search button in affix`});return s`
 			<button
 				part="wrapper"
 				aria-label="${e}"
@@ -105,14 +105,9 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
 				type="submit"
 				@click="${this.submitContainingForm.bind(this)}"
 			>
-				<w-icon
-					name="Search"
-					size="small"
-					locale="${u()}"
-					class="flex"
-				></w-icon>
+				<w-icon name="Search" size="small" locale="${l()}"></w-icon>
 			</button>
-		`}get _clearButton(){let e=this.ariaLabel||l._({id:`affix.aria.clearInput`,message:`Clear input`,comment:`Aria label for the clear input button in affix`});return c`
+		`}get _clearButton(){let e=this.ariaLabel||c._({id:`affix.aria.clearInput`,message:`Clear input`,comment:`Aria label for the clear input button in affix`});return s`
 			<button
 				part="wrapper"
 				aria-label="${e}"
@@ -120,24 +115,18 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,T as n,f as r,p
 				type="reset"
 				@click="${this.resetContainingTextField.bind(this)}"
 			>
-				<w-icon
-					name="Close"
-					size="small"
-					locale="${u()}"
-					class="flex"
-				></w-icon>
+				<w-icon name="Close" size="small" locale="${l()}"></w-icon>
 			</button>
-		`}get _icon(){return this.icon?c`
+		`}get _icon(){return this.icon?s`
 				<div part="wrapper" class="${this._wrapperClasses}">
 					<w-icon
 						name="${this.icon}"
 						size="small"
-						locale="${u()}"
-						class="flex"
+						locale="${l()}"
 					></w-icon>
 				</div>
-			`:``}get _text(){return c`
+			`:``}get _text(){return s`
 			<div part="wrapper" class="${this._wrapperClasses}">
 				<span part="label">${this.label}</span>
 			</div>
-		`}get _markup(){if(this.label)return this._text;if(this.icon)return this._icon;if(this.search)return this._searchButton;if(this.clear)return this._clearButton}render(){return c`${this._markup}`}},s([o({attribute:`aria-label`,reflect:!0,useDefault:!0})],w.prototype,`ariaLabel`,void 0),s([o({type:Boolean})],w.prototype,`clear`,void 0),s([o({type:Boolean})],w.prototype,`search`,void 0),s([o({reflect:!0,useDefault:!0})],w.prototype,`label`,void 0),s([o({reflect:!0,useDefault:!0})],w.prototype,`icon`,void 0),customElements.get(`w-affix`)||customElements.define(`w-affix`,w)})))()}export{T as t};
+		`}get _markup(){if(this.label)return this._text;if(this.icon)return this._icon;if(this.search)return this._searchButton;if(this.clear)return this._clearButton}render(){return s`${this._markup}`}},o([a({attribute:`aria-label`,reflect:!0,useDefault:!0})],x.prototype,`ariaLabel`,void 0),o([a({type:Boolean})],x.prototype,`clear`,void 0),o([a({type:Boolean})],x.prototype,`search`,void 0),o([a({reflect:!0,useDefault:!0})],x.prototype,`label`,void 0),o([a({reflect:!0,useDefault:!0})],x.prototype,`icon`,void 0),customElements.get(`w-affix`)||customElements.define(`w-affix`,x)})))()}export{S as t};
