@@ -1,4 +1,4 @@
-import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{f as n,y as r}from"./decorate-kJVNAdyH.js";import{n as i,t as a}from"./dist-BvnyirUI.js";import{i as o,n as s,r as c}from"./utilities-D7JRNCUp.js";import{t as l}from"./affix-BXJyW2L4.js";import{t as u}from"./taggedTemplateLiteral-BZenJ0bZ.js";import{t as d}from"./tooltip-DFh_EJXQ.js";import{t as f}from"./textfield-DCqR6nVv.js";var p=t({Default:()=>y,Disabled:()=>C,FormParticipation:()=>M,Invalid:()=>S,Masking:()=>j,ReadOnly:()=>w,Required:()=>T,WithClearAffixResetTextfield:()=>O,WithHelpText:()=>x,WithIconAffix:()=>A,WithPlaceholder:()=>b,WithPrefix:()=>D,WithSearchAndClearAffixForm:()=>k,WithSuffix:()=>E,WithTooltip:()=>N,__namedExportsOrder:()=>P,default:()=>v}),m,h,g,_,v,y,b,x,S,C,w,T,E,D,O,k,A,j,M,N,P;function F(){return(F=e((()=>{c(),i(),n(),f(),l(),d(),{events:h,args:g,argTypes:_}=a(`w-textfield`),v={title:`Forms/Textfield`,render(e){return r`<w-textfield ${o(s(e))}></w-textfield>`},args:g,argTypes:_,parameters:{actions:{handles:h}}},y={args:{label:`Email`,type:`email`}},b={args:{label:`Email`,placeholder:`user@example.com`,type:`email`}},x={args:{label:`Password`,"help-text":`Must be at least 8 characters`,type:`password`}},S={args:{label:`Email`,invalid:!0,"help-text":`Please enter a valid email address`,value:`invalid-email`,type:`email`}},C={args:{label:`Email`,disabled:!0,value:`user@example.com`,type:`email`}},w={args:{label:`Email`,"read-only":!0,value:`user@example.com`,type:`email`}},T={args:{label:`Email`,required:!0,type:`email`}},E={args:{label:`Price`,placeholder:`1 000 000`,type:`text`},render(e){return r`
+import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{f as n,y as r}from"./decorate-kJVNAdyH.js";import{n as i,t as a}from"./dist-BvnyirUI.js";import{i as o,n as s,r as c}from"./utilities-D7JRNCUp.js";import{t as l}from"./affix-IzNbsbvd.js";import{t as u}from"./taggedTemplateLiteral-BZenJ0bZ.js";import{t as d}from"./tooltip-DFh_EJXQ.js";import{t as f}from"./textfield-DH4XEeF8.js";var p=t({Default:()=>y,Disabled:()=>C,FormParticipation:()=>M,Invalid:()=>S,Masking:()=>j,ReadOnly:()=>w,Required:()=>T,UsingField:()=>P,WithClearAffixResetTextfield:()=>O,WithHelpText:()=>x,WithIconAffix:()=>A,WithPlaceholder:()=>b,WithPrefix:()=>D,WithSearchAndClearAffixForm:()=>k,WithSuffix:()=>E,WithTooltip:()=>N,__namedExportsOrder:()=>F,default:()=>v}),m,h,g,_,v,y,b,x,S,C,w,T,E,D,O,k,A,j,M,N,P,F;function I(){return(I=e((()=>{c(),i(),n(),f(),l(),d(),{events:h,args:g,argTypes:_}=a(`w-textfield`),v={title:`Forms/Textfield`,render(e){return r`<w-textfield ${o(s(e))}></w-textfield>`},args:g,argTypes:_,parameters:{actions:{handles:h}}},y={args:{label:`Email`,type:`email`}},b={args:{label:`Email`,placeholder:`user@example.com`,type:`email`}},x={args:{label:`Password`,"help-text":`Must be at least 8 characters`,type:`password`}},S={args:{label:`Email`,invalid:!0,"help-text":`Please enter a valid email address`,value:`invalid-email`,type:`email`}},C={args:{label:`Email`,disabled:!0,value:`user@example.com`,type:`email`}},w={args:{label:`Email`,"read-only":!0,value:`user@example.com`,type:`email`}},T={args:{label:`Email`,required:!0,type:`email`}},E={args:{label:`Price`,placeholder:`1 000 000`,type:`text`},render(e){return r`
             <w-textfield ${o(s(e))}>
                 <w-affix slot="suffix" label="kr"></w-affix>
             </w-textfield>
@@ -66,7 +66,13 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{f as n,y as r}f
                 ?optional=${e}
                 ?required=${t}
             ></w-textfield>
-        `}},P=[`Default`,`WithPlaceholder`,`WithHelpText`,`Invalid`,`Disabled`,`ReadOnly`,`Required`,`WithSuffix`,`WithPrefix`,`WithClearAffixResetTextfield`,`WithSearchAndClearAffixForm`,`WithIconAffix`,`Masking`,`FormParticipation`,`WithTooltip`],y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`{
+        `}},P={render(){return r`
+            <w-field>
+                <label for="my-email">Email</label>
+                <input id="my-email" type="text" aria-describedby="help-text" />
+                <p id="help-text">This is some help text...</p>
+            </w-field>
+        `}},F=[`Default`,`WithPlaceholder`,`WithHelpText`,`Invalid`,`Disabled`,`ReadOnly`,`Required`,`WithSuffix`,`WithPrefix`,`WithClearAffixResetTextfield`,`WithSearchAndClearAffixForm`,`WithIconAffix`,`Masking`,`FormParticipation`,`WithTooltip`,`UsingField`],y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`{
   args: {
     label: "Email",
     type: "email"
@@ -258,4 +264,14 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{f as n,y as r}f
             ></w-textfield>
         \`;
   }
-}`,...N.parameters?.docs?.source}}}})))()}export{x as a,N as c,w as i,F as l,C as n,b as o,S as r,E as s,y as t,p as u};
+}`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`{
+  render() {
+    return html\`
+            <w-field>
+                <label for="my-email">Email</label>
+                <input id="my-email" type="text" aria-describedby="help-text" />
+                <p id="help-text">This is some help text...</p>
+            </w-field>
+        \`;
+  }
+}`,...P.parameters?.docs?.source}}}})))()}export{x as a,N as c,w as i,I as l,C as n,b as o,S as r,E as s,y as t,p as u};

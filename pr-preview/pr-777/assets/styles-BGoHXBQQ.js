@@ -1,15 +1,15 @@
 import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{C as t,f as n}from"./decorate-kJVNAdyH.js";var r;function i(){return(i=e((()=>{n(),r=t`
 	:host {
 		--_button-group-background: var(
-			--w-c-button-group-bg,
+			--w-c-button-group-background,
 			var(--w-s-color-background)
 		);
 		--_button-group-background-hover: var(
-			--w-c-button-group-bg-hover,
+			--w-c-button-group-background-hover,
 			var(--w-s-color-background-hover)
 		);
 		--_button-group-background-selected: var(
-			--w-c-button-group-bg-selected,
+			--w-c-button-group-background-selected,
 			var(--w-s-color-background-primary)
 		);
 		--_button-group-border-color: var(
