@@ -1,4 +1,97 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.will-change-height{will-change:height}.border{border-width:1px}.border-l-4{border-left-width:4px}.rounded-4{border-radius:4px}.block{display:block}.inline{display:inline}.flex{display:flex}.hidden{display:none}.static{position:static}.s-bg-info-subtle{background-color:var(--w-s-color-background-info-subtle)}.s-bg-negative-subtle{background-color:var(--w-s-color-background-negative-subtle)}.s-bg-positive-subtle{background-color:var(--w-s-color-background-positive-subtle)}.s-bg-warning-subtle{background-color:var(--w-s-color-background-warning-subtle)}.s-text{color:var(--w-s-color-text)}.s-icon-info{color:var(--w-s-color-icon-info)}.s-icon-negative{color:var(--w-s-color-icon-negative)}.s-icon-positive{color:var(--w-s-color-icon-positive)}.s-icon-warning{color:var(--w-s-color-icon-warning)}.s-border-info-subtle{border-color:var(--w-s-color-border-info-subtle)}.s-border-l-info{border-left-color:var(--w-s-color-border-info)}.s-border-l-negative{border-left-color:var(--w-s-color-border-negative)}.s-border-l-positive{border-left-color:var(--w-s-color-border-positive)}.s-border-l-warning{border-left-color:var(--w-s-color-border-warning)}.s-border-negative-subtle{border-color:var(--w-s-color-border-negative-subtle)}.s-border-positive-subtle{border-color:var(--w-s-color-border-positive-subtle)}.s-border-warning-subtle{border-color:var(--w-s-color-border-warning-subtle)}.min-w-16{min-width:1.6rem}.w-16{width:1.6rem}.last-child\\:mb-0>:last-child{margin-bottom:0}.mr-8{margin-right:.8rem}.p-16{padding:1.6rem}.text-s{font-size:var(--w-font-size-s);line-height:var(--w-line-height-s)}",
-);
+import { css } from "lit";
+export const styles = css`
+	:host {
+		--_icon-size: var(--w-c-alert-icon-size, 16px);
+		--_icon-color: var(--w-c-alert-color-icon, var(--w-s-color-icon-info));
+		--_background-color: var(
+			--w-c-alert-color-background,
+			var(--w-s-color-background-info-subtle)
+		);
+		--_border-color: var(
+			--w-c-alert-color-border,
+			var(--w-s-color-border-info-subtle)
+		);
+		--_border-left-color: var(
+			--w-c-alert-color-border-left,
+			var(--w-s-color-border-info)
+		);
+		--_border-radius: var(--w-c-alert-border-radius, 4px);
+		--_border-width: var(--w-c-alert-border-width, 1px);
+		--_border-left-width: var(--w-c-alert-border-left-width, 4px);
+		--_text-color: var(--w-c-alert-color-text, var(--w-s-color-text));
+		--_font-size: var(--w-c-alert-font-size, var(--w-font-size-s));
+		--_line-height: var(--w-c-alert-line-height, var(--w-line-height-s));
+		--_padding: var(--w-c-alert-padding, 1.6rem);
+	}
+	:host([variant="positive"]) {
+		--_background-color: var(
+			--w-c-alert-color-background,
+			var(--w-s-color-background-positive-subtle)
+		);
+		--_border-color: var(
+			--w-c-alert-border-color,
+			var(--w-s-color-border-positive-subtle)
+		);
+		--_border-left-color: var(
+			--w-c-alert-border-left-color,
+			var(--w-s-color-border-positive)
+		);
+		--_icon-color: var(--w-c-alert-icon-color, var(--w-s-color-icon-positive));
+	}
+	:host([variant="warning"]) {
+		--_background-color: var(
+			--w-c-alert-color-background,
+			var(--w-s-color-background-warning-subtle)
+		);
+		--_border-color: var(
+			--w-c-alert-color-border,
+			var(--w-s-color-border-warning-subtle)
+		);
+		--_border-left-color: var(
+			--w-c-alert-color-border-left,
+			var(--w-s-color-border-warning)
+		);
+		--_icon-color: var(--w-c-alert-color-icon, var(--w-s-color-icon-warning));
+	}
+	:host([variant="negative"]) {
+		--_background-color: var(
+			--w-c-alert-color-background,
+			var(--w-s-color-background-negative-subtle)
+		);
+		--_border-color: var(
+			--w-c-alert-color-border,
+			var(--w-s-color-border-negative-subtle)
+		);
+		--_border-left-color: var(
+			--w-c-alert-color-border-left,
+			var(--w-s-color-border-negative)
+		);
+		--_icon-color: var(--w-c-alert-color-icon, var(--w-s-color-icon-negative));
+	}
+	[part="base"] {
+		padding: var(--_padding);
+		border-color: var(--_border-color);
+		border-left-color: var(--_border-left-color);
+		color: var(--_text-color);
+		background-color: var(--_background-color);
+		display: flex;
+		border-radius: var(--_border-radius);
+		border-width: var(--_border-width);
+		border-left-width: var(--_border-left-width);
+	}
+	[part="icon"] {
+		margin-right: 0.8rem;
+		width: 1.6rem;
+		min-width: 1.6rem;
+		color: var(--_icon-color);
+	}
+	w-icon {
+		height: var(--_icon-size);
+		width: var(--_icon-size);
+		display: flex;
+	}
+	[part="content"] {
+		font-size: var(--_font-size);
+		line-height: var(--_line-height);
+	}
+`;
