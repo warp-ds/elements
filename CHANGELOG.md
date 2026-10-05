@@ -1,3 +1,10 @@
+# [2.13.0-next.14](https://github.com/warp-ds/elements/compare/v2.13.0-next.13...v2.13.0-next.14) (2026-10-05)
+
+
+### Features
+
+* **breadcrumbs:** add parts to breadcrumb parent component ([#789](https://github.com/warp-ds/elements/issues/789)) ([24c0c0e](https://github.com/warp-ds/elements/commit/24c0c0ed674393d8aae3fc673d1b88e9cc661e69))
+
 # [2.13.0-next.13](https://github.com/warp-ds/elements/compare/v2.13.0-next.12...v2.13.0-next.13) (2026-10-05)
 
 
