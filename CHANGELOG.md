@@ -1,3 +1,10 @@
+# [2.13.0-next.12](https://github.com/warp-ds/elements/compare/v2.13.0-next.11...v2.13.0-next.12) (2026-10-05)
+
+
+### Features
+
+* **alert:** add styling api ([#787](https://github.com/warp-ds/elements/issues/787)) ([77e1cc2](https://github.com/warp-ds/elements/commit/77e1cc2b94d5978c8bbef6d47de87a3669c64fb1))
+
 # [2.13.0-next.11](https://github.com/warp-ds/elements/compare/v2.13.0-next.10...v2.13.0-next.11) (2026-10-01)
 
 
