@@ -3,15 +3,15 @@ import { css } from "lit";
 export const buttonGroupComponentVariables = css`
 	:host {
 		--_button-group-background: var(
-			--w-c-button-group-bg,
+			--w-c-button-group-background,
 			var(--w-s-color-background)
 		);
 		--_button-group-background-hover: var(
-			--w-c-button-group-bg-hover,
+			--w-c-button-group-background-hover,
 			var(--w-s-color-background-hover)
 		);
 		--_button-group-background-selected: var(
-			--w-c-button-group-bg-selected,
+			--w-c-button-group-background-selected,
 			var(--w-s-color-background-primary)
 		);
 		--_button-group-border-color: var(
