@@ -135,4 +135,23 @@ export const styles = css`
 	:host([data-show-error]) [part~="help-text"] {
 		color: var(--_help-text-color-error);
 	}
+
+	:host([type="button"]) [part="form-control-input"] {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 0;
+	}
+
+	/** Visually hide the label for button groups */
+	:host([type="button"]) [part="form-control-label"] {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
 `;

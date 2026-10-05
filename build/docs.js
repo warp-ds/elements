@@ -460,6 +460,42 @@ components.forEach(({ declaration, packageName }) => {
   });
 })();
 
+// button-group gets some custom treatment since it's implementation is as an attribute on checkbox and radio group,
+// but conceptually it is a separate component.
+(function buildButtonGroupDocs() {
+  const docsDir = new URL('./button-group/', DOCS_OUTPUT_DIR);
+  const docsDirPath = docsDir.pathname;
+  if (!existsSync(docsDirPath)) {
+    mkdirSync(docsDirPath, { recursive: true });
+  }
+  copyFileSync(new URL('../packages/button-group/docs/accessibility.md', import.meta.url), new URL('./accessibility.md', docsDir));
+  copyFileSync(new URL('../packages/button-group/docs/usage.md', import.meta.url), new URL('./usage.md', docsDir));
+  copyFileSync(new URL('../packages/button-group/docs/examples.md', import.meta.url), new URL('./examples.md', docsDir));
+  copyFileSync(new URL('../packages/button-group/docs/styling.md', import.meta.url), new URL('./styling.md', docsDir));
+
+  const usageContent = readOptionalFile(new URL('./usage.md', docsDir));
+  const accessibilityContent = readOptionalFile(new URL('./accessibility.md', docsDir));
+  const examplesContent = readOptionalFile(new URL('./examples.md', docsDir));
+  const stylingContent = readOptionalFile(new URL('./styling.md', docsDir));
+
+
+  let generatedDocument = '# ButtonGroup\n\n';
+  generatedDocument += '## Description\n\nA button group is a type of form input displayed as multiple buttons in a group, typically used as a filter control.\n\n';
+
+  generatedDocument += `${usageContent}\n\n`;
+  generatedDocument += `${accessibilityContent}\n\n`;
+  generatedDocument += `${examplesContent}\n\n`;
+  generatedDocument += `${stylingContent}\n\n`;
+
+  writeFileSync(new URL('./button-group.md', docsDir), generatedDocument, { encoding: 'utf8' });
+
+  addDocsIndexEntry({
+    description: 'A button group is a type of form input displayed as multiple buttons in a group, typically used as a filter control.',
+    tagName: 'w-checkbox-group | w-radio-group',
+    packageName: 'button-group',
+  });
+})();
+
 buildDocsIndex();
 
 console.log(`Generated docs for ${components.length} components and ${docsIndexEntries.length} index entries.`);
