@@ -1,3 +1,10 @@
+# [2.13.0-next.15](https://github.com/warp-ds/elements/compare/v2.13.0-next.14...v2.13.0-next.15) (2026-10-05)
+
+
+### Features
+
+* add button group components ([#777](https://github.com/warp-ds/elements/issues/777)) ([8372c60](https://github.com/warp-ds/elements/commit/8372c600ecc0cdef714f5aabf4bd55ecff442690))
+
 # [2.13.0-next.14](https://github.com/warp-ds/elements/compare/v2.13.0-next.13...v2.13.0-next.14) (2026-10-05)
 
 
