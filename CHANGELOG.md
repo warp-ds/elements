@@ -1,3 +1,15 @@
+# [2.13.0-next.13](https://github.com/warp-ds/elements/compare/v2.13.0-next.12...v2.13.0-next.13) (2026-10-05)
+
+
+### Bug Fixes
+
+* **card:** gate clickable hover styles behind media feature query ([#776](https://github.com/warp-ds/elements/issues/776)) ([4448152](https://github.com/warp-ds/elements/commit/44481529cf436b7e17bb2d5d58125b27286289de))
+
+
+### Features
+
+* apply warp dark theme on localhost ([#788](https://github.com/warp-ds/elements/issues/788)) ([20bcca7](https://github.com/warp-ds/elements/commit/20bcca7d8f24b48089b537542e2b9ffd3945e374))
+
 # [2.13.0-next.12](https://github.com/warp-ds/elements/compare/v2.13.0-next.11...v2.13.0-next.12) (2026-10-05)
 
 
