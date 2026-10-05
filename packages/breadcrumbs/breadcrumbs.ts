@@ -14,15 +14,7 @@ import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 
-const ccBreadcrumbs = {
-	wrapper: "flex space-x-8",
-	text: "s-text",
-	link: "s-text-link",
-	separator: "select-none s-icon",
-	a11y: "sr-only",
-};
-
-const separator = html`<span class=${ccBreadcrumbs.separator}>/</span>`;
+const separator = html`<span class="legacy-separator">/</span>`;
 
 /**
  * Shows the navigation structure for the current page.
@@ -118,13 +110,15 @@ class WarpBreadcrumbs extends LitElement {
 			if (typeof child === "string") {
 				const isLastEl = index === this.children.length - 1;
 				return html`<span
-					class=${ccBreadcrumbs.text}
+					class="legacy-trail-segment-text"
 					aria-current=${isLastEl ? "page" : undefined}
 					>${child}</span
 				>`;
 			}
 			child.classList.add(
-				child.tagName === "A" ? ccBreadcrumbs.link : ccBreadcrumbs.text,
+				child.tagName === "A"
+					? "legacy-trail-segment-link"
+					: "legacy-trail-segment-text",
 			);
 			return child;
 		});
@@ -135,9 +129,9 @@ class WarpBreadcrumbs extends LitElement {
 
 	render() {
 		return html`
-			<nav aria-labelledby="breadCrumbLabel">
-				<h2 id="breadCrumbLabel" class=${ccBreadcrumbs.a11y}>${this._label}</h2>
-				<div class=${ccBreadcrumbs.wrapper}>${this._children}<slot></slot></div>
+			<nav part="base" aria-labelledby="breadCrumbLabel">
+				<h2 id="breadCrumbLabel" class="sr-only">${this._label}</h2>
+				<div part="trail">${this._children}<slot></slot></div>
 			</nav>
 		`;
 	}

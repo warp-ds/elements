@@ -76,3 +76,15 @@ export const WithoutCurrentPageInTrail: Story = {
 		`;
 	},
 };
+
+export const LegacyChildren: Story = {
+	render(args) {
+		return html`
+			<w-breadcrumbs ${spread(prespread(args))}>
+				<a href="#/home">Home</a>
+				<a href="#/category">Category</a>
+				<span aria-current="page">Item</span>
+			</w-breadcrumbs>
+		`;
+	},
+};
