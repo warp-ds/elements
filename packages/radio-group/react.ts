@@ -1,8 +1,9 @@
 import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
-import React from "react";
+import React, { cloneElement } from "react";
 
 import type { WarpRadioGroup } from "./radio-group.js";
+import type { RadioProps } from "../radio/react.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -36,8 +37,21 @@ type RadioGroupProps = Omit<BaseRadioGroupProps, "help-text" | "helpText"> & {
  * [Warp component reference](https://warp-ds.github.io/docs/components/radio/frameworks/elements)
  */
 export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
-	({ helpText, ...props }, ref) =>
-		React.createElement(
+	({ helpText, ...props }, ref) => {
+		let focusableRadioIndex = 0; // default to the first, but see if any of the children are checked first
+		React.Children.forEach(props.children, (child, index) => {
+			if (
+				React.isValidElement(child) &&
+				(child.type as { displayName?: string }).displayName === "Radio"
+			) {
+				console.log(child.props);
+				if ((child.props as RadioProps).checked) {
+					focusableRadioIndex = index;
+				}
+			}
+		});
+		console.log(focusableRadioIndex);
+		return React.createElement(
 			BaseRadioGroup,
 			{
 				...props,
@@ -47,7 +61,24 @@ export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 				"help-text"?: string;
 			},
 			[
-				props.children,
+				React.Children.map(props.children, (child, index) => {
+					if (
+						React.isValidElement(child) &&
+						(child.type as { displayName?: string }).displayName === "Radio"
+					) {
+						if (index === focusableRadioIndex) {
+							return cloneElement(child, {
+								// @ts-expect-error CBA
+								tabIndex: 0,
+							});
+						} else {
+							return cloneElement(child, {
+								// @ts-expect-error CBA
+								tabIndex: -1,
+							});
+						}
+					}
+				}),
 				// support taking in JSX in helpText and placing it in the correct slot on behalf of users
 				typeof helpText !== "undefined" && typeof helpText !== "string"
 					? React.createElement(
@@ -57,7 +88,8 @@ export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 						)
 					: null,
 			],
-		),
+		);
+	},
 );
 
 RadioGroup.displayName = "RadioGroup";

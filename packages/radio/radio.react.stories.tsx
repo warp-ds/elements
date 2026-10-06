@@ -30,7 +30,7 @@ export const HelpText = {
 					}
 				>
 					<Radio value="foo">foo</Radio>
-					<Radio value="bar">bar</Radio>
+					<Radio value="bar" checked>bar</Radio>
 				</RadioGroup>
 				<button style={{ marginTop: "16px" }}>click me</button>
 			</form>
