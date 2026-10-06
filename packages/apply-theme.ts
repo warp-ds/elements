@@ -4,16 +4,19 @@ const darkModeReadyHosts = [
 	"local.dba.dk",
 	"local.finn.no",
 	"local.tori.fi",
+	"local.vend.com",
 	// dev
 	// "dev.blocket.se",
 	// "dev.dba.dk",
 	// "dev.finn.no",
 	// "dev.tori.fi",
+	// "dev.vend.com",
 	// prod
 	// "www.blocket.se",
 	// "www.dba.dk",
 	// "www.finn.no",
 	// "www.tori.fi",
+	// "www.vend.com",
 ];
 
 /**
