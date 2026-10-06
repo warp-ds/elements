@@ -1,3 +1,10 @@
+# [2.13.0-next.16](https://github.com/warp-ds/elements/compare/v2.13.0-next.15...v2.13.0-next.16) (2026-10-06)
+
+
+### Features
+
+* add Lit and React utilities to watch for theme changes ([#790](https://github.com/warp-ds/elements/issues/790)) ([9945108](https://github.com/warp-ds/elements/commit/994510847105e8e38d2286da195a1931d5e612c6))
+
 # [2.13.0-next.15](https://github.com/warp-ds/elements/compare/v2.13.0-next.14...v2.13.0-next.15) (2026-10-05)
 
 
