@@ -1,4 +1,7 @@
-/** Entrypoint for all the React wrappers so users can import several components from the same import statement. */
+/**
+ * Entrypoint for all the React wrappers so users can import several components from the same import statement.
+ * Also how we ship hooks.
+ */
 export * from "./packages/affix/react.js";
 export * from "./packages/alert/react.js";
 export * from "./packages/attention/react.js";
@@ -13,6 +16,7 @@ export * from "./packages/checkbox-group/react.js";
 export * from "./packages/combobox/react.js";
 export * from "./packages/datepicker/react.js";
 export * from "./packages/expandable/react.js";
+export * from "./packages/hooks/react.js";
 export * from "./packages/icon/react.js";
 export * from "./packages/link/react.js";
 export * from "./packages/modal/react.js";
