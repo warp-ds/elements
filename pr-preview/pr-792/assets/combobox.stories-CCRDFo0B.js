@@ -16,7 +16,7 @@ import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{c as t,h as n,n as r,t
 			--w-c-combobox-option-color-background-selected,
 			var(--w-s-color-background-selected)
 		);
-		--_z-index: var(--w-c-combobox-z-index, 20);
+		--_z-index: var(--w-c-combobox-options-box-z-index, 20);
 	}
 	.sr-only {
 		clip: rect(0px, 0px, 0px, 0px);
