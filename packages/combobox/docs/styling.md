@@ -122,4 +122,4 @@ When the `optional` attribute is set and the field is not `required`, these toke
 | `--w-c-combobox-option-padding` | option padding | `0.8rem` |
 | `--w-c-combobox-option-color-background-hover` | option background color on hover | `--w-s-color-background-hover` |
 | `--w-c-combobox-option-color-background-selected` | selected option background color | `--w-s-color-background-selected` |
-| `--w-c-combobox-z-index` | options-list stacking order | `20` |
+| `--w-c-combobox-options-box-z-index` | options-list stacking order | `20` |

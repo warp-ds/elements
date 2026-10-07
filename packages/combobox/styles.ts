@@ -17,7 +17,7 @@ export const styles = css`
 			--w-c-combobox-option-color-background-selected,
 			var(--w-s-color-background-selected)
 		);
-		--_z-index: var(--w-c-combobox-z-index, 20);
+		--_z-index: var(--w-c-combobox-options-box-z-index, 20);
 	}
 	.sr-only {
 		clip: rect(0px, 0px, 0px, 0px);
