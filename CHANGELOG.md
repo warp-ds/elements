@@ -1,3 +1,10 @@
+# [2.13.0-next.20](https://github.com/warp-ds/elements/compare/v2.13.0-next.19...v2.13.0-next.20) (2026-10-07)
+
+
+### Bug Fixes
+
+* apply data-w-theme in dev environments as well ([#793](https://github.com/warp-ds/elements/issues/793)) ([4a67819](https://github.com/warp-ds/elements/commit/4a67819002117c5b9c0472dc0e028534509ca614))
+
 # [2.13.0-next.19](https://github.com/warp-ds/elements/compare/v2.13.0-next.18...v2.13.0-next.19) (2026-10-07)
 
 
