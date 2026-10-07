@@ -1,3 +1,10 @@
+# [2.13.0-next.19](https://github.com/warp-ds/elements/compare/v2.13.0-next.18...v2.13.0-next.19) (2026-10-07)
+
+
+### Features
+
+* **combobox:** add styling API ([#792](https://github.com/warp-ds/elements/issues/792)) ([1335c3f](https://github.com/warp-ds/elements/commit/1335c3f126058fce58f979b442cfc2911d3c34e9))
+
 # [2.13.0-next.18](https://github.com/warp-ds/elements/compare/v2.13.0-next.17...v2.13.0-next.18) (2026-10-07)
 
 
