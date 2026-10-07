@@ -178,15 +178,12 @@ export class WarpSnackbar extends LitElement {
 				this.shadowRoot?.host.querySelector<WarpSnackbarItem>(
 					"w-snackbar-item:last-of-type",
 				);
-			console.log("Found item!");
 			if (snackbarItem) {
 				const snackbarAction = snackbarItem.querySelector<WarpButton>(
 					'w-button[slot="action"]',
 				);
-				console.log("Found action!");
 				if (snackbarAction) {
 					snackbarAction.click();
-					console.log("Clicked!");
 				}
 			}
 		}

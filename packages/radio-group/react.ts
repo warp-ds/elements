@@ -44,13 +44,11 @@ export const RadioGroup = React.forwardRef<WarpRadioGroup, RadioGroupProps>(
 				React.isValidElement(child) &&
 				(child.type as { displayName?: string }).displayName === "Radio"
 			) {
-				console.log(child.props);
 				if ((child.props as RadioProps).checked) {
 					focusableRadioIndex = index;
 				}
 			}
 		});
-		console.log(focusableRadioIndex);
 		return React.createElement(
 			BaseRadioGroup,
 			{
