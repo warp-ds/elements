@@ -516,7 +516,6 @@ class WarpSlider extends LitElement {
 		const slotContent = slot.assignedElements().length > 0;
 
 		this._hasLabel = slotContent || !!this.label;
-		console.log("Label content changed, has label:", this._hasLabel);
 	}
 
 	get _label() {

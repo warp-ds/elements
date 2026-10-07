@@ -30,12 +30,6 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 		radioStyles,
 	];
 
-	/** @internal */
-	static shadowRootOptions = {
-		...LitElement.shadowRootOptions,
-		delegatesFocus: true,
-	};
-
 	/**
 	 * The name of the radio, submitted as a name/value pair with form data.
 	 */
@@ -118,10 +112,11 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 	connectedCallback() {
 		super.connectedCallback();
 		this.value = this.getAttribute("value") ?? "on";
-		this.#defaultChecked = this.hasAttribute("checked");
+		this.#defaultChecked = this.checked;
 		this.checked = this.#defaultChecked;
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this.internals.role = "radio";
+		this.setAttribute("tabindex", String(this._internalTabIndex));
 		this.syncAriaDisabled();
 		this.syncFormValue();
 		this.updateValidity();
@@ -169,6 +164,13 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 			if (this.checked && !this.isInGroup()) {
 				this.uncheckOtherRadios();
 			}
+		}
+
+		if (
+			changedProperties.has("_groupTabIndex") ||
+			changedProperties.has("_standaloneTabIndex")
+		) {
+			this.setAttribute("tabindex", String(this._internalTabIndex));
 		}
 	}
 
@@ -417,7 +419,7 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div part="base" tabindex="${this._internalTabIndex}">
+			<div part="base">
 				<div part="control"></div>
 				<slot part="label"></slot>
 			</div>
