@@ -1,3 +1,12 @@
+# [2.13.0-next.18](https://github.com/warp-ds/elements/compare/v2.13.0-next.17...v2.13.0-next.18) (2026-10-07)
+
+
+### Bug Fixes
+
+* have RadioGroup apply tabindex on children on behalf of users ([629190f](https://github.com/warp-ds/elements/commit/629190fee98f8825c2684af60918b87473434463))
+* **radio:** accessibility issue where the radio element was not focusable ([3f87139](https://github.com/warp-ds/elements/commit/3f87139c5da7ee2a7d40bdef97bbf8a6bce395f7))
+* **Radio:** the checked prop now gets correctly applied ([f5815be](https://github.com/warp-ds/elements/commit/f5815bed5d4698837c0d094456940f28c42e8596))
+
 # [2.13.0-next.17](https://github.com/warp-ds/elements/compare/v2.13.0-next.16...v2.13.0-next.17) (2026-10-07)
 
 
