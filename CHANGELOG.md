@@ -1,3 +1,15 @@
+# [2.13.0-next.17](https://github.com/warp-ds/elements/compare/v2.13.0-next.16...v2.13.0-next.17) (2026-10-07)
+
+
+### Bug Fixes
+
+* **hooks:** add an input for the default theme ([3a4b32f](https://github.com/warp-ds/elements/commit/3a4b32fe55ec129fafdf73fd2313ffd7c5af64bf))
+
+
+### Features
+
+* **hooks:** offer a WarpThemeContext and usage example ([0d6725e](https://github.com/warp-ds/elements/commit/0d6725e9bc6c4a09e2826cbc54230f25d1eac810))
+
 # [2.13.0-next.16](https://github.com/warp-ds/elements/compare/v2.13.0-next.15...v2.13.0-next.16) (2026-10-06)
 
 
