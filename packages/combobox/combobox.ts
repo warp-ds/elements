@@ -1,6 +1,5 @@
 // @warp-css;
 
-import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, PropertyValues } from "lit";
@@ -21,17 +20,6 @@ import { InputEventWithTarget } from "../types.js";
 
 import "../icon/icon.js";
 import "../tooltip/tooltip.js";
-
-const ccCombobox = {
-	wrapper: "relative z-0",
-	base: "absolute z-20 left-0 right-0 s-bg pb-4 rounded-8 overflow-hidden shadow-m",
-	listbox: "m-0 p-0 select-none list-none",
-	option: "block cursor-pointer p-8",
-	optionUnselected: "hover:s-bg-hover",
-	optionSelected: "s-bg-selected hover:s-bg-selected-hover",
-	textMatch: "font-bold",
-	a11y: "sr-only",
-};
 
 export interface ComboboxOption {
 	value: string;
@@ -362,16 +350,6 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			: noSuggestions;
 	}
 
-	/** Get option classes */
-	private _getOptionClasses(option: OptionWithIdAndMatch) {
-		return classNames(
-			ccCombobox.option,
-			this._navigationOption?.id === option?.id
-				? ccCombobox.optionSelected
-				: ccCombobox.optionUnselected,
-		);
-	}
-
 	/** Handle keyboard navigation */
 	private _handleKeyDown(e: KeyboardEvent) {
 		const isNavigationKey = [
@@ -615,8 +593,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
 		if (startIdx !== -1) {
 			const endIdx = startIdx + option.currentInputValue.length;
-			return html`${display.substring(0, startIdx)}<span
-					class="${ccCombobox.textMatch}"
+			return html`${display.substring(0, startIdx)}<span class="font-bold"
 					>${display.substring(startIdx, endIdx)}</span
 				>${display.substring(endIdx)}`;
 		}
@@ -688,12 +665,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div
-				class=${classNames(ccCombobox.wrapper)}
-				@blur=${this._handleContainerBlur}
-			>
+			<div part="base" @blur=${this._handleContainerBlur}>
 				<w-textfield
-					class="w-combobox-textfield"
 					.value=${this._navigationLabelOrDisplayValue}
 					.label=${this.label}
 					.placeholder=${this.placeholder}
@@ -705,6 +678,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					.name=${this.name}
 					.autocomplete="${this.autocomplete || "off"}"
 					.tooltip="${this.tooltip}"
+					exportparts="base:textfield-wrapper, input, mask-wrapper, mask, help-text, label, tooltip-target, tooltip, arrow, beak, hover-bridge"
 					role="combobox"
 					aria-autocomplete="list"
 					aria-expanded=${this._isOpen && this._currentOptions.length !== 0}
@@ -719,45 +693,40 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					@keydown=${this._handleKeyDown}
 				></w-textfield>
 
-				<span class="${ccCombobox.a11y}" role="status">
+				<span class="sr-only" role="status">
 					${this._getAriaText(
 						this._currentOptions,
 						this._displayValue,
 						this._isOpen,
 					)}
 				</span>
-
-				<div
+				<ul
+					part="options-list"
+					id=${this._listboxId}
+					role="listbox"
 					?hidden=${!this._isOpen || !this._currentOptions.length}
-					class=${classNames(ccCombobox.base)}
 				>
-					<ul
-						id=${this._listboxId}
-						role="listbox"
-						class="${ccCombobox.listbox}"
-					>
-						${repeat(
-							this._currentOptions,
-							(option) => option.key,
-							(option) => {
-								const display = option.label || option.value;
-								return html`
-									<li
-										id=${option.id}
-										role="option"
-										aria-selected=${this._navigationOption?.id === option.id}
-										tabindex="-1"
-										class=${this._getOptionClasses(option)}
-										@mousedown=${(e: MouseEvent) =>
-											this._handleOptionClick(e, option)}
-									>
-										${this._renderTextMatch(display, option)}
-									</li>
-								`;
-							},
-						)}
-					</ul>
-				</div>
+					${repeat(
+						this._currentOptions,
+						(option) => option.key,
+						(option) => {
+							const display = option.label || option.value;
+							return html`
+								<li
+									id=${option.id}
+									role="option"
+									aria-selected=${this._navigationOption?.id === option.id}
+									tabindex="-1"
+									part="option"
+									@mousedown=${(e: MouseEvent) =>
+										this._handleOptionClick(e, option)}
+								>
+									${this._renderTextMatch(display, option)}
+								</li>
+							`;
+						},
+					)}
+				</ul>
 			</div>
 		`;
 	}
