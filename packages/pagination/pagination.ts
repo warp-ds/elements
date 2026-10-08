@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { i18n } from "@lingui/core";
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import "../icon/icon.js";
@@ -22,10 +22,6 @@ const getIconSuffix = () =>
 		comment:
 			"Suffix added at the end of icon titles when img semantics are lost on an html element",
 	});
-
-const placeholderStyles = "min-h-[44px] min-w-[44px] p-4";
-
-const baseItemStyles = `hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out ${placeholderStyles} rounded-full border-0 hover:bg-clip-padding`;
 
 /**
  * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
@@ -71,18 +67,7 @@ class WarpPagination extends LitElement {
 	})
 	visiblePages = 7;
 
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				display: block;
-			}
-			w-icon {
-				height: 16px;
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	constructor() {
 		super();
@@ -134,7 +119,9 @@ class WarpPagination extends LitElement {
 	}
 
 	#dispatchClickPage(e: PointerEvent) {
-		const clickedPage = (e.target as Element).getAttribute("data-page-number");
+		const clickedPage = (e.target as Element)
+			.closest("[data-page-number]")
+			?.getAttribute("data-page-number");
 		if (!clickedPage) {
 			// clicked something that wasn't a page link or button
 			return;
@@ -160,10 +147,7 @@ class WarpPagination extends LitElement {
 	render() {
 		const visiblePages = this.visiblePageNumbers;
 
-		return html`<nav
-			class="flex items-center justify-center p-8"
-			@click="${this.#dispatchClickPage}"
-		>
+		return html`<nav part="base" @click="${this.#dispatchClickPage}">
 			<h2 class="sr-only">
 				${i18n._({
 					id: "pagination.aria.pagination",
@@ -172,16 +156,13 @@ class WarpPagination extends LitElement {
 						"Default screenreader message for pagination container in the pagination component",
 				})}
 			</h2>
-			<div class="flex items-center">
+			<div part="list">
 				${
 					this.shouldShowShowFirstPageButton
 						? html`<a
 								data-page-number="1"
 								href="${this.baseUrl}1"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+								part="control"
 							>
 								<span class="sr-only">
 									${i18n._({
@@ -195,21 +176,18 @@ class WarpPagination extends LitElement {
 									name="ChevronDoubleLeft"
 									size="small"
 									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
+									part="icon"
 								></w-icon>
 								<span class="sr-only">${getIconSuffix()}</span>
 							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
+						: html`<span part="placeholder"></span>`
 				}
 				${
 					this.shouldShowPreviousPageButton
 						? html`<a
 								data-page-number="${this.currentPageNumber - 1}"
 								href="${this.baseUrl}${this.currentPageNumber - 1}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+								part="control"
 							>
 								<span class="sr-only"
 									>${i18n._({
@@ -223,25 +201,16 @@ class WarpPagination extends LitElement {
 									name="ChevronLeft"
 									size="small"
 									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
+									part="icon"
 								></w-icon>
 								<span class="sr-only">${getIconSuffix()}</span>
 							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
+						: html`<span part="placeholder"></span>`
 				}
-				<div class="hidden md:block font-bold">
+				<div>
 					${visiblePages.map((pageNumber) => {
 						const isCurrentPage = pageNumber === this.currentPageNumber;
 						const url = `${this.baseUrl}${pageNumber}`;
-
-						let styles = baseItemStyles;
-
-						if (isCurrentPage) {
-							styles += " s-bg-primary s-text-inverted";
-						} else {
-							styles +=
-								" s-text-link hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]";
-						}
 
 						const ariaLabel = i18n._({
 							id: "pagination.aria.page",
@@ -255,13 +224,13 @@ class WarpPagination extends LitElement {
 							data-page-number="${pageNumber}"
 							aria-label="${ariaLabel}"
 							href="${url}"
-							class="${styles}"
+							part="page${isCurrentPage ? " current" : ""}"
 							aria-current="${isCurrentPage ? "page" : "false"}"
 							>${pageNumber}</a
 						>`;
 					})}
 				</div>
-				<span class="block md:hidden p-8 font-bold ">
+				<span part="mobile-label">
 					${i18n._({
 						id: "pagination.label.current-page",
 						message: "Page {currentPage}",
@@ -275,10 +244,7 @@ class WarpPagination extends LitElement {
 						? html`<a
 								data-page-number="${this.currentPageNumber + 1}"
 								href="${this.baseUrl}${this.currentPageNumber + 1}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+								part="control"
 							>
 								<span class="sr-only">
 									${i18n._({
@@ -292,21 +258,18 @@ class WarpPagination extends LitElement {
 									name="ChevronRight"
 									size="small"
 									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
+									part="icon"
 								></w-icon>
 								<span class="sr-only">${getIconSuffix()}</span>
 							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
+						: html`<span part="placeholder"></span>`
 				}
 				${
 					this.shouldShowLastPageButton
 						? html`<a
 								data-page-number="${this.pages}"
 								href="${this.baseUrl}${this.pages}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+								part="control"
 							>
 								<span class="sr-only"
 									>${i18n._({
@@ -320,11 +283,11 @@ class WarpPagination extends LitElement {
 									name="ChevronDoubleRight"
 									size="small"
 									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
+									part="icon"
 								></w-icon>
 								<span class="sr-only">${getIconSuffix()}</span>
 							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
+						: html`<span part="placeholder"></span>`
 				}
 			</div>
 		</nav>`;
