@@ -55,4 +55,29 @@ describe("w-expandable React SSR hydration", () => {
 		});
 		expect(warnings).toEqual([]);
 	});
+
+	test.each(["default", "box", "box-bleed", "default-with-divider"])(
+		"%s variant hydrates without warnings and upgrades the variant property",
+		async (variant) => {
+			const warnings = await testHydration("w-expandable", {
+				title: "Show more",
+				variant,
+			});
+
+			const el = document.createElement("w-expandable") as HTMLElement & {
+				variant?: string;
+			};
+			el.setAttribute("variant", variant);
+			document.body.appendChild(el);
+			await customElements.whenDefined("w-expandable");
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			try {
+				expect(warnings).toEqual([]);
+				expect(el.variant).toBe(variant);
+			} finally {
+				el.remove();
+			}
+		},
+	);
 });

@@ -143,9 +143,15 @@ w-radio::part(control) {
 | Token | Purpose | Default |
 |-------|---------|---------|
 | `--w-c-radio-bg` | Control background | `var(--w-s-color-background)` |
+| `--w-c-radio-bg-hover` | Control background during hover | `var(--w-s-color-background-hover)` |
+| `--w-c-radio-bg-invalid-hover` | Control background during hover when invalid | `var(--w-s-color-background-negative-subtle-hover)` |
 | `--w-c-radio-border-color` | Control border color | `var(--w-s-color-border-strong)` |
+| `--w-c-radio-border-color-hover` | Control border color during hover | `var(--w-s-color-border-strong-hover)` |
 | `--w-c-radio-border-color-checked` | Border when checked | `var(--w-s-color-border-selected)` |
+| `--w-c-radio-border-color-checked-hover` | Border during hover when checked | `var(--w-s-color-border-selected-hover)` |
 | `--w-c-radio-border-color-invalid` | Border when invalid | `var(--w-s-color-border-negative)` |
+| `--w-c-radio-border-color-invalid-hover` | Border during hover when invalid | `var(--w-s-color-border-negative-hover)` |
+| `--w-c-radio-border-color-invalid-checked-hover` | Border during hover when invalid and checked | `var(--w-s-color-background-hover)` |
 | `--w-c-radio-label-color` | Label text color | `currentColor` |
 
 #### Disabled State

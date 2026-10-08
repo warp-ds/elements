@@ -64,3 +64,27 @@ export const WithSpanForCurrentPage: Story = {
 		`;
 	},
 };
+
+export const WithoutCurrentPageInTrail: Story = {
+	render(args) {
+		return html`
+			<w-breadcrumbs ${spread(prespread(args))}>
+				<w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
+				<w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
+			</w-breadcrumbs>
+			<h2>Current page</h2>
+		`;
+	},
+};
+
+export const LegacyChildren: Story = {
+	render(args) {
+		return html`
+			<w-breadcrumbs ${spread(prespread(args))}>
+				<a href="#/home">Home</a>
+				<a href="#/category">Category</a>
+				<span aria-current="page">Item</span>
+			</w-breadcrumbs>
+		`;
+	},
+};

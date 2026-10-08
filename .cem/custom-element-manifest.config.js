@@ -133,6 +133,7 @@ export default {
 		"packages/checkbox/checkbox.ts",
 		"packages/checkbox-group/checkbox-group.ts",
 		"packages/combobox/combobox.ts",
+		"packages/controllers/theme-controller.ts",
 		"packages/datepicker/datepicker.ts",
 		"packages/expandable/expandable.ts",
 		"packages/icon/icon.ts",

@@ -1,0 +1,18 @@
+import { Canvas, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ButtonGroup from './button-group.stories';
+
+<Meta of={ButtonGroup} name="Docs" />
+
+# ButtonGroup
+
+A button group is a segmented control with checkbox group or radio group semantics, visually presented as a set of buttons.
+
+## Multiple selections
+
+<Canvas of={ButtonGroup.ButtonGroupCheckbox} />
+
+## Single selection
+
+<Canvas of={ButtonGroup.ButtonGroupRadio} />
+

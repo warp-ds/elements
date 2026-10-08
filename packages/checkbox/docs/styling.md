@@ -28,7 +28,9 @@ Customize the checkbox control (the box itself):
 
 ```css
 --w-c-checkbox-bg: var(--w-s-color-background);
+--w-c-checkbox-bg-hover: var(--w-s-color-background-hover);
 --w-c-checkbox-border-color: var(--w-s-color-border-strong);
+--w-c-checkbox-border-color-hover: var(--w-s-color-border-strong-hover);
 --w-c-checkbox-icon-color: var(--w-s-color-icon-inverted);
 ```
 
@@ -36,15 +38,21 @@ Customize the checkbox control (the box itself):
 
 ```css
 --w-c-checkbox-bg-checked: var(--w-s-color-background-primary);
+--w-c-checkbox-bg-checked-hover: var(--w-s-color-background-primary-hover);
 --w-c-checkbox-border-color-checked: var(--w-s-color-border-primary);
+--w-c-checkbox-border-color-checked-hover: var(--w-s-color-background-primary-hover);
 --w-c-checkbox-checked-icon: var(--w-icon-toggle-checked);
+
 ```
 
 ### Color Tokens - Invalid State
 
 ```css
 --w-c-checkbox-border-color-invalid: var(--w-s-color-border-negative);
+--w-c-checkbox-border-color-invalid-hover: var(--w-s-color-border-negative-hover);
+--w-c-checkbox-bg-invalid-hover: var(--w-s-color-background-negative-subtle-hover);
 --w-c-checkbox-bg-invalid-checked: var(--w-s-color-background-negative);
+--w-c-checkbox-bg-invalid-checked-hover: var(--w-s-color-background-negative-hover);
 ```
 
 ### Color Tokens - Disabled State

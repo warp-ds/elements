@@ -192,3 +192,49 @@ export const FormSubmission: Story = {
 		</form>
 	`,
 };
+
+export const CustomStyling: Story = {
+	render: () => html`
+		<style>
+			w-combobox {
+				--w-c-combobox-color-background: green;
+				--w-c-combobox-shadow: 10px 10px 10px black;
+				--w-c-combobox-border-radius: 20px;
+				--w-c-combobox-option-padding: 20px;
+				--w-c-combobox-option-color-background-hover: blue;
+				--w-c-combobox-option-color-background-selected: red;
+				--w-c-textfield-background: yellow;
+			}
+			w-combobox::part(textfield-wrapper) {
+				border: 2px solid purple;
+				border-radius: 8px;
+			}
+		</style>
+		<w-combobox
+			id="combobox-styled"
+			label="Select a fruit (dynamic)"
+			placeholder="Type to search..."
+			disable-static-filtering
+			open-on-focus
+		></w-combobox>
+		<script type="module">
+			const combobox = document.querySelector("#combobox-styled");
+			const sampleOptions = ${JSON.stringify(sampleOptions)};
+			combobox.options = sampleOptions;
+			combobox.value = "";
+
+			combobox.addEventListener("change", (e) => {
+				combobox.value = e?.detail?.value;
+				// Simulate dynamic filtering
+				const filteredOptions = sampleOptions.filter((option) =>
+					option.value.toLowerCase().includes(e?.detail?.value.toLowerCase()),
+				);
+				combobox.options = filteredOptions;
+			});
+
+			combobox.addEventListener("select", (e) => {
+				combobox.value = e?.detail?.value;
+			});
+		</script>
+	`,
+};

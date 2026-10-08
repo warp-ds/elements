@@ -45,17 +45,8 @@ class WarpBreadcrumbItem extends LitElement {
 				></span>`;
 	}
 
-	/** @internal */
-	get separator() {
-		return !this.currentPage
-			? html`<span part="separator" class="separator" aria-hidden="true"
-					>/</span
-				>`
-			: nothing;
-	}
-
 	render() {
-		return html`${this.link}${this.separator}`;
+		return html`${this.link}`;
 	}
 }
 

@@ -1,9 +1,9 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import { reset } from "../styles.js";
 
-import { styles } from "../tabs/styles.js";
+import { styles } from "./styles.js";
 
 /**
  * Tab panel component that holds content for individual tabs.
@@ -15,26 +15,7 @@ import { styles } from "../tabs/styles.js";
  * @parent w-tabs
  */
 export class WarpTabPanel extends LitElement {
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				display: block;
-			}
-			/* Stories and legacy markup may set [hidden] on inactive panels.
-       * Visibility is now controlled internally via active state, so neutralize it. */
-			:host([hidden]) {
-				display: block !important;
-			}
-			.panel-content {
-				display: none;
-			}
-			.panel-content[data-active] {
-				display: block;
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	private _internals: ElementInternals;
 
@@ -105,7 +86,7 @@ export class WarpTabPanel extends LitElement {
 	}
 
 	render() {
-		return html`<div class="panel-content" ?data-active=${this.active}>
+		return html`<div ?data-active=${this.active} part="base">
 			<slot></slot>
 		</div>`;
 	}

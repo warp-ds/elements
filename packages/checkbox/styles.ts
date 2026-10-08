@@ -21,18 +21,35 @@ export const styles = css`
 			--w-c-checkbox-border-color,
 			var(--w-s-color-border-strong)
 		);
+		--_border-hover: var(
+			--w-c-checkbox-border-color-hover,
+			var(--w-s-color-border-strong-hover)
+		);
 		--_icon-color: var(
 			--w-c-checkbox-icon-color,
 			var(--w-s-color-icon-inverted)
+		);
+
+		--_bg-hover: var(
+			--w-c-checkbox-bg-hover,
+			var(--w-s-color-background-hover)
 		);
 
 		--_bg-checked: var(
 			--w-c-checkbox-bg-checked,
 			var(--w-s-color-background-primary)
 		);
+		--_bg-checked-hover: var(
+			--w-c-checkbox-bg-checked-hover,
+			var(--w-s-color-background-primary-hover)
+		);
 		--_border-checked: var(
 			--w-c-checkbox-border-color-checked,
 			var(--w-s-color-border-primary)
+		);
+		--_border-checked-hover: var(
+			--w-c-checkbox-border-color-checked-hover,
+			var(--w-s-color-border-primary-hover)
 		);
 		--_checked-icon: var(
 			--w-c-checkbox-checked-icon,
@@ -42,6 +59,18 @@ export const styles = css`
 		--_border-invalid: var(
 			--w-c-checkbox-border-color-invalid,
 			var(--w-s-color-border-negative)
+		);
+		--_border-invalid-hover: var(
+			--w-c-checkbox-border-color-invalid-hover,
+			var(--w-s-color-border-negative-hover)
+		);
+		--_bg-invalid-hover: var(
+			--w-c-checkbox-bg-invalid-checked-hover,
+			var(--w-s-color-background-negative-subtle-hover)
+		);
+		--_bg-invalid-checked-hover: var(
+			--w-c-checkbox-bg-invalid-checked-hover,
+			var(--w-s-color-background-negative-hover)
 		);
 		--_bg-invalid-checked: var(
 			--w-c-checkbox-bg-invalid-checked,
@@ -77,17 +106,33 @@ export const styles = css`
 		);
 
 		--_bg: var(--_bg-default);
+		--_bg-invalid: var(--_bg-default);
 		--_border-color: var(--_border-default);
+		--_border-color-invalid: var(--_border-invalid);
 	}
 
 	:host([type="checkbox"]) {
 		--_radius: var(--w-c-checkbox-radius, 4px);
 	}
 
+	:host(:hover) {
+		--_bg: var(--_bg-hover);
+		--_border-color: var(--_border-hover);
+		--_bg-invalid: var(--_bg-invalid-hover);
+		--_bg-invalid-checked: var(--_bg-invalid-checked-hover);
+		--_border-color-invalid: var(--_border-invalid-hover);
+	}
+
 	:host([checked]),
 	:host([indeterminate]) {
 		--_bg: var(--_bg-checked);
 		--_border-color: var(--_border-checked);
+	}
+
+	:host([checked]:hover),
+	:host([indeterminate]:hover) {
+		--_bg: var(--_bg-checked-hover);
+		--_border-color: var(--_border-checked-hover);
 	}
 
 	:host([disabled]) {
@@ -110,7 +155,7 @@ export const styles = css`
 
 	[part="base"] {
 		display: grid;
-		grid-template-columns: var(--_control-size) max-content;
+		grid-template-columns: var(--_control-size) minmax(0, 1fr);
 		gap: var(--_gap);
 	}
 
@@ -152,7 +197,8 @@ export const styles = css`
 	/* Invalid visuals are driven by the actual control state instead of host attributes.
    * This preserves group-driven invalid styling without mutating host attributes. */
 	[part="control"]:has(> [part="input"][aria-invalid="true"]:not(:disabled)) {
-		border-color: var(--_border-invalid);
+		border-color: var(--_border-color-invalid);
+		background-color: var(--_bg-invalid);
 	}
 
 	[part="control"]:has(
@@ -183,5 +229,63 @@ export const styles = css`
 		:host {
 			--w-c-checkbox-transition: none;
 		}
+	}
+
+	:host([type="button"]) [part="base"] {
+		display: inline-block;
+	}
+
+	:host([type="button"]) [part="control"] {
+		/** this is our focus target and more, cannot use display:none */
+		position: absolute;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		pointer-events: none;
+		inset: 0;
+	}
+
+	:host([type="button"]) [part="label"] {
+		background: var(--_button-group-background);
+		border-color: var(--_button-group-border-color);
+		border-style: solid;
+		border-bottom-width: var(--_button-group-border-width);
+		border-top-width: var(--_button-group-border-width);
+		color: var(--_button-group-color-text);
+		display: inline-block;
+		font-size: var(--_button-group-font-size);
+		font-weight: var(--_button-group-font-weight);
+		height: var(--_button-group-height);
+		line-height: var(--_button-group-line-height);
+		padding: var(--_button-group-padding);
+		transition: var(--_button-group-transition);
+	}
+
+	:host([type="button"]):has([part="input"]:focus-visible:not(:disabled))
+		[part="label"],
+	:host([type="button"]:focus-visible) [part="label"] {
+		outline: 2px solid var(--w-s-color-border-focus);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	:host([type="button"]:first-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 8px 0 0 8px;
+	}
+
+	:host([type="button"]:last-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 0 8px 8px 0;
+	}
+
+	:host([type="button"]:hover) [part="label"] {
+		background: var(--_button-group-background-hover);
+		border-color: var(--_button-group-border-color-hover);
+	}
+
+	:host([type="button"][checked]) [part="label"] {
+		background: var(--_button-group-background-selected);
+		color: var(--_button-group-color-text-selected);
+		border-color: var(--_button-group-border-color-selected);
 	}
 `;

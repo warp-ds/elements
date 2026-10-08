@@ -1,4 +1,68 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.text-center{text-align:center}.bg-transparent{background-color:#0000}.border-0{border-width:0}.border-b-4{border-bottom-width:4px}.border-transparent{border-color:#0000}.flex{display:flex}.grid{display:grid}.focusable:focus{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:focus-visible{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:not(:focus-visible){outline:none}.gap-8{gap:.8rem}.outline{outline-style:solid}.items-center{align-items:center}.justify-center{justify-content:center}.static{position:static}.s-text-link{color:var(--w-s-color-text-link)}.s-text-subtle{color:var(--w-s-color-text-subtle)}.hover\\:s-text-link:hover{color:var(--w-s-color-text-link)}.s-border-selected{border-color:var(--w-s-color-border-selected)}.hover\\:s-border-primary:hover{border-color:var(--w-s-color-border-primary)}.w-full{width:100%}.m-0{margin:0}.mx-auto{margin-left:auto;margin-right:auto}.p-16{padding:1.6rem}.pb-8{padding-bottom:.8rem}.cursor-pointer{cursor:pointer}.font-bold{font-weight:700}",
-);
+import { css } from "lit";
+
+export const styles = css`
+	:host {
+		--_inactive-color: var(
+			--w-c-tab-inactive-color,
+			var(--w-s-color-text-subtle)
+		);
+		--_hover-color: var(--w-c-tab-hover-color, var(--w-s-color-text-link));
+		--_hover-color-border: var(
+			--w-c-tab-hover-color-border,
+			var(--w-s-color-border-primary)
+		);
+		--_active-color: var(--w-c-tab-active-color, var(--w-s-color-text-link));
+		--_active-color-border: var(
+			--w-c-tab-active-color-border,
+			var(--w-s-color-border-selected)
+		);
+	}
+
+	::slotted([slot="icon"]) {
+		display: flex;
+	}
+
+	:host(:focus-visible) {
+		outline: 2px solid var(--w-s-color-border-focus, #1a73e8);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	[part="base"] {
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0);
+		border-bottom-width: 4px;
+		border-color: rgba(0, 0, 0, 0);
+		cursor: pointer;
+		color: var(--_inactive-color);
+		display: grid;
+		gap: 8px;
+		padding: 16px;
+		padding-bottom: 8px;
+		font-weight: 700;
+		height: 100%;
+		width: 100%;
+		text-align: center;
+	}
+
+	[part="icon-inline"] {
+		align-items: center;
+		display: flex;
+		gap: 8px;
+		justify-content: center;
+	}
+
+	[part="icon-block"] {
+		margin-inline: auto;
+	}
+
+	:host(:hover) [part="base"] {
+		border-color: var(--_hover-color-border);
+		color: var(--_hover-color);
+	}
+
+	/* Selected tab */
+	:host([tabindex="0"]) [part="base"] {
+		border-color: var(--_active-color-border);
+		color: var(--_active-color);
+	}
+`;

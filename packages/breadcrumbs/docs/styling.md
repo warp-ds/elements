@@ -73,6 +73,8 @@ The separator uses `--w-c-breadcrumb-item-font-size`, `--w-c-breadcrumb-item-lin
 
 Use `::part(...)` from outside the component.
 
+- `base` - the outermost container surrounding the trail of breadcrumbs
+- `trail` - the direct wrapper around the trail of breadcrumbs
 - `link` - the link element rendered when `href` is set.
 - `text` - the text element rendered when `href` is omitted.
 - `separator` - the separator rendered after non-current items.

@@ -275,56 +275,129 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 				message: "The maximum value cannot be less than the minimum",
 			});
 
-			if (this.slot === "from") {
-				// Check that the from value is not about to be dragged past the --to value
-
-				const toBoundary =
-					this.openEnded && numericToValue > maxNum
-						? numericToValue
-						: Math.min(numericToValue, this.openEnded ? maxNum - 1 : maxNum);
-
-				if (valueNum > toBoundary) {
-					shouldCancel = true;
-					// The user might have moved the slider so fast that this.value is far away from overlapping.
-					// Set it to be equal to the to/from value, depending on what slider the user's moving.
-					if (this.openEnded && valueIsAtTheSliderEdge) {
-						this.value = String(toBoundary);
-					} else {
-						this.value = toValue;
-					}
-
+			if (this.openEnded) {
+				if (this.slot === "from") {
 					if (isFromTextInput) {
-						this.#handleValidity(numberOverLapError);
-						// Don't override the user's input in the textfield
-						await this.updateComplete;
-						this.textfield.value = value;
+						// Check that the from text input is not higher than the to text input
+
+						const toIsAtMax = numericToValue === maxNum;
+						const toBoundary = toIsAtMax
+							? Number.POSITIVE_INFINITY
+							: numericToValue;
+
+						if (valueNum > toBoundary) {
+							shouldCancel = true;
+							// Don't emit an invalid value from the component itself
+							this.value = String(toBoundary);
+							this.#handleValidity(numberOverLapError);
+							// but don't override the user's input in the textfield
+							await this.updateComplete;
+							this.textfield.value = value;
+						}
+					} else {
+						// Check that the from value is not about to become higher than the to value,
+						// unless the to-value is Max.
+
+						const toBoundary =
+							this.openEnded && numericToValue > maxNum
+								? numericToValue
+								: Math.min(
+										numericToValue,
+										this.openEnded ? maxNum - 1 : maxNum,
+									);
+
+						if (valueNum > toBoundary) {
+							shouldCancel = true;
+							// The user might have moved the slider so fast that this.value is far away from overlapping.
+							// Set it to be equal to the to/from value, depending on what slider the user's moving.
+							if (valueIsAtTheSliderEdge) {
+								this.value = String(toBoundary);
+							} else {
+								this.value = toValue;
+							}
+						}
+					}
+				} else {
+					if (isFromTextInput) {
+						// Check that the to text input is not lower than the from text input
+						const fromIsAtMin = numericFromValue === minNum;
+						const fromBoundary = fromIsAtMin
+							? Number.NEGATIVE_INFINITY
+							: numericFromValue;
+
+						if (valueNum < fromBoundary) {
+							shouldCancel = true;
+							// Don't emit an invalid value from the component itself
+							this.value = String(fromBoundary);
+							this.#handleValidity(numberOverLapError);
+							// but don't override the user's input in the textfield
+							await this.updateComplete;
+							this.textfield.value = value;
+						}
+					} else {
+						// Check that the to value is not about to be dragged past the --from value
+						const fromBoundary =
+							this.openEnded && numericFromValue < minNum
+								? numericFromValue
+								: Math.max(
+										Number.parseInt(fromValue!),
+										this.openEnded ? minNum + 1 : minNum,
+									);
+
+						if (valueNum < fromBoundary) {
+							shouldCancel = true;
+							// The user might have moved the slider so fast that this.value is far away from overlapping.
+							// Set it to be equal to the to/from value, depending on what slider the user's moving.
+							if (this.openEnded && valueIsAtTheSliderEdge) {
+								this.value = String(fromBoundary);
+							} else {
+								this.value = fromValue;
+							}
+						}
 					}
 				}
 			} else {
-				// Check that the to value is not about to be dragged past the --from value
-				const fromBoundary =
-					this.openEnded && numericFromValue < minNum
-						? numericFromValue
-						: Math.max(
-								Number.parseInt(fromValue!),
-								this.openEnded ? minNum + 1 : minNum,
-							);
+				if (this.slot === "from") {
+					// Check that the from value is not about to be dragged past the --to value
 
-				if (valueNum < fromBoundary) {
-					shouldCancel = true;
-					// The user might have moved the slider so fast that this.value is far away from overlapping.
-					// Set it to be equal to the to/from value, depending on what slider the user's moving.
-					if (this.openEnded && valueIsAtTheSliderEdge) {
-						this.value = String(fromBoundary);
-					} else {
-						this.value = fromValue;
+					const toBoundary = Math.min(
+						numericToValue,
+						this.openEnded ? maxNum - 1 : maxNum,
+					);
+
+					if (valueNum > toBoundary) {
+						shouldCancel = true;
+						// The user might have moved the slider so fast that this.value is far away from overlapping.
+						// Set it to be equal to the to/from value, depending on what slider the user's moving.
+						this.value = toValue;
+
+						if (isFromTextInput) {
+							this.#handleValidity(numberOverLapError);
+							// Don't override the user's input in the textfield
+							await this.updateComplete;
+							this.textfield.value = value;
+						}
 					}
+				} else {
+					// Check that the to value is not about to be dragged past the --from value
+					const fromBoundary = Math.max(
+						Number.parseInt(fromValue!),
+						this.openEnded ? minNum + 1 : minNum,
+					);
 
-					if (isFromTextInput) {
-						this.#handleValidity(numberOverLapError);
-						// Don't override the user's input in the textfield
-						await this.updateComplete;
-						this.textfield.value = value;
+					if (valueNum < fromBoundary) {
+						shouldCancel = true;
+						// The user might have moved the slider so fast that this.value is far away from overlapping.
+						// Set it to be equal to the to/from value, depending on what slider the user's moving.
+
+						this.value = fromValue;
+
+						if (isFromTextInput) {
+							this.#handleValidity(numberOverLapError);
+							// Don't override the user's input in the textfield
+							await this.updateComplete;
+							this.textfield.value = value;
+						}
 					}
 				}
 			}

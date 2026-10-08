@@ -14,17 +14,41 @@ export const styles = css`
 		--_checked-border-width: var(--w-c-radio-checked-border-width, 0.6rem);
 
 		--_bg: var(--w-c-radio-bg, var(--w-s-color-background));
+		--_bg-hover: var(
+			--w-c-checkbox-bg-hover,
+			var(--w-s-color-background-hover)
+		);
+		--_bg-invalid-hover: var(
+			--w-c-checkbox-bg-hover,
+			var(--w-s-color-background-negative-subtle-hover)
+		);
 		--_border-color: var(
 			--w-c-radio-border-color,
 			var(--w-s-color-border-strong)
+		);
+		--_border-color-hover: var(
+			--w-c-checkbox-border-color-hover,
+			var(--w-s-color-border-strong-hover)
 		);
 		--_border-color-checked: var(
 			--w-c-radio-border-color-checked,
 			var(--w-s-color-border-selected)
 		);
+		--_border-color-checked-hover: var(
+			--w-c-radio-border-color-checked-hover,
+			var(--w-s-color-border-selected-hover)
+		);
 		--_border-color-invalid: var(
 			--w-c-radio-border-color-invalid,
 			var(--w-s-color-border-negative)
+		);
+		--_border-color-invalid-hover: var(
+			--w-c-radio-border-color-invalid,
+			var(--w-s-color-border-negative-hover)
+		);
+		--_border-color-invalid-checked-hover: var(
+			--w-c-radio-border-color-invalid-checked-hover,
+			var(--w-s-color-border-negative-hover)
 		);
 
 		--_outline-width: var(--w-c-radio-outline-width, 2px);
@@ -66,6 +90,11 @@ export const styles = css`
 			border-width 150ms cubic-bezier(0.4, 0, 0.2, 1),
 			background-color 150ms cubic-bezier(0.4, 0, 0.2, 1)
 		);
+	}
+
+	:host(:hover) [part="control"] {
+		border-color: var(--_border-color-hover);
+		background-color: var(--_bg-hover);
 	}
 
 	:host([disabled]),
@@ -119,10 +148,31 @@ export const styles = css`
 	:host([role="radio"]:state(checked)) [part="control"] {
 		border-color: var(--_border-color-checked);
 		border-width: var(--_checked-border-width);
+		background-color: var(--_bg);
+	}
+
+	:host([checked]:hover) [part="control"],
+	:host([checked-ui]:hover) [part="control"],
+	:host([role="radio"][checked-ui]:hover) [part="control"],
+	:host([role="radio"]:state(checked):hover) [part="control"] {
+		border-color: var(--_border-color-checked-hover);
 	}
 
 	:host([invalid]) [part="control"] {
 		border-color: var(--_border-color-invalid);
+		background-color: var(--_bg);
+	}
+
+	:host([invalid]:hover) [part="control"] {
+		border-color: var(--_border-color-invalid-hover);
+		background-color: var(--_bg-invalid-hover);
+	}
+
+	:host([invalid][checked]:hover) [part="control"],
+	:host([invalid][checked-ui]:hover) [part="control"],
+	:host([invalid][role="radio"][checked-ui]:hover) [part="control"],
+	:host([invalid][role="radio"]:state(checked):hover) [part="control"] {
+		background-color: var(--_bg);
 	}
 
 	:host(:focus-visible) {
@@ -198,5 +248,54 @@ export const styles = css`
 			background-color: var(--_border-color-disabled);
 			border-color: var(--_border-color-disabled);
 		}
+	}
+
+	:host([type="button"]) [part="control"] {
+		display: none;
+	}
+
+	:host([type="button"]) [part="label"] {
+		background: var(--_button-group-background);
+		border-color: var(--_button-group-border-color);
+		border-style: solid;
+		border-bottom-width: var(--_button-group-border-width);
+		border-top-width: var(--_button-group-border-width);
+		color: var(--_button-group-color-text);
+		display: inline-block;
+		font-size: var(--_button-group-font-size);
+		font-weight: var(--_button-group-font-weight);
+		height: var(--_button-group-height);
+		line-height: var(--_button-group-line-height);
+		padding: var(--_button-group-padding);
+		transition: var(--_button-group-transition);
+	}
+
+	:host([type="button"]:focus-visible) {
+		outline: 2px solid var(--w-s-color-border-focus);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	:host([type="button"]:first-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 8px 0 0 8px;
+	}
+
+	:host([type="button"]:last-of-type) [part="label"] {
+		border-width: var(--_button-group-border-width);
+		border-radius: 0 8px 8px 0;
+	}
+
+	:host([type="button"]:hover) [part="label"],
+	:host([type="button"][role="radio"]:hover) [part="label"] {
+		background: var(--_button-group-background-hover);
+		border-color: var(--_button-group-border-color-hover);
+	}
+
+	:host([type="button"][checked]) [part="label"],
+	:host([type="button"][checked-ui]) [part="label"],
+	:host([type="button"][role="radio"]:state(checked)) [part="label"] {
+		background: var(--_button-group-background-selected);
+		color: var(--_button-group-color-text-selected);
+		border-color: var(--_button-group-border-color-selected);
 	}
 `;

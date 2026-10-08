@@ -6,6 +6,7 @@ import { property } from "lit/decorators.js";
 import { reset } from "../styles";
 import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
+import { buttonGroupComponentVariables } from "../button-group/styles";
 
 /**
  * Radios allow users to select a single option from a list of choices.
@@ -22,13 +23,12 @@ import { styles as radioStyles } from "./radio-styles";
 // reasons. Consider aligning both components in a future major version after
 // assessing backwards compatibility implications.
 export class WarpRadio extends FormControlMixin(LitElement) {
-	static styles = [hostStyles, reset, radioStyles];
-
-	/** @internal */
-	static shadowRootOptions = {
-		...LitElement.shadowRootOptions,
-		delegatesFocus: true,
-	};
+	static styles = [
+		hostStyles,
+		reset,
+		buttonGroupComponentVariables,
+		radioStyles,
+	];
 
 	/**
 	 * The name of the radio, submitted as a name/value pair with form data.
@@ -112,10 +112,11 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 	connectedCallback() {
 		super.connectedCallback();
 		this.value = this.getAttribute("value") ?? "on";
-		this.#defaultChecked = this.hasAttribute("checked");
+		this.#defaultChecked = this.checked;
 		this.checked = this.#defaultChecked;
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this.internals.role = "radio";
+		this.setAttribute("tabindex", String(this._internalTabIndex));
 		this.syncAriaDisabled();
 		this.syncFormValue();
 		this.updateValidity();
@@ -163,6 +164,13 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 			if (this.checked && !this.isInGroup()) {
 				this.uncheckOtherRadios();
 			}
+		}
+
+		if (
+			changedProperties.has("_groupTabIndex") ||
+			changedProperties.has("_standaloneTabIndex")
+		) {
+			this.setAttribute("tabindex", String(this._internalTabIndex));
 		}
 	}
 
@@ -411,7 +419,7 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div part="base" tabindex="${this._internalTabIndex}">
+			<div part="base">
 				<div part="control"></div>
 				<slot part="label"></slot>
 			</div>

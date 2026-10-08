@@ -24,6 +24,8 @@ activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
  * [Warp component reference](https://warp-ds.github.io/docs/components/page-indicator/frameworks/elements)
  */
 class WarpPageIndicator extends LitElement {
+	private _internals: ElementInternals;
+
 	static styles = [styles];
 
 	/**
@@ -48,6 +50,24 @@ class WarpPageIndicator extends LitElement {
 	})
 	pageCount = 1;
 
+	constructor() {
+		super();
+		this._internals = this.attachInternals();
+
+		// Use ElementInternals for ARIA to avoid hydration mismatches
+		this._internals.role = "img";
+		const groupLabel = i18n._({
+			id: "page-indicator.aria.label",
+			comment: "Default screenreader message for page indicator group",
+			message: "Dot {selectedPage} is highlighted in a row of {pageCount} dots",
+			values: {
+				selectedPage: this._validSelectedPage,
+				pageCount: this._validPageCount,
+			},
+		});
+		this._internals.ariaLabel = groupLabel;
+	}
+
 	/** Validated page count (minimum 1) */
 	private get _validPageCount(): number {
 		return Math.max(1, Math.floor(this.pageCount ?? 1));
@@ -60,22 +80,12 @@ class WarpPageIndicator extends LitElement {
 	}
 
 	render(): TemplateResult {
-		const pageCount = this._validPageCount;
-		const selectedPage = this._validSelectedPage;
-
-		const groupLabel = i18n._({
-			id: "page-indicator.aria.label",
-			comment: "Default screenreader message for page indicator group",
-			message: "Dot {selectedPage} is highlighted in a row of {pageCount} dots",
-			values: { selectedPage, pageCount },
-		});
-
 		return html`
-			<div class="w-page-indicator" role="img" aria-label="${groupLabel}">
+			<div class="w-page-indicator">
 				<div class="w-page-indicator--container">
-					${map(range(pageCount), (i) => {
+					${map(range(this._validPageCount), (i) => {
 						const pageNumber = i + 1;
-						const isSelected = pageNumber === selectedPage;
+						const isSelected = pageNumber === this._validSelectedPage;
 						const classes = {
 							"w-page-indicator--dot": true,
 							"w-page-indicator--selecteddot": isSelected,
