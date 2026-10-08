@@ -147,8 +147,7 @@ class WarpPagination extends LitElement {
 	render() {
 		const visiblePages = this.visiblePageNumbers;
 
-		return html`<nav part="base" @click="${this.#dispatchClickPage}">
-			<h2 class="sr-only">
+		return html`<h2 class="sr-only" id="paginationLabel">
 				${i18n._({
 					id: "pagination.aria.pagination",
 					message: "Pages",
@@ -156,7 +155,11 @@ class WarpPagination extends LitElement {
 						"Default screenreader message for pagination container in the pagination component",
 				})}
 			</h2>
-			<div part="list">
+			<nav
+				part="base"
+				aria-labelledby="paginationLabel"
+				@click="${this.#dispatchClickPage}"
+			>
 				${
 					this.shouldShowShowFirstPageButton
 						? html`<a
@@ -207,29 +210,27 @@ class WarpPagination extends LitElement {
 							</a>`
 						: html`<span part="placeholder"></span>`
 				}
-				<div>
-					${visiblePages.map((pageNumber) => {
-						const isCurrentPage = pageNumber === this.currentPageNumber;
-						const url = `${this.baseUrl}${pageNumber}`;
+				${visiblePages.map((pageNumber) => {
+					const isCurrentPage = pageNumber === this.currentPageNumber;
+					const url = `${this.baseUrl}${pageNumber}`;
 
-						const ariaLabel = i18n._({
-							id: "pagination.aria.page",
-							message: "Page {currentPage}",
-							values: { currentPage: pageNumber },
-							comment:
-								"Default screenreader message for page link in the pagination component",
-						});
+					const ariaLabel = i18n._({
+						id: "pagination.aria.page",
+						message: "Page {currentPage}",
+						values: { currentPage: pageNumber },
+						comment:
+							"Default screenreader message for page link in the pagination component",
+					});
 
-						return html`<a
-							data-page-number="${pageNumber}"
-							aria-label="${ariaLabel}"
-							href="${url}"
-							part="page${isCurrentPage ? " current" : ""}"
-							aria-current="${isCurrentPage ? "page" : "false"}"
-							>${pageNumber}</a
-						>`;
-					})}
-				</div>
+					return html`<a
+						data-page-number="${pageNumber}"
+						aria-label="${ariaLabel}"
+						href="${url}"
+						part="page${isCurrentPage ? " current" : ""}"
+						aria-current="${isCurrentPage ? "page" : "false"}"
+						>${pageNumber}</a
+					>`;
+				})}
 				<span part="mobile-label">
 					${i18n._({
 						id: "pagination.label.current-page",
@@ -289,8 +290,7 @@ class WarpPagination extends LitElement {
 							</a>`
 						: html`<span part="placeholder"></span>`
 				}
-			</div>
-		</nav>`;
+			</nav>`;
 	}
 }
 

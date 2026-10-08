@@ -7,7 +7,6 @@ Pagination supports styling through **parts**.
 Use `::part(part-name)` from outside the component.
 
 - `base` - the root navigation element
-- `list` - wrapper around pagination items
 - `control` - previous, next, first, and last page controls
 - `page` - numbered page link
 - `current` - current page link
