@@ -1,3 +1,38 @@
+# [2.13.0](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0) (2026-10-08)
+
+
+### Bug Fixes
+
+* apply data-w-theme in dev environments as well ([#793](https://github.com/warp-ds/elements/issues/793)) ([4a67819](https://github.com/warp-ds/elements/commit/4a67819002117c5b9c0472dc0e028534509ca614))
+* **breadcrumbs:** always omit slash from last item ([#780](https://github.com/warp-ds/elements/issues/780)) ([034f041](https://github.com/warp-ds/elements/commit/034f0414f7b874300cebcea7cc293c6e7dc772af))
+* **button:** make the host element itself a button ([#765](https://github.com/warp-ds/elements/issues/765)) ([b767ae8](https://github.com/warp-ds/elements/commit/b767ae87168fca127a0e47d7f40a52e1f8ad9a6e))
+* **card:** ensure cards keep consistent heights in a grid ([#785](https://github.com/warp-ds/elements/issues/785)) ([ae1bd7f](https://github.com/warp-ds/elements/commit/ae1bd7fdc5d90a10b45029870b245dfceab8a29b))
+* **card:** gate clickable hover styles behind media feature query ([#776](https://github.com/warp-ds/elements/issues/776)) ([4448152](https://github.com/warp-ds/elements/commit/44481529cf436b7e17bb2d5d58125b27286289de))
+* checkbox and radio hover styles ([#769](https://github.com/warp-ds/elements/issues/769)) ([26c7e28](https://github.com/warp-ds/elements/commit/26c7e285ac280dd60e639ef45dff0cc3c9ad1556))
+* **checkbox:** ensure long labels wrap instead of overflow ([#768](https://github.com/warp-ds/elements/issues/768)) ([85348e5](https://github.com/warp-ds/elements/commit/85348e506148ddc1b287e70ec122022c883713e1)), closes [#741](https://github.com/warp-ds/elements/issues/741)
+* have RadioGroup apply tabindex on children on behalf of users ([629190f](https://github.com/warp-ds/elements/commit/629190fee98f8825c2684af60918b87473434463))
+* **hooks:** add an input for the default theme ([3a4b32f](https://github.com/warp-ds/elements/commit/3a4b32fe55ec129fafdf73fd2313ffd7c5af64bf))
+* **page-indicator:** move role and ariaLabel to host element ([#774](https://github.com/warp-ds/elements/issues/774)) ([0e7ff41](https://github.com/warp-ds/elements/commit/0e7ff41eb88b373fb5d5d5390289719d49d46f7f))
+* **radio:** accessibility issue where the radio element was not focusable ([3f87139](https://github.com/warp-ds/elements/commit/3f87139c5da7ee2a7d40bdef97bbf8a6bce395f7))
+* **Radio:** the checked prop now gets correctly applied ([f5815be](https://github.com/warp-ds/elements/commit/f5815bed5d4698837c0d094456940f28c42e8596))
+* **slider:** no longer marks open-ended slider from value greater than max attribute as too high ([#767](https://github.com/warp-ds/elements/issues/767)) ([945562b](https://github.com/warp-ds/elements/commit/945562bd982ee180a2b9289adeaa4994cfd8847b))
+* **switch:** make the host element itself interactive ([#760](https://github.com/warp-ds/elements/issues/760)) ([666ae82](https://github.com/warp-ds/elements/commit/666ae82e051343b55ee3ad319106835595c81bc4))
+
+
+### Features
+
+* add button group components ([#777](https://github.com/warp-ds/elements/issues/777)) ([8372c60](https://github.com/warp-ds/elements/commit/8372c600ecc0cdef714f5aabf4bd55ecff442690))
+* add Lit and React utilities to watch for theme changes ([#790](https://github.com/warp-ds/elements/issues/790)) ([9945108](https://github.com/warp-ds/elements/commit/994510847105e8e38d2286da195a1931d5e612c6))
+* **alert:** add styling api ([#787](https://github.com/warp-ds/elements/issues/787)) ([77e1cc2](https://github.com/warp-ds/elements/commit/77e1cc2b94d5978c8bbef6d47de87a3669c64fb1))
+* apply warp dark theme on localhost ([#788](https://github.com/warp-ds/elements/issues/788)) ([20bcca7](https://github.com/warp-ds/elements/commit/20bcca7d8f24b48089b537542e2b9ffd3945e374))
+* **breadcrumbs:** add parts to breadcrumb parent component ([#789](https://github.com/warp-ds/elements/issues/789)) ([24c0c0e](https://github.com/warp-ds/elements/commit/24c0c0ed674393d8aae3fc673d1b88e9cc661e69))
+* **combobox:** add styling API ([#792](https://github.com/warp-ds/elements/issues/792)) ([1335c3f](https://github.com/warp-ds/elements/commit/1335c3f126058fce58f979b442cfc2911d3c34e9))
+* **hooks:** offer a WarpThemeContext and usage example ([0d6725e](https://github.com/warp-ds/elements/commit/0d6725e9bc6c4a09e2826cbc54230f25d1eac810))
+* new expandable default-with-divider variant ([#766](https://github.com/warp-ds/elements/issues/766)) ([877c00d](https://github.com/warp-ds/elements/commit/877c00daf850af3ab5f2488d726e98c53bbc5102))
+* **tabs:** styling API with parts and variables ([#773](https://github.com/warp-ds/elements/issues/773)) ([4b18f79](https://github.com/warp-ds/elements/commit/4b18f791c1e5d0e24bba30ef01a248e5069187bf))
+* **textarea:** add styling API ([#783](https://github.com/warp-ds/elements/issues/783)) ([e52855a](https://github.com/warp-ds/elements/commit/e52855a918211c67a2caa5b5a8dfe415b5f2d972))
+* **textfield:** add styling API ([#782](https://github.com/warp-ds/elements/issues/782)) ([00d6137](https://github.com/warp-ds/elements/commit/00d61374b179208756020f498b1c12fb7b9365a3))
+
 # [2.13.0-next.20](https://github.com/warp-ds/elements/compare/v2.13.0-next.19...v2.13.0-next.20) (2026-10-07)
 
 
