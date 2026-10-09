@@ -248,7 +248,7 @@ const buildTypes = (typesMap = new Map(), hasParent = false) => {
   Array.from(typesMap.entries())
     .sort(([left], [right]) => left.localeCompare(right))
     .forEach(([typeName, parsedType]) => {
-      types += `####${hasParent ? '#' : ''} ${typeName}\n\n`;
+      types += `####${hasParent ? '#' : ''} ${typeName.includes("<") ? `\`${typeName}\`` : typeName}\n\n`;
       types += `\`${normalizeText(parsedType, 'unknown')}\`\n\n`;
     });
 
