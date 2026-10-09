@@ -2,39 +2,39 @@ import { css } from "lit";
 export const styles = css`
 	:host {
 		/* layout */
-		--_padding-x:var(--w-c-pill-padding, 1.2rem);
-		--_padding-y:var(--w-c-pill-padding, .8rem);
+		--_padding-x: var(--w-c-pill-padding, 1.2rem);
+		--_padding-y: var(--w-c-pill-padding, .8rem);
 
 		/* border */
-		--_border-width:var(--w-c-pill-border-width, 0);
-		--_border-style:var(--w-c-pill-border-style, solid);
-		--_border-color:var(--w-c-pill-border-color, transparent);
-		--_border-radius:var(--w-c-pill-border-radius, 9999px);
-		--_focus-outline:var(--w-c-pill-focus-outline, 2px solid var(--w-s-color-border-focus));
-		--_focus-outline-offset:var(--w-c-pill-focus-outline-offset, 1px);
+		--_border-width: var(--w-c-pill-border-width, 0);
+		--_border-style: var(--w-c-pill-border-style, solid);
+		--_border-color: var(--w-c-pill-color-border, transparent);
+		--_border-radius: var(--w-c-pill-border-radius, 9999px);
+		--_focus-outline: var(--w-c-pill-focus-outline, 2px solid var(--w-s-color-border-focus));
+		--_focus-outline-offset: var(--w-c-pill-focus-outline-offset, 1px);
 
 		/* text  */
-		--_font-size:var(--w-c-pill-font-size, var(--w-font-size-xs));
-		--_line-height:var(--w-c-pill-line-height, var(--w-line-height-xs));
-		--_font-weight:var(--w-c-pill-font-weight, normal);
-		--_suggestion-font-weight:var(--w-c-pill-suggestion-font-weight, 700);
-		--_color-text:var(--w-c-pill-color-text, var(--w-s-color-text-inverted));
-		--_color-text-hover:var(--w-c-pill-color-text-hover, var(--_color-text));
-		--_color-text-active:var(--w-c-pill-color-text-active, var(--_color-text));
-		--_suggestion-color-text:var(--w-c-pill-suggestion-color-text, var(--w-s-color-text));
+		--_font-size: var(--w-c-pill-font-size, var(--w-font-size-xs));
+		--_line-height: var(--w-c-pill-line-height, var(--w-line-height-xs));
+		--_font-weight: var(--w-c-pill-font-weight, normal);
+		--_suggestion-font-weight: var(--w-c-pill-suggestion-font-weight, 700);
+		--_color-text: var(--w-c-pill-color-text, var(--w-s-color-text-inverted));
+		--_color-text-hover: var(--w-c-pill-color-text-hover, var(--_color-text));
+		--_color-text-active: var(--w-c-pill-color-text-active, var(--_color-text));
+		--_suggestion-color-text: var(--w-c-pill-suggestion-color-text, var(--w-s-color-text));
 
 		/* background */
-		--_color-background:var(--w-c-pill-color-background, var(--w-s-color-background-primary));
-		--_color-background-hover:var(--w-c-pill-color-background-hover, var(--w-s-color-background-primary-hover));
-		--_color-background-active:var(--w-c-pill-color-background-active, var(--w-s-color-background-primary-active));
-		--_suggestion-color-background:var(--w-c-pill-suggestion-color-background, var(--w-color-pill-suggestion-background));
-		--_suggestion-color-background-hover:var(--w-c-pill-suggestion-color-background-hover, var(--w-color-pill-suggestion-background-hover));
-		--_suggestion-color-background-active:var(--w-c-pill-suggestion-color-background-active, var(--w-color-pill-suggestion-background-active));
+		--_color-background: var(--w-c-pill-color-background, var(--w-s-color-background-primary));
+		--_color-background-hover: var(--w-c-pill-color-background-hover, var(--w-s-color-background-primary-hover));
+		--_color-background-active: var(--w-c-pill-color-background-active, var(--w-s-color-background-primary-active));
+		--_suggestion-color-background: var(--w-c-pill-suggestion-color-background, var(--w-color-pill-suggestion-background));
+		--_suggestion-color-background-hover: var(--w-c-pill-suggestion-color-background-hover, var(--w-color-pill-suggestion-background-hover));
+		--_suggestion-color-background-active: var(--w-c-pill-suggestion-color-background-active, var(--w-color-pill-suggestion-background-active));
 
 		/* motion */
-		--_transition-property:var(--w-c-pill-transition-property, all);
-		--_transition-duration:var(--w-c-pill-transition-duration, .15s);
-		--_transition-timing-function:var(--w-c-pill-transition-timing-function, cubic-bezier(.4, 0, .2, 1));
+		--_transition-property: var(--w-c-pill-transition-property, all);
+		--_transition-duration: var(--w-c-pill-transition-duration, .15s);
+		--_transition-timing-function: var(--w-c-pill-transition-timing-function, cubic-bezier(.4, 0, .2, 1));
 	}
 	.sr-only {
 		position: absolute;

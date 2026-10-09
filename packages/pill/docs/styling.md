@@ -37,6 +37,8 @@ w-pill {
 ##### border
 
 - `--w-c-pill-border-width` - border width of the pill
+- `--w-c-pill-border-style` - border style of the pill
+- `--w-c-pill-color-border` - color of the border
 - `--w-c-pill-border-radius` - border radius of the pill
 - `--w-c-pill-focus-outline` - focus outline setting for the pill
 - `--w-c-pill-focus-outline-offset` - focus outline offset setting for the pill
@@ -45,18 +47,22 @@ w-pill {
 
 - `--w-c-pill-font-size` - font size of the pill
 - `--w-c-pill-font-weight` - font weight of the pill
+- `--w-c-pill-suggestion-font-weight` - font weight of the suggestion variant
 - `--w-c-pill-line-height` - line height of the pill
 - `--w-c-pill-color-text` - text color of the pill
 - `--w-c-pill-color-text-hover` - text color of the pill when hovering
 - `--w-c-pill-color-text-active` - text color of the pill when active
-- `--w-c-pill-color-text-selected` - text color of the pill when selected
+- `--w-c-pill-suggestion-color-text` - text color of the suggestion variant
+
 
 ##### background
 
 - `--w-c-pill-color-background` - background color of the pill
 - `--w-c-pill-color-background-hover` - background color of the pill when hovering
 - `--w-c-pill-color-background-active` - background color of the pill when active
-- `--w-c-pill-color-background-selected` - background color of the pill when selected
+- `--w-c-pill-suggestion-color-background` - background color of the suggestion variant
+- `--w-c-pill-suggestion-color-background-hover` - background color of the suggestion when hovering
+- `--w-c-pill-suggestion-color-background-active` - background color of the suggestion when active
 
 ##### Motion
 
