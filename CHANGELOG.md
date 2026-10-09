@@ -1,3 +1,10 @@
+# [2.14.0-next.1](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0-next.1) (2026-10-09)
+
+
+### Features
+
+* **pagination:** add styling api ([#795](https://github.com/warp-ds/elements/issues/795)) ([051bdc6](https://github.com/warp-ds/elements/commit/051bdc6fa10763d570612c453eed695461c82ac1))
+
 # [2.13.0](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0) (2026-10-08)
 
 
