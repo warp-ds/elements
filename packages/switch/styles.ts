@@ -1,4 +1,181 @@
-import { unsafeCSS } from "lit";
-export const styles = unsafeCSS(
-	"*,:before,:after{--w-rotate:0;--w-rotate-x:0;--w-rotate-y:0;--w-rotate-z:0;--w-scale-x:1;--w-scale-y:1;--w-scale-z:1;--w-skew-x:0;--w-skew-y:0;--w-translate-x:0;--w-translate-y:0;--w-translate-z:0}.bg-\\[--w-s-color-border-strong\\]{background-color:var(--w-s-color-border-strong)}.group:hover .group-hover\\:bg-\\[--w-s-color-border-strong-hover\\]{background-color:var(--w-s-color-border-strong-hover)}.border{border-width:1px}.rounded-full{border-radius:9999px}.block{display:block}.inline-block{display:inline-block}.focusable:focus{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:focus-visible{outline:2px solid var(--w-s-color-border-focus);outline-offset:var(--w-outline-offset,1px)}.focusable:not(:focus-visible){outline:none}.outline{outline-style:solid}.left-0{left:0}.left-4{left:.4rem}.top-0{top:0}.top-4{top:.4rem}.absolute{position:absolute}.relative{position:relative}.static{position:static}.s-bg{background-color:var(--w-s-color-background)}.s-bg-disabled{background-color:var(--w-s-color-background-disabled)}.s-bg-disabled-subtle{background-color:var(--w-s-color-background-disabled-subtle)}.s-bg-primary{background-color:var(--w-s-color-background-primary)}.group:hover .group-hover\\:s-bg-hover{background-color:var(--w-s-color-background-hover)}.group:hover .group-hover\\:s-bg-primary-hover{background-color:var(--w-s-color-background-primary-hover)}.s-border-disabled{border-color:var(--w-s-color-border-disabled)}.s-border-strong{border-color:var(--w-s-color-border-strong)}.group:hover .group-hover\\:s-border-strong-hover{border-color:var(--w-s-color-border-strong-hover)}.h-16{height:1.6rem}.h-24{height:2.4rem}.h-full{height:100%}.w-16{width:1.6rem}.w-44{width:4.4rem}.w-full{width:100%}.cursor-pointer{cursor:pointer}.pointer-events-none{pointer-events:none}.sr-only{clip:rect(0,0,0,0);white-space:nowrap;border-width:0;width:1px;height:1px;margin:-1px;padding:0;position:absolute;overflow:hidden}.translate-x-20{--w-translate-x:2rem;transform:translateX(var(--w-translate-x)) translateY(var(--w-translate-y)) translateZ(var(--w-translate-z)) rotate(var(--w-rotate)) rotateX(var(--w-rotate-x)) rotateY(var(--w-rotate-y)) rotateZ(var(--w-rotate-z)) skewX(var(--w-skew-x)) skewY(var(--w-skew-y)) scaleX(var(--w-scale-x)) scaleY(var(--w-scale-y)) scaleZ(var(--w-scale-z))}.transform-gpu{transform:translate3d(var(--w-translate-x), var(--w-translate-y), var(--w-translate-z)) rotate(var(--w-rotate)) rotateX(var(--w-rotate-x)) rotateY(var(--w-rotate-y)) rotateZ(var(--w-rotate-z)) skewX(var(--w-skew-x)) skewY(var(--w-skew-y)) scaleX(var(--w-scale-x)) scaleY(var(--w-scale-y)) scaleZ(var(--w-scale-z))}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-duration:.15s;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-transform{transition-property:transform;transition-duration:.15s;transition-timing-function:cubic-bezier(.4,0,.2,1)}",
-);
+import { css } from "lit";
+
+export const styles = css`
+	:host {
+		--_border-width: var(--w-c-switch-border-width, 1px);
+		--_border-radius: var(--w-c-switch-border-radius, 9999px);
+		--_handle-border-radius: var(--w-c-switch-border-radius-handle, 9999px);
+
+		--_background-color: var(
+			--w-c-switch-color-background,
+			var(--w-s-color-background)
+		);
+		--_background-color-hover: var(
+			--w-c-switch-color-background-hover,
+			var(--w-s-color-background-hover)
+		);
+		--_background-color-active: var(
+			--w-c-switch-color-background-active,
+			var(--w-s-color-background-primary)
+		);
+		--_background-color-active-hover: var(
+			--w-c-switch-color-background-active-hover,
+			var(--w-s-color-background-primary-hover)
+		);
+		--_background-color-disabled: var(
+			--w-c-switch-color-background-disabled,
+			var(--w-s-color-background-disabled-subtle)
+		);
+		--_background-color-active-disabled: var(
+			--w-c-switch-color-background-active-disabled,
+			var(--w-s-color-background-disabled)
+		);
+
+		--_border-color: var(
+			--w-c-switch-color-border,
+			var(--w-s-color-border-strong)
+		);
+		--_border-color-hover: var(
+			--w-c-switch-color-border-hover,
+			var(--w-s-color-border-strong-hover)
+		);
+		--_border-color-active: var(
+			--w-c-switch-color-border-active,
+			var(--w-s-color-background-primary)
+		);
+		--_border-color-active-hover: var(
+			--w-c-switch-color-border-active-hover,
+			var(--w-s-color-background-primary-hover)
+		);
+		--_border-color-disabled: var(
+			--w-c-switch-color-border-disabled,
+			var(--w-s-color-border-disabled)
+		);
+		--_border-color-active-disabled: var(
+			--w-c-switch-color-border-active-disabled,
+			var(--w-s-color-background-disabled)
+		);
+
+		--_handle-color: var(
+			--w-c-switch-color-handle,
+			var(--w-s-color-border-strong)
+		);
+		--_handle-color-hover: var(
+			--w-c-switch-color-handle-hover,
+			var(--w-s-color-border-strong-hover)
+		);
+		--_handle-color-active: var(
+			--w-c-switch-color-handle-active,
+			var(--w-s-color-background)
+		);
+		--_handle-color-active-hover: var(
+			--w-c-switch-color-handle-active-hover,
+			var(--w-s-color-background-hover)
+		);
+		--_handle-color-disabled: var(
+			--w-c-switch-color-handle-disabled,
+			var(--w-s-color-background-disabled)
+		);
+		--_handle-color-active-disabled: var(
+			--w-c-switch-color-handle-active-disabled,
+			var(--w-s-color-background-disabled-subtle)
+		);
+
+		--_height: var(--w-c-switch-height, 2.4rem);
+		--_width: var(--w-c-switch-width, 4.4rem);
+		--_handle-height: var(--w-c-switch-height-handle, 1.6rem);
+		--_handle-width: var(--w-c-switch-width-handle, 1.6rem);
+		--_handle-gap: var(--w-c-switch-gap-handle, 0.4rem);
+
+		--_transition: var(
+			--w-c-switch-transition,
+			background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+			border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+			transform 150ms cubic-bezier(0.4, 0, 0.2, 1)
+		);
+
+		border-radius: var(--_border-radius); /* for outline */
+		display: inline-block;
+	}
+
+	:host(:focus) {
+		outline: none;
+	}
+
+	:host(:focus-visible) {
+		outline: 2px solid var(--w-s-color-border-focus);
+		outline-offset: var(--w-outline-offset, 1px);
+	}
+
+	:host(:hover) {
+		--_background-color: var(--_background-color-hover);
+		--_border-color: var(--_border-color-hover);
+		--_handle-color: var(--_handle-color-hover);
+	}
+
+	:host([checked]) {
+		--_background-color: var(--_background-color-active);
+		--_border-color: var(--_border-color-active);
+		--_handle-color: var(--_handle-color-active);
+	}
+
+	:host([checked]:hover) {
+		--_background-color: var(--_background-color-active-hover);
+		--_border-color: var(--_border-color-active-hover);
+		--_handle-color: var(--_handle-color-active-hover);
+	}
+
+	:host([checked]) [part="handle"] {
+		transform: translateX(
+			calc(var(--_width) - var(--_handle-width) - calc(var(--_handle-gap) * 2))
+		);
+	}
+
+	:host([disabled]) {
+		pointer-events: none;
+		--_background-color: var(--_background-color-disabled);
+		--_border-color: var(--_border-color-disabled);
+		--_handle-color: var(--_handle-color-disabled);
+	}
+
+	:host([checked][disabled]) {
+		--_background-color: var(--_background-color-active-disabled);
+		--_border-color: var(--_border-color-active-disabled);
+		--_handle-color: var(--_handle-color-active-disabled);
+	}
+
+	[part="base"] {
+		background-color: var(--_background-color);
+		border-radius: var(--_border-radius);
+		cursor: pointer;
+		display: block;
+		height: var(--_height);
+		position: relative;
+		width: var(--_width);
+		transition: var(--_transition);
+	}
+
+	[part="track"] {
+		border-radius: var(--_border-radius);
+		border-color: var(--_border-color);
+		border-width: var(--_border-width);
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		transition: var(--_transition);
+	}
+
+	[part="handle"] {
+		background-color: var(--_background-color);
+		background-color: var(--_handle-color);
+		border-radius: var(--_handle-border-radius);
+		height: var(--_handle-height);
+		left: var(--_handle-gap);
+		position: absolute;
+		top: var(--_handle-gap);
+		transition: var(--_transition);
+		width: var(--_handle-width);
+	}
+`;
