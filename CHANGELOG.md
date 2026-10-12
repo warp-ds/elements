@@ -1,3 +1,10 @@
+# [2.14.0-next.5](https://github.com/warp-ds/elements/compare/v2.14.0-next.4...v2.14.0-next.5) (2026-10-12)
+
+
+### Features
+
+* **select:** add CSS styling API ([#800](https://github.com/warp-ds/elements/issues/800)) ([8226eb9](https://github.com/warp-ds/elements/commit/8226eb9c0920681e4937d000aabb96138d312e10))
+
 # [2.14.0-next.4](https://github.com/warp-ds/elements/compare/v2.14.0-next.3...v2.14.0-next.4) (2026-10-12)
 
 
