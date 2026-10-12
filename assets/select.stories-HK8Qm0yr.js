@@ -90,9 +90,19 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{_ as n,c as r,h
 	}
 `})))()}var F,I;function L(){return(L=e((()=>{se(),ne(),_(),s(),ae(),de(),re(),le(),x(),C(),T(),D(),k(),j(),P(),p(),y(),F={base:`block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current`,default:`s-text s-bg pl-8 border-1 s-border-strong hover:s-border-strong-hover active:s-border-active`,disabled:`s-text-disabled s-bg-disabled-subtle pl-8 border-1 s-border-disabled hover:s-border-disabled active:s-border-disabled pointer-events-none`,invalid:`s-text s-bg pl-8 border-1 s-border-negative hover:s-border-negative-hover active:s-border-active outline-[--w-s-color-border-negative]!`,readOnly:`s-text bg-transparent pl-0 border-0 pointer-events-none before:hidden`,wrapper:`relative`,selectWrapper:`relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none `,chevron:`block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer`,chevronDisabled:`opacity-25`},I=class extends ue(o){get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}#t;#n;#r;static{this.styles=[ce,A,M,N,i`
 			/* if there is an option with an empty value and it is selected */
-			select:has(option[value=""][selected]),
 			/* if there is an option with an empty value, and no other options are selected */
-				select:has(option[value=""]):not(:has(option[selected])) {
+			select:has(option[value=""][selected]),
+			select:has(option[value=""]):not(:has(option[selected])) {
+				color: var(--w-s-color-text-placeholder);
+			}
+
+			/* the options in the list that have a value should always use the text color */
+			option:not([value=""]) {
+				color: var(--w-s-color-text);
+			}
+
+			/* the placeholder should not use the semantic text color when the select has a value */
+			option[value=""] {
 				color: var(--w-s-color-text-placeholder);
 			}
 		`]}constructor(){super(),this.autoFocus=!1,this.autofocus=!1,this.invalid=!1,this.always=!1,this.optional=!1,this.disabled=!1,this.readOnly=!1,this.readonly=!1,this._options=[],this._hasHelpTextSlot=!1,this.#t=void 0,this.#n=()=>this.#c(),this._setValue=e=>{this.value=e,this.setValue(e)},ie(S,E,w,b,O)}resetFormControl(){this.value=this.#t}#i(){return[...this.children].filter(e=>e.tagName.toLowerCase()===`option`||e.tagName.toLowerCase()===`w-option`)}#a(){return this.shadowRoot?.querySelector(`select`)}#o(){return this.#i().some(e=>e.hasAttribute(`selected`))}#s(e){let t=this.#a();if(!t)return;let n=!1;for(let r of[...t.options]){let t=!n&&r.value===e;r.selected=t,r.toggleAttribute(`selected`,t),t&&(n=!0)}}#c({allowDefaultFirstOption:e=!1}={}){let t=this.#a();if(!t)return;let n=t.value;n&&n!==this.value&&(e||this.value||this.#o()||t.selectedIndex!==0)&&(this._setValue(n),this.#s(n))}#l({syncValueFromSelected:e=!1}={}){let t=this.#i(),n,i=t.map(t=>{let i=t.getAttribute(`value`)??``,a=t.textContent??``,o=t.hasAttribute(`selected`),s=t.hasAttribute(`disabled`);return e&&n===void 0&&o&&(n=i),r`<option
