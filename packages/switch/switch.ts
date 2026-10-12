@@ -1,42 +1,9 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { FormControlMixin } from "@open-wc/form-control";
-import { css, html, LitElement, PropertyValues } from "lit";
+import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
 import { reset } from "../styles";
-
 import { styles } from "./styles.js";
-
-const ccSwitch = {
-	base: "block relative h-24 w-44 cursor-pointer group focusable rounded-full",
-	disabled: "pointer-events-none",
-
-	track: "absolute top-0 left-0 h-full w-full rounded-full transition-colors",
-	trackActive: "s-bg-primary group-hover:s-bg-primary-hover",
-	trackInactive:
-		"s-bg border s-border-strong group-hover:s-bg-hover group-hover:s-border-strong-hover",
-
-	trackDisabledOn: "s-bg-disabled",
-	trackDisabledOff: "s-bg-disabled-subtle border s-border-disabled",
-
-	handle:
-		"absolute transform-gpu h-16 w-16 top-4 left-4 rounded-full transition-transform",
-	handleSelected: "translate-x-20",
-
-	// ON + enabled
-	handleActive: "s-bg",
-
-	// OFF + enabled
-	handleNotDisabled:
-		"bg-[--w-s-color-border-strong] group-hover:bg-[--w-s-color-border-strong-hover]",
-
-	handleDisabledOn: "s-bg-disabled-subtle",
-	handleDisabledOff: "s-bg-disabled",
-
-	a11y: "sr-only",
-};
 
 export type WarpSwitchChangeEvent = CustomEvent<{
 	checked: boolean;
@@ -82,60 +49,7 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 	#initialState = false;
 
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				border-radius: 9999px;
-				display: inline-block;
-			}
-
-			:host(:focus) {
-				outline: none;
-			}
-
-			:host(:focus-visible) {
-				outline: 2px solid var(--w-s-color-border-focus);
-				outline-offset: var(--w-outline-offset, 1px);
-			}
-		`,
-	];
-
-	/** @internal */
-	get _baseClasses() {
-		return classNames([ccSwitch.base, this.disabled && ccSwitch.disabled]);
-	}
-
-	/** @internal */
-	get _trackClasses() {
-		return classNames([
-			ccSwitch.track,
-			this.disabled
-				? this.checked
-					? ccSwitch.trackDisabledOn // disabled + ON
-					: ccSwitch.trackDisabledOff // disabled + OFF
-				: this.checked
-					? ccSwitch.trackActive // enabled + ON
-					: ccSwitch.trackInactive, // enabled + OFF
-		]);
-	}
-
-	/** @internal */
-	get _handleClasses() {
-		return classNames([
-			ccSwitch.handle,
-			this.checked && ccSwitch.handleSelected, // position (ON → translated)
-
-			this.disabled
-				? this.checked
-					? ccSwitch.handleDisabledOn // disabled + ON
-					: ccSwitch.handleDisabledOff // disabled + OFF
-				: this.checked
-					? ccSwitch.handleActive // enabled + ON
-					: ccSwitch.handleNotDisabled, // enabled + OFF
-		]);
-	}
+	static styles = [reset, styles];
 
 	/** @internal */
 	_handleClick() {
@@ -216,9 +130,9 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 	render() {
 		return html`
-			<div class=${this._baseClasses}>
-				<span data-testid="track" class=${this._trackClasses}></span>
-				<span data-testid="handle" class=${this._handleClasses}></span>
+			<div part="base">
+				<span data-testid="track" part="track"></span>
+				<span data-testid="handle" part="handle"></span>
 			</div>
 		`;
 	}

@@ -1,3 +1,24 @@
+# [2.14.0-next.4](https://github.com/warp-ds/elements/compare/v2.14.0-next.3...v2.14.0-next.4) (2026-10-12)
+
+
+### Features
+
+* **switch:** styling API via variables and parts ([#799](https://github.com/warp-ds/elements/issues/799)) ([fd7081e](https://github.com/warp-ds/elements/commit/fd7081ec1a3e90bffecda56f24b45928d791faad))
+
+# [2.14.0-next.3](https://github.com/warp-ds/elements/compare/v2.14.0-next.2...v2.14.0-next.3) (2026-10-12)
+
+
+### Features
+
+* **pill:** add styling api ([#798](https://github.com/warp-ds/elements/issues/798)) ([16ed79e](https://github.com/warp-ds/elements/commit/16ed79ed21092e0f9692b9b7e038fbe79c05313f))
+
+# [2.14.0-next.2](https://github.com/warp-ds/elements/compare/v2.14.0-next.1...v2.14.0-next.2) (2026-10-12)
+
+
+### Bug Fixes
+
+* **select:** placeholder styling on Windows ([#797](https://github.com/warp-ds/elements/issues/797)) ([99cbffd](https://github.com/warp-ds/elements/commit/99cbffda4a5edc4881f081c376cc73c18ba4f5f9))
+
 # [2.14.0-next.1](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0-next.1) (2026-10-09)
 
 

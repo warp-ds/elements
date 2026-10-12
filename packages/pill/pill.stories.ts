@@ -39,6 +39,6 @@ export const Suggestion: Story = {
 
 export const Closable: Story = {
 	args: {
-		"can-close": true,
+		canClose: true,
 	},
 };
