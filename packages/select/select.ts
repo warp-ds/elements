@@ -1,6 +1,3 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
 import {
@@ -27,28 +24,6 @@ import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
 
 import "../icon/icon.js";
 import "../tooltip/tooltip.js";
-
-// NOTE: Label and help-text are rendered inline using shared input styles.
-// In a future major version, we could extract these into separate w-label and w-help-text components
-// if we find significant reuse opportunities across non-input components.
-
-const ccSelect = {
-	base: "block text-m mb-0 py-12 pr-32 rounded-4 w-full focusable focus:[--w-outline-offset:-2px] appearance-none cursor-pointer caret-current",
-	default:
-		"s-text s-bg pl-8 border-1 s-border-strong hover:s-border-strong-hover active:s-border-active",
-	disabled:
-		"s-text-disabled s-bg-disabled-subtle pl-8 border-1 s-border-disabled hover:s-border-disabled active:s-border-disabled pointer-events-none",
-	invalid:
-		"s-text s-bg pl-8 border-1 s-border-negative hover:s-border-negative-hover active:s-border-active outline-[--w-s-color-border-negative]!",
-	readOnly:
-		"s-text bg-transparent pl-0 border-0 pointer-events-none before:hidden",
-	wrapper: "relative",
-	selectWrapper:
-		"relative before:block before:absolute before:right-0 before:bottom-0 before:w-32 before:h-full before:pointer-events-none ",
-	chevron:
-		"block absolute top-[30%] right-0 bottom-0 w-32 h-full s-icon pointer-events-none cursor-pointer",
-	chevronDisabled: "opacity-25",
-};
 
 /**
  * A dropdown component for selecting a single value.
@@ -387,30 +362,6 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 		}
 	}
 
-	get #classes() {
-		return classNames([
-			ccSelect.base,
-			!this.invalid &&
-				!this.disabled &&
-				!(this.readonly || this.readOnly) &&
-				ccSelect.default,
-			this.invalid && ccSelect.invalid,
-			this.disabled && ccSelect.disabled,
-			(this.readonly || this.readOnly) && ccSelect.readOnly,
-		]);
-	}
-
-	get #helpTextClasses() {
-		return "help-text";
-	}
-
-	get #chevronClasses() {
-		return classNames([
-			ccSelect.chevron,
-			this.disabled && ccSelect.chevronDisabled,
-		]);
-	}
-
 	get #id() {
 		return "select_id";
 	}
@@ -453,11 +404,11 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	}
 
 	render() {
-		return html`<div class="${ccSelect.wrapper}">
+		return html`<div part="base">
 			${
 				this.label
 					? html`
-							<label for="${this.#id}">
+							<label part="label" for="${this.#id}">
 								${this.label}
 								${
 									this.optional
@@ -497,10 +448,9 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 						`
 					: nothing
 			}
-			<div class="${ccSelect.selectWrapper}">
+			<div class="input-wrapper">
 				<select
 					part="input"
-					class="${this.#classes}"
 					id="${this.#id}"
 					?disabled=${this.disabled}
 					aria-readonly="${this.readonly}"
@@ -512,18 +462,17 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 				>
 					${this._options}
 				</select>
-				<div class="${this.#chevronClasses}">
-					<w-icon
-						name="ChevronDown"
-						size="small"
-						locale="${detectLocale()}"
-						class="flex"
-					></w-icon>
-				</div>
+				<w-icon
+					name="ChevronDown"
+					size="small"
+					locale="${detectLocale()}"
+					part="chevron"
+				></w-icon>
 			</div>
 			<div
 				?hidden=${!this.#hasHelpText && !this.always && !this.invalid}
-				class="${this.#helpTextClasses}"
+				part="help-text"
+				class="help-text"
 				id="${ifDefined(this.#helpId)}"
 			>
 				${this.helpText || this.hint}
