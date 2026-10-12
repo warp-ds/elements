@@ -1,3 +1,10 @@
+# [2.14.0-next.3](https://github.com/warp-ds/elements/compare/v2.14.0-next.2...v2.14.0-next.3) (2026-10-12)
+
+
+### Features
+
+* **pill:** add styling api ([#798](https://github.com/warp-ds/elements/issues/798)) ([16ed79e](https://github.com/warp-ds/elements/commit/16ed79ed21092e0f9692b9b7e038fbe79c05313f))
+
 # [2.14.0-next.2](https://github.com/warp-ds/elements/compare/v2.14.0-next.1...v2.14.0-next.2) (2026-10-12)
 
 
