@@ -130,7 +130,21 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,i
 	:host([disabled]) [part="chevron"] {
 		opacity: var(--_chevron-opacity-disabled);
 	}
-	[part="help-text"] {
+	/* if there is an option with an empty value and it is selected */
+	/* if there is an option with an empty value, and no other options are selected */
+	select:has(option[value=""][selected]),
+	select:has(option[value=""]):not(:has(option[selected])) {
+		color: var(--w-s-color-text-placeholder);
+	}
+
+	/* the options in the list that have a value should always use the text color */
+	option:not([value=""]) {
+		color: var(--w-s-color-text);
+	}
+
+	/* the placeholder should not use the semantic text color when the select has a value */
+	option[value=""] {
+		color: var(--w-s-color-text-placeholder);
 	}
 `})))()}var P,F;function I(){return(I=e((()=>{o(),P=r`
 	/* Label component tokens with semantic fallbacks */
@@ -222,24 +236,7 @@ import{n as e,r as t}from"./rolldown-runtime-DkW27tQK.js";import{c as n,h as r,i
 		display: var(--_help-text-display);
 		color: var(--_help-text-color);
 	}
-`})))()}var L;function R(){return(R=e((()=>{te(),v(),o(),d(),b(),c(),ae(),C(),T(),D(),k(),j(),N(),I(),ie(),x(),L=class extends oe(a){get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}#t;#n;#r;static{this.styles=[m,M,P,F,r`
-			/* if there is an option with an empty value and it is selected */
-			/* if there is an option with an empty value, and no other options are selected */
-			select:has(option[value=""][selected]),
-			select:has(option[value=""]):not(:has(option[selected])) {
-				color: var(--w-s-color-text-placeholder);
-			}
-
-			/* the options in the list that have a value should always use the text color */
-			option:not([value=""]) {
-				color: var(--w-s-color-text);
-			}
-
-			/* the placeholder should not use the semantic text color when the select has a value */
-			option[value=""] {
-				color: var(--w-s-color-text-placeholder);
-			}
-		`]}constructor(){super(),this.autoFocus=!1,this.autofocus=!1,this.invalid=!1,this.always=!1,this.optional=!1,this.disabled=!1,this.readOnly=!1,this.readonly=!1,this._options=[],this._hasHelpTextSlot=!1,this.#t=void 0,this.#n=()=>this.#c(),this._setValue=e=>{this.value=e,this.setValue(e)},l(w,O,E,S,A)}resetFormControl(){this.value=this.#t}#i(){return[...this.children].filter(e=>e.tagName.toLowerCase()===`option`||e.tagName.toLowerCase()===`w-option`)}#a(){return this.shadowRoot?.querySelector(`select`)}#o(){return this.#i().some(e=>e.hasAttribute(`selected`))}#s(e){let t=this.#a();if(!t)return;let n=!1;for(let r of[...t.options]){let t=!n&&r.value===e;r.selected=t,r.toggleAttribute(`selected`,t),t&&(n=!0)}}#c({allowDefaultFirstOption:e=!1}={}){let t=this.#a();if(!t)return;let n=t.value;n&&n!==this.value&&(e||this.value||this.#o()||t.selectedIndex!==0)&&(this._setValue(n),this.#s(n))}#l({syncValueFromSelected:e=!1}={}){let t=this.#i(),r,i=t.map(t=>{let i=t.getAttribute(`value`)??``,a=t.textContent??``,o=t.hasAttribute(`selected`),s=t.hasAttribute(`disabled`);return e&&r===void 0&&o&&(r=i),n`<option
+`})))()}var L;function R(){return(R=e((()=>{te(),v(),o(),d(),b(),c(),ae(),C(),T(),D(),k(),j(),N(),I(),ie(),x(),L=class extends oe(a){get#e(){return this.helpText!==void 0||this._hasHelpTextSlot}#t;#n;#r;static{this.styles=[m,M,P,F]}constructor(){super(),this.autoFocus=!1,this.autofocus=!1,this.invalid=!1,this.always=!1,this.optional=!1,this.disabled=!1,this.readOnly=!1,this.readonly=!1,this._options=[],this._hasHelpTextSlot=!1,this.#t=void 0,this.#n=()=>this.#c(),this._setValue=e=>{this.value=e,this.setValue(e)},l(w,O,E,S,A)}resetFormControl(){this.value=this.#t}#i(){return[...this.children].filter(e=>e.tagName.toLowerCase()===`option`||e.tagName.toLowerCase()===`w-option`)}#a(){return this.shadowRoot?.querySelector(`select`)}#o(){return this.#i().some(e=>e.hasAttribute(`selected`))}#s(e){let t=this.#a();if(!t)return;let n=!1;for(let r of[...t.options]){let t=!n&&r.value===e;r.selected=t,r.toggleAttribute(`selected`,t),t&&(n=!0)}}#c({allowDefaultFirstOption:e=!1}={}){let t=this.#a();if(!t)return;let n=t.value;n&&n!==this.value&&(e||this.value||this.#o()||t.selectedIndex!==0)&&(this._setValue(n),this.#s(n))}#l({syncValueFromSelected:e=!1}={}){let t=this.#i(),r,i=t.map(t=>{let i=t.getAttribute(`value`)??``,a=t.textContent??``,o=t.hasAttribute(`selected`),s=t.hasAttribute(`disabled`);return e&&r===void 0&&o&&(r=i),n`<option
 				value="${i}"
 				?selected=${o}
 				?disabled=${s}
