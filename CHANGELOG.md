@@ -1,3 +1,10 @@
+# [2.14.0-next.4](https://github.com/warp-ds/elements/compare/v2.14.0-next.3...v2.14.0-next.4) (2026-10-12)
+
+
+### Features
+
+* **switch:** styling API via variables and parts ([#799](https://github.com/warp-ds/elements/issues/799)) ([fd7081e](https://github.com/warp-ds/elements/commit/fd7081ec1a3e90bffecda56f24b45928d791faad))
+
 # [2.14.0-next.3](https://github.com/warp-ds/elements/compare/v2.14.0-next.2...v2.14.0-next.3) (2026-10-12)
 
 
