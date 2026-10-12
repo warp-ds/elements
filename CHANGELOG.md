@@ -1,3 +1,10 @@
+# [2.14.0-next.2](https://github.com/warp-ds/elements/compare/v2.14.0-next.1...v2.14.0-next.2) (2026-10-12)
+
+
+### Bug Fixes
+
+* **select:** placeholder styling on Windows ([#797](https://github.com/warp-ds/elements/issues/797)) ([99cbffd](https://github.com/warp-ds/elements/commit/99cbffda4a5edc4881f081c376cc73c18ba4f5f9))
+
 # [2.14.0-next.1](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0-next.1) (2026-10-09)
 
 
