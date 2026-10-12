@@ -131,6 +131,20 @@ export const styles = css`
 	:host([disabled]) [part="chevron"] {
 		opacity: var(--_chevron-opacity-disabled);
 	}
-	[part="help-text"] {
+	/* if there is an option with an empty value and it is selected */
+	/* if there is an option with an empty value, and no other options are selected */
+	select:has(option[value=""][selected]),
+	select:has(option[value=""]):not(:has(option[selected])) {
+		color: var(--w-s-color-text-placeholder);
+	}
+
+	/* the options in the list that have a value should always use the text color */
+	option:not([value=""]) {
+		color: var(--w-s-color-text);
+	}
+
+	/* the placeholder should not use the semantic text color when the select has a value */
+	option[value=""] {
+		color: var(--w-s-color-text-placeholder);
 	}
 `;

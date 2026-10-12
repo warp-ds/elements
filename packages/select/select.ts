@@ -1,13 +1,6 @@
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
-import {
-	css,
-	html,
-	LitElement,
-	nothing,
-	PropertyValues,
-	TemplateResult,
-} from "lit";
+import { html, LitElement, nothing, PropertyValues, TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -144,30 +137,7 @@ export class WarpSelect extends FormControlMixin(LitElement) {
 	#onPageShow = () => this.#syncFromNativeSelect();
 	#lightDomObserver?: MutationObserver;
 
-	static styles = [
-		reset,
-		styles,
-		inputLabelStyles,
-		inputHelpTextStyles,
-		css`
-			/* if there is an option with an empty value and it is selected */
-			/* if there is an option with an empty value, and no other options are selected */
-			select:has(option[value=""][selected]),
-			select:has(option[value=""]):not(:has(option[selected])) {
-				color: var(--w-s-color-text-placeholder);
-			}
-
-			/* the options in the list that have a value should always use the text color */
-			option:not([value=""]) {
-				color: var(--w-s-color-text);
-			}
-
-			/* the placeholder should not use the semantic text color when the select has a value */
-			option[value=""] {
-				color: var(--w-s-color-text-placeholder);
-			}
-		`,
-	];
+	static styles = [reset, styles, inputLabelStyles, inputHelpTextStyles];
 
 	constructor() {
 		super();
