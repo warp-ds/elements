@@ -1,17 +1,9 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import type { WarpStep } from "../step/step.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
-
-const ccSteps = {
-	wrapper: "w-full",
-	horizontal: "flex",
-};
 
 /**
  * Steps are used to show progress through a process or to guide users through a multi-step task.
@@ -43,24 +35,17 @@ export class WarpStepIndicator extends LitElement {
 	updateStepsContext() {
 		// Provide context to child step elements
 		const steps = this.querySelectorAll<WarpStep>("w-step");
-		steps.forEach((step, index) => {
+		steps.forEach((step) => {
 			step.setContext({
 				horizontal: this.horizontal,
 				right: this.right,
-				isLast: index === steps.length - 1,
-				isFirst: index === 0,
 			});
 		});
 	}
 
 	render() {
-		const classes = classNames([
-			ccSteps.wrapper,
-			this.horizontal && ccSteps.horizontal,
-		]);
-
 		return html`
-			<div role="list" class=${classes}>
+			<div role="list" part="base">
 				<slot></slot>
 			</div>
 		`;
