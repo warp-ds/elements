@@ -1,12 +1,17 @@
 import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type { WarpDatepicker } from "./datepicker.js";
 import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	// Callback props must use @lit/react's property path, never HTML attributes.
+	@property({ attribute: false })
+	isDayDisabled: WarpDatepicker["isDayDisabled"];
+}
 
 const BaseDatePicker = createComponent({
 	tagName: "w-datepicker",
