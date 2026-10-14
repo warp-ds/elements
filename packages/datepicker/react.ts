@@ -28,11 +28,12 @@ type BaseDatePickerProps = React.ComponentPropsWithoutRef<
 
 type DatePickerProps = Omit<
 	BaseDatePickerProps,
-	"header-format" | "weekday-format" | "day-format"
+	"header-format" | "weekday-format" | "day-format" | "help-text"
 > & {
 	headerFormat?: string;
 	weekdayFormat?: string;
 	dayFormat?: string;
+	helpText?: string;
 };
 
 /**
@@ -41,7 +42,7 @@ type DatePickerProps = Omit<
  * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
  */
 export const DatePicker = React.forwardRef<WarpDatepicker, DatePickerProps>(
-	({ headerFormat, weekdayFormat, dayFormat, ...props }, ref) =>
+	({ headerFormat, weekdayFormat, dayFormat, helpText, ...props }, ref) =>
 		React.createElement(BaseDatePicker, {
 			...props,
 			...(headerFormat !== undefined ? { "header-format": headerFormat } : {}),
@@ -49,11 +50,13 @@ export const DatePicker = React.forwardRef<WarpDatepicker, DatePickerProps>(
 				? { "weekday-format": weekdayFormat }
 				: {}),
 			...(dayFormat !== undefined ? { "day-format": dayFormat } : {}),
+			...(helpText !== undefined ? { "help-text": helpText } : {}),
 			ref,
 		} as React.ComponentProps<typeof BaseDatePicker> & {
 			"header-format"?: string;
 			"weekday-format"?: string;
 			"day-format"?: string;
+			"help-text"?: string;
 		}),
 );
 

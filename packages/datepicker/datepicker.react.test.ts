@@ -5,4 +5,5 @@ describeReactSsrAttributeMapping("DatePicker", DatePicker, [
 	{ propName: "headerFormat", attrName: "header-format", value: "short" },
 	{ propName: "weekdayFormat", attrName: "weekday-format", value: "narrow" },
 	{ propName: "dayFormat", attrName: "day-format", value: "numeric" },
+	{ propName: "helpText", attrName: "help-text", value: "Choose a date" },
 ]);
