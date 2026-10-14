@@ -1,6 +1,3 @@
-// @warp-css;
-
-import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { html, LitElement, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
@@ -17,39 +14,9 @@ import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
 
-const ccStep = {
-	base: "group/step",
-	vertical: "group/stepv grid-rows-[20px_auto] grid grid-flow-col gap-x-8",
-	horizontal:
-		"group/steph grid-rows-[auto_20px] grid-cols-[1fr_20px_1fr] flex-1 grid items-center",
-
-	alignLeft: "grid-cols-[20px_1fr]",
-	alignRight: "grid-cols-[1fr_20px] text-right",
-
-	dot: "rounded-full border-2 h-20 w-20 transition-colors duration-300 s-icon-inverted",
-	dotAlignRight: "col-start-2",
-	dotHorizontal: "row-start-2 justify-self-end",
-	dotActive: "s-border-primary s-bg-primary",
-	dotIncomplete: "s-border s-bg",
-
-	line: "transition-colors duration-300",
-	lineVertical: "w-2 h-full justify-self-center",
-	lineAlignRight: "col-start-2",
-	lineHorizontal: "h-2 w-full row-start-2",
-
-	lineIncomplete: "s-bg-disabled",
-	lineComplete: "s-bg-primary",
-
-	content: "last:mb-0",
-	contentVertical: "row-span-2 pb-32",
-	contentHorizontal: "col-span-3 px-12 row-start-1 text-center",
-};
-
 export interface StepsContext {
 	horizontal?: boolean;
 	right?: boolean;
-	isLast?: boolean;
-	isFirst?: boolean;
 }
 
 /**
@@ -80,8 +47,6 @@ export class WarpStep extends LitElement {
 	private _context: StepsContext = {
 		horizontal: false,
 		right: false,
-		isLast: false,
-		isFirst: false,
 	};
 
 	private _internals: ElementInternals;
@@ -127,58 +92,17 @@ export class WarpStep extends LitElement {
 	}
 
 	render() {
-		const vertical = !this._context.horizontal;
-		const left = !this._context.right;
-		const isFirst = this._context.isFirst;
-		const isLast = this._context.isLast;
-
-		const stepClasses = classNames([
-			ccStep.base,
-			vertical ? ccStep.vertical : ccStep.horizontal,
-			vertical ? (left ? ccStep.alignLeft : ccStep.alignRight) : "",
-		]);
-
-		const lineHorizontalClasses = classNames([
-			ccStep.line,
-			ccStep.lineHorizontal,
-			this.active || this.completed
-				? ccStep.lineComplete
-				: ccStep.lineIncomplete,
-			isFirst ? "invisible" : "",
-		]);
-
-		const dotClasses = classNames([
-			ccStep.dot,
-			vertical ? (!left ? ccStep.dotAlignRight : "") : ccStep.dotHorizontal,
-			this.active || this.completed ? ccStep.dotActive : ccStep.dotIncomplete,
-		]);
-
-		const lineClasses = classNames([
-			ccStep.line,
-			vertical ? ccStep.lineVertical : ccStep.lineHorizontal,
-			vertical && !left ? ccStep.lineAlignRight : "",
-			this.completed ? ccStep.lineComplete : ccStep.lineIncomplete,
-			isLast ? "invisible" : "",
-		]);
-
-		const contentClasses = classNames([
-			ccStep.content,
-			vertical ? ccStep.contentVertical : ccStep.contentHorizontal,
-			isLast ? "pb-0" : "",
-		]);
+		const { horizontal, right } = this._context;
 
 		return html`
 			<div
-				class="${stepClasses}"
-				style=${ifDefined(
-					this._context.horizontal ? "height: 100%;" : undefined,
-				)}
+				part="base"
+				data-orientation="${horizontal ? "horizontal" : "vertical"}"
+				data-align="${right ? "right" : "left"}"
 			>
-				${
-					!vertical ? html`<div class=${lineHorizontalClasses}></div>` : nothing
-				}
+				${horizontal ? html`<div part="line-horizontal"></div>` : nothing}
 				<div
-					class=${dotClasses}
+					part="dot"
 					role="img"
 					aria-label=${this.getAriaLabel()}
 					aria-current=${ifDefined(this.active ? "step" : undefined)}
@@ -190,18 +114,13 @@ export class WarpStep extends LitElement {
 									size="small"
 									locale="${detectLocale()}"
 									data-testid="completed-icon"
-									class="flex"
+									part="completed-icon"
 								></w-icon>`
 							: nothing
 					}
 				</div>
-				<div class=${lineClasses}></div>
-				<div
-					class=${contentClasses}
-					style=${ifDefined(
-						this._context.horizontal ? "height: 100%;" : undefined,
-					)}
-				>
+				<div part="line"></div>
+				<div part="content">
 					<slot></slot>
 				</div>
 			</div>
