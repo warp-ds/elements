@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import { WarpTooltip } from "./tooltip.js";
+import type { WarpTooltip } from "./tooltip.js";
 
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {}
@@ -15,8 +15,9 @@ const BaseTooltip = createComponent({
 
 type BaseTooltipProps = React.ComponentPropsWithoutRef<typeof BaseTooltip>;
 
-type TooltipProps = BaseTooltipProps & {
+type TooltipProps = Omit<BaseTooltipProps, "no-arrow"> & {
 	htmlFor?: string;
+	noArrow?: boolean;
 };
 
 /**
@@ -31,12 +32,15 @@ type TooltipProps = BaseTooltipProps & {
  * ```
  */
 export const Tooltip = React.forwardRef<WarpTooltip, TooltipProps>(
-	({ htmlFor, ...props }, ref) =>
+	({ htmlFor, noArrow, ...props }, ref) =>
 		React.createElement(BaseTooltip, {
 			for: htmlFor,
 			...props,
+			...(noArrow ? { "no-arrow": true } : {}),
 			ref,
-		} as React.ComponentProps<typeof BaseTooltip>),
+		} as React.ComponentProps<typeof BaseTooltip> & {
+			"no-arrow"?: boolean;
+		}),
 );
 
 Tooltip.displayName = "Tooltip";
