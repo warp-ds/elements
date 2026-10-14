@@ -1,5 +1,6 @@
 import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type { WarpSlider } from "./slider.js";
@@ -8,7 +9,11 @@ import type { WarpSlider } from "./slider.js";
 export { SliderThumb } from "../slider-thumb/react.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	// Callback props must use @lit/react's property path, never HTML attributes.
+	@property({ attribute: false })
+	valueFormatter: WarpSlider["valueFormatter"];
+}
 
 const BaseSlider = createComponent({
 	tagName: "w-slider",
