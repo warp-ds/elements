@@ -1,5 +1,11 @@
 import { describeReactSsrAttributeMapping } from "../../tests/react-ssr-attributes";
 import { Combobox } from "./react.js";
+import { describeReactPropertyMapping } from "../../tests/react-property-mapping.js";
+
+describeReactPropertyMapping("Combobox", Combobox, "options", () => [
+	[{ value: "apple", label: "Apple" }],
+	[{ value: "pear", label: "Pear" }],
+]);
 
 describeReactSsrAttributeMapping("Combobox", Combobox, [
 	{ propName: "openOnFocus", attrName: "open-on-focus" },

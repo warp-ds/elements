@@ -1,11 +1,16 @@
 import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type { WarpCombobox } from "./combobox.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	// Preserve array values through @lit/react's property assignment path.
+	@property({ attribute: false })
+	options: WarpCombobox["options"] | undefined;
+}
 
 const BaseCombobox = createComponent({
 	tagName: "w-combobox",
