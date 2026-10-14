@@ -1,5 +1,42 @@
 # Build Guide
 
+## React wrapper drift
+
+Check all React wrappers, or select components by package directory name:
+
+```sh
+node build/check-react-wrappers.js --all
+node build/check-react-wrappers.js button datepicker
+```
+
+The checker reads the current TypeScript source and inferred exported React
+props. It does not need a build or generated manifest, and never modifies files.
+It reports exposed reactive props whose names differ from their attributes and
+have no matching translation, plus explicit mappings to unknown hyphenated
+attributes. Either add the translation or exclude the unsupported prop from the
+wrapper type; the checker does not require camelCase aliases for every attribute.
+Inherited public reactive fields are included. Private, protected, underscore
+prefixed, and `@internal` fields are excluded.
+
+Property-only props, complex values without explicit serialization, and dynamic
+declarations produce review notices rather than drift errors. This is static
+analysis of the existing `createComponent` / `React.createElement` patterns,
+not a runtime test: it does not validate events, value conversion, hydration,
+arbitrary helper functions, or React-version compatibility. An explicit mapping
+is evidence of translation, not proof that every runtime branch is correct.
+
+Exit codes are **0** for no drift errors (review notices may remain), **1** when
+drift is found, and **2** for invalid input or analysis failure. No arguments
+checks all wrappers. The command works independently of the current directory.
+
+Run the checker's tests with:
+
+```sh
+node --test build/check-react-wrappers.test.js
+```
+
+## Adding components
+
 To add a new component to the build:
 
 1. Add it to `.cem/custom-element-manifest.config.js`
