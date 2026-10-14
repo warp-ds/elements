@@ -13,6 +13,9 @@ class Component extends LitElement {
 	// Callback props must use @lit/react's property path, never HTML attributes.
 	@property({ attribute: false })
 	valueFormatter: WarpSlider["valueFormatter"];
+
+	@property({ attribute: false })
+	tooltipFormatter: WarpSlider["tooltipFormatter"];
 }
 
 const BaseSlider = createComponent({

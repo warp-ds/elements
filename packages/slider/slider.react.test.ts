@@ -7,6 +7,11 @@ describeReactPropertyMapping("Slider", Slider, "valueFormatter", () => [
 	(value: string) => `${value} km`,
 ]);
 
+describeReactPropertyMapping("Slider", Slider, "tooltipFormatter", () => [
+	(value: string) => `From ${value}`,
+	(value: string) => `Up to ${value}`,
+]);
+
 describeReactSsrAttributeMapping("Slider", Slider, [
 	{ propName: "openEnded", attrName: "open-ended" },
 	{ propName: "helpText", attrName: "help-text", value: "Help text" },
