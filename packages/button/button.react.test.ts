@@ -3,6 +3,12 @@ import { renderToString } from "react-dom/server";
 import { describe, expect, test } from "vitest";
 
 import { Button } from "./react.js";
+import { describeReactPropertyMapping } from "../../tests/react-property-mapping.js";
+
+describeReactPropertyMapping("Button", Button, "commandForElement", () => [
+	document.createElement("div"),
+	document.createElement("dialog"),
+]);
 
 describe("Button React SSR", () => {
 	test("renders buttonClass as the button-class attribute, including an empty string", () => {

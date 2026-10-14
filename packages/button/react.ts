@@ -1,11 +1,16 @@
 import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type { WarpButton } from "./button.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	// Let @lit/react assign complex values as properties without bundling the element.
+	@property({ attribute: false })
+	commandForElement: WarpButton["commandForElement"];
+}
 
 const BaseButton = createComponent({
 	tagName: "w-button",
