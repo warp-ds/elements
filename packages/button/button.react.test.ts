@@ -5,6 +5,13 @@ import { describe, expect, test } from "vitest";
 import { Button } from "./react.js";
 
 describe("Button React SSR", () => {
+	test("renders buttonClass as the button-class attribute, including an empty string", () => {
+		for (const buttonClass of ["custom-button", ""]) {
+			const html = renderToString(React.createElement(Button, { buttonClass }));
+			expect(html).toContain(`button-class="${buttonClass}"`);
+			expect(html).not.toContain("buttonClass");
+		}
+	});
 	test("renders fullWidth as the full-width attribute", () => {
 		const html = renderToString(
 			React.createElement(Button, { fullWidth: true }, "Full width"),

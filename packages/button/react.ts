@@ -15,9 +15,13 @@ const BaseButton = createComponent({
 
 type BaseButtonProps = React.ComponentPropsWithoutRef<typeof BaseButton>;
 
-type ButtonProps = Omit<BaseButtonProps, "full-width" | "icon-only"> & {
+type ButtonProps = Omit<
+	BaseButtonProps,
+	"full-width" | "icon-only" | "button-class"
+> & {
 	fullWidth?: boolean;
 	iconOnly?: boolean;
+	buttonClass?: string;
 };
 
 /**
@@ -28,17 +32,19 @@ type ButtonProps = Omit<BaseButtonProps, "full-width" | "icon-only"> & {
  * [Warp component reference](https://warp-ds.github.io/docs/components/button/frameworks/elements)
  */
 export const Button = React.forwardRef<WarpButton, ButtonProps>(
-	({ fullWidth, iconOnly, ...props }, ref) =>
+	({ fullWidth, iconOnly, buttonClass, ...props }, ref) =>
 		React.createElement(BaseButton, {
 			role: "button",
 			tabIndex: 0,
 			...props,
 			...(fullWidth ? { "full-width": true } : {}),
 			...(iconOnly ? { "icon-only": true } : {}),
+			...(buttonClass !== undefined ? { "button-class": buttonClass } : {}),
 			ref,
 		} as React.ComponentProps<typeof BaseButton> & {
 			"full-width"?: boolean;
 			"icon-only"?: boolean;
+			"button-class"?: string;
 		}),
 );
 
