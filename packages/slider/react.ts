@@ -16,6 +16,9 @@ class Component extends LitElement {
 
 	@property({ attribute: false })
 	tooltipFormatter: WarpSlider["tooltipFormatter"];
+
+	@property({ attribute: false })
+	labelFormatter: WarpSlider["labelFormatter"];
 }
 
 const BaseSlider = createComponent({
