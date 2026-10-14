@@ -15,10 +15,14 @@ const BaseTooltip = createComponent({
 
 type BaseTooltipProps = React.ComponentPropsWithoutRef<typeof BaseTooltip>;
 
-type TooltipProps = Omit<BaseTooltipProps, "no-arrow" | "show-delay"> & {
+type TooltipProps = Omit<
+	BaseTooltipProps,
+	"no-arrow" | "show-delay" | "hide-delay"
+> & {
 	htmlFor?: string;
 	noArrow?: boolean;
 	showDelay?: number;
+	hideDelay?: number;
 };
 
 /**
@@ -33,16 +37,18 @@ type TooltipProps = Omit<BaseTooltipProps, "no-arrow" | "show-delay"> & {
  * ```
  */
 export const Tooltip = React.forwardRef<WarpTooltip, TooltipProps>(
-	({ htmlFor, noArrow, showDelay, ...props }, ref) =>
+	({ htmlFor, noArrow, showDelay, hideDelay, ...props }, ref) =>
 		React.createElement(BaseTooltip, {
 			for: htmlFor,
 			...props,
 			...(noArrow ? { "no-arrow": true } : {}),
 			...(showDelay !== undefined ? { "show-delay": showDelay } : {}),
+			...(hideDelay !== undefined ? { "hide-delay": hideDelay } : {}),
 			ref,
 		} as React.ComponentProps<typeof BaseTooltip> & {
 			"no-arrow"?: boolean;
 			"show-delay"?: number;
+			"hide-delay"?: number;
 		}),
 );
 

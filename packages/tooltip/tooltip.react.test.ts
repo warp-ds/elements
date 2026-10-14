@@ -3,6 +3,15 @@ import { renderToString } from "react-dom/server";
 import { expect, test } from "vitest";
 import { Tooltip } from "./react.js";
 
+test("maps hideDelay to hide-delay, including zero", () => {
+	for (const hideDelay of [0, 100, undefined]) {
+		const html = renderToString(React.createElement(Tooltip, { hideDelay }));
+		if (hideDelay === undefined) expect(html).not.toContain("hide-delay");
+		else expect(html).toContain(`hide-delay="${hideDelay}"`);
+		expect(html).not.toContain("hideDelay");
+	}
+});
+
 test("maps showDelay to show-delay, including zero", () => {
 	for (const showDelay of [0, 250, undefined]) {
 		const html = renderToString(React.createElement(Tooltip, { showDelay }));
