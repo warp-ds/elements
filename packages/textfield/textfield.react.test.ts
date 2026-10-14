@@ -1,5 +1,11 @@
 import { describeReactSsrAttributeMapping } from "../../tests/react-ssr-attributes";
 import { TextField } from "./react.js";
+import { describeReactPropertyMapping } from "../../tests/react-property-mapping.js";
+
+describeReactPropertyMapping("TextField", TextField, "formatter", () => [
+	(value: string) => `${value} kr`,
+	(value: string) => `${value} km`,
+]);
 
 describeReactSsrAttributeMapping("TextField", TextField, [
 	{ propName: "helpText", attrName: "help-text", value: "Help text" },
