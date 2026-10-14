@@ -1,3 +1,10 @@
+# [2.14.0-next.6](https://github.com/warp-ds/elements/compare/v2.14.0-next.5...v2.14.0-next.6) (2026-10-14)
+
+
+### Features
+
+* **step-indicator:** add styling api ([#801](https://github.com/warp-ds/elements/issues/801)) ([f796568](https://github.com/warp-ds/elements/commit/f79656898465bd7f80d715f5f0e7addce1cdc795))
+
 # [2.14.0-next.5](https://github.com/warp-ds/elements/compare/v2.14.0-next.4...v2.14.0-next.5) (2026-10-12)
 
 
