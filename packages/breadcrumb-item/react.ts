@@ -13,8 +13,27 @@ class Component extends LitElement {}
  *
  * [Warp component reference](https://warp-ds.github.io/docs/components/breadcrumbs/frameworks/elements)
  */
-export const BreadcrumbItem = createComponent({
+export const BaseBreadcrumbItem = createComponent({
 	tagName: "w-breadcrumb-item",
 	elementClass: Component as unknown as typeof WarpBreadcrumbItem,
 	react: React,
 });
+
+type BaseBreadcrumbItemProps = React.ComponentPropsWithoutRef<typeof BaseBreadcrumbItem>;
+
+type BreadcrumbItemProps = Omit<BaseBreadcrumbItemProps, "current-page"> & {
+	currentPage?: boolean;
+};
+
+export const BreadcrumbItem = React.forwardRef<WarpBreadcrumbItem, BreadcrumbItemProps>(
+	({ currentPage, ...props }, ref) =>
+		React.createElement(BaseBreadcrumbItem, {
+			...props,
+			...(currentPage ? { "current-page": true } : {}),
+			ref,
+		} as React.ComponentProps<typeof BaseBreadcrumbItem> & {
+			"current-page"?: boolean;
+		}),
+);
+
+BreadcrumbItem.displayName = "BreadcrumbItem";
