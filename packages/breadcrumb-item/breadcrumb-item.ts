@@ -17,7 +17,7 @@ class WarpBreadcrumbItem extends LitElement {
 	 * Marks this item as the current page.
 	 * Use this on the final breadcrumb item so it exposes `aria-current="page"` and does not render a trailing separator.
 	 */
-	@property({ type: Boolean, attribute: "current-page" }) currentPage = false;
+	@property({ type: Boolean, attribute: "current-page", reflect: true }) currentPage = false;
 
 	/**
 	 * URL for linked breadcrumb items.
