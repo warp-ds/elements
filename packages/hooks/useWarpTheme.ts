@@ -62,9 +62,7 @@ type WarpTheme = "light" | "dark";
 export const useWarpTheme = (defaultTheme: string = "light"): WarpTheme => {
 	const [hasMounted, setHasMounted] = useState(false);
 	const [colorScheme, setColorScheme] = useState<WarpTheme>(
-		typeof window !== "undefined"
-			? getWarpTheme() || "light"
-			: (defaultTheme as WarpTheme),
+		defaultTheme as WarpTheme,
 	);
 
 	useEffect(() => {
