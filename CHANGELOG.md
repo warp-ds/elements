@@ -1,3 +1,10 @@
+# [2.14.0-next.7](https://github.com/warp-ds/elements/compare/v2.14.0-next.6...v2.14.0-next.7) (2026-10-15)
+
+
+### Bug Fixes
+
+* **useWarpTheme:** make sure a diff between wtheme and current theme triggers a rerender ([#804](https://github.com/warp-ds/elements/issues/804)) ([2bc17cb](https://github.com/warp-ds/elements/commit/2bc17cbee6ee1def7a545bca47778ab107490829))
+
 # [2.14.0-next.6](https://github.com/warp-ds/elements/compare/v2.14.0-next.5...v2.14.0-next.6) (2026-10-14)
 
 
