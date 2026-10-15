@@ -15,7 +15,7 @@ beforeAll(async () => {
 	await customElements.whenDefined("w-affix");
 });
 
-describe("", () => {
+describe("Affix React Wrapper", () => {
 	test("does not render ariaLabel in the DOM on the server side", () => {
 		const html = renderToString(<Affix ariaLabel="an affix" />);
 		expect(html).toMatch("<w-affix>");
