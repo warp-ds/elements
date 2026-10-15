@@ -11,7 +11,7 @@ class Component extends LitElement {
 	// attribute/properties with different attribute names from the property name must be
 	// redeclared on the stub to ensure @lit/react handles them correctly
 	@property({ attribute: "aria-label" })
-	ariaLabel: WarpAffix['ariaLabel'] = null;
+	ariaLabel: WarpAffix["ariaLabel"] = null;
 }
 
 type AffixProps = React.ComponentProps<typeof BaseAffix> & {

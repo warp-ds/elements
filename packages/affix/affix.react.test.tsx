@@ -28,8 +28,6 @@ describe("", () => {
 		await affix.updateComplete;
 
 		expect(affix.ariaLabel).toBe("Clear search");
-		expect(affix.getAttribute('aria-label')).toBe("Clear search");
+		expect(affix.getAttribute("aria-label")).toBe("Clear search");
 	});
 });
-
-
