@@ -45,6 +45,11 @@ export default {
       },
     }),
     minifyHTML(),
-    terser(),
+    terser({
+      format: {
+        // Keep Vite's runtime import hint when this bundle is consumed by Vite.
+        comments: /@vite-ignore/,
+      },
+    }),
   ],
 };

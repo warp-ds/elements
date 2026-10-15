@@ -1,11 +1,11 @@
-import { page } from "vitest/browser";
+import { render } from "vitest-browser-lit";
 import { html } from "lit";
 import { expect, test } from "vitest";
 
 import "./attention.js";
 
 test("renders an info", async () => {
-	const screen = await page.render(
+	const screen = await render(
 		html`<w-attention
 			show
 			data-testid="attentionTarget"
