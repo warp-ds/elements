@@ -237,6 +237,18 @@ class WarpButton extends FormControlMixin(LitElement) {
 		});
 	}
 
+	get isButton() {
+		return !this.href;
+	}
+
+	get hasNoRole() {
+		return !this.role;
+	}
+
+	get hasNoTabindex() {
+		return !this.hasAttribute("tabindex");
+	}
+
 	connectedCallback() {
 		super.connectedCallback();
 
@@ -245,15 +257,6 @@ class WarpButton extends FormControlMixin(LitElement) {
 			throw new Error(
 				`Invalid "variant" attribute. Set its value to one of the following:\n${variants.join(", ")}.`,
 			);
-		}
-
-		if (!this.href && !this.hasAttribute("role")) {
-			// Using this.internals for role breaks Playwright locators.
-			// Set in connectedCallback to avoid a role attribute when we render w-link.
-			this.setAttribute("role", "button");
-		}
-		if (!this.href && !this.hasAttribute("tabindex")) {
-			this.setAttribute("tabindex", "0");
 		}
 
 		this.internals.ariaDescription = this.#ariaDescription;
@@ -288,6 +291,24 @@ class WarpButton extends FormControlMixin(LitElement) {
 		});
 
 		this.#initialValue = this.value;
+	}
+
+	protected willUpdate(): void {
+		if (this.isButton && this.hasNoRole) {
+			// Using this.internals for role breaks Playwright locators.
+			// Set in connectedCallback to avoid a role attribute when we render w-link.
+			this.role = "button";
+		}
+		if (this.isButton && this.hasNoTabindex) {
+			this.tabIndex = 0;
+		}
+		// clear if the component switches to a link
+		if (!this.isButton && this.role === "button") {
+			this.role = null;
+		}
+		if (!this.isButton && this.tabIndex >= 0) {
+			this.removeAttribute("tabindex");
+		}
 	}
 
 	/**
