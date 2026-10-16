@@ -10,6 +10,8 @@ and is home to the [@warp-ds/elements](https://www.npmjs.com/package/@warp-ds/el
 If you'd like to contribute to `@warp-ds/elements`,
 start by reviewing the [contributing guidelines](CONTRIBUTING.md).
 
+For React wrapper maintenance, see [React wrapper stubs](docs/react-wrappers.md).
+
 ## How to use
 
 ### Installation
