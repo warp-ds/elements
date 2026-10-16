@@ -129,7 +129,7 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{c as n,h as r,i
 					class="s-text"
 					aria-current=${this.currentPage?`page`:i}
 					><slot></slot
-				></span>`}render(){return n`${this.link}`}},p([d({type:Boolean,attribute:`current-page`})],z.prototype,`currentPage`,void 0),p([d({type:String})],z.prototype,`href`,void 0),customElements.get(`w-breadcrumb-item`)||customElements.define(`w-breadcrumb-item`,z)})))()}var V=t({Default:()=>G,LegacyChildren:()=>Y,WithLinks:()=>K,WithSpanForCurrentPage:()=>q,WithoutCurrentPageInTrail:()=>J,__namedExportsOrder:()=>X,default:()=>W}),H,U,W,G,K,q,J,Y,X;function Z(){return(Z=e((()=>{b(),m(),o(),I(),B(),{events:H,argTypes:U}=h(`w-breadcrumbs`),W={title:`Navigation/Breadcrumbs`,render(e){return n`
+				></span>`}render(){return n`${this.link}`}},p([d({type:Boolean,attribute:`current-page`,reflect:!0})],z.prototype,`currentPage`,void 0),p([d({type:String})],z.prototype,`href`,void 0),customElements.get(`w-breadcrumb-item`)||customElements.define(`w-breadcrumb-item`,z)})))()}var V=t({Default:()=>G,LegacyChildren:()=>Y,WithLinks:()=>K,WithSpanForCurrentPage:()=>q,WithoutCurrentPageInTrail:()=>J,__namedExportsOrder:()=>X,default:()=>W}),H,U,W,G,K,q,J,Y,X;function Z(){return(Z=e((()=>{b(),m(),o(),I(),B(),{events:H,argTypes:U}=h(`w-breadcrumbs`),W={title:`Navigation/Breadcrumbs`,render(e){return n`
             <w-breadcrumbs ${v(y(e))}>
                 <w-breadcrumb-item href="#/home">Home</w-breadcrumb-item>
                 <w-breadcrumb-item href="#/category">Category</w-breadcrumb-item>
