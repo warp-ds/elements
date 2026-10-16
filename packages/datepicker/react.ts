@@ -4,11 +4,27 @@ import React from "react";
 
 import type { WarpDatepicker } from "./datepicker.js";
 import type { ChangeEventWithTarget, InputEventWithTarget } from "../types.js";
+import { property } from "lit/decorators.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	@property({ attribute: "header-format" })
+	headerFormat: WarpDatepicker["headerFormat"] = "MMMM yyyy";
 
-const BaseDatePicker = createComponent({
+	@property({ attribute: "weekday-format" })
+	weekdayFormat: WarpDatepicker["weekdayFormat"] = "EEEEEE";
+
+	@property({ attribute: "day-format" })
+	dayFormat: WarpDatepicker["dayFormat"] = "PPPP";
+
+	@property({ attribute: false })
+	isDayDisabled: WarpDatepicker["isDayDisabled"];
+
+	@property({ attribute: "help-text" })
+	helpText: WarpDatepicker["helpText"];
+}
+
+export const DatePicker = createComponent({
 	tagName: "w-datepicker",
 	elementClass: Component as unknown as typeof WarpDatepicker,
 	react: React,
@@ -21,40 +37,3 @@ const BaseDatePicker = createComponent({
 		oninput: "input" as EventName<InputEventWithTarget<HTMLInputElement>>,
 	},
 });
-
-type BaseDatePickerProps = React.ComponentPropsWithoutRef<
-	typeof BaseDatePicker
->;
-
-type DatePickerProps = Omit<
-	BaseDatePickerProps,
-	"header-format" | "weekday-format" | "day-format"
-> & {
-	headerFormat?: string;
-	weekdayFormat?: string;
-	dayFormat?: string;
-};
-
-/**
- * A date picker allows the user to select a specific calendar date.
- *
- * [Warp component reference](https://warp-ds.github.io/docs/components/date-picker/frameworks/elements)
- */
-export const DatePicker = React.forwardRef<WarpDatepicker, DatePickerProps>(
-	({ headerFormat, weekdayFormat, dayFormat, ...props }, ref) =>
-		React.createElement(BaseDatePicker, {
-			...props,
-			...(headerFormat !== undefined ? { "header-format": headerFormat } : {}),
-			...(weekdayFormat !== undefined
-				? { "weekday-format": weekdayFormat }
-				: {}),
-			...(dayFormat !== undefined ? { "day-format": dayFormat } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseDatePicker> & {
-			"header-format"?: string;
-			"weekday-format"?: string;
-			"day-format"?: string;
-		}),
-);
-
-DatePicker.displayName = "DatePicker";
