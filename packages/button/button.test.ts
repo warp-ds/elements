@@ -104,6 +104,36 @@ test("calling focus on w-button focuses the host element", async () => {
 	);
 });
 
+test("restores button semantics after switching to a link and back", async () => {
+	const page = render(html`<w-button>Continue</w-button>`);
+	const button = page.container.querySelector("w-button")!;
+	await button.updateComplete;
+
+	expect(button.getAttribute("role")).toBe("button");
+	expect(button.getAttribute("tabindex")).toBe("0");
+	button.focus();
+	expect(document.activeElement).toBe(button);
+
+	button.href = "/next";
+	await button.updateComplete;
+
+	expect(button.hasAttribute("role")).toBe(false);
+	expect(button.hasAttribute("tabindex")).toBe(false);
+	await expect
+		.element(page.getByRole("link", { name: "Continue" }))
+		.toBeVisible();
+
+	button.href = undefined;
+	await button.updateComplete;
+
+	expect(button.getAttribute("role")).toBe("button");
+	expect(button.getAttribute("tabindex")).toBe("0");
+	expect(button.shadowRoot!.querySelector("w-link")).toBeNull();
+	button.blur();
+	button.focus();
+	expect(document.activeElement).toBe(button);
+});
+
 test("primary variant custom accessible description overrides built-in", async () => {
 	const component = html`
 		<w-button variant="primary" aria-description="Radical!">
