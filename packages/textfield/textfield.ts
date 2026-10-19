@@ -203,6 +203,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	tooltip?: string;
 
 	/**
+	 * @override We override the native attribute/property in order to add reactivity
+	 */
+	@property({ type: String, reflect: true, attribute: "aria-description" })
+	ariaDescription: string = "";
+
+	/**
 	 * Function to format value when the input field.
 	 *
 	 * Only active when the input field does not have focus,
