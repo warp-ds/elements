@@ -3,51 +3,25 @@ import { LitElement } from "lit";
 import React from "react";
 
 import type { ExpandableVariant, WarpExpandable } from "./expandable.js";
+import { property } from "lit/decorators.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	@property({ attribute: "button-class" })
+	buttonClass?: WarpExpandable["buttonClass"];
 
-const BaseExpandable = createComponent({
+	@property({ attribute: "content-class" })
+	contentClass?: WarpExpandable["contentClass"];
+
+	@property({ attribute: "no-chevron" })
+	noChevron?: WarpExpandable["noChevron"];
+
+	@property({ attribute: "heading-level" })
+	headingLevel?: WarpExpandable["headingLevel"];
+}
+
+export const Expandable = createComponent({
 	tagName: "w-expandable",
 	elementClass: Component as unknown as typeof WarpExpandable,
 	react: React,
 });
-
-type BaseExpandableProps = React.ComponentPropsWithoutRef<
-	typeof BaseExpandable
->;
-
-type ExpandableProps = Omit<
-	BaseExpandableProps,
-	"button-class" | "content-class" | "no-chevron" | "heading-level"
-> & {
-	buttonClass?: string;
-	contentClass?: string;
-	noChevron?: boolean;
-	headingLevel?: number;
-	variant?: ExpandableVariant;
-};
-
-/**
- * Expandable is a layout component used for creating expandable content areas on a page.
- *
- * [Warp component reference](https://warp-ds.github.io/docs/components/expandable/frameworks/elements)
- */
-export const Expandable = React.forwardRef<WarpExpandable, ExpandableProps>(
-	({ buttonClass, contentClass, noChevron, headingLevel, ...props }, ref) =>
-		React.createElement(BaseExpandable, {
-			...props,
-			...(buttonClass !== undefined ? { "button-class": buttonClass } : {}),
-			...(contentClass !== undefined ? { "content-class": contentClass } : {}),
-			...(noChevron ? { "no-chevron": true } : {}),
-			...(headingLevel !== undefined ? { "heading-level": headingLevel } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseExpandable> & {
-			"button-class"?: string;
-			"content-class"?: string;
-			"no-chevron"?: boolean;
-			"heading-level"?: number;
-		}),
-);
-
-Expandable.displayName = "Expandable";
