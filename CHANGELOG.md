@@ -1,3 +1,10 @@
+# [2.14.0-next.9](https://github.com/warp-ds/elements/compare/v2.14.0-next.8...v2.14.0-next.9) (2026-10-19)
+
+
+### Features
+
+* **modal:** auto assign header, footer and default slots when not provided ([#815](https://github.com/warp-ds/elements/issues/815)) ([ff4693c](https://github.com/warp-ds/elements/commit/ff4693c0c1ac67386afed538427e9c77e7338330))
+
 # [2.14.0-next.8](https://github.com/warp-ds/elements/compare/v2.14.0-next.7...v2.14.0-next.8) (2026-10-19)
 
 
