@@ -205,7 +205,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	/**
 	 * @override We override the native attribute/property in order to add reactivity
 	 */
-	@property({ type: String, reflect: true, attribute: "aria-description" })
+	@property({ type: String, reflect: true, attribute: "aria-description", useDefault: true })
 	ariaDescription: string = "";
 
 	/**
