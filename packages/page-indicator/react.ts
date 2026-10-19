@@ -1,29 +1,24 @@
 import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type { WarpPageIndicator } from "./page-indicator.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	@property({
+		type: Number,
+		attribute: "selected-page",
+	})
+	selectedPage: number | undefined;
 
-const BasePageIndicator = createComponent({
-	tagName: "w-page-indicator",
-	elementClass: Component as unknown as typeof WarpPageIndicator,
-	react: React,
-});
-
-type BasePageIndicatorProps = React.ComponentPropsWithoutRef<
-	typeof BasePageIndicator
->;
-
-type PageIndicatorProps = Omit<
-	BasePageIndicatorProps,
-	"selected-page" | "page-count"
-> & {
-	selectedPage?: number;
-	pageCount?: number;
-};
+	@property({
+		type: Number,
+		attribute: "page-count",
+	})
+	pageCount: number | undefined;
+}
 
 /**
  * A page indicator component that displays a series of dots representing pages.
@@ -32,19 +27,9 @@ type PageIndicatorProps = Omit<
  *
  * [Warp component reference](https://warp-ds.github.io/docs/components/page-indicator/frameworks/elements)
  */
-export const PageIndicator = React.forwardRef<
-	WarpPageIndicator,
-	PageIndicatorProps
->(({ selectedPage, pageCount, ...props }, ref) =>
-	React.createElement(BasePageIndicator, {
-		...props,
-		...(selectedPage !== undefined ? { "selected-page": selectedPage } : {}),
-		...(pageCount !== undefined ? { "page-count": pageCount } : {}),
-		ref,
-	} as React.ComponentProps<typeof BasePageIndicator> & {
-		"selected-page"?: number;
-		"page-count"?: number;
-	}),
-);
-
-PageIndicator.displayName = "PageIndicator";
+export const PageIndicator = createComponent({
+	tagName: "w-page-indicator",
+	displayName: "PageIndicator",
+	elementClass: Component as unknown as typeof WarpPageIndicator,
+	react: React,
+});
