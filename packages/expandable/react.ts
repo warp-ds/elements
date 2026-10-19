@@ -2,7 +2,7 @@ import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
 
-import type { ExpandableVariant, WarpExpandable } from "./expandable.js";
+import type { WarpExpandable } from "./expandable.js";
 import { property } from "lit/decorators.js";
 
 // decouple from CDN by providing a dummy class
