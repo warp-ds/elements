@@ -1,3 +1,10 @@
+# [2.14.0-next.8](https://github.com/warp-ds/elements/compare/v2.14.0-next.7...v2.14.0-next.8) (2026-10-19)
+
+
+### Bug Fixes
+
+* **datepicker:** refactor react wrapper approach add missing properties ([#808](https://github.com/warp-ds/elements/issues/808)) ([d1ed62f](https://github.com/warp-ds/elements/commit/d1ed62f54a7d05955f99d2f8218e406a17f970d1))
+
 # [2.14.0-next.7](https://github.com/warp-ds/elements/compare/v2.14.0-next.6...v2.14.0-next.7) (2026-10-15)
 
 
