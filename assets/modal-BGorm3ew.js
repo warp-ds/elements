@@ -176,7 +176,9 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{c as t,h as n,n as r,t
 				<div part="wrapper">
 					<slot name="header" @slotchange="${this.handleSlotChange}"></slot>
 					<div part="content" id=${d(this.contentId)}>
-						<slot name="content" @slotchange="${this.handleSlotChange}"></slot>
+						<slot name="content" @slotchange="${this.handleSlotChange}"
+							><slot></slot
+						></slot>
 					</div>
 					<slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
 				</div>
