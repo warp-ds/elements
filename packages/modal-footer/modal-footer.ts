@@ -19,6 +19,14 @@ export class WarpModalFooter extends CanCloseMixin(
 ) {
 	static styles = [reset, styles];
 
+	connectedCallback(): void {
+		super.connectedCallback();
+
+		if (!this.hasAttribute("slot")) {
+			this.slot = "footer";
+		}
+	}
+
 	render() {
 		return html`
 			<slot part="footer" @slotchange="${this.handleSlotChange}"></slot>

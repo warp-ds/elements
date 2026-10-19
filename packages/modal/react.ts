@@ -1,6 +1,7 @@
 import { createComponent, EventName } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
+import { property } from "lit/decorators.js";
 
 import type { WarpModal } from "./modal.js";
 
@@ -9,29 +10,13 @@ export { ModalFooter } from "../modal-footer/react.js";
 export { ModalHeader } from "../modal-header/react.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	@property({ attribute: "content-id" })
+	contentId?: WarpModal["contentId"];
 
-const BaseModal = createComponent({
-	tagName: "w-modal",
-	elementClass: Component as unknown as typeof WarpModal,
-	react: React,
-	events: {
-		onShown: "shown" as EventName<CustomEvent>,
-		onshown: "shown" as EventName<CustomEvent>,
-		onHidden: "hidden" as EventName<CustomEvent>,
-		onhidden: "hidden" as EventName<CustomEvent>,
-	},
-});
-
-type BaseModalProps = React.ComponentPropsWithoutRef<typeof BaseModal>;
-
-type ModalProps = Omit<
-	BaseModalProps,
-	"content-id" | "ignore-backdrop-clicks"
-> & {
-	contentId?: string;
-	ignoreBackdropClicks?: boolean;
-};
+	@property({ attribute: "ignore-backdrop-clicks" })
+	ignoreBackdropClicks?: WarpModal["ignoreBackdropClicks"] = false;
+}
 
 /**
  * Modals (or dialogs) display important information that users need to acknowledge.
@@ -65,23 +50,22 @@ type ModalProps = Omit<
  * );
  * ```
  */
-export const Modal = React.forwardRef<WarpModal, ModalProps>(
-	({ contentId, ignoreBackdropClicks, ...props }, ref) =>
-		React.createElement(BaseModal, {
-			...props,
-			...(contentId !== undefined ? { "content-id": contentId } : {}),
-			...(ignoreBackdropClicks ? { "ignore-backdrop-clicks": true } : {}),
-			ref,
-		} as React.ComponentProps<typeof BaseModal> & {
-			"content-id"?: string;
-			"ignore-backdrop-clicks"?: boolean;
-		}),
-);
-
-Modal.displayName = "Modal";
+export const Modal = createComponent({
+	tagName: "w-modal",
+	displayName: "Modal",
+	elementClass: Component as unknown as typeof WarpModal,
+	react: React,
+	events: {
+		onShown: "shown" as EventName<CustomEvent>,
+		onshown: "shown" as EventName<CustomEvent>,
+		onHidden: "hidden" as EventName<CustomEvent>,
+		onhidden: "hidden" as EventName<CustomEvent>,
+	},
+});
 
 /**
  * Convenience component to get a root element in the content slot of the modal.
+ * No longer necessary since content without named slot assignment will be placed in the default (content) slot area.
  */
 export const ModalContent = ({ ...props }) => {
 	return React.createElement("div", { slot: "content", ...props });

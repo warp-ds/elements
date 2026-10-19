@@ -65,6 +65,14 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
+	connectedCallback(): void {
+		super.connectedCallback();
+
+		if (!this.hasAttribute("slot")) {
+			this.slot = "header";
+		}
+	}
+
 	async willUpdate(changedProperties: PropertyValues<this>) {
 		if (changedProperties.has("back")) {
 			if (!this.titleEl) return;
