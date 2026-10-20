@@ -25,6 +25,7 @@ type TabProps = Omit<BaseTabProps, "aria-selected" | "tabindex"> & {
 	id: string;
 	/** A tabIndex is required to avoid hydration issues. Set to 0 for the active tab (usually the first tab) and -1 for all other tabs. */
 	tabIndex: 0 | -1;
+	/** @deprecated Use `aria-selected`. See https://react.dev/learn/writing-markup-with-jsx#3-camelcase-salls-most-of-the-things */
 	ariaSelected?: "true" | "false";
 };
 
