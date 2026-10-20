@@ -25,11 +25,10 @@ type BaseSliderThumbProps = React.ComponentPropsWithoutRef<
 	typeof BaseSliderThumb
 >;
 
-type SliderThumbProps = Omit<
-	BaseSliderThumbProps,
-	"aria-label" | "aria-description"
-> & {
+type SliderThumbProps = BaseSliderThumbProps & {
+	/** @deprecated Use `aria-label`. See https://react.dev/learn/writing-markup-with-jsx#3-camelcase-salls-most-of-the-things */
 	ariaLabel?: string;
+	/** @deprecated Use `aria-description`. See https://react.dev/learn/writing-markup-with-jsx#3-camelcase-salls-most-of-the-things */
 	ariaDescription?: string;
 };
 
