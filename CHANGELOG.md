@@ -1,3 +1,10 @@
+# [2.14.0-next.10](https://github.com/warp-ds/elements/compare/v2.14.0-next.9...v2.14.0-next.10) (2026-10-20)
+
+
+### Bug Fixes
+
+* **textfield:** add back missing sr-only definition ([#816](https://github.com/warp-ds/elements/issues/816)) ([4ee35cc](https://github.com/warp-ds/elements/commit/4ee35cc05ec0cd87c534fdc34e6f4defab069ce8))
+
 # [2.14.0-next.9](https://github.com/warp-ds/elements/compare/v2.14.0-next.8...v2.14.0-next.9) (2026-10-19)
 
 
