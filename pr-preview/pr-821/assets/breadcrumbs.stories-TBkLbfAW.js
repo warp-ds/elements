@@ -12,6 +12,7 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{c as n,h as r,i
 	}
 	[part="trail"] {
 		display: flex;
+		flex-wrap: wrap;
 	}
 	[part="trail"] > :not([hidden]) ~ :not([hidden]) {
 		--w-space-x-reverse: 0;
