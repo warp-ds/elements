@@ -1,3 +1,10 @@
+# [2.14.0-next.11](https://github.com/warp-ds/elements/compare/v2.14.0-next.10...v2.14.0-next.11) (2026-10-20)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** prevent separator from line wrapping on smaller screens ([#821](https://github.com/warp-ds/elements/issues/821)) ([e8af519](https://github.com/warp-ds/elements/commit/e8af51972891e34796954f8102c43508dcfe245c))
+
 # [2.14.0-next.10](https://github.com/warp-ds/elements/compare/v2.14.0-next.9...v2.14.0-next.10) (2026-10-20)
 
 
