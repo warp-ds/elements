@@ -1,5 +1,6 @@
 import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
+import { property } from "lit/decorators.js";
 import React from "react";
 
 import type {
@@ -8,21 +9,10 @@ import type {
 } from "./snackbar-item.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
-
-const BaseSnackbarItem = createComponent({
-	tagName: "w-snackbar-item",
-	elementClass: Component as unknown as typeof WarpSnackbarItem,
-	react: React,
-});
-
-type BaseSnackbarItemProps = React.ComponentPropsWithoutRef<
-	typeof BaseSnackbarItem
->;
-
-type SnackbarItemProps = Omit<BaseSnackbarItemProps, "action-placement"> & {
-	actionPlacement?: SnackbarActionPlacement;
-};
+class Component extends LitElement {
+	@property({ attribute: "action-placement" })
+	actionPlacement: SnackbarActionPlacement = "inline";
+}
 
 /**
  * You should probably not use this component directly. An item to show in a `w-snackbar`.
@@ -31,13 +21,9 @@ type SnackbarItemProps = Omit<BaseSnackbarItemProps, "action-placement"> & {
  *
  * [Warp component reference](https://warp-ds.github.io/docs/components/snackbar/frameworks/elements)
  */
-export const SnackbarItem = React.forwardRef<
-	WarpSnackbarItem,
-	SnackbarItemProps
->(({ actionPlacement, ...props }, ref) =>
-	React.createElement(BaseSnackbarItem, {
-		...props,
-		...(actionPlacement ? { "action-placement": actionPlacement } : {}),
-		ref,
-	}),
-);
+export const SnackbarItem = createComponent({
+	tagName: "w-snackbar-item",
+	displayName: "SnackbarItem",
+	elementClass: Component as unknown as typeof WarpSnackbarItem,
+	react: React,
+});
