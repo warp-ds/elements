@@ -28,12 +28,18 @@ type BaseTextFieldProps = React.ComponentPropsWithoutRef<typeof BaseTextField>;
 
 type TextFieldProps = Omit<
 	BaseTextFieldProps,
-	"help-text" | "helpText" | "min-length" | "max-length" | "read-only"
+	| "aria-description"
+	| "help-text"
+	| "helpText"
+	| "min-length"
+	| "max-length"
+	| "read-only"
 > & {
 	helpText?: string | React.ReactElement;
 	minLength?: number;
 	maxLength?: number;
 	readOnly?: boolean;
+	ariaDescription?: string;
 };
 
 /**
@@ -42,7 +48,10 @@ type TextFieldProps = Omit<
  * [Warp component reference](https://warp-ds.github.io/docs/components/text-area/frameworks/elements)
  */
 export const TextField = React.forwardRef<WarpTextField, TextFieldProps>(
-	({ helpText, minLength, maxLength, readOnly, ...props }, ref) => {
+	(
+		{ ariaDescription, helpText, minLength, maxLength, readOnly, ...props },
+		ref,
+	) => {
 		return React.createElement(
 			BaseTextField,
 			{
@@ -51,6 +60,7 @@ export const TextField = React.forwardRef<WarpTextField, TextFieldProps>(
 				...(minLength !== undefined ? { "min-length": minLength } : {}),
 				...(maxLength !== undefined ? { "max-length": maxLength } : {}),
 				...(readOnly ? { "read-only": true } : {}),
+				...(ariaDescription ? { "aria-description": "" } : {}),
 				ref,
 			},
 			[
