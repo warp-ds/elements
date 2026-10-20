@@ -13,6 +13,7 @@ export const styles = css`
 	}
 	[part="trail"] {
 		display: flex;
+		flex-wrap: wrap;
 	}
 	[part="trail"] > :not([hidden]) ~ :not([hidden]) {
 		--w-space-x-reverse: 0;

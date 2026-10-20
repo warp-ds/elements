@@ -7,6 +7,8 @@ import { css } from "lit";
 export const styles = css`
 	:host {
 		display: inline-block;
+		white-space: nowrap;
+		flex-shrink: 0;
 
 		/* Internal resolved vars (defaults) */
 		--_link-color: var(
