@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-Dh2U9c--.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{a as s,i as c,n as l,o as u,r as d,t as f}from"./breadcrumbs.stories-BNYGyPk0.js";function p(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,h.jsxs)(h.Fragment,{children:[(0,h.jsx)(n,{of:s,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-Dh2U9c--.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{a as s,i as c,n as l,o as u,r as d,t as f}from"./breadcrumbs.stories-TBkLbfAW.js";function p(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,h.jsxs)(h.Fragment,{children:[(0,h.jsx)(n,{of:s,name:`Docs`}),`
 `,(0,h.jsx)(r.h1,{id:`breadcrumbs`,children:`Breadcrumbs`}),`
 `,(0,h.jsx)(r.p,{children:`Breadcrumbs show the navigation structure for the current location.`}),`
 `,(0,h.jsx)(t,{of:f}),`
