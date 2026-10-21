@@ -40,8 +40,18 @@ export class WarpTooltip extends LitElement {
 	/**
 	 * ID of the element that triggers the tooltip on hover or focus.
 	 */
-	@property({ useDefault: true })
-	for: string = "";
+	@property({ useDefault: true, attribute: "for" })
+	htmlFor: string = "";
+
+	/** @deprecated Use `htmlFor`, same as the native HTMLLabelElement property. */
+	set for(value: string) {
+		this.htmlFor = value;
+	}
+
+	/** @deprecated Use `htmlFor`, same as the native HTMLLabelElement property. */
+	get for() {
+		return this.htmlFor;
+	}
 
 	/**
 	 * Hide the arrow pointing toward the tooltip target.
@@ -251,7 +261,9 @@ export class WarpTooltip extends LitElement {
 			return;
 		}
 
-		const newTarget = this.for ? rootNode.getElementById(this.for) : null;
+		const newTarget = this.htmlFor
+			? rootNode.getElementById(this.htmlFor)
+			: null;
 		const oldTarget = this.target;
 		if (newTarget === this.target) {
 			return;

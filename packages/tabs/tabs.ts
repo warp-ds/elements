@@ -162,7 +162,7 @@ export class WarpTabs extends LitElement {
 	/** @internal */
 	get activeTab() {
 		const activeTabs = this.tabs.filter(
-			(tab) => tab.for === this._activeTabFor,
+			(tab) => tab.htmlFor === this._activeTabFor,
 		);
 		return activeTabs[0];
 	}
@@ -180,7 +180,7 @@ export class WarpTabs extends LitElement {
 	}
 
 	private _handleTabClick = (event: PointerEvent & { tab?: WarpTab }) => {
-		const newActiveTab = event.tab?.for;
+		const newActiveTab = event.tab?.htmlFor;
 		if (!newActiveTab) return;
 		if (newActiveTab !== this._activeTabFor) {
 			this.active = newActiveTab;
@@ -225,7 +225,7 @@ export class WarpTabs extends LitElement {
 			if (!tab.id) {
 				tab.id = `w-tab-${this._uniqueId}-${index}`;
 			}
-			const isActive = tab.for === this._activeTabFor;
+			const isActive = tab.htmlFor === this._activeTabFor;
 
 			// Use reflecting properties so assitsive technologies have what they need in the light DOM
 			tab.tabIndex = isActive ? 0 : -1;
@@ -237,7 +237,7 @@ export class WarpTabs extends LitElement {
 		// Update tab panels visibility using non-reflecting properties to reduce risk of hydration mismatch
 		const panels: WarpTabPanel[] = [...this.querySelectorAll("w-tab-panel")];
 		panels.forEach((panel) => {
-			const controller = tabs.find((tab) => tab.for === panel.id);
+			const controller = tabs.find((tab) => tab.htmlFor === panel.id);
 			if (controller) {
 				// Use non-reflecting property to reduce DOM changes during hydration
 				panel._parentAriaLabelledBy = controller.id;
@@ -259,7 +259,7 @@ export class WarpTabs extends LitElement {
 
 		const tabs = [...this.querySelectorAll<WarpTab>("w-tab")];
 		const currentIndex = tabs.findIndex(
-			(tab) => tab.for === this._activeTabFor,
+			(tab) => tab.htmlFor === this._activeTabFor,
 		);
 
 		if (currentIndex === -1) return;
@@ -284,7 +284,7 @@ export class WarpTabs extends LitElement {
 		if (nextIndex !== currentIndex) {
 			event.preventDefault();
 			const nextTab = tabs[nextIndex];
-			const nextTabName = nextTab.for;
+			const nextTabName = nextTab.htmlFor;
 
 			if (nextTabName) {
 				this.active = nextTabName;
