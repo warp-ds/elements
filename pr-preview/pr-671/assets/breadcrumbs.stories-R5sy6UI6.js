@@ -12,6 +12,7 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{c as n,h as r,i
 	}
 	[part="trail"] {
 		display: flex;
+		flex-wrap: wrap;
 	}
 	[part="trail"] > :not([hidden]) ~ :not([hidden]) {
 		--w-space-x-reverse: 0;
@@ -43,6 +44,8 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{c as n,h as r,i
 		`}},customElements.get(`w-breadcrumbs`)||customElements.define(`w-breadcrumbs`,F)})))()}var L;function R(){return(R=e((()=>{o(),L=r`
 	:host {
 		display: inline-block;
+		white-space: nowrap;
+		flex-shrink: 0;
 
 		/* Internal resolved vars (defaults) */
 		--_link-color: var(
