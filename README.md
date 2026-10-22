@@ -10,6 +10,8 @@ and is home to the [@warp-ds/elements](https://www.npmjs.com/package/@warp-ds/el
 If you'd like to contribute to `@warp-ds/elements`,
 start by reviewing the [contributing guidelines](CONTRIBUTING.md).
 
+For React wrapper maintenance, see [React wrapper stubs](docs/react-wrappers.md).
+
 ## How to use
 
 ### Installation
@@ -178,25 +180,11 @@ Now, inside any html`` tagged template literals, you will get intellisense when 
 <w-button variant=""><w-button>
 ```
 
-##### Using Warp Elements in a React app, v19 or later
+##### Using Warp Elements in a React app
 
-```
-npm install @warp-ds/elements
-```
+Warp supplies custom element wrappers for React to add backwards compatibility for React 18, as well as to handle some common hydration error pitfalls with using custom elements directly.
 
-Now, inside your react components, you will get intellisense when using Warp Elements.
-
-```html
-<w-button variant=""><w-button>
-```
-
-##### Using Warp Elements in a React app, v18 or earlier
-
-React 18 and earlier do not support custom elements.
-
-If you are on React 18 or early, we strongly urge you to please consider upgrading to React v19.
-
-If you cannot upgrade right away, Warp supplies custom element wrappers to add backwards compatibility. Use them like so:
+Use them like so:
 
 ```
 npm install @warp-ds/elements

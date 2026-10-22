@@ -184,7 +184,9 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 				<div part="wrapper">
 					<slot name="header" @slotchange="${this.handleSlotChange}"></slot>
 					<div part="content" id=${ifDefined(this.contentId)}>
-						<slot name="content" @slotchange="${this.handleSlotChange}"></slot>
+						<slot name="content" @slotchange="${this.handleSlotChange}"
+							><slot></slot
+						></slot>
 					</div>
 					<slot name="footer" @slotchange="${this.handleSlotChange}"></slot>
 				</div>

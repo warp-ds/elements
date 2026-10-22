@@ -1,9 +1,6 @@
-// @warp-css;
-
 import { html, LitElement } from "lit";
 import "../icon/icon.js";
 
-import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { property } from "lit/decorators.js";
 
@@ -16,21 +13,6 @@ import { messages as fiMessages } from "./locales/fi/messages.mjs";
 import { messages as nbMessages } from "./locales/nb/messages.mjs";
 import { messages as svMessages } from "./locales/sv/messages.mjs";
 import { styles } from "./styles.js";
-
-const pillStyles = {
-	wrapper: "flex items-center",
-	button: "inline-flex items-center focusable text-xs transition-all",
-	suggestion:
-		"bg-[--w-color-pill-suggestion-background] hover:bg-[--w-color-pill-suggestion-background-hover] active:bg-[--w-color-pill-suggestion-background-active] s-text font-bold",
-	filter:
-		"s-bg-primary hover:s-bg-primary-hover active:s-bg-primary-active s-text-inverted",
-	label: "pl-12 py-8 rounded-l-full",
-	labelWithoutClose: "pr-12 rounded-r-full",
-	labelWithClose: "pr-2",
-	close: "pr-12 pl-4 py-8 rounded-r-full",
-	closeIcon: "h-16",
-	a11y: "sr-only",
-};
 
 /**
  * Pill is a type of button that is often used as a filter, but can also be used as a rounded button for overlays, etc.
@@ -101,23 +83,6 @@ class WarpPill extends LitElement {
 		});
 	}
 
-	private get _labelClasses() {
-		return classNames([
-			pillStyles.button,
-			pillStyles.label,
-			this.suggestion ? pillStyles.suggestion : pillStyles.filter,
-			this.canClose ? pillStyles.labelWithClose : pillStyles.labelWithoutClose,
-		]);
-	}
-
-	private get _closeClasses() {
-		return classNames([
-			pillStyles.button,
-			pillStyles.close,
-			this.suggestion ? pillStyles.suggestion : pillStyles.filter,
-		]);
-	}
-
 	private _onClick() {
 		this.dispatchEvent(
 			new CustomEvent("w-pill-click", { bubbles: true, composed: true }),
@@ -142,13 +107,9 @@ class WarpPill extends LitElement {
 
 	render() {
 		return html`
-			<div class="${pillStyles.wrapper}">
-				<button
-					type="button"
-					class="${this._labelClasses}"
-					@click="${this._onClick}"
-				>
-					<span class="${pillStyles.a11y}"
+			<div part="base">
+				<button type="button" part="label" @click="${this._onClick}">
+					<span class="sr-only"
 						>${
 							this.openAriaLabel ? this.openAriaLabel : this.openFilterSrText
 						}</span
@@ -159,10 +120,10 @@ class WarpPill extends LitElement {
 					this.canClose
 						? html` <button
 								type="button"
-								class="${this._closeClasses}"
+								part="close-button"
 								@click="${this._onClose}"
 							>
-								<span class="${pillStyles.a11y}"
+								<span class="sr-only"
 									>${
 										this.closeAriaLabel
 											? this.closeAriaLabel
@@ -173,8 +134,7 @@ class WarpPill extends LitElement {
 									name="Close"
 									size="small"
 									locale="${detectLocale()}"
-									class="${pillStyles.closeIcon}"
-									class="flex"
+									part="close-icon"
 								></w-icon>
 							</button>`
 						: null

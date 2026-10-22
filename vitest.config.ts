@@ -32,6 +32,11 @@ export default defineConfig({
 			provider: playwright(),
 			enabled: true,
 			headless: true,
+			locators: {
+				// With exact: true (the default) you need the full, exact text contents of the node you're querying.
+				// Ain't nobody got time for that.
+				exact: false,
+			},
 			instances: [
 				{ browser: "chromium" },
 				{ browser: "firefox" },

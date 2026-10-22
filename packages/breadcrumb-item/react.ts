@@ -1,11 +1,15 @@
 import { createComponent } from "@lit/react";
 import { LitElement } from "lit";
 import React from "react";
+import { property } from "lit/decorators.js";
 
 import type { WarpBreadcrumbItem } from "./breadcrumb-item.js";
 
 // decouple from CDN by providing a dummy class
-class Component extends LitElement {}
+class Component extends LitElement {
+	@property({ attribute: "current-page" })
+	currentPage: WarpBreadcrumbItem["currentPage"] = false;
+}
 
 /**
  * Represents one item in a `w-breadcrumbs` trail.

@@ -1,7 +1,7 @@
 // @warp-css;
 
 import { i18n } from "@lingui/core";
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 import "../icon/icon.js";
@@ -22,10 +22,6 @@ const getIconSuffix = () =>
 		comment:
 			"Suffix added at the end of icon titles when img semantics are lost on an html element",
 	});
-
-const placeholderStyles = "min-h-[44px] min-w-[44px] p-4";
-
-const baseItemStyles = `hover:no-underline focus:no-underline focusable inline-flex justify-center items-center transition-colors ease-in-out ${placeholderStyles} rounded-full border-0 hover:bg-clip-padding`;
 
 /**
  * Pagination allows users to navigate through multiple pages of content by providing navigation controls with page numbers and directional arrows.
@@ -71,18 +67,7 @@ class WarpPagination extends LitElement {
 	})
 	visiblePages = 7;
 
-	static styles = [
-		reset,
-		styles,
-		css`
-			:host {
-				display: block;
-			}
-			w-icon {
-				height: 16px;
-			}
-		`,
-	];
+	static styles = [reset, styles];
 
 	constructor() {
 		super();
@@ -161,10 +146,11 @@ class WarpPagination extends LitElement {
 		const visiblePages = this.visiblePageNumbers;
 
 		return html`<nav
-			class="flex items-center justify-center p-8"
+			part="base"
+			aria-labelledby="paginationLabel"
 			@click="${this.#dispatchClickPage}"
 		>
-			<h2 class="sr-only">
+			<h2 class="sr-only" id="paginationLabel">
 				${i18n._({
 					id: "pagination.aria.pagination",
 					message: "Pages",
@@ -172,161 +158,132 @@ class WarpPagination extends LitElement {
 						"Default screenreader message for pagination container in the pagination component",
 				})}
 			</h2>
-			<div class="flex items-center">
-				${
-					this.shouldShowShowFirstPageButton
-						? html`<a
-								data-page-number="1"
-								href="${this.baseUrl}1"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+			${
+				this.shouldShowShowFirstPageButton
+					? html`<a data-page-number="1" href="${this.baseUrl}1" part="control">
+							<span class="sr-only">
+								${i18n._({
+									id: "pagination.aria.first-page",
+									message: "First page",
+									comment:
+										"Default screenreader message for first page link in the pagination component",
+								})},
+							</span>
+							<w-icon
+								name="ChevronDoubleLeft"
+								size="small"
+								locale="${detectLocale()}"
+								part="icon"
+							></w-icon>
+							<span class="sr-only">${getIconSuffix()}</span>
+						</a>`
+					: html`<span part="placeholder"></span>`
+			}
+			${
+				this.shouldShowPreviousPageButton
+					? html`<a
+							data-page-number="${this.currentPageNumber - 1}"
+							href="${this.baseUrl}${this.currentPageNumber - 1}"
+							part="control"
+						>
+							<span class="sr-only"
+								>${i18n._({
+									id: "pagination.aria.prev-page",
+									message: "Previous page",
+									comment:
+										"Default screenreader message for previous page link in the pagination component",
+								})},</span
 							>
-								<span class="sr-only">
-									${i18n._({
-										id: "pagination.aria.first-page",
-										message: "First page",
-										comment:
-											"Default screenreader message for first page link in the pagination component",
-									})},
-								</span>
-								<w-icon
-									name="ChevronDoubleLeft"
-									size="small"
-									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
-								></w-icon>
-								<span class="sr-only">${getIconSuffix()}</span>
-							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
-				}
-				${
-					this.shouldShowPreviousPageButton
-						? html`<a
-								data-page-number="${this.currentPageNumber - 1}"
-								href="${this.baseUrl}${this.currentPageNumber - 1}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+							<w-icon
+								name="ChevronLeft"
+								size="small"
+								locale="${detectLocale()}"
+								part="icon"
+							></w-icon>
+							<span class="sr-only">${getIconSuffix()}</span>
+						</a>`
+					: html`<span part="placeholder"></span>`
+			}
+			${visiblePages.map((pageNumber) => {
+				const isCurrentPage = pageNumber === this.currentPageNumber;
+				const url = `${this.baseUrl}${pageNumber}`;
+
+				const ariaLabel = i18n._({
+					id: "pagination.aria.page",
+					message: "Page {currentPage}",
+					values: { currentPage: pageNumber },
+					comment:
+						"Default screenreader message for page link in the pagination component",
+				});
+
+				return html`<a
+					data-page-number="${pageNumber}"
+					aria-label="${ariaLabel}"
+					href="${url}"
+					part="page${isCurrentPage ? " current" : ""}"
+					aria-current="${isCurrentPage ? "page" : "false"}"
+					>${pageNumber}</a
+				>`;
+			})}
+			<span part="mobile-label">
+				${i18n._({
+					id: "pagination.label.current-page",
+					message: "Page {currentPage}",
+					values: { currentPage: this.currentPageNumber },
+					comment:
+						"Default message for current page label in the pagination component",
+				})}
+			</span>
+			${
+				this.shouldShowNextPageButton
+					? html`<a
+							data-page-number="${this.currentPageNumber + 1}"
+							href="${this.baseUrl}${this.currentPageNumber + 1}"
+							part="control"
+						>
+							<span class="sr-only">
+								${i18n._({
+									id: "pagination.aria.next-page",
+									message: "Next page",
+									comment:
+										"Default screenreader message for next page link in the pagination component",
+								})},</span
 							>
-								<span class="sr-only"
-									>${i18n._({
-										id: "pagination.aria.prev-page",
-										message: "Previous page",
-										comment:
-											"Default screenreader message for previous page link in the pagination component",
-									})},</span
-								>
-								<w-icon
-									name="ChevronLeft"
-									size="small"
-									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
-								></w-icon>
-								<span class="sr-only">${getIconSuffix()}</span>
-							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
-				}
-				<div class="hidden md:block font-bold">
-					${visiblePages.map((pageNumber) => {
-						const isCurrentPage = pageNumber === this.currentPageNumber;
-						const url = `${this.baseUrl}${pageNumber}`;
-
-						let styles = baseItemStyles;
-
-						if (isCurrentPage) {
-							styles += " s-bg-primary s-text-inverted";
-						} else {
-							styles +=
-								" s-text-link hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]";
-						}
-
-						const ariaLabel = i18n._({
-							id: "pagination.aria.page",
-							message: "Page {currentPage}",
-							values: { currentPage: pageNumber },
-							comment:
-								"Default screenreader message for page link in the pagination component",
-						});
-
-						return html`<a
-							data-page-number="${pageNumber}"
-							aria-label="${ariaLabel}"
-							href="${url}"
-							class="${styles}"
-							aria-current="${isCurrentPage ? "page" : "false"}"
-							>${pageNumber}</a
-						>`;
-					})}
-				</div>
-				<span class="block md:hidden p-8 font-bold ">
-					${i18n._({
-						id: "pagination.label.current-page",
-						message: "Page {currentPage}",
-						values: { currentPage: this.currentPageNumber },
-						comment:
-							"Default message for current page label in the pagination component",
-					})}
-				</span>
-				${
-					this.shouldShowNextPageButton
-						? html`<a
-								data-page-number="${this.currentPageNumber + 1}"
-								href="${this.baseUrl}${this.currentPageNumber + 1}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
+							<w-icon
+								name="ChevronRight"
+								size="small"
+								locale="${detectLocale()}"
+								part="icon"
+							></w-icon>
+							<span class="sr-only">${getIconSuffix()}</span>
+						</a>`
+					: html`<span part="placeholder"></span>`
+			}
+			${
+				this.shouldShowLastPageButton
+					? html`<a
+							data-page-number="${this.pages}"
+							href="${this.baseUrl}${this.pages}"
+							part="control"
+						>
+							<span class="sr-only"
+								>${i18n._({
+									id: "pagination.aria.last-page",
+									message: "Last page",
+									comment:
+										"Default screenreader message for last page link in the pagination component",
+								})},</span
 							>
-								<span class="sr-only">
-									${i18n._({
-										id: "pagination.aria.next-page",
-										message: "Next page",
-										comment:
-											"Default screenreader message for next page link in the pagination component",
-									})},</span
-								>
-								<w-icon
-									name="ChevronRight"
-									size="small"
-									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
-								></w-icon>
-								<span class="sr-only">${getIconSuffix()}</span>
-							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
-				}
-				${
-					this.shouldShowLastPageButton
-						? html`<a
-								data-page-number="${this.pages}"
-								href="${this.baseUrl}${this.pages}"
-								class="${
-									baseItemStyles +
-									" s-icon hover:bg-[--w-color-button-pill-background-hover] active:bg-[--w-color-button-pill-background-active]"
-								}"
-							>
-								<span class="sr-only"
-									>${i18n._({
-										id: "pagination.aria.last-page",
-										message: "Last page",
-										comment:
-											"Default screenreader message for last page link in the pagination component",
-									})},</span
-								>
-								<w-icon
-									name="ChevronDoubleRight"
-									size="small"
-									locale="${detectLocale()}"
-									class="pointer-events-none flex items-center"
-								></w-icon>
-								<span class="sr-only">${getIconSuffix()}</span>
-							</a>`
-						: html`<span class="${placeholderStyles}"></span>`
-				}
-			</div>
+							<w-icon
+								name="ChevronDoubleRight"
+								size="small"
+								locale="${detectLocale()}"
+								part="icon"
+							></w-icon>
+							<span class="sr-only">${getIconSuffix()}</span>
+						</a>`
+					: html`<span part="placeholder"></span>`
+			}
 		</nav>`;
 	}
 }

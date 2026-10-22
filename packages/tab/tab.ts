@@ -35,8 +35,18 @@ export class WarpTab extends LitElement {
 	/**
 	 * The `id` of the `<w-tab-panel>` this tab controls.
 	 */
-	@property({ reflect: true })
-	for: string | undefined;
+	@property({ reflect: true, attribute: "for", useDefault: true })
+	htmlFor: string = "";
+
+	/** @deprecated Use `htmlFor`, same as the native HTMLLabelElement property. */
+	set for(value: string) {
+		this.htmlFor = value;
+	}
+
+	/** @deprecated Use `htmlFor`, same as the native HTMLLabelElement property. */
+	get for() {
+		return this.htmlFor;
+	}
 
 	/**
 	 * @internal
@@ -64,7 +74,7 @@ export class WarpTab extends LitElement {
 	}
 
 	private get _effectiveAriaControls(): string {
-		return this._ariaControlsAttr || this.for || "";
+		return this._ariaControlsAttr || this.htmlFor || "";
 	}
 
 	/**

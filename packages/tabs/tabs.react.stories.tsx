@@ -65,15 +65,15 @@ export const Default = () => (
 export const WithIcons = () => (
 	<>
 		<Tabs active="info">
-			<Tab id="infotab" for="info" tabIndex={0}>
+			<Tab id="infotab" htmlFor="info" tabIndex={0}>
 				<w-icon name="Info" slot="icon" />
 				Info
 			</Tab>
-			<Tab id="donetab" for="done" tabIndex={-1}>
+			<Tab id="donetab" htmlFor="done" tabIndex={-1}>
 				<w-icon name="Success" slot="icon" />
 				Done
 			</Tab>
-			<Tab id="errortab" for="error" tabIndex={-1}>
+			<Tab id="errortab" htmlFor="error" tabIndex={-1}>
 				<w-icon name="Error" slot="icon" />
 				Failures
 			</Tab>
@@ -96,15 +96,15 @@ export const WithIcons = () => (
 export const WithIconsOver = () => (
 	<>
 		<Tabs active="info">
-			<Tab id="infotab" for="info" over tabIndex={0}>
+			<Tab id="infotab" htmlFor="info" over tabIndex={0}>
 				<w-icon name="Info" slot="icon" />
 				Info
 			</Tab>
-			<Tab id="donetab" for="done" over tabIndex={-1}>
+			<Tab id="donetab" htmlFor="done" over tabIndex={-1}>
 				<w-icon name="Success" slot="icon" />
 				Done
 			</Tab>
-			<Tab id="errortab" for="error" over tabIndex={-1}>
+			<Tab id="errortab" htmlFor="error" over tabIndex={-1}>
 				<w-icon name="Error" slot="icon" />
 				Failures
 			</Tab>
@@ -127,22 +127,22 @@ export const WithIconsOver = () => (
 export const ManyTabs = () => (
 	<>
 		<Tabs active="panel1" id="tabs-many">
-			<Tab id="tab1" for="panel1" tabIndex={0}>
+			<Tab id="tab1" htmlFor="panel1" tabIndex={0}>
 				Tab 1
 			</Tab>
-			<Tab id="tab2" for="panel2" tabIndex={-1}>
+			<Tab id="tab2" htmlFor="panel2" tabIndex={-1}>
 				Tab 2
 			</Tab>
-			<Tab id="tab3" for="panel3" tabIndex={-1}>
+			<Tab id="tab3" htmlFor="panel3" tabIndex={-1}>
 				Tab 3
 			</Tab>
-			<Tab id="tab4" for="panel4" tabIndex={-1}>
+			<Tab id="tab4" htmlFor="panel4" tabIndex={-1}>
 				Tab 4
 			</Tab>
-			<Tab id="tab5" for="panel5" tabIndex={-1}>
+			<Tab id="tab5" htmlFor="panel5" tabIndex={-1}>
 				Tab 5
 			</Tab>
-			<Tab id="tab6" for="panel6" tabIndex={-1}>
+			<Tab id="tab6" htmlFor="panel6" tabIndex={-1}>
 				Tab 6
 			</Tab>
 		</Tabs>

@@ -18,11 +18,9 @@ test("renders a bread crumb", async () => {
 
 test("renders an aria-label if set", async () => {
 	const page = render(
-		html` <w-breadcrumb aria-label="You are here"> </w-breadcrumb>`,
+		html`<w-breadcrumb aria-label="You are here"> </w-breadcrumb>`,
 	);
-	await expect
-		.element(page.getByLabelText("You are here", { hasText: "w-breadcrumb" }))
-		.toBeDefined();
+	await expect.element(page.getByLabelText("You are here")).toBeDefined();
 });
 
 test("sets role navigation", async () => {

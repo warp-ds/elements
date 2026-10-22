@@ -1,3 +1,87 @@
+# [2.14.0-next.12](https://github.com/warp-ds/elements/compare/v2.14.0-next.11...v2.14.0-next.12) (2026-10-22)
+
+
+### Bug Fixes
+
+* **slider:** add missing translations for from and to ([#838](https://github.com/warp-ds/elements/issues/838)) ([9e829f5](https://github.com/warp-ds/elements/commit/9e829f5ce676e4dd51c1699f8a4c456eb76ac047))
+
+# [2.14.0-next.11](https://github.com/warp-ds/elements/compare/v2.14.0-next.10...v2.14.0-next.11) (2026-10-20)
+
+
+### Bug Fixes
+
+* **breadcrumbs:** prevent separator from line wrapping on smaller screens ([#821](https://github.com/warp-ds/elements/issues/821)) ([e8af519](https://github.com/warp-ds/elements/commit/e8af51972891e34796954f8102c43508dcfe245c))
+
+# [2.14.0-next.10](https://github.com/warp-ds/elements/compare/v2.14.0-next.9...v2.14.0-next.10) (2026-10-20)
+
+
+### Bug Fixes
+
+* **textfield:** add back missing sr-only definition ([#816](https://github.com/warp-ds/elements/issues/816)) ([4ee35cc](https://github.com/warp-ds/elements/commit/4ee35cc05ec0cd87c534fdc34e6f4defab069ce8))
+
+# [2.14.0-next.9](https://github.com/warp-ds/elements/compare/v2.14.0-next.8...v2.14.0-next.9) (2026-10-19)
+
+
+### Features
+
+* **modal:** auto assign header, footer and default slots when not provided ([#815](https://github.com/warp-ds/elements/issues/815)) ([ff4693c](https://github.com/warp-ds/elements/commit/ff4693c0c1ac67386afed538427e9c77e7338330))
+
+# [2.14.0-next.8](https://github.com/warp-ds/elements/compare/v2.14.0-next.7...v2.14.0-next.8) (2026-10-19)
+
+
+### Bug Fixes
+
+* **datepicker:** refactor react wrapper approach add missing properties ([#808](https://github.com/warp-ds/elements/issues/808)) ([d1ed62f](https://github.com/warp-ds/elements/commit/d1ed62f54a7d05955f99d2f8218e406a17f970d1))
+
+# [2.14.0-next.7](https://github.com/warp-ds/elements/compare/v2.14.0-next.6...v2.14.0-next.7) (2026-10-15)
+
+
+### Bug Fixes
+
+* **useWarpTheme:** make sure a diff between wtheme and current theme triggers a rerender ([#804](https://github.com/warp-ds/elements/issues/804)) ([2bc17cb](https://github.com/warp-ds/elements/commit/2bc17cbee6ee1def7a545bca47778ab107490829))
+
+# [2.14.0-next.6](https://github.com/warp-ds/elements/compare/v2.14.0-next.5...v2.14.0-next.6) (2026-10-14)
+
+
+### Features
+
+* **step-indicator:** add styling api ([#801](https://github.com/warp-ds/elements/issues/801)) ([f796568](https://github.com/warp-ds/elements/commit/f79656898465bd7f80d715f5f0e7addce1cdc795))
+
+# [2.14.0-next.5](https://github.com/warp-ds/elements/compare/v2.14.0-next.4...v2.14.0-next.5) (2026-10-12)
+
+
+### Features
+
+* **select:** add CSS styling API ([#800](https://github.com/warp-ds/elements/issues/800)) ([8226eb9](https://github.com/warp-ds/elements/commit/8226eb9c0920681e4937d000aabb96138d312e10))
+
+# [2.14.0-next.4](https://github.com/warp-ds/elements/compare/v2.14.0-next.3...v2.14.0-next.4) (2026-10-12)
+
+
+### Features
+
+* **switch:** styling API via variables and parts ([#799](https://github.com/warp-ds/elements/issues/799)) ([fd7081e](https://github.com/warp-ds/elements/commit/fd7081ec1a3e90bffecda56f24b45928d791faad))
+
+# [2.14.0-next.3](https://github.com/warp-ds/elements/compare/v2.14.0-next.2...v2.14.0-next.3) (2026-10-12)
+
+
+### Features
+
+* **pill:** add styling api ([#798](https://github.com/warp-ds/elements/issues/798)) ([16ed79e](https://github.com/warp-ds/elements/commit/16ed79ed21092e0f9692b9b7e038fbe79c05313f))
+
+# [2.14.0-next.2](https://github.com/warp-ds/elements/compare/v2.14.0-next.1...v2.14.0-next.2) (2026-10-12)
+
+
+### Bug Fixes
+
+* **select:** placeholder styling on Windows ([#797](https://github.com/warp-ds/elements/issues/797)) ([99cbffd](https://github.com/warp-ds/elements/commit/99cbffda4a5edc4881f081c376cc73c18ba4f5f9))
+
+# [2.14.0-next.1](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0-next.1) (2026-10-09)
+
+
+### Features
+
+* **pagination:** add styling api ([#795](https://github.com/warp-ds/elements/issues/795)) ([051bdc6](https://github.com/warp-ds/elements/commit/051bdc6fa10763d570612c453eed695461c82ac1))
+
 # [2.13.0](https://github.com/warp-ds/elements/compare/v2.12.1...v2.13.0) (2026-10-08)
 
 
