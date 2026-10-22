@@ -18,7 +18,7 @@ msgstr ""
 #: packages/slider-thumb/slider-thumb.ts
 #: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.from"
-msgstr ""
+msgstr "Fra"
 
 #. Max as in short for Maximum
 #. js-lingui-explicit-id
@@ -55,7 +55,7 @@ msgstr "Dette felt er påkrævet"
 #: packages/slider-thumb/slider-thumb.ts
 #: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.to"
-msgstr ""
+msgstr "Til"
 
 #. js-lingui-explicit-id
 #: packages/slider-thumb/slider-thumb.ts
