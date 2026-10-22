@@ -1,3 +1,10 @@
+# [2.14.0-next.12](https://github.com/warp-ds/elements/compare/v2.14.0-next.11...v2.14.0-next.12) (2026-10-22)
+
+
+### Bug Fixes
+
+* **slider:** add missing translations for from and to ([#838](https://github.com/warp-ds/elements/issues/838)) ([9e829f5](https://github.com/warp-ds/elements/commit/9e829f5ce676e4dd51c1699f8a4c456eb76ac047))
+
 # [2.14.0-next.11](https://github.com/warp-ds/elements/compare/v2.14.0-next.10...v2.14.0-next.11) (2026-10-20)
 
 
