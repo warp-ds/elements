@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>verify-elements playground</title>
+		<link href="https://assets.finn.no/pkg/@warp-ds/css/v2/resets.css" rel="stylesheet" crossorigin />
+		<link href="https://assets.finn.no/pkg/@warp-ds/css/v2/components.css" rel="stylesheet" crossorigin />
+		<script>
+			const brand = new URLSearchParams(location.search).get("brand") || "finn-no";
+			const cdn = "https://assets.finn.no/pkg/@warp-ds";
+			document.documentElement.dataset.wTheme = brand.endsWith("-dark") ? "dark" : "light";
+			window.playgroundBrand = brand;
+			window.playgroundStyles = Promise.all(
+				[`${cdn}/fonts/v1/${brand.replace(/-dark$/, "")}.css`, `${cdn}/css/v2/tokens/${brand}.css`].map(
+					(href) =>
+						new Promise((resolve) => {
+							const link = Object.assign(document.createElement("link"), { rel: "stylesheet", href, crossOrigin: "" });
+							link.onload = () => resolve({ href, ok: true });
+							link.onerror = () => resolve({ href, ok: false });
+							document.head.append(link);
+						}),
+				),
+			);
+		</script>
+		<style>
+			[data-w-theme="light"] {
+				color-scheme: light;
+			}
+			[data-w-theme="dark"] {
+				color-scheme: dark;
+			}
+			#mount {
+				padding: 1rem;
+			}
+		</style>
+		<script type="module" src="./playground.js"></script>
+	</head>
+	<body>
+		<div id="mount"></div>
+	</body>
+</html>
