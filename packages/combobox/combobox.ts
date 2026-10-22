@@ -37,6 +37,11 @@ interface OptionWithIdAndMatch extends ComboboxOption {
  * A combobox element for text input with selectable options.
  *
  * [Warp component reference](https://warp-ds.github.io/docs/components/combo-box/frameworks/elements)
+ *
+ * @fires {CustomEvent<{ value: string }>} select - When an option is selected
+ * @fires {CustomEvent<{ value: string }>} change - When the text in the field changes
+ * @fires {CustomEvent<{ value: string }>} blur - When the field loses focus
+ * @fires {CustomEvent} focus - When the field gets focus, with open-on-focus
  */
 export class WarpCombobox extends FormControlMixin(LitElement) {
 	/**
