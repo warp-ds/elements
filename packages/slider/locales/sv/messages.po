@@ -18,7 +18,7 @@ msgstr ""
 #: packages/slider-thumb/slider-thumb.ts
 #: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.from"
-msgstr ""
+msgstr "Från"
 
 #. Max as in short for Maximum
 #. js-lingui-explicit-id
@@ -55,7 +55,7 @@ msgstr "Detta fält är obligatoriskt"
 #: packages/slider-thumb/slider-thumb.ts
 #: packages/slider-thumb/slider-thumb.ts
 msgid "slider.label.to"
-msgstr ""
+msgstr "Till"
 
 #. js-lingui-explicit-id
 #: packages/slider-thumb/slider-thumb.ts
