@@ -1,3 +1,10 @@
+## [2.14.1-next.1](https://github.com/warp-ds/elements/compare/v2.14.0...v2.14.1-next.1) (2026-10-26)
+
+
+### Bug Fixes
+
+* **slider:** set help text color to subtle ([#842](https://github.com/warp-ds/elements/issues/842)) ([9828a60](https://github.com/warp-ds/elements/commit/9828a607534667d1fd577cd2f061186f21ca6cb6))
+
 # [2.14.0](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0) (2026-10-22)
 
 
