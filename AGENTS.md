@@ -22,9 +22,20 @@ Use these while working. Each takes a few seconds.
 | Type check | `pnpm exec tsc --noEmit` |
 | Lint | `pnpm exec eslint packages/<name>` |
 
-To prove UI behavior, use the `verify-elements` skill (`.agents/skills/verify-elements/SKILL.md`), which drives components in a real browser and captures events, the accessibility tree and screenshots. To debug a component, follow `.agents/skills/verify-elements/debugging.md`.
+To prove UI behavior, use the `verify-elements` skill (`.agents/skills/verify-elements/SKILL.md`), which drives components in a real browser and captures events, the accessibility tree and screenshots.
 
 Before opening a PR, run `pnpm test`, which runs Chromium, Firefox and WebKit (`pnpm exec playwright install` first). CI also runs `pnpm lint`, `pnpm build`, `pnpm lint:package`, `pnpm test:module-resolution` and `pnpm test:output-validation`.
+
+## Fixing a bug
+
+`ctl` is `node .agents/skills/verify-elements/ctl.mjs`, the command-line tool from the `verify-elements` skill.
+
+1. Reproduce the bug with `ctl` before you change code. Start from the closest command block in `packages/<name>/features/`.
+2. Add a Vitest test that fails without the fix.
+3. Fix it, run your reproduction again and keep the evidence: `events`, `snapshot` and a `screenshot`, as described in the skill's Evidence section.
+4. If the behavior changed, update the feature file and run `ctl check` on it.
+
+If you can't explain the behavior yet, your first fix doesn't work, or the engines disagree, follow `.agents/skills/verify-elements/debugging.md`.
 
 ## Layout
 

@@ -108,7 +108,7 @@ What to know when driving:
 
 ## Debugging
 
-When something doesn't behave as expected, follow [debugging.md](debugging.md): reproduce, observe, form one hypothesis, check the other engines, check accessibility, measure if it's about speed, then fix with a failing test and live proof. It also lists engine quirks that look like component bugs.
+Follow [debugging.md](debugging.md) when you can't explain a behavior yet, when your first fix doesn't work, or when engines disagree. It goes from reproducing the problem to proving the fix, and lists engine quirks that look like component bugs. When the cause is already known, the steps in "Fixing a bug" in the root `AGENTS.md` are enough.
 
 ## Evidence
 

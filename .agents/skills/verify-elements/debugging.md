@@ -53,8 +53,4 @@ The playground runs Lit in dev mode, which is slower than production. Only compa
 
 ## 7. Fix and prove
 
-1. Write a failing Vitest test for the behavior: `pnpm vitest run packages/<name> --project chromium`.
-2. Fix the code. The test passes.
-3. Run your reproduction from step 1 again. Capture `events`, `snapshot` and a `screenshot` as proof, as described in the Evidence section of [SKILL.md](SKILL.md).
-4. Run `pnpm test` for all three engines before you open a PR.
-5. If the behavior or a gotcha changed, update the feature file and run `ctl check` on it.
+Follow "Fixing a bug" in the root [AGENTS.md](../../../AGENTS.md#fixing-a-bug), with your reproduction from step 1 as the proof. If a gotcha changed, update the feature file too.
