@@ -37,7 +37,10 @@ export const wSliderStyles = css`
 						1px
 				)
 		);
-		--_help-text-color: var(--w-c-input-help-text-color, var(--w-s-color-text-subtle));
+		--_help-text-color: var(
+			--w-c-input-help-text-color,
+			var(--w-s-color-text-subtle)
+		);
 	}
 
 	.w-slider[disabled] {
