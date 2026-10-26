@@ -1,6 +1,6 @@
 # @warp-ds/elements
 
-Lit web components for the Warp design system, published to npm and Eik. Each component is a custom element named `w-<name>`. The default branch is `next`.
+Lit web components for the Warp design system, published to internal npm registry and Eik. Each component is a custom element named `w-<name>`. The default branch is `next`.
 
 ## Setup
 
@@ -14,13 +14,7 @@ Storybook (`pnpm storybook`, port 63900) also needs `pnpm build` first, because 
 
 ## Fast checks
 
-Use these while working. Each takes a few seconds.
-
-| Check | Command |
-|---|---|
-| Tests for one component, Chromium only | `pnpm vitest run packages/<name> --project chromium` |
-| Type check | `pnpm exec tsc --noEmit` |
-| Lint | `pnpm exec eslint packages/<name>` |
+Run tests for individual components, type checks and linters to do fast checks that only takes a few seconds.
 
 To prove UI behavior, use the `verify-elements` skill (`.agents/skills/verify-elements/SKILL.md`), which drives components in a real browser and captures events, the accessibility tree and screenshots.
 
@@ -36,6 +30,8 @@ Before opening a PR, run `pnpm test`, which runs Chromium, Firefox and WebKit (`
 4. If the behavior changed, update the feature file and run `ctl check` on it.
 
 If you can't explain the behavior yet, your first fix doesn't work, or the engines disagree, follow `.agents/skills/verify-elements/debugging.md`.
+
+Fix only the bug you were asked to fix. If you find another one along the way, leave it and check whether it's already filed with `gh issue list --repo warp-ds/elements --state all --search "<words>"`. Then tell the user about it, with a link to the existing issue or a draft for a new one: steps to reproduce, expected and actual. 
 
 ## Layout
 
