@@ -35,7 +35,7 @@ Options for `up`:
 - `--browser firefox|webkit`: needs `pnpm exec playwright install <browser>` first.
 - `--session <name>`: run a second daemon from the same checkout. Each session has its own ports, browser, Vite cache and log.
 
-Running `up` on a live session prints it again with `alreadyRunning: true`. Asking for different flags fails until you run `down`.
+Running `up` on a live session prints it again with `alreadyRunning: true`, whatever flags it was started with. Passing a flag that differs from the running session fails until you run `down`.
 
 How it works:
 

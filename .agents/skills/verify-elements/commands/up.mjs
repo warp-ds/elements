@@ -25,7 +25,7 @@ export const help = {
 	about:
 		"Start the daemon in the background: Vite on a free port, a browser and the playground page. Prints the session once the page is ready. " +
 		"--headed shows the browser window. --browser is chromium (default), firefox or webkit. --brand is a Warp brand such as tori-fi-dark (default finn-no). " +
-		"If the session is already running, prints it again with alreadyRunning: true.",
+		"If the session is already running, prints it again with alreadyRunning: true. It fails only if a flag you pass differs from the running session.",
 	examples: [
 		"up",
 		"up --headed --brand tori-fi-dark",
@@ -48,7 +48,7 @@ export async function main({ flags, paths }) {
 		);
 		if (healthy) {
 			const differs = Object.keys(wanted).filter(
-				(key) => existing[key] !== wanted[key],
+				(key) => key in flags && existing[key] !== wanted[key],
 			);
 			if (differs.length)
 				fail(
