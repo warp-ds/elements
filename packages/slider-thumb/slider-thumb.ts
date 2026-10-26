@@ -693,8 +693,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 		let value: string | number;
 		if (this.tooltipFormatter) {
 			value = this.tooltipFormatter(this.value!, this.slot as SliderSlot);
-		} else if (this.valueFormatter) {
-			value = this.valueFormatter(this.value!, this.slot as SliderSlot);
 		} else if (this.isAtFromRangeBoundary) {
 			value = i18n.t({
 				id: "slider.placeholder.from",
@@ -705,6 +703,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 				id: "slider.placeholder.to",
 				message: "Max",
 			});
+		} else if (this.valueFormatter) {
+			value = this.valueFormatter(this.value!, this.slot as SliderSlot);
 		} else if (this.value === "") {
 			value = this.range?.value ?? this.boundaryValue;
 		} else {
@@ -800,10 +800,20 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	}
 
 	render() {
+		const minLabel = i18n.t({
+			id: "slider.placeholder.from",
+			message: "Min",
+		});
+
+		const maxLabel = i18n.t({
+			id: "slider.placeholder.to",
+			message: "Max",
+		});
+
 		const showPlaceholder = this.placeholder && !this.value;
 		const showTooltipSuffix =
-			this.tooltipDisplayValue !== "Min" &&
-			this.tooltipDisplayValue !== "Max" &&
+			this.tooltipDisplayValue !== minLabel &&
+			this.tooltipDisplayValue !== maxLabel &&
 			(this.suffix ?? "") !== "";
 		return html`
 			<div class="w-slider-thumb">
