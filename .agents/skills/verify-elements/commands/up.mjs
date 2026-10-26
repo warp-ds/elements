@@ -24,7 +24,7 @@ export const help = {
 	usage: "up [--headed] [--browser <name>] [--brand <brand>]",
 	about:
 		"Start the daemon in the background: Vite on a free port, a browser and the playground page. Prints the session once the page is ready. " +
-		"--headed shows the browser window. --browser is chromium (default), firefox or webkit. --brand is a Warp brand such as tori-fi-dark (default finn-no). " +
+		"--headed shows the browser window, with an events panel for whoever is watching. --browser is chromium (default), firefox or webkit. --brand is a Warp brand such as tori-fi-dark (default finn-no). " +
 		"If the session is already running, prints it again with alreadyRunning: true. It fails only if a flag you pass differs from the running session.",
 	examples: [
 		"up",

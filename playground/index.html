@@ -32,6 +32,11 @@
 			#mount {
 				padding: 1rem;
 			}
+			body:has(> #events-panel) {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) auto;
+				align-items: start;
+			}
 		</style>
 		<script type="module" src="./playground.js"></script>
 	</head>

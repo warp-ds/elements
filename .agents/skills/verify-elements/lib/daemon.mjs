@@ -56,7 +56,7 @@ const vite = await createServer({
 });
 await vite.listen();
 const viteUrl = `http://127.0.0.1:${vitePort}`;
-const playgroundUrl = `${viteUrl}/playground/?brand=${encodeURIComponent(config.brand)}`;
+const playgroundUrl = `${viteUrl}/playground/?brand=${encodeURIComponent(config.brand)}${config.headed ? "&events-panel" : ""}`;
 log("vite listening", viteUrl);
 
 const browser = await playwright[config.browser].launch({

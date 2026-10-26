@@ -24,6 +24,18 @@ A bare page that renders components from source with the Warp CDN styles. The `v
 | `serialize(value)` | A JSON-safe copy of any value: elements become `<tag#id>`, functions `[function]`, cycles `[circular]`. |
 | `brand`, `ready` | The brand in use, and `true` once the page is ready. |
 
+## Events panel
+
+With `?events-panel` in the URL, the page shows a panel on the right that lists the public events as they fire, meaning the ones a consumer's listener would get, not the ones from inside shadow roots. `ctl up --headed` adds it, so a person watching sees what each of the agent's actions triggers. Identical events (same type, target and detail) within 50 ms share a row with a ×N count and an amber highlight, which makes duplicate events easy to spot. A count is a reason to look, not proof of a bug: separate actions less than 50 ms apart, such as a held key or `ctl type` with several characters, share a row too. The list clears on every mount.
+
+The panel can't change what an agent sees or does:
+
+- It's `inert` and `aria-hidden`, so it never takes focus, isn't in the Tab order and stays out of the accessibility tree.
+- It lives in a closed shadow root, so Playwright selectors such as `text=` and `role=` can't match it and axe doesn't scan it.
+- It sits next to `#mount`, not over it, so clicks always land on the component. The mounted content is narrower in headed mode as a result.
+- It scrolls its own list, never the page.
+- Headless sessions don't load it.
+
 ## Behavior to know
 
 - **Missing imports are reported, not loaded.** `mount` imports only the tags in the HTML. When a component renders a `w-*` element that nothing imported, `mount` returns a warning instead of loading it, because the missing import is a product bug. `with` loads it explicitly.

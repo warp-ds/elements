@@ -30,7 +30,7 @@ node .agents/skills/verify-elements/ctl.mjs up
 
 Options for `up`:
 
-- `--headed`: show the browser window.
+- `--headed`: show the browser window, with a panel listing the component's events as they fire.
 - `--brand <brand>`: any Warp brand, such as `tori-fi-dark`. Defaults to `finn-no`. If the brand's fonts or tokens don't load, `up` fails and the log names the URLs.
 - `--browser firefox|webkit`: needs `pnpm exec playwright install <browser>` first.
 - `--session <name>`: run a second daemon from the same checkout. Each session has its own ports, browser, Vite cache and log.

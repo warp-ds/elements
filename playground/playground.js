@@ -2,6 +2,9 @@ const W_PREFIX = /^w-/;
 const mountEl = document.getElementById("mount");
 const events = [];
 let mountedAt = performance.now();
+const panel = new URLSearchParams(location.search).has("events-panel")
+	? (await import("./events-panel.js")).createEventsPanel()
+	: null;
 
 const describe = (el) =>
 	el?.localName ? el.localName + (el.id ? `#${el.id}` : "") : String(el);
@@ -53,13 +56,15 @@ EventTarget.prototype.dispatchEvent = function (event) {
 		this instanceof Element &&
 		this.localName.startsWith("w-")
 	) {
-		events.push({
+		const record = {
 			type: event.type,
 			target: describe(this),
 			insideShadowOf: shadowHostOf(this),
 			detail: serializeWithConsoleMuted(event.detail),
 			time: Math.round(performance.now() - mountedAt),
-		});
+		};
+		events.push(record);
+		panel?.add(record);
 	}
 	return nativeDispatch.call(this, event);
 };
@@ -91,6 +96,7 @@ async function mount(html, options = {}) {
 	const extra = (options.with ?? []).map((name) => name.replace(W_PREFIX, ""));
 	mountEl.replaceChildren();
 	events.length = 0;
+	panel?.reset();
 	mountedAt = performance.now();
 	mountEl.innerHTML = html;
 
