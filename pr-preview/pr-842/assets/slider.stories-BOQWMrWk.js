@@ -35,7 +35,10 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{n,t as r}from".
 						1px
 				)
 		);
-		--_help-text-color: var(--w-c-input-help-text-color, var(--w-s-color-text-subtle));
+		--_help-text-color: var(
+			--w-c-input-help-text-color,
+			var(--w-s-color-text-subtle)
+		);
 	}
 
 	.w-slider[disabled] {
