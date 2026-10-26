@@ -37,6 +37,7 @@ export const wSliderStyles = css`
 						1px
 				)
 		);
+		--_help-text-color: var(--w-c-input-help-text-color, var(--w-s-color-text-subtle));
 	}
 
 	.w-slider[disabled] {
@@ -174,6 +175,7 @@ export const wSliderStyles = css`
 		padding-top: 8px;
 		font-size: var(--w-font-size-xs);
 		line-height: var(--w-line-height-xs);
+		color: var(--_help-text-color);
 	}
 
 	slot::slotted(w-slider-thumb) {
