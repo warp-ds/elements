@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-Fh2IFq1z.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{a as s,c,i as l,l as u,n as d,o as f,r as p,s as m,t as h,u as g}from"./badge.stories-CG9Yd9Jz.js";function _(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,y.jsxs)(y.Fragment,{children:[(0,y.jsx)(n,{of:u,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-CGOhH0UK.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{a as s,c,i as l,l as u,n as d,o as f,r as p,s as m,t as h,u as g}from"./badge.stories-CG9Yd9Jz.js";function _(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,y.jsxs)(y.Fragment,{children:[(0,y.jsx)(n,{of:u,name:`Docs`}),`
 `,(0,y.jsx)(r.h1,{id:`badge`,children:`Badge`}),`
 `,(0,y.jsx)(r.p,{children:`Badge is used for showing a small amount of non-interactive color-categorized metadata, like a status or count.`}),`
 `,(0,y.jsx)(r.h2,{id:`visual-options`,children:`Visual options`}),`

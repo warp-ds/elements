@@ -1,4 +1,4 @@
-import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-Fh2IFq1z.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{i as s,n as c,r as l,t as u}from"./modal.stories-D5qtFxmh.js";function d(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(n,{of:s,name:`Docs`}),`
+import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{n as t,o as n,s as r}from"./blocks-CGOhH0UK.js";import{t as i}from"./jsx-runtime-MKhVqBIO.js";import{n as a,r as o}from"./lib-CG-rO6jW.js";import{i as s,n as c,r as l,t as u}from"./modal.stories-D5qtFxmh.js";function d(e){let r={h1:`h1`,h2:`h2`,h3:`h3`,p:`p`,...o(),...e.components};return(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(n,{of:s,name:`Docs`}),`
 `,(0,p.jsx)(r.h1,{id:`modal`,children:`Modal`}),`
 `,(0,p.jsx)(r.p,{children:`Modals (or dialogs) display important information that users need to acknowledge.`}),`
 `,(0,p.jsx)(r.h2,{id:`variants`,children:`Variants`}),`
