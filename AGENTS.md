@@ -1,6 +1,6 @@
 # @warp-ds/elements
 
-Lit web components for the Warp design system, published to internal npm registry and Eik. Each component is a custom element named `w-<name>`. The default branch is `next`.
+Lit web components for the Warp design system, published to npm and Eik. Each component is a custom element named `w-<name>`. The default branch is `next`.
 
 ## Setup
 
@@ -14,7 +14,13 @@ Storybook (`pnpm storybook`, port 63900) also needs `pnpm build` first, because 
 
 ## Fast checks
 
-Run tests for individual components, type checks and linters to do fast checks that only takes a few seconds.
+Use these while working. Each takes a few seconds.
+
+| Check | Command |
+|---|---|
+| Tests for one component, Chromium only | `pnpm vitest run packages/<name> --project chromium` |
+| Type check | `pnpm exec tsc --noEmit` |
+| Lint | `pnpm exec eslint packages/<name>` |
 
 To prove UI behavior, use the `verify-elements` skill (`.agents/skills/verify-elements/SKILL.md`), which drives components in a real browser and captures events, the accessibility tree and screenshots.
 
