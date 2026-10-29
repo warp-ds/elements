@@ -97,6 +97,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	 * Whether the active option is selected when the input loses focus.
 	 *
 	 * When enabled, the combobox selects the keyboard-highlighted option, or an option whose value exactly matches the current input value, on blur.
+	 *
+	 * @deprecated Use `noSelectOnBlur` / `no-select-on-blur` instead. Set it to `true` to disable selection on blur.
 	 */
 	@property({
 		type: Boolean,
@@ -105,6 +107,14 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 		useDefault: true,
 	})
 	selectOnBlur = true;
+
+	/**
+	 * Whether automatic selection when the input loses focus is disabled.
+	 *
+	 * Set this to keep the typed value without selecting the highlighted or matching option on blur. Takes precedence over the deprecated `selectOnBlur` property.
+	 */
+	@property({ type: Boolean, attribute: "no-select-on-blur", reflect: true })
+	noSelectOnBlur = false;
 
 	/**
 	 * Whether matching text segments in options are highlighted.
@@ -540,6 +550,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 		// If user has navigated to an option on blur || the input value equals one of the options' value -> select value
 		if (
 			this.selectOnBlur &&
+			!this.noSelectOnBlur &&
 			(this._navigationOption ||
 				(!this._navigationOption &&
 					this._currentOptions.findIndex((o) => o.value === this.value) !== -1))

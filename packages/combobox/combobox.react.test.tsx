@@ -29,6 +29,12 @@ describe("Combobox React Wrapper", () => {
 		expect(html).toContain("<w-combobox>");
 	});
 
+	test("does not render noSelectOnBlur as an attribute on the server side", () => {
+		const html = renderToString(<Combobox noSelectOnBlur={true} />);
+
+		expect(html).toContain("<w-combobox>");
+	});
+
 	test("does not render matchTextSegments as an attribute on the server side", () => {
 		const html = renderToString(<Combobox matchTextSegments={true} />);
 
@@ -65,6 +71,16 @@ describe("Combobox React Wrapper", () => {
 
 		expect(combobox.selectOnBlur).toBe(true);
 		expect(combobox.hasAttribute("select-on-blur")).toBe(true);
+	});
+
+	test("assigns noSelectOnBlur to the registered element on the client side", async () => {
+		const ref = React.createRef<WarpCombobox>();
+		await render(<Combobox ref={ref} noSelectOnBlur={true} />);
+		const combobox = ref.current!;
+		await combobox.updateComplete;
+
+		expect(combobox.noSelectOnBlur).toBe(true);
+		expect(combobox.hasAttribute("no-select-on-blur")).toBe(true);
 	});
 
 	test("assigns matchTextSegments to the registered element on the client side", async () => {
