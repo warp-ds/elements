@@ -19,6 +19,7 @@ import { styles } from "./styles.js";
 import { InputEventWithTarget } from "../types.js";
 
 import "../icon/icon.js";
+import "../textfield/textfield.js";
 import "../tooltip/tooltip.js";
 
 export interface ComboboxOption {

@@ -12,6 +12,9 @@ import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
 import { wSliderThumbStyles } from "./styles/w-slider-thumb.styles.js";
 
+import "../attention/attention.js";
+import "../textfield/textfield.js";
+
 export type SliderSlot = "to" | "from";
 
 const webkitRe = /WebKit/;
