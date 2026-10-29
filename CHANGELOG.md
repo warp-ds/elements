@@ -1,3 +1,11 @@
+# [2.15.0-next.3](https://github.com/warp-ds/elements/compare/v2.15.0-next.2...v2.15.0-next.3) (2026-10-29)
+
+
+### Bug Fixes
+
+* **combobox:** prevent duplicate events ([#848](https://github.com/warp-ds/elements/issues/848)) ([881733c](https://github.com/warp-ds/elements/commit/881733ca9a05ccb46e6d2f3c4df87b779a25c23a))
+* **combobox:** replace select-on-blur with no-select-on-blur ([#849](https://github.com/warp-ds/elements/issues/849)) ([412126c](https://github.com/warp-ds/elements/commit/412126c42a0ddfef223d6fcd3223ce7276caece8))
+
 # [2.15.0-next.2](https://github.com/warp-ds/elements/compare/v2.15.0-next.1...v2.15.0-next.2) (2026-10-29)
 
 
