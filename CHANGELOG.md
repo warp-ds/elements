@@ -1,3 +1,15 @@
+# [2.15.0-next.1](https://github.com/warp-ds/elements/compare/v2.14.1-next.1...v2.15.0-next.1) (2026-10-29)
+
+
+### Bug Fixes
+
+* **card:** reflect card flat property ([#846](https://github.com/warp-ds/elements/issues/846)) ([c0c010b](https://github.com/warp-ds/elements/commit/c0c010ba82b74b9f6df227869cfa06f319d65eb1))
+
+
+### Features
+
+* **checkbox:** add checkbox group gap configurability ([#845](https://github.com/warp-ds/elements/issues/845)) ([d5b0f64](https://github.com/warp-ds/elements/commit/d5b0f64acf176581c75fef5c06c5b4de7953f1f0))
+
 ## [2.14.1-next.1](https://github.com/warp-ds/elements/compare/v2.14.0...v2.14.1-next.1) (2026-10-26)
 
 
