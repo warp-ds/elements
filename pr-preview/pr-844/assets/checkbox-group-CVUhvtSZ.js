@@ -308,6 +308,10 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{c as t,h as n,i as r,l
 				<slot part="label"></slot>
 			</label>
 		`}},x([ee(`input[type="checkbox"]`)],L.prototype,`input`,void 0),x([_({reflect:!0})],L.prototype,`name`,null),x([_({reflect:!0})],L.prototype,`value`,void 0),x([_({type:Boolean,reflect:!0})],L.prototype,`indeterminate`,void 0),x([_({type:Boolean,reflect:!0})],L.prototype,`checked`,void 0),x([_({type:Boolean,reflect:!0})],L.prototype,`disabled`,void 0),x([_({type:Boolean,reflect:!0})],L.prototype,`required`,void 0),x([_({type:Boolean,reflect:!0})],L.prototype,`invalid`,void 0),x([_({attribute:!1})],L.prototype,`_groupInvalid`,void 0),x([_({attribute:!1})],L.prototype,`_groupName`,void 0),customElements.get(`w-checkbox`)||customElements.define(`w-checkbox`,L)})))()}var z;function B(){return(B=e((()=>{z=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Mindst én valgt mulighed er påkrævet."]}`)})))()}var V;function H(){return(H=e((()=>{V=JSON.parse(`{"checkbox-group.label.optional":["Optional"],"checkbox-group.validation.required":["At least one selection is required."]}`)})))()}var U;function W(){return(W=e((()=>{U=JSON.parse(`{"checkbox-group.label.optional":["Valinnainen"],"checkbox-group.validation.required":["Vähintään yksi valinta vaaditaan."]}`)})))()}var G;function K(){return(K=e((()=>{G=JSON.parse(`{"checkbox-group.label.optional":["Valgfri"],"checkbox-group.validation.required":["Minst ett valg er påkrevd."]}`)})))()}var q;function J(){return(J=e((()=>{q=JSON.parse(`{"checkbox-group.label.optional":["Valfritt"],"checkbox-group.validation.required":["Minst ett val krävs."]}`)})))()}var Y;function X(){return(X=e((()=>{s(),Y=n`
+	:host {
+		--_checkboxes-gap: var(--w-c-checkbox-group-gap, 16px);
+	}
+
 	[part="form-control"] {
 		display: inline-flex;
 		flex-direction: column;
@@ -316,7 +320,7 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{c as t,h as n,i as r,l
 
 	[part="form-control-input"] {
 		display: grid;
-		gap: 16px;
+		gap: var(--_checkboxes-gap);
 	}
 
 	[part="form-control-label"] {
