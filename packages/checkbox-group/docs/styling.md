@@ -108,7 +108,11 @@ Transitions are automatically disabled when `prefers-reduced-motion: reduce` is 
 
 ### w-checkbox-group
 
-The checkbox-group component uses direct CSS styling rather than component tokens. Customization is limited to ensure consistent form control patterns across the design system.
+#### Component tokens
+
+| Token | Purpose | Default |
+|---|---|---|
+| `--w-c-checkbox-group-gap` | Space between checkboxes (does not apply to button groups) | `16px` |
 
 #### Styling
 
@@ -119,7 +123,7 @@ The checkbox-group provides minimal styling hooks:
 | Label | `font-size: var(--w-font-size-s)`<br>`line-height: var(--w-line-height-s)`<br>`font-weight: 700`<br>`color: var(--w-s-color-text)` | Uses semantic tokens |
 | Optional indicator | `font-weight: 400`<br>`color: var(--w-s-color-text-subtle)` | Matches form control pattern |
 | Help text | `font-size: var(--w-font-size-xs)`<br>`line-height: var(--w-line-height-xs)`<br>`color: var(--w-s-color-text-subtle)` | Error state: `--w-s-color-text-negative` |
-| Checkbox spacing | `gap: 16px` | Spacing between checkboxes |
+| Checkbox spacing | `gap: var(--w-c-checkbox-group-gap, 16px)` | Spacing between checkboxes |
 | Wrapper spacing | `gap: 16px` | Spacing between label and group |
 
 #### Parts
@@ -137,8 +141,8 @@ The checkbox group exposes a set of parts that can be targeted for last‑mile l
 Example:
 
 ```css
-w-checkbox-group::part(form-control-input) {
-    gap: 8px;
+w-checkbox-group {
+    --w-c-checkbox-group-gap: 8px;
 }
 ```
 

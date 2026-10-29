@@ -1,6 +1,10 @@
 import { css } from "lit";
 
 export const styles = css`
+	:host {
+		--_checkboxes-gap: var(--w-c-checkbox-group-gap, 16px);
+	}
+
 	[part="form-control"] {
 		display: inline-flex;
 		flex-direction: column;
@@ -9,7 +13,7 @@ export const styles = css`
 
 	[part="form-control-input"] {
 		display: grid;
-		gap: 16px;
+		gap: var(--_checkboxes-gap);
 	}
 
 	[part="form-control-label"] {
