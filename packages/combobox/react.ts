@@ -10,8 +10,12 @@ class Component extends LitElement {
 	@property({ attribute: "open-on-focus" })
 	openOnFocus: WarpCombobox["openOnFocus"] = false;
 
+	/** @deprecated Use noSelectOnBlur instead. */
 	@property({ attribute: "select-on-blur" })
 	selectOnBlur: WarpCombobox["selectOnBlur"] = true;
+
+	@property({ attribute: "no-select-on-blur" })
+	noSelectOnBlur: WarpCombobox["noSelectOnBlur"] = false;
 
 	@property({ attribute: "match-text-segments" })
 	matchTextSegments: WarpCombobox["matchTextSegments"] = false;

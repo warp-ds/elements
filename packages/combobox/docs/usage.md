@@ -27,3 +27,7 @@ combobox.options = [
 ```
 
 When `options` contains entries, it is used instead of child `<option>` elements.
+
+Selection on blur is enabled by default. Add `no-select-on-blur` in HTML, or set `noSelectOnBlur = true` in JavaScript, to disable it. In React, use `<Combobox noSelectOnBlur />`.
+
+The `select-on-blur` attribute and `selectOnBlur` property are deprecated. Replace `selectOnBlur = false` with `noSelectOnBlur = true`. The new opt-out takes precedence if both are set.
