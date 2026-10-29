@@ -1,3 +1,10 @@
+# [2.15.0-next.2](https://github.com/warp-ds/elements/compare/v2.15.0-next.1...v2.15.0-next.2) (2026-10-29)
+
+
+### Bug Fixes
+
+* **combobox:** deprecate custom blur and focus events ([#850](https://github.com/warp-ds/elements/issues/850)) ([f9f46e6](https://github.com/warp-ds/elements/commit/f9f46e69a3fb1d193029cd18ad3252f7dca2bbba))
+
 # [2.15.0-next.1](https://github.com/warp-ds/elements/compare/v2.14.1-next.1...v2.15.0-next.1) (2026-10-29)
 
 
