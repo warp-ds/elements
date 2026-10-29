@@ -55,7 +55,7 @@ class WarpCard extends LitElement {
 	 *
 	 * Flat cards use a bordered surface instead of the default elevated surface. Use this for denser layouts or when the card sits inside another surface.
 	 */
-	@property({ type: Boolean })
+	@property({ type: Boolean, reflect: true })
 	flat = false;
 
 	/**
