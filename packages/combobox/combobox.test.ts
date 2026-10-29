@@ -15,6 +15,37 @@ i18n.load("en", textfieldMessages);
 i18n.load("nb", textfieldNbMessages);
 i18n.activate("en");
 
+test("ignores deprecated textfield event copies", async () => {
+	const page = render(html`
+		<w-combobox label="Country" open-on-focus>
+			<option value="no">Norway</option>
+		</w-combobox>
+		<button>Next</button>
+	`);
+	const el = page.getByRole("textbox", { name: "Country" });
+	await expect.element(el).toBeVisible();
+	const combobox = page.container.querySelector("w-combobox")!;
+	const events: [string, unknown][] = [];
+	for (const type of ["focus", "change", "select", "blur"]) {
+		combobox.addEventListener(type, (event) => {
+			if (event instanceof CustomEvent && event.target === combobox) {
+				events.push([event.type, event.detail]);
+			}
+		});
+	}
+
+	// Fill emits input without the separate keydown change tracked in #827.
+	await el.fill("no");
+	await userEvent.keyboard("{Tab}");
+
+	expect(events).toEqual([
+		["focus", null],
+		["change", { value: "no" }],
+		["select", { value: "no" }],
+		["blur", { value: "no" }],
+	]);
+});
+
 test("native focus and blur listeners can ignore deprecated custom copies", async () => {
 	const page = render(html`
 		<w-combobox label="Country" open-on-focus>
