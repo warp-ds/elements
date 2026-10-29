@@ -5,6 +5,9 @@ import { property } from "lit/decorators.js";
 
 import type { WarpCombobox } from "./combobox.js";
 
+/** @deprecated Ignore custom focus/blur copies and use native FocusEvent instead. Removal planned for the next major release. */
+type DeprecatedCustomFocusEvent<T = unknown> = CustomEvent<T>;
+
 // decouple from CDN by providing a dummy class
 class Component extends LitElement {
 	@property({ attribute: "open-on-focus" })
@@ -32,9 +35,13 @@ export const Combobox = createComponent({
 		onselect: "select" as EventName<CustomEvent<{ value: string }>>,
 		onChange: "change" as EventName<CustomEvent<{ value: string }>>,
 		onchange: "change" as EventName<CustomEvent<{ value: string }>>,
-		onBlur: "blur" as EventName<CustomEvent<{ value: string }>>,
-		onblur: "blur" as EventName<CustomEvent<{ value: string }>>,
-		onFocus: "focus" as EventName<CustomEvent>,
-		onfocus: "focus" as EventName<CustomEvent>,
+		onBlur: "blur" as EventName<
+			FocusEvent | DeprecatedCustomFocusEvent<{ value: string }>
+		>,
+		onblur: "blur" as EventName<
+			FocusEvent | DeprecatedCustomFocusEvent<{ value: string }>
+		>,
+		onFocus: "focus" as EventName<FocusEvent | DeprecatedCustomFocusEvent>,
+		onfocus: "focus" as EventName<FocusEvent | DeprecatedCustomFocusEvent>,
 	},
 });
