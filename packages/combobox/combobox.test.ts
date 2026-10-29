@@ -46,6 +46,31 @@ test("ignores deprecated textfield event copies", async () => {
 	]);
 });
 
+test("native focus and blur listeners can ignore deprecated custom copies", async () => {
+	const page = render(html`
+		<w-combobox label="Country" open-on-focus>
+			<option value="no">Norway</option>
+		</w-combobox>
+		<button>Next</button>
+	`);
+	const combobox = page.container.querySelector("w-combobox")!;
+	const events: [string, string][] = [];
+	for (const type of ["focus", "blur"]) {
+		combobox.addEventListener(type, (event) => {
+			if (event instanceof CustomEvent) return;
+			expect(event).toBeInstanceOf(FocusEvent);
+			events.push([event.type, combobox.value]);
+		});
+	}
+
+	await page.getByRole("textbox", { name: "Country" }).fill("n");
+	await userEvent.keyboard("{ArrowDown}{Tab}");
+	expect(events).toEqual([
+		["focus", ""],
+		["blur", "no"],
+	]);
+});
+
 test('renders with autocomplete="off" on inner textfield when attribute not provided', async () => {
 	const component = html`<w-combobox data-testid="combobox"></w-combobox>`;
 
