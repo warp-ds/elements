@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html, LitElement } from "lit";
-import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import "../pagination/pagination.js";
 
@@ -66,10 +65,7 @@ export const WarpTheme: StoryObj = {
 export const ReactiveLocalization: StoryObj = {
 	render() {
 		return html`
-			<p>
-				Switch language to refresh the labels without remounting pagination.
-				Use mobile view to see localised text "page 1"/"side 1" etc.
-			</p>
+			<p>Switch language to refresh the labels without remounting pagination. Use mobile view to see localised text "page 1"/"side 1" etc.</p>
 			<button
 				@click=${() => {
 					document.documentElement.lang = "en";
