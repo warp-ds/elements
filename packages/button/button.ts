@@ -3,6 +3,7 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n";
 import "../link/link.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -181,8 +182,6 @@ class WarpButton extends FormControlMixin(LitElement) {
 	@property()
 	command: string | undefined;
 
-	private ariaValueTextLoading: string;
-
 	// capture the initial value using connectedCallback and #initialValue
 	#initialValue: string | undefined = undefined;
 
@@ -226,15 +225,18 @@ class WarpButton extends FormControlMixin(LitElement) {
 		}
 	}
 
-	constructor() {
-		super();
-		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-		this.ariaValueTextLoading = i18n.t({
+	private get ariaValueTextLoading() {
+		return i18n.t({
 			id: "button.aria.loading",
 			message: "Loading...",
 			comment: "Screen reader message for buttons that are loading",
 		});
+	}
+
+	constructor() {
+		super();
+		new I18nController(this);
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
 	get isButton() {

@@ -1,6 +1,7 @@
 import { html, LitElement, nothing } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
@@ -40,6 +41,11 @@ const variants = [
  * [Warp component reference](https://warp-ds.github.io/docs/components/link/frameworks/elements)
  */
 class WarpLink extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/** @internal */
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,

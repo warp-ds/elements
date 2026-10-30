@@ -1,6 +1,7 @@
 import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 import "../utils/expand-transition";
 import { detectLocale } from "../i18n.js";
@@ -24,6 +25,11 @@ export type ExpandableVariant =
  * @csspart chevron - the chevron container.
  */
 class WarpExpandable extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Controls component's expanded state
 	 */

@@ -1,6 +1,7 @@
 import { css, html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { i18n } from "@lingui/core";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n.js";
 import type {
 	SliderSlot,
@@ -218,6 +219,7 @@ class WarpSlider extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 

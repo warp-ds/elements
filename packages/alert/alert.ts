@@ -1,6 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 import { detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
@@ -50,6 +51,7 @@ class WarpAlert extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this._internals = this.attachInternals();
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this._internals.role = "alert";

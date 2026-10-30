@@ -5,6 +5,7 @@ import { html, LitElement, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../radio/radio.js";
 import type { WarpRadio } from "../radio/radio.js";
 import { activateI18n } from "../i18n";
@@ -142,6 +143,7 @@ export class WarpRadioGroup extends FormControlMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this.addEventListener("keydown", this.handleKeyDown);
 		this.addEventListener("click", this.handleRadioClick);
 		this.addEventListener("invalid", this.handleInvalid);

@@ -1,6 +1,7 @@
 import { html, LitElement, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { styles } from "./styles.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 
 /**
@@ -13,6 +14,11 @@ import { reset } from "../styles.js";
  * @slot - The breadcrumb label content.
  */
 class WarpBreadcrumbItem extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Marks this item as the current page.
 	 * Use this on the final breadcrumb item so it exposes `aria-current="page"` and does not render a trailing separator.

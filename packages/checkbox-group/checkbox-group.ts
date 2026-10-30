@@ -3,6 +3,7 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n";
 import { messages as daMessages } from "./locales/da/messages.mjs";
 import { messages as enMessages } from "./locales/en/messages.mjs";
@@ -44,6 +45,11 @@ const REQUIRED_MESSAGE = () =>
  * [Warp component reference](https://warp-ds.github.io/docs/components/checkbox/frameworks/elements)
  */
 export class WarpCheckboxGroup extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	// Use delegatesFocus so focus delegates to an internal focusable element
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,

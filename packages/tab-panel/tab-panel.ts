@@ -1,6 +1,7 @@
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 
 import { styles } from "./styles.js";
@@ -21,6 +22,7 @@ export class WarpTabPanel extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this._internals = this.attachInternals();
 	}
 

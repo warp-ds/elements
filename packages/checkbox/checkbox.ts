@@ -4,6 +4,7 @@ import { property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { buttonGroupComponentVariables } from "../button-group/styles";
 import { reset } from "../styles";
 import { styles } from "./styles";
@@ -18,6 +19,11 @@ import { styles } from "./styles";
  * @parent w-checkbox-group
  */
 export class WarpCheckbox extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	static styles = [reset, buttonGroupComponentVariables, styles];
 
 	static shadowRootOptions = {

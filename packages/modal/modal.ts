@@ -5,6 +5,7 @@ import {
 	setup as setupScrollLock,
 	teardown as teardownScrollLock,
 } from "scroll-doctor";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
 import { ProvidesCanCloseToSlotsMixin } from "./util.js";
@@ -67,6 +68,7 @@ export class WarpModal extends ProvidesCanCloseToSlotsMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this.interceptEscape = this.interceptEscape.bind(this);
 		this.closeOnBackdropClick = this.closeOnBackdropClick.bind(this);
 		this.eventPreventer = this.eventPreventer.bind(this);

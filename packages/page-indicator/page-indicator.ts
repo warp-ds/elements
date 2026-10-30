@@ -5,6 +5,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { map } from "lit/directives/map.js";
 import { range } from "lit/directives/range.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n.js";
 
 import { messages as daMessages } from "./locales/da/messages.mjs";
@@ -52,20 +53,11 @@ class WarpPageIndicator extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this._internals = this.attachInternals();
 
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this._internals.role = "img";
-		const groupLabel = i18n._({
-			id: "page-indicator.aria.label",
-			comment: "Default screenreader message for page indicator group",
-			message: "Dot {selectedPage} is highlighted in a row of {pageCount} dots",
-			values: {
-				selectedPage: this._validSelectedPage,
-				pageCount: this._validPageCount,
-			},
-		});
-		this._internals.ariaLabel = groupLabel;
 	}
 
 	/** Validated page count (minimum 1) */
@@ -80,6 +72,17 @@ class WarpPageIndicator extends LitElement {
 	}
 
 	render(): TemplateResult {
+		const groupLabel = i18n._({
+			id: "page-indicator.aria.label",
+			comment: "Default screenreader message for page indicator group",
+			message: "Dot {selectedPage} is highlighted in a row of {pageCount} dots",
+			values: {
+				selectedPage: this._validSelectedPage,
+				pageCount: this._validPageCount,
+			},
+		});
+		this._internals.ariaLabel = groupLabel;
+
 		return html`
 			<div class="w-page-indicator">
 				<div class="w-page-indicator--container">
