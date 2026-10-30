@@ -1,10 +1,12 @@
 // @warp-css;
+
 import { classNames } from "@chbphone55/classnames";
 import { i18n } from "@lingui/core";
 import { css, html, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 
 import { activateI18n, detectLocale } from "../i18n";
@@ -80,6 +82,7 @@ export class WarpToast extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 		// Generate unique ID in constructor to avoid hydration mismatch from reflected property default
 		if (!this.id) {

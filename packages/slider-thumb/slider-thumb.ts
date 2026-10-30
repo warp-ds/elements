@@ -6,6 +6,7 @@ import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import type { WarpAttention } from "../attention/attention.js";
 import { styles as unoStyles } from "../slider/styles.js";
 import { reset } from "../styles.js";
@@ -27,6 +28,11 @@ const chromeRe = /Chrome/;
  * @event {CustomEvent} thumbreset - Internal event used by (and stopped by) `w-slider`.
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/** @internal */
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,

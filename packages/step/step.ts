@@ -3,6 +3,7 @@ import { html, LitElement, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
@@ -55,6 +56,7 @@ export class WarpStep extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this._internals = this.attachInternals();
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}

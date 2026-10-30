@@ -10,6 +10,7 @@ import {
 	type Placement,
 } from "@floating-ui/dom";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n";
 import { reset } from "../styles.js";
 
@@ -182,6 +183,7 @@ export class WarpTooltip extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 

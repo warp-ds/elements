@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html, LitElement } from "lit";
 
+import "../pagination/pagination.js";
+
 import { WarpThemeController } from "./theme-controller.js";
 
 const meta: Meta = {
@@ -56,5 +58,37 @@ export const WarpTheme: StoryObj = {
 				</button>
 			</div>
 			<dba-logo></dba-logo>`;
+	},
+};
+
+// I18nController: document lang -> Lingui -> existing component labels.
+export const ReactiveLocalization: StoryObj = {
+	render() {
+		return html`
+			<p>
+				Switch language to refresh the labels without remounting pagination. Use
+				mobile view to see localised text "page 1"/"side 1" etc.
+			</p>
+			<button
+				@click=${() => {
+					document.documentElement.lang = "en";
+				}}
+			>
+				English
+			</button>
+			<button
+				@click=${() => {
+					document.documentElement.lang = "nb";
+				}}
+			>
+				Norwegian
+			</button>
+			<w-pagination
+				current-page="5"
+				pages="10"
+				base-url="?page="
+				@click=${(event: Event) => event.preventDefault()}
+			></w-pagination>
+		`;
 	},
 };

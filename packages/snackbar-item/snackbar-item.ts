@@ -1,6 +1,7 @@
 import { html, LitElement } from "lit";
 import { property, query, state } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { collapse, expand } from "../utils/element-collapse.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
@@ -50,6 +51,11 @@ export enum SnackbarDuration {
  * @cssprop --w-c-snackbar-item-box-shadow
  */
 export class WarpSnackbarItem extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	static styles = [reset, styles];
 
 	/**

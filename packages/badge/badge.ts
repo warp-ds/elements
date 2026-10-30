@@ -1,6 +1,7 @@
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 import { styles } from "./styles";
 
@@ -10,6 +11,11 @@ import { styles } from "./styles";
  * @slot - The content of the badge, which is typically a short string like "New" or "4".
  */
 class WarpBadge extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Controls the badge color treatment.
 	 * If omitted, the badge uses neutral styling without reflecting a `variant` attribute.

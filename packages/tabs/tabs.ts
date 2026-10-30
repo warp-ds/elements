@@ -1,6 +1,7 @@
 import { html, LitElement, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 import { WarpTab } from "../tab/tab.js";
 import { WarpTabPanel } from "../tab-panel/tab-panel.js";
@@ -92,6 +93,7 @@ export class WarpTabs extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this.addEventListener("click", this._handleTabClick);
 	}
 

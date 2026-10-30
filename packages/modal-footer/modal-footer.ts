@@ -1,4 +1,5 @@
 import { html, LitElement } from "lit";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { CanCloseMixin, ProvidesCanCloseToSlotsMixin } from "../modal/util.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
@@ -17,6 +18,11 @@ import { styles } from "./styles.js";
 export class WarpModalFooter extends CanCloseMixin(
 	ProvidesCanCloseToSlotsMixin(LitElement),
 ) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	static styles = [reset, styles];
 
 	connectedCallback(): void {

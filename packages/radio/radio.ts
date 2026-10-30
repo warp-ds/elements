@@ -3,6 +3,7 @@ import type { PropertyValues } from "lit";
 import { html, LitElement } from "lit";
 
 import { property } from "lit/decorators.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 import { styles as hostStyles } from "./host-styles";
 import { styles as radioStyles } from "./radio-styles";
@@ -104,6 +105,7 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		this.addEventListener("click", this.handleClick);
 		this.addEventListener("invalid", this.handleInvalid);
 		this.addEventListener("keydown", this.handleKeyDown);

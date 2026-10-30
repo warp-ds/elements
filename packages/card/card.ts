@@ -3,6 +3,7 @@ import { css, html, LitElement, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n.js";
 import { reset } from "../styles.js";
 
@@ -68,17 +69,18 @@ class WarpCard extends LitElement {
 	@property({ type: Boolean })
 	clickable = false;
 
-	private buttonText: string;
-
-	constructor() {
-		super();
-		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-		this.buttonText = i18n._({
+	private get buttonText() {
+		return i18n._({
 			id: "card.button.text",
 			message: "Select",
 			comment: "Screenreader message to indicate that the card is clickable",
 		});
+	}
+
+	constructor() {
+		super();
+		new I18nController(this);
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
 	keypressed(e: KeyboardEvent) {

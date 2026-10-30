@@ -1,9 +1,11 @@
 // @warp-css;
+
 import { css, html, LitElement } from "lit";
 
 import { state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 
 import { styles } from "./styles.js";
@@ -33,6 +35,11 @@ const ccToastContainer = {
  * @internal
  */
 export class WarpToastContainer extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	static styles = [
 		reset,
 		styles,

@@ -2,6 +2,7 @@ import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { FormControlMixin } from "@open-wc/form-control";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 
 import { styles } from "./styles";
@@ -12,6 +13,11 @@ import { styles } from "./styles";
  * [Warp component reference](https://warp-ds.github.io/docs/components/box/frameworks/elements)
  */
 class WarpBox extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Makes the box bleed to the container edge.
 	 * Extends the box into the horizontal gutter on narrow screens. Adds negative horizontal margins and square side corners below the small breakpoint, then restores the normal margins and rounded corners from the small breakpoint and up.
