@@ -1,3 +1,10 @@
+# [2.15.0-next.4](https://github.com/warp-ds/elements/compare/v2.15.0-next.3...v2.15.0-next.4) (2026-10-30)
+
+
+### Features
+
+* auto-change language based on lingui current language ([#851](https://github.com/warp-ds/elements/issues/851)) ([f402fcf](https://github.com/warp-ds/elements/commit/f402fcf64f3c7fd289480c431d33c847872f3fa8))
+
 # [2.15.0-next.3](https://github.com/warp-ds/elements/compare/v2.15.0-next.2...v2.15.0-next.3) (2026-10-29)
 
 
