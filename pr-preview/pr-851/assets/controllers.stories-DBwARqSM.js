@@ -23,10 +23,7 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{T as t,v as n,y as r}f
                 </button>
             </div>
             <dba-logo></dba-logo>`}},p={render(){return t`
-            <p>
-                Switch language to refresh the labels without remounting pagination.
-                Use mobile view to see localised text "page 1"/"side 1" etc.
-            </p>
+            <p>Switch language to refresh the labels without remounting pagination. Use mobile view to see localised text "page 1"/"side 1" etc.</p>
             <button
                 @click=${()=>{document.documentElement.lang=`en`}}
             >
@@ -71,10 +68,7 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{T as t,v as n,y as r}f
 }`,...f.parameters?.docs?.source}}},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
   render() {
     return html\`
-            <p>
-                Switch language to refresh the labels without remounting pagination.
-                Use mobile view to see localised text "page 1"/"side 1" etc.
-            </p>
+            <p>Switch language to refresh the labels without remounting pagination. Use mobile view to see localised text "page 1"/"side 1" etc.</p>
             <button
                 @click=\${() => {
       document.documentElement.lang = "en";
