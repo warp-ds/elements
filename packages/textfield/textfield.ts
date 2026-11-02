@@ -1,6 +1,12 @@
 import { i18n } from "@lingui/core";
 import { FormControlMixin } from "@open-wc/form-control";
-import { html, LitElement, nothing, PropertyValues } from "lit";
+import {
+	html,
+	LitElement,
+	nothing,
+	PropertyValues,
+	type TemplateResult,
+} from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
@@ -36,12 +42,13 @@ class WarpTextField extends FormControlMixin(LitElement) {
 	@property({ attribute: "aria-label" })
 	ariaLabel: string | null = null;
 
-	/** @internal Combobox semantics, with element references across shadow roots. */
+	/** @internal Combobox semantics and popup rendered beside the input for same-tree ARIA references. */
 	@property({ attribute: false })
 	inputAria?: {
 		expanded: boolean;
-		controls: Element;
-		activeDescendant: Element | null;
+		controls: string;
+		activeDescendant?: string;
+		popup: TemplateResult;
 	};
 
 	/** @internal */
@@ -436,8 +443,8 @@ class WarpTextField extends FormControlMixin(LitElement) {
 						aria-label=${ifDefined(this.ariaLabel ?? undefined)}
 						aria-autocomplete=${ifDefined(this.inputAria ? "list" : undefined)}
 						aria-expanded=${ifDefined(this.inputAria?.expanded)}
-						.ariaControlsElements=${this.inputAria ? [this.inputAria.controls] : null}
-						.ariaActiveDescendantElement=${this.inputAria?.activeDescendant ?? null}
+						aria-controls=${ifDefined(this.inputAria?.controls)}
+						aria-activedescendant=${ifDefined(this.inputAria?.activeDescendant)}
 						type="${this.type || "text"}"
 						min="${ifDefined(this.min)}"
 						max="${ifDefined(this.max)}"
@@ -480,6 +487,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 				${this.helpText}
 				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
 			</div>
+			${this.inputAria?.popup ?? nothing}
 		`;
 	}
 }

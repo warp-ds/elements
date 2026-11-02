@@ -169,7 +169,7 @@ test("filters options by label, not value", async () => {
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
 	// Check that the dropdown shows the matching options
-	const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+	const listbox = textfield?.shadowRoot?.querySelector('[role="listbox"]');
 	const visibleOptions = listbox?.querySelectorAll('[role="option"]');
 
 	// Should show 2 options: "United States" and "United Kingdom"
@@ -212,7 +212,7 @@ test("displays option label in textfield but stores option value", async () => {
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
 	// Find and click the "Norway" option (which has value "no")
-	const listbox = el.shadowRoot?.querySelector('[role="listbox"]');
+	const listbox = textfield?.shadowRoot?.querySelector('[role="listbox"]');
 	const options = listbox?.querySelectorAll('[role="option"]');
 	const norwayOption = [...(options || [])].find(
 		(opt) => opt.textContent?.trim() === "Norway",
@@ -282,9 +282,9 @@ test("renders light-DOM option children in the generated popup", async () => {
 	input?.focus();
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
-	const visibleOptions = el.shadowRoot?.querySelectorAll(
-		'[role="listbox"] [role="option"]',
-	);
+	const visibleOptions = el.shadowRoot
+		?.querySelector("w-textfield")
+		?.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
 	const optionTexts = Array.from(visibleOptions || [], (opt) =>
 		opt.textContent?.trim(),
 	);
@@ -321,9 +321,9 @@ test("filters light-DOM options by label attribute and stores option value on se
 	);
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
-	const visibleOptions = el.shadowRoot?.querySelectorAll(
-		'[role="listbox"] [role="option"]',
-	);
+	const visibleOptions = el.shadowRoot
+		?.querySelector("w-textfield")
+		?.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
 	const optionTexts = Array.from(visibleOptions || [], (opt) =>
 		opt.textContent?.trim(),
 	);
@@ -395,9 +395,9 @@ test("syncs dynamic light-DOM option child changes", async () => {
 	input.focus();
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
-	const visibleOptions = el.shadowRoot?.querySelectorAll(
-		'[role="listbox"] [role="option"]',
-	);
+	const visibleOptions = el.shadowRoot
+		?.querySelector("w-textfield")
+		?.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
 	const optionTexts = Array.from(visibleOptions || [], (opt) =>
 		opt.textContent?.trim(),
 	);
@@ -424,9 +424,9 @@ test("non-empty options property takes precedence over light-DOM option children
 	input.focus();
 	await new Promise((resolve) => setTimeout(resolve, 100));
 
-	const visibleOptions = el.shadowRoot?.querySelectorAll(
-		'[role="listbox"] [role="option"]',
-	);
+	const visibleOptions = el.shadowRoot
+		?.querySelector("w-textfield")
+		?.shadowRoot?.querySelectorAll('[role="listbox"] [role="option"]');
 	const optionTexts = Array.from(visibleOptions || [], (opt) =>
 		opt.textContent?.trim(),
 	);
@@ -579,14 +579,22 @@ test("combobox semantics and option references belong to the focused input", asy
 	input.focus();
 	await userEvent.keyboard("{ArrowDown}{ArrowDown}");
 	expect(input.getAttribute("aria-expanded")).toBe("true");
-	expect(input.ariaActiveDescendantElement?.textContent?.trim()).toBe("Norway");
-	expect(input.ariaControlsElements).toEqual([
-		el.shadowRoot!.querySelector("ul"),
-	]);
-	expect(input.ariaActiveDescendantElement).toBe(
-		el.shadowRoot!.querySelector('[aria-selected="true"]'),
+	const listbox = page.getByRole("listbox").element();
+	const root = input.getRootNode() as ShadowRoot;
+	expect(listbox.getRootNode()).toBe(root);
+	expect(root.getElementById(input.getAttribute("aria-controls")!)).toBe(
+		listbox,
 	);
+	const active = root.getElementById(
+		input.getAttribute("aria-activedescendant")!,
+	);
+	expect(active?.textContent?.trim()).toBe("Norway");
+	expect(active).toBe(listbox.querySelector('[aria-selected="true"]'));
+	el.options = [{ value: "dk", label: "Denmark" }];
+	await el.updateComplete;
+	await field.updateComplete;
+	expect(input.hasAttribute("aria-activedescendant")).toBe(false);
 	await userEvent.keyboard("{Escape}");
 	expect(input.getAttribute("aria-expanded")).toBe("false");
-	expect(input.ariaActiveDescendantElement).toBeNull();
+	expect(input.hasAttribute("aria-activedescendant")).toBe(false);
 });
