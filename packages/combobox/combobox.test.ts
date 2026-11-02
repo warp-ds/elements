@@ -22,7 +22,7 @@ test("ignores deprecated textfield event copies", async () => {
 		</w-combobox>
 		<button>Next</button>
 	`);
-	const el = page.getByRole("textbox", { name: "Country" });
+	const el = page.getByRole("combobox", { name: "Country" });
 	await expect.element(el).toBeVisible();
 	const combobox = page.container.querySelector("w-combobox")!;
 	const events: [string, unknown][] = [];
@@ -63,7 +63,7 @@ test("native focus and blur listeners can ignore deprecated custom copies", asyn
 		});
 	}
 
-	await page.getByRole("textbox", { name: "Country" }).fill("n");
+	await page.getByRole("combobox", { name: "Country" }).fill("n");
 	await userEvent.keyboard("{ArrowDown}{Tab}");
 	expect(events).toEqual([
 		["focus", ""],
@@ -468,7 +468,7 @@ test("includes optional indicator in the accessible name", async () => {
 
 	// The inner textfield with role="combobox" should have accessible name including Optional
 	await expect
-		.element(page.getByRole("textbox", { name: /Country.*Optional/ }))
+		.element(page.getByRole("combobox", { name: /Country.*Optional/ }))
 		.toBeVisible();
 });
 
@@ -520,7 +520,9 @@ test("does not render optional indicator when there is no label", async () => {
 		</w-combobox>
 	`);
 
-	await expect.element(page.getByLabelText("Country")).toBeVisible();
+	await expect
+		.element(page.getByRole("combobox", { name: "Country" }))
+		.toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
 });
 
@@ -532,11 +534,11 @@ test("excludes optional indicator from accessible name when required suppresses 
 		</w-combobox>
 	`);
 
-	const input = page.getByRole("textbox", { name: "Country" });
+	const input = page.getByRole("combobox", { name: "Country" });
 	await expect.element(input).toBeVisible();
 
 	// Verify "Optional" is not part of the accessible name
-	expect(page.getByRole("textbox", { name: /Optional/ }).query()).toBeNull();
+	expect(page.getByRole("combobox", { name: /Optional/ }).query()).toBeNull();
 });
 
 test("renders localized optional text based on document lang", async () => {
@@ -557,4 +559,34 @@ test("renders localized optional text based on document lang", async () => {
 	await expect.element(page.getByText("Valgfri")).toBeVisible();
 
 	document.documentElement.lang = originalLang;
+});
+
+test("combobox semantics and option references belong to the focused input", async () => {
+	const page = render(
+		html`<w-combobox data-testid="country" aria-label="Country"
+			><option value="no">Norway</option>
+			<option value="se">Sweden</option></w-combobox
+		>`,
+	);
+	await expect.element(page.getByTestId("country")).toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	const field = el.shadowRoot!.querySelector("w-textfield")!;
+	await field.updateComplete;
+	const input = field.shadowRoot!.querySelector("input")!;
+	expect(input.getAttribute("role")).toBe("combobox");
+	expect(input.getAttribute("aria-label")).toBe("Country");
+	expect(field.hasAttribute("role")).toBe(false);
+	input.focus();
+	await userEvent.keyboard("{ArrowDown}{ArrowDown}");
+	expect(input.getAttribute("aria-expanded")).toBe("true");
+	expect(input.ariaActiveDescendantElement?.textContent?.trim()).toBe("Norway");
+	expect(input.ariaControlsElements).toEqual([
+		el.shadowRoot!.querySelector("ul"),
+	]);
+	expect(input.ariaActiveDescendantElement).toBe(
+		el.shadowRoot!.querySelector('[aria-selected="true"]'),
+	);
+	await userEvent.keyboard("{Escape}");
+	expect(input.getAttribute("aria-expanded")).toBe("false");
+	expect(input.ariaActiveDescendantElement).toBeNull();
 });
