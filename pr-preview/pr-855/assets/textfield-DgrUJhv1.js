@@ -299,8 +299,8 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{T as t,_ as n,a as r,d
 						aria-label=${S(this.ariaLabel??void 0)}
 						aria-autocomplete=${S(this.inputAria?`list`:void 0)}
 						aria-expanded=${S(this.inputAria?.expanded)}
-						.ariaControlsElements=${this.inputAria?[this.inputAria.controls]:null}
-						.ariaActiveDescendantElement=${this.inputAria?.activeDescendant??null}
+						aria-controls=${S(this.inputAria?.controls)}
+						aria-activedescendant=${S(this.inputAria?.activeDescendant)}
 						type="${this.type||`text`}"
 						min="${S(this.min)}"
 						max="${S(this.max)}"
@@ -340,4 +340,5 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{T as t,_ as n,a as r,d
 				${this.helpText}
 				<slot @slotchange="${this.helpTextSlotChange}" name="help-text"></slot>
 			</div>
+			${this.inputAria?.popup??p}
 		`}},d([i({attribute:`aria-label`})],B.prototype,`ariaLabel`,void 0),d([i({attribute:!1})],B.prototype,`inputAria`,void 0),d([i({type:Boolean,reflect:!0})],B.prototype,`disabled`,void 0),d([i({type:Boolean,reflect:!0})],B.prototype,`invalid`,void 0),d([i({type:String,reflect:!0})],B.prototype,`label`,void 0),d([i({type:String,reflect:!0,attribute:`help-text`})],B.prototype,`helpText`,void 0),d([i({type:Boolean,reflect:!0})],B.prototype,`optional`,void 0),d([i({type:String,reflect:!0})],B.prototype,`size`,void 0),d([i({type:Number,reflect:!0})],B.prototype,`max`,void 0),d([i({type:Number,reflect:!0})],B.prototype,`min`,void 0),d([i({type:Number,reflect:!0,attribute:`min-length`})],B.prototype,`minLength`,void 0),d([i({type:Number,reflect:!0})],B.prototype,`minlength`,void 0),d([i({type:Number,reflect:!0,attribute:`max-length`})],B.prototype,`maxLength`,void 0),d([i({type:Number,reflect:!0})],B.prototype,`maxlength`,void 0),d([i({type:String,reflect:!0})],B.prototype,`pattern`,void 0),d([i({type:String,reflect:!0})],B.prototype,`placeholder`,void 0),d([i({type:Boolean,reflect:!0,attribute:`read-only`})],B.prototype,`readOnly`,void 0),d([i({type:Boolean,reflect:!0})],B.prototype,`readonly`,void 0),d([i({type:Boolean,reflect:!0})],B.prototype,`required`,void 0),d([i({type:String,reflect:!0})],B.prototype,`type`,void 0),d([i({type:String,reflect:!0})],B.prototype,`value`,void 0),d([i({type:String,reflect:!0})],B.prototype,`name`,void 0),d([i({type:Number,reflect:!0})],B.prototype,`step`,void 0),d([i({type:String,reflect:!0})],B.prototype,`autocomplete`,void 0),d([i({type:String,reflect:!0})],B.prototype,`tooltip`,void 0),d([i({type:String,reflect:!0,attribute:`aria-description`,useDefault:!0})],B.prototype,`ariaDescription`,void 0),d([i({attribute:!1})],B.prototype,`formatter`,void 0),d([l(`[part="mask"]`)],B.prototype,`mask`,void 0),d([i({type:Boolean})],B.prototype,`_hasPrefix`,void 0),d([i({type:Boolean})],B.prototype,`_hasSuffix`,void 0),d([c()],B.prototype,`_hasHelpTextSlot`,void 0),customElements.get(`w-textfield`)||customElements.define(`w-textfield`,B)})))()}export{V as t};
