@@ -252,6 +252,12 @@ class WarpTextField extends FormControlMixin(LitElement) {
 		}
 	}
 
+	#onLabelRowClick(event: MouseEvent) {
+		if (event.target === event.currentTarget) {
+			this.renderRoot.querySelector("input")?.focus();
+		}
+	}
+
 	updated(changedProperties: PropertyValues<this>) {
 		if (changedProperties.has("value") && typeof this.value !== "undefined") {
 			this.setValue(this.value);
@@ -372,7 +378,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 			${
 				this.label
 					? html`
-							<div class="label-row">
+							<div class="label-row" @click=${this.#onLabelRowClick}>
 								<label for="${this._id}" part="label">
 									${this.label}${
 										showOptionalLabel

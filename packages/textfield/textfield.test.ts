@@ -342,3 +342,21 @@ test("tooltip content does not change the input name", async () => {
 	await expect.element(page.getByRole("tooltip")).toBeVisible();
 	expect(input.query()).not.toBeNull();
 });
+
+test("clicking beside the label focuses the input when a tooltip is present", async () => {
+	const page = render(html`
+		<w-textfield
+			label="Country"
+			tooltip="Where you live"
+			style="display: block; width: 320px"
+			data-testid="field"
+		></w-textfield>
+	`);
+	await expect.element(page.getByRole("textbox")).toBeVisible();
+
+	// Click the blank label area, to the right of the text and info button.
+	await page.getByTestId("field").click({ position: { x: 160, y: 10 } });
+	await userEvent.keyboard("nor");
+
+	await expect.element(page.getByRole("textbox")).toHaveValue("nor");
+});
