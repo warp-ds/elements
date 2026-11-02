@@ -89,7 +89,7 @@ import{n as e}from"./rolldown-runtime-sJBDdmOt.js";import{T as t,_ as n,a as r,d
 					aria-expanded=${this._isOpen&&this._currentOptions.length!==0}
 					aria-activedescendant=${m(this._isOpen?this._navigationOption?.id:void 0)}
 					aria-controls=${this._listboxId}
-					@input=${e=>{e instanceof CustomEvent||this._handleChange(e.target.value)}}
+					@input=${e=>{e instanceof CustomEvent||(this._isOpen=!0,this._handleChange(e.target.value))}}
 					@focus=${this._handleFocus}
 					@blur=${this._handleBlur}
 					@keydown=${this._handleKeyDown}
