@@ -624,15 +624,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 			await this.updateComplete;
 		}
 
-		const UA = window.navigator.userAgent;
-		const needsSafariHack = webkitRe.test(UA) && !chromeRe.test(UA);
-		if (needsSafariHack && this.tooltipTarget) {
-			this.tooltipTarget.style.setProperty(
-				"--transform-offset",
-				"var(--w-slider-thumb-size, 28px)",
-			);
-		}
-
 		this.#syncRangeValue();
 	}
 
