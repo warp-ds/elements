@@ -1,3 +1,10 @@
+# [2.15.0-next.6](https://github.com/warp-ds/elements/compare/v2.15.0-next.5...v2.15.0-next.6) (2026-11-02)
+
+
+### Bug Fixes
+
+* **switch:** add missing parts of Constraint Validation API ([#859](https://github.com/warp-ds/elements/issues/859)) ([4d240d6](https://github.com/warp-ds/elements/commit/4d240d62cfdf1885a530927b259f7933d6e10e4f))
+
 # [2.15.0-next.5](https://github.com/warp-ds/elements/compare/v2.15.0-next.4...v2.15.0-next.5) (2026-11-02)
 
 
