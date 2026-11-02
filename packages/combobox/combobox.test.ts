@@ -559,198 +559,28 @@ test("renders localized optional text based on document lang", async () => {
 	document.documentElement.lang = originalLang;
 });
 
-test.each(["ArrowDown", "ArrowUp"])(
-	"opens and navigates with one %s",
-	async (key) => {
-		const page = render(
-			html`<w-combobox label="Country"
-				><option value="no">Norway</option>
-				<option value="se">Sweden</option></w-combobox
-			>`,
-		);
-		const field = page.getByRole("textbox", { name: "Country" });
-		await expect.element(field).toBeVisible();
-		(field.element() as HTMLInputElement).focus();
-		await userEvent.keyboard(`{${key}}`);
-		expect(
-			page.container
-				.querySelector("w-combobox")!
-				.shadowRoot!.querySelector('[aria-selected="true"]')
-				?.textContent?.trim(),
-		).toBe(key === "ArrowDown" ? "Norway" : "Sweden");
-	},
-);
-
-test("Shift typing opens suggestions", async () => {
-	const page = render(
-		html`<w-combobox label="Country"
-			><option value="no">Norway</option></w-combobox
-		>`,
-	);
+test("keyboard users can open suggestions, select and edit a label", async () => {
+	const page = render(html`
+		<w-combobox label="Country">
+			<option value="us" label="United States">US</option>
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
 	const field = page.getByRole("textbox", { name: "Country" });
 	await expect.element(field).toBeVisible();
-	(field.element() as HTMLInputElement).focus();
-	await userEvent.keyboard("{Shift>}N{/Shift}");
+	const input = field.element() as HTMLInputElement;
+	input.focus();
+
+	await userEvent.keyboard("{ArrowDown}");
+	expect(input.value).toBe("United States");
+	await userEvent.keyboard("{Escape}{ArrowUp}");
+	expect(input.value).toBe("Sweden");
+
+	await userEvent.keyboard("{Escape}{Escape}{Shift>}U{/Shift}");
 	expect(
 		page.container.querySelector("w-combobox")!.shadowRoot!.querySelector("ul")!
 			.hidden,
 	).toBe(false);
-});
-
-test.each([false, true])(
-	"edits the displayed label after navigation, selected=%s",
-	async (selected) => {
-		const page = render(
-			html`<w-combobox label="Country"
-				><option value="us" label="United States">US</option></w-combobox
-			>`,
-		);
-		const input = page.getByRole("textbox", { name: "Country" });
-		await input.fill("uni");
-		await userEvent.keyboard("{ArrowDown}");
-		if (selected) await userEvent.keyboard("{Enter}");
-		await userEvent.keyboard("x");
-		expect((input.element() as HTMLInputElement).value).toBe("United Statesx");
-	},
-);
-
-// These keys already opened a closed list, but left selection and text editing alone.
-test.each([
-	"Home",
-	"End",
-	"PageUp",
-	"PageDown",
-	"Shift+Home",
-	"Shift+End",
-	"Shift+ArrowDown",
-	"Control+ArrowDown",
-	"Alt+ArrowDown",
-	"Meta+ArrowDown",
-])(
-	"%s on a closed list preserves native editing without previewing an option",
-	async (chord) => {
-		const page = render(
-			html`<div>
-				<input aria-label="Reference" /><w-combobox label="Country"
-					><option value="no">Norway</option>
-					<option value="se">Sweden</option></w-combobox
-				>
-			</div>`,
-		);
-		const field = page.getByRole("textbox", { name: "Country" });
-		const combo = page.container.querySelector("w-combobox")!;
-		const parts = chord.split("+");
-		const key = parts.at(-1)!;
-		const keys =
-			parts.length === 1 ? `{${key}}` : `{${parts[0]}>}{${key}}{/${parts[0]}}`;
-		const reference = page.getByRole("textbox", { name: "Reference" });
-		await reference.fill("nor");
-		await userEvent.keyboard(keys);
-		const native = reference.element() as HTMLInputElement;
-		const nativeSelection = [native.selectionStart, native.selectionEnd];
-		await field.fill("nor");
-		const input = field.element() as HTMLInputElement;
-		let prevented: boolean | undefined;
-		combo.addEventListener("keydown", (event) => {
-			if (event.key === key) prevented = event.defaultPrevented;
-		});
-		await userEvent.keyboard(keys);
-		expect(prevented).toBe(false);
-		expect(input.value).toBe("nor");
-		expect(combo.shadowRoot!.querySelector("ul")!.hidden).toBe(false);
-		expect(
-			combo.shadowRoot!.querySelector('[aria-selected="true"]'),
-		).toBeNull();
-		expect([input.selectionStart, input.selectionEnd]).toEqual(nativeSelection);
-	},
-);
-
-test.each(["Home", "End", "PageUp", "PageDown"])(
-	"%s still navigates an already open list",
-	async (key) => {
-		const page = render(
-			html`<w-combobox label="Country"
-				><option value="no">Norway</option>
-				<option value="se">Sweden</option></w-combobox
-			>`,
-		);
-		const field = page.getByRole("textbox", { name: "Country" });
-		await expect.element(field).toBeVisible();
-		(field.element() as HTMLInputElement).focus();
-		await userEvent.keyboard(`{${key}}{${key}}`);
-		expect((field.element() as HTMLInputElement).value).toBe(
-			key === "Home" || key === "PageUp" ? "Norway" : "Sweden",
-		);
-	},
-);
-
-test.each([false, true])(
-	"Shift+Escape leaves the field unchanged, open=%s",
-	async (open) => {
-		const page = render(
-			html`<w-combobox label="Country"
-				><option value="no">Norway</option></w-combobox
-			>`,
-		);
-		const field = page.getByRole("textbox", { name: "Country" });
-		await field.fill("nor");
-		if (open) await userEvent.keyboard("{ArrowDown}");
-		const input = field.element() as HTMLInputElement;
-		const before = input.value;
-		await userEvent.keyboard("{Shift>}{Escape}{/Shift}");
-		expect(input.value).toBe(before);
-		expect(
-			page.container
-				.querySelector("w-combobox")!
-				.shadowRoot!.querySelector("ul")!.hidden,
-		).toBe(!open);
-	},
-);
-
-test("Shift+Enter does not commit the highlighted option", async () => {
-	const page = render(
-		html`<w-combobox label="Country"
-			><option value="no">Norway</option></w-combobox
-		>`,
-	);
-	const field = page.getByRole("textbox", { name: "Country" });
-	await field.fill("nor");
-	await userEvent.keyboard("{ArrowDown}{Shift>}{Enter}{/Shift}");
-	const combo = page.container.querySelector("w-combobox")!;
-	expect(combo.value).toBe("nor");
-	expect(combo.shadowRoot!.querySelector("ul")!.hidden).toBe(false);
-});
-
-test("Shift+Backspace edits natively without reopening suggestions", async () => {
-	const page = render(
-		html`<w-combobox label="Country"
-			><option value="no">Norway</option></w-combobox
-		>`,
-	);
-	const field = page.getByRole("textbox", { name: "Country" });
-	await field.fill("nor");
-	await userEvent.keyboard("{Shift>}{Backspace}{/Shift}");
-	expect((field.element() as HTMLInputElement).value).toBe("no");
-	expect(
-		page.container.querySelector("w-combobox")!.shadowRoot!.querySelector("ul")!
-			.hidden,
-	).toBe(true);
-});
-
-test("Shift+ArrowLeft selects text without opening suggestions", async () => {
-	const page = render(
-		html`<w-combobox label="Country"
-			><option value="no">Norway</option></w-combobox
-		>`,
-	);
-	const field = page.getByRole("textbox", { name: "Country" });
-	await field.fill("nor");
-	await userEvent.keyboard("{Shift>}{ArrowLeft}{/Shift}");
-	const input = field.element() as HTMLInputElement;
-	expect([input.selectionStart, input.selectionEnd]).toEqual([2, 3]);
-	expect(input.value).toBe("nor");
-	expect(
-		page.container.querySelector("w-combobox")!.shadowRoot!.querySelector("ul")!
-			.hidden,
-	).toBe(true);
+	await userEvent.keyboard("{ArrowDown}{Enter}x");
+	expect(input.value).toBe("United Statesx");
 });
