@@ -1,6 +1,11 @@
 import { css } from "lit";
 
 export const styles = css`
+	.label-row {
+		display: flex;
+		align-items: baseline;
+	}
+
 	:host {
 		--_padding-left: var(--w-c-textfield-padding-left, 8px);
 		--_padding-right: var(--w-c-textfield-padding-right, 8px);
