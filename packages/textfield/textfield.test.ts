@@ -271,7 +271,9 @@ test("does not render optional indicator when there is no label", async () => {
 		html`<w-textfield aria-label="Email" optional></w-textfield>`,
 	);
 
-	await expect.element(page.getByLabelText("Email")).toBeVisible();
+	await expect
+		.element(page.getByRole("textbox", { name: "Email" }))
+		.toBeVisible();
 	expect(page.getByText("Optional").query()).toBeNull();
 });
 
