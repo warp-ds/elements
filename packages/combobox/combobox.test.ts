@@ -558,3 +558,56 @@ test("renders localized optional text based on document lang", async () => {
 
 	document.documentElement.lang = originalLang;
 });
+
+test("remote suggestions count visible results", async () => {
+	const page = render(
+		html`<w-combobox
+			label="City"
+			disable-static-filtering
+			.options=${[{ value: "osl", label: "Oslo" }]}
+		></w-combobox>`,
+	);
+	await expect
+		.element(page.getByRole("textbox", { name: "City" }))
+		.toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	const list = el.shadowRoot!.querySelector("ul")!;
+	const field = page.getByRole("textbox", { name: "City" });
+	(field.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("xyz");
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("1 suggestion");
+	expect(list.hidden).toBe(false);
+	el.options = [
+		{ value: "osl", label: "Oslo" },
+		{ value: "bgo", label: "Bergen" },
+	];
+	await el.updateComplete;
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("2 suggestions");
+	el.options = [];
+	await el.updateComplete;
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("No suggestions");
+});
+
+test("a single remote result does not open the list without interaction", async () => {
+	const page = render(
+		html`<w-combobox
+			label="City"
+			disable-static-filtering
+			.options=${[{ value: "osl", label: "Oslo" }]}
+		></w-combobox>`,
+	);
+	await expect
+		.element(page.getByRole("textbox", { name: "City" }))
+		.toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	expect(el.shadowRoot!.querySelector("ul")!.hidden).toBe(true);
+	el.options = [{ value: "bgo", label: "Bergen" }];
+	await el.updateComplete;
+	expect(el.shadowRoot!.querySelector("ul")!.hidden).toBe(true);
+});

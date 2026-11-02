@@ -336,25 +336,15 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	}
 
 	/** Get ARIA text for screen readers */
-	private _getAriaText(
-		options: OptionWithIdAndMatch[],
-		value: string,
-		isOpen: boolean,
-	) {
+	private _getAriaText(options: OptionWithIdAndMatch[], isOpen: boolean) {
 		if (!options || !isOpen) return "";
-
-		const filteredOptionsByInputValue = options.filter((option) =>
-			(option.label || option.value)
-				.toLowerCase()
-				.includes(value.toLowerCase()),
-		);
 
 		const pluralSuggestions = i18n._({
 			id: "combobox.aria.pluralSuggestions",
 			message:
 				"{numSuggestions, plural, one {# suggestion} other {# suggestions}}",
 			comment: "Aria text for combobox when there are one or more suggestions",
-			values: { numSuggestions: filteredOptionsByInputValue.length },
+			values: { numSuggestions: options.length },
 		});
 
 		const noSuggestions = i18n._({
@@ -363,9 +353,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			comment: "Aria text for combobox when no suggestions",
 		});
 
-		return filteredOptionsByInputValue.length
-			? pluralSuggestions
-			: noSuggestions;
+		return options.length ? pluralSuggestions : noSuggestions;
 	}
 
 	/** Handle keyboard navigation */
@@ -677,16 +665,6 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					: true,
 			);
 		}
-
-		if (
-			this.disableStaticFiltering &&
-			this._currentOptions.length &&
-			this._currentOptions.length === 1 &&
-			!this._currentOptions.some((o) => o.value === this.value) &&
-			!this._isOpen
-		) {
-			this._isOpen = true;
-		}
 	}
 
 	render() {
@@ -724,11 +702,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 				></w-textfield>
 
 				<span class="sr-only" role="status">
-					${this._getAriaText(
-						this._currentOptions,
-						this._displayValue,
-						this._isOpen,
-					)}
+					${this._getAriaText(this._currentOptions, this._isOpen)}
 				</span>
 				<ul
 					part="options-list"
