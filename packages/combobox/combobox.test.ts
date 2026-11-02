@@ -2,7 +2,7 @@ import { i18n } from "@lingui/core";
 import { html } from "lit";
 
 import { expect, test } from "vitest";
-import { userEvent } from "vitest/browser";
+import { userEvent, server } from "vitest/browser";
 import { render } from "vitest-browser-lit";
 
 import "../textfield/textfield.js";
@@ -570,7 +570,9 @@ test.each(["ArrowDown", "ArrowUp"])(
 				<option value="se">Sweden</option></w-combobox
 			>`,
 		);
-		await page.getByRole("combobox", { name: "Country" }).click();
+		const field = page.getByRole("combobox", { name: "Country" });
+		await expect.element(field).toBeVisible();
+		(field.element() as HTMLInputElement).focus();
 		await userEvent.keyboard(`{${key}}`);
 		expect(
 			page.container
@@ -587,7 +589,9 @@ test("Shift typing opens suggestions", async () => {
 			><option value="no">Norway</option></w-combobox
 		>`,
 	);
-	await page.getByRole("combobox", { name: "Country" }).click();
+	const field = page.getByRole("combobox", { name: "Country" });
+	await expect.element(field).toBeVisible();
+	(field.element() as HTMLInputElement).focus();
 	await userEvent.keyboard("{Shift>}N{/Shift}");
 	expect(
 		page.container.querySelector("w-combobox")!.shadowRoot!.querySelector("ul")!
@@ -651,17 +655,77 @@ test("pointer selection retains input focus for further keyboard use", async () 
 		</div>`,
 	);
 	const input = page.getByRole("combobox", { name: "Country" });
-	await input.click();
+	await expect.element(input).toBeVisible();
+	(input.element() as HTMLInputElement).focus();
 	await userEvent.keyboard("s");
 	await page.getByRole("option", { name: "Sweden" }).click();
+	// Selection currently finishes its label update in an animation frame.
+	await new Promise<void>((resolve) =>
+		requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+	);
 	const nativeInput = input.element() as HTMLInputElement;
 	expect(
 		(nativeInput.getRootNode() as ShadowRoot).activeElement === nativeInput,
 	).toBe(true);
 	await userEvent.keyboard("x");
 	expect(nativeInput.value).toBe("Swedenx");
-	await userEvent.keyboard("{Tab}");
+	await userEvent.keyboard(
+		server.browser === "webkit" ? "{Alt>}{Tab}{/Alt}" : "{Tab}",
+	);
 	await expect
 		.element(page.getByRole("button", { name: "Next" }))
 		.toHaveFocus();
+});
+
+test("remote suggestions count visible results", async () => {
+	const page = render(
+		html`<w-combobox
+			label="City"
+			disable-static-filtering
+			.options=${[{ value: "osl", label: "Oslo" }]}
+		></w-combobox>`,
+	);
+	await expect
+		.element(page.getByRole("combobox", { name: "City" }))
+		.toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	const list = el.shadowRoot!.querySelector("ul")!;
+	const field = page.getByRole("combobox", { name: "City" });
+	(field.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("xyz");
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("1 suggestion");
+	expect(list.hidden).toBe(false);
+	el.options = [
+		{ value: "osl", label: "Oslo" },
+		{ value: "bgo", label: "Bergen" },
+	];
+	await el.updateComplete;
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("2 suggestions");
+	el.options = [];
+	await el.updateComplete;
+	expect(
+		el.shadowRoot!.querySelector('[role="status"]')!.textContent!.trim(),
+	).toBe("No suggestions");
+});
+
+test("a single remote result does not open the list without interaction", async () => {
+	const page = render(
+		html`<w-combobox
+			label="City"
+			disable-static-filtering
+			.options=${[{ value: "osl", label: "Oslo" }]}
+		></w-combobox>`,
+	);
+	await expect
+		.element(page.getByRole("combobox", { name: "City" }))
+		.toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	expect(el.shadowRoot!.querySelector("ul")!.hidden).toBe(true);
+	el.options = [{ value: "bgo", label: "Bergen" }];
+	await el.updateComplete;
+	expect(el.shadowRoot!.querySelector("ul")!.hidden).toBe(true);
 });

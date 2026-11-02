@@ -1,5 +1,5 @@
 import { i18n } from "@lingui/core";
-import { userEvent } from "vitest/browser";
+import { userEvent, server } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
@@ -335,8 +335,12 @@ test("tooltip content does not change the input name", async () => {
 	await expect.element(page.getByRole("textbox")).toBeVisible();
 	const input = page.getByRole("textbox", { name: "Country", exact: true });
 	expect(input.query()).not.toBeNull();
-	await input.click();
-	await userEvent.keyboard("{Shift>}{Tab}{/Shift}");
+	(input.element() as HTMLInputElement).focus();
+	await userEvent.keyboard(
+		server.browser === "webkit"
+			? "{Alt>}{Shift>}{Tab}{/Shift}{/Alt}"
+			: "{Shift>}{Tab}{/Shift}",
+	);
 	await expect.element(page.getByRole("tooltip")).toBeVisible();
 	expect(input.query()).not.toBeNull();
 });
