@@ -672,7 +672,8 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 		return this.value;
 	}
 
-	get valueOrBoundary() {
+	/** @internal */
+	get valueOrBoundary(): string | undefined {
 		return this.value === "" || this.value === undefined
 			? this.boundaryValue
 			: this.value;
@@ -681,16 +682,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	/** @internal */
 	get isAtFromRangeBoundary(): boolean {
 		return (
-			Number(this.valueOrBoundary) === Number(this.boundaryValue) &&
-			this.slot === "from"
+			(this.slot === "from" || this.slot === "") &&
+			Number(this.valueOrBoundary) === Number(this.min)
 		);
 	}
 
 	/** @internal */
 	get isAtToRangeBoundary(): boolean {
 		return (
-			Number(this.valueOrBoundary) === Number(this.boundaryValue) &&
-			this.slot === "to"
+			(this.slot === "to" || this.slot === "") &&
+			Number(this.valueOrBoundary) === Number(this.max)
 		);
 	}
 
