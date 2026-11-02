@@ -18,8 +18,6 @@ import "../textfield/textfield.js";
 
 export type SliderSlot = "to" | "from";
 
-const webkitRe = /WebKit/;
-const chromeRe = /Chrome/;
 /**
  * Component to place inside a `<w-slider>`.
  *
