@@ -327,3 +327,16 @@ test("shows info tooltip after label when the tooltip property is set", async ()
 
 	expect(tooltip).toBeTruthy();
 });
+
+test("tooltip content does not change the input name", async () => {
+	const page = render(
+		html`<w-textfield label="Country" tooltip="Where you live"></w-textfield>`,
+	);
+	await expect.element(page.getByRole("textbox")).toBeVisible();
+	const input = page.getByRole("textbox", { name: "Country", exact: true });
+	expect(input.query()).not.toBeNull();
+	await input.click();
+	await userEvent.keyboard("{Shift>}{Tab}{/Shift}");
+	await expect.element(page.getByRole("tooltip")).toBeVisible();
+	expect(input.query()).not.toBeNull();
+});

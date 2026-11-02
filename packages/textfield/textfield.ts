@@ -384,21 +384,23 @@ class WarpTextField extends FormControlMixin(LitElement) {
 			${
 				this.label
 					? html`
-							<label for="${this._id}" part="label">
-								${this.label}${
-									showOptionalLabel
-										? html`
-												<span>
-													${i18n._({
-														id: "textfield.label.optional",
-														message: "Optional",
-														comment:
-															"Shown behind label when marked as optional",
-													})}
-												</span>
-											`
-										: nothing
-								}
+							<div class="label-row">
+								<label for="${this._id}" part="label">
+									${this.label}${
+										showOptionalLabel
+											? html`
+													<span>
+														${i18n._({
+															id: "textfield.label.optional",
+															message: "Optional",
+															comment:
+																"Shown behind label when marked as optional",
+														})}
+													</span>
+												`
+											: nothing
+									}
+								</label>
 								${
 									hasTooltip
 										? html`
@@ -419,7 +421,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 											`
 										: nothing
 								}
-							</label>
+							</div>
 						`
 					: nothing
 			}
