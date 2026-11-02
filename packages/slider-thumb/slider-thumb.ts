@@ -6,16 +6,18 @@ import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import type { WarpAttention } from "../attention/attention.js";
 import { styles as unoStyles } from "../slider/styles.js";
 import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
 import { wSliderThumbStyles } from "./styles/w-slider-thumb.styles.js";
 
+import "../attention/attention.js";
+import "../textfield/textfield.js";
+
 export type SliderSlot = "to" | "from";
 
-const webkitRe = /WebKit/;
-const chromeRe = /Chrome/;
 /**
  * Component to place inside a `<w-slider>`.
  *
@@ -24,6 +26,11 @@ const chromeRe = /Chrome/;
  * @event {CustomEvent} thumbreset - Internal event used by (and stopped by) `w-slider`.
  */
 class WarpSliderThumb extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/** @internal */
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,
@@ -615,15 +622,6 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 			await this.updateComplete;
 		}
 
-		const UA = window.navigator.userAgent;
-		const needsSafariHack = webkitRe.test(UA) && !chromeRe.test(UA);
-		if (needsSafariHack && this.tooltipTarget) {
-			this.tooltipTarget.style.setProperty(
-				"--transform-offset",
-				"var(--w-slider-thumb-size, 28px)",
-			);
-		}
-
 		this.#syncRangeValue();
 	}
 
@@ -663,6 +661,29 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 		return this.value;
 	}
 
+	/** @internal */
+	get valueOrBoundary(): string | undefined {
+		return this.value === "" || this.value === undefined
+			? this.boundaryValue
+			: this.value;
+	}
+
+	/** @internal */
+	get isAtFromRangeBoundary(): boolean {
+		return (
+			(this.slot === "from" || this.slot === "") &&
+			Number(this.valueOrBoundary) === Number(this.min)
+		);
+	}
+
+	/** @internal */
+	get isAtToRangeBoundary(): boolean {
+		return (
+			(this.slot === "to" || this.slot === "") &&
+			Number(this.valueOrBoundary) === Number(this.max)
+		);
+	}
+
 	/**
 	 * Value to display in the tooltip
 	 * @internal
@@ -673,6 +694,16 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 			value = this.tooltipFormatter(this.value!, this.slot as SliderSlot);
 		} else if (this.valueFormatter) {
 			value = this.valueFormatter(this.value!, this.slot as SliderSlot);
+		} else if (this.isAtFromRangeBoundary) {
+			value = i18n.t({
+				id: "slider.placeholder.from",
+				message: "Min",
+			});
+		} else if (this.isAtToRangeBoundary) {
+			value = i18n.t({
+				id: "slider.placeholder.to",
+				message: "Max",
+			});
 		} else if (this.value === "") {
 			value = this.range?.value ?? this.boundaryValue;
 		} else {
@@ -768,10 +799,20 @@ class WarpSliderThumb extends FormControlMixin(LitElement) {
 	}
 
 	render() {
+		const minLabel = i18n.t({
+			id: "slider.placeholder.from",
+			message: "Min",
+		});
+
+		const maxLabel = i18n.t({
+			id: "slider.placeholder.to",
+			message: "Max",
+		});
+
 		const showPlaceholder = this.placeholder && !this.value;
 		const showTooltipSuffix =
-			this.tooltipDisplayValue !== "Min" &&
-			this.tooltipDisplayValue !== "Max" &&
+			this.tooltipDisplayValue !== minLabel &&
+			this.tooltipDisplayValue !== maxLabel &&
 			(this.suffix ?? "") !== "";
 		return html`
 			<div class="w-slider-thumb">

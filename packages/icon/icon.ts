@@ -1,6 +1,7 @@
 import { html, LitElement, type TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { styles } from "./style.js";
 
 type PixelValue = `${number}px`;
@@ -53,6 +54,11 @@ function fetchIcon(url: string): Promise<SVGElement | null> {
  * [Warp component reference](https://warp-ds.github.io/docs/components/icons/frameworks/elements)
  */
 export class WarpIcon extends LitElement {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	static styles = [styles];
 
 	/** Icon filename (without .svg) */

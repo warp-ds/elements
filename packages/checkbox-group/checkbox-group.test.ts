@@ -11,6 +11,19 @@ import { messages } from "./locales/en/messages.mjs";
 i18n.load("en", messages);
 i18n.activate("en");
 
+test("supports a custom gap between checkboxes", async () => {
+	const page = render(html`
+		<w-checkbox-group style="--w-c-checkbox-group-gap: 8px">
+			<w-checkbox>One</w-checkbox>
+			<w-checkbox>Two</w-checkbox>
+		</w-checkbox-group>
+	`);
+
+	await expect
+		.poll(() => getComputedStyle(page.getByRole("group").element()).gap)
+		.toBe("8px");
+});
+
 test("renders help text when provided", async () => {
 	const page = render(html`
 		<w-checkbox-group help-text="Select all that apply">

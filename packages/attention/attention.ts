@@ -12,6 +12,7 @@ import { css, html, LitElement, nothing } from "lit";
 import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n, detectLocale } from "../i18n";
 import { reset } from "../styles";
 
@@ -253,6 +254,7 @@ class WarpAttention extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 
 		this.handleDone = this.handleDone.bind(this);

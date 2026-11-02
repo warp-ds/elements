@@ -4,6 +4,7 @@ import { i18n } from "@lingui/core";
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 import { activateI18n, detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
@@ -71,6 +72,7 @@ class WarpPagination extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 

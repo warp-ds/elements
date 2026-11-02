@@ -4,6 +4,7 @@ import { i18n } from "@lingui/core";
 import { interleave } from "@warp-ds/core/breadcrumbs";
 import { html, LitElement, TemplateResult } from "lit";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n";
 import { reset } from "../styles.js";
 
@@ -25,7 +26,6 @@ const separator = html`<span class="legacy-separator">/</span>`;
  */
 class WarpBreadcrumbs extends LitElement {
 	private _internals: ElementInternals;
-	private _defaultLabel: string;
 
 	/**
 	 * Accessible label for the breadcrumb navigation.
@@ -35,19 +35,19 @@ class WarpBreadcrumbs extends LitElement {
 
 	static styles = [reset, styles];
 
-	constructor() {
-		super();
-		this._internals = this.attachInternals();
-		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-
-		// Store default label for use in render
-		this._defaultLabel = i18n._({
+	private get _defaultLabel() {
+		return i18n._({
 			id: "breadcrumbs.ariaLabel",
 			message: "You are here",
 			comment: "Default screen reader message for the breadcrumb component",
 		});
-		// Use ElementInternals for ARIA to avoid hydration mismatches
-		this._internals.ariaLabel = this._defaultLabel;
+	}
+
+	constructor() {
+		super();
+		new I18nController(this);
+		this._internals = this.attachInternals();
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
 	private get _label(): string {
@@ -128,6 +128,7 @@ class WarpBreadcrumbs extends LitElement {
 	}
 
 	render() {
+		this._internals.ariaLabel = this._label;
 		return html`
 			<nav part="base" aria-labelledby="breadCrumbLabel">
 				<h2 id="breadCrumbLabel" class="sr-only">${this._label}</h2>

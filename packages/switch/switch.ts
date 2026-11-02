@@ -2,6 +2,7 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 import { styles } from "./styles.js";
 
@@ -18,6 +19,11 @@ export type WarpSwitchChangeEvent = CustomEvent<{
  * @event {WarpSwitchChangeEvent} change - Dispatched when the switch toggles. Includes boolean `checked` and string/null `value` on `details`.
  */
 export class WarpSwitch extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Name used when submitting an HTML form.
 	 */

@@ -1,3 +1,44 @@
+# [2.15.0-next.4](https://github.com/warp-ds/elements/compare/v2.15.0-next.3...v2.15.0-next.4) (2026-10-30)
+
+
+### Features
+
+* auto-change language based on lingui current language ([#851](https://github.com/warp-ds/elements/issues/851)) ([f402fcf](https://github.com/warp-ds/elements/commit/f402fcf64f3c7fd289480c431d33c847872f3fa8))
+
+# [2.15.0-next.3](https://github.com/warp-ds/elements/compare/v2.15.0-next.2...v2.15.0-next.3) (2026-10-29)
+
+
+### Bug Fixes
+
+* **combobox:** prevent duplicate events ([#848](https://github.com/warp-ds/elements/issues/848)) ([881733c](https://github.com/warp-ds/elements/commit/881733ca9a05ccb46e6d2f3c4df87b779a25c23a))
+* **combobox:** replace select-on-blur with no-select-on-blur ([#849](https://github.com/warp-ds/elements/issues/849)) ([412126c](https://github.com/warp-ds/elements/commit/412126c42a0ddfef223d6fcd3223ce7276caece8))
+
+# [2.15.0-next.2](https://github.com/warp-ds/elements/compare/v2.15.0-next.1...v2.15.0-next.2) (2026-10-29)
+
+
+### Bug Fixes
+
+* **combobox:** deprecate custom blur and focus events ([#850](https://github.com/warp-ds/elements/issues/850)) ([f9f46e6](https://github.com/warp-ds/elements/commit/f9f46e69a3fb1d193029cd18ad3252f7dca2bbba))
+
+# [2.15.0-next.1](https://github.com/warp-ds/elements/compare/v2.14.1-next.1...v2.15.0-next.1) (2026-10-29)
+
+
+### Bug Fixes
+
+* **card:** reflect card flat property ([#846](https://github.com/warp-ds/elements/issues/846)) ([c0c010b](https://github.com/warp-ds/elements/commit/c0c010ba82b74b9f6df227869cfa06f319d65eb1))
+
+
+### Features
+
+* **checkbox:** add checkbox group gap configurability ([#845](https://github.com/warp-ds/elements/issues/845)) ([d5b0f64](https://github.com/warp-ds/elements/commit/d5b0f64acf176581c75fef5c06c5b4de7953f1f0))
+
+## [2.14.1-next.1](https://github.com/warp-ds/elements/compare/v2.14.0...v2.14.1-next.1) (2026-10-26)
+
+
+### Bug Fixes
+
+* **slider:** set help text color to subtle ([#842](https://github.com/warp-ds/elements/issues/842)) ([9828a60](https://github.com/warp-ds/elements/commit/9828a607534667d1fd577cd2f061186f21ca6cb6))
+
 # [2.14.0](https://github.com/warp-ds/elements/compare/v2.13.0...v2.14.0) (2026-10-22)
 
 
