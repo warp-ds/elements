@@ -640,3 +640,28 @@ test("combobox semantics and option references belong to the focused input", asy
 	expect(input.getAttribute("aria-expanded")).toBe("false");
 	expect(input.ariaActiveDescendantElement).toBeNull();
 });
+
+test("pointer selection retains input focus for further keyboard use", async () => {
+	const page = render(
+		html`<div>
+			<w-combobox label="Country"
+				><option value="no">Norway</option>
+				<option value="se">Sweden</option></w-combobox
+			><button>Next</button>
+		</div>`,
+	);
+	const input = page.getByRole("combobox", { name: "Country" });
+	await input.click();
+	await userEvent.keyboard("s");
+	await page.getByRole("option", { name: "Sweden" }).click();
+	const nativeInput = input.element() as HTMLInputElement;
+	expect(
+		(nativeInput.getRootNode() as ShadowRoot).activeElement === nativeInput,
+	).toBe(true);
+	await userEvent.keyboard("x");
+	expect(nativeInput.value).toBe("Swedenx");
+	await userEvent.keyboard("{Tab}");
+	await expect
+		.element(page.getByRole("button", { name: "Next" }))
+		.toHaveFocus();
+});
