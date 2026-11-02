@@ -379,12 +379,27 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			"End",
 		].includes(e.key);
 
-		if (isNavigationKey) {
+		if (isNavigationKey && !this._isOpen) {
 			this._isOpen = true;
+			// Only unmodified arrows should both open and navigate on the first press.
+			const isUnmodifiedArrow =
+				(e.key === "ArrowDown" || e.key === "ArrowUp") &&
+				!e.altKey &&
+				!e.ctrlKey &&
+				!e.metaKey &&
+				!e.shiftKey;
+			if (!isUnmodifiedArrow) return;
+		}
+		if (isNavigationKey && this._isOpen) {
 			this._findAndSetActiveOption(e);
 			return;
 		}
-		if (e.altKey || e.ctrlKey || e.metaKey) {
+		if (
+			e.altKey ||
+			e.ctrlKey ||
+			e.metaKey ||
+			(e.shiftKey && e.key.length !== 1)
+		) {
 			return;
 		}
 
