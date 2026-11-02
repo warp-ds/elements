@@ -1,3 +1,10 @@
+# [2.15.0-next.5](https://github.com/warp-ds/elements/compare/v2.15.0-next.4...v2.15.0-next.5) (2026-11-02)
+
+
+### Bug Fixes
+
+* **slider:** display min/max on popovers at boundaries ([#843](https://github.com/warp-ds/elements/issues/843)) ([2cd3638](https://github.com/warp-ds/elements/commit/2cd3638df494820a23d6fc3369ab419bbd448339))
+
 # [2.15.0-next.4](https://github.com/warp-ds/elements/compare/v2.15.0-next.3...v2.15.0-next.4) (2026-10-30)
 
 
