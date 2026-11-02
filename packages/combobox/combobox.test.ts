@@ -2,7 +2,7 @@ import { i18n } from "@lingui/core";
 import { html } from "lit";
 
 import { expect, test } from "vitest";
-import { userEvent } from "vitest/browser";
+import { userEvent, server } from "vitest/browser";
 import { render } from "vitest-browser-lit";
 
 import "../textfield/textfield.js";
@@ -557,4 +557,39 @@ test("renders localized optional text based on document lang", async () => {
 	await expect.element(page.getByText("Valgfri")).toBeVisible();
 
 	document.documentElement.lang = originalLang;
+});
+
+test("pointer selection retains input focus for further keyboard use", async () => {
+	const page = render(
+		html`<div>
+			<w-combobox label="Country"
+				><option value="no">Norway</option>
+				<option value="se">Sweden</option></w-combobox
+			><button>Next</button>
+		</div>`,
+	);
+	const input = page.getByRole("textbox", { name: "Country" });
+	await expect.element(input).toBeVisible();
+	(input.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("s");
+	await page.getByRole("option", { name: "Sweden" }).click();
+	// Selection currently finishes its label update in an animation frame.
+	await new Promise<void>((resolve) =>
+		requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+	);
+	const nativeInput = input.element() as HTMLInputElement;
+	expect(
+		(nativeInput.getRootNode() as ShadowRoot).activeElement === nativeInput,
+	).toBe(true);
+	expect(nativeInput.value).toBe("Sweden");
+	await userEvent.keyboard("{ArrowDown}");
+	await expect
+		.element(page.getByRole("option", { name: "Sweden" }))
+		.toBeVisible();
+	await userEvent.keyboard(
+		server.browser === "webkit" ? "{Alt>}{Tab}{/Alt}" : "{Tab}",
+	);
+	await expect
+		.element(page.getByRole("button", { name: "Next" }))
+		.toHaveFocus();
 });
