@@ -373,15 +373,6 @@ export const OpenEnded: Story = {
 					}
 					return "2025+";
 				};
-				overunderSlider.valueFormatter = function (value, slot) {
-					if (slot === "from" && value === "") {
-						return "Min";
-					}
-					if (slot === "to" && value === "") {
-						return "Max";
-					}
-					return value;
-				};
 
 				/** Code to show the form values in output */
 				document.forms["openended"].addEventListener("input", function () {
