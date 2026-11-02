@@ -541,7 +541,7 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{n,t as r}from".
           left: anchor(--polyfilled-thumb left);
           margin-left: 38px;
         }
-      `,await t({roots:[this.shadowRoot],elements:[this.anchorPositioningStyleElement]})}catch(e){console.error(Error(`Error registering the CSS anchor positioning polyfill. The UI will look broken.`,{cause:e}))}}let e=window.navigator.userAgent;O.test(e)&&!k.test(e)&&this.tooltipTarget&&this.tooltipTarget.style.setProperty(`--transform-offset`,`var(--w-slider-thumb-size, 28px)`),this.#r()}get boundaryValue(){return this.slot===`from`?this.min:this.max}get textFieldDisplayValue(){return this._inputHasFocus&&this.value===``?this.range?.value?Math.min(Math.max(Number(this.range.value),Number(this.min)+1),Number(this.max)-1).toString():``:this.value}get valueOrBoundary(){return this.value===``||this.value===void 0?this.boundaryValue:this.value}get isAtFromRangeBoundary(){return Number(this.valueOrBoundary)===Number(this.boundaryValue)&&this.slot===`from`}get isAtToRangeBoundary(){return Number(this.valueOrBoundary)===Number(this.boundaryValue)&&this.slot===`to`}get tooltipDisplayValue(){let e;return e=this.tooltipFormatter?this.tooltipFormatter(this.value,this.slot):this.isAtFromRangeBoundary?c.t({id:`slider.placeholder.from`,message:`Min`}):this.isAtToRangeBoundary?c.t({id:`slider.placeholder.to`,message:`Max`}):this.valueFormatter?this.valueFormatter(this.value,this.slot):this.value===``?this.range?.value??this.boundaryValue:this.value||0,e}get ariaDescriptionText(){let e=``,t=this.ariaDescription||``,n=this.value===``;return this.openEnded&&n&&(e=this.slot===`from`?c.t({id:`slider.placeholder.from`,message:`Min`}):c.t({id:`slider.placeholder.to`,message:`Max`})),e?`${e}, ${t}`:t}updated(e){if(e.has(`openEnded`)&&this.openEnded&&!this.placeholder&&(this.slot===`to`||this.slot===``?this.placeholder=c.t({id:`slider.placeholder.to`,message:`Max`,comment:`Max as in short for Maximum`}):this.slot===`from`&&(this.placeholder=c.t({id:`slider.placeholder.from`,message:`Min`,comment:`Min as in short for Minimum`}))),e.has(`value`)){this.#e===void 0&&this.value!==void 0&&(this.#e=this.value),this.setValue(this.value),this.#r();let t=e.get(`value`);(this.value===``&&t||this.slot===`from`&&this.value===this.min||this.slot===`to`&&this.value===this.max)&&this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}(e.has(`min`)||e.has(`max`))&&(this.value=this.#e,this.setValue(this.value),this.#r())}render(){let e=c.t({id:`slider.placeholder.from`,message:`Min`}),t=c.t({id:`slider.placeholder.to`,message:`Max`}),n=this.placeholder&&!this.value,r=this.tooltipDisplayValue!==e&&this.tooltipDisplayValue!==t&&(this.suffix??``)!==``;return i`
+      `,await t({roots:[this.shadowRoot],elements:[this.anchorPositioningStyleElement]})}catch(e){console.error(Error(`Error registering the CSS anchor positioning polyfill. The UI will look broken.`,{cause:e}))}}let e=window.navigator.userAgent;O.test(e)&&!k.test(e)&&this.tooltipTarget&&this.tooltipTarget.style.setProperty(`--transform-offset`,`var(--w-slider-thumb-size, 28px)`),this.#r()}get boundaryValue(){return this.slot===`from`?this.min:this.max}get textFieldDisplayValue(){return this._inputHasFocus&&this.value===``?this.range?.value?Math.min(Math.max(Number(this.range.value),Number(this.min)+1),Number(this.max)-1).toString():``:this.value}get valueOrBoundary(){return this.value===``||this.value===void 0?this.boundaryValue:this.value}get isAtFromRangeBoundary(){return(this.slot===`from`||this.slot===``)&&Number(this.valueOrBoundary)===Number(this.min)}get isAtToRangeBoundary(){return(this.slot===`to`||this.slot===``)&&Number(this.valueOrBoundary)===Number(this.max)}get tooltipDisplayValue(){let e;return e=this.tooltipFormatter?this.tooltipFormatter(this.value,this.slot):this.valueFormatter?this.valueFormatter(this.value,this.slot):this.isAtFromRangeBoundary?c.t({id:`slider.placeholder.from`,message:`Min`}):this.isAtToRangeBoundary?c.t({id:`slider.placeholder.to`,message:`Max`}):this.value===``?this.range?.value??this.boundaryValue:this.value||0,e}get ariaDescriptionText(){let e=``,t=this.ariaDescription||``,n=this.value===``;return this.openEnded&&n&&(e=this.slot===`from`?c.t({id:`slider.placeholder.from`,message:`Min`}):c.t({id:`slider.placeholder.to`,message:`Max`})),e?`${e}, ${t}`:t}updated(e){if(e.has(`openEnded`)&&this.openEnded&&!this.placeholder&&(this.slot===`to`||this.slot===``?this.placeholder=c.t({id:`slider.placeholder.to`,message:`Max`,comment:`Max as in short for Maximum`}):this.slot===`from`&&(this.placeholder=c.t({id:`slider.placeholder.from`,message:`Min`,comment:`Min as in short for Minimum`}))),e.has(`value`)){this.#e===void 0&&this.value!==void 0&&(this.#e=this.value),this.setValue(this.value),this.#r();let t=e.get(`value`);(this.value===``&&t||this.slot===`from`&&this.value===this.min||this.slot===`to`&&this.value===this.max)&&this.dispatchEvent(new CustomEvent(`thumbreset`,{bubbles:!0}))}(e.has(`min`)||e.has(`max`))&&(this.value=this.#e,this.setValue(this.value),this.#r())}render(){let e=c.t({id:`slider.placeholder.from`,message:`Min`}),t=c.t({id:`slider.placeholder.to`,message:`Max`}),n=this.placeholder&&!this.value,r=this.tooltipDisplayValue!==e&&this.tooltipDisplayValue!==t&&(this.suffix??``)!==``;return i`
 			<div class="w-slider-thumb">
 				${`anchorName`in document.documentElement.style?_:i`<div class="polyfill-range">
 								<div class="polyfill-active-range"></div>
@@ -856,15 +856,6 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{n,t as r}from".
 						return "Before 1950";
 					}
 					return "2025+";
-				};
-				overunderSlider.valueFormatter = function (value, slot) {
-					if (slot === "from" && value === "") {
-						return "Min";
-					}
-					if (slot === "to" && value === "") {
-						return "Max";
-					}
-					return value;
 				};
 
 				/** Code to show the form values in output */
@@ -1411,15 +1402,6 @@ import{n as e,r as t}from"./rolldown-runtime-sJBDdmOt.js";import{n,t as r}from".
                         return "Before 1950";
                     }
                     return "2025+";
-                };
-                overunderSlider.valueFormatter = function (value, slot) {
-                    if (slot === "from" && value === "") {
-                        return "Min";
-                    }
-                    if (slot === "to" && value === "") {
-                        return "Max";
-                    }
-                    return value;
                 };
 
                 /** Code to show the form values in output */
