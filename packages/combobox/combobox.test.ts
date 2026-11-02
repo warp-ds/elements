@@ -611,3 +611,39 @@ test("a single remote result does not open the list without interaction", async 
 	await el.updateComplete;
 	expect(el.shadowRoot!.querySelector("ul")!.hidden).toBe(true);
 });
+
+test("shifted input opens remote suggestions and late results respect dismissal", async () => {
+	const page = render(html`
+		<w-combobox label="City" disable-static-filtering></w-combobox>
+		<input aria-label="Next" />
+	`);
+	const field = page.getByRole("textbox", { name: "City" });
+	await expect.element(field).toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	(field.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("{Shift>}O{/Shift}");
+	await expect.element(field).toHaveValue("O");
+
+	el.options = [{ value: "osl", label: "Oslo" }];
+	await expect
+		.element(page.getByRole("option", { name: "Oslo" }))
+		.toBeVisible();
+	await expect
+		.element(page.getByRole("status"))
+		.toHaveTextContent("1 suggestion");
+
+	await userEvent.keyboard("{Escape}");
+	el.options = [{ value: "bgo", label: "Bergen" }];
+	await el.updateComplete;
+	expect(page.getByRole("listbox").query()).toBeNull();
+	expect(page.getByRole("status").element().textContent!.trim()).toBe("");
+
+	await userEvent.keyboard("o{Tab}");
+	await expect
+		.element(page.getByRole("textbox", { name: "Next" }))
+		.toHaveFocus();
+	el.options = [{ value: "osl", label: "Oslo" }];
+	await el.updateComplete;
+	expect(page.getByRole("listbox").query()).toBeNull();
+	expect(page.getByRole("status").element().textContent!.trim()).toBe("");
+});
