@@ -558,3 +558,58 @@ test("renders localized optional text based on document lang", async () => {
 
 	document.documentElement.lang = originalLang;
 });
+
+test.each(["ArrowDown", "ArrowUp"])(
+	"opens and navigates with one %s",
+	async (key) => {
+		const page = render(
+			html`<w-combobox label="Country"
+				><option value="no">Norway</option>
+				<option value="se">Sweden</option></w-combobox
+			>`,
+		);
+		const field = page.getByRole("textbox", { name: "Country" });
+		await expect.element(field).toBeVisible();
+		(field.element() as HTMLInputElement).focus();
+		await userEvent.keyboard(`{${key}}`);
+		expect(
+			page.container
+				.querySelector("w-combobox")!
+				.shadowRoot!.querySelector('[aria-selected="true"]')
+				?.textContent?.trim(),
+		).toBe(key === "ArrowDown" ? "Norway" : "Sweden");
+	},
+);
+
+test("Shift typing opens suggestions", async () => {
+	const page = render(
+		html`<w-combobox label="Country"
+			><option value="no">Norway</option></w-combobox
+		>`,
+	);
+	const field = page.getByRole("textbox", { name: "Country" });
+	await expect.element(field).toBeVisible();
+	(field.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("{Shift>}N{/Shift}");
+	expect(
+		page.container.querySelector("w-combobox")!.shadowRoot!.querySelector("ul")!
+			.hidden,
+	).toBe(false);
+});
+
+test.each([false, true])(
+	"edits the displayed label after navigation, selected=%s",
+	async (selected) => {
+		const page = render(
+			html`<w-combobox label="Country"
+				><option value="us" label="United States">US</option></w-combobox
+			>`,
+		);
+		const input = page.getByRole("textbox", { name: "Country" });
+		await input.fill("uni");
+		await userEvent.keyboard("{ArrowDown}");
+		if (selected) await userEvent.keyboard("{Enter}");
+		await userEvent.keyboard("x");
+		expect((input.element() as HTMLInputElement).value).toBe("United Statesx");
+	},
+);
