@@ -166,6 +166,9 @@ page.on("load", () => {
 	}).catch((error) => log("remount after reload failed", error.message));
 });
 
+const TIMEOUT = /Timeout \d+ms exceeded/;
+const ROLE_SELECTOR = /^role=([\w-]+)/;
+
 const GENERIC_HINTS = [
 	[
 		/strict mode violation/,
@@ -173,7 +176,7 @@ const GENERIC_HINTS = [
 			'The selector matched more than one element. Make it specific, for example role=option[name="Norway"] instead of role=option.',
 	],
 	[
-		/Timeout \d+ms exceeded/,
+		TIMEOUT,
 		(args) =>
 			args.selector &&
 			`Nothing matching ${args.selector} became visible and enabled within ${ACTION_TIMEOUT_MS}ms. Run snapshot to see the roles and names on the page, and check that the component is open or rendered.`,
@@ -195,6 +198,41 @@ const GENERIC_HINTS = [
 			'Selectors are Playwright selectors: role=combobox, role=option[name="Norway"], text=Norway, or CSS such as w-combobox.',
 	],
 ];
+
+async function diagnose(error, args) {
+	if (!args?.selector || !TIMEOUT.test(String(error?.message))) return null;
+	const count = await page
+		.locator(args.selector)
+		.count()
+		.catch(() => null);
+	if (count !== 0) return null;
+	const role = args.selector.match(ROLE_SELECTOR)?.[1];
+	if (!role)
+		return {
+			error: `No element matches ${args.selector}.`,
+			hint: "Run snapshot or inspect to find a selector that matches.",
+		};
+	const tree = await page
+		.locator("#mount")
+		.ariaSnapshot()
+		.catch(() => "");
+	const found = [
+		...new Set(
+			Array.from(
+				tree.matchAll(
+					new RegExp(`^\\s*- ${role}(?: "((?:[^"\\\\]|\\\\.)*)")?`, "gm"),
+				),
+				(match) => (match[1] === undefined ? role : `${role} "${match[1]}"`),
+			),
+		),
+	].slice(0, 6);
+	return {
+		error: `No element matches ${args.selector}.`,
+		hint: found.length
+			? `The page has ${found.join(", ")}. [name="..."] must match the whole accessible name: use [name=/^Start/] for a prefix, or [name="..."i] to ignore case.`
+			: `There's no ${role} in the mounted content. Run snapshot to see the roles and names.`,
+	};
+}
 
 function hintFor(command, message, args) {
 	const own = command.hint?.(message, args);
@@ -233,7 +271,14 @@ async function handle({ cmd, args = {} }) {
 			hint: "Run ctl.mjs --help.",
 		};
 	try {
-		const result = await enqueue(() => command.run(ctx, args));
+		const result = await enqueue(async () => {
+			try {
+				return await command.run(ctx, args);
+			} catch (error) {
+				error.diagnosis = await diagnose(error, args);
+				throw error;
+			}
+		});
 		return { ok: true, command: cmd, ...result };
 	} catch (error) {
 		const [message, ...rest] = String(error?.message ?? error).split("\n");
@@ -248,8 +293,8 @@ async function handle({ cmd, args = {} }) {
 		return {
 			ok: false,
 			command: cmd,
-			error: message,
-			hint: hintFor(command, message, args),
+			error: error?.diagnosis?.error ?? message,
+			hint: error?.diagnosis?.hint ?? hintFor(command, message, args),
 			...(callLog.length
 				? { callLog: callLog.slice(0, 8).map((line) => line.slice(0, 200)) }
 				: {}),
