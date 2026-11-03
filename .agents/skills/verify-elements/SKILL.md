@@ -83,6 +83,7 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 | `a11y [selector]` | axe-core violations, with the same WCAG tags as the a11y tests. |
 | `metrics`, `throttle cpu <n>`, `trace start/stop` | Performance counters, CPU throttling and traces. Chromium only. |
 | `eval <js>` | Evaluate one expression in the page. Use it to read state, never as proof. |
+| `run [--file f] [--keep-going]` | Run several commands in one call, one per line from stdin or a file, and print each result in order. Stops at the first failure unless `--keep-going`. |
 
 Examples from this repo:
 
@@ -105,6 +106,18 @@ What to know when driving:
 - **Action output.** Each action waits for pending Lit updates and two animation frames, so the next `snapshot` sees the settled state. It reports `focused` (the deepest focused element through shadow roots, with its value) and `eventsDuringAction`, the public events the action caused. `internalEvents` counts the events from inside shadow roots; `events --internal` lists them.
 - **Timeouts.** Actions time out after 5 s. A failure includes Playwright's `callLog`, which says why, for example `element is not enabled`.
 - **Focus.** `type` and `press --selector` move focus programmatically, like tabbing in. Use `click` when the pointer path matters.
+- **Several commands at once.** Use `run` instead of chaining commands or storing `pnpm ctl` in a shell variable, which zsh doesn't split into words:
+
+  ```sh
+  pnpm --silent ctl run <<'EOF'
+  mount '<w-combobox label="Country"><option value="no">Norway</option></w-combobox>'
+  type 'role=textbox[name="Country"]' n
+  press ArrowDown Enter
+  events --type select
+  EOF
+  ```
+
+  `run --file .verify-elements/repro.md` runs the `sh` blocks of a reproduction and prints every result.
 
 ## Debugging
 

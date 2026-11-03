@@ -10,6 +10,7 @@ The code has no comments by design, except one-line notes on behavior forced by 
 |---|---|
 | `ctl.mjs` | Entry point. Parses arguments, loads `commands/<name>.mjs`, prints one JSON object. Builds `--help` from the command files. |
 | `commands/<name>.mjs` | One command per file. |
+| `lib/lines.mjs` | The line parser `check` and `run` share: splits a line into arguments without a shell, reads `sh` blocks, and runs one `ctl` command in a child process. |
 | `lib/session.mjs` | Paths under `.verify-elements/`, the session file, JSON output, and `post`/`request` for talking to the daemon. |
 | `lib/processes.mjs` | Process trees from `ps`, and `kill` by PID. |
 | `lib/pointer.mjs` | `click` and `hover` with a fallback for Playwright's WebKit hit test. |
@@ -53,4 +54,5 @@ A command file exports:
 - **Public events by default.** Action output and `events` leave out events from elements inside shadow roots, which aren't public API, and actions only count them. Agents otherwise wrote a `jq` filter for this in every session.
 - **Compact JSON.** Arrays and objects that fit in 100 characters print on one line, so an event list costs a line per event, not seven.
 - **Before and after in one command.** `check --save` stores each command's comparable result in `.verify-elements/check/`, and `--against` matches commands by file and arguments, so a reproduction can be edited between runs, and prints only what changed.
+- **`run` for several commands.** Agents chained commands in one shell call and stored the command in a variable, which zsh doesn't split into words. `run` takes one command per line on stdin, without a shell, and prints every result, so a whole journey costs one call.
 - **Stale sessions.** `up` on a session whose daemon is gone runs `down` first, to clean up what it left behind.
