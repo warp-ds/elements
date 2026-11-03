@@ -156,4 +156,4 @@ Before verifying a change:
 2. Open every feature file the change can touch.
 3. Drive each sub-feature in them and capture its proof.
 
-If you find a new behavior or trap, add it to the feature file it belongs to, then run `pnpm ctl check` on that file. To map a component that has none, use the `create-verification-skill` skill with the component name, or follow [feature-maps.md](feature-maps.md).
+If you find a new behavior or trap, add it to the feature file it belongs to, then run `pnpm ctl check` on that file. To map a component that has none, use the `create-verification-skill` skill with the component name, or follow [feature-maps.md](feature-maps.md). When a component changed and its map may be out of date, use the `maintain-verification-skill` skill.

@@ -1,7 +1,6 @@
 ---
 name: maintain-verification-skill
-description: "Keep verify-elements and the component feature maps honest as components change: read each mapped component's source in parallel, drive every map's recipes live, and ship at most one set of proven corrections. Use after component changes, before a release, or when asked to audit the verify skill."
-disable-model-invocation: true
+description: "Bring the component feature maps (packages/<name>/AGENTS.md and features/) and the verify-elements harness up to date after components change: check each feature file against the source, run every map live with pnpm ctl check, fix doc drift and report product bugs. Use when a component changed, after merging upstream changes, when asked whether a feature map is still accurate or up to date, before a release, or to audit the verify skill."
 ---
 
 # Maintain the verification skill
@@ -55,6 +54,7 @@ Edit only `.agents/skills/verify-elements/`, `playground/`, `packages/*/AGENTS.m
    - Merge the recipes into as few mounts as practical.
    - Spot-check the cited drift. Don't re-prove claims that came back clean.
    - Then check recent changes: for each component, list the commits since its map was last changed. Find that commit with `git log -1 --format=%H -- packages/<name>/AGENTS.md packages/<name>/features`, then run `git log <that commit>..HEAD -- packages/<name>/`. Include the packages it imports or renders; the combobox renders `w-textfield`, so textfield changes count. Call a user-facing behavior missing only when you can name the source line.
+   - To see exactly what those commits changed, run the map against the code before them: make a throwaway worktree at that commit with the current map files, run `ctl check <files> --save /tmp/<name>-before.json` there, then `ctl check <files> --against /tmp/<name>-before.json` in this checkout. It lists every command whose result changed. Remove the worktree afterwards.
 
 4. **Live pass.** This step is required even when the source looks clean. Start with `ctl check` on every component's `AGENTS.md` and feature files: it runs every block in its own session and lists the commands that fail. Investigate each failure, and read the results of passing blocks against the end states the files describe, since `check` only proves the commands run. Then run `ctl check --browser all` on the same files: a difference between engines is either an engine quirk, which goes in `debugging.md` or the feature file's gotchas, or a product bug, which you report. Then start one `ctl up` session for the recipes from step 3 and drive it serially yourself; never let helpers drive. The recipes in the map are what the next agent will copy, so they're what must not rot.
 
