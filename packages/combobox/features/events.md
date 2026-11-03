@@ -16,13 +16,13 @@ Listen on the element or an ancestor: `addEventListener("select", …)`, or `ons
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs eval 'delete window.picked'
-node .agents/skills/verify-elements/ctl.mjs mount '<div onselect="(window.picked ??= []).push(event.detail.value)"><w-combobox label="Country" open-on-focus><option value="no">Norway</option><option value="se">Sweden</option></w-combobox></div><button>Next</button>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' n
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown Enter
-node .agents/skills/verify-elements/ctl.mjs press Tab
-node .agents/skills/verify-elements/ctl.mjs events
-node .agents/skills/verify-elements/ctl.mjs eval 'window.picked'
+pnpm ctl eval 'delete window.picked'
+pnpm ctl mount '<div onselect="(window.picked ??= []).push(event.detail.value)"><w-combobox label="Country" open-on-focus><option value="no">Norway</option><option value="se">Sweden</option></w-combobox></div><button>Next</button>' --with textfield
+pnpm ctl type 'role=textbox[name="Country"]' n
+pnpm ctl press ArrowDown Enter
+pnpm ctl press Tab
+pnpm ctl events
+pnpm ctl eval 'window.picked'
 ```
 
 - change: `type` reports `focus` twice, then `change` with `""`, `"n"` and `"n"`.

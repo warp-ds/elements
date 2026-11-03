@@ -16,13 +16,13 @@ Any `<w-combobox label="Country">` with options. A screen reader user tabs in, t
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown ArrowDown --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs eval '(() => { const field = document.querySelector("w-combobox").shadowRoot.querySelector("w-textfield"); return [field.getAttribute("role"), field.getAttribute("aria-activedescendant"), field.shadowRoot.querySelector("input").getAttribute("aria-activedescendant")]; })()'
-node .agents/skills/verify-elements/ctl.mjs press Escape x y z
-node .agents/skills/verify-elements/ctl.mjs snapshot
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl snapshot
+pnpm ctl press ArrowDown ArrowDown --selector 'role=textbox[name="Country"]'
+pnpm ctl snapshot
+pnpm ctl eval '(() => { const field = document.querySelector("w-combobox").shadowRoot.querySelector("w-textfield"); return [field.getAttribute("role"), field.getAttribute("aria-activedescendant"), field.shadowRoot.querySelector("input").getAttribute("aria-activedescendant")]; })()'
+pnpm ctl press Escape x y z
+pnpm ctl snapshot
 ```
 
 - roles: every `snapshot` has `combobox` containing `textbox "Country"`, and the open one a `listbox` of three `option`s.

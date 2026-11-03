@@ -10,7 +10,13 @@ export const skillDir = path.resolve(
 );
 export const repoRoot = path.resolve(skillDir, "../../..");
 export const evidenceDir = path.join(repoRoot, ".verify-elements", "evidence");
-export const CTL = `node ${path.relative(repoRoot, path.join(skillDir, "ctl.mjs"))}`;
+const DIRECT = `node ${path.relative(repoRoot, path.join(skillDir, "ctl.mjs"))}`;
+const scripts =
+	JSON.parse(fs.readFileSync(path.join(repoRoot, "package.json"), "utf8"))
+		.scripts ?? {};
+const script = Object.keys(scripts).find((name) => scripts[name] === DIRECT);
+export const CTL = script ? `pnpm ${script}` : DIRECT;
+export const CTL_FORMS = [...new Set([CTL, DIRECT])];
 
 export function print(result) {
 	console.log(JSON.stringify(result, null, 2));

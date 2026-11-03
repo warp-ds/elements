@@ -15,14 +15,14 @@ Add `open-on-focus` to show options on entry. Select-on-blur needs no markup. Th
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country" open-on-focus value="se"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox><button>Next</button>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs click 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace d e n ArrowDown ArrowDown Tab
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace n o Tab --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs eval 'document.querySelector("w-combobox").selectOnBlur = false'
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace s w e ArrowDown Tab --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
+pnpm ctl mount '<w-combobox label="Country" open-on-focus value="se"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox><button>Next</button>' --with textfield
+pnpm ctl click 'role=textbox[name="Country"]'
+pnpm ctl snapshot
+pnpm ctl press ControlOrMeta+a Backspace d e n ArrowDown ArrowDown Tab
+pnpm ctl press ControlOrMeta+a Backspace n o Tab --selector 'role=textbox[name="Country"]'
+pnpm ctl eval 'document.querySelector("w-combobox").selectOnBlur = false'
+pnpm ctl press ControlOrMeta+a Backspace s w e ArrowDown Tab --selector 'role=textbox[name="Country"]'
+pnpm ctl snapshot
 ```
 
 - open-on-focus: the click reports `focus` from `w-combobox` (no detail). The `snapshot` shows `combobox [expanded]`, `status: 1 suggestion` and only `option "Sweden"`.

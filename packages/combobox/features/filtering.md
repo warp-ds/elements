@@ -16,14 +16,14 @@ Any `<w-combobox>` with options; add `match-text-segments` for the bold matches.
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country" match-text-segments><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' DEN
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
-node .agents/skills/verify-elements/ctl.mjs screenshot
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace s e
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace n o r ArrowDown Enter ArrowDown
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
+pnpm ctl mount '<w-combobox label="Country" match-text-segments><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl type 'role=textbox[name="Country"]' DEN
+pnpm ctl snapshot 'role=listbox'
+pnpm ctl screenshot
+pnpm ctl press ControlOrMeta+a Backspace s e
+pnpm ctl snapshot
+pnpm ctl press ControlOrMeta+a Backspace n o r ArrowDown Enter ArrowDown
+pnpm ctl snapshot 'role=listbox'
 ```
 
 - filter-by-label: after `DEN`, the listbox holds `Sweden` and `Denmark`. After `se`, nothing is listed, although `se` is Sweden's value.

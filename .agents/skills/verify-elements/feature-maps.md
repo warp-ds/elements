@@ -2,7 +2,7 @@
 
 A feature map tells you, from a user's point of view, what a component does, how to reach each behavior, how to drive it with `ctl`, and what end state proves it works. This file holds the format and the conventions shared by all maps. To list the mapped components, run `ls packages/*/AGENTS.md`.
 
-`ctl` below means `node .agents/skills/verify-elements/ctl.mjs`, run from the repo root.
+`ctl` below means `pnpm ctl`, run from the repo root.
 
 ## Layout
 

@@ -5,14 +5,14 @@ description: Render and drive Warp components (w-* custom elements from packages
 
 # verify-elements
 
-Proves component behavior the way a user meets it. A real Chromium page loads the same Warp CDN styles as Storybook, Vite imports the components from source, and real keyboard and mouse input drives them. One CLI, `ctl.mjs`. Every command prints one JSON object. On failure it exits 1 and prints `error` and a `hint` that tells you what to do next.
+Proves component behavior the way a user meets it. A real Chromium page loads the same Warp CDN styles as Storybook, Vite imports the components from source, and real keyboard and mouse input drives them. One CLI, `pnpm ctl`, which runs `ctl.mjs` in this folder. Every command prints one JSON object. On failure it exits 1 and prints `error` and a `hint` that tells you what to do next. If you pipe it into `jq`, run `pnpm --silent ctl`, because on failure pnpm prints an `[ELIFECYCLE]` line after the JSON.
 
-Run everything from the repo root. Write the command out in full every time, because shell aliases and variables don't survive between tool calls:
+Run everything from the repo root:
 
 ```sh
-node .agents/skills/verify-elements/ctl.mjs <command> [args] [--session <name>]
-node .agents/skills/verify-elements/ctl.mjs --help          # all commands
-node .agents/skills/verify-elements/ctl.mjs mount --help    # one command, with examples
+pnpm ctl <command> [args] [--session <name>]
+pnpm ctl --help          # all commands
+pnpm ctl mount --help    # one command, with examples
 ```
 
 ## Launch
@@ -23,7 +23,7 @@ From a fresh checkout:
 pnpm install
 pnpm messages:compile                  # compiled locale files are gitignored; components fail to import without them
 pnpm exec playwright install chromium
-node .agents/skills/verify-elements/ctl.mjs up
+pnpm ctl up
 ```
 
 `up` returns once the playground page has loaded, usually in about a second. The first run of a session takes a few seconds longer while Vite pre-bundles dependencies. It is ready when it prints `"ok": true` with `pid`, `viteUrl`, `playgroundUrl` and `log`. If it fails, it prints the daemon log tail, or a preflight `hint` such as running `pnpm messages:compile`.
@@ -49,7 +49,7 @@ When you edit a component's source, Vite reloads the page and the daemon re-runs
 
 ## Doctor
 
-Run `node .agents/skills/verify-elements/ctl.mjs doctor` first whenever anything looks off: a selector that should match doesn't, a component renders blank, or a command hangs. It only reads. Each entry in `checks` has `name`, `ok` and `detail`, and failing ones have a `hint`. Top-level `ok` is false, with exit code 1, if any check fails.
+Run `pnpm ctl doctor` first whenever anything looks off: a selector that should match doesn't, a component renders blank, or a command hangs. It only reads. Each entry in `checks` has `name`, `ok` and `detail`, and failing ones have a `hint`. Top-level `ok` is false, with exit code 1, if any check fails.
 
 | Check | Passing means | When it fails |
 |---|---|---|
@@ -87,13 +87,13 @@ Run `node .agents/skills/verify-elements/ctl.mjs doctor` first whenever anything
 Examples from this repo:
 
 ```sh
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' nor
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown Enter
-node .agents/skills/verify-elements/ctl.mjs click 'role=option[name="Sweden"]'
-node .agents/skills/verify-elements/ctl.mjs drag 'role=slider' --by 120,0
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
-node .agents/skills/verify-elements/ctl.mjs events --type select
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>' --with textfield
+pnpm ctl type 'role=textbox[name="Country"]' nor
+pnpm ctl press ArrowDown Enter
+pnpm ctl click 'role=option[name="Sweden"]'
+pnpm ctl drag 'role=slider' --by 120,0
+pnpm ctl snapshot 'role=listbox'
+pnpm ctl events --type select
 ```
 
 What to know when driving:
@@ -121,12 +121,12 @@ The proof bar:
 5. **Check `console`.** It should show `"errors": 0`, or every error should be explained.
 6. **Green tests alone aren't proof.** Many behaviors have `no test` in the feature maps, and the tests that exist often dispatch synthetic events.
 
-Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `node .agents/skills/verify-elements/ctl.mjs events > .verify-elements/evidence/combobox-events.json`. The directory is gitignored and survives `down`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
+Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `pnpm ctl events > .verify-elements/evidence/combobox-events.json`. The directory is gitignored and survives `down`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
 
 ## Cleanup
 
 ```sh
-node .agents/skills/verify-elements/ctl.mjs down
+pnpm ctl down
 ```
 
 `down` asks the daemon to close the browser and Vite. It then confirms, by PID, that every process in the daemon's tree has exited: the daemon (which runs Vite), the browser and its helpers. Anything left gets SIGTERM, then SIGKILL, but only if its PID still runs the same command line. It never kills by process name, so your Storybook or other Vite servers are safe.
@@ -143,4 +143,4 @@ Before verifying a change:
 2. Open every feature file the change can touch.
 3. Drive each sub-feature in them and capture its proof.
 
-If you find a new behavior or trap, add it to the feature file it belongs to, then run `node .agents/skills/verify-elements/ctl.mjs check` on that file. To map a component that has none, use the `create-verification-skill` skill with the component name, or follow [feature-maps.md](feature-maps.md).
+If you find a new behavior or trap, add it to the feature file it belongs to, then run `pnpm ctl check` on that file. To map a component that has none, use the `create-verification-skill` skill with the component name, or follow [feature-maps.md](feature-maps.md).

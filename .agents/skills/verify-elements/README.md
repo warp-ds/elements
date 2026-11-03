@@ -20,7 +20,7 @@ The code has no comments by design, except one-line notes on behavior forced by 
 
 A command file exports:
 
-- `help`: `{ usage, about, examples }`. Examples omit the `node .../ctl.mjs` prefix. The first sentence of `about` is the summary in `ctl --help`.
+- `help`: `{ usage, about, examples }`. Examples omit the `pnpm ctl` prefix. The first sentence of `about` is the summary in `ctl --help`.
 - `booleanFlags`, optional: names of flags that take no value, such as `["headed"]`. Without it, `--name` followed by a word takes that word as its value.
 - `args(input)`, optional: turns `{ positional, flags, paths }` into the request sent to the daemon. Call `fail()` or `needArgs()` for usage errors.
 - One of:
@@ -49,4 +49,5 @@ A command file exports:
 - **Leaving the playground.** The daemon watches main-frame navigations. If the page leaves `/playground/`, for example after Backspace outside an input in WebKit, every command except `mount`, `doctor` and `console` reports it, and `mount` navigates back first.
 - **Call log reasons.** Failed actions return the Playwright call log lines that explain why, such as "intercepts pointer events" or "not enabled", not just the first lines.
 - **A plain `up` reuses the running session.** `up` compares only the flags you pass. A person can start `up --headed` to watch, and an agent's plain `up` then drives that window instead of failing.
+- **`pnpm ctl`.** Agents repeat the command dozens of times. With the full `node .agents/skills/verify-elements/ctl.mjs`, they stored it in a shell variable, which zsh doesn't split into words, so the call failed. Hints print `pnpm <script>` when `package.json` has a script that runs `ctl.mjs`, and `check` accepts both forms in maps. pnpm adds about 0.3 s per call and, when a command fails, an `[ELIFECYCLE]` line on stdout after the JSON; `pnpm --silent ctl` leaves both out. `check` starts `ctl.mjs` directly.
 - **Stale sessions.** `up` on a session whose daemon is gone runs `down` first, to clean up what it left behind.

@@ -16,16 +16,16 @@ How `w-combobox` takes part in a surrounding `<form>`. Disabled fields are in in
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs eval 'delete window.submitted'
-node .agents/skills/verify-elements/ctl.mjs mount '<form onsubmit="event.preventDefault(); (window.submitted ??= []).push(Object.fromEntries(new FormData(this)))"><w-combobox name="country" label="Country" value="se"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox><w-combobox name="city" label="City" required><option value="osl">Oslo</option></w-combobox><button type="reset">Reset</button><button>Submit</button></form>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs click 'role=button[name="Submit"]'
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace n o r ArrowDown Enter --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="City"]' Bergen
-node .agents/skills/verify-elements/ctl.mjs click 'role=button[name="Submit"]'
-node .agents/skills/verify-elements/ctl.mjs click 'role=button[name="Reset"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs click 'role=button[name="Submit"]'
-node .agents/skills/verify-elements/ctl.mjs eval 'window.submitted'
+pnpm ctl eval 'delete window.submitted'
+pnpm ctl mount '<form onsubmit="event.preventDefault(); (window.submitted ??= []).push(Object.fromEntries(new FormData(this)))"><w-combobox name="country" label="Country" value="se"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox><w-combobox name="city" label="City" required><option value="osl">Oslo</option></w-combobox><button type="reset">Reset</button><button>Submit</button></form>' --with textfield
+pnpm ctl click 'role=button[name="Submit"]'
+pnpm ctl press ControlOrMeta+a Backspace n o r ArrowDown Enter --selector 'role=textbox[name="Country"]'
+pnpm ctl type 'role=textbox[name="City"]' Bergen
+pnpm ctl click 'role=button[name="Submit"]'
+pnpm ctl click 'role=button[name="Reset"]'
+pnpm ctl snapshot
+pnpm ctl click 'role=button[name="Submit"]'
+pnpm ctl eval 'window.submitted'
 ```
 
 - form-value: the second submission is `{"country":"no","city":"Bergen"}`: Norway's value, and free text for City.

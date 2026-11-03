@@ -5,19 +5,19 @@
 ## Mount
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
 ```
 
 ## Core journey
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' nor
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown
-node .agents/skills/verify-elements/ctl.mjs press Enter
-node .agents/skills/verify-elements/ctl.mjs events --type select
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs screenshot
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl type 'role=textbox[name="Country"]' nor
+pnpm ctl press ArrowDown
+pnpm ctl press Enter
+pnpm ctl events --type select
+pnpm ctl snapshot
+pnpm ctl screenshot
 ```
 
 After `type`, `focused.value` is `nor`. After ArrowDown it previews `Norway`. After Enter, `eventsDuringAction` and `events --type select` hold exactly one `select` from `w-combobox` with `{"value":"no"}`. The `snapshot` shows `textbox "Country"` reading `Norway`, `combobox` without `[expanded]` and no listbox, and the screenshot shows the closed field reading Norway.

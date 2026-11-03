@@ -15,16 +15,16 @@ Any `<w-combobox>` with options. The user types, arrows to an option and presses
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' swe
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown
-node .agents/skills/verify-elements/ctl.mjs press Escape
-node .agents/skills/verify-elements/ctl.mjs press Escape
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown ArrowDown Backspace
-node .agents/skills/verify-elements/ctl.mjs press Enter
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown ArrowDown Enter
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown Delete
-node .agents/skills/verify-elements/ctl.mjs snapshot
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl type 'role=textbox[name="Country"]' swe
+pnpm ctl press ArrowDown
+pnpm ctl press Escape
+pnpm ctl press Escape
+pnpm ctl press ArrowDown ArrowDown Backspace
+pnpm ctl press Enter
+pnpm ctl press ArrowDown ArrowDown Enter
+pnpm ctl press ArrowDown Delete
+pnpm ctl snapshot
 ```
 
 - enter: the first Enter has no `select` and keeps `Norwa`. `press ArrowDown ArrowDown Enter` reports `select` `{"value":"no"}`, and the `snapshot` shows the textbox reading `Norway`.

@@ -15,16 +15,16 @@ An info button after the label that shows supplementary text in a `w-tooltip`.
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country" tooltip="Where you live"><option value="no">Norway</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs press Shift+Tab --selector 'role=textbox[name=/^Country/]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs screenshot
-node .agents/skills/verify-elements/ctl.mjs press Tab
-node .agents/skills/verify-elements/ctl.mjs hover 'role=textbox[name=/^Country/]'
-node .agents/skills/verify-elements/ctl.mjs hover 'role=button'
+pnpm ctl mount '<w-combobox label="Country" tooltip="Where you live"><option value="no">Norway</option></w-combobox>' --with textfield
+pnpm ctl snapshot
+pnpm ctl press Shift+Tab --selector 'role=textbox[name=/^Country/]'
+pnpm ctl snapshot
+pnpm ctl screenshot
+pnpm ctl press Tab
+pnpm ctl hover 'role=textbox[name=/^Country/]'
+pnpm ctl hover 'role=button'
 sleep 0.2
-node .agents/skills/verify-elements/ctl.mjs snapshot
+pnpm ctl snapshot
 ```
 
 - info-button: the first `snapshot` has `button "Circle with letter i inside"` and no `tooltip`.

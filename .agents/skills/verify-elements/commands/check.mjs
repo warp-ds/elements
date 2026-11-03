@@ -2,7 +2,14 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
-import { CTL, fail, repoRoot, skillDir, sleep } from "../lib/session.mjs";
+import {
+	CTL,
+	CTL_FORMS,
+	fail,
+	repoRoot,
+	skillDir,
+	sleep,
+} from "../lib/session.mjs";
 
 const BLOCK = /```(?:bash|sh)\n([\s\S]*?)```/g;
 const SHELL_SYNTAX = /[|;&<>`$]/;
@@ -114,7 +121,7 @@ const comparable = (reply) =>
 	});
 
 async function runFiles(files, session, browser, keep) {
-	const prefix = tokenize(CTL);
+	const forms = CTL_FORMS.map(tokenize);
 	const up = ctl(["up", ...(browser ? ["--browser", browser] : [])], session);
 	if (!up.ok) return { up };
 
@@ -140,7 +147,10 @@ async function runFiles(files, session, browser, keep) {
 					await sleep(Number(tokens[1]) * 1000);
 					continue;
 				}
-				if (!tokens || prefix.some((token, i) => tokens[i] !== token)) {
+				const prefix =
+					tokens &&
+					forms.find((form) => form.every((token, i) => tokens[i] === token));
+				if (!prefix) {
 					report({
 						error: "Not a plain ctl or sleep command.",
 						hint: `Map blocks may only contain lines starting with ${CTL}, or sleep <seconds>, without pipes, redirects or variables.`,

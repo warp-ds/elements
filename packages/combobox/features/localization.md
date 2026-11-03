@@ -16,14 +16,14 @@ A page with `<html lang="nb">`. A Norwegian screen reader user opens the list an
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs eval 'document.documentElement.lang = "nb"'
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country" optional><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown --selector 'role=textbox[name=/^Country/]'
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs eval 'document.documentElement.lang = "sv"'
-node .agents/skills/verify-elements/ctl.mjs press Escape ArrowDown
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs eval 'document.documentElement.lang = "en"'
+pnpm ctl eval 'document.documentElement.lang = "nb"'
+pnpm ctl mount '<w-combobox label="Country" optional><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>' --with textfield
+pnpm ctl press ArrowDown --selector 'role=textbox[name=/^Country/]'
+pnpm ctl snapshot
+pnpm ctl eval 'document.documentElement.lang = "sv"'
+pnpm ctl press Escape ArrowDown
+pnpm ctl snapshot
+pnpm ctl eval 'document.documentElement.lang = "en"'
 ```
 
 - status-text: the first `snapshot` has `status: 2 forslag`. For another language, change `"nb"` in the first line.

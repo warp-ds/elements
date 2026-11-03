@@ -17,10 +17,10 @@ The text around the input and the input's own attributes, all passed on to `w-te
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country" placeholder="Search" help-text="Pick where you live" optional autocomplete="country-name"><option value="no">Norway</option></w-combobox><w-combobox label="City" optional required><option value="osl">Oslo</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs screenshot
-node .agents/skills/verify-elements/ctl.mjs eval '[...document.querySelectorAll("w-combobox")].map((el) => el.shadowRoot.querySelector("w-textfield").shadowRoot.querySelector("input").getAttribute("autocomplete"))'
+pnpm ctl mount '<w-combobox label="Country" placeholder="Search" help-text="Pick where you live" optional autocomplete="country-name"><option value="no">Norway</option></w-combobox><w-combobox label="City" optional required><option value="osl">Oslo</option></w-combobox>' --with textfield
+pnpm ctl snapshot
+pnpm ctl screenshot
+pnpm ctl eval '[...document.querySelectorAll("w-combobox")].map((el) => el.shadowRoot.querySelector("w-textfield").shadowRoot.querySelector("input").getAttribute("autocomplete"))'
 ```
 
 - label: the `snapshot` has `text: Country Optional` and `textbox "Country Optional"`.

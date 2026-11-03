@@ -16,10 +16,10 @@ A consumer stylesheet such as `w-combobox { --w-c-combobox-color-background: lig
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<style>w-combobox { --w-c-combobox-color-background: lightyellow; --w-c-combobox-option-color-background-selected: pink; --w-c-textfield-background: honeydew; } w-combobox::part(option) { font-style: italic; } w-combobox::part(label) { color: rebeccapurple; }</style><w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown ArrowDown --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs screenshot
-node .agents/skills/verify-elements/ctl.mjs eval 'getComputedStyle(document.querySelector("w-combobox").shadowRoot.querySelector("[part=options-list]")).backgroundColor'
+pnpm ctl mount '<style>w-combobox { --w-c-combobox-color-background: lightyellow; --w-c-combobox-option-color-background-selected: pink; --w-c-textfield-background: honeydew; } w-combobox::part(option) { font-style: italic; } w-combobox::part(label) { color: rebeccapurple; }</style><w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option></w-combobox>' --with textfield
+pnpm ctl press ArrowDown ArrowDown --selector 'role=textbox[name="Country"]'
+pnpm ctl screenshot
+pnpm ctl eval 'getComputedStyle(document.querySelector("w-combobox").shadowRoot.querySelector("[part=options-list]")).backgroundColor'
 ```
 
 - list-tokens: the screenshot shows a light yellow list with Norway highlighted in pink, and the `eval` returns `rgb(255, 255, 224)`.

@@ -15,17 +15,17 @@ Any `<w-combobox>` with options. The user focuses the field, presses ArrowDown t
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option><option value="fi">Finland</option><option value="is">Iceland</option><option value="ee">Estonia</option><option value="lv">Latvia</option><option value="lt">Lithuania</option><option value="de">Germany</option><option value="pl">Poland</option><option value="fr">France</option><option value="es">Spain</option></w-combobox>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown
-node .agents/skills/verify-elements/ctl.mjs press ArrowUp
-node .agents/skills/verify-elements/ctl.mjs press ArrowUp
-node .agents/skills/verify-elements/ctl.mjs press Home
-node .agents/skills/verify-elements/ctl.mjs press PageDown
-node .agents/skills/verify-elements/ctl.mjs press PageDown
-node .agents/skills/verify-elements/ctl.mjs press PageUp
-node .agents/skills/verify-elements/ctl.mjs press End
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option><option value="dk">Denmark</option><option value="fi">Finland</option><option value="is">Iceland</option><option value="ee">Estonia</option><option value="lv">Latvia</option><option value="lt">Lithuania</option><option value="de">Germany</option><option value="pl">Poland</option><option value="fr">France</option><option value="es">Spain</option></w-combobox>' --with textfield
+pnpm ctl press ArrowDown --selector 'role=textbox[name="Country"]'
+pnpm ctl press ArrowDown
+pnpm ctl press ArrowUp
+pnpm ctl press ArrowUp
+pnpm ctl press Home
+pnpm ctl press PageDown
+pnpm ctl press PageDown
+pnpm ctl press PageUp
+pnpm ctl press End
+pnpm ctl snapshot 'role=listbox'
 ```
 
 - open-keys: the first press leaves `focused.value` empty, and the second already highlights `Norway`, so the first only opened the list.

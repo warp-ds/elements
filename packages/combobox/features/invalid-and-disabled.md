@@ -14,13 +14,13 @@ The two states a consumer sets on the field: an external validation error, and a
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs eval 'delete window.submitted'
-node .agents/skills/verify-elements/ctl.mjs mount '<form onsubmit="event.preventDefault(); window.submitted = Object.fromEntries(new FormData(this))"><w-combobox label="Country" invalid help-text="Pick a country from the list" value="Atlantis"><option value="no">Norway</option></w-combobox><w-combobox name="city" label="City" value="osl" disabled><option value="osl">Oslo</option></w-combobox><button>Submit</button></form>' --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs screenshot
-node .agents/skills/verify-elements/ctl.mjs press Tab --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs click 'role=button[name="Submit"]'
-node .agents/skills/verify-elements/ctl.mjs eval 'window.submitted'
+pnpm ctl eval 'delete window.submitted'
+pnpm ctl mount '<form onsubmit="event.preventDefault(); window.submitted = Object.fromEntries(new FormData(this))"><w-combobox label="Country" invalid help-text="Pick a country from the list" value="Atlantis"><option value="no">Norway</option></w-combobox><w-combobox name="city" label="City" value="osl" disabled><option value="osl">Oslo</option></w-combobox><button>Submit</button></form>' --with textfield
+pnpm ctl snapshot
+pnpm ctl screenshot
+pnpm ctl press Tab --selector 'role=textbox[name="Country"]'
+pnpm ctl click 'role=button[name="Submit"]'
+pnpm ctl eval 'window.submitted'
 ```
 
 - invalid: the `snapshot` has `textbox "Country" [invalid]` reading `Atlantis`, followed by `text: Pick a country from the list`. The screenshot shows a red border and red help text.

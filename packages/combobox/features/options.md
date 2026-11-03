@@ -16,13 +16,13 @@ Write `<option value="no">Norway</option>` children, or set `options` from JavaS
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount --file packages/combobox/features/fixtures/options.html --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs eval 'document.querySelector("w-combobox").insertAdjacentHTML("beforeend", "<option value=\"fi\">Finland</option>")'
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace --selector 'role=textbox[name="Country"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
-node .agents/skills/verify-elements/ctl.mjs press ControlOrMeta+a Backspace --selector 'role=textbox[name="City"]'
-node .agents/skills/verify-elements/ctl.mjs snapshot 'role=listbox'
+pnpm ctl mount --file packages/combobox/features/fixtures/options.html --with textfield
+pnpm ctl snapshot
+pnpm ctl eval 'document.querySelector("w-combobox").insertAdjacentHTML("beforeend", "<option value=\"fi\">Finland</option>")'
+pnpm ctl press ControlOrMeta+a Backspace --selector 'role=textbox[name="Country"]'
+pnpm ctl snapshot 'role=listbox'
+pnpm ctl press ControlOrMeta+a Backspace --selector 'role=textbox[name="City"]'
+pnpm ctl snapshot 'role=listbox'
 ```
 
 - light-dom-options: the first `snapshot 'role=listbox'` lists `Norway`, `Sweden` (the `label`, not the text `SE`) and `dk` (empty label).

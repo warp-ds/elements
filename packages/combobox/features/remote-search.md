@@ -15,13 +15,13 @@
 ## Driving it with ctl
 
 ```bash
-node .agents/skills/verify-elements/ctl.mjs mount --file packages/combobox/features/fixtures/remote-search.html --with textfield
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="Country"]' swe
-node .agents/skills/verify-elements/ctl.mjs snapshot
-node .agents/skills/verify-elements/ctl.mjs press ArrowDown Enter
-node .agents/skills/verify-elements/ctl.mjs type 'role=textbox[name="City"]' xyz
-node .agents/skills/verify-elements/ctl.mjs snapshot
+pnpm ctl mount --file packages/combobox/features/fixtures/remote-search.html --with textfield
+pnpm ctl snapshot
+pnpm ctl type 'role=textbox[name="Country"]' swe
+pnpm ctl snapshot
+pnpm ctl press ArrowDown Enter
+pnpm ctl type 'role=textbox[name="City"]' xyz
+pnpm ctl snapshot
 ```
 
 - auto-open: right after the mount, City is `combobox [expanded]` with `option "Oslo"`, with nothing focused.

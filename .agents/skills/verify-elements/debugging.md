@@ -1,6 +1,6 @@
 # Debugging a component
 
-Follow these steps in order. Each one narrows the problem before you change code, and the last one leaves proof behind. `ctl` means `node .agents/skills/verify-elements/ctl.mjs`, run from the repo root.
+Follow these steps in order. Each one narrows the problem before you change code, and the last one leaves proof behind. `ctl` means `pnpm ctl`, run from the repo root.
 
 ## 1. Reproduce
 
