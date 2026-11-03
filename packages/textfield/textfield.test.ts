@@ -1,5 +1,5 @@
 import { i18n } from "@lingui/core";
-import { userEvent, server } from "vitest/browser";
+import { userEvent } from "vitest/browser";
 import { html } from "lit";
 import { expect, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
@@ -326,24 +326,7 @@ test("shows info tooltip after label when the tooltip property is set", async ()
 	expect(tooltip).toBeTruthy();
 });
 
-test("tooltip content does not change the input name", async () => {
-	const page = render(
-		html`<w-textfield label="Country" tooltip="Where you live"></w-textfield>`,
-	);
-	await expect.element(page.getByRole("textbox")).toBeVisible();
-	const input = page.getByRole("textbox", { name: "Country", exact: true });
-	expect(input.query()).not.toBeNull();
-	(input.element() as HTMLInputElement).focus();
-	await userEvent.keyboard(
-		server.browser === "webkit"
-			? "{Alt>}{Shift>}{Tab}{/Shift}{/Alt}"
-			: "{Shift>}{Tab}{/Shift}",
-	);
-	await expect.element(page.getByRole("tooltip")).toBeVisible();
-	expect(input.query()).not.toBeNull();
-});
-
-test("clicking beside the label focuses the input when a tooltip is present", async () => {
+test("label focuses the input and tooltip content stays out of its name", async () => {
 	const page = render(html`
 		<w-textfield
 			label="Country"
@@ -352,11 +335,13 @@ test("clicking beside the label focuses the input when a tooltip is present", as
 			data-testid="field"
 		></w-textfield>
 	`);
-	await expect.element(page.getByRole("textbox")).toBeVisible();
-
-	// Click the blank label area, to the right of the text and info button.
+	const input = page.getByRole("textbox", { name: "Country", exact: true });
+	await expect.element(input).toBeVisible();
 	await page.getByTestId("field").click({ position: { x: 160, y: 10 } });
 	await userEvent.keyboard("nor");
+	await expect.element(input).toHaveValue("nor");
 
-	await expect.element(page.getByRole("textbox")).toHaveValue("nor");
+	await page.getByRole("button").click();
+	await expect.element(page.getByRole("tooltip")).toBeVisible();
+	await expect.element(input).toBeVisible();
 });
