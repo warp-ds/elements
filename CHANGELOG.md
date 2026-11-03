@@ -1,3 +1,10 @@
+# [2.15.0-next.7](https://github.com/warp-ds/elements/compare/v2.15.0-next.6...v2.15.0-next.7) (2026-11-03)
+
+
+### Bug Fixes
+
+* **pagination:** stop using multi part part names to avoid build issues ([02e5b4b](https://github.com/warp-ds/elements/commit/02e5b4bc6b99bd12fa003862d99f095ceec25503))
+
 # [2.15.0-next.6](https://github.com/warp-ds/elements/compare/v2.15.0-next.5...v2.15.0-next.6) (2026-11-02)
 
 
