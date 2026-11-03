@@ -11,19 +11,21 @@ export const booleanFlags = ["keep"];
 
 export const help = {
 	usage:
-		"check <file> [<file> ...] [--browser <name>|all] [--save <name>] [--against <name>] [--keep]",
+		"check <file> [<file> ...] [--browser <name>|all] [--save <name|file>] [--against <name|file>] [--keep]",
 	about:
 		"Run every command block in feature map files, top to bottom, and report the commands that fail. " +
 		"A command fails when it errors, when a mount warns about a missing import or logs console errors, or when a block ends with console errors. " +
 		"Runs in its own session (check unless --session is given) and stops it afterwards unless --keep. Only ctl commands and sleep run; anything else in a block is reported. " +
 		"With --browser all it runs the files in Chromium, Firefox and WebKit, and also lists every command whose result differs between them, ignoring events from inside shadow roots and timing. " +
-		"--save <name> stores every command's result; --against <name> runs the files again and lists only the commands whose result changed since that save, so run it before and after a fix. Both work with one browser.",
+		"--save stores every command's result; --against runs the files again and lists only the commands whose result changed since that save, so run it before and after a fix. " +
+		"Each takes a name, kept in .verify-elements/check/, or a path to a .json file, which lets you compare two checkouts or branches. Both work with one browser.",
 	examples: [
 		"check packages/combobox/features/form.md",
 		"check packages/combobox/AGENTS.md packages/combobox/features/*.md",
 		"check packages/combobox/features/keyboard-navigation.md --browser all",
 		"check .verify-elements/repro.md --save before",
 		"check .verify-elements/repro.md --against before",
+		"check packages/combobox/features/*.md --save /tmp/combobox-next.json",
 	],
 };
 
@@ -187,13 +189,17 @@ function changesSince(saved, results) {
 }
 
 function savedFile(name) {
+	if (name.includes("/") || name.endsWith(".json")) return fromCaller(name);
 	if (!SAVED_NAME.test(name))
 		fail(
 			`Invalid name "${name}".`,
-			"Use letters, digits, dots, dashes and underscores.",
+			"Use letters, digits, dots, dashes and underscores, or a path to a .json file.",
 		);
 	return path.join(savedDir, `${name}.json`);
 }
+
+const shown = (file) =>
+	file.startsWith(repoRoot + path.sep) ? path.relative(repoRoot, file) : file;
 
 export async function main({ positional, flags }) {
 	if (!positional.length)
@@ -206,14 +212,14 @@ export async function main({ positional, flags }) {
 		const againstFile = flags.against ? savedFile(String(flags.against)) : null;
 		if (againstFile && !fs.existsSync(againstFile))
 			fail(
-				`Nothing saved as "${flags.against}".`,
+				`Nothing saved at ${shown(againstFile)}.`,
 				`Run ${CTL} check <files> --save ${flags.against} first.`,
 			);
 		const run = await runFiles(positional, session, browser, flags.keep);
 		if (run.up) return { ...run.up, session };
 		const { failures, blocks, commands, results } = run;
 		if (saveTo) {
-			fs.mkdirSync(savedDir, { recursive: true });
+			fs.mkdirSync(path.dirname(saveTo), { recursive: true });
 			fs.writeFileSync(
 				saveTo,
 				JSON.stringify({ browser, files: positional, results }, null, 2),
@@ -226,7 +232,7 @@ export async function main({ positional, flags }) {
 			blocks,
 			commands,
 			failures,
-			...(saveTo ? { saved: path.relative(repoRoot, saveTo) } : {}),
+			...(saveTo ? { saved: shown(saveTo) } : {}),
 			...(againstFile
 				? {
 						against: flags.against,

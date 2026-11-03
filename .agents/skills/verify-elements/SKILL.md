@@ -77,7 +77,7 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 | `events [--type t] [--internal]` | The public CustomEvents `w-*` elements dispatched since the mount: `type`, `target`, `detail`, `time`. `--internal` adds events from elements inside shadow roots, with `insideShadowOf` naming the host. |
 | `console` | Console messages and page errors since the mount. |
 | `screenshot [path] [--selector s]` | Full-page or element PNG. Prints the absolute path. |
-| `check <file> ... [--browser all] [--save n] [--against n]` | Run every command block in feature map files in its own session and report the commands that fail. With `--browser all`, run them in Chromium, Firefox and WebKit and list results that differ. `--save before`, then `--against before` after a change, lists only the commands whose result changed. |
+| `check <file> ... [--browser all] [--save n] [--against n]` | Run every command block in feature map files in its own session and report the commands that fail. With `--browser all`, run them in Chromium, Firefox and WebKit and list results that differ. `--save before`, then `--against before` after a change, lists only the commands whose result changed. A path to a `.json` file instead of a name compares two checkouts or branches. |
 | `inspect <selector>` | Attributes, Lit properties, internal state and the start of the shadow DOM. |
 | `styles <selector> [--props=a,b]` | Computed styles through shadow DOM, including what design tokens resolve to. |
 | `a11y [selector]` | axe-core violations, with the same WCAG tags as the a11y tests. |
