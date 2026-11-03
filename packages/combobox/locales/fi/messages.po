@@ -23,8 +23,20 @@ msgstr ""
 msgid "combobox.aria.pluralSuggestions"
 msgstr "{numSuggestions, plural, one {# ehdotus} other {# ehdotusta}}"
 
+#. Accessible name of the button that shows the field tooltip
+#. js-lingui-explicit-id
+#: packages/combobox/combobox.ts
+msgid "combobox.tooltip.moreInformation"
+msgstr "Lisätietoja"
+
 #. Aria text for combobox when no suggestions
 #. js-lingui-explicit-id
 #: packages/combobox/combobox.ts
 msgid "combobox.aria.noSuggestions"
 msgstr "Ei ehdotuksia"
+
+#. Shown behind label when marked as optional
+#. js-lingui-explicit-id
+#: packages/combobox/combobox.ts
+msgid "combobox.label.optional"
+msgstr "Valinnainen"

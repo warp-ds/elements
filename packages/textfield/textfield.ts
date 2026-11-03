@@ -32,18 +32,6 @@ import "../tooltip/tooltip.js";
  * @slot prefix - Use with `<w-affix>` to include a prefix, for example a search icon.
  */
 class WarpTextField extends FormControlMixin(LitElement) {
-	/** Accessible name forwarded to the native input. */
-	@property({ attribute: "aria-label" })
-	ariaLabel: string | null = null;
-
-	/** @internal Combobox semantics, with element references across shadow roots. */
-	@property({ attribute: false })
-	inputAria?: {
-		expanded: boolean;
-		controls: Element;
-		activeDescendant: Element | null;
-	};
-
 	/** @internal */
 	static shadowRootOptions = {
 		...LitElement.shadowRootOptions,
@@ -432,12 +420,6 @@ class WarpTextField extends FormControlMixin(LitElement) {
 					${this.formatter ? html`<div part="mask"></div>` : nothing}
 					<input
 						part="input"
-						role=${ifDefined(this.inputAria ? "combobox" : undefined)}
-						aria-label=${ifDefined(this.ariaLabel ?? undefined)}
-						aria-autocomplete=${ifDefined(this.inputAria ? "list" : undefined)}
-						aria-expanded=${ifDefined(this.inputAria?.expanded)}
-						.ariaControlsElements=${this.inputAria ? [this.inputAria.controls] : null}
-						.ariaActiveDescendantElement=${this.inputAria?.activeDescendant ?? null}
 						type="${this.type || "text"}"
 						min="${ifDefined(this.min)}"
 						max="${ifDefined(this.max)}"

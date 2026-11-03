@@ -4,17 +4,16 @@ Combobox supports styling through **component tokens** (CSS custom properties wi
 
 ### Parts
 
-The combobox exposes a set of parts that can be targeted for last-mile layout or typography tweaks. Since the combobox uses a w-textfield internally, parts exposed by the textfield can also be styled. If you use the `tooltip` property, the tooltip component's parts can also be styled. All stylable parts are listed in the table below.
+The combobox exposes a set of parts that can be targeted for last-mile layout or typography tweaks. The combobox owns its native input and reuses the field styles and tokens. If you use the `tooltip` property, the tooltip component's parts can also be styled. All stylable parts are listed in the table below.
 
 Use `::part(part-name)` from outside the component.
 
 | Part | Targets | Typical use |
 |---|---|---|
 | `base` | wrapper around the component internals |  |
-| `textfield-wrapper` | wrapper around the textfield component internals |  |
+| `textfield-wrapper` | wrapper around the native input |  |
 | `input` | native input element | minor typography or spacing tweaks |
-| `mask-wrapper` | wrapper around the input mask | formatting-related layout tweaks |
-| `mask` | formatted value shown when the input is not focused | typography for formatter output |
+| `mask-wrapper` | wrapper around the native input | input layout tweaks |
 | `help-text` | help text container below the field | small typography tweaks |
 | `label` | label element above the field | small label layout tweaks |
 | `tooltip-target` | info icon button rendered when `tooltip` is set | small icon button alignment tweaks |
