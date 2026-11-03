@@ -51,7 +51,7 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 	/**
 	 * The value submitted when the checkbox is checked.
 	 *
-	 * If no value attribute is set, the checkbox defaults to `on`. Unchecked and disabled checkboxes do not submit a value.
+	 * If no value is set (as attribute or property), the checkbox defaults to `on`. Unchecked and disabled checkboxes do not submit a value.
 	 */
 	@property({ reflect: true }) value: string | null = null;
 
@@ -120,10 +120,8 @@ export class WarpCheckbox extends FormControlMixin(LitElement) {
 
 	connectedCallback() {
 		super.connectedCallback();
-		const attrValue = this.getAttribute("value");
-		this.value = attrValue ?? "on";
-		this.#defaultChecked = this.hasAttribute("checked");
-		this.checked = this.#defaultChecked;
+		this.value ??= "on";
+		this.#defaultChecked = this.checked;
 		this.addEventListener("invalid", this.#handleInvalid);
 		this.addEventListener("keydown", this.#handleKeyDown);
 		this.#syncFormValue();

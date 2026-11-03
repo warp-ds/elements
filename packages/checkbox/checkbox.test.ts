@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { expect, test, vi } from "vitest";
+import { expect, onTestFinished, test, vi } from "vitest";
 import { server, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-lit";
 
@@ -250,3 +250,102 @@ test.skipIf(server.browser === "webkit")(
 		expect(onSubmit).toHaveBeenCalled();
 	},
 );
+
+// Frameworks such as React 19 create the element, set props as properties and only then insert it.
+// Lit reflects properties to attributes on its first update, which runs after connectedCallback.
+const connect = (element: HTMLElement, parent: HTMLElement = document.body) => {
+	parent.append(element);
+	onTestFinished(() => element.remove());
+	return element;
+};
+
+test("keeps value and checked set as properties before the checkbox is connected", async () => {
+	const checkbox = document.createElement("w-checkbox");
+	checkbox.value = "yes";
+	checkbox.checked = true;
+	connect(checkbox);
+	await checkbox.updateComplete;
+
+	expect(checkbox.value).toBe("yes");
+	expect(checkbox.getAttribute("value")).toBe("yes");
+	expect(checkbox.checked).toBe(true);
+	expect(checkbox.hasAttribute("checked")).toBe(true);
+	expect(getInput(checkbox)?.checked).toBe(true);
+});
+
+test("submits and resets to the value and checked state set as properties before connecting", async () => {
+	const form = document.createElement("form");
+	connect(form);
+
+	const checkbox = document.createElement("w-checkbox");
+	checkbox.name = "newsletter";
+	checkbox.value = "yes";
+	checkbox.checked = true;
+	form.append(checkbox);
+	await checkbox.updateComplete;
+
+	expect(new FormData(form).get("newsletter")).toBe("yes");
+
+	checkbox.click();
+	await checkbox.updateComplete;
+	expect(checkbox.checked).toBe(false);
+	expect(new FormData(form).get("newsletter")).toBeNull();
+
+	form.reset();
+	await checkbox.updateComplete;
+	expect(checkbox.checked).toBe(true);
+	expect(new FormData(form).get("newsletter")).toBe("yes");
+});
+
+test("a property set after the attribute but before connecting wins", async () => {
+	const checkbox = document.createElement("w-checkbox");
+	checkbox.setAttribute("value", "server");
+	checkbox.setAttribute("checked", "");
+	checkbox.value = "client";
+	checkbox.checked = false;
+	connect(checkbox);
+	await checkbox.updateComplete;
+
+	expect(checkbox.value).toBe("client");
+	expect(checkbox.getAttribute("value")).toBe("client");
+	expect(checkbox.checked).toBe(false);
+	expect(checkbox.hasAttribute("checked")).toBe(false);
+});
+
+test("keeps a checked state changed right before the checkbox is moved", async () => {
+	render(html`
+		<div data-testid="from"><w-checkbox checked>Moved</w-checkbox></div>
+		<div data-testid="to"></div>
+	`);
+
+	const checkbox = document.querySelector("w-checkbox")!;
+	await checkbox.updateComplete;
+
+	// Moving disconnects and reconnects synchronously, before the attribute is reflected.
+	checkbox.checked = false;
+	document.querySelector('[data-testid="to"]')!.append(checkbox);
+	await checkbox.updateComplete;
+
+	expect(checkbox.checked).toBe(false);
+	expect(checkbox.hasAttribute("checked")).toBe(false);
+});
+
+test("uses the value and checked attributes, and falls back to 'on' and unchecked without them", async () => {
+	render(html`
+		<w-checkbox value="yes" checked>With attributes</w-checkbox>
+		<w-checkbox>Without attributes</w-checkbox>
+	`);
+
+	const [withAttributes, withoutAttributes] = [
+		...document.querySelectorAll("w-checkbox"),
+	];
+	await withAttributes.updateComplete;
+	await withoutAttributes.updateComplete;
+
+	expect(withAttributes.value).toBe("yes");
+	expect(withAttributes.checked).toBe(true);
+	expect(withoutAttributes.value).toBe("on");
+	expect(withoutAttributes.getAttribute("value")).toBe("on");
+	expect(withoutAttributes.checked).toBe(false);
+	expect(withoutAttributes.hasAttribute("checked")).toBe(false);
+});

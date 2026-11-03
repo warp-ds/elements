@@ -705,3 +705,46 @@ test("applies group name to child radios when missing", async () => {
 	expect(radios[0].getAttribute("name")).toBe("choice");
 	expect(radios[1].getAttribute("name")).toBe("choice");
 });
+
+test("dispatches input/change when radios got their value as properties before connecting", async () => {
+	render(html`
+		<form>
+			<w-radio-group label="Time slot" name="slot"></w-radio-group>
+		</form>
+	`);
+
+	const form = document.querySelector("form") as HTMLFormElement;
+	const group = document.querySelector("w-radio-group")!;
+
+	// Mimic React 19, which sets props as properties on custom elements before inserting them.
+	const radios = ["asap", "morning", "evening"].map((value) => {
+		const radio = document.createElement("w-radio");
+		radio.value = value;
+		radio.textContent = value;
+		return radio;
+	});
+	group.append(...radios);
+	await group.updateComplete;
+	await Promise.all(radios.map((radio) => radio.updateComplete));
+
+	const onInput = vi.fn();
+	const onChange = vi.fn();
+	group.addEventListener("input", onInput);
+	group.addEventListener("change", onChange);
+
+	radios[0].click();
+	await group.updateComplete;
+	expect(onChange).toHaveBeenCalledTimes(1);
+
+	radios[2].click();
+	await group.updateComplete;
+
+	expect(radios.map((radio) => radio.value)).toEqual([
+		"asap",
+		"morning",
+		"evening",
+	]);
+	expect(onInput).toHaveBeenCalledTimes(2);
+	expect(onChange).toHaveBeenCalledTimes(2);
+	expect(new FormData(form).get("slot")).toBe("evening");
+});
