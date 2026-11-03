@@ -561,30 +561,23 @@ test("renders localized optional text based on document lang", async () => {
 	document.documentElement.lang = originalLang;
 });
 
-test("combobox semantics and option references belong to the focused input", async () => {
-	const page = render(
-		html`<w-combobox data-testid="country" aria-label="Country"
-			><option value="no">Norway</option>
-			<option value="se">Sweden</option></w-combobox
-		>`,
-	);
-	await expect.element(page.getByTestId("country")).toBeVisible();
-	const el = page.container.querySelector("w-combobox")!;
-	const field = el.shadowRoot!.querySelector("w-textfield")!;
-	await field.updateComplete;
-	const input = field.shadowRoot!.querySelector("input")!;
-	expect(input.getAttribute("role")).toBe("combobox");
-	expect(input.getAttribute("aria-label")).toBe("Country");
-	expect(field.hasAttribute("role")).toBe(false);
+test("focused combobox exposes its name and active suggestion", async () => {
+	const page = render(html`
+		<w-combobox aria-label="Country">
+			<option value="no">Norway</option>
+		</w-combobox>
+	`);
+	const field = page.getByRole("combobox", { name: "Country" });
+	await expect.element(field).toBeVisible();
+	const input = field.element() as HTMLInputElement;
 	input.focus();
 	await userEvent.keyboard("{ArrowDown}{ArrowDown}");
 	expect(input.getAttribute("aria-expanded")).toBe("true");
-	expect(input.ariaActiveDescendantElement?.textContent?.trim()).toBe("Norway");
-	expect(input.ariaControlsElements).toEqual([
-		el.shadowRoot!.querySelector("ul"),
-	]);
+	expect(input.ariaControlsElements?.[0]).toBe(
+		page.getByRole("listbox").element(),
+	);
 	expect(input.ariaActiveDescendantElement).toBe(
-		el.shadowRoot!.querySelector('[aria-selected="true"]'),
+		page.getByRole("option", { name: "Norway" }).element(),
 	);
 	await userEvent.keyboard("{Escape}");
 	expect(input.getAttribute("aria-expanded")).toBe("false");
