@@ -6,6 +6,7 @@ import {
 	CTL,
 	CTL_FORMS,
 	fail,
+	fromCaller,
 	repoRoot,
 	skillDir,
 	sleep,
@@ -69,7 +70,7 @@ function tokenize(line) {
 }
 
 function blocksOf(file) {
-	const text = fs.readFileSync(file, "utf8");
+	const text = fs.readFileSync(fromCaller(file), "utf8");
 	return Array.from(text.matchAll(BLOCK), (match) => {
 		const firstLine = text.slice(0, match.index).split("\n").length + 1;
 		return match[1]
@@ -136,7 +137,7 @@ async function runFiles(files, session, browser, keep) {
 	let blocks = 0;
 	let commands = 0;
 	for (const file of files) {
-		const relative = path.relative(repoRoot, path.resolve(file));
+		const relative = path.relative(repoRoot, fromCaller(file));
 		for (const [index, block] of blocksOf(file).entries()) {
 			blocks += 1;
 			for (const { source, line } of block) {

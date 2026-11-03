@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { requireChromium } from "../lib/chromium.mjs";
-import { CTL, evidenceDir, fail } from "../lib/session.mjs";
+import { CTL, evidenceDir, fail, fromCaller } from "../lib/session.mjs";
 
 export const help = {
 	usage: "trace start | trace stop [path]",
@@ -21,7 +21,7 @@ export function args({ positional, paths }) {
 	return {
 		action,
 		file: file
-			? path.resolve(file)
+			? fromCaller(file)
 			: path.join(evidenceDir, `${stamp}-${paths.name}-trace.json`),
 	};
 }

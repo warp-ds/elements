@@ -1,7 +1,6 @@
 import fs from "node:fs";
-import path from "node:path";
 
-import { CTL, fail } from "../lib/session.mjs";
+import { CTL, fail, fromCaller } from "../lib/session.mjs";
 
 export const help = {
 	usage:
@@ -18,7 +17,7 @@ export const help = {
 
 export function args({ positional, flags }) {
 	const html = flags.file
-		? fs.readFileSync(path.resolve(String(flags.file)), "utf8")
+		? fs.readFileSync(fromCaller(flags.file), "utf8")
 		: positional[0];
 	if (html === undefined)
 		fail("mount needs HTML or --file <path>.", `Usage: ${CTL} ${help.usage}`);

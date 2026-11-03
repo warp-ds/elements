@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { evidenceDir } from "../lib/session.mjs";
+import { evidenceDir, fromCaller } from "../lib/session.mjs";
 
 export const help = {
 	usage: "screenshot [path] [--selector <selector>]",
@@ -19,7 +19,7 @@ export function args({ positional, flags, paths }) {
 	const stamp = new Date().toISOString().replace(/[:.]/g, "-");
 	return {
 		file: positional[0]
-			? path.resolve(positional[0])
+			? fromCaller(positional[0])
 			: path.join(evidenceDir, `${stamp}-${paths.name}.png`),
 		selector: flags.selector,
 	};

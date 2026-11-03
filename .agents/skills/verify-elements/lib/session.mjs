@@ -17,6 +17,8 @@ const scripts =
 const script = Object.keys(scripts).find((name) => scripts[name] === DIRECT);
 export const CTL = script ? `pnpm ${script}` : DIRECT;
 export const CTL_FORMS = [...new Set([CTL, DIRECT])];
+export const fromCaller = (file) =>
+	path.resolve(process.env.INIT_CWD ?? process.cwd(), String(file));
 
 const WIDTH = 100;
 
