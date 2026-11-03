@@ -14,6 +14,8 @@ import {
 } from "./lib/session.mjs";
 
 const FINAL_DOT = /\.?$/;
+const USAGE_FLAG = /--([a-z][\w-]*)/g;
+const WHITESPACE = /\s/;
 
 const commandsDir = path.join(skillDir, "commands");
 const commandNames = fs
@@ -96,6 +98,26 @@ async function main() {
 	if (flags.help) {
 		console.log(commandHelp(command.help));
 		return;
+	}
+	const accepted = [
+		...new Set([
+			...Array.from(
+				command.help.usage.matchAll(USAGE_FLAG),
+				(match) => match[1],
+			),
+			"session",
+			"help",
+		]),
+	];
+	const unknown = Object.keys(flags).filter((key) => !accepted.includes(key));
+	if (unknown.length) {
+		const split = unknown.some((key) => WHITESPACE.test(key))
+			? " A flag and its value arrived as one argument, which happens when they're stored together in an unquoted shell variable: zsh doesn't split it into words. Write them out, or use run."
+			: "";
+		fail(
+			`Unknown flag ${unknown.map((key) => `--${key}`).join(", ")} for ${name}.`,
+			`${name} takes ${accepted.map((key) => `--${key}`).join(", ")}.${split}`,
+		);
 	}
 	const paths = sessionPaths(
 		flags.session ?? process.env.VERIFY_ELEMENTS_SESSION ?? "default",

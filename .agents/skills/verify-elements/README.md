@@ -21,7 +21,7 @@ The code has no comments by design, except one-line notes on behavior forced by 
 
 A command file exports:
 
-- `help`: `{ usage, about, examples }`. Examples omit the `pnpm ctl` prefix. The first sentence of `about` is the summary in `ctl --help`.
+- `help`: `{ usage, about, examples }`. Every flag the command reads must appear in `usage`, because `ctl` rejects the rest. Examples omit the `pnpm ctl` prefix. The first sentence of `about` is the summary in `ctl --help`.
 - `booleanFlags`, optional: names of flags that take no value, such as `["headed"]`. Without it, `--name` followed by a word takes that word as its value.
 - `args(input)`, optional: turns `{ positional, flags, paths }` into the request sent to the daemon. Call `fail()` or `needArgs()` for usage errors.
 - One of:
@@ -54,5 +54,6 @@ A command file exports:
 - **Public events by default.** Action output and `events` leave out events from elements inside shadow roots, which aren't public API, and actions only count them. Agents otherwise wrote a `jq` filter for this in every session.
 - **Compact JSON.** Arrays and objects that fit in 100 characters print on one line, so an event list costs a line per event, not seven.
 - **Before and after in one command.** `check --save` stores each command's comparable result in `.verify-elements/check/`, and `--against` matches commands by file and arguments, so a reproduction can be edited between runs, and prints only what changed.
+- **Unknown flags fail.** A command accepts the flags in its `usage` line, plus `--session` and `--help`, so adding a flag means listing it there. A typo, or a flag and value glued into one argument by an unquoted shell variable, fails with the list of valid flags instead of being ignored.
 - **`run` for several commands.** Agents chained commands in one shell call and stored the command in a variable, which zsh doesn't split into words. `run` takes one command per line on stdin, without a shell, and prints every result, so a whole journey costs one call.
 - **Stale sessions.** `up` on a session whose daemon is gone runs `down` first, to clean up what it left behind.
