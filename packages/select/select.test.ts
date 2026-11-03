@@ -451,3 +451,32 @@ test("renders localized optional text based on document lang", async () => {
 
 	document.documentElement.lang = originalLang;
 });
+
+test("has Constraint Validation API support", async () => {
+	render(html`
+		<w-select label="Country" optional data-testid="field">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+		</w-select>
+	`);
+
+	const component = document.querySelector("w-select")!;
+	await component.updateComplete;
+
+	// Start off as valid (empty string in validationMessage)
+	expect(component.validationMessage).toBe("");
+	expect(component.validity.valid).toBe(true);
+	expect(component.checkValidity()).toBe(true);
+
+	// Can set a custom validation message
+	component.setCustomValidity("Custom validation error");
+	expect(component.validationMessage).toBe("Custom validation error");
+	expect(component.checkValidity()).toBe(false);
+	expect(component.validity.valid).toBe(false);
+	expect(component.validity.customError).toBe(true);
+
+	// Can call reportValidity to show the validation message in the browser
+	// AFAIK there's no good way to assert that the browser shows something in Playwright,
+	// but I verified this with manual testing.
+	expect(component.reportValidity()).toBe(false);
+});
