@@ -584,3 +584,49 @@ test("keyboard users can open suggestions, select and edit a label", async () =>
 	await userEvent.keyboard("{ArrowDown}{Enter}x");
 	expect(input.value).toBe("United Statesx");
 });
+
+test("arrow keys move focus into the list, where list keys are handled", async () => {
+	const page = render(html`
+		<w-combobox label="Country">
+			<option value="no">Norway</option>
+			<option value="se">Sweden</option>
+			<option value="dk">Denmark</option>
+		</w-combobox>
+	`);
+	const field = page.getByRole("textbox", { name: "Country" });
+	await expect.element(field).toBeVisible();
+	const input = field.element() as HTMLInputElement;
+	const root = page.container.querySelector("w-combobox")!.shadowRoot!;
+	const list = root.querySelector("ul")!;
+	const focused = () => root.activeElement?.textContent?.trim();
+	input.focus();
+
+	// List keys and modified arrows are left to the text field
+	await userEvent.keyboard("{Home}{End}{PageDown}{Shift>}{ArrowDown}{/Shift}");
+	expect(list.hidden).toBe(true);
+
+	await userEvent.keyboard("{ArrowDown}");
+	expect(focused()).toBe("Norway");
+	await userEvent.keyboard("{End}");
+	expect(focused()).toBe("Denmark");
+	await userEvent.keyboard("{Home}{ArrowDown}");
+	expect(focused()).toBe("Sweden");
+	await userEvent.keyboard("{Alt>}{ArrowDown}{/Alt}");
+	expect(focused()).toBe("Sweden");
+
+	// First-letter navigation moves to the next match, wrapping around
+	await userEvent.keyboard("n");
+	expect(focused()).toBe("Norway");
+	await userEvent.keyboard("d");
+	expect(focused()).toBe("Denmark");
+	await userEvent.keyboard("x");
+	expect(focused()).toBe("Denmark");
+	await userEvent.keyboard("s");
+	expect(focused()).toBe("Sweden");
+	expect(input.value).toBe("Sweden");
+
+	await userEvent.keyboard("{Enter}");
+	expect(root.activeElement?.tagName).toBe("W-TEXTFIELD");
+	expect(input.value).toBe("Sweden");
+	expect(list.hidden).toBe(true);
+});
