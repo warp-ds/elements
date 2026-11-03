@@ -88,7 +88,7 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 Examples from this repo:
 
 ```sh
-pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>' --with textfield
+pnpm ctl mount '<w-combobox label="Country"><option value="no">Norway</option><option value="se">Sweden</option></w-combobox>'
 pnpm ctl type 'role=textbox[name="Country"]' nor
 pnpm ctl press ArrowDown Enter
 pnpm ctl click 'role=option[name="Sweden"]'
@@ -99,7 +99,7 @@ pnpm ctl events --type select
 
 What to know when driving:
 
-- **Missing imports.** `mount` imports only the tags written in the HTML. If a component renders another `w-*` element that nothing imported, `mount` returns a warning naming the tag and the `--with` flag to add. `w-combobox` needs `--with textfield`, and `w-slider-thumb` needs `--with attention`. Each one is a missing import in the product, so report it.
+- **Missing imports.** `mount` imports only the tags written in the HTML. If a component renders another `w-*` element that nothing imported, `mount` returns a warning naming the tag and the `--with` flag to add. It's a missing import in the product, so report it.
 - **Stand-ins for consumer code.** Inline `<script>` tags in mounted HTML don't run, because the HTML is inserted with `innerHTML`. Inline `on*` attributes do run: `onchange`, `onselect`, a form's `onsubmit`. `<style>` elements apply. Array properties take JSON in the attribute.
 - **Quoting.** Wrap the HTML in single quotes and use double quotes inside. Write `&quot;` for a quote inside an inline handler. Use `--file` for anything long.
 - **Selectors.** These are Playwright selectors, and they pierce shadow DOM. Prefer role selectors read off `snapshot`. `[name="..."]` must match the whole accessible name exactly. Use `[name="..."i]` for case-insensitive, or `[name=/^Country/]` for a prefix.

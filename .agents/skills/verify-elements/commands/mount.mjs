@@ -10,8 +10,8 @@ export const help = {
 		"Clears the event and console logs. Components that a component renders internally are not imported for you: they come back as warnings, because a missing import is a product bug. " +
 		"Load them explicitly with --with. Inline <script> tags don't run; inline on* attributes do.",
 	examples: [
-		`mount '<w-combobox label="Country"><option value="no">Norway</option></w-combobox>' --with textfield`,
-		"mount --file /tmp/form.html --with textfield",
+		`mount '<w-combobox label="Country"><option value="no">Norway</option></w-combobox>'`,
+		"mount --file packages/combobox/features/fixtures/options.html",
 	],
 };
 

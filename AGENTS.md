@@ -66,5 +66,5 @@ Skills live in `.agents/skills/<name>/SKILL.md`, where Cursor, Codex and Copilot
 ## Gotchas
 
 - Design tokens are CSS custom properties loaded from the Eik CDN (`https://assets.finn.no/pkg/@warp-ds/css/v2/tokens/<brand>.css`), not bundled with the components. A page without that stylesheet renders unstyled. See `.storybook/preview-head.html` for the full set of links.
-- Components are imported one file at a time. If a component renders another `w-*` element, it must import it. `w-combobox` currently renders `w-textfield` without importing it, so tests and stories import `textfield.js` themselves.
+- Components are imported one file at a time. If a component renders another `w-*` element, it must import it, or that element stays undefined and renders nothing.
 - Firefox and WebKit tests need their own Playwright browsers. `--project chromium` avoids that in the inner loop.

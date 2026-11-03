@@ -73,7 +73,7 @@ Selectors are Playwright selectors and pierce shadow DOM. Prefer role selectors 
 
 Typical loop:
   ${CTL} up
-  ${CTL} mount '<w-combobox label="Country"><option value="no">Norway</option></w-combobox>' --with textfield
+  ${CTL} mount '<w-combobox label="Country"><option value="no">Norway</option></w-combobox>'
   ${CTL} type 'role=textbox[name="Country"]' nor
   ${CTL} press ArrowDown Enter
   ${CTL} events --type select

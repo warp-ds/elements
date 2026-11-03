@@ -36,7 +36,7 @@ Create `playground/index.html`, served by Vite (already a dev dependency) from t
 
 - Load the same CDN stylesheets as `.storybook/preview-head.html`: resets, components, and the brand's fonts and `tokens/<brand>.css`. A spike confirmed this renders pixel-identical to Storybook. Support `?brand=<brand>` (for example `finn-no` or `tori-fi-dark`), defaulting to `finn-no`. Build the brand URLs from the brand name instead of listing brands, and report whether they loaded.
 - Expose a small API on `window` for the daemon: mount HTML into a container, import the module for each `w-<name>` tag in that HTML from `/packages/<name>/<name>.ts`, and record every `CustomEvent` dispatched by a `w-*` element (type, target tag, detail, time).
-- Never silently import components that a component renders internally. After mounting, find undefined `w-*` elements inside shadow roots and report them as warnings. A missing import is a real bug: `w-combobox` renders `w-textfield` without importing it. Let the caller load extra modules explicitly instead, for example with `--with textfield`.
+- Never silently import components that a component renders internally. After mounting, find undefined `w-*` elements inside shadow roots and report them as warnings. A missing import is a real bug, so report it. Let the caller load extra modules explicitly instead, with `--with <name>`.
 
 Inline `<script>` tags don't run when HTML is inserted with `innerHTML`. Document that rather than working around it.
 
