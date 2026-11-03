@@ -5,7 +5,7 @@ description: Render and drive Warp components (w-* custom elements from packages
 
 # verify-elements
 
-Proves component behavior the way a user meets it. A real Chromium page loads the same Warp CDN styles as Storybook, Vite imports the components from source, and real keyboard and mouse input drives them. One CLI, `pnpm ctl`, which runs `ctl.mjs` in this folder. Every command prints one JSON object. On failure it exits 1 and prints `error` and a `hint` that tells you what to do next. If you pipe it into `jq`, run `pnpm --silent ctl`, because on failure pnpm prints an `[ELIFECYCLE]` line after the JSON.
+Proves component behavior the way a user meets it. A real Chromium page loads the same Warp CDN styles as Storybook, Vite imports the components from source, and real keyboard and mouse input drives them. One CLI, `pnpm ctl`, which runs `ctl.mjs` in this folder. Every command prints one compact JSON object. On failure it exits 1 and prints `error` and a `hint` that tells you what to do next. The output is short enough to read as is. If you pipe it into `jq`, run `pnpm --silent ctl`, because on failure pnpm prints an `[ELIFECYCLE]` line after the JSON.
 
 Run everything from the repo root:
 
@@ -74,7 +74,7 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 | `click <selector>`, `hover <selector>` | Real mouse actions, after Playwright's visibility and enabled checks. |
 | `drag <selector> --by dx,dy` or `--to <selector>` | Press on the element's centre, move in 10 steps, release. |
 | `snapshot [selector]` | Accessibility tree of `#mount`, or of the selector: roles, names, `[expanded]`, `[selected]`, `[disabled]`, `[invalid]` and input values, through shadow DOM. One line per array entry. |
-| `events [--type t]` | Every CustomEvent any `w-*` element dispatched since the mount: `type`, `target`, `insideShadowOf`, `detail`, `time`. |
+| `events [--type t] [--internal]` | The public CustomEvents `w-*` elements dispatched since the mount: `type`, `target`, `detail`, `time`. `--internal` adds events from elements inside shadow roots, with `insideShadowOf` naming the host. |
 | `console` | Console messages and page errors since the mount. |
 | `screenshot [path] [--selector s]` | Full-page or element PNG. Prints the absolute path. |
 | `check <file> ... [--browser all]` | Run every command block in feature map files in its own session and report the commands that fail. With `--browser all`, run them in Chromium, Firefox and WebKit and list results that differ. |
@@ -102,7 +102,7 @@ What to know when driving:
 - **Stand-ins for consumer code.** Inline `<script>` tags in mounted HTML don't run, because the HTML is inserted with `innerHTML`. Inline `on*` attributes do run: `onchange`, `onselect`, a form's `onsubmit`. `<style>` elements apply. Array properties take JSON in the attribute.
 - **Quoting.** Wrap the HTML in single quotes and use double quotes inside. Write `&quot;` for a quote inside an inline handler. Use `--file` for anything long.
 - **Selectors.** These are Playwright selectors, and they pierce shadow DOM. Prefer role selectors read off `snapshot`. `[name="..."]` must match the whole accessible name exactly. Use `[name="..."i]` for case-insensitive, or `[name=/^Country/]` for a prefix.
-- **Action output.** Each action waits for pending Lit updates and two animation frames, so the next `snapshot` sees the settled state. It reports `focused` (the deepest focused element through shadow roots, with its value) and `eventsDuringAction`.
+- **Action output.** Each action waits for pending Lit updates and two animation frames, so the next `snapshot` sees the settled state. It reports `focused` (the deepest focused element through shadow roots, with its value) and `eventsDuringAction`, the public events the action caused. `internalEvents` counts the events from inside shadow roots; `events --internal` lists them.
 - **Timeouts.** Actions time out after 5 s. A failure includes Playwright's `callLog`, which says why, for example `element is not enabled`.
 - **Focus.** `type` and `press --selector` move focus programmatically, like tabbing in. Use `click` when the pointer path matters.
 

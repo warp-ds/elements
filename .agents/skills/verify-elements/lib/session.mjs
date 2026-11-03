@@ -18,8 +18,33 @@ const script = Object.keys(scripts).find((name) => scripts[name] === DIRECT);
 export const CTL = script ? `pnpm ${script}` : DIRECT;
 export const CTL_FORMS = [...new Set([CTL, DIRECT])];
 
+const WIDTH = 100;
+
+function format(value, indent = "") {
+	const flat = JSON.stringify(value);
+	if (
+		typeof value !== "object" ||
+		value === null ||
+		indent.length + flat.length <= WIDTH
+	)
+		return flat;
+	const inner = `${indent}  `;
+	const items = Array.isArray(value)
+		? value.map((item) => inner + format(item ?? null, inner))
+		: Object.entries(value)
+				.filter(([, item]) => item !== undefined)
+				.map(
+					([key, item]) =>
+						`${inner}${JSON.stringify(key)}: ${format(item, inner)}`,
+				);
+	const [open, close] = Array.isArray(value) ? "[]" : "{}";
+	return items.length
+		? `${open}\n${items.join(",\n")}\n${indent}${close}`
+		: open + close;
+}
+
 export function print(result) {
-	console.log(JSON.stringify(result, null, 2));
+	console.log(format(result));
 	process.exit(result.ok ? 0 : 1);
 }
 

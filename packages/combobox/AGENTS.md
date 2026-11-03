@@ -44,7 +44,7 @@ After `type`, `focused.value` is `nor`. After ArrowDown it previews `Norway`. Af
 
 - Always mount with `--with textfield`. `w-combobox` renders `w-textfield` without importing it (a product bug), so without it `mount` warns and the field renders nothing.
 - Drive the focused `role=textbox[name="Country"]`. `role=combobox`, `[expanded]` and `aria-activedescendant` sit on the unnamed `w-textfield` wrapper around it.
-- Events are noisy: three `change` per keystroke, and leaving the field or clicking an option fires `select` and `blur` two or three times. Use `events --type`, and skip entries with `insideShadowOf: "w-combobox"`, which come from the internal `w-textfield`.
+- Events are noisy: three `change` per keystroke, and leaving the field or clicking an option fires `select` and `blur` two or three times. Use `events --type`. Events from the internal `w-textfield` only show with `events --internal`.
 - The open list covers whatever is below it, so `click` on an element under it times out. Put pointer targets above the combobox, or close the list first.
 - Typing into a field that shows a label replaces the label with the option's value first: after picking Norway, typing `x` gives `nox`. Clear the field with `press ControlOrMeta+a Backspace` before typing new text.
 - `optional` and `tooltip` add to the accessible name (`Country Optional`). Match those with `[name=/^Country/]`.

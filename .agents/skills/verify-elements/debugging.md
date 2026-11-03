@@ -11,7 +11,7 @@ Run `ctl doctor`, then reproduce the problem from a fresh `ctl mount`. Start fro
 | Question | Command |
 |---|---|
 | What did my action cause? | the action's own output: `focused` and `eventsDuringAction` |
-| Which events fired, in what order, with what detail? | `events`, `events --type <name>` |
+| Which events fired, in what order, with what detail? | `events`, `events --type <name>`, `events --internal` for events inside shadow roots |
 | What would a screen reader see? | `snapshot` |
 | Why is the component in this state? | `inspect <selector>`: attributes, Lit properties, internal `_state`, shadow DOM |
 | Why does it look wrong? | `styles <selector>`, or `styles <selector> --props=--w-s-color-background` for a design token |
@@ -37,7 +37,7 @@ Engine quirks that look like component bugs but aren't:
 - Playwright's WebKit hit test can report a component as covering its own shadow content. `click` and `hover` check where the browser's hit test lands and, if it's the target, send a real mouse event there; their output has a `note` when that happened.
 - Firefox's `input.autocomplete` property can be `""` while the attribute is set. Read attributes with `getAttribute` in `eval`.
 - WebKit doesn't focus a button when it's clicked, as in Safari on macOS, so `focused` is `null` after clicking one.
-- WebKit doesn't fire a native `change` on blur when a script set the input's value. It only shows in `w-textfield`'s internal events (`insideShadowOf` set), which `check --browser all` doesn't compare.
+- WebKit doesn't fire a native `change` on blur when a script set the input's value. It only shows in `w-textfield`'s internal events (`events --internal`), which `check --browser all` doesn't compare.
 
 ## 5. Accessibility
 

@@ -57,7 +57,7 @@ Describe current behavior, even when it looks wrong. A behavior that can't be dr
 The bar is in the Evidence section of [SKILL.md](SKILL.md). For each sub-feature, keep:
 
 1. The JSON from the user action (`type`, `press`, `click`, `hover`, `drag`). Its `eventsDuringAction` and `focused` show what the action caused.
-2. `ctl events` (or `--type <name>`) showing the component's own event with the expected `detail`. Events whose `insideShadowOf` is set come from internal elements, such as the `w-textfield` inside `w-combobox`. They aren't the component's public API.
+2. `ctl events` (or `--type <name>`) showing the component's own event with the expected `detail`. It lists only public events. Events from internal elements, such as the `w-textfield` inside `w-combobox`, appear with `--internal` and aren't the component's public API.
 3. `ctl snapshot` showing the end state in the accessibility tree: input value, `[expanded]`, `[selected]`, `[disabled]`, `[invalid]`, names.
 4. A full-page `ctl screenshot` for anything visual.
 5. `ctl console` with `"errors": 0`. The "Lit is in dev mode" warning is expected.

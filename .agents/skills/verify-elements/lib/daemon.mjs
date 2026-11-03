@@ -108,21 +108,17 @@ async function act(action) {
 	const before = await page.evaluate(() => window.playground.events().length);
 	await action();
 	await page.evaluate(() => window.playground.settle());
-	return page.evaluate(
-		(count) => ({
+	return page.evaluate((count) => {
+		const events = window.playground.events().slice(count);
+		const internal = events.filter((event) => event.insideShadowOf).length;
+		return {
 			focused: window.playground.focused(),
-			eventsDuringAction: window.playground
-				.events()
-				.slice(count)
-				.map(({ type, target, insideShadowOf, detail }) => ({
-					type,
-					target,
-					insideShadowOf,
-					detail,
-				})),
-		}),
-		before,
-	);
+			eventsDuringAction: events
+				.filter((event) => !event.insideShadowOf)
+				.map(({ type, target, detail }) => ({ type, target, detail })),
+			...(internal ? { internalEvents: internal } : {}),
+		};
+	}, before);
 }
 
 const ctx = {

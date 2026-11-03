@@ -34,5 +34,5 @@ pnpm ctl eval 'window.picked'
 
 - Suspected bug, duplicates: each keystroke fires `change` three times (the previous text on keydown, then the new text twice), and `focus`, `blur` and select-on-blur fire twice. The combobox listens on `w-textfield`, which delivers both the native event and its deprecated CustomEvent copy. Repro: core mount, `type 'role=textbox[name="Country"]' n`, then `events --type change` has 3 events.
 - The native `focus` and `blur` from the inner input also reach `w-combobox`, so an `onblur` handler runs three times per blur. `events` records only CustomEvents.
-- Entries with `insideShadowOf: "w-combobox"` (`focus`, `input`, `change` and `blur` from `w-textfield`) are internal, not public API.
+- `events --internal` also shows `focus`, `input`, `change` and `blur` from the internal `w-textfield`, with `insideShadowOf: "w-combobox"`. They aren't public API.
 - The events have no `@fires` JSDoc, so the custom elements manifest and generated types miss them. Only `react.ts` declares them (`onSelect`, `onChange`, `onBlur`, `onFocus`).
