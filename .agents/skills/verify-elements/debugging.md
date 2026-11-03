@@ -4,7 +4,7 @@ Follow these steps in order. Each one narrows the problem before you change code
 
 ## 1. Reproduce
 
-Run `ctl doctor`, then reproduce the problem from a fresh `ctl mount`. Start from the command block in the component's feature file (`packages/<name>/features/`) closest to the problem. Write the reproduction down as a short list of `ctl` commands; you'll reuse it to prove the fix.
+Run `ctl doctor`, then reproduce the problem from a fresh `ctl mount`. Start from the command block in the component's feature file (`packages/<name>/features/`) closest to the problem. Save the reproduction as a `sh` block of `ctl` commands in `.verify-elements/repro.md` and run `ctl check .verify-elements/repro.md --save before`. After the fix, `--against before` shows what changed.
 
 ## 2. Observe before changing anything
 

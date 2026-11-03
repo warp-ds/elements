@@ -77,7 +77,7 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 | `events [--type t] [--internal]` | The public CustomEvents `w-*` elements dispatched since the mount: `type`, `target`, `detail`, `time`. `--internal` adds events from elements inside shadow roots, with `insideShadowOf` naming the host. |
 | `console` | Console messages and page errors since the mount. |
 | `screenshot [path] [--selector s]` | Full-page or element PNG. Prints the absolute path. |
-| `check <file> ... [--browser all]` | Run every command block in feature map files in its own session and report the commands that fail. With `--browser all`, run them in Chromium, Firefox and WebKit and list results that differ. |
+| `check <file> ... [--browser all] [--save n] [--against n]` | Run every command block in feature map files in its own session and report the commands that fail. With `--browser all`, run them in Chromium, Firefox and WebKit and list results that differ. `--save before`, then `--against before` after a change, lists only the commands whose result changed. |
 | `inspect <selector>` | Attributes, Lit properties, internal state and the start of the shadow DOM. |
 | `styles <selector> [--props=a,b]` | Computed styles through shadow DOM, including what design tokens resolve to. |
 | `a11y [selector]` | axe-core violations, with the same WCAG tags as the a11y tests. |
@@ -121,7 +121,7 @@ The proof bar:
 5. **Check `console`.** It should show `"errors": 0`, or every error should be explained.
 6. **Green tests alone aren't proof.** Many behaviors have `no test` in the feature maps, and the tests that exist often dispatch synthetic events.
 
-Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `pnpm ctl events > .verify-elements/evidence/combobox-events.json`. The directory is gitignored and survives `down`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
+Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `pnpm ctl events > .verify-elements/evidence/combobox-events.json`. The directory is gitignored and survives `down`. For before-and-after proof, save your reproduction as a `sh` block of `pnpm ctl` commands in `.verify-elements/repro.md`, run `pnpm ctl check .verify-elements/repro.md --save before`, and after the fix `--against before`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
 
 ## Cleanup
 

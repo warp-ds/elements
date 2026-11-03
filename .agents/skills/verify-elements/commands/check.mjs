@@ -15,20 +15,26 @@ const BLOCK = /```(?:bash|sh)\n([\s\S]*?)```/g;
 const SHELL_SYNTAX = /[|;&<>`$]/;
 const SECONDS = /^\d+(\.\d+)?$/;
 const WHITESPACE = /\s/;
+const SAVED_NAME = /^[\w.-]+$/;
+const savedDir = path.join(repoRoot, ".verify-elements", "check");
 
 export const booleanFlags = ["keep"];
 
 export const help = {
-	usage: "check <file> [<file> ...] [--browser <name>|all] [--keep]",
+	usage:
+		"check <file> [<file> ...] [--browser <name>|all] [--save <name>] [--against <name>] [--keep]",
 	about:
 		"Run every command block in feature map files, top to bottom, and report the commands that fail. " +
 		"A command fails when it errors, when a mount warns about a missing import or logs console errors, or when a block ends with console errors. " +
 		"Runs in its own session (check unless --session is given) and stops it afterwards unless --keep. Only ctl commands and sleep run; anything else in a block is reported. " +
-		"With --browser all it runs the files in Chromium, Firefox and WebKit, and also lists every command whose result differs between them, ignoring events from inside shadow roots and timing.",
+		"With --browser all it runs the files in Chromium, Firefox and WebKit, and also lists every command whose result differs between them, ignoring events from inside shadow roots and timing. " +
+		"--save <name> stores every command's result; --against <name> runs the files again and lists only the commands whose result changed since that save, so run it before and after a fix. Both work with one browser.",
 	examples: [
 		"check packages/combobox/features/form.md",
 		"check packages/combobox/AGENTS.md packages/combobox/features/*.md",
 		"check packages/combobox/features/keyboard-navigation.md --browser all",
+		"check .verify-elements/repro.md --save before",
+		"check .verify-elements/repro.md --against before",
 	],
 };
 
@@ -158,8 +164,10 @@ async function runFiles(files, session, browser, keep) {
 					continue;
 				}
 				commands += 1;
-				const reply = ctl(tokens.slice(prefix.length), session);
+				const args = tokens.slice(prefix.length);
+				const reply = ctl(args, session);
 				results.push({
+					key: JSON.stringify([relative, ...args]),
 					file: relative,
 					line,
 					command: source,
@@ -210,6 +218,55 @@ function differencesBetween(runs) {
 	return differences;
 }
 
+function changesSince(saved, results) {
+	const pending = new Map();
+	for (const result of saved)
+		pending.set(result.key, [...(pending.get(result.key) ?? []), result]);
+	const changed = [];
+	const added = [];
+	let unchanged = 0;
+	for (const result of results) {
+		const { file, line, command } = result;
+		const before = pending.get(result.key)?.shift();
+		if (!before) added.push({ file, line, command });
+		else if (before.reply === result.reply) unchanged += 1;
+		else {
+			const was = JSON.parse(before.reply);
+			const now = JSON.parse(result.reply);
+			const keys = Object.keys({ ...was, ...now }).filter(
+				(key) => JSON.stringify(was[key]) !== JSON.stringify(now[key]),
+			);
+			const pick = (reply) =>
+				Object.fromEntries(keys.map((key) => [key, reply[key] ?? null]));
+			changed.push({
+				file,
+				line,
+				command,
+				before: pick(was),
+				after: pick(now),
+			});
+		}
+	}
+	const missing = [...pending.values()]
+		.flat()
+		.map(({ file, line, command }) => ({ file, line, command }));
+	return {
+		unchanged,
+		changed,
+		...(added.length ? { added } : {}),
+		...(missing.length ? { missing } : {}),
+	};
+}
+
+function savedFile(name) {
+	if (!SAVED_NAME.test(name))
+		fail(
+			`Invalid name "${name}".`,
+			"Use letters, digits, dots, dashes and underscores.",
+		);
+	return path.join(savedDir, `${name}.json`);
+}
+
 export async function main({ positional, flags }) {
 	if (!positional.length)
 		fail("check needs at least one file.", `Usage: ${CTL} ${help.usage}`);
@@ -217,9 +274,23 @@ export async function main({ positional, flags }) {
 
 	if (flags.browser !== "all") {
 		const browser = flags.browser ? String(flags.browser) : undefined;
+		const saveTo = flags.save ? savedFile(String(flags.save)) : null;
+		const againstFile = flags.against ? savedFile(String(flags.against)) : null;
+		if (againstFile && !fs.existsSync(againstFile))
+			fail(
+				`Nothing saved as "${flags.against}".`,
+				`Run ${CTL} check <files> --save ${flags.against} first.`,
+			);
 		const run = await runFiles(positional, session, browser, flags.keep);
 		if (run.up) return { ...run.up, session };
-		const { failures, blocks, commands } = run;
+		const { failures, blocks, commands, results } = run;
+		if (saveTo) {
+			fs.mkdirSync(savedDir, { recursive: true });
+			fs.writeFileSync(
+				saveTo,
+				JSON.stringify({ browser, files: positional, results }, null, 2),
+			);
+		}
 		return {
 			ok: failures.length === 0,
 			session,
@@ -227,8 +298,24 @@ export async function main({ positional, flags }) {
 			blocks,
 			commands,
 			failures,
+			...(saveTo ? { saved: path.relative(repoRoot, saveTo) } : {}),
+			...(againstFile
+				? {
+						against: flags.against,
+						...changesSince(
+							JSON.parse(fs.readFileSync(againstFile, "utf8")).results,
+							results,
+						),
+					}
+				: {}),
 		};
 	}
+
+	if (flags.save || flags.against)
+		fail(
+			"--save and --against work with one browser.",
+			"Drop --browser all, or pass --browser <name>.",
+		);
 
 	const runs = {};
 	for (const browser of BROWSERS) {

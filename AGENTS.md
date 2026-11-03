@@ -30,9 +30,9 @@ Before opening a PR, run `pnpm test`, which runs Chromium, Firefox and WebKit (`
 
 `pnpm ctl` is the command-line tool from the `verify-elements` skill.
 
-1. Reproduce the bug with `pnpm ctl` before you change code. Start from the closest command block in `packages/<name>/features/`.
+1. Reproduce the bug with `pnpm ctl` before you change code. Start from the closest command block in `packages/<name>/features/`, save the steps as a `sh` block in `.verify-elements/repro.md`, and record them with `pnpm ctl check .verify-elements/repro.md --save before`.
 2. Add a Vitest test that fails without the fix.
-3. Fix it, run your reproduction again and keep the evidence: `events`, `snapshot` and a `screenshot`, as described in the skill's Evidence section.
+3. Fix it. `pnpm ctl check .verify-elements/repro.md --against before` lists what changed. Keep that output and a `screenshot` if the bug is visible, as described in the skill's Evidence section.
 4. If the behavior changed, update the feature file and run `pnpm ctl check` on it.
 
 If you can't explain the behavior yet, your first fix doesn't work, or the engines disagree, follow `.agents/skills/verify-elements/debugging.md`.
