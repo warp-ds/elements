@@ -222,7 +222,7 @@ class WarpPagination extends LitElement {
 					data-page-number="${pageNumber}"
 					aria-label="${ariaLabel}"
 					href="${url}"
-					part="page${isCurrentPage ? " current" : ""}"
+					part="${isCurrentPage ? "current-page" : "page"}"
 					aria-current="${isCurrentPage ? "page" : "false"}"
 					>${pageNumber}</a
 				>`;
