@@ -182,7 +182,7 @@ export const styles = css`
 
 	[part="control"],
 	[part="page"],
-	[part="page current"],
+	[part="current-page"],
 	[part="placeholder"] {
 		display: inline-flex;
 		min-height: 44px;
@@ -196,7 +196,7 @@ export const styles = css`
 
 	[part="control"],
 	[part="page"],
-	[part="page current"] {
+	[part="current-page"] {
 		align-items: center;
 		background-color: var(--_item-color-background);
 		border-width: var(--_item-border-width);
@@ -216,14 +216,14 @@ export const styles = css`
 		padding: var(--_control-padding);
 	}
 
-	:is([part="control"], [part="page"], [part="page current"]):is(
+	:is([part="control"], [part="page"], [part="current-page"]):is(
 		:hover,
 		:focus
 	) {
 		text-decoration: none;
 	}
 
-	:is([part="control"], [part="page"], [part="page current"]):is(
+	:is([part="control"], [part="page"], [part="current-page"]):is(
 		:focus,
 		:focus-visible
 	) {
@@ -231,7 +231,7 @@ export const styles = css`
 		outline-offset: var(--_item-focus-outline-offset);
 	}
 
-	:is([part="control"], [part="page"], [part="page current"]):not(
+	:is([part="control"], [part="page"], [part="current-page"]):not(
 		:focus-visible
 	) {
 		outline: none;
@@ -254,7 +254,7 @@ export const styles = css`
 	}
 
 	[part="page"],
-	[part="page current"] {
+	[part="current-page"] {
 		color: var(--_item-color-text);
 		display: none;
 	}
@@ -275,18 +275,18 @@ export const styles = css`
 		color: var(--_item-color-text-selected);
 	}
 
-	[part="page current"] {
+	[part="current-page"] {
 		background-color: var(--_current-page-color-background-selected);
 		color: var(--_current-page-text-color-selected);
 		padding: var(--_current-page-padding);
 	}
 
-	[part="page current"]:hover {
+	[part="current-page"]:hover {
 		background-color: var(--_current-page-color-background-hover);
 		color: var(--_current-page-text-color-hover);
 	}
 
-	[part="page current"]:active {
+	[part="current-page"]:active {
 		background-color: var(--_current-page-color-background-active);
 		color: var(--_current-page-text-color-active);
 	}
@@ -308,7 +308,7 @@ export const styles = css`
 
 	@media (min-width: 768px) {
 		[part="page"],
-		[part="page current"] {
+		[part="current-page"] {
 			display: inline-flex;
 		}
 

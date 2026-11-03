@@ -5,6 +5,7 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles.js";
 import { styles } from "./styles.js";
 import { inputLabelStyles, inputHelpTextStyles } from "./input-styles.js";
@@ -180,6 +181,7 @@ class WarpTextarea extends FormControlMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 

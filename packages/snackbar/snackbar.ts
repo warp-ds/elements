@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { html, LitElement } from "lit";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import type { WarpButton } from "../button/button.js";
 import {
 	SnackbarDuration,
@@ -136,6 +137,7 @@ export class WarpSnackbar extends LitElement {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		/**
 		 * Set on internals to avoid hydration mismatches in React
 		 * @internal

@@ -1,4 +1,5 @@
 import { html, LitElement } from "lit";
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 
 import { i18n } from "@lingui/core";
@@ -59,28 +60,28 @@ class WarpPill extends LitElement {
 	@property({ attribute: "close-aria-label", type: String })
 	closeAriaLabel: string | undefined;
 
-	private openFilterSrText: string;
-	private removeFilterSrText: string;
-
 	static styles = [reset, styles];
 
-	constructor() {
-		super();
-		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
-		this.canClose = false;
-		this.suggestion = false;
-
-		this.openFilterSrText = i18n._({
+	private get openFilterSrText() {
+		return i18n._({
 			id: "pill.aria.openFilter",
 			message: "Open filter",
 			comment: "Fallback screen reader message for open filter",
 		});
+	}
 
-		this.removeFilterSrText = i18n._({
+	private get removeFilterSrText() {
+		return i18n._({
 			id: "pill.aria.removeFilter",
 			message: "Remove filter {label}",
 			comment: "Fallback screen reader message for removal of the filter",
 		});
+	}
+
+	constructor() {
+		super();
+		new I18nController(this);
+		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
 	private _onClick() {

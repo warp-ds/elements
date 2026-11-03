@@ -2,6 +2,7 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { reset } from "../styles";
 import { styles } from "./styles.js";
 
@@ -18,6 +19,11 @@ export type WarpSwitchChangeEvent = CustomEvent<{
  * @event {WarpSwitchChangeEvent} change - Dispatched when the switch toggles. Includes boolean `checked` and string/null `value` on `details`.
  */
 export class WarpSwitch extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * Name used when submitting an HTML form.
 	 */
@@ -80,8 +86,12 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 	_syncA11yState() {
 		// Use ElementInternals for ARIA state - works with real AT,
 		// avoids hydration mismatches from client-side attribute changes
-		this.internals.ariaChecked = this.checked ? "true" : "false";
-		this.internals.ariaDisabled = this.disabled ? "true" : null;
+		(this.internals as ElementInternals).ariaChecked = this.checked
+			? "true"
+			: "false";
+		(this.internals as ElementInternals).ariaDisabled = this.disabled
+			? "true"
+			: null;
 	}
 
 	connectedCallback(): void {
@@ -90,12 +100,12 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 		// Use ElementInternals for role - works with real AT,
 		// avoids hydration mismatches from client-side attribute changes
-		this.internals.role = "switch";
+		(this.internals as ElementInternals).role = "switch";
 
 		// Sync aria-label to internals (keep attribute for hydration compatibility)
 		const ariaLabel = this.getAttribute("aria-label");
 		if (ariaLabel) {
-			this.internals.ariaLabel = ariaLabel;
+			(this.internals as ElementInternals).ariaLabel = ariaLabel;
 		}
 
 		if (!this.disabled) {
@@ -126,6 +136,23 @@ export class WarpSwitch extends FormControlMixin(LitElement) {
 
 	resetFormControl(): void {
 		this.checked = this.#initialState;
+	}
+
+	setCustomValidity(message: string): void {
+		if (!message) {
+			(this.internals as ElementInternals).setValidity({});
+			return;
+		}
+		return (this.internals as ElementInternals).setValidity(
+			{
+				customError: true,
+			},
+			message,
+		);
+	}
+
+	reportValidity(): boolean {
+		return (this.internals as ElementInternals).reportValidity();
 	}
 
 	render() {

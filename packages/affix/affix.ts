@@ -4,6 +4,7 @@ import { i18n } from "@lingui/core";
 import { html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { detectLocale } from "../i18n.js";
 import { reset } from "../styles.js";
 import type { WarpTextField } from "../textfield/textfield.js";
@@ -18,6 +19,11 @@ import "../icon/icon.js";
  * [Warp component reference](https://warp-ds.github.io/docs/components/text-field/frameworks/elements#prefix-label)
  */
 class WarpAffix extends FormControlMixin(LitElement) {
+	constructor() {
+		super();
+		new I18nController(this);
+	}
+
 	/**
 	 * @summary Accessible label for icon-button variants.
 	 * @description Used to override the default `aria-label`s for the internal button when `search` or `clear` is enabled.

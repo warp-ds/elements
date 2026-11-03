@@ -29,6 +29,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { styleMap } from "lit/directives/style-map.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 import "../tooltip/tooltip.js";
 
@@ -512,6 +513,7 @@ class WarpDatepicker extends FormControlMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 

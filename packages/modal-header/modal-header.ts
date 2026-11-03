@@ -2,6 +2,7 @@ import { Move } from "@itsy/animate/move";
 import { i18n } from "@lingui/core";
 import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
+import { I18nController } from "../controllers/i18n-controller.js";
 import "../icon/icon.js";
 
 import { activateI18n, detectLocale } from "../i18n.js";
@@ -62,6 +63,7 @@ export class WarpModalHeader extends CanCloseMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 

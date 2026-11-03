@@ -4,6 +4,7 @@ import { html, LitElement, nothing, PropertyValues } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
+import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n.js";
 import { reset } from "../styles.js";
 
@@ -39,6 +40,7 @@ class WarpTextField extends FormControlMixin(LitElement) {
 
 	constructor() {
 		super();
+		new I18nController(this);
 		activateI18n(enMessages, nbMessages, fiMessages, daMessages, svMessages);
 	}
 
