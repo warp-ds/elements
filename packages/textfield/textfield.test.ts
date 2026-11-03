@@ -325,3 +325,23 @@ test("shows info tooltip after label when the tooltip property is set", async ()
 
 	expect(tooltip).toBeTruthy();
 });
+
+test("label focuses the input and tooltip content stays out of its name", async () => {
+	const page = render(html`
+		<w-textfield
+			label="Country"
+			tooltip="Where you live"
+			style="display: block; width: 320px"
+			data-testid="field"
+		></w-textfield>
+	`);
+	const input = page.getByRole("textbox", { name: "Country", exact: true });
+	await expect.element(input).toBeVisible();
+	await page.getByTestId("field").click({ position: { x: 160, y: 10 } });
+	await userEvent.keyboard("nor");
+	await expect.element(input).toHaveValue("nor");
+
+	await page.getByRole("button").click();
+	await expect.element(page.getByRole("tooltip")).toBeVisible();
+	await expect.element(input).toBeVisible();
+});
