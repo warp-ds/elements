@@ -134,7 +134,7 @@ The proof bar:
 5. **Check `console`.** It should show `"errors": 0`, or every error should be explained.
 6. **Green tests alone aren't proof.** Many behaviors have `no test` in the feature maps, and the tests that exist often dispatch synthetic events.
 
-Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `pnpm ctl events > .verify-elements/evidence/combobox-events.json`. The directory is gitignored and survives `down`. For before-and-after proof, save your reproduction as a `sh` block of `pnpm ctl` commands in `.verify-elements/repro.md`, run `pnpm ctl check .verify-elements/repro.md --save before`, and after the fix `--against before`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
+Screenshots default to `.verify-elements/evidence/<time>-<session>.png`. To keep JSON as evidence, redirect it to the same place, for example `pnpm ctl events > .verify-elements/evidence/combobox-events.json`. `up` creates the directory; it's gitignored and survives `down`. For before-and-after proof, save your reproduction as a `sh` block of `pnpm ctl` commands in `.verify-elements/repro.md`, run `pnpm ctl check .verify-elements/repro.md --save before`, and after the fix `--against before`. In your report, list the commands you ran, the key lines of their output and the evidence paths. List suspected product bugs separately.
 
 ## Cleanup
 

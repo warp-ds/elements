@@ -34,6 +34,7 @@ export const help = {
 };
 
 export async function main({ flags, paths }) {
+	fs.mkdirSync(evidenceDir, { recursive: true });
 	const wanted = {
 		browser: flags.browser ?? "chromium",
 		brand: flags.brand ?? "finn-no",
