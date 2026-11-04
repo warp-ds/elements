@@ -1,5 +1,10 @@
 import { css } from "lit";
 export const styles = css`
+	.label-row {
+		display: flex;
+		align-items: flex-start;
+	}
+
 	:host {
 		--_option-list-padding-bottom: var(--w-c-combobox-padding-bottom, 0.4rem);
 		--_option-list-shadow: var(--w-c-combobox-shadow, var(--w-shadow-m));

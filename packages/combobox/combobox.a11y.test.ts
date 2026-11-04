@@ -2,7 +2,6 @@ import { html } from "lit";
 import { describe, expect, test } from "vitest";
 import { render } from "vitest-browser-lit";
 
-import "../textfield/textfield.js";
 import "./combobox.js";
 
 describe("w-combobox accessibility (WCAG 2.2)", () => {
@@ -110,9 +109,7 @@ describe("w-combobox accessibility (WCAG 2.2)", () => {
 				</w-combobox>
 			`);
 			const el = (await page.getByTestId("combobox").element()) as HTMLElement;
-			const input = el?.shadowRoot
-				?.querySelector("w-textfield")
-				?.shadowRoot?.querySelector("input");
+			const input = el?.shadowRoot?.querySelector("input");
 
 			input?.focus();
 			await new Promise((resolve) => setTimeout(resolve, 100));

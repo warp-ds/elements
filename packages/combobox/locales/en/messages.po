@@ -20,8 +20,20 @@ msgstr ""
 msgid "combobox.aria.pluralSuggestions"
 msgstr "{numSuggestions, plural, one {# suggestion} other {# suggestions}}"
 
+#. Accessible name of the button that shows the field tooltip
+#. js-lingui-explicit-id
+#: packages/combobox/combobox.ts
+msgid "combobox.tooltip.moreInformation"
+msgstr "More information"
+
 #. Aria text for combobox when no suggestions
 #. js-lingui-explicit-id
 #: packages/combobox/combobox.ts
 msgid "combobox.aria.noSuggestions"
 msgstr "No suggestions"
+
+#. Shown behind label when marked as optional
+#. js-lingui-explicit-id
+#: packages/combobox/combobox.ts
+msgid "combobox.label.optional"
+msgstr "Optional"
