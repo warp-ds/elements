@@ -1,3 +1,10 @@
+## [2.15.1-next.1](https://github.com/warp-ds/elements/compare/v2.15.0...v2.15.1-next.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* **radio,checkbox:** keep value and checked set as properties before connect ([e5bfed4](https://github.com/warp-ds/elements/commit/e5bfed4c84d4e37bc1909f3744b40fe195bafcf9))
+
 # [2.15.0](https://github.com/warp-ds/elements/compare/v2.14.0...v2.15.0) (2026-11-03)
 
 
