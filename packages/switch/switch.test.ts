@@ -83,3 +83,36 @@ test("native label click toggles switch", async () => {
 	await wSwitch.updateComplete;
 	expect(wSwitch.checked).toBe(false);
 });
+
+test("has Constraint Validation API support", async () => {
+	render(html`
+		<label for="native-label-switch">Enable notifications</label>
+		<w-switch
+			id="native-label-switch"
+			name="notifications"
+			value="enabled"
+		></w-switch>
+	`);
+
+	const component = document.querySelector("w-switch")!;
+	await component.updateComplete;
+
+	// Start off as valid (empty string in validationMessage)
+	expect(component.validationMessage).toBe("");
+	expect(component.validity.valid).toBe(true);
+	expect(component.checkValidity()).toBe(true);
+
+	// Can set a custom validation message
+	component.setCustomValidity("This switch must be on for some reason");
+	expect(component.validationMessage).toBe(
+		"This switch must be on for some reason",
+	);
+	expect(component.checkValidity()).toBe(false);
+	expect(component.validity.valid).toBe(false);
+	expect(component.validity.customError).toBe(true);
+
+	// Can call reportValidity to show the validation message in the browser
+	// AFAIK there's no good way to assert that the browser shows something in Playwright,
+	// but I verified this with manual testing.
+	expect(component.reportValidity()).toBe(false);
+});

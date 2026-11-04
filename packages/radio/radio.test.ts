@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { expect, test, vi } from "vitest";
+import { expect, onTestFinished, test, vi } from "vitest";
 import { render } from "vitest-browser-lit";
 
 import "./radio.js";
@@ -361,4 +361,65 @@ test("submits the associated form when radio has focus and user presses Enter", 
 	await userEvent.keyboard("{Enter}");
 
 	expect(onSubmit).toHaveBeenCalled();
+});
+
+// Frameworks such as React 19 create the element, set props as properties and only then insert it.
+// Lit reflects properties to attributes on its first update, which runs after connectedCallback.
+const connect = (element: HTMLElement, parent: HTMLElement = document.body) => {
+	parent.append(element);
+	onTestFinished(() => element.remove());
+	return element;
+};
+
+test("keeps a value set as a property before the radio is connected", async () => {
+	const radio = document.createElement("w-radio");
+	radio.value = "evening";
+	connect(radio);
+	await radio.updateComplete;
+
+	expect(radio.value).toBe("evening");
+	expect(radio.getAttribute("value")).toBe("evening");
+});
+
+test("submits a value and checked state set as properties before connecting", async () => {
+	const form = document.createElement("form");
+	connect(form);
+
+	const radio = document.createElement("w-radio");
+	radio.name = "slot";
+	radio.value = "evening";
+	radio.checked = true;
+	form.append(radio);
+	await radio.updateComplete;
+
+	expect(new FormData(form).get("slot")).toBe("evening");
+});
+
+test("a property set after the attribute but before connecting wins", async () => {
+	const radio = document.createElement("w-radio");
+	radio.setAttribute("value", "server");
+	radio.value = "client";
+	connect(radio);
+	await radio.updateComplete;
+
+	expect(radio.value).toBe("client");
+	expect(radio.getAttribute("value")).toBe("client");
+});
+
+test("uses the value attribute, and falls back to 'on' without one", async () => {
+	render(html`
+		<w-radio value="alpha">Alpha</w-radio>
+		<w-radio>No value</w-radio>
+	`);
+
+	const [withAttribute, withoutAttribute] = [
+		...document.querySelectorAll("w-radio"),
+	];
+	await withAttribute.updateComplete;
+	await withoutAttribute.updateComplete;
+
+	expect(withAttribute.value).toBe("alpha");
+	expect(withAttribute.getAttribute("value")).toBe("alpha");
+	expect(withoutAttribute.value).toBe("on");
+	expect(withoutAttribute.getAttribute("value")).toBe("on");
 });
