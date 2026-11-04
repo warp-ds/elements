@@ -113,9 +113,8 @@ export class WarpRadio extends FormControlMixin(LitElement) {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.value = this.getAttribute("value") ?? "on";
+		this.value ??= "on";
 		this.#defaultChecked = this.checked;
-		this.checked = this.#defaultChecked;
 		// Use ElementInternals for ARIA to avoid hydration mismatches
 		this.internals.role = "radio";
 		this.setAttribute("tabindex", String(this._internalTabIndex));
