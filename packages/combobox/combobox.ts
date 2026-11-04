@@ -5,7 +5,6 @@ import { FormControlMixin } from "@open-wc/form-control";
 import { html, LitElement, PropertyValues } from "lit";
 import { property, state } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 import { I18nController } from "../controllers/i18n-controller.js";
 import { activateI18n } from "../i18n.js";
@@ -368,50 +367,68 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 			: noSuggestions;
 	}
 
-	/** Handle keyboard navigation */
-	private _handleKeyDown(e: KeyboardEvent) {
-		const isNavigationKey = [
-			"ArrowDown",
-			"ArrowUp",
-			"PageUp",
-			"PageDown",
-			"Home",
-			"End",
-		].includes(e.key);
-		const ignoreList = ["ArrowDown", "ArrowLeft", "ArrowUp", "ArrowRight"];
+	/** Whether any modifier key is pressed; modified keys are left to the browser */
+	private _hasModifier(e: KeyboardEvent) {
+		return e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
+	}
 
-		if (isNavigationKey && !this._isOpen) {
-			this._isOpen = true;
-			return;
-		}
-		if (isNavigationKey && this._isOpen) {
-			this._findAndSetActiveOption(e);
-			return;
-		}
-		if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) {
-			return;
-		}
+	/** Move DOM focus to an option, opening the list if needed */
+	private async _focusOption(option: OptionWithIdAndMatch | undefined) {
+		if (!option) return;
+		this._isOpen = true;
+		this._navigationOption = option;
+		await this.updateComplete;
+		(this.shadowRoot?.getElementById(option.id) as HTMLElement | null)?.focus();
+	}
 
-		// Other keys
+	/** Move DOM focus back to the text input */
+	private _focusInput() {
+		const input = this.shadowRoot
+			?.querySelector("w-textfield")
+			?.shadowRoot?.querySelector("input");
+		if (!input) return;
+		input.focus();
+		// Continue editing at the end instead of selecting the whole text
+		const end = input.value.length;
+		input.setSelectionRange(end, end);
+	}
+
+	/** Sync the native input with the display value after a selection */
+	private _syncInputValue() {
+		// Force update the textfield's internal input value with the label
+		requestAnimationFrame(() => {
+			const textfield = this.shadowRoot?.querySelector("w-textfield");
+			const input = textfield?.shadowRoot?.querySelector("input");
+			if (input) {
+				input.value = this._displayValue;
+			}
+		});
+	}
+
+	/** Handle keyboard input in the text field */
+	private _handleInputKeyDown(e: KeyboardEvent) {
+		if (this._hasModifier(e)) return;
+
 		switch (e.key) {
+			case "ArrowDown":
+				e.preventDefault();
+				this._isOpen = true;
+				this._focusOption(this._currentOptions[0]);
+				break;
+			case "ArrowUp":
+				e.preventDefault();
+				this._isOpen = true;
+				this._focusOption(this._currentOptions.at(-1));
+				break;
 			case "Enter":
 				if (this._navigationOption) {
 					e.preventDefault();
 					this._handleSelect(this._navigationOption);
-
-					// Force update the textfield's internal input value with the label
-					requestAnimationFrame(() => {
-						const textfield = this.shadowRoot?.querySelector("w-textfield");
-						const input = textfield?.shadowRoot?.querySelector("input");
-						if (input) {
-							input.value = this._displayValue;
-						}
-					});
+					this._syncInputValue();
 				}
 				this._isOpen = false;
 				break;
 			case "Tab":
-			case "Delete":
 				this._isOpen = false;
 				break;
 			case "Escape":
@@ -422,69 +439,101 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 				}
 				this._navigationOption = null;
 				break;
-			case "Backspace":
-				this._handleChange(this._navigationLabelOrDisplayValue);
-				this._navigationOption = null;
-				this._isOpen = true;
-				break;
-			default:
-				if (ignoreList.includes(e.key)) {
-					break;
-				}
-
-				this._isOpen = true;
-				if (this._navigationOption) {
-					this._handleChange(this._navigationOption.value);
-					this._navigationOption = null;
-				} else {
-					this._handleChange(this.value);
-				}
-				break;
 		}
 	}
 
-	/** Find and set active option based on keyboard navigation */
-	private _findAndSetActiveOption(e: KeyboardEvent) {
-		e.preventDefault();
+	/** Handle keyboard input while focus is on an option in the list */
+	private _handleListKeyDown(e: KeyboardEvent) {
+		if (this._hasModifier(e)) return;
 
-		const currIndex = this._currentOptions.findIndex(
+		const options = this._currentOptions;
+		const lastIndex = options.length - 1;
+		const currIndex = options.findIndex(
 			(option) => option.id === this._navigationOption?.id,
 		);
-		const nextIndex = currIndex + 1;
-		const prevIndex = currIndex - 1;
 
 		switch (e.key) {
 			case "ArrowDown":
-				this._navigationOption =
-					nextIndex > this._currentOptions.length - 1
-						? null
-						: this._currentOptions[nextIndex];
+				e.preventDefault();
+				if (currIndex >= lastIndex) {
+					// Moving past the last option returns to the text input
+					this._navigationOption = null;
+					this._focusInput();
+				} else {
+					this._focusOption(options[currIndex + 1]);
+				}
 				break;
 			case "ArrowUp":
-				this._navigationOption =
-					prevIndex === -2
-						? (this._currentOptions.at(-1) ?? null)
-						: prevIndex < 0
-							? null
-							: this._currentOptions[prevIndex];
+				e.preventDefault();
+				if (currIndex <= 0) {
+					// Moving past the first option returns to the text input
+					this._navigationOption = null;
+					this._focusInput();
+				} else {
+					this._focusOption(options[currIndex - 1]);
+				}
 				break;
 			case "PageUp":
-				this._navigationOption =
-					currIndex - 10 < 0
-						? this._currentOptions[0]
-						: this._currentOptions[currIndex - 10];
+				e.preventDefault();
+				this._focusOption(options[Math.max(currIndex - 10, 0)]);
 				break;
 			case "PageDown":
-				this._navigationOption =
-					currIndex + 10 > this._currentOptions.length - 1
-						? (this._currentOptions.at(-1) ?? null)
-						: (this._currentOptions[currIndex + 10] ?? null);
+				e.preventDefault();
+				this._focusOption(options[Math.min(currIndex + 10, lastIndex)]);
 				break;
 			case "Home":
-				this._navigationOption = this._currentOptions[0];
+				e.preventDefault();
+				this._focusOption(options[0]);
 				break;
 			case "End":
-				this._navigationOption = this._currentOptions.at(-1) ?? null;
+				e.preventDefault();
+				this._focusOption(options.at(-1));
+				break;
+			case "Enter":
+				e.preventDefault();
+				if (this._navigationOption) {
+					this._handleSelect(this._navigationOption);
+					this._syncInputValue();
+				}
+				this._focusInput();
+				break;
+			case "Escape":
+				e.preventDefault();
+				this._isOpen = false;
+				this._navigationOption = null;
+				this._focusInput();
+				break;
+			case "Tab":
+				// Tab from an option (tabindex="-1") isn't reliable across browsers, so
+				// let the default action continue from the input, as if Tab was pressed there.
+				this._isOpen = false;
+				this._focusInput();
+				break;
+			default:
+				// First-letter navigation: move to the next option, wrapping around,
+				// whose display text starts with the typed character.
+				if (e.key.length === 1) {
+					e.preventDefault();
+					const char = e.key.toLowerCase();
+					for (let step = 1; step <= options.length; step++) {
+						const option = options[(currIndex + step) % options.length];
+						const display = (option.label || option.value).toLowerCase();
+						if (display.startsWith(char)) {
+							this._focusOption(option);
+							break;
+						}
+					}
+					break;
+				}
+				// Backspace continues editing in the text input, starting from the shown label.
+				// Focus moves before the default action, so the key lands in the input.
+				if (e.key === "Backspace") {
+					if (this._navigationOption) {
+						this._handleChange(this._navigationLabelOrDisplayValue);
+						this._navigationOption = null;
+					}
+					this._focusInput();
+				}
 				break;
 		}
 	}
@@ -532,6 +581,8 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 		// see comment in w-textfield for more details.
 		if (e instanceof CustomEvent) return;
 		if (!this.openOnFocus) return;
+		// Focus returning from an option is not a new focus of the component
+		if (this._isFocusWithin(e.relatedTarget)) return;
 
 		const focusEvent = new CustomEvent("focus", {
 			bubbles: true,
@@ -542,17 +593,19 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 		this._isOpen = true;
 	}
 
+	/** Whether a focus target is the input or an option in this combobox */
+	private _isFocusWithin(target: EventTarget | null) {
+		return target instanceof Node && !!this.shadowRoot?.contains(target);
+	}
+
 	/** Handle input blur */
 	private _handleBlur(e: FocusEvent) {
 		// filter out deprecated, duplicated event generated by w-textfield.
 		// see comment in w-textfield for more details.
 		if (e instanceof CustomEvent) return;
 
-		// Check if focus moved to an option
-		const relatedTarget = e.relatedTarget as Element;
-		if (relatedTarget && this.shadowRoot?.contains(relatedTarget)) {
-			return;
-		}
+		// Ignore focus moving between the input and the options
+		if (this._isFocusWithin(e.relatedTarget)) return;
 
 		this._isOpen = false;
 
@@ -587,7 +640,10 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 
 	/** Handle option click */
 	private _handleOptionClick(e: MouseEvent, option: OptionWithIdAndMatch) {
+		// Keep focus off the option, which is hidden once selected
+		e.preventDefault();
 		this._handleSelect(option);
+		this._focusInput();
 
 		// Force update the textfield's internal input value with the label
 		requestAnimationFrame(() => {
@@ -708,19 +764,18 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					role="combobox"
 					aria-autocomplete="list"
 					aria-expanded=${this._isOpen && this._currentOptions.length !== 0}
-					aria-activedescendant=${ifDefined(
-						this._isOpen ? this._navigationOption?.id : undefined,
-					)}
 					aria-controls=${this._listboxId}
 					@input=${(e: InputEventWithTarget<HTMLInputElement>) => {
 						// filter out deprecated, duplicated event generated by w-textfield.
 						// see comment in w-textfield for more details.
 						if (e instanceof CustomEvent) return;
+						this._navigationOption = null;
 						this._handleChange(e.target.value);
+						this._isOpen = true;
 					}}
 					@focus=${this._handleFocus}
 					@blur=${this._handleBlur}
-					@keydown=${this._handleKeyDown}
+					@keydown=${this._handleInputKeyDown}
 				></w-textfield>
 
 				<span class="sr-only" role="status">
@@ -735,6 +790,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 					id=${this._listboxId}
 					role="listbox"
 					?hidden=${!this._isOpen || !this._currentOptions.length}
+					@keydown=${this._handleListKeyDown}
 				>
 					${repeat(
 						this._currentOptions,
@@ -748,6 +804,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 									aria-selected=${this._navigationOption?.id === option.id}
 									tabindex="-1"
 									part="option"
+									@blur=${this._handleBlur}
 									@mousedown=${(e: MouseEvent) =>
 										this._handleOptionClick(e, option)}
 								>
