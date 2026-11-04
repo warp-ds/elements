@@ -589,10 +589,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 	private _handleOptionClick(e: MouseEvent, option: OptionWithIdAndMatch) {
 		// Keep the native mousedown action from focusing an option that is about to hide.
 		e.preventDefault();
-		this.shadowRoot
-			?.querySelector("w-textfield")
-			?.shadowRoot?.querySelector("input")
-			?.focus();
+		this.shadowRoot?.querySelector("w-textfield")?.focus();
 		this._handleSelect(option);
 
 		// Force update the textfield's internal input value with the label
