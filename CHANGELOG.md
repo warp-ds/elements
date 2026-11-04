@@ -1,3 +1,10 @@
+## [2.15.1-next.2](https://github.com/warp-ds/elements/compare/v2.15.1-next.1...v2.15.1-next.2) (2026-11-04)
+
+
+### Bug Fixes
+
+* **combobox:** retain input focus after pointer selection ([#857](https://github.com/warp-ds/elements/issues/857)) ([161ceb4](https://github.com/warp-ds/elements/commit/161ceb4d32b74054b3b69eff167559919f991277)), closes [#830](https://github.com/warp-ds/elements/issues/830)
+
 ## [2.15.1-next.1](https://github.com/warp-ds/elements/compare/v2.15.0...v2.15.1-next.1) (2026-11-04)
 
 
