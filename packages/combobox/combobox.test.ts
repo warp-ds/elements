@@ -558,3 +558,30 @@ test("renders localized optional text based on document lang", async () => {
 
 	document.documentElement.lang = originalLang;
 });
+
+test("remote suggestions announce visible results and respect dismissal", async () => {
+	const page = render(html`
+		<w-combobox
+			label="City"
+			disable-static-filtering
+			.options=${[{ value: "osl", label: "Oslo" }]}
+		></w-combobox>
+	`);
+	const field = page.getByRole("textbox", { name: "City" });
+	await expect.element(field).toBeVisible();
+	const el = page.container.querySelector("w-combobox")!;
+	expect(page.getByRole("listbox").query()).toBeNull();
+	(field.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("{Shift>}X{/Shift}yz");
+	await expect
+		.element(page.getByRole("option", { name: "Oslo" }))
+		.toBeVisible();
+	await expect
+		.element(page.getByRole("status"))
+		.toHaveTextContent("1 suggestion");
+
+	await userEvent.keyboard("{Escape}");
+	el.options = [{ value: "bgo", label: "Bergen" }];
+	await el.updateComplete;
+	expect(page.getByRole("listbox").query()).toBeNull();
+});
