@@ -592,7 +592,7 @@ export class WarpCombobox extends FormControlMixin(LitElement) {
 		this.shadowRoot
 			?.querySelector("w-textfield")
 			?.shadowRoot?.querySelector("input")
-			?.focus({ preventScroll: true });
+			?.focus();
 		this._handleSelect(option);
 
 		// Force update the textfield's internal input value with the label
