@@ -183,6 +183,7 @@
     "build": "rimraf dist && rimraf eik && pnpm messages:compile && tsc && pnpm build:manifest && pnpm build:editor && pnpm build:components && pnpm run build:cloak && pnpm run build:global-css && pnpm build:bundle && pnpm build:eik-components-backwards-compat && pnpm run build:polyfill && pnpm run build:docs",
     "clean": "git clean -fdx",
     "commit": "cz",
+    "ctl": "node .agents/skills/verify-elements/ctl.mjs",
     "dev": "pnpm run storybook",
     "storybook": "storybook dev --port 63900",
     "storybook:react": "storybook dev -p 63901 -c .storybook-react",

@@ -13,6 +13,7 @@ export default [
 			"eik",
 			"storybook-static",
 			".vitest-attachments",
+			".verify-elements",
 			"entrypoint.js",
 		],
 	},
