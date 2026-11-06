@@ -325,3 +325,46 @@ test("shows info tooltip after label when the tooltip property is set", async ()
 
 	expect(tooltip).toBeTruthy();
 });
+
+test("has Constraint Validation API support", async () => {
+	const submitHandler = vi.fn();
+	const page = render(html`
+		<form
+			data-testid="form"
+			@submit="${(e: SubmitEvent) => {
+				e.preventDefault();
+				submitHandler();
+			}}"
+		>
+			<w-textfield label="Message" name="message"></w-textfield>
+			<button type="submit">Submit</button>
+		</form>
+	`);
+
+	const component = document.querySelector("w-textfield")!;
+	await component.updateComplete;
+
+	// Start off as valid (empty string in validationMessage)
+	expect(component.validationMessage).toBe("");
+	expect(component.validity.valid).toBe(true);
+	expect(component.checkValidity()).toBe(true);
+
+	// Can set a custom validation message
+	component.setCustomValidity("This simply will not do!");
+	expect(component.validationMessage).toBe("This simply will not do!");
+	expect(component.checkValidity()).toBe(false);
+	expect(component.validity.valid).toBe(false);
+	expect(component.validity.customError).toBe(true);
+
+	// Can call reportValidity to show the validation message in the browser
+	expect(component.reportValidity()).toBe(false);
+
+	// Custom error prevents a form submit
+	await userEvent.click(page.getByRole("button"));
+	expect(submitHandler).not.toHaveBeenCalled();
+
+	// Clearing the error makes form submittable
+	component.setCustomValidity("");
+	await userEvent.click(page.getByRole("button"));
+	expect(submitHandler).toHaveBeenCalled();
+});
