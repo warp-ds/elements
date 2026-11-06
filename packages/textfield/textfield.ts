@@ -281,6 +281,23 @@ class WarpTextField extends FormControlMixin(LitElement) {
 		this.value = this.#initialValue;
 	}
 
+	setCustomValidity(message: string): void {
+		if (!message) {
+			(this.internals as ElementInternals).setValidity({});
+			return;
+		}
+		return (this.internals as ElementInternals).setValidity(
+			{
+				customError: true,
+			},
+			message,
+		);
+	}
+
+	reportValidity(): boolean {
+		return (this.internals as ElementInternals).reportValidity();
+	}
+
 	/** @internal */
 	get _helptextstyles() {
 		return "help-text";
