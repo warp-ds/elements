@@ -68,12 +68,12 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 
 | Command | Does |
 |---|---|
-| `mount <html> [--with a,b]`, `mount --file <path>` | Replace the page content and import `packages/<name>/<name>.ts` for every `w-<name>` tag in the HTML, then wait until the components are defined and rendered. Clears the event and console logs. |
+| `mount <html> [--with a,b] [--late]`, `mount --file <path>` | Replace the page content and import `packages/<name>/<name>.ts` for every `w-<name>` tag in the HTML, then wait until the components are defined and rendered. The components are defined before the HTML goes in. `--late` reloads the page, inserts the HTML first and defines the components one at a time in document order, as when server-rendered HTML upgrades while its scripts load. Clears the event and console logs. |
 | `type <selector> <text> [--delay ms]` | Focus the element, then send real key events one character at a time (keydown, input, keyup). Appends at the caret. |
 | `press <key> [<key> ...] [--selector s]` | Press keys in order on the focused element, or focus `--selector` first. Uses Playwright key names: `ArrowDown`, `Enter`, `Escape`, `Tab`, `Shift+Tab`, `Home`, `End`, `PageUp`, `PageDown`, `Backspace`, `ControlOrMeta+a`. |
 | `click <selector>`, `hover <selector>` | Real mouse actions, after Playwright's visibility and enabled checks. |
 | `drag <selector> --by dx,dy` or `--to <selector>` | Press on the element's centre, move in 10 steps, release. |
-| `snapshot [selector]` | Accessibility tree of `#mount`, or of the selector: roles, names, `[expanded]`, `[selected]`, `[disabled]`, `[invalid]` and input values, through shadow DOM. One line per array entry. |
+| `snapshot [selector] [--platform]` | Accessibility tree of `#mount`, or of the selector: roles, names, `[expanded]`, `[selected]`, `[disabled]`, `[invalid]` and input values, through shadow DOM. One line per array entry. `--platform` reads the browser's own tree instead, what a screen reader gets, including roles and relations set through `ElementInternals` (Chromium only). |
 | `events [--type t] [--internal]` | The public CustomEvents `w-*` elements dispatched since the mount: `type`, `target`, `detail`, `time`. `--internal` adds events from elements inside shadow roots, with `insideShadowOf` naming the host. |
 | `console` | Console messages and page errors since the mount. |
 | `screenshot [path] [--selector s]` | Full-page or element PNG. Prints the absolute path. |
@@ -81,6 +81,8 @@ Run `pnpm ctl doctor` first whenever anything looks off: a selector that should 
 | `inspect <selector>` | Attributes, Lit properties, internal state and the start of the shadow DOM. |
 | `styles <selector> [--props=a,b]` | Computed styles through shadow DOM, including what design tokens resolve to. |
 | `a11y [selector]` | axe-core violations, with the same WCAG tags as the a11y tests. |
+| `box <selector>` | Position and size of every match, through shadow DOM, for layout behavior such as an indicator lining up with the active tab. |
+| `viewport <w> <h>`, `viewport reset` | Resize the page, for responsive layouts and components that react to their own size. |
 | `metrics`, `throttle cpu <n>`, `trace start/stop` | Performance counters, CPU throttling and traces. Chromium only. |
 | `eval <js>` | Evaluate one expression in the page. Use it to read state, never as proof. |
 | `run [--file f] [--keep-going]` | Run several commands in one call, one per line from stdin or a file, and print each result in order. Stops at the first failure unless `--keep-going`. |
@@ -100,12 +102,14 @@ pnpm ctl events --type select
 What to know when driving:
 
 - **Missing imports.** `mount` imports only the tags written in the HTML. If a component renders another `w-*` element that nothing imported, `mount` returns a warning naming the tag and the `--with` flag to add. It's a missing import in the product, so report it.
+- **Upgrade order.** A container that reads its children, such as `w-tabs` reading its `w-tab` elements, can break when the children upgrade after it. A plain `mount` never shows that. Check it with `mount --late`.
 - **Stand-ins for consumer code.** Inline `<script>` tags in mounted HTML don't run, because the HTML is inserted with `innerHTML`. Inline `on*` attributes do run: `onchange`, `onselect`, a form's `onsubmit`. `<style>` elements apply. Array properties take JSON in the attribute.
 - **Quoting.** Wrap the HTML in single quotes and use double quotes inside. Write `&quot;` for a quote inside an inline handler. Use `--file` for anything long.
 - **Selectors.** These are Playwright selectors, and they pierce shadow DOM. Prefer role selectors read off `snapshot`. `[name="..."]` must match the whole accessible name exactly. Use `[name="..."i]` for case-insensitive, or `[name=/^Country/]` for a prefix.
+- **Roles from `ElementInternals`.** Tabs, radio, switch and several other components set their role and ARIA state through `ElementInternals`, not attributes. Playwright's `snapshot`, `role=` selectors and axe can't see that. Select those elements with CSS, such as `w-tab[for="two"]`, and read their roles and states with `snapshot --platform`.
 - **Action output.** Each action waits for pending Lit updates and two animation frames, so the next `snapshot` sees the settled state. It reports `focused` (the deepest focused element through shadow roots, with its value) and `eventsDuringAction`, the public events the action caused. `internalEvents` counts the events from inside shadow roots; `events --internal` lists them.
 - **Timeouts.** Actions time out after 5 s. A failure includes Playwright's `callLog`, which says why, for example `element is not enabled`.
-- **Focus.** `type` and `press --selector` move focus programmatically, like tabbing in. Use `click` when the pointer path matters.
+- **Focus.** `type` and `press --selector` move focus programmatically, like tabbing in. Use `click` when the pointer path matters. WebKit leaves links out of the Tab order, as Safari does by default, and at the end of the page Firefox wraps Tab to the first element where the others report `focused: null`. Use buttons or inputs as Tab targets, and put one after the component.
 - **Several commands at once.** Use `run` instead of chaining commands or storing `pnpm ctl` in a shell variable, which zsh doesn't split into words:
 
   ```sh

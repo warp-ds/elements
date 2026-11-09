@@ -47,7 +47,7 @@ Describe current behavior, even when it looks wrong. A behavior that can't be dr
 
 ## Selector rules
 
-- Use role selectors read off `ctl snapshot`: `role=<role>[name="<accessible name>"]`. They pierce shadow DOM.
+- Use role selectors read off `ctl snapshot`: `role=<role>[name="<accessible name>"]`. They pierce shadow DOM. For elements whose role comes from `ElementInternals`, which role selectors can't see, use a CSS selector on the element and prove roles and states with `snapshot --platform`.
 - `[name="..."]` matches the whole accessible name exactly and is case-sensitive. A label with `optional` is named `Country Optional`, so `[name="Country"]` does not match it. Use the full name, `[name="country optional"i]` for case-insensitive, or a regex: `[name=/^Country/]`.
 - CSS selectors also pierce open shadow roots. Use tag names such as `w-combobox` when no role fits. Don't use ids or classes from inside a shadow root: they are internal, and some are generic (`combobox-listbox`).
 - Hidden elements don't match: options in a closed list time out after 5 s. Open the component first.

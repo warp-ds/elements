@@ -97,22 +97,36 @@ async function mount(html, options = {}) {
 	mountEl.replaceChildren();
 	events.length = 0;
 	panel?.reset();
-	mountedAt = performance.now();
-	mountEl.innerHTML = html;
 
+	const template = document.createElement("template");
+	template.innerHTML = html;
 	const tags = [
-		...new Set(Array.from(mountEl.querySelectorAll("*"), (el) => el.localName)),
+		...new Set(
+			Array.from(template.content.querySelectorAll("*"), (el) => el.localName),
+		),
 	].filter((tag) => tag.startsWith("w-"));
 	const names = [...new Set([...tags.map((tag) => tag.slice(2)), ...extra])];
 	const modules = names.map((name) => `/packages/${name}/${name}.ts`);
 	const errors = [];
-	await Promise.all(
-		modules.map((path) =>
-			import(/* @vite-ignore */ path).catch((error) => {
-				errors.push({ module: path, message: String(error?.message ?? error) });
-			}),
-		),
-	);
+	const load = (path) =>
+		import(/* @vite-ignore */ path).catch((error) => {
+			errors.push({ module: path, message: String(error?.message ?? error) });
+		});
+
+	// By default every component is defined before the markup goes in, as in the
+	// tests and in apps that import components before rendering. With late, the
+	// markup goes in first and each module loads and renders before the next, as
+	// when server-rendered HTML upgrades while its scripts arrive one by one.
+	if (!options.late) await Promise.all(modules.map(load));
+	mountedAt = performance.now();
+	mountEl.innerHTML = html;
+	if (options.late) {
+		for (const path of modules) {
+			await load(path);
+			await settle();
+		}
+	}
+
 	const undefinedTags = [];
 	await Promise.all(
 		tags.map((tag) =>

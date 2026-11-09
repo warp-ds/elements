@@ -29,7 +29,14 @@ export const help = {
 	],
 };
 
+const CHROMIUM_ONLY = /is Chromium only/;
+const ELEMENT_ID = /#[^\s>"]+/g;
+const withoutIds = (text) => text?.replace(ELEMENT_ID, "");
+const chromiumOnly = (reply) =>
+	!reply.ok && CHROMIUM_ONLY.test(reply.error ?? "");
+
 function problemWith(reply) {
+	if (chromiumOnly(reply)) return null;
 	if (!reply.ok) return { error: reply.error, hint: reply.hint };
 	if (reply.warnings?.length) return { error: reply.warnings.join(" ") };
 	if (reply.consoleErrors?.length)
@@ -42,20 +49,40 @@ function problemWith(reply) {
 const publicOnly = (events) => events?.filter((event) => !event.insideShadowOf);
 
 const comparable = (reply) =>
-	JSON.stringify({
-		ok: reply.ok,
-		error: reply.error,
-		focused: reply.focused,
-		eventsDuringAction: publicOnly(reply.eventsDuringAction),
-		snapshot: reply.snapshot,
-		value: reply.value,
-		events: publicOnly(reply.events)?.map(({ type, target, detail }) => ({
-			type,
-			target,
-			detail,
-		})),
-		warnings: reply.warnings,
-	});
+	chromiumOnly(reply)
+		? JSON.stringify({ chromiumOnly: true })
+		: JSON.stringify({
+				ok: reply.ok,
+				error: reply.error,
+				focused: reply.focused && {
+					...reply.focused,
+					element: withoutIds(reply.focused.element),
+				},
+				eventsDuringAction: publicOnly(reply.eventsDuringAction),
+				snapshot: reply.snapshot,
+				value: reply.value,
+				events: publicOnly(reply.events)?.map(({ type, target, detail }) => ({
+					type,
+					target,
+					detail,
+				})),
+				warnings: reply.warnings,
+				styles: reply.styles,
+				violations: reply.violations?.map((violation) => violation.id),
+			});
+
+const layout = (reply) =>
+	reply.boxes
+		? JSON.stringify(
+				reply.boxes.map(({ element, x, y, width, height }) => [
+					withoutIds(element),
+					Math.round(x),
+					Math.round(y),
+					Math.round(width),
+					Math.round(height),
+				]),
+			)
+		: undefined;
 
 async function runFiles(files, session, browser, keep) {
 	const up = runCtl(
@@ -102,6 +129,7 @@ async function runFiles(files, session, browser, keep) {
 					line,
 					command: source,
 					reply: comparable(reply),
+					layout: layout(reply),
 				});
 				const problem = problemWith(reply);
 				if (problem) report(problem);
@@ -133,6 +161,10 @@ function differencesBetween(runs) {
 			]),
 		);
 		if (new Set(Object.values(replies)).size === 1) continue;
+		if (
+			Object.values(replies).some((reply) => reply?.includes('"chromiumOnly"'))
+		)
+			continue;
 		differences.push({
 			file: result.file,
 			line: result.line,
@@ -159,10 +191,17 @@ function changesSince(saved, results) {
 		const { file, line, command } = result;
 		const before = pending.get(result.key)?.shift();
 		if (!before) added.push({ file, line, command });
-		else if (before.reply === result.reply) unchanged += 1;
+		else if (before.reply === result.reply && before.layout === result.layout)
+			unchanged += 1;
 		else {
-			const was = JSON.parse(before.reply);
-			const now = JSON.parse(result.reply);
+			const was = {
+				...JSON.parse(before.reply),
+				...(before.layout ? { boxes: JSON.parse(before.layout) } : {}),
+			};
+			const now = {
+				...JSON.parse(result.reply),
+				...(result.layout ? { boxes: JSON.parse(result.layout) } : {}),
+			};
 			const keys = Object.keys({ ...was, ...now }).filter(
 				(key) => JSON.stringify(was[key]) !== JSON.stringify(now[key]),
 			);
@@ -273,5 +312,19 @@ export async function main({ positional, flags }) {
 		commands: runs.chromium.commands,
 		failures,
 		differences,
+		...(() => {
+			const skipped = Object.fromEntries(
+				Object.entries(runs)
+					.map(([browser, run]) => [
+						browser,
+						run.results.filter((r) => r.reply.includes('"chromiumOnly"'))
+							.length,
+					])
+					.filter(([, n]) => n),
+			);
+			return Object.keys(skipped).length
+				? { chromiumOnlySkipped: skipped }
+				: {};
+		})(),
 	};
 }

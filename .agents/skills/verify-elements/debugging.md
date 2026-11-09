@@ -12,9 +12,11 @@ Run `ctl doctor`, then reproduce the problem from a fresh `ctl mount`. Start fro
 |---|---|
 | What did my action cause? | the action's own output: `focused` and `eventsDuringAction` |
 | Which events fired, in what order, with what detail? | `events`, `events --type <name>`, `events --internal` for events inside shadow roots |
-| What would a screen reader see? | `snapshot` |
+| What would a screen reader see? | `snapshot`, and `snapshot --platform` (Chromium) for roles and relations set through `ElementInternals` |
 | Why is the component in this state? | `inspect <selector>`: attributes, Lit properties, internal `_state`, shadow DOM |
 | Why does it look wrong? | `styles <selector>`, or `styles <selector> --props=--w-s-color-background` for a design token |
+| Is it in the right place, at the right size? | `box <selector>`, and `viewport <w> <h>` to see how it responds to a different width |
+| Does it only break on a real page? | `mount --late`, where the components upgrade one at a time after the HTML is in |
 | Any errors? | `console` |
 | What does it look like? | `screenshot`, or `up --headed` to watch |
 

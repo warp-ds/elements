@@ -59,6 +59,7 @@ const viteUrl = `http://127.0.0.1:${vitePort}`;
 const playgroundUrl = `${viteUrl}/playground/?brand=${encodeURIComponent(config.brand)}${config.headed ? "&events-panel" : ""}`;
 log("vite listening", viteUrl);
 
+const defaultViewport = vite.config.test?.browser?.viewport;
 const browser = await playwright[config.browser].launch({
 	headless: !config.headed,
 	handleSIGINT: false,
@@ -66,7 +67,7 @@ const browser = await playwright[config.browser].launch({
 	handleSIGHUP: false,
 });
 const page = await (
-	await browser.newContext({ viewport: vite.config.test?.browser?.viewport })
+	await browser.newContext({ viewport: defaultViewport })
 ).newPage();
 page.setDefaultTimeout(ACTION_TIMEOUT_MS);
 log("browser launched", config.browser, browser.version());
@@ -123,6 +124,7 @@ async function act(action) {
 
 const ctx = {
 	page,
+	defaultViewport,
 	browser,
 	config,
 	viteUrl,
@@ -230,7 +232,7 @@ async function diagnose(error, args) {
 		error: `No element matches ${args.selector}.`,
 		hint: found.length
 			? `The page has ${found.join(", ")}. [name="..."] must match the whole accessible name: use [name=/^Start/] for a prefix, or [name="..."i] to ignore case.`
-			: `There's no ${role} in the mounted content. Run snapshot to see the roles and names.`,
+			: `There's no ${role} in Playwright's accessibility tree. Run snapshot to see the roles and names. If the component sets its role through ElementInternals, as tabs, radio and switch do, role selectors can't see it: use a CSS selector such as w-tab[for="..."], and snapshot --platform to read the roles.`,
 	};
 }
 
