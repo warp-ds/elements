@@ -630,3 +630,25 @@ test("arrow keys move focus into the list, where list keys are handled", async (
 	expect(input.value).toBe("Sweden");
 	expect(list.hidden).toBe(true);
 });
+
+test("pointer selection keeps focus for keyboard navigation", async () => {
+	const page = render(html`
+		<w-combobox label="Country">
+			<option value="se">Sweden</option>
+		</w-combobox>
+	`);
+	const input = page.getByRole("textbox", { name: "Country" });
+	await expect.element(input).toBeVisible();
+	(input.element() as HTMLInputElement).focus();
+	await userEvent.keyboard("s");
+	await page.getByRole("option", { name: "Sweden" }).click();
+	await expect.element(input).toHaveValue("Sweden");
+	const nativeInput = input.element() as HTMLInputElement;
+	expect((nativeInput.getRootNode() as ShadowRoot).activeElement).toBe(
+		nativeInput,
+	);
+	await userEvent.keyboard("{ArrowDown}");
+	await expect
+		.element(page.getByRole("option", { name: "Sweden" }))
+		.toBeVisible();
+});
