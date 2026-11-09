@@ -1,3 +1,10 @@
+## [2.15.2-next.1](https://github.com/warp-ds/elements/compare/v2.15.1...v2.15.2-next.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* **combobox:** correct keyboard opening and label editing ([#854](https://github.com/warp-ds/elements/issues/854)) ([3a861f8](https://github.com/warp-ds/elements/commit/3a861f8f97edd8f541d439fb246434bc6b425af7)), closes [#827](https://github.com/warp-ds/elements/issues/827)
+
 ## [2.15.1](https://github.com/warp-ds/elements/compare/v2.15.0...v2.15.1) (2026-11-09)
 
 
