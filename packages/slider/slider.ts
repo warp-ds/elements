@@ -381,11 +381,6 @@ class WarpSlider extends LitElement {
 	#onInput(e: InputEvent) {
 		const input = e.target as WarpSliderThumb;
 		this.#updateActiveTrack(input);
-
-		const isRangeSlider = input.slot;
-		if (isRangeSlider) {
-			this.#doValidation();
-		}
 	}
 
 	#onBlur() {
@@ -419,32 +414,6 @@ class WarpSlider extends LitElement {
 		}
 	}
 
-	#doValidation() {
-		// In a range slider changing the value in one input can change the validity
-		// of the second input. Specifically, what was a value outside the mininum or
-		// maximum can become inside those limits when the limits change, by changing
-		// the from or to values. Check to see if a field is invalid, but should be
-		// valid based on those rules.
-
-		let from: WarpSliderThumb | null = null;
-		let to: WarpSliderThumb | null = null;
-		const sliderThumbs =
-			this.querySelectorAll<WarpSliderThumb>("w-slider-thumb");
-		for (const thumb of sliderThumbs.values()) {
-			if (thumb.slot === "from") from = thumb;
-			if (thumb.slot === "to") to = thumb;
-		}
-
-		if (!from || !to) {
-			// Not a range slider, nothing to do here.
-			return;
-		}
-		if (!from.invalid && !to.invalid) {
-			// Both are valid, nothing to do here
-			return;
-		}
-	}
-
 	#onSliderValidity(e: CustomEvent) {
 		e.stopPropagation();
 
@@ -455,9 +424,13 @@ class WarpSlider extends LitElement {
 		this._hasInternalError = Boolean(e.detail.invalid) || this.invalid;
 		this._invalidMessage = e.detail.invalid;
 
+		const sliderThumbs =
+			this.querySelectorAll<WarpSliderThumb>("w-slider-thumb");
+		for (const thumb of sliderThumbs.values()) {
+			thumb.setCustomValidity(this._invalidMessage);
+		}
+
 		if (didHaveInternalError === true && this._hasInternalError === false) {
-			const sliderThumbs =
-				this.querySelectorAll<WarpSliderThumb>("w-slider-thumb");
 			for (const thumb of sliderThumbs.values()) {
 				if (thumb !== triggeredThumb) {
 					thumb.updateFieldAfterValidation();

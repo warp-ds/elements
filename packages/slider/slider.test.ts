@@ -933,3 +933,62 @@ test("renders localized optional text based on active locale", async () => {
 
 	document.documentElement.lang = originalLang;
 });
+
+test("has Constraint Validation API support", async () => {
+	render(html`
+		<w-slider label="Price" min="0" max="100" optional>
+			<w-slider-thumb name="price"></w-slider-thumb>
+		</w-slider>
+	`);
+
+	const component = document.querySelector("w-slider-thumb")!;
+	await component.updateComplete;
+
+	// Start off as valid (empty string in validationMessage)
+	expect(component.validationMessage).toBe("");
+	expect(component.validity.valid).toBe(true);
+	expect(component.checkValidity()).toBe(true);
+
+	// Can set a custom validation message
+	component.setCustomValidity("Custom validation message");
+	expect(component.validationMessage).toBe("Custom validation message");
+	expect(component.checkValidity()).toBe(false);
+	expect(component.validity.valid).toBe(false);
+	expect(component.validity.customError).toBe(true);
+
+	// Can call reportValidity to show the validation message in the browser
+	// AFAIK there's no good way to assert that the browser shows something in Playwright,
+	// but I verified this with manual testing.
+	expect(component.reportValidity()).toBe(false);
+});
+
+test("sets custom validity on internal validation error, f. ex. from value greater than to value", async () => {
+	const page = render(html`
+		<form data-testid="form">
+			<w-slider label="Model year" min="2020" max="2025" open-ended>
+				<w-slider-thumb
+					slot="from"
+					aria-label="From year"
+					name="from-year"
+				></w-slider-thumb>
+				<w-slider-thumb
+					slot="to"
+					aria-label="To year"
+					name="to-year"
+				></w-slider-thumb>
+			</w-slider>
+		</form>
+	`);
+
+	await userEvent.type(page.getByRole("spinbutton").first(), "2022");
+	await expect.element(page.getByRole("spinbutton").first()).toHaveValue(2022);
+
+	await userEvent.type(page.getByRole("spinbutton").last(), "2021");
+	await expect.element(page.getByRole("spinbutton").last()).toHaveValue(2021);
+
+	const component = document.querySelector("w-slider-thumb")!;
+
+	expect(component.validationMessage).toMatch(/The maximum value cannot/);
+	expect(component.validity.valid).toBe(false);
+	expect(component.validity.customError).toBe(true);
+});
