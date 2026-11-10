@@ -16,3 +16,4 @@ packages/*/locales/*/*.mjs
 .tmp
 .vitest-attachments/
 .vitest/attachments/
+.verify-elements/
